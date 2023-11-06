@@ -1,9 +1,10 @@
 
 const Sample = () => {
     return (
-        <div>
-            <h1>Sample Component</h1>
-        </div>
+      <>
+        
+        {/* <Typography color={primary.main}>dsad</Typography> */}
+      </>
     );
 }
 
