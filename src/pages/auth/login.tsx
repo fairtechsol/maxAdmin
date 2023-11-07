@@ -7,7 +7,7 @@ const Login = () => {
     <Form className="login-main text-center d-flex  justify-content-center">
       <div className="login-box ">
         <img src="/logo.webp" alt="fairGame" />
-        <div className="p-5 rounded-2 bg-white">
+        <div className="p-5 rounded-2 bg-light">
           <Form.Group className="mb-3 d-block">
             <Form.Control type="email" placeholder="Username" />
           </Form.Group>
