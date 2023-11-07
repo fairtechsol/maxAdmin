@@ -3,6 +3,7 @@ const Sidebar = () => {
 
     return (
       <>
+      <div className='sidebarBox'>
          <ListGroup>
             <ListGroup.Item>Football</ListGroup.Item>
             <ListGroup.Item>Tenies</ListGroup.Item>
@@ -15,6 +16,7 @@ const Sidebar = () => {
             <ListGroup.Item>Tabel Tennise</ListGroup.Item>
             <ListGroup.Item>Drafts</ListGroup.Item>
         </ListGroup>
+      </div>
       </>
     );
 }

@@ -1,18 +1,27 @@
 import { useState } from 'react';
-import { GiHamburgerMenu } from 'react-icons/gi';
+// import { GiHamburgerMenu } from 'react-icons/gi';
+import './layout.css';
 import Sidebar from './main/Sidebar';
+import Topbar from './main/Topbar';
 function Layout() {
-    const [toggle, setToggle] = useState('');
+    const [toggle, setToggle] = useState();
     const handleDrawer = () =>{
-        alert('dghasd')
         setToggle(!toggle)
     }
   return (
     <>
-        <div onClick={()=>handleDrawer}><GiHamburgerMenu /></div>
-        <div className={`sidebarBox ${toggle ? 'sidebarActive' : ''}`}>
+      {/* topbar */}
+        <Topbar onClick={()=>handleDrawer()}/>
+
+        {/* sidebar start */}
+        <div className={`sidebar ${toggle ? 'sidebarActive' : ''}`}>
             <Sidebar></Sidebar>
         </div>
+
+        {/* layout */}
+        
+
+
     </>
   );
 }
