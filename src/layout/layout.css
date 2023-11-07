@@ -30,6 +30,15 @@
 .sidebar .sidebarBox{
     height: 100%;
 }
+
+.sidebar .sidebarBox .accordion-item {
+    border: 0;
+}
+.sidebar .sidebarBox .accordion-item .accordion-header .accordion-button{
+    background: none;
+    box-shadow: none;
+    
+}   
 .sidebar .sidebarBox .accordion-item {
 
 }
