@@ -1,13 +1,11 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './assets/common.css';
-import Layout from './layout/layout';
-import './theme.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./assets/common.css";
+import Routes from "./routes";
+// import "./theme.css";
+import "./theme/color-theme.css";
+
 function App() {
-  return (
-    <div >
-      <Layout />
-    </div>
-  );
+  return <Routes />;
 }
 
 export default App;

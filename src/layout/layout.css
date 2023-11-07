@@ -1,3 +1,6 @@
+.navbar {
+    height: 52px;
+}
 .navbar .navbar-brand img{
     max-width: 120px;
     height: 40px;
@@ -10,16 +13,25 @@
     font-weight: 600;
     color: #fff;
 }
+.navbar  a.nav-link:hover{
+    text-decoration: underline;
+}
 .sidebar{
     position: absolute;
     left: -100%;
-    top: 100px;
-    background-color: #fff;
+    top: 52px;
     width: 400px;
     transition: 1s;
+    height: calc(100vh - 52px);
 }
 .sidebar.sidebarActive{
     left: 0;
+}
+.sidebar .sidebarBox{
+    height: 100%;
+}
+.sidebar .sidebarBox .accordion-item {
+
 }
 .sidebar .list-group .list-group-item {
     font-size: 12px;
