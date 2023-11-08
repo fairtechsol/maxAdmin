@@ -1,11 +1,12 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+import { RouterProvider } from "react-router-dom";
 import "./assets/common.css";
-import Routes from "./routes";
+import routes from "./routes";
 import "./theme.css";
 // import "./theme/color-theme.css";
 
 function App() {
-  return <Routes />;
+  return <RouterProvider router={routes()} />;
 }
 
 export default App;

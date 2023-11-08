@@ -1,12 +1,10 @@
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
+import { Container, Form, Nav, NavDropdown, Navbar } from "react-bootstrap";
+
 import { GiHamburgerMenu } from "react-icons/gi";
 
-function Topbar(props: any) {
+const Topbar = (props: any) => {
   return (
-    <Navbar expand="lg" className="bg-primary" data-bs-theme="dark">
+    <Navbar expand="lg" className="bg-primary" data-bs-theme="light">
       <Container fluid>
         <Navbar.Brand href="#home">
           <img src="/logo.webp" alt="fairGame" />
@@ -17,9 +15,17 @@ function Topbar(props: any) {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#home">List of clients</Nav.Link>
-            <Nav.Link href="#link">Market Analysis</Nav.Link>
-            <NavDropdown title="Live Market" id="basic-nav-dropdown">
+            <Nav.Link className="text-white" href="#home">
+              List of clients
+            </Nav.Link>
+            <Nav.Link className="text-white" href="#link">
+              Market Analysis
+            </Nav.Link>
+            <NavDropdown
+              className="text-white"
+              title="Live Market"
+              id="basic-nav-dropdown"
+            >
               <NavDropdown.Item className="text-white" href="#">
                 Binary
               </NavDropdown.Item>
@@ -72,7 +78,11 @@ function Topbar(props: any) {
                 Cricket Casino
               </NavDropdown.Item>
             </NavDropdown>
-            <NavDropdown title="Reports" id="basic-nav-dropdown">
+            <NavDropdown
+              className="text-white"
+              title="Reports"
+              id="basic-nav-dropdown"
+            >
               <NavDropdown.Item className="text-white" href="#">
                 Account's Statement
               </NavDropdown.Item>
@@ -101,9 +111,35 @@ function Topbar(props: any) {
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>
+        <div className="d-flex algin-items-center">
+          <Navbar.Collapse id="navbar-dark-example">
+            <Nav>
+              <NavDropdown
+                id="nav-dropdown-dark-example"
+                title="Dropdown"
+                menuVariant="dark"
+              >
+                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.2">
+                  Secure Auth Verification
+                </NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.3">
+                  Change Password
+                </NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item href="#action/3.4">Logout</NavDropdown.Item>
+              </NavDropdown>
+            </Nav>
+          </Navbar.Collapse>
+          <Form>
+            <Form.Group className="" controlId="exampleForm.ControlInput1">
+              <Form.Control type="text" placeholder="All Clients" />
+            </Form.Group>
+          </Form>
+        </div>
       </Container>
     </Navbar>
   );
-}
+};
 
 export default Topbar;

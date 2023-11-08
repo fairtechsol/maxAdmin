@@ -6,10 +6,18 @@ body{
     --secondary: #fdcb52;
     --black: #000000;
     --white: #ffffff;
+    --light: #f9f9f9;
+    --gray: #dddddd;
   }
 
-  input, select{
+  body input, body select{
     height: 33px;
+    border-radius: 3px !important;
+  }
+  .btn{
+    border-radius: 3px !important;
+    height: 33px;
+    font-size: 14px !important;
   }
 
   /* ===== for title ====  */

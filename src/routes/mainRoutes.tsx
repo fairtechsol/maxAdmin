@@ -2,7 +2,7 @@ import MainLayout from "../layout/main";
 import Game from "../pages/games/index";
 // ==============================|| Auth ROUTING ||============================== //
 
-const AuthRoutes = {
+const MainRoutes = {
   path: "/",
   element: <MainLayout />,
   children: [
@@ -12,4 +12,4 @@ const AuthRoutes = {
     },
   ],
 };
-export default AuthRoutes;
+export default MainRoutes;
