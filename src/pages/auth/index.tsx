@@ -1,33 +1,24 @@
 import { Button, Form } from "react-bootstrap";
 import { MdOutlineLogin } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
 import "./style.css";
 
 const Login = () => {
-  const navigate = useNavigate();
-
   return (
     <Form className="auth-main text-center d-flex  justify-content-center">
       <div className="auth-box ">
         <img src="/logo.webp" alt="fairGame" />
-        <div className="auth-box-form rounded-2 bg-light mt-3">
-          <h2 className="auth-title text-center mb-4">Sign In</h2>
+        <div className="p-5 rounded-2 bg-light">
+          <h2 className="auth-title text-center">Sign In</h2>
           <Form.Group className="mb-3 d-block">
             <Form.Control type="email" placeholder="Username" />
           </Form.Group>
           <Form.Group className="mb-3 d-block">
             <Form.Control type="password" placeholder="Password" />
           </Form.Group>
-          <Button
-            className="w-100"
-            variant="primary"
-            type="submit"
-            onClick={() => navigate("/game")}
-          >
+          <Button className="w-100" variant="success" type="submit">
             Login <MdOutlineLogin />
           </Button>
         </div>
-        <p className="text-white mt-3 mb-0 title-14">© MAXXBET7</p>
       </div>
     </Form>
   );

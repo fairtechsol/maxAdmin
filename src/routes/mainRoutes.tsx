@@ -7,7 +7,7 @@ const AuthRoutes = {
   element: <MainLayout />,
   children: [
     {
-      path: "temp",
+      path: "game",
       element: <Game />,
     },
   ],
