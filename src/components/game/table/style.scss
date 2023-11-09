@@ -1,0 +1,12 @@
+@import "/src/assets/variable.scss";
+
+.gameTable table th,
+.gameTable table td{
+    padding: 0 !important;
+} 
+.gameTable table th nav ol{
+    margin: 0 !important;
+}
+.gameTable table th{
+    background-color: transparent;
+}

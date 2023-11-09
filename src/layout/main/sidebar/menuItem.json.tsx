@@ -13,7 +13,7 @@ export default function menuItemJson() {
             {
               id: "teamName",
               name: "24-11-2023",
-              type: "item",
+              type: "collapse",
               path: "/temp",
               children: [
                 {

@@ -1,0 +1,11 @@
+.backLay{
+    width: 84px;
+    height: 41px;
+    flex-direction: column;
+     .backLay-rate{
+        line-height: 16px; 
+    }
+    .backLay-percent{
+        line-height: 10px;
+    }
+}

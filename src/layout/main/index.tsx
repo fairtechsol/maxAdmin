@@ -1,8 +1,7 @@
 import { useState } from "react";
 // import { GiHamburgerMenu } from 'react-icons/gi';
 import { Outlet } from "react-router-dom";
-import CommonHeader from "../../components/commonHeader";
-import "../layout.css";
+import "../layout.scss";
 import Topbar from "./header";
 import Sidebar from "./sidebar";
 function MainLayout() {
@@ -21,7 +20,6 @@ function MainLayout() {
       </div>
       {/* layout */}
       <main className="page-content ">
-        <CommonHeader />
         <Outlet />
       </main>
     </>

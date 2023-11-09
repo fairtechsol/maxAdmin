@@ -14,22 +14,24 @@ export const MenuItem: React.FC<Props> = ({ item }) => {
   const MenuCollapse = (props: any) => {
     const { data } = props;
     return (
-      <Accordion.Item eventKey="0">
-        <Accordion.Header>{data?.name}</Accordion.Header>
-        <Accordion.Body>
-          {data?.type === "item" ? (
-            <MenuItemChild data={data} />
-          ) : (
-            data?.children?.map((sideBarChild: any) => {
-              return (
-                <Accordion defaultActiveKey={["0"]}>
-                  <MenuCollapse data={sideBarChild} />
-                </Accordion>
-              );
-            })
-          )}
-        </Accordion.Body>
-      </Accordion.Item>
+      <>
+        {data?.type === "item" ? (
+          <MenuItemChild data={data} />
+        ) : (
+          <Accordion.Item eventKey="0">
+            <Accordion.Header>{data?.name}</Accordion.Header>
+            <Accordion.Body>
+              {data?.children?.map((sideBarChild: any) => {
+                return (
+                  <Accordion defaultActiveKey={["0"]}>
+                    <MenuCollapse data={sideBarChild} />
+                  </Accordion>
+                );
+              })}
+            </Accordion.Body>
+          </Accordion.Item>
+        )}
+      </>
     );
   };
 

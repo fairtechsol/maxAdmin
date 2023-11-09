@@ -1,4 +1,4 @@
-import Sample from "../../components/sample";
+import Sample from "../../components/Sample";
 
 function SamplePage() {
   return (

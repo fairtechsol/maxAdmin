@@ -1,8 +1,9 @@
 
-// @import "./assets/common.css";
-// $primary: --mainBg; 004a25 fdcb52
-$primary: #004a25;
-$secondary: #fdcb52; 
-$light: '#f9f9f9';
+@import "./assets/variable.scss";
+$primary: $primary;
+$secondary: $secondary; 
+$light: $light;
+$black: $black;
+$white: $white;
 
-@import "../node_modules/bootstrap/scss/bootstrap";
+@import "../node_modules/bootstrap/scss/bootstrap"; 
