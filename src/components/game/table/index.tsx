@@ -1,23 +1,15 @@
-import { Breadcrumb, Table } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 import BackLayBox from "../../backLayBox";
+import BackLayTable from "./index.json";
 import "./style.scss";
-
 function GameTable() {
   return (
     <div className="gameTable">
-      <Table hover>
+      <Table>
         <thead>
           <tr>
             <th>
-              <Breadcrumb className="bg-lightGray">
-                <Breadcrumb.Item href="#">
-                  ICC Cricket World Cup{" "}
-                </Breadcrumb.Item>
-                <Breadcrumb.Item href="#">
-                  ICC Cricket World Cup
-                </Breadcrumb.Item>
-                <Breadcrumb.Item active>10/5/2023 2:00:00 PM</Breadcrumb.Item>
-              </Breadcrumb>
+              <span className="f600 px-1">Runner</span>
             </th>
             <th style={{ width: "84px" }}></th>
             <th style={{ width: "84px" }}></th>
@@ -33,109 +25,55 @@ function GameTable() {
         </thead>
         <tbody>
           <tr>
-            <td></td>
             <td>
-              <BackLayBox bgColor="blue1" rate={1.94} percent={11} />
+              <div className="backLayRunner d-flex flex-column px-2">
+                <span className="title-14">India</span>
+                <span className="title-14">0</span>
+              </div>
             </td>
-            <td>
-              <BackLayBox bgColor="blue2" rate={1.94} percent={25} />
-            </td>
-            <td>
-              <BackLayBox bgColor="blue3" rate={1.94} percent={32} />
-            </td>
-            <td>
-              <BackLayBox bgColor="red1" rate={1.94} percent={9} />
-            </td>
-            <td>
-              <BackLayBox bgColor="red2" rate={1.94} percent={21} />
-            </td>
-            <td>
-              <BackLayBox bgColor="red3" rate={1.94} percent={17} />
-            </td>
+            {BackLayTable()?.map((item) => (
+              <td>
+                <BackLayBox
+                  bgColor="blue1"
+                  rate={item?.rate}
+                  percent={item?.percent}
+                />
+              </td>
+            ))}
           </tr>
           <tr>
-            <td></td>
             <td>
-              <BackLayBox bgColor="blue1" rate={1.94} percent={11} />
+              <div className="backLayRunner d-flex flex-column px-2">
+                <span className="title-14">England</span>
+                <span className="title-14">0</span>
+              </div>
             </td>
-            <td>
-              <BackLayBox bgColor="blue2" rate={1.94} percent={11} />
-            </td>
-            <td>
-              <BackLayBox bgColor="blue3" rate={1.94} percent={11} />
-            </td>
-            <td>
-              <BackLayBox bgColor="red1" rate={1.94} percent={11} />
-            </td>
-            <td>
-              <BackLayBox bgColor="red2" rate={1.94} percent={11} />
-            </td>
-            <td>
-              <BackLayBox bgColor="red3" rate={1.94} percent={11} />
-            </td>
+            {BackLayTable()?.map((item) => (
+              <td>
+                <BackLayBox
+                  bgColor="blue1"
+                  rate={item?.rate}
+                  percent={item?.percent}
+                />
+              </td>
+            ))}
           </tr>
           <tr>
-            <td></td>
             <td>
-              <BackLayBox bgColor="blue1" rate={1.94} percent={11} />
+              <div className="backLayRunner d-flex flex-column px-2">
+                <span className="title-14">Australia</span>
+                <span className="title-14">0</span>
+              </div>
             </td>
-            <td>
-              <BackLayBox bgColor="blue2" rate={1.94} percent={11} />
-            </td>
-            <td>
-              <BackLayBox bgColor="blue3" rate={1.94} percent={11} />
-            </td>
-            <td>
-              <BackLayBox bgColor="red1" rate={1.94} percent={11} />
-            </td>
-            <td>
-              <BackLayBox bgColor="red2" rate={1.94} percent={11} />
-            </td>
-            <td>
-              <BackLayBox bgColor="red3" rate={1.94} percent={11} />
-            </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td>
-              <BackLayBox bgColor="blue1" rate={1.94} percent={11} />
-            </td>
-            <td>
-              <BackLayBox bgColor="blue2" rate={1.94} percent={11} />
-            </td>
-            <td>
-              <BackLayBox bgColor="blue3" rate={1.94} percent={11} />
-            </td>
-            <td>
-              <BackLayBox bgColor="red1" rate={1.94} percent={11} />
-            </td>
-            <td>
-              <BackLayBox bgColor="red2" rate={1.94} percent={11} />
-            </td>
-            <td>
-              <BackLayBox bgColor="red3" rate={1.94} percent={11} />
-            </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td>
-              <BackLayBox bgColor="blue1" rate={1.94} percent={11} />
-            </td>
-            <td>
-              <BackLayBox bgColor="blue2" rate={1.94} percent={11} />
-            </td>
-            <td>
-              <BackLayBox bgColor="blue3" rate={1.94} percent={11} />
-            </td>
-            <td>
-              <BackLayBox bgColor="red1" rate={1.94} percent={11} />
-            </td>
-            <td>
-              <BackLayBox bgColor="red2" rate={1.94} percent={11} />
-            </td>
-            <td>
-              <BackLayBox bgColor="red3" rate={1.94} percent={11} />
-            </td>
+            {BackLayTable()?.map((item) => (
+              <td>
+                <BackLayBox
+                  bgColor="blue1"
+                  rate={item?.rate}
+                  percent={item?.percent}
+                />
+              </td>
+            ))}
           </tr>
         </tbody>
       </Table>

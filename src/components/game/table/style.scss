@@ -1,12 +1,21 @@
 @import "/src/assets/variable.scss";
 
+.gameTable table td{
+    background-color: $lightGray;
+}
 .gameTable table th,
 .gameTable table td{
     padding: 0 !important;
-} 
+    border-color: $white;
+    border-width: 1px;
+}
 .gameTable table th nav ol{
     margin: 0 !important;
 }
 .gameTable table th{
     background-color: transparent;
+    border: 0;
+}
+.backLayRunner span{
+    line-height: 1.1;
 }
