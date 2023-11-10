@@ -1,4 +1,5 @@
-@import "/src/assets/variable.scss";
+@import "../assets/variable.scss";
+
 .navbar {
     height: 52px;
 }
@@ -24,6 +25,9 @@
         }
     }
     
+}
+.navbar  a.nav-link:focus{
+    color: $white;
 }
 .navbar  a.nav-link:hover{
     text-decoration: underline;
@@ -86,7 +90,7 @@
     content: "-";
 }
 .sidebar .sidebarBox .accordion-item .accordion-header .accordion-button:before{
-    background: var(--primary);
+    background: $primary;
     bottom: auto;
     content: "";
     height: 8px;
@@ -96,11 +100,7 @@
     right: auto;
     width: 8px;
     z-index: 1;
-    border-radius: 50%;
-}
-
-.sidebar .sidebarBox .accordion-item {
-
+    border-radius: 50%; 
 }
 .sidebar .list-group .list-group-item {
     font-size: 12px;

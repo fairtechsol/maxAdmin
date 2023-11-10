@@ -2,7 +2,7 @@ import { Table } from "react-bootstrap";
 import BackLayBox from "../../backLayBox";
 import BackLayTable from "./index.json";
 import "./style.scss";
-function GameTable() {
+function BookMakerTable() {
   const handleClick = () => {
     alert("dhsad");
   };
@@ -12,18 +12,18 @@ function GameTable() {
         <thead>
           <tr>
             <th className="border-0">
-              <span className="f600 px-1">Runner</span>
+              <span className="f600 px-1">Min: 100 Max: 10000</span>
             </th>
-            <th className="border-0" style={{ width: "84px" }}></th>
-            <th className="border-0" style={{ width: "84px" }}></th>
-            <th className="text-center bg-blue1" style={{ width: "84px" }}>
+            <th className="border-0" style={{ width: "60px" }}></th>
+            <th className="border-0" style={{ width: "60px" }}></th>
+            <th className="text-center bg-blue1" style={{ width: "60px" }}>
               Back
             </th>
-            <th className="text-center bg-red1" style={{ width: "84px" }}>
+            <th className="text-center bg-red1" style={{ width: "60px" }}>
               Lay
             </th>
-            <th className="border-0" style={{ width: "84px" }}></th>
-            <th className="border-0" style={{ width: "84px" }}></th>
+            <th className="border-0" style={{ width: "60px" }}></th>
+            <th className="border-0" style={{ width: "60px" }}></th>
           </tr>
         </thead>
         <tbody>
@@ -36,6 +36,7 @@ function GameTable() {
             </td>
             {BackLayTable()?.map((item, i) => (
               <BackLayBox
+                style={{ width: "60px" }}
                 overlay={true}
                 rate={item?.rate}
                 percent={item?.percent}
@@ -84,4 +85,4 @@ function GameTable() {
   );
 }
 
-export default GameTable;
+export default BookMakerTable;

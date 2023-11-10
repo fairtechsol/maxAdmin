@@ -2,7 +2,7 @@ import { Button, Form } from "react-bootstrap";
 import { MdOutlineLogin } from "react-icons/md";
 
 import { useNavigate } from "react-router-dom";
-import "./style.css";
+import "./style.scss";
 
 const Login = () => {
   const navigate = useNavigate();

@@ -1,11 +1,44 @@
-.backLay {
+/***/
+.backLayBox {
   width: 84px;
   height: 41px;
   flex-direction: column;
+  justify-content: center;
+  position: relative;
 }
-.backLay .backLay-rate {
+.backLayBox:nth-child(2) {
+  background-color: rgba(114, 187, 239, 0.5019607843);
+}
+.backLayBox:nth-child(3) {
+  background-color: rgba(114, 187, 239, 0.7490196078);
+}
+.backLayBox:nth-child(4) {
+  background-color: #72BBEF;
+}
+.backLayBox:nth-child(5) {
+  background-color: #FAA9BA;
+}
+.backLayBox:nth-child(6) {
+  background-color: rgba(250, 169, 186, 0.75);
+}
+.backLayBox:nth-child(7) {
+  background-color: rgba(250, 169, 186, 0.5);
+}
+.backLayBox .backLay-rate {
   line-height: 16px;
 }
-.backLay .backLay-percent {
+.backLayBox .backLay-percent {
   line-height: 10px;
+}
+
+.backLay.overlay:after {
+  position: absolute;
+  content: "";
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  width: 100%;
 }/*# sourceMappingURL=style.css.map */

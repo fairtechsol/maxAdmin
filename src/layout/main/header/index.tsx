@@ -2,6 +2,21 @@ import { Container, Form, Nav, NavDropdown, Navbar } from "react-bootstrap";
 import { GiHamburgerMenu } from "react-icons/gi";
 import LogoSection from "../../../components/commonComponent/logoSection";
 
+interface ItemProps {
+  name: string;
+  options: Array<any>;
+}
+
+const TopbarDropdown = ({ name, options }: ItemProps) => {
+  return (
+    <NavDropdown title={name} id="basic-nav-dropdown">
+      {options?.map((option) => (
+        <NavDropdown.Item href={option.link}>{option.name}</NavDropdown.Item>
+      ))}
+    </NavDropdown>
+  );
+};
+
 const Topbar = (props: any) => {
   return (
     <Navbar expand="lg" className="bg-primary" data-bs-theme="light">
@@ -17,42 +32,39 @@ const Topbar = (props: any) => {
           <Nav className="me-auto">
             <Nav.Link href="#home">List of clients</Nav.Link>
             <Nav.Link href="#link">Market Analysis</Nav.Link>
-            <NavDropdown title="Live Market" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#">Binary</NavDropdown.Item>
-              <NavDropdown.Item href="#">Race 20-20</NavDropdown.Item>
-              <NavDropdown.Item href="#">Queen</NavDropdown.Item>
-              <NavDropdown.Item href="#">Baccarat</NavDropdown.Item>
-              <NavDropdown.Item href="#">Sports Casino</NavDropdown.Item>
-              <NavDropdown.Item href="#">Casino War</NavDropdown.Item>
-              <NavDropdown.Item href="#">Worli</NavDropdown.Item>
-              <NavDropdown.Item href="#">3 Cards Judgement</NavDropdown.Item>
-              <NavDropdown.Item href="#">32 Cards Casino</NavDropdown.Item>
-              <NavDropdown.Item href="#">Live TeenPatti</NavDropdown.Item>
-              <NavDropdown.Item href="#">TeenPatti 2.0</NavDropdown.Item>
-              <NavDropdown.Item href="#">Live Poker</NavDropdown.Item>
-              <NavDropdown.Item href="#">Andar Bahar</NavDropdown.Item>
-              <NavDropdown.Item href="#">Lucky 7</NavDropdown.Item>
-              <NavDropdown.Item href="#">Dragon Tiger</NavDropdown.Item>
-              <NavDropdown.Item href="#">Bollywood Casino</NavDropdown.Item>
-              <NavDropdown.Item href="#">Cricket Casino</NavDropdown.Item>
-            </NavDropdown>
-            <NavDropdown
-              className="text-white"
-              title="Reports"
-              id="basic-nav-dropdown"
-            >
-              <NavDropdown.Item href="#">Account's Statement</NavDropdown.Item>
-              <NavDropdown.Item href="#">Current Bets</NavDropdown.Item>
-              <NavDropdown.Item href="#">General Report</NavDropdown.Item>
-              <NavDropdown.Item href="#">Game Report</NavDropdown.Item>
-              <NavDropdown.Item href="#">Casino Report</NavDropdown.Item>
-              <NavDropdown.Item href="#">Profit And Loss</NavDropdown.Item>
-              <NavDropdown.Item href="#">Casino Result Report</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
-              </NavDropdown.Item>
-            </NavDropdown>
+            <TopbarDropdown
+              name="Live Market"
+              options={[
+                { name: "Race 20-20", link: "#1" },
+                { name: "Queen", link: "#2" },
+                { name: "Baccarat", link: "#3" },
+                { name: "Sports Casino", link: "#4" },
+                { name: "Casino War", link: "#5" },
+                { name: "Worli", link: "#6" },
+                { name: "3 Cards Judgement", link: "#7" },
+                { name: "32 Cards Casino", link: "#8" },
+                { name: "Live TeenPatti", link: "#9" },
+                { name: "TeenPatti 2.0", link: "#10" },
+                { name: "Live Poker", link: "#11" },
+                { name: "Andar Bahar", link: "#12" },
+                { name: "Lucky 7", link: "#13" },
+                { name: "Dragon Tiger", link: "#14" },
+                { name: "Bollywood Casino", link: "#15" },
+                { name: "Cricket Casino", link: "#16" },
+              ]}
+            />
+            <TopbarDropdown
+              name="Reports"
+              options={[
+                { name: "Account's Statement", link: "#1" },
+                { name: "Current Bets", link: "#2" },
+                { name: "General Report", link: "#3" },
+                { name: "Game Report", link: "#4" },
+                { name: "Casino Report", link: "#5" },
+                { name: "Profit And Loss", link: "#6" },
+                { name: "Casino Result Report", link: "#7" },
+              ]}
+            />
           </Nav>
         </Navbar.Collapse>
         <div className="d-flex algin-items-center">
