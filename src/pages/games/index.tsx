@@ -1,9 +1,11 @@
 import { Col, Container, Row } from "react-bootstrap";
 import CustomBreadcrumb from "../../components/commonComponent/breadcrumb";
 import BookMakerTable from "../../components/game/bookMaker";
+import FancyMarketTable from "../../components/game/fancyMarket";
 import GameHeader from "../../components/game/gameHeader";
-import LiveMatch from "../../components/game/liveMatch";
-import GameTable from "../../components/game/table";
+import MatchOddsTable from "../../components/game/matchOdds";
+import SessionMarketTable from "../../components/game/sessionMarket";
+// import GameTable from "../../components/game/table";
 
 export default function Games() {
   return (
@@ -11,7 +13,7 @@ export default function Games() {
       <Container fluid>
         <GameHeader />
         {/* table start here */}
-        <div className="gamePage-table mt-5">
+        <div className="gamePage-table">
           <Row className="no-gutters">
             <Col md={8}>
               <CustomBreadcrumb
@@ -22,12 +24,18 @@ export default function Games() {
                   { name: "10/5/2023 2:00:00 PM" },
                 ]}
               />
-              <GameTable />
+              <MatchOddsTable />
               <BookMakerTable />
+              <Row className="no-gutters">
+                <Col md={6}>
+                  <FancyMarketTable />
+                </Col>
+                <Col md={6}>
+                  <SessionMarketTable />
+                </Col>
+              </Row>
             </Col>
-            <Col md={4}>
-              <LiveMatch />
-            </Col>
+            <Col md={4}>{/* <LiveMatch /> */}</Col>
           </Row>
         </div>
       </Container>

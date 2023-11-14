@@ -3,7 +3,7 @@
 }
 .breadcrumb-item {
     // Styles for breadcrumb items
-    
+    line-height: 16px;
     & + &::before {
       // Styles for the separator (::before) between breadcrumb items
       content: '->' !important;

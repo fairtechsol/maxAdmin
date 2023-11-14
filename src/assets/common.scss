@@ -2,8 +2,14 @@
 body {
   font-family: "Roboto Condensed", sans-serif !important;
 }
+body table.table{
+  margin-bottom: 0;
+}
 
 /* ====== bg Colors start ====  */
+.bg-secondaryLight{
+  background-color: rgba( $secondary, 0.7) !important;
+}
 .bg-blue1{
   background-color: $blue1 !important;
 }
@@ -115,4 +121,8 @@ body input, body select {
   font-weight: 900;
 }
 
+
+// === border css start ====
+
+// === border css start ====
 /*# sourceMappingURL=common.css.map */

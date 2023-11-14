@@ -3,15 +3,15 @@ import "./style.scss";
 
 interface props {
   bgColor?: string;
-  rate: number;
-  percent: number;
+  rate?: number;
+  percent?: number;
   customClass?: string;
   overlay?: boolean;
   onClick?: any;
   style?: React.CSSProperties;
   // onClick?: () => void;
 }
-function BackLayBox({
+function YesNoBox({
   customClass,
   bgColor,
   rate,
@@ -41,4 +41,4 @@ function BackLayBox({
   );
 }
 
-export default BackLayBox;
+export default YesNoBox;

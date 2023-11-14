@@ -1,4 +1,4 @@
-function BookmakerData() {
+function MatchOddsData() {
   const dataList = [
     {
       id: "1",
@@ -61,4 +61,4 @@ function BookmakerData() {
   return dataList;
 }
 
-export default BookmakerData;
+export default MatchOddsData;

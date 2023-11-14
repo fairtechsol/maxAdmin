@@ -5,7 +5,7 @@ import "./style.scss";
 const GameHeader = () => {
   return (
     <>
-      <div className="common-header ">
+      <div className="common-header mb-3">
         <div className="common-headerBox d-flex justify-content-end">
           <GameHeaderDropdown
             name="Live Market"

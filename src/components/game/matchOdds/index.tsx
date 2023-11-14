@@ -1,39 +1,32 @@
 import { Table } from "react-bootstrap";
 import BackLayBox from "../../backLayBox";
-import TabelHeader from "../../commonComponent/tableHeader";
 import "../style.scss";
-import BookmakerData from "./index.json";
-function BookmakerTable() {
+import MatchOddsData from "./index.json";
+function MatchOddsTable() {
   const handleClick = () => {};
   return (
     <>
-      <TabelHeader
-        customClass="my-2"
-        title="Bookmaker Market 0% commission fast bet confirm"
-      />
-      <div className={`gameTable sessionFancyTable borderTable border `}>
+      <div className={`gameTable mt-3 `}>
         <Table className="mb-0">
           <thead>
             <tr>
               <th className="border-0">
-                <span className="f700 title-16 px-2 text-info ">
-                  Min:100 Max:10000
-                </span>
+                <span className="f600 px-1">Runner</span>
               </th>
-              <th className="border-0" style={{ width: "60px" }}></th>
-              <th className="border-0" style={{ width: "60px" }}></th>
-              <th className="text-center bg-blue3" style={{ width: "60px" }}>
+              <th className="border-0" style={{ width: "85px" }}></th>
+              <th className="border-0" style={{ width: "85px" }}></th>
+              <th className="text-center bg-blue3" style={{ width: "85px" }}>
                 Back
               </th>
-              <th className="text-center bg-red1" style={{ width: "60px" }}>
+              <th className="text-center bg-red1" style={{ width: "85px" }}>
                 Lay
               </th>
-              <th className="border-0" style={{ width: "60px" }}></th>
-              <th className="border-0" style={{ width: "60px" }}></th>
+              <th className="border-0" style={{ width: "85px" }}></th>
+              <th className="border-0" style={{ width: "85px" }}></th>
             </tr>
           </thead>
           <tbody>
-            {BookmakerData()?.map((item, i) => (
+            {MatchOddsData()?.map((item, i) => (
               <tr>
                 <td>
                   <div className="backLayRunner d-flex flex-column px-3">
@@ -45,7 +38,7 @@ function BookmakerTable() {
                 </td>
                 <td>
                   <BackLayBox
-                    style={{ width: "60px" }}
+                    style={{ width: "85px" }}
                     // overlay={true}
                     bgColor="blue1"
                     rate={item?.backRate1}
@@ -55,7 +48,7 @@ function BookmakerTable() {
                 </td>
                 <td>
                   <BackLayBox
-                    style={{ width: "60px" }}
+                    style={{ width: "85px" }}
                     // overlay={true}
                     bgColor="blue2"
                     rate={item?.backRate2}
@@ -65,7 +58,7 @@ function BookmakerTable() {
                 </td>
                 <td>
                   <BackLayBox
-                    style={{ width: "60px" }}
+                    style={{ width: "85px" }}
                     // overlay={true}
                     bgColor="blue3"
                     rate={item?.backRate3}
@@ -75,7 +68,7 @@ function BookmakerTable() {
                 </td>
                 <td>
                   <BackLayBox
-                    style={{ width: "60px" }}
+                    style={{ width: "85px" }}
                     // overlay={true}
                     bgColor="red1"
                     rate={item?.layRate1}
@@ -85,7 +78,7 @@ function BookmakerTable() {
                 </td>
                 <td>
                   <BackLayBox
-                    style={{ width: "60px" }}
+                    style={{ width: "85px" }}
                     // overlay={true}
                     bgColor="red2"
                     rate={item?.layRate2}
@@ -95,7 +88,7 @@ function BookmakerTable() {
                 </td>
                 <td>
                   <BackLayBox
-                    style={{ width: "60px" }}
+                    style={{ width: "85px" }}
                     // overlay={true}
                     bgColor="red3"
                     rate={item?.layRate3}
@@ -112,4 +105,4 @@ function BookmakerTable() {
   );
 }
 
-export default BookmakerTable;
+export default MatchOddsTable;
