@@ -124,6 +124,7 @@ const CustomTable: React.FC<CustomTableProps> = ({
           totalPages={Math.ceil(itemCount / rowPerPage)}
           onPageChange={onPageChange}
           itemCount={itemCount}
+          rowPerPage={rowPerPage}
         />
       )}
     </div>

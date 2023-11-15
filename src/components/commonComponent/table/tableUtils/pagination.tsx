@@ -7,6 +7,7 @@ interface PaginationComponentProps {
   totalPages: number;
   onPageChange: (pageNumber: number) => void;
   itemCount: number;
+  rowPerPage: number;
 }
 
 const PaginationComponent: React.FC<PaginationComponentProps> = ({
@@ -14,13 +15,13 @@ const PaginationComponent: React.FC<PaginationComponentProps> = ({
   totalPages,
   onPageChange,
   itemCount,
+  rowPerPage,
 }) => {
   return (
     <Pagination>
       <div className="title-14">
-        Showing{" "}
-        {currentPage === 1 ? 1 : currentPage * totalPages - totalPages + 1} to{" "}
-        {Math.min(currentPage * totalPages, itemCount)} of {itemCount} entries
+        Showing {currentPage === 1 ? 1 : (currentPage - 1) * rowPerPage + 1} to{" "}
+        {Math.min(currentPage * rowPerPage, itemCount)} of {itemCount} entries
       </div>
       <div className="paginationContainer">
         <CustomButton
