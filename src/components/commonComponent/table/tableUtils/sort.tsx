@@ -21,7 +21,7 @@ const SortIcon: React.FC<SortIconProps> = ({
         isActive
           ? isAscending
             ? "sortIconDark"
-            : "sortIconGray"
+            : "sortIconDark"
           : "sortIconGray"
       }`}
       onClick={() => clickHandler(id)}
