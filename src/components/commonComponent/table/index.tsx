@@ -75,7 +75,7 @@ const CustomTable: React.FC<CustomTableProps> = ({
   }, [currentPage, sortConfig]);
 
   return (
-    <div className={`${customClass ?? ""}`}>
+    <div className={`${customClass ?? ""} customTable`}>
       <TableHeader
         enablePdfExcel={enablePdfExcel}
         isPagination={isPagination}
@@ -85,7 +85,7 @@ const CustomTable: React.FC<CustomTableProps> = ({
         setRowPerPage={setRowPerPage}
       />
       {/* Table for displaying data */}
-      <Table striped bordered hover>
+      <Table striped bordered>
         <thead>
           <tr>
             {/* Table header with sorting icons */}
