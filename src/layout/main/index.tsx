@@ -13,7 +13,6 @@ function MainLayout() {
     <>
       {/* topbar */}
       <Topbar onClick={() => handleDrawer()} />
-
       {/* sidebar start */}
       <div className={`sidebar ${toggle ? "sidebarActive" : ""}`}>
         <Sidebar />

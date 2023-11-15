@@ -3,6 +3,7 @@ import CustomBreadcrumb from "../../components/commonComponent/breadcrumb";
 import BookMakerTable from "../../components/game/bookMaker";
 import FancyMarketTable from "../../components/game/fancyMarket";
 import GameHeader from "../../components/game/gameHeader";
+import LiveMatch from "../../components/game/liveMatch";
 import MatchOddsTable from "../../components/game/matchOdds";
 import SessionMarketTable from "../../components/game/sessionMarket";
 // import GameTable from "../../components/game/table";
@@ -35,7 +36,9 @@ export default function Games() {
                 </Col>
               </Row>
             </Col>
-            <Col md={4}>{/* <LiveMatch /> */}</Col>
+            <Col md={4}>
+              <LiveMatch />
+            </Col>
           </Row>
         </div>
       </Container>
