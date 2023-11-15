@@ -16,7 +16,7 @@ function TabelHeader({ title, bgColor, padding, style, customClass }: props) {
     <div
       className={`tableHeader bg-${bgColor ? bgColor : "secondaryLight"} ${
         padding ? padding : "px-2"
-      } ${customClass ? customClass : ""}
+      } ${customClass ?? ""}
       `}
       style={{ ...inlineStyle }}
     >

@@ -9,8 +9,8 @@ const Sidebar = (props: any) => {
         <div className="sidebarBox-close" onClick={props.sidebarCloseBtn}>
           <GiHamburgerMenu />
         </div>
-        {menuItemJson()?.map((item) => (
-          <Accordion defaultActiveKey={["0"]}>
+        {menuItemJson()?.map((item, index) => (
+          <Accordion key={index} defaultActiveKey={["0"]}>
             <MenuItem item={item} />
           </Accordion>
         ))}

@@ -21,9 +21,9 @@ export const MenuItem: React.FC<Props> = ({ item }) => {
           <Accordion.Item eventKey="0">
             <Accordion.Header>{data?.name}</Accordion.Header>
             <Accordion.Body>
-              {data?.children?.map((sideBarChild: any) => {
+              {data?.children?.map((sideBarChild: any, index: number) => {
                 return (
-                  <Accordion defaultActiveKey={["0"]}>
+                  <Accordion key={index} defaultActiveKey={["0"]}>
                     <MenuCollapse data={sideBarChild} />
                   </Accordion>
                 );
