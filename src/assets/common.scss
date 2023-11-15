@@ -20,6 +20,14 @@ body table.table{
   color: $white;
 }
 
+/* ====== excel csv btn ======= */
+.excel{
+  background-color: $excel !important;
+}
+.pdf{
+ background-color: $pdf !important;
+}
+
 /* ====== bg Colors start ====  */
 .bg-secondaryLight{
   background-color: rgba( $secondary, 0.7) !important;
