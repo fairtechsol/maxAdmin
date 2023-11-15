@@ -1,19 +1,11 @@
 // CustomTable.tsx
 import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
+import { Column } from "../../../models/tableInterface";
 import "./style.scss";
 import TableHeader from "./tableHeader";
 import PaginationComponent from "./tableUtils/pagination"; // Import the PaginationComponent
 import SortIcon from "./tableUtils/sort";
-
-interface Column {
-  id: string;
-  label: string;
-}
-
-interface DataItem {
-  [key: string]: string | number;
-}
 
 interface SortConfig {
   key: string | null | number;
@@ -22,7 +14,6 @@ interface SortConfig {
 
 interface CustomTableProps {
   columns: Column[];
-  data: DataItem[];
   customClass?: string;
   isPagination?: boolean;
   isSort?: boolean;

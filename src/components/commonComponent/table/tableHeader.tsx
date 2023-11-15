@@ -31,7 +31,7 @@ const TableHeader: React.FC<TableHeaderProps> = ({
   return (
     <div className="d-flex justify-content-between align-items-center">
       {enablePdfExcel && (
-        <div className="d-flex gap-2">
+        <div className="d-flex gap-2 mb-2">
           <CustomButton className="d-flex gap-1 align-items-center pdf border-0">
             <FaRegFilePdf />
             PDF

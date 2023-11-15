@@ -32,7 +32,7 @@ const Topbar = (props: any) => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#home">List of clients</Nav.Link>
+            <Nav.Link href="/listClients">List of clients</Nav.Link>
             <Nav.Link href="#link">Market Analysis</Nav.Link>
             <TopbarDropdown
               name="Live Market"
