@@ -38,6 +38,7 @@ const App: React.FC = () => {
       isSearch={true}
       itemCount={data?.length}
       setTableConfig={setTableConfig}
+      enablePdfExcel={true}
     >
       {data.map((item, index) => (
         <tr key={index}>

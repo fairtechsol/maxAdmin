@@ -2,9 +2,8 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import "./style.scss";
+import TableHeader from "./tableHeader";
 import PaginationComponent from "./tableUtils/pagination"; // Import the PaginationComponent
-import RowPerPage from "./tableUtils/rowPerPage";
-import SearchBox from "./tableUtils/search";
 import SortIcon from "./tableUtils/sort";
 
 interface Column {
@@ -30,7 +29,8 @@ interface CustomTableProps {
   children: any;
   itemCount: number;
   setTableConfig: any;
-  isSearch: boolean;
+  isSearch?: boolean;
+  enablePdfExcel?: boolean;
 }
 
 const CustomTable: React.FC<CustomTableProps> = ({
@@ -42,6 +42,7 @@ const CustomTable: React.FC<CustomTableProps> = ({
   children,
   isSearch,
   setTableConfig,
+  enablePdfExcel,
 }) => {
   // State for sorting configuration and current page
   const [sortConfig, setSortConfig] = useState<SortConfig>({
@@ -50,7 +51,6 @@ const CustomTable: React.FC<CustomTableProps> = ({
   });
   const [currentPage, setCurrentPage] = useState(1);
   const [rowPerPage, setRowPerPage] = useState(10);
-  const [keyword, setKeyword] = useState("");
 
   // Handle column click to change the sorting configuration
   const handleSort = (key: string | number) => {
@@ -71,18 +71,19 @@ const CustomTable: React.FC<CustomTableProps> = ({
     setTableConfig({
       page: currentPage,
       sort: sortConfig,
-      keyword: keyword,
     });
-  }, [currentPage, keyword, sortConfig]);
+  }, [currentPage, sortConfig]);
 
   return (
     <div className={`${customClass ?? ""}`}>
-      <div className="d-flex justify-content-between align-items-center">
-        {isPagination && (
-          <RowPerPage value={rowPerPage} onChange={setRowPerPage} />
-        )}
-        {isSearch && <SearchBox value={keyword} onSearch={setKeyword} />}
-      </div>
+      <TableHeader
+        enablePdfExcel={enablePdfExcel}
+        isPagination={isPagination}
+        isSearch={isSearch}
+        setTableConfig={setTableConfig}
+        rowPerPage={rowPerPage}
+        setRowPerPage={setRowPerPage}
+      />
       {/* Table for displaying data */}
       <Table striped bordered hover>
         <thead>
