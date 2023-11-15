@@ -3,6 +3,10 @@ import GameHeaderDropdown from "./dropdown";
 import "./style.scss";
 
 const GameHeader = () => {
+  const liveMarketModal = () => {
+    alert("asjdh");
+  };
+
   return (
     <>
       <div className="common-header mb-3">
@@ -10,8 +14,16 @@ const GameHeader = () => {
           <GameHeaderDropdown
             name="Live Market"
             options={[
-              { name: "All Deactivate", clickHandle: () => {} },
-              { name: "Otherwise", clickHandle: () => {} },
+              {
+                name: "All Deactivate",
+                clickHandle: () => {},
+              },
+              {
+                name: "Otherwise 123",
+                clickHandle: () => {
+                  liveMarketModal();
+                },
+              },
             ]}
           />
           <GameHeaderDropdown
