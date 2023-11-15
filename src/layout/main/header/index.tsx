@@ -10,8 +10,10 @@ interface ItemProps {
 const TopbarDropdown = ({ name, options }: ItemProps) => {
   return (
     <NavDropdown title={name} id="basic-nav-dropdown">
-      {options?.map((option) => (
-        <NavDropdown.Item href={option.link}>{option.name}</NavDropdown.Item>
+      {options?.map((option, index) => (
+        <NavDropdown.Item key={index} href={option.link}>
+          {option.name}
+        </NavDropdown.Item>
       ))}
     </NavDropdown>
   );
