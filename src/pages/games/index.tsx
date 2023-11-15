@@ -6,6 +6,7 @@ import GameHeader from "../../components/game/gameHeader";
 import LiveMatch from "../../components/game/liveMatch";
 import MatchOddsTable from "../../components/game/matchOdds";
 import SessionMarketTable from "../../components/game/sessionMarket";
+import UserBets from "../../components/game/userBet";
 // import GameTable from "../../components/game/table";
 
 export default function Games() {
@@ -38,6 +39,7 @@ export default function Games() {
             </Col>
             <Col md={4}>
               <LiveMatch />
+              <UserBets />
             </Col>
           </Row>
         </div>
