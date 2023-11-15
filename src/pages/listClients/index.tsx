@@ -114,10 +114,14 @@ const App: React.FC = () => {
           >
             <tr>
               {columns?.map((item, index) => {
-                return <td className=" fw-bold">{index === 1 && 173398}</td>;
+                return (
+                  <td key={index} className=" fw-bold">
+                    {index === 1 && 173398}
+                  </td>
+                );
               })}
             </tr>
-            {data?.map((item: any) => {
+            {data?.map((item: any, index: number) => {
               const {
                 username,
                 creditReferance,
@@ -127,7 +131,7 @@ const App: React.FC = () => {
                 casinoTotal,
               } = item;
               return (
-                <tr key={username}>
+                <tr key={index}>
                   <td>
                     <CustomButton className="actionBtn">
                       {username}
@@ -151,7 +155,7 @@ const App: React.FC = () => {
                   <td className="d-flex gap-1">
                     {actionButtons?.map((item) => {
                       return (
-                        <CustomButton className="actionBtn">
+                        <CustomButton key={item?.name} className="actionBtn">
                           {item?.name}
                         </CustomButton>
                       );
