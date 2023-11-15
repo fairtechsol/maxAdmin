@@ -127,7 +127,7 @@ const App: React.FC = () => {
                 casinoTotal,
               } = item;
               return (
-                <tr>
+                <tr key={username}>
                   <td>
                     <CustomButton className="actionBtn">
                       {username}
