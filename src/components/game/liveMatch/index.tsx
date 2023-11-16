@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { Button } from "react-bootstrap";
 
-import TableHeader from "../../commonComponent/betTableHeader";
+import BetTableHeader from "../../commonComponent/betTableHeader";
 import CustomModal from "../../commonComponent/modal";
 
 function LiveMatch() {
   const [show, setShow] = useState(false);
   return (
     <>
-      <TableHeader customClass=" f-400" title="Live Match" />
+      <BetTableHeader customClass=" f-400" title="Live Match" />
       <div className="gameTable">
         <div className="bg-dark" style={{ height: "100px" }}>
           <p className="text-info text-center pt-4">Live match....</p>
