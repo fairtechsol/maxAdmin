@@ -3,8 +3,8 @@ import "./style.scss";
 
 interface props {
   bgColor?: string;
-  rate: number;
-  percent: number;
+  rate: number | string;
+  percent: number | string;
   customClass?: string;
   overlay?: boolean;
   onClick?: any;

@@ -9,7 +9,7 @@ interface props {
   children?: ReactNode;
 }
 
-function TabelHeader({
+function BetTableHeader({
   title,
   bgColor,
   padding,
@@ -34,4 +34,4 @@ function TabelHeader({
   );
 }
 
-export default TabelHeader;
+export default BetTableHeader;

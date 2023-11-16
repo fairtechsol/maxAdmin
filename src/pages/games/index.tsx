@@ -1,13 +1,11 @@
 import { Col, Container, Row } from "react-bootstrap";
-import CustomBreadcrumb from "../../components/commonComponent/breadcrumb";
-import BookMakerTable from "../../components/game/bookMaker";
-import FancyMarketTable from "../../components/game/fancyMarket";
+import BetTable from "../../components/game/betTable";
 import GameHeader from "../../components/game/gameHeader";
 import LiveMatch from "../../components/game/liveMatch";
-import MatchOddsTable from "../../components/game/matchOdds";
 import ScoreCard from "../../components/game/scoreCard";
-import SessionMarketTable from "../../components/game/sessionMarket";
 import UserBets from "../../components/game/userBet";
+import { MatchType } from "../../utils/enum";
+import { GameData, MatchOdds, SessionMarketData } from "./index.json";
 // import GameTable from "../../components/game/table";
 
 export default function Games() {
@@ -19,23 +17,40 @@ export default function Games() {
         <div className="gamePage-table">
           <Row className="no-gutters">
             <Col md={8}>
-              <CustomBreadcrumb
-                items={[
-                  { name: "ICC Cricket World Cup" },
-                  { name: "ICC Cricket World Cup" },
-                  { name: "TOURNAMENT_WINNER  " },
-                  { name: "10/5/2023 2:00:00 PM" },
-                ]}
-              />
-              <MatchOddsTable />
-              <BookMakerTable />
+              {MatchOdds().map((item: any) => {
+                return (
+                  <Col md={12}>
+                    <BetTable
+                      title={item?.title}
+                      type={MatchType.MATCH_ODDS}
+                      data={item?.runners}
+                    />
+                  </Col>
+                );
+              })}
               <Row className="no-gutters">
-                <Col md={6}>
-                  <FancyMarketTable />
-                </Col>
-                <Col md={6}>
-                  <SessionMarketTable />
-                </Col>
+                {GameData()?.map((item: any, index: number) => (
+                  <Col md={6}>
+                    <BetTable
+                      key={index}
+                      title={item?.title}
+                      type={MatchType.BOOKMAKER}
+                      data={item?.data}
+                    />
+                  </Col>
+                ))}
+              </Row>
+              <Row className="no-gutters">
+                {SessionMarketData()?.map((item: any, index: number) => (
+                  <Col md={6}>
+                    <BetTable
+                      key={index}
+                      title={item?.title}
+                      type={MatchType.SESSION_MARKET}
+                      data={item?.data}
+                    />
+                  </Col>
+                ))}
               </Row>
             </Col>
             <Col md={4}>

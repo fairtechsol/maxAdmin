@@ -1,13 +1,9 @@
-import TabelHeader from "../../commonComponent/tableHeader";
+import BetTableHeader from "../../commonComponent/betTableHeader";
 
 const ScoreCard = () => {
   return (
     <>
-      <TabelHeader
-        customClass="fw-normal"
-        title="Score Card"
-        style={{ height: "33px" }}
-      />
+      <BetTableHeader title="Score Board" />
     </>
   );
 };

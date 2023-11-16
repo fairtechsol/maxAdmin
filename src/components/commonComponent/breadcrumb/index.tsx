@@ -17,8 +17,12 @@ function CustomBreadcrumb({ items, style }: Props) {
   return (
     <div className="customBreadcrumb bg-secondary" style={{ ...inlineStyle }}>
       <Breadcrumb bsPrefix="breadcrumb m-0">
-        {items?.map((item) => (
-          <Breadcrumb.Item linkAs="span" className="title-16 f600 p-0">
+        {items?.map((item, index) => (
+          <Breadcrumb.Item
+            key={index}
+            linkAs="span"
+            className="title-16 f600 p-0"
+          >
             {item?.name}
           </Breadcrumb.Item>
         ))}
