@@ -1,5 +1,5 @@
 import { Accordion } from "react-bootstrap";
-import { GiHamburgerMenu } from "react-icons/gi";
+import { TiTimes } from "react-icons/ti";
 import { MenuItem } from "./menuItem";
 import menuItemJson from "./menuItem.json";
 const Sidebar = (props: any) => {
@@ -7,7 +7,7 @@ const Sidebar = (props: any) => {
     <>
       <div className="sidebarBox bg-light">
         <div className="sidebarBox-close" onClick={props.sidebarCloseBtn}>
-          <GiHamburgerMenu />
+          <TiTimes />
         </div>
         {menuItemJson()?.map((item, index) => (
           <Accordion key={index} defaultActiveKey={["0"]}>

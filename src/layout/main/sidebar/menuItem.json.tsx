@@ -2,7 +2,567 @@ export default function menuItemJson() {
   const menuItems = [
     {
       id: "football",
-      name: "football",
+      name: "Football",
+      type: "collapse",
+      children: [
+        {
+          id: "teamName",
+          name: "ARGENTINA Reserve League",
+          type: "collapse",
+          children: [
+            {
+              id: "teamName",
+              name: "24-11-2023",
+              type: "collapse",
+              path: "/temp",
+              children: [
+                {
+                  id: "teamName",
+                  name: "dssdf",
+                  type: "item",
+                  path: "/temp3",
+                },
+                {
+                  id: "teamName",
+                  name: "fdsfsd",
+                  type: "item",
+                  path: "/temp4",
+                },
+                {
+                  id: "teamName",
+                  name: "434",
+                  type: "item",
+                  path: "/temp5",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "tennis",
+      name: "Tennis",
+      type: "collapse",
+      children: [
+        {
+          id: "teamName",
+          name: "ARGENTINA Reserve League",
+          type: "collapse",
+          children: [
+            {
+              id: "teamName",
+              name: "24-11-2023",
+              type: "collapse",
+              path: "/temp",
+              children: [
+                {
+                  id: "teamName",
+                  name: "dssdf",
+                  type: "item",
+                  path: "/temp3",
+                },
+                {
+                  id: "teamName",
+                  name: "fdsfsd",
+                  type: "item",
+                  path: "/temp4",
+                },
+                {
+                  id: "teamName",
+                  name: "434",
+                  type: "item",
+                  path: "/temp5",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "cricket",
+      name: "Cricket",
+      type: "collapse",
+      children: [
+        {
+          id: "teamName",
+          name: "ARGENTINA Reserve League",
+          type: "collapse",
+          children: [
+            {
+              id: "teamName",
+              name: "24-11-2023",
+              type: "collapse",
+              path: "/temp",
+              children: [
+                {
+                  id: "teamName",
+                  name: "dssdf",
+                  type: "item",
+                  path: "/temp3",
+                },
+                {
+                  id: "teamName",
+                  name: "fdsfsd",
+                  type: "item",
+                  path: "/temp4",
+                },
+                {
+                  id: "teamName",
+                  name: "434",
+                  type: "item",
+                  path: "/temp5",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "ice_hockey",
+      name: "Ice Hockey",
+      type: "collapse",
+      children: [
+        {
+          id: "teamName",
+          name: "ARGENTINA Reserve League",
+          type: "collapse",
+          children: [
+            {
+              id: "teamName",
+              name: "24-11-2023",
+              type: "collapse",
+              path: "/temp",
+              children: [
+                {
+                  id: "teamName",
+                  name: "dssdf",
+                  type: "item",
+                  path: "/temp3",
+                },
+                {
+                  id: "teamName",
+                  name: "fdsfsd",
+                  type: "item",
+                  path: "/temp4",
+                },
+                {
+                  id: "teamName",
+                  name: "434",
+                  type: "item",
+                  path: "/temp5",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "volleyball",
+      name: "Volleyball",
+      type: "collapse",
+      children: [
+        {
+          id: "teamName",
+          name: "ARGENTINA Reserve League",
+          type: "collapse",
+          children: [
+            {
+              id: "teamName",
+              name: "24-11-2023",
+              type: "collapse",
+              path: "/temp",
+              children: [
+                {
+                  id: "teamName",
+                  name: "dssdf",
+                  type: "item",
+                  path: "/temp3",
+                },
+                {
+                  id: "teamName",
+                  name: "fdsfsd",
+                  type: "item",
+                  path: "/temp4",
+                },
+                {
+                  id: "teamName",
+                  name: "434",
+                  type: "item",
+                  path: "/temp5",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "politics",
+      name: "Politics",
+      type: "collapse",
+      children: [
+        {
+          id: "teamName",
+          name: "ARGENTINA Reserve League",
+          type: "collapse",
+          children: [
+            {
+              id: "teamName",
+              name: "24-11-2023",
+              type: "collapse",
+              path: "/temp",
+              children: [
+                {
+                  id: "teamName",
+                  name: "dssdf",
+                  type: "item",
+                  path: "/temp3",
+                },
+                {
+                  id: "teamName",
+                  name: "fdsfsd",
+                  type: "item",
+                  path: "/temp4",
+                },
+                {
+                  id: "teamName",
+                  name: "434",
+                  type: "item",
+                  path: "/temp5",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "basketball",
+      name: "Basketball",
+      type: "collapse",
+      children: [
+        {
+          id: "teamName",
+          name: "ARGENTINA Reserve League",
+          type: "collapse",
+          children: [
+            {
+              id: "teamName",
+              name: "24-11-2023",
+              type: "collapse",
+              path: "/temp",
+              children: [
+                {
+                  id: "teamName",
+                  name: "dssdf",
+                  type: "item",
+                  path: "/temp3",
+                },
+                {
+                  id: "teamName",
+                  name: "fdsfsd",
+                  type: "item",
+                  path: "/temp4",
+                },
+                {
+                  id: "teamName",
+                  name: "434",
+                  type: "item",
+                  path: "/temp5",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "table_tennis",
+      name: "Table Tennis",
+      type: "collapse",
+      children: [
+        {
+          id: "teamName",
+          name: "ARGENTINA Reserve League",
+          type: "collapse",
+          children: [
+            {
+              id: "teamName",
+              name: "24-11-2023",
+              type: "collapse",
+              path: "/temp",
+              children: [
+                {
+                  id: "teamName",
+                  name: "dssdf",
+                  type: "item",
+                  path: "/temp3",
+                },
+                {
+                  id: "teamName",
+                  name: "fdsfsd",
+                  type: "item",
+                  path: "/temp4",
+                },
+                {
+                  id: "teamName",
+                  name: "434",
+                  type: "item",
+                  path: "/temp5",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "darts",
+      name: "Darts",
+      type: "collapse",
+      children: [
+        {
+          id: "teamName",
+          name: "ARGENTINA Reserve League",
+          type: "collapse",
+          children: [
+            {
+              id: "teamName",
+              name: "24-11-2023",
+              type: "collapse",
+              path: "/temp",
+              children: [
+                {
+                  id: "teamName",
+                  name: "dssdf",
+                  type: "item",
+                  path: "/temp3",
+                },
+                {
+                  id: "teamName",
+                  name: "fdsfsd",
+                  type: "item",
+                  path: "/temp4",
+                },
+                {
+                  id: "teamName",
+                  name: "434",
+                  type: "item",
+                  path: "/temp5",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "badminton",
+      name: "Badminton",
+      type: "collapse",
+      children: [
+        {
+          id: "teamName",
+          name: "ARGENTINA Reserve League",
+          type: "collapse",
+          children: [
+            {
+              id: "teamName",
+              name: "24-11-2023",
+              type: "collapse",
+              path: "/temp",
+              children: [
+                {
+                  id: "teamName",
+                  name: "dssdf",
+                  type: "item",
+                  path: "/temp3",
+                },
+                {
+                  id: "teamName",
+                  name: "fdsfsd",
+                  type: "item",
+                  path: "/temp4",
+                },
+                {
+                  id: "teamName",
+                  name: "434",
+                  type: "item",
+                  path: "/temp5",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "kabaddi",
+      name: "Kabaddi",
+      type: "collapse",
+      children: [
+        {
+          id: "teamName",
+          name: "ARGENTINA Reserve League",
+          type: "collapse",
+          children: [
+            {
+              id: "teamName",
+              name: "24-11-2023",
+              type: "collapse",
+              path: "/temp",
+              children: [
+                {
+                  id: "teamName",
+                  name: "dssdf",
+                  type: "item",
+                  path: "/temp3",
+                },
+                {
+                  id: "teamName",
+                  name: "fdsfsd",
+                  type: "item",
+                  path: "/temp4",
+                },
+                {
+                  id: "teamName",
+                  name: "434",
+                  type: "item",
+                  path: "/temp5",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "boxing",
+      name: "Boxing",
+      type: "collapse",
+      children: [
+        {
+          id: "teamName",
+          name: "ARGENTINA Reserve League",
+          type: "collapse",
+          children: [
+            {
+              id: "teamName",
+              name: "24-11-2023",
+              type: "collapse",
+              path: "/temp",
+              children: [
+                {
+                  id: "teamName",
+                  name: "dssdf",
+                  type: "item",
+                  path: "/temp3",
+                },
+                {
+                  id: "teamName",
+                  name: "fdsfsd",
+                  type: "item",
+                  path: "/temp4",
+                },
+                {
+                  id: "teamName",
+                  name: "434",
+                  type: "item",
+                  path: "/temp5",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "american_football",
+      name: "American Football",
+      type: "collapse",
+      children: [
+        {
+          id: "teamName",
+          name: "ARGENTINA Reserve League",
+          type: "collapse",
+          children: [
+            {
+              id: "teamName",
+              name: "24-11-2023",
+              type: "collapse",
+              path: "/temp",
+              children: [
+                {
+                  id: "teamName",
+                  name: "dssdf",
+                  type: "item",
+                  path: "/temp3",
+                },
+                {
+                  id: "teamName",
+                  name: "fdsfsd",
+                  type: "item",
+                  path: "/temp4",
+                },
+                {
+                  id: "teamName",
+                  name: "434",
+                  type: "item",
+                  path: "/temp5",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "mixed_martial_arts",
+      name: "Mixed Martial Arts",
+      type: "collapse",
+      children: [
+        {
+          id: "teamName",
+          name: "ARGENTINA Reserve League",
+          type: "collapse",
+          children: [
+            {
+              id: "teamName",
+              name: "24-11-2023",
+              type: "collapse",
+              path: "/temp",
+              children: [
+                {
+                  id: "teamName",
+                  name: "dssdf",
+                  type: "item",
+                  path: "/temp3",
+                },
+                {
+                  id: "teamName",
+                  name: "fdsfsd",
+                  type: "item",
+                  path: "/temp4",
+                },
+                {
+                  id: "teamName",
+                  name: "434",
+                  type: "item",
+                  path: "/temp5",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "motor_sport",
+      name: "Motor Sport",
       type: "collapse",
       children: [
         {
