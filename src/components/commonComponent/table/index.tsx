@@ -34,6 +34,7 @@ const CustomTable: React.FC<CustomTableProps> = ({
   isSearch,
   setTableConfig,
   enablePdfExcel,
+  ...props
 }) => {
   // State for sorting configuration and current page
   const [sortConfig, setSortConfig] = useState<SortConfig>({
@@ -76,7 +77,7 @@ const CustomTable: React.FC<CustomTableProps> = ({
         setRowPerPage={setRowPerPage}
       />
       {/* Table for displaying data */}
-      <Table striped bordered>
+      <Table {...props}>
         <thead>
           <tr>
             {/* Table header with sorting icons */}

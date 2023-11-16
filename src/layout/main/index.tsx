@@ -5,17 +5,17 @@ import "../layout.scss";
 import Topbar from "./header";
 import Sidebar from "./sidebar";
 function MainLayout() {
-  const [toggle, setToggle] = useState<Boolean>();
+  const [toggle, setToggle] = useState<Boolean>(false);
   const handleDrawer = () => {
     setToggle(!toggle);
   };
   return (
     <>
       {/* topbar */}
-      <Topbar onClick={() => handleDrawer()} />
+      <Topbar onClick={handleDrawer} />
       {/* sidebar start */}
       <div className={`sidebar ${toggle ? "sidebarActive" : ""}`}>
-        <Sidebar />
+        <Sidebar clickHandler={handleDrawer} />
       </div>
       {/* layout */}
       <main className="page-content ">

@@ -23,7 +23,7 @@ export const MenuItem: React.FC<Props> = ({ item }) => {
             <Accordion.Body>
               {data?.children?.map((sideBarChild: any, index: number) => {
                 return (
-                  <Accordion key={index} defaultActiveKey={["0"]}>
+                  <Accordion key={index} defaultActiveKey={[]}>
                     <MenuCollapse data={sideBarChild} />
                   </Accordion>
                 );

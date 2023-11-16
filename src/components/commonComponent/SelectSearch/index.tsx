@@ -11,7 +11,10 @@ const options = [
   { value: "vanilla", label: "Vanilla" },
 ];
 
-const SelectSearch = ({ isMultiOption, isSearchableOptions }: Props) => {
+const SelectSearch = ({
+  isMultiOption,
+  isSearchableOptions = false,
+}: Props) => {
   const [value, setValue] = useState<any>(null);
 
   return (
@@ -22,7 +25,7 @@ const SelectSearch = ({ isMultiOption, isSearchableOptions }: Props) => {
         options={options}
         placeholder="select"
         isMulti={isMultiOption}
-        isSearchable={isMultiOption == true ? isSearchableOptions : false}
+        isSearchable={isSearchableOptions}
       />
     </div>
   );
