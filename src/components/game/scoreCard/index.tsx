@@ -3,8 +3,11 @@ import TabelHeader from "../../commonComponent/tableHeader";
 const ScoreCard = () => {
   return (
     <>
-      <h1>fepo</h1>
-      <TabelHeader title="dsad" />
+      <TabelHeader
+        customClass="fw-normal"
+        title="Score Card"
+        style={{ height: "33px" }}
+      />
     </>
   );
 };

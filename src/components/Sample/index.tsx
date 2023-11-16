@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { TableConfig } from "../../models/tableInterface";
+import SelectSearch from "../commonComponent/SelectSearch";
 import CustomTable from "../commonComponent/table";
 
 interface Column {
@@ -30,24 +31,28 @@ const App: React.FC = () => {
   useEffect(() => {}, [tableConfig]);
 
   return (
-    <CustomTable
-      columns={columns}
-      isPagination={true}
-      isSort={true}
-      isSearch={true}
-      itemCount={data?.length}
-      setTableConfig={setTableConfig}
-      enablePdfExcel={true}
-    >
-      {data.map((item, index) => (
-        <tr key={index}>
-          {/* Table cells with data */}
-          {columns.map((column) => (
-            <td key={column.id}>{item[column.id]}</td>
-          ))}
-        </tr>
-      ))}
-    </CustomTable>
+    <>
+      <CustomTable
+        columns={columns}
+        isPagination={true}
+        isSort={true}
+        isSearch={true}
+        itemCount={data?.length}
+        setTableConfig={setTableConfig}
+        enablePdfExcel={true}
+      >
+        {data.map((item, index) => (
+          <tr key={index}>
+            {/* Table cells with data */}
+            {columns.map((column) => (
+              <td key={column.id}>{item[column.id]}</td>
+            ))}
+          </tr>
+        ))}
+      </CustomTable>
+
+      <SelectSearch isMultiOption={false} />
+    </>
   );
 };
 
