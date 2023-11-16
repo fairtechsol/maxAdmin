@@ -8,7 +8,13 @@ interface props {
   customClass?: string;
 }
 
-function TabelHeader({ title, bgColor, padding, style, customClass }: props) {
+function BetTableHeader({
+  title,
+  bgColor,
+  padding,
+  style,
+  customClass,
+}: props) {
   const inlineStyle: React.CSSProperties = {
     ...style,
   };
@@ -25,4 +31,4 @@ function TabelHeader({ title, bgColor, padding, style, customClass }: props) {
   );
 }
 
-export default TabelHeader;
+export default BetTableHeader;

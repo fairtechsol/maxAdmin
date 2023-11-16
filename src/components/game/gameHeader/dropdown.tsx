@@ -31,8 +31,8 @@ export default function GameHeaderDropdown({ name, options }: Props) {
           {name}
         </Dropdown.Toggle>
         <Dropdown.Menu>
-          {options?.map((option) => (
-            <Dropdown.Item onClick={() => setShowModal(true)}>
+          {options?.map((option, index) => (
+            <Dropdown.Item key={index} onClick={() => setShowModal(true)}>
               {option.name}
             </Dropdown.Item>
           ))}

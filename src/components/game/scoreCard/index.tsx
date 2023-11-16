@@ -1,10 +1,10 @@
-import TabelHeader from "../../commonComponent/tableHeader";
+import TableHeader from "../../commonComponent/betTableHeader";
 
 const ScoreCard = () => {
   return (
     <>
       <h1>fepo</h1>
-      <TabelHeader title="dsad" />
+      <TableHeader title="dsad" />
     </>
   );
 };
