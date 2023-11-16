@@ -32,7 +32,6 @@ const App: React.FC = () => {
   return (
     <CustomTable
       columns={columns}
-      data={data}
       isPagination={true}
       isSort={true}
       isSearch={true}

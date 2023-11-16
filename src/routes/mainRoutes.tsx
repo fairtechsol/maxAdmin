@@ -1,7 +1,10 @@
-import Sample from "../components/Sample";
+import { lazy } from "react";
 import MainLayout from "../layout/main";
-import Game from "../pages/games/index";
-// ==============================|| Auth ROUTING ||============================== //
+import Loadable from "../utils/loadable";
+// ==============================|| Main ROUTING ||============================== //
+const Game = Loadable(lazy(() => import("../pages/games")));
+const Sample = Loadable(lazy(() => import("../components/Sample")));
+const ListClients = Loadable(lazy(() => import("../pages/listClients")));
 
 const MainRoutes = {
   path: "/",
@@ -14,6 +17,10 @@ const MainRoutes = {
     {
       path: "samplepage",
       element: <Sample />,
+    },
+    {
+      path: "listClients",
+      element: <ListClients />,
     },
   ],
 };

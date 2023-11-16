@@ -14,6 +14,12 @@ body table.table{
  background-color: $pdf !important;
 }
 
+// action buttons
+.actionBtn{
+  padding: 0px 10px !important;
+  height: auto !important;
+}
+
 /* ====== bg Colors start ====  */
 .bg-secondaryLight{
   background-color: rgba( $secondary, 0.7) !important;
