@@ -23,35 +23,35 @@ const CasinoResultReport = Loadable(
 );
 
 const ReportRoutes = {
-  path: "/",
+  path: "/admin",
   element: <MainLayout />,
   children: [
     {
-      path: "admin/account-statement",
+      path: "account-statement",
       element: <AccountStatement />,
     },
     {
-      path: "admin/current-bets",
+      path: "current-bets",
       element: <CurrentBets />,
     },
     {
-      path: "admin/general-report",
+      path: "general-report",
       element: <GeneralReport />,
     },
     {
-      path: "admin/game-report",
+      path: "game-report",
       element: <GameReport />,
     },
     {
-      path: "admin/casino-report",
+      path: "casino-report",
       element: <CasinoReport />,
     },
     {
-      path: "admin/profit-loss",
+      path: "profit-loss",
       element: <ProfitLossReport />,
     },
     {
-      path: "admin/casinoresult",
+      path: "casino-result",
       element: <CasinoResultReport />,
     },
   ],

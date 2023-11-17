@@ -44,7 +44,7 @@ function BookmakerTable({ minMax, data }: BookmakerTableProps) {
                 </div>
               </td>
               {item?.ex?.availableToBack?.map((back: any, index: number) => (
-                <td>
+                <td key={index}>
                   <BackLayBox
                     style={{ width: "60px" }}
                     // overlay={true}
@@ -57,7 +57,7 @@ function BookmakerTable({ minMax, data }: BookmakerTableProps) {
               ))}
 
               {item?.ex?.availableToLay?.map((red: any, index: number) => (
-                <td>
+                <td key={index}>
                   <BackLayBox
                     style={{ width: "60px" }}
                     // overlay={true}
