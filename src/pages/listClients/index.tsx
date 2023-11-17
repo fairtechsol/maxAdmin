@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import CustomButton from "../../components/commonComponent/button";
 import CustomTable from "../../components/commonComponent/table";
+import ListClientModals from "../../components/listClients/modals";
 import { Column, TableConfig } from "../../models/tableInterface";
-import { useNavigate } from "react-router-dom";
 
 // Example usage
 const columns: Column[] = [
@@ -49,51 +50,55 @@ const App: React.FC = () => {
   const navigate = useNavigate();
 
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
+  const [eventDetails, setEventDetails] = useState({
+    show: false,
+    eventId: null,
+  });
+
+  const showEventModals = (id: any) => {
+    setEventDetails({
+      show: true,
+      eventId: id,
+    });
+  };
 
   useEffect(() => {}, [tableConfig]);
 
   const actionButtons = [
     {
+      id: "d",
       name: "D",
-      onClick: (rowData: any) => {
-        console.log(rowData);
-      },
+      onClick: showEventModals,
     },
     {
+      id: "w",
       name: "W",
-      onClick: (rowData: any) => {
-        console.log(rowData);
-      },
+      onClick: showEventModals,
     },
     {
+      id: "l",
       name: "L",
-      onClick: (rowData: any) => {
-        console.log(rowData);
-      },
+      onClick: showEventModals,
     },
     {
+      id: "c",
       name: "C",
-      onClick: (rowData: any) => {
-        console.log(rowData);
-      },
+      onClick: showEventModals,
     },
     {
+      id: "p",
       name: "P",
-      onClick: (rowData: any) => {
-        console.log(rowData);
-      },
+      onClick: showEventModals,
     },
     {
+      id: "s",
       name: "S",
-      onClick: (rowData: any) => {
-        console.log(rowData);
-      },
+      onClick: showEventModals,
     },
     {
+      id: "more",
       name: "More",
-      onClick: (rowData: any) => {
-        console.log(rowData);
-      },
+      onClick: () => {},
     },
   ];
 
@@ -148,12 +153,12 @@ const App: React.FC = () => {
                   <td>{creditReferance}</td>
                   <td>
                     <Form>
-                      <Form.Check aria-label="option 1" />
+                      <Form.Check id={`opt${index}1`} aria-label="option 1" />
                     </Form>
                   </td>
                   <td>
                     <Form>
-                      <Form.Check aria-label="option 1" />
+                      <Form.Check id={`opt${index}`} aria-label="option 1" />
                     </Form>
                   </td>
                   <td>{exposureLimit}</td>
@@ -163,7 +168,13 @@ const App: React.FC = () => {
                   <td className="d-flex gap-1">
                     {actionButtons?.map((item) => {
                       return (
-                        <CustomButton key={item?.name} className="actionBtn">
+                        <CustomButton
+                          onClick={() => {
+                            item.onClick(item?.id);
+                          }}
+                          key={item?.id}
+                          className="actionBtn"
+                        >
                           {item?.name}
                         </CustomButton>
                       );
@@ -175,6 +186,15 @@ const App: React.FC = () => {
           </CustomTable>
         </Col>
       </Row>
+      <ListClientModals
+        show={eventDetails.show}
+        setShow={(data) => {
+          setEventDetails((prev) => {
+            return { ...prev, show: data };
+          });
+        }}
+        id={eventDetails.eventId}
+      />
     </Container>
   );
 };
