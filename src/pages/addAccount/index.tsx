@@ -191,7 +191,7 @@ const AddAccount = () => {
                   title={"Transaction Password:"}
                   placeholder={"Transaction Password"}
                   type={"text"}
-                  customStyle={" col-md-3 float-end"}
+                  customStyle={"mb-3 col-md-3 float-end"}
                 />
               </Col>
             </Row>
