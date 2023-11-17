@@ -7,7 +7,7 @@ function CustomModal(props: any) {
         {...props}
         show={props?.show}
         onHide={() => props?.setShow((prev: any) => !prev)}
-        className={`customModal ${props.customClass}`}
+        className={`customModal ${props?.customStyle}`}
       >
         <Modal.Header closeButton>
           <Modal.Title>{props.title}</Modal.Title>
