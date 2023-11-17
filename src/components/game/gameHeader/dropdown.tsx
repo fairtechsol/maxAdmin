@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Dropdown } from "react-bootstrap";
 
 import CustomModal from "../../commonComponent/modal";
-import ActiveUser from "../../modals/activeUsers";
+import ActiveUser from "./modals/activeUsers";
 
 interface Props {
   name: string;
@@ -39,7 +39,11 @@ export default function GameHeaderDropdown({ name, options }: Props) {
         </Dropdown.Menu>
       </Dropdown>
 
-      <CustomModal show={showModal} setShow={setShowModal} title="Active User">
+      <CustomModal
+        show={showModal}
+        setShow={setShowModal}
+        title="View More Bet"
+      >
         <ActiveUser />
       </CustomModal>
     </>

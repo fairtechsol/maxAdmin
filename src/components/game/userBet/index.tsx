@@ -1,6 +1,12 @@
+import { useState } from "react";
 import { Button, Col, Nav, Row, Tab, Table } from "react-bootstrap";
+import CustomModal from "../../commonComponent/modal";
+import UserBetModalTable from "./modal";
+import UserBetModalForm from "./modal/form";
 import "./style.scss";
 const UserBets = () => {
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <div className={`userBets`}>
       <Tab.Container id="left-tabs-example" defaultActiveKey="first">
@@ -27,7 +33,9 @@ const UserBets = () => {
                 </Nav>
               </div>
               <div className="userBets-headerRight">
-                <Button variant="secondary">View More</Button>
+                <Button variant="secondary" onClick={() => setShowModal(true)}>
+                  View More
+                </Button>
               </div>
             </div>
           </Col>
@@ -67,6 +75,15 @@ const UserBets = () => {
           </Col>
         </Row>
       </Tab.Container>
+      <CustomModal
+        customStyle="userBetModal"
+        show={showModal}
+        setShow={setShowModal}
+        title="View More Bet"
+      >
+        <UserBetModalForm />
+        <UserBetModalTable />
+      </CustomModal>
     </div>
   );
 };

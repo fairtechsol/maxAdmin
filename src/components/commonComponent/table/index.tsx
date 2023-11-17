@@ -17,7 +17,7 @@ interface CustomTableProps {
   customClass?: string;
   isPagination?: boolean;
   isSort?: boolean;
-  children: any;
+  children?: any;
   itemCount: number;
   setTableConfig: any;
   isSearch?: boolean;
