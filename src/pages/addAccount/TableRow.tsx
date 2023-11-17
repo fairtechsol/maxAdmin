@@ -5,9 +5,9 @@ const TableRow = ({ data }: any) => {
 
   return (
     <tr>
-      <td style={{ width: "30%" }}>{column1}</td>
+      <td>{column1}</td>
       {column1 === "Downline" ? (
-        <td style={{ width: "30%" }}>
+        <td>
           <input
             style={{
               width: "100%",
@@ -23,7 +23,7 @@ const TableRow = ({ data }: any) => {
           />
         </td>
       ) : (
-        <td style={{ width: "70%" }}>{column2}</td>
+        <td>{column2}</td>
       )}
     </tr>
   );
