@@ -3,6 +3,7 @@ import { Col, Container, Form, Row } from "react-bootstrap";
 import CustomButton from "../../components/commonComponent/button";
 import CustomTable from "../../components/commonComponent/table";
 import { Column, TableConfig } from "../../models/tableInterface";
+import { useNavigate } from "react-router-dom";
 
 // Example usage
 const columns: Column[] = [
@@ -45,6 +46,8 @@ const data: any = [
 ];
 
 const App: React.FC = () => {
+  const navigate = useNavigate();
+
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
 
   useEffect(() => {}, [tableConfig]);
@@ -101,7 +104,12 @@ const App: React.FC = () => {
           <p className="title-22">Account List</p>
         </Col>
         <Col>
-          <CustomButton className="float-end">Add Account</CustomButton>
+          <CustomButton
+            className="float-end"
+            onClick={() => navigate(`/admin/add-account`)}
+          >
+            Add Account
+          </CustomButton>
         </Col>
       </Row>
       <Row>
