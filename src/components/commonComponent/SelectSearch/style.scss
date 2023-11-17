@@ -1,0 +1,11 @@
+.customSelect{
+    height: 28px;
+}
+.SelectInline{
+    display: flex;
+    align-items: center;
+    .form-label{
+        margin-right: 20px;
+        margin-bottom: 0;
+    }
+}

@@ -1,75 +1,30 @@
-import { Col, Form, Row } from "react-bootstrap";
+import SelectSearch from "../../../commonComponent/SelectSearch";
+import CustomInput from "../../../commonComponent/input";
 
 const UserBetModalForm = () => {
   return (
     <div className="UserBetModalForm">
       <div className="row">
         <div className="col-lg-4">
-          <Form>
-            <Form.Group
-              as={Row}
-              className="mb-3"
-              controlId="formPlaintextEmail"
-            >
-              <Form.Label column sm="2">
-                Email
-              </Form.Label>
-              <Col sm="10">
-                <Form.Control
-                  plaintext
-                  readOnly
-                  defaultValue="email@example.com"
-                />
-              </Col>
-            </Form.Group>
+          <SelectSearch
+            SelectInline={true}
+            defaultValue="- Select Your A/C. Type -"
+            options={[]}
+            placeholder="- Select Your A/C. Type -"
+            label={"Account Type"}
+          />
 
-            <Form.Group
-              as={Row}
-              className="mb-3"
-              controlId="formPlaintextPassword"
-            >
-              <Form.Label column sm="2">
-                Password
-              </Form.Label>
-              <Col sm="10">
-                <Form.Control type="password" placeholder="Password" />
-              </Col>
-            </Form.Group>
-          </Form>
+          <CustomInput
+            customStyle="mt-5"
+            title={"User Password"}
+            placeholder={"Enter User Password"}
+            type={"text"}
+            // formInline={true}
+            labelCol="lg-4 aa "
+            inputCol="lg-6"
+          />
         </div>
-        <div className="col-lg-4 offset-lg-4">
-          <Form>
-            <Form.Group
-              as={Row}
-              className="mb-3"
-              controlId="formPlaintextEmail"
-            >
-              <Form.Label column sm="2">
-                Email
-              </Form.Label>
-              <Col sm="10">
-                <Form.Control
-                  plaintext
-                  readOnly
-                  defaultValue="email@example.com"
-                />
-              </Col>
-            </Form.Group>
-
-            <Form.Group
-              as={Row}
-              className="mb-3"
-              controlId="formPlaintextPassword"
-            >
-              <Form.Label column sm="2">
-                Password
-              </Form.Label>
-              <Col sm="10">
-                <Form.Control type="password" placeholder="Password" />
-              </Col>
-            </Form.Group>
-          </Form>
-        </div>
+        <div className="col-lg-4"></div>
       </div>
     </div>
   );

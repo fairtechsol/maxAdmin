@@ -1,5 +1,4 @@
-import React from "react";
-import { Card, Form, Row, Col, Button, Table } from "react-bootstrap";
+import { Button, Card, Col, Form, Row, Table } from "react-bootstrap";
 import CustomInput from "../../components/commonComponent/input";
 import TableRow from "./TableRow";
 import SelectSearch from "../../components/commonComponent/SelectSearch";

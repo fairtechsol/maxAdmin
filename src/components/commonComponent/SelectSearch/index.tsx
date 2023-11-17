@@ -1,7 +1,6 @@
-import { useState } from "react";
 import { Form } from "react-bootstrap";
 import Select from "react-select";
-
+import "./style.scss";
 interface Props {
   isMultiOption?: boolean;
   isSearchableOptions?: boolean;
@@ -10,6 +9,9 @@ interface Props {
   onChange?: any;
   defaultValue?: string;
   label?: string;
+  customClass?: string;
+  filedClass?: string;
+  SelectInline?: boolean;
 }
 
 const SelectSearch = ({
@@ -20,23 +22,30 @@ const SelectSearch = ({
   onChange,
   defaultValue,
   label,
+  customClass,
+  filedClass,
+  SelectInline,
 }: Props) => {
   return (
     <>
-      <div className="App">
-        <Form.Group className="mb-3" controlId="cityName">
-          <Form.Label>{label}</Form.Label>
-          <Select
-            id="mySelect"
-            defaultValue={defaultValue}
-            onChange={onChange}
-            options={options}
-            placeholder={placeholder}
-            isMulti={isMultiOption}
-            isSearchable={isMultiOption == true ? isSearchableOptions : false}
-          />
-        </Form.Group>
-      </div>
+      <Form.Group
+        className={`customSelect ${SelectInline ? "SelectInline" : ""} ${
+          customClass ?? ""
+        }`}
+        controlId="cityName"
+      >
+        <Form.Label>{label}</Form.Label>
+        <Select
+          className={`${filedClass}`}
+          id="mySelect"
+          defaultValue={defaultValue}
+          onChange={onChange}
+          options={options}
+          placeholder={placeholder}
+          isMulti={isMultiOption}
+          isSearchable={isMultiOption == true ? isSearchableOptions : false}
+        />
+      </Form.Group>
       {/* <Form.Control {...prop} /> */}
     </>
   );

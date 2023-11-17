@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Form } from "react-bootstrap";
 import { Column, TableConfig } from "../../../../models/tableInterface";
 import CustomTable from "../../../commonComponent/table";
 import "./style.scss";
@@ -9,19 +8,51 @@ function UserBetModalTable() {
   useEffect(() => {}, [tableConfig]);
   const columns: Column[] = [
     { id: "sr", label: "S. NO" },
-    { id: "username", label: "	User Name UserBetModal" },
-    { id: "Checked", label: "Checked UserBetModal" },
+    { id: "username", label: "	User Name " },
+    { id: "nation", label: "nation " },
+    { id: "betType", label: "betType " },
+    { id: "amount", label: "amount " },
+    { id: "userRate", label: "userRate " },
+    { id: "placeDate", label: "placeDate " },
+    { id: "matchDate", label: "matchDate " },
+    { id: "ip", label: "ip " },
+    { id: "browserDetail", label: "browserDetail " },
+    // { id: "Checked", label: "Checked " },
   ];
 
   const data: any = [
     {
       username: "fuser1",
+      nation: "India",
+      betType: "Match1",
+      amount: "1000",
+      userRate: "94.5",
+      placeDate: "17-11-223",
+      matchDate: "17-11-223",
+      ip: "1000",
+      browserDetail: "http:",
     },
     {
-      username: "fuser2",
+      username: "fuser1",
+      nation: "India",
+      betType: "Match1",
+      amount: "1000",
+      userRate: "94.5",
+      placeDate: "17-11-223",
+      matchDate: "17-11-223",
+      ip: "1000",
+      browserDetail: "http:",
     },
     {
-      username: "fuser05",
+      username: "fuser1",
+      nation: "India",
+      betType: "Match1",
+      amount: "1000",
+      userRate: "94.5",
+      placeDate: "17-11-223",
+      matchDate: "17-11-223",
+      ip: "1000",
+      browserDetail: "http:",
     },
   ];
 
@@ -32,28 +63,37 @@ function UserBetModalTable() {
         columns={columns}
         itemCount={10}
         setTableConfig={setTableConfig}
-        //  enablePdfExcel={true}
       >
-        <tr>
-          {/* {columns?.map((item, index) => {
-            return (
-              <td key={index} className=" fw-bold">
-                {index === 1 && 173398}
-              </td>
-            );
-          })} */}
-        </tr>
         {data?.map((item: any, index: number) => {
-          const { sr, username, creditReferance } = item;
+          const {
+            username,
+            nation,
+            betType,
+            amount,
+            userRate,
+            placeDate,
+            matchDate,
+            ip,
+            browserDetail,
+          } = item;
+
           return (
             <tr key={index}>
               <td>{index++}</td>
               <td>{username}</td>
-              <td>
+              <td>{nation}</td>
+              <td>{betType}</td>
+              <td>{amount}</td>
+              <td>{userRate}</td>
+              <td>{placeDate}</td>
+              <td>{matchDate}</td>
+              <td>{ip}</td>
+              <td>{browserDetail}</td>
+              {/* <td>
                 <Form>
                   <Form.Check aria-label="option 1" />
                 </Form>
-              </td>
+              </td> */}
             </tr>
           );
         })}
