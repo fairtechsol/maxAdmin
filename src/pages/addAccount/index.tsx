@@ -2,12 +2,24 @@ import React from "react";
 import { Card, Form, Row, Col, Button, Table } from "react-bootstrap";
 import CustomInput from "../../components/commonComponent/input";
 import TableRow from "./TableRow";
+import SelectSearch from "../../components/commonComponent/SelectSearch";
 
 const tableData = [
   ["Upline", "0"],
   ["Downline", "0"],
   ["Our", "0"],
 ];
+
+const options = [
+  { value: "- Select Your A/C. Type -", label: "- Select Your A/C. Type -" },
+  { value: "master", label: "Master" },
+  { value: "agent", label: "Agent" },
+  { value: "user", label: "User" },
+];
+
+const handleSubmit = (e: any) => {
+  e.preventDefault();
+};
 
 const AddAccount = () => {
   return (
@@ -17,9 +29,8 @@ const AddAccount = () => {
           <Card.Title>Add Account</Card.Title>
         </Card.Header>
         <Card.Body>
-          <Form>
+          <Form onSubmit={handleSubmit}>
             <Row>
-              {/* Personal Details Section */}
               <Col md={6}>
                 <h6 className="mb-3 bg-warning p-2">Personal Details</h6>
                 <Row>
@@ -28,41 +39,47 @@ const AddAccount = () => {
                       title={"Client Name:"}
                       placeholder={"Client Name:"}
                       type={"text"}
+                      customStyle={"mb-3"}
                     />
                   </Col>
                   <Col md={6}>
                     <CustomInput
                       title={"User Password"}
-                      placeholder={"Enter User Password"}
+                      placeholder={"Transaction Password"}
                       type={"password"}
+                      customStyle={"mb-3"}
                     />
                   </Col>
                   <Col md={6}>
                     <CustomInput
-                      title={"Retype Password"}
+                      title={"Retype Password:"}
                       placeholder={"Retype Password"}
                       type={"password"}
+                      customStyle={"mb-3"}
                     />
                   </Col>
                   <Col md={6}>
                     <CustomInput
-                      title={"Full Name"}
-                      placeholder={"Enter Full Name"}
+                      title={"Full Name:"}
+                      placeholder={"Full Name"}
                       type={"text"}
+                      customStyle={"mb-3"}
                     />
                   </Col>
                   <Col md={6}>
                     <CustomInput
-                      title={"City Name"}
-                      placeholder={"Enter City Name"}
+                      title={"City:"}
+                      placeholder={"City"}
                       type={"text"}
+                      customStyle={"mb-3"}
                     />
                   </Col>
                   <Col md={6}>
                     <CustomInput
-                      title={"Phone No"}
-                      placeholder={"Enter Phone No"}
-                      type={"tel"}
+                      title={"Phone:"}
+                      placeholder={"Phone"}
+                      type={"number"}
+                      customStyle={"mb-3"}
                     />
                   </Col>
                 </Row>
@@ -71,24 +88,27 @@ const AddAccount = () => {
                 <h6 className="mb-3 bg-warning p-2">Account Details</h6>
                 <Row>
                   <Col md={6}>
-                    <CustomInput
-                      title={"Account Type"}
-                      placeholder={"Enter Account Type"}
-                      type={"text"}
+                    <SelectSearch
+                      defaultValue="- Select Your A/C. Type -"
+                      options={options}
+                      placeholder="- Select Your A/C. Type -"
+                      label={"Account Type"}
                     />
                   </Col>
                   <Col md={6}>
                     <CustomInput
                       title={"Credit Reference"}
                       placeholder={"Enter Credit Reference"}
-                      type={"text"}
+                      type={"number"}
+                      customStyle={"mb-3"}
                     />
                   </Col>
                   <Col md={6}>
                     <CustomInput
                       title={"Exposure Limit"}
                       placeholder={"Enter Exposure Limit"}
-                      type={"text"}
+                      type={"number"}
+                      customStyle={"mb-3"}
                     />
                   </Col>
                 </Row>
@@ -121,6 +141,59 @@ const AddAccount = () => {
             <Row>
               <Col md={12}>
                 <h6 className="mb-3 bg-warning p-2">Min Max Bet</h6>
+                <Table striped bordered>
+                  <thead>
+                    <tr>
+                      <tr></tr>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td rowSpan={2} style={{ verticalAlign: "middle" }}>
+                        Min Bet
+                      </td>
+                      <td>100</td>
+                    </tr>
+                    <tr>
+                      <td style={{ verticalAlign: "middle" }}>
+                        <CustomInput type={"number"} customStyle={"mb-3"}/>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td rowSpan={2} style={{ verticalAlign: "middle" }}>
+                        Max Bet
+                      </td>
+                      <td>100</td>
+                    </tr>
+                    <tr>
+                      <td style={{ verticalAlign: "middle" }}>
+                        <CustomInput type={"number"} customStyle={"mb-3"}/>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td rowSpan={2} style={{ verticalAlign: "middle" }}>
+                        Delay
+                      </td>
+                      <td>5.00</td>
+                    </tr>
+                    <tr>
+                      <td style={{ verticalAlign: "middle" }}>
+                        <CustomInput type={"number"} customStyle={"mb-3"}/>
+                      </td>
+                    </tr>
+                  </tbody>
+                </Table>
+              </Col>
+            </Row>
+            <Row>
+              <Col md={12}>
+                <CustomInput
+                  title={"Transaction Password:"}
+                  placeholder={"Transaction Password"}
+                  type={"text"}
+                  customStyle={" col-md-3 float-end"}
+                />
               </Col>
             </Row>
 
