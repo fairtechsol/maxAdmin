@@ -9,7 +9,7 @@ const Login = () => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    navigate("/game");
+    navigate("/admin");
   };
 
   return (

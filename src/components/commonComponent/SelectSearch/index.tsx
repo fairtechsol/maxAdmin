@@ -1,33 +1,44 @@
 import { useState } from "react";
+import { Form } from "react-bootstrap";
 import Select from "react-select";
 
 interface Props {
   isMultiOption?: boolean;
   isSearchableOptions?: boolean;
+  placeholder?: string;
+  options?: any;
+  onChange?: any;
+  defaultValue?: string;
+  label?: string;
 }
-const options = [
-  { value: "chocolate", label: "Chocolate" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
 
 const SelectSearch = ({
+  options,
+  placeholder,
   isMultiOption,
-  isSearchableOptions = false,
+  isSearchableOptions,
+  onChange,
+  defaultValue,
+  label,
 }: Props) => {
-  const [value, setValue] = useState<any>(null);
-
   return (
-    <div className="App">
-      <Select
-        defaultValue={value}
-        onChange={setValue}
-        options={options}
-        placeholder="select"
-        isMulti={isMultiOption}
-        isSearchable={isSearchableOptions}
-      />
-    </div>
+    <>
+      <div className="App">
+        <Form.Group className="mb-3" controlId="cityName">
+          <Form.Label>{label}</Form.Label>
+          <Select
+            id="mySelect"
+            defaultValue={defaultValue}
+            onChange={onChange}
+            options={options}
+            placeholder={placeholder}
+            isMulti={isMultiOption}
+            isSearchable={isMultiOption == true ? isSearchableOptions : false}
+          />
+        </Form.Group>
+      </div>
+      {/* <Form.Control {...prop} /> */}
+    </>
   );
 };
 
