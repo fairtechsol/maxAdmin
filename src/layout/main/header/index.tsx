@@ -1,6 +1,7 @@
 import { Container, Form, Nav, NavDropdown, Navbar } from "react-bootstrap";
 import { GiHamburgerMenu } from "react-icons/gi";
 import LogoSection from "../../../components/commonComponent/logoSection";
+import { NavLink } from "react-router-dom";
 
 interface ItemProps {
   name: string;
@@ -11,8 +12,8 @@ const TopbarDropdown = ({ name, options }: ItemProps) => {
   return (
     <NavDropdown title={name} id="basic-nav-dropdown">
       {options?.map((option, index) => (
-        <NavDropdown.Item key={index} href={option.link}>
-          {option.name}
+        <NavDropdown.Item key={index}>
+          <NavLink to={option.link}>{option.name}</NavLink>
         </NavDropdown.Item>
       ))}
     </NavDropdown>
@@ -32,7 +33,7 @@ const Topbar = (props: any) => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/listClients">List of clients</Nav.Link>
+            <Nav.Link href="/admin/listClients">List of clients</Nav.Link>
             <Nav.Link href="#link">Market Analysis</Nav.Link>
             <TopbarDropdown
               name="Live Market"
@@ -58,13 +59,16 @@ const Topbar = (props: any) => {
             <TopbarDropdown
               name="Reports"
               options={[
-                { name: "Account's Statement", link: "#1" },
-                { name: "Current Bets", link: "#2" },
-                { name: "General Report", link: "#3" },
-                { name: "Game Report", link: "#4" },
-                { name: "Casino Report", link: "#5" },
-                { name: "Profit And Loss", link: "#6" },
-                { name: "Casino Result Report", link: "#7" },
+                {
+                  name: "Account's Statement",
+                  link: "/admin/account-statement",
+                },
+                { name: "Current Bets", link: "/admin/current-bets" },
+                { name: "General Report", link: "/admin/general-report" },
+                { name: "Game Report", link: "/admin/game-report" },
+                { name: "Casino Report", link: "/admin/casino-report" },
+                { name: "Profit And Loss", link: "/admin/profit-loss" },
+                { name: "Casino Result Report", link: "/admin/casinoresult" },
               ]}
             />
           </Nav>
