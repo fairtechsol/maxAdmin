@@ -9,13 +9,13 @@ const Deposit = () => {
         <div className="d-flex gap-2 input-inner-container">
           <CustomInput
             type="text"
-            customClass="input-box"
+            customStyle="input-box"
             disabled={true}
             value={2}
             id="fmstr1Input1"
           />
           <CustomInput
-            customClass="input-box"
+            customStyle="input-box"
             type="text"
             disabled={true}
             value={2}
@@ -28,13 +28,13 @@ const Deposit = () => {
         <div className="d-flex gap-2 input-inner-container">
           <CustomInput
             type="text"
-            customClass="input-box"
+            customStyle="input-box"
             disabled={true}
             value={2}
             id="accountInput1"
           />
           <CustomInput
-            customClass="input-box"
+            customStyle="input-box"
             type="text"
             disabled={true}
             value={2}
@@ -44,7 +44,7 @@ const Deposit = () => {
       </div>
       <div className="input-container">
         <p>Amount</p>
-        <CustomInput type="number" customClass="input-box" id="amountInput" />
+        <CustomInput type="number" customStyle="input-box" id="amountInput" />
       </div>
       <div className="input-container">
         <p>Remark</p>
@@ -52,7 +52,7 @@ const Deposit = () => {
           type="textarea"
           as="textarea"
           rows={4}
-          customClass="input-box"
+          customStyle="input-box"
           id="remarkInput"
         />
       </div>
@@ -60,7 +60,7 @@ const Deposit = () => {
         <p>Transition password</p>
         <CustomInput
           type="password"
-          customClass="input-box"
+          customStyle="input-box"
           id="passwordInput"
         />
       </div>

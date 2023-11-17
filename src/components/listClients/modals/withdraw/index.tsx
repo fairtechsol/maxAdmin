@@ -9,13 +9,13 @@ const Withdraw = () => {
         <div className="d-flex gap-2 input-inner-container">
           <CustomInput
             type="text"
-            customClass="input-box"
+            customStyle="input-box"
             disabled={true}
             value={2}
             id="fmstr1Input1"
           />
           <CustomInput
-            customClass="input-box"
+            customStyle="input-box"
             type="text"
             disabled={true}
             value={2}
@@ -28,13 +28,13 @@ const Withdraw = () => {
         <div className="d-flex gap-2 input-inner-container">
           <CustomInput
             type="text"
-            customClass="input-box"
+            customStyle="input-box"
             disabled={true}
             value={2}
             id="accountInput1"
           />
           <CustomInput
-            customClass="input-box"
+            customStyle="input-box"
             type="text"
             disabled={true}
             value={2}
@@ -44,17 +44,17 @@ const Withdraw = () => {
       </div>
       <div className="input-container">
         <p>Amount</p>
-        <CustomInput type="number" customClass="input-box" id="amountInput" />
+        <CustomInput type="number" customStyle="input-box" id="amountInput" />
       </div>
       <div className="input-container">
         <p>Remark</p>
-        <CustomInput type="text" customClass="input-box" id="remarkInput" />
+        <CustomInput type="text" customStyle="input-box" id="remarkInput" />
       </div>
       <div className="input-container">
         <p>Transition password</p>
         <CustomInput
           type="password"
-          customClass="input-box"
+          customStyle="input-box"
           id="passwordInput"
         />
       </div>

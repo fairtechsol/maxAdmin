@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Form } from "react-bootstrap";
 import Select from "react-select";
 
@@ -33,7 +32,7 @@ const SelectSearch = ({
             options={options}
             placeholder={placeholder}
             isMulti={isMultiOption}
-            isSearchable={isMultiOption == true ? isSearchableOptions : false}
+            isSearchable={isMultiOption === true ? isSearchableOptions : false}
           />
         </Form.Group>
       </div>

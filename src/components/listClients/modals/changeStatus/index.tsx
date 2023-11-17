@@ -29,7 +29,7 @@ const ChangeStatus = () => {
         <p>Transaction password</p>
         <CustomInput
           type="password"
-          customClass="input-box"
+          customStyle="input-box"
           id="transactionPassword"
         />
       </div>

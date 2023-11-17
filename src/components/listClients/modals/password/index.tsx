@@ -8,7 +8,7 @@ const Password = () => {
         <p>New Password</p>
         <CustomInput
           type="password"
-          customClass="input-box"
+          customStyle="input-box"
           disabled={true}
           id="newPasswordInput"
         />
@@ -17,7 +17,7 @@ const Password = () => {
         <p>Confirm Password</p>
         <CustomInput
           type="password"
-          customClass="input-box"
+          customStyle="input-box"
           id="confirmPasswordInput"
         />
       </div>
@@ -25,7 +25,7 @@ const Password = () => {
         <p>Transaction password</p>
         <CustomInput
           type="password"
-          customClass="input-box"
+          customStyle="input-box"
           id="transactionPasswordInput"
         />
       </div>

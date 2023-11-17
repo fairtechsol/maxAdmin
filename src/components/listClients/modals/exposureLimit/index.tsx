@@ -8,20 +8,20 @@ const ExposureLimit = () => {
         <p>Old Limit</p>
         <CustomInput
           type="text"
-          customClass="input-box"
+          customStyle="input-box"
           disabled={true}
           id="oldLimitInput"
         />
       </div>
       <div className="input-container">
         <p>New Limit</p>
-        <CustomInput type="number" customClass="input-box" id="newLimitInput" />
+        <CustomInput type="number" customStyle="input-box" id="newLimitInput" />
       </div>
       <div className="input-container">
         <p>Transaction password</p>
         <CustomInput
           type="password"
-          customClass="input-box"
+          customStyle="input-box"
           id="transactionPasswordInput"
         />
       </div>

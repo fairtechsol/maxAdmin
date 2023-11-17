@@ -8,7 +8,7 @@ const Credit = () => {
         <p>Old Credit</p>
         <CustomInput
           type="text"
-          customClass="input-box"
+          customStyle="input-box"
           disabled={true}
           id="oldCreditInput"
         />
@@ -17,7 +17,7 @@ const Credit = () => {
         <p>New Credit</p>
         <CustomInput
           type="number"
-          customClass="input-box"
+          customStyle="input-box"
           id="newCreditInput"
         />
       </div>
@@ -25,7 +25,7 @@ const Credit = () => {
         <p>Transaction password</p>
         <CustomInput
           type="password"
-          customClass="input-box"
+          customStyle="input-box"
           id="transactionPasswordInput"
         />
       </div>
