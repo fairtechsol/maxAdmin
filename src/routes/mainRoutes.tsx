@@ -8,11 +8,11 @@ const ListClients = Loadable(lazy(() => import("../pages/listClients")));
 const AddAccount = Loadable(lazy(() => import("../pages/addAccount")));
 
 const MainRoutes = {
-  path: "/",
+  path: "/admin",
   element: <MainLayout />,
   children: [
     {
-      path: "admin",
+      path: "",
       element: <Game />,
     },
     {
@@ -20,11 +20,11 @@ const MainRoutes = {
       element: <Sample />,
     },
     {
-      path: "admin/listClients",
+      path: "listClients",
       element: <ListClients />,
     },
     {
-      path: "admin/add-account",
+      path: "add-account",
       element: <AddAccount />,
     },
   ],

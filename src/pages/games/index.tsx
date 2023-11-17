@@ -17,9 +17,9 @@ export default function Games() {
         <div className="gamePage-table">
           <Row className="no-gutters">
             <Col md={8}>
-              {MatchOdds().map((item: any) => {
+              {MatchOdds().map((item: any, index: number) => {
                 return (
-                  <Col md={12}>
+                  <Col md={12} key={index}>
                     <BetTable
                       title={item?.title}
                       type={MatchType.MATCH_ODDS}
@@ -30,9 +30,8 @@ export default function Games() {
               })}
               <Row className="no-gutters">
                 {GameData()?.map((item: any, index: number) => (
-                  <Col md={6}>
+                  <Col md={6} key={index}>
                     <BetTable
-                      key={index}
                       title={item?.title}
                       type={MatchType.BOOKMAKER}
                       data={item?.data}
@@ -42,9 +41,8 @@ export default function Games() {
               </Row>
               <Row className="no-gutters">
                 {SessionMarketData()?.map((item: any, index: number) => (
-                  <Col md={6}>
+                  <Col md={6} key={index}>
                     <BetTable
-                      key={index}
                       title={item?.title}
                       type={MatchType.SESSION_MARKET}
                       data={item?.data}

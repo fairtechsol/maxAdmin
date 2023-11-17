@@ -2,11 +2,11 @@ import { Table } from "react-bootstrap";
 import BackLayBox from "../../../backLayBox";
 import "../../style.scss";
 
-interface BookmakerTableProps {
+interface MatchOddsProps {
   minMax?: any;
   data: any;
 }
-function BookmakerTable({ minMax, data }: BookmakerTableProps) {
+function MatchOdds({ minMax, data }: MatchOddsProps) {
   const handleClick = () => {};
   return (
     <div
@@ -76,4 +76,4 @@ function BookmakerTable({ minMax, data }: BookmakerTableProps) {
   );
 }
 
-export default BookmakerTable;
+export default MatchOdds;

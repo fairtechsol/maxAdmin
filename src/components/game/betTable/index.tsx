@@ -2,6 +2,7 @@ import { MatchType } from "../../../utils/enum";
 import BetTableHeader from "../../commonComponent/betTableHeader";
 import CustomBreadcrumb from "../../commonComponent/breadcrumb";
 import BookmakerTable from "./bookMaker";
+import MatchOdds from "./matchOdds";
 import SessionMarketTable from "./sessionMarket";
 
 interface BetTableProps {
@@ -24,8 +25,10 @@ const BetTable = ({ title, type, data }: BetTableProps) => {
       ) : (
         <BetTableHeader customClass="my-2" title={title} />
       )}
-      {type === MatchType.BOOKMAKER || type === MatchType.MATCH_ODDS ? (
+      {type === MatchType.BOOKMAKER ? (
         <BookmakerTable data={data} />
+      ) : type === MatchType.MATCH_ODDS ? (
+        <MatchOdds data={data} />
       ) : (
         <SessionMarketTable data={data} />
       )}
