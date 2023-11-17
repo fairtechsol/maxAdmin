@@ -5,7 +5,7 @@ const CustomInput = (props: any) => {
   return (
     <>
       <Form.Group className={`${customStyle ?? ""}`} controlId={id}>
-        <Form.Label>{title}</Form.Label>
+        {title && <Form.Label>{title}</Form.Label>}
         <Form.Control {...prop} />
       </Form.Group>
     </>
