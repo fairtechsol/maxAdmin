@@ -5,8 +5,13 @@ import "../../style.scss";
 interface BookmakerTableProps {
   minMax?: any;
   data: any;
+  backLayCount?: number;
 }
-function BookmakerTable({ minMax, data }: BookmakerTableProps) {
+function BookmakerTable({
+  minMax,
+  data,
+  backLayCount = 6,
+}: BookmakerTableProps) {
   const handleClick = () => {};
   return (
     <div
@@ -15,13 +20,21 @@ function BookmakerTable({ minMax, data }: BookmakerTableProps) {
       <Table className="mb-0">
         <thead>
           <tr>
-            <th className="border-0">
-              {minMax && (
-                <span className="f700 title-16 px-2 text-info ">{minMax}</span>
-              )}
+            <th className="border-0 px-2">
+              <div className="px-2 text-info">
+                {minMax && (
+                  <span className="f700 title-16 px-2 text-info ">
+                    {minMax}
+                  </span>
+                )}
+              </div>
             </th>
-            <th className="border-0" style={{ width: "60px" }}></th>
-            <th className="border-0" style={{ width: "60px" }}></th>
+            {backLayCount === 6 && (
+              <>
+                <th className="border-0" style={{ width: "60px" }}></th>
+                <th className="border-0" style={{ width: "60px" }}></th>
+              </>
+            )}
             <th className="text-center bg-blue3" style={{ width: "60px" }}>
               Back
             </th>
@@ -43,8 +56,12 @@ function BookmakerTable({ minMax, data }: BookmakerTableProps) {
                   <span className="title-14">{item?.lastPriceTraded}</span>
                 </div>
               </td>
-              <td style={{ borderLeft: 0 }}></td>
-              <td style={{ borderLeft: 0 }}></td>
+              {/* {backLayCount === 2 && (
+                <>
+                  <td style={{ borderLeft: 0 }}></td>
+                  <td style={{ borderLeft: 0 }}></td>
+                </>
+              )} */}
               {item?.ex?.availableToBack?.map((back: any, index: number) => (
                 <td key={index}>
                   <BackLayBox
@@ -70,8 +87,8 @@ function BookmakerTable({ minMax, data }: BookmakerTableProps) {
                   />
                 </td>
               ))}
-              <td style={{ borderLeft: 0 }}></td>
-              <td style={{ borderLeft: 0 }}></td>
+
+              <td colSpan={2} style={{ borderLeft: 0 }}></td>
             </tr>
           ))}
         </tbody>
