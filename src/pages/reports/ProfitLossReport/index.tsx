@@ -1,7 +1,94 @@
-import React from "react";
+import { useState, useEffect } from "react";
+import CustomTable from "../../../components/commonComponent/table";
+import { TableConfig } from "../../../models/tableInterface";
+import SelectSearch from "../../../components/commonComponent/SelectSearch";
+import { Button, Col, Form, Row } from "react-bootstrap";
+import CustomInput from "../../../components/commonComponent/input";
+
+interface Column {
+  id: string;
+  label: string;
+}
+
+interface DataItem {
+  [key: string]: string | number;
+}
+
+// Example usage
+const columns: Column[] = [
+  { id: "gameName", label: "Game Name" },
+  { id: "gameType", label: "Game Type" },
+  { id: "profitLoss", label: "Profit & Loss" },
+];
+
+const data: DataItem[] = [];
+
+const options = [
+  { value: "slotGame", label: "Slot Game" },
+  { value: "liveCasino", label: "Live Casino" },
+  { value: "liveCasino1", label: "Live Casino 1" },
+  { value: "liveCasino2", label: "Live Casino 2" },
+];
 
 const ProfitLossReport = () => {
-  return <div>ProfitLossReport</div>;
+  const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
+
+  useEffect(() => {}, [tableConfig]);
+  return (
+    <>
+      <h5>Profit Loss</h5>
+      <Form>
+        <Row className="mb-3">
+          <Col md={2}>
+            <SelectSearch
+              defaultValue="slotGame"
+              options={options}
+              label={"Search By Client Name"}
+              isMultiOption={true}
+            />
+          </Col>
+          <Col md={2}>
+            <CustomInput
+              title={"From"}
+              placeholder={""}
+              // customStyle={"mb-3"}
+              type="date"
+            />
+          </Col>
+          <Col md={2}>
+            <CustomInput
+              title={"To"}
+              placeholder={""}
+              // customStyle={"mb-3"}
+              type="date"
+            />
+          </Col>
+          <Col md={2}>
+            <Button>Load</Button>
+          </Col>
+        </Row>
+      </Form>
+      <CustomTable
+        columns={columns}
+        isPagination={true}
+        isSort={true}
+        isSearch={true}
+        itemCount={data?.length}
+        setTableConfig={setTableConfig}
+        enablePdfExcel={false}
+      >
+        {data?.length === 0 && <tr>No data available in table </tr>}
+        {data?.length > 0 &&
+          data.map((item, index) => (
+            <tr key={index}>
+              {columns.map((column) => (
+                <td key={column.id}>{item[column.id]}</td>
+              ))}
+            </tr>
+          ))}
+      </CustomTable>
+    </>
+  );
 };
 
 export default ProfitLossReport;
