@@ -19,7 +19,10 @@ body table.table{
   padding: 0px 10px !important;
   height: auto !important;
 }
-
+.modalFull-90.customModal .modal-dialog{
+  width: 90vw;
+  max-width: none;
+}
 /* ====== bg Colors start ====  */
 .bg-secondaryLight{
   background-color: rgba( $secondary, 0.7) !important;

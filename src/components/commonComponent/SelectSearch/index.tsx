@@ -3,7 +3,7 @@ import Select from "react-select";
 import "./style.scss";
 interface Props {
   isMultiOption?: boolean;
-  isSearchableOptions?: boolean;
+  // isSearchableOptions?: boolean;
   placeholder?: string;
   options?: any;
   onChange?: any;
@@ -18,7 +18,7 @@ const SelectSearch = ({
   options,
   placeholder,
   isMultiOption,
-  isSearchableOptions,
+  // isSearchableOptions,
   onChange,
   defaultValue,
   label,
@@ -34,16 +34,16 @@ const SelectSearch = ({
         }`}
         controlId="cityName"
       >
-        <Form.Label>{label}</Form.Label>
+        {label ? <Form.Label>{label}</Form.Label> : ""}
         <Select
-          className={`${filedClass}`}
+          className={`selectSearch ${filedClass}`}
           id="mySelect"
           defaultValue={defaultValue}
           onChange={onChange}
           options={options}
           placeholder={placeholder}
           isMulti={isMultiOption}
-          isSearchable={isMultiOption === true ? isSearchableOptions : false}
+          // isSearchable={isMultiOption === true ? isSearchableOptions : false}
         />
       </Form.Group>
       {/* <Form.Control {...prop} /> */}

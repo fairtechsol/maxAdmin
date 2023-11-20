@@ -22,6 +22,8 @@ interface CustomTableProps {
   setTableConfig: any;
   isSearch?: boolean;
   enablePdfExcel?: boolean;
+  tHeadTheme?: string;
+  tBodyTheme?: string;
 }
 
 const CustomTable: React.FC<CustomTableProps> = ({
@@ -34,6 +36,8 @@ const CustomTable: React.FC<CustomTableProps> = ({
   isSearch,
   setTableConfig,
   enablePdfExcel,
+  tHeadTheme,
+  tBodyTheme,
   ...props
 }) => {
   // State for sorting configuration and current page
@@ -64,8 +68,8 @@ const CustomTable: React.FC<CustomTableProps> = ({
       page: currentPage,
       sort: sortConfig,
     });
+    // alert(tHeadTheme);
   }, [currentPage, sortConfig]);
-
   return (
     <div className={`${customClass ?? ""} customTable`}>
       <TableHeader
@@ -82,7 +86,7 @@ const CustomTable: React.FC<CustomTableProps> = ({
           <tr>
             {/* Table header with sorting icons */}
             {columns.map((column) => (
-              <th key={column.id}>
+              <th className={`${tHeadTheme} 456`} key={column.id}>
                 {column.label}
                 {/* Display sorting icons based on the sorting configuration */}
                 {isSort && (
@@ -101,7 +105,7 @@ const CustomTable: React.FC<CustomTableProps> = ({
           {/* Table body with sorted data */}
           {itemCount === 0 ? (
             <tr className="text-center">
-              <td colSpan={columns?.length}>
+              <td className={`${tBodyTheme}`} colSpan={columns?.length}>
                 <p className="title-14">No data available in table</p>
               </td>
             </tr>
