@@ -34,7 +34,7 @@ const Topbar = (props: any) => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href="/admin/listClients">List of clients</Nav.Link>
-            <Nav.Link href="#link">Market Analysis</Nav.Link>
+            <Nav.Link href="/admin/market-analysis">Market Analysis</Nav.Link>
             <TopbarDropdown
               name="Live Market"
               options={[
