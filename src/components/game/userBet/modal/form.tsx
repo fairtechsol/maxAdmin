@@ -1,3 +1,4 @@
+import { Form } from "react-bootstrap";
 import SelectSearch from "../../../commonComponent/SelectSearch";
 import CustomInput from "../../../commonComponent/input";
 
@@ -7,22 +8,23 @@ const UserBetModalForm = () => {
       <div className="row">
         <div className="col-lg-4">
           <SelectSearch
-            SelectInline={true}
             defaultValue="- Select Your A/C. Type -"
             options={[]}
             placeholder="- Select Your A/C. Type -"
             label={"Account Type"}
           />
-
-          <CustomInput
-            customStyle="mt-5"
-            title={"User Password"}
-            placeholder={"Enter User Password"}
-            type={"text"}
-            // formInline={true}
-            labelCol="lg-4 aa "
-            inputCol="lg-6"
-          />
+          <div className="row align-items-center mt-4">
+            <div className="col-md-4">
+              <Form.Group>IP Address</Form.Group>
+            </div>
+            <div className="col-md-8">
+              <CustomInput
+                customStyle=""
+                placeholder={"Enter User Password"}
+                type={"text"}
+              />
+            </div>
+          </div>
         </div>
         <div className="col-lg-4"></div>
       </div>

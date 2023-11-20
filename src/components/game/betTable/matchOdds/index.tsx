@@ -20,16 +20,16 @@ function MatchOdds({ minMax, data }: MatchOddsProps) {
                 <span className="f700 title-16 px-2 text-info ">{minMax}</span>
               )}
             </th>
-            <th className="border-0" style={{ width: "60px" }}></th>
-            <th className="border-0" style={{ width: "60px" }}></th>
-            <th className="text-center bg-blue3" style={{ width: "60px" }}>
+            <th className="border-0" style={{ width: "84px" }}></th>
+            <th className="border-0" style={{ width: "84px" }}></th>
+            <th className="text-center bg-blue3" style={{ width: "84px" }}>
               Back
             </th>
-            <th className="text-center bg-red1" style={{ width: "60px" }}>
+            <th className="text-center bg-red1" style={{ width: "84px" }}>
               Lay
             </th>
-            <th className="border-0" style={{ width: "60px" }}></th>
-            <th className="border-0" style={{ width: "60px" }}></th>
+            <th className="border-0" style={{ width: "84px" }}></th>
+            <th className="border-0" style={{ width: "84px" }}></th>
           </tr>
         </thead>
         <tbody>
@@ -46,7 +46,7 @@ function MatchOdds({ minMax, data }: MatchOddsProps) {
               {item?.ex?.availableToBack?.map((back: any, index: number) => (
                 <td key={index}>
                   <BackLayBox
-                    style={{ width: "60px" }}
+                    style={{ width: "84px" }}
                     // overlay={true}
                     bgColor={`blue${index + 1}`}
                     rate={back?.price}
@@ -59,7 +59,7 @@ function MatchOdds({ minMax, data }: MatchOddsProps) {
               {item?.ex?.availableToLay?.map((red: any, index: number) => (
                 <td key={index}>
                   <BackLayBox
-                    style={{ width: "60px" }}
+                    style={{ width: "84px" }}
                     // overlay={true}
                     bgColor={`red${index + 1}`}
                     rate={red?.price}

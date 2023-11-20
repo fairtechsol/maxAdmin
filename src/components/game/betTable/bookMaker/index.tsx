@@ -43,6 +43,8 @@ function BookmakerTable({ minMax, data }: BookmakerTableProps) {
                   <span className="title-14">{item?.lastPriceTraded}</span>
                 </div>
               </td>
+              <td style={{ borderLeft: 0 }}></td>
+              <td style={{ borderLeft: 0 }}></td>
               {item?.ex?.availableToBack?.map((back: any, index: number) => (
                 <td key={index}>
                   <BackLayBox
@@ -68,6 +70,8 @@ function BookmakerTable({ minMax, data }: BookmakerTableProps) {
                   />
                 </td>
               ))}
+              <td style={{ borderLeft: 0 }}></td>
+              <td style={{ borderLeft: 0 }}></td>
             </tr>
           ))}
         </tbody>

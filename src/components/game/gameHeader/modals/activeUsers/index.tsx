@@ -33,7 +33,7 @@ function ActiveUser() {
         setTableConfig={setTableConfig}
       >
         {data?.map((item: any, index: number) => {
-          const { sr, username, creditReferance } = item;
+          const { username } = item;
           return (
             <tr key={index}>
               <td>{index++}</td>

@@ -8,9 +8,13 @@ const CustomInput = (props: any) => {
         className={`${props.customStyle} ${formInline ? "row" : ""}`}
         controlId="cityName w-100"
       >
-        <Form.Label className={`col-${formInline ? labelCol : ""}`}>
-          {title}
-        </Form.Label>
+        {title ? (
+          <Form.Label className={`col-${formInline ? labelCol : ""}`}>
+            {title}
+          </Form.Label>
+        ) : (
+          ""
+        )}
         <Form.Control
           className={`col-${formInline ? inputCol : ""}`}
           {...prop}

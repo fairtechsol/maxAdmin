@@ -43,7 +43,7 @@ const SelectSearch = ({
           options={options}
           placeholder={placeholder}
           isMulti={isMultiOption}
-          isSearchable={isMultiOption == true ? isSearchableOptions : false}
+          isSearchable={isMultiOption === true ? isSearchableOptions : false}
         />
       </Form.Group>
       {/* <Form.Control {...prop} /> */}

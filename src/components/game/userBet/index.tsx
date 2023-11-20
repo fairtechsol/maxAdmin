@@ -76,7 +76,7 @@ const UserBets = () => {
         </Row>
       </Tab.Container>
       <CustomModal
-        customStyle="userBetModal"
+        customClass="userBetModal"
         show={showModal}
         setShow={setShowModal}
         title="View More Bet"
