@@ -9,8 +9,9 @@ interface BetTableProps {
   title: string;
   type: string;
   data: any;
+  backLayCount?: number;
 }
-const BetTable = ({ title, type, data }: BetTableProps) => {
+const BetTable = ({ title, type, data, backLayCount }: BetTableProps) => {
   return (
     <>
       {type === MatchType.MATCH_ODDS ? (
@@ -26,7 +27,7 @@ const BetTable = ({ title, type, data }: BetTableProps) => {
         <BetTableHeader customClass="my-2" title={title} />
       )}
       {type === MatchType.BOOKMAKER ? (
-        <BookmakerTable data={data} />
+        <BookmakerTable data={data} backLayCount={backLayCount} />
       ) : type === MatchType.MATCH_ODDS ? (
         <MatchOdds data={data} />
       ) : (
