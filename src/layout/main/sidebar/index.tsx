@@ -1,5 +1,5 @@
 import { Accordion } from "react-bootstrap";
-import { TiTimes } from "react-icons/ti";
+import { FaTimes } from "react-icons/fa";
 import { MenuItem } from "./menuItem";
 import menuItemJson from "./menuItem.json";
 const Sidebar = (props: any) => {
@@ -7,13 +7,13 @@ const Sidebar = (props: any) => {
     <>
       <div className="sidebarBox bg-light">
         <div className=" ">
-          <h3 className="title-32 f400">Sports</h3>
           <div
             className="sidebarBox-close cursor-pointer"
             onClick={props.clickHandler}
           >
-            <TiTimes />
+            <FaTimes />
           </div>
+          <h3 className="title-32 f400 mb-4">Sports</h3>
         </div>
         {menuItemJson()?.map((item, index) => (
           <Accordion key={index} defaultActiveKey={[]}>

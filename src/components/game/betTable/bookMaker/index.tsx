@@ -56,12 +56,6 @@ function BookmakerTable({
                   <span className="title-14">{item?.lastPriceTraded}</span>
                 </div>
               </td>
-              {/* {backLayCount === 2 && (
-                <>
-                  <td style={{ borderLeft: 0 }}></td>
-                  <td style={{ borderLeft: 0 }}></td>
-                </>
-              )} */}
               {item?.ex?.availableToBack?.map((back: any, index: number) => (
                 <td key={index}>
                   <BackLayBox
