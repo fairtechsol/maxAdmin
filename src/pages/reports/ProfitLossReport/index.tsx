@@ -45,7 +45,6 @@ const ProfitLossReport = () => {
               options={options}
               label={"Search By Client Name"}
               isMultiOption={true}
-              isSearchableOptions={true}
             />
           </Col>
           <Col md={2}>
