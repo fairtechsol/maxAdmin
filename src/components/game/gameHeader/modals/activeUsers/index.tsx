@@ -8,7 +8,7 @@ function ActiveUser() {
   useEffect(() => {}, [tableConfig]);
   const columns: Column[] = [
     { id: "sr", label: "S. NO" },
-    { id: "username", label: "	User Name" },
+    { id: "username", label: "  User Name" },
     { id: "Checked", label: "Checked" },
   ];
 
