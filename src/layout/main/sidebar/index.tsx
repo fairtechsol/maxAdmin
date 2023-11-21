@@ -6,14 +6,14 @@ const Sidebar = (props: any) => {
   return (
     <>
       <div className="sidebarBox bg-light">
-        <div className=" ">
+        <div className="">
           <div
             className="sidebarBox-close cursor-pointer"
             onClick={props.clickHandler}
           >
             <FaTimes />
           </div>
-          <h3 className="title-32 f400 mb-4">Sports</h3>
+          <h3 className="title-28 f400 mb-3">Sports</h3>
         </div>
         {menuItemJson()?.map((item, index) => (
           <Accordion key={index} defaultActiveKey={[]}>
