@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Button, Col, Form, Row } from "react-bootstrap";
+import SelectSearch from "../../../components/commonComponent/SelectSearch";
+import CustomInput from "../../../components/commonComponent/input";
 import CustomTable from "../../../components/commonComponent/table";
 import { TableConfig } from "../../../models/tableInterface";
-import SelectSearch from "../../../components/commonComponent/SelectSearch";
-import { Button, Col, Form, Row } from "react-bootstrap";
-import CustomInput from "../../../components/commonComponent/input";
 
 interface Column {
   id: string;
@@ -39,7 +39,7 @@ const GameReport = () => {
   return (
     <>
       <h5>Game Report</h5>
-      <Form>
+      <Form className="mb-4">
         <Row>
           <Col md={2}>
             <CustomInput
@@ -65,20 +65,19 @@ const GameReport = () => {
             />
           </Col>
           <Col md={2}>
-            <Button>Load</Button>
+            <Form.Label className="invisible d-block">dasd</Form.Label>
+            <Button>Game List</Button>
           </Col>
         </Row>
-      </Form>
-      <Form>
         <Row>
           <Col md={6}>
             <SelectSearch defaultValue="all" options={options} />
           </Col>
           <Col md={2}>
-            <Button>Show Game Report</Button>
-          </Col>
-          <Col md={2}>
-            <Button>Master Game Report</Button>
+            <div className="d-flex">
+              <Button className="me-2">Show Game Report</Button>
+              <Button>Master Game Report</Button>
+            </div>
           </Col>
         </Row>
       </Form>
