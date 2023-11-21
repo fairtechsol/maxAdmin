@@ -36,8 +36,8 @@ const SelectSearch = ({
       >
         {label ? <Form.Label>{label}</Form.Label> : ""}
         <Select
-          className={`selectSearch ${filedClass}`}
           id="mySelect"
+          className={`selectSearch ${filedClass}`}
           defaultValue={defaultValue}
           onChange={onChange}
           options={options}
