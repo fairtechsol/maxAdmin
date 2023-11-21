@@ -35,6 +35,7 @@ export default function Games() {
                       title={item?.title}
                       type={MatchType.BOOKMAKER}
                       data={item?.data}
+                      backLayCount={item.countRow}
                     />
                   </Col>
                 ))}

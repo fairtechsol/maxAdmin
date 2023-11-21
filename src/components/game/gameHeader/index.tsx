@@ -4,6 +4,7 @@ import CustomModal from "../../commonComponent/modal";
 import GameHeaderDropdown from "./dropdown";
 import BookMarkerBook from "./modals/bookMarkersBook";
 import UserBook from "./modals/userBook";
+import ActiveUser from "./modals/activeUsers";
 import "./style.scss";
 const GameHeader = () => {
   const liveMarketModal = () => {
@@ -29,14 +30,22 @@ const GameHeader = () => {
                 clickHandle: () => {
                   liveMarketModal();
                 },
+                children: <ActiveUser />,
               },
             ]}
           />
           <GameHeaderDropdown
             name="Live Market"
             options={[
-              { name: "All Deactivate", clickHandle: () => {} },
-              { name: "Otherwise", clickHandle: () => {} },
+              {
+                name: "All Deactivate",
+                clickHandle: () => {},
+              },
+              {
+                name: "Otherwise",
+                clickHandle: () => {},
+                children: <ActiveUser />,
+              },
             ]}
           />
           <CustomButton

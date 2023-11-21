@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Dropdown } from "react-bootstrap";
 
 import CustomModal from "../../commonComponent/modal";
-import ActiveUser from "./modals/activeUsers";
 
 interface Props {
   name: string;
@@ -12,6 +11,7 @@ interface Props {
 export default function GameHeaderDropdown({ name, options }: Props) {
   const [show, setShow] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [showChildren, setShowChildren] = useState(null);
 
   const handleMouseEnter = () => {
     setShow(true);
@@ -32,7 +32,15 @@ export default function GameHeaderDropdown({ name, options }: Props) {
         </Dropdown.Toggle>
         <Dropdown.Menu>
           {options?.map((option, index) => (
-            <Dropdown.Item key={index} onClick={() => setShowModal(true)}>
+            <Dropdown.Item
+              key={index}
+              onClick={() => {
+                if (option?.name !== "All Deactivate") {
+                  setShowChildren(option?.children);
+                  setShowModal(true);
+                } else alert("abcdf");
+              }}
+            >
               {option.name}
             </Dropdown.Item>
           ))}
@@ -44,7 +52,7 @@ export default function GameHeaderDropdown({ name, options }: Props) {
         setShow={setShowModal}
         title="View More Bet"
       >
-        <ActiveUser />
+        {showChildren}
       </CustomModal>
     </>
   );

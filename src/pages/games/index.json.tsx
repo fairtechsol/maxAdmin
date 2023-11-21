@@ -2,6 +2,8 @@ export function GameData() {
   const dataList = [
     {
       title: "bookmaker1",
+      countRow: 6,
+
       data: [
         {
           selectionId: 1,
@@ -87,6 +89,7 @@ export function GameData() {
     },
     {
       title: "bookmaker2",
+      countRow: 2,
       data: [
         {
           selectionId: 1,
