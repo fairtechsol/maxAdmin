@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { Col, Form, Row } from "react-bootstrap";
+import SelectSearch from "../../../components/commonComponent/SelectSearch";
+import CustomButton from "../../../components/commonComponent/button";
+import CustomInput from "../../../components/commonComponent/input";
 import CustomTable from "../../../components/commonComponent/table";
 import { TableConfig } from "../../../models/tableInterface";
-import CustomInput from "../../../components/commonComponent/input";
-import { Button, Col, Form, Row } from "react-bootstrap";
-import SelectSearch from "../../../components/commonComponent/SelectSearch";
 
 interface Column {
   id: string;
@@ -108,7 +109,8 @@ const AccountStatement = () => {
             />
           </Col>
           <Col md={2}>
-            <Button>Load</Button>
+            <Form.Label className="invisible d-block">dasd</Form.Label>
+            <CustomButton>Load</CustomButton>
           </Col>
         </Row>
       </Form>
