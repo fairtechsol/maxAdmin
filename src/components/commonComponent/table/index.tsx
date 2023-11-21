@@ -87,7 +87,7 @@ const CustomTable: React.FC<CustomTableProps> = ({
           <tr>
             {/* Table header with sorting icons */}
             {columns.map((column) => (
-              <th className={`${tHeadTheme} 456`} key={column.id}>
+              <th className={`${tHeadTheme}`} key={column.id}>
                 {column.label}
                 {/* Display sorting icons based on the sorting configuration */}
                 {isSort && (
