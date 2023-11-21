@@ -1,5 +1,6 @@
 import { Table } from "react-bootstrap";
 import BackLayBox from "../../../backLayBox";
+import BetStatusOverlay from "../../../commonComponent/betStatusOverlay";
 import "../../style.scss";
 
 interface MatchOddsProps {
@@ -43,31 +44,35 @@ function MatchOdds({ minMax, data }: MatchOddsProps) {
                   <span className="title-14">{item?.lastPriceTraded}</span>
                 </div>
               </td>
-              {item?.ex?.availableToBack?.map((back: any, index: number) => (
-                <td key={index}>
-                  <BackLayBox
-                    style={{ width: "84px" }}
-                    // overlay={true}
-                    bgColor={`blue${index + 1}`}
-                    rate={back?.price}
-                    percent={back?.size}
-                    onClick={handleClick}
-                  />
-                </td>
-              ))}
+              <td colSpan={6}>
+                <BetStatusOverlay title="Lock">
+                  {item?.ex?.availableToBack?.map(
+                    (back: any, index: number) => (
+                      <BackLayBox
+                        key={index}
+                        style={{ width: "84px" }}
+                        // overlay={true}
+                        bgColor={`blue${index + 1}`}
+                        rate={back?.price}
+                        percent={back?.size}
+                        onClick={handleClick}
+                      />
+                    )
+                  )}
+                  {item?.ex?.availableToLay?.map((red: any, index: number) => (
+                    <BackLayBox
+                      style={{ width: "84px" }}
+                      // overlay={true}
+                      bgColor={`red${index + 1}`}
+                      rate={red?.price}
+                      percent={red?.size}
+                      onClick={handleClick}
+                    />
+                  ))}
+                </BetStatusOverlay>
+              </td>
 
-              {item?.ex?.availableToLay?.map((red: any, index: number) => (
-                <td key={index}>
-                  <BackLayBox
-                    style={{ width: "84px" }}
-                    // overlay={true}
-                    bgColor={`red${index + 1}`}
-                    rate={red?.price}
-                    percent={red?.size}
-                    onClick={handleClick}
-                  />
-                </td>
-              ))}
+              <td></td>
             </tr>
           ))}
         </tbody>

@@ -1,7 +1,8 @@
-import { Button, Form } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import { MdOutlineLogin } from "react-icons/md";
 
 import { useNavigate } from "react-router-dom";
+import CustomButton from "../../components/commonComponent/button";
 import "./style.scss";
 
 const Login = () => {
@@ -30,9 +31,9 @@ const Login = () => {
           {/* <Link className="btn btn-primary" to="/game">
             Login <MdOutlineLogin />
           </Link> */}
-          <Button className="w-100" variant="primary" type="submit">
+          <CustomButton className="w-100" variant="primary" type="submit">
             Login <MdOutlineLogin />
-          </Button>
+          </CustomButton>
         </div>
         <p className="text-white mt-3 mb-0 title-14">© MAXXBET7</p>
       </div>

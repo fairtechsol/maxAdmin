@@ -25,6 +25,7 @@ interface CustomTableProps extends React.HTMLAttributes<HTMLDivElement> {
   tHeadTheme?: string;
   tBodyTheme?: string;
   bordered?: boolean;
+  striped?: boolean;
 }
 
 const CustomTable: React.FC<CustomTableProps> = ({
