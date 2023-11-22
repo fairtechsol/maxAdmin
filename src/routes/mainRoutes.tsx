@@ -1,6 +1,7 @@
 import { lazy } from "react";
 import MainLayout from "../layout/main";
 import Loadable from "../utils/loadable";
+import ChangePassword from "../pages/changePassword";
 // ==============================|| Main ROUTING ||============================== //
 const Game = Loadable(lazy(() => import("../pages/games")));
 const Sample = Loadable(lazy(() => import("../components/Sample")));
@@ -31,6 +32,10 @@ const MainRoutes = {
     {
       path: "market-analysis",
       element: <MarketAnalysis />,
+    },
+    {
+      path: "change-password",
+      element: <ChangePassword />,
     },
   ],
 };

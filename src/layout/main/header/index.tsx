@@ -78,17 +78,16 @@ const Topbar = (props: any) => {
             <Nav>
               <NavDropdown
                 id="nav-dropdown-dark-example"
-                title="Dropdown"
+                title="User Name"
                 menuVariant="dark"
               >
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">
                   Secure Auth Verification
                 </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">
+                <NavDropdown.Item href="/admin/change-password">
                   Change Password
                 </NavDropdown.Item>
-                <NavDropdown.Divider />
                 <NavDropdown.Item href="#action/3.4">Logout</NavDropdown.Item>
               </NavDropdown>
             </Nav>

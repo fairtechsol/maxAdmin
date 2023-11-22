@@ -1,7 +1,7 @@
 import { Button, Card, Col, Form, Row, Table } from "react-bootstrap";
 import { useFormik } from "formik";
 import TableRow from "./TableRow";
-import { addAccountValidationSchema } from "../../utils/validationSchema";
+import { addAccountValidationSchema } from "../../utils/fieldValidations/addAccount";
 import CustomInput from "../../components/commonComponent/input";
 import SelectSearch from "../../components/commonComponent/SelectSearch";
 
