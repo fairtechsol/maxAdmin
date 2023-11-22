@@ -76,6 +76,22 @@ body input, body select {
   height: 33px;
   border-radius: 3px !important;
 }
+body{
+  input.form-check-input{
+    border: 1px solid $black ;
+    border-radius: 0 !important;
+    height: 20px;
+    width: 20px;
+    &:focus{
+        border-color: $black;
+        box-shadow: none;                        
+    }
+    &:checked{
+        background-color: $dark !important;
+    }
+  }
+
+}
 .css-13cymwt-control{
   height: 33px;
 }

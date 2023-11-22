@@ -1,7 +1,8 @@
 import { Form } from "react-bootstrap";
 
 const CustomInput = (props: any) => {
-  const { title, formInline, labelCol, inputCol, ...prop } = props;
+  const { title, formInline, labelCol, inputCol, errors, id, ...prop } = props;
+  console.log(prop);
   return (
     <>
       <Form.Group
@@ -17,6 +18,7 @@ const CustomInput = (props: any) => {
         )}
         <Form.Control
           className={`col-${formInline ? inputCol : ""}`}
+          name={id}
           {...prop}
         />
       </Form.Group>

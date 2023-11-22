@@ -26,4 +26,23 @@
     padding: 0px !important;
 }
 
+// ==========other pages =========
+/** list client ***/
+.listClientTable thead tr{
+    border: 0
+}
+.listClientTable tr:nth-of-type(odd) td{
+    background: rgba(0,0,0, 0.03) !important;
+}
+.listClientTable tr th,
+.listClientTable tr td{
+    border: 2px solid $grayBlue;
+    height: 40px;
+    padding: 6px 5px ;
+}
+.listClientTable tr td button{
+    min-height: 25px;
+    min-width: 28px;
+}
+
 

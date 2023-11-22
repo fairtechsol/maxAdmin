@@ -5,6 +5,7 @@ import Loadable from "../utils/loadable";
 const Game = Loadable(lazy(() => import("../pages/games")));
 const Sample = Loadable(lazy(() => import("../components/Sample")));
 const ListClients = Loadable(lazy(() => import("../pages/listClients")));
+const ListAccount = Loadable(lazy(() => import("../pages/listAccount")));
 const AddAccount = Loadable(lazy(() => import("../pages/addAccount")));
 const MarketAnalysis = Loadable(lazy(() => import("../pages/marketAnalysis")));
 
@@ -23,6 +24,10 @@ const MainRoutes = {
     {
       path: "listClients",
       element: <ListClients />,
+    },
+    {
+      path: "listAccount",
+      element: <ListAccount />,
     },
     {
       path: "add-account",
