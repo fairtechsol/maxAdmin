@@ -19,7 +19,6 @@ const TableRow = ({ data }: any) => {
             type="number"
             min={0}
             max={100}
-            disabled
           />
         </td>
       ) : (
