@@ -25,24 +25,44 @@
 .rowPerPageSelect{
     padding: 0px !important;
 }
-
+.page-link{
+    border-radius: 4px;
+}
 // ==========other pages =========
 /** list client ***/
+
 .listClientTable thead tr{
     border: 0
-}
-.listClientTable tr:nth-of-type(odd) td{
-    background: rgba(0,0,0, 0.03) !important;
-}
-.listClientTable tr th,
-.listClientTable tr td{
-    border: 2px solid $grayBlue;
-    height: 40px;
-    padding: 6px 5px ;
 }
 .listClientTable tr td button{
     min-height: 25px;
     min-width: 28px;
 }
 
+/** list client ***/
+
+.commonTable.table.table-striped tr:nth-of-type(odd) td{
+// .table.table-striped tr:nth-of-type(odd) td{
+    background: rgba(0,0,0, 0.03) !important;
+}
+.commonTable tr th,
+.commonTable tr td{
+    border: 2px solid $grayBlue;
+    height: 40px;
+    padding: 6px 5px ;
+}
+.commonTable.reportTable th {
+    border-width: 1px;
+    border-bottom-color: $primary;
+    background-color: transparent;
+}
+.commonTable.reportTable tr:nth-of-type(1) td{
+    border-top: 0;
+}
+.commonTable.reportTable tr:last-child td{
+    border-bottom: 1px solid $black;
+}
+.commonTable .noRecord{
+    background-color: white;
+}
 

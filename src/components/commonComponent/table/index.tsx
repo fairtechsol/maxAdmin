@@ -112,8 +112,11 @@ const CustomTable: React.FC<CustomTableProps> = ({
           {/* Table body with sorted data */}
           {itemCount === 0 ? (
             <tr className="text-center">
-              <td className={`${tBodyTheme}`} colSpan={columns?.length}>
-                <p className="title-14">No data available in table</p>
+              <td
+                className={`${tBodyTheme} noRecord`}
+                colSpan={columns?.length}
+              >
+                <p className="title-14 mb-0">No data available in table555</p>
               </td>
             </tr>
           ) : (

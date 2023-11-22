@@ -25,7 +25,7 @@ body table.table{
 }
 
 
-body input, body select {
+body input.form-control {
   height: 33px;
   border-radius: 3px !important;
 }
@@ -48,9 +48,9 @@ body{
   }
 
 }
-.css-13cymwt-control{
-  height: 33px;
-}
+// .css-13cymwt-control{
+//   height: 33px;
+// }
 
 .btn {
   border-radius: 3px !important;

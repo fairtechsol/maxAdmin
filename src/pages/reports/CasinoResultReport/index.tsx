@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Button, Col, Form, Row } from "react-bootstrap";
+import SelectSearch from "../../../components/commonComponent/SelectSearch";
+import CustomInput from "../../../components/commonComponent/input";
 import CustomTable from "../../../components/commonComponent/table";
 import { TableConfig } from "../../../models/tableInterface";
-import SelectSearch from "../../../components/commonComponent/SelectSearch";
-import { Button, Col, Form, Row } from "react-bootstrap";
-import CustomInput from "../../../components/commonComponent/input";
 
 interface Column {
   id: string;
@@ -50,6 +50,8 @@ const CasinoResultReport = () => {
         </Row>
       </Form>
       <CustomTable
+        customClass="commonTable reportTable"
+        striped
         columns={columns}
         isPagination={true}
         isSort={true}

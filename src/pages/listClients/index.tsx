@@ -8,7 +8,7 @@ import { Column, TableConfig } from "../../models/tableInterface";
 
 // Example usage
 const columns: Column[] = [
-  { id: "username", label: "User Name", colSpan: 3 },
+  { id: "username", label: "User Name", colSpan: 4 },
   { id: "creditReferance", label: "Credit Referance" },
   { id: "ust", label: "U St" },
   { id: "bst", label: "B St" },
@@ -122,7 +122,7 @@ const App: React.FC = () => {
           <Col>
             <CustomTable
               tHeadTheme="border-0 bg-light"
-              customClass="listClientTable border-top-0 "
+              customClass="listClientTable commonTable border-top-0 "
               bordered
               striped
               columns={columns}
@@ -133,7 +133,11 @@ const App: React.FC = () => {
               <tr>
                 {columns?.map((item, index) => {
                   return (
-                    <td colSpan={3} key={index} className=" fw-bold">
+                    <td
+                      colSpan={index === 0 ? 4 : undefined}
+                      key={index}
+                      className=" fw-bold"
+                    >
                       {index === 1 && 173398}
                     </td>
                   );
@@ -150,7 +154,7 @@ const App: React.FC = () => {
                 } = item;
                 return (
                   <tr key={index}>
-                    <td colSpan={3}>
+                    <td colSpan={4}>
                       <CustomButton className="actionBtn" variant="dark">
                         {username}
                       </CustomButton>

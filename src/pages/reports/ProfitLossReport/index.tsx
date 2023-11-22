@@ -70,6 +70,8 @@ const ProfitLossReport = () => {
         </Row>
       </Form>
       <CustomTable
+        customClass="commonTable reportTable"
+        striped
         columns={columns}
         isPagination={true}
         isSort={true}
