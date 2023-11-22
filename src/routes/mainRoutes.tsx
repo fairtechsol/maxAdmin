@@ -1,13 +1,13 @@
 import { lazy } from "react";
 import MainLayout from "../layout/main";
 import Loadable from "../utils/loadable";
-import ChangePassword from "../pages/changePassword";
 // ==============================|| Main ROUTING ||============================== //
 const Game = Loadable(lazy(() => import("../pages/games")));
 const Sample = Loadable(lazy(() => import("../components/Sample")));
 const ListClients = Loadable(lazy(() => import("../pages/listClients")));
 const AddAccount = Loadable(lazy(() => import("../pages/addAccount")));
 const MarketAnalysis = Loadable(lazy(() => import("../pages/marketAnalysis")));
+const ChangePassword = Loadable(lazy(() => import("../pages/changePassword")));
 
 const MainRoutes = {
   path: "/admin",
