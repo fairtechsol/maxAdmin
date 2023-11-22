@@ -1,9 +1,9 @@
-import { Button, Card, Col, Row, Table } from "react-bootstrap";
-import { Formik, Form, FormikHelpers } from "formik";
+import { Button, Card, Col, Form, Row, Table } from "react-bootstrap";
+import { useFormik } from "formik";
 import TableRow from "./TableRow";
+import { addAccountValidationSchema } from "../../utils/fieldValidations/addAccount";
+import CustomInput from "../../components/commonComponent/input";
 import SelectSearch from "../../components/commonComponent/SelectSearch";
-import { addAccountValidationSchema } from "../../utils/validationSchema";
-import FormikInput from "../../components/commonComponent/input/FormikInput";
 
 interface Values {
   clientName: string;
@@ -12,7 +12,10 @@ interface Values {
   fullName: string;
   city: string;
   phoneNo: string;
-  accountType: string;
+  accountType: {
+    label: string;
+    value: string;
+  };
   creditReference: string;
   exposureLimit: string;
   minBet: string;
@@ -27,7 +30,7 @@ const tableData = [
   ["Our", "0"],
 ];
 
-const options = [
+const accountTypes = [
   { value: "- Select Your A/C. Type -", label: "- Select Your A/C. Type -" },
   { value: "master", label: "Master" },
   { value: "agent", label: "Agent" },
@@ -41,7 +44,10 @@ const initialValues = {
   fullName: "",
   city: "",
   phoneNo: "",
-  accountType: "",
+  accountType: {
+    label: "",
+    value: "",
+  },
   creditReference: "",
   exposureLimit: "",
   minBet: "",
@@ -51,6 +57,17 @@ const initialValues = {
 };
 
 const AddAccount = () => {
+  const formik = useFormik({
+    initialValues: initialValues,
+    validationSchema: addAccountValidationSchema,
+    onSubmit: (values: Values) => {
+      console.log(values);
+      alert(JSON.stringify(values, null, 2));
+    },
+  });
+
+  const { handleSubmit, getFieldProps, touched, errors } = formik;
+
   return (
     <>
       <Card>
@@ -58,217 +75,230 @@ const AddAccount = () => {
           <Card.Title>Add Account</Card.Title>
         </Card.Header>
         <Card.Body>
-          <Formik
-            initialValues={initialValues}
-            validationSchema={addAccountValidationSchema}
-            onSubmit={(
-              values: Values,
-              { setSubmitting }: FormikHelpers<Values>
-            ) => {
-              setTimeout(() => {
-                alert(JSON.stringify(values, null, 2));
-                setSubmitting(false);
-              }, 500);
-            }}
-          >
-            <Form>
-              <Row>
-                <Col md={6}>
-                  <h6 className="mb-3 bg-warning p-2">Personal Details</h6>
-                  <Row>
-                    <Col md={6}>
-                      <FormikInput
-                        id={"clientName"}
-                        title={"Client Name:"}
-                        placeholder={"Client Name:"}
-                        type={"text"}
-                        customstyle={"mb-3"}
-                      />
-                    </Col>
-                    <Col md={6}>
-                      <FormikInput
-                        id={"userPassword"}
-                        title={"User Password"}
-                        placeholder={"Transaction Password"}
-                        type={"password"}
-                        customstyle={"mb-3"}
-                      />
-                    </Col>
-                    <Col md={6}>
-                      <FormikInput
-                        id={"retypePassword"}
-                        title={"Retype Password:"}
-                        placeholder={"Retype Password"}
-                        type={"password"}
-                        customstyle={"mb-3"}
-                      />
-                    </Col>
-                    <Col md={6}>
-                      <FormikInput
-                        id={"fullName"}
-                        title={"Full Name:"}
-                        placeholder={"Full Name"}
-                        type={"text"}
-                        customstyle={"mb-3"}
-                      />
-                    </Col>
-                    <Col md={6}>
-                      <FormikInput
-                        id={"city"}
-                        title={"City:"}
-                        placeholder={"City"}
-                        type={"text"}
-                        customstyle={"mb-3"}
-                      />
-                    </Col>
-                    <Col md={6}>
-                      <FormikInput
-                        id={"phoneNo"}
-                        title={"Phone:"}
-                        placeholder={"Phone"}
-                        type={"number"}
-                        customstyle={"mb-3"}
-                      />
-                    </Col>
-                  </Row>
-                </Col>
-                <Col md={6}>
-                  <h6 className="mb-3 bg-warning p-2">Account Details</h6>
-                  <Row>
-                    <Col md={6}>
-                      <SelectSearch
-                        defaultValue="- Select Your A/C. Type -"
-                        options={options}
-                        placeholder="- Select Your A/C. Type -"
-                        label={"Account Type"}
-                      />
-                    </Col>
-                    <Col md={6}>
-                      <FormikInput
-                        id={"creditReference"}
-                        title={"Credit Reference"}
-                        placeholder={"Enter Credit Reference"}
-                        type={"number"}
-                        customstyle={"mb-3"}
-                      />
-                    </Col>
-                    <Col md={6}>
-                      <FormikInput
-                        id={"exposureLimit"}
-                        title={"Exposure Limit"}
-                        placeholder={"Enter Exposure Limit"}
-                        type={"number"}
-                        customstyle={"mb-3"}
-                      />
-                    </Col>
-                  </Row>
-                </Col>
-              </Row>
-              <Row>
-                <Col md={12}>
-                  <h6 className="mb-3 bg-warning p-2">Commission Settings</h6>
-                  <Table className="mb-3" striped bordered hover>
-                    <tbody>
-                      {tableData.map((rowData, index) => (
-                        <TableRow key={index} data={rowData} />
-                      ))}
-                    </tbody>
-                  </Table>
-                </Col>
-              </Row>
-              <Row>
-                <Col md={12}>
-                  <h6 className="mb-3 bg-warning p-2">Partnership</h6>
-                  <Table className="mb-3" striped bordered hover>
-                    <tbody>
-                      {tableData.map((rowData, index) => (
-                        <TableRow key={index} data={rowData} />
-                      ))}
-                    </tbody>
-                  </Table>
-                </Col>
-              </Row>
-              <Row>
-                <Col md={12}>
-                  <h6 className="mb-3 bg-warning p-2">Min Max Bet</h6>
-                  <Table striped bordered>
-                    <thead>
-                      <tr>
-                        <tr></tr>
-                        <th></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td rowSpan={2} style={{ verticalAlign: "middle" }}>
-                          Min Bet
-                        </td>
-                        <td>100</td>
-                      </tr>
-                      <tr>
-                        <td style={{ verticalAlign: "middle" }}>
-                          <FormikInput
-                            id={"minBet"}
-                            type={"number"}
-                            customstyle={"mb-3"}
-                          />
-                        </td>
-                      </tr>
-                      <tr>
-                        <td rowSpan={2} style={{ verticalAlign: "middle" }}>
-                          Max Bet
-                        </td>
-                        <td>100</td>
-                      </tr>
-                      <tr>
-                        <td style={{ verticalAlign: "middle" }}>
-                          <FormikInput
-                            id={"maxBet"}
-                            type={"number"}
-                            customstyle={"mb-3"}
-                          />
-                        </td>
-                      </tr>
-                      <tr>
-                        <td rowSpan={2} style={{ verticalAlign: "middle" }}>
-                          Delay
-                        </td>
-                        <td>5.00</td>
-                      </tr>
-                      <tr>
-                        <td style={{ verticalAlign: "middle" }}>
-                          <FormikInput
-                            id={"delay"}
-                            type={"number"}
-                            customstyle={"mb-3"}
-                          />
-                        </td>
-                      </tr>
-                    </tbody>
-                  </Table>
-                </Col>
-              </Row>
-              <Row>
-                <Col md={12}>
-                  <FormikInput
-                    id={"transactionPassword"}
-                    title={"Transaction Password:"}
-                    placeholder={"Transaction Password"}
-                    type={"text"}
-                    customstyle={"mb-3 col-md-3 float-end"}
-                  />
-                </Col>
-              </Row>
+          <Form onSubmit={handleSubmit}>
+            <Row>
+              <Col md={6}>
+                <h6 className="mb-3 bg-warning p-2">Personal Details</h6>
+                <Row>
+                  <Col md={6}>
+                    <CustomInput
+                      id={"clientName"}
+                      title={"Client Name:"}
+                      placeholder={"Client Name:"}
+                      type={"text"}
+                      customstyle={"mb-3"}
+                      {...getFieldProps("clientName")}
+                      touched={touched.clientName}
+                      errors={errors.clientName}
+                    />
+                  </Col>
+                  <Col md={6}>
+                    <CustomInput
+                      id={"userPassword"}
+                      title={"User Password"}
+                      placeholder={"Transaction Password"}
+                      type={"password"}
+                      customstyle={"mb-3"}
+                      {...getFieldProps("userPassword")}
+                      touched={touched.userPassword}
+                      errors={errors.userPassword}
+                    />
+                  </Col>
+                  <Col md={6}>
+                    <CustomInput
+                      id={"retypePassword"}
+                      title={"Retype Password:"}
+                      placeholder={"Retype Password"}
+                      type={"password"}
+                      customstyle={"mb-3"}
+                      {...getFieldProps("retypePassword")}
+                      touched={touched.retypePassword}
+                      errors={errors.retypePassword}
+                    />
+                  </Col>
+                  <Col md={6}>
+                    <CustomInput
+                      id={"fullName"}
+                      title={"Full Name:"}
+                      placeholder={"Full Name"}
+                      type={"text"}
+                      customstyle={"mb-3"}
+                      {...getFieldProps("fullName")}
+                    />
+                  </Col>
+                  <Col md={6}>
+                    <CustomInput
+                      id={"city"}
+                      title={"City:"}
+                      placeholder={"City"}
+                      type={"text"}
+                      customstyle={"mb-3"}
+                      {...getFieldProps("city")}
+                    />
+                  </Col>
+                  <Col md={6}>
+                    <CustomInput
+                      id={"phoneNo"}
+                      title={"Phone:"}
+                      placeholder={"Phone"}
+                      type={"number"}
+                      customstyle={"mb-3"}
+                      {...getFieldProps("phoneNo")}
+                    />
+                  </Col>
+                </Row>
+              </Col>
+              <Col md={6}>
+                <h6 className="mb-3 bg-warning p-2">Account Details</h6>
+                <Row>
+                  <Col md={6}>
+                    <SelectSearch
+                      id="accountType"
+                      label={"Account Type"}
+                      options={accountTypes}
+                      placeholder={"- Select Your A/C. Type -"}
+                      value={formik.values.accountType.label}
+                      onChange={(selectedOption: any) =>
+                        formik.setFieldValue("accountType", selectedOption)
+                      }
+                      onBlur={formik.handleBlur}
+                      touched={touched.accountType}
+                      errors={errors.accountType?.label}
+                    />
+                  </Col>
+                  <Col md={6}>
+                    <CustomInput
+                      id={"creditReference"}
+                      title={"Credit Reference"}
+                      placeholder={"Enter Credit Reference"}
+                      type={"number"}
+                      customstyle={"mb-3"}
+                      {...getFieldProps("creditReference")}
+                      touched={touched.creditReference}
+                      errors={errors.creditReference}
+                    />
+                  </Col>
+                  <Col md={6}>
+                    <CustomInput
+                      id={"exposureLimit"}
+                      title={"Exposure Limit"}
+                      placeholder={"Enter Exposure Limit"}
+                      type={"number"}
+                      customstyle={"mb-3"}
+                      {...getFieldProps("exposureLimit")}
+                      touched={touched.exposureLimit}
+                      errors={errors.exposureLimit}
+                    />
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
+            <Row>
+              <Col md={12}>
+                <h6 className="mb-3 bg-warning p-2">Commission Settings</h6>
+                <Table className="mb-3" striped bordered hover>
+                  <tbody>
+                    {tableData.map((rowData, index) => (
+                      <TableRow key={index} data={rowData} />
+                    ))}
+                  </tbody>
+                </Table>
+              </Col>
+            </Row>
+            <Row>
+              <Col md={12}>
+                <h6 className="mb-3 bg-warning p-2">Partnership</h6>
+                <Table className="mb-3" striped bordered hover>
+                  <tbody>
+                    {tableData.map((rowData, index) => (
+                      <TableRow key={index} data={rowData} />
+                    ))}
+                  </tbody>
+                </Table>
+              </Col>
+            </Row>
+            <Row>
+              <Col md={12}>
+                <h6 className="mb-3 bg-warning p-2">Min Max Bet</h6>
+                <Table striped bordered>
+                  <thead>
+                    <tr>
+                      <tr></tr>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td rowSpan={2} style={{ verticalAlign: "middle" }}>
+                        Min Bet
+                      </td>
+                      <td>100</td>
+                    </tr>
+                    <tr>
+                      <td style={{ verticalAlign: "middle" }}>
+                        <CustomInput
+                          id={"minBet"}
+                          type={"number"}
+                          customstyle={"mb-3"}
+                          {...getFieldProps("minBet")}
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td rowSpan={2} style={{ verticalAlign: "middle" }}>
+                        Max Bet
+                      </td>
+                      <td>100</td>
+                    </tr>
+                    <tr>
+                      <td style={{ verticalAlign: "middle" }}>
+                        <CustomInput
+                          id={"maxBet"}
+                          type={"number"}
+                          customstyle={"mb-3"}
+                          {...getFieldProps("maxBet")}
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td rowSpan={2} style={{ verticalAlign: "middle" }}>
+                        Delay
+                      </td>
+                      <td>5.00</td>
+                    </tr>
+                    <tr>
+                      <td style={{ verticalAlign: "middle" }}>
+                        <CustomInput
+                          id={"delay"}
+                          type={"number"}
+                          customstyle={"mb-3"}
+                          {...getFieldProps("delay")}
+                        />
+                      </td>
+                    </tr>
+                  </tbody>
+                </Table>
+              </Col>
+            </Row>
+            <Row>
+              <Col md={12}>
+                <CustomInput
+                  id={"transactionPassword"}
+                  title={"Transaction Password:"}
+                  placeholder={"Transaction Password"}
+                  type={"password"}
+                  customstyle={"mb-3 col-md-3 mt-2 float-end"}
+                  {...getFieldProps("transactionPassword")}
+                  touched={touched.transactionPassword}
+                  errors={errors.transactionPassword}
+                />
+              </Col>
+            </Row>
 
-              <Button
-                variant="primary"
-                style={{ float: "right" }}
-                type="submit"
-              >
-                Create Account
-              </Button>
-            </Form>
-          </Formik>
+            <Button variant="primary" style={{ float: "right" }} type="submit">
+              Create Account
+            </Button>
+          </Form>
         </Card.Body>
       </Card>
     </>

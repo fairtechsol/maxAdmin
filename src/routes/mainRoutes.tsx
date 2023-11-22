@@ -8,6 +8,7 @@ const ListClients = Loadable(lazy(() => import("../pages/listClients")));
 const ListAccount = Loadable(lazy(() => import("../pages/listAccount")));
 const AddAccount = Loadable(lazy(() => import("../pages/addAccount")));
 const MarketAnalysis = Loadable(lazy(() => import("../pages/marketAnalysis")));
+const ChangePassword = Loadable(lazy(() => import("../pages/changePassword")));
 
 const MainRoutes = {
   path: "/admin",
@@ -36,6 +37,10 @@ const MainRoutes = {
     {
       path: "market-analysis",
       element: <MarketAnalysis />,
+    },
+    {
+      path: "change-password",
+      element: <ChangePassword />,
     },
   ],
 };
