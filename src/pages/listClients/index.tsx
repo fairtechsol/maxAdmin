@@ -120,6 +120,8 @@ const App: React.FC = () => {
       <Row>
         <Col>
           <CustomTable
+            bordered
+            striped
             columns={columns}
             itemCount={10}
             setTableConfig={setTableConfig}
@@ -146,7 +148,7 @@ const App: React.FC = () => {
               return (
                 <tr key={index}>
                   <td>
-                    <CustomButton className="actionBtn">
+                    <CustomButton className="actionBtn" variant="dark">
                       {username}
                     </CustomButton>
                   </td>
@@ -169,6 +171,7 @@ const App: React.FC = () => {
                     {actionButtons?.map((item) => {
                       return (
                         <CustomButton
+                          variant="dark"
                           onClick={() => {
                             item.onClick(item?.id);
                           }}

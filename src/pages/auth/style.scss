@@ -1,8 +1,9 @@
+@import "/src/assets/variable.scss";
 
 .auth-main {
   height: 100vh;
   width: 100%;
-  background-image: linear-gradient(#004a25, #ffc742);
+  background-image: linear-gradient($primary, $secondary);
 }
 
 .auth-box {
@@ -33,7 +34,7 @@
   position: absolute;
   top: 23px;
   width: 20%;
-  background: var(--black);
+  background: $black;
 }
 
 .auth-main .auth-title:before {

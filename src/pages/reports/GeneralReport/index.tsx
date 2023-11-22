@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Button, Col, Form, Row } from "react-bootstrap";
+import SelectSearch from "../../../components/commonComponent/SelectSearch";
 import CustomTable from "../../../components/commonComponent/table";
 import { TableConfig } from "../../../models/tableInterface";
-import SelectSearch from "../../../components/commonComponent/SelectSearch";
-import { Button, Col, Form, Row } from "react-bootstrap";
 
 interface Column {
   id: string;
@@ -38,7 +38,7 @@ const GeneralReport = () => {
     <>
       <h5>General Report</h5>
       <Form>
-        <Row>
+        <Row className="mb-4">
           <Col md={2}>
             <SelectSearch
               defaultValue="generalReport"
@@ -48,6 +48,7 @@ const GeneralReport = () => {
             />
           </Col>
           <Col md={2}>
+            <Form.Label className="invisible d-block">dasd</Form.Label>
             <Button>Load</Button>
           </Col>
         </Row>

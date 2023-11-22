@@ -2,9 +2,9 @@ import { useState } from "react";
 import CustomButton from "../../commonComponent/button";
 import CustomModal from "../../commonComponent/modal";
 import GameHeaderDropdown from "./dropdown";
+import ActiveUser from "./modals/activeUsers";
 import BookMarkerBook from "./modals/bookMarkersBook";
 import UserBook from "./modals/userBook";
-import ActiveUser from "./modals/activeUsers";
 import "./style.scss";
 const GameHeader = () => {
   const liveMarketModal = () => {

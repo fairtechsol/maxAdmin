@@ -12,7 +12,7 @@ interface SortConfig {
   direction: "asc" | "desc";
 }
 
-interface CustomTableProps {
+interface CustomTableProps extends React.HTMLAttributes<HTMLDivElement> {
   columns: Column[];
   customClass?: string;
   isPagination?: boolean;
@@ -24,6 +24,8 @@ interface CustomTableProps {
   enablePdfExcel?: boolean;
   tHeadTheme?: string;
   tBodyTheme?: string;
+  bordered?: boolean;
+  striped?: boolean;
 }
 
 const CustomTable: React.FC<CustomTableProps> = ({

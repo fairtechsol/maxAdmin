@@ -1,10 +1,16 @@
+import { useState } from "react";
 import { Table } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import CustomModal from "../../../commonComponent/modal";
 import YesNoBox from "../../../yesNo";
 import "../../style.scss";
+import TableRunner from "./tableRunner";
 interface SessionMarketTableProps {
   data: any;
 }
 function SessionMarketTable({ data }: SessionMarketTableProps) {
+  const [runnerModalShow, setRunnerModalShow] = useState(false);
+
   const handleClick = () => {};
   return (
     <div className={`gameTable sessionFancyTable borderTable border `}>
@@ -27,9 +33,11 @@ function SessionMarketTable({ data }: SessionMarketTableProps) {
             <tr key={i}>
               <td>
                 <div className="backLayRunner d-flex flex-column px-3">
-                  <span className="backLayRunner-country title-14">
-                    {item?.RunnerName}
-                  </span>
+                  <div onClick={() => setRunnerModalShow((prev) => !prev)}>
+                    <Link to="" className="backLayRunner-country title-14">
+                      {item?.RunnerName}
+                    </Link>
+                  </div>
                   <span className="title-14">{0}</span>
                 </div>
               </td>
@@ -63,6 +71,10 @@ function SessionMarketTable({ data }: SessionMarketTableProps) {
           ))}
         </tbody>
       </Table>
+
+      <CustomModal show={runnerModalShow} setShow={setRunnerModalShow}>
+        <TableRunner />
+      </CustomModal>
     </div>
   );
 }
