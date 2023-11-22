@@ -154,8 +154,10 @@ const AddAccount = () => {
                   <Col md={6}>
                     <SelectSearch
                       id="accountType"
+                      label={"Account Type"}
                       options={accountTypes}
-                      value={formik.values.accountType}
+                      placeholder={"- Select Your A/C. Type -"}
+                      value={formik.values.accountType.label}
                       onChange={(selectedOption: any) =>
                         formik.setFieldValue("accountType", selectedOption)
                       }
