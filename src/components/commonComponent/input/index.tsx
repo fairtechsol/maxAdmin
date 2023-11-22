@@ -1,7 +1,16 @@
 import { Form } from "react-bootstrap";
 
 const CustomInput = (props: any) => {
-  const { title, formInline, labelCol, inputCol, errors, id, ...prop } = props;
+  const {
+    title,
+    formInline,
+    labelCol,
+    inputCol,
+    bgColor,
+    errors,
+    id,
+    ...prop
+  } = props;
   console.log(prop);
   return (
     <>
@@ -17,7 +26,7 @@ const CustomInput = (props: any) => {
           ""
         )}
         <Form.Control
-          className={`col-${formInline ? inputCol : ""}`}
+          className={`col-${formInline ? inputCol : ""} bg-${bgColor}`}
           name={id}
           {...prop}
         />

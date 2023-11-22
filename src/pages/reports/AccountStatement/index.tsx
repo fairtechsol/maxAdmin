@@ -106,6 +106,7 @@ const AccountStatement = () => {
               placeholder={""}
               customStyle={"mb-3"}
               type="date"
+              bgColor="lightGray"
             />
           </Col>
           <Col md={2}>
