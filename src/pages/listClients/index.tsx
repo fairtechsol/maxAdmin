@@ -8,7 +8,7 @@ import { Column, TableConfig } from "../../models/tableInterface";
 
 // Example usage
 const columns: Column[] = [
-  { id: "username", label: "User Name" },
+  { id: "username", label: "User Name", colSpan: 4 },
   { id: "creditReferance", label: "Credit Referance" },
   { id: "ust", label: "U St" },
   { id: "bst", label: "B St" },
@@ -103,102 +103,110 @@ const App: React.FC = () => {
   ];
 
   return (
-    <Container fluid>
-      <Row>
-        <Col>
-          <p className="title-22">Account List</p>
-        </Col>
-        <Col>
-          <CustomButton
-            className="float-end"
-            onClick={() => navigate(`/admin/add-account`)}
-          >
-            Add Account
-          </CustomButton>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          <CustomTable
-            bordered
-            striped
-            columns={columns}
-            itemCount={10}
-            setTableConfig={setTableConfig}
-            enablePdfExcel={true}
-          >
-            <tr>
-              {columns?.map((item, index) => {
+    <>
+      <Container fluid>
+        <Row>
+          <Col>
+            <p className="title-22">Account List</p>
+          </Col>
+          <Col>
+            <CustomButton
+              className="float-end"
+              onClick={() => navigate(`/admin/add-account`)}
+            >
+              Add Account
+            </CustomButton>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <CustomTable
+              tHeadTheme="border-0 bg-light"
+              customClass="listClientTable commonTable border-top-0 "
+              bordered
+              striped
+              columns={columns}
+              itemCount={10}
+              setTableConfig={setTableConfig}
+              enablePdfExcel={true}
+            >
+              <tr>
+                {columns?.map((item, index) => {
+                  return (
+                    <td
+                      colSpan={index === 0 ? 4 : undefined}
+                      key={index}
+                      className=" fw-bold"
+                    >
+                      {index === 1 && 173398}
+                    </td>
+                  );
+                })}
+              </tr>
+              {data?.map((item: any, index: number) => {
+                const {
+                  username,
+                  creditReferance,
+                  exposureLimit,
+                  defaultPer,
+                  accountType,
+                  casinoTotal,
+                } = item;
                 return (
-                  <td key={index} className=" fw-bold">
-                    {index === 1 && 173398}
-                  </td>
+                  <tr key={index}>
+                    <td colSpan={4}>
+                      <CustomButton className="actionBtn" variant="dark">
+                        {username}
+                      </CustomButton>
+                    </td>
+                    <td className="text-end">{creditReferance}</td>
+                    <td className="text-center">
+                      <Form>
+                        <Form.Check id={`opt${index}1`} aria-label="option 1" />
+                      </Form>
+                    </td>
+                    <td className="text-center">
+                      <Form>
+                        <Form.Check id={`opt${index}`} aria-label="option 1" />
+                      </Form>
+                    </td>
+                    <td className="text-end">{exposureLimit}</td>
+                    <td>{defaultPer}</td>
+                    <td>{accountType}</td>
+                    <td className="text-end">{casinoTotal}</td>
+                    <td className="d-flex gap-1 border-right-0 border-left-0">
+                      {actionButtons?.map((item) => {
+                        return (
+                          <CustomButton
+                            variant="dark"
+                            onClick={() => {
+                              item.onClick(item?.id);
+                            }}
+                            key={item?.id}
+                            className="actionBtn"
+                          >
+                            {item?.name}
+                          </CustomButton>
+                        );
+                      })}
+                    </td>
+                  </tr>
                 );
               })}
-            </tr>
-            {data?.map((item: any, index: number) => {
-              const {
-                username,
-                creditReferance,
-                exposureLimit,
-                defaultPer,
-                accountType,
-                casinoTotal,
-              } = item;
-              return (
-                <tr key={index}>
-                  <td>
-                    <CustomButton className="actionBtn" variant="dark">
-                      {username}
-                    </CustomButton>
-                  </td>
-                  <td>{creditReferance}</td>
-                  <td>
-                    <Form>
-                      <Form.Check id={`opt${index}1`} aria-label="option 1" />
-                    </Form>
-                  </td>
-                  <td>
-                    <Form>
-                      <Form.Check id={`opt${index}`} aria-label="option 1" />
-                    </Form>
-                  </td>
-                  <td>{exposureLimit}</td>
-                  <td>{defaultPer}</td>
-                  <td>{accountType}</td>
-                  <td>{casinoTotal}</td>
-                  <td className="d-flex gap-1">
-                    {actionButtons?.map((item) => {
-                      return (
-                        <CustomButton
-                          variant="dark"
-                          onClick={() => {
-                            item.onClick(item?.id);
-                          }}
-                          key={item?.id}
-                          className="actionBtn"
-                        >
-                          {item?.name}
-                        </CustomButton>
-                      );
-                    })}
-                  </td>
-                </tr>
-              );
-            })}
-          </CustomTable>
-        </Col>
-      </Row>
-      <ListClientModals
-        show={eventDetails.show}
-        setShow={(data) => {
-          setEventDetails((prev) => {
-            return { ...prev, show: data };
-          });
-        }}
-        id={eventDetails.eventId}
-      />
-    </Container>
+            </CustomTable>
+          </Col>
+        </Row>
+        <ListClientModals
+          show={eventDetails.show}
+          setShow={(data) => {
+            setEventDetails((prev) => {
+              return { ...prev, show: data };
+            });
+          }}
+          id={eventDetails.eventId}
+        />
+      </Container>
+    </>
   );
 };
 

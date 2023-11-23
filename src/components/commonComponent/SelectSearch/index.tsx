@@ -9,6 +9,7 @@ const SelectSearch = (props: any) => {
     options,
     placeholder,
     isMultiOption,
+    isSearchable,
     onChange,
     value,
     defaultValue,
@@ -24,8 +25,11 @@ const SelectSearch = (props: any) => {
   const customStyles = {
     control: (provided: any) => ({
       ...provided,
-      minHeight: "33.10px",
-      height: "33.10px",
+      height: 40, // Set the height of the control
+    }),
+    menu: (provided: any) => ({
+      ...provided,
+      height: 200, // Set the max height of the dropdown menu
     }),
   };
 
@@ -48,6 +52,7 @@ const SelectSearch = (props: any) => {
           options={options}
           placeholder={placeholder}
           isMulti={isMultiOption}
+          isSearchable={isMultiOption === undefined ? false : isSearchable}
         />
         <CustomErrorMessage touched={touched} errors={errors} />
       </Form.Group>

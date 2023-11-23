@@ -72,6 +72,7 @@ const CustomTable: React.FC<CustomTableProps> = ({
     });
     // alert(tHeadTheme);
   }, [currentPage, sortConfig]);
+  console.log(columns);
   return (
     <div className={`${customClass ?? ""} customTable`}>
       <TableHeader
@@ -88,7 +89,11 @@ const CustomTable: React.FC<CustomTableProps> = ({
           <tr>
             {/* Table header with sorting icons */}
             {columns.map((column) => (
-              <th className={`${tHeadTheme}`} key={column.id}>
+              <th
+                className={`${tHeadTheme}`}
+                key={column.id}
+                colSpan={column?.colSpan}
+              >
                 {column.label}
                 {/* Display sorting icons based on the sorting configuration */}
                 {isSort && (
@@ -107,8 +112,11 @@ const CustomTable: React.FC<CustomTableProps> = ({
           {/* Table body with sorted data */}
           {itemCount === 0 ? (
             <tr className="text-center">
-              <td className={`${tBodyTheme}`} colSpan={columns?.length}>
-                <p className="title-14">No data available in table</p>
+              <td
+                className={`${tBodyTheme} noRecord`}
+                colSpan={columns?.length}
+              >
+                <p className="title-14 mb-0">No data available in table555</p>
               </td>
             </tr>
           ) : (

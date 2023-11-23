@@ -50,6 +50,22 @@ const data: DataItem[] = [
     description: "ehrtrewe",
     fromto: JSON.stringify(new Date()),
   },
+  {
+    date: "Bob",
+    credit: 22,
+    debit: 30,
+    closing: "New York",
+    description: "ehrtrewe",
+    fromto: JSON.stringify(new Date()),
+  },
+  {
+    date: "Bob",
+    credit: 22,
+    debit: 30,
+    closing: "New York",
+    description: "ehrtrewe",
+    fromto: JSON.stringify(new Date()),
+  },
 ];
 
 const options = [
@@ -98,6 +114,7 @@ const AccountStatement = () => {
               placeholder={""}
               customStyle={"mb-3"}
               type="date"
+              bgColor="lightGray"
             />
           </Col>
           <Col md={2}>
@@ -106,6 +123,7 @@ const AccountStatement = () => {
               placeholder={""}
               customStyle={"mb-3"}
               type="date"
+              bgColor="lightGray"
             />
           </Col>
           <Col md={2}>
@@ -115,13 +133,15 @@ const AccountStatement = () => {
         </Row>
       </Form>
       <CustomTable
+        striped
+        customClass="mt-4 commonTable reportTable"
         columns={columns}
         isPagination={true}
         isSort={true}
         isSearch={true}
         itemCount={data?.length}
         setTableConfig={setTableConfig}
-        enablePdfExcel={false}
+        enablePdfExcel={true}
       >
         {data.map((item, index) => (
           <tr key={index}>

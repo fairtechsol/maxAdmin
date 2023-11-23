@@ -7,4 +7,5 @@ export interface TableConfig {
 export interface Column {
   id: string;
   label: string;
+  colSpan?: number;
 }
