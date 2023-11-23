@@ -30,7 +30,7 @@ body input.form-control {
   border-radius: 3px !important;
 }
 body{
-  input.form-check-input{
+  input.form-check-input[type="checkbox"]{
     border: 1px solid $black ;
     border-radius: 0 !important;
     height: 20px;
@@ -83,6 +83,9 @@ body{
 }
 .bg-red3{
   background-color: $red3 !important;
+}
+.bg-green{
+  background-color: $green;
 }
 .bg-lightGray{
   background-color: $lightGray !important;
@@ -142,7 +145,7 @@ body{
   font-size: 13px;
 }
 .title-12 {
-  font-size: 10px;
+  font-size: 12px;
 }
 .title-10 {
   font-size: 10px;

@@ -1,0 +1,29 @@
+@import "/src/assets/variable.scss";
+
+// ======== Account Statement Start ======
+    .accountStatementModal{
+        .form-check-input:checked{
+            background-color: $defaultBlue;
+            border-color: $defaultBlue;
+        }
+        
+    }
+
+    body{
+        .accountStatement-table.reportTable.commonTable{
+            tbody tr td{
+                background-color: $red3 !important;
+            }
+        }
+    }
+    .accountStatement-table tr td button{
+        min-height: 25px;
+        min-width: 28px;
+    }
+    
+
+// ======== Account Statement End ======
+
+// ======== Profit Loss start ======
+
+// ======== Profit Loss end ======

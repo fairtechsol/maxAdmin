@@ -7,6 +7,7 @@ function CustomModal({
   title,
   children,
   footer,
+  titleStyle,
   ...props
 }: any) {
   return (
@@ -18,7 +19,7 @@ function CustomModal({
         className={`customModal ${customClass}`}
       >
         <Modal.Header closeButton>
-          <Modal.Title>{title}</Modal.Title>
+          <Modal.Title className={`${titleStyle}`}>{title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>{children}</Modal.Body>
         {footer ? <Modal.Footer>{footer}</Modal.Footer> : ""}

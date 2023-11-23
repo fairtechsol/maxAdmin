@@ -3,7 +3,9 @@ import { Col, Form, Row } from "react-bootstrap";
 import SelectSearch from "../../../components/commonComponent/SelectSearch";
 import CustomButton from "../../../components/commonComponent/button";
 import CustomInput from "../../../components/commonComponent/input";
+import CustomModal from "../../../components/commonComponent/modal";
 import CustomTable from "../../../components/commonComponent/table";
+import AccountStatementModal from "../../../components/reports/modals/accountStatement";
 import { TableConfig } from "../../../models/tableInterface";
 
 interface Column {
@@ -31,7 +33,7 @@ const data: DataItem[] = [
     credit: 25,
     debit: 30,
     closing: "New York",
-    description: "asfsadas",
+    description: "Cricket/3.3 over run SS W/Fancy-25",
     fromto: JSON.stringify(new Date()),
   },
   {
@@ -39,7 +41,7 @@ const data: DataItem[] = [
     credit: 30,
     debit: 30,
     closing: "New York",
-    description: "asgsfdgdf",
+    description: "TEEN/Teen Patti Rno. 231611124752/Teen-Player B",
     fromto: JSON.stringify(new Date()),
   },
   {
@@ -47,7 +49,7 @@ const data: DataItem[] = [
     credit: 22,
     debit: 30,
     closing: "New York",
-    description: "ehrtrewe",
+    description: "Cricket/3.3 over run SS W/Fancy-25",
     fromto: JSON.stringify(new Date()),
   },
   {
@@ -55,7 +57,7 @@ const data: DataItem[] = [
     credit: 22,
     debit: 30,
     closing: "New York",
-    description: "ehrtrewe",
+    description: "Cricket/3.3 over run SS W/Fancy-25",
     fromto: JSON.stringify(new Date()),
   },
   {
@@ -63,7 +65,7 @@ const data: DataItem[] = [
     credit: 22,
     debit: 30,
     closing: "New York",
-    description: "ehrtrewe",
+    description: "Cricket/3.3 over run SS W/Fancy-25",
     fromto: JSON.stringify(new Date()),
   },
 ];
@@ -75,6 +77,8 @@ const options = [
 ];
 
 const AccountStatement = () => {
+  const [AccountStatementModalShow, setAccountStatementModalShow] =
+    useState(false);
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
 
   useEffect(() => {}, [tableConfig]);
@@ -143,14 +147,47 @@ const AccountStatement = () => {
         setTableConfig={setTableConfig}
         enablePdfExcel={true}
       >
-        {data.map((item, index) => (
-          <tr key={index}>
-            {columns.map((column) => (
+        {data.map((item, index) => {
+          const { date, credit, debit, closing, description, fromto } = item;
+          return (
+            <tr key={index}>
+              {/* {columns.map((column) => (
               <td key={column.id}>{item[column.id]}</td>
-            ))}
-          </tr>
-        ))}
+            ))} */}
+              <td>{date}</td>
+              <td>{credit}</td>
+              <td>{debit}</td>
+              <td>{closing}</td>
+              <td>
+                <CustomButton
+                  className="actionBtn"
+                  variant="dark"
+                  onClick={() => setAccountStatementModalShow((prev) => !prev)}
+                >
+                  {description}
+                </CustomButton>
+              </td>
+              <td>{fromto}</td>
+            </tr>
+          );
+        })}
       </CustomTable>
+
+      <CustomModal
+        customClass="modalFull-90 "
+        title={[
+          <>
+            <span className="f400">
+              Client Ledger (Total Win Loss : 100) (Total Count : 1) (Total Soda
+              : 1)
+            </span>
+          </>,
+        ]}
+        show={AccountStatementModalShow}
+        setShow={setAccountStatementModalShow}
+      >
+        <AccountStatementModal />
+      </CustomModal>
     </>
   );
 };

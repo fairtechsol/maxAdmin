@@ -23,13 +23,14 @@ const SelectSearch = (props: any) => {
   } = props;
 
   const customStyles = {
-    control: (provided: any) => ({
+    control: (provided: any, state: any) => ({
       ...provided,
-      height: 40, // Set the height of the control
+      minHeight: "30px", // Adjust the minHeight to your desired height
     }),
-    menu: (provided: any) => ({
+    menu: (provided: any, state: any) => ({
       ...provided,
-      height: 200, // Set the max height of the dropdown menu
+      paddingTop: 0,
+      paddingBottom: 0,
     }),
   };
 

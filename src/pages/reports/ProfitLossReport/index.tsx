@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import SelectSearch from "../../../components/commonComponent/SelectSearch";
+import CustomButton from "../../../components/commonComponent/button";
 import CustomInput from "../../../components/commonComponent/input";
+import CustomModal from "../../../components/commonComponent/modal";
 import CustomTable from "../../../components/commonComponent/table";
+import ProfitLossModal from "../../../components/reports/modals/profitLoss";
+import ProfitLossEventType from "../../../components/reports/profitLossEventType";
 import { TableConfig } from "../../../models/tableInterface";
 
 interface Column {
@@ -21,7 +25,23 @@ const columns: Column[] = [
   { id: "profitLoss", label: "Profit & Loss" },
 ];
 
-const data: DataItem[] = [];
+const data: DataItem[] = [
+  {
+    gameName: "gameName",
+    gameType: 25,
+    profitLoss: 30,
+  },
+  {
+    gameName: "gameName",
+    gameType: 25,
+    profitLoss: 30,
+  },
+  {
+    gameName: "gameName",
+    gameType: 25,
+    profitLoss: 30,
+  },
+];
 
 const options = [
   { value: "slotGame", label: "Slot Game" },
@@ -32,7 +52,7 @@ const options = [
 
 const ProfitLossReport = () => {
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
-
+  const [profitLossModalShow, setProfitLossModalShow] = useState(false);
   useEffect(() => {}, [tableConfig]);
   return (
     <>
@@ -69,6 +89,8 @@ const ProfitLossReport = () => {
           </Col>
         </Row>
       </Form>
+
+      <ProfitLossEventType />
       <CustomTable
         customClass="commonTable reportTable"
         striped
@@ -82,14 +104,40 @@ const ProfitLossReport = () => {
       >
         {data?.length === 0 && <tr>No data available in table </tr>}
         {data?.length > 0 &&
-          data.map((item, index) => (
-            <tr key={index}>
-              {columns.map((column) => (
-                <td key={column.id}>{item[column.id]}</td>
-              ))}
-            </tr>
-          ))}
+          data.map((item, index) => {
+            const { gameName, gameType, profitLoss } = item;
+            return (
+              <tr key={index}>
+                <td>{gameName}</td>
+                <td>
+                  <CustomButton
+                    className="actionBtn"
+                    variant="dark"
+                    onClick={() => setProfitLossModalShow((prev) => !prev)}
+                  >
+                    {gameType}
+                  </CustomButton>
+                </td>
+                <td>{profitLoss}</td>
+              </tr>
+            );
+          })}
       </CustomTable>
+      <CustomModal
+        customClass="modalFull-90 "
+        // title={[
+        //   <>
+        //     <span className="f400">
+        //       Client Ledger (Total Win Loss : 100) (Total Count : 1) (Total Soda
+        //       : 1)
+        //     </span>
+        //   </>,
+        // ]}
+        show={profitLossModalShow}
+        setShow={setProfitLossModalShow}
+      >
+        <ProfitLossModal />
+      </CustomModal>
     </>
   );
 };

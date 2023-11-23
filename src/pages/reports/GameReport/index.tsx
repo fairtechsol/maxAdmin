@@ -69,7 +69,7 @@ const GameReport = () => {
             <Button>Game List</Button>
           </Col>
         </Row>
-        <Row>
+        <Row className="mt-2">
           <Col md={6}>
             <SelectSearch defaultValue="all" options={options} />
           </Col>
