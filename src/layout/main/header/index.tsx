@@ -1,7 +1,14 @@
-import { Container, Form, Nav, NavDropdown, Navbar } from "react-bootstrap";
+import {
+  Container,
+  Form,
+  InputGroup,
+  Nav,
+  NavDropdown,
+  Navbar,
+} from "react-bootstrap";
 import { GiHamburgerMenu } from "react-icons/gi";
-import LogoSection from "../../../components/commonComponent/logoSection";
 import { NavLink } from "react-router-dom";
+import LogoSection from "../../../components/commonComponent/logoSection";
 
 interface ItemProps {
   name: string;
@@ -93,9 +100,17 @@ const Topbar = (props: any) => {
             </Nav>
           </Navbar.Collapse>
           <Form>
-            <Form.Group className="" controlId="exampleForm.ControlInput1">
+            <InputGroup className="mb-3">
+              <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
+              <Form.Control
+                placeholder="Username"
+                aria-label="Username"
+                aria-describedby="basic-addon1"
+              />
+            </InputGroup>
+            {/* <Form.Group className="" controlId="exampleForm.ControlInput1">
               <Form.Control type="text" placeholder="All Clients" />
-            </Form.Group>
+            </Form.Group> */}
           </Form>
         </div>
       </Container>

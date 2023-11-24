@@ -30,7 +30,7 @@ const ListClientModals = ({ id, show, setShow }: ListClientModalsProps) => {
       show={show}
       setShow={setShow}
       title={modalTitle?.[id]?.name}
-      titleStyle="fw-normal"
+      titleStyle="fw-normal title-22"
       footer={
         <ModalFooter
           clickHandler={() => {
