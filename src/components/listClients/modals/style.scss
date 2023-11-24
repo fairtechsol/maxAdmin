@@ -1,22 +1,18 @@
 @import "/src/assets/variable.scss";
 
-.input-box{
-    max-width: 70%;
-flex: 2.5;   
-}
 
-.input-container{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    p{
-        flex: 2;
+.listClientModals{
+    .input-container{
+        input,textarea{
+            text-align: right;
+            border-radius: 0 !important;
+            border-color: $black;
+            background-color: $white;
+        }
     }
-    input{
-        text-align: right;
+    
+    .input-inner-container{
+        flex: 2.5;
     }
-}
 
-.input-inner-container{
-    flex: 2.5;
 }

@@ -90,7 +90,7 @@ const ProfitLossReport = () => {
         </Row>
       </Form>
 
-      <ProfitLossEventType />
+      <ProfitLossEventType customClass="mb-3" />
       <CustomTable
         customClass="commonTable reportTable"
         striped

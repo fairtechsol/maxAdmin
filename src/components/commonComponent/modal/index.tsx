@@ -1,5 +1,6 @@
 import { Modal } from "react-bootstrap";
 import "./style.scss";
+
 function CustomModal({
   show,
   setShow,
@@ -22,7 +23,11 @@ function CustomModal({
           <Modal.Title className={`${titleStyle}`}>{title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>{children}</Modal.Body>
-        {footer ? <Modal.Footer>{footer}</Modal.Footer> : ""}
+        {footer ? (
+          <Modal.Footer className="border-0 mt-3">{footer}</Modal.Footer>
+        ) : (
+          ""
+        )}
       </Modal>
     </>
   );

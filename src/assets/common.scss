@@ -57,7 +57,12 @@ body{
   height: 33px;
   font-size: 14px !important;
 }
+@media (min-width: 992px){
+  body .modal-dialog {
+      min-width: 530px;
+  }
 
+}
 
 
 
@@ -93,9 +98,31 @@ body{
 .bg-gray{
   background-color: $gray !important;
 }
+.btn-close {
+  background: $primary !important;
+  height: 35px !important;
+  width: 35px !important;
+  position: relative;
+}
+.btn-close::after{
+ background: url(../../public/cross.svg) no-repeat !important;
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 12px;
+  width: 12px;
+  font-weight: bold;
+  color: #fff;
+  filter: invert(1);
+}
 /* ====== bg Colors end ====  */
 
 /* ===== for title ====  */
+.text-green{
+  color: $green;
+}
 .title-46 {
   font-size: 46px;
 }

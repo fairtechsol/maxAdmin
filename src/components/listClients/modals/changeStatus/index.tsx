@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Stack } from "react-bootstrap";
+import { Col, Row, Stack } from "react-bootstrap";
 import CustomInput from "../../../commonComponent/input";
 import Switch from "../../../commonComponent/switch";
 
@@ -10,21 +10,35 @@ const ChangeStatus = () => {
   return (
     <Stack gap={0}>
       <div className="input-container">
-        <h1 className="">Account</h1>
-        <span>Active</span>
+        <Row>
+          <Col sm={12}>
+            <div className="d-flex align-items-center justify-content-between">
+              <h3 className="text-secondary title-20 fw-normal">
+                ajay Duple...
+              </h3>
+              <h3 className="text-green title-14">Active</h3>
+            </div>
+            <div className="row">
+              <Col sm={6}>
+                <Switch
+                  onSwitchChange={setActiveUser}
+                  isChecked={activeUser}
+                  label="User Active"
+                />
+              </Col>
+              <Col sm={6}>
+                <Switch
+                  onSwitchChange={setActiveBet}
+                  isChecked={activeBet}
+                  label="Bet Active"
+                />
+              </Col>
+            </div>
+          </Col>
+          <Col sm={8}></Col>
+        </Row>
       </div>
-      <div className="input-container">
-        <Switch
-          onSwitchChange={setActiveUser}
-          isChecked={activeUser}
-          label="User Active"
-        />
-        <Switch
-          onSwitchChange={setActiveBet}
-          isChecked={activeBet}
-          label="Bet Active"
-        />
-      </div>
+      <div className="input-container"></div>
       <div className="input-container">
         <p>Transaction password</p>
         <CustomInput

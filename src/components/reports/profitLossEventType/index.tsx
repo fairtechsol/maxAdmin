@@ -1,8 +1,8 @@
 import "./style.scss";
 
-const ProfitLossEventType = () => {
+const ProfitLossEventType = (props: any) => {
   return (
-    <div className="profitLossEventType">
+    <div className={`profitLossEventType ${props.customClass}`}>
       <h5 className="f400">Profit & Loss for Event type</h5>
       <div className="d-flex" style={{ gap: "12px" }}>
         <div className="profitLossEventType-box d-flex bg-green px-1">
