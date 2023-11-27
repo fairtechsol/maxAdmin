@@ -55,8 +55,8 @@ const ProfitLossReport = () => {
   const [profitLossModalShow, setProfitLossModalShow] = useState(false);
   useEffect(() => {}, [tableConfig]);
   return (
-    <>
-      <h5>Profit Loss</h5>
+    <div className="p-2 pt-0">
+      <h5 className="title-22 fw-normal">Profit Loss</h5>
       <Form>
         <Row className="mb-3">
           <Col md={2}>
@@ -138,7 +138,7 @@ const ProfitLossReport = () => {
       >
         <ProfitLossModal />
       </CustomModal>
-    </>
+    </div>
   );
 };
 

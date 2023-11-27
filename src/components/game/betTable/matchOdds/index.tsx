@@ -34,6 +34,7 @@ function MatchOdds({ minMax, data }: MatchOddsProps) {
           </tr>
         </thead>
         <tbody>
+          {/* <Loader /> */}
           {data?.map((item: any, i: number) => (
             <tr key={i}>
               <td>

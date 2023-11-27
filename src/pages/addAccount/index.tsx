@@ -1,9 +1,9 @@
-import { Button, Card, Col, Form, Row, Table } from "react-bootstrap";
 import { useFormik } from "formik";
-import TableRow from "./TableRow";
-import { addAccountValidationSchema } from "../../utils/fieldValidations/addAccount";
-import CustomInput from "../../components/commonComponent/input";
+import { Button, Card, Col, Form, Row, Table } from "react-bootstrap";
 import SelectSearch from "../../components/commonComponent/SelectSearch";
+import CustomInput from "../../components/commonComponent/input";
+import { addAccountValidationSchema } from "../../utils/fieldValidations/addAccount";
+import TableRow from "./TableRow";
 
 interface Values {
   clientName: string;
@@ -68,17 +68,25 @@ const AddAccount = () => {
 
   const { handleSubmit, getFieldProps, touched, errors } = formik;
 
+  const addAccountHedingStyle = {
+    padding: "5px 10px",
+  };
   return (
     <>
-      <Card>
-        <Card.Header>
-          <Card.Title>Add Account</Card.Title>
+      <Card className="addAccount  border-0">
+        <Card.Header className="border-0 pb-0">
+          <Card.Title className="title-28 fw-normal ">Add Account</Card.Title>
         </Card.Header>
-        <Card.Body>
+        <Card.Body className="bg-light">
           <Form onSubmit={handleSubmit}>
             <Row>
               <Col md={6}>
-                <h6 className="mb-3 bg-warning p-2">Personal Details</h6>
+                <h6
+                  className="mb-3 bg-warning title-18 fw-bold"
+                  style={addAccountHedingStyle}
+                >
+                  Personal Details
+                </h6>
                 <Row>
                   <Col md={6}>
                     <CustomInput
@@ -149,7 +157,12 @@ const AddAccount = () => {
                 </Row>
               </Col>
               <Col md={6}>
-                <h6 className="mb-3 bg-warning p-2">Account Details</h6>
+                <h6
+                  className="mb-3 bg-warning title-18 fw-bold "
+                  style={addAccountHedingStyle}
+                >
+                  Account Details
+                </h6>
                 <Row>
                   <Col md={6}>
                     <SelectSearch
@@ -195,7 +208,12 @@ const AddAccount = () => {
             </Row>
             <Row>
               <Col md={12}>
-                <h6 className="mb-3 bg-warning p-2">Commission Settings</h6>
+                <h6
+                  className="mb-3 bg-warning title-18 fw-bold "
+                  style={addAccountHedingStyle}
+                >
+                  Commission Settings
+                </h6>
                 <Table className="mb-3" striped bordered hover>
                   <tbody>
                     {tableData.map((rowData, index) => (
@@ -207,7 +225,12 @@ const AddAccount = () => {
             </Row>
             <Row>
               <Col md={12}>
-                <h6 className="mb-3 bg-warning p-2">Partnership</h6>
+                <h6
+                  className="mb-3 bg-warning title-18 fw-bold "
+                  style={addAccountHedingStyle}
+                >
+                  Partnership
+                </h6>
                 <Table className="mb-3" striped bordered hover>
                   <tbody>
                     {tableData.map((rowData, index) => (
@@ -219,8 +242,13 @@ const AddAccount = () => {
             </Row>
             <Row>
               <Col md={12}>
-                <h6 className="mb-3 bg-warning p-2">Min Max Bet</h6>
-                <Table striped bordered>
+                <h6
+                  className="mb-3 bg-warning title-18 fw-bold "
+                  style={addAccountHedingStyle}
+                >
+                  Min Max Bet
+                </h6>
+                <Table striped bordered className="commonTable">
                   <thead>
                     <tr>
                       <tr></tr>

@@ -1,11 +1,9 @@
-import React from "react";
-
 const TableRow = ({ data }: any) => {
   const [column1, column2] = data;
 
   return (
     <tr>
-      <td>{column1}</td>
+      <td className="w-25">{column1}</td>
       {column1 === "Downline" ? (
         <td>
           <input

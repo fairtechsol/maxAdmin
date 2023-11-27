@@ -37,8 +37,8 @@ const GameReport = () => {
 
   useEffect(() => {}, [tableConfig]);
   return (
-    <>
-      <h5>Game Report</h5>
+    <div className="p-2 pt-0">
+      <h5 className="title-22 fw-normal">Game Report</h5>
       <Form className="mb-4">
         <Row>
           <Col md={2}>
@@ -85,9 +85,9 @@ const GameReport = () => {
         customClass="commonTable reportTable"
         striped
         columns={columns}
-        isPagination={true}
+        isPagination={false}
         isSort={true}
-        isSearch={true}
+        isSearch={false}
         itemCount={data?.length}
         setTableConfig={setTableConfig}
         enablePdfExcel={false}
@@ -102,7 +102,7 @@ const GameReport = () => {
             </tr>
           ))}
       </CustomTable>
-    </>
+    </div>
   );
 };
 

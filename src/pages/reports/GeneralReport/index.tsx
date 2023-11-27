@@ -35,8 +35,8 @@ const GeneralReport = () => {
 
   useEffect(() => {}, [tableConfig]);
   return (
-    <>
-      <h5>General Report</h5>
+    <div className="p-2 pt-0">
+      <h5 className="title-22 fw-normal">General Report</h5>
       <Form>
         <Row className="mb-4">
           <Col md={2}>
@@ -74,7 +74,7 @@ const GeneralReport = () => {
             </tr>
           ))}
       </CustomTable>
-    </>
+    </div>
   );
 };
 

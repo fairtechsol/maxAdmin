@@ -1,11 +1,5 @@
-import {
-  Container,
-  Form,
-  InputGroup,
-  Nav,
-  NavDropdown,
-  Navbar,
-} from "react-bootstrap";
+import { Container, Form, Nav, NavDropdown, Navbar } from "react-bootstrap";
+import { FaSearchPlus } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { NavLink } from "react-router-dom";
 import LogoSection from "../../../components/commonComponent/logoSection";
@@ -89,7 +83,7 @@ const Topbar = (props: any) => {
                 menuVariant="dark"
               >
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">
+                <NavDropdown.Item href="/admin/secure-auth">
                   Secure Auth Verification
                 </NavDropdown.Item>
                 <NavDropdown.Item href="/admin/change-password">
@@ -99,18 +93,13 @@ const Topbar = (props: any) => {
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
-          <Form>
-            <InputGroup className="mb-3">
-              <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
-              <Form.Control
-                placeholder="Username"
-                aria-label="Username"
-                aria-describedby="basic-addon1"
-              />
-            </InputGroup>
-            {/* <Form.Group className="" controlId="exampleForm.ControlInput1">
+          <Form className="headerSearch">
+            <Form.Group className="" controlId="exampleForm.ControlInput1">
               <Form.Control type="text" placeholder="All Clients" />
-            </Form.Group> */}
+              <span className="headerSearch-ico">
+                <FaSearchPlus />
+              </span>
+            </Form.Group>
           </Form>
         </div>
       </Container>

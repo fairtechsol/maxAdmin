@@ -2,6 +2,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import BetTable from "../../components/game/betTable";
 import GameHeader from "../../components/game/gameHeader";
 import LiveMatch from "../../components/game/liveMatch";
+import Rules from "../../components/game/rules";
 import ScoreCard from "../../components/game/scoreCard";
 import UserBets from "../../components/game/userBet";
 import { MatchType } from "../../utils/enum";
@@ -58,6 +59,7 @@ export default function Games() {
                 <ScoreCard />
               </div>
               <UserBets />
+              <Rules />
             </Col>
           </Row>
         </div>

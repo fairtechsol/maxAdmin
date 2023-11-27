@@ -1,9 +1,9 @@
 @import "/src/assets/variable.scss";
 
 .navbar {
-    height: 52px;
 }
 .navbar {
+    height: 52px;
     a.nav-link{
         text-transform: capitalize;
         // padding: 10px 10px;
@@ -21,6 +21,14 @@
         }
         :hover{
             background-color: $secondary;
+        }
+    }
+    .headerSearch{
+        position: relative;
+        .headerSearch-ico{
+            position: absolute;
+            right: 10px;
+            top: 5px;
         }
     }
     

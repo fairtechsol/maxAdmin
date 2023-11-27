@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import BetStatusOverlay from "../../../commonComponent/betStatusOverlay";
 import CustomModal from "../../../commonComponent/modal";
 import YesNoBox from "../../../yesNo";
 import "../../style.scss";
@@ -41,32 +42,31 @@ function SessionMarketTable({ data }: SessionMarketTableProps) {
                   <span className="title-14">{0}</span>
                 </div>
               </td>
-              <td>
-                <YesNoBox
-                  style={{ width: "50px" }}
-                  // overlay={true}
-                  bgColor="red1"
-                  rate={item?.BackPrice1}
-                  percent={item?.BackSize1}
-                  onClick={handleClick}
-                />
-              </td>
-              <td>
-                <YesNoBox
-                  style={{ width: "50px" }}
-                  bgColor="blue3"
-                  rate={item?.LayPrice1}
-                  percent={item?.LaySize1}
-                  onClick={handleClick}
-                />
+              <td colSpan={3}>
+                <BetStatusOverlay title="Suspend">
+                  <YesNoBox
+                    style={{ width: "50px" }}
+                    // overlay={true}
+                    bgColor="red1"
+                    rate={item?.BackPrice1}
+                    percent={item?.BackSize1}
+                    onClick={handleClick}
+                  />
+                  <YesNoBox
+                    style={{ width: "50px" }}
+                    bgColor="blue3"
+                    rate={item?.LayPrice1}
+                    percent={item?.LaySize1}
+                    onClick={handleClick}
+                  />
+                  <div className="minMaxBox d-flex flex-column justify-content-center text-end px-2 text-info title-14">
+                    <span className="">Min:{item?.min}</span>
+                    <span>Min:{item?.max}</span>
+                  </div>
+                </BetStatusOverlay>
               </td>
 
-              <td className="minMax align-middle">
-                <div className="minMaxBox d-flex flex-column justify-content-center text-end px-2 text-info title-14">
-                  <span className="">Min:{item?.min}</span>
-                  <span>Min:{item?.max}</span>
-                </div>
-              </td>
+              <td className="minMax align-middle"></td>
             </tr>
           ))}
         </tbody>

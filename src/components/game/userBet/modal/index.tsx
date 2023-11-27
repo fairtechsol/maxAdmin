@@ -9,14 +9,14 @@ function UserBetModalTable() {
   const columns: Column[] = [
     { id: "sr", label: "S. NO" },
     { id: "username", label: "	User Name " },
-    { id: "nation", label: "nation " },
-    { id: "betType", label: "betType " },
-    { id: "amount", label: "amount " },
-    { id: "userRate", label: "userRate " },
-    { id: "placeDate", label: "placeDate " },
-    { id: "matchDate", label: "matchDate " },
-    { id: "ip", label: "ip " },
-    { id: "browserDetail", label: "browserDetail " },
+    { id: "nation", label: "Nation " },
+    { id: "betType", label: "BetType " },
+    { id: "amount", label: "Amount " },
+    { id: "userRate", label: "UserRate " },
+    { id: "placeDate", label: "PlaceDate " },
+    { id: "matchDate", label: "MatchDate " },
+    { id: "ip", label: "IP " },
+    { id: "browserDetail", label: "BrowserDetail " },
     // { id: "Checked", label: "Checked " },
   ];
 

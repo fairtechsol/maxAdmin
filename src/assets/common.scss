@@ -23,7 +23,10 @@ body table.table{
   width: 90vw;
   max-width: none;
 }
-
+.btn.focus, .btn:focus {
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
 
 body input.form-control {
   height: 33px;
@@ -88,6 +91,12 @@ body{
 }
 .bg-red3{
   background-color: $red3 !important;
+}
+.bg-pdf{
+  background-color: $pdf;
+}
+.bg-defaultBlue{
+  background-color: $defaultBlue !important ;
 }
 .bg-green{
   background-color: $green;

@@ -39,8 +39,8 @@ const CurrentBets = () => {
 
   useEffect(() => {}, [tableConfig]);
   return (
-    <>
-      <h5>Current Bets</h5>
+    <div className="p-2 pt-0">
+      <h5 className="title-22 fw-normal">Current Bets</h5>
       <Form>
         <Row className="mb-4">
           <Col md={2}>
@@ -77,7 +77,7 @@ const CurrentBets = () => {
             </tr>
           ))}
       </CustomTable>
-    </>
+    </div>
   );
 };
 

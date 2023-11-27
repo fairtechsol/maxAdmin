@@ -9,6 +9,7 @@ const ListAccount = Loadable(lazy(() => import("../pages/listAccount")));
 const AddAccount = Loadable(lazy(() => import("../pages/addAccount")));
 const MarketAnalysis = Loadable(lazy(() => import("../pages/marketAnalysis")));
 const ChangePassword = Loadable(lazy(() => import("../pages/changePassword")));
+const SecureAuth = Loadable(lazy(() => import("../pages/secureAuth")));
 
 const MainRoutes = {
   path: "/admin",
@@ -41,6 +42,10 @@ const MainRoutes = {
     {
       path: "change-password",
       element: <ChangePassword />,
+    },
+    {
+      path: "Secure-auth",
+      element: <SecureAuth />,
     },
   ],
 };

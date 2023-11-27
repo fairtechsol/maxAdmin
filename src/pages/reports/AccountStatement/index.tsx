@@ -83,8 +83,8 @@ const AccountStatement = () => {
 
   useEffect(() => {}, [tableConfig]);
   return (
-    <>
-      <h5>Account Statement</h5>
+    <div className="p-2 pt-0">
+      <h5 className="title-22 fw-normal">Account Statement</h5>
       <Form>
         <Row>
           <Col md={2}>
@@ -188,7 +188,7 @@ const AccountStatement = () => {
       >
         <AccountStatementModal />
       </CustomModal>
-    </>
+    </div>
   );
 };
 

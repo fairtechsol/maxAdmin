@@ -1,10 +1,11 @@
+@import "/src/assets/variable.scss";
 .betStatusOverlay{
         position: absolute;
         // content: attr(data-title);
         top: 0;
         right: 0;
-        background: rgba(0, 0, 0, 0.6);
-        color: #ff0000;
+        background: rgba($black, 0.5);
+        color: $pdf;
         width: 100%;
         height: 100%;
         font-size: 20px;

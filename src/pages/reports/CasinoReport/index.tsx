@@ -40,8 +40,8 @@ const CasinoReport = () => {
 
   useEffect(() => {}, [tableConfig]);
   return (
-    <>
-      <h5>Casino Report</h5>
+    <div className="p-2 pt-0">
+      <h5 className="title-22 fw-normal">Casino Report</h5>
       <Form>
         <Row>
           <Col md={2}>
@@ -94,7 +94,7 @@ const CasinoReport = () => {
             </tr>
           ))}
       </CustomTable>
-    </>
+    </div>
   );
 };
 

@@ -18,7 +18,7 @@ function MainLayout() {
         <Sidebar clickHandler={handleDrawer} />
       </div>
       {/* layout */}
-      <main className="page-content ">
+      <main className="page-content bg-light">
         <Outlet />
       </main>
     </>
