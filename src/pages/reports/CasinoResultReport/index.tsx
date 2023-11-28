@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import SelectSearch from "../../../components/commonComponent/SelectSearch";
 import CustomInput from "../../../components/commonComponent/input";
+import CustomModal from "../../../components/commonComponent/modal";
 import CustomTable from "../../../components/commonComponent/table";
 import { TableConfig } from "../../../models/tableInterface";
 
@@ -20,7 +22,10 @@ const columns: Column[] = [
   { id: "winner", label: "Winner" },
 ];
 
-const data: DataItem[] = [];
+const data: DataItem[] = [
+  { RoundID: "1001254", winner: "Teen B" },
+  { RoundID: "1001254", winner: "Teen B" },
+];
 
 const options = [
   { value: "slotGame", label: "Slot Game" },
@@ -30,6 +35,7 @@ const options = [
 ];
 
 const CasinoResultReport = () => {
+  const [casinoModalShow, setCasinoModalShow] = useState(false);
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
 
   useEffect(() => {}, [tableConfig]);
@@ -62,14 +68,35 @@ const CasinoResultReport = () => {
       >
         {data?.length === 0 && <tr>No data available in table </tr>}
         {data?.length > 0 &&
-          data.map((item, index) => (
-            <tr key={index}>
-              {columns.map((column) => (
-                <td key={column.id}>{item[column.id]}</td>
-              ))}
-            </tr>
-          ))}
+          data.map((item, index) => {
+            const { RoundID, winner } = item;
+            return (
+              // <tr key={index}>
+              //   {columns.map((column) => (
+              //     <td key={column.id}>
+              //       {item[column.id]}
+              //     </td>
+              //   ))}
+              // </tr>
+              <tr key={index}>
+                <td>
+                  <div onClick={() => setCasinoModalShow((prev) => !prev)}>
+                    <Link to="">{RoundID}</Link>
+                  </div>
+                </td>
+                <td>{winner}</td>
+              </tr>
+            );
+          })}
       </CustomTable>
+      <CustomModal
+        show={casinoModalShow}
+        setShow={setCasinoModalShow}
+        title="Result Detail"
+        titleStyle="fw-normal"
+      >
+        <h1>APi Fatch</h1>
+      </CustomModal>
     </div>
   );
 };

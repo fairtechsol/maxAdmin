@@ -1,4 +1,5 @@
 import { Col, Container, Row } from "react-bootstrap";
+import BetTableHeader from "../../components/commonComponent/betTableHeader";
 import BetTable from "../../components/game/betTable";
 import GameHeader from "../../components/game/gameHeader";
 import LiveMatch from "../../components/game/liveMatch";
@@ -59,7 +60,19 @@ export default function Games() {
                 <ScoreCard />
               </div>
               <UserBets />
-              <Rules />
+              <BetTableHeader
+                customClass="mt-2 fw-normal"
+                title="Rules"
+                style={{ height: "39px" }}
+              />
+              <Row>
+                <Col lg={6}>
+                  <Rules teamName="Banglore XI" />
+                </Col>
+                <Col lg={6}>
+                  <Rules teamName="Rajasthan XI" />
+                </Col>
+              </Row>
             </Col>
           </Row>
         </div>
