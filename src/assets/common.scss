@@ -113,19 +113,19 @@ body{
   width: 35px !important;
   position: relative;
 }
-.btn-close::after{
- background: url(../../public/cross.svg) no-repeat !important;
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  height: 12px;
-  width: 12px;
-  font-weight: bold;
-  color: #fff;
-  filter: invert(1);
-}
+// .btn-close::after{
+//  background: url(../../public/cross.svg) no-repeat !important;
+//   content: "";
+//   position: absolute;
+//   top: 50%;
+//   left: 50%;
+//   transform: translate(-50%, -50%);
+//   height: 12px;
+//   width: 12px;
+//   font-weight: bold;
+//   color: #fff;
+//   filter: invert(1);
+// }
 /* ====== bg Colors end ====  */
 
 /* ===== for title ====  */

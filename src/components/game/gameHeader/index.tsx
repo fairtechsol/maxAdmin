@@ -26,7 +26,7 @@ const GameHeader = () => {
                 clickHandle: () => {},
               },
               {
-                name: "Otherwise 123",
+                name: "Otherwise",
                 clickHandle: () => {
                   liveMarketModal();
                 },

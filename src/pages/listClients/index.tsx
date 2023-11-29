@@ -47,7 +47,7 @@ const data: any = [
   },
 ];
 
-const App: React.FC = () => {
+const ListClent: React.FC = () => {
   const navigate = useNavigate();
 
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
@@ -211,4 +211,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default ListClent;

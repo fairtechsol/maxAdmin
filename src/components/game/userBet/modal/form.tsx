@@ -46,7 +46,9 @@ const UserBetModalForm = (props: any) => {
             </div>
             <div className="col-md-8">
               <div className="d-flex">
-                <CustomInput customStyle="me-2 w-50" type={"text"} />
+                <div className="me-2">
+                  <CustomInput customStyle=" w-50" type={"text"} />
+                </div>
                 <CustomInput customStyle=" w-50" type={"text"} />
               </div>
             </div>

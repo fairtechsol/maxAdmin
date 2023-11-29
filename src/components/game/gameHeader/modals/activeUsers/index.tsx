@@ -27,7 +27,7 @@ function ActiveUser() {
   return (
     <div className="activeUsers-modal">
       <CustomTable
-        // striped
+        striped
         columns={columns}
         itemCount={10}
         setTableConfig={setTableConfig}

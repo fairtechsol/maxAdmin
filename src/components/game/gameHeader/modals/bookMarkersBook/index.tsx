@@ -33,7 +33,8 @@ const BookMarkerBook = () => {
   ];
   return (
     <CustomTable
-      // striped
+      striped
+      customClass="commonTable"
       tHeadTheme="bg-primary text-white"
       columns={columns}
       itemCount={10}

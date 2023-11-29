@@ -47,11 +47,7 @@ export default function GameHeaderDropdown({ name, options }: Props) {
         </Dropdown.Menu>
       </Dropdown>
 
-      <CustomModal
-        show={showModal}
-        setShow={setShowModal}
-        title="View More Bet"
-      >
+      <CustomModal show={showModal} setShow={setShowModal} title="Active User">
         {showChildren}
       </CustomModal>
     </>

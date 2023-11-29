@@ -33,7 +33,6 @@ const UserBook = () => {
   ];
   return (
     <CustomTable
-      // striped
       tHeadTheme="bg-primary text-white"
       columns={columns}
       itemCount={10}

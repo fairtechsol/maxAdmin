@@ -1,6 +1,5 @@
 import { Container, Form, Nav, NavDropdown, Navbar } from "react-bootstrap";
 import { FaSearchPlus } from "react-icons/fa";
-import { GiHamburgerMenu } from "react-icons/gi";
 import { NavLink } from "react-router-dom";
 import LogoSection from "../../../components/commonComponent/logoSection";
 
@@ -11,7 +10,11 @@ interface ItemProps {
 
 const TopbarDropdown = ({ name, options }: ItemProps) => {
   return (
-    <NavDropdown title={name} id="basic-nav-dropdown">
+    <NavDropdown
+      className="navbar-mainLink"
+      title={name}
+      id="basic-nav-dropdown"
+    >
       {options?.map((option, index) => (
         <NavDropdown.Item key={index}>
           <NavLink to={option.link}>{option.name}</NavLink>
@@ -25,17 +28,25 @@ const Topbar = (props: any) => {
   return (
     <Navbar expand="lg" className="bg-primary" data-bs-theme="light">
       <Container fluid>
-        <Navbar.Brand href="#home">
+        <Navbar.Brand href="#home" className="me-1">
           <LogoSection width="120px" />
         </Navbar.Brand>
         <div onClick={props.onClick}>
-          <GiHamburgerMenu className="text-white" />
+          <div className="menuHamBurger d-flex flex-column me-2">
+            <span className="mb-1"></span>
+            <span className="mb-1"></span>
+            <span></span>
+          </div>
         </div>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/admin/listClients">List of clients</Nav.Link>
-            <Nav.Link href="/admin/market-analysis">Market Analysis</Nav.Link>
+            <Nav.Link className="navbar-mainLink" href="/admin/listClients">
+              List of clients
+            </Nav.Link>
+            <Nav.Link className="navbar-mainLink" href="/admin/market-analysis">
+              Market Analysis
+            </Nav.Link>
             <TopbarDropdown
               name="Live Market"
               options={[
