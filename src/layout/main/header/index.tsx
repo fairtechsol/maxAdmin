@@ -1,16 +1,26 @@
+import { useState } from "react";
 import { Container, Form, Nav, NavDropdown, Navbar } from "react-bootstrap";
-import { FaSearchPlus } from "react-icons/fa";
+import { FaSearchPlus, FaTimes } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import LogoSection from "../../../components/commonComponent/logoSection";
-
 interface ItemProps {
   name: string;
   options: Array<any>;
 }
 
 const TopbarDropdown = ({ name, options }: ItemProps) => {
+  const [show, setShow] = useState(false);
+  const handleMouseEnter = () => {
+    setShow(true);
+  };
+  const handleMouseLeave = () => {
+    setShow(false);
+  };
   return (
     <NavDropdown
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      show={show}
       className="navbar-mainLink"
       title={name}
       id="basic-nav-dropdown"
@@ -32,11 +42,17 @@ const Topbar = (props: any) => {
           <LogoSection width="120px" />
         </Navbar.Brand>
         <div onClick={props.onClick}>
-          <div className="menuHamBurger d-flex flex-column me-2">
-            <span className="mb-1"></span>
-            <span className="mb-1"></span>
-            <span></span>
-          </div>
+          {props.toggle ? (
+            <div style={{ width: "28px" }}>
+              <FaTimes color="white" size={20} />
+            </div>
+          ) : (
+            <div className="menuHamBurger d-flex flex-column me-2">
+              <span className="mb-1"></span>
+              <span className="mb-1"></span>
+              <span></span>
+            </div>
+          )}
         </div>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -50,6 +66,8 @@ const Topbar = (props: any) => {
             <TopbarDropdown
               name="Live Market"
               options={[
+                { name: "Ball By Ball", link: "#1" },
+                { name: "Binary", link: "#1" },
                 { name: "Race 20-20", link: "#1" },
                 { name: "Queen", link: "#2" },
                 { name: "Baccarat", link: "#3" },
@@ -93,7 +111,6 @@ const Topbar = (props: any) => {
                 title="User Name"
                 menuVariant="dark"
               >
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="/admin/secure-auth">
                   Secure Auth Verification
                 </NavDropdown.Item>
@@ -108,7 +125,7 @@ const Topbar = (props: any) => {
             <Form.Group className="" controlId="exampleForm.ControlInput1">
               <Form.Control type="text" placeholder="All Clients" />
               <span className="headerSearch-ico">
-                <FaSearchPlus />
+                <FaSearchPlus size={24} />
               </span>
             </Form.Group>
           </Form>

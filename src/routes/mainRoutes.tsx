@@ -1,4 +1,5 @@
 import { lazy } from "react";
+import { Navigate } from "react-router-dom";
 import MainLayout from "../layout/main";
 import Loadable from "../utils/loadable";
 // ==============================|| Main ROUTING ||============================== //
@@ -46,6 +47,10 @@ const MainRoutes = {
     {
       path: "Secure-auth",
       element: <SecureAuth />,
+    },
+    {
+      path: "*",
+      element: <Navigate to={"/admin/listAccount"} replace />,
     },
   ],
 };

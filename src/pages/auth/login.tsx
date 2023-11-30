@@ -20,7 +20,7 @@ const Login = () => {
     >
       <div className="auth-box ">
         <img src="/logo.png" alt="fairGame" />
-        <div className="auth-box-form rounded-2 bg-light mt-3">
+        <div className="auth-box-form rounded-2 bg-light">
           <h2 className="auth-title text-center mb-4">Sign In</h2>
           <Form.Group className="mb-3 d-block">
             <Form.Control type="email" placeholder="Username" />

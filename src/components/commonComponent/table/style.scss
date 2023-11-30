@@ -2,7 +2,7 @@
 @import "/src/assets/variable.scss";
 .pdfExcel-btns{
     box-shadow: 0px 5px 6px -6px $black;
-    padding: .375rem .60rem;
+    padding: 2px 4.5px;
     height: 34px;
 }
 .sortIcon{
@@ -30,8 +30,15 @@
 .rowPerPageSelect{
     padding: 0px !important;
 }
-.page-link{
-    border-radius: 4px;
+.page-item{
+    margin: 0 5px;
+    .page-link{
+        border-radius: 4px;
+    }
+}
+
+body .reportTable .tableSearchBox input{
+    width: 160px;
 }
 // ==========other pages =========
 
@@ -61,16 +68,6 @@
     background-color: white;
 }
 
-/** list client start***/
 
-.listClientTable thead tr{
-    border: 0
-}
-.listClientTable tr td button{
-    min-height: 25px;
-    min-width: 28px;
-}
-
-/** list client end***/
 
 

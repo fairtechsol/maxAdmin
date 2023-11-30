@@ -5,8 +5,8 @@ import "../../assets/common.scss";
 import CustomButton from "../../components/commonComponent/button";
 import CustomTable from "../../components/commonComponent/table";
 import ListClientModals from "../../components/listClients/modals";
+import "../../components/listClients/style.scss";
 import { Column, TableConfig } from "../../models/tableInterface";
-
 // Example usage
 const columns: Column[] = [
   { id: "username", label: "User Name", colSpan: 4 },
@@ -105,7 +105,7 @@ const ListClent: React.FC = () => {
 
   return (
     <>
-      <Container fluid>
+      <Container className="listClient" fluid>
         <Row>
           <Col>
             <p className="title-22">Account List</p>
@@ -137,7 +137,7 @@ const ListClent: React.FC = () => {
                     <td
                       colSpan={index === 0 ? 4 : undefined}
                       key={index}
-                      className=" fw-bold"
+                      className=" fw-bold text-end"
                     >
                       {index === 1 && 173398}
                     </td>
@@ -175,21 +175,23 @@ const ListClent: React.FC = () => {
                     <td>{defaultPer}</td>
                     <td>{accountType}</td>
                     <td className="text-end">{casinoTotal}</td>
-                    <td className="d-flex gap-1 border-right-0 border-left-0">
-                      {actionButtons?.map((item) => {
-                        return (
-                          <CustomButton
-                            variant="dark"
-                            onClick={() => {
-                              item.onClick(item?.id);
-                            }}
-                            key={item?.id}
-                            className="actionBtn"
-                          >
-                            {item?.name}
-                          </CustomButton>
-                        );
-                      })}
+                    <td>
+                      <div className="d-flex gap-1 border-right-0 border-left-0">
+                        {actionButtons?.map((item) => {
+                          return (
+                            <CustomButton
+                              variant="dark"
+                              onClick={() => {
+                                item.onClick(item?.id);
+                              }}
+                              key={item?.id}
+                              className="actionBtn"
+                            >
+                              {item?.name}
+                            </CustomButton>
+                          );
+                        })}
+                      </div>
                     </td>
                   </tr>
                 );

@@ -15,7 +15,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onSearch, value }) => {
   return (
     <Form.Group
       controlId="searchBox"
-      className="mb-3 d-flex align-items-center"
+      className="tableSearchBox mb-3 d-flex align-items-center"
     >
       <Form.Label className="mb-0">Search:</Form.Label>
       <InputGroup>

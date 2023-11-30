@@ -11,6 +11,7 @@ const Sidebar = (props: any) => {
             className="sidebarBox-close cursor-pointer"
             onClick={props.clickHandler}
           >
+            {" "}
             <FaTimes />
           </div>
           <h3 className="title-28 f400 mb-3">Sports</h3>

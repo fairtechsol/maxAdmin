@@ -48,7 +48,7 @@ const CustomTable: React.FC<CustomTableProps> = ({
     direction: "asc",
   });
   const [currentPage, setCurrentPage] = useState(1);
-  const [rowPerPage, setRowPerPage] = useState(10);
+  const [rowPerPage, setRowPerPage] = useState(1);
 
   // Handle column click to change the sorting configuration
   const handleSort = (key: string | number) => {
