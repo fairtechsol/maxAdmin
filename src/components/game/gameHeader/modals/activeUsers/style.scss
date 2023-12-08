@@ -1,0 +1,46 @@
+@import "/src/assets/variable.scss";
+
+.activeUsers-modal{
+    .table-striped {
+        thead{
+            th{
+                background-color: rgba($darkBlue, 0.5) ; 
+                height:  24px;
+                padding: 0 10px;
+            }
+        }
+        tbody{
+            tr{
+                &:nth-of-type(even){
+                    td{
+                        background-color: rgba($darkBlue, 0.5); 
+                    }
+                }
+                td{
+                    background-color: $gray; 
+                    input{
+                        border: 1px solid $black;
+                        border-radius: 0 !important;
+                        height: 20px;
+                        width: 20px;
+                        &:focus{
+                            border-color: $black;
+                            box-shadow: none;                        
+                        }
+                        &:checked{
+                            background-color: $dark;
+                        }
+                    }
+                }
+            }
+        }
+    
+    }
+
+}
+.table-striped tbody tr td input:focus{
+}
+.table-striped tbody tr td input:checked{
+}
+.table-striped tbody tr:nth-of-type(even) td {
+  }

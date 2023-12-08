@@ -1,15 +1,19 @@
 {
-    "env": {
-      "browser": true,
-      "node": true,
-      "es6": true
-    },
-    "extends": "eslint:recommended",
-    "rules": {
-      "indent": ["error", 2],
-      "semi": ["error", "always"],
-      "no-console": "off",
-      "no-unused-vars": "warn",
-      "no-warning-comments": "error"
-    }
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "extends": "eslint:recommended",
+  "rules": {
+    "indent": ["error", 2],
+    "semi": ["error", "always"],
+    "no-console": "off",
+    "no-unused-vars": "error",
+    "no-warning-comments": "error",
+    "react-hooks/exhaustive-deps": "off",
+    "prefer-arrow-callback": "error",
+    // Enforce camelCase for variables
+    "camelcase": ["error", { "properties": "always" }]
   }
+}

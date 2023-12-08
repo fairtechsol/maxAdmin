@@ -6,6 +6,73 @@ body table.table{
   margin-bottom: 0;
 }
 
+/* ====== excel csv btn ======= */
+.excel{
+  background-color: $excel !important;
+}
+.pdf{
+ background-color: $pdf !important;
+}
+
+// action buttons
+.actionBtn{
+  padding: 0px 10px !important;
+  height: auto !important;
+}
+.modalFull-90.customModal .modal-dialog{
+  width: 90vw;
+  max-width: none;
+}
+.btn.focus, .btn:focus {
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+body input.form-control {
+  height: 33px;
+  border-radius: 3px !important;
+  font-size: 14px;
+}
+body{
+  input.form-check-input[type="checkbox"]{
+    border: 1px solid $black ;
+    border-radius: 0 !important;
+    height: 20px;
+    width: 20px;
+    &:focus{
+        border-color: $black;
+        box-shadow: none;                        
+    }
+    &:checked{
+        background-color: $dark !important;
+    }
+  }
+  label{
+    font-size: 14px;
+  }
+
+}
+// .css-13cymwt-control{
+//   height: 33px;
+// }
+th{
+  font-size: 14px;
+}
+.btn {
+  border-radius: 3px !important;
+  height: 33px;
+  font-size: 14px !important;
+}
+@media (min-width: 992px){
+  body .modal-dialog {
+      min-width: 530px;
+  }
+
+}
+
+
+
+
 /* ====== bg Colors start ====  */
 .bg-secondaryLight{
   background-color: rgba( $secondary, 0.7) !important;
@@ -28,73 +95,96 @@ body table.table{
 .bg-red3{
   background-color: $red3 !important;
 }
+.bg-pdf{
+  background-color: $pdf;
+}
+.bg-defaultBlue{
+  background-color: $defaultBlue !important ;
+}
+.bg-green{
+  background-color: $green;
+}
 .bg-lightGray{
   background-color: $lightGray !important;
 }
+.bg-gray{
+  background-color: $gray !important;
+}
+.btn-close {
+  background: $primary !important;
+  height: 35px !important;
+  width: 35px !important;
+  position: relative;
+}
+// .btn-close::after{
+//  background: url(../../public/cross.svg) no-repeat !important;
+//   content: "";
+//   position: absolute;
+//   top: 50%;
+//   left: 50%;
+//   transform: translate(-50%, -50%);
+//   height: 12px;
+//   width: 12px;
+//   font-weight: bold;
+//   color: #fff;
+//   filter: invert(1);
+// }
 /* ====== bg Colors end ====  */
 
-body input, body select {
-  height: 33px;
-  border-radius: 3px !important;
-}
-
-.btn {
-  border-radius: 3px !important;
-  height: 33px;
-  font-size: 14px !important;
-}
-
 /* ===== for title ====  */
+.text-green{
+  color: $green;
+}
 .title-46 {
-  font-size: 46px;
+  font-size: 46px !important;
 }
 .title-40 {
-  font-size: 40px;
+  font-size: 40px !important;
 }
 .title-36 {
-  font-size: 36px;
+  font-size: 36px !important;
 }
 .title-34 {
-  font-size: 34px;
+  font-size: 34px !important;
 }
 .title-32 {
-  font-size: 32px;
+  font-size: 32px !important;
 }
 .title-30 {
-  font-size: 30px;
+  font-size: 30px !important;
 }
 .title-28 {
-  font-size: 28px;
+  font-size: 28px !important;
 }
 .title-26 {
-  font-size: 26px;
+  font-size: 26px !important;
 }
 .title-24 {
-  font-size: 24px;
+  font-size: 24px !important;
 }
 .title-22 {
-  font-size: 22px;
+  font-size: 22px !important;
 }
 .title-20 {
-  font-size: 20px;
+  font-size: 20px !important;
 }
 .title-18 {
-  font-size: 18px;
+  font-size: 18px !important;
 }
 .title-16 {
-  font-size: 16px;
+  font-size: 16px !important;
 }
 .title-15 {
-  font-size: 15px;
+  font-size: 15px !important;
 }
 .title-14 {
-  font-size: 14px;
+  font-size: 14px !important;
 }
 .title-13 {
-  font-size: 13px;
+  font-size: 13px !important;
 }
 .title-12 {
-  font-size: 10px;
+  font-size: 12px !important;
 }
 .title-10 {
   font-size: 10px;

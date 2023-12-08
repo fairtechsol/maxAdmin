@@ -1,10 +1,13 @@
 import { Col, Container, Row } from "react-bootstrap";
-import CustomBreadcrumb from "../../components/commonComponent/breadcrumb";
-import BookMakerTable from "../../components/game/bookMaker";
-import FancyMarketTable from "../../components/game/fancyMarket";
+import BetTableHeader from "../../components/commonComponent/betTableHeader";
+import BetTable from "../../components/game/betTable";
 import GameHeader from "../../components/game/gameHeader";
-import MatchOddsTable from "../../components/game/matchOdds";
-import SessionMarketTable from "../../components/game/sessionMarket";
+import LiveMatch from "../../components/game/liveMatch";
+import Rules from "../../components/game/rules";
+import ScoreCard from "../../components/game/scoreCard";
+import UserBets from "../../components/game/userBet";
+import { MatchType } from "../../utils/enum";
+import { GameData, MatchOdds, SessionMarketData } from "./index.json";
 // import GameTable from "../../components/game/table";
 
 export default function Games() {
@@ -16,26 +19,61 @@ export default function Games() {
         <div className="gamePage-table">
           <Row className="no-gutters">
             <Col md={8}>
-              <CustomBreadcrumb
-                items={[
-                  { name: "ICC Cricket World Cup" },
-                  { name: "ICC Cricket World Cup" },
-                  { name: "TOURNAMENT_WINNER  " },
-                  { name: "10/5/2023 2:00:00 PM" },
-                ]}
-              />
-              <MatchOddsTable />
-              <BookMakerTable />
+              {MatchOdds().map((item: any, index: number) => {
+                return (
+                  <Col md={12} key={index}>
+                    <BetTable
+                      title={item?.title}
+                      type={MatchType.MATCH_ODDS}
+                      data={item?.runners}
+                    />
+                  </Col>
+                );
+              })}
               <Row className="no-gutters">
-                <Col md={6}>
-                  <FancyMarketTable />
+                {GameData()?.map((item: any, index: number) => (
+                  <Col md={6} key={index}>
+                    <BetTable
+                      title={item?.title}
+                      type={MatchType.BOOKMAKER}
+                      data={item?.data}
+                      backLayCount={item.countRow}
+                    />
+                  </Col>
+                ))}
+              </Row>
+              <Row className="no-gutters">
+                {SessionMarketData()?.map((item: any, index: number) => (
+                  <Col md={6} key={index}>
+                    <BetTable
+                      title={item?.title}
+                      type={MatchType.SESSION_MARKET}
+                      data={item?.data}
+                    />
+                  </Col>
+                ))}
+              </Row>
+            </Col>
+            <Col md={4}>
+              <LiveMatch />
+              <div className="my-2">
+                <ScoreCard />
+              </div>
+              <UserBets />
+              <BetTableHeader
+                customClass="mt-2 fw-normal"
+                title="Rules"
+                style={{ height: "39px" }}
+              />
+              <Row>
+                <Col lg={6}>
+                  <Rules teamName="Banglore XI" />
                 </Col>
-                <Col md={6}>
-                  <SessionMarketTable />
+                <Col lg={6}>
+                  <Rules teamName="Rajasthan XI" />
                 </Col>
               </Row>
             </Col>
-            <Col md={4}>{/* <LiveMatch /> */}</Col>
           </Row>
         </div>
       </Container>

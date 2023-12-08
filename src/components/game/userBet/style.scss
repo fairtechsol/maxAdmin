@@ -1,0 +1,17 @@
+@import "/src/assets/variable.scss";
+
+.userBets{
+    .userBets-headerLeft{
+        .userBets-headerLeft-tabs{
+            border-bottom: 1px solid $primary;
+        }
+    }
+    .userBets-headerRight{
+    }
+}
+.userBetModal{
+   .modal-dialog{
+    width: 90vw;
+    max-width: none;
+   }
+}

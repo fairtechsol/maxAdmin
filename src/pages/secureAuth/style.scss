@@ -1,0 +1,54 @@
+@import "/src/assets/variable.scss";
+
+.secureAuth{
+    .nav-pills{
+        max-width: 410px;
+        margin: auto;
+        .nav-item{
+            a.nav-link{
+                .btn{
+                    border: 1px solid $green;
+                    width: 205px;
+                    height: 42px;
+                }
+                &.active {
+                    .btn{
+                        background-color: $green !important;
+                        color: $white; 
+                    }
+                }
+            }
+            &:first-child{
+                .nav-link{
+                    .btn{
+                        border-top-left-radius: 4px !important;
+                        border-bottom-left-radius: 4px !important;
+                    }
+                    
+                }
+            }
+            &:last-child{
+                .nav-link{
+                    .btn{
+                        border-top-right-radius: 4px !important;
+                        border-bottom-right-radius: 4px !important;
+                    }
+                    
+                }
+            }
+        }
+    }
+    .telegram{
+        .getConection{
+            max-width: 500px;
+        }
+    }
+}
+.androidDwnloadCard{
+    width: 200px;
+    color: #fff;
+    box-shadow: 2px 4px 4px #00000047;
+    text-decoration: none !important;
+    border-radius: 0.3rem;
+    padding: .5rem 1rem;
+}

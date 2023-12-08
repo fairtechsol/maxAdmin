@@ -1,0 +1,15 @@
+@import "/src/assets/variable.scss";
+
+.listClientTable thead tr{
+    border: 0
+}
+.listClientTable tr td button{
+    min-height: 25px;
+    min-width: 28px;
+}
+.listClientTable tbody{
+    box-shadow: 0 0 0 1px rgba($black, 1) !important;
+    -webkit-clip-path: inset(-2px 0px -2px 0);
+    clip-path: inset(-2px 0px -2px 0)
+
+}

@@ -1,9 +1,15 @@
-@import "../assets/variable.scss";
+@import "/src/assets/variable.scss";
 
 .navbar {
     height: 52px;
-}
-.navbar {
+    .menuHamBurger{
+        span{
+            height: 3px;
+            background-color: $white;
+            width: 20px;
+            
+        }
+    }
     a.nav-link{
         text-transform: capitalize;
         // padding: 10px 10px;
@@ -11,21 +17,65 @@
         line-height: 15px;
         font-weight: 600;
         color: $white;
-       
+        margin: 0 2px;
     }
     .dropdown-menu {
         background-color: $primary;
         border: 0;
         border-radius: 0;
         a{
+            &:first-child{
+                a{
+                    
+                    position: relative;
+                    // animation: blinkingText 0.8s infinite;
+                    // &::after{
+                    //         height: 1px;
+                    //         width: 20px;
+                    //         background-color: red;
+                    //         animation: pulse 4s ease infinite alternate, nudge .5s linear infinite alternate;
+                    //         border-radius: 100%;
+                    //         position: absolute;
+                    //         bottom: -3px;
+                    //         content: "";
+                    //         animation: blinkingText 0.8s infinite;
+
+                    // }
+                }
+            }
+        }
+        a{
             color: $white;
+            text-decoration: none;
         }
         :hover{
             background-color: $secondary;
         }
     }
+    .headerSearch{
+        position: relative;
+        .headerSearch-ico{
+            position: absolute;
+            right: 10px;
+            top: 5px;
+        }
+        input{
+            height: 38px;
+        }
+    }
     
 }
+@keyframes pulse {
+    0% {
+       background-color: red;
+   }
+    50% {
+        background-color: #F9A9BA;
+    }
+     100% {
+        background-color: red;
+    }
+} 
 .navbar  a.nav-link:focus{
     color: $white;
 }
@@ -43,19 +93,41 @@
     transition: 1s;
     height: calc(100vh - 52px);
 }
+.sidebar .sidebarBox-close{
+    position: absolute;
+    right: 10px;
+    font-size: 22px;
+    cursor: pointer;
+    font-weight: 400;
+}
 .sidebar.sidebarActive{
     left: 0;
 }
 .sidebar .sidebarBox{
     height: 100%;
     padding: 20px 10px;
+    position: relative;
+    z-index: 333;
+}
+.sidebar .sidebarBox .accordion-body{
+    padding: 0;
+    
+}
+.sidebar .sidebarBox .accordion-body .accordion-body{
+    padding: 5px 10px;
 }
 .sidebar .sidebarBox .accordion-item {
     border: 0;
     background: none;
     position: relative;
 }
-.sidebar .sidebarBox .accordion-item:after{
+.sidebar .sidebarBox .accordion-item  .accordion-header .accordion-button{
+    margin: 5px 0 0 0;
+}
+.sidebar .sidebarBox .accordion-item  .accordion-body .accordion-button{
+    margin: 0;
+}
+.sidebar .sidebarBox .accordion-item .accordion-body .accordion-item:after{
     border-left: 1px solid $primary;
     bottom: 0;
     content: "";
@@ -63,52 +135,65 @@
     position: absolute;
     top: 0px;
 }
-.sidebar .sidebarBox .accordion-item .accordion-header .accordion-button,
-.sidebar .sidebarBox .accordion-item a{
+.sidebar .sidebarBox .accordion-item  .accordion-header .accordion-button,
+    .sidebar .sidebarBox .accordion-item a{
+    padding: 0 !important;
     background: none;
     box-shadow: none;
-    padding: 0;
-    position: relative;
     font-size: 12px;
+    position: relative;
     text-decoration: none;
+}
+.sidebar .sidebarBox .accordion-item .accordion-item .accordion-header .accordion-button,
+.sidebar .sidebarBox .accordion-item a{
     padding: 0 0 0 12px !important;
 }   
 .sidebar .sidebarBox .accordion-item .accordion-header .accordion-button:after{
     flex-shrink: 0;
-   background: none;
+    background: none;
     transition: transform .2s ease-in-out;
     float: left;
     margin-left: 6px !important;
     font-size: 15px;
     transform: rotate(0);
-    color: var(--black);
+    color: $black;
 }
-.sidebar .sidebarBox .accordion-item .accordion-header .accordion-button.collapsed:after{
+.sidebar .sidebarBox .accordion-item  .accordion-header .accordion-button.collapsed:after{
     content: "+";
 }
-.sidebar .sidebarBox .accordion-item .accordion-header .accordion-button:after{
+
+.sidebar .sidebarBox .accordion-item  .accordion-header .accordion-button:after{
     content: "-";
 }
-.sidebar .sidebarBox .accordion-item .accordion-header .accordion-button:before{
+.sidebar .sidebarBox .accordion-item .accordion-body .accordion-header .accordion-button:before,
+.sidebar .sidebarBox .accordion-item .accordion-body .accordion a:before{
     background: $primary;
     bottom: auto;
     content: "";
     height: 8px;
+    width: 8px;
     left: 0px;
     margin-top: 0;
     position: absolute;
     right: auto;
-    width: 8px;
     z-index: 1;
     border-radius: 50%; 
+}
+.sidebar .sidebarBox .accordion-item .accordion-body .accordion a:before{
+    margin-top: 10px;
 }
 .sidebar .list-group .list-group-item {
     font-size: 12px;
 }
 .page-content{
     background-color: $light;
-    height: calc(100vh - 52px);
+    // height: calc(100vh - 76px);
     margin: 12px;
     padding: 10px 0;
 }
 /* ===== main content ===== */
+.addAcc{
+    box-shadow: 0px 0px 5px rgba($black, 0.5);
+    border-radius: 5px;
+}
+

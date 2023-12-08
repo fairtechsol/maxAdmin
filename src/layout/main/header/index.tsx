@@ -1,17 +1,34 @@
+import { useState } from "react";
 import { Container, Form, Nav, NavDropdown, Navbar } from "react-bootstrap";
-import { GiHamburgerMenu } from "react-icons/gi";
+import { FaSearchPlus, FaTimes } from "react-icons/fa";
+import { NavLink } from "react-router-dom";
 import LogoSection from "../../../components/commonComponent/logoSection";
-
 interface ItemProps {
   name: string;
   options: Array<any>;
 }
 
 const TopbarDropdown = ({ name, options }: ItemProps) => {
+  const [show, setShow] = useState(false);
+  const handleMouseEnter = () => {
+    setShow(true);
+  };
+  const handleMouseLeave = () => {
+    setShow(false);
+  };
   return (
-    <NavDropdown title={name} id="basic-nav-dropdown">
-      {options?.map((option) => (
-        <NavDropdown.Item href={option.link}>{option.name}</NavDropdown.Item>
+    <NavDropdown
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      show={show}
+      className="navbar-mainLink"
+      title={name}
+      id="basic-nav-dropdown"
+    >
+      {options?.map((option, index) => (
+        <NavDropdown.Item key={index}>
+          <NavLink to={option.link}>{option.name}</NavLink>
+        </NavDropdown.Item>
       ))}
     </NavDropdown>
   );
@@ -21,20 +38,36 @@ const Topbar = (props: any) => {
   return (
     <Navbar expand="lg" className="bg-primary" data-bs-theme="light">
       <Container fluid>
-        <Navbar.Brand href="#home">
+        <Navbar.Brand href="#home" className="me-1">
           <LogoSection width="120px" />
         </Navbar.Brand>
         <div onClick={props.onClick}>
-          <GiHamburgerMenu className="text-white" />
+          {props.toggle ? (
+            <div style={{ width: "28px" }}>
+              <FaTimes color="white" size={20} />
+            </div>
+          ) : (
+            <div className="menuHamBurger d-flex flex-column me-2">
+              <span className="mb-1"></span>
+              <span className="mb-1"></span>
+              <span></span>
+            </div>
+          )}
         </div>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#home">List of clients</Nav.Link>
-            <Nav.Link href="#link">Market Analysis</Nav.Link>
+            <Nav.Link className="navbar-mainLink" href="/admin/listClients">
+              List of clients
+            </Nav.Link>
+            <Nav.Link className="navbar-mainLink" href="/admin/market-analysis">
+              Market Analysis
+            </Nav.Link>
             <TopbarDropdown
               name="Live Market"
               options={[
+                { name: "Ball By Ball", link: "#1" },
+                { name: "Binary", link: "#1" },
                 { name: "Race 20-20", link: "#1" },
                 { name: "Queen", link: "#2" },
                 { name: "Baccarat", link: "#3" },
@@ -56,13 +89,16 @@ const Topbar = (props: any) => {
             <TopbarDropdown
               name="Reports"
               options={[
-                { name: "Account's Statement", link: "#1" },
-                { name: "Current Bets", link: "#2" },
-                { name: "General Report", link: "#3" },
-                { name: "Game Report", link: "#4" },
-                { name: "Casino Report", link: "#5" },
-                { name: "Profit And Loss", link: "#6" },
-                { name: "Casino Result Report", link: "#7" },
+                {
+                  name: "Account's Statement",
+                  link: "/admin/account-statement",
+                },
+                { name: "Current Bets", link: "/admin/current-bets" },
+                { name: "General Report", link: "/admin/general-report" },
+                { name: "Game Report", link: "/admin/game-report" },
+                { name: "Casino Report", link: "/admin/casino-report" },
+                { name: "Profit And Loss", link: "/admin/profit-loss" },
+                { name: "Casino Result Report", link: "/admin/casinoresult" },
               ]}
             />
           </Nav>
@@ -72,24 +108,25 @@ const Topbar = (props: any) => {
             <Nav>
               <NavDropdown
                 id="nav-dropdown-dark-example"
-                title="Dropdown"
+                title="User Name"
                 menuVariant="dark"
               >
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">
+                <NavDropdown.Item href="/admin/secure-auth">
                   Secure Auth Verification
                 </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">
+                <NavDropdown.Item href="/admin/change-password">
                   Change Password
                 </NavDropdown.Item>
-                <NavDropdown.Divider />
                 <NavDropdown.Item href="#action/3.4">Logout</NavDropdown.Item>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
-          <Form>
+          <Form className="headerSearch">
             <Form.Group className="" controlId="exampleForm.ControlInput1">
               <Form.Control type="text" placeholder="All Clients" />
+              <span className="headerSearch-ico">
+                <FaSearchPlus size={24} />
+              </span>
             </Form.Group>
           </Form>
         </div>

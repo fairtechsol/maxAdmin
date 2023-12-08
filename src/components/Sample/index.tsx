@@ -1,19 +1,59 @@
-import BackLayBox from "../backLayBox";
-import CustomButton from "../commonComponent/button";
-function Sample() {
-  return (
-    <>
-      <CustomButton variant="danger">dsad</CustomButton>
-      <h3>Sample </h3>
+import React, { useEffect, useState } from "react";
+import { TableConfig } from "../../models/tableInterface";
+import SelectSearch from "../commonComponent/SelectSearch";
+import CustomTable from "../commonComponent/table";
 
-      <BackLayBox bgColor="blue1" rate={1.94} percent={11} />
-      <BackLayBox bgColor="blue2" rate={1.94} percent={11} />
-      <BackLayBox bgColor="blue3" rate={1.94} percent={11} />
-      <BackLayBox bgColor="red1" rate={1.94} percent={11} />
-      <BackLayBox bgColor="red2" rate={1.94} percent={11} />
-      <BackLayBox bgColor="red3" rate={1.94} percent={11} />
-    </>
-  );
+interface Column {
+  id: string;
+  label: string;
 }
 
-export default Sample;
+interface DataItem {
+  [key: string]: string | number;
+}
+
+// Example usage
+const columns: Column[] = [
+  { id: "name", label: "Name" },
+  { id: "age", label: "Age" },
+  { id: "city", label: "City" },
+];
+
+const data: DataItem[] = [
+  { name: "John", age: 25, city: "New York" },
+  { name: "Jane", age: 30, city: "San Francisco" },
+  { name: "Bob", age: 22, city: "Los Angeles" },
+];
+
+const App: React.FC = () => {
+  const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
+
+  useEffect(() => {}, [tableConfig]);
+
+  return (
+    <>
+      <CustomTable
+        columns={columns}
+        isPagination={true}
+        isSort={true}
+        isSearch={true}
+        itemCount={data?.length}
+        setTableConfig={setTableConfig}
+        enablePdfExcel={true}
+      >
+        {data.map((item, index) => (
+          <tr key={index}>
+            {/* Table cells with data */}
+            {columns.map((column) => (
+              <td key={column.id}>{item[column.id]}</td>
+            ))}
+          </tr>
+        ))}
+      </CustomTable>
+
+      <SelectSearch isMultiOption={false} />
+    </>
+  );
+};
+
+export default App;
