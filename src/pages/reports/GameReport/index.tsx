@@ -73,7 +73,7 @@ const GameReport = () => {
           <Col md={6}>
             <SelectSearch defaultValue="all" options={options} />
           </Col>
-          <Col md={2}>
+          <Col md={3}>
             <div className="d-flex">
               <Button className="me-2">Show Game Report</Button>
               <Button>Master Game Report</Button>

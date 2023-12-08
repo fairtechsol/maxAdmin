@@ -22,17 +22,17 @@ const SelectSearch = (props: any) => {
     errors,
   } = props;
 
-  const customStyles = {
-    control: (provided: any, state: any) => ({
-      ...provided,
-      minHeight: "30px", // Adjust the minHeight to your desired height
-    }),
-    menu: (provided: any, state: any) => ({
-      ...provided,
-      paddingTop: 0,
-      paddingBottom: 0,
-    }),
-  };
+  // const customStyles = {
+  //   control: (provided: any, state: any) => ({
+  //     ...provided,
+  //     minHeight: "30px", // Adjust the minHeight to your desired height
+  //   }),
+  //   menu: (provided: any, state: any) => ({
+  //     ...provided,
+  //     paddingTop: 0,
+  //     paddingBottom: 0,
+  //   }),
+  // };
 
   return (
     <>
@@ -44,7 +44,22 @@ const SelectSearch = (props: any) => {
         {label ? <Form.Label>{label}</Form.Label> : ""}
         <Select
           id={id}
-          styles={customStyles}
+          // styles={customStyles}
+          // styles={{ minHeight: '20px' }}
+          styles={{
+            control: (baseStyles, state) => ({
+              ...baseStyles,
+              borderColor: state.isFocused ? "grey" : "red",
+              // minHeight: 20,
+              maxHeight: "20px",
+            }),
+            menu: (baseStyles) => ({
+              ...baseStyles,
+              height: "20px", // Set the root menu height here
+            }),
+          }}
+          minMenuHeight={20}
+          maxMenuHeight={25}
           className={`selectSearch ${filedClass}`}
           value={value}
           defaultValue={defaultValue}
