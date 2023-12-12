@@ -2,8 +2,11 @@ import { Button, Card, Col, Form, Row, Table } from "react-bootstrap";
 import SelectSearch from "../../components/commonComponent/SelectSearch";
 import CustomInput from "../../components/commonComponent/input";
 import { addAccountValidationSchema } from "../../utils/fieldValidations/addAccount";
-import TableRow from "./TableRow";
 import { useFormik } from "formik";
+import { addUser } from "../../store/actions/user/userActions";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../store/store";
+import { useEffect } from "react";
 
 interface Values {
   clientName: string;
@@ -22,19 +25,15 @@ interface Values {
   maxBet: string;
   delay: string;
   transactionPassword: string;
+  downlinePartnership: number | string;
 }
 
-const tableData = [
-  ["Upline", "0"],
-  ["Downline", "0"],
-  ["Our", "0"],
-];
-
 const accountTypes = [
-  { value: "- Select Your A/C. Type -", label: "- Select Your A/C. Type -" },
-  { value: "master", label: "Master" },
-  { value: "agent", label: "Agent" },
-  { value: "user", label: "User" },
+  { value: "admin", label: "Admin", level: 1 },
+  { value: "superMaster", label: "Super Master", level: 2 },
+  { value: "master", label: "Master", level: 3 },
+  { value: "agent", label: "Agent", level: 4 },
+  { value: "user", label: "User", level: 5 },
 ];
 
 const initialValues = {
@@ -48,6 +47,12 @@ const initialValues = {
     label: "",
     value: "",
   },
+  commissionUpPartnership: 0,
+  commissionDownPartnership: 0,
+  ourCommissionPartnership: 0,
+  uplinePartnership: 0,
+  ourPartnership: 0,
+  downlinePartnership: 0,
   creditReference: "",
   exposureLimit: "",
   minBet: "",
@@ -57,12 +62,26 @@ const initialValues = {
 };
 
 const AddAccount = () => {
+  const dispatch: AppDispatch = useDispatch();
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: addAccountValidationSchema,
     onSubmit: (values: Values) => {
-      console.log(values);
-      alert(JSON.stringify(values, null, 2));
+      let payload = {
+        userName: values.clientName,
+        fullName: values.fullName,
+        password: values.retypePassword,
+        confirmPassword: values.retypePassword,
+        phoneNumber: JSON.stringify(values.phoneNo),
+        city: values.city,
+        roleName: values.accountType.value,
+        creditRefrence: values.creditReference,
+        exposureLimit: values.exposureLimit,
+        maxBetLimit: values.maxBet,
+        minBetLimit: values.minBet,
+        myPartnership: values.downlinePartnership,
+      };
+      dispatch(addUser(payload));
     },
   });
 
@@ -71,6 +90,8 @@ const AddAccount = () => {
   const addAccountHedingStyle = {
     padding: "5px 10px",
   };
+
+  useEffect(() => {}, []);
   return (
     <>
       <Card className="addAccount  border-0">
@@ -104,7 +125,7 @@ const AddAccount = () => {
                     <CustomInput
                       id={"userPassword"}
                       title={"User Password"}
-                      placeholder={"Transaction Password"}
+                      placeholder={"User Password"}
                       type={"password"}
                       customstyle={"mb-3"}
                       {...getFieldProps("userPassword")}
@@ -170,13 +191,16 @@ const AddAccount = () => {
                       label={"Account Type"}
                       options={accountTypes}
                       placeholder={"- Select Your A/C. Type -"}
-                      value={formik.values.accountType.label}
-                      onChange={(selectedOption: any) =>
-                        formik.setFieldValue("accountType", selectedOption)
+                      value={accountTypes.find(
+                        (option: any) =>
+                          option.value === formik.values.accountType.value
+                      )}
+                      onChange={(accountTypes: any) =>
+                        formik.setFieldValue("accountType", accountTypes)
                       }
                       onBlur={formik.handleBlur}
                       touched={touched.accountType}
-                      errors={errors.accountType?.label}
+                      errors={errors.accountType}
                     />
                   </Col>
                   <Col md={6}>
@@ -216,9 +240,38 @@ const AddAccount = () => {
                 </h6>
                 <Table className="mb-3" striped bordered hover>
                   <tbody>
-                    {tableData.map((rowData, index) => (
-                      <TableRow key={index} data={rowData} />
-                    ))}
+                    <tr>
+                      <td className="w-25">Upline</td>
+                      <td>
+                        <CustomInput
+                          disabled={true}
+                          id={"commissionUpPartnership"}
+                          type={"number"}
+                          {...getFieldProps("commissionUpPartnership")}
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="w-25">Downline</td>
+                      <td>
+                        <CustomInput
+                          id={"commissionDownPartnership"}
+                          type={"number"}
+                          {...getFieldProps("commissionDownPartnership")}
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="w-25">Our</td>
+                      <td>
+                        <CustomInput
+                          disabled={true}
+                          id={"ourCommissionPartnership"}
+                          type={"number"}
+                          {...getFieldProps("ourCommissionPartnership")}
+                        />
+                      </td>
+                    </tr>
                   </tbody>
                 </Table>
               </Col>
@@ -233,9 +286,38 @@ const AddAccount = () => {
                 </h6>
                 <Table className="mb-3" striped bordered hover>
                   <tbody>
-                    {tableData.map((rowData, index) => (
-                      <TableRow key={index} data={rowData} />
-                    ))}
+                    <tr>
+                      <td className="w-25">Upline</td>
+                      <td>
+                        <CustomInput
+                          disabled={true}
+                          id={"uplinePartnership"}
+                          type={"number"}
+                          {...getFieldProps("uplinePartnership")}
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="w-25">Downline</td>
+                      <td>
+                        <CustomInput
+                          id={"downLinePartnership"}
+                          type={"number"}
+                          {...getFieldProps("downLinePartnership")}
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="w-25">Our</td>
+                      <td>
+                        <CustomInput
+                          disabled={true}
+                          id={"ourPartnership"}
+                          type={"number"}
+                          {...getFieldProps("ourPartnership")}
+                        />
+                      </td>
+                    </tr>
                   </tbody>
                 </Table>
               </Col>
@@ -260,7 +342,7 @@ const AddAccount = () => {
                       <td rowSpan={2} style={{ verticalAlign: "middle" }}>
                         Min Bet
                       </td>
-                      <td>100</td>
+                      <td>{formik.values.minBet || "0.00"}</td>
                     </tr>
                     <tr>
                       <td style={{ verticalAlign: "middle" }}>
@@ -276,7 +358,7 @@ const AddAccount = () => {
                       <td rowSpan={2} style={{ verticalAlign: "middle" }}>
                         Max Bet
                       </td>
-                      <td>100</td>
+                      <td>{formik.values.maxBet || "0.00"}</td>
                     </tr>
                     <tr>
                       <td style={{ verticalAlign: "middle" }}>
@@ -285,6 +367,8 @@ const AddAccount = () => {
                           type={"number"}
                           customstyle={"mb-3"}
                           {...getFieldProps("maxBet")}
+                          touched={touched.maxBet}
+                          errors={errors.maxBet}
                         />
                       </td>
                     </tr>
@@ -292,11 +376,12 @@ const AddAccount = () => {
                       <td rowSpan={2} style={{ verticalAlign: "middle" }}>
                         Delay
                       </td>
-                      <td>5.00</td>
+                      <td>{formik.values.delay || "0.00"}</td>
                     </tr>
                     <tr>
                       <td style={{ verticalAlign: "middle" }}>
                         <CustomInput
+                          disabled={true}
                           id={"delay"}
                           type={"number"}
                           customstyle={"mb-3"}

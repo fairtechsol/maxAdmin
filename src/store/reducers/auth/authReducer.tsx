@@ -20,7 +20,6 @@ export const authReducer = createReducer(initialState, (builder) => {
       state.forceChangePassword = action?.payload?.forceChangePassword;
     })
     .addCase(login.rejected, (state, action) => {
-      console.log(action);
       state.loading = false;
     })
     .addCase(authReset, (state) => {

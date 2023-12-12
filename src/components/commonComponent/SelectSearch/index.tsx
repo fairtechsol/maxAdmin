@@ -53,13 +53,9 @@ const SelectSearch = (props: any) => {
               // minHeight: 20,
               maxHeight: "20px",
             }),
-            menu: (baseStyles) => ({
-              ...baseStyles,
-              height: "20px", // Set the root menu height here
-            }),
           }}
           minMenuHeight={20}
-          maxMenuHeight={25}
+          maxMenuHeight={200}
           className={`selectSearch ${filedClass}`}
           value={value}
           defaultValue={defaultValue}

@@ -2,22 +2,6 @@ import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
 import service from "../../../service";
 
-interface AddUser {
-  userName: string;
-  fullName: string;
-  password: string;
-  confirmPassword: string;
-  phoneNumber: string;
-  city: string;
-  roleName: string;
-  myPartnership: string;
-  createdBy: string;
-  creditRefrence: string;
-  exposureLimit: string;
-  maxBetLimit: string;
-  minBetLimit: string;
-}
-
 interface ChangePassword {
   newPassword: string;
   confirmPassword: string;
@@ -36,7 +20,7 @@ export const getUsers = createAsyncThunk("user/list", async () => {
   }
 });
 
-export const addUser = createAsyncThunk<any, AddUser>(
+export const addUser = createAsyncThunk<any, any>(
   "user/add",
   async (requestData) => {
     try {
