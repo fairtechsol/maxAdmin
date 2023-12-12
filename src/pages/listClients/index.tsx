@@ -7,6 +7,9 @@ import CustomTable from "../../components/commonComponent/table";
 import ListClientModals from "../../components/listClients/modals";
 import "../../components/listClients/style.scss";
 import { Column, TableConfig } from "../../models/tableInterface";
+import { AppDispatch, RootState } from "../../store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { getUsers } from "../../store/actions/user/userActions";
 // Example usage
 const columns: Column[] = [
   { id: "username", label: "User Name", colSpan: 4 },
@@ -20,36 +23,36 @@ const columns: Column[] = [
   { id: "actions", label: "Actions" },
 ];
 
-const data: any = [
-  {
-    username: "Account",
-    creditReferance: 25,
-    exposureLimit: 12,
-    defaultPer: 23,
-    accountType: "Agent",
-    casinoTotal: "20",
-  },
-  {
-    username: "Account",
-    creditReferance: 25,
-    exposureLimit: 12,
-    defaultPer: 23,
-    accountType: "Agent",
-    casinoTotal: "20",
-  },
-  {
-    username: "Account",
-    creditReferance: 25,
-    exposureLimit: 12,
-    defaultPer: 23,
-    accountType: "Agent",
-    casinoTotal: "20",
-  },
-];
+// const data: any = [
+//   {
+//     username: "Account",
+//     creditReferance: 25,
+//     exposureLimit: 12,
+//     defaultPer: 23,
+//     accountType: "Agent",
+//     casinoTotal: "20",
+//   },
+//   {
+//     username: "Account",
+//     creditReferance: 25,
+//     exposureLimit: 12,
+//     defaultPer: 23,
+//     accountType: "Agent",
+//     casinoTotal: "20",
+//   },
+//   {
+//     username: "Account",
+//     creditReferance: 25,
+//     exposureLimit: 12,
+//     defaultPer: 23,
+//     accountType: "Agent",
+//     casinoTotal: "20",
+//   },
+// ];
 
 const ListClent: React.FC = () => {
   const navigate = useNavigate();
-
+  const dispatch: AppDispatch = useDispatch();
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
   const [eventDetails, setEventDetails] = useState({
     show: false,
@@ -103,6 +106,14 @@ const ListClent: React.FC = () => {
     },
   ];
 
+  const { userList } = useSelector((state: RootState) => state.user);
+
+  console.log(userList);
+
+  useEffect(() => {
+    dispatch(getUsers());
+  }, [dispatch]);
+
   return (
     <>
       <Container className="listClient" fluid>
@@ -144,58 +155,65 @@ const ListClent: React.FC = () => {
                   );
                 })}
               </tr>
-              {data?.map((item: any, index: number) => {
-                const {
-                  username,
-                  creditReferance,
-                  exposureLimit,
-                  defaultPer,
-                  accountType,
-                  casinoTotal,
-                } = item;
-                return (
-                  <tr key={index}>
-                    <td colSpan={4}>
-                      <CustomButton className="actionBtn" variant="dark">
-                        {username}
-                      </CustomButton>
-                    </td>
-                    <td className="text-end">{creditReferance}</td>
-                    <td className="text-center">
-                      <Form>
-                        <Form.Check id={`opt${index}1`} aria-label="option 1" />
-                      </Form>
-                    </td>
-                    <td className="text-center">
-                      <Form>
-                        <Form.Check id={`opt${index}`} aria-label="option 1" />
-                      </Form>
-                    </td>
-                    <td className="text-end">{exposureLimit}</td>
-                    <td>{defaultPer}</td>
-                    <td>{accountType}</td>
-                    <td className="text-end">{casinoTotal}</td>
-                    <td>
-                      <div className="d-flex gap-1 border-right-0 border-left-0">
-                        {actionButtons?.map((item) => {
-                          return (
-                            <CustomButton
-                              variant="dark"
-                              onClick={() => {
-                                item.onClick(item?.id);
-                              }}
-                              key={item?.id}
-                              className="actionBtn"
-                            >
-                              {item?.name}
-                            </CustomButton>
-                          );
-                        })}
-                      </div>
-                    </td>
-                  </tr>
-                );
-              })}
+              {userList &&
+                userList.list.map((item: any, index: number) => {
+                  const {
+                    userName,
+                    creditRefrence,
+                    exposureLimit,
+                    defaultPer,
+                    roleName,
+                    casinoTotal,
+                  } = item;
+                  return (
+                    <tr key={item?.id}>
+                      <td colSpan={4}>
+                        <CustomButton className="actionBtn" variant="dark">
+                          {userName}
+                        </CustomButton>
+                      </td>
+                      <td className="text-end">{creditRefrence}</td>
+                      <td className="text-center">
+                        <Form>
+                          <Form.Check
+                            id={`opt${index}1`}
+                            aria-label="option 1"
+                          />
+                        </Form>
+                      </td>
+                      <td className="text-center">
+                        <Form>
+                          <Form.Check
+                            id={`opt${index}`}
+                            aria-label="option 1"
+                          />
+                        </Form>
+                      </td>
+                      <td className="text-end">{exposureLimit}</td>
+                      <td>{defaultPer}</td>
+                      <td>{roleName}</td>
+                      <td className="text-end">{casinoTotal}</td>
+                      <td>
+                        <div className="d-flex gap-1 border-right-0 border-left-0">
+                          {actionButtons?.map((item) => {
+                            return (
+                              <CustomButton
+                                variant="dark"
+                                onClick={() => {
+                                  item.onClick(item?.id);
+                                }}
+                                key={item?.id}
+                                className="actionBtn"
+                              >
+                                {item?.name}
+                              </CustomButton>
+                            );
+                          })}
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
             </CustomTable>
           </Col>
         </Row>
