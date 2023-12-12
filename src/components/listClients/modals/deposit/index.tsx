@@ -1,6 +1,10 @@
-import { Col, Modal, Row, Stack } from "react-bootstrap";
-import CustomInput from "../../../commonComponent/input";
 import { useFormik } from "formik";
+import { useEffect } from "react";
+import { Col, Modal, Row, Stack } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { changeAmmountUser } from "../../../../store/actions/user/userActions";
+import { AppDispatch, RootState } from "../../../../store/store";
+import CustomInput from "../../../commonComponent/input";
 import ModalFooter from "../footer";
 
 const initialValues: any = {
@@ -14,15 +18,53 @@ const initialValues: any = {
 };
 
 const Deposit = ({ userData, setShow }: any) => {
-  console.log(userData);
+  const dispatch: AppDispatch = useDispatch();
+
+  const { userList } = useSelector((state: RootState) => state.user);
+
   const formik = useFormik({
     initialValues: initialValues,
     onSubmit: (values: any) => {
-      console.log(values);
+      let payload = {
+        userId: userData.userId,
+        amount: values.amount,
+        transactionPassword: values.transactionPassword,
+        remark: values.remark,
+        transactionType: "add",
+      };
+      dispatch(changeAmmountUser(payload));
+      setShow(false);
     },
   });
 
   const { handleSubmit, handleChange, values } = formik;
+
+  const handleAmountChange = (e: any) => {
+    const newAmount = parseFloat(e.target.value);
+    const initialBalance = parseFloat(formik.values.initialBalance);
+
+    if (!isNaN(newAmount) && !isNaN(initialBalance)) {
+      const updatedBalance = initialBalance - newAmount;
+      const userBalance = parseFloat(formik.values.userBalance) + newAmount;
+
+      formik.setValues({
+        ...formik.values,
+        updatedBalance: updatedBalance.toFixed(2),
+        userUpdatedBalance: userBalance.toFixed(2),
+        amount: e.target.value,
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (userList) {
+      formik.setValues({
+        ...formik.values,
+        userBalance: userData.balance,
+        initialBalance: userList?.list[0]?.balance,
+      });
+    }
+  }, [userList]);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -99,7 +141,7 @@ const Deposit = ({ userData, setShow }: any) => {
                 name="amount"
                 id="amount"
                 value={values.amount}
-                onChange={handleChange}
+                onChange={handleAmountChange}
                 customStyle="input-box"
                 type="number"
               />

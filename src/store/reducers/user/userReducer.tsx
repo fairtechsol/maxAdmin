@@ -5,6 +5,7 @@ import {
   changePassword,
   changePasswordReset,
   getUsers,
+  getUsersDetail,
   setCreditRefference,
   setExposureLimit,
   setLockUnlockUser,
@@ -41,6 +42,18 @@ export const userReducer = createReducer(initialState, (builder) => {
       state.userList = action.payload;
     })
     .addCase(getUsers.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action?.error?.message;
+    })
+    .addCase(getUsersDetail.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    })
+    .addCase(getUsersDetail.fulfilled, (state, action) => {
+      state.loading = false;
+      state.userDetail = action.payload;
+    })
+    .addCase(getUsersDetail.rejected, (state, action) => {
       state.loading = false;
       state.error = action?.error?.message;
     })
