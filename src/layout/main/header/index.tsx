@@ -3,6 +3,10 @@ import { Container, Form, Nav, NavDropdown, Navbar } from "react-bootstrap";
 import { FaSearchPlus, FaTimes } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import LogoSection from "../../../components/commonComponent/logoSection";
+
+import { useDispatch } from "react-redux";
+import { logout } from "../../../store/actions/auth/authActions";
+import { AppDispatch } from "../../../store/store";
 interface ItemProps {
   name: string;
   options: Array<any>;
@@ -13,6 +17,7 @@ const TopbarDropdown = ({ name, options }: ItemProps) => {
   const handleMouseEnter = () => {
     setShow(true);
   };
+
   const handleMouseLeave = () => {
     setShow(false);
   };
@@ -35,6 +40,7 @@ const TopbarDropdown = ({ name, options }: ItemProps) => {
 };
 
 const Topbar = (props: any) => {
+  const dispatch: AppDispatch = useDispatch();
   return (
     <Navbar expand="lg" className="bg-primary" data-bs-theme="light">
       <Container fluid>
@@ -117,7 +123,14 @@ const Topbar = (props: any) => {
                 <NavDropdown.Item href="/admin/change-password">
                   Change Password
                 </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.4">Logout</NavDropdown.Item>
+                <NavDropdown.Item
+                  onClick={() => {
+                    dispatch(logout());
+                  }}
+                  href="#action/3.4"
+                >
+                  Logout
+                </NavDropdown.Item>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
