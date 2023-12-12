@@ -16,3 +16,16 @@ export const addAccountValidationSchema = Yup.object({
     "Transaction Password is required"
   ),
 });
+
+export const depositAmountValidations = Yup.object({
+  amount: Yup.string().required("Amount is required"),
+  transactionPassword: Yup.string().required(
+    "Transaction Password is required"
+  ),
+});
+export const widthdrawAmountValidations = Yup.object({
+  amount: Yup.string().required("Amount is required"),
+  transactionPassword: Yup.string().required(
+    "Transaction Password is required"
+  ),
+});
