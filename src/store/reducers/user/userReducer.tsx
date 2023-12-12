@@ -2,6 +2,8 @@ import { createReducer } from "@reduxjs/toolkit";
 import {
   addUser,
   changeAmmountUser,
+  changePassword,
+  changePasswordReset,
   getUsers,
   setCreditRefference,
   setExposureLimit,
@@ -102,7 +104,20 @@ export const userReducer = createReducer(initialState, (builder) => {
       state.loading = false;
       state.error = action?.error?.message;
     })
+    .addCase(changePassword.pending, (state) => {
+      state.loading = true;
+    })
+    .addCase(changePassword.fulfilled, (state) => {
+      state.success = true;
+      state.loading = false;
+    })
+    .addCase(changePassword.rejected, (state) => {
+      state.loading = false;
+    })
     .addCase(userListReset, (state) => {
+      return { ...state, success: false };
+    })
+    .addCase(changePasswordReset, (state) => {
       return { ...state, success: false };
     });
 });

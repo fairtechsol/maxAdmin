@@ -13,7 +13,7 @@ const ModalFooter = ({ clickHandler }: any) => {
         <FaUndo />
         Back
       </CustomButton>
-      <CustomButton className="d-flex gap-2 align-items-center">
+      <CustomButton className="d-flex gap-2 align-items-center" type="submit">
         Submit
         <IoMdExit />
       </CustomButton>

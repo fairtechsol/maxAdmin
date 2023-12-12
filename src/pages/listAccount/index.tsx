@@ -189,15 +189,17 @@ const ListAccount: React.FC = () => {
           </CustomTable>
         </Col>
       </Row>
-      <ListClientModals
-        show={eventDetails.show}
-        setShow={(data) => {
-          setEventDetails((prev) => {
-            return { ...prev, show: data };
-          });
-        }}
-        id={eventDetails.eventId}
-      />
+      {eventDetails?.eventId && (
+        <ListClientModals
+          show={eventDetails.show}
+          setShow={(data) => {
+            setEventDetails((prev) => {
+              return { ...prev, show: data };
+            });
+          }}
+          id={eventDetails.eventId}
+        />
+      )}
     </Container>
   );
 };

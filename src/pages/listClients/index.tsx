@@ -57,12 +57,14 @@ const ListClent: React.FC = () => {
   const [eventDetails, setEventDetails] = useState({
     show: false,
     eventId: null,
+    userData: null,
   });
 
-  const showEventModals = (id: any) => {
+  const showEventModals = (id: any, userData: any) => {
     setEventDetails({
       show: true,
       eventId: id,
+      userData: userData,
     });
   };
 
@@ -156,7 +158,7 @@ const ListClent: React.FC = () => {
                 })}
               </tr>
               {userList &&
-                userList.list.map((item: any, index: number) => {
+                userList.list.map((userItem: any, index: number) => {
                   const {
                     userName,
                     creditRefrence,
@@ -164,9 +166,10 @@ const ListClent: React.FC = () => {
                     defaultPer,
                     roleName,
                     casinoTotal,
-                  } = item;
+                    id,
+                  } = userItem;
                   return (
-                    <tr key={item?.id}>
+                    <tr key={id}>
                       <td colSpan={4}>
                         <CustomButton className="actionBtn" variant="dark">
                           {userName}
@@ -200,7 +203,7 @@ const ListClent: React.FC = () => {
                               <CustomButton
                                 variant="dark"
                                 onClick={() => {
-                                  item.onClick(item?.id);
+                                  item.onClick(item?.id, userItem);
                                 }}
                                 key={item?.id}
                                 className="actionBtn"
@@ -217,7 +220,8 @@ const ListClent: React.FC = () => {
             </CustomTable>
           </Col>
         </Row>
-        <ListClientModals
+        {eventDetails.eventId&&<ListClientModals
+          userData={eventDetails.userData}
           show={eventDetails.show}
           setShow={(data) => {
             setEventDetails((prev) => {
@@ -225,7 +229,7 @@ const ListClent: React.FC = () => {
             });
           }}
           id={eventDetails.eventId}
-        />
+        />}
       </Container>
     </>
   );

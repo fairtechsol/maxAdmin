@@ -13,6 +13,7 @@
     "no-warning-comments": "error",
     "react-hooks/exhaustive-deps": "off",
     "prefer-arrow-callback": "error",
+    "no-debugger":"off",
     // Enforce camelCase for variables
     "camelcase": ["error", { "properties": "always" }]
   }
