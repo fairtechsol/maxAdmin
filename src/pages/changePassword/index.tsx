@@ -2,6 +2,14 @@ import { useFormik } from "formik";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import CustomInput from "../../components/commonComponent/input";
 import { newPasswordValidationSchema } from "../../utils/fieldValidations/newPassword";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  changePassword,
+  changePasswordReset,
+} from "../../store/actions/user/userActions";
+import { AppDispatch, RootState } from "../../store/store";
+import { useNavigate } from "react-router";
+import { useEffect } from "react";
 
 interface Values {
   newPassword: string;
@@ -16,17 +24,25 @@ const initialValues = {
 };
 
 const ChangePassword = () => {
+  const dispatch: AppDispatch = useDispatch();
+  const navigate = useNavigate();
+  const { success } = useSelector((state: RootState) => state.user);
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: newPasswordValidationSchema,
     onSubmit: (values: Values) => {
-      console.log(values);
-      alert(JSON.stringify(values, null, 2));
+      dispatch(changePassword(values));
     },
   });
 
   const { handleSubmit, getFieldProps, touched, errors } = formik;
 
+  useEffect(() => {
+    if (success) {
+      navigate("/admin/listClients");
+      dispatch(changePasswordReset());
+    }
+  }, [success]);
   return (
     <>
       <h5>Change Password</h5>
@@ -75,7 +91,7 @@ const ChangePassword = () => {
         </Row>
 
         <Button variant="primary" type="submit">
-          Load
+          Submit
         </Button>
       </Form>
     </>
