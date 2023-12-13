@@ -30,6 +30,7 @@ interface CustomTableProps extends React.HTMLAttributes<HTMLDivElement> {
   tBodyTheme?: string;
   bordered?: boolean;
   striped?: boolean;
+  CustomTableClass?: string;
 }
 
 const CustomTable: React.FC<CustomTableProps> = ({
@@ -44,6 +45,7 @@ const CustomTable: React.FC<CustomTableProps> = ({
   enablePdfExcel,
   tHeadTheme,
   tBodyTheme,
+  CustomTableClass,
   ...props
 }) => {
   // State for sorting configuration and current page
@@ -105,7 +107,7 @@ const CustomTable: React.FC<CustomTableProps> = ({
         setRowPerPage={setRowPerPage}
       />
       {/* Table for displaying data */}
-      <Table {...props}>
+      <Table {...props} className={`${CustomTableClass}`}>
         <thead>
           <tr>
             {/* Table header with sorting icons */}

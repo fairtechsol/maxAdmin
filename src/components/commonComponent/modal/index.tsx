@@ -9,6 +9,7 @@ function CustomModal({
   children,
   footer,
   titleStyle,
+  headerStyle,
   ...props
 }: any) {
   return (
@@ -19,7 +20,10 @@ function CustomModal({
         onHide={() => setShow(false)}
         className={`customModal ${customClass}`}
       >
-        <Modal.Header closeButton>
+        <Modal.Header
+          closeButton
+          className={`${headerStyle ? headerStyle : ""}`}
+        >
           <Modal.Title className={`${titleStyle}`}>{title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>{children}</Modal.Body>
