@@ -1,17 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import { GiHamburgerMenu } from 'react-icons/gi';
-import { Outlet, useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { getUsersDetail } from "../../store/actions/user/userActions";
+import { AppDispatch } from "../../store/store";
 import "../layout.scss";
 import Topbar from "./header";
 import Sidebar from "./sidebar";
 
 function MainLayout() {
   let location = useLocation();
+  const navigate = useNavigate();
+  const dispatch: AppDispatch = useDispatch();
 
   const [toggle, setToggle] = useState<Boolean>(false);
   const handleDrawer = () => {
     setToggle(!toggle);
   };
+
+  useEffect(() => {
+    if (!localStorage.getItem("userToken")) {
+      navigate("/");
+    }
+    dispatch(getUsersDetail());
+  }, [dispatch]);
+
   return (
     <>
       {/* topbar */}

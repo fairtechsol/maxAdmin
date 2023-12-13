@@ -3,6 +3,7 @@ import { AxiosError } from "axios";
 import service from "../../../service";
 
 interface ChangePassword {
+  userId?: string;
   newPassword: string;
   confirmPassword: string;
   transactionPassword: string;
@@ -13,6 +14,18 @@ export const getUsers = createAsyncThunk("user/list", async () => {
     const resp = await service.get("/user/list");
     if (resp) {
       return resp?.data;
+    }
+  } catch (error: any) {
+    const err = error as AxiosError;
+    throw err;
+  }
+});
+
+export const getUsersDetail = createAsyncThunk("user/profile", async () => {
+  try {
+    const resp = await service.get(`/user/profile`);
+    if (resp) {
+      return resp?.data[0][0];
     }
   } catch (error: any) {
     const err = error as AxiosError;
