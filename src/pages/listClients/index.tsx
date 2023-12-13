@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "../../assets/common.scss";
 import CustomButton from "../../components/commonComponent/button";
@@ -7,9 +8,8 @@ import CustomTable from "../../components/commonComponent/table";
 import ListClientModals from "../../components/listClients/modals";
 import "../../components/listClients/style.scss";
 import { Column, TableConfig } from "../../models/tableInterface";
-import { AppDispatch, RootState } from "../../store/store";
-import { useDispatch, useSelector } from "react-redux";
 import { getUsers } from "../../store/actions/user/userActions";
+import { AppDispatch, RootState } from "../../store/store";
 // Example usage
 const columns: Column[] = [
   { id: "username", label: "User Name", colSpan: 4 },
@@ -114,6 +114,7 @@ const ListClent: React.FC = () => {
               itemCount={10}
               setTableConfig={setTableConfig}
               enablePdfExcel={true}
+              isSearch
             >
               <tr>
                 {columns?.map((item, index) => {

@@ -26,7 +26,7 @@ const Deposit = ({ userData, setShow }: any) => {
     initialValues: initialValues,
     onSubmit: (values: any) => {
       let payload = {
-        userId: userData.userId,
+        // userId: userData.userId,
         amount: values.amount,
         transactionPassword: values.transactionPassword,
         remark: values.remark,
@@ -37,7 +37,7 @@ const Deposit = ({ userData, setShow }: any) => {
     },
   });
 
-  const { handleSubmit, handleChange, values } = formik;
+  const { handleSubmit, handleChange, values, touched, errors } = formik;
 
   const handleAmountChange = (e: any) => {
     const newAmount = parseFloat(e.target.value);
@@ -144,6 +144,8 @@ const Deposit = ({ userData, setShow }: any) => {
                 onChange={handleAmountChange}
                 customStyle="input-box"
                 type="number"
+                touched={touched.amount}
+                errors={errors.amount}
               />
             </Col>
           </Row>
@@ -163,6 +165,8 @@ const Deposit = ({ userData, setShow }: any) => {
                 as="textarea"
                 rows={4}
                 customStyle="input-box"
+                touched={touched.remark}
+                errors={errors.remark}
               />
             </Col>
           </Row>
@@ -181,6 +185,8 @@ const Deposit = ({ userData, setShow }: any) => {
                 onChange={handleChange}
                 type="password"
                 customStyle="input-box"
+                touched={touched.transactionPassword}
+                errors={errors.transactionPassword}
               />
             </Col>
           </Row>
