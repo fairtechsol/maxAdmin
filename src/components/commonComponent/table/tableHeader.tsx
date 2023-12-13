@@ -11,6 +11,7 @@ interface TableHeaderProps {
   setTableConfig: any;
   rowPerPage: number;
   setRowPerPage: any;
+  handleExport: any;
 }
 
 const TableHeader: React.FC<TableHeaderProps> = ({
@@ -20,6 +21,7 @@ const TableHeader: React.FC<TableHeaderProps> = ({
   setTableConfig,
   rowPerPage,
   setRowPerPage,
+  handleExport,
 }) => {
   const [keyword, setKeyword] = useState("");
   useEffect(() => {
@@ -32,11 +34,17 @@ const TableHeader: React.FC<TableHeaderProps> = ({
     <div className="d-flex justify-content-between align-items-center">
       {enablePdfExcel && (
         <div className="d-flex gap-1 mb-2">
-          <CustomButton className="pdfExcel-btns d-flex gap-1 align-items-center pdf border-0 ">
+          <CustomButton
+            onClick={() => handleExport("pdf")}
+            className="pdfExcel-btns d-flex gap-1 align-items-center pdf border-0 "
+          >
             <FaRegFilePdf />
             PDF
           </CustomButton>
-          <CustomButton className="pdfExcel-btns d-flex gap-1 align-items-center excel border-0 ">
+          <CustomButton
+            onClick={() => handleExport("excel")}
+            className="pdfExcel-btns d-flex gap-1 align-items-center excel border-0 "
+          >
             <FaRegFileExcel />
             Excel
           </CustomButton>
@@ -45,7 +53,11 @@ const TableHeader: React.FC<TableHeaderProps> = ({
       {isPagination && (
         <RowPerPage value={rowPerPage} onChange={setRowPerPage} />
       )}
-      {isSearch && <SearchBox value={keyword} onSearch={setKeyword} />}
+      {isSearch && (
+        <>
+          <SearchBox value={keyword} onSearch={setKeyword} />
+        </>
+      )}
     </div>
   );
 };

@@ -1,14 +1,14 @@
+import { useFormik } from "formik";
+import { useEffect } from "react";
 import { Form } from "react-bootstrap";
 import { MdOutlineLogin } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import CustomButton from "../../components/commonComponent/button";
-import "./style.scss";
-import { useFormik } from "formik";
-import { loginValidationSchema } from "../../utils/fieldValidations/login";
-import { useDispatch, useSelector } from "react-redux";
 import { authReset, login } from "../../store/actions/auth/authActions";
 import { AppDispatch, RootState } from "../../store/store";
-import { useEffect } from "react";
+import { loginValidationSchema } from "../../utils/fieldValidations/login";
+import "./style.scss";
 
 const initialValues: any = {
   userName: "",
@@ -68,6 +68,7 @@ const Login = () => {
               value={formik.values.userName}
               onChange={formik.handleChange}
             />
+
             {touched.userName && errors.userName && (
               <p style={{ color: "#fa1e1e" }}>{errors.userName as string}</p>
             )}
