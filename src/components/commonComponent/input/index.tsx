@@ -11,11 +11,11 @@ const CustomInput = (props: any) => {
     errors,
     id,
     touched,
+    disabled,
     ...prop
   } = props;
   return (
     <>
-    
       <Form.Group className={`${props.customstyle} ${formInline ? "row" : ""}`}>
         {title ? (
           <Form.Label className={`col-${formInline ? labelCol : ""}`}>
@@ -25,6 +25,7 @@ const CustomInput = (props: any) => {
           ""
         )}
         <Form.Control
+          disabled={disabled}
           className={`col-${formInline ? inputCol : ""} bg-${bgColor}`}
           name={id}
           {...prop}

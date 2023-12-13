@@ -23,33 +23,6 @@ const columns: Column[] = [
   { id: "actions", label: "Actions" },
 ];
 
-// const data: any = [
-//   {
-//     username: "Account",
-//     creditReferance: 25,
-//     exposureLimit: 12,
-//     defaultPer: 23,
-//     accountType: "Agent",
-//     casinoTotal: "20",
-//   },
-//   {
-//     username: "Account",
-//     creditReferance: 25,
-//     exposureLimit: 12,
-//     defaultPer: 23,
-//     accountType: "Agent",
-//     casinoTotal: "20",
-//   },
-//   {
-//     username: "Account",
-//     creditReferance: 25,
-//     exposureLimit: 12,
-//     defaultPer: 23,
-//     accountType: "Agent",
-//     casinoTotal: "20",
-//   },
-// ];
-
 const ListClent: React.FC = () => {
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
@@ -110,8 +83,6 @@ const ListClent: React.FC = () => {
 
   const { userList } = useSelector((state: RootState) => state.user);
 
-  console.log(userList);
-
   useEffect(() => {
     dispatch(getUsers());
   }, [dispatch]);
@@ -167,6 +138,8 @@ const ListClent: React.FC = () => {
                     roleName,
                     casinoTotal,
                     id,
+                    userBlock,
+                    betBlock,
                   } = userItem;
                   return (
                     <tr key={id}>
@@ -179,6 +152,8 @@ const ListClent: React.FC = () => {
                       <td className="text-center">
                         <Form>
                           <Form.Check
+                            disabled={true}
+                            checked={userBlock}
                             id={`opt${index}1`}
                             aria-label="option 1"
                           />
@@ -187,6 +162,8 @@ const ListClent: React.FC = () => {
                       <td className="text-center">
                         <Form>
                           <Form.Check
+                            disabled={true}
+                            checked={betBlock}
                             id={`opt${index}`}
                             aria-label="option 1"
                           />
@@ -220,16 +197,18 @@ const ListClent: React.FC = () => {
             </CustomTable>
           </Col>
         </Row>
-        {eventDetails.eventId&&<ListClientModals
-          userData={eventDetails.userData}
-          show={eventDetails.show}
-          setShow={(data) => {
-            setEventDetails((prev) => {
-              return { ...prev, show: data };
-            });
-          }}
-          id={eventDetails.eventId}
-        />}
+        {eventDetails.eventId && (
+          <ListClientModals
+            userData={eventDetails.userData}
+            show={eventDetails.show}
+            setShow={(data) => {
+              setEventDetails((prev) => {
+                return { ...prev, show: data };
+              });
+            }}
+            id={eventDetails.eventId}
+          />
+        )}
       </Container>
     </>
   );
