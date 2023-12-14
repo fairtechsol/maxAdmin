@@ -13,3 +13,20 @@
     clip-path: inset(-2px 0px -2px 0)
 
 }
+
+.listActiveUser{
+    .nav-pills{
+        border-bottom: 1px solid #ddd;
+        .nav-item{
+            margin-bottom: -1px;
+            .active{
+                background-color: $white;
+                color: $black;
+                border: 1px solid $gray;
+                border-bottom: 0;
+                border-top-left-radius: 0.25rem;
+                border-top-right-radius: 0.25rem;
+            }
+        }
+    }
+}

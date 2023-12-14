@@ -1,0 +1,32 @@
+@import "/src/assets/variable.scss";
+.LoggedUserDetail{
+    .accordion-item{
+        border: 0;
+        .accordion-header{
+            button{
+            background-color: $secondary;
+            box-shadow: none;
+            text-align: center;
+            svg{
+                margin: auto;
+            }
+            &:after{
+                display: none;
+            }
+            }
+            button.collapsed{
+                svg{
+                    transform: rotate(180deg);
+                }
+            }
+        }
+        .accordion-body{
+            background-color: $secondary !important;
+            ul{
+                li{
+                    
+                }
+            }
+        }
+    }
+}

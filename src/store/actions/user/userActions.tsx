@@ -21,7 +21,7 @@ export const getUsers = createAsyncThunk("user/list", async () => {
   }
 });
 
-export const getUsersDetail = createAsyncThunk("user/profile", async () => {
+export const getUsersProfile = createAsyncThunk("user/profile", async () => {
   try {
     const resp = await service.get(`/user/profile`);
     if (resp) {

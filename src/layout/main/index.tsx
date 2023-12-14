@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 // import { GiHamburgerMenu } from 'react-icons/gi';
 import { useDispatch } from "react-redux";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import { getUsersDetail } from "../../store/actions/user/userActions";
+import LoggedUserDetail from "../../components/listClients/loggedUserDetail";
+import { getUsersProfile } from "../../store/actions/user/userActions";
 import { AppDispatch } from "../../store/store";
 import "../layout.scss";
 import Topbar from "./header";
@@ -22,7 +23,7 @@ function MainLayout() {
     if (!localStorage.getItem("userToken")) {
       navigate("/");
     }
-    dispatch(getUsersDetail());
+    dispatch(getUsersProfile());
   }, [dispatch]);
 
   return (
@@ -34,6 +35,11 @@ function MainLayout() {
         <Sidebar clickHandler={handleDrawer} />
       </div>
       {/* layout */}
+      {location.pathname === "/admin/active-inactive-user-list" ? (
+        <LoggedUserDetail />
+      ) : (
+        ""
+      )}
       <main
         className={`page-content bg-light ${
           location.pathname === "/admin/add-account" ? "addAcc" : ""
