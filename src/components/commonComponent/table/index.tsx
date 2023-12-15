@@ -1,11 +1,7 @@
 // CustomTable.tsx
-import { saveAs } from "file-saver";
 import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
-import { useSelector } from "react-redux";
 import { Column } from "../../../models/tableInterface";
-import service from "../../../service";
-import { RootState } from "../../../store/store";
 import "./style.scss";
 import TableHeader from "./tableHeader";
 import PaginationComponent from "./tableUtils/pagination"; // Import the PaginationComponent
@@ -56,8 +52,6 @@ const CustomTable: React.FC<CustomTableProps> = ({
   const [currentPage, setCurrentPage] = useState(1);
   const [rowPerPage, setRowPerPage] = useState(1);
 
-  const { userDetail } = useSelector((state: RootState) => state?.user);
-
   // Handle column click to change the sorting configuration
   const handleSort = (key: string | number) => {
     setSortConfig((prevSortConfig) => ({
@@ -82,23 +76,9 @@ const CustomTable: React.FC<CustomTableProps> = ({
   }, [currentPage, sortConfig]);
   console.log(columns);
 
-  const handleExport = async (type: any) => {
-    try {
-      let url = `/user/list?type=${type}`;
-      const response = await service.get(url, { responseType: "blob" });
-      saveAs(
-        response.data,
-        userDetail?.userName ? userDetail?.userName : "file"
-      );
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
   return (
     <div className={`${customClass ?? ""} customTable`}>
       <TableHeader
-        handleExport={handleExport}
         enablePdfExcel={enablePdfExcel}
         isPagination={isPagination}
         isSearch={isSearch}

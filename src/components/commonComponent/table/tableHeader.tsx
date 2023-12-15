@@ -3,6 +3,9 @@ import { FaRegFileExcel, FaRegFilePdf } from "react-icons/fa";
 import CustomButton from "../button";
 import RowPerPage from "./tableUtils/rowPerPage";
 import SearchBox from "./tableUtils/search";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../../store/store";
+import { handleExport } from "../../../store/actions/user/userActions";
 
 interface TableHeaderProps {
   enablePdfExcel?: boolean;
@@ -11,7 +14,6 @@ interface TableHeaderProps {
   setTableConfig: any;
   rowPerPage: number;
   setRowPerPage: any;
-  handleExport: any;
 }
 
 const TableHeader: React.FC<TableHeaderProps> = ({
@@ -21,8 +23,8 @@ const TableHeader: React.FC<TableHeaderProps> = ({
   setTableConfig,
   rowPerPage,
   setRowPerPage,
-  handleExport,
 }) => {
+  const dispatch: AppDispatch = useDispatch();
   const [keyword, setKeyword] = useState("");
   useEffect(() => {
     setTableConfig((prev: any) => {
@@ -35,14 +37,14 @@ const TableHeader: React.FC<TableHeaderProps> = ({
       {enablePdfExcel && (
         <div className="d-flex gap-1 mb-2">
           <CustomButton
-            onClick={() => handleExport("pdf")}
+            onClick={() => dispatch(handleExport("pdf"))}
             className="pdfExcel-btns d-flex gap-1 align-items-center pdf border-0 "
           >
             <FaRegFilePdf />
             PDF
           </CustomButton>
           <CustomButton
-            onClick={() => handleExport("excel")}
+            onClick={() => dispatch(handleExport("excel"))}
             className="pdfExcel-btns d-flex gap-1 align-items-center excel border-0 "
           >
             <FaRegFileExcel />

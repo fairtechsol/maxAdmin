@@ -1,0 +1,19 @@
+export const ApiConstants = {
+  AUTH: {
+    LOGIN: "/auth/login",
+    LOGOUT: "/auth/logout",
+  },
+  USER: {
+    BALANCEUPDATE: "/balance/update",
+    CHANGEPASSWORD: "/user/changePassword",
+    LIST: "/user/list",
+    ADDFGADMIN: "/user/add",
+    ADDURLADMIN: "/superadmin/create",
+    ADDEXPERT: "/expert/add",
+    UPDATE: "/user/updateUser",
+    PROFILE: "/user/profile",
+    LOCKUNLOCK: "/user/lockUnlockUser",
+    CREDITREFERRENCE: "/user/update/creditreferrence",
+    EXPOSURELIMIT: "/user/update/exposurelimit",
+  },
+};
