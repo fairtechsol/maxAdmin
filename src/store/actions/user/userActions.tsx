@@ -12,7 +12,7 @@ interface ChangePassword {
 
 export const getUsers = createAsyncThunk("user/list", async () => {
   try {
-    const resp = await service.get("/user/list");
+    const resp = await service.get(`${ApiConstants.USER.LIST}`);
     if (resp) {
       return resp?.data;
     }
@@ -25,7 +25,10 @@ export const updateUser = createAsyncThunk<any, any>(
   "user/updateUser",
   async (requestData) => {
     try {
-      const resp = await service.post("/user/updateUser", requestData);
+      const resp = await service.post(
+        `${ApiConstants.USER.UPDATE}`,
+        requestData
+      );
       if (resp) {
         return resp?.data;
       }
@@ -38,7 +41,7 @@ export const updateUser = createAsyncThunk<any, any>(
 
 export const getUsersProfile = createAsyncThunk("user/profile", async () => {
   try {
-    const resp = await service.get(`/user/profile`);
+    const resp = await service.get(`${ApiConstants.USER.PROFILE}`);
     if (resp) {
       return resp?.data[0][0];
     }
@@ -67,7 +70,10 @@ export const changeAmmountUser = createAsyncThunk<any, any>(
   "balance/update",
   async (requestData) => {
     try {
-      const resp = await service.post("/balance/update", requestData);
+      const resp = await service.post(
+        `${ApiConstants.USER.BALANCEUPDATE}`,
+        requestData
+      );
       if (resp) {
         return resp?.data;
       }
@@ -83,7 +89,7 @@ export const setCreditRefference = createAsyncThunk<any, any>(
   async (requestData) => {
     try {
       const resp = await service.post(
-        "/user/update/creditreferrence",
+        `${ApiConstants.USER.CREDITREFERRENCE}`,
         requestData
       );
       if (resp) {
@@ -101,7 +107,7 @@ export const setExposureLimit = createAsyncThunk<any, any>(
   async (requestData) => {
     try {
       const resp = await service.post(
-        "/user/update/exposurelimit",
+        `${ApiConstants.USER.EXPOSURELIMIT}`,
         requestData
       );
       if (resp) {
@@ -118,7 +124,10 @@ export const setLockUnlockUser = createAsyncThunk<any, any>(
   "/user/lockUnlockUser",
   async (requestData) => {
     try {
-      const resp = await service.post("/user/lockUnlockUser", requestData);
+      const resp = await service.post(
+        `${ApiConstants.USER.LOCKUNLOCK}`,
+        requestData
+      );
       if (resp) {
         return resp?.data;
       }
@@ -133,7 +142,10 @@ export const changePassword = createAsyncThunk<any, ChangePassword>(
   "user/changePassword",
   async (requestData, thunkApi) => {
     try {
-      const resp = await service.post("/user/changePassword", requestData);
+      const resp = await service.post(
+        `${ApiConstants.USER.CHANGEPASSWORD}`,
+        requestData
+      );
       if (resp) {
         console.log(resp.data, "data");
       }
