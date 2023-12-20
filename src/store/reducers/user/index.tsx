@@ -3,7 +3,7 @@ import { profileReducer } from "./profileSlice";
 import { userListReducers } from "./userListSlice";
 import { userUpdateReducer } from "./userUpdateSlice";
 
-export const userReducer1 = combineReducers({
+export const userReducer = combineReducers({
   profile: profileReducer,
   userUpdate: userUpdateReducer,
   userList: userListReducers,

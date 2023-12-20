@@ -20,7 +20,7 @@ const initialValues: any = {
 const Deposit = ({ userData, setShow }: any) => {
   const dispatch: AppDispatch = useDispatch();
 
-  const { userList } = useSelector((state: RootState) => state.user);
+  const { userList } = useSelector((state: RootState) => state.user.userList);
 
   const formik = useFormik({
     initialValues: initialValues,
