@@ -44,7 +44,7 @@ const ChangePassword = () => {
     }
   }, [success]);
   return (
-    <>
+    <div className="px-3">
       <h5>Change Password</h5>
       <Form onSubmit={handleSubmit}>
         <Row>
@@ -94,7 +94,7 @@ const ChangePassword = () => {
           Submit
         </Button>
       </Form>
-    </>
+    </div>
   );
 };
 
