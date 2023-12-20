@@ -1,15 +1,15 @@
 import { useFormik } from "formik";
+import { useEffect } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
-import CustomInput from "../../components/commonComponent/input";
-import { newPasswordValidationSchema } from "../../utils/fieldValidations/newPassword";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
+import CustomInput from "../../components/commonComponent/input";
 import {
   changePassword,
   changePasswordReset,
 } from "../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../store/store";
-import { useNavigate } from "react-router";
-import { useEffect } from "react";
+import { newPasswordValidationSchema } from "../../utils/fieldValidations/newPassword";
 
 interface Values {
   newPassword: string;
@@ -26,7 +26,7 @@ const initialValues = {
 const ChangePassword = () => {
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
-  const { success } = useSelector((state: RootState) => state.user);
+  const { success } = useSelector((state: RootState) => state.user.userList);
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: newPasswordValidationSchema,

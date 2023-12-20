@@ -5,8 +5,8 @@ import { RootState } from "../../../store/store";
 import "./style.scss";
 
 const LoggedUserDetail = () => {
-  const { userDetail } = useSelector((state: RootState) => state.user);
-  console.log(userDetail, "userDetail555");
+  const { userDetail } = useSelector((state: RootState) => state.user.profile);
+  console.log(userDetail, "userDetail");
   return (
     <div className="bg-secondary LoggedUserDetail">
       <Accordion>

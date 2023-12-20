@@ -81,7 +81,7 @@ const ListClent: React.FC = () => {
     },
   ];
 
-  const { userList } = useSelector((state: RootState) => state.user);
+  const { userList } = useSelector((state: RootState) => state.user.userList);
 
   useEffect(() => {
     dispatch(getUsers());
@@ -130,7 +130,7 @@ const ListClent: React.FC = () => {
                 })}
               </tr>
               {userList &&
-                userList.list.map((userItem: any, index: number) => {
+                userList?.list?.map((userItem: any, index: number) => {
                   const {
                     userName,
                     creditRefrence,
