@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   changeAmmountUser,
+  getUsers,
   setCreditRefference,
   setExposureLimit,
   setLockUnlockUser,
@@ -26,6 +27,20 @@ export const userList = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(getUsers.pending, (state) => {
+        state.loading = true;
+        state.success = false;
+        state.error = null;
+      })
+      .addCase(getUsers.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        state.userList = action.payload;
+      })
+      .addCase(getUsers.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action?.error?.message;
+      })
       .addCase(changeAmmountUser.pending, (state) => {
         state.loading = true;
         state.error = null;
