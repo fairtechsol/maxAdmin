@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
@@ -10,42 +10,51 @@ import {
 } from "../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../store/store";
 import { newPasswordValidationSchema } from "../../utils/fieldValidations/newPassword";
+// import CustomModal from "../../components/commonComponent/modal";
 
-interface Values {
-  newPassword: string;
-  confirmPassword: string;
-  transactionPassword: string;
-}
+// interface Values {
+//   newPassword: string;
+//   confirmPassword: string;
+//   transactionPassword: string;
+// }
 
-const initialValues = {
+const initialValues: any = {
   newPassword: "",
   confirmPassword: "",
-  transactionPassword: "",
+  // transactionPassword: "",
 };
 
 const ChangePassword = () => {
   const dispatch: AppDispatch = useDispatch();
+  const [showModal, setShowModal] = useState<boolean>(false);
   const navigate = useNavigate();
   const { success } = useSelector((state: RootState) => state.user.userList);
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: newPasswordValidationSchema,
-    onSubmit: (values: Values) => {
-      dispatch(changePassword(values));
+    onSubmit: (values: any) => {
+      const payload = {
+        newPassword: values.newPassword,
+        confirmPassword: values.confirmPassword,
+        oldPassword: values.newPassword,
+      };
+      dispatch(changePassword(payload));
     },
   });
 
   const { handleSubmit, getFieldProps, touched, errors } = formik;
 
+
   useEffect(() => {
     if (success) {
       navigate("/admin/listClients");
       dispatch(changePasswordReset());
+      setShowModal(true);
     }
   }, [success]);
   return (
     <div className="px-3">
-      <h5>Change Password</h5>
+      <h5>Change Password77888</h5>
       <Form onSubmit={handleSubmit}>
         <Row>
           <Col md={4}>
@@ -75,7 +84,7 @@ const ChangePassword = () => {
             />
           </Col>
         </Row>
-        <Row>
+        {/* <Row>
           <Col md={4}>
             <CustomInput
               id={"transactionPassword"}
@@ -88,11 +97,17 @@ const ChangePassword = () => {
               errors={errors.transactionPassword}
             />
           </Col>
-        </Row>
+        </Row> */}
 
         <Button variant="primary" type="submit">
           Submit
         </Button>
+
+        {showModal && (
+          <h3>Navigate to login</h3>
+          //    <CustomModal show={showModal} setShow={setShowModal}>
+          //  </CustomModal>
+        )}
       </Form>
     </div>
   );

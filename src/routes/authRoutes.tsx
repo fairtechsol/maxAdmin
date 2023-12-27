@@ -4,6 +4,8 @@ import Loadable from "../utils/loadable";
 import { Navigate } from "react-router-dom";
 // ==============================|| Auth ROUTING ||============================== //
 const Login = Loadable(lazy(() => import("../pages/auth/login")));
+const ChangePassword = Loadable(lazy(() => import("../pages/changePassword")));
+
 const AuthRoutes = {
   path: "/",
   element: <AuthLayout />,
@@ -12,6 +14,10 @@ const AuthRoutes = {
     {
       path: "login",
       element: <Login />,
+    },
+    {
+      path: "change-password",
+      element: <ChangePassword />,
     },
   ],
 };

@@ -53,6 +53,7 @@ const ExposureLimit = ({ setShow, userData }: any) => {
               </Col>
               <Col sm={8}>
                 <CustomInput
+                  
                   type="text"
                   customStyle="input-box"
                   bgColor="gray"

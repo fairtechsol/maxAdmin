@@ -13,7 +13,7 @@ import "./style.scss";
 const initialValues: any = {
   userName: "",
   password: "",
-  loginType: "wallet",
+  loginType: "admin",
 };
 
 const Login = () => {
@@ -42,7 +42,7 @@ const Login = () => {
           "forceChangePassword",
           JSON.stringify(forceChangePassword)
         );
-        navigate("/change_password");
+        navigate("/change-password");
       } else {
         navigate("/admin/market-analysis");
       }

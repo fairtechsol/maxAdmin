@@ -7,7 +7,8 @@ interface ChangePassword {
   userId?: string;
   newPassword: string;
   confirmPassword: string;
-  transactionPassword: string;
+  oldPassword?: string;
+  transactionPassword?: string;
 }
 
 export const getUsers = createAsyncThunk("user/list", async () => {

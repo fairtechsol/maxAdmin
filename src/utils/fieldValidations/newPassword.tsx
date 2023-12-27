@@ -5,7 +5,7 @@ export const newPasswordValidationSchema = Yup.object({
   confirmPassword: Yup.string()
     .oneOf([Yup.ref("newPassword"), ""], "Passwords must match")
     .required("Password is required"),
-  transactionPassword: Yup.string().required(
-    "Transaction Password is required"
-  ),
+  // transactionPassword: Yup.string().required(
+  //   "Transaction Password is required"
+  // ),
 });
