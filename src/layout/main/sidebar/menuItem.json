@@ -1,0 +1,92 @@
+[
+  {
+    "id": "football",
+    "name": "Football",
+    "type": "collapse",
+    "children": []
+  },
+  {
+    "id": "tennis",
+    "name": "Tennis",
+    "type": "collapse",
+    "children": []
+  },
+  {
+    "id": "cricket",
+    "name": "Cricket",
+    "type": "collapse",
+    "children": []
+  },
+  {
+    "id": "ice_hockey",
+    "name": "Ice Hockey",
+    "type": "collapse",
+    "children": []
+  },
+  {
+    "id": "volleyball",
+    "name": "Volleyball",
+    "type": "collapse",
+    "children": []
+  },
+  {
+    "id": "politics",
+    "name": "Politics",
+    "type": "collapse",
+    "children": []
+  },
+  {
+    "id": "basketball",
+    "name": "Basketball",
+    "type": "collapse",
+    "children": []
+  },
+  {
+    "id": "table_tennis",
+    "name": "Table Tennis",
+    "type": "collapse",
+    "children": []
+  },
+  {
+    "id": "darts",
+    "name": "Darts",
+    "type": "collapse",
+    "children": []
+  },
+  {
+    "id": "badminton",
+    "name": "Badminton",
+    "type": "collapse",
+    "children": []
+  },
+  {
+    "id": "kabaddi",
+    "name": "Kabaddi",
+    "type": "collapse",
+    "children": []
+  },
+  {
+    "id": "boxing",
+    "name": "Boxing",
+    "type": "collapse",
+    "children": []
+  },
+  {
+    "id": "american_football",
+    "name": "American Football",
+    "type": "collapse",
+    "children": []
+  },
+  {
+    "id": "mixed_martial_arts",
+    "name": "Mixed Martial Arts",
+    "type": "collapse",
+    "children": []
+  },
+  {
+    "id": "motor_sport",
+    "name": "Motor Sport",
+    "type": "collapse",
+    "children": []
+  }
+]
