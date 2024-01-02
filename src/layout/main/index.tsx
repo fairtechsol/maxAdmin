@@ -41,9 +41,8 @@ function MainLayout() {
         ""
       )}
       <main
-        className={`page-content bg-light ${
-          location.pathname === "/admin/add-account" ? "addAcc" : ""
-        }  `}
+        className={`page-content bg-light ${location.pathname === "/admin/add-account" ? "addAcc" : ""
+          }  `}
       >
         <Outlet />
       </main>

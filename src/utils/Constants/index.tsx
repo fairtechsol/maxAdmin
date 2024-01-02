@@ -16,4 +16,9 @@ export const ApiConstants = {
     CREDITREFERRENCE: "/user/update/creditreferrence",
     EXPOSURELIMIT: "/user/update/exposurelimit",
   },
+  EXPERT: {
+    COMPETITIONLIST: "/expert/match/competitionList/",
+    COMPETITIONDATES: "/expert/match/competition/dates/",
+    COMPETITIONMATCHES: "/expert/match/competition/getMatch/",
+  },
 };

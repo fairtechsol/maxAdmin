@@ -6,15 +6,23 @@
   },
   "extends": "eslint:recommended",
   "rules": {
-    "indent": ["error", 2],
-    "semi": ["error", "always"],
+    // "indent": ["error", 2],
+    "semi": [
+      "error",
+      "always"
+    ],
     "no-console": "off",
     "no-unused-vars": "error",
     "no-warning-comments": "error",
     "react-hooks/exhaustive-deps": "off",
     "prefer-arrow-callback": "error",
-    "no-debugger":"off",
+    "no-debugger": "off",
     // Enforce camelCase for variables
-    "camelcase": ["error", { "properties": "always" }]
+    "camelcase": [
+      "error",
+      {
+        "properties": "always"
+      }
+    ]
   }
 }
