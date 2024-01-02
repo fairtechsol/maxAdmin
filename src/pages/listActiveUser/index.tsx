@@ -30,6 +30,7 @@ const columns: Column[] = [
 const ListActiveInactiveUser: React.FC = () => {
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
+  
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
   const [eventDetails, setEventDetails] = useState({
     show: false,
@@ -45,7 +46,7 @@ const ListActiveInactiveUser: React.FC = () => {
     });
   };
 
-  useEffect(() => {}, [tableConfig]);
+  useEffect(() => { }, [tableConfig]);
 
   const actionButtons = [
     {
@@ -78,11 +79,11 @@ const ListActiveInactiveUser: React.FC = () => {
       name: "S",
       onClick: showEventModals,
     },
-    {
-      id: "more",
-      name: "More",
-      onClick: () => {},
-    },
+    // {
+    //   id: "more",
+    //   name: "More",
+    //   onClick: () => { },
+    // },
   ];
 
   const { userList } = useSelector((state: RootState) => state.user.userList);
@@ -90,6 +91,18 @@ const ListActiveInactiveUser: React.FC = () => {
   useEffect(() => {
     dispatch(getUsers());
   }, [dispatch]);
+  console.log(userList?.list, "list.userBlock");
+
+  const activeUser: Array<object> = [];
+  const deactiveUser: Array<object> = [];
+
+  userList?.list?.forEach((user: any) => {
+    if (user.userBlock === false) {
+      activeUser.push(user);
+    } else {
+      deactiveUser.push(user);
+    }
+  });
 
   return (
     <>
@@ -150,7 +163,7 @@ const ListActiveInactiveUser: React.FC = () => {
                       })}
                     </tr>
                     {userList &&
-                      userList.list.map((userItem: any, index: number) => {
+                      activeUser.map((userItem: any, index: number) => {
                         const {
                           userName,
                           creditRefrence,
@@ -251,7 +264,7 @@ const ListActiveInactiveUser: React.FC = () => {
                       })}
                     </tr>
                     {userList &&
-                      userList.list.map((userItem: any, index: number) => {
+                      deactiveUser.map((userItem: any, index: number) => {
                         const {
                           userName,
                           creditRefrence,

@@ -54,7 +54,7 @@ const ChangePassword = () => {
   }, [success]);
   return (
     <div className="px-3">
-      <h5>Change Password77888</h5>
+      <h5>Change Password</h5>
       <Form onSubmit={handleSubmit}>
         <Row>
           <Col md={4}>
