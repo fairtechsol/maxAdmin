@@ -10,6 +10,7 @@ import {
 } from "../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../store/store";
 import { newPasswordValidationSchema } from "../../utils/fieldValidations/newPassword";
+import CustomModal from "../../components/commonComponent/modal";
 // import CustomModal from "../../components/commonComponent/modal";
 
 // interface Values {
@@ -54,7 +55,7 @@ const ChangePassword = () => {
   }, [success]);
   return (
     <div className="px-3">
-      <h5>Change Password77888</h5>
+      <h5>Change Password</h5>
       <Form onSubmit={handleSubmit}>
         <Row>
           <Col md={4}>
@@ -104,9 +105,11 @@ const ChangePassword = () => {
         </Button>
 
         {showModal && (
-          <h3>Navigate to login</h3>
-          //    <CustomModal show={showModal} setShow={setShowModal}>
-          //  </CustomModal>
+          <>
+            <h3>Navigate to login</h3>
+            <CustomModal show={showModal} setShow={setShowModal}>
+            </CustomModal>
+          </>
         )}
       </Form>
     </div>

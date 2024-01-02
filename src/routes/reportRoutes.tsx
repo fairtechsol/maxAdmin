@@ -1,6 +1,7 @@
 import { lazy } from "react";
 import MainLayout from "../layout/main";
 import Loadable from "../utils/loadable";
+import { Navigate } from "react-router-dom";
 // ==============================|| Main ROUTING ||============================== //
 const AccountStatement = Loadable(
   lazy(() => import("../pages/reports/AccountStatement"))
@@ -53,6 +54,10 @@ const ReportRoutes = {
     {
       path: "casinoresult",
       element: <CasinoResultReport />,
+    },
+    {
+      path: "*",
+      element: <Navigate to={"/admin/listAccount"} replace />,
     },
   ],
 };

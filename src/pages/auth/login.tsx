@@ -42,7 +42,7 @@ const Login = () => {
           "forceChangePassword",
           JSON.stringify(forceChangePassword)
         );
-        navigate("/change-password");
+        navigate("/admin/change-password");
       } else {
         navigate("/admin/market-analysis");
       }

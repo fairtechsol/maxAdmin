@@ -22,7 +22,7 @@ const LoggedUserDetail = () => {
                     Upper Level Credit Referance:
                   </div>
                   <div className="col-md-4 title-14">
-                    {userDetail.currentBalance}
+                    {userDetail?.currentBalance}
                   </div>
                 </div>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
@@ -32,7 +32,7 @@ const LoggedUserDetail = () => {
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
                   <div className="col-md-8 title-14">Available Balance:</div>
                   <div className="col-md-4 title-14">
-                    {userDetail.currentBalance}
+                    {userDetail?.currentBalance}
                   </div>
                 </div>
               </Col>
@@ -42,7 +42,7 @@ const LoggedUserDetail = () => {
                     Down level Occupy Balance:
                   </div>
                   <div className="col-md-4 title-14">
-                    {userDetail.downLevelBalance}
+                    {userDetail?.downLevelBalance}
                   </div>
                 </div>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
@@ -54,7 +54,7 @@ const LoggedUserDetail = () => {
                     Available Balance With Profit/Loss:
                   </div>
                   <div className="col-md-4 title-14">
-                    {userDetail.profitLoss}
+                    {userDetail?.profitLoss}
                   </div>
                 </div>
               </Col>
@@ -64,7 +64,7 @@ const LoggedUserDetail = () => {
                     Down Level Credit Referance:
                   </div>
                   <div className="col-md-4 title-14">
-                    {userDetail.downLevelCreditRefrence}
+                    {userDetail?.downLevelCreditRefrence}
                   </div>
                 </div>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
@@ -76,7 +76,7 @@ const LoggedUserDetail = () => {
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
                   <div className="col-md-8 title-14">My Profit/Loss:</div>
                   <div className="col-md-4 title-14">
-                    {userDetail.myProfitLoss}
+                    {userDetail?.myProfitLoss}
                   </div>
                 </div>
               </Col>

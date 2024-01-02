@@ -25,7 +25,7 @@ interface Values {
   maxBet: string;
   delay: string;
   transactionPassword: string;
-  downlinePartnership: number | string;
+  downlinePartnership: number;
 }
 
 const accountTypes = [
@@ -67,6 +67,7 @@ const AddAccount = () => {
     initialValues: initialValues,
     validationSchema: addAccountValidationSchema,
     onSubmit: (values: Values) => {
+      debugger;
       let payload = {
         userName: values.clientName,
         fullName: values.fullName,
@@ -79,7 +80,7 @@ const AddAccount = () => {
         exposureLimit: values.exposureLimit,
         maxBetLimit: values.maxBet,
         minBetLimit: values.minBet,
-        myPartnership: values.downlinePartnership,
+        myPartnership: 89,
       };
       dispatch(addUser(payload));
     },
@@ -91,7 +92,7 @@ const AddAccount = () => {
     padding: "5px 10px",
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => { }, []);
   return (
     <>
       <Card className="addAccount  border-0">

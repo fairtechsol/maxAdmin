@@ -4,11 +4,12 @@ import { FaSearchPlus, FaTimes } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import LogoSection from "../../../components/commonComponent/logoSection";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CustomModal from "../../../components/commonComponent/modal";
 import MainHeader from "../../../components/mainHeader";
 import { logout } from "../../../store/actions/auth/authActions";
-import { AppDispatch } from "../../../store/store";
+import { AppDispatch, RootState } from "../../../store/store";
+
 interface ItemProps {
   name: string;
   options: Array<any>;
@@ -44,6 +45,8 @@ const TopbarDropdown = ({ name, options }: ItemProps) => {
 const Topbar = (props: any) => {
   const dispatch: AppDispatch = useDispatch();
   const [SearchModal, setSearchModal] = useState(false);
+  const { userDetail } = useSelector((state: RootState) => state.user.profile);
+
   return (
     <>
       <Navbar expand="lg" className="bg-primary" data-bs-theme="light">
@@ -121,13 +124,13 @@ const Topbar = (props: any) => {
               <Nav>
                 <NavDropdown
                   id="nav-dropdown-dark-example"
-                  title="User Name"
+                  title={userDetail.userName}
                   menuVariant="dark"
                 >
                   <NavDropdown.Item href="/admin/secure-auth">
                     Secure Auth Verification
                   </NavDropdown.Item>
-                  <NavDropdown.Item href="/admin/change-password">
+                  <NavDropdown.Item href="/admin/change_password">
                     Change Password
                   </NavDropdown.Item>
                   <NavDropdown.Item
