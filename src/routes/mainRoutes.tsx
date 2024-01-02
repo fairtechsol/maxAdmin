@@ -42,7 +42,7 @@ const MainRoutes = {
       element: <MarketAnalysis />,
     },
     {
-      path: "change-password",
+      path: "change_password",
       element: <ChangePassword />,
     },
     {
