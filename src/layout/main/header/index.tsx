@@ -124,7 +124,7 @@ const Topbar = (props: any) => {
               <Nav>
                 <NavDropdown
                   id="nav-dropdown-dark-example"
-                  title={userDetail.userName}
+                  title={userDetail && userDetail?.userName}
                   menuVariant="dark"
                 >
                   <NavDropdown.Item href="/admin/secure-auth">

@@ -67,7 +67,6 @@ const AddAccount = () => {
     initialValues: initialValues,
     validationSchema: addAccountValidationSchema,
     onSubmit: (values: Values) => {
-      debugger;
       let payload = {
         userName: values.clientName,
         fullName: values.fullName,
@@ -80,7 +79,7 @@ const AddAccount = () => {
         exposureLimit: values.exposureLimit,
         maxBetLimit: values.maxBet,
         minBetLimit: values.minBet,
-        myPartnership: 89,
+        myPartnership: 100,
       };
       dispatch(addUser(payload));
     },
@@ -92,7 +91,8 @@ const AddAccount = () => {
     padding: "5px 10px",
   };
 
-  useEffect(() => { }, []);
+  useEffect(() => {}, []);
+  
   return (
     <>
       <Card className="addAccount  border-0">

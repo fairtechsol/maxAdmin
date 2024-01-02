@@ -1,6 +1,7 @@
 {
   "name": "fairgame-new",
-  "version": "0.1.1",
+  "version": "0.1.3",
+  "homepage": "/admin/",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^2.0.1",

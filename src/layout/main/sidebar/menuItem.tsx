@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Accordion } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { getCompetitionDates, getCompetitionMatches } from "../../../store/actions/match/matchAction";
+// import { Link } from "react-router-dom";
+import {
+  getCompetitionDates,
+  getCompetitionMatches,
+} from "../../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../../store/store";
 
 interface Props {
@@ -14,7 +17,7 @@ interface Props {
 
 const MenuItemChild = (props: any) => {
   const { data } = props;
-  return <Link to={`${data.path}`}>{data?.name}</Link>;
+  return <p className="title-12">{data?.name}</p>;
 };
 
 const MenuCollapse = (props: any) => {
@@ -33,8 +36,7 @@ const MenuCollapse = (props: any) => {
   useEffect(() => {
     if (selectedCompetition !== "") {
       const tempList = [...menuItemList];
-      const selectedMatchChildren =
-        tempList[selectedMatchIndex].children;
+      const selectedMatchChildren = tempList[selectedMatchIndex].children;
       const competitionIndex = selectedMatchChildren.findIndex(
         (item: any) => item?.id === selectedCompetition
       );
@@ -53,8 +55,7 @@ const MenuCollapse = (props: any) => {
   useEffect(() => {
     if (selectedDate !== "") {
       const tempList = [...menuItemList];
-      const selectedMatchChildren =
-        tempList[selectedMatchIndex].children;
+      const selectedMatchChildren = tempList[selectedMatchIndex].children;
       const competitionIndex = selectedMatchChildren.findIndex(
         (item: any) => item?.id === selectedCompetition
       );
@@ -65,7 +66,7 @@ const MenuCollapse = (props: any) => {
         competitionMatches?.map((item: any) => ({
           name: item?.title,
           id: item?.id,
-          type: "collapse"
+          type: "collapse",
         }));
       setMenuItemList(tempList);
     }
@@ -85,16 +86,18 @@ const MenuCollapse = (props: any) => {
           <Accordion.Body>
             {data?.children?.map((sideBarChild: any, index: number) => {
               return (
-                <Accordion onSelect={(e: any) => {
-                  if (e == 0) {
-                    setSelectedCompetition(sideBarChild?.id);
-                    dispatch(getCompetitionDates(sideBarChild?.id));
-                  }
-                }} key={index} defaultActiveKey={[]}>
+                <Accordion
+                  onSelect={(e: any) => {
+                    if (e == 0) {
+                      setSelectedCompetition(sideBarChild?.id);
+                      dispatch(getCompetitionDates(sideBarChild?.id));
+                    }
+                  }}
+                  key={index}
+                  defaultActiveKey={[]}
+                >
                   <Accordion.Item eventKey="0">
-                    <Accordion.Header>
-                      {sideBarChild?.name}
-                    </Accordion.Header>
+                    <Accordion.Header>{sideBarChild?.name}</Accordion.Header>
                     <Accordion.Body>
                       {sideBarChild?.children?.map(
                         (menuItemChild: any, indexes: number) => (
@@ -114,39 +117,38 @@ const MenuCollapse = (props: any) => {
                             key={indexes}
                             defaultActiveKey={[]}
                           >
-                            <Accordion.Item
-                              eventKey="0"
-                            >
+                            <Accordion.Item eventKey="0">
                               <Accordion.Header>
                                 {menuItemChild?.name}
                               </Accordion.Header>
                               <Accordion.Body>
                                 {menuItemChild?.children?.map(
                                   (matches: any, matchIndex: number) => (
-
                                     <Accordion
                                       key={indexes}
                                       defaultActiveKey={[]}
                                     >
-                                      <Accordion.Item
-                                        eventKey="0"
-                                      >
+                                      <Accordion.Item eventKey="0">
                                         <Accordion.Header>
                                           {matches?.name}
                                         </Accordion.Header>
                                         <Accordion.Body>
-                                          {<MenuItemChild data={
-                                            {
-                                              path: "",
-                                              name: "Match Odds"
-                                            }
-                                          } />}
-                                          {matches?.isTiedMatch && <MenuItemChild data={
-                                            {
-                                              path: "",
-                                              name: "Tied Match"
-                                            }
-                                          } />}
+                                          {
+                                            <MenuItemChild
+                                              data={{
+                                                path: "",
+                                                name: "Match Odds",
+                                              }}
+                                            />
+                                          }
+                                          {matches?.isTiedMatch && (
+                                            <MenuItemChild
+                                              data={{
+                                                path: "",
+                                                name: "Tied Match",
+                                              }}
+                                            />
+                                          )}
                                         </Accordion.Body>
                                       </Accordion.Item>
                                     </Accordion>
@@ -164,23 +166,24 @@ const MenuCollapse = (props: any) => {
             })}
           </Accordion.Body>
         </Accordion.Item>
-      )
-      }
+      )}
     </>
   );
 };
 
-export const MenuItem: React.FC<Props> = ({ item,
+export const MenuItem: React.FC<Props> = ({
+  item,
   setMenuItemList,
-  menuItemList, selectedMatchIndex }) => {
-
-
+  menuItemList,
+  selectedMatchIndex,
+}) => {
   return (
     <>
       {item?.type === "item" ? (
         <MenuItemChild data={item} />
       ) : (
-        <MenuCollapse data={item}
+        <MenuCollapse
+          data={item}
           setMenuItemList={setMenuItemList}
           menuItemList={menuItemList}
           selectedMatchIndex={selectedMatchIndex}
