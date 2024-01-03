@@ -148,7 +148,7 @@ export const changePassword = createAsyncThunk<any, ChangePassword>(
         requestData
       );
       if (resp) {
-        console.log(resp.data, "data");
+        return resp?.data;
       }
     } catch (error: any) {
       const err = error as AxiosError;
