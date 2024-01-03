@@ -7,6 +7,7 @@ import {
   getCompetitionMatches,
 } from "../../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../../store/store";
+import { Link } from "react-router-dom";
 
 interface Props {
   item: any;
@@ -17,7 +18,11 @@ interface Props {
 
 const MenuItemChild = (props: any) => {
   const { data } = props;
-  return <p className="title-12">{data?.name}</p>;
+  return (
+    <Link to={`${data?.path}`} className="title-12">
+      {data?.name}
+    </Link>
+  );
 };
 
 const MenuCollapse = (props: any) => {
@@ -136,7 +141,7 @@ const MenuCollapse = (props: any) => {
                                           {
                                             <MenuItemChild
                                               data={{
-                                                path: "",
+                                                path: `/admin/match_detail/${matches?.id}`,
                                                 name: "Match Odds",
                                               }}
                                             />
@@ -144,7 +149,7 @@ const MenuCollapse = (props: any) => {
                                           {matches?.isTiedMatch && (
                                             <MenuItemChild
                                               data={{
-                                                path: "",
+                                                path: `/admin/match_detail/${matches?.id}`,
                                                 name: "Tied Match",
                                               }}
                                             />

@@ -9,6 +9,7 @@ import { authReset, login } from "../../store/actions/auth/authActions";
 import { AppDispatch, RootState } from "../../store/store";
 import { loginValidationSchema } from "../../utils/fieldValidations/login";
 import "./style.scss";
+import { FgLogo } from "../../assets/images";
 
 const initialValues: any = {
   userName: "",
@@ -56,7 +57,7 @@ const Login = () => {
       onSubmit={handleSubmit}
     >
       <div className="auth-box ">
-        <img src="/logo.png" alt="fairGame" />
+        <img src={FgLogo} alt="fairGame" />
         <div className="auth-box-form rounded-2 bg-light">
           <h2 className="auth-title text-center mb-4">Sign In</h2>
           <Form.Group className="mb-3 d-block">
