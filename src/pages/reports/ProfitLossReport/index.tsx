@@ -42,7 +42,7 @@ const data: DataItem[] = [
     profitLoss: 30,
   },
 ];
-
+ 
 const options = [
   { value: "slotGame", label: "Slot Game" },
   { value: "liveCasino", label: "Live Casino" },
