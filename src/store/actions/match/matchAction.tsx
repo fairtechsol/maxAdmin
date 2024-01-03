@@ -51,3 +51,23 @@ export const getCompetitionMatches = createAsyncThunk<any, any>(
     }
   }
 );
+
+
+// ====== Reports ======
+
+export const getReportAccountList = createAsyncThunk<any, any>(
+  "competition/list",
+  async (requestData, thunkApi) => {
+    try {
+      const resp = await service.get(
+        `${ApiConstants.REPORT.ACCOUNTLIST}/${requestData?.id}`
+      );
+      if (resp?.data) {
+        return resp?.data;
+      }
+    } catch (error) {
+      const err = error as AxiosError;
+      return thunkApi.rejectWithValue(err.response?.status);
+    }
+  }
+);

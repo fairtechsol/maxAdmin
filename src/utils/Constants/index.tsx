@@ -21,4 +21,7 @@ export const ApiConstants = {
     COMPETITIONDATES: "/expert/match/competition/dates/",
     COMPETITIONMATCHES: "/expert/match/competition/getMatch/",
   },
+  REPORT: {
+    ACCOUNTLIST: "/transaction/get",
+  }
 };
