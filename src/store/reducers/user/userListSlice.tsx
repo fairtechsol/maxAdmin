@@ -5,6 +5,7 @@ import {
   setCreditRefference,
   setExposureLimit,
   setLockUnlockUser,
+  changePassword,
 } from "../../actions/user/userActions";
 
 interface InitialState {
@@ -12,6 +13,7 @@ interface InitialState {
   success: boolean;
   loading: boolean;
   error: any;
+  transactionPassword: any;
 }
 
 const initialState: InitialState = {
@@ -19,6 +21,7 @@ const initialState: InitialState = {
   success: false,
   loading: false,
   error: null,
+  transactionPassword: "",
 };
 
 export const userList = createSlice({
@@ -82,6 +85,20 @@ export const userList = createSlice({
         state.loading = false;
       })
       .addCase(setLockUnlockUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action?.error?.message;
+      })
+      .addCase(changePassword.pending, (state) => {
+        state.loading = true;
+        state.success = false;
+        state.error = null;
+      })
+      .addCase(changePassword.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        state.transactionPassword = action.payload;
+      })
+      .addCase(changePassword.rejected, (state, action) => {
         state.loading = false;
         state.error = action?.error?.message;
       });
