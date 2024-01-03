@@ -26,6 +26,7 @@ interface Values {
   delay: string;
   transactionPassword: string;
   downlinePartnership: number;
+  commissionDownPartnership: number;
 }
 
 const accountTypes = [
@@ -80,6 +81,7 @@ const AddAccount = () => {
           roleName: values.accountType.value,
           creditRefrence: values.creditReference,
           exposureLimit: values.exposureLimit,
+          commissionDownPartnership: values.commissionDownPartnership,
           maxBetLimit: values.maxBet,
           minBetLimit: values.minBet,
           myPartnership: userDetail?.saPartnership,
@@ -98,7 +100,7 @@ const AddAccount = () => {
     padding: "5px 10px",
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => { }, []);
 
   return (
     <>
@@ -179,7 +181,10 @@ const AddAccount = () => {
                       title={"Phone:"}
                       placeholder={"Phone"}
                       type={"number"}
-                      customstyle={"mb-3"}
+                      style={{
+                        MozAppearance: "none",
+                        WebkitAppearance: "none", appearance: "none"
+                      }}
                       {...getFieldProps("phoneNo")}
                     />
                   </Col>
@@ -207,9 +212,9 @@ const AddAccount = () => {
                       onChange={(accountTypes: any) =>
                         formik.setFieldValue("accountType", accountTypes)
                       }
-                      // onBlur={formik.handleBlur}
-                      // touched={touched.accountType}
-                      // errors={errors.accountType}
+                    // onBlur={formik.handleBlur}
+                    // touched={touched.accountType}
+                    // errors={errors.accountType}
                     />
                   </Col>
                   <Col md={6}>
@@ -268,6 +273,7 @@ const AddAccount = () => {
                         <CustomInput
                           id={"commissionDownPartnership"}
                           type={"number"}
+                          min={0}
                           {...getFieldProps("commissionDownPartnership")}
                         />
                       </td>
@@ -313,6 +319,7 @@ const AddAccount = () => {
                       <td>
                         <CustomInput
                           id={"downLinePartnership"}
+                          min={0}
                           type={"number"}
                           {...getFieldProps("downLinePartnership")}
                         />
@@ -360,6 +367,7 @@ const AddAccount = () => {
                         <CustomInput
                           id={"minBet"}
                           type={"number"}
+                          min={0}
                           customstyle={"mb-3"}
                           {...getFieldProps("minBet")}
                         />
@@ -376,6 +384,7 @@ const AddAccount = () => {
                         <CustomInput
                           id={"maxBet"}
                           type={"number"}
+                          min={0}
                           customstyle={"mb-3"}
                           {...getFieldProps("maxBet")}
                           touched={touched.maxBet}

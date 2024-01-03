@@ -79,7 +79,7 @@ const data: DataItem[] = [
 
 const options = [
   { value: "all", label: "All" },
-  { value: "balaceReport", label: "Balace Report" },
+  { value: "balanceReport", label: "Balance Report" },
   { value: "gameReport", label: "Game Report" },
 ];
 

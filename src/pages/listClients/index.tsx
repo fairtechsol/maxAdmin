@@ -96,7 +96,7 @@ const ListClent: React.FC = () => {
           </Col>
           <Col>
             <CustomButton
-              className="float-end"
+              className="float-end mt-2"
               onClick={() => navigate(`/admin/add-account`)}
             >
               Add Account

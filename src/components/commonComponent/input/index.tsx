@@ -1,6 +1,6 @@
 import { Form } from "react-bootstrap";
 import CustomErrorMessage from "./CustomErrorMessage";
-
+import React from "react";
 const CustomInput = (props: any) => {
   const {
     title,
@@ -11,9 +11,14 @@ const CustomInput = (props: any) => {
     errors,
     id,
     touched,
+    style,
     disabled,
     ...prop
   } = props;
+
+  const inlineStyle: React.CSSProperties = {
+    ...style,
+  };
   return (
     <>
       <Form.Group className={`${props.customstyle} ${formInline ? "row" : ""}`}>
@@ -29,6 +34,7 @@ const CustomInput = (props: any) => {
           className={`col-${formInline ? inputCol : ""} bg-${bgColor}`}
           name={id}
           {...prop}
+          style={{ ...inlineStyle }}
         />
         <CustomErrorMessage touched={touched} errors={errors} />
       </Form.Group>

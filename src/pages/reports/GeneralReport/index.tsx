@@ -27,7 +27,7 @@ const data: DataItem[] = [];
 
 const options = [
   { value: "generalReport", label: "General Report" },
-  { value: "creditRefference", label: "Credit Refference" },
+  { value: "creditReferance", label: "Credit Referance" },
 ];
 
 const GeneralReport = () => {
