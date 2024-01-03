@@ -6,12 +6,17 @@ export const addAccountValidationSchema = Yup.object({
   retypePassword: Yup.string()
     .oneOf([Yup.ref("userPassword"), ""], "Passwords must match")
     .required("Password is required"),
+  city: Yup.string().required("City Name is required"),
   // accountType: Yup.object().shape({
   //   value: Yup.string().required("Account Type is required"),
   //   label: Yup.string().required("Account Type is required"),
   // }),
-  creditReference: Yup.string().required("Credit Reference is required"),
-  exposureLimit: Yup.string().required("Exposure Limit is required"),
+  creditReference: Yup.number().positive('Credit Reference must be a positive number')
+  .min(0, 'Credit Reference must be greater than or equal to 0')
+  .required("Credit Reference is required"),
+  exposureLimit: Yup.number()
+  .min(0, 'Credit Reference must be greater than or equal to 0')
+  .positive('Exposure Limit must be a positive number').required("Exposure Limit is required"),
   transactionPassword: Yup.string().required(
     "Transaction Password is required"
   ),

@@ -79,7 +79,7 @@ const ChangePassword = () => {
               id={"newPassword"}
               title={"New Password"}
               placeholder={"New Password"}
-              type={"text"}
+              type={"password"}
               customstyle={"mb-3"}
               {...getFieldProps("newPassword")}
               touched={touched.newPassword}

@@ -4,7 +4,7 @@ import Loadable from "../utils/loadable";
 import { Navigate } from "react-router-dom";
 // ==============================|| Auth ROUTING ||============================== //
 const Login = Loadable(lazy(() => import("../pages/auth/login")));
-const ChangePassword = Loadable(lazy(() => import("../pages/changePassword")));
+const ChangePassword = Loadable(lazy(() => import("../pages/auth/changePassword")));
 
 const AuthRoutes = {
   path: "/admin/",

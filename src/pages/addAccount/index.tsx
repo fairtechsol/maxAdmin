@@ -218,6 +218,7 @@ const AddAccount = () => {
                       title={"Credit Reference"}
                       placeholder={"Enter Credit Reference"}
                       type={"number"}
+                      min={0}
                       customstyle={"mb-3"}
                       {...getFieldProps("creditReference")}
                       touched={touched.creditReference}
@@ -230,6 +231,7 @@ const AddAccount = () => {
                       title={"Exposure Limit"}
                       placeholder={"Enter Exposure Limit"}
                       type={"number"}
+                      min={0}
                       customstyle={"mb-3"}
                       {...getFieldProps("exposureLimit")}
                       touched={touched.exposureLimit}
