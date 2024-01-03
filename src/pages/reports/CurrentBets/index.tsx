@@ -26,7 +26,41 @@ const columns: Column[] = [
   { id: "matchDate", label: "Match Date" },
 ];
 
-const data: DataItem[] = [];
+const data: DataItem[] = [
+  {
+    eventType: "eventType",
+    eventName: "ICC World Cup",
+    Username: "fuser111",
+    runnerName: "Deepak ",
+    betType: "Match1",
+    userRate: "94.5",
+    amount: "1000",
+    placeDate: "17-11-223",
+    matchDate: "17-11-223",
+  },
+  {
+    eventType: "eventType",
+    eventName: "American Premier League",
+    Username: "fuser111",
+    runnerName: "Pardeep ",
+    betType: "Match1",
+    userRate: "62.5",
+    amount: "1000",
+    placeDate: "17-11-223",
+    matchDate: "17-11-223",
+  },
+  {
+    eventType: "eventType",
+    eventName: "T20",
+    Username: "fuser111",
+    runnerName: "Rohan ",
+    betType: "Match1",
+    userRate: "94.5",
+    amount: "1000",
+    placeDate: "17-11-223",
+    matchDate: "17-11-223",
+  },
+];
 
 const options = [
   { value: "matched", label: "Matched" },
