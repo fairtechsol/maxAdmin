@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   getUsersProfile,
   profileReset,
+
 } from "../../../store/actions/user/userActions";
 
 interface InitialState {
@@ -9,9 +10,11 @@ interface InitialState {
   success: boolean;
   loading: boolean;
   error: any;
+
 }
 
 const initialState: InitialState = {
+
   userDetail: null,
   loading: false,
   success: false,
@@ -41,6 +44,7 @@ const profileSlice = createSlice({
       .addCase(profileReset, (state) => {
         return { ...state, success: false };
       });
+    
   },
 });
 

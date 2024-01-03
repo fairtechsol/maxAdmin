@@ -19,6 +19,7 @@ const Password = ({ userData, setShow }: any) => {
 
   const formik = useFormik({
     initialValues: initialValues,
+    
     onSubmit: (values: any) => {
       let payload = {
         userid: userData.userId,
