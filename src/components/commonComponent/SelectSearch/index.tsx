@@ -49,7 +49,7 @@ const SelectSearch = (props: any) => {
           styles={{
             control: (baseStyles, state) => ({
               ...baseStyles,
-              borderColor: state.isFocused ? "grey" : "red",
+              // borderColor: state.isFocused ? "grey" : "red",
               // minHeight: 20,
               maxHeight: "20px",
             }),
