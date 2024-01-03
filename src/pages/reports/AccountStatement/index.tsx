@@ -7,6 +7,13 @@ import CustomModal from "../../../components/commonComponent/modal";
 import CustomTable from "../../../components/commonComponent/table";
 import AccountStatementModal from "../../../components/reports/modals/accountStatement";
 import { TableConfig } from "../../../models/tableInterface";
+import {
+  getReportAccountList,
+} from "../../../store/actions/match/matchAction";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../../store/store";
+
+
 
 interface Column {
   id: string;
@@ -77,11 +84,27 @@ const options = [
 ];
 
 const AccountStatement = () => {
+  const dispatch: AppDispatch = useDispatch();
   const [AccountStatementModalShow, setAccountStatementModalShow] =
     useState(false);
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
 
-  useEffect(() => {}, [tableConfig]);
+  const { ReportAccountList } = useSelector(
+    (state: RootState) => state.match.reportList
+  );
+  const { userDetail } = useSelector(
+    (state: RootState) => state.user.profile
+  );
+
+
+  useEffect(() => {
+    if (userDetail) {
+      dispatch(getReportAccountList({ id: userDetail?.id }));
+
+    }
+  }, []);
+  useEffect(() => {
+  }, [tableConfig]);
   return (
     <div className="p-2 pt-0">
       <h5 className="title-22 fw-normal">Account Statement</h5>
@@ -147,17 +170,17 @@ const AccountStatement = () => {
         setTableConfig={setTableConfig}
         enablePdfExcel={true}
       >
-        {data.map((item, index) => {
-          const { date, credit, debit, closing, description, fromto } = item;
+        {ReportAccountList?.transactions?.map((item: any, index: any) => {
+          const { createdAt, amount,  closingBalance, description, actionByUser, user } = item;
           return (
             <tr key={index}>
               {/* {columns.map((column) => (
               <td key={column.id}>{item[column.id]}</td>
             ))} */}
-              <td>{date}</td>
-              <td>{credit}</td>
-              <td>{debit}</td>
-              <td>{closing}</td>
+              <td>{createdAt} </td>
+              <td>{amount > 0 ? amount : ""}</td>
+              <td>{amount < 0 ? amount : ""}</td>
+              <td>{closingBalance}</td>
               <td>
                 <CustomButton
                   className="actionBtn"
@@ -167,7 +190,7 @@ const AccountStatement = () => {
                   {description}
                 </CustomButton>
               </td>
-              <td>{fromto}</td>
+              <td>{"From: "}<span className="badge bg-primary">{actionByUser.userName}</span> {"To: "}<span className="badge bg-primary">{user.userName}</span> </td>
             </tr>
           );
         })}
