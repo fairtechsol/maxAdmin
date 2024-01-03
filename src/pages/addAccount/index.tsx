@@ -4,8 +4,8 @@ import CustomInput from "../../components/commonComponent/input";
 import { addAccountValidationSchema } from "../../utils/fieldValidations/addAccount";
 import { useFormik } from "formik";
 import { addUser } from "../../store/actions/user/userActions";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../store/store";
 import { useEffect } from "react";
 
 interface Values {
@@ -63,25 +63,32 @@ const initialValues = {
 
 const AddAccount = () => {
   const dispatch: AppDispatch = useDispatch();
+
+  const { userDetail } = useSelector((state: RootState) => state.user.profile);
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: addAccountValidationSchema,
     onSubmit: (values: Values) => {
-      let payload = {
-        userName: values.clientName,
-        fullName: values.fullName,
-        password: values.retypePassword,
-        confirmPassword: values.retypePassword,
-        phoneNumber: JSON.stringify(values.phoneNo),
-        city: values.city,
-        roleName: values.accountType.value,
-        creditRefrence: values.creditReference,
-        exposureLimit: values.exposureLimit,
-        maxBetLimit: values.maxBet,
-        minBetLimit: values.minBet,
-        myPartnership: 100,
-      };
-      dispatch(addUser(payload));
+      try {
+        let payload = {
+          userName: values.clientName,
+          fullName: values.fullName,
+          password: values.retypePassword,
+          confirmPassword: values.retypePassword,
+          phoneNumber: JSON.stringify(values.phoneNo),
+          city: values.city,
+          roleName: values.accountType.value,
+          creditRefrence: values.creditReference,
+          exposureLimit: values.exposureLimit,
+          maxBetLimit: values.maxBet,
+          minBetLimit: values.minBet,
+          myPartnership: userDetail?.saPartnership,
+          transactionPassword: values?.transactionPassword,
+        };
+        dispatch(addUser(payload));
+      } catch (e) {
+        console.log(e);
+      }
     },
   });
 
@@ -92,7 +99,7 @@ const AddAccount = () => {
   };
 
   useEffect(() => {}, []);
-  
+
   return (
     <>
       <Card className="addAccount  border-0">
@@ -192,6 +199,7 @@ const AddAccount = () => {
                       label={"Account Type"}
                       options={accountTypes}
                       placeholder={"- Select Your A/C. Type -"}
+                      defaultValue={"Select..."}
                       value={accountTypes.find(
                         (option: any) =>
                           option.value === formik.values.accountType.value
@@ -199,9 +207,9 @@ const AddAccount = () => {
                       onChange={(accountTypes: any) =>
                         formik.setFieldValue("accountType", accountTypes)
                       }
-                      onBlur={formik.handleBlur}
-                      touched={touched.accountType}
-                      errors={errors.accountType}
+                      // onBlur={formik.handleBlur}
+                      // touched={touched.accountType}
+                      // errors={errors.accountType}
                     />
                   </Col>
                   <Col md={6}>

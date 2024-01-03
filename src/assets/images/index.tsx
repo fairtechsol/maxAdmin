@@ -1,0 +1,1 @@
+export { default as FgLogo } from "./logo.webp";
