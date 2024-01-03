@@ -165,7 +165,7 @@ export const handleExport = createAsyncThunk<any, string>(
         `${ApiConstants.USER.LIST}?type=${type}`
       );
 
-      const fileData = response?.data;
+      const fileData = response?.data?.file;
 
       let blob = new Blob();
       if (type === "pdf") {
