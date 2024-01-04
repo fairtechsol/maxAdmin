@@ -50,7 +50,7 @@ const CustomTable: React.FC<CustomTableProps> = ({
     direction: "asc",
   });
   const [currentPage, setCurrentPage] = useState(1);
-  const [rowPerPage, setRowPerPage] = useState(1);
+  const [rowPerPage, setRowPerPage] = useState(10);
 
   // Handle column click to change the sorting configuration
   const handleSort = (key: string | number) => {
@@ -71,11 +71,10 @@ const CustomTable: React.FC<CustomTableProps> = ({
     setTableConfig({
       page: currentPage,
       sort: sortConfig,
+      rowPerPage: rowPerPage,
     });
     // alert(tHeadTheme);
-  }, [currentPage, sortConfig]);
-  console.log(columns);
-
+  }, [currentPage, sortConfig, rowPerPage]);
   return (
     <div className={`${customClass ?? ""} customTable`}>
       <TableHeader
@@ -87,14 +86,14 @@ const CustomTable: React.FC<CustomTableProps> = ({
         setRowPerPage={setRowPerPage}
       />
       {/* Table for displaying data */}
-      <Table {...props} className={`${CustomTableClass}`}>
+      <Table {...props} className={`${CustomTableClass}`} responsive>
         <thead>
           <tr>
             {/* Table header with sorting icons */}
-            {columns.map((column) => (
+            {columns.map((column, index) => (
               <th
                 className={`${tHeadTheme}`}
-                key={column.id}
+                key={index}
                 colSpan={column?.colSpan}
               >
                 {column.label}
