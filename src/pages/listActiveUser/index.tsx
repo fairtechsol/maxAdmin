@@ -15,7 +15,7 @@ const columns: Column[] = [
   { id: "username", label: "User Name", colSpan: 2 },
   { id: "creditReferance", label: "Credit Referance" },
   { id: "balance", label: "Balance" },
-  { id: "client", label: "Client" },
+  { id: "client", label: "Client (P/L)" },
   { id: "exposure", label: "Exposure" },
   { id: "availBal", label: "Avialable Balance" },
   { id: "ust", label: "U St" },
@@ -30,7 +30,7 @@ const columns: Column[] = [
 const ListActiveInactiveUser: React.FC = () => {
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
-  
+
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
   const [eventDetails, setEventDetails] = useState({
     show: false,
@@ -166,14 +166,17 @@ const ListActiveInactiveUser: React.FC = () => {
                       activeUser.map((userItem: any, index: number) => {
                         const {
                           userName,
+                          balance,
+                          availableBalance,
                           creditRefrence,
                           exposureLimit,
-                          defaultPer,
                           roleName,
-                          casinoTotal,
+                          matchCommission,
+                          totalComission,
                           id,
                           userBlock,
                           betBlock,
+                          userBal,
                         } = userItem;
                         return (
                           <tr key={id}>
@@ -187,10 +190,10 @@ const ListActiveInactiveUser: React.FC = () => {
                             </td>
 
                             <td className="text-end">{creditRefrence}</td>
-                            <td className="text-end">...</td>
-                            <td className="text-end">...</td>
-                            <td className="text-end">...</td>
-                            <td className="text-end">...</td>
+                            <td className="text-end">{balance}</td>
+                            <td className="text-end">{userBal?.myProfitLoss}</td>
+                            <td className="text-end">{userBal?.exposure}</td>
+                            <td className="text-end">{availableBalance}</td>
                             <td className="text-center">
                               <Form>
                                 <Form.Check
@@ -212,9 +215,9 @@ const ListActiveInactiveUser: React.FC = () => {
                               </Form>
                             </td>
                             <td className="text-end">{exposureLimit}</td>
-                            <td>{defaultPer}</td>
+                            <td>{matchCommission}</td>
                             <td>{roleName}</td>
-                            <td className="text-end">{casinoTotal}</td>
+                            <td className="text-end">{totalComission}</td>
                             <td>
                               <div className="d-flex gap-1 border-right-0 border-left-0">
                                 {actionButtons?.map((item) => {
@@ -269,9 +272,9 @@ const ListActiveInactiveUser: React.FC = () => {
                           userName,
                           creditRefrence,
                           exposureLimit,
-                          defaultPer,
+                          matchCommission,
                           roleName,
-                          casinoTotal,
+                          totalComission,
                           id,
                           userBlock,
                           betBlock,
@@ -313,9 +316,9 @@ const ListActiveInactiveUser: React.FC = () => {
                               </Form>
                             </td>
                             <td className="text-end">{exposureLimit}</td>
-                            <td>{defaultPer}</td>
+                            <td>{matchCommission}</td>
                             <td>{roleName}</td>
-                            <td className="text-end">{casinoTotal}</td>
+                            <td className="text-end">{totalComission}</td>
                             <td>
                               <div className="d-flex gap-1 border-right-0 border-left-0">
                                 {actionButtons?.map((item) => {
