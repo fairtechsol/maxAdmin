@@ -51,7 +51,7 @@ const SelectSearch = (props: any) => {
               ...baseStyles,
               // borderColor: state.isFocused ? "grey" : "red",
               // minHeight: 20,
-              maxHeight: "20px",
+              // maxHeight: "20px",
             }),
           }}
           minMenuHeight={20}

@@ -12,8 +12,8 @@ const service = axios.create({
   //PROD
   // baseURL: "http://3.89.232.255:5000/",
   //DEV
-  // baseURL: 'http://localhost:5000',
-  baseURL: "http://localhost:5001/",
+  baseURL: 'http://localhost:5000',
+  // baseURL: "http://localhost:5000/",
 });
 
 service.defaults.timeout = 100000;
