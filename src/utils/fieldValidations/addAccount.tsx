@@ -7,8 +7,7 @@ export const addAccountValidationSchema = Yup.object({
     .oneOf([Yup.ref("userPassword"), ""], "Passwords must match")
     .required("Password is required"),
   city: Yup.string()
-    .matches(/^[A-Za-z]+$/, 'City Name must only contain letters'),
-    
+  .matches(/^[A-Za-z]+$/, 'City Name must only contain letters'),
   // accountType: Yup.object().shape({
   //   value: Yup.string().required("Account Type is required"),
   //   label: Yup.string().required("Account Type is required"),
