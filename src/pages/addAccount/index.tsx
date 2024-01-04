@@ -6,7 +6,7 @@ import { useFormik } from "formik";
 import { addUser } from "../../store/actions/user/userActions";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface Values {
   clientName: string;
@@ -28,14 +28,6 @@ interface Values {
   downlinePartnership: number;
   commissionDownPartnership: number;
 }
-
-const accountTypes = [
-  { value: "admin", label: "Admin", level: 1 },
-  { value: "superMaster", label: "Super Master", level: 2 },
-  { value: "master", label: "Master", level: 3 },
-  { value: "agent", label: "Agent", level: 4 },
-  { value: "user", label: "User", level: 5 },
-];
 
 const initialValues = {
   clientName: "",
@@ -64,6 +56,7 @@ const initialValues = {
 
 const AddAccount = () => {
   const dispatch: AppDispatch = useDispatch();
+  const [accountTypes, setAccountTypes] = useState<any>([]);
 
   const { userDetail } = useSelector((state: RootState) => state.user.profile);
   const formik = useFormik({
@@ -76,7 +69,7 @@ const AddAccount = () => {
           fullName: values.fullName,
           password: values.retypePassword,
           confirmPassword: values.retypePassword,
-          phoneNumber: JSON.stringify(values.phoneNo),
+          phoneNumber: values.phoneNo ? JSON.stringify(values.phoneNo) : "",
           city: values.city,
           roleName: values.accountType.value,
           creditRefrence: values.creditReference,
@@ -100,7 +93,45 @@ const AddAccount = () => {
     padding: "5px 10px",
   };
 
-  useEffect(() => { }, []);
+  const setTypeForAccountType = () => {
+    try {
+      const roleName = userDetail?.roleName;
+
+      const accountTypeMap: any = {
+        superAdmin: [
+          { value: "admin", label: "Admin" },
+          { value: "superMaster", label: "Super Master" },
+          { value: "master", label: "Master" },
+          { value: "agent", label: "Agent" },
+          { value: "user", label: "User" },
+        ],
+        admin: [
+          { value: "superMaster", label: "Super Master" },
+          { value: "master", label: "Master" },
+          { value: "agent", label: "Agent" },
+          { value: "user", label: "User" },
+        ],
+        superMaster: [
+          { value: "master", label: "Master" },
+          { value: "agent", label: "Agent" },
+          { value: "user", label: "User" },
+        ],
+        master: [
+          { value: "agent", label: "Agent" },
+          { value: "user", label: "User" },
+        ],
+        agent: [{ value: "user", label: "User" }],
+      };
+
+      setAccountTypes(accountTypeMap[roleName] || []);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  useEffect(() => {
+    setTypeForAccountType();
+  }, [userDetail]);
 
   return (
     <>
@@ -183,7 +214,8 @@ const AddAccount = () => {
                       type={"number"}
                       style={{
                         MozAppearance: "none",
-                        WebkitAppearance: "none", appearance: "none"
+                        WebkitAppearance: "none",
+                        appearance: "none",
                       }}
                       {...getFieldProps("phoneNo")}
                     />
@@ -212,9 +244,9 @@ const AddAccount = () => {
                       onChange={(accountTypes: any) =>
                         formik.setFieldValue("accountType", accountTypes)
                       }
-                    // onBlur={formik.handleBlur}
-                    // touched={touched.accountType}
-                    // errors={errors.accountType}
+                      // onBlur={formik.handleBlur}
+                      // touched={touched.accountType}
+                      // errors={errors.accountType}
                     />
                   </Col>
                   <Col md={6}>
