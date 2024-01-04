@@ -31,10 +31,10 @@ const ChangeStatus = ({ setShow, userData }: any) => {
     initialValues: initialValues,
     onSubmit: (values: any) => {
       let payload = {
-        userId: userData.userId,
+        userId: userData?.id,
         betBlock: lockUnlockObj.betBlocked,
         userBlock: lockUnlockObj.allBlocked,
-        transPassword: values.transactionPassword,
+        transactionPassword: values.transactionPassword,
       };
       dispatch(setLockUnlockUser(payload));
       setShow(false);
