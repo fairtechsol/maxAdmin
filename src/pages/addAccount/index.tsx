@@ -24,41 +24,46 @@ interface Values {
   minBet: string;
   maxBet: string;
   delay: string;
+  uplinePartnership: number;
   transactionPassword: string;
   downlinePartnership: number;
+  ourPartnership: number;
   commissionDownPartnership: number;
 }
-
-const initialValues = {
-  clientName: "",
-  userPassword: "",
-  retypePassword: "",
-  fullName: "",
-  city: "",
-  phoneNo: "",
-  accountType: {
-    label: "",
-    value: "",
-  },
-  commissionUpPartnership: 0,
-  commissionDownPartnership: 0,
-  ourCommissionPartnership: 0,
-  uplinePartnership: 0,
-  ourPartnership: 0,
-  downlinePartnership: 0,
-  creditReference: "",
-  exposureLimit: "",
-  minBet: "",
-  maxBet: "",
-  delay: "",
-  transactionPassword: "",
-};
 
 const AddAccount = () => {
   const dispatch: AppDispatch = useDispatch();
   const [accountTypes, setAccountTypes] = useState<any>([]);
+  const [down, setDown] = useState<number>(0);
 
-  const { userDetail } = useSelector((state: RootState) => state.user.profile);
+  const initialValues = {
+    clientName: "",
+    userPassword: "",
+    retypePassword: "",
+    fullName: "",
+    city: "",
+    phoneNo: "",
+    accountType: {
+      label: "",
+      value: "",
+    },
+    commissionUpPartnership: 0,
+    commissionDownPartnership: 0,
+    ourCommissionPartnership: 0,
+    uplinePartnership: 0,
+    ourPartnership: 0,
+    downlinePartnership: 0,
+    creditReference: "",
+    exposureLimit: "",
+    minBet: "",
+    maxBet: "",
+    delay: "",
+    transactionPassword: "",
+  };
+
+  const { userDetail, success } = useSelector(
+    (state: RootState) => state.user.profile
+  );
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: addAccountValidationSchema,
@@ -74,10 +79,10 @@ const AddAccount = () => {
           roleName: values.accountType.value,
           creditRefrence: values.creditReference,
           exposureLimit: values.exposureLimit,
-          commissionDownPartnership: values.commissionDownPartnership,
+          // commissionDownPartnership: values.commissionDownPartnership,
           maxBetLimit: values.maxBet,
           minBetLimit: values.minBet,
-          myPartnership: userDetail?.saPartnership,
+          myPartnership: values.ourPartnership,
           transactionPassword: values?.transactionPassword,
         };
         dispatch(addUser(payload));
@@ -128,6 +133,67 @@ const AddAccount = () => {
       console.error(e);
     }
   };
+
+  const handlePartnershipChange = (event: any) => {
+    try {
+      const newValue = parseInt(event.target.value, 10);
+      const remainingDownline = +down - +newValue;
+      if (remainingDownline < 0) {
+        return;
+      }
+
+      formik.setValues({
+        ...formik.values,
+        ourPartnership: remainingDownline,
+        downlinePartnership: newValue,
+      });
+    } catch (e: any) {
+      console.log(e);
+    }
+  };
+
+  const handleUpline = () => {
+    const {
+      aPartnership,
+      saPartnership,
+      smPartnership,
+      faPartnership,
+      fwPartnership,
+      roleName,
+    } = userDetail;
+
+    const partnershipMap: any = {
+      superMaster: aPartnership + saPartnership + faPartnership + fwPartnership,
+      superAdmin: faPartnership + fwPartnership,
+      master:
+        smPartnership +
+        aPartnership +
+        saPartnership +
+        faPartnership +
+        fwPartnership,
+      admin: saPartnership + faPartnership + fwPartnership,
+      fairGameWallet: 0,
+      fairGameAdmin: fwPartnership,
+    };
+
+    const thisUplinePertnerShip = partnershipMap[roleName] || 0;
+
+    return thisUplinePertnerShip;
+  };
+
+  useEffect(() => {
+    if (success) {
+      if (userDetail && userDetail.roleName) {
+        const res = handleUpline();
+        formik.setValues({
+          ...formik.values,
+          uplinePartnership: res,
+          downlinePartnership: 100 - res,
+        });
+        setDown(100 - res);
+      }
+    }
+  }, [userDetail, userDetail?.roleName, success]);
 
   useEffect(() => {
     setTypeForAccountType();
@@ -353,7 +419,8 @@ const AddAccount = () => {
                           id={"downLinePartnership"}
                           min={0}
                           type={"number"}
-                          {...getFieldProps("downLinePartnership")}
+                          onChange={handlePartnershipChange}
+                          // {...getFieldProps("downLinePartnership")}
                         />
                       </td>
                     </tr>
