@@ -1,7 +1,7 @@
 import React from "react";
 import { Pagination } from "react-bootstrap";
-import CustomButton from "../../button";
-
+// import CustomButton from "../../button";
+/*** */
 interface PaginationComponentProps {
   currentPage: number;
   totalPages: number;
@@ -19,36 +19,54 @@ const PaginationComponent: React.FC<PaginationComponentProps> = ({
 }) => {
   return (
     <Pagination>
-      <div className="title-14">
-        Showing {currentPage === 1 ? 1 : (currentPage - 1) * rowPerPage + 1} to{" "}
-        {Math.min(currentPage * rowPerPage, itemCount)} of {itemCount} entries
-      </div>
-      <div className="paginationContainer">
-        <CustomButton
-          variant="primary"
+      <div className="paginationContainer title-14">
+      <Pagination.First
           disabled={currentPage === 1}
-          onClick={() => onPageChange(currentPage - 1)}
-          className="paginationBtn"
+          onClick={() => onPageChange(1)}
         >
+          First
+        </Pagination.First>
+        <Pagination.Prev
+      //   Showing {currentPage === 1 ? 1 : (currentPage - 1) * rowPerPage + 1} to{" "}
+      //   {Math.min(currentPage * rowPerPage, itemCount)} of {itemCount} entries
+      // </div>
+      // <div className="paginationContainer">
+      //   <CustomButton
+      //     variant="primary"
+      disabled={currentPage === 1}
+      onClick={() => onPageChange(currentPage - 1)}
+      className="paginationBtn"
+      >
           Previous
-        </CustomButton>
+          {/* </CustomButton> */}
+          </Pagination.Prev>
+
         {[...Array(totalPages)].map((_, index) => (
           <Pagination.Item
             key={index + 1}
             active={index + 1 === currentPage}
             onClick={() => onPageChange(index + 1)}
+            className="cursor-pointer"
           >
             {index + 1}
           </Pagination.Item>
         ))}
-        <CustomButton
-          variant="primary"
+        {/* <CustomButton
+          variant="primary" */}
+          <Pagination.Next
           disabled={currentPage === totalPages}
           onClick={() => onPageChange(currentPage + 1)}
-          className="paginationBtn"
+          // className="paginationBtn"
         >
           Next
-        </CustomButton>
+        {/* </CustomButton> */}
+        </Pagination.Next>
+        <Pagination.Last
+          disabled={currentPage === totalPages}
+          onClick={() => onPageChange(totalPages)}
+        >
+          Last
+        </Pagination.Last>
       </div>
     </Pagination>
   );
