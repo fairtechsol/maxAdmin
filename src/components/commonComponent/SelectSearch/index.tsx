@@ -20,6 +20,7 @@ const SelectSearch = (props: any) => {
     onBlur,
     touched,
     errors,
+    onInputChange
   } = props;
 
   // const customStyles = {
@@ -59,6 +60,7 @@ const SelectSearch = (props: any) => {
           value={value}
           defaultValue={defaultValue}
           onChange={onChange}
+          onInputChange={onInputChange}
           onBlur={onBlur}
           options={options}
           placeholder={placeholder}

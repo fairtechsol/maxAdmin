@@ -31,7 +31,7 @@ const TableHeader: React.FC<TableHeaderProps> = ({
     setTableConfig((prev: any) => {
       return { ...prev, keyword: keyword };
     });
-  }, []);
+  }, [keyword]);
 
   return (
     <div className="d-flex justify-content-between align-items-center">

@@ -1,12 +1,22 @@
 import { Accordion, Col, Row } from "react-bootstrap";
 import { FaRegArrowAltCircleUp } from "react-icons/fa";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../../store/store";
 import "./style.scss";
+import { useEffect } from "react";
+import { userBalance } from "../../../store/actions/user/userActions";
 
 const LoggedUserDetail = () => {
   const { userDetail } = useSelector((state: RootState) => state.user.profile);
+  const { userBalanceList } = useSelector((state: RootState) => state.user.userList);
+  console.log(userBalanceList, "userBalance77777777");
   console.log(userDetail, "userDetail");
+  const dispatch: AppDispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(userBalance());
+  }, []);
+
   return (
     <div className="bg-secondary LoggedUserDetail">
       <Accordion>
@@ -22,17 +32,17 @@ const LoggedUserDetail = () => {
                     Upper Level Credit Referance:
                   </div>
                   <div className="col-md-4 title-14">
-                    {userDetail?.currentBalance}
+                    {+userBalanceList?.userCreditReference || 0}
                   </div>
                 </div>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
                   <div className="col-md-8 title-14">Total Master Balance</div>
-                  <div className="col-md-4 title-14">27044</div>
+                  <div className="col-md-4 title-14">{+userBalanceList?.totalMasterBalance || 0}</div>
                 </div>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
                   <div className="col-md-8 title-14">Available Balance:</div>
                   <div className="col-md-4 title-14">
-                    {userDetail?.currentBalance}
+                    {+userBalanceList?.availableBalance|| 0}
                   </div>
                 </div>
               </Col>
@@ -42,19 +52,19 @@ const LoggedUserDetail = () => {
                     Down level Occupy Balance:
                   </div>
                   <div className="col-md-4 title-14">
-                    {userDetail?.downLevelBalance}
+                    {+userBalanceList?.downLevelBalance || 0}
                   </div>
                 </div>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
                   <div className="col-md-8 title-14">Upper Level:</div>
-                  <div className="col-md-4 title-14">27044</div>
+                  <div className="col-md-4 title-14">{+userBalanceList.upperLevelBalance}</div>
                 </div>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
                   <div className="col-md-8 title-14">
                     Available Balance With Profit/Loss:
                   </div>
                   <div className="col-md-4 title-14">
-                    {userDetail?.profitLoss}
+                    {+userBalanceList?.availableBalanceWithProfitLoss || 0}
                   </div>
                 </div>
               </Col>
@@ -64,19 +74,19 @@ const LoggedUserDetail = () => {
                     Down Level Credit Referance:
                   </div>
                   <div className="col-md-4 title-14">
-                    {userDetail?.downLevelCreditRefrence}
+                    {+userBalanceList?.downLevelCreditReference || 0}
                   </div>
                 </div>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
                   <div className="col-md-8 title-14">
                     Down Level Profit/Loss :
                   </div>
-                  <div className="col-md-4 title-14">27044</div>
+                  <div className="col-md-4 title-14">{+userBalanceList?.downLevelProfitLoss || 0}</div>
                 </div>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
                   <div className="col-md-8 title-14">My Profit/Loss:</div>
                   <div className="col-md-4 title-14">
-                    {userDetail?.myProfitLoss}
+                    {+userBalanceList?.profitLoss || 0}
                   </div>
                 </div>
               </Col>

@@ -18,7 +18,6 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onSearch }) => {
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const query = e.target.value;
-    onSearch(query);
     setKeyword(query);
     debouncedInputValue(query);
   };
