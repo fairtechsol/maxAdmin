@@ -21,7 +21,7 @@ const ExposureLimit = ({ setShow, userData }: any) => {
     initialValues: initialValues,
     onSubmit: (values: any) => {
       let payload = {
-        userid: userData.userId,
+        userid: userData?.id,
         amount: values.amount,
         transPassword: values.transPassword,
       };

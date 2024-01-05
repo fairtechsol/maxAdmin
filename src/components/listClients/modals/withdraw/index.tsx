@@ -26,7 +26,7 @@ const Withdraw = ({ userData, setShow }: any) => {
     initialValues: initialValues,
     onSubmit: (values: any) => {
       let payload = {
-        userId: userData.userId,
+        userId: userData?.id,
         amount: values.amount,
         transactionPassword: values.transactionPassword,
         remark: values.remark,
