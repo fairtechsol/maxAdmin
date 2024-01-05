@@ -328,7 +328,7 @@ const AddAccount = () => {
                       errors={errors.creditReference}
                     />
                   </Col>
-                  <Col md={6}>
+                  {formik.values.accountType.value === "user" &&<Col md={6}>
                     <CustomInput
                       id={"exposureLimit"}
                       title={"Exposure Limit"}
@@ -340,7 +340,7 @@ const AddAccount = () => {
                       touched={touched.exposureLimit}
                       errors={errors.exposureLimit}
                     />
-                  </Col>
+                  </Col>}
                 </Row>
               </Col>
             </Row>
