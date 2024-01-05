@@ -71,3 +71,20 @@ export const getReportAccountList = createAsyncThunk<any, any>(
     }
   }
 );
+
+export const betReportAccountList = createAsyncThunk<any, any>(
+  "competition/dates",
+  async (requestData, thunkApi) => {
+    try {
+      const resp = await service.get(
+        `${ApiConstants.REPORT.BETHISTORY}?status=${requestData?.status}`
+      );
+      if (resp?.data) {
+        return resp?.data;
+      }
+    } catch (error) {
+      const err = error as AxiosError;
+      return thunkApi.rejectWithValue(err.response?.status);
+    }
+  }
+);
