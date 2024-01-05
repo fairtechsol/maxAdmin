@@ -22,9 +22,9 @@ export const addAccountValidationSchema = Yup.object({
   creditReference: Yup.number().positive('Credit Reference must be a positive number')
     .min(0, 'Credit Reference must be greater than or equal to 0')
     .required("Credit Reference is required"),
-  exposureLimit: Yup.number()
-    .min(0, 'Credit Reference must be greater than or equal to 0')
-    .positive('Exposure Limit must be a positive number').required("Exposure Limit is required"),
+  // exposureLimit: Yup.number()
+  //   .min(0, 'Credit Reference must be greater than or equal to 0')
+  //   .positive('Exposure Limit must be a positive number').required("Exposure Limit is required"),
   transactionPassword: Yup.string().required(
     "Transaction Password is required"
   ),
