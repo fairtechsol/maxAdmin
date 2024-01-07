@@ -25,6 +25,27 @@ export const ApiConstants = {
   },
   REPORT: {
     ACCOUNTLIST: "/transaction/get",
-    BETHISTORY: "/bet"
-  }
+    BETHISTORY: "/bet",
+  },
+};
+
+export const Constants = {
+  apiBasePath: "http://localhost:5000",
+  thirdParty: "http://localhost:3200",
+  expertPath: "http://localhost:6060",
+};
+
+export const baseUrls = {
+  socket:
+    process.env.NODE_ENV === "production"
+      ? `${Constants.apiBasePath}`
+      : "http://localhost:5000",
+  thirdParty:
+    process.env.NODE_ENV === "production"
+      ? `${Constants.thirdParty}`
+      : "http://localhost:3200",
+  expertSocket:
+    process.env.NODE_ENV === "production"
+      ? `${Constants.expertPath}`
+      : "http://localhost:6060",
 };

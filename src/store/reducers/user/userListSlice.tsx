@@ -12,7 +12,7 @@ import {
 
 interface InitialState {
   userList: any;
-  searchListPayload: any;
+  searchListData: any;
   userBalanceList: any;
   success: boolean;
   loading: boolean;
@@ -22,7 +22,7 @@ interface InitialState {
 
 const initialState: InitialState = {
   userList: null,
-  searchListPayload: null,
+  searchListData: null,
   userBalanceList: null,
   success: false,
   loading: false,
@@ -58,7 +58,7 @@ export const userList = createSlice({
       .addCase(searchList.fulfilled, (state, action) => {
         state.loading = false;
         state.success = true;
-        state.searchListPayload = action.payload;
+        state.searchListData = action.payload;
       })
       .addCase(searchList.rejected, (state, action) => {
         state.loading = false;

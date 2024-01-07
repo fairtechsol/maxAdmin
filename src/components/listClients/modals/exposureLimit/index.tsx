@@ -27,7 +27,6 @@ const ExposureLimit = ({ setShow, userData }: any) => {
       };
       dispatch(setExposureLimit(payload));
       setShow(false);
-      console.log(values, "exposerLimit");
     },
   });
 

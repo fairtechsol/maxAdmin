@@ -74,7 +74,6 @@ export const getCompetitionMatches = createAsyncThunk<any, any>(
 export const getReportAccountList = createAsyncThunk<any, any>(
   "competition/list",
   async ({id, page, limit, searchBy, keyword, filter}, thunkApi) => {
-    console.log(id, page, limit, searchBy, keyword, filter);
     try {
       const resp = await service.get(
         `${ApiConstants.REPORT.ACCOUNTLIST}/${id}?page=${
@@ -95,7 +94,6 @@ export const getReportAccountList = createAsyncThunk<any, any>(
 export const getReportCurrentBet = createAsyncThunk<any, any>(
   "user/currentBetList",
   async ({id, page, limit, searchBy, keyword, filter}, thunkApi) => {
-    console.log(id, page, limit, searchBy, keyword, filter);
     try {
       const resp = await service.get(
         `${ApiConstants.REPORT.ACCOUNTLIST}/${id}?page=${

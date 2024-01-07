@@ -21,7 +21,6 @@ const ChangeStatus = ({ setShow, userData }: any) => {
     allBlocked: userData?.userBlock,
     betBlocked: userData?.betBlock,
   };
-  console.log(defaultLockUnlockObj);
   // const [betChecked, setbetChecked] = useState(false);
   const [lockUnlockObj, setLockUnlockObj] = useState(defaultLockUnlockObj);
 

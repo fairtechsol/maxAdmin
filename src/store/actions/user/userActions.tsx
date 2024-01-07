@@ -16,36 +16,46 @@ interface GetUsers {
 }
 interface SearchUsers {
   userName?: string;
-  createdBy: string
+  createdBy: string;
 }
 
-export const getUsers = createAsyncThunk<any, GetUsers | undefined>("user/list", async (requestData) => {
-  try {
-    const resp = await service.get(`${ApiConstants.USER.LIST}?searchBy=userName&keyword=${requestData?.userName ? requestData?.userName : ""
-      }`);
-    if (resp) {
-      return resp?.data;
+export const getUsers = createAsyncThunk<any, GetUsers | undefined>(
+  "user/list",
+  async (requestData) => {
+    try {
+      const resp = await service.get(
+        `${ApiConstants.USER.LIST}?searchBy=userName&keyword=${
+          requestData?.userName ? requestData?.userName : ""
+        }`
+      );
+      if (resp) {
+        return resp?.data;
+      }
+    } catch (error: any) {
+      const err = error as AxiosError;
+      throw err;
     }
-    console.log(resp, "agagag");
-  } catch (error: any) {
-    const err = error as AxiosError;
-    throw err;
   }
-});
+);
 
-export const searchList = createAsyncThunk<any, SearchUsers | undefined>("user/searchList", async (requestData) => {
-  try {
-    const resp = await service.get(`${ApiConstants.USER.SEARCH_LIST}?createdBy=${requestData?.createdBy}&userName=${requestData?.userName ? requestData?.userName : ""
-      }`);
-    if (resp) {
-      return resp?.data;
+export const searchList = createAsyncThunk<any, SearchUsers | undefined>(
+  "user/searchList",
+  async (requestData) => {
+    try {
+      const resp = await service.get(
+        `${ApiConstants.USER.SEARCH_LIST}?createBy=${
+          requestData?.createdBy
+        }&userName=${requestData?.userName ? requestData?.userName : ""}`
+      );
+      if (resp) {
+        return resp?.data;
+      }
+    } catch (error: any) {
+      const err = error as AxiosError;
+      throw err;
     }
-  } catch (error: any) {
-    const err = error as AxiosError;
-    throw err;
   }
-});
-
+);
 
 export const updateUser = createAsyncThunk<any, any>(
   "user/updateUser",
@@ -110,24 +120,17 @@ export const changeAmmountUser = createAsyncThunk<any, any>(
   }
 );
 
-export const userBalance = createAsyncThunk<any>(
-  "user/balance",
-  async (requestData) => {
-    try {
-      const resp = await service.get(
-        `${ApiConstants.USER.USERBALANCE}`,
-
-      );
-      console.log(resp, "user balance 3333333");
-      if (resp) {
-        return resp?.data?.response;
-      }
-    } catch (error: any) {
-      const err = error as AxiosError;
-      throw err;
+export const userBalance = createAsyncThunk<any>("user/balance", async () => {
+  try {
+    const resp = await service.get(`${ApiConstants.USER.USERBALANCE}`);
+    if (resp) {
+      return resp?.data?.response;
     }
+  } catch (error: any) {
+    const err = error as AxiosError;
+    throw err;
   }
-);
+});
 
 export const setCreditRefference = createAsyncThunk<any, any>(
   "user/update/creditreferrence",

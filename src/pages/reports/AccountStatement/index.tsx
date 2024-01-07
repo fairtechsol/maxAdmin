@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { useEffect, useState } from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import SelectSearch from "../../../components/commonComponent/SelectSearch";
@@ -8,25 +8,17 @@ import CustomModal from "../../../components/commonComponent/modal";
 import CustomTable from "../../../components/commonComponent/table";
 import AccountStatementModal from "../../../components/reports/modals/accountStatement";
 import { TableConfig } from "../../../models/tableInterface";
-import {
-  getReportAccountList,
-} from "../../../store/actions/match/matchAction";
+import { getReportAccountList } from "../../../store/actions/match/matchAction";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../store/store";
-import { searchList } from '../../../store/actions/user/userActions';
-import { debounce } from 'lodash';
+import { searchList } from "../../../store/actions/user/userActions";
+import { debounce } from "lodash";
+import moment from "moment-timezone";
 // import moment from "moment-timezone";
-
-
-
 
 interface Column {
   id: string;
   label: string;
-}
-
-interface DataItem {
-  [key: string]: string | number;
 }
 
 // Example usage
@@ -39,65 +31,15 @@ const columns: Column[] = [
   { id: "fromto", label: "Fromto" },
 ];
 
-const data: DataItem[] = [
-  {
-    date: "John",
-    credit: 25,
-    debit: 30,
-    closing: "New York",
-    description: "Cricket/3.3 over run SS W/Fancy-25",
-    fromto: JSON.stringify(new Date()),
-  },
-  {
-    date: "Jane",
-    credit: 30,
-    debit: 30,
-    closing: "New York",
-    description: "TEEN/Teen Patti Rno. 231611124752/Teen-Player B",
-    fromto: JSON.stringify(new Date()),
-  },
-  {
-    date: "Bob",
-    credit: 22,
-    debit: 30,
-    closing: "New York",
-    description: "Cricket/3.3 over run SS W/Fancy-25",
-    fromto: JSON.stringify(new Date()),
-  },
-  {
-    date: "Bob",
-    credit: 22,
-    debit: 30,
-    closing: "New York",
-    description: "Cricket/3.3 over run SS W/Fancy-25",
-    fromto: JSON.stringify(new Date()),
-  },
-  {
-    date: "Bob",
-    credit: 22,
-    debit: 30,
-    closing: "New York",
-    description: "Cricket/3.3 over run SS W/Fancy-25",
-    fromto: JSON.stringify(new Date()),
-  },
-];
-
-// const options = [
-//   { value: "all", label: "All" },
-//   { value: "balanceReport", label: "Balance Report" },
-//   { value: "gameReport", label: "Game Report" },
-// ];
-
 interface Option {
   value: string;
   label: string;
 }
 const AccountStatement = () => {
-  const { userList } = useSelector((state: RootState) => state.user.userList);
   const dispatch: AppDispatch = useDispatch();
 
-  // const [dateFrom,setDateFrom]=useState(false);
-  // const [dateTo,setDateTo]=useState(false);
+  const [dateFrom, setDateFrom] = useState<any>();
+  const [dateTo, setDateTo] = useState<any>();
   const [firstTime, setFirstTime] = useState(false);
   const [AccountStatementModalShow, setAccountStatementModalShow] =
     useState(false);
@@ -106,54 +48,49 @@ const AccountStatement = () => {
   const { ReportAccountList } = useSelector(
     (state: RootState) => state.match.reportList
   );
-  const { userDetail } = useSelector(
-    (state: RootState) => state.user.profile
-  );
 
-  // const accountTypeHandle = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const query = e.target.value;
-  //   alert("56");
-  // };
-
-
-
-  // State for the first select
+  // const { searchListData } = useSelector(
+  //   (state: RootState) => state.user.userList
+  // );
+  const { userDetail } = useSelector((state: RootState) => state.user.profile);
   const [selectedOption1, setSelectedOption1] = useState(null);
 
-  // State and options for the second select
   const [options2, setOptions2] = useState<Option[]>([]);
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedUser, setSelectedUser] = useState(null);
   const [selectedOption2, setSelectedOption2] = useState(null);
 
-  // Options for the first select
+  console.log(selectedUser);
   const options1: Option[] = [
-    { value: 'all', label: 'All' },
-    { value: 'balanceReport', label: 'Balance Report' },
-    { value: 'gameReport', label: 'Game Report' },
-    // Add more options as needed
+    { value: "all", label: "All" },
+    { value: "balanceReport", label: "Balance Report" },
+    { value: "gameReport", label: "Game Report" },
   ];
 
-  // Function to handle the change of the first select
   const handleSelect1Change = (selectedOption: any) => {
     setSelectedOption1(selectedOption);
 
-    // Update options for the second select based on the selected value of the first select
-    if (selectedOption && (selectedOption as Option).value === 'balanceReport') {
+    if (
+      selectedOption &&
+      (selectedOption as Option).value === "balanceReport"
+    ) {
       setOptions2([
-        { value: 'upper', label: 'Upper' },
-        { value: 'down', label: 'Down' },
+        { value: "upper", label: "Upper" },
+        { value: "down", label: "Down" },
         // Add more options as needed
       ]);
-    } else if (selectedOption && (selectedOption as Option).value === 'gameReport') {
+    } else if (
+      selectedOption &&
+      (selectedOption as Option).value === "gameReport"
+    ) {
       setOptions2([
-        { value: 'cricket', label: 'Cricket' },
-        { value: 'football', label: 'Football' },
-        { value: 'tennis', label: 'Tennis' },
+        { value: "cricket", label: "Cricket" },
+        { value: "football", label: "Football" },
+        { value: "tennis", label: "Tennis" },
         // Add more options as needed
       ]);
-    } else if (selectedOption && (selectedOption as Option).value === 'all') {
+    } else if (selectedOption && (selectedOption as Option).value === "all") {
       setOptions2([
-        { value: 'all', label: 'All' },
+        { value: "all", label: "All" },
 
         // Add more options as needed
       ]);
@@ -168,14 +105,13 @@ const AccountStatement = () => {
     setSelectedOption2(null);
   };
 
-
   // Function to handle the change of the second select
   const handleSelect2Change = (selectedOption: any) => {
     setSelectedOption2(selectedOption);
   };
 
   const handleChange = (selectedOption: any) => {
-    setSelectedOption(selectedOption);
+    setSelectedUser(selectedOption);
   };
 
   const searchClientName = debounce(async (value: any) => {
@@ -183,30 +119,41 @@ const AccountStatement = () => {
       dispatch(
         searchList({
           userName: value,
-          createdBy: userDetail?.id
+          createdBy: userDetail?.id,
         })
-        );
+      );
     } catch (e) {
       console.log(e);
     }
-
   }, 500);
-  console.log(userList, "getUsers6555");
 
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    let filter = "";
+    if (dateFrom && dateTo) {
+      filter += `&createdAt=between${moment(new Date(dateFrom))?.format(
+        "DD/MM/YYYY"
+      )}|${moment(
+        new Date(dateTo).setDate(new Date(dateTo).getDate() + 1)
+      )?.format("DD/MM/YYYY")}`;
+    }
+    // if (type) {
+    //   filter += `&statementType=${type?.value}`;
+    // }
+    dispatch(
+      getReportAccountList({
+        id: userDetail?.id,
+        page: 1,
+        limit: tableConfig?.rowPerPage,
+        searchBy: "description",
+        keyword: tableConfig?.keyword || "",
+        filter,
+      })
+    );
+  };
 
   useEffect(() => {
     if (userDetail?.id && tableConfig && firstTime) {
-      let filter = "";
-      // if (dateFrom && dateTo) {
-      //   filter += `&createdAt=between${moment(new Date(from))?.format(
-      //     "DD/MM/YYYY"
-      //   )}|${moment(new Date(to).setDate(to.getDate() + 1))?.format(
-      //     "DD/MM/YYYY"
-      //   )}`;
-      // }
-      // if (type) {
-      //   filter += `&statementType=${type?.value}`;
-      // }
       dispatch(
         getReportAccountList({
           id: userDetail?.id,
@@ -214,15 +161,18 @@ const AccountStatement = () => {
           limit: tableConfig?.rowPerPage,
           searchBy: "description",
           keyword: tableConfig?.keyword || "",
-          filter,
         })
       );
     }
   }, [userDetail?.id, tableConfig, firstTime]);
+
+  let searchListData = {
+    users: [{ value: "abc", name: "abc" }],
+  };
   return (
     <div className="p-2 pt-0">
       <h5 className="title-22 fw-normal">Account Statement</h5>
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <Row>
           <Col md={2}>
             <SelectSearch
@@ -250,10 +200,17 @@ const AccountStatement = () => {
             <SelectSearch
               defaultValue="All"
               label={"Search By Client Name"}
-              // options={value}
-              value={selectedOption}
+              options={
+                searchListData &&
+                searchListData?.users?.map((user: any) => ({
+                  value: user.name,
+                  label: user.name,
+                }))
+              }
+              value={selectedUser}
               placeholder={"Client Name:"}
               isMultiOption={true}
+              isSearchable={true  }
               onChange={handleChange}
               onInputChange={searchClientName}
             />
@@ -263,6 +220,9 @@ const AccountStatement = () => {
               title={"From"}
               placeholder={""}
               customStyle={"mb-3"}
+              onChange={(e: any) => {
+                setDateFrom(e.target.value);
+              }}
               type="date"
               bgColor="lightGray"
             />
@@ -271,6 +231,7 @@ const AccountStatement = () => {
             <CustomInput
               title={"To"}
               placeholder={""}
+              onChange={(e: any) => setDateTo(e.target.value)}
               customStyle={"mb-3"}
               type="date"
               bgColor="lightGray"
@@ -278,9 +239,14 @@ const AccountStatement = () => {
           </Col>
           <Col md={2}>
             <Form.Label className="invisible d-block">dasd</Form.Label>
-            <CustomButton onClick={() => {
-              setFirstTime(true);
-            }}>Load</CustomButton>
+            <CustomButton
+              type={"submit"}
+              onClick={() => {
+                setFirstTime(true);
+              }}
+            >
+              Load
+            </CustomButton>
           </Col>
         </Row>
       </Form>
@@ -291,12 +257,19 @@ const AccountStatement = () => {
         isPagination={true}
         isSort={true}
         isSearch={true}
-        itemCount={data?.length}
+        itemCount={2}
         setTableConfig={setTableConfig}
         enablePdfExcel={true}
       >
         {ReportAccountList?.transactions?.map((item: any, index: any) => {
-          const { createdAt, amount, closingBalance, description, actionByUser, user } = item;
+          const {
+            createdAt,
+            amount,
+            closingBalance,
+            description,
+            actionByUser,
+            user,
+          } = item;
           return (
             <tr key={index}>
               {/* {columns.map((column) => (
@@ -315,7 +288,14 @@ const AccountStatement = () => {
                   {description}
                 </CustomButton>
               </td>
-              <td>{"From: "}<span className="badge bg-primary">{actionByUser.userName}</span> {"To: "}<span className="badge bg-primary">{user.userName}</span> </td>
+              <td>
+                {"From: "}
+                <span className="badge bg-primary">
+                  {actionByUser.userName}
+                </span>{" "}
+                {"To: "}
+                <span className="badge bg-primary">{user.userName}</span>{" "}
+              </td>
             </tr>
           );
         })}

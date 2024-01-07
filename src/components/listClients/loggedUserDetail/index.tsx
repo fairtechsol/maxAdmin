@@ -7,10 +7,9 @@ import { useEffect } from "react";
 import { userBalance } from "../../../store/actions/user/userActions";
 
 const LoggedUserDetail = () => {
-  const { userDetail } = useSelector((state: RootState) => state.user.profile);
-  const { userBalanceList } = useSelector((state: RootState) => state.user.userList);
-  console.log(userBalanceList, "userBalance77777777");
-  console.log(userDetail, "userDetail");
+  const { userBalanceList } = useSelector(
+    (state: RootState) => state.user.userList
+  );
   const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
@@ -37,12 +36,14 @@ const LoggedUserDetail = () => {
                 </div>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
                   <div className="col-md-8 title-14">Total Master Balance</div>
-                  <div className="col-md-4 title-14">{+userBalanceList?.totalMasterBalance || 0}</div>
+                  <div className="col-md-4 title-14">
+                    {+userBalanceList?.totalMasterBalance || 0}
+                  </div>
                 </div>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
                   <div className="col-md-8 title-14">Available Balance:</div>
                   <div className="col-md-4 title-14">
-                    {+userBalanceList?.availableBalance|| 0}
+                    {+userBalanceList?.availableBalance || 0}
                   </div>
                 </div>
               </Col>
@@ -57,7 +58,9 @@ const LoggedUserDetail = () => {
                 </div>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
                   <div className="col-md-8 title-14">Upper Level:</div>
-                  <div className="col-md-4 title-14">{+userBalanceList.upperLevelBalance}</div>
+                  <div className="col-md-4 title-14">
+                    {+userBalanceList.upperLevelBalance}
+                  </div>
                 </div>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
                   <div className="col-md-8 title-14">
@@ -81,7 +84,9 @@ const LoggedUserDetail = () => {
                   <div className="col-md-8 title-14">
                     Down Level Profit/Loss :
                   </div>
-                  <div className="col-md-4 title-14">{+userBalanceList?.downLevelProfitLoss || 0}</div>
+                  <div className="col-md-4 title-14">
+                    {+userBalanceList?.downLevelProfitLoss || 0}
+                  </div>
                 </div>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
                   <div className="col-md-8 title-14">My Profit/Loss:</div>
