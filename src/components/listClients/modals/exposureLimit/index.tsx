@@ -6,12 +6,14 @@ import { setExposureLimit } from "../../../../store/actions/user/userActions";
 import { AppDispatch } from "../../../../store/store";
 import CustomInput from "../../../commonComponent/input";
 import ModalFooter from "../footer";
+import { widthdrawAmountValidations } from "../../../../utils/fieldValidations/addAccount";
+
 
 const initialValues: any = {
-  userid: "",
+  userId: "",
   amount: "",
   createBy: "",
-  transPassword: "",
+  transactionPassword: "",
 };
 
 const ExposureLimit = ({ setShow, userData }: any) => {
@@ -19,17 +21,23 @@ const ExposureLimit = ({ setShow, userData }: any) => {
 
   const formik = useFormik({
     initialValues: initialValues,
+    validationSchema: widthdrawAmountValidations,
     onSubmit: (values: any) => {
+      try {
       let payload = {
-        userid: userData?.id,
+        userId: userData?.id,
         amount: values.amount,
-        transPassword: values.transPassword,
+        transactionPassword: values.transactionPassword,
       };
       dispatch(setExposureLimit(payload));
       setShow(false);
       console.log(values, "exposerLimit");
-    },
-  });
+      // setShow(false);
+    } catch (e) {
+      console.log(e);
+    }
+  },
+});
 
   const { handleSubmit, handleChange, values } = formik;
 
@@ -77,6 +85,7 @@ const ExposureLimit = ({ setShow, userData }: any) => {
                   type="number"
                   customStyle="input-box"
                   // id="newLimitInput"
+                  min={0}
                 />
               </Col>
             </Row>
@@ -88,10 +97,10 @@ const ExposureLimit = ({ setShow, userData }: any) => {
               </Col>
               <Col sm={8}>
                 <CustomInput
-                  name="transPassword"
-                  id="transPassword"
+                  name="transactionPassword"
+                  id="transactionPassword"
                   autoComplete="new-password"
-                  value={values.transPassword}
+                  value={values.transactionPassword}
                   onChange={handleChange}
                   type="password"
                   customStyle="input-box"

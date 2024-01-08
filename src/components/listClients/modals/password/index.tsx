@@ -22,7 +22,7 @@ const Password = ({ userData, setShow }: any) => {
     
     onSubmit: (values: any) => {
       let payload = {
-        userid: userData?.id,
+        userId: userData?.id,
         newPassword: values?.newPassword,
         confirmPassword: values?.newPassword,
         transactionPassword: values?.transactionPassword,

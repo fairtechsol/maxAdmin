@@ -31,13 +31,13 @@ export const addAccountValidationSchema = Yup.object({
 });
 
 export const depositAmountValidations = Yup.object({
-  amount: Yup.string().required("Amount is required"),
+  amount: Yup.string().required("Amount is required").min(0, 'Amount must be zero or a positive number'),
   transactionPassword: Yup.string().required(
     "Transaction Password is required"
   ),
 });
 export const widthdrawAmountValidations = Yup.object({
-  amount: Yup.string().required("Amount is required"),
+  amount: Yup.string().required("Amount is required").min(0, 'Amount must be zero or a positive number'),
   transactionPassword: Yup.string().required(
     "Transaction Password is required"
   ),

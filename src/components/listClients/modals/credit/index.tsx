@@ -8,9 +8,10 @@ import CustomInput from "../../../commonComponent/input";
 import ModalFooter from "../footer";
 
 const initialValues: any = {
-  userid: "any",
+  userId: "any",
   amount: "",
   creditRefrence: "",
+  transactionPassword: "",
 };
 
 const Credit = ({ userData, setShow }: any) => {
@@ -20,12 +21,13 @@ const Credit = ({ userData, setShow }: any) => {
     initialValues: initialValues,
     onSubmit: (values: any) => {
       let payload = {
-        userid: userData?.id,
+        userId: userData?.id,
         amount: values.amount,
+        transactionPassword: values.transactionPassword,
       };
       dispatch(setCreditRefference(payload));
       setShow(false);
-      console.log(values, "Credit REfer");
+      // console.log(values, "Credit REfer");
     },
   });
 
@@ -78,6 +80,26 @@ const Credit = ({ userData, setShow }: any) => {
                   type="number"
                   customStyle="input-box"
                   // id="newCreditInput"
+                  min={0}
+                />
+              </Col>
+            </Row>
+          </div>
+          <div className="input-container mt-3">
+            <Row>
+              <Col sm={4}>
+                <span>Transaction password</span>
+              </Col>
+              <Col sm={8}>
+                <CustomInput
+                  name="transactionPassword"
+                  id="transactionPassword"
+                  autoComplete="new-password"
+                  value={values.transactionPassword}
+                  onChange={handleChange}
+                  type="password"
+                  customStyle="input-box"
+                  // id="transactionPasswordInput"
                 />
               </Col>
             </Row>
