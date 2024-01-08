@@ -5,8 +5,10 @@ export const ApiConstants = {
   },
   USER: {
     BALANCEUPDATE: "/balance/update",
+    USERBALANCE: "/user/balance",
     CHANGEPASSWORD: "/user/changePassword",
     LIST: "/user/list",
+    SEARCH_LIST: "/user/searchlist",
     ADDFGADMIN: "/user/add",
     ADDURLADMIN: "/superadmin/create",
     ADDEXPERT: "/expert/add",
@@ -23,5 +25,27 @@ export const ApiConstants = {
   },
   REPORT: {
     ACCOUNTLIST: "/transaction/get",
-  }
+    BETHISTORY: "/bet",
+  },
+};
+
+export const Constants = {
+  apiBasePath: "http://localhost:5000",
+  thirdParty: "http://localhost:3200",
+  expertPath: "http://localhost:6060",
+};
+
+export const baseUrls = {
+  socket:
+    process.env.NODE_ENV === "production"
+      ? `${Constants.apiBasePath}`
+      : "http://localhost:5000",
+  thirdParty:
+    process.env.NODE_ENV === "production"
+      ? `${Constants.thirdParty}`
+      : "http://localhost:3200",
+  expertSocket:
+    process.env.NODE_ENV === "production"
+      ? `${Constants.expertPath}`
+      : "http://localhost:6060",
 };

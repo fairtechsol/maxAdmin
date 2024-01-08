@@ -8,6 +8,7 @@ import { AppDispatch } from "../../store/store";
 import "../layout.scss";
 import Topbar from "./header";
 import Sidebar from "./sidebar";
+import { socketService } from "../../socketManager";
 
 function MainLayout() {
   let location = useLocation();
@@ -25,6 +26,16 @@ function MainLayout() {
     }
     dispatch(getUsersProfile());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (sessionStorage.getItem("userToken")) {
+      socketService.connect();
+      socketService.auth.logout();
+    }
+    return () => {
+      socketService.disconnect();
+    };
+  }, [sessionStorage.getItem("userToken")]);
 
   return (
     <>

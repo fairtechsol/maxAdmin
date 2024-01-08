@@ -35,6 +35,22 @@ export const getCompetitionDates = createAsyncThunk<any, any>(
     }
   }
 );
+export const betReportAccountList = createAsyncThunk<any, any>(
+  "competition/dates",
+  async (requestData, thunkApi) => {
+    try {
+      const resp = await service.get(
+        `${ApiConstants.REPORT.BETHISTORY}${requestData}`
+      );
+      if (resp?.data) {
+        return resp?.data;
+      }
+    } catch (error) {
+      const err = error as AxiosError;
+      return thunkApi.rejectWithValue(err.response?.status);
+    }
+  }
+);
 export const getCompetitionMatches = createAsyncThunk<any, any>(
   "competition/matches",
   async (requestData, thunkApi) => {
@@ -57,10 +73,12 @@ export const getCompetitionMatches = createAsyncThunk<any, any>(
 
 export const getReportAccountList = createAsyncThunk<any, any>(
   "competition/list",
-  async (requestData, thunkApi) => {
+  async ({ id, page, limit, searchBy, keyword, filter }, thunkApi) => {
     try {
       const resp = await service.get(
-        `${ApiConstants.REPORT.ACCOUNTLIST}/${requestData?.id}`
+        `${ApiConstants.REPORT.ACCOUNTLIST}/${id}?page=${page || 1
+        }&limit=${limit || 15}&searchBy=${searchBy}&keyword=${keyword || ""
+        }${filter}`
       );
       if (resp?.data) {
         return resp?.data;
@@ -71,3 +89,40 @@ export const getReportAccountList = createAsyncThunk<any, any>(
     }
   }
 );
+export const getReportCurrentBet = createAsyncThunk<any, any>(
+  "user/currentBetList",
+  async ({ id, page, limit, searchBy, keyword, filter }, thunkApi) => {
+    try {
+      const resp = await service.get(
+        `${ApiConstants.REPORT.ACCOUNTLIST}/${id}?page=${page || 1
+        }&limit=${limit || 15}&searchBy=${searchBy}&keyword=${keyword || ""
+        }${filter}`
+      );
+      if (resp?.data) {
+        return resp?.data;
+      }
+    } catch (error) {
+      const err = error as AxiosError;
+      return thunkApi.rejectWithValue(err.response?.status);
+    }
+  }
+);
+export const getGameReport = createAsyncThunk<any, any>(
+  "bet",
+  async ({ type, page, limit, searchBy, keyword, filter }, thunkApi) => {
+    try {
+      const resp = await service.get(
+        `${ApiConstants.REPORT.BETHISTORY}?status=${type}&page=${page || 1
+        }&limit=${limit || 15}&searchBy=${searchBy}&keyword=${keyword || ""
+        }${filter}`
+      );
+      if (resp?.data) {
+        return resp?.data;
+      }
+    } catch (error) {
+      const err = error as AxiosError;
+      return thunkApi.rejectWithValue(err.response?.status);
+    }
+  }
+);
+

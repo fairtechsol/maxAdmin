@@ -20,6 +20,7 @@ const SelectSearch = (props: any) => {
     onBlur,
     touched,
     errors,
+    onInputChange
   } = props;
 
   // const customStyles = {
@@ -37,9 +38,8 @@ const SelectSearch = (props: any) => {
   return (
     <>
       <Form.Group
-        className={`customSelect ${SelectInline ? "SelectInline" : ""} ${
-          customClass ?? ""
-        }`}
+        className={`customSelect ${SelectInline ? "SelectInline" : ""} ${customClass ?? ""
+          }`}
       >
         {label ? <Form.Label>{label}</Form.Label> : ""}
         <Select
@@ -51,7 +51,7 @@ const SelectSearch = (props: any) => {
               ...baseStyles,
               // borderColor: state.isFocused ? "grey" : "red",
               // minHeight: 20,
-              maxHeight: "20px",
+              // maxHeight: "20px",
             }),
           }}
           minMenuHeight={20}
@@ -60,6 +60,7 @@ const SelectSearch = (props: any) => {
           value={value}
           defaultValue={defaultValue}
           onChange={onChange}
+          onInputChange={onInputChange}
           onBlur={onBlur}
           options={options}
           placeholder={placeholder}

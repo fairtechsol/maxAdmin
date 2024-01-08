@@ -11,17 +11,52 @@ interface ChangePassword {
   transactionPassword?: string;
 }
 
-export const getUsers = createAsyncThunk("user/list", async () => {
-  try {
-    const resp = await service.get(`${ApiConstants.USER.LIST}`);
-    if (resp) {
-      return resp?.data;
+interface GetUsers {
+  userName?: string;
+}
+interface SearchUsers {
+  userName?: string;
+  createdBy: string;
+}
+
+export const getUsers = createAsyncThunk<any, GetUsers | undefined>(
+  "user/list",
+  async (requestData) => {
+    try {
+      const resp = await service.get(
+        `${ApiConstants.USER.LIST}?searchBy=userName&keyword=${
+          requestData?.userName ? requestData?.userName : ""
+        }`
+      );
+      if (resp) {
+        return resp?.data;
+      }
+    } catch (error: any) {
+      const err = error as AxiosError;
+      throw err;
     }
-  } catch (error: any) {
-    const err = error as AxiosError;
-    throw err;
   }
-});
+);
+
+export const searchList = createAsyncThunk<any, SearchUsers | undefined>(
+  "user/searchList",
+  async (requestData) => {
+    try {
+      const resp = await service.get(
+        `${ApiConstants.USER.SEARCH_LIST}?createBy=${
+          requestData?.createdBy
+        }&userName=${requestData?.userName ? requestData?.userName : ""}`
+      );
+      if (resp) {
+        return resp?.data;
+      }
+    } catch (error: any) {
+      const err = error as AxiosError;
+      throw err;
+    }
+  }
+);
+
 export const updateUser = createAsyncThunk<any, any>(
   "user/updateUser",
   async (requestData) => {
@@ -84,6 +119,18 @@ export const changeAmmountUser = createAsyncThunk<any, any>(
     }
   }
 );
+
+export const userBalance = createAsyncThunk<any>("user/balance", async () => {
+  try {
+    const resp = await service.get(`${ApiConstants.USER.USERBALANCE}`);
+    if (resp) {
+      return resp?.data?.response;
+    }
+  } catch (error: any) {
+    const err = error as AxiosError;
+    throw err;
+  }
+});
 
 export const setCreditRefference = createAsyncThunk<any, any>(
   "user/update/creditreferrence",

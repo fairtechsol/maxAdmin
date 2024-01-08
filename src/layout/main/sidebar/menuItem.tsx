@@ -27,7 +27,6 @@ const MenuItemChild = (props: any) => {
 
 const MenuCollapse = (props: any) => {
   const { data, menuItemList, setMenuItemList, selectedMatchIndex } = props;
-  console.log(menuItemList);
 
   const [selectedCompetition, setSelectedCompetition] = useState("");
   const [selectedDate, setSelectedDate] = useState("");

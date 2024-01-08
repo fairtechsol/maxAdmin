@@ -6,10 +6,14 @@ import {
   setExposureLimit,
   setLockUnlockUser,
   changePassword,
+  userBalance,
+  searchList,
 } from "../../actions/user/userActions";
 
 interface InitialState {
   userList: any;
+  searchListData: any;
+  userBalanceList: any;
   success: boolean;
   loading: boolean;
   error: any;
@@ -18,6 +22,8 @@ interface InitialState {
 
 const initialState: InitialState = {
   userList: null,
+  searchListData: null,
+  userBalanceList: null,
   success: false,
   loading: false,
   error: null,
@@ -41,6 +47,34 @@ export const userList = createSlice({
         state.userList = action.payload;
       })
       .addCase(getUsers.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action?.error?.message;
+      })
+      .addCase(searchList.pending, (state) => {
+        state.loading = true;
+        state.success = false;
+        state.error = null;
+      })
+      .addCase(searchList.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        state.searchListData = action.payload;
+      })
+      .addCase(searchList.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action?.error?.message;
+      })
+      .addCase(userBalance.pending, (state) => {
+        state.loading = true;
+        state.success = false;
+        state.error = null;
+      })
+      .addCase(userBalance.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        state.userBalanceList = action.payload;
+      })
+      .addCase(userBalance.rejected, (state, action) => {
         state.loading = false;
         state.error = action?.error?.message;
       })

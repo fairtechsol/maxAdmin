@@ -19,7 +19,7 @@ const Password = ({ userData, setShow }: any) => {
 
   const formik = useFormik({
     initialValues: initialValues,
-    
+
     onSubmit: (values: any) => {
       let payload = {
         userId: userData?.id,
@@ -29,7 +29,6 @@ const Password = ({ userData, setShow }: any) => {
       };
       dispatch(changePassword(payload));
       setShow(false);
-      console.log(values, "change Passw");
     },
   });
 

@@ -1,23 +1,22 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import SelectSearch from "../../../components/commonComponent/SelectSearch";
 import CustomTable from "../../../components/commonComponent/table";
 import { TableConfig } from "../../../models/tableInterface";
+import { betReportAccountList } from "../../../store/actions/match/matchAction";
+import { AppDispatch, RootState } from "../../../store/store";
 
 interface Column {
   id: string;
   label: string;
 }
 
-interface DataItem {
-  [key: string]: string | number;
-}
-
 // Example usage
 const columns: Column[] = [
+  { id: "userName", label: "Username" },
   { id: "eventType", label: "Event Type" },
   { id: "eventName", label: "Event Name" },
-  { id: "Username", label: "Username" },
   { id: "runnerName", label: "Runner Name" },
   { id: "betType", label: "Bet Type" },
   { id: "userRate", label: "User Rate" },
@@ -26,67 +25,53 @@ const columns: Column[] = [
   { id: "matchDate", label: "Match Date" },
 ];
 
-const data: DataItem[] = [
-  {
-    eventType: "eventType",
-    eventName: "ICC World Cup",
-    Username: "fuser111",
-    runnerName: "Deepak ",
-    betType: "Match1",
-    userRate: "94.5",
-    amount: "1000",
-    placeDate: "17-11-223",
-    matchDate: "17-11-223",
-  },
-  {
-    eventType: "eventType",
-    eventName: "American Premier League",
-    Username: "fuser111",
-    runnerName: "Pardeep ",
-    betType: "Match1",
-    userRate: "62.5",
-    amount: "1000",
-    placeDate: "17-11-223",
-    matchDate: "17-11-223",
-  },
-  {
-    eventType: "eventType",
-    eventName: "T20",
-    Username: "fuser111",
-    runnerName: "Rohan ",
-    betType: "Match1",
-    userRate: "94.5",
-    amount: "1000",
-    placeDate: "17-11-223",
-    matchDate: "17-11-223",
-  },
-];
-
 const options = [
-  { value: "matched", label: "Matched" },
-  { value: "unmatched", label: "UnMatched" },
-  { value: "deleted", label: "Deleted" },
+  { value: "MATCHED", label: "Matched" },
+  { value: "UNMATCHED", label: "UnMatched" },
+  { value: "DELETED", label: "Deleted" },
 ];
 
 const CurrentBets = () => {
+  const dispatch: AppDispatch = useDispatch();
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
+  const [selectType, setSelectType] = useState({ value: "MATCHED", label: "Matched" });
+  
 
-  useEffect(() => {}, [tableConfig]);
+  useEffect(() => { }, [tableConfig]);
+
+  const { ReportBetList } = useSelector((state: RootState) => state.match.bettListSlice);
+
+  useEffect(() => {
+    dispatch(betReportAccountList({ status: selectType?.value }));
+  }, []);
+
+  const handleType = (type: any) => {
+    setSelectType(type);
+  };
+
+  const handleLoad = (e: any) => {
+    e.preventDefault();
+    dispatch(betReportAccountList({ status: selectType?.value }));
+  };
+
   return (
     <div className="p-2 pt-0">
       <h5 className="title-22 fw-normal">Current Bets</h5>
-      <Form>
+      <Form onSubmit={(e) => handleLoad(e)}>
         <Row className="mb-4">
           <Col md={2}>
             <SelectSearch
-              defaultValue="matched"
+              defaultValue={[selectType]}
+              // defaultValue="matched"
               options={options}
               label={"Account Type"}
+              value={selectType}
+              onChange={handleType}
             />
           </Col>
           <Col md={2}>
             <Form.Label className="invisible d-block">dasd</Form.Label>
-            <Button>Load</Button>
+            <Button type="submit">Load</Button>
           </Col>
         </Row>
       </Form>
@@ -97,21 +82,22 @@ const CurrentBets = () => {
         isPagination={true}
         isSort={true}
         isSearch={true}
-        itemCount={data?.length}
+        itemCount={ReportBetList && ReportBetList?.count > 0 ? ReportBetList?.count : 0}
         setTableConfig={setTableConfig}
         enablePdfExcel={false}
       >
-        {data?.length === 0 && <tr>No data available in table </tr>}
-        {data?.length > 0 &&
-          data.map((item, index) => (
+        {ReportBetList && ReportBetList?.count === 0 && <tr>No data available in table </tr>}
+        {ReportBetList?.count > 0 &&
+          ReportBetList?.list?.map((item: any, index: number) => (
             <tr key={index}>
               {columns.map((column) => (
                 <td key={column.id}>{item[column.id]}</td>
+                // <td key={index}>{item.userName}</td>
               ))}
             </tr>
           ))}
       </CustomTable>
-    </div>
+    </div >
   );
 };
 

@@ -46,7 +46,7 @@ const ListActiveInactiveUser: React.FC = () => {
     });
   };
 
-  useEffect(() => { }, [tableConfig]);
+  useEffect(() => {}, [tableConfig]);
 
   const actionButtons = [
     {
@@ -91,7 +91,6 @@ const ListActiveInactiveUser: React.FC = () => {
   useEffect(() => {
     dispatch(getUsers());
   }, [dispatch]);
-  console.log(userList?.list, "list.userBlock");
 
   const activeUser: Array<object> = [];
   const deactiveUser: Array<object> = [];
@@ -191,7 +190,9 @@ const ListActiveInactiveUser: React.FC = () => {
 
                             <td className="text-end">{creditRefrence}</td>
                             <td className="text-end">{balance}</td>
-                            <td className="text-end">{userBal?.myProfitLoss}</td>
+                            <td className="text-end">
+                              {userBal?.myProfitLoss}
+                            </td>
                             <td className="text-end">{userBal?.exposure}</td>
                             <td className="text-end">{availableBalance}</td>
                             <td className="text-center">
