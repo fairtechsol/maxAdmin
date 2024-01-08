@@ -73,13 +73,11 @@ export const getCompetitionMatches = createAsyncThunk<any, any>(
 
 export const getReportAccountList = createAsyncThunk<any, any>(
   "competition/list",
-  async ({id, page, limit, searchBy, keyword, filter}, thunkApi) => {
+  async ({ id, page, limit, searchBy, keyword, filter }, thunkApi) => {
     try {
       const resp = await service.get(
-        `${ApiConstants.REPORT.ACCOUNTLIST}/${id}?page=${
-          page || 1
-        }&limit=${limit || 15}&searchBy=${searchBy}&keyword=${
-          keyword || ""
+        `${ApiConstants.REPORT.ACCOUNTLIST}/${id}?page=${page || 1
+        }&limit=${limit || 15}&searchBy=${searchBy}&keyword=${keyword || ""
         }${filter}`
       );
       if (resp?.data) {
@@ -93,13 +91,29 @@ export const getReportAccountList = createAsyncThunk<any, any>(
 );
 export const getReportCurrentBet = createAsyncThunk<any, any>(
   "user/currentBetList",
-  async ({id, page, limit, searchBy, keyword, filter}, thunkApi) => {
+  async ({ id, page, limit, searchBy, keyword, filter }, thunkApi) => {
     try {
       const resp = await service.get(
-        `${ApiConstants.REPORT.ACCOUNTLIST}/${id}?page=${
-          page || 1
-        }&limit=${limit || 15}&searchBy=${searchBy}&keyword=${
-          keyword || ""
+        `${ApiConstants.REPORT.ACCOUNTLIST}/${id}?page=${page || 1
+        }&limit=${limit || 15}&searchBy=${searchBy}&keyword=${keyword || ""
+        }${filter}`
+      );
+      if (resp?.data) {
+        return resp?.data;
+      }
+    } catch (error) {
+      const err = error as AxiosError;
+      return thunkApi.rejectWithValue(err.response?.status);
+    }
+  }
+);
+export const getGameReport = createAsyncThunk<any, any>(
+  "bet",
+  async ({ id, page, limit, searchBy, keyword, filter }, thunkApi) => {
+    try {
+      const resp = await service.get(
+        `${ApiConstants.REPORT.BETHISTORY}/${id}?page=${page || 1
+        }&limit=${limit || 15}&searchBy=${searchBy}&keyword=${keyword || ""
         }${filter}`
       );
       if (resp?.data) {
