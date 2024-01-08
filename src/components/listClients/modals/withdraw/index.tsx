@@ -6,6 +6,8 @@ import { changeAmmountUser } from "../../../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../../../store/store";
 import CustomInput from "../../../commonComponent/input";
 import ModalFooter from "../footer";
+import { widthdrawAmountValidations } from "../../../../utils/fieldValidations/addAccount";
+
 
 const initialValues: any = {
   initialBalance: "",
@@ -24,7 +26,9 @@ const Withdraw = ({ userData, setShow }: any) => {
 
   const formik = useFormik({
     initialValues: initialValues,
+    validationSchema: widthdrawAmountValidations,
     onSubmit: (values: any) => {
+      try{
       let payload = {
         userId: userData?.id,
         amount: values.amount,
@@ -33,25 +37,28 @@ const Withdraw = ({ userData, setShow }: any) => {
         transactionType: "withDraw",
       };
       dispatch(changeAmmountUser(payload));
-      setShow(false);
-    },
-  });
+      // setShow(false);
+    } catch (e) {
+      console.log(e);
+    }
+  },
+});
 
   const { handleSubmit, handleChange, values } = formik;
 
   const handleAmountChange = (e: any) => {
-    const newAmount = parseFloat(e.target.value);
+    const newAmount = e.target.value;
     const initialBalance = parseFloat(formik.values.initialBalance);
 
     if (!isNaN(newAmount) && !isNaN(initialBalance)) {
-      const updatedBalance = initialBalance + newAmount;
-      const userBalance = parseFloat(formik.values.userBalance) - newAmount;
+      const updatedBalance = +initialBalance - + newAmount;
+      const userBalance = parseFloat(formik.values.userBalance) + +newAmount;
 
       formik.setValues({
         ...formik.values,
-        updatedBalance: updatedBalance.toFixed(2),
-        userUpdatedBalance: userBalance.toFixed(2),
-        amount: e.target.value,
+        updatedBalance: +updatedBalance,
+        userUpdatedBalance: +userBalance,
+        amount: +newAmount,
       });
     }
   };
@@ -73,7 +80,7 @@ const Withdraw = ({ userData, setShow }: any) => {
           <div className="input-container w-100">
             <Row>
               <Col sm={4}>
-                <span>fmstr1</span>
+                <span>{userData?.userName}</span>
               </Col>
               <Col sm={8}>
                 <div className="d-flex gap-2 input-inner-container">
@@ -149,6 +156,7 @@ const Withdraw = ({ userData, setShow }: any) => {
                   onChange={handleAmountChange}
                   customStyle="input-box"
                   type="number"
+                  min={0}
                 />
               </Col>
             </Row>

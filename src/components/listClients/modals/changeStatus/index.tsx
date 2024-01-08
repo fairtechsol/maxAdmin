@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { useState } from "react";
+import { useState,  } from "react";
 import { Col, Modal, Row, Stack } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import Switch from "react-switch";
@@ -12,7 +12,7 @@ const initialValues: any = {
   userId: "",
   betBlock: false,
   userBlock: false,
-  transPassword: "",
+  transactionPassword: "",
 };
 
 const ChangeStatus = ({ setShow, userData }: any) => {
@@ -23,7 +23,7 @@ const ChangeStatus = ({ setShow, userData }: any) => {
   };
   // const [betChecked, setbetChecked] = useState(false);
   const [lockUnlockObj, setLockUnlockObj] = useState(defaultLockUnlockObj);
-
+// console.log(userList.list, "edfsc");
   const dispatch: AppDispatch = useDispatch();
 
   const formik = useFormik({
@@ -50,7 +50,7 @@ const ChangeStatus = ({ setShow, userData }: any) => {
             <Col sm={12}>
               <div className="d-flex align-items-center justify-content-between">
                 <h3 className="text-secondary title-20 fw-normal">
-                  ajay Duple...
+                   {userData?.userName}
                 </h3>
                 <h3 className="text-green title-14">Active</h3>
               </div>
