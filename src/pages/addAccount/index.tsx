@@ -7,6 +7,7 @@ import { addUser } from "../../store/actions/user/userActions";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
 import { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
 interface Values {
   clientName: string;
@@ -35,6 +36,7 @@ const AddAccount = () => {
   const dispatch: AppDispatch = useDispatch();
   const [accountTypes, setAccountTypes] = useState<any>([]);
   const [down, setDown] = useState<number>(0);
+  const navigate = useNavigate();
 
   const initialValues = {
     clientName: "",
@@ -64,6 +66,9 @@ const AddAccount = () => {
   const { userDetail, success } = useSelector(
     (state: RootState) => state.user.profile
   );
+  const { addSuccess } = useSelector(
+    (state: RootState) => state.user.userUpdate
+  );
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: addAccountValidationSchema,
@@ -86,6 +91,7 @@ const AddAccount = () => {
           transactionPassword: values?.transactionPassword,
         };
         dispatch(addUser(payload));
+     
       } catch (e) {
         console.log(e);
       }
@@ -194,6 +200,12 @@ const AddAccount = () => {
       }
     }
   }, [userDetail, userDetail?.roleName, success]);
+  
+  useEffect(() => {
+    if (addSuccess) {
+      navigate("/admin/listClients");
+    }
+  }, [addSuccess]);
 
   useEffect(() => {
     setTypeForAccountType();
@@ -310,9 +322,9 @@ const AddAccount = () => {
                       onChange={(accountTypes: any) =>
                         formik.setFieldValue("accountType", accountTypes)
                       }
-                      // onBlur={formik.handleBlur}
-                      // touched={touched.accountType}
-                      // errors={errors.accountType}
+                    // onBlur={formik.handleBlur}
+                    // touched={touched.accountType}
+                    // errors={errors.accountType}
                     />
                   </Col>
                   <Col md={6}>
@@ -328,7 +340,7 @@ const AddAccount = () => {
                       errors={errors.creditReference}
                     />
                   </Col>
-                  {formik.values.accountType.value === "user" &&<Col md={6}>
+                  {formik.values.accountType.value === "user" && <Col md={6}>
                     <CustomInput
                       id={"exposureLimit"}
                       title={"Exposure Limit"}
@@ -420,7 +432,7 @@ const AddAccount = () => {
                           min={0}
                           type={"number"}
                           onChange={handlePartnershipChange}
-                          // {...getFieldProps("downLinePartnership")}
+                        // {...getFieldProps("downLinePartnership")}
                         />
                       </td>
                     </tr>

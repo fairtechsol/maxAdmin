@@ -1,16 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addUser } from "../../actions/user/userActions";
+import { addSuccessReset, addUser } from "../../actions/user/userActions";
 // actions/user/userAction
 
 interface InitialState {
-  success: boolean;
+  addSuccess: boolean;
   loading: boolean;
   error: any;
 }
 
 const initialState: InitialState = {
   loading: false,
-  success: false,
+  addSuccess: false,
   error: null,
 };
 
@@ -25,12 +25,18 @@ const userUpdateSlice = createSlice({
         state.error = null;
       })
       .addCase(addUser.fulfilled, (state) => {
-        state.success = true;
+        state.addSuccess = true;
         state.loading = false;
       })
       .addCase(addUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action?.error?.message;
+      })
+      .addCase(addSuccessReset, (state) => {
+        return {
+          ...state,
+          addSuccess: false
+        };
       });
   },
 });
