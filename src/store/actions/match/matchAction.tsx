@@ -109,10 +109,10 @@ export const getReportCurrentBet = createAsyncThunk<any, any>(
 );
 export const getGameReport = createAsyncThunk<any, any>(
   "bet",
-  async ({ id, page, limit, searchBy, keyword, filter }, thunkApi) => {
+  async ({ type, page, limit, searchBy, keyword, filter }, thunkApi) => {
     try {
       const resp = await service.get(
-        `${ApiConstants.REPORT.BETHISTORY}/${id}?page=${page || 1
+        `${ApiConstants.REPORT.BETHISTORY}?status=${type}&page=${page || 1
         }&limit=${limit || 15}&searchBy=${searchBy}&keyword=${keyword || ""
         }${filter}`
       );

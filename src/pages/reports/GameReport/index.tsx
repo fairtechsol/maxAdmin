@@ -36,6 +36,10 @@ const options = [
   { value: "fancy", label: "Fancy" },
 ];
 
+const secondOptions = [
+  { value: "all", label: "All" },
+];
+
 const GameReport = () => {
   const dispatch: AppDispatch = useDispatch();
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
@@ -45,6 +49,11 @@ const GameReport = () => {
   useEffect(() => { }, [tableConfig]);
 
   const { gameReportList } = useSelector((state: RootState) => state.match.reportList);
+  const [selectType, setSelectType] = useState({ value: "ALL", label: "All" });
+
+  const handleType = (type: any) => {
+    setSelectType(type);
+  };
 
   useEffect(() => {
     dispatch(getGameReport({ status: "" }));
@@ -65,7 +74,7 @@ const GameReport = () => {
     // dispatch(betReportAccountList({ status: selectType?.value }));
     dispatch(
       getGameReport({
-        id: "",
+        type: selectType?.value,
         page: 1,
         limit: tableConfig?.rowPerPage,
         searchBy: "description",
@@ -102,9 +111,10 @@ const GameReport = () => {
           </Col>
           <Col md={2}>
             <SelectSearch
-              defaultValue="slotGame"
+              defaultValue={[selectType]}
               options={options}
               label={"Type"}
+              onChange={handleType}
             />
           </Col>
           <Col md={2}>
@@ -114,7 +124,7 @@ const GameReport = () => {
         </Row>
         <Row className="mt-2">
           <Col md={6}>
-            <SelectSearch defaultValue="all" options={options} />
+            <SelectSearch defaultValue={[{ value: "all", label: "All" }]} options={secondOptions} />
           </Col>
           <Col md={3}>
             <div className="d-flex">
