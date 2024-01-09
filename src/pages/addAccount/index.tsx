@@ -3,7 +3,7 @@ import SelectSearch from "../../components/commonComponent/SelectSearch";
 import CustomInput from "../../components/commonComponent/input";
 import { addAccountValidationSchema } from "../../utils/fieldValidations/addAccount";
 import { useFormik } from "formik";
-import { addUser } from "../../store/actions/user/userActions";
+import {  addSuccessReset, addUser } from "../../store/actions/user/userActions";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
 import { useEffect, useState } from "react";
@@ -83,20 +83,29 @@ const AddAccount = () => {
           city: values.city,
           roleName: values.accountType.value,
           creditRefrence: values.creditReference,
-          exposureLimit: values.exposureLimit,
           // commissionDownPartnership: values.commissionDownPartnership,
-          maxBetLimit: values.maxBet,
-          minBetLimit: values.minBet,
           myPartnership: values.ourPartnership,
           transactionPassword: values?.transactionPassword,
         };
-        dispatch(addUser(payload));
-     
+        if (values.accountType.value === "user") {
+          let newPayload = {
+            ...payload,
+            exposureLimit: values.exposureLimit,
+            maxBetLimit: values.maxBet,
+            minBetLimit: values.minBet,
+          };
+          dispatch(addUser(newPayload));
+        } else {
+          dispatch(addUser(payload));
+        }
+
       } catch (e) {
         console.log(e);
       }
+
     },
   });
+
 
   const { handleSubmit, getFieldProps, touched, errors } = formik;
 
@@ -200,10 +209,11 @@ const AddAccount = () => {
       }
     }
   }, [userDetail, userDetail?.roleName, success]);
-  
+
   useEffect(() => {
     if (addSuccess) {
       navigate("/admin/listClients");
+      dispatch(addSuccessReset());
     }
   }, [addSuccess]);
 
@@ -451,6 +461,7 @@ const AddAccount = () => {
                 </Table>
               </Col>
             </Row>
+            {formik.values.accountType.value === "user" ?
             <Row>
               <Col md={12}>
                 <h6
@@ -459,6 +470,7 @@ const AddAccount = () => {
                 >
                   Min Max Bet
                 </h6>
+               
                 <Table striped bordered className="commonTable">
                   <thead>
                     <tr>
@@ -524,6 +536,8 @@ const AddAccount = () => {
                 </Table>
               </Col>
             </Row>
+              : null
+            }
             <Row>
               <Col md={12}>
                 <CustomInput
