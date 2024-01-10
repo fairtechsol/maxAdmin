@@ -27,6 +27,12 @@ export const ApiConstants = {
     ACCOUNTLIST: "/transaction/get",
     BETHISTORY: "/bet",
   },
+  MATCH: {
+    MATCHLIST: "/match/list",
+    SEARCHLIST: "/user/searchlist",
+    MATCHDETAILS: "/match/",
+    CURRENTBET: "/bet",
+  },
 };
 
 export const Constants = {
