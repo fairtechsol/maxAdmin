@@ -10,6 +10,7 @@ import "../../components/listClients/style.scss";
 import { Column, TableConfig } from "../../models/tableInterface";
 import { getUsers } from "../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../store/store";
+
 // Example usage
 const columns: Column[] = [
   { id: "username", label: "User Name", colSpan: 4 },
@@ -115,6 +116,7 @@ const ListClent: React.FC = () => {
               setTableConfig={setTableConfig}
               enablePdfExcel={true}
               isSearch
+              isPagination={true}
             >
               <tr>
                 {columns?.map((item, index) => {

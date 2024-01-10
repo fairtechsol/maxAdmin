@@ -11,16 +11,19 @@ import { widthdrawAmountValidations } from "../../../../utils/fieldValidations/a
 
 const initialValues: any = {
   userId: "",
+  userData: "",
   amount: "",
   createBy: "",
   transactionPassword: "",
 };
+
 
 const ExposureLimit = ({ setShow, userData }: any) => {
   const dispatch: AppDispatch = useDispatch();
 
   const formik = useFormik({
     initialValues: initialValues,
+    
     validationSchema: widthdrawAmountValidations,
     onSubmit: (values: any) => {
       try {
@@ -31,7 +34,7 @@ const ExposureLimit = ({ setShow, userData }: any) => {
       };
       dispatch(setExposureLimit(payload));
       setShow(false);
-      console.log(values, "exposerLimit");
+      // console.log(values, "exposerLimit");
       // setShow(false);
     } catch (e) {
       console.log(e);
@@ -47,7 +50,9 @@ const ExposureLimit = ({ setShow, userData }: any) => {
     if (userData) {
       formik.setValues({
         ...formik.values,
+        
         initialBalance: userData?.balance,
+        oldLimit: userData?.exposureLimit,
       });
     }
   }, [userData]);
@@ -69,6 +74,7 @@ const ExposureLimit = ({ setShow, userData }: any) => {
                   bgColor="gray"
                   disabled={true}
                   id="oldLimitInput"
+                  value={values.oldLimit}
                 />
               </Col>
             </Row>
