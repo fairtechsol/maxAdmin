@@ -9,7 +9,7 @@ import {
   changePasswordReset,
 } from "../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../store/store";
-import { newPasswordValidationSchema } from "../../utils/fieldValidations/newPassword";
+import { oldPasswordValidationSchema } from "../../utils/fieldValidations/newPassword";
 import { logout } from "../../store/actions/auth/authActions";
 import NavigateModal from "../../components/commonComponent/customModal";
 
@@ -34,7 +34,7 @@ const ChangePassword = () => {
   const { transactionPassword, success } = useSelector((state: RootState) => state.user.userList);
   const formik = useFormik({
     initialValues: initialValues,
-    validationSchema: newPasswordValidationSchema,
+    validationSchema: oldPasswordValidationSchema,
     onSubmit: (values: any) => {
       const payload = {
         newPassword: values.newPassword,
