@@ -8,6 +8,7 @@ import {
   changePassword,
   userBalance,
   searchList,
+  accountListModalReset,
 } from "../../actions/user/userActions";
 
 interface InitialState {
@@ -84,6 +85,7 @@ export const userList = createSlice({
       })
       .addCase(changeAmmountUser.fulfilled, (state) => {
         state.loading = false;
+        state.success = true;
       })
       .addCase(changeAmmountUser.rejected, (state, action) => {
         state.loading = false;
@@ -95,6 +97,7 @@ export const userList = createSlice({
       })
       .addCase(setCreditRefference.fulfilled, (state) => {
         state.loading = false;
+        state.success = true;
       })
       .addCase(setCreditRefference.rejected, (state, action) => {
         state.loading = false;
@@ -106,6 +109,7 @@ export const userList = createSlice({
       })
       .addCase(setExposureLimit.fulfilled, (state) => {
         state.loading = false;
+        state.success = true;
       })
       .addCase(setExposureLimit.rejected, (state, action) => {
         state.loading = false;
@@ -117,6 +121,7 @@ export const userList = createSlice({
       })
       .addCase(setLockUnlockUser.fulfilled, (state) => {
         state.loading = false;
+        state.success = true;
       })
       .addCase(setLockUnlockUser.rejected, (state, action) => {
         state.loading = false;
@@ -135,6 +140,9 @@ export const userList = createSlice({
       .addCase(changePassword.rejected, (state, action) => {
         state.loading = false;
         state.error = action?.error?.message;
+      })
+      .addCase(accountListModalReset, (state) => {
+        return { ...state, success: false };
       });
   },
 });
