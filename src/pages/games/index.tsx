@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import BetTableHeader from "../../components/commonComponent/betTableHeader";
 import BetTable from "../../components/game/betTable";
@@ -9,8 +10,26 @@ import UserBets from "../../components/game/userBet";
 import { MatchType } from "../../utils/enum";
 import { GameData, MatchOdds, SessionMarketData } from "./index.json";
 // import GameTable from "../../components/game/table";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../store/store";
+import {
+  matchDetailAction,
+} from "../../store/actions/match/matchAction";
+import { useParams } from "react-router-dom";
 
 export default function Games() {
+  const dispatch: AppDispatch = useDispatch();
+
+  const { id } = useParams();
+
+  const { matchDetails } = useSelector((state: RootState) => state.match.matchListSlice);
+
+  useEffect(() => {
+    dispatch(matchDetailAction(id));
+  }, []);
+
+  console.log("matchDetails :", matchDetails);
+
   return (
     <div className="gamePage">
       <Container fluid>
