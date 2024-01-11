@@ -132,6 +132,24 @@ export const getGameReport = createAsyncThunk<any, any>(
     }
   }
 );
+export const getGeneralReport = createAsyncThunk<any, any>(
+  "user/generalReport",
+  async ({ type, page, limit, searchBy, keyword, filter }, thunkApi) => {
+    try {
+      const resp = await service.get(
+        `${ApiConstants.REPORT.GENRALREPORT}?type=${type}&page=${page || 1
+        }&limit=${limit || 15}&searchBy=${searchBy}&keyword=${keyword || ""
+        }${filter}`
+      );
+      if (resp?.data) {
+        return resp?.data;
+      }
+    } catch (error) {
+      const err = error as AxiosError;
+      return thunkApi.rejectWithValue(err.response?.status);
+    }
+  }
+);
 
 export const matchDetailAction = createAsyncThunk<any, any>(
   "/match/details",

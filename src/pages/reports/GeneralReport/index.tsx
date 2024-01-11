@@ -3,53 +3,95 @@ import { Button, Col, Form, Row } from "react-bootstrap";
 import SelectSearch from "../../../components/commonComponent/SelectSearch";
 import CustomTable from "../../../components/commonComponent/table";
 import { TableConfig } from "../../../models/tableInterface";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../../store/store";
+import { getGeneralReport } from "../../../store/actions/match/matchAction";
 
 interface Column {
   id: string;
   label: string;
 }
 
-interface DataItem {
-  [key: string]: string | number;
-}
+// interface DataItem {
+//   [key: string]: string | number;
+// }
 
 // Example usage
 const columns: Column[] = [
-  { id: "srNo", label: "Sr No" },
+  { id: "sr", label: "Sr No" },
   { id: "name", label: "Name" },
-  { id: "amount", label: "Amount" },
+  { id: "bl", label: "Amount" },
   { id: "srNo", label: "Sr No." },
-  { id: "name", label: "Name" },
+  { id: "userName", label: "Name" },
   { id: "amount", label: "Amount" },
 ];
 
-const data: DataItem[] = [];
+// const data: DataItem[] = [];
 
 const options = [
-  { value: "generalReport", label: "General Report" },
+  { value: "balance", label: "General Report" },
   { value: "creditReferance", label: "Credit Referance" },
 ];
 
 const GeneralReport = () => {
-  const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
 
-  useEffect(() => {}, [tableConfig]);
+  const dispatch: AppDispatch = useDispatch();
+  const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
+  const [selectType, setSelectType] = useState({ value: "ALL", label: "All" });
+
+  useEffect(() => { }, [tableConfig]);
+
+  const handleType = (type: any) => {
+    setSelectType(type);
+
+  };
+
+  const { gameGeneralList } = useSelector((state: RootState) => state.match.reportList);
+  console.log(gameGeneralList, "gameGeneralList>>>>1");
+  const handleLoad = (e: any) => {
+    e.preventDefault();
+    let filter = "";
+    alert("fjddf");
+
+    console.log('filter :', selectType?.value);
+    // dispatch(betReportAccountList({ status: selectType?.value }));
+    dispatch(
+      getGeneralReport({
+        type: selectType?.value,
+        page: 1,
+        limit: tableConfig?.rowPerPage,
+        searchBy: "description",
+        keyword: tableConfig?.keyword || "",
+        filter,
+      })
+    );
+  };
+
+
+  useEffect(() => {
+    dispatch(getGeneralReport({ status: "" }));
+  }, []);
+
+
+  // const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
+  useEffect(() => { }, [tableConfig]);
   return (
     <div className="p-2 pt-0">
       <h5 className="title-22 fw-normal">General Report</h5>
-      <Form>
+      <Form onSubmit={(e) => handleLoad(e)}>
         <Row className="mb-4">
           <Col md={2}>
             <SelectSearch
-              defaultValue="generalReport"
+              defaultValue={[selectType]}
               options={options}
               label={"Select Type"}
               placeholder={"All"}
+              onChange={handleType}
             />
           </Col>
           <Col md={2}>
-            <Form.Label className="invisible d-block">dasd</Form.Label>
-            <Button>Load</Button>
+            <Form.Label className="invisible d-block">just invisible</Form.Label>
+            <Button type="submit">Load45645</Button>
           </Col>
         </Row>
       </Form>
@@ -57,19 +99,24 @@ const GeneralReport = () => {
         customClass="commonTable reportTable"
         striped
         columns={columns}
-        isPagination={true}
+        isPagination={false}
         isSort={true}
         isSearch={true}
-        itemCount={data?.length}
+        // itemCount={data?.length}
+        itemCount={gameGeneralList?.usersData?.length}
         setTableConfig={setTableConfig}
         enablePdfExcel={false}
       >
-        {data?.length === 0 && <tr>No data available in table </tr>}
-        {data?.length > 0 &&
-          data.map((item, index) => (
+        {gameGeneralList && gameGeneralList?.usersData?.length === 0 && <tr>No data available in table </tr>}
+        {gameGeneralList &&
+          gameGeneralList?.usersData?.map((item: any, index: any) => (
             <tr key={index}>
               {columns.map((column) => (
-                <td key={column.id}>{item[column.id]}</td>
+                <td key={column.id}>
+                  {column.id === 'srNo' && index + 1}
+                  {column.id === 'amount' && item.userBal && item.userBal.currentBalance}
+                  {column.id === 'userName' && item[column.id]}
+              </td>
               ))}
             </tr>
           ))}
