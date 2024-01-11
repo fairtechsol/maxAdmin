@@ -8,6 +8,10 @@ import CustomTable from "../../../components/commonComponent/table";
 import ProfitLossModal from "../../../components/reports/modals/profitLoss";
 import ProfitLossEventType from "../../../components/reports/profitLossEventType";
 import { TableConfig } from "../../../models/tableInterface";
+import { AppDispatch, RootState } from "../../../store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { searchList } from "../../../store/actions/user/userActions";
+import { debounce } from "lodash";
 
 interface Column {
   id: string;
@@ -42,18 +46,52 @@ const data: DataItem[] = [
     profitLoss: 30,
   },
 ];
- 
-const options = [
-  { value: "slotGame", label: "Slot Game" },
-  { value: "liveCasino", label: "Live Casino" },
-  { value: "liveCasino1", label: "Live Casino 1" },
-  { value: "liveCasino2", label: "Live Casino 2" },
-];
+
+// const options = [
+//   { value: "slotGame", label: "Slot Game" },
+//   { value: "liveCasino", label: "Live Casino" },
+//   { value: "liveCasino1", label: "Live Casino 1" },
+//   { value: "liveCasino2", label: "Live Casino 2" },
+// ];
 
 const ProfitLossReport = () => {
+  const dispatch: AppDispatch = useDispatch();
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
   const [profitLossModalShow, setProfitLossModalShow] = useState(false);
+  const [selectedUser, setSelectedUser] = useState<any>(null);
+  const [userOptions, setUserOptions] = useState([]);
+
+  const { userDetail } = useSelector((state: RootState) => state.user.profile);
+  const { searchListData } = useSelector(
+    (state: RootState) => state.user.userList
+  );
+
+  const searchClientName = debounce(async (value: any) => {
+    try {
+      dispatch(
+        searchList({
+          userName: value,
+          createdBy: userDetail?.id,
+        })
+      );
+    } catch (e) {
+      console.log(e);
+    }
+  }, 500);
+
   useEffect(() => {}, [tableConfig]);
+
+  useEffect(() => {
+    if (searchListData) {
+      const options = searchListData?.users?.map((user: any) => ({
+        value: user.id,
+        label: user.userName,
+      }));
+
+      setUserOptions(options);
+    }
+  }, [searchListData]);
+
   return (
     <div className="p-2 pt-0">
       <h5 className="title-22 fw-normal">Profit Loss</h5>
@@ -61,10 +99,14 @@ const ProfitLossReport = () => {
         <Row className="mb-3">
           <Col md={2}>
             <SelectSearch
-              defaultValue="slotGame"
-              options={options}
               label={"Search By Client Name"}
+              options={userOptions}
+              value={selectedUser}
+              onChange={setSelectedUser}
+              placeholder={"Client Name:"}
               isMultiOption={true}
+              isSearchable={true}
+              onInputChange={searchClientName}
             />
           </Col>
           <Col md={2}>
