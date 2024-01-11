@@ -1,11 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Col, Nav, Row, Tab, Table } from "react-bootstrap";
 import CustomModal from "../../commonComponent/modal";
 import UserBetModalTable from "./modal";
 import UserBetModalForm from "./modal/form";
 import "./style.scss";
-const UserBets = () => {
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../../store/store";
+import { getPlacedBets } from "../../../store/actions/match/matchAction";
+
+const UserBets = ({ id }: any) => {
+  const dispatch: AppDispatch = useDispatch();
+  const { placedBets } = useSelector(
+    (state: RootState) => state.match.placeBets
+  );
   const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    if (id) {
+      dispatch(getPlacedBets(id));
+    }
+  }, [id]);
 
   return (
     <div className={`userBets`}>
@@ -22,7 +36,7 @@ const UserBets = () => {
                 >
                   <Nav.Item>
                     <Nav.Link className="rounded-0" eventKey="first">
-                      Matched{`(0)`}
+                      Matched{`(${placedBets.length})`}
                     </Nav.Link>
                   </Nav.Item>
                   <Nav.Item>
@@ -55,18 +69,23 @@ const UserBets = () => {
                     </tr>
                   </thead>
                   <tbody className="bg-primary">
-                    {/* {UsreBetsData?.map((item) => ( */}
-
-                    <tr>
-                      <td>UAccount</td>
-                      <td>India</td>
-                      <td>35</td>
-                      <td>100</td>
-                      <td>2023-11-14 15:15:08</td>
-                      <td>2023-11-14 15:15:08</td>
-                      <td>Match1</td>
-                    </tr>
-                    {/* ))} */}
+                    {placedBets?.map((bet: any) => {
+                      return (
+                        <tr key={bet?.id}>
+                          <td>{bet?.user?.userName}</td>
+                          <td>
+                            {bet?.marketBetType === "SESSION"
+                              ? bet?.eventName
+                              : bet?.teamName}
+                          </td>
+                          <td>{bet?.odds}</td>
+                          <td>{bet?.amount}</td>
+                          <td>{bet?.createdAt}</td>
+                          <td>{bet?.createdAt}</td>
+                          <td>{bet?.eventType}</td>
+                        </tr>
+                      );
+                    })}
                   </tbody>
                 </Table>
               </Tab.Pane>
@@ -84,14 +103,14 @@ const UserBets = () => {
                   </thead>
                   <tbody className="bg-primary">
                     {/* {UsreBetsData?.map((item) => ( */}
-                    <tr>
+                    {/* <tr>
                       <td>UAccount</td>
                       <td>India</td>
                       <td>35</td>
                       <td>100</td>
                       <td>2023-11-14 15:15:08</td>
                       <td>Match1</td>
-                    </tr>
+                    </tr> */}
                     {/* ))} */}
                   </tbody>
                 </Table>

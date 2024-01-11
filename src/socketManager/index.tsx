@@ -1,6 +1,7 @@
 import io from "socket.io-client";
 import { baseUrls } from "../utils/Constants";
 import { authSocketService } from "./authSocket";
+import { matchSocketService } from "./matchSocketService";
 
 export const socket = io(baseUrls.socket, {
   transports: ["websocket"],
@@ -28,4 +29,5 @@ export const socketService = {
     thirdParty.disconnect();
   },
   auth: { ...authSocketService },
+  match: { ...matchSocketService },
 };
