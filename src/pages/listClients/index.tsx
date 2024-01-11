@@ -33,7 +33,7 @@ const ListClent: React.FC = () => {
     eventId: null,
     userData: null,
   });
-
+  const { userList } = useSelector((state: RootState) => state.user.userList);
   const showEventModals = (id: any, userData: any) => {
     setEventDetails({
       show: true,
@@ -42,7 +42,7 @@ const ListClent: React.FC = () => {
     });
   };
 
-  useEffect(() => {}, [tableConfig]);
+  useEffect(() => { }, [tableConfig]);
 
   const actionButtons = [
     {
@@ -59,6 +59,7 @@ const ListClent: React.FC = () => {
       id: "l",
       name: "L",
       onClick: showEventModals,
+
     },
     {
       id: "c",
@@ -75,14 +76,10 @@ const ListClent: React.FC = () => {
       name: "S",
       onClick: showEventModals,
     },
-    {
-      id: "more",
-      name: "More",
-      onClick: () => {},
-    },
   ];
 
-  const { userList } = useSelector((state: RootState) => state.user.userList);
+
+
 
   useEffect(() => {
     dispatch(getUsers());
@@ -172,25 +169,29 @@ const ListClent: React.FC = () => {
                           />
                         </Form>
                       </td>
-                      <td className="text-end">{exposureLimit}</td>
+                      <td className="text-end">{roleName === "user" ? exposureLimit : "NA"}</td>
                       <td>{defaultPer}</td>
                       <td>{roleName}</td>
                       <td className="text-end">{casinoTotal}</td>
                       <td>
                         <div className="d-flex gap-1 border-right-0 border-left-0">
+
+
                           {actionButtons?.map((item) => {
                             return (
                               <CustomButton
                                 variant="dark"
+                                disabled={item?.name === "L" ? roleName !== "user" ? true : false : false}
                                 onClick={() => {
                                   item.onClick(item?.id, userItem);
                                 }}
                                 key={item?.id}
-                                className="actionBtn"
+                                className={`actionBtn ${(item?.name === "L" ? roleName !== "user" ? true : false : false) ? 'disabled' : ''}`}
                               >
                                 {item?.name}
                               </CustomButton>
                             );
+
                           })}
                         </div>
                       </td>
