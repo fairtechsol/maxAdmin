@@ -7,18 +7,17 @@ interface BookmakerTableProps {
   minMax?: any;
   data: any;
   backLayCount?: number;
+  matchDetails: any;
 }
 function BookmakerTable({
   minMax,
   data,
   backLayCount = 6,
+  matchDetails,
 }: BookmakerTableProps) {
   const handleClick = () => {
     alert("5555");
   };
-  // const overLayStatus = <h1>fhdsjkfj</h1>;
-  // const overlayString = ReactDOMServer.renderToString(overLayStatus);
-  // console.log(overlayString);
   return (
     <div
       className={`gameTable table-responsive sessionFancyTable borderTable border `}
@@ -52,48 +51,44 @@ function BookmakerTable({
           </tr>
         </thead>
         <tbody>
-          {data?.map((item: any, i: number) => (
-            <tr key={i} className="">
-              <td>
-                <div className="backLayRunner d-flex flex-column px-3">
-                  <span className="backLayRunner-country title-14">
-                    {item?.RunnerName}
-                  </span>
-                  <span className="title-14">{item?.lastPriceTraded}</span>
-                </div>
-              </td>
-              <td colSpan={backLayCount === 6 ? 6 : 2}>
-                <BetStatusOverlay title="Lock">
-                  {item?.ex?.availableToBack?.map(
-                    (back: any, index: number) => (
-                      <BackLayBox
-                        key={index}
-                        style={{ width: "60px" }}
-                        // overlay={true}
-                        bgColor={`blue${index + 1}`}
-                        rate={back?.price}
-                        percent={back?.size}
-                        onClick={handleClick}
-                      />
-                    )
-                  )}
-                  {item?.ex?.availableToLay?.map((red: any, index: number) => (
-                    <BackLayBox
-                      key={index}
-                      style={{ width: "60px" }}
-                      // overlay={true}
-                      bgColor={`red${index + 1}`}
-                      rate={red?.price}
-                      percent={red?.size}
-                      onClick={handleClick}
-                    />
-                  ))}
-                </BetStatusOverlay>
-              </td>
+          <tr className="">
+            <td>
+              <div className="backLayRunner d-flex flex-column px-3">
+                <span className="backLayRunner-country title-14">
+                  {data?.RunnerName}
+                </span>
+                <span className="title-14">{data?.lastPriceTraded}</span>
+              </div>
+            </td>
+            <td colSpan={backLayCount === 6 ? 6 : 2}>
+              <BetStatusOverlay title="Lock">
+                {data?.ex?.availableToBack?.map((back: any, index: number) => (
+                  <BackLayBox
+                    key={index}
+                    style={{ width: "60px" }}
+                    // overlay={true}
+                    bgColor={`blue${index + 1}`}
+                    rate={back?.price}
+                    percent={back?.size}
+                    onClick={handleClick}
+                  />
+                ))}
+                {data?.ex?.availableToLay?.map((red: any, index: number) => (
+                  <BackLayBox
+                    key={index}
+                    style={{ width: "60px" }}
+                    // overlay={true}
+                    bgColor={`red${index + 1}`}
+                    rate={red?.price}
+                    percent={red?.size}
+                    onClick={handleClick}
+                  />
+                ))}
+              </BetStatusOverlay>
+            </td>
 
-              <td colSpan={2} style={{ borderLeft: 0 }}></td>
-            </tr>
-          ))}
+            <td colSpan={2} style={{ borderLeft: 0 }}></td>
+          </tr>
         </tbody>
       </Table>
     </div>

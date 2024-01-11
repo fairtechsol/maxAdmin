@@ -5,17 +5,18 @@ import BetStatusOverlay from "../../../commonComponent/betStatusOverlay";
 import CustomModal from "../../../commonComponent/modal";
 import YesNoBox from "../../../yesNo";
 import "../../style.scss";
-import TableRunner from "./tableRunner";
-interface SessionMarketTableProps {
+import TableRunner from "../sessionMarket/tableRunner";
+
+interface ApiSessionMarketTableProps {
   data: any;
   title: any;
   matchDetails: any;
 }
-function SessionMarketTable({
+function ApiSessionMarketTable({
   data,
   title,
   matchDetails,
-}: SessionMarketTableProps) {
+}: ApiSessionMarketTableProps) {
   const [runnerModalShow, setRunnerModalShow] = useState(false);
 
   const handleClick = () => {};
@@ -42,7 +43,7 @@ function SessionMarketTable({
                 <div className="backLayRunner d-flex flex-column px-3">
                   <div onClick={() => setRunnerModalShow((prev) => !prev)}>
                     <Link to="" className="backLayRunner-country title-14">
-                      {JSON.parse(item)?.name}
+                      {item?.RunnerName}
                     </Link>
                   </div>
                   <span className="title-14">{0}</span>
@@ -54,20 +55,20 @@ function SessionMarketTable({
                     style={{ width: "50px" }}
                     // overlay={true}
                     bgColor="red1"
-                    rate={JSON.parse(item)?.noRate}
-                    percent={JSON.parse(item)?.noPercent}
+                    rate={item?.BackPrice1}
+                    percent={item?.BackSize1}
                     onClick={handleClick}
                   />
                   <YesNoBox
                     style={{ width: "50px" }}
                     bgColor="blue3"
-                    rate={JSON.parse(item)?.yesRate}
-                    percent={JSON.parse(item)?.yesPercent}
+                    rate={item?.LayPrice1}
+                    percent={item?.LaySize1}
                     onClick={handleClick}
                   />
                   <div className="minMaxBox d-flex flex-column justify-content-center text-end px-2 text-info title-14">
-                    <span className="">Min:{JSON.parse(item)?.minBet}</span>
-                    <span>Max:{JSON.parse(item)?.maxBet}</span>
+                    <span className="">Min:{item?.min}</span>
+                    <span>Min:{item?.max}</span>
                   </div>
                 </BetStatusOverlay>
               </td>
@@ -85,4 +86,4 @@ function SessionMarketTable({
   );
 }
 
-export default SessionMarketTable;
+export default ApiSessionMarketTable;

@@ -8,13 +8,9 @@ import Rules from "../../components/game/rules";
 import ScoreCard from "../../components/game/scoreCard";
 import UserBets from "../../components/game/userBet";
 import { MatchType } from "../../utils/enum";
-import { GameData, MatchOdds, SessionMarketData } from "./index.json";
-// import GameTable from "../../components/game/table";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
-import {
-  matchDetailAction,
-} from "../../store/actions/match/matchAction";
+import { matchDetailAction } from "../../store/actions/match/matchAction";
 import { useParams } from "react-router-dom";
 
 export default function Games() {
@@ -22,13 +18,15 @@ export default function Games() {
 
   const { id } = useParams();
 
-  const { matchDetails } = useSelector((state: RootState) => state.match.matchListSlice);
+  const { matchDetails } = useSelector(
+    (state: RootState) => state.match.matchListSlice
+  );
 
   useEffect(() => {
-    dispatch(matchDetailAction(id));
-  }, []);
-
-  console.log("matchDetails :", matchDetails);
+    if (id) {
+      dispatch(matchDetailAction(id));
+    }
+  }, [id]);
 
   return (
     <div className="gamePage">
@@ -38,39 +36,61 @@ export default function Games() {
         <div className="gamePage-table">
           <Row className="no-gutters">
             <Col md={8}>
-              {MatchOdds().map((item: any, index: number) => {
-                return (
-                  <Col md={12} key={index}>
-                    <BetTable
-                      title={item?.title}
-                      type={MatchType.MATCH_ODDS}
-                      data={item?.runners}
-                    />
-                  </Col>
-                );
-              })}
+              {matchDetails?.matchOdd && (
+                <Col md={12}>
+                  <BetTable
+                    title={matchDetails?.matchOdd?.name}
+                    type={MatchType.MATCH_ODDS}
+                    data={matchDetails?.matchOdd}
+                  />
+                </Col>
+              )}
+              {matchDetails?.bookmaker && (
+                <Col md={12}>
+                  <BetTable
+                    title={matchDetails?.bookmaker?.name}
+                    type={MatchType.BOOKMAKER}
+                    data={matchDetails?.bookmaker}
+                  />
+                </Col>
+              )}
               <Row className="no-gutters">
-                {GameData()?.map((item: any, index: number) => (
-                  <Col md={6} key={index}>
-                    <BetTable
-                      title={item?.title}
-                      type={MatchType.BOOKMAKER}
-                      data={item?.data}
-                      backLayCount={item.countRow}
-                    />
-                  </Col>
-                ))}
+                {matchDetails?.quickBookmaker.length > 0 &&
+                  matchDetails?.quickBookmaker?.map(
+                    (item: any, index: number) => (
+                      <div key={index}>
+                        {item?.isActive && (
+                          <Col md={12}>
+                            <BetTable
+                              title={item?.name}
+                              type={MatchType.BOOKMAKER}
+                              data={matchDetails?.quickBookmaker}
+                            />
+                          </Col>
+                        )}
+                      </div>
+                    )
+                  )}
               </Row>
               <Row className="no-gutters">
-                {SessionMarketData()?.map((item: any, index: number) => (
-                  <Col md={6} key={index}>
+                {matchDetails?.apiSessionActive && (
+                  <Col md={6}>
                     <BetTable
-                      title={item?.title}
-                      type={MatchType.SESSION_MARKET}
-                      data={item?.data}
+                      title={"Session Market"}
+                      type={MatchType.API_SESSION_MARKET}
+                      data={matchDetails?.apiSession}
                     />
                   </Col>
-                ))}
+                )}
+                {matchDetails?.manualSessionActive && (
+                  <Col md={6}>
+                    <BetTable
+                      title={"Fancy Market"}
+                      type={MatchType.SESSION_MARKET}
+                      data={matchDetails?.sessionBettings}
+                    />
+                  </Col>
+                )}
               </Row>
             </Col>
             <Col md={4}>
