@@ -6,6 +6,7 @@ import "./theme/theme.css";
 // import "./theme/color-theme.css";
 
 function App() {
+  if (process.env.NODE_ENV === "production") console.log = () => {};
   return <RouterProvider router={routes()} />;
 }
 

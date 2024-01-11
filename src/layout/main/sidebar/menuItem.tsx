@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getCompetitionDates,
   getCompetitionMatches,
+  setBreadCrumb,
 } from "../../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../../store/store";
 import { Link } from "react-router-dom";
@@ -29,6 +30,7 @@ const MenuCollapse = (props: any) => {
   const { data, menuItemList, setMenuItemList, selectedMatchIndex } = props;
 
   const [selectedCompetition, setSelectedCompetition] = useState("");
+  const [selectedCompetitionName, setSelectedCompetitionName] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
 
   const dispatch: AppDispatch = useDispatch();
@@ -71,6 +73,7 @@ const MenuCollapse = (props: any) => {
           name: item?.title,
           id: item?.id,
           type: "collapse",
+          isTiedMatch: item?.isTiedMatch,
         }));
       setMenuItemList(tempList);
     }
@@ -110,6 +113,7 @@ const MenuCollapse = (props: any) => {
                               if (e == 0) {
                                 setSelectedDate(menuItemChild?.id);
                                 setSelectedCompetition(sideBarChild?.id);
+                                setSelectedCompetitionName(sideBarChild?.name);
                                 dispatch(
                                   getCompetitionMatches({
                                     date: menuItemChild?.id,
@@ -127,36 +131,75 @@ const MenuCollapse = (props: any) => {
                               </Accordion.Header>
                               <Accordion.Body>
                                 {menuItemChild?.children?.map(
-                                  (matches: any, matchIndex: number) => (
-                                    <Accordion
-                                      key={indexes}
-                                      defaultActiveKey={[]}
-                                    >
-                                      <Accordion.Item eventKey="0">
-                                        <Accordion.Header>
-                                          {matches?.name}
-                                        </Accordion.Header>
-                                        <Accordion.Body>
-                                          {
-                                            <MenuItemChild
-                                              data={{
-                                                path: `/admin/match_detail/${matches?.id}`,
-                                                name: "Match Odds",
-                                              }}
-                                            />
-                                          }
+                                  (matches: any, matchIndex: number) => {
+                                    return (
+                                      <Accordion
+                                        key={indexes}
+                                        defaultActiveKey={[]}
+                                      >
+                                        <Accordion.Item eventKey="0">
+                                          <Accordion.Header>
+                                            {matches?.name}
+                                          </Accordion.Header>
+                                          <Accordion.Body
+                                            onClick={() => {
+                                              dispatch(
+                                                setBreadCrumb({
+                                                  competition:
+                                                    selectedCompetitionName,
+                                                  matchName: matches?.name,
+                                                  type: "Match_Odds",
+                                                  date: selectedDate,
+                                                })
+                                              );
+                                            }}
+                                          >
+                                            {
+                                              <MenuItemChild
+                                                data={{
+                                                  path: `/admin/match_detail/${matches?.id}`,
+                                                  name: "Match_Odds",
+                                                }}
+                                              />
+                                            }
+                                          </Accordion.Body>
                                           {matches?.isTiedMatch && (
-                                            <MenuItemChild
-                                              data={{
-                                                path: `/admin/match_detail/${matches?.id}`,
-                                                name: "Tied Match",
+                                            <Accordion.Body
+                                              onClick={() => {
+                                                dispatch(
+                                                  setBreadCrumb({
+                                                    competition:
+                                                      selectedCompetitionName,
+                                                    matchName: matches?.name,
+                                                    type: "Tied_Match",
+                                                    date: selectedDate,
+                                                  })
+                                                );
                                               }}
-                                            />
+                                            >
+                                              <MenuItemChild
+                                                data={{
+                                                  path: `/admin/match_details/${matches?.id}`,
+                                                  name: "Tied_Match",
+                                                }}
+                                                onClick={() => {
+                                                  dispatch(
+                                                    setBreadCrumb({
+                                                      competition:
+                                                        selectedCompetition,
+                                                      matchName: matches?.name,
+                                                      type: "Tied_Match",
+                                                      date: selectedDate,
+                                                    })
+                                                  );
+                                                }}
+                                              />
+                                            </Accordion.Body>
                                           )}
-                                        </Accordion.Body>
-                                      </Accordion.Item>
-                                    </Accordion>
-                                  )
+                                        </Accordion.Item>
+                                      </Accordion>
+                                    );
+                                  }
                                 )}
                               </Accordion.Body>
                             </Accordion.Item>

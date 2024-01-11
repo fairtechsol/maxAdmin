@@ -78,9 +78,6 @@ const ListClent: React.FC = () => {
     },
   ];
 
-
-
-
   useEffect(() => {
     dispatch(getUsers());
   }, [dispatch]);

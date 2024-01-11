@@ -8,6 +8,7 @@ import BookmakerTable from "./bookMaker";
 import MatchOdds from "./matchOdds";
 import SessionMarketTable from "./sessionMarket";
 import { RootState } from "../../../store/store";
+import { useLocation } from "react-router-dom";
 
 interface BetTableProps {
   title: string;
@@ -19,17 +20,26 @@ const BetTable = ({ title, type, data, backLayCount }: BetTableProps) => {
   const { matchDetails } = useSelector(
     (state: RootState) => state.match.matchListSlice
   );
+  const { breadCrumb } = useSelector(
+    (state: RootState) => state.match.sidebarList
+  );
 
-  console.log(data);
+  const location = useLocation();
   return (
     <>
       {type === MatchType.MATCH_ODDS ? (
         <CustomBreadcrumb
           items={[
-            { name: "ICC Cricket World Cup" },
-            { name: "ICC Cricket World Cup" },
-            { name: "TOURNAMENT_WINNER  " },
-            { name: "10/5/2023 2:00:00 PM" },
+            { name: breadCrumb?.competition || matchDetails?.competitionName },
+            { name: breadCrumb?.matchName || matchDetails?.title },
+            {
+              name:
+                breadCrumb?.type ||
+                (location.pathname.includes("match_details")
+                  ? "Tied_Match"
+                  : "Match_Odds"),
+            },
+            { name: breadCrumb?.date || matchDetails?.startAt },
           ]}
         />
       ) : (
@@ -44,6 +54,7 @@ const BetTable = ({ title, type, data, backLayCount }: BetTableProps) => {
         />
       ) : type === MatchType.MATCH_ODDS ? (
         <MatchOdds
+          title={"Runners"}
           data={data}
           backLayCount={backLayCount}
           matchDetails={matchDetails}
