@@ -1,13 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
 
-    getReportAccountList, getReportCurrentBet, getGameReport,
+    getReportAccountList, getReportCurrentBet, getGameReport, getGeneralReport,
 } from "../../actions/match/matchAction";
 
 interface InitialState {
     ReportAccountList: any;
     CurrentBetAccountList: any;
     gameReportList: any;
+    gameGeneralList: any;
     loading: boolean;
     success: boolean;
     error: any;
@@ -17,6 +18,7 @@ const initialState: InitialState = {
     ReportAccountList: [],
     CurrentBetAccountList: [],
     gameReportList: [],
+    gameGeneralList: [],
     loading: false,
     success: false,
     error: null,
@@ -67,6 +69,20 @@ const reportListSlice = createSlice({
                 state.loading = false;
             })
             .addCase(getGameReport.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action?.error?.message;
+            })
+            .addCase(getGeneralReport.pending, (state) => {
+                state.loading = false;
+                state.success = false;
+                state.error = null;
+            })
+            .addCase(getGeneralReport.fulfilled, (state, action) => {
+                state.success = true;
+                state.gameGeneralList = action.payload;
+                state.loading = false;
+            })
+            .addCase(getGeneralReport.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action?.error?.message;
             });

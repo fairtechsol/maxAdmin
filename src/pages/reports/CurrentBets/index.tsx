@@ -51,6 +51,7 @@ const CurrentBets = () => {
 
   const handleLoad = (e: any) => {
     e.preventDefault();
+    alert("fhsd");
     dispatch(betReportAccountList({ status: selectType?.value }));
   };
 

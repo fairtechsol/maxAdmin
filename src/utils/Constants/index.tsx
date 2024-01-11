@@ -26,6 +26,7 @@ export const ApiConstants = {
   REPORT: {
     ACCOUNTLIST: "/transaction/get",
     BETHISTORY: "/bet",
+    GENRALREPORT: "user/generalReport",
   },
 };
 
