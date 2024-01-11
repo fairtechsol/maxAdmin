@@ -11,7 +11,9 @@ const ListAccount = Loadable(lazy(() => import("../pages/listActiveUser")));
 const AddAccount = Loadable(lazy(() => import("../pages/addAccount")));
 const MarketAnalysis = Loadable(lazy(() => import("../pages/marketAnalysis")));
 const ChangePassword = Loadable(lazy(() => import("../pages/changePassword")));
-const ChangePasswordFirst = Loadable(lazy(() => import("../pages/auth/changePassword")));
+const ChangePasswordFirst = Loadable(
+  lazy(() => import("../pages/auth/changePassword"))
+);
 
 const SecureAuth = Loadable(lazy(() => import("../pages/secureAuth")));
 
@@ -21,6 +23,10 @@ const MainRoutes = {
   children: [
     {
       path: "match_detail/:id",
+      element: <Game />,
+    },
+    {
+      path: "match_details/:id",
       element: <Game />,
     },
     // {

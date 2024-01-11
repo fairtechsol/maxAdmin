@@ -24,7 +24,7 @@ import { FgLogo } from "../../assets/images";
 const initialValues: any = {
   oldPassword: "",
   newPassword: "",
-  // confirmPassword: "",
+  confirmPassword: "",
   // transactionPassword: "",
 };
 
@@ -39,7 +39,7 @@ const ChangePassword = () => {
     onSubmit: (values: any) => {
       const payload = {
         newPassword: values.newPassword,
-        confirmPassword: values.newPassword,
+        confirmPassword: values.confirmPassword,
         oldPassword: values.oldPassword,
       };
       dispatch(changePassword(payload));
@@ -94,6 +94,18 @@ const ChangePassword = () => {
             />
           </Form.Group>
       
+          <Form.Group className="mb-3 d-block">
+            <CustomInput
+              id={"confirmPassword"}
+              title={"Confirm Password"}
+              placeholder={"Confirm Password"}
+              type={"password"}
+              customstyle={"mb-3"}
+              {...getFieldProps("confirmPassword")}
+              touched={touched.confirmPassword}
+              errors={errors.confirmPassword}
+            />
+          </Form.Group>
 
         <Button className="w-100" variant="primary" type="submit">
           Submit

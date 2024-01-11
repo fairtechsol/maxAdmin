@@ -67,7 +67,12 @@ export const getCompetitionMatches = createAsyncThunk<any, any>(
     }
   }
 );
-
+export const setBreadCrumb = createAsyncThunk<any, any>(
+  "/breadCrumb",
+  async (data) => {
+    return data;
+  }
+);
 
 // ====== Reports ======
 
@@ -76,9 +81,9 @@ export const getReportAccountList = createAsyncThunk<any, any>(
   async ({ id, page, limit, searchBy, keyword, filter }, thunkApi) => {
     try {
       const resp = await service.get(
-        `${ApiConstants.REPORT.ACCOUNTLIST}/${id}?page=${page || 1
-        }&limit=${limit || 15}&searchBy=${searchBy}&keyword=${keyword || ""
-        }${filter}`
+        `${ApiConstants.REPORT.ACCOUNTLIST}/${id}?page=${page || 1}&limit=${
+          limit || 15
+        }&searchBy=${searchBy}&keyword=${keyword || ""}${filter}`
       );
       if (resp?.data) {
         return resp?.data;
@@ -94,9 +99,9 @@ export const getReportCurrentBet = createAsyncThunk<any, any>(
   async ({ id, page, limit, searchBy, keyword, filter }, thunkApi) => {
     try {
       const resp = await service.get(
-        `${ApiConstants.REPORT.ACCOUNTLIST}/${id}?page=${page || 1
-        }&limit=${limit || 15}&searchBy=${searchBy}&keyword=${keyword || ""
-        }${filter}`
+        `${ApiConstants.REPORT.ACCOUNTLIST}/${id}?page=${page || 1}&limit=${
+          limit || 15
+        }&searchBy=${searchBy}&keyword=${keyword || ""}${filter}`
       );
       if (resp?.data) {
         return resp?.data;
@@ -112,8 +117,10 @@ export const getGameReport = createAsyncThunk<any, any>(
   async ({ type, page, limit, searchBy, keyword, filter }, thunkApi) => {
     try {
       const resp = await service.get(
-        `${ApiConstants.REPORT.BETHISTORY}?status=${type}&page=${page || 1
-        }&limit=${limit || 15}&searchBy=${searchBy}&keyword=${keyword || ""
+        `${ApiConstants.REPORT.BETHISTORY}?status=${type}&page=${
+          page || 1
+        }&limit=${limit || 15}&searchBy=${searchBy}&keyword=${
+          keyword || ""
         }${filter}`
       );
       if (resp?.data) {
@@ -144,3 +151,40 @@ export const getGeneralReport = createAsyncThunk<any, any>(
   }
 );
 
+export const matchDetailAction = createAsyncThunk<any, any>(
+  "/match/details",
+  async (matchId) => {
+    try {
+      const resp = await service.get(
+        `${ApiConstants.MATCH.MATCHDETAILS}${matchId}`
+      );
+      if (resp) {
+        return resp?.data;
+      }
+    } catch (error: any) {
+      const err = error as AxiosError;
+      throw err;
+    }
+  }
+);
+
+export const getPlacedBets = createAsyncThunk<any, any>("/bet", async (id) => {
+  try {
+    const resp = await service.get(
+      `${ApiConstants.BET.GETPLACEDBETS}?status=PENDING&betPlaced.matchId=${id}`
+    );
+    if (resp) {
+      return resp?.data?.rows;
+    }
+  } catch (error: any) {
+    const err = error as AxiosError;
+    throw err;
+  }
+});
+
+export const updateMatchRates = createAsyncThunk<any, any>(
+  "/match/rates",
+  async (matchDetails) => {
+    return matchDetails;
+  }
+);

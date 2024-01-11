@@ -3,12 +3,14 @@ import {
   getCompetitionDates,
   getCompetitionList,
   getCompetitionMatches,
+  setBreadCrumb,
 } from "../../actions/match/matchAction";
 
 interface InitialState {
   competitionList: Array<object>;
   competitionDates: Array<object>;
   competitionMatches: Array<object>;
+  breadCrumb: any;
   loading: boolean;
   success: boolean;
   error: any;
@@ -18,6 +20,7 @@ const initialState: InitialState = {
   competitionList: [],
   competitionDates: [],
   competitionMatches: [],
+  breadCrumb: null,
   loading: false,
   success: false,
   error: null,
@@ -70,6 +73,9 @@ const sidebarListSlice = createSlice({
       .addCase(getCompetitionMatches.rejected, (state, action) => {
         state.loading = false;
         state.error = action?.error?.message;
+      })
+      .addCase(setBreadCrumb.fulfilled, (state, action) => {
+        state.breadCrumb = action.payload;
       });
   },
 });

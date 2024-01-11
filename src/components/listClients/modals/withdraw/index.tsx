@@ -37,7 +37,7 @@ const Withdraw = ({ userData, setShow }: any) => {
         transactionType: "withDraw",
       };
       dispatch(changeAmmountUser(payload));
-      // setShow(false);
+      setShow(false);
     } catch (e) {
       console.log(e);
     }

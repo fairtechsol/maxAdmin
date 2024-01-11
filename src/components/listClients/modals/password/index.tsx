@@ -59,8 +59,8 @@ const Password = ({ userData, setShow }: any) => {
                 onChange={handleChange}
                 type="password"
                 customStyle="input-box"
-                bgColor="gray"
-                disabled={true}
+                // bgColor="gray"
+                // disabled={true}
                 // id="newPasswordInput"
               />
             </Col>
@@ -75,7 +75,7 @@ const Password = ({ userData, setShow }: any) => {
               <CustomInput
                 name="newPassword"
                 id="newPassword"
-                value={values.newPassword}
+                value={values.confirmPassword}
                 onChange={handleChange}
                 type="password"
                 customStyle="input-box"

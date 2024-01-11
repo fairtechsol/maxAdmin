@@ -254,3 +254,4 @@ export const userListReset = createAction("userList/reset");
 export const addSuccessReset = createAction("addSuccess/reset");
 export const changePasswordReset = createAction("changePasswordReset/reset");
 export const profileReset = createAction("profile/reset");
+export const accountListModalReset = createAction("accountListModal/reset");

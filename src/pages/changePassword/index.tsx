@@ -9,7 +9,7 @@ import {
   changePasswordReset,
 } from "../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../store/store";
-import { newPasswordValidationSchema } from "../../utils/fieldValidations/newPassword";
+import { oldPasswordValidationSchema } from "../../utils/fieldValidations/newPassword";
 import { logout } from "../../store/actions/auth/authActions";
 import NavigateModal from "../../components/commonComponent/customModal";
 
@@ -21,10 +21,10 @@ import NavigateModal from "../../components/commonComponent/customModal";
 // }
 
 const initialValues: any = {
-  oldPassword: "",
+  // oldPassword: "",
   newPassword: "",
-  // confirmPassword: "",
-  // transactionPassword: "",
+  confirmPassword: "",
+  transactionPassword: "",
 };
 
 const ChangePassword = () => {
@@ -34,12 +34,13 @@ const ChangePassword = () => {
   const { transactionPassword, success } = useSelector((state: RootState) => state.user.userList);
   const formik = useFormik({
     initialValues: initialValues,
-    validationSchema: newPasswordValidationSchema,
+    validationSchema: oldPasswordValidationSchema,
     onSubmit: (values: any) => {
       const payload = {
         newPassword: values.newPassword,
-        confirmPassword: values.newPassword,
-        oldPassword: values.oldPassword,
+        confirmPassword: values.confirmPassword,
+        // oldPassword: values.oldPassword,
+        transactionPassword: values.transactionPassword,
       };
       dispatch(changePassword(payload));
     },
@@ -56,9 +57,9 @@ const ChangePassword = () => {
   }, [success]);
   return (
     <div className="px-3">
-      <h5>Change Password </h5>
+      <h5>Change Password</h5>
       <Form onSubmit={handleSubmit}>
-        <Row>
+        {/* <Row>
           <Col md={4}>
             <CustomInput
               id={"oldPassword"}
@@ -72,7 +73,7 @@ const ChangePassword = () => {
 
             />
           </Col>
-        </Row>
+        </Row> */}
         <Row>
           <Col md={4}>
             <CustomInput
@@ -84,6 +85,36 @@ const ChangePassword = () => {
               {...getFieldProps("newPassword")}
               touched={touched.newPassword}
               errors={errors.newPassword}
+            />
+          </Col>
+        </Row>
+
+        <Row>
+          <Col md={4}>
+            <CustomInput
+              id={"confirmPassword"}
+              title={"Confirm Password"}
+              placeholder={"Confirm Password"}
+              type={"password"}
+              customstyle={"mb-3"}
+              {...getFieldProps("confirmPassword")}
+              touched={touched.confirmPassword}
+              errors={errors.confirmPassword}
+            />
+          </Col>
+        </Row>
+
+        <Row>
+          <Col md={4}>
+            <CustomInput
+              id={"transactionPassword"}
+              title={"Transaction Password"}
+              placeholder={"Transaction Password"}
+              type={"password"}
+              customstyle={"mb-3"}
+              {...getFieldProps("transactionPassword")}
+              touched={touched.transactionPassword}
+              errors={errors.transactionPassword}
             />
           </Col>
         </Row>

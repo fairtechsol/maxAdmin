@@ -122,25 +122,25 @@ const AddAccount = () => {
           { value: "admin", label: "Admin" },
           { value: "superMaster", label: "Super Master" },
           { value: "master", label: "Master" },
-          { value: "agent", label: "Agent" },
+          // { value: "agent", label: "Agent" },
           { value: "user", label: "User" },
         ],
         admin: [
           { value: "superMaster", label: "Super Master" },
           { value: "master", label: "Master" },
-          { value: "agent", label: "Agent" },
+          // { value: "agent", label: "Agent" },
           { value: "user", label: "User" },
         ],
         superMaster: [
           { value: "master", label: "Master" },
-          { value: "agent", label: "Agent" },
+          // { value: "agent", label: "Agent" },
           { value: "user", label: "User" },
         ],
         master: [
-          { value: "agent", label: "Agent" },
+          // { value: "agent", label: "Agent" },
           { value: "user", label: "User" },
         ],
-        agent: [{ value: "user", label: "User" }],
+        // agent: [{ value: "user", label: "User" }],
       };
 
       setAccountTypes(accountTypeMap[roleName] || []);

@@ -39,7 +39,7 @@ const Deposit = ({ userData, setShow }: any) => {
           transactionType: "add",
         };
         dispatch(changeAmmountUser(payload));
-        // setShow(false);
+        setShow(false);
       } catch (e) {
         console.log(e);
       }
