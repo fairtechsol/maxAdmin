@@ -44,7 +44,7 @@ const AccountStatement = () => {
   const [AccountStatementModalShow, setAccountStatementModalShow] =
     useState(false);
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
-  const [aaccountTypeValues, setSelectedOption1] = useState(null);
+  const [aaccountTypeValues, setSelectedOption1] = useState<any>(null);
 
   const [gameNameOptions, setGameNameOptions] = useState<Option[]>([]);
   const [gameNameValues, setGameNameValues] = useState(null);
@@ -118,6 +118,25 @@ const AccountStatement = () => {
           new Date(dateTo).setDate(new Date(dateTo).getDate() + 1)
         )?.format("DD/MM/YYYY")}`;
       }
+      if (selectedUser) {
+        filter += `&user.userName=${selectedUser[0].label}`;
+      }
+      if (aaccountTypeValues && aaccountTypeValues?.value === "gameReport") {
+        filter += `&transType=inArr${JSON.stringify([
+          "win",
+          "loss",
+          // "bet",
+        ])}`;
+      } else if (
+        aaccountTypeValues &&
+        aaccountTypeValues?.value === "balanceReport"
+      ) {
+        filter += `&transType=inArr${JSON.stringify([
+          "add",
+          "withDraw",
+          "creditReference",
+        ])}`;
+      }
       // if (type) {
       //   filter += `&statementType=${type?.value}`;
       // }
@@ -127,8 +146,8 @@ const AccountStatement = () => {
           page: 1,
           limit: tableConfig?.rowPerPage,
           searchBy: "description",
-          keyword: tableConfig?.keyword || "",
-          filter,
+          keyword: tableConfig?.keyword ?? "",
+          filter: filter,
         })
       );
     } catch (e) {
@@ -144,7 +163,7 @@ const AccountStatement = () => {
           page: tableConfig?.page,
           limit: tableConfig?.rowPerPage,
           searchBy: "description",
-          keyword: tableConfig?.keyword || "",
+          keyword: tableConfig?.keyword ?? "",
         })
       );
     }
@@ -156,7 +175,6 @@ const AccountStatement = () => {
         value: user.id,
         label: user.userName,
       }));
-
       setUserOptions(options);
     }
   }, [searchListData]);
