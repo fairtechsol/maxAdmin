@@ -1,4 +1,3 @@
-import React from "react";
 import { useEffect, useState } from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import SelectSearch from "../../../components/commonComponent/SelectSearch";
@@ -14,7 +13,6 @@ import { AppDispatch, RootState } from "../../../store/store";
 import { searchList } from "../../../store/actions/user/userActions";
 import { debounce } from "lodash";
 import moment from "moment-timezone";
-// import moment from "moment-timezone";
 
 interface Column {
   id: string;
@@ -41,77 +39,59 @@ const AccountStatement = () => {
   const [dateFrom, setDateFrom] = useState<any>();
   const [dateTo, setDateTo] = useState<any>();
   const [firstTime, setFirstTime] = useState(false);
+  const [selectedUser, setSelectedUser] = useState<any>(null);
+  const [userOptions, setUserOptions] = useState([]);
   const [AccountStatementModalShow, setAccountStatementModalShow] =
     useState(false);
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
+  const [aaccountTypeValues, setSelectedOption1] = useState<any>(null);
+
+  const [gameNameOptions, setGameNameOptions] = useState<Option[]>([]);
+  const [gameNameValues, setGameNameValues] = useState(null);
 
   const { ReportAccountList } = useSelector(
     (state: RootState) => state.match.reportList
   );
 
-  // const { searchListData } = useSelector(
-  //   (state: RootState) => state.user.userList
-  // );
+  const { searchListData } = useSelector(
+    (state: RootState) => state.user.userList
+  );
   const { userDetail } = useSelector((state: RootState) => state.user.profile);
-  const [selectedOption1, setSelectedOption1] = useState(null);
 
-  const [options2, setOptions2] = useState<Option[]>([]);
-  const [selectedUser, setSelectedUser] = useState(null);
-  const [selectedOption2, setSelectedOption2] = useState(null);
-
-  console.log(selectedUser);
-  const options1: Option[] = [
+  const aaccountTypeOptions: Option[] = [
     { value: "all", label: "All" },
     { value: "balanceReport", label: "Balance Report" },
     { value: "gameReport", label: "Game Report" },
   ];
 
-  const handleSelect1Change = (selectedOption: any) => {
+  const handleAccountTypeChange = (selectedOption: any) => {
     setSelectedOption1(selectedOption);
-
     if (
       selectedOption &&
       (selectedOption as Option).value === "balanceReport"
     ) {
-      setOptions2([
+      setGameNameOptions([
         { value: "upper", label: "Upper" },
         { value: "down", label: "Down" },
-        // Add more options as needed
       ]);
     } else if (
       selectedOption &&
       (selectedOption as Option).value === "gameReport"
     ) {
-      setOptions2([
+      setGameNameOptions([
         { value: "cricket", label: "Cricket" },
         { value: "football", label: "Football" },
         { value: "tennis", label: "Tennis" },
-        // Add more options as needed
       ]);
     } else if (selectedOption && (selectedOption as Option).value === "all") {
-      setOptions2([
-        { value: "all", label: "All" },
-
-        // Add more options as needed
-      ]);
+      setGameNameOptions([{ value: "all", label: "All" }]);
     } else {
-      // Reset options if no option is selected
-      setOptions2([]);
+      setGameNameOptions([]);
     }
-
-    // ==== client Lst ====
-
-    // Reset the selected option for the second select
-    setSelectedOption2(null);
+    setGameNameValues(null);
   };
-
-  // Function to handle the change of the second select
-  const handleSelect2Change = (selectedOption: any) => {
-    setSelectedOption2(selectedOption);
-  };
-
-  const handleChange = (selectedOption: any) => {
-    setSelectedUser(selectedOption);
+  const handleGameNameChange = (selectedOption: any) => {
+    setGameNameValues(selectedOption);
   };
 
   const searchClientName = debounce(async (value: any) => {
@@ -128,28 +108,51 @@ const AccountStatement = () => {
   }, 500);
 
   const handleSubmit = (e: any) => {
-    e.preventDefault();
-    let filter = "";
-    if (dateFrom && dateTo) {
-      filter += `&createdAt=between${moment(new Date(dateFrom))?.format(
-        "DD/MM/YYYY"
-      )}|${moment(
-        new Date(dateTo).setDate(new Date(dateTo).getDate() + 1)
-      )?.format("DD/MM/YYYY")}`;
+    try {
+      e.preventDefault();
+      let filter = "";
+      if (dateFrom && dateTo) {
+        filter += `&createdAt=between${moment(new Date(dateFrom))?.format(
+          "DD/MM/YYYY"
+        )}|${moment(
+          new Date(dateTo).setDate(new Date(dateTo).getDate() + 1)
+        )?.format("DD/MM/YYYY")}`;
+      }
+      if (selectedUser) {
+        filter += `&user.userName=${selectedUser[0].label}`;
+      }
+      if (aaccountTypeValues && aaccountTypeValues?.value === "gameReport") {
+        filter += `&transType=inArr${JSON.stringify([
+          "win",
+          "loss",
+          // "bet",
+        ])}`;
+      } else if (
+        aaccountTypeValues &&
+        aaccountTypeValues?.value === "balanceReport"
+      ) {
+        filter += `&transType=inArr${JSON.stringify([
+          "add",
+          "withDraw",
+          "creditReference",
+        ])}`;
+      }
+      // if (type) {
+      //   filter += `&statementType=${type?.value}`;
+      // }
+      dispatch(
+        getReportAccountList({
+          id: userDetail?.id,
+          page: 1,
+          limit: tableConfig?.rowPerPage,
+          searchBy: "description",
+          keyword: tableConfig?.keyword ?? "",
+          filter: filter,
+        })
+      );
+    } catch (e) {
+      console.log(e);
     }
-    // if (type) {
-    //   filter += `&statementType=${type?.value}`;
-    // }
-    dispatch(
-      getReportAccountList({
-        id: userDetail?.id,
-        page: 1,
-        limit: tableConfig?.rowPerPage,
-        searchBy: "description",
-        keyword: tableConfig?.keyword || "",
-        filter,
-      })
-    );
   };
 
   useEffect(() => {
@@ -160,15 +163,22 @@ const AccountStatement = () => {
           page: tableConfig?.page,
           limit: tableConfig?.rowPerPage,
           searchBy: "description",
-          keyword: tableConfig?.keyword || "",
+          keyword: tableConfig?.keyword ?? "",
         })
       );
     }
   }, [userDetail?.id, tableConfig, firstTime]);
 
-  let searchListData = {
-    users: [{ value: "abc", name: "abc" }],
-  };
+  useEffect(() => {
+    if (searchListData) {
+      const options = searchListData?.users?.map((user: any) => ({
+        value: user.id,
+        label: user.userName,
+      }));
+      setUserOptions(options);
+    }
+  }, [searchListData]);
+
   return (
     <div className="p-2 pt-0">
       <h5 className="title-22 fw-normal">Account Statement</h5>
@@ -180,9 +190,9 @@ const AccountStatement = () => {
               // options={options}
               placeholder="All"
               label={"Account Type"}
-              value={selectedOption1}
-              onChange={handleSelect1Change}
-              options={options1}
+              value={aaccountTypeValues}
+              onChange={handleAccountTypeChange}
+              options={aaccountTypeOptions}
             />
           </Col>
           <Col md={2}>
@@ -191,27 +201,20 @@ const AccountStatement = () => {
               label={"Game Name"}
               // options={options}
               placeholder={"All"}
-              value={selectedOption2}
-              onChange={handleSelect2Change}
-              options={options2}
+              value={gameNameValues}
+              onChange={handleGameNameChange}
+              options={gameNameOptions}
             />
           </Col>
           <Col md={2}>
             <SelectSearch
-              defaultValue="All"
               label={"Search By Client Name"}
-              options={
-                searchListData &&
-                searchListData?.users?.map((user: any) => ({
-                  value: user.name,
-                  label: user.name,
-                }))
-              }
+              options={userOptions}
               value={selectedUser}
+              onChange={setSelectedUser}
               placeholder={"Client Name:"}
               isMultiOption={true}
-              isSearchable={true  }
-              onChange={handleChange}
+              isSearchable={true}
               onInputChange={searchClientName}
             />
           </Col>
