@@ -34,26 +34,26 @@ const options = [
 ];
 
 const GeneralReport = () => {
-
   const dispatch: AppDispatch = useDispatch();
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
   const [selectType, setSelectType] = useState({ value: "ALL", label: "All" });
 
-  useEffect(() => { }, [tableConfig]);
+  useEffect(() => {}, [tableConfig]);
 
   const handleType = (type: any) => {
     setSelectType(type);
-
   };
 
-  const { gameGeneralList } = useSelector((state: RootState) => state.match.reportList);
+  const { gameGeneralList } = useSelector(
+    (state: RootState) => state.match.reportList
+  );
   console.log(gameGeneralList, "gameGeneralList>>>>1");
   const handleLoad = (e: any) => {
     e.preventDefault();
     let filter = "";
     alert("fjddf");
 
-    console.log('filter :', selectType?.value);
+    console.log("filter :", selectType?.value);
     // dispatch(betReportAccountList({ status: selectType?.value }));
     dispatch(
       getGeneralReport({
@@ -67,14 +67,12 @@ const GeneralReport = () => {
     );
   };
 
-
   useEffect(() => {
     dispatch(getGeneralReport({ status: "" }));
   }, []);
 
-
   // const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
-  useEffect(() => { }, [tableConfig]);
+  useEffect(() => {}, [tableConfig]);
   return (
     <div className="p-2 pt-0">
       <h5 className="title-22 fw-normal">General Report</h5>
@@ -90,7 +88,9 @@ const GeneralReport = () => {
             />
           </Col>
           <Col md={2}>
-            <Form.Label className="invisible d-block">just invisible</Form.Label>
+            <Form.Label className="invisible d-block">
+              just invisible
+            </Form.Label>
             <Button type="submit">Load</Button>
           </Col>
         </Row>
@@ -107,16 +107,20 @@ const GeneralReport = () => {
         setTableConfig={setTableConfig}
         enablePdfExcel={false}
       >
-        {gameGeneralList && gameGeneralList?.usersData?.length === 0 && <tr>No data available in table </tr>}
+        {gameGeneralList && gameGeneralList?.usersData?.length === 0 && (
+          <tr>No data available in table </tr>
+        )}
         {gameGeneralList &&
           gameGeneralList?.usersData?.map((item: any, index: any) => (
             <tr key={index}>
               {columns.map((column) => (
                 <td key={column.id}>
-                  {column.id === 'srNo' && index + 1}
-                  {column.id === 'amount' && item.userBal && item.userBal.currentBalance}
-                  {column.id === 'userName' && item[column.id]}
-              </td>
+                  {column.id === "srNo" && index + 1}
+                  {column.id === "amount" &&
+                    item.userBal &&
+                    item.userBal.currentBalance}
+                  {column.id === "userName" && item[column.id]}
+                </td>
               ))}
             </tr>
           ))}

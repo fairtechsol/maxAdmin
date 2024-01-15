@@ -77,13 +77,13 @@ export const setBreadCrumb = createAsyncThunk<any, any>(
 // ====== Reports ======
 
 export const getReportAccountList = createAsyncThunk<any, any>(
-  "competition/list",
+  "transaction/list",
   async ({ id, page, limit, searchBy, keyword, filter }, thunkApi) => {
     try {
       const resp = await service.get(
         `${ApiConstants.REPORT.ACCOUNTLIST}/${id}?page=${page || 1}&limit=${
           limit || 15
-        }&searchBy=${searchBy}&keyword=${keyword || ""}${filter}`
+        }&searchBy=${searchBy}&keyword=${keyword}${filter ? filter : ""}`
       );
       if (resp?.data) {
         return resp?.data;
@@ -137,8 +137,10 @@ export const getGeneralReport = createAsyncThunk<any, any>(
   async ({ type, page, limit, searchBy, keyword, filter }, thunkApi) => {
     try {
       const resp = await service.get(
-        `${ApiConstants.REPORT.GENRALREPORT}?type=${type}&page=${page || 1
-        }&limit=${limit || 15}&searchBy=${searchBy}&keyword=${keyword || ""
+        `${ApiConstants.REPORT.GENRALREPORT}?type=${type}&page=${
+          page || 1
+        }&limit=${limit || 15}&searchBy=${searchBy}&keyword=${
+          keyword || ""
         }${filter}`
       );
       if (resp?.data) {
