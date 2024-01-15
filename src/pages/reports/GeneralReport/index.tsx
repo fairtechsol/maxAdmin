@@ -91,7 +91,7 @@ const GeneralReport = () => {
           </Col>
           <Col md={2}>
             <Form.Label className="invisible d-block">just invisible</Form.Label>
-            <Button type="submit">Load45645</Button>
+            <Button type="submit">Load</Button>
           </Col>
         </Row>
       </Form>

@@ -15,9 +15,16 @@ interface Props {
   setMenuItemList: any;
   menuItemList: any;
   selectedMatchIndex: any;
+  onClickMenuItem: any;
 }
 
 const MenuItemChild = (props: any) => {
+  // const [toggle, setToggle] = useState<Boolean>(false);
+  
+  // const handleDrawer = () => {
+  //   setToggle(!toggle);
+  // };
+
   const { data } = props;
   return (
     <Link to={`${data?.path}`} className="title-12">
@@ -27,7 +34,7 @@ const MenuItemChild = (props: any) => {
 };
 
 const MenuCollapse = (props: any) => {
-  const { data, menuItemList, setMenuItemList, selectedMatchIndex } = props;
+  const { data, menuItemList, setMenuItemList, selectedMatchIndex, onClickMenuItem } = props;
 
   const [selectedCompetition, setSelectedCompetition] = useState("");
   const [selectedCompetitionName, setSelectedCompetitionName] = useState("");
@@ -143,6 +150,7 @@ const MenuCollapse = (props: any) => {
                                           </Accordion.Header>
                                           <Accordion.Body
                                             onClick={() => {
+                                              onClickMenuItem();
                                               dispatch(
                                                 setBreadCrumb({
                                                   competition:
@@ -156,6 +164,7 @@ const MenuCollapse = (props: any) => {
                                           >
                                             {
                                               <MenuItemChild
+                                              
                                                 data={{
                                                   path: `/admin/match_detail/${matches?.id}`,
                                                   name: "Match_Odds",
@@ -166,6 +175,7 @@ const MenuCollapse = (props: any) => {
                                           {matches?.isTiedMatch && (
                                             <Accordion.Body
                                               onClick={() => {
+                                                onClickMenuItem();
                                                 dispatch(
                                                   setBreadCrumb({
                                                     competition:
@@ -223,7 +233,12 @@ export const MenuItem: React.FC<Props> = ({
   setMenuItemList,
   menuItemList,
   selectedMatchIndex,
+  onClickMenuItem,
 }) => {
+
+
+
+
   return (
     <>
       {item?.type === "item" ? (
@@ -234,6 +249,7 @@ export const MenuItem: React.FC<Props> = ({
           setMenuItemList={setMenuItemList}
           menuItemList={menuItemList}
           selectedMatchIndex={selectedMatchIndex}
+          onClickMenuItem={onClickMenuItem}
         />
       )}
     </>

@@ -64,7 +64,7 @@ const Sidebar = (props: any) => {
               dispatch(getCompetitionList(item?.id));
             }
           }} key={index} defaultActiveKey={[]}>
-            <MenuItem item={item} menuItemList={menuItemList}
+            <MenuItem onClickMenuItem={props.clickHandler} item={item} menuItemList={menuItemList}
               setMenuItemList={setMenuItemList} selectedMatchIndex={index} />
           </Accordion>
         ))}
