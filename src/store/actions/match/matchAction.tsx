@@ -152,6 +152,23 @@ export const getGeneralReport = createAsyncThunk<any, any>(
     }
   }
 );
+export const getProfitLossReport = createAsyncThunk<any, any>(
+  "user/profitLossReport",
+  async (requestData, thunkApi) => {
+    try {
+      const resp = await service.post(
+        `${ApiConstants.REPORT.PROFIT_LOSS}`,
+        requestData
+      );
+      if (resp?.data) {
+        return resp?.data;
+      }
+    } catch (error) {
+      const err = error as AxiosError;
+      return thunkApi.rejectWithValue(err.response?.status);
+    }
+  }
+);
 
 export const matchDetailAction = createAsyncThunk<any, any>(
   "/match/details",
