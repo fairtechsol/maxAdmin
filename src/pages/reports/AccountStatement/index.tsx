@@ -117,6 +117,10 @@ const AccountStatement = () => {
         )}|${moment(
           new Date(dateTo).setDate(new Date(dateTo).getDate() + 1)
         )?.format("DD/MM/YYYY")}`;
+      } else if (dateFrom) {
+        filter += `&createdAt=gte${moment(dateFrom)?.format("MM/DD/YYYY")}`;
+      } else if (dateTo) {
+        filter += `&createdAt=lte${moment(dateTo)?.format("MM/DD/YYYY")}`;
       }
       if (selectedUser) {
         filter += `&user.userName=${selectedUser[0].label}`;
