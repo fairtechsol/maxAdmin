@@ -7,8 +7,6 @@ import { AppDispatch, RootState } from "../../../../store/store";
 import CustomInput from "../../../commonComponent/input";
 import ModalFooter from "../footer";
 import { depositAmountValidations } from "../../../../utils/fieldValidations/addAccount";
-// import { Form } from "react-bootstrap/lib/Navbar";
-// import { getUsers } from "../../../../store/actions/user/userActions";
 
 const initialValues: any = {
   initialBalance: "",
@@ -24,7 +22,7 @@ const Deposit = ({ userData, setShow }: any) => {
   const dispatch: AppDispatch = useDispatch();
 
   const { userList } = useSelector((state: RootState) => state.user.userList);
-
+  const { userDetail } = useSelector((state: RootState) => state.user.profile);
 
   const formik = useFormik({
     initialValues: initialValues,
@@ -52,29 +50,26 @@ const Deposit = ({ userData, setShow }: any) => {
     const newAmount = e.target.value;
     const initialBalance = parseFloat(formik.values.initialBalance);
 
-      const updatedBalance = +initialBalance - +newAmount;
-      const userBalance = parseFloat(formik.values.userBalance) + +newAmount;
+    const updatedBalance = +initialBalance - +newAmount;
+    const userBalance = parseFloat(formik.values.userBalance) + +newAmount;
 
-      formik.setValues({
-        ...formik.values,
-        updatedBalance: +updatedBalance,
-        userUpdatedBalance: +userBalance,
-        amount: +newAmount,
-      });
-    
+    formik.setValues({
+      ...formik.values,
+      updatedBalance: +updatedBalance,
+      userUpdatedBalance: +userBalance,
+      amount: +newAmount,
+    });
   };
 
   useEffect(() => {
-    if (userList) {
+    if (userList && userDetail) {
       formik.setValues({
         ...formik.values,
         userBalance: userData.balance,
-        initialBalance: userList?.list[0]?.balance,
+        initialBalance: userDetail?.userBal?.currentBalance,
       });
     }
-  }, [userList]);
-
-
+  }, [userList, userDetail]);
 
   return (
     <>
@@ -83,7 +78,7 @@ const Deposit = ({ userData, setShow }: any) => {
           <div className="input-container w-100">
             <Row>
               <Col sm={4}>
-                <span>{userData?.userName}</span>
+                <span>{userDetail?.userName}</span>
               </Col>
               <Col sm={8}>
                 <div className="d-flex gap-2 input-inner-container">
@@ -116,7 +111,7 @@ const Deposit = ({ userData, setShow }: any) => {
           <div className="input-container mt-3">
             <Row>
               <Col sm={4}>
-                <span>Account</span>
+                <span>{userData?.userName}</span>
               </Col>
               <Col sm={8}>
                 <div className="d-flex gap-2 input-inner-container">

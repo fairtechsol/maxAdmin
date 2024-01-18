@@ -27,6 +27,7 @@ export const ApiConstants = {
     ACCOUNTLIST: "/transaction/get",
     BETHISTORY: "/bet",
     GENRALREPORT: "user/generalReport",
+    PROFIT_LOSS: "/bet/profitLoss",
   },
   MATCH: {
     MATCHLIST: "/match/list",

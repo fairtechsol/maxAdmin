@@ -12,14 +12,11 @@ import { AppDispatch, RootState } from "../../../store/store";
 import { useDispatch, useSelector } from "react-redux";
 import { searchList } from "../../../store/actions/user/userActions";
 import { debounce } from "lodash";
+import { getProfitLossReport } from "../../../store/actions/match/matchAction";
 
 interface Column {
   id: string;
   label: string;
-}
-
-interface DataItem {
-  [key: string]: string | number;
 }
 
 // Example usage
@@ -29,41 +26,21 @@ const columns: Column[] = [
   { id: "profitLoss", label: "Profit & Loss" },
 ];
 
-const data: DataItem[] = [
-  {
-    gameName: "gameName",
-    gameType: 25,
-    profitLoss: 30,
-  },
-  {
-    gameName: "gameName",
-    gameType: 25,
-    profitLoss: 30,
-  },
-  {
-    gameName: "gameName",
-    gameType: 25,
-    profitLoss: 30,
-  },
-];
-
-// const options = [
-//   { value: "slotGame", label: "Slot Game" },
-//   { value: "liveCasino", label: "Live Casino" },
-//   { value: "liveCasino1", label: "Live Casino 1" },
-//   { value: "liveCasino2", label: "Live Casino 2" },
-// ];
-
 const ProfitLossReport = () => {
   const dispatch: AppDispatch = useDispatch();
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
   const [profitLossModalShow, setProfitLossModalShow] = useState(false);
-  const [selectedUser, setSelectedUser] = useState<any>(null);
+  const [selectedUser, setSelectedUser] = useState<any>([]);
+  const [fromDate, setFromDate] = useState<any>(new Date());
+  const [toDate, setToDate] = useState<any>(new Date());
   const [userOptions, setUserOptions] = useState([]);
 
   const { userDetail } = useSelector((state: RootState) => state.user.profile);
   const { searchListData } = useSelector(
     (state: RootState) => state.user.userList
+  );
+  const { profitLossReport } = useSelector(
+    (state: RootState) => state.match.reportList
   );
 
   const searchClientName = debounce(async (value: any) => {
@@ -81,6 +58,17 @@ const ProfitLossReport = () => {
 
   useEffect(() => {}, [tableConfig]);
 
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    dispatch(
+      getProfitLossReport({
+        userId: selectedUser[0]?.value,
+        startDate: fromDate ? fromDate : "",
+        endDate: toDate ? toDate : "",
+      })
+    );
+  };
+
   useEffect(() => {
     if (searchListData) {
       const options = searchListData?.users?.map((user: any) => ({
@@ -95,7 +83,7 @@ const ProfitLossReport = () => {
   return (
     <div className="p-2 pt-0">
       <h5 className="title-22 fw-normal">Profit Loss</h5>
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <Row className="mb-3">
           <Col md={2}>
             <SelectSearch
@@ -113,6 +101,8 @@ const ProfitLossReport = () => {
             <CustomInput
               title={"From"}
               placeholder={""}
+              value={fromDate}
+              onChange={(e: any) => setFromDate(e.target.value)}
               // customStyle={"mb-3"}
               type="date"
             />
@@ -121,13 +111,15 @@ const ProfitLossReport = () => {
             <CustomInput
               title={"To"}
               placeholder={""}
+              value={toDate}
               // customStyle={"mb-3"}
+              onChange={(e: any) => setToDate(e.target.value)}
               type="date"
             />
           </Col>
           <Col md={2}>
-            <Form.Label className="invisible d-block">dasd</Form.Label>
-            <Button>Load</Button>
+            <Form.Label className="invisible d-block">a</Form.Label>
+            <Button type="submit">Load</Button>
           </Col>
         </Row>
       </Form>
@@ -140,27 +132,29 @@ const ProfitLossReport = () => {
         isPagination={true}
         isSort={true}
         isSearch={true}
-        itemCount={data?.length}
+        itemCount={profitLossReport && profitLossReport?.result?.length}
         setTableConfig={setTableConfig}
         enablePdfExcel={false}
       >
-        {data?.length === 0 && <tr>No data available in table </tr>}
-        {data?.length > 0 &&
-          data.map((item, index) => {
-            const { gameName, gameType, profitLoss } = item;
+        {profitLossReport?.result?.length === 0 && (
+          <tr>No data available in table </tr>
+        )}
+        {profitLossReport?.result?.length > 0 &&
+          profitLossReport?.result.map((item: any, index: number) => {
+            const { eventType, marketType, aggregateAmount } = item;
             return (
               <tr key={index}>
-                <td>{gameName}</td>
+                <td>{eventType}</td>
                 <td>
                   <CustomButton
                     className="actionBtn"
                     variant="dark"
                     onClick={() => setProfitLossModalShow((prev) => !prev)}
                   >
-                    {gameType}
+                    {marketType}
                   </CustomButton>
                 </td>
-                <td>{profitLoss}</td>
+                <td>{aggregateAmount}</td>
               </tr>
             );
           })}

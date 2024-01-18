@@ -8,7 +8,6 @@ import CustomInput from "../../../commonComponent/input";
 import ModalFooter from "../footer";
 import { widthdrawAmountValidations } from "../../../../utils/fieldValidations/addAccount";
 
-
 const initialValues: any = {
   initialBalance: "",
   updatedBalance: "",
@@ -22,27 +21,28 @@ const initialValues: any = {
 const Withdraw = ({ userData, setShow }: any) => {
   const dispatch: AppDispatch = useDispatch();
 
-  const { userList } = useSelector((state: RootState) => state.user.userList);
+  // const { userList } = useSelector((state: RootState) => state.user.userList);
+  const { userDetail } = useSelector((state: RootState) => state.user.profile);
 
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: widthdrawAmountValidations,
     onSubmit: (values: any) => {
-      try{
-      let payload = {
-        userId: userData?.id,
-        amount: values.amount,
-        transactionPassword: values.transactionPassword,
-        remark: values.remark,
-        transactionType: "withDraw",
-      };
-      dispatch(changeAmmountUser(payload));
-      setShow(false);
-    } catch (e) {
-      console.log(e);
-    }
-  },
-});
+      try {
+        let payload = {
+          userId: userData?.id,
+          amount: values.amount,
+          transactionPassword: values.transactionPassword,
+          remark: values.remark,
+          transactionType: "withDraw",
+        };
+        dispatch(changeAmmountUser(payload));
+        setShow(false);
+      } catch (e) {
+        console.log(e);
+      }
+    },
+  });
 
   const { handleSubmit, handleChange, values } = formik;
 
@@ -51,8 +51,8 @@ const Withdraw = ({ userData, setShow }: any) => {
     const initialBalance = parseFloat(formik.values.initialBalance);
 
     if (!isNaN(newAmount) && !isNaN(initialBalance)) {
-      const updatedBalance = +initialBalance - + newAmount;
-      const userBalance = parseFloat(formik.values.userBalance) + +newAmount;
+      const updatedBalance = +initialBalance + +newAmount;
+      const userBalance = parseFloat(formik.values.userBalance) - +newAmount;
 
       formik.setValues({
         ...formik.values,
@@ -64,14 +64,14 @@ const Withdraw = ({ userData, setShow }: any) => {
   };
 
   useEffect(() => {
-    if (userData) {
+    if (userData && userDetail) {
       formik.setValues({
         ...formik.values,
-        initialBalance: userList?.list[0]?.balance,
+        initialBalance: userDetail?.userBal?.currentBalance,
         userBalance: userData?.balance,
       });
     }
-  }, [userData]);
+  }, [userData, userDetail]);
 
   return (
     <>
@@ -80,7 +80,7 @@ const Withdraw = ({ userData, setShow }: any) => {
           <div className="input-container w-100">
             <Row>
               <Col sm={4}>
-                <span>{userData?.userName}</span>
+                <span>{userDetail?.userName}</span>
               </Col>
               <Col sm={8}>
                 <div className="d-flex gap-2 input-inner-container">
@@ -111,7 +111,7 @@ const Withdraw = ({ userData, setShow }: any) => {
           <div className="input-container mt-3">
             <Row>
               <Col sm={4}>
-                <span>Account</span>
+                <span>{userData?.userName}</span>
               </Col>
               <Col sm={8}>
                 <div className="d-flex gap-2 input-inner-container">
