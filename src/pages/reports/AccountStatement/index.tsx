@@ -117,6 +117,10 @@ const AccountStatement = () => {
         )}|${moment(
           new Date(dateTo).setDate(new Date(dateTo).getDate() + 1)
         )?.format("DD/MM/YYYY")}`;
+      } else if (dateFrom) {
+        filter += `&createdAt=gte${moment(dateFrom)?.format("MM/DD/YYYY")}`;
+      } else if (dateTo) {
+        filter += `&createdAt=lte${moment(dateTo)?.format("MM/DD/YYYY")}`;
       }
       if (selectedUser) {
         filter += `&user.userName=${selectedUser[0].label}`;
@@ -260,7 +264,11 @@ const AccountStatement = () => {
         isPagination={true}
         isSort={true}
         isSearch={true}
-        itemCount={2}
+        itemCount={
+          ReportAccountList && ReportAccountList?.count > 0
+            ? ReportAccountList?.count
+            : 1
+        }
         setTableConfig={setTableConfig}
         enablePdfExcel={true}
       >
@@ -278,7 +286,7 @@ const AccountStatement = () => {
               {/* {columns.map((column) => (
               <td key={column.id}>{item[column.id]}</td>
             ))} */}
-              <td>{createdAt} </td>
+              <td>{moment(createdAt).format("YYYY-DD-MM")} </td>
               <td>{amount > 0 ? amount : ""}</td>
               <td>{amount < 0 ? amount : ""}</td>
               <td>{closingBalance}</td>

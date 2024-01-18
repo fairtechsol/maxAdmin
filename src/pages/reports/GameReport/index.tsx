@@ -36,9 +36,7 @@ const options = [
   { value: "fancy", label: "Fancy" },
 ];
 
-const secondOptions = [
-  { value: "all", label: "All" },
-];
+const secondOptions = [{ value: "all", label: "All" }];
 
 const GameReport = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -46,9 +44,11 @@ const GameReport = () => {
   const [dateFrom, setDateFrom] = useState<any>();
   const [dateTo, setDateTo] = useState<any>();
 
-  useEffect(() => { }, [tableConfig]);
+  useEffect(() => {}, [tableConfig]);
 
-  const { gameReportList } = useSelector((state: RootState) => state.match.reportList);
+  const { gameReportList } = useSelector(
+    (state: RootState) => state.match.reportList
+  );
   const [selectType, setSelectType] = useState({ value: "ALL", label: "All" });
 
   const handleType = (type: any) => {
@@ -69,9 +69,11 @@ const GameReport = () => {
       )}|${moment(
         new Date(dateTo).setDate(new Date(dateTo).getDate() + 1)
       )?.format("DD/MM/YYYY")}`;
+    } else if (dateFrom) {
+      filter += `&createdAt=gte${moment(dateFrom)?.format("MM/DD/YYYY")}`;
+    } else if (dateTo) {
+      filter += `&createdAt=lte${moment(dateTo)?.format("MM/DD/YYYY")}`;
     }
-    console.log('filter :', filter);
-    // dispatch(betReportAccountList({ status: selectType?.value }));
     dispatch(
       getGameReport({
         type: selectType?.value,
@@ -124,7 +126,10 @@ const GameReport = () => {
         </Row>
         <Row className="mt-2">
           <Col md={6}>
-            <SelectSearch defaultValue={[{ value: "all", label: "All" }]} options={secondOptions} />
+            <SelectSearch
+              defaultValue={[{ value: "all", label: "All" }]}
+              options={secondOptions}
+            />
           </Col>
           <Col md={3}>
             <div className="d-flex">
@@ -142,11 +147,17 @@ const GameReport = () => {
         isSort={true}
         isSearch={false}
         // itemCount={data?.length}
-        itemCount={gameReportList && gameReportList?.count > 0 ? gameReportList?.count : 0}
+        itemCount={
+          gameReportList && gameReportList?.count > 0
+            ? gameReportList?.count
+            : 0
+        }
         setTableConfig={setTableConfig}
         enablePdfExcel={false}
       >
-        {gameReportList && gameReportList?.count === 0 && <tr>No data available in table </tr>}
+        {gameReportList && gameReportList?.count === 0 && (
+          <tr>No data available in table </tr>
+        )}
         {gameReportList?.count > 0 &&
           gameReportList?.list?.map((item: any, index: any) => (
             <tr key={index}>

@@ -47,14 +47,8 @@ const GeneralReport = () => {
   const { gameGeneralList } = useSelector(
     (state: RootState) => state.match.reportList
   );
-  console.log(gameGeneralList, "gameGeneralList>>>>1");
   const handleLoad = (e: any) => {
     e.preventDefault();
-    let filter = "";
-    alert("fjddf");
-
-    console.log("filter :", selectType?.value);
-    // dispatch(betReportAccountList({ status: selectType?.value }));
     dispatch(
       getGeneralReport({
         type: selectType?.value,
@@ -62,7 +56,6 @@ const GeneralReport = () => {
         limit: tableConfig?.rowPerPage,
         searchBy: "description",
         keyword: tableConfig?.keyword || "",
-        filter,
       })
     );
   };
@@ -71,7 +64,6 @@ const GeneralReport = () => {
     dispatch(getGeneralReport({ status: "" }));
   }, []);
 
-  // const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
   useEffect(() => {}, [tableConfig]);
   return (
     <div className="p-2 pt-0">

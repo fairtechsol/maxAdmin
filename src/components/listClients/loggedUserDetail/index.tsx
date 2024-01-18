@@ -53,7 +53,7 @@ const LoggedUserDetail = () => {
                     Down level Occupy Balance:
                   </div>
                   <div className="col-md-4 title-14">
-                    {+userBalanceList?.downLevelBalance || 0}
+                    {+userBalanceList?.downLevelOccupyBalance || 0}
                   </div>
                 </div>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">

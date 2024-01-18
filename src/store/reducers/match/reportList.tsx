@@ -23,7 +23,7 @@ const initialState: InitialState = {
   CurrentBetAccountList: [],
   gameReportList: [],
   gameGeneralList: [],
-  profitLossReport: [],
+  profitLossReport: null,
   loading: false,
   success: false,
   error: null,

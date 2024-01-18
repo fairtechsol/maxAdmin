@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { useState,  } from "react";
+import { useState } from "react";
 import { Col, Modal, Row, Stack } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import Switch from "react-switch";
@@ -23,7 +23,6 @@ const ChangeStatus = ({ setShow, userData }: any) => {
   };
   // const [betChecked, setbetChecked] = useState(false);
   const [lockUnlockObj, setLockUnlockObj] = useState(defaultLockUnlockObj);
-// console.log(userList.list, "edfsc");
   const dispatch: AppDispatch = useDispatch();
 
   const formik = useFormik({
@@ -50,9 +49,15 @@ const ChangeStatus = ({ setShow, userData }: any) => {
             <Col sm={12}>
               <div className="d-flex align-items-center justify-content-between">
                 <h3 className="text-secondary title-20 fw-normal">
-                   {userData?.userName}
+                  {userData?.userName}
                 </h3>
-                <h3 className="text-green title-14">Active</h3>
+                <h3
+                  className={`${
+                    !lockUnlockObj?.allBlocked ? "text-green" : "text-red"
+                  } title-14`}
+                >
+                  {!lockUnlockObj?.allBlocked ? "Active" : "InActive"}
+                </h3>
               </div>
               <div className="row">
                 <Col sm={6} className="text-center">
@@ -67,7 +72,7 @@ const ChangeStatus = ({ setShow, userData }: any) => {
                           };
                         });
                       }}
-                      checked={lockUnlockObj?.allBlocked}
+                      checked={!lockUnlockObj?.allBlocked}
                       uncheckedIcon={
                         <span
                           style={{
@@ -115,7 +120,7 @@ const ChangeStatus = ({ setShow, userData }: any) => {
                           };
                         });
                       }}
-                      checked={lockUnlockObj?.betBlocked}
+                      checked={!lockUnlockObj?.betBlocked}
                       uncheckedIcon={
                         <span
                           style={{
