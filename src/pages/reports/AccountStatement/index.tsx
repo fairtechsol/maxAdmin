@@ -264,7 +264,11 @@ const AccountStatement = () => {
         isPagination={true}
         isSort={true}
         isSearch={true}
-        itemCount={2}
+        itemCount={
+          ReportAccountList && ReportAccountList?.count > 0
+            ? ReportAccountList?.count
+            : 1
+        }
         setTableConfig={setTableConfig}
         enablePdfExcel={true}
       >
@@ -282,7 +286,7 @@ const AccountStatement = () => {
               {/* {columns.map((column) => (
               <td key={column.id}>{item[column.id]}</td>
             ))} */}
-              <td>{createdAt} </td>
+              <td>{moment(createdAt).format("YYYY-DD-MM")} </td>
               <td>{amount > 0 ? amount : ""}</td>
               <td>{amount < 0 ? amount : ""}</td>
               <td>{closingBalance}</td>

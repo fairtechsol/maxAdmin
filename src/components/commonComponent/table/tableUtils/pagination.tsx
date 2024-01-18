@@ -20,26 +20,26 @@ const PaginationComponent: React.FC<PaginationComponentProps> = ({
   return (
     <Pagination>
       <div className="paginationContainer title-14">
-      <Pagination.First
+        <Pagination.First
           disabled={currentPage === 1}
           onClick={() => onPageChange(1)}
         >
           First
         </Pagination.First>
         <Pagination.Prev
-      //   Showing {currentPage === 1 ? 1 : (currentPage - 1) * rowPerPage + 1} to{" "}
-      //   {Math.min(currentPage * rowPerPage, itemCount)} of {itemCount} entries
-      // </div>
-      // <div className="paginationContainer">
-      //   <CustomButton
-      //     variant="primary"
-      disabled={currentPage === 1}
-      onClick={() => onPageChange(currentPage - 1)}
-      className="paginationBtn"
-      >
+          //   Showing {currentPage === 1 ? 1 : (currentPage - 1) * rowPerPage + 1} to{" "}
+          //   {Math.min(currentPage * rowPerPage, itemCount)} of {itemCount} entries
+          // </div>
+          // <div className="paginationContainer">
+          //   <CustomButton
+          //     variant="primary"
+          disabled={currentPage === 1}
+          onClick={() => onPageChange(currentPage - 1)}
+          className="paginationBtn"
+        >
           Previous
           {/* </CustomButton> */}
-          </Pagination.Prev>
+        </Pagination.Prev>
 
         {[...Array(totalPages)].map((_, index) => (
           <Pagination.Item
@@ -53,13 +53,13 @@ const PaginationComponent: React.FC<PaginationComponentProps> = ({
         ))}
         {/* <CustomButton
           variant="primary" */}
-          <Pagination.Next
+        <Pagination.Next
           disabled={currentPage === totalPages}
           onClick={() => onPageChange(currentPage + 1)}
           // className="paginationBtn"
         >
           Next
-        {/* </CustomButton> */}
+          {/* </CustomButton> */}
         </Pagination.Next>
         <Pagination.Last
           disabled={currentPage === totalPages}

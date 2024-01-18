@@ -31,8 +31,8 @@ const ProfitLossReport = () => {
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
   const [profitLossModalShow, setProfitLossModalShow] = useState(false);
   const [selectedUser, setSelectedUser] = useState<any>([]);
-  const [fromDate, setFromDate] = useState<any>(new Date());
-  const [toDate, setToDate] = useState<any>(new Date());
+  const [fromDate, setFromDate] = useState<any>();
+  const [toDate, setToDate] = useState<any>();
   const [userOptions, setUserOptions] = useState([]);
 
   const { userDetail } = useSelector((state: RootState) => state.user.profile);
@@ -132,14 +132,15 @@ const ProfitLossReport = () => {
         isPagination={true}
         isSort={true}
         isSearch={true}
-        itemCount={profitLossReport && profitLossReport?.result?.length}
+        itemCount={profitLossReport ? profitLossReport?.result?.length : 1}
         setTableConfig={setTableConfig}
         enablePdfExcel={false}
       >
-        {profitLossReport?.result?.length === 0 && (
+        {profitLossReport && profitLossReport?.result?.length === 0 && (
           <tr>No data available in table </tr>
         )}
-        {profitLossReport?.result?.length > 0 &&
+        {profitLossReport &&
+          profitLossReport?.result?.length > 0 &&
           profitLossReport?.result.map((item: any, index: number) => {
             const { eventType, marketType, aggregateAmount } = item;
             return (
