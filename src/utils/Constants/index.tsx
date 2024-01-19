@@ -39,6 +39,7 @@ export const ApiConstants = {
     PLACEBETSESSION: "bet/session",
     PLACEBETMATCHBETTING: "bet/matchBetting",
     GETPLACEDBETS: "bet",
+    RUN_AMOUNT: "bet/session/profitLoss",
   },
 };
 

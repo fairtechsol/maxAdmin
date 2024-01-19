@@ -1,8 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getPlacedBets } from "../../actions/match/matchAction";
+import {
+  getPlacedBets,
+  getRunAmount,
+  resetRunAmount,
+} from "../../actions/match/matchAction";
 
 interface InitialState {
   placedBets: any;
+  runAmount: any;
   loading: boolean;
   success: boolean;
   error: any;
@@ -10,6 +15,7 @@ interface InitialState {
 
 const initialState: InitialState = {
   placedBets: [],
+  runAmount: [],
   loading: false,
   success: false,
   error: null,
@@ -34,6 +40,23 @@ const placedBetsSlice = createSlice({
       .addCase(getPlacedBets.rejected, (state, action) => {
         state.loading = false;
         state.error = action?.error?.message;
+      })
+      .addCase(getRunAmount.pending, (state) => {
+        state.loading = true;
+        state.success = false;
+        state.error = null;
+      })
+      .addCase(getRunAmount.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        state.runAmount = action.payload;
+      })
+      .addCase(getRunAmount.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action?.error?.message;
+      })
+      .addCase(resetRunAmount, (state) => {
+        return { ...state, runAmount: [] };
       });
   },
 });
