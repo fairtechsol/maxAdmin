@@ -40,7 +40,11 @@ export const betReportAccountList = createAsyncThunk<any, any>(
   async (requestData, thunkApi) => {
     try {
       const resp = await service.get(
-        `${ApiConstants.REPORT.BETHISTORY}${requestData}`
+        `${ApiConstants.REPORT.BETHISTORY}?status=${requestData.status}&page=${
+          requestData.page || 1
+        }&limit=${requestData.limit || 15}&searchBy=${
+          requestData.searchBy ?? ""
+        }&keyword=${requestData.keyword ?? ""}`
       );
       if (resp?.data) {
         return resp?.data;
