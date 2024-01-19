@@ -7,6 +7,12 @@ import YesNoBox from "../../../yesNo";
 import "../../style.scss";
 import TableRunner from "./tableRunner";
 import { teamStatus } from "../../../../utils/Constants";
+import { AppDispatch, RootState } from "../../../../store/store";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getRunAmount,
+  resetRunAmount,
+} from "../../../../store/actions/match/matchAction";
 interface SessionMarketTableProps {
   data: any;
   title: any;
@@ -17,6 +23,10 @@ function SessionMarketTable({
   title,
   matchDetails,
 }: SessionMarketTableProps) {
+  const dispatch: AppDispatch = useDispatch();
+  const { runAmount } = useSelector(
+    (state: RootState) => state.match.placeBets
+  );
   const [runnerModalShow, setRunnerModalShow] = useState(false);
 
   const handleClick = () => {};
@@ -41,7 +51,13 @@ function SessionMarketTable({
             <tr key={i}>
               <td>
                 <div className="backLayRunner d-flex flex-column px-3">
-                  <div onClick={() => setRunnerModalShow((prev) => !prev)}>
+                  <div
+                    onClick={() => {
+                      dispatch(resetRunAmount());
+                      setRunnerModalShow((prev) => !prev);
+                      dispatch(getRunAmount(JSON.parse(item)?.id));
+                    }}
+                  >
                     <Link to="" className="backLayRunner-country title-14">
                       {JSON.parse(item)?.name}
                     </Link>
@@ -84,7 +100,7 @@ function SessionMarketTable({
       </Table>
 
       <CustomModal show={runnerModalShow} setShow={setRunnerModalShow}>
-        <TableRunner />
+        <TableRunner runAmount={runAmount} />
       </CustomModal>
     </div>
   );

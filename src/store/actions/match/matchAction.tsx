@@ -1,4 +1,4 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
 import service from "../../../service";
 import { ApiConstants } from "../../../utils/Constants";
@@ -40,7 +40,11 @@ export const betReportAccountList = createAsyncThunk<any, any>(
   async (requestData, thunkApi) => {
     try {
       const resp = await service.get(
-        `${ApiConstants.REPORT.BETHISTORY}${requestData}`
+        `${ApiConstants.REPORT.BETHISTORY}?status=${requestData.status}&page=${
+          requestData.page || 1
+        }&limit=${requestData.limit || 15}&searchBy=${
+          requestData.searchBy ?? ""
+        }&keyword=${requestData.keyword ?? ""}`
       );
       if (resp?.data) {
         return resp?.data;
@@ -172,7 +176,7 @@ export const getProfitLossReport = createAsyncThunk<any, any>(
 
 export const matchDetailAction = createAsyncThunk<any, any>(
   "/match/details",
-  async (matchId) => {
+  async (matchId, thunkApi) => {
     try {
       const resp = await service.get(
         `${ApiConstants.MATCH.MATCHDETAILS}${matchId}`
@@ -182,24 +186,42 @@ export const matchDetailAction = createAsyncThunk<any, any>(
       }
     } catch (error: any) {
       const err = error as AxiosError;
-      throw err;
+      return thunkApi.rejectWithValue(err.response?.status);
     }
   }
 );
 
-export const getPlacedBets = createAsyncThunk<any, any>("/bet", async (id) => {
-  try {
-    const resp = await service.get(
-      `${ApiConstants.BET.GETPLACEDBETS}?status=PENDING&betPlaced.matchId=${id}`
-    );
-    if (resp) {
-      return resp?.data?.rows;
+export const getPlacedBets = createAsyncThunk<any, any>(
+  "/bet",
+  async (id, thunkApi) => {
+    try {
+      const resp = await service.get(
+        `${ApiConstants.BET.GETPLACEDBETS}?status=PENDING&betPlaced.matchId=${id}`
+      );
+      if (resp) {
+        return resp?.data?.rows;
+      }
+    } catch (error: any) {
+      const err = error as AxiosError;
+      return thunkApi.rejectWithValue(err.response?.status);
     }
-  } catch (error: any) {
-    const err = error as AxiosError;
-    throw err;
   }
-});
+);
+
+export const getRunAmount = createAsyncThunk<any, any>(
+  "/runAmount",
+  async (id, thunkApi) => {
+    try {
+      const resp = await service.get(`${ApiConstants.BET.RUN_AMOUNT}/${id}`);
+      if (resp?.data !== null) {
+        return JSON.parse(resp?.data?.profitLoss).betPlaced;
+      }
+    } catch (error: any) {
+      const err = error as AxiosError;
+      return thunkApi.rejectWithValue(err.response?.status);
+    }
+  }
+);
 
 export const updateMatchRates = createAsyncThunk<any, any>(
   "/match/rates",
@@ -207,3 +229,5 @@ export const updateMatchRates = createAsyncThunk<any, any>(
     return matchDetails;
   }
 );
+
+export const resetRunAmount = createAction("runAmount/reset");

@@ -6,6 +6,7 @@ import CustomTable from "../../../components/commonComponent/table";
 import { TableConfig } from "../../../models/tableInterface";
 import { betReportAccountList } from "../../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../../store/store";
+import _ from "lodash";
 
 interface Column {
   id: string;
@@ -14,15 +15,15 @@ interface Column {
 
 // Example usage
 const columns: Column[] = [
-  { id: "userName", label: "Username" },
+  { id: "user.userName", label: "Username" },
   { id: "eventType", label: "Event Type" },
   { id: "eventName", label: "Event Name" },
-  { id: "runnerName", label: "Runner Name" },
+  { id: "teamName", label: "Runner Name" },
   { id: "betType", label: "Bet Type" },
-  { id: "userRate", label: "User Rate" },
+  { id: "odds", label: "User Rate" },
   { id: "amount", label: "Amount" },
-  { id: "placeDate", label: "Place Date" },
-  { id: "matchDate", label: "Match Date" },
+  { id: "createdAt", label: "Place Date" },
+  { id: "createdAt", label: "Match Date" },
 ];
 
 const options = [
@@ -34,16 +35,30 @@ const options = [
 const CurrentBets = () => {
   const dispatch: AppDispatch = useDispatch();
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
-  const [selectType, setSelectType] = useState({ value: "MATCHED", label: "Matched" });
-  
+  const [selectType, setSelectType] = useState({
+    value: "MATCHED",
+    label: "Matched",
+  });
 
-  useEffect(() => { }, [tableConfig]);
+  useEffect(() => {}, [tableConfig]);
 
-  const { ReportBetList } = useSelector((state: RootState) => state.match.bettListSlice);
+  const { ReportBetList } = useSelector(
+    (state: RootState) => state.match.bettListSlice
+  );
 
   useEffect(() => {
-    dispatch(betReportAccountList({ status: selectType?.value }));
-  }, []);
+    if (tableConfig) {
+      dispatch(
+        betReportAccountList({
+          status: selectType?.value,
+          page: tableConfig?.page,
+          limit: tableConfig?.rowPerPage,
+          searchBy: "user.userName",
+          keyword: tableConfig?.keyword ?? "",
+        })
+      );
+    }
+  }, [tableConfig]);
 
   const handleType = (type: any) => {
     setSelectType(type);
@@ -51,7 +66,6 @@ const CurrentBets = () => {
 
   const handleLoad = (e: any) => {
     e.preventDefault();
-    alert("fhsd");
     dispatch(betReportAccountList({ status: selectType?.value }));
   };
 
@@ -83,22 +97,25 @@ const CurrentBets = () => {
         isPagination={true}
         isSort={true}
         isSearch={true}
-        itemCount={ReportBetList && ReportBetList?.count > 0 ? ReportBetList?.count : 0}
+        itemCount={
+          ReportBetList && ReportBetList?.count > 0 ? ReportBetList?.count : 1
+        }
         setTableConfig={setTableConfig}
         enablePdfExcel={false}
       >
-        {ReportBetList && ReportBetList?.count === 0 && <tr>No data available in table </tr>}
+        {ReportBetList && ReportBetList?.count === 0 && (
+          <tr>No data available in table </tr>
+        )}
         {ReportBetList?.count > 0 &&
-          ReportBetList?.list?.map((item: any, index: number) => (
+          ReportBetList?.rows?.map((item: any, index: number) => (
             <tr key={index}>
-              {columns.map((column) => (
-                <td key={column.id}>{item[column.id]}</td>
-                // <td key={index}>{item.userName}</td>
+              {columns.map((column, index: number) => (
+                <td key={index}>{_.get(item, column?.id)}</td>
               ))}
             </tr>
           ))}
       </CustomTable>
-    </div >
+    </div>
   );
 };
 
