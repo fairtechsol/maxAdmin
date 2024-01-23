@@ -3,7 +3,6 @@ import { FaRegArrowAltCircleUp } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../store/store";
 import "./style.scss";
-import { useEffect } from "react";
 import { userBalance } from "../../../store/actions/user/userActions";
 
 const LoggedUserDetail = () => {
@@ -12,13 +11,15 @@ const LoggedUserDetail = () => {
   );
   const dispatch: AppDispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(userBalance());
-  }, []);
+  const handleAccordionSelect = (eventKey: any) => {
+    if (eventKey !== null) {
+      dispatch(userBalance());
+    }
+  };
 
   return (
     <div className="bg-secondary LoggedUserDetail">
-      <Accordion>
+      <Accordion onSelect={handleAccordionSelect}>
         <Accordion.Item eventKey="0">
           <Accordion.Header>
             <FaRegArrowAltCircleUp />

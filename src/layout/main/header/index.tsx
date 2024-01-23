@@ -51,7 +51,10 @@ const Topbar = (props: any) => {
     <>
       <Navbar expand="lg" className="bg-primary" data-bs-theme="light">
         <Container fluid>
-          <Navbar.Brand href="/admin/active-inactive-user-list" className="me-1">
+          <Navbar.Brand
+            href="/admin/active-inactive-user-list"
+            className="me-1"
+          >
             <LogoSection width="120px" />
           </Navbar.Brand>
           <div onClick={props.onClick}>

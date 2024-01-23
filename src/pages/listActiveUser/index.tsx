@@ -191,7 +191,7 @@ const ListActiveInactiveUser: React.FC = () => {
                             <td className="text-end">{creditRefrence}</td>
                             <td className="text-end">{balance}</td>
                             <td className="text-end">
-                              {userBal?.myProfitLoss}
+                              {userBal?.profitLoss}
                             </td>
                             <td className="text-end">{userBal?.exposure}</td>
                             <td className="text-end">{availableBalance}</td>
