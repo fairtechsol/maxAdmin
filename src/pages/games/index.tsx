@@ -11,6 +11,7 @@ import { MatchType } from "../../utils/enum";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
 import {
+  getPlacedBets,
   matchDetailAction,
   updateMatchRates,
 } from "../../store/actions/match/matchAction";
@@ -28,20 +29,69 @@ export default function Games() {
   );
 
   const updateMatchDetailToRedux = (event: any) => {
-    if (id === event?.id) {
-      dispatch(updateMatchRates(event));
-    } else return;
+    try {
+      if (id === event?.id) {
+        dispatch(updateMatchRates(event));
+      } else return;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const handleDeleteBet = (event: any) => {
+    try {
+      if (event?.matchId === id) {
+        dispatch(matchDetailAction(id));
+        dispatch(getPlacedBets(id));
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const handleSessionBetPlaced = (event: any) => {
+    try {
+      if (event?.jobData?.placedBet?.matchId === id) {
+        dispatch(matchDetailAction(id));
+        dispatch(getPlacedBets(id));
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const handleMatchBetPlaced = (event: any) => {
+    try {
+      if (event?.jobData?.matchId === id) {
+        dispatch(matchDetailAction(id));
+        dispatch(getPlacedBets(id));
+      }
+    } catch (e) {
+      console.log(e);
+    }
   };
   useEffect(() => {
-    if (id) {
-      dispatch(matchDetailAction(id));
+    try {
+      if (id) {
+        dispatch(matchDetailAction(id));
+        dispatch(getPlacedBets(id));
+      }
+    } catch (e) {
+      console.log(e);
     }
   }, [id]);
 
   useEffect(() => {
-    if (id) {
-      socketService.match.joinMatchRoom(id, "superAdmin");
-      socketService.match.getMatchRates(id, updateMatchDetailToRedux);
+    try {
+      if (id) {
+        socketService.match.joinMatchRoom(id, "superAdmin");
+        socketService.match.getMatchRates(id, updateMatchDetailToRedux);
+        socketService.match.matchDeleteBet(handleDeleteBet);
+        socketService.match.sessionDeleteBet(handleDeleteBet);
+        socketService.match.userSessionBetPlaced(handleSessionBetPlaced);
+        socketService.match.userMatchBetPlaced(handleMatchBetPlaced);
+      }
+    } catch (e) {
+      console.log(e);
     }
     return () => {
       socketService.match.leaveMatchRoom(id);
@@ -62,7 +112,7 @@ export default function Games() {
                     <BetTable
                       title={"Runners"}
                       type={MatchType.MATCH_ODDS}
-                      data={matchDetails?.matchOdd}
+                      data={matchDetails?.apiTideMatch}
                     />
                   </Col>
                 )
@@ -114,7 +164,7 @@ export default function Games() {
               <div className="my-2">
                 <ScoreCard />
               </div>
-              <UserBets id={id} />
+              <UserBets />
               {/* <BetTableHeader
                 customClass="mt-2 fw-normal"
                 title="Rules"

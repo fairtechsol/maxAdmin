@@ -1,25 +1,17 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button, Col, Nav, Row, Tab, Table } from "react-bootstrap";
 import CustomModal from "../../commonComponent/modal";
 import UserBetModalTable from "./modal";
 import UserBetModalForm from "./modal/form";
 import "./style.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../../store/store";
-import { getPlacedBets } from "../../../store/actions/match/matchAction";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store/store";
 
-const UserBets = ({ id }: any) => {
-  const dispatch: AppDispatch = useDispatch();
+const UserBets = () => {
   const { placedBets } = useSelector(
     (state: RootState) => state.match.placeBets
   );
   const [showModal, setShowModal] = useState(false);
-
-  useEffect(() => {
-    if (id) {
-      dispatch(getPlacedBets(id));
-    }
-  }, [id]);
 
   return (
     <div className={`userBets`}>

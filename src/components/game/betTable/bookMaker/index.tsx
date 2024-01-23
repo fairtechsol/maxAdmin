@@ -63,7 +63,11 @@ function BookmakerTable({
                         : matchDetails?.[`team${item}`]}
                     </span>
                     <div className="d-flex align-items-center justify-content-between w-100">
-                      <span className="title-14">{0}</span>
+                      <span className="title-14">
+                        {matchDetails?.profitLossDataMatch?.[
+                          `team${item}Rate`
+                        ] ?? 0}
+                      </span>
                     </div>
                   </div>
                 </td>

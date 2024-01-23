@@ -3,30 +3,43 @@ import { baseUrls } from "../utils/Constants";
 import { authSocketService } from "./authSocket";
 import { matchSocketService } from "./matchSocketService";
 
-export const socket = io(baseUrls.socket, {
-  transports: ["websocket"],
-  auth: {
-    token: `${sessionStorage.getItem("userToken")}`,
-  },
-});
+export let socket: any = null;
+export let thirdParty: any = null;
 
-export const thirdParty = io(baseUrls.thirdParty, {
-  transports: ["websocket"],
-  auth: {
-    token: `${sessionStorage.getItem("userToken")}`,
-  },
-});
+export const initialiseSocket = () => {
+  socket = io(baseUrls.socket, {
+    transports: ["websocket"],
+    auth: {
+      token: `${sessionStorage.getItem("userToken")}`,
+    },
+  });
+  thirdParty = io(baseUrls.thirdParty, {
+    transports: ["websocket"],
+    auth: {
+      token: `${sessionStorage.getItem("userToken")}`,
+    },
+  });
+};
 
 export const socketService = {
   connect: () => {
-    // Connect to the socket server
-    socket.connect();
-    thirdParty.connect();
+    try {
+      initialiseSocket();
+      // Connect to the socket server
+      socket.connect();
+      thirdParty.connect();
+    } catch (e) {
+      console.log(e);
+    }
   },
   disconnect: () => {
+    try {
+      socket.disconnect();
+      thirdParty.disconnect();
+    } catch (e) {
+      console.log(e);
+    }
     // Disconnect from the socket server
-    socket.disconnect();
-    thirdParty.disconnect();
   },
   auth: { ...authSocketService },
   match: { ...matchSocketService },

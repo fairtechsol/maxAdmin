@@ -25,4 +25,16 @@ export const matchSocketService = {
   getMatchRates: (matchId: string, callback: any) => {
     thirdParty.on(`liveData${matchId}`, callback);
   },
+  userSessionBetPlaced: (callback: any) => {
+    socket.on("userSessionBetPlaced", callback);
+  },
+  matchDeleteBet: (callback: any) => {
+    socket.on(`matchDeleteBet`, callback);
+  },
+  sessionDeleteBet: (callback: any) => {
+    socket.on(`sessionDeleteBet`, callback);
+  },
+  userMatchBetPlaced: (callback: any) => {
+    socket.on("userMatchBetPlaced", callback);
+  },
 };

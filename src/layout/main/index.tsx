@@ -21,7 +21,7 @@ function MainLayout() {
   };
 
   useEffect(() => {
-    if (!localStorage.getItem("userToken")) {
+    if (!sessionStorage.getItem("userToken")) {
       navigate("/admin/login");
     }
     dispatch(getUsersProfile());
