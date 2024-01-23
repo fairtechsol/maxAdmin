@@ -113,14 +113,14 @@ const AccountStatement = () => {
       let filter = "";
       if (dateFrom && dateTo) {
         filter += `&createdAt=between${moment(new Date(dateFrom))?.format(
-          "DD/MM/YYYY"
+          "YYYY-DD-MM"
         )}|${moment(
           new Date(dateTo).setDate(new Date(dateTo).getDate() + 1)
-        )?.format("DD/MM/YYYY")}`;
+        )?.format("YYYY-DD-MM")}`;
       } else if (dateFrom) {
-        filter += `&createdAt=gte${moment(dateFrom)?.format("MM/DD/YYYY")}`;
+        filter += `&createdAt=gte${moment(dateFrom)?.format("YYYY-DD-MM")}`;
       } else if (dateTo) {
-        filter += `&createdAt=lte${moment(dateTo)?.format("MM/DD/YYYY")}`;
+        filter += `&createdAt=lte${moment(dateTo)?.format("YYYY-DD-MM")}`;
       }
       if (selectedUser) {
         filter += `&user.userName=${selectedUser[0].label}`;
