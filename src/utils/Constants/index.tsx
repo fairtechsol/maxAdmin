@@ -44,9 +44,9 @@ export const ApiConstants = {
 };
 
 export const Constants = {
-  apiBasePath: "http://localhost:5000",
-  thirdParty: "http://localhost:3200",
-  expertPath: "http://localhost:6060",
+  apiBasePath: "http://3.89.232.255:5000",
+  thirdParty: "http://3.89.232.255:3200",
+  expertPath: "http://3.89.232.255:6060",
 };
 
 export const baseUrls = {
