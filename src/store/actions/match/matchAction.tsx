@@ -121,11 +121,11 @@ export const getGameReport = createAsyncThunk<any, any>(
   async ({ type, page, limit, searchBy, keyword, filter }, thunkApi) => {
     try {
       const resp = await service.get(
-        `${ApiConstants.REPORT.BETHISTORY}?status=${type}&page=${
+        `${ApiConstants.REPORT.BETHISTORY}?status=${type || ""}&page=${
           page || 1
-        }&limit=${limit || 15}&searchBy=${searchBy}&keyword=${
-          keyword || ""
-        }${filter}`
+        }&limit=${limit || 15}&searchBy=${searchBy || ""}&keyword=${keyword}${
+          filter || ""
+        }`
       );
       if (resp?.data) {
         return resp?.data;

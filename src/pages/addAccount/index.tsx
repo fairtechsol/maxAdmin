@@ -3,11 +3,11 @@ import SelectSearch from "../../components/commonComponent/SelectSearch";
 import CustomInput from "../../components/commonComponent/input";
 import { addAccountValidationSchema } from "../../utils/fieldValidations/addAccount";
 import { useFormik } from "formik";
-import {  addSuccessReset, addUser } from "../../store/actions/user/userActions";
+import { addSuccessReset, addUser } from "../../store/actions/user/userActions";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
 import { useEffect, useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 interface Values {
   clientName: string;
@@ -93,19 +93,17 @@ const AddAccount = () => {
             exposureLimit: values.exposureLimit,
             maxBetLimit: values.maxBet,
             minBetLimit: values.minBet,
+            delayTime: values.delay,
           };
           dispatch(addUser(newPayload));
         } else {
           dispatch(addUser(payload));
         }
-
       } catch (e) {
         console.log(e);
       }
-
     },
   });
-
 
   const { handleSubmit, getFieldProps, touched, errors } = formik;
 
@@ -221,6 +219,17 @@ const AddAccount = () => {
     setTypeForAccountType();
   }, [userDetail]);
 
+  useEffect(() => {
+    if (formik?.values?.accountType) {
+      formik.setValues({
+        ...formik.values,
+        minBet: "100",
+        maxBet: "1000",
+        delay: "5",
+      });
+    }
+  }, [formik?.values?.accountType]);
+
   return (
     <>
       <Card className="addAccount  border-0">
@@ -332,9 +341,9 @@ const AddAccount = () => {
                       onChange={(accountTypes: any) =>
                         formik.setFieldValue("accountType", accountTypes)
                       }
-                    // onBlur={formik.handleBlur}
-                    // touched={touched.accountType}
-                    // errors={errors.accountType}
+                      // onBlur={formik.handleBlur}
+                      // touched={touched.accountType}
+                      // errors={errors.accountType}
                     />
                   </Col>
                   <Col md={6}>
@@ -350,19 +359,21 @@ const AddAccount = () => {
                       errors={errors.creditReference}
                     />
                   </Col>
-                  {formik.values.accountType.value === "user" && <Col md={6}>
-                    <CustomInput
-                      id={"exposureLimit"}
-                      title={"Exposure Limit"}
-                      placeholder={"Enter Exposure Limit"}
-                      type={"number"}
-                      min={0}
-                      customstyle={"mb-3"}
-                      {...getFieldProps("exposureLimit")}
-                      touched={touched.exposureLimit}
-                      errors={errors.exposureLimit}
-                    />
-                  </Col>}
+                  {formik.values.accountType.value === "user" && (
+                    <Col md={6}>
+                      <CustomInput
+                        id={"exposureLimit"}
+                        title={"Exposure Limit"}
+                        placeholder={"Enter Exposure Limit"}
+                        type={"number"}
+                        min={0}
+                        customstyle={"mb-3"}
+                        {...getFieldProps("exposureLimit")}
+                        touched={touched.exposureLimit}
+                        errors={errors.exposureLimit}
+                      />
+                    </Col>
+                  )}
                 </Row>
               </Col>
             </Row>
@@ -442,7 +453,7 @@ const AddAccount = () => {
                           min={0}
                           type={"number"}
                           onChange={handlePartnershipChange}
-                        // {...getFieldProps("downLinePartnership")}
+                          // {...getFieldProps("downLinePartnership")}
                         />
                       </td>
                     </tr>
@@ -461,83 +472,85 @@ const AddAccount = () => {
                 </Table>
               </Col>
             </Row>
-            {formik.values.accountType.value === "user" ?
-            <Row>
-              <Col md={12}>
-                <h6
-                  className="mb-3 bg-warning title-18 fw-bold "
-                  style={addAccountHedingStyle}
-                >
-                  Min Max Bet
-                </h6>
-               
-                <Table striped bordered className="commonTable">
-                  <thead>
-                    <tr>
-                      <tr></tr>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td rowSpan={2} style={{ verticalAlign: "middle" }}>
-                        Min Bet
-                      </td>
-                      <td>{formik.values.minBet || "0.00"}</td>
-                    </tr>
-                    <tr>
-                      <td style={{ verticalAlign: "middle" }}>
-                        <CustomInput
-                          id={"minBet"}
-                          type={"number"}
-                          min={0}
-                          customstyle={"mb-3"}
-                          {...getFieldProps("minBet")}
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <td rowSpan={2} style={{ verticalAlign: "middle" }}>
-                        Max Bet
-                      </td>
-                      <td>{formik.values.maxBet || "0.00"}</td>
-                    </tr>
-                    <tr>
-                      <td style={{ verticalAlign: "middle" }}>
-                        <CustomInput
-                          id={"maxBet"}
-                          type={"number"}
-                          min={0}
-                          customstyle={"mb-3"}
-                          {...getFieldProps("maxBet")}
-                          touched={touched.maxBet}
-                          errors={errors.maxBet}
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <td rowSpan={2} style={{ verticalAlign: "middle" }}>
-                        Delay
-                      </td>
-                      <td>{formik.values.delay || "0.00"}</td>
-                    </tr>
-                    <tr>
-                      <td style={{ verticalAlign: "middle" }}>
-                        <CustomInput
-                          disabled={true}
-                          id={"delay"}
-                          type={"number"}
-                          customstyle={"mb-3"}
-                          {...getFieldProps("delay")}
-                        />
-                      </td>
-                    </tr>
-                  </tbody>
-                </Table>
-              </Col>
-            </Row>
-              : null
-            }
+            {formik.values.accountType.value === "user" ? (
+              <Row>
+                <Col md={12}>
+                  <h6
+                    className="mb-3 bg-warning title-18 fw-bold "
+                    style={addAccountHedingStyle}
+                  >
+                    Min Max Bet
+                  </h6>
+
+                  <Table striped bordered className="commonTable">
+                    <thead>
+                      <tr>
+                        <tr></tr>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td rowSpan={2} style={{ verticalAlign: "middle" }}>
+                          Min Bet
+                        </td>
+                        <td>{formik.values.minBet || "0.00"}</td>
+                      </tr>
+                      <tr>
+                        <td style={{ verticalAlign: "middle" }}>
+                          <CustomInput
+                            id={"minBet"}
+                            type={"number"}
+                            min={0}
+                            customstyle={"mb-3"}
+                            {...getFieldProps("minBet")}
+                            touched={touched.minBet}
+                            errors={errors.minBet}
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td rowSpan={2} style={{ verticalAlign: "middle" }}>
+                          Max Bet
+                        </td>
+                        <td>{formik.values.maxBet || "0.00"}</td>
+                      </tr>
+                      <tr>
+                        <td style={{ verticalAlign: "middle" }}>
+                          <CustomInput
+                            id={"maxBet"}
+                            type={"number"}
+                            min={0}
+                            customstyle={"mb-3"}
+                            {...getFieldProps("maxBet")}
+                            touched={touched.maxBet}
+                            errors={errors.maxBet}
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td rowSpan={2} style={{ verticalAlign: "middle" }}>
+                          Delay
+                        </td>
+                        <td>{formik.values.delay || "0.00"}</td>
+                      </tr>
+                      <tr>
+                        <td style={{ verticalAlign: "middle" }}>
+                          <CustomInput
+                            // disabled={true}
+                            id={"delay"}
+                            type={"number"}
+                            min={0}
+                            customstyle={"mb-3"}
+                            {...getFieldProps("delay")}
+                          />
+                        </td>
+                      </tr>
+                    </tbody>
+                  </Table>
+                </Col>
+              </Row>
+            ) : null}
             <Row>
               <Col md={12}>
                 <CustomInput

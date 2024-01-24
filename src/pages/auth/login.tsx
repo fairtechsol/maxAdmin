@@ -9,7 +9,7 @@ import { authReset, login } from "../../store/actions/auth/authActions";
 import { AppDispatch, RootState } from "../../store/store";
 import { loginValidationSchema } from "../../utils/fieldValidations/login";
 import "./style.scss";
-import { FgLogo } from "../../assets/images";
+import { MaxLogo } from "../../assets/images";
 
 const initialValues: any = {
   userName: "",
@@ -57,7 +57,7 @@ const Login = () => {
       onSubmit={handleSubmit}
     >
       <div className="auth-box ">
-        <img src={FgLogo} alt="fairGame" />
+        <img src={MaxLogo} alt="MAXXBET9" />
         <div className="auth-box-form rounded-2 bg-light">
           <h2 className="auth-title text-center mb-4">Sign In</h2>
           <Form.Group className="mb-3 d-block">
@@ -91,7 +91,7 @@ const Login = () => {
             Login <MdOutlineLogin />
           </CustomButton>
         </div>
-        <p className="text-white mt-3 mb-0 title-14">© MAXXBET7</p>
+        <p className="text-white mt-3 mb-0 title-14">© MAXXBET9</p>
       </div>
     </Form>
   );
