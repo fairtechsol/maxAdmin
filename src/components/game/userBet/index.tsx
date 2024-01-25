@@ -6,6 +6,7 @@ import UserBetModalForm from "./modal/form";
 import "./style.scss";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
+import moment from "moment-timezone";
 
 const UserBets = () => {
   const { placedBets } = useSelector(
@@ -64,17 +65,75 @@ const UserBets = () => {
                     {placedBets?.map((bet: any) => {
                       return (
                         <tr key={bet?.id}>
-                          <td>{bet?.user?.userName}</td>
-                          <td>
+                          <td
+                            className={
+                              bet?.betType === "NO" || bet?.betType === "LAY"
+                                ? "bg-red1"
+                                : "bg-blue3"
+                            }
+                          >
+                            {bet?.user?.userName}
+                          </td>
+                          <td
+                            className={
+                              bet?.betType === "NO" || bet?.betType === "LAY"
+                                ? "bg-red1"
+                                : "bg-blue3"
+                            }
+                          >
                             {bet?.marketBetType === "SESSION"
                               ? bet?.eventName
                               : bet?.teamName}
                           </td>
-                          <td>{bet?.odds}</td>
-                          <td>{bet?.amount}</td>
-                          <td>{bet?.createdAt}</td>
-                          <td>{bet?.createdAt}</td>
-                          <td>{bet?.eventType}</td>
+                          <td
+                            className={
+                              bet?.betType === "NO" || bet?.betType === "LAY"
+                                ? "bg-red1"
+                                : "bg-blue3"
+                            }
+                          >
+                            {bet?.odds}
+                          </td>
+                          <td
+                            className={
+                              bet?.betType === "NO" || bet?.betType === "LAY"
+                                ? "bg-red1"
+                                : "bg-blue3"
+                            }
+                          >
+                            {bet?.amount}
+                          </td>
+                          <td
+                            className={
+                              bet?.betType === "NO" || bet?.betType === "LAY"
+                                ? "bg-red1"
+                                : "bg-blue3"
+                            }
+                          >
+                            {moment(bet?.createdAt).format(
+                              "YYYY-MM-DD hh:mm:ss"
+                            )}
+                          </td>
+                          <td
+                            className={
+                              bet?.betType === "NO" || bet?.betType === "LAY"
+                                ? "bg-red1"
+                                : "bg-blue3"
+                            }
+                          >
+                            {moment(bet?.match?.startAt).format(
+                              "YYYY-MM-DD hh:mm:ss"
+                            )}
+                          </td>
+                          <td
+                            className={
+                              bet?.betType === "NO" || bet?.betType === "LAY"
+                                ? "bg-red1"
+                                : "bg-blue3"
+                            }
+                          >
+                            {bet?.eventType}
+                          </td>
                         </tr>
                       );
                     })}
