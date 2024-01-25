@@ -139,11 +139,7 @@ export const getGeneralReport = createAsyncThunk<any, any>(
   async ({ type, page, limit, searchBy, keyword, filter }, thunkApi) => {
     try {
       const resp = await service.get(
-        `${ApiConstants.REPORT.GENRALREPORT}?type=${type}&page=${
-          page || 1
-        }&limit=${limit || 15}&searchBy=${searchBy}&keyword=${
-          keyword || ""
-        }${filter}`
+        `${ApiConstants.REPORT.GENRALREPORT}?type=${type}`
       );
       if (resp?.data) {
         return resp?.data;
