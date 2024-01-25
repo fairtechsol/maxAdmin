@@ -150,7 +150,7 @@ const ListClent: React.FC = () => {
                         <Form>
                           <Form.Check
                             disabled={true}
-                            checked={userBlock}
+                            checked={!userBlock}
                             id={`opt${index}1`}
                             aria-label="option 1"
                           />
@@ -160,7 +160,7 @@ const ListClent: React.FC = () => {
                         <Form>
                           <Form.Check
                             disabled={true}
-                            checked={betBlock}
+                            checked={!betBlock}
                             id={`opt${index}`}
                             aria-label="option 1"
                           />
