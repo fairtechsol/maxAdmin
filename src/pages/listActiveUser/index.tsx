@@ -215,7 +215,7 @@ const ListActiveInactiveUser: React.FC = () => {
                                 />
                               </Form>
                             </td>
-                            <td className="text-end">{exposureLimit}</td>
+                            <td className="text-end">{roleName === "user" ? exposureLimit : "NA"}</td>
                             <td>{matchCommission}</td>
                             <td>{roleName}</td>
                             <td className="text-end">{totalComission}</td>
@@ -225,6 +225,7 @@ const ListActiveInactiveUser: React.FC = () => {
                                   return (
                                     <CustomButton
                                       variant="dark"
+                                      disabled={item?.name === "L" ? roleName !== "user" ? true : false : false}
                                       onClick={() => {
                                         item.onClick(item?.id, userItem);
                                       }}
