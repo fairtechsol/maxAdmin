@@ -178,7 +178,13 @@ const GameReport = () => {
             <td>0</td>
             <td></td>
             <td>General Total</td>
-            <td>0</td>
+            <td>
+              {gameReportList?.count > 0
+                ? gameReportList?.rows?.reduce((acc: any, match: any) => {
+                    return acc + +match?.amount;
+                  }, 0)
+                : 0}
+            </td>
           </tr>
         )}
       </CustomTable>
