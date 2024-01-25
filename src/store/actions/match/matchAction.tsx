@@ -229,3 +229,6 @@ export const updateMatchRates = createAsyncThunk<any, any>(
 );
 
 export const resetRunAmount = createAction("runAmount/reset");
+export const betReportAccountListReset = createAction(
+  "betReportAccountList/reset"
+);
