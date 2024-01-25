@@ -56,23 +56,22 @@ const GameReport = () => {
   };
 
   useEffect(() => {
-    dispatch(getGameReport({ status: "" }));
+    dispatch(getGameReport({}));
   }, []);
-  console.log("gameReportList :", gameReportList);
 
   const handleLoad = (e: any) => {
     e.preventDefault();
     let filter = "";
     if (dateFrom && dateTo) {
       filter += `&createdAt=between${moment(new Date(dateFrom))?.format(
-        "YYYY-DD-MM"
+        "YYYY-MM-DD"
       )}|${moment(
         new Date(dateTo).setDate(new Date(dateTo).getDate() + 1)
-      )?.format("YYYY-DD-MM")}`;
+      )?.format("YYYY-MM-DD")}`;
     } else if (dateFrom) {
-      filter += `&createdAt=gte${moment(dateFrom)?.format("YYYY-DD-MM")}`;
+      filter += `&createdAt=gte${moment(dateFrom)?.format("YYYY-MM-DD")}`;
     } else if (dateTo) {
-      filter += `&createdAt=lte${moment(dateTo)?.format("YYYY-DD-MM")}`;
+      filter += `&createdAt=lte${moment(dateTo)?.format("YYYY-MM-DD")}`;
     }
     dispatch(
       getGameReport({
@@ -159,7 +158,7 @@ const GameReport = () => {
           <tr>No data available in table </tr>
         )}
         {gameReportList?.count > 0 &&
-          gameReportList?.list?.map((item: any, index: any) => (
+          gameReportList?.rows?.map((item: any, index: any) => (
             <tr key={index}>
               {columns.map((column) => (
                 <td key={column.id}>{item[column.id]}</td>

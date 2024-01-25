@@ -1,11 +1,11 @@
-import { FgLogo } from "../../../assets/images";
+import { MaxLogo } from "../../../assets/images";
 
 interface Props {
   height?: string;
   width?: string;
 }
 function LogoSection(props: Props) {
-  return <img src={FgLogo} {...props} alt="fairGame" />;
+  return <img src={MaxLogo} {...props} alt="fairGame" />;
 }
 
 export default LogoSection;

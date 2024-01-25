@@ -113,14 +113,14 @@ const AccountStatement = () => {
       let filter = "";
       if (dateFrom && dateTo) {
         filter += `&createdAt=between${moment(new Date(dateFrom))?.format(
-          "YYYY-DD-MM"
+          "YYYY-MM-DD"
         )}|${moment(
           new Date(dateTo).setDate(new Date(dateTo).getDate() + 1)
-        )?.format("YYYY-DD-MM")}`;
+        )?.format("YYYY-MM-DD")}`;
       } else if (dateFrom) {
-        filter += `&createdAt=gte${moment(dateFrom)?.format("YYYY-DD-MM")}`;
+        filter += `&createdAt=gte${moment(dateFrom)?.format("YYYY-MM-DD")}`;
       } else if (dateTo) {
-        filter += `&createdAt=lte${moment(dateTo)?.format("YYYY-DD-MM")}`;
+        filter += `&createdAt=lte${moment(dateTo)?.format("YYYY-MM-DD")}`;
       }
       if (selectedUser) {
         filter += `&user.userName=${selectedUser[0].label}`;
@@ -286,7 +286,7 @@ const AccountStatement = () => {
               {/* {columns.map((column) => (
               <td key={column.id}>{item[column.id]}</td>
             ))} */}
-              <td>{moment(createdAt).format("YYYY-DD-MM")} </td>
+              <td>{moment(createdAt).format("YYYY-MM-DD")} </td>
               <td>{amount > 0 ? amount : ""}</td>
               <td>{amount < 0 ? amount : ""}</td>
               <td>{closingBalance}</td>
