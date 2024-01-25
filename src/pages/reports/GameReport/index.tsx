@@ -8,10 +8,12 @@ import { TableConfig } from "../../../models/tableInterface";
 import { getGameReport } from "../../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../../store/store";
 import moment from "moment-timezone";
+import _ from "lodash";
 
 interface Column {
   id: string;
   label: string;
+  type?: string;
 }
 
 // interface DataItem {
@@ -20,11 +22,11 @@ interface Column {
 
 // Example usage
 const columns: Column[] = [
-  { id: "srNo", label: "Sr No" },
+  { id: "SrNo", label: "Sr No" },
   { id: "name", label: "Name" },
-  { id: "amount", label: "Amount" },
-  { id: "srNo", label: "Sr No" },
-  { id: "name", label: "Name" },
+  { id: "Amount", label: "Amount" },
+  { id: "srNo", label: "Sr No", type: "index" },
+  { id: "user.userName", label: "Name" },
   { id: "amount", label: "Amount" },
 ];
 
@@ -76,7 +78,7 @@ const GameReport = () => {
     dispatch(
       getGameReport({
         type: selectType?.value,
-        page: 1,
+        // page: 1,
         limit: tableConfig?.rowPerPage,
         searchBy: "description",
         keyword: tableConfig?.keyword || "",
@@ -143,7 +145,7 @@ const GameReport = () => {
         striped
         columns={columns}
         isPagination={false}
-        isSort={true}
+        isSort={false}
         isSearch={false}
         // itemCount={data?.length}
         itemCount={
@@ -161,10 +163,24 @@ const GameReport = () => {
           gameReportList?.rows?.map((item: any, index: any) => (
             <tr key={index}>
               {columns.map((column) => (
-                <td key={column.id}>{item[column.id]}</td>
+                <td key={column.id}>
+                  {column?.type === "index"
+                    ? index + 1
+                    : _.get(item, column?.id)}
+                </td>
               ))}
             </tr>
           ))}
+        {gameReportList?.count > 0 && (
+          <tr>
+            <td></td>
+            <td>General Total</td>
+            <td>0</td>
+            <td></td>
+            <td>General Total</td>
+            <td>0</td>
+          </tr>
+        )}
       </CustomTable>
     </div>
   );
