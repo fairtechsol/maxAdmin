@@ -4,7 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import SelectSearch from "../../../components/commonComponent/SelectSearch";
 import CustomTable from "../../../components/commonComponent/table";
 import { TableConfig } from "../../../models/tableInterface";
-import { betReportAccountList } from "../../../store/actions/match/matchAction";
+import {
+  betReportAccountList,
+  betReportAccountListReset,
+} from "../../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../../store/store";
 import _ from "lodash";
 
@@ -17,7 +20,7 @@ interface Column {
 const columns: Column[] = [
   { id: "user.userName", label: "Username" },
   { id: "eventType", label: "Event Type" },
-  { id: "eventName", label: "Event Name" },
+  { id: "match.title", label: "Event Name" },
   { id: "teamName", label: "Runner Name" },
   { id: "betType", label: "Bet Type" },
   { id: "odds", label: "User Rate" },
@@ -66,7 +69,11 @@ const CurrentBets = () => {
 
   const handleLoad = (e: any) => {
     e.preventDefault();
-    dispatch(betReportAccountList({ status: selectType?.value }));
+    if (selectType?.value !== "UNMATCHED") {
+      dispatch(betReportAccountList({ status: selectType?.value }));
+    } else {
+      dispatch(betReportAccountListReset());
+    }
   };
 
   return (
@@ -104,7 +111,17 @@ const CurrentBets = () => {
         enablePdfExcel={false}
       >
         {ReportBetList && ReportBetList?.count === 0 && (
-          <tr>No data available in table </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>No data available in table</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
         )}
         {ReportBetList?.count > 0 &&
           ReportBetList?.rows?.map((item: any, index: number) => (

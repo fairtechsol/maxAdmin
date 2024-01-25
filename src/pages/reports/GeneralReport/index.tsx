@@ -30,13 +30,16 @@ const columns: Column[] = [
 
 const options = [
   { value: "balance", label: "General Report" },
-  { value: "creditReferance", label: "Credit Referance" },
+  { value: "creditRefrence", label: "Credit Referance Report" },
 ];
 
 const GeneralReport = () => {
   const dispatch: AppDispatch = useDispatch();
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
-  const [selectType, setSelectType] = useState({ value: "ALL", label: "All" });
+  const [selectType, setSelectType] = useState({
+    value: "balance",
+    label: "General Report",
+  });
 
   useEffect(() => {}, [tableConfig]);
 
@@ -52,19 +55,20 @@ const GeneralReport = () => {
     dispatch(
       getGeneralReport({
         type: selectType?.value,
-        page: 1,
-        limit: tableConfig?.rowPerPage,
-        searchBy: "description",
-        keyword: tableConfig?.keyword || "",
       })
     );
   };
 
   useEffect(() => {
-    dispatch(getGeneralReport({ status: "" }));
-  }, []);
+    if (tableConfig) {
+      dispatch(
+        getGeneralReport({
+          type: selectType?.value,
+        })
+      );
+    }
+  }, [tableConfig]);
 
-  useEffect(() => {}, [tableConfig]);
   return (
     <div className="p-2 pt-0">
       <h5 className="title-22 fw-normal">General Report</h5>
@@ -92,8 +96,8 @@ const GeneralReport = () => {
         striped
         columns={columns}
         isPagination={false}
-        isSort={true}
-        isSearch={true}
+        isSort={false}
+        isSearch={false}
         // itemCount={data?.length}
         itemCount={gameGeneralList?.usersData?.length}
         setTableConfig={setTableConfig}
@@ -108,9 +112,9 @@ const GeneralReport = () => {
               {columns.map((column) => (
                 <td key={column.id}>
                   {column.id === "srNo" && index + 1}
-                  {column.id === "amount" &&
-                    item.userBal &&
-                    item.userBal.currentBalance}
+                  {column.id === "amount" && item.userBal
+                    ? item.userBal.currentBalance
+                    : column.id === "amount" && item?.creditRefrence}
                   {column.id === "userName" && item[column.id]}
                 </td>
               ))}

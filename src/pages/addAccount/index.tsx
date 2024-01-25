@@ -195,16 +195,20 @@ const AddAccount = () => {
   };
 
   useEffect(() => {
-    if (success) {
-      if (userDetail && userDetail.roleName) {
-        const res = handleUpline();
-        formik.setValues({
-          ...formik.values,
-          uplinePartnership: res,
-          downlinePartnership: 100 - res,
-        });
-        setDown(100 - res);
+    try {
+      if (success) {
+        if (userDetail && userDetail.roleName) {
+          const res = handleUpline();
+          formik.setValues({
+            ...formik.values,
+            uplinePartnership: res,
+            downlinePartnership: 100 - res,
+          });
+          setDown(100 - res);
+        }
       }
+    } catch (e) {
+      console.log(e);
     }
   }, [userDetail, userDetail?.roleName, success]);
 
@@ -220,7 +224,7 @@ const AddAccount = () => {
   }, [userDetail]);
 
   useEffect(() => {
-    if (formik?.values?.accountType) {
+    if (formik?.values?.accountType?.value === "user") {
       formik.setValues({
         ...formik.values,
         minBet: "100",
