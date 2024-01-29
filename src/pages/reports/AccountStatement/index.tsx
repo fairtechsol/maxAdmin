@@ -268,7 +268,7 @@ const AccountStatement = () => {
         itemCount={
           ReportAccountList && ReportAccountList?.count > 0
             ? ReportAccountList?.count
-            : 1
+            : 0
         }
         endpoint={`${ApiConstants.REPORT.ACCOUNTLIST}/${userDetail?.id}`}
         setTableConfig={setTableConfig}
