@@ -1,7 +1,30 @@
 import * as Yup from "yup";
+// import { getAlreadyExistUser } from "../../store/actions/user/userActions";
+import service from "../../service";
+import { ApiConstants } from "../Constants";
 
-export const addAccountValidationSchema = Yup.object({
-  clientName: Yup.string().required("Client Name is required"),
+export const addAccountValidationSchema: any = Yup.object({
+  clientName: Yup.string()
+    .required("Client Name is required")
+    .test({
+      name: "clientName",
+      message: "Client Name already exists",
+      test: async function (value: any) {
+        if (value) {
+          try {
+            const resp = await service.get(
+              `${ApiConstants.USER.ALREADY_EXIST}?userName=${value}`
+            );
+            if (resp) {
+              return resp?.data?.isUserExist ? false : true;
+            }
+          } catch (error: any) {
+            console.log(error);
+          }
+        }
+        return true;
+      },
+    }),
   userPassword: Yup.string().required("Password is required"),
   retypePassword: Yup.string()
     .oneOf([Yup.ref("userPassword"), ""], "Passwords must match")

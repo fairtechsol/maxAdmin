@@ -3,7 +3,10 @@ import SelectSearch from "../../components/commonComponent/SelectSearch";
 import CustomInput from "../../components/commonComponent/input";
 import { addAccountValidationSchema } from "../../utils/fieldValidations/addAccount";
 import { useFormik } from "formik";
-import { addSuccessReset, addUser } from "../../store/actions/user/userActions";
+import {
+  addSuccessReset,
+  addUser,
+} from "../../store/actions/user/userActions";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
 import { useEffect, useState } from "react";
@@ -120,25 +123,25 @@ const AddAccount = () => {
           { value: "admin", label: "Admin" },
           { value: "superMaster", label: "Super Master" },
           { value: "master", label: "Master" },
-          // { value: "agent", label: "Agent" },
+          { value: "agent", label: "Agent" },
           { value: "user", label: "User" },
         ],
         admin: [
           { value: "superMaster", label: "Super Master" },
           { value: "master", label: "Master" },
-          // { value: "agent", label: "Agent" },
+          { value: "agent", label: "Agent" },
           { value: "user", label: "User" },
         ],
         superMaster: [
           { value: "master", label: "Master" },
-          // { value: "agent", label: "Agent" },
+          { value: "agent", label: "Agent" },
           { value: "user", label: "User" },
         ],
         master: [
-          // { value: "agent", label: "Agent" },
+          { value: "agent", label: "Agent" },
           { value: "user", label: "User" },
         ],
-        // agent: [{ value: "user", label: "User" }],
+        agent: [{ value: "user", label: "User" }],
       };
 
       setAccountTypes(accountTypeMap[roleName] || []);

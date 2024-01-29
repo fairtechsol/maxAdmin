@@ -12,6 +12,7 @@ export const ApiConstants = {
     ADDFGADMIN: "/user/add",
     ADDURLADMIN: "/superadmin/create",
     ADDEXPERT: "/expert/add",
+    ALREADY_EXIST: "/user/exist",
     UPDATE: "/user/updateUser",
     PROFILE: "/user/profile",
     LOCKUNLOCK: "/user/lockUnlockUser",
