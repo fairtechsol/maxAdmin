@@ -6,11 +6,13 @@ import { useFormik } from "formik";
 import {
   addSuccessReset,
   addUser,
+  getAlreadyUserExist,
 } from "../../store/actions/user/userActions";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
-import { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { debounce } from "lodash";
 
 interface Values {
   clientName: string;
@@ -69,12 +71,15 @@ const AddAccount = () => {
   const { userDetail, success } = useSelector(
     (state: RootState) => state.user.profile
   );
+  const { userAlreadyExist } = useSelector(
+    (state: RootState) => state.user.userList
+  );
   const { addSuccess } = useSelector(
     (state: RootState) => state.user.userUpdate
   );
   const formik = useFormik({
     initialValues: initialValues,
-    validationSchema: addAccountValidationSchema,
+    validationSchema: addAccountValidationSchema(userAlreadyExist),
     onSubmit: (values: Values) => {
       try {
         let payload = {
@@ -96,7 +101,7 @@ const AddAccount = () => {
             exposureLimit: values.exposureLimit,
             maxBetLimit: values.maxBet,
             minBetLimit: values.minBet,
-            delayTime: values.delay,
+            delayTime: JSON.stringify(values.delay),
           };
           dispatch(addUser(newPayload));
         } else {
@@ -197,6 +202,18 @@ const AddAccount = () => {
     return thisUplinePertnerShip;
   };
 
+  const debouncedInputValue = useMemo(() => {
+    return debounce((value) => {
+      dispatch(getAlreadyUserExist(value));
+    }, 500);
+  }, []);
+
+  const handleUserNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const query = e.target.value;
+    formik.handleChange(e);
+    debouncedInputValue(query);
+  };
+
   useEffect(() => {
     try {
       if (success) {
@@ -258,10 +275,12 @@ const AddAccount = () => {
                     <CustomInput
                       id={"clientName"}
                       title={"Client Name:"}
+                      name={"clientName"}
+                      onBlur={formik.handleBlur}
                       placeholder={"Client Name:"}
                       type={"text"}
                       customstyle={"mb-3"}
-                      {...getFieldProps("clientName")}
+                      onChange={handleUserNameChange}
                       touched={touched.clientName}
                       errors={errors.clientName}
                     />
