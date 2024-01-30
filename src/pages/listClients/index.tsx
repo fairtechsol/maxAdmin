@@ -10,6 +10,7 @@ import "../../components/listClients/style.scss";
 import { Column, TableConfig } from "../../models/tableInterface";
 import { getUsers } from "../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../store/store";
+import { ApiConstants } from "../../utils/Constants";
 
 // Example usage
 const columns: Column[] = [
@@ -42,7 +43,7 @@ const ListClent: React.FC = () => {
     });
   };
 
-  useEffect(() => { }, [tableConfig]);
+  useEffect(() => {}, [tableConfig]);
 
   const actionButtons = [
     {
@@ -59,7 +60,6 @@ const ListClent: React.FC = () => {
       id: "l",
       name: "L",
       onClick: showEventModals,
-
     },
     {
       id: "c",
@@ -110,6 +110,7 @@ const ListClent: React.FC = () => {
               setTableConfig={setTableConfig}
               enablePdfExcel={true}
               isSearch
+              endpoint={ApiConstants.USER.LIST}
               isPagination={true}
             >
               <tr>
@@ -150,7 +151,7 @@ const ListClent: React.FC = () => {
                         <Form>
                           <Form.Check
                             disabled={true}
-                            checked={userBlock}
+                            checked={!userBlock}
                             id={`opt${index}1`}
                             aria-label="option 1"
                           />
@@ -160,35 +161,50 @@ const ListClent: React.FC = () => {
                         <Form>
                           <Form.Check
                             disabled={true}
-                            checked={betBlock}
+                            checked={!betBlock}
                             id={`opt${index}`}
                             aria-label="option 1"
                           />
                         </Form>
                       </td>
-                      <td className="text-end">{roleName === "user" ? exposureLimit : "NA"}</td>
+                      <td className="text-end">
+                        {roleName === "user" ? exposureLimit : "NA"}
+                      </td>
                       <td>{defaultPer}</td>
                       <td>{roleName}</td>
                       <td className="text-end">{casinoTotal}</td>
                       <td>
                         <div className="d-flex gap-1 border-right-0 border-left-0">
-
-
                           {actionButtons?.map((item) => {
                             return (
                               <CustomButton
                                 variant="dark"
-                                disabled={item?.name === "L" ? roleName !== "user" ? true : false : false}
+                                disabled={
+                                  item?.name === "L"
+                                    ? roleName !== "user"
+                                      ? true
+                                      : false
+                                    : false
+                                }
                                 onClick={() => {
                                   item.onClick(item?.id, userItem);
                                 }}
                                 key={item?.id}
-                                className={`actionBtn ${(item?.name === "L" ? roleName !== "user" ? true : false : false) ? 'disabled' : ''}`}
+                                className={`actionBtn ${
+                                  (
+                                    item?.name === "L"
+                                      ? roleName !== "user"
+                                        ? true
+                                        : false
+                                      : false
+                                  )
+                                    ? "disabled"
+                                    : ""
+                                }`}
                               >
                                 {item?.name}
                               </CustomButton>
                             );
-
                           })}
                         </div>
                       </td>

@@ -13,6 +13,7 @@ import { AppDispatch, RootState } from "../../../store/store";
 import { searchList } from "../../../store/actions/user/userActions";
 import { debounce } from "lodash";
 import moment from "moment-timezone";
+import { ApiConstants } from "../../../utils/Constants";
 
 interface Column {
   id: string;
@@ -267,8 +268,9 @@ const AccountStatement = () => {
         itemCount={
           ReportAccountList && ReportAccountList?.count > 0
             ? ReportAccountList?.count
-            : 1
+            : 0
         }
+        endpoint={`${ApiConstants.REPORT.ACCOUNTLIST}/${userDetail?.id}`}
         setTableConfig={setTableConfig}
         enablePdfExcel={true}
       >

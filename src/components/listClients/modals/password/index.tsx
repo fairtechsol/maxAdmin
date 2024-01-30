@@ -6,10 +6,12 @@ import { changePassword } from "../../../../store/actions/user/userActions";
 import { AppDispatch } from "../../../../store/store";
 import CustomInput from "../../../commonComponent/input";
 import ModalFooter from "../footer";
+import { oldPasswordValidationSchema } from "../../../../utils/fieldValidations/newPassword";
 
 const initialValues: any = {
   userid: "any",
   newPassword: "",
+  confirmPassword: "",
   createBy: "any",
   transactionPassword: "",
 };
@@ -19,12 +21,12 @@ const Password = ({ userData, setShow }: any) => {
 
   const formik = useFormik({
     initialValues: initialValues,
-
+    validationSchema: oldPasswordValidationSchema,
     onSubmit: (values: any) => {
       let payload = {
         userId: userData?.id,
         newPassword: values?.newPassword,
-        confirmPassword: values?.newPassword,
+        confirmPassword: values?.confirmPassword,
         transactionPassword: values?.transactionPassword,
       };
       dispatch(changePassword(payload));
@@ -32,7 +34,7 @@ const Password = ({ userData, setShow }: any) => {
     },
   });
 
-  const { handleSubmit, handleChange, values } = formik;
+  const { handleSubmit, touched, errors, getFieldProps } = formik;
 
   useEffect(() => {
     if (userData) {
@@ -53,15 +55,12 @@ const Password = ({ userData, setShow }: any) => {
             </Col>
             <Col sm={8}>
               <CustomInput
-                name="newPassword"
                 id="newPassword"
-                value={values.newPassword}
-                onChange={handleChange}
                 type="password"
                 customStyle="input-box"
-                // bgColor="gray"
-                // disabled={true}
-                // id="newPasswordInput"
+                {...getFieldProps("newPassword")}
+                touched={touched.newPassword}
+                errors={errors.newPassword}
               />
             </Col>
           </Row>
@@ -73,13 +72,12 @@ const Password = ({ userData, setShow }: any) => {
             </Col>
             <Col sm={8}>
               <CustomInput
-                name="newPassword"
-                id="newPassword"
-                value={values.confirmPassword}
-                onChange={handleChange}
+                id="confirmPassword"
                 type="password"
                 customStyle="input-box"
-                // id="confirmPasswordInput"
+                {...getFieldProps("confirmPassword")}
+                touched={touched.confirmPassword}
+                errors={errors.confirmPassword}
               />
             </Col>
           </Row>
@@ -94,8 +92,9 @@ const Password = ({ userData, setShow }: any) => {
                 type="password"
                 customStyle="input-box"
                 id="transactionPassword"
-                value={values.transactionPassword}
-                onChange={handleChange}
+                {...getFieldProps("transactionPassword")}
+                touched={touched.transactionPassword}
+                errors={errors.transactionPassword}
               />
             </Col>
           </Row>

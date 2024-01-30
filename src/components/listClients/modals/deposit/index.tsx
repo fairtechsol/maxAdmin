@@ -44,7 +44,7 @@ const Deposit = ({ userData, setShow }: any) => {
     },
   });
 
-  const { handleSubmit, handleChange, values, touched, errors } = formik;
+  const { handleSubmit, getFieldProps, values, touched, errors } = formik;
 
   const handleAmountChange = (e: any) => {
     const newAmount = e.target.value;
@@ -84,25 +84,21 @@ const Deposit = ({ userData, setShow }: any) => {
                 <div className="d-flex gap-2 input-inner-container">
                   <CustomInput
                     type="number"
-                    name="initialBalance"
-                    value={values.initialBalance}
-                    onChange={handleChange}
                     customStyle="input-box"
                     bgColor="gray"
                     min={0}
                     disabled={true}
                     id="initialBalance"
+                    {...getFieldProps("initialBalance")}
                   />
                   <CustomInput
-                    name="updatedBalance"
-                    value={values.updatedBalance}
-                    onChange={handleChange}
                     customStyle="input-box"
                     bgColor="gray"
                     type="number"
                     min={0}
                     disabled={true}
                     id="updatedBalance"
+                    {...getFieldProps("updatedBalance")}
                   />
                 </div>
               </Col>
@@ -116,24 +112,20 @@ const Deposit = ({ userData, setShow }: any) => {
               <Col sm={8}>
                 <div className="d-flex gap-2 input-inner-container">
                   <CustomInput
-                    name="userBalance"
                     id="userBalance"
-                    value={values.userBalance}
-                    onChange={handleChange}
                     type="number"
                     customStyle="input-box"
                     bgColor="gray"
                     disabled={true}
+                    {...getFieldProps("userBalance")}
                   />
                   <CustomInput
-                    name="userUpdatedBalance"
                     id="userUpdatedBalance"
-                    value={values.userUpdatedBalance}
-                    onChange={handleChange}
                     customStyle="input-box"
                     bgColor="gray"
                     type="number"
                     disabled={true}
+                    {...getFieldProps("userUpdatedBalance")}
                   />
                 </div>
               </Col>
@@ -166,16 +158,14 @@ const Deposit = ({ userData, setShow }: any) => {
               </Col>
               <Col sm={8}>
                 <CustomInput
-                  name="remark"
                   id="remark"
-                  value={values.remark}
-                  onChange={handleChange}
                   type="textarea"
                   as="textarea"
                   rows={4}
                   customStyle="input-box"
                   touched={touched.remark}
                   errors={errors.remark}
+                  {...getFieldProps("remark")}
                 />
               </Col>
             </Row>
@@ -188,14 +178,12 @@ const Deposit = ({ userData, setShow }: any) => {
               </Col>
               <Col sm={8}>
                 <CustomInput
-                  name="transactionPassword"
                   id="transactionPassword"
-                  value={values.transactionPassword}
-                  onChange={handleChange}
                   type="password"
                   customStyle="input-box"
                   touched={touched.transactionPassword}
                   errors={errors.transactionPassword}
+                  {...getFieldProps("transactionPassword")}
                 />
               </Col>
             </Row>

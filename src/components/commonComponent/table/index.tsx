@@ -27,6 +27,7 @@ interface CustomTableProps extends React.HTMLAttributes<HTMLDivElement> {
   bordered?: boolean;
   striped?: boolean;
   CustomTableClass?: string;
+  endpoint?: string;
 }
 
 const CustomTable: React.FC<CustomTableProps> = ({
@@ -36,6 +37,7 @@ const CustomTable: React.FC<CustomTableProps> = ({
   isPagination,
   isSort,
   children,
+  endpoint,
   isSearch,
   setTableConfig,
   enablePdfExcel,
@@ -81,6 +83,7 @@ const CustomTable: React.FC<CustomTableProps> = ({
         enablePdfExcel={enablePdfExcel}
         isPagination={isPagination}
         isSearch={isSearch}
+        endpoint={endpoint}
         setTableConfig={setTableConfig}
         rowPerPage={rowPerPage}
         setRowPerPage={setRowPerPage}
