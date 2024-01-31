@@ -162,7 +162,6 @@ const AddAccount = () => {
       if (remainingDownline < 0) {
         return;
       }
-
       formik.setValues({
         ...formik.values,
         ourPartnership: remainingDownline,
@@ -477,7 +476,9 @@ const AddAccount = () => {
                         <CustomInput
                           id={"downLinePartnership"}
                           min={0}
+                          max={100}
                           type={"number"}
+                          value={formik.values.downlinePartnership}
                           onChange={handlePartnershipChange}
                           // {...getFieldProps("downLinePartnership")}
                         />
