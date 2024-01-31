@@ -9,6 +9,7 @@ import {
   userBalance,
   searchList,
   accountListModalReset,
+  getAlreadyUserExist,
 } from "../../actions/user/userActions";
 
 interface InitialState {
@@ -19,6 +20,7 @@ interface InitialState {
   loading: boolean;
   error: any;
   transactionPassword: any;
+  userAlreadyExist: boolean;
 }
 
 const initialState: InitialState = {
@@ -29,6 +31,7 @@ const initialState: InitialState = {
   loading: false,
   error: null,
   transactionPassword: "",
+  userAlreadyExist: false,
 };
 
 export const userList = createSlice({
@@ -138,6 +141,20 @@ export const userList = createSlice({
         state.transactionPassword = action.payload;
       })
       .addCase(changePassword.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action?.error?.message;
+      })
+      .addCase(getAlreadyUserExist.pending, (state) => {
+        state.loading = true;
+        state.success = false;
+        state.error = null;
+      })
+      .addCase(getAlreadyUserExist.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        state.userAlreadyExist = action.payload;
+      })
+      .addCase(getAlreadyUserExist.rejected, (state, action) => {
         state.loading = false;
         state.error = action?.error?.message;
       })

@@ -57,6 +57,23 @@ export const searchList = createAsyncThunk<any, SearchUsers | undefined>(
   }
 );
 
+export const getAlreadyUserExist = createAsyncThunk<any, SearchUsers | undefined>(
+  "user/clientName",
+  async (requestData) => {
+    try {
+      const resp = await service.get(
+        `${ApiConstants.USER.ALREADY_EXIST}?userName=${requestData}`
+      );
+      if (resp) {
+        return resp?.data?.isUserExist;
+      }
+    } catch (error: any) {
+      const err = error as AxiosError;
+      throw err;
+    }
+  }
+);
+
 export const updateUser = createAsyncThunk<any, any>(
   "user/updateUser",
   async (requestData) => {

@@ -121,7 +121,12 @@ const ListClent: React.FC = () => {
                       key={index}
                       className=" fw-bold text-end"
                     >
-                      {index === 1 && 173398}
+                      {index === 1 &&
+                        userList &&
+                        userList?.totalBalance?.totalCreditReference}
+                      {index === 4 &&
+                        userList &&
+                        userList?.totalBalance?.totalExposure}
                     </td>
                   );
                 })}
