@@ -13,6 +13,8 @@ interface ChangePassword {
 
 interface GetUsers {
   userName?: string;
+  page?: number;
+  limit?: number;
 }
 interface SearchUsers {
   userName?: string;
@@ -24,9 +26,8 @@ export const getUsers = createAsyncThunk<any, GetUsers | undefined>(
   async (requestData) => {
     try {
       const resp = await service.get(
-        `${ApiConstants.USER.LIST}?searchBy=userName&keyword=${
-          requestData?.userName ? requestData?.userName : ""
-        }`
+        `${ApiConstants.USER.LIST}?searchBy=userName&keyword=${requestData?.userName ? requestData?.userName : ""
+        }&page=${requestData?.page || 1}&limit=${requestData?.limit || 10}`
       );
       if (resp) {
         return resp?.data;
@@ -43,8 +44,7 @@ export const searchList = createAsyncThunk<any, SearchUsers | undefined>(
   async (requestData) => {
     try {
       const resp = await service.get(
-        `${ApiConstants.USER.SEARCH_LIST}?createBy=${
-          requestData?.createdBy
+        `${ApiConstants.USER.SEARCH_LIST}?createBy=${requestData?.createdBy
         }&userName=${requestData?.userName ? requestData?.userName : ""}`
       );
       if (resp) {

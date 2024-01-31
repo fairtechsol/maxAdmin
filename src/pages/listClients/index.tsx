@@ -43,7 +43,9 @@ const ListClent: React.FC = () => {
     });
   };
 
-  useEffect(() => {}, [tableConfig]);
+  useEffect(() => {
+
+  }, [tableConfig]);
 
   const actionButtons = [
     {
@@ -79,8 +81,14 @@ const ListClent: React.FC = () => {
   ];
 
   useEffect(() => {
-    dispatch(getUsers());
-  }, [dispatch]);
+    dispatch(getUsers(
+
+      {
+        page: tableConfig?.page || 1,
+        limit: tableConfig?.rowPerPage,
+      }
+    ));
+  }, [tableConfig]);
 
   return (
     <>
@@ -106,7 +114,7 @@ const ListClent: React.FC = () => {
               bordered
               striped
               columns={columns}
-              itemCount={10}
+              itemCount={userList && userList?.count}
               setTableConfig={setTableConfig}
               enablePdfExcel={true}
               isSearch
@@ -195,17 +203,16 @@ const ListClent: React.FC = () => {
                                   item.onClick(item?.id, userItem);
                                 }}
                                 key={item?.id}
-                                className={`actionBtn ${
-                                  (
-                                    item?.name === "L"
-                                      ? roleName !== "user"
-                                        ? true
-                                        : false
+                                className={`actionBtn ${(
+                                  item?.name === "L"
+                                    ? roleName !== "user"
+                                      ? true
                                       : false
-                                  )
-                                    ? "disabled"
-                                    : ""
-                                }`}
+                                    : false
+                                )
+                                  ? "disabled"
+                                  : ""
+                                  }`}
                               >
                                 {item?.name}
                               </CustomButton>
