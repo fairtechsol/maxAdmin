@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import CustomButton from "../../commonComponent/button";
 import CustomModal from "../../commonComponent/modal";
 import GameHeaderDropdown from "./dropdown";
@@ -6,9 +6,20 @@ import ActiveUser from "./modals/activeUsers";
 import BookMarkerBook from "./modals/bookMarkersBook";
 import UserBook from "./modals/userBook";
 import "./style.scss";
+import { AppDispatch, RootState } from "../../../store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import {
+  getMatchLockAllChild,
+  updateUserMatchLock,
+} from "../../../store/actions/match/matchAction";
+
 const GameHeader = () => {
+  const dispatch: AppDispatch = useDispatch();
+  const { userDetail } = useSelector((state: RootState) => state.user.profile);
+  const { id } = useParams();
   const liveMarketModal = () => {
-    alert("asjdh");
+    dispatch(getMatchLockAllChild(id));
   };
 
   const [userBookShow, setUserBookShow] = useState(false);
@@ -19,32 +30,55 @@ const GameHeader = () => {
       <div className="common-header mb-3">
         <div className="common-headerBox d-flex justify-content-end">
           <GameHeaderDropdown
-            name="Live Market"
+            name="Bet Lock"
             options={[
               {
-                name: "All Deactivate",
-                clickHandle: () => {},
+                name: "All Deactive",
+                clickHandle: () => {
+                  dispatch(
+                    updateUserMatchLock({
+                      userId: userDetail?.id,
+                      matchId: id,
+                      type: "match",
+                      block: true,
+                      operationToAll: true,
+                    })
+                  );
+                },
               },
               {
-                name: "Otherwise",
+                name: "Userwise",
                 clickHandle: () => {
                   liveMarketModal();
                 },
-                children: <ActiveUser />,
+                children: <ActiveUser type={"match"} />,
               },
             ]}
           />
           <GameHeaderDropdown
-            name="Live Market"
+            name="Fancy Lock"
             options={[
               {
-                name: "All Deactivate",
-                clickHandle: () => {},
+                name: "All Deactive",
+                clickHandle: () => {
+                  dispatch(
+                    updateUserMatchLock({
+                      userId: userDetail?.id,
+                      matchId: id,
+                      type: "session",
+                      block: true,
+                      operationToAll: true,
+                    })
+                  );
+                },
               },
               {
-                name: "Otherwise",
-                clickHandle: () => {},
-                children: <ActiveUser />,
+                name: "Userwise",
+                type: "session",
+                clickHandle: () => {
+                  liveMarketModal();
+                },
+                children: <ActiveUser type={"session"} />,
               },
             ]}
           />
@@ -85,4 +119,4 @@ const GameHeader = () => {
   );
 };
 
-export default GameHeader;
+export default React.memo(GameHeader);

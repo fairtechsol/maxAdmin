@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 // import BetTableHeader from "../../components/commonComponent/betTableHeader";
 import BetTable from "../../components/game/betTable";
@@ -18,7 +18,7 @@ import {
 import { useLocation, useParams } from "react-router-dom";
 import { socketService } from "../../socketManager";
 
-export default function Games() {
+const Games = () => {
   const dispatch: AppDispatch = useDispatch();
   const location = useLocation();
 
@@ -107,7 +107,7 @@ export default function Games() {
           <Row className="no-gutters">
             <Col md={8}>
               {location.pathname.includes("match_details") ? (
-                matchDetails?.matchOdd && (
+                matchDetails?.matchOdd?.isActive && (
                   <Col md={12}>
                     <BetTable
                       title={"Runners"}
@@ -118,7 +118,7 @@ export default function Games() {
                 )
               ) : (
                 <>
-                  {matchDetails?.matchOdd && (
+                  {matchDetails?.matchOdd?.isActive && (
                     <Col md={12}>
                       <BetTable
                         title={"Runners"}
@@ -127,7 +127,7 @@ export default function Games() {
                       />
                     </Col>
                   )}
-                  {matchDetails?.bookmaker && (
+                  {matchDetails?.bookmaker?.isActive && (
                     <Col md={12}>
                       <BetTable
                         title={matchDetails?.bookmaker?.name}
@@ -184,4 +184,6 @@ export default function Games() {
       </Container>
     </div>
   );
-}
+};
+
+export default React.memo(Games);

@@ -36,7 +36,7 @@ export const getCompetitionDates = createAsyncThunk<any, any>(
   }
 );
 export const betReportAccountList = createAsyncThunk<any, any>(
-  "competition/dates",
+  "competition/betReportList",
   async (requestData, thunkApi) => {
     try {
       const resp = await service.get(
@@ -202,6 +202,56 @@ export const getPlacedBets = createAsyncThunk<any, any>(
   }
 );
 
+export const updateUserMatchLock = createAsyncThunk<any, any>(
+  "/userMatchLock",
+  async (requestData, thunkApi) => {
+    try {
+      const resp = await service.post(
+        `${ApiConstants.USER.USER_MATCH_LOCK}`,
+        requestData
+      );
+      if (resp) {
+        return resp?.data;
+      }
+    } catch (error: any) {
+      const err = error as AxiosError;
+      return thunkApi.rejectWithValue(err.response?.status);
+    }
+  }
+);
+export const getMatchLockAllChild = createAsyncThunk<any, any>(
+  "/matchLockAllChild",
+  async (_, thunkApi) => {
+    try {
+      const resp = await service.get(
+        `${ApiConstants.USER.USER_MATCH_LOCK_ALL_CHILD}`
+      );
+      if (resp) {
+        return resp?.data;
+      }
+    } catch (error: any) {
+      const err = error as AxiosError;
+      return thunkApi.rejectWithValue(err.response?.status);
+    }
+  }
+);
+export const getUserDetailsForParent = createAsyncThunk<any, any>(
+  "/userDetailsForParent",
+  async (id, thunkApi) => {
+    try {
+      const resp = await service.get(
+        `${ApiConstants.USER.USER_DETAIL_FOR_PARENT}?userId=${id}`
+      );
+      if (resp) {
+        return resp?.data;
+      }
+    } catch (error: any) {
+      const err = error as AxiosError;
+      return thunkApi.rejectWithValue(err.response?.status);
+    }
+  }
+);
+
 export const getRunAmount = createAsyncThunk<any, any>(
   "/runAmount",
   async (id, thunkApi) => {
@@ -225,6 +275,7 @@ export const updateMatchRates = createAsyncThunk<any, any>(
 );
 
 export const resetRunAmount = createAction("runAmount/reset");
+export const successResetForLockUnlock = createAction("successResetForLockUnlock/reset");
 export const betReportAccountListReset = createAction(
   "betReportAccountList/reset"
 );

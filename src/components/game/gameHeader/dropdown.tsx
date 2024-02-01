@@ -5,7 +5,7 @@ import CustomModal from "../../commonComponent/modal";
 
 interface Props {
   name: string;
-  options: Array<any>;
+  options: any;
 }
 
 export default function GameHeaderDropdown({ name, options }: Props) {
@@ -31,14 +31,15 @@ export default function GameHeaderDropdown({ name, options }: Props) {
           {name}
         </Dropdown.Toggle>
         <Dropdown.Menu>
-          {options?.map((option, index) => (
+          {options?.map((option: any, index: number) => (
             <Dropdown.Item
               key={index}
               onClick={() => {
-                if (option?.name !== "All Deactivate") {
+                if (option?.name !== "All Deactive") {
                   setShowChildren(option?.children);
+                  option?.clickHandle();
                   setShowModal(true);
-                } else alert("abcdf");
+                } else option?.clickHandle();
               }}
             >
               {option.name}
