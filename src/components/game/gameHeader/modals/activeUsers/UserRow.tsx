@@ -1,8 +1,5 @@
 import { useParams } from "react-router-dom";
-import {
-  //   successResetForLockUnlock,
-  updateUserMatchLock,
-} from "../../../../../store/actions/match/matchAction";
+import { updateUserMatchLock } from "../../../../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../../../../store/store";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -34,7 +31,6 @@ const UserRow = ({ index, userName, userId, lock, type }: any) => {
   useEffect(() => {
     if (statusSuccess && userMatchLock?.userId == userId) {
       setUserLock((prev) => !prev);
-      //   dispatch(successResetForLockUnlock());
     }
   }, [statusSuccess]);
 
