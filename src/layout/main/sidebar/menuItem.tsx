@@ -20,7 +20,7 @@ interface Props {
 
 const MenuItemChild = (props: any) => {
   // const [toggle, setToggle] = useState<Boolean>(false);
-  
+
   // const handleDrawer = () => {
   //   setToggle(!toggle);
   // };
@@ -34,7 +34,13 @@ const MenuItemChild = (props: any) => {
 };
 
 const MenuCollapse = (props: any) => {
-  const { data, menuItemList, setMenuItemList, selectedMatchIndex, onClickMenuItem } = props;
+  const {
+    data,
+    menuItemList,
+    setMenuItemList,
+    selectedMatchIndex,
+    onClickMenuItem,
+  } = props;
 
   const [selectedCompetition, setSelectedCompetition] = useState("");
   const [selectedCompetitionName, setSelectedCompetitionName] = useState("");
@@ -47,21 +53,25 @@ const MenuCollapse = (props: any) => {
   );
 
   useEffect(() => {
-    if (selectedCompetition !== "") {
-      const tempList = [...menuItemList];
-      const selectedMatchChildren = tempList[selectedMatchIndex].children;
-      const competitionIndex = selectedMatchChildren.findIndex(
-        (item: any) => item?.id === selectedCompetition
-      );
-      selectedMatchChildren[competitionIndex].children = competitionDates?.map(
-        (item: any) => ({
-          name: item?.startdate,
-          id: item?.startdate,
-          type: "collapse",
-          children: [],
-        })
-      );
-      setMenuItemList(tempList);
+    try {
+      if (selectedCompetition !== "") {
+        const tempList = [...menuItemList];
+        const selectedMatchChildren = tempList[selectedMatchIndex].children;
+        const competitionIndex = selectedMatchChildren.findIndex(
+          (item: any) => item?.id === selectedCompetition
+        );
+        selectedMatchChildren[competitionIndex].children =
+          competitionDates &&
+          competitionDates?.map((item: any) => ({
+            name: item?.startdate,
+            id: item?.startdate,
+            type: "collapse",
+            children: [],
+          }));
+        setMenuItemList(tempList);
+      }
+    } catch (e) {
+      console.log(e);
     }
   }, [competitionDates, selectedCompetition, selectedMatchIndex]);
 
@@ -164,7 +174,6 @@ const MenuCollapse = (props: any) => {
                                           >
                                             {
                                               <MenuItemChild
-                                              
                                                 data={{
                                                   path: `/admin/match_detail/${matches?.id}`,
                                                   name: "Match_Odds",
@@ -235,10 +244,6 @@ export const MenuItem: React.FC<Props> = ({
   selectedMatchIndex,
   onClickMenuItem,
 }) => {
-
-
-
-
   return (
     <>
       {item?.type === "item" ? (

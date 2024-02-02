@@ -43,9 +43,7 @@ const ListClent: React.FC = () => {
     });
   };
 
-  useEffect(() => {
-
-  }, [tableConfig]);
+  useEffect(() => {}, [tableConfig]);
 
   const actionButtons = [
     {
@@ -81,13 +79,12 @@ const ListClent: React.FC = () => {
   ];
 
   useEffect(() => {
-    dispatch(getUsers(
-
-      {
+    dispatch(
+      getUsers({
         page: tableConfig?.page || 1,
         limit: tableConfig?.rowPerPage,
-      }
-    ));
+      })
+    );
   }, [tableConfig]);
 
   return (
@@ -132,9 +129,6 @@ const ListClent: React.FC = () => {
                       {index === 1 &&
                         userList &&
                         userList?.totalBalance?.totalCreditReference}
-                      {index === 4 &&
-                        userList &&
-                        userList?.totalBalance?.totalExposure}
                     </td>
                   );
                 })}
@@ -203,16 +197,17 @@ const ListClent: React.FC = () => {
                                   item.onClick(item?.id, userItem);
                                 }}
                                 key={item?.id}
-                                className={`actionBtn ${(
-                                  item?.name === "L"
-                                    ? roleName !== "user"
-                                      ? true
+                                className={`actionBtn ${
+                                  (
+                                    item?.name === "L"
+                                      ? roleName !== "user"
+                                        ? true
+                                        : false
                                       : false
-                                    : false
-                                )
-                                  ? "disabled"
-                                  : ""
-                                  }`}
+                                  )
+                                    ? "disabled"
+                                    : ""
+                                }`}
                               >
                                 {item?.name}
                               </CustomButton>

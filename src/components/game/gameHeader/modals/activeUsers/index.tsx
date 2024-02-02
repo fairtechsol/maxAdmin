@@ -1,27 +1,23 @@
-import { useEffect, useState } from "react";
-import { Form } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
 import { Column, TableConfig } from "../../../../../models/tableInterface";
 import CustomTable from "../../../../commonComponent/table";
 import "./style.scss";
-function ActiveUser() {
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../../store/store";
+import UserRow from "./UserRow";
+
+const ActiveUser = (props: any) => {
+  const { type } = props;
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
+
+  const { matchLockAllChild } = useSelector(
+    (state: RootState) => state.match.placeBets
+  );
   useEffect(() => {}, [tableConfig]);
   const columns: Column[] = [
     { id: "sr", label: "S. NO" },
-    { id: "username", label: "  User Name" },
+    { id: "userName", label: "  User Name" },
     { id: "Checked", label: "Checked" },
-  ];
-
-  const data: any = [
-    {
-      username: "fuser1",
-    },
-    {
-      username: "fuser2",
-    },
-    {
-      username: "fuser05",
-    },
   ];
 
   return (
@@ -32,23 +28,31 @@ function ActiveUser() {
         itemCount={10}
         setTableConfig={setTableConfig}
       >
-        {data?.map((item: any, index: number) => {
-          const { username } = item;
-          return (
-            <tr key={index}>
-              <td>{index++}</td>
-              <td>{username}</td>
-              <td>
-                <Form>
-                  <Form.Check aria-label="option 1" />
-                </Form>
-              </td>
-            </tr>
-          );
-        })}
+        {matchLockAllChild &&
+          matchLockAllChild?.map((item: any, index: number) => {
+            const { userName, id, sessionLock, matchLock } = item;
+            return (
+              <UserRow
+                key={index}
+                userName={userName}
+                index={index}
+                userId={id}
+                lock={
+                  type === "session"
+                    ? sessionLock !== null
+                      ? sessionLock
+                      : false
+                    : matchLock !== null
+                    ? matchLock
+                    : false
+                }
+                type={type}
+              />
+            );
+          })}
       </CustomTable>
     </div>
   );
-}
+};
 
-export default ActiveUser;
+export default React.memo(ActiveUser);

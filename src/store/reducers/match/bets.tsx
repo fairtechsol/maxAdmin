@@ -1,23 +1,35 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  getMatchLockAllChild,
   getPlacedBets,
   getRunAmount,
+  getUserDetailsForParent,
   resetRunAmount,
+  successResetForLockUnlock,
+  updateUserMatchLock,
 } from "../../actions/match/matchAction";
 
 interface InitialState {
   placedBets: any;
   runAmount: any;
+  userMatchLock: any;
+  matchLockAllChild: any;
+  userDetailsForParent: any;
   loading: boolean;
   success: boolean;
+  statusSuccess: boolean;
   error: any;
 }
 
 const initialState: InitialState = {
   placedBets: [],
   runAmount: [],
+  userMatchLock: [],
+  matchLockAllChild: [],
+  userDetailsForParent: [],
   loading: false,
   success: false,
+  statusSuccess: false,
   error: null,
 };
 
@@ -55,8 +67,54 @@ const placedBetsSlice = createSlice({
         state.loading = false;
         state.error = action?.error?.message;
       })
+      .addCase(updateUserMatchLock.pending, (state) => {
+        state.loading = true;
+        state.success = false;
+        state.error = null;
+        state.statusSuccess = false;
+      })
+      .addCase(updateUserMatchLock.fulfilled, (state, action) => {
+        state.loading = false;
+        state.statusSuccess = true;
+        state.userMatchLock = action.payload;
+      })
+      .addCase(updateUserMatchLock.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action?.error?.message;
+      })
+      .addCase(getMatchLockAllChild.pending, (state) => {
+        state.loading = true;
+        state.success = false;
+        state.error = null;
+      })
+      .addCase(getMatchLockAllChild.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        state.matchLockAllChild = action.payload;
+      })
+      .addCase(getMatchLockAllChild.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action?.error?.message;
+      })
+      .addCase(getUserDetailsForParent.pending, (state) => {
+        state.loading = true;
+        state.success = false;
+        state.error = null;
+      })
+      .addCase(getUserDetailsForParent.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        state.userDetailsForParent = action.payload;
+      })
+      .addCase(getUserDetailsForParent.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action?.error?.message;
+      })
       .addCase(resetRunAmount, (state) => {
         return { ...state, runAmount: [] };
+      })
+      .addCase(successResetForLockUnlock, (state) => {
+        return { ...state, statusSuccess: false };
       });
   },
 });

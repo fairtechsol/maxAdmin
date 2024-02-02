@@ -156,7 +156,9 @@ const ListActiveInactiveUser: React.FC = () => {
                             key={index}
                             className=" fw-bold text-end"
                           >
-                            {index === 1 && 173398}
+                            {index === 1 &&
+                              userList &&
+                              userList?.totalBalance?.totalCreditReference}
                           </td>
                         );
                       })}
@@ -190,9 +192,7 @@ const ListActiveInactiveUser: React.FC = () => {
 
                             <td className="text-end">{creditRefrence}</td>
                             <td className="text-end">{balance}</td>
-                            <td className="text-end">
-                              {userBal?.profitLoss}
-                            </td>
+                            <td className="text-end">{userBal?.profitLoss}</td>
                             <td className="text-end">{userBal?.exposure}</td>
                             <td className="text-end">{availableBalance}</td>
                             <td className="text-center">
@@ -215,7 +215,9 @@ const ListActiveInactiveUser: React.FC = () => {
                                 />
                               </Form>
                             </td>
-                            <td className="text-end">{roleName === "user" ? exposureLimit : "NA"}</td>
+                            <td className="text-end">
+                              {roleName === "user" ? exposureLimit : "NA"}
+                            </td>
                             <td>{matchCommission}</td>
                             <td>{roleName}</td>
                             <td className="text-end">{totalComission}</td>
@@ -225,7 +227,13 @@ const ListActiveInactiveUser: React.FC = () => {
                                   return (
                                     <CustomButton
                                       variant="dark"
-                                      disabled={item?.name === "L" ? roleName !== "user" ? true : false : false}
+                                      disabled={
+                                        item?.name === "L"
+                                          ? roleName !== "user"
+                                            ? true
+                                            : false
+                                          : false
+                                      }
                                       onClick={() => {
                                         item.onClick(item?.id, userItem);
                                       }}
@@ -263,7 +271,9 @@ const ListActiveInactiveUser: React.FC = () => {
                             key={index}
                             className=" fw-bold text-end"
                           >
-                            {index === 1 && 173398}
+                            {index === 1 &&
+                              userList &&
+                              userList?.totalBalance?.totalCreditReference}
                           </td>
                         );
                       })}

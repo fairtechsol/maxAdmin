@@ -30,7 +30,7 @@ const columns: Column[] = [
 ];
 
 const options = [
-  { value: "MATCHED", label: "Matched" },
+  { value: "PENDING", label: "Matched" },
   { value: "UNMATCHED", label: "UnMatched" },
   { value: "DELETED", label: "Deleted" },
 ];
@@ -70,7 +70,12 @@ const CurrentBets = () => {
   const handleLoad = (e: any) => {
     e.preventDefault();
     if (selectType?.value !== "UNMATCHED") {
-      dispatch(betReportAccountList({ status: selectType?.value }));
+      dispatch(
+        betReportAccountList({
+          status: selectType?.value,
+          limit: tableConfig?.rowPerPage,
+        })
+      );
     } else {
       dispatch(betReportAccountListReset());
     }

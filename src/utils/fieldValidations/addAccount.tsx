@@ -17,6 +17,13 @@ export const addAccountValidationSchema: any = (item: any) => {
           }
           return true;
         },
+      })
+      .test({
+        name: "noSpace",
+        message: "Space is not allowed in Client Name",
+        test: function (value: any) {
+          return !/\s/.test(value);
+        },
       }),
     userPassword: Yup.string().required("Password is required"),
     retypePassword: Yup.string()
