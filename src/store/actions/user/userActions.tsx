@@ -26,7 +26,7 @@ export const getUsers = createAsyncThunk<any, GetUsers | undefined>(
   async (requestData) => {
     try {
       const resp = await service.get(
-        `${ApiConstants.USER.LIST}?searchBy=userName&keyword=${requestData?.userName ? requestData?.userName : ""
+        `${ApiConstants.USER.LIST}?searchBy=user.userName&keyword=${requestData?.userName ? requestData?.userName : ""
         }&page=${requestData?.page || 1}&limit=${requestData?.limit || 10}`
       );
       if (resp) {
