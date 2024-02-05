@@ -94,6 +94,7 @@
     transition: 1s;
     height: calc(100vh - 52px);
 }
+
 .sidebar .sidebarBox-close{
     position: absolute;
     right: 10px;
@@ -198,3 +199,8 @@
     border-radius: 5px;
 }
 
+@media screen and (max-width: 768px) {
+    .sidebar {
+        width: 300px; /* New width for smaller screens */
+    }
+}
