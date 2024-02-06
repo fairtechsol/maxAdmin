@@ -43,8 +43,6 @@ const ListClent: React.FC = () => {
     });
   };
 
-  useEffect(() => {}, [tableConfig]);
-
   const actionButtons = [
     {
       id: "d",
@@ -78,11 +76,15 @@ const ListClent: React.FC = () => {
     },
   ];
 
+
+
+
   useEffect(() => {
     dispatch(
       getUsers({
         page: tableConfig?.page || 1,
         limit: tableConfig?.rowPerPage,
+        userName: tableConfig?.keyword || ""
       })
     );
   }, [tableConfig]);
@@ -114,9 +116,10 @@ const ListClent: React.FC = () => {
               itemCount={userList && userList?.count}
               setTableConfig={setTableConfig}
               enablePdfExcel={true}
-              isSearch
+              isSearch={true}
               endpoint={ApiConstants.USER.LIST}
               isPagination={true}
+              isSort={true}
             >
               <tr>
                 {columns?.map((item, index) => {
