@@ -2,14 +2,18 @@ import React, { useEffect, useState } from "react";
 import { Column, TableConfig } from "../../../../../models/tableInterface";
 import CustomTable from "../../../../commonComponent/table";
 import "./style.scss";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../../../store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../../../../store/store";
 import UserRow from "./UserRow";
+import { getMatchLockAllChild } from "../../../../../store/actions/match/matchAction";
+import { useParams } from "react-router-dom";
 
 const ActiveUser = (props: any) => {
   const { type } = props;
+  const { id } = useParams();
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
-
+  const [check, setCheck] = useState(false);
+  const dispatch: AppDispatch = useDispatch();
   const { matchLockAllChild } = useSelector(
     (state: RootState) => state.match.placeBets
   );
@@ -19,7 +23,9 @@ const ActiveUser = (props: any) => {
     { id: "userName", label: "  User Name" },
     { id: "Checked", label: "Checked" },
   ];
-
+  useEffect(() => {
+    dispatch(getMatchLockAllChild(id));
+  }, [check]);
   return (
     <div className="activeUsers-modal">
       <CustomTable
@@ -46,6 +52,7 @@ const ActiveUser = (props: any) => {
                     ? matchLock
                     : false
                 }
+                setCheck={setCheck}
                 type={type}
               />
             );

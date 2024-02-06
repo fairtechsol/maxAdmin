@@ -5,8 +5,9 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Form } from "react-bootstrap";
 
-const UserRow = ({ index, userName, userId, lock, type }: any) => {
+const UserRow = ({ index, userName, userId, lock, type, setCheck }: any) => {
   const [userLock, setUserLock] = useState<boolean>(false);
+
   const { id } = useParams();
   const dispatch: AppDispatch = useDispatch();
   const { statusSuccess, userMatchLock } = useSelector(
@@ -23,10 +24,15 @@ const UserRow = ({ index, userName, userId, lock, type }: any) => {
           operationToAll: false,
         })
       );
+
+      setTimeout(() => {
+        setCheck((prev: boolean) => !prev);
+      }, 300);
     } catch (e) {
       console.log(e);
     }
   };
+  console.log("lock", lock);
 
   useEffect(() => {
     if (statusSuccess && userMatchLock?.userId == userId) {

@@ -252,6 +252,23 @@ export const getUserDetailsForParent = createAsyncThunk<any, any>(
   }
 );
 
+export const getUserDetailsOfLock = createAsyncThunk<any, any>(
+  "/userDetails_ForLock",
+  async (id, thunkApi) => {
+    try {
+      const resp = await service.get(
+        `${ApiConstants.USER.USER_CHECK_CHILD_DEACTIVATE}?matchId=${id}`
+      );
+      if (resp) {
+        return resp?.data;
+      }
+    } catch (error: any) {
+      const err = error as AxiosError;
+      return thunkApi.rejectWithValue(err.response?.status);
+    }
+  }
+);
+
 export const getRunAmount = createAsyncThunk<any, any>(
   "/runAmount",
   async (id, thunkApi) => {

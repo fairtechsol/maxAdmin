@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CustomButton from "../../commonComponent/button";
 import CustomModal from "../../commonComponent/modal";
 import GameHeaderDropdown from "./dropdown";
@@ -12,11 +12,15 @@ import { useParams } from "react-router-dom";
 import {
   getMatchLockAllChild,
   updateUserMatchLock,
+  getUserDetailsOfLock,
 } from "../../../store/actions/match/matchAction";
 
 const GameHeader = () => {
   const dispatch: AppDispatch = useDispatch();
   const { userDetail } = useSelector((state: RootState) => state.user.profile);
+  const { childStatus } = useSelector(
+    (state: RootState) => state.match.placeBets
+  );
   const { id } = useParams();
   const liveMarketModal = () => {
     dispatch(getMatchLockAllChild(id));
@@ -24,6 +28,15 @@ const GameHeader = () => {
 
   const [userBookShow, setUserBookShow] = useState(false);
   const [userBookmarkerShow, setBookmarkerShow] = useState(false);
+  const [nameOption, setNameOption] = useState(false);
+
+  useEffect(() => {
+    try {
+      dispatch(getUserDetailsOfLock(id));
+    } catch (error) {
+      console.warn(error);
+    }
+  }, [nameOption]);
 
   return (
     <>
@@ -33,17 +46,22 @@ const GameHeader = () => {
             name="Bet Lock"
             options={[
               {
-                name: "All Deactive",
+                name: childStatus?.allChildMatchDeactive
+                  ? "All Deactive"
+                  : "All Active",
                 clickHandle: () => {
                   dispatch(
                     updateUserMatchLock({
                       userId: userDetail?.id,
                       matchId: id,
                       type: "match",
-                      block: true,
+                      block: !childStatus?.allChildMatchDeactive,
                       operationToAll: true,
                     })
                   );
+                  setTimeout(() => {
+                    setNameOption(!nameOption);
+                  }, 500);
                 },
               },
               {
@@ -59,17 +77,22 @@ const GameHeader = () => {
             name="Fancy Lock"
             options={[
               {
-                name: "All Deactive",
+                name: childStatus?.allChildSessionDeactive
+                  ? "All Deactive"
+                  : "All Active",
                 clickHandle: () => {
                   dispatch(
                     updateUserMatchLock({
                       userId: userDetail?.id,
                       matchId: id,
                       type: "session",
-                      block: true,
+                      block: !childStatus?.allChildSessionDeactive,
                       operationToAll: true,
                     })
                   );
+                  setTimeout(() => {
+                    setNameOption(!nameOption);
+                  }, 500);
                 },
               },
               {
