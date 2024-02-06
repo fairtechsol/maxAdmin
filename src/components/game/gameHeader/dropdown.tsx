@@ -35,7 +35,10 @@ export default function GameHeaderDropdown({ name, options }: Props) {
             <Dropdown.Item
               key={index}
               onClick={() => {
-                if (option?.name !== "All Deactive") {
+                if (
+                  option?.name !== "All Deactive" &&
+                  option?.name !== "All Active"
+                ) {
                   setShowChildren(option?.children);
                   option?.clickHandle();
                   setShowModal(true);

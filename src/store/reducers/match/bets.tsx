@@ -4,6 +4,7 @@ import {
   getPlacedBets,
   getRunAmount,
   getUserDetailsForParent,
+  getUserDetailsOfLock,
   resetRunAmount,
   successResetForLockUnlock,
   updateUserMatchLock,
@@ -19,6 +20,7 @@ interface InitialState {
   success: boolean;
   statusSuccess: boolean;
   error: any;
+  childStatus:any;
 }
 
 const initialState: InitialState = {
@@ -31,6 +33,7 @@ const initialState: InitialState = {
   success: false,
   statusSuccess: false,
   error: null,
+  childStatus:{},
 };
 
 const placedBetsSlice = createSlice({
@@ -115,6 +118,20 @@ const placedBetsSlice = createSlice({
       })
       .addCase(successResetForLockUnlock, (state) => {
         return { ...state, statusSuccess: false };
+      })
+      .addCase(getUserDetailsOfLock.pending, (state) => {
+        state.loading = false;
+        state.success = false;
+        state.error = null;
+      })
+      .addCase(getUserDetailsOfLock.fulfilled, (state, action) => {
+        state.success = true;
+        state.childStatus = action.payload;
+        state.loading = false;
+      })
+      .addCase(getUserDetailsOfLock.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action?.error?.message;
       });
   },
 });
