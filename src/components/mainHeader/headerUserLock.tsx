@@ -3,13 +3,7 @@ import { Form } from "react-bootstrap";
 import { Column, TableConfig } from "../../models/tableInterface";
 import CustomTable from "../commonComponent/table";
 
-import { useDispatch } from "react-redux";
-import { getUsers } from "../../store/actions/user/userActions";
-import { AppDispatch } from "../../store/store";
-import { ListClientData } from "./index.json";
-
-const HeaderUserLock = () => {
-  const dispatch: AppDispatch = useDispatch();
+const HeaderUserLock = ({ data }: any) => {
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
   useEffect(() => {}, [tableConfig]);
   const columns: Column[] = [
@@ -18,11 +12,6 @@ const HeaderUserLock = () => {
     { id: "userActive", label: "userActive" },
     { id: "betActive", label: "betActive" },
   ];
-
-  //   const { userList } = useSelector((state: RootState) => state.user);
-  useEffect(() => {
-    dispatch(getUsers());
-  }, [dispatch]);
 
   return (
     <>
@@ -34,28 +23,26 @@ const HeaderUserLock = () => {
         itemCount={10}
         setTableConfig={setTableConfig}
       >
-        {ListClientData()?.map((item: any, index: number) => (
-          //   const { item,   } = item;
+        {data?.map((item: any, index: number) => (
           <tr key={index}>
-            {/* <td>{index++}</td> */}
-            <td>{item?.eventName} </td>
             <td>{item?.userName} </td>
-            {/* <td>{item?.userAcive} </td>
-            <td>{item?.betActive} </td>
-            <td>{item?.fancyActive} </td> */}
+            <td>{item?.roleName} </td>
             <td>
               <Form>
-                <Form.Check aria-label="option 1" />
+                <Form.Check
+                  aria-label="option 1"
+                  checked={item?.userBlock}
+                  disabled={true}
+                />
               </Form>
             </td>
             <td>
               <Form>
-                <Form.Check aria-label="option 1" />
-              </Form>
-            </td>
-            <td>
-              <Form>
-                <Form.Check aria-label="option 1" />
+                <Form.Check
+                  aria-label="option 2"
+                  checked={item?.betBlock}
+                  disabled={true}
+                />
               </Form>
             </td>
           </tr>

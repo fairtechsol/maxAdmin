@@ -326,6 +326,8 @@ const AddAccount = () => {
                       type={"text"}
                       customstyle={"mb-3"}
                       {...getFieldProps("city")}
+                      touched={touched.city}
+                      errors={errors.city}
                     />
                   </Col>
                   <Col md={6}>

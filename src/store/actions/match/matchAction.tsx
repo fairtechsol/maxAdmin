@@ -236,7 +236,7 @@ export const getMatchLockAllChild = createAsyncThunk<any, any>(
   }
 );
 export const getUserDetailsForParent = createAsyncThunk<any, any>(
-  "/userDetailsForParent",
+  "/userDetails_ForParent",
   async (id, thunkApi) => {
     try {
       const resp = await service.get(
@@ -275,7 +275,9 @@ export const updateMatchRates = createAsyncThunk<any, any>(
 );
 
 export const resetRunAmount = createAction("runAmount/reset");
-export const successResetForLockUnlock = createAction("successResetForLockUnlock/reset");
+export const successResetForLockUnlock = createAction(
+  "successResetForLockUnlock/reset"
+);
 export const betReportAccountListReset = createAction(
   "betReportAccountList/reset"
 );

@@ -3,13 +3,12 @@ import { Form } from "react-bootstrap";
 import { Column, TableConfig } from "../../models/tableInterface";
 import CustomTable from "../commonComponent/table";
 
-import { useDispatch } from "react-redux";
-import { getUsers } from "../../store/actions/user/userActions";
-import { AppDispatch } from "../../store/store";
-import { ListClientData } from "./index.json";
+// import { useDispatch } from "react-redux";
+// import { getUsers } from "../../store/actions/user/userActions";
+// import { AppDispatch } from "../../store/store";
 
-const HeaderGameLock = () => {
-  const dispatch: AppDispatch = useDispatch();
+const HeaderGameLock = ({ data }: any) => {
+  // const dispatch: AppDispatch = useDispatch();
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
   useEffect(() => {}, [tableConfig]);
   const columns: Column[] = [
@@ -18,13 +17,7 @@ const HeaderGameLock = () => {
     { id: "userActive", label: "  UserActive" },
     { id: "betActive", label: "  BetActive" },
     { id: "fancyActive", label: "  FancyActive" },
-    // { id: "Checked", label: "Checked" },
   ];
-
-  //   const { userList } = useSelector((state: RootState) => state.user);
-  useEffect(() => {
-    dispatch(getUsers());
-  }, [dispatch]);
 
   return (
     <>
@@ -36,28 +29,37 @@ const HeaderGameLock = () => {
         itemCount={10}
         setTableConfig={setTableConfig}
       >
-        {ListClientData()?.map((item: any, index: number) => (
+        {data?.map((item: any, index: number) => (
           //   const { item,   } = item;
           <tr key={index}>
             {/* <td>{index++}</td> */}
             <td>{item?.eventName} </td>
             <td>{item?.userName} </td>
-            {/* <td>{item?.userAcive} </td>
-            <td>{item?.betActive} </td>
-            <td>{item?.fancyActive} </td> */}
             <td>
               <Form>
-                <Form.Check aria-label="option 1" />
+                <Form.Check
+                  aria-label="option 1"
+                  checked={item?.userBlock}
+                  disabled={true}
+                />
               </Form>
             </td>
             <td>
               <Form>
-                <Form.Check aria-label="option 2" />
+                <Form.Check
+                  aria-label="option 2"
+                  checked={item?.betBlock}
+                  disabled={true}
+                />
               </Form>
             </td>
             <td>
               <Form>
-                <Form.Check aria-label="option 3" />
+                <Form.Check
+                  aria-label="option 3"
+                  checked={item?.fancyBlock}
+                  disabled={true}
+                />
               </Form>
             </td>
           </tr>

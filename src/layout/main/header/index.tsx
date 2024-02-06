@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useMemo, useState } from "react";
 import { Container, Form, Nav, NavDropdown, Navbar } from "react-bootstrap";
 import { FaSearchPlus, FaTimes } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
@@ -9,6 +9,8 @@ import CustomModal from "../../../components/commonComponent/modal";
 import MainHeader from "../../../components/mainHeader";
 import { logout } from "../../../store/actions/auth/authActions";
 import { AppDispatch, RootState } from "../../../store/store";
+import { debounce } from "lodash";
+import { searchList } from "../../../store/actions/user/userActions";
 
 interface ItemProps {
   name: string;
@@ -24,6 +26,7 @@ const TopbarDropdown = ({ name, options }: ItemProps) => {
   const handleMouseLeave = () => {
     setShow(false);
   };
+
   return (
     <NavDropdown
       onMouseEnter={handleMouseEnter}
@@ -45,7 +48,32 @@ const TopbarDropdown = ({ name, options }: ItemProps) => {
 const Topbar = (props: any) => {
   const dispatch: AppDispatch = useDispatch();
   const [SearchModal, setSearchModal] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
   const { userDetail } = useSelector((state: RootState) => state.user.profile);
+  const { searchListData } = useSelector(
+    (state: RootState) => state.user.userList
+  );
+
+  const debouncedInputValue = useMemo(() => {
+    return debounce((value) => {
+      dispatch(
+        searchList({
+          createdBy: userDetail?.id,
+          userName: value,
+        })
+      );
+    }, 500);
+  }, []);
+
+  const handleSearch = (event: any) => {
+    const query = event.target.value;
+    setSearchValue(query);
+    debouncedInputValue(query);
+  };
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+  };
 
   return (
     <>
@@ -147,9 +175,26 @@ const Topbar = (props: any) => {
                 </NavDropdown>
               </Nav>
             </Navbar.Collapse>
-            <Form className="headerSearch">
+            <Form className="headerSearch" onSubmit={handleSubmit}>
               <Form.Group className="" controlId="exampleForm.ControlInput1">
-                <Form.Control type="text" placeholder="All Clients" />
+                <Form.Control
+                  type="text"
+                  placeholder="All Clients"
+                  value={searchValue}
+                  list="clients-list"
+                  onChange={handleSearch}
+                  autoComplete="off"
+                />
+                <datalist id="clients-list">
+                  {searchListData &&
+                    searchListData?.users?.map((item: any) => {
+                      return (
+                        <option key={item?.id} value={item?.userName}>
+                          {item?.userName}
+                        </option>
+                      );
+                    })}
+                </datalist>
                 <div
                   className="headerSearch-ico"
                   onClick={() => setSearchModal((prev) => !prev)}
@@ -168,10 +213,10 @@ const Topbar = (props: any) => {
         show={SearchModal}
         setShow={setSearchModal}
       >
-        <MainHeader />
+        <MainHeader userId={"ed5557ea-720c-49b4-a44e-2cf37e2778f0"} />
       </CustomModal>
     </>
   );
 };
 
-export default Topbar;
+export default memo(Topbar);

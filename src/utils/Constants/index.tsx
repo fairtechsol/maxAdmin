@@ -15,6 +15,7 @@ export const ApiConstants = {
     ALREADY_EXIST: "/user/exist",
     UPDATE: "/user/updateUser",
     PROFILE: "/user/profile",
+    USER_DETAILS_FOR_PARENT: "/user/getUserDetailsForParent",
     LOCKUNLOCK: "/user/lockUnlockUser",
     CREDITREFERRENCE: "/user/update/creditreferrence",
     EXPOSURELIMIT: "/user/update/exposurelimit",

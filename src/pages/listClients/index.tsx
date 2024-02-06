@@ -241,4 +241,4 @@ const ListClent: React.FC = () => {
   );
 };
 
-export default ListClent;
+export default React.memo(ListClent);
