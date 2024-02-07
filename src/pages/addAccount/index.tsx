@@ -104,9 +104,9 @@ const AddAccount = () => {
             delayTime: JSON.stringify(values.delay),
           };
           dispatch(addUser(newPayload));
-        } else {
-          dispatch(addUser(payload));
-        }
+          } else {
+            dispatch(addUser(payload));
+          }
       } catch (e) {
         console.log(e);
       }
