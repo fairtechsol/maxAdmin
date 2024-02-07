@@ -2,7 +2,12 @@ import { useFormik } from "formik";
 import { useEffect } from "react";
 import { Col, Modal, Row, Stack } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { changeAmmountUser } from "../../../../store/actions/user/userActions";
+import {
+  accountListModalReset,
+  changeAmmountUser,
+  getUsers,
+  getUsersProfile,
+} from "../../../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../../../store/store";
 import CustomInput from "../../../commonComponent/input";
 import ModalFooter from "../footer";
@@ -21,7 +26,9 @@ const initialValues: any = {
 const Withdraw = ({ userData, setShow }: any) => {
   const dispatch: AppDispatch = useDispatch();
 
-  // const { userList } = useSelector((state: RootState) => state.user.userList);
+  const { modalSuccess } = useSelector(
+    (state: RootState) => state.user.userList
+  );
   const { userDetail } = useSelector((state: RootState) => state.user.profile);
 
   const formik = useFormik({
@@ -37,7 +44,6 @@ const Withdraw = ({ userData, setShow }: any) => {
           transactionType: "withDraw",
         };
         dispatch(changeAmmountUser(payload));
-        setShow(false);
       } catch (e) {
         console.log(e);
       }
@@ -72,6 +78,15 @@ const Withdraw = ({ userData, setShow }: any) => {
       });
     }
   }, [userData, userDetail]);
+
+  useEffect(() => {
+    if (modalSuccess) {
+      setShow(false);
+      dispatch(getUsers());
+      dispatch(getUsersProfile());
+      dispatch(accountListModalReset());
+    }
+  }, [modalSuccess]);
 
   return (
     <>

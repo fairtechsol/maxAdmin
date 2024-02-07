@@ -76,15 +76,12 @@ const ListClent: React.FC = () => {
     },
   ];
 
-
-
-
   useEffect(() => {
     dispatch(
       getUsers({
         page: tableConfig?.page || 1,
         limit: tableConfig?.rowPerPage,
-        userName: tableConfig?.keyword || ""
+        userName: tableConfig?.keyword || "",
       })
     );
   }, [tableConfig]);

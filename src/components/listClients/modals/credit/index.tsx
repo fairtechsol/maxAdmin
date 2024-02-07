@@ -1,9 +1,14 @@
 import { useFormik } from "formik";
 import { useEffect } from "react";
 import { Col, Modal, Row, Stack } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import { setCreditRefference } from "../../../../store/actions/user/userActions";
-import { AppDispatch } from "../../../../store/store";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  accountListModalReset,
+  getUsers,
+  getUsersProfile,
+  setCreditRefference,
+} from "../../../../store/actions/user/userActions";
+import { AppDispatch, RootState } from "../../../../store/store";
 import CustomInput from "../../../commonComponent/input";
 import ModalFooter from "../footer";
 
@@ -17,6 +22,10 @@ const initialValues: any = {
 const Credit = ({ userData, setShow }: any) => {
   const dispatch: AppDispatch = useDispatch();
 
+  const { modalSuccess } = useSelector(
+    (state: RootState) => state.user.userList
+  );
+
   const formik = useFormik({
     initialValues: initialValues,
     onSubmit: (values: any) => {
@@ -26,8 +35,6 @@ const Credit = ({ userData, setShow }: any) => {
         transactionPassword: values.transactionPassword,
       };
       dispatch(setCreditRefference(payload));
-      setShow(false);
-      // console.log(values, "Credit REfer");
     },
   });
 
@@ -41,6 +48,15 @@ const Credit = ({ userData, setShow }: any) => {
       });
     }
   }, [userData]);
+
+  useEffect(() => {
+    if (modalSuccess) {
+      setShow(false);
+      dispatch(getUsers());
+      dispatch(getUsersProfile());
+      dispatch(accountListModalReset());
+    }
+  }, [modalSuccess]);
 
   return (
     <>

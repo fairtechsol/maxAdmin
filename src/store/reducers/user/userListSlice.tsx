@@ -19,6 +19,7 @@ interface InitialState {
   userBalanceList: any;
   childUsersData: any;
   success: boolean;
+  modalSuccess: boolean;
   loading: boolean;
   error: any;
   transactionPassword: any;
@@ -31,6 +32,7 @@ const initialState: InitialState = {
   userBalanceList: null,
   childUsersData: null,
   success: false,
+  modalSuccess: false,
   loading: false,
   error: null,
   transactionPassword: "",
@@ -103,10 +105,11 @@ export const userList = createSlice({
       .addCase(changeAmmountUser.pending, (state) => {
         state.loading = true;
         state.error = null;
+        state.modalSuccess = false;
       })
       .addCase(changeAmmountUser.fulfilled, (state) => {
         state.loading = false;
-        state.success = true;
+        state.modalSuccess = true;
       })
       .addCase(changeAmmountUser.rejected, (state, action) => {
         state.loading = false;
@@ -118,7 +121,7 @@ export const userList = createSlice({
       })
       .addCase(setCreditRefference.fulfilled, (state) => {
         state.loading = false;
-        state.success = true;
+        state.modalSuccess = true;
       })
       .addCase(setCreditRefference.rejected, (state, action) => {
         state.loading = false;
@@ -130,7 +133,7 @@ export const userList = createSlice({
       })
       .addCase(setExposureLimit.fulfilled, (state) => {
         state.loading = false;
-        state.success = true;
+        state.modalSuccess = true;
       })
       .addCase(setExposureLimit.rejected, (state, action) => {
         state.loading = false;
@@ -142,7 +145,7 @@ export const userList = createSlice({
       })
       .addCase(setLockUnlockUser.fulfilled, (state) => {
         state.loading = false;
-        state.success = true;
+        state.modalSuccess = true;
       })
       .addCase(setLockUnlockUser.rejected, (state, action) => {
         state.loading = false;
@@ -150,12 +153,12 @@ export const userList = createSlice({
       })
       .addCase(changePassword.pending, (state) => {
         state.loading = true;
-        state.success = false;
+        state.modalSuccess = false;
         state.error = null;
       })
       .addCase(changePassword.fulfilled, (state, action) => {
         state.loading = false;
-        state.success = true;
+        state.modalSuccess = true;
         state.transactionPassword = action.payload;
       })
       .addCase(changePassword.rejected, (state, action) => {
@@ -177,7 +180,7 @@ export const userList = createSlice({
         state.error = action?.error?.message;
       })
       .addCase(accountListModalReset, (state) => {
-        return { ...state, success: false };
+        return { ...state, modalSuccess: false };
       });
   },
 });
