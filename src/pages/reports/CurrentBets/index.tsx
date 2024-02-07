@@ -39,7 +39,7 @@ const CurrentBets = () => {
   const dispatch: AppDispatch = useDispatch();
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
   const [selectType, setSelectType] = useState({
-    value: "MATCHED",
+    value: "PENDING",
     label: "Matched",
   });
 
