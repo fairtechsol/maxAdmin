@@ -1,5 +1,5 @@
 import { memo, useMemo, useState } from "react";
-import { Container, Form, Nav, NavDropdown, Navbar,Dropdown } from "react-bootstrap";
+import { Container, Form, Nav, NavDropdown, Navbar } from "react-bootstrap";
 import { FaSearchPlus, FaTimes } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import LogoSection from "../../../components/commonComponent/logoSection";
@@ -185,7 +185,7 @@ const Topbar = (props: any) => {
                   onChange={handleSearch}
                   autoComplete="off"
                 />
-                
+
                 <datalist id="clients-list">
                   {searchListData &&
                     searchListData?.users?.map((item: any) => {
@@ -202,7 +202,6 @@ const Topbar = (props: any) => {
                 >
                   <FaSearchPlus size={24} />
                 </div>
-               
               </Form.Group>
             </Form>
           </div>
