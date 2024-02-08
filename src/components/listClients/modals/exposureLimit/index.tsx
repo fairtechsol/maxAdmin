@@ -1,13 +1,17 @@
 import { useFormik } from "formik";
 import { useEffect } from "react";
 import { Col, Modal, Row, Stack } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import { setExposureLimit } from "../../../../store/actions/user/userActions";
-import { AppDispatch } from "../../../../store/store";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  accountListModalReset,
+  getUsers,
+  getUsersProfile,
+  setExposureLimit,
+} from "../../../../store/actions/user/userActions";
+import { AppDispatch, RootState } from "../../../../store/store";
 import CustomInput from "../../../commonComponent/input";
 import ModalFooter from "../footer";
 import { widthdrawAmountValidations } from "../../../../utils/fieldValidations/addAccount";
-
 
 const initialValues: any = {
   userId: "",
@@ -17,32 +21,30 @@ const initialValues: any = {
   transactionPassword: "",
 };
 
-
 const ExposureLimit = ({ setShow, userData }: any) => {
   const dispatch: AppDispatch = useDispatch();
 
+  const { modalSuccess } = useSelector(
+    (state: RootState) => state.user.userList
+  );
+
   const formik = useFormik({
     initialValues: initialValues,
-    
+
     validationSchema: widthdrawAmountValidations,
     onSubmit: (values: any) => {
       try {
-      let payload = {
-        userId: userData?.id,
-        amount: values.amount,
-        transactionPassword: values.transactionPassword,
-      };
-      dispatch(setExposureLimit(payload));
-      setShow(false);
-      // console.log(values, "exposerLimit");
-      // setShow(false);
-    } catch (e) {
-      console.log(e);
-    }
-  },
-});
-    
-
+        let payload = {
+          userId: userData?.id,
+          amount: values.amount,
+          transactionPassword: values.transactionPassword,
+        };
+        dispatch(setExposureLimit(payload));
+      } catch (e) {
+        console.log(e);
+      }
+    },
+  });
 
   const { handleSubmit, handleChange, values } = formik;
 
@@ -50,12 +52,21 @@ const ExposureLimit = ({ setShow, userData }: any) => {
     if (userData) {
       formik.setValues({
         ...formik.values,
-        
+
         initialBalance: userData?.balance,
         oldLimit: userData?.exposureLimit,
       });
     }
   }, [userData]);
+
+  useEffect(() => {
+    if (modalSuccess) {
+      setShow(false);
+      dispatch(getUsers());
+      dispatch(getUsersProfile());
+      dispatch(accountListModalReset());
+    }
+  }, [modalSuccess]);
 
   return (
     <>
@@ -68,7 +79,6 @@ const ExposureLimit = ({ setShow, userData }: any) => {
               </Col>
               <Col sm={8}>
                 <CustomInput
-                  
                   type="text"
                   customStyle="input-box"
                   bgColor="gray"

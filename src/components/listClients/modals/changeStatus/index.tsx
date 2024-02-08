@@ -1,10 +1,15 @@
 import { useFormik } from "formik";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Col, Modal, Row, Stack } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Switch from "react-switch";
-import { setLockUnlockUser } from "../../../../store/actions/user/userActions";
-import { AppDispatch } from "../../../../store/store";
+import {
+  accountListModalReset,
+  getUsers,
+  getUsersProfile,
+  setLockUnlockUser,
+} from "../../../../store/actions/user/userActions";
+import { AppDispatch, RootState } from "../../../../store/store";
 import CustomInput from "../../../commonComponent/input";
 import ModalFooter from "../footer";
 
@@ -25,6 +30,10 @@ const ChangeStatus = ({ setShow, userData }: any) => {
   const [lockUnlockObj, setLockUnlockObj] = useState(defaultLockUnlockObj);
   const dispatch: AppDispatch = useDispatch();
 
+  const { modalSuccess } = useSelector(
+    (state: RootState) => state.user.userList
+  );
+
   const formik = useFormik({
     initialValues: initialValues,
     onSubmit: (values: any) => {
@@ -40,6 +49,15 @@ const ChangeStatus = ({ setShow, userData }: any) => {
   });
 
   const { handleSubmit, values, handleChange } = formik;
+
+  useEffect(() => {
+    if (modalSuccess) {
+      setShow(false);
+      dispatch(getUsers());
+      dispatch(getUsersProfile());
+      dispatch(accountListModalReset());
+    }
+  }, [modalSuccess]);
 
   return (
     <form onSubmit={handleSubmit}>
