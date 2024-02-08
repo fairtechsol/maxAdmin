@@ -3,7 +3,7 @@ import { Container, Form, Nav, NavDropdown, Navbar,Dropdown } from "react-bootst
 import { FaSearchPlus, FaTimes } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import LogoSection from "../../../components/commonComponent/logoSection";
-
+import Select, { components } from "react-select";
 import { useDispatch, useSelector } from "react-redux";
 import CustomModal from "../../../components/commonComponent/modal";
 import MainHeader from "../../../components/mainHeader";
@@ -11,6 +11,7 @@ import { logout } from "../../../store/actions/auth/authActions";
 import { AppDispatch, RootState } from "../../../store/store";
 import { debounce } from "lodash";
 import { searchList } from "../../../store/actions/user/userActions";
+// import styled from '@emotion/styled';
 
 interface ItemProps {
   name: string;
@@ -26,6 +27,7 @@ const TopbarDropdown = ({ name, options }: ItemProps) => {
   const handleMouseLeave = () => {
     setShow(false);
   };
+
 
   return (
     <NavDropdown
@@ -48,8 +50,9 @@ const TopbarDropdown = ({ name, options }: ItemProps) => {
 const Topbar = (props: any) => {
   const dispatch: AppDispatch = useDispatch();
   const [SearchModal, setSearchModal] = useState(false);
-  const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState<any>(null);
   const { userDetail } = useSelector((state: RootState) => state.user.profile);
+
   const { searchListData } = useSelector(
     (state: RootState) => state.user.userList
   );
@@ -66,14 +69,110 @@ const Topbar = (props: any) => {
   }, []);
 
   const handleSearch = (event: any) => {
-    const query = event.target.value;
-    setSearchValue(query);
+    const query = event;
     debouncedInputValue(query);
+    // setSearchModal(true);
   };
 
+  //   const [selectedUser, setSelectedUser] = useState(null);
+
+  // const handleSearch = (selectedOption: any) => {
+  //   if (selectedOption) {
+  //     setSelectedUser(selectedOption); // Set the selected user
+  //   }
+  // };
+
+  // const handleSearchIconClick = () => {
+  //   if (selectedUser) {
+  //     setSearchModal(true); // Open the modal with the selected user details
+  //   }
+  // };
+
+  // const handleSearch = (selectedOption: any) => {
+  //   if (selectedOption) {
+  //     setSearchValue(selectedOption.label); 
+  //     setSearchModal(true); // Open the modal
+  //     debouncedInputValue(selectedOption.label); 
+  //   }
+  // };
+
+  const optionslist = searchListData?.users?.map((item: any) => ({
+    value: item?.id,
+    label: item?.userName,
+  })) || [];
+
+
+
   const handleSubmit = (e: any) => {
-    e.preventDefault();
+    console.log(e.target.value, "aflatoor");
+    setSearchModal(true);
   };
+
+  const customStyles = {
+    control: (base: any, state: { isFocused: any; }) => ({
+      ...base,
+      fontFamily: 'Roboto Condensed", sans-serif',
+      fontSize: 14,
+      border: state.isFocused ? 0 : 0,
+      boxShadow: state.isFocused ? 0 : 0,
+      cursor: 'text',
+      borderRadius: "3px",
+      borderBottom: 'solid 1px',
+
+    }),
+
+    option: (styles: any, { isFocused }: any) => {
+      return {
+        ...styles,
+        cursor: 'pointer',
+        backgroundColor: isFocused ? 'white' : 'white',
+        color: isFocused ? 'rgba(255, 80, 86)' : 'black',
+        lineHeight: 2,
+        height: "30px"
+      };
+    },
+
+    input: (styles: any) => ({
+      ...styles,
+
+      color: 'black',
+      fontFamily: 'Times New Roman, Times, Serif',
+      padding: "0px"
+    }),
+
+    menu: (styles: any) => ({
+      ...styles,
+      marginTop: 0,
+      boxShadow: 'none',
+      borderRadius: 0,
+    }),
+
+    singleValue: (styles: any) => ({
+      ...styles,
+      color: 'rgba(255, 80, 86)',
+    }),
+    container: (provided: any) => ({
+      ...provided,
+      width: '180px',
+      borderRadius: "10px"
+    }),
+
+    dropdownIndicator: (provided: any) => ({
+      ...provided,
+    }),
+  };
+
+
+  const DropdownIndicator = (props: any) => {
+    return (
+      components.DropdownIndicator && (
+        <components.DropdownIndicator {...props} >
+          <FaSearchPlus size={24} onClick={handleSubmit} />
+        </components.DropdownIndicator>
+      )
+    );
+  };
+
 
   return (
     <>
@@ -175,15 +274,16 @@ const Topbar = (props: any) => {
                 </NavDropdown>
               </Nav>
             </Navbar.Collapse>
-            <Form className="headerSearch" onSubmit={handleSubmit}>
-              <Form.Group className="" controlId="exampleForm.ControlInput1">
+            {/* <Form className="headerSearch" onSubmit={handleSubmit}           autoComplete="off">
+              <Form.Group className="" controlId="exampleForm.ControlInput1" >
                 <Form.Control
                   type="text"
+                  autoComplete="off"
                   placeholder="All Clients"
                   value={searchValue}
                   list="clients-list"
                   onChange={handleSearch}
-                  autoComplete="off"
+          
                 />
                 
                 <datalist id="clients-list">
@@ -205,8 +305,28 @@ const Topbar = (props: any) => {
                
               </Form.Group>
             </Form>
+            */}
           </div>
+          <Form >
+            <div>
+              <Select
+                value={searchValue}
+                options={optionslist}
+                onInputChange={handleSearch}
+                placeholder="All Client"
+                openMenuOnClick={false}
+                styles={customStyles}
+                classNamePrefix="select"
+                onChange={(item: any) => {
+                  setSearchValue(item);
+                }}
+                components={{ DropdownIndicator }}
+              />
+            </div>
+          </Form>
+
         </Container>
+
       </Navbar>
       <CustomModal
         customClass="modalFull-90 "
@@ -215,9 +335,11 @@ const Topbar = (props: any) => {
         show={SearchModal}
         setShow={setSearchModal}
       >
-        <MainHeader userId={"ed5557ea-720c-49b4-a44e-2cf37e2778f0"} />
+        <MainHeader userId={searchValue?.value} />
       </CustomModal>
     </>
+
+
   );
 };
 
