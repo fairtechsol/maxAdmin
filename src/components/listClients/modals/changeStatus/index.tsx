@@ -44,7 +44,7 @@ const ChangeStatus = ({ setShow, userData }: any) => {
         transactionPassword: values.transactionPassword,
       };
       dispatch(setLockUnlockUser(payload));
-      setShow(false);
+      // setShow(false);
     },
   });
 
