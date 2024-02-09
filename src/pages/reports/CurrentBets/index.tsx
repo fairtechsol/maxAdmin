@@ -26,7 +26,7 @@ const columns: Column[] = [
   { id: "odds", label: "User Rate" },
   { id: "amount", label: "Amount" },
   { id: "createdAt", label: "Place Date" },
-  { id: "createdAt", label: "Match Date" },
+  { id: "match.startAt", label: "Match Date" },
 ];
 
 const options = [
@@ -67,19 +67,25 @@ const CurrentBets = () => {
     setSelectType(type);
   };
 
-  const handleLoad = (e: any) => {
-    e.preventDefault();
-    if (selectType?.value !== "UNMATCHED") {
+  const handleLoad = (e?: any) => {
+    if (e) {
+      e.preventDefault();
+    }
+    if (selectType?.value === "PENDING" || selectType?.value === "DELETED") {
       dispatch(
         betReportAccountList({
           status: selectType?.value,
           limit: tableConfig?.rowPerPage,
         })
       );
-    } else {
+    } else if (selectType?.value === "UNMATCHED") {
       dispatch(betReportAccountListReset());
     }
   };
+
+  useEffect(() => {
+    handleLoad();
+  }, []); 
 
   return (
     <div className="p-2 pt-0">
