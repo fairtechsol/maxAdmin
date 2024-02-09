@@ -13,7 +13,7 @@ import { AppDispatch, RootState } from "../../store/store";
 // Example usage
 const columns: Column[] = [
   { id: "username", label: "User Name", colSpan: 2 },
-  { id: "creditReferance", label: "Credit Referance" },
+  { id: "creditReferance", label: "Credit Reference" },
   { id: "balance", label: "Balance" },
   { id: "client", label: "Client (P/L)" },
   { id: "exposure", label: "Exposure" },
