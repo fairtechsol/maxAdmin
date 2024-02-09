@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import { useEffect, useState } from "react";
-import { Button,Form,} from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 // import { useNavigate } from "react-router";
 import CustomInput from "../../components/commonComponent/input";
@@ -32,7 +32,9 @@ const ChangePassword = () => {
   const dispatch: AppDispatch = useDispatch();
   const [showModal, setShowModal] = useState<boolean>(false);
   // const navigate = useNavigate();
-  const { transactionPassword, success } = useSelector((state: RootState) => state.user.userList);
+  const { transactionPassword, success } = useSelector(
+    (state: RootState) => state.user.userList
+  );
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: newPasswordValidationSchema,
@@ -43,11 +45,11 @@ const ChangePassword = () => {
         oldPassword: values.oldPassword,
       };
       dispatch(changePassword(payload));
+      setShowModal(true);
     },
   });
 
   const { handleSubmit, getFieldProps, touched, errors } = formik;
-
 
   useEffect(() => {
     if (success) {
@@ -56,62 +58,60 @@ const ChangePassword = () => {
     }
   }, [success]);
   return (
-    <div >
-     
+    <div>
       <Form
-            className="auth-main text-center d-flex  justify-content-center"
-       onSubmit={handleSubmit}>
-      
+        className="auth-main text-center d-flex  justify-content-center"
+        onSubmit={handleSubmit}
+      >
         <div className="auth-box ">
-        <img src={FgLogo} alt="fairGame"/>
-        <div className="auth-box-form rounded-2 bg-light">
-          <h2 className="auth-title text-center mb-4">Change Password</h2>
-      
-          <Form.Group  className="mb-3 d-block">
-            <CustomInput
-              id={"oldPassword"}
-              title={"Old Password"}
-              placeholder={"Old Password"}
-              type={"password"}
-              customstyle={"mb-3"}
-              {...getFieldProps("oldPassword")}
-              touched={touched.oldPassword}
-              errors={errors.oldPassword}
-           
-            />
-           </Form.Group>
-      
-          <Form.Group className="mb-3 d-block">
-            <CustomInput
-              id={"newPassword"}
-              title={"New Password"}
-              placeholder={"New Password"}
-              type={"password"}
-              customstyle={"mb-3"}
-              {...getFieldProps("newPassword")}
-              touched={touched.newPassword}
-              errors={errors.newPassword}
-            />
-          </Form.Group>
-      
-          <Form.Group className="mb-3 d-block">
-            <CustomInput
-              id={"confirmPassword"}
-              title={"Confirm Password"}
-              placeholder={"Confirm Password"}
-              type={"password"}
-              customstyle={"mb-3"}
-              {...getFieldProps("confirmPassword")}
-              touched={touched.confirmPassword}
-              errors={errors.confirmPassword}
-            />
-          </Form.Group>
+          <img src={FgLogo} alt="fairGame" />
+          <div className="auth-box-form rounded-2 bg-light">
+            <h2 className="auth-title text-center mb-4">Change Password</h2>
 
-        <Button className="w-100" variant="primary" type="submit">
-          Submit
-        </Button>
-    </div>
-    <p className="text-white mt-3 mb-0 title-14">© MAXXBET7</p>
+            <Form.Group className="mb-3 d-block">
+              <CustomInput
+                id={"oldPassword"}
+                title={"Old Password"}
+                placeholder={"Old Password"}
+                type={"password"}
+                customstyle={"mb-3"}
+                {...getFieldProps("oldPassword")}
+                touched={touched.oldPassword}
+                errors={errors.oldPassword}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3 d-block">
+              <CustomInput
+                id={"newPassword"}
+                title={"New Password"}
+                placeholder={"New Password"}
+                type={"password"}
+                customstyle={"mb-3"}
+                {...getFieldProps("newPassword")}
+                touched={touched.newPassword}
+                errors={errors.newPassword}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3 d-block">
+              <CustomInput
+                id={"confirmPassword"}
+                title={"Confirm Password"}
+                placeholder={"Confirm Password"}
+                type={"password"}
+                customstyle={"mb-3"}
+                {...getFieldProps("confirmPassword")}
+                touched={touched.confirmPassword}
+                errors={errors.confirmPassword}
+              />
+            </Form.Group>
+
+            <Button className="w-100" variant="primary" type="submit">
+              Submit
+            </Button>
+          </div>
+          <p className="text-white mt-3 mb-0 title-14">© MAXXBET7</p>
         </div>
       </Form>
       {showModal && (
@@ -125,7 +125,6 @@ const ChangePassword = () => {
             navigateTo={"/admin/login"}
             transactionMessage={transactionPassword?.transactionPassword}
           />
-
         </>
       )}
     </div>
