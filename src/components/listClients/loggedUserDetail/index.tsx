@@ -29,7 +29,7 @@ const LoggedUserDetail = () => {
               <Col lg={4}>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
                   <div className="col-md-8 title-14">
-                    Upper Level Credit Referance:
+                    Upper Level Credit Reference:
                   </div>
                   <div className="col-md-4 title-14">
                     {+userBalanceList?.userCreditReference || 0}
@@ -75,7 +75,7 @@ const LoggedUserDetail = () => {
               <Col lg={4}>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
                   <div className="col-md-8 title-14">
-                    Down Level Credit Referance:
+                    Down Level Credit Reference:
                   </div>
                   <div className="col-md-4 title-14">
                     {+userBalanceList?.downLevelCreditReference || 0}
