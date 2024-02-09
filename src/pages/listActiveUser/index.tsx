@@ -158,7 +158,34 @@ const ListActiveInactiveUser: React.FC = () => {
                           >
                             {index === 1 &&
                               userList &&
-                              userList?.totalBalance?.totalCreditReference}
+                              (activeUser?.reduce((acc: any, match: any) => {
+                                return acc + +match?.creditRefrence;
+                              }, 0) ||
+                                0)}
+                            {index === 2 &&
+                              userList &&
+                              (activeUser?.reduce((acc: any, match: any) => {
+                                return acc + +match?.balance;
+                              }, 0) ||
+                                0)}
+                            {index === 3 &&
+                              userList &&
+                              (activeUser?.reduce((acc: any, match: any) => {
+                                return acc + +match?.userBal?.profitLoss;
+                              }, 0) ||
+                                0)}
+                            {index === 4 &&
+                              userList &&
+                              (activeUser?.reduce((acc: any, match: any) => {
+                                return acc + +match?.userBal?.exposure;
+                              }, 0) ||
+                                0)}
+                            {index === 5 &&
+                              userList &&
+                              (activeUser?.reduce((acc: any, match: any) => {
+                                return acc + +match?.availableBalance;
+                              }, 0) ||
+                                0)}
                           </td>
                         );
                       })}
@@ -199,7 +226,7 @@ const ListActiveInactiveUser: React.FC = () => {
                               <Form>
                                 <Form.Check
                                   disabled={true}
-                                  checked={userBlock}
+                                  checked={!userBlock}
                                   id={`opt${index}1`}
                                   aria-label="option 1"
                                 />
@@ -209,7 +236,7 @@ const ListActiveInactiveUser: React.FC = () => {
                               <Form>
                                 <Form.Check
                                   disabled={true}
-                                  checked={betBlock}
+                                  checked={!betBlock}
                                   id={`opt${index}`}
                                   aria-label="option 1"
                                 />
@@ -273,7 +300,34 @@ const ListActiveInactiveUser: React.FC = () => {
                           >
                             {index === 1 &&
                               userList &&
-                              userList?.totalBalance?.totalCreditReference}
+                              (deactiveUser?.reduce((acc: any, match: any) => {
+                                return acc + +match?.creditRefrence;
+                              }, 0) ||
+                                0)}
+                            {index === 2 &&
+                              userList &&
+                              (deactiveUser?.reduce((acc: any, match: any) => {
+                                return acc + +match?.balance;
+                              }, 0) ||
+                                0)}
+                            {index === 3 &&
+                              userList &&
+                              (deactiveUser?.reduce((acc: any, match: any) => {
+                                return acc + +match?.userBal?.profitLoss;
+                              }, 0) ||
+                                0)}
+                            {index === 4 &&
+                              userList &&
+                              (deactiveUser?.reduce((acc: any, match: any) => {
+                                return acc + +match?.userBal?.exposure;
+                              }, 0) ||
+                                0)}
+                            {index === 5 &&
+                              userList &&
+                              (deactiveUser?.reduce((acc: any, match: any) => {
+                                return acc + +match?.availableBalance;
+                              }, 0) ||
+                                0)}
                           </td>
                         );
                       })}
@@ -282,14 +336,17 @@ const ListActiveInactiveUser: React.FC = () => {
                       deactiveUser.map((userItem: any, index: number) => {
                         const {
                           userName,
+                          balance,
+                          availableBalance,
                           creditRefrence,
                           exposureLimit,
-                          matchCommission,
                           roleName,
+                          matchCommission,
                           totalComission,
                           id,
                           userBlock,
                           betBlock,
+                          userBal,
                         } = userItem;
                         return (
                           <tr key={id}>
@@ -303,10 +360,10 @@ const ListActiveInactiveUser: React.FC = () => {
                             </td>
 
                             <td className="text-end">{creditRefrence}</td>
-                            <td className="text-end">...</td>
-                            <td className="text-end">...</td>
-                            <td className="text-end">...</td>
-                            <td className="text-end">...</td>
+                            <td className="text-end">{balance}</td>
+                            <td className="text-end">{userBal?.profitLoss}</td>
+                            <td className="text-end">{userBal?.exposure}</td>
+                            <td className="text-end">{availableBalance}</td>
                             <td className="text-center">
                               <Form>
                                 <Form.Check
