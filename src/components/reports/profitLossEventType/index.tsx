@@ -21,8 +21,8 @@ const ProfitLossEventType = (props: any) => {
             key={index}
             className="profitLossEventType-box d-flex bg-green px-1"
           >
-            <label className="text-white title-12">{item?.name}</label>
-            <span className="text-white title-12">{item?.amount}</span>
+            <label className="text-white title-12">{item?.name}:</label>
+            <span className="text-white title-12"> {item?.amount}</span>
           </div>
         ))}
       </div>
