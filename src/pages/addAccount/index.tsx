@@ -92,7 +92,10 @@ const AddAccount = () => {
           roleName: values.accountType.value,
           creditRefrence: values.creditReference,
           // commissionDownPartnership: values.commissionDownPartnership,
-          myPartnership: values.ourPartnership,
+          myPartnership:
+            values?.accountType.value === "user"
+              ? values?.downlinePartnership
+              : values.ourPartnership,
           transactionPassword: values?.transactionPassword,
         };
         if (values.accountType.value === "user") {
@@ -104,9 +107,9 @@ const AddAccount = () => {
             delayTime: JSON.stringify(values.delay),
           };
           dispatch(addUser(newPayload));
-          } else {
-            dispatch(addUser(payload));
-          }
+        } else {
+          dispatch(addUser(payload));
+        }
       } catch (e) {
         console.log(e);
       }
@@ -173,32 +176,45 @@ const AddAccount = () => {
   };
 
   const handleUpline = () => {
-    const {
-      aPartnership,
-      saPartnership,
-      smPartnership,
-      faPartnership,
-      fwPartnership,
-      roleName,
-    } = userDetail;
-
-    const partnershipMap: any = {
-      superMaster: aPartnership + saPartnership + faPartnership + fwPartnership,
-      superAdmin: faPartnership + fwPartnership,
-      master:
-        smPartnership +
-        aPartnership +
-        saPartnership +
-        faPartnership +
+    try {
+      const {
+        aPartnership,
+        saPartnership,
+        smPartnership,
+        faPartnership,
         fwPartnership,
-      admin: saPartnership + faPartnership + fwPartnership,
-      fairGameWallet: 0,
-      fairGameAdmin: fwPartnership,
-    };
+        mPartnership,
+        roleName,
+      } = userDetail;
 
-    const thisUplinePertnerShip = partnershipMap[roleName] || 0;
+      const partnershipMap: any = {
+        agent:
+          smPartnership +
+          aPartnership +
+          saPartnership +
+          faPartnership +
+          fwPartnership +
+          mPartnership,
+        superMaster:
+          aPartnership + saPartnership + faPartnership + fwPartnership,
+        superAdmin: faPartnership + fwPartnership,
+        master:
+          smPartnership +
+          aPartnership +
+          saPartnership +
+          faPartnership +
+          fwPartnership,
+        admin: saPartnership + faPartnership + fwPartnership,
+        fairGameWallet: 0,
+        fairGameAdmin: fwPartnership,
+      };
 
-    return thisUplinePertnerShip;
+      const thisUplinePertnerShip = partnershipMap[roleName] || 0;
+
+      return thisUplinePertnerShip;
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const debouncedInputValue = useMemo(() => {
@@ -480,6 +496,12 @@ const AddAccount = () => {
                           min={0}
                           max={100}
                           type={"number"}
+                          disabled={
+                            formik.values.accountType.value === "user" ||
+                            userDetail.roleName === "agent"
+                              ? true
+                              : false
+                          }
                           value={formik.values.downlinePartnership}
                           onChange={handlePartnershipChange}
                           // {...getFieldProps("downLinePartnership")}

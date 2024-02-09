@@ -32,7 +32,7 @@ const ChangePassword = () => {
   const dispatch: AppDispatch = useDispatch();
   const [showModal, setShowModal] = useState<boolean>(false);
   // const navigate = useNavigate();
-  const { transactionPassword, success } = useSelector(
+  const { transactionPassword, modalSuccess } = useSelector(
     (state: RootState) => state.user.userList
   );
   const formik = useFormik({
@@ -45,18 +45,18 @@ const ChangePassword = () => {
         oldPassword: values.oldPassword,
       };
       dispatch(changePassword(payload));
-      setShowModal(true);
     },
   });
 
   const { handleSubmit, getFieldProps, touched, errors } = formik;
 
   useEffect(() => {
-    if (success) {
-      dispatch(changePasswordReset());
+    if (modalSuccess) {
       setShowModal(true);
+      dispatch(changePasswordReset());
     }
-  }, [success]);
+  }, [modalSuccess]);
+
   return (
     <div>
       <Form
@@ -120,7 +120,13 @@ const ChangePassword = () => {
             show={showModal}
             setShowModal={setShowModal}
             modalTitle="Your password has been changed sucessfully"
-            functionDispatch={() => dispatch(logout())}
+            functionDispatch={() => {
+              if (sessionStorage.getItem("forceChangePassword") === "true") {
+                sessionStorage.clear();
+              } else {
+                dispatch(logout());
+              }
+            }}
             buttonMessage={"Navigate To Login"}
             navigateTo={"/admin/login"}
             transactionMessage={transactionPassword?.transactionPassword}

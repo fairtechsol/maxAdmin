@@ -13,7 +13,6 @@ import { oldPasswordValidationSchema } from "../../utils/fieldValidations/newPas
 import { logout } from "../../store/actions/auth/authActions";
 import NavigateModal from "../../components/commonComponent/customModal";
 
-
 // interface Values {
 //   newPassword: string;
 //   confirmPassword: string;
@@ -31,7 +30,9 @@ const ChangePassword = () => {
   const dispatch: AppDispatch = useDispatch();
   const [showModal, setShowModal] = useState<boolean>(false);
   // const navigate = useNavigate();
-  const { transactionPassword, success } = useSelector((state: RootState) => state.user.userList);
+  const { transactionPassword, success } = useSelector(
+    (state: RootState) => state.user.userList
+  );
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: oldPasswordValidationSchema,
@@ -47,7 +48,6 @@ const ChangePassword = () => {
   });
 
   const { handleSubmit, getFieldProps, touched, errors } = formik;
-
 
   useEffect(() => {
     if (success) {
@@ -122,8 +122,6 @@ const ChangePassword = () => {
         <Button variant="primary" type="submit">
           Submit
         </Button>
-
-
       </Form>
       {showModal && (
         <>
@@ -132,12 +130,13 @@ const ChangePassword = () => {
             show={showModal}
             setShowModal={setShowModal}
             modalTitle="Your password has been changed sucessfully"
-            functionDispatch={() => dispatch(logout())}
+            functionDispatch={() => {
+              dispatch(logout());
+            }}
             buttonMessage={"Navigate To Login"}
             navigateTo={"/admin/login"}
             transactionMessage={transactionPassword?.transactionPassword}
           />
-
         </>
       )}
     </div>
