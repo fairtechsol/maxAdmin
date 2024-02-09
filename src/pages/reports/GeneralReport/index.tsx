@@ -30,7 +30,7 @@ const columns: Column[] = [
 
 const options = [
   { value: "balance", label: "General Report" },
-  { value: "creditRefrence", label: "Credit Referance Report" },
+  { value: "creditRefrence", label: "Credit Reference Report" },
 ];
 
 const GeneralReport = () => {
@@ -41,7 +41,7 @@ const GeneralReport = () => {
     label: "General Report",
   });
 
-  useEffect(() => {}, [tableConfig]);
+  useEffect(() => { }, [tableConfig]);
 
   const handleType = (type: any) => {
     setSelectType(type);
@@ -120,6 +120,18 @@ const GeneralReport = () => {
               ))}
             </tr>
           ))}
+        <tr>
+          <td></td>
+          <td>General Total</td>
+          <td>0</td>
+          <td></td>
+          <td>General Total</td>
+          <td>
+            {gameGeneralList?.usersData?.reduce((acc: any, user: any) => {
+              return acc + (user?.userBal?.currentBalance || 0) + (user?.creditRefrence || 0);
+            }, 0)}
+          </td>
+        </tr>
       </CustomTable>
     </div>
   );

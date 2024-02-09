@@ -15,7 +15,7 @@ import { ApiConstants } from "../../utils/Constants";
 // Example usage
 const columns: Column[] = [
   { id: "username", label: "User Name", colSpan: 4 },
-  { id: "creditReferance", label: "Credit Referance" },
+  { id: "creditReferance", label: "Credit Reference" },
   { id: "ust", label: "U St" },
   { id: "bst", label: "B St" },
   { id: "exposureLimit", label: "Exposure Limit" },
