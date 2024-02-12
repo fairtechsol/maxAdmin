@@ -22,7 +22,7 @@ export const ApiConstants = {
     USER_MATCH_LOCK: "/user/userMatchLock",
     USER_MATCH_LOCK_ALL_CHILD: "/user/getMatchLockAllChild",
     USER_DETAIL_FOR_PARENT: "/user/getUserDetailsForParent",
-    USER_CHECK_CHILD_DEACTIVATE: "/user/checkChildDeactivate"
+    USER_CHECK_CHILD_DEACTIVATE: "/user/checkChildDeactivate",
   },
   EXPERT: {
     COMPETITIONLIST: "/expert/match/competitionList/",
@@ -50,24 +50,27 @@ export const ApiConstants = {
 };
 
 export const Constants = {
-  apiBasePath: "http://3.89.232.255:5000",
-  thirdParty: "http://3.89.232.255:3200",
-  expertPath: "http://3.89.232.255:6060",
+  apiBasePath: "http://54.208.19.89:5000",
+  thirdParty: "http://54.208.19.89:3200",
+  expertPath: "http://54.208.19.89:6060",
+  localPath: "http://localhost:5000",
+  localPathThird: "http://localhost:3200",
+  localPathExpert: "http://localhost:6060",
 };
 
 export const baseUrls = {
   socket:
     process.env.NODE_ENV === "production"
       ? `${Constants.apiBasePath}`
-      : "http://localhost:5000",
+      : `${Constants.localPath}`,
   thirdParty:
     process.env.NODE_ENV === "production"
       ? `${Constants.thirdParty}`
-      : "http://localhost:3200",
+      : `${Constants.localPathThird}`,
   expertSocket:
     process.env.NODE_ENV === "production"
       ? `${Constants.expertPath}`
-      : "http://localhost:6060",
+      : `${Constants.localPathExpert}`,
 };
 
 export const teamStatus = {
