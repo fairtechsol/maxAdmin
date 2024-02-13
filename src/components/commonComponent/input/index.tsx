@@ -1,6 +1,7 @@
 import { Form } from "react-bootstrap";
 import CustomErrorMessage from "./CustomErrorMessage";
 import React from "react";
+import "./style.scss";
 const CustomInput = (props: any) => {
   const {
     title,
@@ -23,7 +24,7 @@ const CustomInput = (props: any) => {
     <>
       <Form.Group className={`${props.customstyle} ${formInline ? "row" : ""}`}>
         {title ? (
-          <Form.Label className={`col-${formInline ? labelCol : ""}`}>
+          <Form.Label className={`col-${formInline ? labelCol : ""} custom-label`}>
             {title}
           </Form.Label>
         ) : (
