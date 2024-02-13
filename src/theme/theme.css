@@ -3975,6 +3975,7 @@ textarea.form-control-lg {
 }
 .navbar-nav .dropdown-menu {
   position: static;
+  margin-top: 0;
 }
 
 .navbar-text {
