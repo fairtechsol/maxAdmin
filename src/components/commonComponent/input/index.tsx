@@ -1,7 +1,7 @@
 import { Form } from "react-bootstrap";
 import CustomErrorMessage from "./CustomErrorMessage";
 import React from "react";
-import "./style.scss";
+import { numberInputOnWheelPreventChange } from "../../../helpers";
 const CustomInput = (props: any) => {
   const {
     title,
@@ -34,6 +34,7 @@ const CustomInput = (props: any) => {
           disabled={disabled}
           className={`col-${formInline ? inputCol : ""} bg-${bgColor}`}
           name={id}
+          onWheel={numberInputOnWheelPreventChange}
           {...prop}
           style={{ ...inlineStyle }}
         />
