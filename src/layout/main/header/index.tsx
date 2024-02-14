@@ -104,7 +104,9 @@ const Topbar = (props: any) => {
 
 
   const handleSubmit = (e: any) => {
-    console.log(e.target.value, "aflatoor");
+    // console.log(e.target.value, "aflatoor");
+    e.preventDefault();
+    setSearchValue(null);
     setSearchModal(true);
   };
 
@@ -306,7 +308,7 @@ const Topbar = (props: any) => {
             </Form>
             */}
           </div>
-          <Form >
+          <Form className="headerSearch" >
             <div>
               <Select
                 value={searchValue}
