@@ -58,7 +58,7 @@ function SessionMarketTable({
                       dispatch(getRunAmount(JSON.parse(item)?.id));
                     }}
                   >
-                    <Link to="" className="backLayRunner-country title-14">
+                    <Link to="" className="backLayRunner-country title-14 defaultBlue">
                       {JSON.parse(item)?.name}
                     </Link>
                   </div>

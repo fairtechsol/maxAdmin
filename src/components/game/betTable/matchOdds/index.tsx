@@ -63,9 +63,8 @@ function MatchOdds({
                   <td>
                     <div className="backLayRunner d-flex flex-column px-1 w-100">
                       <span
-                        className={`backLayRunner-country title-12  ${
-                          isMobile ? "f900" : "f600"
-                        } `}
+                        className={`backLayRunner-country title-12  ${isMobile ? "f900" : "f600"
+                          } `}
                       >
                         {data?.type === "tiedMatch1"
                           ? indexes === 0
@@ -77,17 +76,16 @@ function MatchOdds({
                         <span className="title-14">
                           {data?.type === "tiedMatch1"
                             ? indexes === 0
-                              ? matchDetails?.profitLossDataMatch?.yesRateTie ??
-                                0
-                              : matchDetails?.profitLossDataMatch?.noRateTie ??
-                                0
-                            : matchDetails?.profitLossDataMatch?.[
-                                `team${matchs}Rate`
-                              ]
-                            ? matchDetails?.profitLossDataMatch?.[
-                                `team${matchs}Rate`
-                              ]
-                            : 0}
+                              ? <span className={matchDetails?.profitLossDataMatch?.yesRateTie < 0 ? "color-red" : "color-green"}>
+                                {matchDetails?.profitLossDataMatch?.yesRateTie ?? 0} 
+                              </span>
+                              : <span className={matchDetails?.profitLossDataMatch?.noRateTie < 0 ? "color-red" : "color-green"}>
+                                {matchDetails?.profitLossDataMatch?.noRateTie ?? 0} 
+                              </span>
+                            : <span className={matchDetails?.profitLossDataMatch?.[`team${matchs}Rate`] < 0 ? "color-red" : "color-green"}>
+                              {matchDetails?.profitLossDataMatch?.[`team${matchs}Rate`] ?? 0}
+                            </span>
+                          }
                         </span>
                         <span className={`title-14`}></span>
                       </div>

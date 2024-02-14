@@ -101,6 +101,9 @@ th{
 .bg-defaultBlue{
   background-color: $defaultBlue !important ;
 }
+.defaultBlue{
+color: $defaultBlue !important ;
+}
 .bg-green{
   background-color: $green;
 }
@@ -118,6 +121,13 @@ th{
   height: 35px !important;
   width: 35px !important;
   position: relative;
+}
+
+.color-green {
+  color: $green !important;
+}
+.color-red {
+  color: $pdf !important;
 }
 // .btn-close::after{
 //  background: url(../../public/cross.svg) no-repeat !important;
