@@ -28,7 +28,6 @@ const TopbarDropdown = ({ name, options }: ItemProps) => {
     setShow(false);
   };
 
-
   return (
     <NavDropdown
       onMouseEnter={handleMouseEnter}
@@ -90,18 +89,17 @@ const Topbar = (props: any) => {
 
   // const handleSearch = (selectedOption: any) => {
   //   if (selectedOption) {
-  //     setSearchValue(selectedOption.label); 
+  //     setSearchValue(selectedOption.label);
   //     setSearchModal(true); // Open the modal
-  //     debouncedInputValue(selectedOption.label); 
+  //     debouncedInputValue(selectedOption.label);
   //   }
   // };
 
-  const optionslist = searchListData?.users?.map((item: any) => ({
-    value: item?.id,
-    label: item?.userName,
-  })) || [];
-
-
+  const optionslist =
+    searchListData?.users?.map((item: any) => ({
+      value: item?.id,
+      label: item?.userName,
+    })) || [];
 
   const handleSubmit = (e: any) => {
     // console.log(e.target.value, "aflatoor");
@@ -111,52 +109,51 @@ const Topbar = (props: any) => {
   };
 
   const customStyles = {
-    control: (base: any, state: { isFocused: any; }) => ({
+    control: (base: any, state: { isFocused: any }) => ({
       ...base,
       fontFamily: 'Roboto Condensed", sans-serif',
       fontSize: 14,
       border: state.isFocused ? 0 : 0,
       boxShadow: state.isFocused ? 0 : 0,
-      cursor: 'text',
+      cursor: "text",
       borderRadius: "3px",
-      borderBottom: 'solid 1px',
-
+      borderBottom: "solid 1px",
     }),
 
     option: (styles: any, { isFocused }: any) => {
       return {
         ...styles,
-        cursor: 'pointer',
-        backgroundColor: isFocused ? 'white' : 'white',
-        color: isFocused ? 'rgba(255, 80, 86)' : 'black',
+        cursor: "pointer",
+        backgroundColor: isFocused ? "white" : "white",
+        color: isFocused ? "rgba(255, 80, 86)" : "black",
         lineHeight: 2,
-        height: "30px"
+        height: "30px",
       };
     },
 
     input: (styles: any) => ({
       ...styles,
 
-      color: 'black',
-      fontFamily: 'Times New Roman, Times, Serif',
-      padding: "0px"
+      color: "black",
+      fontFamily: "Times New Roman, Times, Serif",
+      padding: "0px",
     }),
 
     menu: (styles: any) => ({
       ...styles,
       marginTop: 0,
-      boxShadow: 'none',
+      boxShadow: "none",
       borderRadius: 0,
     }),
 
     singleValue: (styles: any) => ({
       ...styles,
-      color: 'rgba(255, 80, 86)',
+      color: "rgba(255, 80, 86)",
     }),
     container: (provided: any) => ({
       ...provided,
-      width: '180px',
-      borderRadius: "10px"
+      width: "180px",
+      borderRadius: "10px",
     }),
 
     dropdownIndicator: (provided: any) => ({
@@ -164,17 +161,15 @@ const Topbar = (props: any) => {
     }),
   };
 
-
   const DropdownIndicator = (props: any) => {
     return (
       components.DropdownIndicator && (
-        <components.DropdownIndicator {...props} >
+        <components.DropdownIndicator {...props}>
           <FaSearchPlus size={24} onClick={handleSubmit} />
         </components.DropdownIndicator>
       )
     );
   };
-
 
   return (
     <>
@@ -308,7 +303,7 @@ const Topbar = (props: any) => {
             </Form>
             */}
           </div>
-          <Form className="headerSearch" >
+          <Form className="headerSearch">
             <div>
               <Select
                 value={searchValue}
@@ -325,9 +320,7 @@ const Topbar = (props: any) => {
               />
             </div>
           </Form>
-
         </Container>
-
       </Navbar>
       <CustomModal
         customClass="modalFull-90 "
@@ -339,8 +332,6 @@ const Topbar = (props: any) => {
         <MainHeader userId={searchValue?.value} />
       </CustomModal>
     </>
-
-
   );
 };
 
