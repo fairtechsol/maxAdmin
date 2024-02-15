@@ -26,7 +26,8 @@ export const getUsers = createAsyncThunk<any, GetUsers | undefined>(
   async (requestData) => {
     try {
       const resp = await service.get(
-        `${ApiConstants.USER.LIST}?searchBy=user.userName&keyword=${requestData?.userName ? requestData?.userName : ""
+        `${ApiConstants.USER.LIST}?searchBy=user.userName&keyword=${
+          requestData?.userName ? requestData?.userName : ""
         }&page=${requestData?.page || 1}&limit=${requestData?.limit || 10}`
       );
       if (resp) {
@@ -282,6 +283,13 @@ export const handleExport = createAsyncThunk<any, any>(
       const err = error as AxiosError;
       return thunkApi.rejectWithValue(err.response?.status);
     }
+  }
+);
+
+export const updateUserBalance = createAsyncThunk<any, any>(
+  "updateUserBalance",
+  async (data) => {
+    return data;
   }
 );
 

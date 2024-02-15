@@ -3,7 +3,10 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import LoggedUserDetail from "../../components/listClients/loggedUserDetail";
-import { getUsersProfile } from "../../store/actions/user/userActions";
+import {
+  getUsersProfile,
+  updateUserBalance,
+} from "../../store/actions/user/userActions";
 import { AppDispatch } from "../../store/store";
 import "../layout.scss";
 import Topbar from "./header";
@@ -20,6 +23,10 @@ function MainLayout() {
     setToggle(!toggle);
   };
 
+  const updateLoggedUserBalance = (event: any) => {
+    dispatch(updateUserBalance(event));
+  };
+
   useEffect(() => {
     if (!sessionStorage.getItem("userToken")) {
       navigate("/admin/login");
@@ -31,6 +38,7 @@ function MainLayout() {
     if (sessionStorage.getItem("userToken")) {
       socketService.connect();
       socketService.auth.logout();
+      socketService.match.updateUserBalance(updateLoggedUserBalance);
     }
     return () => {
       socketService.disconnect();

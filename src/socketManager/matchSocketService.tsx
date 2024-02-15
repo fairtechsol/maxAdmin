@@ -37,4 +37,7 @@ export const matchSocketService = {
   userMatchBetPlaced: (callback: any) => {
     socket.on("userMatchBetPlaced", callback);
   },
+  updateUserBalance: (callback: any) => {
+    socket.on("updateUserBalance", callback);
+  },
 };

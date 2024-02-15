@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   getUsersProfile,
   profileReset,
-
+  updateUserBalance,
 } from "../../../store/actions/user/userActions";
 
 interface InitialState {
@@ -10,11 +10,9 @@ interface InitialState {
   success: boolean;
   loading: boolean;
   error: any;
-
 }
 
 const initialState: InitialState = {
-
   userDetail: null,
   loading: false,
   success: false,
@@ -43,8 +41,17 @@ const profileSlice = createSlice({
       })
       .addCase(profileReset, (state) => {
         return { ...state, success: false };
+      })
+      .addCase(updateUserBalance.fulfilled, (state, action) => {
+        state.userDetail = {
+          ...state.userDetail,
+          userBal: {
+            ...state.userDetail.userBal,
+            currentBalance: action.payload.currentBalance,
+            profitLoss: action.payload.profitLoss,
+          },
+        };
       });
-    
   },
 });
 
