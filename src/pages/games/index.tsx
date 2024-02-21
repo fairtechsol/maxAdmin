@@ -24,7 +24,7 @@ const Games = () => {
 
   const { id } = useParams();
 
-  const { matchDetails } = useSelector(
+  const { matchDetails, success } = useSelector(
     (state: RootState) => state.match.matchListSlice
   );
 
@@ -82,7 +82,7 @@ const Games = () => {
 
   useEffect(() => {
     try {
-      if (id) {
+      if (success) {
         socketService.match.joinMatchRoom(id, "superAdmin");
         socketService.match.getMatchRates(id, updateMatchDetailToRedux);
         socketService.match.matchDeleteBet(handleDeleteBet);
@@ -93,10 +93,26 @@ const Games = () => {
     } catch (e) {
       console.log(e);
     }
-    return () => {
-      socketService.match.leaveMatchRoom(id);
+  }, [location?.pathname, success]);
+
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        if (id) {
+          dispatch(matchDetailAction(id));
+          dispatch(getPlacedBets(id));
+        }
+      } else if (document.visibilityState === "hidden") {
+        socketService.match.leaveMatchRoom(id);
+        socketService.match.getMatchRatesOff(id, updateMatchDetailToRedux);
+      }
     };
-  }, [location?.pathname]);
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, []);
 
   return (
     <div className="gamePage">
