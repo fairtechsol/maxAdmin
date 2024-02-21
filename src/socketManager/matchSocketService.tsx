@@ -22,7 +22,10 @@ export const matchSocketService = {
   matchAdded: (callback: any) => {
     socket.on("addMatch", callback);
   },
-  getMatchRates: (matchId: string, callback: any) => {
+  getMatchRates: (matchId: any, callback: any) => {
+    thirdParty.on(`liveData${matchId}`, callback);
+  },
+  getMatchRatesOff: (matchId: any, callback: any) => {
     thirdParty.on(`liveData${matchId}`, callback);
   },
   userSessionBetPlaced: (callback: any) => {

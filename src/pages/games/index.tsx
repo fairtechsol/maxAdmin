@@ -24,7 +24,7 @@ const Games = () => {
 
   const { id } = useParams();
 
-  const { matchDetails } = useSelector(
+  const { matchDetails, success } = useSelector(
     (state: RootState) => state.match.matchListSlice
   );
 
@@ -82,7 +82,7 @@ const Games = () => {
 
   useEffect(() => {
     try {
-      if (id) {
+      if (success) {
         socketService.match.joinMatchRoom(id, "superAdmin");
         socketService.match.getMatchRates(id, updateMatchDetailToRedux);
         socketService.match.matchDeleteBet(handleDeleteBet);
@@ -95,8 +95,9 @@ const Games = () => {
     }
     return () => {
       socketService.match.leaveMatchRoom(id);
+      socketService.match.getMatchRatesOff(id, updateMatchDetailToRedux);
     };
-  }, [location?.pathname]);
+  }, [location?.pathname, success]);
 
   return (
     <div className="gamePage">
