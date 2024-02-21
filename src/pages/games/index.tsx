@@ -93,11 +93,26 @@ const Games = () => {
     } catch (e) {
       console.log(e);
     }
-    return () => {
-      socketService.match.leaveMatchRoom(id);
-      socketService.match.getMatchRatesOff(id, updateMatchDetailToRedux);
-    };
   }, [location?.pathname, success]);
+
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        if (id) {
+          dispatch(matchDetailAction(id));
+          dispatch(getPlacedBets(id));
+        }
+      } else if (document.visibilityState === "hidden") {
+        socketService.match.leaveMatchRoom(id);
+        socketService.match.getMatchRatesOff(id, updateMatchDetailToRedux);
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, []);
 
   return (
     <div className="gamePage">
