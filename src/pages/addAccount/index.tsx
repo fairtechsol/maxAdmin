@@ -449,6 +449,12 @@ const AddAccount = () => {
                           type={"number"}
                           min={0}
                           {...getFieldProps("commissionDownPartnership")}
+                          disabled={
+                            formik.values.accountType.value === "user" ||
+                            userDetail.roleName === "agent"
+                              ? true
+                              : false
+                          }
                         />
                       </td>
                     </tr>
