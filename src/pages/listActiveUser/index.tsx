@@ -254,13 +254,6 @@ const ListActiveInactiveUser: React.FC = () => {
                                   return (
                                     <CustomButton
                                       variant="dark"
-                                      disabled={
-                                        item?.name === "L"
-                                          ? roleName !== "user"
-                                            ? true
-                                            : false
-                                          : false
-                                      }
                                       onClick={() => {
                                         item.onClick(item?.id, userItem);
                                       }}

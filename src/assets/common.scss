@@ -13,7 +13,21 @@ body table.table{
 .pdf{
  background-color: $pdf !important;
 }
-
+.divLoading{
+  display: block;
+  position: fixed;
+  z-index: 9999;
+  background-image: url(../assets/images/loader.gif);
+  background-color: #666;
+  opacity: 0.4;
+  background-repeat: no-repeat;
+  background-position: center;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  top: 0;
+  background-size: 100px 100px;
+}
 // action buttons
 .actionBtn{
   padding: 0px 10px !important;

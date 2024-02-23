@@ -33,6 +33,10 @@ const ExposureLimit = ({ setShow, userData }: any) => {
 
     validationSchema: widthdrawAmountValidations,
     onSubmit: (values: any) => {
+      if (userData?.roleName !== "user") {
+        alert("This function work only on User Account.");
+        return;
+      }
       try {
         let payload = {
           userId: userData?.id,
