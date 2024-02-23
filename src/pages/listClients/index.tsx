@@ -182,32 +182,16 @@ const ListClent: React.FC = () => {
                       <td className="text-end">{casinoTotal}</td>
                       <td>
                         <div className="d-flex gap-1 border-right-0 border-left-0">
+
                           {actionButtons?.map((item) => {
                             return (
                               <CustomButton
                                 variant="dark"
-                                disabled={
-                                  item?.name === "L"
-                                    ? roleName !== "user"
-                                      ? true
-                                      : false
-                                    : false
-                                }
                                 onClick={() => {
                                   item.onClick(item?.id, userItem);
                                 }}
                                 key={item?.id}
-                                className={`actionBtn ${
-                                  (
-                                    item?.name === "L"
-                                      ? roleName !== "user"
-                                        ? true
-                                        : false
-                                      : false
-                                  )
-                                    ? "disabled"
-                                    : ""
-                                }`}
+                                className={`actionBtn`}
                               >
                                 {item?.name}
                               </CustomButton>
