@@ -28,7 +28,9 @@ export const getUsers = createAsyncThunk<any, GetUsers | undefined>(
       const resp = await service.get(
         `${ApiConstants.USER.LIST}?searchBy=user.userName&keyword=${
           requestData?.userName ? requestData?.userName : ""
-        }&page=${requestData?.page || 1}&limit=${requestData?.limit || 10}`
+        }&page=${requestData?.page || 1}&limit=${
+          requestData?.limit || 10
+        }&sort=user.createdAt:DESC`
       );
       if (resp) {
         return resp?.data;
