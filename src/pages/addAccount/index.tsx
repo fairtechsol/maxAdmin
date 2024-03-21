@@ -499,7 +499,7 @@ const AddAccount = () => {
                           type={"number"}
                           disabled={
                             formik.values.accountType.value === "user" ||
-                            userDetail.roleName === "agent"
+                            userDetail?.roleName === "agent"
                               ? true
                               : false
                           }
