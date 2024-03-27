@@ -1,4 +1,4 @@
-import { memo, useMemo, useState } from "react";
+import React, { memo, useMemo, useState } from "react";
 import { Container, Form, Nav, NavDropdown, Navbar } from "react-bootstrap";
 import { FaSearchPlus, FaTimes } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
@@ -11,6 +11,7 @@ import { logout } from "../../../store/actions/auth/authActions";
 import { AppDispatch, RootState } from "../../../store/store";
 import { debounce } from "lodash";
 import { searchList } from "../../../store/actions/user/userActions";
+// import isMobile from "../../../utils/screenDimension";
 // import styled from '@emotion/styled';
 
 interface ItemProps {
@@ -118,6 +119,8 @@ const Topbar = (props: any) => {
       cursor: "text",
       borderRadius: "3px",
       borderBottom: "solid 1px",
+      zIndex: 999,
+      height: "1px"
     }),
 
     option: (styles: any, { isFocused }: any) => {
@@ -152,7 +155,7 @@ const Topbar = (props: any) => {
     }),
     container: (provided: any) => ({
       ...provided,
-      width: "180px",
+      width: { lg: "180px", xs: "150px" },
       borderRadius: "10px",
     }),
 
@@ -171,17 +174,24 @@ const Topbar = (props: any) => {
     );
   };
 
+
+  const [isMobile, setIsMobile] = React.useState(window.innerWidth <= 768);
+  // const [searchValue, setSearchValue] = React.useState(null);
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <>
       <Navbar expand="lg" className="bg-primary" data-bs-theme="light">
         <Container fluid>
-          <Navbar.Brand
-            href="/admin/active-inactive-user-list"
-            className="me-1"
-          >
-            <LogoSection width="120px" />
-          </Navbar.Brand>
-          <div onClick={props.onClick}>
+          <span onClick={props.onClick}>
             {props.toggle ? (
               <div style={{ width: "28px" }}>
                 <FaTimes color="white" size={20} />
@@ -193,9 +203,76 @@ const Topbar = (props: any) => {
                 <span></span>
               </div>
             )}
-          </div>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
+          </span>
+          <Navbar.Brand
+            href="/admin/active-inactive-user-list"
+          className="me-2"
+          >
+            <LogoSection width="120px" />
+          </Navbar.Brand>
+          {isMobile && (
+            <div className="user-dropdown-container">
+              <NavDropdown
+                id="nav-dropdown-dark-example"
+                title={userDetail && userDetail?.userName}
+                menuVariant="dark"
+              >
+                <NavDropdown.Item href="/admin/secure-auth">
+                  Secure Auth Verification
+                </NavDropdown.Item>
+                <NavDropdown.Item href="/admin/change_password">
+                  Change Password
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  onClick={() => {
+                    dispatch(logout());
+                  }}
+                  href="#action/3.4"
+                >
+                  Logout
+                </NavDropdown.Item>
+              </NavDropdown>
+              <Form className="headerSearch">
+              <div>
+                <Select
+                  value={searchValue}
+                  options={optionslist}
+                  onInputChange={handleSearch}
+                  placeholder="All Client"
+                  openMenuOnClick={false}
+                  styles={customStyles}
+                  classNamePrefix="select"
+                  onChange={(item) => {
+                    setSearchValue(item);
+                  }}
+                  components={{ DropdownIndicator }}
+                />
+              </div>
+            </Form>
+            </div>
+          )}
+          {/* {isMobile && (
+            <Form className="headerSearch">
+              <div>
+                <Select
+                  value={searchValue}
+                  options={optionslist}
+                  onInputChange={handleSearch}
+                  placeholder="All Client"
+                  openMenuOnClick={false}
+                  styles={customStyles}
+                  classNamePrefix="select"
+                  onChange={(item) => {
+                    setSearchValue(item);
+                  }}
+                  components={{ DropdownIndicator }}
+                />
+              </div>
+            </Form>
+          )} */}
+
+          {/* <Navbar.Toggle aria-controls="basic-navbar-nav" /> */}
+          {!isMobile && <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link className="navbar-mainLink" href="/admin/listClients">
                 List of clients
@@ -245,8 +322,8 @@ const Topbar = (props: any) => {
                 ]}
               />
             </Nav>
-          </Navbar.Collapse>
-          <div className="d-flex algin-items-center">
+          </Navbar.Collapse>}
+          {!isMobile && <div className="d-flex algin-items-center">
             <Navbar.Collapse id="navbar-dark-example">
               <Nav>
                 <NavDropdown
@@ -302,8 +379,9 @@ const Topbar = (props: any) => {
               </Form.Group>
             </Form>
             */}
-          </div>
-          <Form className="headerSearch">
+          </div>}
+
+          {!isMobile && <Form className="headerSearch">
             <div>
               <Select
                 value={searchValue}
@@ -319,9 +397,11 @@ const Topbar = (props: any) => {
                 components={{ DropdownIndicator }}
               />
             </div>
-          </Form>
+          </Form>}
         </Container>
+
       </Navbar>
+
       <CustomModal
         customClass="modalFull-90 "
         headerStyle="bg-secondary py-2"
