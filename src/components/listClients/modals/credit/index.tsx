@@ -11,6 +11,7 @@ import {
 import { AppDispatch, RootState } from "../../../../store/store";
 import CustomInput from "../../../commonComponent/input";
 import ModalFooter from "../footer";
+import Loader from "../../../commonComponent/loader";
 
 const initialValues: any = {
   userId: "any",
@@ -22,7 +23,7 @@ const initialValues: any = {
 const Credit = ({ userData, setShow }: any) => {
   const dispatch: AppDispatch = useDispatch();
 
-  const { modalSuccess } = useSelector(
+  const { modalSuccess, loading } = useSelector(
     (state: RootState) => state.user.userList
   );
 
@@ -60,6 +61,7 @@ const Credit = ({ userData, setShow }: any) => {
 
   return (
     <>
+      {loading ? <Loader /> : null}
       <form onSubmit={handleSubmit}>
         <Stack className="listClientModals" gap={0}>
           <div className="input-container mt-3">
@@ -77,7 +79,7 @@ const Credit = ({ userData, setShow }: any) => {
                   customStyle="input-box"
                   bgColor="gray"
                   disabled={true}
-                  // id="oldCreditInput"
+                // id="oldCreditInput"
                 />
               </Col>
             </Row>
@@ -115,7 +117,7 @@ const Credit = ({ userData, setShow }: any) => {
                   onChange={handleChange}
                   type="password"
                   customStyle="input-box"
-                  // id="transactionPasswordInput"
+                // id="transactionPasswordInput"
                 />
               </Col>
             </Row>

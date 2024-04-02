@@ -12,6 +12,7 @@ import {
 import { AppDispatch, RootState } from "../../../../store/store";
 import CustomInput from "../../../commonComponent/input";
 import ModalFooter from "../footer";
+import Loader from "../../../commonComponent/loader";
 
 const initialValues: any = {
   userId: "",
@@ -30,7 +31,7 @@ const ChangeStatus = ({ setShow, userData }: any) => {
   const [lockUnlockObj, setLockUnlockObj] = useState(defaultLockUnlockObj);
   const dispatch: AppDispatch = useDispatch();
 
-  const { modalSuccess } = useSelector(
+  const { modalSuccess, loading } = useSelector(
     (state: RootState) => state.user.userList
   );
 
@@ -60,150 +61,152 @@ const ChangeStatus = ({ setShow, userData }: any) => {
   }, [modalSuccess]);
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Stack className="listClientModals" gap={0}>
-        <div className="input-container">
-          <Row>
-            <Col sm={12}>
-              <div className="d-flex align-items-center justify-content-between">
-                <h3 className="text-secondary title-20 fw-normal">
-                  {userData?.userName}
-                </h3>
-                <h3
-                  className={`${
-                    !lockUnlockObj?.allBlocked ? "text-green" : "text-red"
-                  } title-14`}
-                >
-                  {!lockUnlockObj?.allBlocked ? "Active" : "InActive"}
-                </h3>
-              </div>
-              <div className="row">
-                <Col sm={6} className="text-center">
-                  <p className="m-0 mb-1 title-14">User Active</p>
-                  <label>
-                    <Switch
-                      onChange={() => {
-                        setLockUnlockObj((prev: any) => {
-                          return {
-                            ...prev,
-                            allBlocked: !lockUnlockObj?.allBlocked,
-                          };
-                        });
-                      }}
-                      checked={!lockUnlockObj?.allBlocked}
-                      uncheckedIcon={
-                        <span
-                          style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            height: "100%",
-                            fontSize: 12,
-                            fontWeight: 600,
-                          }}
-                        >
-                          OFF
-                        </span>
-                      }
-                      checkedIcon={
-                        <span
-                          style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            height: "100%",
-                            fontSize: 12,
-                            fontWeight: 600,
-                            paddingRight: 2,
-                          }}
-                        >
-                          ON
-                        </span>
-                      }
-                      height={24}
-                      width={60}
-                    />
-                  </label>
-                </Col>
+    <>
+      {loading ? <Loader /> : null}
+      <form onSubmit={handleSubmit}>
+        <Stack className="listClientModals" gap={0}>
+          <div className="input-container">
+            <Row>
+              <Col sm={12}>
+                <div className="d-flex align-items-center justify-content-between">
+                  <h3 className="text-secondary title-20 fw-normal">
+                    {userData?.userName}
+                  </h3>
+                  <h3
+                    className={`${!lockUnlockObj?.allBlocked ? "text-green" : "text-red"
+                      } title-14`}
+                  >
+                    {!lockUnlockObj?.allBlocked ? "Active" : "InActive"}
+                  </h3>
+                </div>
+                <div className="row">
+                  <Col sm={6} className="text-center">
+                    <p className="m-0 mb-1 title-14">User Active</p>
+                    <label>
+                      <Switch
+                        onChange={() => {
+                          setLockUnlockObj((prev: any) => {
+                            return {
+                              ...prev,
+                              allBlocked: !lockUnlockObj?.allBlocked,
+                            };
+                          });
+                        }}
+                        checked={!lockUnlockObj?.allBlocked}
+                        uncheckedIcon={
+                          <span
+                            style={{
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              height: "100%",
+                              fontSize: 12,
+                              fontWeight: 600,
+                            }}
+                          >
+                            OFF
+                          </span>
+                        }
+                        checkedIcon={
+                          <span
+                            style={{
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              height: "100%",
+                              fontSize: 12,
+                              fontWeight: 600,
+                              paddingRight: 2,
+                            }}
+                          >
+                            ON
+                          </span>
+                        }
+                        height={24}
+                        width={60}
+                      />
+                    </label>
+                  </Col>
 
-                <Col sm={6} className="text-center">
-                  <p className="m-0 mb-1 title-14">Bet Active</p>
-                  <label>
-                    <Switch
-                      onChange={() => {
-                        setLockUnlockObj((prev: any) => {
-                          return {
-                            ...prev,
-                            betBlocked: !lockUnlockObj?.betBlocked,
-                          };
-                        });
-                      }}
-                      checked={!lockUnlockObj?.betBlocked}
-                      uncheckedIcon={
-                        <span
-                          style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            height: "100%",
-                            fontSize: 12,
-                            fontWeight: 600,
-                          }}
-                        >
-                          OFF
-                        </span>
-                      }
-                      checkedIcon={
-                        <span
-                          style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            height: "100%",
-                            fontSize: 12,
-                            fontWeight: 600,
-                            paddingRight: 2,
-                          }}
-                        >
-                          ON
-                        </span>
-                      }
-                      height={24}
-                      width={60}
-                    />
-                  </label>
-                </Col>
-              </div>
-            </Col>
-            <Col sm={8}></Col>
-          </Row>
-        </div>
-        <div className="input-container mt-5">
-          <Row>
-            <Col sm={4}>
-              <span>Transaction password</span>
-            </Col>
-            <Col sm={8}>
-              <CustomInput
-                type="password"
-                name="transactionPassword"
-                id="transactionPassword"
-                customStyle="input-box"
-                value={values.transactionPassword}
-                onChange={handleChange}
-              />
-            </Col>
-          </Row>
-        </div>
-      </Stack>
-      <Modal.Footer className="border-0 mt-3">
-        <ModalFooter
-          clickHandler={() => {
-            setShow(false);
-          }}
-        />
-      </Modal.Footer>
-    </form>
+                  <Col sm={6} className="text-center">
+                    <p className="m-0 mb-1 title-14">Bet Active</p>
+                    <label>
+                      <Switch
+                        onChange={() => {
+                          setLockUnlockObj((prev: any) => {
+                            return {
+                              ...prev,
+                              betBlocked: !lockUnlockObj?.betBlocked,
+                            };
+                          });
+                        }}
+                        checked={!lockUnlockObj?.betBlocked}
+                        uncheckedIcon={
+                          <span
+                            style={{
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              height: "100%",
+                              fontSize: 12,
+                              fontWeight: 600,
+                            }}
+                          >
+                            OFF
+                          </span>
+                        }
+                        checkedIcon={
+                          <span
+                            style={{
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              height: "100%",
+                              fontSize: 12,
+                              fontWeight: 600,
+                              paddingRight: 2,
+                            }}
+                          >
+                            ON
+                          </span>
+                        }
+                        height={24}
+                        width={60}
+                      />
+                    </label>
+                  </Col>
+                </div>
+              </Col>
+              <Col sm={8}></Col>
+            </Row>
+          </div>
+          <div className="input-container mt-5">
+            <Row>
+              <Col sm={4}>
+                <span>Transaction password</span>
+              </Col>
+              <Col sm={8}>
+                <CustomInput
+                  type="password"
+                  name="transactionPassword"
+                  id="transactionPassword"
+                  customStyle="input-box"
+                  value={values.transactionPassword}
+                  onChange={handleChange}
+                />
+              </Col>
+            </Row>
+          </div>
+        </Stack>
+        <Modal.Footer className="border-0 mt-3">
+          <ModalFooter
+            clickHandler={() => {
+              setShow(false);
+            }}
+          />
+        </Modal.Footer>
+      </form>
+    </>
   );
 };
 
