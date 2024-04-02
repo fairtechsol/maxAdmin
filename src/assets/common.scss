@@ -85,7 +85,24 @@ th{
 }
 
 
+.nav-pills .nav-link:not(.active) {
+  color: $defaultBlue;
+  transition: color 0.9s ease; 
+}
 
+
+.nav-pills .nav-link.active {
+  color: black; 
+}
+
+
+.nav-pills .nav-link:hover {
+  border: .5px solid grey; 
+}
+
+.defaultBlue {
+  color: $defaultBlue; 
+}
 
 /* ====== bg Colors start ====  */
 .bg-secondaryLight{

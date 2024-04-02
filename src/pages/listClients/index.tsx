@@ -116,7 +116,7 @@ const ListClent: React.FC = () => {
               isSearch={true}
               endpoint={ApiConstants.USER.LIST}
               isPagination={true}
-              isSort={true}
+              // isSort={true}
             >
               <tr>
                 {columns?.map((item, index) => {

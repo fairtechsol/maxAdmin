@@ -15,6 +15,9 @@ interface GetUsers {
   userName?: string;
   page?: number;
   limit?: number;
+  sort?:any;
+  order?:any;
+
 }
 interface SearchUsers {
   userName?: string;
@@ -30,7 +33,7 @@ export const getUsers = createAsyncThunk<any, GetUsers | undefined>(
           requestData?.userName ? requestData?.userName : ""
         }&page=${requestData?.page || 1}&limit=${
           requestData?.limit || 10
-        }&sort=user.createdAt:DESC`
+        }&sort=user.${requestData?.sort}:${requestData?.order}`
       );
       if (resp) {
         return resp?.data;

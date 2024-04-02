@@ -12,6 +12,7 @@ import { AppDispatch, RootState } from "../../../../store/store";
 import CustomInput from "../../../commonComponent/input";
 import ModalFooter from "../footer";
 import { widthdrawAmountValidations } from "../../../../utils/fieldValidations/addAccount";
+import Loader from "../../../commonComponent/loader";
 
 const initialValues: any = {
   initialBalance: "",
@@ -26,7 +27,7 @@ const initialValues: any = {
 const Withdraw = ({ userData, setShow }: any) => {
   const dispatch: AppDispatch = useDispatch();
 
-  const { modalSuccess } = useSelector(
+  const { modalSuccess,loading } = useSelector(
     (state: RootState) => state.user.userList
   );
   const { userDetail } = useSelector((state: RootState) => state.user.profile);
@@ -90,6 +91,7 @@ const Withdraw = ({ userData, setShow }: any) => {
 
   return (
     <>
+       {loading ? <Loader /> : null}
       <form onSubmit={handleSubmit}>
         <Stack className="listClientModals" gap={0}>
           <div className="input-container w-100">

@@ -1,12 +1,13 @@
 import { useFormik } from "formik";
 import { useEffect } from "react";
 import { Col, Modal, Row, Stack } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { changePassword } from "../../../../store/actions/user/userActions";
-import { AppDispatch } from "../../../../store/store";
+import { AppDispatch, RootState } from "../../../../store/store";
 import CustomInput from "../../../commonComponent/input";
 import ModalFooter from "../footer";
 import { oldPasswordValidationSchema } from "../../../../utils/fieldValidations/newPassword";
+import Loader from "../../../commonComponent/loader";
 
 const initialValues: any = {
   userid: "any",
@@ -18,6 +19,10 @@ const initialValues: any = {
 
 const Password = ({ userData, setShow }: any) => {
   const dispatch: AppDispatch = useDispatch();
+
+  const { loading } = useSelector(
+    (state: RootState) => state.user.userList
+  );
 
   const formik = useFormik({
     initialValues: initialValues,
@@ -46,68 +51,71 @@ const Password = ({ userData, setShow }: any) => {
   }, [userData]);
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Stack className="listClientModals" gap={0}>
-        <div className="input-container">
-          <Row>
-            <Col sm={4}>
-              <span>New Password</span>
-            </Col>
-            <Col sm={8}>
-              <CustomInput
-                id="newPassword"
-                type="password"
-                customStyle="input-box"
-                {...getFieldProps("newPassword")}
-                touched={touched.newPassword}
-                errors={errors.newPassword}
-              />
-            </Col>
-          </Row>
-        </div>
-        <div className="input-container mt-3">
-          <Row>
-            <Col sm={4}>
-              <span>Confirm Password</span>
-            </Col>
-            <Col sm={8}>
-              <CustomInput
-                id="confirmPassword"
-                type="password"
-                customStyle="input-box"
-                {...getFieldProps("confirmPassword")}
-                touched={touched.confirmPassword}
-                errors={errors.confirmPassword}
-              />
-            </Col>
-          </Row>
-        </div>
-        <div className="input-container mt-3">
-          <Row>
-            <Col sm={4}>
-              <span>Transaction Password</span>
-            </Col>
-            <Col sm={8}>
-              <CustomInput
-                type="password"
-                customStyle="input-box"
-                id="transactionPassword"
-                {...getFieldProps("transactionPassword")}
-                touched={touched.transactionPassword}
-                errors={errors.transactionPassword}
-              />
-            </Col>
-          </Row>
-        </div>
-      </Stack>
-      <Modal.Footer className="border-0 mt-3">
-        <ModalFooter
-          clickHandler={() => {
-            setShow(false);
-          }}
-        />
-      </Modal.Footer>
-    </form>
+    <>
+      {loading ? <Loader /> : null}
+      <form onSubmit={handleSubmit}>
+        <Stack className="listClientModals" gap={0}>
+          <div className="input-container">
+            <Row>
+              <Col sm={4}>
+                <span>New Password</span>
+              </Col>
+              <Col sm={8}>
+                <CustomInput
+                  id="newPassword"
+                  type="password"
+                  customStyle="input-box"
+                  {...getFieldProps("newPassword")}
+                  touched={touched.newPassword}
+                  errors={errors.newPassword}
+                />
+              </Col>
+            </Row>
+          </div>
+          <div className="input-container mt-3">
+            <Row>
+              <Col sm={4}>
+                <span>Confirm Password</span>
+              </Col>
+              <Col sm={8}>
+                <CustomInput
+                  id="confirmPassword"
+                  type="password"
+                  customStyle="input-box"
+                  {...getFieldProps("confirmPassword")}
+                  touched={touched.confirmPassword}
+                  errors={errors.confirmPassword}
+                />
+              </Col>
+            </Row>
+          </div>
+          <div className="input-container mt-3">
+            <Row>
+              <Col sm={4}>
+                <span>Transaction Password</span>
+              </Col>
+              <Col sm={8}>
+                <CustomInput
+                  type="password"
+                  customStyle="input-box"
+                  id="transactionPassword"
+                  {...getFieldProps("transactionPassword")}
+                  touched={touched.transactionPassword}
+                  errors={errors.transactionPassword}
+                />
+              </Col>
+            </Row>
+          </div>
+        </Stack>
+        <Modal.Footer className="border-0 mt-3">
+          <ModalFooter
+            clickHandler={() => {
+              setShow(false);
+            }}
+          />
+        </Modal.Footer>
+      </form>
+    </>
   );
 };
 

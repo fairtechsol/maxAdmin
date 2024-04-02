@@ -10,14 +10,15 @@ import "../../components/listClients/style.scss";
 import { Column, TableConfig } from "../../models/tableInterface";
 import { getUsers } from "../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../store/store";
+import { ApiConstants } from "../../utils/Constants";
 // Example usage
 const columns: Column[] = [
-  { id: "username", label: "User Name", colSpan: 2 },
-  { id: "creditReferance", label: "Credit Reference" },
+  { id: "userName", label: "User Name", colSpan: 2 },
+  { id: "creditRefrence", label: "Credit Reference" },
   { id: "balance", label: "Balance" },
   { id: "client", label: "Client (P/L)" },
   { id: "exposure", label: "Exposure" },
-  { id: "availBal", label: "Avialable Balance" },
+  { id: "availableBalance", label: "Avialable Balance" },
   { id: "ust", label: "U St" },
   { id: "accountType", label: "B St" },
   { id: "exposureLimit", label: "Exposure Limit" },
@@ -45,8 +46,16 @@ const ListActiveInactiveUser: React.FC = () => {
       userData: userData,
     });
   };
-
-  useEffect(() => {}, [tableConfig]);
+  useEffect(() => { dispatch(
+    
+    getUsers({
+      page: tableConfig?.page || 1,
+      limit: tableConfig?.rowPerPage,
+      userName: tableConfig?.keyword || "",
+      sort: tableConfig?.sort?.key || 'userName',
+      order :tableConfig?.sort?.direction || 'desc'
+    })
+  );}, [tableConfig]);
 
   const actionButtons = [
     {
@@ -108,7 +117,7 @@ const ListActiveInactiveUser: React.FC = () => {
       <Container className="listClient listActiveUser" fluid>
         <Row>
           <Col>
-            <p className="title-22">Account List </p>
+            <p className="title-22">Account List</p>
           </Col>
           <Col>
             <CustomButton
@@ -124,12 +133,12 @@ const ListActiveInactiveUser: React.FC = () => {
             <Tab.Container id="left-tabs-example" defaultActiveKey="first">
               <Nav variant="pills" className="flex-row ">
                 <Nav.Item>
-                  <Nav.Link className="rounded-0" eventKey="first">
+                  <Nav.Link className="rounded-0 " eventKey="first">
                     Active User
                   </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link className="rounded-0" eventKey="second">
+                  <Nav.Link className="rounded-0 " eventKey="second">
                     Deactivate User
                   </Nav.Link>
                 </Nav.Item>
@@ -138,15 +147,18 @@ const ListActiveInactiveUser: React.FC = () => {
               <Tab.Content className="mt-3">
                 <Tab.Pane eventKey="first">
                   <CustomTable
-                    tHeadTheme="border-0 bg-light"
+                    tHeadTheme="border bg-light"
                     customClass="listClientTable commonTable border-top-0 "
                     bordered
                     striped
                     columns={columns}
-                    itemCount={10}
+                    itemCount={userList && userList?.count}
                     setTableConfig={setTableConfig}
                     enablePdfExcel={true}
                     isSearch
+                    isSort={true}
+                    isPagination={true}
+                    endpoint={ApiConstants.USER.LIST}
                   >
                     <tr>
                       {columns?.map((item, index) => {
@@ -278,10 +290,12 @@ const ListActiveInactiveUser: React.FC = () => {
                     bordered
                     striped
                     columns={columns}
-                    itemCount={10}
+                    itemCount={userList && userList?.count}
                     setTableConfig={setTableConfig}
                     enablePdfExcel={true}
                     isSearch
+                    isPagination={true}
+                    endpoint={ApiConstants.USER.LIST}
                   >
                     <tr>
                       {columns?.map((item, index) => {
