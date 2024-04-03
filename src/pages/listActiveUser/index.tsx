@@ -13,18 +13,18 @@ import { AppDispatch, RootState } from "../../store/store";
 import { ApiConstants } from "../../utils/Constants";
 // Example usage
 const columns: Column[] = [
-  { id: "userName", label: "User Name", colSpan: 2 },
-  { id: "creditRefrence", label: "Credit Reference" },
+  { id: "user.userName", label: "User Name", colSpan: 2 },
+  { id: "user.creditRefrence", label: "Credit Reference" },
   { id: "balance", label: "Balance" },
-  { id: "client", label: "Client (P/L)" },
-  { id: "exposure", label: "Exposure" },
+  { id: "UB.profitLoss", label: "Client (P/L)" },
+  { id: "UB.exposure", label: "Exposure" },
   { id: "availableBalance", label: "Avialable Balance" },
   { id: "ust", label: "U St" },
   { id: "accountType", label: "B St" },
   { id: "exposureLimit", label: "Exposure Limit" },
   { id: "default", label: "Default%" },
-  { id: "AccountType", label: "Account Type" },
-  { id: "casinoTotal", label: "Casino Total" },
+  { id: "user.roleName", label: "Account Type" },
+  { id: "casino", label: "Casino Total" },
   { id: "actions", label: "Actions" },
 ];
 
@@ -38,7 +38,8 @@ const ListActiveInactiveUser: React.FC = () => {
     eventId: null,
     userData: null,
   });
-
+  const [activeUser, setActiveUser] = useState<any>([]); 
+  const [deactiveUser, setDeactiveUser] = useState<any>([]);
   const showEventModals = (id: any, userData: any) => {
     setEventDetails({
       show: true,
@@ -49,10 +50,10 @@ const ListActiveInactiveUser: React.FC = () => {
   useEffect(() => { dispatch(
     
     getUsers({
-      page: tableConfig?.page || 1,
-      limit: tableConfig?.rowPerPage,
+      // page: tableConfig?.page || 1,
+      // limit: tableConfig?.rowPerPage,
       userName: tableConfig?.keyword || "",
-      sort: tableConfig?.sort?.key || 'userName',
+      sort: tableConfig?.sort?.key || '',
       order :tableConfig?.sort?.direction || 'desc'
     })
   );}, [tableConfig]);
@@ -101,16 +102,39 @@ const ListActiveInactiveUser: React.FC = () => {
     dispatch(getUsers());
   }, [dispatch]);
 
-  const activeUser: Array<object> = [];
-  const deactiveUser: Array<object> = [];
+  // const activeUser: Array<object> = [];
+  // const deactiveUser: Array<object> = [];
+  useEffect(() => {
+    const active: Array<object> = [];
+    const deactive  : Array<object> = [];
 
-  userList?.list?.forEach((user: any) => {
-    if (user.userBlock === false) {
-      activeUser.push(user);
-    } else {
-      deactiveUser.push(user);
+    userList?.list?.forEach((user: any) => {
+      if (user.userBlock === false) {
+        active.push(user);
+      } else {
+        deactive.push(user);
+      }
+    });
+
+    // Update the state with the new active and deactive users
+    setActiveUser(active);
+    setDeactiveUser(deactive);
+  }, [userList]);
+useEffect(() => {
+
+}, [activeUser]);
+
+  const sortData = (key:string) => {
+  let array = [...activeUser];
+  
+    if(array[0][key] > array[array?.length - 1][key]){
+      array.sort((a : any, b: any) => a[key] - b[key]);
+    }else{
+      array.sort((a : any, b: any) =>  b[key] - a[key] );
     }
-  });
+  
+  setActiveUser(array);
+  };
 
   return (
     <>
@@ -157,8 +181,9 @@ const ListActiveInactiveUser: React.FC = () => {
                     enablePdfExcel={true}
                     isSearch
                     isSort={true}
-                    isPagination={true}
+                    isPagination={false}
                     endpoint={ApiConstants.USER.LIST}
+                    sortData={sortData}
                   >
                     <tr>
                       {columns?.map((item, index) => {
@@ -211,8 +236,7 @@ const ListActiveInactiveUser: React.FC = () => {
                           creditRefrence,
                           exposureLimit,
                           roleName,
-                          matchCommission,
-                          totalComission,
+                          // matchCommission,
                           id,
                           userBlock,
                           betBlock,
@@ -257,9 +281,9 @@ const ListActiveInactiveUser: React.FC = () => {
                             <td className="text-end">
                               {roleName === "user" ? exposureLimit : "NA"}
                             </td>
-                            <td>{matchCommission}</td>
+                            <td>0</td>
                             <td>{roleName}</td>
-                            <td className="text-end">{totalComission}</td>
+                            <td className="text-end">0</td>
                             <td>
                               <div className="d-flex gap-1 border-right-0 border-left-0">
                                 {actionButtons?.map((item) => {
@@ -294,8 +318,9 @@ const ListActiveInactiveUser: React.FC = () => {
                     setTableConfig={setTableConfig}
                     enablePdfExcel={true}
                     isSearch
-                    isPagination={true}
+                    isPagination={false}
                     endpoint={ApiConstants.USER.LIST}
+                    sortData={sortData}
                   >
                     <tr>
                       {columns?.map((item, index) => {
@@ -348,8 +373,6 @@ const ListActiveInactiveUser: React.FC = () => {
                           creditRefrence,
                           exposureLimit,
                           roleName,
-                          matchCommission,
-                          totalComission,
                           id,
                           userBlock,
                           betBlock,
@@ -392,9 +415,9 @@ const ListActiveInactiveUser: React.FC = () => {
                               </Form>
                             </td>
                             <td className="text-end">{exposureLimit}</td>
-                            <td>{matchCommission}</td>
+                            <td>0</td>
                             <td>{roleName}</td>
-                            <td className="text-end">{totalComission}</td>
+                            <td className="text-end">0</td>
                             <td>
                               <div className="d-flex gap-1 border-right-0 border-left-0">
                                 {actionButtons?.map((item) => {

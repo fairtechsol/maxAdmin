@@ -34,7 +34,7 @@ const MainRoutes = {
     //   element: <Sample />,
     // },
     {
-      path: "listClients",
+      path: "listClients/:id",
       element: <ListClients />,
     },
     {

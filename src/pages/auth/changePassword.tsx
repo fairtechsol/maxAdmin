@@ -121,8 +121,8 @@ const ChangePassword = () => {
             setShowModal={setShowModal}
             modalTitle="Your password has been changed sucessfully"
             functionDispatch={() => {
-              if (sessionStorage.getItem("forceChangePassword") === "true") {
-                sessionStorage.clear();
+              if (localStorage.getItem("forceChangePassword") === "true") {
+                localStorage.clear();
               } else {
                 dispatch(logout());
               }
