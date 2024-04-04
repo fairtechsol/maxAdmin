@@ -15,12 +15,13 @@ import {
   matchDetailAction,
   updateMatchRates,
 } from "../../store/actions/match/matchAction";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams,useNavigate } from "react-router-dom";
 import { socketService } from "../../socketManager";
 
 const Games = () => {
   const dispatch: AppDispatch = useDispatch();
   const location = useLocation();
+  const navigate = useNavigate();
 
   const { id } = useParams();
 
@@ -69,6 +70,16 @@ const Games = () => {
       console.log(e);
     }
   };
+  const handleMatchResultDeclarted = (event: any) => {
+    try {
+      if (event?.matchId === id) {
+        navigate("/admin/market-analysis");
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   useEffect(() => {
     try {
       if (id) {
@@ -89,6 +100,8 @@ const Games = () => {
         socketService.match.sessionDeleteBet(handleDeleteBet);
         socketService.match.userSessionBetPlaced(handleSessionBetPlaced);
         socketService.match.userMatchBetPlaced(handleMatchBetPlaced);
+        socketService.match.matchResultDeclared(handleMatchResultDeclarted);
+        socketService.match.declaredMatchResultAllUser(handleMatchResultDeclarted);
       }
     } catch (e) {
       console.log(e);
