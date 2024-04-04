@@ -4,10 +4,10 @@ import { Outlet, useNavigate } from "react-router-dom";
 export default function AuthLayout() {
   const navigate = useNavigate();
   useEffect(() => {
-    if (sessionStorage.getItem("userToken")) {
+    if (localStorage.getItem("userToken")) {
       navigate(-1);
     } else {
-      if (!sessionStorage.getItem("forceChangePassword")) {
+      if (!localStorage.getItem("forceChangePassword")) {
         navigate("/admin/login");
       }
     }

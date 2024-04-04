@@ -186,7 +186,6 @@ const Topbar = (props: any) => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-
   return (
     <>
       <Navbar expand="lg" className="bg-primary" data-bs-theme="light">
@@ -274,7 +273,7 @@ const Topbar = (props: any) => {
           {/* <Navbar.Toggle aria-controls="basic-navbar-nav" /> */}
           {!isMobile && <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link className="navbar-mainLink" href="/admin/listClients">
+              <Nav.Link className="navbar-mainLink" href={`/admin/listClients/${userDetail?.id}`}>
                 List of clients
               </Nav.Link>
               <Nav.Link

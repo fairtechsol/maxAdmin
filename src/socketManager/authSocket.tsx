@@ -3,7 +3,7 @@ import { socket } from ".";
 export const authSocketService = {
   logout: () => {
     socket.on("logoutUserForce", () => {
-      sessionStorage.clear();
+      localStorage.clear();
       window.location.replace("/login");
     });
   },

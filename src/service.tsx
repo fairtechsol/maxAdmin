@@ -23,7 +23,7 @@ service.interceptors.request.use(
   (config: any) => {
     config.headers["Content-Type"] = "application/json";
 
-    const authToken = sessionStorage.getItem("userToken");
+    const authToken = localStorage.getItem("userToken");
     config.headers.Authorization = `Bearer ${authToken}`;
     return config;
   },
@@ -55,7 +55,7 @@ service.interceptors.response.use(
     } else if (error.response.status === 401) {
       toast.error(error.response.data.message, toastOptions);
       window.location.replace("/admin/login");
-      sessionStorage.clear();
+      localStorage.clear();
     }
 
     return Promise.reject(error);

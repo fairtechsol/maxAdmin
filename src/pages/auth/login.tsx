@@ -37,9 +37,9 @@ const Login = () => {
 
   useEffect(() => {
     if (success) {
-      sessionStorage.setItem("userRole", userRole);
+      localStorage.setItem("userRole", userRole);
       if (forceChangePassword) {
-        sessionStorage.setItem(
+        localStorage.setItem(
           "forceChangePassword",
           JSON.stringify(forceChangePassword)
         );
