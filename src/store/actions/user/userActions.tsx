@@ -27,7 +27,6 @@ interface SearchUsers {
 export const getUsers = createAsyncThunk<any, GetUsers | undefined>(
   "user/list",
   async (requestData) => {
-    console.log('requestData',requestData);
     try {
       const resp = await service.get(
         `${ApiConstants.USER.LIST}?${requestData?.userId ? `userId=${requestData.userId}&` : ''}searchBy=user.userName&keyword=${

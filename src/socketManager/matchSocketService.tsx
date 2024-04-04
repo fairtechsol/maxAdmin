@@ -31,6 +31,12 @@ export const matchSocketService = {
   userSessionBetPlaced: (callback: any) => {
     socket.on("userSessionBetPlaced", callback);
   },
+  matchResultDeclared: (callback: any) => {
+    socket.on("matchResult", callback);
+  },
+  declaredMatchResultAllUser: (callback: any) => {
+    socket.on("matchResultDeclareAllUser", callback);
+  },
   matchDeleteBet: (callback: any) => {
     socket.on(`matchDeleteBet`, callback);
   },
@@ -42,5 +48,8 @@ export const matchSocketService = {
   },
   updateUserBalance: (callback: any) => {
     socket.on("updateUserBalance", callback);
+  },
+  matchResultDeclaredOff: () => {
+    socket.off("matchResult");
   },
 };
