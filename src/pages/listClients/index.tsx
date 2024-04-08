@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate,useParams } from "react-router-dom";
 import "../../assets/common.scss";
 import CustomButton from "../../components/commonComponent/button";
 import CustomTable from "../../components/commonComponent/table";
@@ -26,6 +26,7 @@ const columns: Column[] = [
 ];
 
 const ListClent: React.FC = () => {
+  const { id } = useParams();
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
@@ -75,12 +76,12 @@ const ListClent: React.FC = () => {
       onClick: showEventModals,
     },
   ];
-
   useEffect(() => {
     dispatch(
       getUsers({
-        page: tableConfig?.page || 1,
-        limit: tableConfig?.rowPerPage,
+        userId: id,
+        // page: tableConfig?.page || 1,
+        // limit: tableConfig?.rowPerPage,
         userName: tableConfig?.keyword || "",
       })
     );
@@ -115,8 +116,8 @@ const ListClent: React.FC = () => {
               enablePdfExcel={true}
               isSearch={true}
               endpoint={ApiConstants.USER.LIST}
-              isPagination={true}
-              isSort={true}
+              isPagination={false}
+              // isSort={true}
             >
               <tr>
                 {columns?.map((item, index) => {
@@ -149,9 +150,17 @@ const ListClent: React.FC = () => {
                   return (
                     <tr key={id}>
                       <td colSpan={4}>
-                        <CustomButton className="actionBtn" variant="dark">
+                        {
+                          roleName ==='user' || roleName === 'expert' ? 
+                          <CustomButton className="actionBtn" variant="dark" >
                           {userName}
-                        </CustomButton>
+                        </CustomButton>  :
+                        <Link to={`/admin/listClients/${id}`} target="_blank" rel="noopener noreferrer">
+                        <CustomButton className="actionBtn" variant="dark" >
+                          {userName}
+                        </CustomButton></Link>
+                        }
+                      
                       </td>
                       <td className="text-end">{creditRefrence}</td>
                       <td className="text-center">

@@ -28,14 +28,14 @@ function MainLayout() {
   };
 
   useEffect(() => {
-    if (!sessionStorage.getItem("userToken")) {
+    if (!localStorage.getItem("userToken")) {
       navigate("/admin/login");
     }
     dispatch(getUsersProfile());
   }, [dispatch]);
 
   useEffect(() => {
-    if (sessionStorage.getItem("userToken")) {
+    if (localStorage.getItem("userToken")) {
       socketService.connect();
       socketService.auth.logout();
       socketService.match.updateUserBalance(updateLoggedUserBalance);
@@ -43,7 +43,7 @@ function MainLayout() {
     return () => {
       socketService.disconnect();
     };
-  }, [sessionStorage.getItem("userToken")]);
+  }, [localStorage.getItem("userToken")]);
 
   return (
     <>

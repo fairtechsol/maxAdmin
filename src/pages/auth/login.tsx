@@ -37,9 +37,9 @@ const Login = () => {
 
   useEffect(() => {
     if (success) {
-      sessionStorage.setItem("userRole", userRole);
+      localStorage.setItem("userRole", userRole);
       if (forceChangePassword) {
-        sessionStorage.setItem(
+        localStorage.setItem(
           "forceChangePassword",
           JSON.stringify(forceChangePassword)
         );
@@ -60,7 +60,7 @@ const Login = () => {
         <img src={MaxLogo} alt="MAXXBET9" />
         <div className="auth-box-form rounded-2 bg-light">
           <h2 className="auth-title text-center mb-4">Sign In</h2>
-          <Form.Group className="mb-3 d-block">
+          <Form.Group className="mb-4 d-block">
             <Form.Control
               type="text"
               placeholder="Username"
@@ -74,7 +74,7 @@ const Login = () => {
               <p style={{ color: "#fa1e1e" }}>{errors.userName as string}</p>
             )}
           </Form.Group>
-          <Form.Group className="mb-3 d-block">
+          <Form.Group className="mb-4 d-block">
             <Form.Control
               type="password"
               placeholder="Password"

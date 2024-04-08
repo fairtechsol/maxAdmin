@@ -10,20 +10,21 @@ import "../../components/listClients/style.scss";
 import { Column, TableConfig } from "../../models/tableInterface";
 import { getUsers } from "../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../store/store";
+import { ApiConstants } from "../../utils/Constants";
 // Example usage
 const columns: Column[] = [
-  { id: "username", label: "User Name", colSpan: 2 },
-  { id: "creditReferance", label: "Credit Reference" },
+  { id: "user.userName", label: "User Name", colSpan: 2 },
+  { id: "user.creditRefrence", label: "Credit Reference" },
   { id: "balance", label: "Balance" },
-  { id: "client", label: "Client (P/L)" },
-  { id: "exposure", label: "Exposure" },
-  { id: "availBal", label: "Avialable Balance" },
+  { id: "UB.profitLoss", label: "Client (P/L)" },
+  { id: "UB.exposure", label: "Exposure" },
+  { id: "availableBalance", label: "Avialable Balance" },
   { id: "ust", label: "U St" },
   { id: "accountType", label: "B St" },
   { id: "exposureLimit", label: "Exposure Limit" },
   { id: "default", label: "Default%" },
-  { id: "AccountType", label: "Account Type" },
-  { id: "casinoTotal", label: "Casino Total" },
+  { id: "user.roleName", label: "Account Type" },
+  { id: "casino", label: "Casino Total" },
   { id: "actions", label: "Actions" },
 ];
 
@@ -37,7 +38,8 @@ const ListActiveInactiveUser: React.FC = () => {
     eventId: null,
     userData: null,
   });
-
+  const [activeUser, setActiveUser] = useState<any>([]); 
+  const [deactiveUser, setDeactiveUser] = useState<any>([]);
   const showEventModals = (id: any, userData: any) => {
     setEventDetails({
       show: true,
@@ -45,8 +47,16 @@ const ListActiveInactiveUser: React.FC = () => {
       userData: userData,
     });
   };
-
-  useEffect(() => {}, [tableConfig]);
+  useEffect(() => { dispatch(
+    
+    getUsers({
+      // page: tableConfig?.page || 1,
+      // limit: tableConfig?.rowPerPage,
+      userName: tableConfig?.keyword || "",
+      sort: tableConfig?.sort?.key || '',
+      order :tableConfig?.sort?.direction || 'desc'
+    })
+  );}, [tableConfig]);
 
   const actionButtons = [
     {
@@ -92,23 +102,46 @@ const ListActiveInactiveUser: React.FC = () => {
     dispatch(getUsers());
   }, [dispatch]);
 
-  const activeUser: Array<object> = [];
-  const deactiveUser: Array<object> = [];
+  // const activeUser: Array<object> = [];
+  // const deactiveUser: Array<object> = [];
+  useEffect(() => {
+    const active: Array<object> = [];
+    const deactive  : Array<object> = [];
 
-  userList?.list?.forEach((user: any) => {
-    if (user.userBlock === false) {
-      activeUser.push(user);
-    } else {
-      deactiveUser.push(user);
+    userList?.list?.forEach((user: any) => {
+      if (user.userBlock === false) {
+        active.push(user);
+      } else {
+        deactive.push(user);
+      }
+    });
+
+    // Update the state with the new active and deactive users
+    setActiveUser(active);
+    setDeactiveUser(deactive);
+  }, [userList]);
+useEffect(() => {
+
+}, [activeUser]);
+
+  const sortData = (key:string) => {
+  let array = [...activeUser];
+  
+    if(array[0][key] > array[array?.length - 1][key]){
+      array.sort((a : any, b: any) => a[key] - b[key]);
+    }else{
+      array.sort((a : any, b: any) =>  b[key] - a[key] );
     }
-  });
+  
+  setActiveUser(array);
+  };
 
   return (
     <>
       <Container className="listClient listActiveUser" fluid>
         <Row>
           <Col>
-            <p className="title-22">Account List </p>
+            <p className="title-22">Account List</p>
           </Col>
           <Col>
             <CustomButton
@@ -124,12 +157,12 @@ const ListActiveInactiveUser: React.FC = () => {
             <Tab.Container id="left-tabs-example" defaultActiveKey="first">
               <Nav variant="pills" className="flex-row ">
                 <Nav.Item>
-                  <Nav.Link className="rounded-0" eventKey="first">
+                  <Nav.Link className="rounded-0 " eventKey="first">
                     Active User
                   </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link className="rounded-0" eventKey="second">
+                  <Nav.Link className="rounded-0 " eventKey="second">
                     Deactivate User
                   </Nav.Link>
                 </Nav.Item>
@@ -138,15 +171,19 @@ const ListActiveInactiveUser: React.FC = () => {
               <Tab.Content className="mt-3">
                 <Tab.Pane eventKey="first">
                   <CustomTable
-                    tHeadTheme="border-0 bg-light"
+                    tHeadTheme="border bg-light"
                     customClass="listClientTable commonTable border-top-0 "
                     bordered
                     striped
                     columns={columns}
-                    itemCount={10}
+                    itemCount={userList && userList?.count}
                     setTableConfig={setTableConfig}
                     enablePdfExcel={true}
                     isSearch
+                    isSort={true}
+                    isPagination={false}
+                    endpoint={ApiConstants.USER.LIST}
+                    sortData={sortData}
                   >
                     <tr>
                       {columns?.map((item, index) => {
@@ -199,8 +236,7 @@ const ListActiveInactiveUser: React.FC = () => {
                           creditRefrence,
                           exposureLimit,
                           roleName,
-                          matchCommission,
-                          totalComission,
+                          // matchCommission,
                           id,
                           userBlock,
                           betBlock,
@@ -245,9 +281,9 @@ const ListActiveInactiveUser: React.FC = () => {
                             <td className="text-end">
                               {roleName === "user" ? exposureLimit : "NA"}
                             </td>
-                            <td>{matchCommission}</td>
+                            <td>0</td>
                             <td>{roleName}</td>
-                            <td className="text-end">{totalComission}</td>
+                            <td className="text-end">0</td>
                             <td>
                               <div className="d-flex gap-1 border-right-0 border-left-0">
                                 {actionButtons?.map((item) => {
@@ -278,10 +314,13 @@ const ListActiveInactiveUser: React.FC = () => {
                     bordered
                     striped
                     columns={columns}
-                    itemCount={10}
+                    itemCount={userList && userList?.count}
                     setTableConfig={setTableConfig}
                     enablePdfExcel={true}
                     isSearch
+                    isPagination={false}
+                    endpoint={ApiConstants.USER.LIST}
+                    sortData={sortData}
                   >
                     <tr>
                       {columns?.map((item, index) => {
@@ -334,8 +373,6 @@ const ListActiveInactiveUser: React.FC = () => {
                           creditRefrence,
                           exposureLimit,
                           roleName,
-                          matchCommission,
-                          totalComission,
                           id,
                           userBlock,
                           betBlock,
@@ -378,9 +415,9 @@ const ListActiveInactiveUser: React.FC = () => {
                               </Form>
                             </td>
                             <td className="text-end">{exposureLimit}</td>
-                            <td>{matchCommission}</td>
+                            <td>0</td>
                             <td>{roleName}</td>
-                            <td className="text-end">{totalComission}</td>
+                            <td className="text-end">0</td>
                             <td>
                               <div className="d-flex gap-1 border-right-0 border-left-0">
                                 {actionButtons?.map((item) => {

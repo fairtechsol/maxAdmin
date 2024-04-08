@@ -15,6 +15,9 @@ interface GetUsers {
   userName?: string;
   page?: number;
   limit?: number;
+  sort?:any;
+  order?:any;
+  userId?: string;
 }
 interface SearchUsers {
   userName?: string;
@@ -26,11 +29,9 @@ export const getUsers = createAsyncThunk<any, GetUsers | undefined>(
   async (requestData) => {
     try {
       const resp = await service.get(
-        `${ApiConstants.USER.LIST}?searchBy=user.userName&keyword=${
+        `${ApiConstants.USER.LIST}?${requestData?.userId ? `userId=${requestData.userId}&` : ''}searchBy=user.userName&keyword=${
           requestData?.userName ? requestData?.userName : ""
-        }&page=${requestData?.page || 1}&limit=${
-          requestData?.limit || 10
-        }&sort=user.createdAt:DESC`
+        }${requestData?.page ? `&page=${requestData.page}` : ''}${requestData?.limit ? `&limit=${requestData.limit}` : ''}&sort=${requestData?.sort}:${requestData?.order}`
       );
       if (resp) {
         return resp?.data;

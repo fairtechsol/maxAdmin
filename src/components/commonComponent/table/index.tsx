@@ -28,6 +28,7 @@ interface CustomTableProps extends React.HTMLAttributes<HTMLDivElement> {
   striped?: boolean;
   CustomTableClass?: string;
   endpoint?: string;
+  sortData?: any;
 }
 
 const CustomTable: React.FC<CustomTableProps> = ({
@@ -44,6 +45,7 @@ const CustomTable: React.FC<CustomTableProps> = ({
   tHeadTheme,
   tBodyTheme,
   CustomTableClass,
+  sortData,
   ...props
 }) => {
   // State for sorting configuration and current page
@@ -56,6 +58,11 @@ const CustomTable: React.FC<CustomTableProps> = ({
 
   // Handle column click to change the sorting configuration
   const handleSort = (key: string | number) => {
+    if(key === 'ust' || key === 'accountType' ||  key === 'actions' || key === 'default' || key === 'casino'){
+      return true;
+    }else if( key === 'balance' || key === 'availableBalance' || key === 'exposureLimit'){
+      sortData(key);
+    }else{
     setSortConfig((prevSortConfig) => ({
       key,
       direction:
@@ -63,6 +70,7 @@ const CustomTable: React.FC<CustomTableProps> = ({
           ? "desc"
           : "asc",
     }));
+  }
   };
 
   // Handle pagination item click to set the current page
