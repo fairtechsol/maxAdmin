@@ -28,14 +28,14 @@ function MainLayout() {
   };
 
   useEffect(() => {
-    if (!localStorage.getItem("userToken")) {
+    if (!localStorage.getItem("jwtMaxAdmin")) {
       navigate("/admin/login");
     }
     dispatch(getUsersProfile());
   }, [dispatch]);
 
   useEffect(() => {
-    if (localStorage.getItem("userToken")) {
+    if (localStorage.getItem("jwtMaxAdmin")) {
       socketService.connect();
       socketService.auth.logout();
       socketService.match.updateUserBalance(updateLoggedUserBalance);
@@ -43,7 +43,7 @@ function MainLayout() {
     return () => {
       socketService.disconnect();
     };
-  }, [localStorage.getItem("userToken")]);
+  }, [localStorage.getItem("jwtMaxAdmin")]);
 
   return (
     <>

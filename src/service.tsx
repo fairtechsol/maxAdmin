@@ -23,7 +23,7 @@ service.interceptors.request.use(
   (config: any) => {
     config.headers["Content-Type"] = "application/json";
 
-    const authToken = localStorage.getItem("userToken");
+    const authToken = localStorage.getItem("jwtMaxAdmin");
     config.headers.Authorization = `Bearer ${authToken}`;
     return config;
   },
