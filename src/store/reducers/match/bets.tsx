@@ -20,7 +20,7 @@ interface InitialState {
   success: boolean;
   statusSuccess: boolean;
   error: any;
-  childStatus:any;
+  childStatus: any;
 }
 
 const initialState: InitialState = {
@@ -33,7 +33,7 @@ const initialState: InitialState = {
   success: false,
   statusSuccess: false,
   error: null,
-  childStatus:{},
+  childStatus: {},
 };
 
 const placedBetsSlice = createSlice({
@@ -114,10 +114,10 @@ const placedBetsSlice = createSlice({
         state.error = action?.error?.message;
       })
       .addCase(resetRunAmount, (state) => {
-        return { ...state, runAmount: [] };
+        state.runAmount = [];
       })
       .addCase(successResetForLockUnlock, (state) => {
-        return { ...state, statusSuccess: false };
+        state.statusSuccess = false;
       })
       .addCase(getUserDetailsOfLock.pending, (state) => {
         state.loading = false;

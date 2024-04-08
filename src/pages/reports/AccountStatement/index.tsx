@@ -91,6 +91,7 @@ const AccountStatement = () => {
     }
     setGameNameValues(null);
   };
+
   const handleGameNameChange = (selectedOption: any) => {
     setGameNameValues(selectedOption);
   };

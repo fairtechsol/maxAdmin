@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Accordion } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   getCompetitionDates,
   getCompetitionMatches,
   setBreadCrumb,
 } from "../../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../../store/store";
-import { Link } from "react-router-dom";
+import moment from "moment-timezone";
 
 interface Props {
   item: any;
@@ -63,7 +63,7 @@ const MenuCollapse = (props: any) => {
         selectedMatchChildren[competitionIndex].children =
           competitionDates &&
           competitionDates?.map((item: any) => ({
-            name: item?.startdate,
+            name: moment(item?.startdate).format("YYYY/MM/DD"),
             id: item?.startdate,
             type: "collapse",
             children: [],
@@ -76,23 +76,27 @@ const MenuCollapse = (props: any) => {
   }, [competitionDates, selectedCompetition, selectedMatchIndex]);
 
   useEffect(() => {
-    if (selectedDate !== "") {
-      const tempList = [...menuItemList];
-      const selectedMatchChildren = tempList[selectedMatchIndex].children;
-      const competitionIndex = selectedMatchChildren.findIndex(
-        (item: any) => item?.id === selectedCompetition
-      );
-      const dateIndex = selectedMatchChildren[
-        competitionIndex
-      ].children.findIndex((item: any) => item?.id === selectedDate);
-      selectedMatchChildren[competitionIndex].children[dateIndex].children =
-        competitionMatches?.map((item: any) => ({
-          name: item?.title,
-          id: item?.id,
-          type: "collapse",
-          isTiedMatch: item?.isTiedMatch,
-        }));
-      setMenuItemList(tempList);
+    try {
+      if (selectedDate !== "") {
+        const tempList = [...menuItemList];
+        const selectedMatchChildren = tempList[selectedMatchIndex].children;
+        const competitionIndex = selectedMatchChildren.findIndex(
+          (item: any) => item?.id === selectedCompetition
+        );
+        const dateIndex = selectedMatchChildren[
+          competitionIndex
+        ].children.findIndex((item: any) => item?.id === selectedDate);
+        selectedMatchChildren[competitionIndex].children[dateIndex].children =
+          competitionMatches?.map((item: any) => ({
+            name: item?.title,
+            id: item?.id,
+            type: "collapse",
+            isTiedMatch: item?.isTiedMatch,
+          }));
+        setMenuItemList(tempList);
+      }
+    } catch (error) {
+      console.log(error);
     }
   }, [
     competitionMatches,

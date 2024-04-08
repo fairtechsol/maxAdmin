@@ -15,7 +15,7 @@ import {
   matchDetailAction,
   updateMatchRates,
 } from "../../store/actions/match/matchAction";
-import { useLocation, useParams,useNavigate } from "react-router-dom";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { socketService } from "../../socketManager";
 
 const Games = () => {
@@ -130,7 +130,9 @@ const Games = () => {
         socketService.match.userSessionBetPlaced(handleSessionBetPlaced);
         socketService.match.userMatchBetPlaced(handleMatchBetPlaced);
         socketService.match.matchResultDeclared(handleMatchResultDeclarted);
-        socketService.match.declaredMatchResultAllUser(handleMatchResultDeclarted);
+        socketService.match.declaredMatchResultAllUser(
+          handleMatchResultDeclarted
+        );
         socketService.match.sessionResult(handleSessionResultDeclare);
         socketService.match.sessionResultUnDeclare(
           handleSessionResultUnDeclare
@@ -141,41 +143,53 @@ const Games = () => {
     }
   }, [location?.pathname, success]);
 
-
   useEffect(() => {
-    return () => {
-      socketService.match.leaveMatchRoom(id);
-      socketService.match.getMatchRatesOff(id);
-      socketService.match.userSessionBetPlacedOff();
-      socketService.match.userMatchBetPlacedOff();
-      socketService.match.matchResultDeclaredOff();
-      socketService.match.declaredMatchResultAllUserOff();
-      socketService.match.matchDeleteBetOff();
-      socketService.match.sessionDeleteBetOff();
-      socketService.match.sessionResultOff();
-      socketService.match.sessionResultUnDeclareOff();
-      // dispatch(resetUserProfitLoss());
-      // dispatch(resetBetSessionProfitLossGraph());
-    };
-  }, []);
-
-  useEffect(() => {
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === "visible") {
-        if (id) {
-          dispatch(matchDetailAction(id));
-          dispatch(getPlacedBets(id));
-        }
-      } else if (document.visibilityState === "hidden") {
-        socketService.match.leaveMatchRoom(id);
-        socketService.match.getMatchRatesOff(id);
+    try {
+      if (id) {
+        return () => {
+          socketService.match.leaveMatchRoom(id);
+          socketService.match.getMatchRatesOff(id);
+          socketService.match.userSessionBetPlacedOff();
+          socketService.match.userMatchBetPlacedOff();
+          socketService.match.matchResultDeclaredOff();
+          socketService.match.declaredMatchResultAllUserOff();
+          socketService.match.matchDeleteBetOff();
+          socketService.match.sessionDeleteBetOff();
+          socketService.match.sessionResultOff();
+          socketService.match.sessionResultUnDeclareOff();
+          // dispatch(resetUserProfitLoss());
+          // dispatch(resetBetSessionProfitLossGraph());
+        };
       }
-    };
+    } catch (error) {
+      console.error(error);
+    }
+  }, [id]);
 
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-    return () => {
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
-    };
+  useEffect(() => {
+    try {
+      const handleVisibilityChange = () => {
+        if (document.visibilityState === "visible") {
+          if (id) {
+            dispatch(matchDetailAction(id));
+            dispatch(getPlacedBets(id));
+          }
+        } else if (document.visibilityState === "hidden") {
+          socketService.match.leaveMatchRoom(id);
+          socketService.match.getMatchRatesOff(id);
+        }
+      };
+
+      document.addEventListener("visibilitychange", handleVisibilityChange);
+      return () => {
+        document.removeEventListener(
+          "visibilitychange",
+          handleVisibilityChange
+        );
+      };
+    } catch (error) {
+      console.log(error);
+    }
   }, []);
 
   return (
