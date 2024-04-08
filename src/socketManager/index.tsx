@@ -10,7 +10,7 @@ export const initialiseSocket = () => {
   socket = io(baseUrls.socket, {
     transports: [`${Constants.WEBSOCKET}`],
     auth: {
-      token: `${localStorage.getItem("userToken")}`,
+      token: `${localStorage.getItem("jwtMaxAdmin")}`,
     },
   });
   thirdParty = io(baseUrls.thirdParty, {
@@ -20,7 +20,7 @@ export const initialiseSocket = () => {
         : `${Constants.WEBSOCKET}`,
     ],
     auth: {
-      token: `${localStorage.getItem("userToken")}`,
+      token: `${localStorage.getItem("jwtMaxAdmin")}`,
     },
   });
 };
