@@ -104,7 +104,7 @@ const AddAccount = () => {
             exposureLimit: values.exposureLimit,
             maxBetLimit: values.maxBet,
             minBetLimit: values.minBet,
-            delayTime: (values.delay).toString,
+            delayTime: values.delay.toString(),
           };
           dispatch(addUser(newPayload));
         } else {
