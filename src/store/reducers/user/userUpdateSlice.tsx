@@ -33,10 +33,7 @@ const userUpdateSlice = createSlice({
         state.error = action?.error?.message;
       })
       .addCase(addSuccessReset, (state) => {
-        return {
-          ...state,
-          addSuccess: false
-        };
+        state.addSuccess = false;
       });
   },
 });

@@ -43,14 +43,11 @@ const bettListSlice = createSlice({
         state.error = action?.error?.message;
       })
       .addCase(betReportAccountListReset, (state) => {
-        return {
-          ...state,
-          ReportBetList: {
-            count: 0,
-            rows: [],
-          },
-          success: false,
+        state.ReportBetList = {
+          count: 0,
+          rows: [],
         };
+        state.success = false;
       });
   },
 });

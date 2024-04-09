@@ -11,7 +11,6 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
 import React, { useEffect, useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { debounce } from "lodash";
 
 interface Values {
@@ -41,7 +40,6 @@ const AddAccount = () => {
   const dispatch: AppDispatch = useDispatch();
   const [accountTypes, setAccountTypes] = useState<any>([]);
   const [down, setDown] = useState<number>(0);
-  const navigate = useNavigate();
 
   const initialValues = {
     clientName: "",
@@ -249,7 +247,8 @@ const AddAccount = () => {
 
   useEffect(() => {
     if (addSuccess) {
-      navigate("/admin/listClients");
+      // navigate(`/admin/listClients/${userDetail?.id}`);
+      formik.resetForm();
       dispatch(addSuccessReset());
     }
   }, [addSuccess]);

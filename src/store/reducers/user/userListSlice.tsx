@@ -180,7 +180,7 @@ export const userList = createSlice({
         state.error = action?.error?.message;
       })
       .addCase(accountListModalReset, (state) => {
-        return { ...state, modalSuccess: false };
+        state.modalSuccess = false;
       });
   },
 });

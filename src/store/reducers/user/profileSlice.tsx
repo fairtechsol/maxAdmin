@@ -40,7 +40,7 @@ const profileSlice = createSlice({
         state.error = action?.error?.message;
       })
       .addCase(profileReset, (state) => {
-        return { ...state, success: false };
+        state.success = false;
       })
       .addCase(updateUserBalance.fulfilled, (state, action) => {
         state.userDetail = {
