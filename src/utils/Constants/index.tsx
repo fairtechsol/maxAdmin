@@ -50,9 +50,9 @@ export const ApiConstants = {
 };
 
 export const Constants = {
-  apiBasePath: "http://107.23.165.155:5000",
-  thirdParty: "http://107.23.165.155:3200",
-  expertPath: "http://107.23.165.155:6060",
+  apiBasePath: "https://devmaxbet9api.fairgame.club",
+  thirdParty: "https://devserviceapi.fairgame.club",
+  expertPath: "https://devexpertapi.fairgame.club",
   localPath: "http://localhost:5000",
   localPathThird: "http://localhost:3200",
   localPathExpert: "http://localhost:6060",
