@@ -19,7 +19,13 @@ const ProfitLossEventType = (props: any) => {
         {dataArray?.map((item: any, index: number) => (
           <div
             key={index}
-            className="profitLossEventType-box d-flex bg-green px-1"
+            className={`profitLossEventType-box d-flex ${
+              +item?.amount
+                ? +item?.amount >= 0
+                  ? "bg-green"
+                  : "bg-pdf"
+                : "bg-green"
+            } px-1`}
           >
             <label className="text-white title-12">{item?.name}:</label>
             <span className="text-white title-12"> {item?.amount}</span>
