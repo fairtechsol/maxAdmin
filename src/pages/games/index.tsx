@@ -245,7 +245,10 @@ const Games = () => {
                         <BetTable
                           title={"Fancy Market"}
                           type={MatchType.SESSION_MARKET}
-                          data={matchDetails?.sessionBettings}
+                          data={matchDetails?.sessionBettings?.filter(
+                            (item: any) =>
+                              JSON.parse(item)?.selectionId === null
+                          )}
                         />
                       </Col>
                     )}
