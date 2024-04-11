@@ -30,16 +30,16 @@ export const socketService = {
     try {
       initialiseSocket();
       // Connect to the socket server
-      socket.connect();
-      thirdParty.connect();
+      socket?.connect();
+      thirdParty?.connect();
     } catch (e) {
       console.log(e);
     }
   },
   disconnect: () => {
     try {
-      socket.disconnect();
-      thirdParty.disconnect();
+      socket?.disconnect();
+      thirdParty?.disconnect();
     } catch (e) {
       console.log(e);
     }
