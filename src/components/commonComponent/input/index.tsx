@@ -20,7 +20,7 @@ const CustomInput = (props: any) => {
   const inlineStyle: React.CSSProperties = {
     ...style,
   };
-  return (
+    return (
     <>
       <Form.Group className={`${props.customstyle} ${formInline ? "row" : ""}`}>
         {title ? (
@@ -32,6 +32,7 @@ const CustomInput = (props: any) => {
         )}
         <Form.Control
           disabled={disabled}
+          autoComplete="new-password"
           className={`col-${formInline ? inputCol : ""} bg-${bgColor}`}
           name={id}
           onWheel={numberInputOnWheelPreventChange}
