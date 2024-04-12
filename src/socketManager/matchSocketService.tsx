@@ -2,81 +2,81 @@ import { thirdParty, socket } from ".";
 
 export const matchSocketService = {
   joinMatchRoom: (matchId: any, roleName: any) => {
-    socket.emit("matchRoom", {
+    socket?.emit("matchRoom", {
       id: matchId,
     });
 
-    thirdParty.emit("initCricketData", {
+    thirdParty?.emit("initCricketData", {
       matchId: matchId,
       roleName: roleName,
     });
   },
   leaveMatchRoom: (matchId: any) => {
-    thirdParty.emit("disconnectCricketData", {
+    thirdParty?.emit("disconnectCricketData", {
       matchId: matchId,
     });
   },
   leaveAllRooms: () => {
-    socket.emit("leaveAll");
+    socket?.emit("leaveAll");
   },
   matchAdded: (callback: any) => {
-    socket.on("addMatch", callback);
+    socket?.on("addMatch", callback);
   },
   getMatchRates: (matchId: any, callback: any) => {
-    thirdParty.on(`liveData${matchId}`, callback);
+    thirdParty?.on(`liveData${matchId}`, callback);
   },
   getMatchRatesOff: (matchId: any) => {
-    thirdParty.off(`liveData${matchId}`);
+    thirdParty?.off(`liveData${matchId}`);
   },
   userSessionBetPlaced: (callback: any) => {
-    socket.on("userSessionBetPlaced", callback);
+    socket?.on("userSessionBetPlaced", callback);
   },
   matchResultDeclared: (callback: any) => {
-    socket.on("matchResult", callback);
+    socket?.on("matchResult", callback);
   },
   declaredMatchResultAllUser: (callback: any) => {
-    socket.on("matchResultDeclareAllUser", callback);
+    socket?.on("matchResultDeclareAllUser", callback);
   },
   matchDeleteBet: (callback: any) => {
-    socket.on(`matchDeleteBet`, callback);
+    socket?.on(`matchDeleteBet`, callback);
   },
   sessionDeleteBet: (callback: any) => {
-    socket.on(`sessionDeleteBet`, callback);
+    socket?.on(`sessionDeleteBet`, callback);
   },
   userMatchBetPlaced: (callback: any) => {
-    socket.on("userMatchBetPlaced", callback);
+    socket?.on("userMatchBetPlaced", callback);
   },
   updateUserBalance: (callback: any) => {
-    socket.on("updateUserBalance", callback);
+    socket?.on("updateUserBalance", callback);
   },
   sessionResult: (callback: any) => {
-    socket.on("sessionResult", callback);
+    socket?.on("sessionResult", callback);
   },
   sessionResultUnDeclare: (callback: any) => {
-    socket.on("sessionResultUnDeclare", callback);
+    socket?.on("sessionResultUnDeclare", callback);
   },
   sessionResultUnDeclareOff: () => {
-    socket.off("sessionResultUnDeclareOff");
+    socket?.off("sessionResultUnDeclareOff");
   },
   sessionResultOff: () => {
-    socket.off("sessionResult");
+    socket?.off("sessionResult");
   },
   matchResultDeclaredOff: () => {
-    socket.off("matchResult");
+    socket?.off("matchResult");
   },
   declaredMatchResultAllUserOff: () => {
-    socket.off("matchResultDeclareAllUser");
+    socket?.off("matchResultDeclareAllUser");
   },
   userSessionBetPlacedOff: () => {
-    socket.off("userSessionBetPlaced");
+    socket?.off("userSessionBetPlaced");
   },
   userMatchBetPlacedOff: () => {
-    socket.off("userMatchBetPlaced");
+    socket?.off("userMatchBetPlaced");
   },
   matchDeleteBetOff: () => {
-    socket.off("matchDeleteBet");
+    socket?.off("matchDeleteBet");
   },
   sessionDeleteBetOff: () => {
-    socket.off("sessionDeleteBet");
+    socket?.off("sessionDeleteBet");
   },
 };
