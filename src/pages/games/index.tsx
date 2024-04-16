@@ -236,11 +236,11 @@ const Games = () => {
                         <BetTable
                           title={"Session Market"}
                           type={MatchType.API_SESSION_MARKET}
-                          data={matchDetails?.apiSession}
+                          data={matchDetails?.sessionBettings}
                         />
                       </Col>
                     )}
-                    {matchDetails?.manualSessionActive && (
+                    {/* {matchDetails?.manualSessionActive && (
                       <Col md={6}>
                         <BetTable
                           title={"Fancy Market"}
@@ -251,7 +251,7 @@ const Games = () => {
                           )}
                         />
                       </Col>
-                    )}
+                    )} */}
                   </Row>
                 </>
               )}

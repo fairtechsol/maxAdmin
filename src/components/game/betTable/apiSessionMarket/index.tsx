@@ -6,6 +6,12 @@ import CustomModal from "../../../commonComponent/modal";
 import YesNoBox from "../../../yesNo";
 import "../../style.scss";
 import TableRunner from "../sessionMarket/tableRunner";
+import {
+  getRunAmount,
+  resetRunAmount,
+} from "../../../../store/actions/match/matchAction";
+import { AppDispatch, RootState } from "../../../../store/store";
+import { useDispatch, useSelector } from "react-redux";
 
 interface ApiSessionMarketTableProps {
   data: any;
@@ -17,7 +23,11 @@ function ApiSessionMarketTable({
   title,
   matchDetails,
 }: ApiSessionMarketTableProps) {
+  const dispatch: AppDispatch = useDispatch();
   const [runnerModalShow, setRunnerModalShow] = useState(false);
+  const { runAmount } = useSelector(
+    (state: RootState) => state.match.placeBets
+  );
 
   const handleClick = () => {};
   return (
@@ -37,63 +47,70 @@ function ApiSessionMarketTable({
           </tr>
         </thead>
         <tbody>
-          {data?.map((item: any, i: number) => (
-            <tr key={i}>
-              <td>
-                <div className="backLayRunner d-flex flex-column px-3">
-                  <div onClick={() => setRunnerModalShow((prev) => !prev)}>
-                    <Link to="" className="backLayRunner-country title-14">
-                      {item?.RunnerName}
-                    </Link>
+          {data?.map((bet: any, i: number) => {
+            let item = JSON.parse(bet);
+            return (
+              <tr key={item?.id}>
+                <td>
+                  <div className="backLayRunner d-flex flex-column px-3">
+                    <div
+                      onClick={() => {
+                        dispatch(resetRunAmount());
+                        setRunnerModalShow((prev) => !prev);
+                        dispatch(getRunAmount(item?.id));
+                      }}
+                    >
+                      <Link to="" className="backLayRunner-country title-14">
+                        {item?.name}
+                      </Link>
+                    </div>
+                    <span className="title-14">
+                      {matchDetails?.profitLossDataSession.length > 0
+                        ? matchDetails?.profitLossDataSession?.reduce(
+                            (accumulator: any, bet: any) => {
+                              const maxLossToAdd =
+                                bet?.betId === item?.id ? +bet?.maxLoss : 0;
+                              return accumulator + maxLossToAdd;
+                            },
+                            0
+                          )
+                        : 0}
+                    </span>
                   </div>
-                  <span className="title-14">
-                    {matchDetails?.profitLossDataSession.length > 0
-                      ? matchDetails?.profitLossDataSession?.reduce(
-                          (accumulator: any, bet: any) => {
-                            const maxLossToAdd =
-                              bet?.betId === JSON.parse(item)?.id
-                                ? +bet?.maxLoss
-                                : 0;
-                            return accumulator + maxLossToAdd;
-                          },
-                          0
-                        )
-                      : 0}
-                  </span>
-                </div>
-              </td>
-              <td colSpan={3}>
-                <BetStatusOverlay title="Suspend">
-                  <YesNoBox
-                    style={{ width: "50px" }}
-                    // overlay={true}
-                    bgColor="red1"
-                    rate={item?.BackPrice1}
-                    percent={item?.BackSize1}
-                    onClick={handleClick}
-                  />
-                  <YesNoBox
-                    style={{ width: "50px" }}
-                    bgColor="blue3"
-                    rate={item?.LayPrice1}
-                    percent={item?.LaySize1}
-                    onClick={handleClick}
-                  />
-                  <div className="minMaxBox d-flex flex-column justify-content-center text-end px-2 text-info title-14">
-                    <span className="">Min:{item?.min}</span>
-                    <span>Min:{item?.max}</span>
-                  </div>
-                </BetStatusOverlay>
-              </td>
+                </td>
+                <td colSpan={3}>
+                  <BetStatusOverlay title="Suspend">
+                    <YesNoBox
+                      style={{ width: "50px" }}
+                      // overlay={true}
+                      bgColor="red1"
+                      rate={item?.noRate}
+                      percent={item?.noPercent}
+                      onClick={handleClick}
+                    />
+                    <YesNoBox
+                      style={{ width: "50px" }}
+                      bgColor="blue3"
+                      rate={item?.yesRate}
+                      percent={item?.yesPercent}
+                      onClick={handleClick}
+                    />
+                    <div className="minMaxBox d-flex flex-column justify-content-center text-end px-2 text-info title-14">
+                      <span className="">Min:{item?.minBet}</span>
+                      <span>Min:{item?.maxBet}</span>
+                    </div>
+                  </BetStatusOverlay>
+                </td>
 
-              <td className="minMax align-middle"></td>
-            </tr>
-          ))}
+                <td className="minMax align-middle"></td>
+              </tr>
+            );
+          })}
         </tbody>
       </Table>
 
       <CustomModal show={runnerModalShow} setShow={setRunnerModalShow}>
-        <TableRunner />
+        <TableRunner runAmount={runAmount} />
       </CustomModal>
     </div>
   );
