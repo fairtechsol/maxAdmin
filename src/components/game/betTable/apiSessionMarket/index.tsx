@@ -6,6 +6,12 @@ import CustomModal from "../../../commonComponent/modal";
 import YesNoBox from "../../../yesNo";
 import "../../style.scss";
 import TableRunner from "../sessionMarket/tableRunner";
+import {
+  getRunAmount,
+  resetRunAmount,
+} from "../../../../store/actions/match/matchAction";
+import { AppDispatch, RootState } from "../../../../store/store";
+import { useDispatch, useSelector } from "react-redux";
 
 interface ApiSessionMarketTableProps {
   data: any;
@@ -17,7 +23,11 @@ function ApiSessionMarketTable({
   title,
   matchDetails,
 }: ApiSessionMarketTableProps) {
+  const dispatch: AppDispatch = useDispatch();
   const [runnerModalShow, setRunnerModalShow] = useState(false);
+  const { runAmount } = useSelector(
+    (state: RootState) => state.match.placeBets
+  );
 
   const handleClick = () => {};
   return (
@@ -40,10 +50,16 @@ function ApiSessionMarketTable({
           {data?.map((bet: any, i: number) => {
             let item = JSON.parse(bet);
             return (
-              <tr key={i}>
+              <tr key={item?.id}>
                 <td>
                   <div className="backLayRunner d-flex flex-column px-3">
-                    <div onClick={() => setRunnerModalShow((prev) => !prev)}>
+                    <div
+                      onClick={() => {
+                        dispatch(resetRunAmount());
+                        setRunnerModalShow((prev) => !prev);
+                        dispatch(getRunAmount(item?.id));
+                      }}
+                    >
                       <Link to="" className="backLayRunner-country title-14">
                         {item?.name}
                       </Link>
@@ -94,7 +110,7 @@ function ApiSessionMarketTable({
       </Table>
 
       <CustomModal show={runnerModalShow} setShow={setRunnerModalShow}>
-        <TableRunner />
+        <TableRunner runAmount={runAmount} />
       </CustomModal>
     </div>
   );

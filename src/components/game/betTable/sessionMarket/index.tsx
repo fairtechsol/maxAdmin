@@ -48,7 +48,7 @@ function SessionMarketTable({
         </thead>
         <tbody>
           {data?.map((item: any, i: number) => (
-            <tr key={i}>
+            <tr key={JSON.parse(item)?.id}>
               <td>
                 <div className="backLayRunner d-flex flex-column px-3">
                   <div
@@ -58,7 +58,10 @@ function SessionMarketTable({
                       dispatch(getRunAmount(JSON.parse(item)?.id));
                     }}
                   >
-                    <Link to="" className="backLayRunner-country title-14 defaultBlue">
+                    <Link
+                      to=""
+                      className="backLayRunner-country title-14 defaultBlue"
+                    >
                       {JSON.parse(item)?.name}
                     </Link>
                   </div>

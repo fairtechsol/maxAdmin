@@ -3,6 +3,7 @@ import { Column, TableConfig } from "../../../../models/tableInterface";
 import CustomTable from "../../../commonComponent/table";
 
 const TableRunner = ({ runAmount }: any) => {
+  console.log(runAmount, "runAmount");
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
   useEffect(() => {}, [tableConfig]);
   const columns: Column[] = [
@@ -19,16 +20,20 @@ const TableRunner = ({ runAmount }: any) => {
         itemCount={10}
         setTableConfig={setTableConfig}
       >
-        {runAmount.length === 0 && (
+        {runAmount?.length === 0 && (
           <tr className="text-center">No Record Found!</tr>
         )}
-        {runAmount.length > 0 &&
+        {runAmount?.length > 0 &&
           runAmount?.map((item: any, index: number) => {
             const { profitLoss, odds } = item;
             return (
               <tr key={index}>
-                <td className="bg-red1">{odds}</td>
-                <td className="bg-red1">{profitLoss}</td>
+                <td className={+profitLoss >= 0 ? "bg-blue1" : "bg-red1"}>
+                  {odds}
+                </td>
+                <td className={+profitLoss >= 0 ? "bg-blue1" : "bg-red1"}>
+                  {profitLoss}
+                </td>
               </tr>
             );
           })}
