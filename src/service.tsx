@@ -9,6 +9,8 @@ const toastOptions = {
   pauseOnHover: true,
 };
 
+// use below baseUrl for live build
+
 const service = axios.create({
   //PROD
   baseURL:
@@ -16,6 +18,15 @@ const service = axios.create({
       ? `${Constants.apiBasePath}`
       : `${Constants.localPath}`,
 });
+
+// use below service for live build
+
+// const service = axios.create({
+//   baseURL:
+//     process.env.NODE_ENV === "production"
+//       ? `${Constants.apiBasePathLive}`
+//       : `${Constants.localPath}`,
+// });
 
 service.defaults.timeout = 100000;
 
