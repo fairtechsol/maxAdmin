@@ -55,7 +55,6 @@ const LoggedUserDetail = () => {
                   </div>
                   <div className="col-md-4 title-14">
                     {+userBalanceList?.downLevelOccupyBalance || 0}(
-                    {+userBalanceList?.upperLevelProfitLossPercent || 0}%)(
                     {+userBalanceList?.totalProfitLoss || 0})
                   </div>
                 </div>
