@@ -105,7 +105,7 @@ const Topbar = (props: any) => {
   const handleSubmit = (e: any) => {
     // console.log(e.target.value, "aflatoor");
     e.preventDefault();
-    setSearchValue(null);
+    // setSearchValue(null);
     setSearchModal(true);
   };
 
