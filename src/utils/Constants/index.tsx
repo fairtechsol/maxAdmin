@@ -2,6 +2,7 @@ export const ApiConstants = {
   AUTH: {
     LOGIN: "/auth/login",
     LOGOUT: "/auth/logout",
+    OLD_PASSWORD: "/user/check/oldPassword",
   },
   USER: {
     BALANCEUPDATE: "/balance/update",
@@ -53,12 +54,17 @@ export const Constants = {
   apiBasePath: "https://devmaxbet9api.fairgame.club",
   thirdParty: "https://devserviceapi.fairgame.club",
   expertPath: "https://devexpertapi.fairgame.club",
+  apiBasePathLive: "https://betfairapi.fairgame7.com",
+  thirdPartyLive: "https://serviceapi.fairgame7.com",
+  expertPathLive: "https://expertapi.fairgame7.com",
   localPath: "http://localhost:5000",
   localPathThird: "http://localhost:3200",
   localPathExpert: "http://localhost:6060",
   WEBSOCKET: "websocket",
   POLLING: "polling",
 };
+
+// use below baseUrl for live build
 
 export const baseUrls = {
   socket:
@@ -74,6 +80,23 @@ export const baseUrls = {
       ? `${Constants.expertPath}`
       : `${Constants.localPathExpert}`,
 };
+
+// use below baseUrl for live build
+
+// export const baseUrls = {
+//   socket:
+//     process.env.NODE_ENV === "production"
+//       ? `${Constants.apiBasePathLive}`
+//       : `${Constants.localPath}`,
+//   matchSocket:
+//     process.env.NODE_ENV === "production"
+//       ? `${Constants.thirdPartyLive}`
+//       : `${Constants.localPathThird}`,
+//   expertSocket:
+//     process.env.NODE_ENV === "production"
+//       ? `${Constants.expertPathLive}`
+//       : `${Constants.localPathExpert}`,
+// };
 
 export const teamStatus = {
   suspended: "suspended",

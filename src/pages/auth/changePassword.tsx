@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 // import { useNavigate } from "react-router";
@@ -9,11 +9,12 @@ import {
   changePasswordReset,
 } from "../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../store/store";
-import { newPasswordValidationSchema } from "../../utils/fieldValidations/newPassword";
-import { logout } from "../../store/actions/auth/authActions";
+import { changePasswordValidation } from "../../utils/fieldValidations/newPassword";
+import { checkOldPassword, logout } from "../../store/actions/auth/authActions";
 import NavigateModal from "../../components/commonComponent/customModal";
 import "./style.scss";
 import { FgLogo } from "../../assets/images";
+import { debounce } from "lodash";
 
 // interface Values {
 //   newPassword: string;
@@ -35,9 +36,10 @@ const ChangePassword = () => {
   const { transactionPassword, modalSuccess } = useSelector(
     (state: RootState) => state.user.userList
   );
+  const { oldPasswordMatched } = useSelector((state: RootState) => state.auth);
   const formik = useFormik({
     initialValues: initialValues,
-    validationSchema: newPasswordValidationSchema,
+    validationSchema: changePasswordValidation(oldPasswordMatched),
     onSubmit: (values: any) => {
       const payload = {
         newPassword: values.newPassword,
@@ -49,6 +51,18 @@ const ChangePassword = () => {
   });
 
   const { handleSubmit, getFieldProps, touched, errors } = formik;
+
+  const debouncedInputValue = useMemo(() => {
+    return debounce((value) => {
+      dispatch(checkOldPassword({ oldPassword: value }));
+    }, 500);
+  }, []);
+
+  const handleOldPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const query = e.target.value;
+    formik.handleChange(e);
+    debouncedInputValue(query);
+  };
 
   useEffect(() => {
     if (modalSuccess) {
@@ -76,6 +90,7 @@ const ChangePassword = () => {
                 type={"password"}
                 customstyle={"mb-3"}
                 {...getFieldProps("oldPassword")}
+                onChange={handleOldPasswordChange}
                 touched={touched.oldPassword}
                 errors={errors.oldPassword}
               />
