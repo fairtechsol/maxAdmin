@@ -54,13 +54,16 @@ const LoggedUserDetail = () => {
                     Down level Occupy Balance:
                   </div>
                   <div className="col-md-4 title-14">
-                    {+userBalanceList?.downLevelOccupyBalance || 0}
+                    {+userBalanceList?.downLevelOccupyBalance || 0}(
+                    {+userBalanceList?.totalProfitLossDownlevel || 0})
                   </div>
                 </div>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
                   <div className="col-md-8 title-14">Upper Level:</div>
                   <div className="col-md-4 title-14">
-                    {+userBalanceList?.upperLevelBalance}
+                    {+userBalanceList?.upperLevelBalance}(
+                    {+userBalanceList?.upperLevelProfitLossPercent || 0}%)(
+                    {+userBalanceList?.totalProfitLossUpperlevel || 0})
                   </div>
                 </div>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
