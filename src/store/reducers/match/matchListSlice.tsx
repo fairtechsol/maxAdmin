@@ -52,54 +52,54 @@ const matchListSlice = createSlice({
           overUnder,
         } = action.payload;
 
-        let removedsessionBettings = state.matchDetails.sessionBettings.filter(
+        let removedsessionBettings = state?.matchDetails?.sessionBettings?.filter(
           (item: any) => {
-            return apiSession.some(
+            return apiSession?.some(
               (apiItem: any) => apiItem?.id === JSON.parse(item)?.id
             );
           }
         );
 
-        let newSessionBettings = removedsessionBettings.filter((item: any) => {
-          return sessionBettings.some(
+        let newSessionBettings = removedsessionBettings?.filter((item: any) => {
+          return sessionBettings?.some(
             (apiItem: any) => JSON.parse(apiItem)?.id === JSON.parse(item)?.id
           );
         });
 
         apiSession.forEach((apiItem: any) => {
           if (
-            !newSessionBettings.some(
-              (item: any) => JSON.parse(item).id === apiItem.id
+            !newSessionBettings?.some(
+              (item: any) => JSON.parse(item)?.id === apiItem?.id
             )
           ) {
-            newSessionBettings.push(
+            newSessionBettings?.push(
               JSON.stringify({
                 id: apiItem?.id,
                 name: apiItem?.RunnerName,
-                yesRate: apiItem.BackPrice1,
-                yesPercent: apiItem.BackSize1,
-                noRate: apiItem.LayPrice1,
-                noPercent: apiItem.LaySize1,
-                selectionId: apiItem.SelectionId,
-                minBet: apiItem.min,
-                maxBet: apiItem.max,
-                activeStatus: apiItem.activeStatus,
-                updatedAt: apiItem.updatedAt,
+                yesRate: apiItem?.BackPrice1,
+                yesPercent: apiItem?.BackSize1,
+                noRate: apiItem?.LayPrice1,
+                noPercent: apiItem?.LaySize1,
+                selectionId: apiItem?.SelectionId,
+                minBet: apiItem?.min,
+                maxBet: apiItem?.max,
+                activeStatus: apiItem?.activeStatus,
+                updatedAt: apiItem?.updatedAt,
                 type: "session",
                 isManual: false,
                 status:
-                  apiItem.GameStatus === "" ? "active" : apiItem.GameStatus,
+                  apiItem?.GameStatus === "" ? "active" : apiItem?.GameStatus,
               })
             );
           }
         });
-        sessionBettings.forEach((apiItem: any) => {
+        sessionBettings?.forEach((apiItem: any) => {
           if (
-            !newSessionBettings.some(
-              (item: any) => JSON.parse(item).id === apiItem.id
+            !newSessionBettings?.some(
+              (item: any) => JSON.parse(item)?.id === apiItem?.id
             )
           ) {
-            newSessionBettings.push(apiItem);
+            newSessionBettings?.push(apiItem);
           }
         });
 
@@ -121,8 +121,8 @@ const matchListSlice = createSlice({
             if (!JSON.parse(item)?.selectionId) {
               const parsedItem = JSON.parse(item);
               let id = parsedItem?.id;
-              const matchingSession = sessionBettings.find(
-                (sessionItem: any) => JSON.parse(sessionItem).id === id
+              const matchingSession = sessionBettings?.find(
+                (sessionItem: any) => JSON.parse(sessionItem)?.id === id
               );
               let parsedSession = JSON.parse(matchingSession);
               if (parsedSession) {
@@ -134,21 +134,21 @@ const matchListSlice = createSlice({
             } else {
               const parsedItem = JSON.parse(item);
               let id = parsedItem?.id;
-              const matchingApiSession = apiSession.find(
-                (sessionItem: any) => sessionItem.id === id
+              const matchingApiSession = apiSession?.find(
+                (sessionItem: any) => sessionItem?.id === id
               );
               if (matchingApiSession) {
                 return JSON.stringify({
                   ...parsedItem,
-                  yesRate: matchingApiSession.BackPrice1,
-                  yesPercent: matchingApiSession.BackSize1,
-                  noRate: matchingApiSession.LayPrice1,
-                  noPercent: matchingApiSession.LaySize1,
+                  yesRate: matchingApiSession?.BackPrice1,
+                  yesPercent: matchingApiSession?.BackSize1,
+                  noRate: matchingApiSession?.LayPrice1,
+                  noPercent: matchingApiSession?.LaySize1,
                   activeStatus: "live",
                   status:
-                    matchingApiSession.GameStatus === ""
+                    matchingApiSession?.GameStatus === ""
                       ? "active"
-                      : matchingApiSession.GameStatus,
+                      : matchingApiSession?.GameStatus,
                 });
               } else {
                 return JSON.stringify({
@@ -158,13 +158,13 @@ const matchListSlice = createSlice({
                   yesPercent: 0,
                   noPercent: 0,
                   activeStatus:
-                    parsedItem.activeStatus === "live"
+                    parsedItem?.activeStatus === "live"
                       ? "save"
-                      : parsedItem.activeStatus,
+                      : parsedItem?.activeStatus,
                   status:
-                    matchingApiSession.GameStatus === ""
+                    matchingApiSession?.GameStatus === ""
                       ? "active"
-                      : matchingApiSession.GameStatus,
+                      : matchingApiSession?.GameStatus,
                 });
               }
             }

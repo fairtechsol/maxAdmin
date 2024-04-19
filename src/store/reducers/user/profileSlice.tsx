@@ -47,8 +47,8 @@ const profileSlice = createSlice({
           ...state.userDetail,
           userBal: {
             ...state.userDetail.userBal,
-            currentBalance: action.payload.currentBalance,
-            profitLoss: action.payload.profitLoss,
+            currentBalance: action.payload?.currentBalance,
+            profitLoss: action.payload?.profitLoss,
           },
         };
       });
