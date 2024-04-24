@@ -207,7 +207,7 @@ const Topbar = (props: any) => {
             href="/admin/active-inactive-user-list"
           className="me-2"
           >
-            <LogoSection width="120px" height="38px" />
+            <LogoSection width="110px" height="38px" />
           </Navbar.Brand>
           {isMobile && (
             <div className="user-dropdown-container">
