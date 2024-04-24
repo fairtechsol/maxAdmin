@@ -3,12 +3,13 @@
 
 .user-dropdown-container{
     text-transform: capitalize;
-    font-size: 14px;
+    font-size: 10px;
     font-weight: 600;
     color: $white;
     display: flex;
     flex-direction: row;
     background-color: rgb(0, 74, 37);
+    margin-bottom: 10px;
 }
 
 .dropdown-content {
@@ -34,7 +35,7 @@
         line-height: 15px;
         font-weight: 600;
         color: $white;
-        margin: 0 2px;
+        margin: 10px 2px;
         background-color: rgb(0, 74, 37);
     }
     .dropdown-menu {
