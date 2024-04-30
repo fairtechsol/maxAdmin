@@ -66,7 +66,7 @@ const matchListSlice = createSlice({
           );
         });
 
-        apiSession.forEach((apiItem: any) => {
+        apiSession?.forEach((apiItem: any) => {
           if (
             !newSessionBettings?.some(
               (item: any) => JSON.parse(item)?.id === apiItem?.id
