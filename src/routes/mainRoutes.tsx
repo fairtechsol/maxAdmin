@@ -25,10 +25,6 @@ const MainRoutes = {
       path: "match_detail/:id",
       element: <Game />,
     },
-    {
-      path: "match_details/:id",
-      element: <Game />,
-    },
     // {
     //   path: "samplepage",
     //   element: <Sample />,
