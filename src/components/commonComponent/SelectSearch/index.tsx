@@ -20,7 +20,7 @@ const SelectSearch = (props: any) => {
     onBlur,
     touched,
     errors,
-    onInputChange
+    onInputChange,
   } = props;
 
   // const customStyles = {
@@ -38,8 +38,9 @@ const SelectSearch = (props: any) => {
   return (
     <>
       <Form.Group
-        className={`customSelect ${SelectInline ? "SelectInline" : ""} ${customClass ?? ""
-          }`}
+        className={`customSelect ${SelectInline ? "SelectInline" : ""} ${
+          customClass ?? ""
+        }`}
       >
         {label ? <Form.Label>{label}</Form.Label> : ""}
         <Select

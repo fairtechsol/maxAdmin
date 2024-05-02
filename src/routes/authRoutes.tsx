@@ -7,7 +7,7 @@ const Login = Loadable(lazy(() => import("../pages/auth/login")));
 const ChangePassword = Loadable(lazy(() => import("../pages/auth/changePassword")));
 
 const AuthRoutes = {
-  path: "/admin/",
+  path: "/admin",
   element: <AuthLayout />,
   children: [
     { index: true, element: <Navigate to="/admin/login" replace /> },

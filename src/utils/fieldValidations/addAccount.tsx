@@ -33,10 +33,10 @@ export const addAccountValidationSchema: any = (item: any) => {
       /^[A-Za-z]+$/,
       "City Name must only contain letters"
     ),
-    // accountType: Yup.object().shape({
-    //   value: Yup.string().required("Account Type is required"),
-    //   label: Yup.string().required("Account Type is required"),
-    // }),
+    accountType: Yup.object().shape({
+      value: Yup.string().required("Account Type is required"),
+      label: Yup.string().required("Account Type is required"),
+    }),
     // commissionDownPartnership: Yup.number()
     //   .min(0, 'Downline commission must be zero or greater')
     //   .required('Downline commission is required'),
