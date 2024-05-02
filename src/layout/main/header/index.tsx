@@ -231,7 +231,7 @@ const Topbar = (props: any) => {
                   Logout
                 </NavDropdown.Item>
               </NavDropdown>
-              <Form className="headerSearch">
+              <Form className="headerSearchMobile">
               <div>
                 <Select
                   value={searchValue}
