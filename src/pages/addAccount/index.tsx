@@ -108,6 +108,7 @@ const AddAccount = () => {
         } else {
           dispatch(addUser(payload));
         }
+        window.location.reload();
       } catch (e) {
         console.log(e);
       }

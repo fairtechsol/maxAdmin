@@ -73,6 +73,17 @@
     }
     .headerSearch{
         position: relative;
+        width: 160px;
+        .headerSearch-ico{
+            position: absolute;
+            right: 10px;
+            top: 5px;
+            cursor: pointer;
+            z-index: 9999;
+        }
+    }
+    .headerSearchMobile{
+        position: relative;
         .headerSearch-ico{
             position: absolute;
             right: 10px;
