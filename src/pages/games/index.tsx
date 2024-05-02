@@ -16,7 +16,7 @@ import {
   updateMatchRates,
 } from "../../store/actions/match/matchAction";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
-import { socketService } from "../../socketManager";
+import { socket, socketService } from "../../socketManager";
 
 const Games = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -113,7 +113,7 @@ const Games = () => {
 
   useEffect(() => {
     try {
-      if (success) {
+      if (success && socket) {
         socketService.match.getMatchRatesOff(id);
         socketService.match.userSessionBetPlacedOff();
         socketService.match.userMatchBetPlacedOff();
@@ -141,7 +141,7 @@ const Games = () => {
     } catch (e) {
       console.log(e);
     }
-  }, [location?.pathname, success]);
+  }, [location?.pathname, success, socket]);
 
   useEffect(() => {
     try {
