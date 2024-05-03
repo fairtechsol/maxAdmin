@@ -49,7 +49,7 @@ const AddAccount = () => {
     city: "",
     phoneNo: "",
     accountType: {
-      label: "",
+      label: "- Select Your A/C. Type -",
       value: "",
     },
     commissionUpPartnership: 0,
@@ -294,6 +294,7 @@ const AddAccount = () => {
                       placeholder={"Client Name:"}
                       type={"text"}
                       customstyle={"mb-3"}
+                      value={formik.values.clientName}
                       onChange={handleUserNameChange}
                       touched={touched.clientName}
                       errors={errors.clientName}
@@ -372,20 +373,17 @@ const AddAccount = () => {
                   <Col md={6}>
                     <SelectSearch
                       id="accountType"
+                      name="accountType"
                       label={"Account Type"}
                       options={accountTypes}
                       placeholder={"- Select Your A/C. Type -"}
-                      defaultValue={"Select..."}
-                      value={accountTypes.find(
-                        (option: any) =>
-                          option.value === formik.values.accountType.value
-                      )}
+                      value={formik.values.accountType}
                       onChange={(accountTypes: any) =>
                         formik.setFieldValue("accountType", accountTypes)
                       }
-                      // onBlur={formik.handleBlur}
-                      // touched={touched.accountType}
-                      // errors={errors.accountType}
+                      onBlur={() => formik.setFieldTouched("accountType", true)}
+                      touched={touched.accountType}
+                      errors={errors.accountType?.value}
                     />
                   </Col>
                   <Col md={6}>
