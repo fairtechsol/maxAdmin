@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate,useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import "../../assets/common.scss";
 import CustomButton from "../../components/commonComponent/button";
 import CustomTable from "../../components/commonComponent/table";
@@ -77,15 +77,19 @@ const ListClent: React.FC = () => {
     },
   ];
   useEffect(() => {
-    dispatch(
-      getUsers({
-        userId: id,
-        // page: tableConfig?.page || 1,
-        // limit: tableConfig?.rowPerPage,
-        userName: tableConfig?.keyword || "",
-      })
-    );
-  }, [tableConfig]);
+    if (id) {
+      dispatch(
+        getUsers({
+          userId: id,
+          // page: tableConfig?.page || 1,
+          // limit: tableConfig?.rowPerPage,
+          userName: tableConfig?.keyword || "",
+          sort: "user.createdAt",
+          order: "DESC",
+        })
+      );
+    }
+  }, [tableConfig, id]);
 
   return (
     <>
@@ -150,17 +154,21 @@ const ListClent: React.FC = () => {
                   return (
                     <tr key={id}>
                       <td colSpan={4}>
-                        {
-                          roleName ==='user' || roleName === 'expert' ? 
-                          <CustomButton className="actionBtn" variant="dark" >
-                          {userName}
-                        </CustomButton>  :
-                        <Link to={`/admin/listClients/${id}`} target="_blank" rel="noopener noreferrer">
-                        <CustomButton className="actionBtn" variant="dark" >
-                          {userName}
-                        </CustomButton></Link>
-                        }
-                      
+                        {roleName === "user" || roleName === "expert" ? (
+                          <CustomButton className="actionBtn" variant="dark">
+                            {userName}
+                          </CustomButton>
+                        ) : (
+                          <Link
+                            to={`/admin/listClients/${id}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <CustomButton className="actionBtn" variant="dark">
+                              {userName}
+                            </CustomButton>
+                          </Link>
+                        )}
                       </td>
                       <td className="text-end">{creditRefrence}</td>
                       <td className="text-center">
@@ -191,7 +199,6 @@ const ListClent: React.FC = () => {
                       <td className="text-end">{casinoTotal}</td>
                       <td>
                         <div className="d-flex gap-1 border-right-0 border-left-0">
-
                           {actionButtons?.map((item) => {
                             return (
                               <CustomButton

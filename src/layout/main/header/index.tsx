@@ -120,7 +120,7 @@ const Topbar = (props: any) => {
       borderRadius: "3px",
       borderBottom: "solid 1px",
       zIndex: 999,
-      height: "1px"
+      height: "1px",
     }),
 
     option: (styles: any, { isFocused }: any) => {
@@ -174,7 +174,6 @@ const Topbar = (props: any) => {
     );
   };
 
-
   const [isMobile, setIsMobile] = React.useState(window.innerWidth <= 768);
   // const [searchValue, setSearchValue] = React.useState(null);
 
@@ -183,8 +182,8 @@ const Topbar = (props: any) => {
       setIsMobile(window.innerWidth <= 768);
     };
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
   return (
     <>
@@ -205,7 +204,7 @@ const Topbar = (props: any) => {
           </span>
           <Navbar.Brand
             href="/admin/active-inactive-user-list"
-          className="me-2"
+            className="me-2"
           >
             <LogoSection width="110px" height="38px" />
           </Navbar.Brand>
@@ -232,22 +231,22 @@ const Topbar = (props: any) => {
                 </NavDropdown.Item>
               </NavDropdown>
               <Form className="headerSearchMobile">
-              <div>
-                <Select
-                  value={searchValue}
-                  options={optionslist}
-                  onInputChange={handleSearch}
-                  placeholder="All Client"
-                  openMenuOnClick={false}
-                  styles={customStyles}
-                  classNamePrefix="select"
-                  onChange={(item) => {
-                    setSearchValue(item);
-                  }}
-                  components={{ DropdownIndicator }}
-                />
-              </div>
-            </Form>
+                <div>
+                  <Select
+                    value={searchValue}
+                    options={optionslist}
+                    onInputChange={handleSearch}
+                    placeholder="All Client"
+                    openMenuOnClick={false}
+                    styles={customStyles}
+                    classNamePrefix="select"
+                    onChange={(item) => {
+                      setSearchValue(item);
+                    }}
+                    components={{ DropdownIndicator }}
+                  />
+                </div>
+              </Form>
             </div>
           )}
           {/* {isMobile && (
@@ -271,83 +270,92 @@ const Topbar = (props: any) => {
           )} */}
 
           {/* <Navbar.Toggle aria-controls="basic-navbar-nav" /> */}
-          {!isMobile && <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              <Nav.Link className="navbar-mainLink" href={`/admin/listClients/${userDetail?.id}`}>
-                List of clients
-              </Nav.Link>
-              <Nav.Link
-                className="navbar-mainLink"
-                href="/admin/market-analysis"
-              >
-                Market Analysis
-              </Nav.Link>
-              <TopbarDropdown
-                name="Live Market"
-                options={[
-                  { name: "Ball By Ball", link: "#1" },
-                  { name: "Binary", link: "#1" },
-                  { name: "Race 20-20", link: "#1" },
-                  { name: "Queen", link: "#2" },
-                  { name: "Baccarat", link: "#3" },
-                  { name: "Sports Casino", link: "#4" },
-                  { name: "Casino War", link: "#5" },
-                  { name: "Worli", link: "#6" },
-                  { name: "3 Cards Judgement", link: "#7" },
-                  { name: "32 Cards Casino", link: "#8" },
-                  { name: "Live TeenPatti", link: "#9" },
-                  { name: "TeenPatti 2.0", link: "#10" },
-                  { name: "Live Poker", link: "#11" },
-                  { name: "Andar Bahar", link: "#12" },
-                  { name: "Lucky 7", link: "#13" },
-                  { name: "Dragon Tiger", link: "#14" },
-                  { name: "Bollywood Casino", link: "#15" },
-                  { name: "Cricket Casino", link: "#16" },
-                ]}
-              />
-              <TopbarDropdown
-                name="Reports"
-                options={[
-                  {
-                    name: "Account's Statement",
-                    link: "/admin/account-statement",
-                  },
-                  { name: "Current Bets", link: "/admin/current-bets" },
-                  { name: "General Report", link: "/admin/general-report" },
-                  { name: "Game Report", link: "/admin/game-report" },
-                  { name: "Casino Report", link: "/admin/casino-report" },
-                  { name: "Profit And Loss", link: "/admin/profit-loss" },
-                  { name: "Casino Result Report", link: "/admin/casinoresult" },
-                ]}
-              />
-            </Nav>
-          </Navbar.Collapse>}
-          {!isMobile && <div className="d-flex algin-items-center">
-            <Navbar.Collapse id="navbar-dark-example">
-              <Nav>
-                <NavDropdown
-                  id="nav-dropdown-dark-example"
-                  title={userDetail && userDetail?.userName}
-                  menuVariant="dark"
+          {!isMobile && (
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="me-auto">
+                <Nav.Link
+                  className="navbar-mainLink"
+                  href={`/admin/listClients/${localStorage.getItem("key")}`}
                 >
-                  <NavDropdown.Item href="/admin/secure-auth">
-                    Secure Auth Verification
-                  </NavDropdown.Item>
-                  <NavDropdown.Item href="/admin/change_password">
-                    Change Password
-                  </NavDropdown.Item>
-                  <NavDropdown.Item
-                    onClick={() => {
-                      dispatch(logout());
-                    }}
-                    href="#action/3.4"
-                  >
-                    Logout
-                  </NavDropdown.Item>
-                </NavDropdown>
+                  List of clients
+                </Nav.Link>
+                <Nav.Link
+                  className="navbar-mainLink"
+                  href="/admin/market-analysis"
+                >
+                  Market Analysis
+                </Nav.Link>
+                <TopbarDropdown
+                  name="Live Market"
+                  options={[
+                    { name: "Ball By Ball", link: "#1" },
+                    { name: "Binary", link: "#1" },
+                    { name: "Race 20-20", link: "#1" },
+                    { name: "Queen", link: "#2" },
+                    { name: "Baccarat", link: "#3" },
+                    { name: "Sports Casino", link: "#4" },
+                    { name: "Casino War", link: "#5" },
+                    { name: "Worli", link: "#6" },
+                    { name: "3 Cards Judgement", link: "#7" },
+                    { name: "32 Cards Casino", link: "#8" },
+                    { name: "Live TeenPatti", link: "#9" },
+                    { name: "TeenPatti 2.0", link: "#10" },
+                    { name: "Live Poker", link: "#11" },
+                    { name: "Andar Bahar", link: "#12" },
+                    { name: "Lucky 7", link: "#13" },
+                    { name: "Dragon Tiger", link: "#14" },
+                    { name: "Bollywood Casino", link: "#15" },
+                    { name: "Cricket Casino", link: "#16" },
+                  ]}
+                />
+                <TopbarDropdown
+                  name="Reports"
+                  options={[
+                    {
+                      name: "Account's Statement",
+                      link: "/admin/account-statement",
+                    },
+                    { name: "Current Bets", link: "/admin/current-bets" },
+                    { name: "General Report", link: "/admin/general-report" },
+                    { name: "Game Report", link: "/admin/game-report" },
+                    { name: "Casino Report", link: "/admin/casino-report" },
+                    { name: "Profit And Loss", link: "/admin/profit-loss" },
+                    {
+                      name: "Casino Result Report",
+                      link: "/admin/casinoresult",
+                    },
+                  ]}
+                />
               </Nav>
             </Navbar.Collapse>
-            {/* <Form className="headerSearch" onSubmit={handleSubmit}           autoComplete="off">
+          )}
+          {!isMobile && (
+            <div className="d-flex algin-items-center">
+              <Navbar.Collapse id="navbar-dark-example">
+                <Nav>
+                  <NavDropdown
+                    id="nav-dropdown-dark-example"
+                    title={userDetail && userDetail?.userName}
+                    menuVariant="dark"
+                  >
+                    <NavDropdown.Item href="/admin/secure-auth">
+                      Secure Auth Verification
+                    </NavDropdown.Item>
+                    <NavDropdown.Item href="/admin/change_password">
+                      Change Password
+                    </NavDropdown.Item>
+                    <NavDropdown.Item
+                      onClick={() => {
+                        dispatch(logout());
+                      }}
+                      href="#action/3.4"
+                    >
+                      Logout
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                </Nav>
+              </Navbar.Collapse>
+              {/* <Form className="headerSearch" onSubmit={handleSubmit}           autoComplete="off">
               <Form.Group className="" controlId="exampleForm.ControlInput1" >
                 <Form.Control
                   type="text"
@@ -378,27 +386,29 @@ const Topbar = (props: any) => {
               </Form.Group>
             </Form>
             */}
-          </div>}
-
-          {!isMobile && <Form className="headerSearch">
-            <div>
-              <Select
-                value={searchValue}
-                options={optionslist}
-                onInputChange={handleSearch}
-                placeholder="All Client"
-                openMenuOnClick={false}
-                styles={customStyles}
-                classNamePrefix="select"
-                onChange={(item: any) => {
-                  setSearchValue(item);
-                }}
-                components={{ DropdownIndicator }}
-              />
             </div>
-          </Form>}
-        </Container>
+          )}
 
+          {!isMobile && (
+            <Form className="headerSearch">
+              <div>
+                <Select
+                  value={searchValue}
+                  options={optionslist}
+                  onInputChange={handleSearch}
+                  placeholder="All Client"
+                  openMenuOnClick={false}
+                  styles={customStyles}
+                  classNamePrefix="select"
+                  onChange={(item: any) => {
+                    setSearchValue(item);
+                  }}
+                  components={{ DropdownIndicator }}
+                />
+              </div>
+            </Form>
+          )}
+        </Container>
       </Navbar>
 
       <CustomModal
