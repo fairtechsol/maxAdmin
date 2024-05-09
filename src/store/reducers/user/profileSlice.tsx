@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  dropdownSummary,
   getUsersProfile,
   profileReset,
   updateUserBalance,
@@ -10,6 +11,7 @@ interface InitialState {
   success: boolean;
   loading: boolean;
   error: any;
+  summary:  boolean;
 }
 
 const initialState: InitialState = {
@@ -17,6 +19,7 @@ const initialState: InitialState = {
   loading: false,
   success: false,
   error: null,
+  summary: true,
 };
 
 const profileSlice = createSlice({
@@ -41,6 +44,9 @@ const profileSlice = createSlice({
       })
       .addCase(profileReset, (state) => {
         state.success = false;
+      })
+      .addCase(dropdownSummary.fulfilled, (state, action) => {
+        state.summary = action.payload.summary;
       })
       .addCase(updateUserBalance.fulfilled, (state, action) => {
         state.userDetail = {

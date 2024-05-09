@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
 // import { GiHamburgerMenu } from 'react-icons/gi';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import LoggedUserDetail from "../../components/listClients/loggedUserDetail";
 import {
   getUsersProfile,
   updateUserBalance,
 } from "../../store/actions/user/userActions";
-import { AppDispatch } from "../../store/store";
+import { AppDispatch, RootState } from "../../store/store";
 import "../layout.scss";
 import Topbar from "./header";
 import Sidebar from "./sidebar";
 import { socketService } from "../../socketManager";
 
-function MainLayout() {
+function MainLayout({eventKey}:any) {
   let location = useLocation();
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
@@ -22,6 +22,10 @@ function MainLayout() {
   const handleDrawer = () => {
     setToggle(!toggle);
   };
+
+  const { summary } = useSelector(
+    (state: RootState) => state.user.profile
+  );
 
   const updateLoggedUserBalance = (event: any) => {
     dispatch(updateUserBalance(event));
@@ -55,7 +59,7 @@ function MainLayout() {
         <Sidebar clickHandler={handleDrawer} />
       </div>
       {/* layout */}
-      {location.pathname.includes("/admin/active-inactive-user-list") ? (
+      {location.pathname.includes("/admin/active-inactive-user-list") && summary ? (
         <LoggedUserDetail />
       ) : (
         ""

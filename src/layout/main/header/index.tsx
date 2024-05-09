@@ -71,7 +71,6 @@ const Topbar = (props: any) => {
   const handleSearch = (event: any) => {
     const query = event;
     debouncedInputValue(query);
-    // setSearchModal(true);
   };
 
   //   const [selectedUser, setSelectedUser] = useState(null);
@@ -102,11 +101,14 @@ const Topbar = (props: any) => {
       label: item?.userName,
     })) || [];
 
-  const handleSubmit = (e: any) => {
-    // console.log(e.target.value, "aflatoor");
+      const handleSubmit = (e: any) => {
     e.preventDefault();
-    // setSearchValue(null);
-    setSearchModal(true);
+    if ( searchValue?.value && userDetail?.id) {
+      setSearchModal(true);
+    } else {
+      alert("Please select user!");
+      return;
+    }
   };
 
   const customStyles = {
