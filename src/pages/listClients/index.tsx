@@ -26,7 +26,7 @@ const columns: Column[] = [
 ];
 
 const ListClent: React.FC = () => {
-  const { id } = useParams();
+  const { id,type } = useParams();
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
@@ -154,21 +154,17 @@ const ListClent: React.FC = () => {
                   return (
                     <tr key={id}>
                       <td colSpan={4}>
-                        {roleName === "user" || roleName === "expert" ? (
-                          <CustomButton className="actionBtn" variant="dark">
-                            {userName}
-                          </CustomButton>
-                        ) : (
-                          <Link
-                            to={`/admin/listClients/${id}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            <CustomButton className="actionBtn" variant="dark">
-                              {userName}
-                            </CustomButton>
-                          </Link>
-                        )}
+                        {
+                          roleName ==='user' || roleName === 'expert' ? 
+                          <CustomButton className="actionBtn" variant="dark" >
+                          {userName}
+                        </CustomButton>  :
+                        <Link to={`/admin/listClients/sub-user/${id}`} target="_blank" rel="noopener noreferrer">
+                        <CustomButton className="actionBtn" variant="dark" >
+                          {userName}
+                        </CustomButton></Link>
+                        }
+                      
                       </td>
                       <td className="text-end">{creditRefrence}</td>
                       <td className="text-center">
@@ -199,6 +195,22 @@ const ListClent: React.FC = () => {
                       <td className="text-end">{casinoTotal}</td>
                       <td>
                         <div className="d-flex gap-1 border-right-0 border-left-0">
+                          {type ? <>
+                            {actionButtons?.map((item) => {
+                            return (item.id ==='d' || item.id==='w') && (
+                              <CustomButton
+                                variant="dark"
+                                onClick={() => {
+                                  item.onClick(item?.id, userItem);
+                                }}
+                                key={item?.id}
+                                className={`actionBtn`}
+                              >
+                                {item?.name}
+                              </CustomButton>
+                            );
+                          })}
+                          </> :  <>
                           {actionButtons?.map((item) => {
                             return (
                               <CustomButton
@@ -213,6 +225,7 @@ const ListClent: React.FC = () => {
                               </CustomButton>
                             );
                           })}
+                          </> }
                         </div>
                       </td>
                     </tr>

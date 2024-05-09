@@ -34,6 +34,10 @@ const MainRoutes = {
       element: <ListClients />,
     },
     {
+      path: "listClients/:type/:id",
+      element: <ListClients />,
+    },
+    {
       path: "listAccount",
       element: <ListAccount />,
     },
@@ -58,7 +62,11 @@ const MainRoutes = {
       element: <SecureAuth />,
     },
     {
-      path: "active-inactive-user-list",
+      path: "active-inactive-user-list/:id",
+      element: <ListActiveInactiveUser />,
+    },
+    {
+      path: "active-inactive-user-list/:type/:id",
       element: <ListActiveInactiveUser />,
     },
     {
