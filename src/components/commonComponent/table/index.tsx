@@ -9,7 +9,7 @@ import SortIcon from "./tableUtils/sort";
 
 interface SortConfig {
   key: string | null | number;
-  direction: "asc" | "desc";
+  direction: "ASC" | "DESC";
 }
 
 interface CustomTableProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -51,26 +51,36 @@ const CustomTable: React.FC<CustomTableProps> = ({
   // State for sorting configuration and current page
   const [sortConfig, setSortConfig] = useState<SortConfig>({
     key: null,
-    direction: "asc",
+    direction: "ASC",
   });
   const [currentPage, setCurrentPage] = useState(1);
   const [rowPerPage, setRowPerPage] = useState(10);
 
   // Handle column click to change the sorting configuration
   const handleSort = (key: string | number) => {
-    if(key === 'ust' || key === 'accountType' ||  key === 'actions' || key === 'default' || key === 'casino'){
+    if (
+      key === "ust" ||
+      key === "accountType" ||
+      key === "actions" ||
+      key === "default" ||
+      key === "casino"
+    ) {
       return true;
-    }else if( key === 'balance' || key === 'availableBalance' || key === 'exposureLimit'){
+    } else if (
+      key === "balance" ||
+      key === "availableBalance" ||
+      key === "exposureLimit"
+    ) {
       sortData(key);
-    }else{
-    setSortConfig((prevSortConfig) => ({
-      key,
-      direction:
-        prevSortConfig.key === key && prevSortConfig.direction === "asc"
-          ? "desc"
-          : "asc",
-    }));
-  }
+    } else {
+      setSortConfig((prevSortConfig) => ({
+        key,
+        direction:
+          prevSortConfig.key === key && prevSortConfig.direction === "ASC"
+            ? "DESC"
+            : "ASC",
+      }));
+    }
   };
 
   // Handle pagination item click to set the current page
@@ -78,10 +88,13 @@ const CustomTable: React.FC<CustomTableProps> = ({
 
   //   for api fetching when sort or page change
   useEffect(() => {
-    setTableConfig({
-      page: currentPage,
-      sort: sortConfig,
-      rowPerPage: rowPerPage,
+    setTableConfig((prev: any) => {
+      return {
+        ...prev,
+        page: currentPage,
+        sort: sortConfig,
+        rowPerPage: rowPerPage,
+      };
     });
     // alert(tHeadTheme);
   }, [currentPage, sortConfig, rowPerPage]);
@@ -112,7 +125,7 @@ const CustomTable: React.FC<CustomTableProps> = ({
                 {isSort && (
                   <SortIcon
                     isActive={sortConfig.key === column.id}
-                    isAscending={sortConfig.direction === "asc"}
+                    isAscending={sortConfig.direction === "ASC"}
                     clickHandler={handleSort}
                     id={column.id}
                   />

@@ -15,7 +15,7 @@ const ProfitLossEventType = (props: any) => {
   return (
     <div className={`profitLossEventType ${props.customClass}`}>
       <h5 className="f400">Profit & Loss for Event type</h5>
-      <div className="d-flex" style={{ gap: "12px" }}>
+      <div className="d-flex" style={{ gap: "12px", flexWrap: "wrap" }}>
         {dataArray?.map((item: any, index: number) => (
           <div
             key={index}

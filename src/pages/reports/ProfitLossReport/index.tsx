@@ -13,6 +13,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { searchList } from "../../../store/actions/user/userActions";
 import { debounce } from "lodash";
 import { getProfitLossReport } from "../../../store/actions/match/matchAction";
+import moment from "moment-timezone";
+import { Constants } from "../../../utils/Constants";
 
 interface Column {
   id: string;
@@ -56,7 +58,23 @@ const ProfitLossReport = () => {
     }
   }, 500);
 
-  useEffect(() => {}, [tableConfig]);
+  useEffect(() => {
+    dispatch(
+      getProfitLossReport({
+        userId: selectedUser[0]?.value,
+        startDate: fromDate ? fromDate : "",
+        endDate: toDate
+          ? moment(
+              new Date(toDate).setDate(new Date(toDate).getDate() + 1)
+            ).format("YYYY/MM/DD")
+          : "",
+        page: tableConfig?.page,
+        limit: tableConfig?.rowPerPage,
+        searchBy: "gameName",
+        keyword: tableConfig?.keyword ?? "",
+      })
+    );
+  }, [tableConfig]);
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -64,7 +82,13 @@ const ProfitLossReport = () => {
       getProfitLossReport({
         userId: selectedUser[0]?.value,
         startDate: fromDate ? fromDate : "",
-        endDate: toDate ? toDate : "",
+        endDate: toDate
+          ? moment(
+              new Date(toDate).setDate(new Date(toDate).getDate() + 1)
+            ).format("YYYY/MM/DD")
+          : "",
+        page: 1,
+        limit: Constants.PAGELIMIT,
       })
     );
   };
