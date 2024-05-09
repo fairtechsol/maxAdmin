@@ -54,7 +54,7 @@ function MainLayout() {
         <Sidebar clickHandler={handleDrawer} />
       </div>
       {/* layout */}
-      {location.pathname === "/admin/active-inactive-user-list" ? (
+      {location.pathname.includes("/admin/active-inactive-user-list") ? (
         <LoggedUserDetail />
       ) : (
         ""

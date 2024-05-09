@@ -26,7 +26,7 @@ const columns: Column[] = [
 ];
 
 const ListClent: React.FC = () => {
-  const { id } = useParams();
+  const { id,type } = useParams();
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
@@ -155,7 +155,7 @@ const ListClent: React.FC = () => {
                           <CustomButton className="actionBtn" variant="dark" >
                           {userName}
                         </CustomButton>  :
-                        <Link to={`/admin/listClients/${id}`} target="_blank" rel="noopener noreferrer">
+                        <Link to={`/admin/listClients/sub-user/${id}`} target="_blank" rel="noopener noreferrer">
                         <CustomButton className="actionBtn" variant="dark" >
                           {userName}
                         </CustomButton></Link>
@@ -192,6 +192,22 @@ const ListClent: React.FC = () => {
                       <td>
                         <div className="d-flex gap-1 border-right-0 border-left-0">
 
+                          {type ? <>
+                            {actionButtons?.map((item) => {
+                            return (item.id ==='d' || item.id==='w') && (
+                              <CustomButton
+                                variant="dark"
+                                onClick={() => {
+                                  item.onClick(item?.id, userItem);
+                                }}
+                                key={item?.id}
+                                className={`actionBtn`}
+                              >
+                                {item?.name}
+                              </CustomButton>
+                            );
+                          })}
+                          </> :  <>
                           {actionButtons?.map((item) => {
                             return (
                               <CustomButton
@@ -206,6 +222,7 @@ const ListClent: React.FC = () => {
                               </CustomButton>
                             );
                           })}
+                          </> }
                         </div>
                       </td>
                     </tr>

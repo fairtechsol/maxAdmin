@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Form, Nav, Row, Tab } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import "../../assets/common.scss";
 import CustomButton from "../../components/commonComponent/button";
 import CustomTable from "../../components/commonComponent/table";
@@ -30,6 +30,7 @@ const columns: Column[] = [
 
 const ListActiveInactiveUser: React.FC = () => {
   const navigate = useNavigate();
+  const { id, type } = useParams();
   const dispatch: AppDispatch = useDispatch();
 
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
@@ -38,7 +39,7 @@ const ListActiveInactiveUser: React.FC = () => {
     eventId: null,
     userData: null,
   });
-  const [activeUser, setActiveUser] = useState<any>([]); 
+  const [activeUser, setActiveUser] = useState<any>([]);
   const [deactiveUser, setDeactiveUser] = useState<any>([]);
   const showEventModals = (id: any, userData: any) => {
     setEventDetails({
@@ -47,16 +48,18 @@ const ListActiveInactiveUser: React.FC = () => {
       userData: userData,
     });
   };
-  useEffect(() => { dispatch(
-    
-    getUsers({
-      // page: tableConfig?.page || 1,
-      // limit: tableConfig?.rowPerPage,
-      userName: tableConfig?.keyword || "",
-      sort: tableConfig?.sort?.key || '',
-      order :tableConfig?.sort?.direction || 'desc'
-    })
-  );}, [tableConfig]);
+  useEffect(() => {
+    dispatch(
+      getUsers({
+        userId: id,
+        // page: tableConfig?.page || 1,
+        // limit: tableConfig?.rowPerPage,
+        userName: tableConfig?.keyword || "",
+        sort: tableConfig?.sort?.key || "",
+        order: tableConfig?.sort?.direction || "desc",
+      })
+    );
+  }, [tableConfig]);
 
   const actionButtons = [
     {
@@ -99,14 +102,18 @@ const ListActiveInactiveUser: React.FC = () => {
   const { userList } = useSelector((state: RootState) => state.user.userList);
 
   useEffect(() => {
-    dispatch(getUsers());
-  }, [dispatch]);
+    dispatch(
+      getUsers({
+        userId: id,
+      })
+    );
+  }, []);
 
   // const activeUser: Array<object> = [];
   // const deactiveUser: Array<object> = [];
   useEffect(() => {
     const active: Array<object> = [];
-    const deactive  : Array<object> = [];
+    const deactive: Array<object> = [];
 
     userList?.list?.forEach((user: any) => {
       if (user.userBlock === false) {
@@ -120,20 +127,18 @@ const ListActiveInactiveUser: React.FC = () => {
     setActiveUser(active);
     setDeactiveUser(deactive);
   }, [userList]);
-useEffect(() => {
+  useEffect(() => {}, [activeUser]);
 
-}, [activeUser]);
+  const sortData = (key: string) => {
+    let array = [...activeUser];
 
-  const sortData = (key:string) => {
-  let array = [...activeUser];
-  
-    if(array[0][key] > array[array?.length - 1][key]){
-      array.sort((a : any, b: any) => a[key] - b[key]);
-    }else{
-      array.sort((a : any, b: any) =>  b[key] - a[key] );
+    if (array[0][key] > array[array?.length - 1][key]) {
+      array.sort((a: any, b: any) => a[key] - b[key]);
+    } else {
+      array.sort((a: any, b: any) => b[key] - a[key]);
     }
-  
-  setActiveUser(array);
+
+    setActiveUser(array);
   };
 
   return (
@@ -245,12 +250,28 @@ useEffect(() => {
                         return (
                           <tr key={id}>
                             <td colSpan={2}>
-                              <CustomButton
-                                className="actionBtn"
-                                variant="dark"
-                              >
-                                {userName}
-                              </CustomButton>
+                              {roleName === "user" || roleName === "expert" ? (
+                                <CustomButton
+                                  className="actionBtn"
+                                  variant="dark"
+                                >
+                                  {userName}
+                                </CustomButton>
+                              ) : (
+                                <Link
+                                  to={`/admin/active-inactive-user-list/sub-user/${id}`}
+                                  target="_blank"
+                                  state="second"
+                                  rel="noopener noreferrer"
+                                >
+                                  <CustomButton
+                                    className="actionBtn"
+                                    variant="dark"
+                                  >
+                                    {userName}
+                                  </CustomButton>
+                                </Link>
+                              )}
                             </td>
 
                             <td className="text-end">{creditRefrence}</td>
@@ -381,12 +402,28 @@ useEffect(() => {
                         return (
                           <tr key={id}>
                             <td colSpan={2}>
-                              <CustomButton
-                                className="actionBtn"
-                                variant="dark"
-                              >
-                                {userName}
-                              </CustomButton>
+                              {roleName === "user" || roleName === "expert" ? (
+                                <CustomButton
+                                  className="actionBtn"
+                                  variant="dark"
+                                >
+                                  {userName}
+                                </CustomButton>
+                              ) : (
+                                <Link
+                                  to={`/admin/active-inactive-user-list/sub-user/${id}`}
+                                  state="second"
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                >
+                                  <CustomButton
+                                    className="actionBtn"
+                                    variant="dark"
+                                  >
+                                    {userName}
+                                  </CustomButton>
+                                </Link>
+                              )}
                             </td>
 
                             <td className="text-end">{creditRefrence}</td>
@@ -420,20 +457,44 @@ useEffect(() => {
                             <td className="text-end">0</td>
                             <td>
                               <div className="d-flex gap-1 border-right-0 border-left-0">
-                                {actionButtons?.map((item) => {
-                                  return (
-                                    <CustomButton
-                                      variant="dark"
-                                      onClick={() => {
-                                        item.onClick(item?.id, userItem);
-                                      }}
-                                      key={item?.id}
-                                      className="actionBtn"
-                                    >
-                                      {item?.name}
-                                    </CustomButton>
-                                  );
-                                })}
+                                {type ? (
+                                  <>
+                                    {actionButtons?.map((item) => {
+                                      return (
+                                        (item.id === "d" ||
+                                          item.id === "w") && (
+                                          <CustomButton
+                                            variant="dark"
+                                            onClick={() => {
+                                              item.onClick(item?.id, userItem);
+                                            }}
+                                            key={item?.id}
+                                            className={`actionBtn`}
+                                          >
+                                            {item?.name}
+                                          </CustomButton>
+                                        )
+                                      );
+                                    })}
+                                  </>
+                                ) : (
+                                  <>
+                                    {actionButtons?.map((item) => {
+                                      return (
+                                        <CustomButton
+                                          variant="dark"
+                                          onClick={() => {
+                                            item.onClick(item?.id, userItem);
+                                          }}
+                                          key={item?.id}
+                                          className={`actionBtn`}
+                                        >
+                                          {item?.name}
+                                        </CustomButton>
+                                      );
+                                    })}
+                                  </>
+                                )}
                               </div>
                             </td>
                           </tr>

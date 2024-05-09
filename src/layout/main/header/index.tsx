@@ -204,7 +204,7 @@ const Topbar = (props: any) => {
             )}
           </span>
           <Navbar.Brand
-            href="/admin/active-inactive-user-list"
+            href={`/admin/active-inactive-user-list/${userDetail?.id}`}
           className="me-2"
           >
             <LogoSection width="110px" height="38px" />
