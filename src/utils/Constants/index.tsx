@@ -62,6 +62,7 @@ export const Constants = {
   localPathExpert: "http://localhost:6060",
   WEBSOCKET: "websocket",
   POLLING: "polling",
+  PAGELIMIT: 15,
 };
 
 // use below baseUrl for live build
