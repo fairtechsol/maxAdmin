@@ -14,7 +14,6 @@ import { searchList } from "../../../store/actions/user/userActions";
 import { debounce } from "lodash";
 import { getProfitLossReport } from "../../../store/actions/match/matchAction";
 import moment from "moment-timezone";
-import { Constants } from "../../../utils/Constants";
 
 interface Column {
   id: string;
@@ -70,7 +69,6 @@ const ProfitLossReport = () => {
           : "",
         page: tableConfig?.page,
         limit: tableConfig?.rowPerPage,
-        searchBy: "gameName",
         keyword: tableConfig?.keyword ?? "",
       })
     );
@@ -88,7 +86,8 @@ const ProfitLossReport = () => {
             ).format("YYYY/MM/DD")
           : "",
         page: 1,
-        limit: Constants.PAGELIMIT,
+        limit: tableConfig?.rowPerPage,
+        keyword: tableConfig?.keyword ?? "",
       })
     );
   };
@@ -159,7 +158,7 @@ const ProfitLossReport = () => {
         isPagination={true}
         isSort={true}
         isSearch={true}
-        itemCount={profitLossReport ? profitLossReport?.result?.length : 1}
+        itemCount={profitLossReport ? profitLossReport?.count : 1}
         setTableConfig={setTableConfig}
         enablePdfExcel={false}
       >
