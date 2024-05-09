@@ -30,8 +30,9 @@ function MainLayout() {
   useEffect(() => {
     if (!localStorage.getItem("jwtMaxAdmin")) {
       navigate("/admin/login");
+    } else {
+      dispatch(getUsersProfile());
     }
-    dispatch(getUsersProfile());
   }, [dispatch]);
 
   useEffect(() => {

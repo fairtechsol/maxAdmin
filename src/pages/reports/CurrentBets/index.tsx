@@ -10,6 +10,7 @@ import {
 } from "../../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../../store/store";
 import _ from "lodash";
+import moment from "moment-timezone";
 
 interface Column {
   id: string;
@@ -42,6 +43,8 @@ const CurrentBets = () => {
     value: "PENDING",
     label: "Matched",
   });
+
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
   useEffect(() => {}, [tableConfig]);
 
@@ -85,7 +88,7 @@ const CurrentBets = () => {
 
   useEffect(() => {
     handleLoad();
-  }, []); 
+  }, []);
 
   return (
     <div className="p-2 pt-0">
@@ -138,7 +141,13 @@ const CurrentBets = () => {
           ReportBetList?.rows?.map((item: any, index: number) => (
             <tr key={index}>
               {columns.map((column, index: number) => (
-                <td key={index}>{_.get(item, column?.id)}</td>
+                <td key={index}>
+                  {column?.id === "createdAt" || column?.id === "match.startAt"
+                    ? moment(_.get(item, column?.id))
+                        .tz(timezone)
+                        .format("YYYY-MMM-DD h:mmA [IST]")
+                    : _.get(item, column?.id)}
+                </td>
               ))}
             </tr>
           ))}

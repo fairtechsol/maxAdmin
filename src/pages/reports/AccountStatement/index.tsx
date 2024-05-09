@@ -34,6 +34,14 @@ interface Option {
   value: string;
   label: string;
 }
+
+let sortConstant: any = {
+  date: "createdAt",
+  credit: "amount",
+  debit: "amount",
+  closing: "closingBalance",
+  description: "description",
+};
 const AccountStatement = () => {
   const dispatch: AppDispatch = useDispatch();
 
@@ -156,6 +164,12 @@ const AccountStatement = () => {
           filter: filter,
         })
       );
+      setTableConfig((prev: any) => {
+        return {
+          ...prev,
+          sort: { key: null, direction: "ASC" },
+        };
+      });
     } catch (e) {
       console.log(e);
     }
@@ -163,6 +177,37 @@ const AccountStatement = () => {
 
   useEffect(() => {
     if (userDetail?.id && tableConfig && firstTime) {
+      let filter = "";
+      if (dateFrom && dateTo) {
+        filter += `&createdAt=between${moment(new Date(dateFrom))?.format(
+          "YYYY-MM-DD"
+        )}|${moment(
+          new Date(dateTo).setDate(new Date(dateTo).getDate() + 1)
+        )?.format("YYYY-MM-DD")}`;
+      } else if (dateFrom) {
+        filter += `&createdAt=gte${moment(dateFrom)?.format("YYYY-MM-DD")}`;
+      } else if (dateTo) {
+        filter += `&createdAt=lte${moment(dateTo)?.format("YYYY-MM-DD")}`;
+      }
+      if (selectedUser) {
+        filter += `&user.userName=${selectedUser[0].label}`;
+      }
+      if (aaccountTypeValues && aaccountTypeValues?.value === "gameReport") {
+        filter += `&transType=inArr${JSON.stringify([
+          "win",
+          "loss",
+          // "bet",
+        ])}`;
+      } else if (
+        aaccountTypeValues &&
+        aaccountTypeValues?.value === "balanceReport"
+      ) {
+        filter += `&transType=inArr${JSON.stringify([
+          "add",
+          "withDraw",
+          "creditReference",
+        ])}`;
+      }
       dispatch(
         getReportAccountList({
           id: userDetail?.id,
@@ -170,6 +215,14 @@ const AccountStatement = () => {
           limit: tableConfig?.rowPerPage,
           searchBy: "description",
           keyword: tableConfig?.keyword ?? "",
+          sort: tableConfig?.sort?.key
+            ? sortConstant[tableConfig?.sort?.key]
+              ? `transaction.${sortConstant[tableConfig?.sort?.key]}:${
+                  tableConfig?.sort?.direction
+                }`
+              : ""
+            : "",
+          filter,
         })
       );
     }

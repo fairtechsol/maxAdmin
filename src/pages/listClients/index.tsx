@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate,useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import "../../assets/common.scss";
 import CustomButton from "../../components/commonComponent/button";
 import CustomTable from "../../components/commonComponent/table";
@@ -77,15 +77,19 @@ const ListClent: React.FC = () => {
     },
   ];
   useEffect(() => {
-    dispatch(
-      getUsers({
-        userId: id,
-        // page: tableConfig?.page || 1,
-        // limit: tableConfig?.rowPerPage,
-        userName: tableConfig?.keyword || "",
-      })
-    );
-  }, [tableConfig]);
+    if (id) {
+      dispatch(
+        getUsers({
+          userId: id,
+          // page: tableConfig?.page || 1,
+          // limit: tableConfig?.rowPerPage,
+          userName: tableConfig?.keyword || "",
+          sort: "user.createdAt",
+          order: "DESC",
+        })
+      );
+    }
+  }, [tableConfig, id]);
 
   return (
     <>
@@ -191,7 +195,6 @@ const ListClent: React.FC = () => {
                       <td className="text-end">{casinoTotal}</td>
                       <td>
                         <div className="d-flex gap-1 border-right-0 border-left-0">
-
                           {type ? <>
                             {actionButtons?.map((item) => {
                             return (item.id ==='d' || item.id==='w') && (
