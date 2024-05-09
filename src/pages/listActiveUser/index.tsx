@@ -8,7 +8,7 @@ import CustomTable from "../../components/commonComponent/table";
 import ListClientModals from "../../components/listClients/modals";
 import "../../components/listClients/style.scss";
 import { Column, TableConfig } from "../../models/tableInterface";
-import { getUsers } from "../../store/actions/user/userActions";
+import { dropdownSummary, getUsers } from "../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../store/store";
 import { ApiConstants } from "../../utils/Constants";
 // Example usage
@@ -140,7 +140,7 @@ useEffect(() => {
     <>
       <Container className="listClient listActiveUser" fluid>
         <Row>
-          <Col>
+                 <Col>
             <p className="title-22">Account List</p>
           </Col>
           <Col>
@@ -157,17 +157,16 @@ useEffect(() => {
             <Tab.Container id="left-tabs-example" defaultActiveKey="first">
               <Nav variant="pills" className="flex-row ">
                 <Nav.Item>
-                  <Nav.Link className="rounded-0 " eventKey="first">
+                  <Nav.Link className="rounded-0 " eventKey="first" onClick={()=>dispatch(dropdownSummary({summary:true}))}>
                     Active User
                   </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link className="rounded-0 " eventKey="second">
+                  <Nav.Link className="rounded-0 " eventKey="second" onClick={()=>dispatch(dropdownSummary({summary:false}))}>
                     Deactivate User
                   </Nav.Link>
                 </Nav.Item>
               </Nav>
-
               <Tab.Content className="mt-3">
                 <Tab.Pane eventKey="first">
                   <CustomTable
@@ -458,7 +457,7 @@ useEffect(() => {
           />
         )}
       </Container>
-    </>
+          </>
   );
 };
 

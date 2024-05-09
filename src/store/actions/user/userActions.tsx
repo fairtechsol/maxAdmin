@@ -301,6 +301,13 @@ export const updateUserBalance = createAsyncThunk<any, any>(
   }
 );
 
+export const dropdownSummary = createAsyncThunk<any, any>(
+  "dropdownSummary",
+  async (data) => {
+    return data;
+  }
+);
+
 export const userListReset = createAction("userList/reset");
 export const addSuccessReset = createAction("addSuccess/reset");
 export const changePasswordReset = createAction("changePasswordReset/reset");
