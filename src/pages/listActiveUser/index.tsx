@@ -8,7 +8,10 @@ import CustomTable from "../../components/commonComponent/table";
 import ListClientModals from "../../components/listClients/modals";
 import "../../components/listClients/style.scss";
 import { Column, TableConfig } from "../../models/tableInterface";
-import { dropdownSummary, getUsers } from "../../store/actions/user/userActions";
+import {
+  dropdownSummary,
+  getUsers,
+} from "../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../store/store";
 import { ApiConstants } from "../../utils/Constants";
 // Example usage
@@ -145,7 +148,7 @@ const ListActiveInactiveUser: React.FC = () => {
     <>
       <Container className="listClient listActiveUser" fluid>
         <Row>
-                 <Col>
+          <Col>
             <p className="title-22">Account List</p>
           </Col>
           <Col>
@@ -162,12 +165,22 @@ const ListActiveInactiveUser: React.FC = () => {
             <Tab.Container id="left-tabs-example" defaultActiveKey="first">
               <Nav variant="pills" className="flex-row ">
                 <Nav.Item>
-                  <Nav.Link className="rounded-0 " eventKey="first" onClick={()=>dispatch(dropdownSummary({summary:true}))}>
+                  <Nav.Link
+                    className="rounded-0 "
+                    eventKey="first"
+                    onClick={() => dispatch(dropdownSummary({ summary: true }))}
+                  >
                     Active User
                   </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link className="rounded-0 " eventKey="second" onClick={()=>dispatch(dropdownSummary({summary:false}))}>
+                  <Nav.Link
+                    className="rounded-0 "
+                    eventKey="second"
+                    onClick={() =>
+                      dispatch(dropdownSummary({ summary: false }))
+                    }
+                  >
                     Deactivate User
                   </Nav.Link>
                 </Nav.Item>
@@ -326,6 +339,41 @@ const ListActiveInactiveUser: React.FC = () => {
                         );
                       })}
                   </CustomTable>
+                  {activeUser?.length > 0 &&( <div
+                    style={{
+                      width: "100%",
+                      marginTop: "5px",
+                      display: "flex",
+                      flexDirection: "row",
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: "50%",
+                        display: "flex",
+                        justifyContent: "flex-start",
+                      }}
+                    >
+                      Showing 1 to {activeUser?.length} of {activeUser?.length} entries
+                    </div>
+                    <div
+                      style={{
+                        width: "50%",
+                        display: "flex",
+                        justifyContent: "flex-end",
+                        gap: "5px",
+                      }}
+                    >
+                      <CustomButton className={`actionBtn`} disabled>
+                        Previous
+                      </CustomButton>
+                      <CustomButton className={`actionBtn`}>1</CustomButton>
+                      <CustomButton className={`actionBtn`} disabled>
+                        Next
+                      </CustomButton>
+                    </div>
+                  </div>)}
+                 
                 </Tab.Pane>
                 <Tab.Pane eventKey="second">
                   <CustomTable
@@ -500,6 +548,43 @@ const ListActiveInactiveUser: React.FC = () => {
                         );
                       })}
                   </CustomTable>
+                  {deactiveUser?.length > 0 &&(
+                    <div
+                    style={{
+                      width: "100%",
+                      marginTop: "5px",
+                      display: "flex",
+                      flexDirection: "row",
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: "50%",
+                        display: "flex",
+                        justifyContent: "flex-start",
+                      }}
+                    >
+                      Showing 1 to {deactiveUser?.length} of {deactiveUser?.length} entries
+                    </div>
+                    <div
+                      style={{
+                        width: "50%",
+                        display: "flex",
+                        justifyContent: "flex-end",
+                        gap: "5px",
+                      }}
+                    >
+                      <CustomButton className={`actionBtn`} disabled>
+                        Previous
+                      </CustomButton>
+                      <CustomButton className={`actionBtn`}>1</CustomButton>
+                      <CustomButton className={`actionBtn`} disabled>
+                        Next
+                      </CustomButton>
+                    </div>
+                  </div>
+                  )}
+                  
                 </Tab.Pane>
               </Tab.Content>
             </Tab.Container>
@@ -518,7 +603,7 @@ const ListActiveInactiveUser: React.FC = () => {
           />
         )}
       </Container>
-          </>
+    </>
   );
 };
 
