@@ -225,8 +225,8 @@ const AccountStatement = () => {
                 ? `transaction.${sortConstant[tableConfig?.sort?.key]}:${
                     tableConfig?.sort?.direction
                   }`
-                : ""
-              : "",
+                : "transaction.createdAt:DESC"
+              : "transaction.createdAt:DESC",
             filter,
           })
         );
