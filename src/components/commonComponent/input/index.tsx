@@ -14,6 +14,7 @@ const CustomInput = (props: any) => {
     touched,
     style,
     disabled,
+    required,
     customstyle,
     ...prop
   } = props;
@@ -32,6 +33,7 @@ const CustomInput = (props: any) => {
           ""
         )}
         <Form.Control
+        required={required}
           disabled={disabled}
           autoComplete="new-password"
           className={`col-${formInline ? inputCol : ""} bg-${bgColor}`}

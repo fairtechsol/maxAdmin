@@ -102,6 +102,7 @@ const ExposureLimit = ({ setShow, userData }: any) => {
               </Col>
               <Col sm={8}>
                 <CustomInput
+                required={true}
                   name="amount"
                   id="amount"
                   value={values.amount}

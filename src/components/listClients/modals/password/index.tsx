@@ -62,6 +62,7 @@ const Password = ({ userData, setShow }: any) => {
               </Col>
               <Col sm={8}>
                 <CustomInput
+                  required={true}
                   id="newPassword"
                   type="password"
                   customStyle="input-box"
@@ -79,6 +80,7 @@ const Password = ({ userData, setShow }: any) => {
               </Col>
               <Col sm={8}>
                 <CustomInput
+                  required={true}
                   id="confirmPassword"
                   type="password"
                   customStyle="input-box"
@@ -96,6 +98,7 @@ const Password = ({ userData, setShow }: any) => {
               </Col>
               <Col sm={8}>
                 <CustomInput
+                  required={true}
                   type="password"
                   customStyle="input-box"
                   id="transactionPassword"
