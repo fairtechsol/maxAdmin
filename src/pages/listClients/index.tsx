@@ -32,7 +32,13 @@ const ListClent: React.FC = () => {
   const { id, type } = useParams();
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
-  const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
+  const [keyWord, setKeyWord] = useState<any>("");
+  const [tableConfig, setTableConfig] = useState<TableConfig | null>({
+    page: 1,
+    sort: { direction: "ASC", key: null },
+    rowPerPage: 10,
+    keyword: "",
+  });
   const [eventDetails, setEventDetails] = useState({
     show: false,
     eventId: null,
@@ -89,14 +95,23 @@ const ListClent: React.FC = () => {
           userId: id,
           // page: tableConfig?.page || 1,
           // limit: tableConfig?.rowPerPage,
-          userName: tableConfig?.keyword || "",
+          userName: keyWord,
           sort: "user.createdAt",
           order: "DESC",
         })
       );
-      dispatch(getTotalBalance());
     }
-  }, [tableConfig, id]);
+  }, [keyWord, id]);
+
+  useEffect(() => {
+    dispatch(getTotalBalance());
+  }, []);
+
+  useEffect(() => {
+    if (keyWord !== tableConfig?.keyword) {
+      setKeyWord(tableConfig?.keyword);
+    }
+  }, [tableConfig]);
 
   return (
     <>
@@ -140,7 +155,9 @@ const ListClent: React.FC = () => {
                     >
                       {index === 1 &&
                         totalBalance &&
-                        totalBalance?.totalCreditReference}
+                        parseFloat(
+                          totalBalance?.totalCreditReference || 0
+                        ).toFixed(2)}
                     </td>
                   );
                 })}

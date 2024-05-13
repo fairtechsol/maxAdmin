@@ -29,7 +29,19 @@ const columns: Column[] = [
 
 const ProfitLossReport = () => {
   const dispatch: AppDispatch = useDispatch();
-  const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
+  const [tableConfig, setTableConfig] = useState<TableConfig | null>({
+    page: 1,
+    sort: { direction: "ASC", key: null },
+    rowPerPage: 10,
+    keyword: "",
+  });
+  const [keyword, setKeyword] = useState<any>("");
+  const [page, setPage] = useState<any>(1);
+  const [rowPerPage, setRowPerPage] = useState<any>(10);
+  const [sort, setSort] = useState({
+    direction: "ASC",
+    key: null,
+  });
   const [profitLossModalShow, setProfitLossModalShow] = useState(false);
   const [selectedUser, setSelectedUser] = useState<any>([]);
   const [fromDate, setFromDate] = useState<any>();
@@ -72,8 +84,26 @@ const ProfitLossReport = () => {
         keyword: tableConfig?.keyword ?? "",
       })
     );
-  }, [tableConfig]);
+  }, [keyword, page, rowPerPage, sort]);
 
+  useEffect(() => {
+    if (page !== tableConfig?.page) {
+      setPage(tableConfig?.page);
+    }
+    if (keyword !== tableConfig?.keyword) {
+      setKeyword(tableConfig?.keyword);
+    }
+    if (
+      sort?.direction !== tableConfig?.sort?.direction ||
+      sort?.key !== tableConfig?.sort?.key
+    ) {
+      setSort(tableConfig?.sort);
+    }
+    if (rowPerPage !== tableConfig?.rowPerPage) {
+      setRowPerPage(tableConfig?.rowPerPage);
+    }
+  }, [tableConfig]);
+  
   const handleSubmit = (e: any) => {
     e.preventDefault();
     dispatch(

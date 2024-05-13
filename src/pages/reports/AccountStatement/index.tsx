@@ -51,9 +51,21 @@ const AccountStatement = () => {
   const [firstTime, setFirstTime] = useState(false);
   const [selectedUser, setSelectedUser] = useState<any>(null);
   const [userOptions, setUserOptions] = useState([]);
+  const [keyword, setKeyword] = useState<any>("");
+  const [page, setPage] = useState<any>(1);
+  const [rowPerPage, setRowPerPage] = useState<any>(10);
+  const [sort, setSort] = useState({
+    direction: "ASC",
+    key: null,
+  });
   const [AccountStatementModalShow, setAccountStatementModalShow] =
     useState(false);
-  const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
+  const [tableConfig, setTableConfig] = useState<TableConfig | null>({
+    page: 1,
+    sort: { direction: "ASC", key: null },
+    rowPerPage: 10,
+    keyword: "",
+  });
   const [aaccountTypeValues, setSelectedOption1] = useState<any>(null);
 
   const [gameNameOptions, setGameNameOptions] = useState<Option[]>([]);
@@ -163,6 +175,7 @@ const AccountStatement = () => {
           searchBy: "description",
           keyword: tableConfig?.keyword ?? "",
           filter: filter,
+          sort: "transaction.createdAt:DESC",
         })
       );
       setTableConfig((prev: any) => {
@@ -178,41 +191,41 @@ const AccountStatement = () => {
 
   useEffect(() => {
     try {
-      if (userDetail?.id && tableConfig && firstTime) {
-        let filter = "";
-        if (dateFrom && dateTo) {
-          filter += `&createdAt=between${moment(new Date(dateFrom))?.format(
-            "YYYY-MM-DD"
-          )}|${moment(
-            new Date(dateTo).setDate(new Date(dateTo).getDate() + 1)
-          )?.format("YYYY-MM-DD")}`;
-        } else if (dateFrom) {
-          filter += `&createdAt=gte${moment(dateFrom)?.format("YYYY-MM-DD")}`;
-        } else if (dateTo) {
-          filter += `&createdAt=lte${moment(dateTo)?.format("YYYY-MM-DD")}`;
-        }
-        if (selectedUser && selectedUser?.length > 0) {
-          filter += `&user.userName=${selectedUser[0]?.label}`;
-        }
-        if (aaccountTypeValues && aaccountTypeValues?.value === "gameReport") {
-          filter += `&transType=inArr${JSON.stringify([
-            "win",
-            "loss",
-            // "bet",
-          ])}`;
-        } else if (
-          aaccountTypeValues &&
-          aaccountTypeValues?.value === "balanceReport"
-        ) {
-          filter += `&transType=inArr${JSON.stringify([
-            "add",
-            "withDraw",
-            "creditReference",
-          ])}`;
-        }
-        if (gameNameValues && aaccountTypeValues?.value === "balanceReport") {
-          filter += `&gameName=${gameNameValues?.value}`;
-        }
+      let filter = "";
+      if (dateFrom && dateTo) {
+        filter += `&createdAt=between${moment(new Date(dateFrom))?.format(
+          "YYYY-MM-DD"
+        )}|${moment(
+          new Date(dateTo).setDate(new Date(dateTo).getDate() + 1)
+        )?.format("YYYY-MM-DD")}`;
+      } else if (dateFrom) {
+        filter += `&createdAt=gte${moment(dateFrom)?.format("YYYY-MM-DD")}`;
+      } else if (dateTo) {
+        filter += `&createdAt=lte${moment(dateTo)?.format("YYYY-MM-DD")}`;
+      }
+      if (selectedUser && selectedUser?.length > 0) {
+        filter += `&user.userName=${selectedUser[0]?.label}`;
+      }
+      if (aaccountTypeValues && aaccountTypeValues?.value === "gameReport") {
+        filter += `&transType=inArr${JSON.stringify([
+          "win",
+          "loss",
+          // "bet",
+        ])}`;
+      } else if (
+        aaccountTypeValues &&
+        aaccountTypeValues?.value === "balanceReport"
+      ) {
+        filter += `&transType=inArr${JSON.stringify([
+          "add",
+          "withDraw",
+          "creditReference",
+        ])}`;
+      }
+      if (gameNameValues && aaccountTypeValues?.value === "balanceReport") {
+        filter += `&gameName=${gameNameValues?.value}`;
+      }
+      if (firstTime) {
         dispatch(
           getReportAccountList({
             id: localStorage.getItem("key"),
@@ -234,7 +247,25 @@ const AccountStatement = () => {
     } catch (error) {
       console.log(error);
     }
-  }, [userDetail?.id, tableConfig, firstTime]);
+  }, [page, keyword, sort, rowPerPage, firstTime]);
+
+  useEffect(() => {
+    if (page !== tableConfig?.page) {
+      setPage(tableConfig?.page);
+    }
+    if (keyword !== tableConfig?.keyword) {
+      setKeyword(tableConfig?.keyword);
+    }
+    if (
+      sort?.direction !== tableConfig?.sort?.direction ||
+      sort?.key !== tableConfig?.sort?.key
+    ) {
+      setSort(tableConfig?.sort);
+    }
+    if (rowPerPage !== tableConfig?.rowPerPage) {
+      setRowPerPage(tableConfig?.rowPerPage);
+    }
+  }, [tableConfig]);
 
   useEffect(() => {
     if (searchListData) {

@@ -7,7 +7,7 @@ import CustomButton from "../../components/commonComponent/button";
 import CustomTable from "../../components/commonComponent/table";
 import ListClientModals from "../../components/listClients/modals";
 import "../../components/listClients/style.scss";
-import { Column, TableConfig } from "../../models/tableInterface";
+import { Column } from "../../models/tableInterface";
 import {
   dropdownSummary,
   getTotalBalance,
@@ -37,7 +37,12 @@ const ListActiveInactiveUser: React.FC = () => {
   const { id, type } = useParams();
   const dispatch: AppDispatch = useDispatch();
 
-  const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
+  const [tableConfig, setTableConfig] = useState<any>({
+    keyword: "",
+    page: 1,
+    rowPerPage: 10,
+    sort: { direction: "ASC", key: null },
+  });
   const [eventDetails, setEventDetails] = useState({
     show: false,
     eventId: null,
@@ -45,6 +50,11 @@ const ListActiveInactiveUser: React.FC = () => {
   });
   const [activeUser, setActiveUser] = useState<any>([]);
   const [deactiveUser, setDeactiveUser] = useState<any>([]);
+  const [keyword, setKeyWord] = useState<any>("");
+  const [sort, setSort] = useState<any>({
+    direction: "ASC",
+    key: null,
+  });
   const showEventModals = (id: any, userData: any) => {
     setEventDetails({
       show: true,
@@ -58,11 +68,23 @@ const ListActiveInactiveUser: React.FC = () => {
         userId: id,
         // page: tableConfig?.page || 1,
         // limit: tableConfig?.rowPerPage,
-        userName: tableConfig?.keyword || "",
-        sort: tableConfig?.sort?.key || "",
-        order: tableConfig?.sort?.direction || "desc",
+        userName: keyword || "",
+        sort: sort?.key || "",
+        order: sort?.direction || "DESC",
       })
     );
+  }, [keyword, sort]);
+
+  useEffect(() => {
+    if (keyword !== tableConfig?.keyword) {
+      setKeyWord(tableConfig?.keyword);
+    }
+    if (
+      sort.direction !== tableConfig?.sort?.direction ||
+      sort.key !== tableConfig?.sort?.key
+    ) {
+      setSort(tableConfig?.sort);
+    }
   }, [tableConfig]);
 
   const actionButtons = [
@@ -109,16 +131,9 @@ const ListActiveInactiveUser: React.FC = () => {
   // );
 
   useEffect(() => {
-    dispatch(
-      getUsers({
-        userId: id,
-      })
-    );
     dispatch(getTotalBalance());
   }, []);
 
-  // const activeUser: Array<object> = [];
-  // const deactiveUser: Array<object> = [];
   useEffect(() => {
     const active: Array<object> = [];
     const deactive: Array<object> = [];
@@ -131,7 +146,6 @@ const ListActiveInactiveUser: React.FC = () => {
       }
     });
 
-    // Update the state with the new active and deactive users
     setActiveUser(active);
     setDeactiveUser(deactive);
   }, [userList]);
@@ -232,34 +246,39 @@ const ListActiveInactiveUser: React.FC = () => {
                               totalBalance?.availableBalance} */}
                             {index === 1 &&
                               userList &&
-                              (activeUser?.reduce((acc: any, match: any) => {
-                                return acc + +match?.creditRefrence;
-                              }, 0) ||
-                                0)}
+                              parseFloat(
+                                activeUser?.reduce((acc: any, match: any) => {
+                                  return acc + +match?.creditRefrence;
+                                }, 0) || 0
+                              ).toFixed(2)}
                             {index === 2 &&
                               userList &&
-                              (activeUser?.reduce((acc: any, match: any) => {
-                                return acc + +match?.balance;
-                              }, 0) ||
-                                0)}
+                              parseFloat(
+                                activeUser?.reduce((acc: any, match: any) => {
+                                  return acc + +match?.balance;
+                                }, 0) || 0
+                              ).toFixed(2)}
                             {index === 3 &&
                               userList &&
-                              (activeUser?.reduce((acc: any, match: any) => {
-                                return acc + +match?.userBal?.profitLoss;
-                              }, 0) ||
-                                0)}
+                              parseFloat(
+                                activeUser?.reduce((acc: any, match: any) => {
+                                  return acc + +match?.userBal?.profitLoss;
+                                }, 0) || 0
+                              ).toFixed(2)}
                             {index === 4 &&
                               userList &&
-                              (activeUser?.reduce((acc: any, match: any) => {
-                                return acc + +match?.userBal?.exposure;
-                              }, 0) ||
-                                0)}
+                              parseFloat(
+                                activeUser?.reduce((acc: any, match: any) => {
+                                  return acc + +match?.userBal?.exposure;
+                                }, 0) || 0
+                              ).toFixed(2)}
                             {index === 5 &&
                               userList &&
-                              (activeUser?.reduce((acc: any, match: any) => {
-                                return acc + +match?.availableBalance;
-                              }, 0) ||
-                                0)}
+                              parseFloat(
+                                activeUser?.reduce((acc: any, match: any) => {
+                                  return acc + +match?.availableBalance;
+                                }, 0) || 0
+                              ).toFixed(2)}
                           </td>
                         );
                       })}
@@ -359,41 +378,43 @@ const ListActiveInactiveUser: React.FC = () => {
                         );
                       })}
                   </CustomTable>
-                  {activeUser?.length > 0 &&( <div
-                    style={{
-                      width: "100%",
-                      marginTop: "5px",
-                      display: "flex",
-                      flexDirection: "row",
-                    }}
-                  >
+                  {activeUser?.length > 0 && (
                     <div
                       style={{
-                        width: "50%",
+                        width: "100%",
+                        marginTop: "5px",
                         display: "flex",
-                        justifyContent: "flex-start",
+                        flexDirection: "row",
                       }}
                     >
-                      Showing 1 to {activeUser?.length} of {activeUser?.length} entries
+                      <div
+                        style={{
+                          width: "50%",
+                          display: "flex",
+                          justifyContent: "flex-start",
+                        }}
+                      >
+                        Showing 1 to {activeUser?.length} of{" "}
+                        {activeUser?.length} entries
+                      </div>
+                      <div
+                        style={{
+                          width: "50%",
+                          display: "flex",
+                          justifyContent: "flex-end",
+                          gap: "5px",
+                        }}
+                      >
+                        <CustomButton className={`actionBtn`} disabled>
+                          Previous
+                        </CustomButton>
+                        <CustomButton className={`actionBtn`}>1</CustomButton>
+                        <CustomButton className={`actionBtn`} disabled>
+                          Next
+                        </CustomButton>
+                      </div>
                     </div>
-                    <div
-                      style={{
-                        width: "50%",
-                        display: "flex",
-                        justifyContent: "flex-end",
-                        gap: "5px",
-                      }}
-                    >
-                      <CustomButton className={`actionBtn`} disabled>
-                        Previous
-                      </CustomButton>
-                      <CustomButton className={`actionBtn`}>1</CustomButton>
-                      <CustomButton className={`actionBtn`} disabled>
-                        Next
-                      </CustomButton>
-                    </div>
-                  </div>)}
-                 
+                  )}
                 </Tab.Pane>
                 <Tab.Pane eventKey="second">
                   <CustomTable
@@ -568,43 +589,43 @@ const ListActiveInactiveUser: React.FC = () => {
                         );
                       })}
                   </CustomTable>
-                  {deactiveUser?.length > 0 &&(
-                    <div
-                    style={{
-                      width: "100%",
-                      marginTop: "5px",
-                      display: "flex",
-                      flexDirection: "row",
-                    }}
-                  >
+                  {deactiveUser?.length > 0 && (
                     <div
                       style={{
-                        width: "50%",
+                        width: "100%",
+                        marginTop: "5px",
                         display: "flex",
-                        justifyContent: "flex-start",
+                        flexDirection: "row",
                       }}
                     >
-                      Showing 1 to {deactiveUser?.length} of {deactiveUser?.length} entries
+                      <div
+                        style={{
+                          width: "50%",
+                          display: "flex",
+                          justifyContent: "flex-start",
+                        }}
+                      >
+                        Showing 1 to {deactiveUser?.length} of{" "}
+                        {deactiveUser?.length} entries
+                      </div>
+                      <div
+                        style={{
+                          width: "50%",
+                          display: "flex",
+                          justifyContent: "flex-end",
+                          gap: "5px",
+                        }}
+                      >
+                        <CustomButton className={`actionBtn`} disabled>
+                          Previous
+                        </CustomButton>
+                        <CustomButton className={`actionBtn`}>1</CustomButton>
+                        <CustomButton className={`actionBtn`} disabled>
+                          Next
+                        </CustomButton>
+                      </div>
                     </div>
-                    <div
-                      style={{
-                        width: "50%",
-                        display: "flex",
-                        justifyContent: "flex-end",
-                        gap: "5px",
-                      }}
-                    >
-                      <CustomButton className={`actionBtn`} disabled>
-                        Previous
-                      </CustomButton>
-                      <CustomButton className={`actionBtn`}>1</CustomButton>
-                      <CustomButton className={`actionBtn`} disabled>
-                        Next
-                      </CustomButton>
-                    </div>
-                  </div>
                   )}
-                  
                 </Tab.Pane>
               </Tab.Content>
             </Tab.Container>

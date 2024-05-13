@@ -1,5 +1,5 @@
 // CustomTable.tsx
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { Column } from "../../../models/tableInterface";
 import "./style.scss";
@@ -50,8 +50,8 @@ const CustomTable: React.FC<CustomTableProps> = ({
 }) => {
   // State for sorting configuration and current page
   const [sortConfig, setSortConfig] = useState<SortConfig>({
-    key: null,
     direction: "ASC",
+    key: null,
   });
   const [currentPage, setCurrentPage] = useState(1);
   const [rowPerPage, setRowPerPage] = useState(10);
@@ -74,11 +74,11 @@ const CustomTable: React.FC<CustomTableProps> = ({
       sortData(key);
     } else {
       setSortConfig((prevSortConfig) => ({
-        key,
         direction:
           prevSortConfig.key === key && prevSortConfig.direction === "ASC"
             ? "DESC"
             : "ASC",
+        key,
       }));
     }
   };
@@ -161,4 +161,4 @@ const CustomTable: React.FC<CustomTableProps> = ({
   );
 };
 
-export default CustomTable;
+export default memo(CustomTable);
