@@ -77,6 +77,7 @@ const ChangePassword = () => {
         <Row>
           <Col md={4}>
             <CustomInput
+              required={true}
               id={"newPassword"}
               title={"New Password"}
               placeholder={"New Password"}
@@ -92,6 +93,7 @@ const ChangePassword = () => {
         <Row>
           <Col md={4}>
             <CustomInput
+              required={true}
               id={"confirmPassword"}
               title={"Confirm Password"}
               placeholder={"Confirm Password"}
@@ -107,6 +109,7 @@ const ChangePassword = () => {
         <Row>
           <Col md={4}>
             <CustomInput
+              required={true}
               id={"transactionPassword"}
               title={"Transaction Password"}
               placeholder={"Transaction Password"}
