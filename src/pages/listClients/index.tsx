@@ -8,7 +8,10 @@ import CustomTable from "../../components/commonComponent/table";
 import ListClientModals from "../../components/listClients/modals";
 import "../../components/listClients/style.scss";
 import { Column, TableConfig } from "../../models/tableInterface";
-import { getUsers } from "../../store/actions/user/userActions";
+import {
+  getTotalBalance,
+  getUsers,
+} from "../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../store/store";
 import { ApiConstants } from "../../utils/Constants";
 
@@ -26,7 +29,7 @@ const columns: Column[] = [
 ];
 
 const ListClent: React.FC = () => {
-  const { id,type } = useParams();
+  const { id, type } = useParams();
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
@@ -36,6 +39,9 @@ const ListClent: React.FC = () => {
     userData: null,
   });
   const { userList } = useSelector((state: RootState) => state.user.userList);
+  const { totalBalance } = useSelector(
+    (state: RootState) => state.user.profile
+  );
   const showEventModals = (id: any, userData: any) => {
     setEventDetails({
       show: true,
@@ -88,6 +94,7 @@ const ListClent: React.FC = () => {
           order: "DESC",
         })
       );
+      dispatch(getTotalBalance());
     }
   }, [tableConfig, id]);
 
@@ -132,8 +139,8 @@ const ListClent: React.FC = () => {
                       className=" fw-bold text-end"
                     >
                       {index === 1 &&
-                        userList &&
-                        userList?.totalBalance?.totalCreditReference}
+                        totalBalance &&
+                        totalBalance?.totalCreditReference}
                     </td>
                   );
                 })}
@@ -154,17 +161,21 @@ const ListClent: React.FC = () => {
                   return (
                     <tr key={id}>
                       <td colSpan={4}>
-                        {
-                          roleName ==='user' || roleName === 'expert' ? 
-                          <CustomButton className="actionBtn" variant="dark" >
-                          {userName}
-                        </CustomButton>  :
-                        <Link to={`/admin/listClients/sub-user/${id}`} target="_blank" rel="noopener noreferrer">
-                        <CustomButton className="actionBtn" variant="dark" >
-                          {userName}
-                        </CustomButton></Link>
-                        }
-                      
+                        {roleName === "user" || roleName === "expert" ? (
+                          <CustomButton className="actionBtn" variant="dark">
+                            {userName}
+                          </CustomButton>
+                        ) : (
+                          <Link
+                            to={`/admin/listClients/sub-user/${id}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <CustomButton className="actionBtn" variant="dark">
+                              {userName}
+                            </CustomButton>
+                          </Link>
+                        )}
                       </td>
                       <td className="text-end">{creditRefrence}</td>
                       <td className="text-center">
@@ -195,37 +206,43 @@ const ListClent: React.FC = () => {
                       <td className="text-end">{casinoTotal}</td>
                       <td>
                         <div className="d-flex gap-1 border-right-0 border-left-0">
-                          {type ? <>
-                            {actionButtons?.map((item) => {
-                            return (item.id ==='d' || item.id==='w') && (
-                              <CustomButton
-                                variant="dark"
-                                onClick={() => {
-                                  item.onClick(item?.id, userItem);
-                                }}
-                                key={item?.id}
-                                className={`actionBtn`}
-                              >
-                                {item?.name}
-                              </CustomButton>
-                            );
-                          })}
-                          </> :  <>
-                          {actionButtons?.map((item) => {
-                            return (
-                              <CustomButton
-                                variant="dark"
-                                onClick={() => {
-                                  item.onClick(item?.id, userItem);
-                                }}
-                                key={item?.id}
-                                className={`actionBtn`}
-                              >
-                                {item?.name}
-                              </CustomButton>
-                            );
-                          })}
-                          </> }
+                          {type ? (
+                            <>
+                              {actionButtons?.map((item) => {
+                                return (
+                                  (item.id === "d" || item.id === "w") && (
+                                    <CustomButton
+                                      variant="dark"
+                                      onClick={() => {
+                                        item.onClick(item?.id, userItem);
+                                      }}
+                                      key={item?.id}
+                                      className={`actionBtn`}
+                                    >
+                                      {item?.name}
+                                    </CustomButton>
+                                  )
+                                );
+                              })}
+                            </>
+                          ) : (
+                            <>
+                              {actionButtons?.map((item) => {
+                                return (
+                                  <CustomButton
+                                    variant="dark"
+                                    onClick={() => {
+                                      item.onClick(item?.id, userItem);
+                                    }}
+                                    key={item?.id}
+                                    className={`actionBtn`}
+                                  >
+                                    {item?.name}
+                                  </CustomButton>
+                                );
+                              })}
+                            </>
+                          )}
                         </div>
                       </td>
                     </tr>

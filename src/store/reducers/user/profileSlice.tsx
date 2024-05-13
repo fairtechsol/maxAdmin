@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   dropdownSummary,
+  getTotalBalance,
   getUsersProfile,
   profileReset,
   updateUserBalance,
@@ -8,14 +9,16 @@ import {
 
 interface InitialState {
   userDetail: any;
+  totalBalance: any;
   success: boolean;
   loading: boolean;
   error: any;
-  summary:  boolean;
+  summary: boolean;
 }
 
 const initialState: InitialState = {
   userDetail: null,
+  totalBalance: null,
   loading: false,
   success: false,
   error: null,
@@ -57,6 +60,18 @@ const profileSlice = createSlice({
             profitLoss: action.payload?.profitLoss,
           },
         };
+      })
+      .addCase(getTotalBalance.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getTotalBalance.fulfilled, (state, action) => {
+        state.totalBalance = action?.payload;
+        state.loading = false;
+      })
+      .addCase(getTotalBalance.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action?.error?.message;
       });
   },
 });
