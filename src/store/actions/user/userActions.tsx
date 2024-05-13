@@ -24,6 +24,16 @@ interface SearchUsers {
   createdBy: string;
 }
 
+interface RequestData {
+  userName?: string;
+  currentPage?: number;
+  url?: any;
+  searchBy?: string;
+  userId?: string;
+  roleName?: string;
+  domain?: string;
+}
+
 export const getUsers = createAsyncThunk<any, GetUsers | undefined>(
   "user/list",
   async (requestData) => {
@@ -43,6 +53,24 @@ export const getUsers = createAsyncThunk<any, GetUsers | undefined>(
     } catch (error: any) {
       const err = error as AxiosError;
       throw err;
+    }
+  }
+);
+export const getTotalBalance = createAsyncThunk<any, RequestData | undefined>(
+  "user/balance",
+  async (requestData, thunkApi) => {
+    try {
+      const resp = await service.get(
+        `${ApiConstants.USER.TOTAL_BALANCE}?userId=${
+          requestData?.userId ? requestData?.userId : ""
+        }&roleName=${requestData?.roleName ? requestData?.roleName : ""}`
+      );
+      if (resp) {
+        return resp?.data;
+      }
+    } catch (error: any) {
+      const err = error as AxiosError;
+      return thunkApi.rejectWithValue(err.response?.status);
     }
   }
 );

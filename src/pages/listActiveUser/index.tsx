@@ -8,7 +8,11 @@ import CustomTable from "../../components/commonComponent/table";
 import ListClientModals from "../../components/listClients/modals";
 import "../../components/listClients/style.scss";
 import { Column, TableConfig } from "../../models/tableInterface";
-import { dropdownSummary, getUsers } from "../../store/actions/user/userActions";
+import {
+  dropdownSummary,
+  getTotalBalance,
+  getUsers,
+} from "../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../store/store";
 import { ApiConstants } from "../../utils/Constants";
 // Example usage
@@ -100,6 +104,9 @@ const ListActiveInactiveUser: React.FC = () => {
   ];
 
   const { userList } = useSelector((state: RootState) => state.user.userList);
+  // const { totalBalance } = useSelector(
+  //   (state: RootState) => state.user.profile
+  // );
 
   useEffect(() => {
     dispatch(
@@ -107,6 +114,7 @@ const ListActiveInactiveUser: React.FC = () => {
         userId: id,
       })
     );
+    dispatch(getTotalBalance());
   }, []);
 
   // const activeUser: Array<object> = [];
@@ -145,7 +153,7 @@ const ListActiveInactiveUser: React.FC = () => {
     <>
       <Container className="listClient listActiveUser" fluid>
         <Row>
-                 <Col>
+          <Col>
             <p className="title-22">Account List</p>
           </Col>
           <Col>
@@ -162,12 +170,22 @@ const ListActiveInactiveUser: React.FC = () => {
             <Tab.Container id="left-tabs-example" defaultActiveKey="first">
               <Nav variant="pills" className="flex-row ">
                 <Nav.Item>
-                  <Nav.Link className="rounded-0 " eventKey="first" onClick={()=>dispatch(dropdownSummary({summary:true}))}>
+                  <Nav.Link
+                    className="rounded-0 "
+                    eventKey="first"
+                    onClick={() => dispatch(dropdownSummary({ summary: true }))}
+                  >
                     Active User
                   </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link className="rounded-0 " eventKey="second" onClick={()=>dispatch(dropdownSummary({summary:false}))}>
+                  <Nav.Link
+                    className="rounded-0 "
+                    eventKey="second"
+                    onClick={() =>
+                      dispatch(dropdownSummary({ summary: false }))
+                    }
+                  >
                     Deactivate User
                   </Nav.Link>
                 </Nav.Item>
@@ -197,6 +215,21 @@ const ListActiveInactiveUser: React.FC = () => {
                             key={index}
                             className=" fw-bold text-end"
                           >
+                            {/* {index === 1 &&
+                              totalBalance &&
+                              totalBalance?.totalCreditReference}
+                            {index === 2 &&
+                              totalBalance &&
+                              totalBalance?.currBalance}
+                            {index === 3 &&
+                              totalBalance &&
+                              totalBalance?.profitsum}
+                            {index === 4 &&
+                              totalBalance &&
+                              totalBalance?.totalExposure}
+                            {index === 5 &&
+                              totalBalance &&
+                              totalBalance?.availableBalance} */}
                             {index === 1 &&
                               userList &&
                               (activeUser?.reduce((acc: any, match: any) => {
@@ -518,7 +551,7 @@ const ListActiveInactiveUser: React.FC = () => {
           />
         )}
       </Container>
-          </>
+    </>
   );
 };
 
