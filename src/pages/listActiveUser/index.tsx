@@ -359,6 +359,41 @@ const ListActiveInactiveUser: React.FC = () => {
                         );
                       })}
                   </CustomTable>
+                  {activeUser?.length > 0 &&( <div
+                    style={{
+                      width: "100%",
+                      marginTop: "5px",
+                      display: "flex",
+                      flexDirection: "row",
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: "50%",
+                        display: "flex",
+                        justifyContent: "flex-start",
+                      }}
+                    >
+                      Showing 1 to {activeUser?.length} of {activeUser?.length} entries
+                    </div>
+                    <div
+                      style={{
+                        width: "50%",
+                        display: "flex",
+                        justifyContent: "flex-end",
+                        gap: "5px",
+                      }}
+                    >
+                      <CustomButton className={`actionBtn`} disabled>
+                        Previous
+                      </CustomButton>
+                      <CustomButton className={`actionBtn`}>1</CustomButton>
+                      <CustomButton className={`actionBtn`} disabled>
+                        Next
+                      </CustomButton>
+                    </div>
+                  </div>)}
+                 
                 </Tab.Pane>
                 <Tab.Pane eventKey="second">
                   <CustomTable
@@ -533,6 +568,43 @@ const ListActiveInactiveUser: React.FC = () => {
                         );
                       })}
                   </CustomTable>
+                  {deactiveUser?.length > 0 &&(
+                    <div
+                    style={{
+                      width: "100%",
+                      marginTop: "5px",
+                      display: "flex",
+                      flexDirection: "row",
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: "50%",
+                        display: "flex",
+                        justifyContent: "flex-start",
+                      }}
+                    >
+                      Showing 1 to {deactiveUser?.length} of {deactiveUser?.length} entries
+                    </div>
+                    <div
+                      style={{
+                        width: "50%",
+                        display: "flex",
+                        justifyContent: "flex-end",
+                        gap: "5px",
+                      }}
+                    >
+                      <CustomButton className={`actionBtn`} disabled>
+                        Previous
+                      </CustomButton>
+                      <CustomButton className={`actionBtn`}>1</CustomButton>
+                      <CustomButton className={`actionBtn`} disabled>
+                        Next
+                      </CustomButton>
+                    </div>
+                  </div>
+                  )}
+                  
                 </Tab.Pane>
               </Tab.Content>
             </Tab.Container>
