@@ -38,7 +38,19 @@ const options = [
 
 const CurrentBets = () => {
   const dispatch: AppDispatch = useDispatch();
-  const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
+  const [tableConfig, setTableConfig] = useState<TableConfig | null>({
+    page: 1,
+    sort: { direction: "ASC", key: null },
+    rowPerPage: 10,
+    keyword: "",
+  });
+  const [keyword, setKeyword] = useState<any>("");
+  const [page, setPage] = useState<any>(1);
+  const [rowPerPage, setRowPerPage] = useState<any>(10);
+  const [sort, setSort] = useState({
+    direction: "ASC",
+    key: null,
+  });
   const [selectType, setSelectType] = useState({
     value: "PENDING",
     label: "Matched",
@@ -46,25 +58,21 @@ const CurrentBets = () => {
 
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
-  useEffect(() => {}, [tableConfig]);
-
   const { ReportBetList } = useSelector(
     (state: RootState) => state.match.bettListSlice
   );
 
   useEffect(() => {
-    if (tableConfig) {
-      dispatch(
-        betReportAccountList({
-          status: selectType?.value,
-          page: tableConfig?.page,
-          limit: tableConfig?.rowPerPage,
-          searchBy: "user.userName",
-          keyword: tableConfig?.keyword ?? "",
-        })
-      );
-    }
-  }, [tableConfig]);
+    dispatch(
+      betReportAccountList({
+        status: selectType?.value,
+        page: page,
+        limit: rowPerPage,
+        searchBy: "user.userName",
+        keyword: keyword || "",
+      })
+    );
+  }, [keyword, page, rowPerPage, sort]);
 
   const handleType = (type: any) => {
     setSelectType(type);
@@ -78,7 +86,10 @@ const CurrentBets = () => {
       dispatch(
         betReportAccountList({
           status: selectType?.value,
-          limit: tableConfig?.rowPerPage,
+          page: 1,
+          limit: rowPerPage,
+          searchBy: "user.userName",
+          keyword: keyword || "",
         })
       );
     } else if (selectType?.value === "UNMATCHED") {
@@ -87,8 +98,22 @@ const CurrentBets = () => {
   };
 
   useEffect(() => {
-    handleLoad();
-  }, []);
+    if (page !== tableConfig?.page) {
+      setPage(tableConfig?.page);
+    }
+    if (keyword !== tableConfig?.keyword) {
+      setKeyword(tableConfig?.keyword);
+    }
+    if (
+      sort?.direction !== tableConfig?.sort?.direction ||
+      sort?.key !== tableConfig?.sort?.key
+    ) {
+      setSort(tableConfig?.sort);
+    }
+    if (rowPerPage !== tableConfig?.rowPerPage) {
+      setRowPerPage(tableConfig?.rowPerPage);
+    }
+  }, [tableConfig]);
 
   return (
     <div className="p-2 pt-0">
