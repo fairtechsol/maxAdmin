@@ -167,6 +167,7 @@ const Withdraw = ({ userData, setShow }: any) => {
               </Col>
               <Col sm={8}>
                 <CustomInput
+                  required={true}
                   name="amount"
                   id="amount"
                   value={values.amount}
@@ -205,6 +206,7 @@ const Withdraw = ({ userData, setShow }: any) => {
               </Col>
               <Col sm={8}>
                 <CustomInput
+                  required={true}
                   name="transactionPassword"
                   id="transactionPassword"
                   value={values.transactionPassword}

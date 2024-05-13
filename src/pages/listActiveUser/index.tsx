@@ -22,7 +22,7 @@ const columns: Column[] = [
   { id: "balance", label: "Balance" },
   { id: "UB.profitLoss", label: "Client (P/L)" },
   { id: "UB.exposure", label: "Exposure" },
-  { id: "availableBalance", label: "Avialable Balance" },
+  { id: "availableBalance", label: "Available Balance" },
   { id: "ust", label: "U St" },
   { id: "accountType", label: "B St" },
   { id: "exposureLimit", label: "Exposure Limit" },

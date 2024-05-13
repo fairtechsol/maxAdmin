@@ -155,6 +155,7 @@ const Deposit = ({ userData, setShow }: any) => {
               </Col>
               <Col sm={8}>
                 <CustomInput
+                  required={true}
                   name="amount"
                   id="amount"
                   value={values.amount}
@@ -195,6 +196,7 @@ const Deposit = ({ userData, setShow }: any) => {
               </Col>
               <Col sm={8}>
                 <CustomInput
+                  required={true}
                   id="transactionPassword"
                   type="password"
                   customStyle="input-box"
