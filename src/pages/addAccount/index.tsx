@@ -40,6 +40,7 @@ const AddAccount = () => {
   const dispatch: AppDispatch = useDispatch();
   const [accountTypes, setAccountTypes] = useState<any>([]);
   const [down, setDown] = useState<number>(0);
+  const [errorHandle, setErrorHandle] = useState(false);
 
   const initialValues = {
     clientName: "",
@@ -275,7 +276,19 @@ const AddAccount = () => {
           <Card.Title className="title-28 fw-normal ">Add Account</Card.Title>
         </Card.Header>
         <Card.Body className="bg-light">
-          <Form onSubmit={handleSubmit}>
+          <Form
+            onSubmit={(e) => {
+              e.preventDefault(); 
+              handleSubmit(e);
+              if(formik.values.accountType.value === "user"){setErrorHandle(true);}
+              
+              const hasErrors = Object.keys(errors).length > 0;
+
+              if (hasErrors || (formik.values.accountType.value === "user" && formik.values.exposureLimit ==='' )) {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }
+            }}
+          >
             <Row>
               <Col md={6}>
                 <h6
@@ -412,6 +425,8 @@ const AddAccount = () => {
                         touched={touched.exposureLimit}
                         errors={errors.exposureLimit}
                       />
+                      {(errorHandle && formik.values.exposureLimit=='') &&(<div className="text-danger">Exposure Limit is required</div>)}
+                      
                     </Col>
                   )}
                 </Row>
