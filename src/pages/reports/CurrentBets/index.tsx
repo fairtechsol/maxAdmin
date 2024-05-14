@@ -125,7 +125,7 @@ const CurrentBets = () => {
               defaultValue={[selectType]}
               // defaultValue="matched"
               options={options}
-              label={"Account Type"}
+              label={"Choose Type"}
               value={selectType}
               onChange={handleType}
             />
