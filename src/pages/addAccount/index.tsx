@@ -433,7 +433,7 @@ const AddAccount = () => {
                         touched={touched.exposureLimit}
                         errors={errors.exposureLimit}
                       />
-                      {(errorHandle && formik.values.exposureLimit=='') &&(<div className="text-danger">Exposure Limit is required</div>)}
+                      {(errorHandle && formik.values.exposureLimit==='') &&(<div className="text-danger">Exposure Limit is required</div>)}
                       
                     </Col>
                   )}
