@@ -32,7 +32,6 @@ const UserRow = ({ index, userName, userId, lock, type, setCheck }: any) => {
       console.log(e);
     }
   };
-  console.log("lock", lock);
 
   useEffect(() => {
     if (statusSuccess && userMatchLock?.userId == userId) {

@@ -77,7 +77,7 @@ const ProfitLossReport = () => {
         endDate: toDate
           ? moment(
               new Date(toDate).setDate(new Date(toDate).getDate() + 1)
-            ).format("YYYY/MM/DD")
+            ).format("YYYY-MM-DD")
           : "",
         page: tableConfig?.page,
         limit: tableConfig?.rowPerPage,
@@ -113,7 +113,7 @@ const ProfitLossReport = () => {
         endDate: toDate
           ? moment(
               new Date(toDate).setDate(new Date(toDate).getDate() + 1)
-            ).format("YYYY/MM/DD")
+            ).format("YYYY-MM-DD")
           : "",
         page: 1,
         limit: tableConfig?.rowPerPage,

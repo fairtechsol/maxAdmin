@@ -7,17 +7,13 @@ import { AppDispatch, RootState } from "../../../store/store";
 import { MenuItem } from "./menuItem";
 import menuItemJson from "./menuItem.json";
 const Sidebar = (props: any) => {
-
   const [menuItemList, setMenuItemList] = useState<any>([]);
   const [selectedMatch, setSelectedMatch] = useState("");
-
+  const [selectedMatchIndex, setSelectedMatchIndex] = useState(0);
 
   useEffect(() => {
     setMenuItemList(menuItemJson);
   }, [menuItemJson]);
-
-
-
 
   const dispatch: AppDispatch = useDispatch();
 
@@ -31,18 +27,17 @@ const Sidebar = (props: any) => {
       const matchIndex = tempList.findIndex(
         (item: any) => item?.id === selectedMatch
       );
-      tempList[matchIndex].children = competitionList?.map(
-        (item: any) => ({
-          name: item?.competitionName,
-          id: item?.competitionId,
-          type: "collapse",
-          children: [],
-        })
-      );
+
+      tempList[matchIndex].children = competitionList?.map((item: any) => ({
+        name: item?.competitionName,
+        id: item?.competitionId,
+        type: "collapse",
+        children: [],
+      }));
+      setSelectedMatchIndex(matchIndex);
       setMenuItemList(tempList);
     }
   }, [competitionList, selectedMatch]);
-
 
   return (
     <>
@@ -57,15 +52,24 @@ const Sidebar = (props: any) => {
           </div>
           <h3 className="title-28 f400 mb-3">Sports</h3>
         </div>
-        {menuItemList?.map((item: any, index: number) => (
-          <Accordion onSelect={(e: any) => {
-            if (e == 0) {
-              setSelectedMatch(item?.id);
-              dispatch(getCompetitionList(item?.id));
-            }
-          }} key={index} defaultActiveKey={[]}>
-            <MenuItem onClickMenuItem={props.clickHandler} item={item} menuItemList={menuItemList}
-              setMenuItemList={setMenuItemList} selectedMatchIndex={index} />
+        {menuItemList?.map((item: any) => (
+          <Accordion
+            onSelect={(e: any) => {
+              if (e == 0) {
+                setSelectedMatch(item?.id);
+                dispatch(getCompetitionList(item?.id));
+              }
+            }}
+            key={item?.id}
+            defaultActiveKey={[]}
+          >
+            <MenuItem
+              onClickMenuItem={props.clickHandler}
+              item={item}
+              menuItemList={menuItemList}
+              setMenuItemList={setMenuItemList}
+              selectedMatchIndex={selectedMatchIndex}
+            />
           </Accordion>
         ))}
       </div>

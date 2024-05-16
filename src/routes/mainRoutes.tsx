@@ -5,6 +5,7 @@ import ListActiveInactiveUser from "../pages/listActiveUser";
 import Loadable from "../utils/loadable";
 // ==============================|| Main ROUTING ||============================== //
 const Game = Loadable(lazy(() => import("../pages/games")));
+const OtherGamesDetail = Loadable(lazy(() => import("../pages/otherGames")));
 // const Sample = Loadable(lazy(() => import("../components/Sample")));
 const ListClients = Loadable(lazy(() => import("../pages/listClients")));
 const ListAccount = Loadable(lazy(() => import("../pages/listActiveUser")));
@@ -24,6 +25,10 @@ const MainRoutes = {
     {
       path: "match_detail/:id",
       element: <Game />,
+    },
+    {
+      path: "other_match_detail-/:id",
+      element: <OtherGamesDetail />,
     },
     // {
     //   path: "samplepage",

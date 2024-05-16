@@ -37,7 +37,6 @@ const GameHeader = () => {
       console.warn(error);
     }
   }, [nameOption]);
-
   return (
     <>
       <div className="common-header mb-3">
@@ -63,6 +62,7 @@ const GameHeader = () => {
                     setNameOption(!nameOption);
                   }, 500);
                 },
+                matchId: id,
               },
               {
                 name: "Userwise",
@@ -94,6 +94,7 @@ const GameHeader = () => {
                     setNameOption(!nameOption);
                   }, 500);
                 },
+                matchId: id,
               },
               {
                 name: "Userwise",
