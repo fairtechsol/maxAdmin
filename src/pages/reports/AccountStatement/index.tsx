@@ -310,7 +310,7 @@ const AccountStatement = () => {
               options={userOptions}
               value={selectedUser}
               onChange={setSelectedUser}
-              placeholder={"Client Name:"}
+              placeholder={"Please enter 3 or more characters"}
               isMultiOption={true}
               isSearchable={true}
               onInputChange={searchClientName}

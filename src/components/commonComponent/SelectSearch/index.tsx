@@ -54,6 +54,11 @@ const SelectSearch = (props: any) => {
               // minHeight: 20,
               // maxHeight: "20px",
             }),
+            dropdownIndicator: (provided, state) => ({
+              ...provided,
+              color: state.isFocused ? '#00000' : '#00000', 
+            }),
+           
           }}
           minMenuHeight={20}
           maxMenuHeight={200}
