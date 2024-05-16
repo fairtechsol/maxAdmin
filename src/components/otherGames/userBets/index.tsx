@@ -1,14 +1,13 @@
 import { useState } from "react";
 import { Button, Col, Nav, Row, Tab, Table } from "react-bootstrap";
 import CustomModal from "../../commonComponent/modal";
-import UserBetModalTable from "./modal";
-import UserBetModalForm from "./modal/form";
-import "./style.scss";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import moment from "moment-timezone";
+import UserBetModalForm from "../../game/userBet/modal/form";
+import UserBetModalTable from "../../game/userBet/modal";
 
-const UserBets = () => {
+const OtherUserBets = () => {
   const { placedBets } = useSelector(
     (state: RootState) => state.match.placeBets
   );
@@ -32,11 +31,6 @@ const UserBets = () => {
                       Matched{`(${placedBets.length})`}
                     </Nav.Link>
                   </Nav.Item>
-                  <Nav.Item>
-                    <Nav.Link className="rounded-0" eventKey="second">
-                      unmatched
-                    </Nav.Link>
-                  </Nav.Item>
                 </Nav>
               </div>
               <div className="userBets-headerRight">
@@ -51,8 +45,7 @@ const UserBets = () => {
             <Tab.Content>
               <Tab.Pane eventKey="first">
                 <Table className="coupon-table" striped bordered>
-              
-                  <thead >
+                  <thead>
                     <tr>
                       <th>UserName</th>
                       <th>Nation</th>
@@ -186,4 +179,4 @@ const UserBets = () => {
   );
 };
 
-export default UserBets;
+export default OtherUserBets;

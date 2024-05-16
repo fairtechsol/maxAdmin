@@ -324,7 +324,7 @@ const AddAccount = () => {
                   <Col md={6}>
                     <CustomInput
                       id={"userPassword"}
-                      title={"User Password"}
+                      title={"User Password:"}
                       placeholder={"User Password"}
                       type={"password"}
                       customstyle={"mb-3"}
@@ -395,7 +395,7 @@ const AddAccount = () => {
                     <SelectSearch
                       id="accountType"
                       name="accountType"
-                      label={"Account Type"}
+                      label={"Account Type:"}
                       options={accountTypes}
                       placeholder={"- Select Your A/C. Type -"}
                       value={formik.values.accountType}
@@ -410,7 +410,7 @@ const AddAccount = () => {
                   <Col md={6}>
                     <CustomInput
                       id={"creditReference"}
-                      title={"Credit Reference"}
+                      title={"Credit Reference:"}
                       placeholder={"Enter Credit Reference"}
                       type={"number"}
                       min={0}

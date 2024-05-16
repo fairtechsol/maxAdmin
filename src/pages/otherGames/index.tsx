@@ -17,10 +17,8 @@ import {
 } from "../../store/actions/match/matchAction";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { socket, socketService } from "../../socketManager";
-import NavComponent from "../../components/otherGames/matchList";
-import OtherUserBets from "../../components/otherGames/userBets";
 
-const Games = () => {
+const otherGames = () => {
   const dispatch: AppDispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
@@ -198,7 +196,6 @@ const Games = () => {
     <div className="gamePage">
       <Container fluid>
         <GameHeader />
-        <NavComponent/>
         {/* table start here */}
         <div className="gamePage-table">
           <Row className="no-gutters">
@@ -243,8 +240,6 @@ const Games = () => {
                         />
                       </Col>
                     )}
-                    {/* <BetTableHeader title="runners" />
-                    <div className="game-heading"><span className="card-header-title">SSD Bari v Ternana</span> <span className="float-right">5/17/2024 12:00:00 AM</span></div> */}
                     {/* {matchDetails?.manualSessionActive && (
                       <Col md={6}>
                         <BetTable
@@ -267,7 +262,6 @@ const Games = () => {
                 <ScoreCard />
               </div>
               <UserBets />
-              <OtherUserBets/>
               {/* <BetTableHeader
                 customClass="mt-2 fw-normal"
                 title="Rules"
@@ -289,4 +283,4 @@ const Games = () => {
   );
 };
 
-export default React.memo(Games);
+export default React.memo(otherGames);
