@@ -2,6 +2,9 @@ import { useState } from "react";
 import { Dropdown } from "react-bootstrap";
 
 import CustomModal from "../../commonComponent/modal";
+import { getUserDetailsOfLock } from "../../../store/actions/match/matchAction";
+import { AppDispatch } from "../../../store/store";
+import { useDispatch } from "react-redux";
 
 interface Props {
   name: string;
@@ -9,17 +12,20 @@ interface Props {
 }
 
 export default function GameHeaderDropdown({ name, options }: Props) {
+  const dispatch: AppDispatch = useDispatch();
   const [show, setShow] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showChildren, setShowChildren] = useState(null);
 
   const handleMouseEnter = () => {
     setShow(true);
+    if (options[0]?.matchId) {
+      dispatch(getUserDetailsOfLock(options[0]?.matchId));
+    }
   };
   const handleMouseLeave = () => {
     setShow(false);
   };
-
   return (
     <>
       <Dropdown

@@ -275,8 +275,6 @@ const AddAccount = () => {
     }
   }, [formik?.values?.accountType]);
 
-  console.log(formik.values);
-
   return (
     <>
       <Card className="addAccount  border-0">

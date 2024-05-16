@@ -223,10 +223,10 @@ export const updateUserMatchLock = createAsyncThunk<any, any>(
 );
 export const getMatchLockAllChild = createAsyncThunk<any, any>(
   "/matchLockAllChild",
-  async (_, thunkApi) => {
+  async (id, thunkApi) => {
     try {
       const resp = await service.get(
-        `${ApiConstants.USER.USER_MATCH_LOCK_ALL_CHILD}`
+        `${ApiConstants.USER.USER_MATCH_LOCK_ALL_CHILD}?matchId=${id}`
       );
       if (resp) {
         return resp?.data;

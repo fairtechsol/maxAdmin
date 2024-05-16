@@ -3,7 +3,6 @@ import { Column, TableConfig } from "../../../../models/tableInterface";
 import CustomTable from "../../../commonComponent/table";
 
 const TableRunner = ({ runAmount }: any) => {
-  console.log(runAmount, "runAmount");
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
   useEffect(() => {}, [tableConfig]);
   const columns: Column[] = [
