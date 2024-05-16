@@ -190,8 +190,19 @@ const Topbar = (props: any) => {
   return (
     <>
       <Navbar expand="lg" className="bg-primary" data-bs-theme="light">
+     
         <Container fluid>
-          <span onClick={props.onClick}>
+        <div className="d-flex">
+
+        <a
+            href={`/admin/active-inactive-user-list/${userDetail?.id}`}
+            className="me-2 d-flex"
+          >
+            <LogoSection width="110px" height="38px"/>
+           
+          </a>
+         
+            <span className="mt-2 m-2" onClick={props.onClick}>
             {props.toggle ? (
               <div style={{ width: "28px" }}>
                 <FaTimes color="white" size={20} />
@@ -204,12 +215,9 @@ const Topbar = (props: any) => {
               </div>
             )}
           </span>
-          <Navbar.Brand
-            href={`/admin/active-inactive-user-list/${userDetail?.id}`}
-          className="me-2"
-          >
-            <LogoSection width="110px" height="38px" />
-          </Navbar.Brand>
+          
+          </div>
+        
           {isMobile && (
             <div className="user-dropdown-container">
               <NavDropdown
