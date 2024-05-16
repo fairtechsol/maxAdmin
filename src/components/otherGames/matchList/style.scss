@@ -1,0 +1,31 @@
+
+
+
+.market-tab-link {
+    background: #004a25;
+    color: #fff;
+    padding: 3px 7px;
+    display: inline-block;
+    text-decoration: none;
+    font-size: 12px;
+    margin: 5px;
+}
+li {
+    list-style: none;
+}
+.market-tab-link.active {
+    background-color: #ffc742;
+    color: white;
+  }
+
+  .market-tab-link:hover {
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .col-md-12 {
+        -ms-flex: 0 0 100%;
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
