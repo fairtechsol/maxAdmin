@@ -27,7 +27,11 @@ const MainRoutes = {
       element: <Game />,
     },
     {
-      path: "other_match_detail-/:id",
+      path: "match_details/:id",
+      element: <Game />,
+    },
+    {
+      path: "other_match_detail/:id/:marketId",
       element: <OtherGamesDetail />,
     },
     // {

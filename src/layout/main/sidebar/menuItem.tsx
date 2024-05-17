@@ -195,8 +195,11 @@ const MenuCollapse = (props: any) => {
                                                           path:
                                                             data?.id ===
                                                             "cricket"
-                                                              ? `/admin/match_detail/${matches?.id}`
-                                                              : `/admin/other_match_detail/${matches?.id}`,
+                                                              ? item?.name ===
+                                                                "tied_match"
+                                                                ? `/admin/match_details/${matches?.id}`
+                                                                : `/admin/match_detail/${matches?.id}`
+                                                              : `/admin/other_match_detail/${matches?.id}/${item?.id}`,
                                                           name: item?.name,
                                                         }}
                                                       />

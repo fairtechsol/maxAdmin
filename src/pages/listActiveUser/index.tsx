@@ -63,17 +63,19 @@ const ListActiveInactiveUser: React.FC = () => {
     });
   };
   useEffect(() => {
-    dispatch(
-      getUsers({
-        userId: id,
-        // page: tableConfig?.page || 1,
-        // limit: tableConfig?.rowPerPage,
-        userName: keyword || "",
-        sort: sort?.key || "",
-        order: sort?.direction || "DESC",
-      })
-    );
-  }, [keyword, sort]);
+    if (id) {
+      dispatch(
+        getUsers({
+          userId: id,
+          // page: tableConfig?.page || 1,
+          // limit: tableConfig?.rowPerPage,
+          userName: keyword || "",
+          sort: sort?.key || "",
+          order: sort?.direction || "DESC",
+        })
+      );
+    }
+  }, [id, keyword, sort]);
 
   useEffect(() => {
     if (keyword !== tableConfig?.keyword) {

@@ -197,7 +197,7 @@ const ProfitLossReport = () => {
         )}
         {profitLossReport &&
           profitLossReport?.result?.length > 0 &&
-          profitLossReport?.result.map((item: any, index: number) => {
+          profitLossReport?.result?.map((item: any, index: number) => {
             const { eventType, marketType, aggregateAmount } = item;
             return (
               <tr key={index}>

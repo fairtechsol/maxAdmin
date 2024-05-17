@@ -1,29 +1,26 @@
 import React, { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-// import BetTableHeader from "../../components/commonComponent/betTableHeader";
-import BetTable from "../../components/game/betTable";
 import GameHeader from "../../components/game/gameHeader";
-import LiveMatch from "../../components/game/liveMatch";
-// import Rules from "../../components/game/rules";
-import ScoreCard from "../../components/game/scoreCard";
-import UserBets from "../../components/game/userBet";
 import { MatchType } from "../../utils/enum";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
 import {
   getPlacedBets,
-  matchDetailAction,
+  otherMatchDetailAction,
   updateMatchRates,
 } from "../../store/actions/match/matchAction";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { socket, socketService } from "../../socketManager";
+import NavComponent from "../../components/otherGames/matchList";
+import OtherUserBets from "../../components/otherGames/userBets";
+import BetTable from "../../components/otherGames/betTable";
 
-const otherGames = () => {
+const OtherGamesDetail = () => {
   const dispatch: AppDispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { id } = useParams();
+  const { id, marketId } = useParams();
 
   const { matchDetails, success } = useSelector(
     (state: RootState) => state.match.matchListSlice
@@ -42,7 +39,9 @@ const otherGames = () => {
   const handleDeleteBet = (event: any) => {
     try {
       if (event?.matchId === id) {
-        dispatch(matchDetailAction(id));
+        dispatch(
+          otherMatchDetailAction({ matchId: id, matchType: "football" })
+        );
         dispatch(getPlacedBets(id));
       }
     } catch (e) {
@@ -53,7 +52,9 @@ const otherGames = () => {
   const handleSessionBetPlaced = (event: any) => {
     try {
       if (event?.jobData?.placedBet?.matchId === id) {
-        dispatch(matchDetailAction(id));
+        dispatch(
+          otherMatchDetailAction({ matchId: id, matchType: "football" })
+        );
         dispatch(getPlacedBets(id));
       }
     } catch (e) {
@@ -63,7 +64,9 @@ const otherGames = () => {
   const handleMatchBetPlaced = (event: any) => {
     try {
       if (event?.jobData?.matchId === id) {
-        dispatch(matchDetailAction(id));
+        dispatch(
+          otherMatchDetailAction({ matchId: id, matchType: "football" })
+        );
         dispatch(getPlacedBets(id));
       }
     } catch (e) {
@@ -100,10 +103,34 @@ const otherGames = () => {
       console.log(error);
     }
   };
+
+  function formatMarkets(matchDetail: any) {
+    const formattedArray = [];
+
+    // Iterate through each type of market
+    for (const marketType in matchDetail) {
+      const marketValue: any = matchDetail[marketType];
+      if (typeof marketValue === "object" && marketValue !== null) {
+        if (Array.isArray(marketValue) && marketType !== "quickBookmaker") {
+          formattedArray.push(...marketValue.map((market: any) => market));
+        } else {
+          if (marketValue?.id) {
+            formattedArray.push(marketValue);
+          }
+        }
+      }
+    }
+
+    return formattedArray;
+  }
+  const updatedMarket: any = formatMarkets(matchDetails);
+
   useEffect(() => {
     try {
       if (id) {
-        dispatch(matchDetailAction(id));
+        dispatch(
+          otherMatchDetailAction({ matchId: id, matchType: "football" })
+        );
         dispatch(getPlacedBets(id));
       }
     } catch (e) {
@@ -171,7 +198,9 @@ const otherGames = () => {
       const handleVisibilityChange = () => {
         if (document.visibilityState === "visible") {
           if (id) {
-            dispatch(matchDetailAction(id));
+            dispatch(
+              otherMatchDetailAction({ matchId: id, matchType: "football" })
+            );
             dispatch(getPlacedBets(id));
           }
         } else if (document.visibilityState === "hidden") {
@@ -196,85 +225,27 @@ const otherGames = () => {
     <div className="gamePage">
       <Container fluid>
         <GameHeader />
+        <NavComponent matchDetail={matchDetails} />
         {/* table start here */}
         <div className="gamePage-table">
           <Row className="no-gutters">
             <Col md={8}>
-              {location.pathname.includes("match_details") ? (
-                matchDetails?.matchOdd?.isActive && (
-                  <Col md={12}>
-                    <BetTable
-                      title={"Runners"}
-                      type={MatchType.MATCH_ODDS}
-                      data={matchDetails?.apiTideMatch}
-                    />
-                  </Col>
-                )
-              ) : (
-                <>
-                  {matchDetails?.matchOdd?.isActive && (
+              <>
+                {updatedMarket
+                  ?.filter((item: any) => item?.id === marketId)
+                  ?.map((item: any) => (
                     <Col md={12}>
                       <BetTable
-                        title={"Runners"}
+                        title={item?.name}
                         type={MatchType.MATCH_ODDS}
-                        data={matchDetails?.matchOdd}
+                        data={item}
                       />
                     </Col>
-                  )}
-                  {matchDetails?.bookmaker?.isActive && (
-                    <Col md={12}>
-                      <BetTable
-                        title={matchDetails?.bookmaker?.name}
-                        type={MatchType.BOOKMAKER}
-                        data={matchDetails?.bookmaker}
-                      />
-                    </Col>
-                  )}
-                  <Row className="no-gutters">
-                    {matchDetails?.apiSessionActive && (
-                      <Col md={6}>
-                        <BetTable
-                          title={"Session Market"}
-                          type={MatchType.API_SESSION_MARKET}
-                          data={matchDetails?.sessionBettings}
-                        />
-                      </Col>
-                    )}
-                    {/* {matchDetails?.manualSessionActive && (
-                      <Col md={6}>
-                        <BetTable
-                          title={"Fancy Market"}
-                          type={MatchType.SESSION_MARKET}
-                          data={matchDetails?.sessionBettings?.filter(
-                            (item: any) =>
-                              JSON.parse(item)?.selectionId === null
-                          )}
-                        />
-                      </Col>
-                    )} */}
-                  </Row>
-                </>
-              )}
+                  ))}
+              </>
             </Col>
             <Col md={4}>
-              <LiveMatch />
-              <div className="my-2">
-                <ScoreCard />
-              </div>
-              <UserBets />
-              {/* <BetTableHeader
-                customClass="mt-2 fw-normal"
-                title="Rules"
-                style={{ height: "39px" }}
-              />
-              <Row>
-                <Col lg={6}>
-                  <Rules teamName="Banglore XI" />
-                </Col>
-                <Col lg={6}>
-                  <Rules teamName="Rajasthan XI" />
-                </Col>
-              </Row> */}
+              <OtherUserBets />
             </Col>
           </Row>
         </div>
@@ -283,4 +254,4 @@ const otherGames = () => {
   );
 };
 
-export default React.memo(otherGames);
+export default React.memo(OtherGamesDetail);
