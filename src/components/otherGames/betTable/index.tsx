@@ -3,12 +3,12 @@ import { MatchType } from "../../../utils/enum";
 import { formattedMinMax } from "../../../utils/formatMinMax";
 import BetTableHeader from "../../commonComponent/betTableHeader";
 import CustomBreadcrumb from "../../commonComponent/breadcrumb";
-import ApiSessionMarketTable from "./apiSessionMarket";
 import BookmakerTable from "./bookMaker";
 import MatchOdds from "./matchOdds";
-import SessionMarketTable from "./sessionMarket";
 import { RootState } from "../../../store/store";
-import { useLocation } from "react-router-dom";
+import OverUnderMarket from "./overUnder";
+import SetWinner from "./setWinner";
+import HTFTMarketTable from "./htftmarket";
 
 interface BetTableProps {
   title: string;
@@ -24,27 +24,12 @@ const BetTable = ({ title, type, data, backLayCount }: BetTableProps) => {
     (state: RootState) => state.match.sidebarList
   );
 
-  const location = useLocation();
   return (
     <>
-      {type === MatchType.MATCH_ODDS ? (
-        <CustomBreadcrumb
-          items={[
-            { name: breadCrumb?.competition || matchDetails?.competitionName },
-            { name: breadCrumb?.matchName || matchDetails?.title },
-            {
-              name:
-                breadCrumb?.type ||
-                (location.pathname.includes("match_details")
-                  ? "tied_match"
-                  : "Match Odd"),
-            },
-            { name: breadCrumb?.date || matchDetails?.startAt },
-          ]}
-        />
-      ) : (
-        <BetTableHeader customClass="my-2" title={title} />
-      )}
+      <CustomBreadcrumb
+        items={[{ name: breadCrumb?.matchName || matchDetails?.title }]}
+      />
+      <BetTableHeader customClass="mt-2" title={title} />
       {type === MatchType.BOOKMAKER ? (
         <BookmakerTable
           minMax={formattedMinMax(data?.minBet, data?.maxBet)}
@@ -54,22 +39,31 @@ const BetTable = ({ title, type, data, backLayCount }: BetTableProps) => {
         />
       ) : type === MatchType.MATCH_ODDS ? (
         <MatchOdds
-          title={"Runners"}
+          title={formattedMinMax(data?.minBet, data?.maxBet)}
           data={data}
           backLayCount={backLayCount}
           matchDetails={matchDetails}
         />
-      ) : type === MatchType.API_SESSION_MARKET ? (
-        <ApiSessionMarketTable
+      ) : type === MatchType.UNDER_OVER ? (
+        <OverUnderMarket
+          minMax={formattedMinMax(data?.minBet, data?.maxBet)}
           data={data}
+          backLayCount={backLayCount}
+          matchDetails={matchDetails}
           title={title}
+        />
+      ) : type === MatchType.SET_WINNER ? (
+        <SetWinner
+          minMax={formattedMinMax(data?.minBet, data?.maxBet)}
+          data={data}
+          backLayCount={backLayCount}
           matchDetails={matchDetails}
         />
       ) : (
-        <SessionMarketTable
-          data={data}
-          title={title}
-          matchDetails={matchDetails}
+        <HTFTMarketTable
+        //   data={data}
+        //   title={title}
+        //   matchDetails={matchDetails}
         />
       )}
     </>

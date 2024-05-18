@@ -230,19 +230,24 @@ const OtherGamesDetail = () => {
         <div className="gamePage-table">
           <Row className="no-gutters">
             <Col md={8}>
-              <>
-                {updatedMarket
-                  ?.filter((item: any) => item?.id === marketId)
-                  ?.map((item: any) => (
-                    <Col md={12}>
-                      <BetTable
-                        title={item?.name}
-                        type={MatchType.MATCH_ODDS}
-                        data={item}
-                      />
-                    </Col>
-                  ))}
-              </>
+              {updatedMarket
+                ?.filter((item: any) => item?.id === marketId)
+                ?.map((item: any) => (
+                  <Col md={12} key={item?.id}>
+                    <BetTable
+                      title={item?.name}
+                      type={
+                        item.type.includes("overUnder") ||
+                        item.type.includes("firstHalfGoal")
+                          ? MatchType.UNDER_OVER
+                          : item.type.includes("setWinner")
+                          ? MatchType.SET_WINNER
+                          : MatchType.MATCH_ODDS
+                      }
+                      data={item}
+                    />
+                  </Col>
+                ))}
             </Col>
             <Col md={4}>
               <OtherUserBets />

@@ -2,7 +2,10 @@ import { Table } from "react-bootstrap";
 import "../../style.scss";
 import BetStatusOverlay from "../../../commonComponent/betStatusOverlay";
 import BackLayBox from "../../../backLayBox";
-import { teamStatus } from "../../../../utils/Constants";
+import {
+  profitLossDataForMatchConstants,
+  teamStatus,
+} from "../../../../utils/Constants";
 import isMobile from "../../../../utils/screenDimension";
 
 interface MatchOddsProps {
@@ -63,8 +66,9 @@ function MatchOdds({
                   <td>
                     <div className="backLayRunner d-flex flex-column px-1 w-100">
                       <span
-                        className={`backLayRunner-country title-12  ${isMobile ? "f900" : "f600"
-                          } `}
+                        className={`backLayRunner-country title-12  ${
+                          isMobile ? "f900" : "f600"
+                        } `}
                       >
                         {data?.type === "tiedMatch1"
                           ? indexes === 0
@@ -74,18 +78,57 @@ function MatchOdds({
                       </span>
                       <div className="d-flex align-items-center justify-content-between w-100">
                         <span className="title-14">
-                          {data?.type === "tiedMatch1"
-                            ? indexes === 0
-                              ? <span className={matchDetails?.profitLossDataMatch?.yesRateTie < 0 ? "color-red" : "color-green"}>
-                                {matchDetails?.profitLossDataMatch?.yesRateTie ?? 0} 
+                          {data?.type === "tiedMatch1" ? (
+                            indexes === 0 ? (
+                              <span
+                                className={
+                                  matchDetails?.profitLossDataMatch
+                                    ?.yesRateTie < 0
+                                    ? "color-red"
+                                    : "color-green"
+                                }
+                              >
+                                {matchDetails?.profitLossDataMatch
+                                  ?.yesRateTie ?? 0}
                               </span>
-                              : <span className={matchDetails?.profitLossDataMatch?.noRateTie < 0 ? "color-red" : "color-green"}>
-                                {matchDetails?.profitLossDataMatch?.noRateTie ?? 0} 
+                            ) : (
+                              <span
+                                className={
+                                  matchDetails?.profitLossDataMatch[
+                                    profitLossDataForMatchConstants[
+                                      data?.type
+                                    ]?.[matchs]
+                                  ] < 0
+                                    ? "color-red"
+                                    : "color-green"
+                                }
+                              >
+                                {matchDetails?.profitLossDataMatch[
+                                  profitLossDataForMatchConstants[data?.type]?.[
+                                    matchs
+                                  ]
+                                ] ?? 0}
                               </span>
-                            : <span className={matchDetails?.profitLossDataMatch?.[`team${matchs}Rate`] < 0 ? "color-red" : "color-green"}>
-                              {matchDetails?.profitLossDataMatch?.[`team${matchs}Rate`] ?? 0}
+                            )
+                          ) : (
+                            <span
+                              className={
+                                matchDetails?.profitLossDataMatch[
+                                  profitLossDataForMatchConstants[data?.type]?.[
+                                    matchs
+                                  ]
+                                ] < 0
+                                  ? "color-red"
+                                  : "color-green"
+                              }
+                            >
+                              {matchDetails?.profitLossDataMatch[
+                                profitLossDataForMatchConstants[data?.type]?.[
+                                  matchs
+                                ]
+                              ] ?? 0}
                             </span>
-                          }
+                          )}
                         </span>
                         <span className={`title-14`}></span>
                       </div>

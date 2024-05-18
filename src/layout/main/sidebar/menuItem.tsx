@@ -1,3 +1,4 @@
+import moment from "moment-timezone";
 import React, { useEffect, useState } from "react";
 import { Accordion } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,7 +9,6 @@ import {
   setBreadCrumb,
 } from "../../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../../store/store";
-import moment from "moment-timezone";
 
 interface Props {
   item: any;
@@ -122,7 +122,7 @@ const MenuCollapse = (props: any) => {
                       dispatch(getCompetitionDates(sideBarChild?.id));
                     }
                   }}
-                  key={index}
+                  key={sideBarChild?.id}
                   defaultActiveKey={[]}
                 >
                   <Accordion.Item eventKey="0">
@@ -144,7 +144,7 @@ const MenuCollapse = (props: any) => {
                                 );
                               }
                             }}
-                            key={indexes}
+                            key={menuItemChild?.id}
                             defaultActiveKey={[]}
                           >
                             <Accordion.Item eventKey="0">
@@ -156,7 +156,7 @@ const MenuCollapse = (props: any) => {
                                   (matches: any) => {
                                     return (
                                       <Accordion
-                                        key={indexes}
+                                        key={matches?.id}
                                         defaultActiveKey={[]}
                                       >
                                         <Accordion.Item eventKey="0">
@@ -167,6 +167,7 @@ const MenuCollapse = (props: any) => {
                                             (item: any) => {
                                               return (
                                                 <Accordion.Body
+                                                  key={item?.id}
                                                   onClick={() => {
                                                     onClickMenuItem();
                                                     if (
