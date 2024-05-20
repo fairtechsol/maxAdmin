@@ -358,20 +358,44 @@ const ListActiveInactiveUser: React.FC = () => {
                             <td className="text-end">0</td>
                             <td>
                               <div className="d-flex gap-1 border-right-0 border-left-0">
-                                {actionButtons?.map((item) => {
-                                  return (
-                                    <CustomButton
-                                      variant="dark"
-                                      onClick={() => {
-                                        item.onClick(item?.id, userItem);
-                                      }}
-                                      key={item?.id}
-                                      className="actionBtn"
-                                    >
-                                      {item?.name}
-                                    </CustomButton>
-                                  );
-                                })}
+                              {type ? (
+                                  <>
+                                    {actionButtons?.map((item) => {
+                                      return (
+                                        (item.id === "d" ||
+                                          item.id === "w") && (
+                                          <CustomButton
+                                            variant="dark"
+                                            onClick={() => {
+                                              item.onClick(item?.id, userItem);
+                                            }}
+                                            key={item?.id}
+                                            className={`actionBtn`}
+                                          >
+                                            {item?.name}
+                                          </CustomButton>
+                                        )
+                                      );
+                                    })}
+                                  </>
+                                ) : (
+                                  <>
+                                    {actionButtons?.map((item) => {
+                                      return (
+                                        <CustomButton
+                                          variant="dark"
+                                          onClick={() => {
+                                            item.onClick(item?.id, userItem);
+                                          }}
+                                          key={item?.id}
+                                          className={`actionBtn`}
+                                        >
+                                          {item?.name}
+                                        </CustomButton>
+                                      );
+                                    })}
+                                  </>
+                                )}
                               </div>
                             </td>
                           </tr>

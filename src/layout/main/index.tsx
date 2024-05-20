@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 // import { GiHamburgerMenu } from 'react-icons/gi';
 import { useDispatch, useSelector } from "react-redux";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 import LoggedUserDetail from "../../components/listClients/loggedUserDetail";
 import {
   getUsersProfile,
@@ -17,7 +17,7 @@ function MainLayout({eventKey}:any) {
   let location = useLocation();
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
-
+  const { type } = useParams();
   const [toggle, setToggle] = useState<Boolean>(false);
   const handleDrawer = () => {
     setToggle(!toggle);
@@ -59,7 +59,7 @@ function MainLayout({eventKey}:any) {
         <Sidebar clickHandler={handleDrawer} />
       </div>
       {/* layout */}
-      {location.pathname.includes("/admin/active-inactive-user-list") && summary ? (
+      {location.pathname.includes("/admin/active-inactive-user-list") && summary && !type ? (
         <LoggedUserDetail />
       ) : (
         ""
