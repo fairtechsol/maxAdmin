@@ -125,7 +125,7 @@ function OverUnderMarket({
                         ?.map((_: any, index: number) => (
                           <BackLayBox
                             key={index}
-                            customClass="match-odd-bet-place"
+                            customClass="match-odd-bet-place-box"
                             bgColor={`blue${index + 1}`}
                             rate={
                               +data?.runners?.[indexes]?.ex?.availableToBack?.[
@@ -150,7 +150,7 @@ function OverUnderMarket({
                         ?.map((_: any, index: number) => (
                           <BackLayBox
                             key={index}
-                            customClass="match-odd-bet-place"
+                            customClass="match-odd-bet-place-box"
                             bgColor={`red${index + 1}`}
                             rate={
                               +data?.runners?.[indexes]?.ex?.availableToLay?.[
