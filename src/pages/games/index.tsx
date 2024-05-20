@@ -1,10 +1,8 @@
 import React, { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-// import BetTableHeader from "../../components/commonComponent/betTableHeader";
 import BetTable from "../../components/game/betTable";
 import GameHeader from "../../components/game/gameHeader";
 import LiveMatch from "../../components/game/liveMatch";
-// import Rules from "../../components/game/rules";
 import ScoreCard from "../../components/game/scoreCard";
 import UserBets from "../../components/game/userBet";
 import { MatchType } from "../../utils/enum";
@@ -17,8 +15,6 @@ import {
 } from "../../store/actions/match/matchAction";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { socket, socketService } from "../../socketManager";
-import NavComponent from "../../components/otherGames/matchList";
-import OtherUserBets from "../../components/otherGames/userBets";
 
 const Games = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -30,7 +26,9 @@ const Games = () => {
   const { matchDetails, success } = useSelector(
     (state: RootState) => state.match.matchListSlice
   );
-
+  const { breadCrumb } = useSelector(
+    (state: RootState) => state.match.sidebarList
+  );
   const updateMatchDetailToRedux = (event: any) => {
     try {
       if (id === event?.id) {
@@ -198,13 +196,12 @@ const Games = () => {
     <div className="gamePage">
       <Container fluid>
         <GameHeader />
-        <NavComponent/>
         {/* table start here */}
         <div className="gamePage-table">
           <Row className="no-gutters">
             <Col md={8}>
-              {location.pathname.includes("match_details") ? (
-                matchDetails?.matchOdd?.isActive && (
+              {breadCrumb && breadCrumb?.type === "tied_match" ? (
+                matchDetails?.apiTideMatch?.isActive && (
                   <Col md={12}>
                     <BetTable
                       title={"Runners"}
@@ -267,7 +264,6 @@ const Games = () => {
                 <ScoreCard />
               </div>
               <UserBets />
-              <OtherUserBets/>
               {/* <BetTableHeader
                 customClass="mt-2 fw-normal"
                 title="Rules"

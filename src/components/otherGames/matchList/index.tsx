@@ -1,38 +1,54 @@
-import React from 'react';
+import { NavLink, useParams } from "react-router-dom";
 import "./style.scss";
 
-const NavComponent = () => {
-  const navItems = [
-    { id: 1, name: 'HALF_TIME', link: 'javascript:void(0)' },
-    { id: 2, name: 'OVER_UNDER_15', link: 'javascript:void(0)' },
-    { id: 3, name: 'OVER_UNDER_25', link: 'javascript:void(0)' },
-    { id: 4, name: 'OVER_UNDER_05', link: 'javascript:void(0)' },
-    { id: 5, name: 'MATCH_ODDS', link: 'javascript:void(0)' },
-    { id: 6, name: 'Bookmaker', link: 'javascript:void(0)' },
-    { id: 1, name: 'HALF_TIME', link: 'javascript:void(0)' },
-    { id: 2, name: 'OVER_UNDER_15', link: 'javascript:void(0)' },
-    { id: 3, name: 'OVER_UNDER_25', link: 'javascript:void(0)' },
-    { id: 4, name: 'OVER_UNDER_05', link: 'javascript:void(0)' },
-    { id: 5, name: 'MATCH_ODDS', link: 'javascript:void(0)' },
-    { id: 6, name: 'Bookmaker', link: 'javascript:void(0)' },
-    { id: 1, name: 'HALF_TIME', link: 'javascript:void(0)' },
-    { id: 2, name: 'OVER_UNDER_15', link: 'javascript:void(0)' },
-    { id: 3, name: 'OVER_UNDER_25', link: 'javascript:void(0)' },
-    { id: 4, name: 'OVER_UNDER_05', link: 'javascript:void(0)' },
-    { id: 5, name: 'MATCH_ODDS', link: 'javascript:void(0)', active: true },
-    { id: 6, name: 'Bookmaker', link: 'javascript:void(0)' }
+const NavComponent = ({ matchDetail }: any) => {
+  const { marketId } = useParams();
+  function formatMarkets(matchDetail: any) {
+    const formattedArray = [];
 
-  ];
+    // Iterate through each type of market
+    for (const marketType in matchDetail) {
+      const marketValue: any = matchDetail[marketType];
+      if (typeof marketValue === "object" && marketValue !== null) {
+        if (Array.isArray(marketValue) && marketType !== "quickBookmaker") {
+          formattedArray.push(
+            ...marketValue.map((market: any) => ({
+              type: market?.type,
+              id: market.id,
+              name: market.name,
+            }))
+          );
+        } else {
+          if (marketValue?.id) {
+            formattedArray.push({
+              type: marketValue?.type,
+              id: marketValue?.id,
+              name: marketValue?.name,
+            });
+          }
+        }
+      }
+    }
+
+    return formattedArray;
+  }
+
+  const navItems: any = formatMarkets(matchDetail);
 
   return (
     <div className="row">
       <div className="col-md-12">
         <ul className="nav mb-3">
-          {navItems.map(item => (
+          {navItems.map((item: any) => (
             <li key={item.id} className="nav-items">
-              <a href={item.link} className={`market-tab-link ${item.active ? 'active' : ''}`}>
+              <NavLink
+                to={`/admin/other_match_detail/${matchDetail?.id}/${item?.id}`}
+                className={`market-tab-link ${
+                  item?.id === marketId ? "active" : ""
+                }`}
+              >
                 {item.name}
-              </a>
+              </NavLink>
             </li>
           ))}
         </ul>

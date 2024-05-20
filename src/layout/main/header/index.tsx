@@ -61,7 +61,7 @@ const Topbar = (props: any) => {
     return debounce((value) => {
       dispatch(
         searchList({
-          createdBy: userDetail?.id,
+          createdBy: localStorage.getItem("key") as string,
           userName: value,
         })
       );
@@ -101,9 +101,9 @@ const Topbar = (props: any) => {
       label: item?.userName,
     })) || [];
 
-      const handleSubmit = (e: any) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
-    if ( searchValue?.value && userDetail?.id) {
+    if (searchValue?.value && localStorage.getItem("key")) {
       setSearchModal(true);
     } else {
       alert("Please select user!");
@@ -190,34 +190,32 @@ const Topbar = (props: any) => {
   return (
     <>
       <Navbar expand="lg" className="bg-primary" data-bs-theme="light">
-     
         <Container fluid>
-        <div className="d-flex">
+          <div className="d-flex">
+            <a
+              href={`/admin/active-inactive-user-list/${localStorage.getItem(
+                "key"
+              )}`}
+              className="me-2 d-flex"
+            >
+              <LogoSection width="110px" height="38px" />
+            </a>
 
-        <a
-            href={`/admin/active-inactive-user-list/${userDetail?.id}`}
-            className="me-2 d-flex"
-          >
-            <LogoSection width="110px" height="38px"/>
-           
-          </a>
-         
             <span className="mt-2 m-2" onClick={props.onClick}>
-            {props.toggle ? (
-              <div style={{ width: "28px" }}>
-                <FaTimes color="white" size={20} />
-              </div>
-            ) : (
-              <div className="menuHamBurger d-flex flex-column me-2">
-                <span className="mb-1"></span>
-                <span className="mb-1"></span>
-                <span></span>
-              </div>
-            )}
-          </span>
-          
+              {props.toggle ? (
+                <div style={{ width: "28px" }}>
+                  <FaTimes color="white" size={20} />
+                </div>
+              ) : (
+                <div className="menuHamBurger d-flex flex-column me-2">
+                  <span className="mb-1"></span>
+                  <span className="mb-1"></span>
+                  <span></span>
+                </div>
+              )}
+            </span>
           </div>
-        
+
           {isMobile && (
             <div className="user-dropdown-container">
               <NavDropdown
