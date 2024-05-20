@@ -149,7 +149,7 @@ function MatchOdds({
                           <BackLayBox
                             style={{ width: "84px" }}
                             key={index}
-                            customClass="match-odd-bet-place"
+                            customClass="match-odd-bet-place-box"
                             bgColor={`blue${index + 1}`}
                             rate={
                               data?.runners?.[indexes]?.ex?.availableToBack?.[
@@ -175,7 +175,7 @@ function MatchOdds({
                           <BackLayBox
                             style={{ width: "84px" }}
                             key={index}
-                            customClass="match-odd-bet-place"
+                            customClass="match-odd-bet-place-box"
                             bgColor={`red${index + 1}`}
                             rate={
                               data?.runners?.[indexes]?.ex?.availableToLay?.[

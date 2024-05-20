@@ -115,7 +115,7 @@ const Topbar = (props: any) => {
     control: (base: any, state: { isFocused: any }) => ({
       ...base,
       fontFamily: 'Roboto Condensed", sans-serif',
-      fontSize: 14,
+      fontSize: 12,
       border: state.isFocused ? 0 : 0,
       boxShadow: state.isFocused ? 0 : 0,
       cursor: "text",
@@ -157,8 +157,9 @@ const Topbar = (props: any) => {
     }),
     container: (provided: any) => ({
       ...provided,
-      width: { lg: "180px", xs: "150px" },
+      width: isMobile ? "80px" : "160px",
       borderRadius: "10px",
+      marginRight: "10px",
     }),
 
     dropdownIndicator: (provided: any) => ({
@@ -201,7 +202,7 @@ const Topbar = (props: any) => {
               <LogoSection width="110px" height="38px" />
             </a>
 
-            <span className="mt-2 m-2" onClick={props.onClick}>
+            <span className="mt-2 m-2 cursor" onClick={props.onClick}>
               {props.toggle ? (
                 <div style={{ width: "28px" }}>
                   <FaTimes color="white" size={20} />
@@ -217,7 +218,7 @@ const Topbar = (props: any) => {
           </div>
 
           {isMobile && (
-            <div className="user-dropdown-container">
+            <div className="user-dropdown-containerM">
               <NavDropdown
                 id="nav-dropdown-dark-example"
                 title={userDetail && userDetail?.userName}
@@ -239,7 +240,7 @@ const Topbar = (props: any) => {
                 </NavDropdown.Item>
               </NavDropdown>
               <Form className="headerSearchMobile">
-                <div>
+                <div className="selectheight">
                   <Select
                     value={searchValue}
                     options={optionslist}
@@ -394,10 +395,6 @@ const Topbar = (props: any) => {
               </Form.Group>
             </Form>
             */}
-            </div>
-          )}
-
-          {!isMobile && (
             <Form className="headerSearch">
               <div>
                 <Select
@@ -415,7 +412,12 @@ const Topbar = (props: any) => {
                 />
               </div>
             </Form>
+            </div>
           )}
+
+          {/* {!isMobile && (
+            
+          )} */}
         </Container>
       </Navbar>
 
