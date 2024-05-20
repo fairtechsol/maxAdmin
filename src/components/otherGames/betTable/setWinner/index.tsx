@@ -6,7 +6,7 @@ import {
 import isMobile from "../../../../utils/screenDimension";
 import BackLayBox from "../../../backLayBox";
 import BetStatusOverlay from "../../../commonComponent/betStatusOverlay";
-// import "../style.scss";
+import "../../style.scss";
 
 interface MatchOddsProps {
   minMax?: any;
