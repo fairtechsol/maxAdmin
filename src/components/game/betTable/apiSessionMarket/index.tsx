@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Table } from "react-bootstrap";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import BetStatusOverlay from "../../../commonComponent/betStatusOverlay";
 import CustomModal from "../../../commonComponent/modal";
 import YesNoBox from "../../../yesNo";
@@ -52,7 +52,7 @@ function ApiSessionMarketTable({
             return (
               <tr key={item?.id}>
                 <td>
-                  <div className="backLayRunner d-flex flex-column px-3">
+                  <div className="backLayRunner d-flex flex-column title-10">
                     <div
                       onClick={() => {
                         dispatch(resetRunAmount());
@@ -60,11 +60,11 @@ function ApiSessionMarketTable({
                         dispatch(getRunAmount(item?.id));
                       }}
                     >
-                      <Link to="" className="backLayRunner-country title-14">
+                  
                         {item?.name}
-                      </Link>
+                 
                     </div>
-                    <span className="title-14">
+                    <span className="title-12">
                       {matchDetails?.profitLossDataSession.length > 0
                         ? matchDetails?.profitLossDataSession?.reduce(
                             (accumulator: any, bet: any) => {

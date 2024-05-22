@@ -4,11 +4,12 @@
 .market-tab-link {
     background: #004a25;
     color: #fff;
-    padding: 3px 7px;
+    padding: 5px 9px;
     display: inline-block;
     text-decoration: none;
-    font-size: 12px;
+    font-size: 14px;
     margin: 5px;
+    text-transform: capitalize;
 }
 li {
     list-style: none;
@@ -28,4 +29,7 @@ li {
         flex: 0 0 100%;
         max-width: 100%;
     }
+}
+td{
+  width: 50%;
 }

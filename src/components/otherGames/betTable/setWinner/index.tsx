@@ -26,32 +26,32 @@ function SetWinner({
       className={`gameTable table-responsive sessionFancyTable borderTable border `}
     >
       <Table className="mb-0">
-        <thead>
+      <thead>
           <tr>
             <th className="border-0">
+          
+            
               {minMax && isMobile && (
                 <span className="f700 title-14">{minMax}</span>
               )}
+    
             </th>
-            {!isMobile && (
+            {backLayCount === 6 && (
               <>
-                <th className="border-0 match-odd-bet-place"></th>
-                <th className="border-0 match-odd-bet-place"></th>
+                <th className="border-0" style={{ width: "60px" }}></th>
+                <th className="border-0" style={{ width: "60px" }}></th>
               </>
             )}
-            <th className="text-center bg-blue3 match-odd-bet-place f400">
-              {" "}
-              BACK
+            <th className="border-0" style={{ width: "60px" }}></th>
+            <th className="border-0" style={{ width: "60px" }}></th>
+            <th className="text-center bg-blue3" style={{ width: "60px" }}>
+              Back
             </th>
-            <th className="text-center bg-red1 match-odd-bet-place f400">
-              LAY
+            <th className="text-center bg-red1" style={{ width: "60px" }}>
+              Lay
             </th>
-            {!isMobile && (
-              <>
-                <th className="border-0 match-odd-bet-place"></th>
-                <th className="border-0 match-odd-bet-place"></th>
-              </>
-            )}
+            <th className="border-0" style={{ width: "60px" }}></th>
+            <th className="border-0" style={{ width: "60px" }}></th>
           </tr>
         </thead>
         <tbody>
