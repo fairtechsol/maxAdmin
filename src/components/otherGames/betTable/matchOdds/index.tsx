@@ -147,7 +147,7 @@ function MatchOdds({
                         .fill(0)
                         ?.map((_: any, index: number) => (
                           <BackLayBox
-                            style={{ width: "84px" }}
+                            // style={{ width: "84px" }}
                             key={index}
                             customClass="match-odd-bet-place-box"
                             bgColor={`blue${index + 1}`}
@@ -173,7 +173,7 @@ function MatchOdds({
                         .fill(0)
                         ?.map((_: any, index: number) => (
                           <BackLayBox
-                            style={{ width: "84px" }}
+                            // style={{ width: "84px" }}
                             key={index}
                             customClass="match-odd-bet-place-box"
                             bgColor={`red${index + 1}`}

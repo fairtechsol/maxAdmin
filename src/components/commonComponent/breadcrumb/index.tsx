@@ -24,8 +24,10 @@ function CustomBreadcrumb({ items, style }: Props) {
             className="title-16 f600 p-0"
           >
             {item?.name}
+          
           </Breadcrumb.Item>
         ))}
+          <div>kwjefbdsa</div>
       </Breadcrumb>
     </div>
   );
