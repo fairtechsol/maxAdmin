@@ -93,6 +93,7 @@ const AccountStatement = () => {
       (selectedOption as Option).value === "balanceReport"
     ) {
       setGameNameOptions([
+        { value: "all", label: "All" },
         { value: "upper", label: "Upper" },
         { value: "down", label: "Down" },
       ]);
@@ -101,6 +102,7 @@ const AccountStatement = () => {
       (selectedOption as Option).value === "gameReport"
     ) {
       setGameNameOptions([
+        { value: "all", label: "All" },
         { value: "cricket", label: "Cricket" },
         { value: "football", label: "Football" },
         { value: "tennis", label: "Tennis" },
