@@ -12,6 +12,7 @@ import "../layout.scss";
 import Topbar from "./header";
 import Sidebar from "./sidebar";
 import { socketService } from "../../socketManager";
+import Loader from "../../components/commonComponent/loader";
 
 function MainLayout({eventKey}:any) {
   let location = useLocation();
@@ -26,7 +27,9 @@ function MainLayout({eventKey}:any) {
   const { summary } = useSelector(
     (state: RootState) => state.user.profile
   );
-
+  const { loading } = useSelector(
+    (state: RootState) => state.user.userList
+  );
   const updateLoggedUserBalance = (event: any) => {
     dispatch(updateUserBalance(event));
   };
@@ -53,6 +56,7 @@ function MainLayout({eventKey}:any) {
   return (
     <>
       {/* topbar */}
+      {loading ? <Loader /> : null}
       <Topbar onClick={handleDrawer} toggle={toggle} />
       {/* sidebar start */}
       <div className={`sidebar ${toggle ? "sidebarActive" : ""}`}>
