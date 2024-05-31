@@ -1,6 +1,9 @@
 .profitLossEventType{
     .profitLossEventType-box{
-        width: 238px;
-        padding: 1.5px;
+        min-width: 130px;
+        max-width: 20vw;
+        padding: 5px 10px 5px 10px;
+        display: flex;
+        justify-content: center;
     }
 }

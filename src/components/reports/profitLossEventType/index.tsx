@@ -25,7 +25,7 @@ const ProfitLossEventType = (props: any) => {
                   ? "bg-green"
                   : "bg-pdf"
                 : "bg-green"
-            } px-1`}
+            } `}
           >
             <label className="text-white title-12">{item?.name}:</label>
             <span className="text-white title-12"> {item?.amount}</span>

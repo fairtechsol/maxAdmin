@@ -7,6 +7,7 @@ import {
   addSuccessReset,
   addUser,
   getAlreadyUserExist,
+  successMessageReset,
 } from "../../store/actions/user/userActions";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
@@ -41,7 +42,7 @@ const AddAccount = () => {
   const [accountTypes, setAccountTypes] = useState<any>([]);
   const [down, setDown] = useState<number>(0);
   const [errorHandle, setErrorHandle] = useState(false);
-
+  const [successInsert, setSuccessInsert] = useState(false);
   const initialValues = {
     clientName: "",
     userPassword: "",
@@ -73,7 +74,7 @@ const AddAccount = () => {
   const { userAlreadyExist } = useSelector(
     (state: RootState) => state.user.userList
   );
-  const { addSuccess } = useSelector(
+  const { addSuccess, successMessage } = useSelector(
     (state: RootState) => state.user.userUpdate
   );
   const formik = useFormik({
@@ -274,13 +275,25 @@ const AddAccount = () => {
       setDown(100 - res);
     }
   }, [formik?.values?.accountType]);
-
+  useEffect(() => {
+   if(successMessage != ""){
+    setSuccessInsert(true);
+    setTimeout(() => {
+      dispatch(successMessageReset());
+      setSuccessInsert(false);
+    }, 2000);
+  
+   }
+  }, [successMessage]);
+  
   return (
     <>
       <Card className="addAccount  border-0">
         <Card.Header className="border-0 pb-0">
           <Card.Title className="title-28 fw-normal ">Add Account</Card.Title>
+          {successInsert && <div style={{ backgroundColor: "#d4edda", height: "40px", alignItems: "center", display: "flex", paddingLeft: "5px"}}>{successMessage}</div>}
         </Card.Header>
+       
         <Card.Body className="bg-light">
           <Form
             onSubmit={(e) => {
@@ -351,6 +364,8 @@ const AddAccount = () => {
                       type={"text"}
                       customstyle={"mb-3"}
                       {...getFieldProps("fullName")}
+                      touched={touched.fullName}
+                      errors={errors.fullName}
                     />
                   </Col>
                   <Col md={6}>
