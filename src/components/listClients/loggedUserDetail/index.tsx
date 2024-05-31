@@ -22,7 +22,7 @@ const LoggedUserDetail = () => {
       <Accordion onSelect={handleAccordionSelect}>
         <Accordion.Item eventKey="0">
           <Accordion.Header>
-            <FaRegArrowAltCircleUp />
+            <FaRegArrowAltCircleUp style={{fontSize: "20px"}} />
           </Accordion.Header>
           <Accordion.Body>
             <Row>

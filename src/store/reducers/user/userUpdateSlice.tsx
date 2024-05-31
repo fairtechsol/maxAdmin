@@ -1,17 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addSuccessReset, addUser } from "../../actions/user/userActions";
+import { addSuccessReset, addUser, successMessageReset } from "../../actions/user/userActions";
 // actions/user/userAction
 
 interface InitialState {
   addSuccess: boolean;
   loading: boolean;
   error: any;
+  successMessage: string;
 }
 
 const initialState: InitialState = {
   loading: false,
   addSuccess: false,
   error: null,
+  successMessage: ""
 };
 
 const userUpdateSlice = createSlice({
@@ -27,6 +29,7 @@ const userUpdateSlice = createSlice({
       .addCase(addUser.fulfilled, (state) => {
         state.addSuccess = true;
         state.loading = false;
+        state.successMessage = "Successfully Insert";
       })
       .addCase(addUser.rejected, (state, action) => {
         state.loading = false;
@@ -34,6 +37,9 @@ const userUpdateSlice = createSlice({
       })
       .addCase(addSuccessReset, (state) => {
         state.addSuccess = false;
+      })
+      .addCase(successMessageReset, (state) => {
+        state.successMessage = " ";
       });
   },
 });

@@ -26,6 +26,7 @@ export const addAccountValidationSchema: any = (item: any) => {
         },
       }),
     userPassword: Yup.string().required("Password is required"),
+    fullName: Yup.string().required("FullName is required"),
     retypePassword: Yup.string()
       .oneOf([Yup.ref("userPassword"), ""], "Passwords must match")
       .required("Password is required"),

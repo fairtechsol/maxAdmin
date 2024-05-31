@@ -202,7 +202,7 @@ const ListActiveInactiveUser: React.FC = () => {
                       dispatch(dropdownSummary({ summary: false }))
                     }
                   >
-                    Deactivate User
+                    Deactive User
                   </Nav.Link>
                 </Nav.Item>
               </Nav>
