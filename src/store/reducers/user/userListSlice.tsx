@@ -110,6 +110,7 @@ export const userList = createSlice({
       .addCase(changeAmmountUser.fulfilled, (state) => {
         state.loading = false;
         state.modalSuccess = true;
+        alert('Successfully balance transfer');
       })
       .addCase(changeAmmountUser.rejected, (state, action) => {
         state.loading = false;
@@ -122,6 +123,7 @@ export const userList = createSlice({
       .addCase(setCreditRefference.fulfilled, (state) => {
         state.loading = false;
         state.modalSuccess = true;
+        alert('Successfully update credit reference');
       })
       .addCase(setCreditRefference.rejected, (state, action) => {
         state.loading = false;
@@ -134,6 +136,7 @@ export const userList = createSlice({
       .addCase(setExposureLimit.fulfilled, (state) => {
         state.loading = false;
         state.modalSuccess = true;
+        alert('Successfully update limit');
       })
       .addCase(setExposureLimit.rejected, (state, action) => {
         state.loading = false;
