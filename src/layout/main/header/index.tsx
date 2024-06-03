@@ -53,9 +53,10 @@ const Topbar = (props: any) => {
   const [searchValue, setSearchValue] = useState<any>(null);
   const { userDetail } = useSelector((state: RootState) => state.user.profile);
 
-  const { searchListData } = useSelector(
+  const { searchListData} = useSelector(
     (state: RootState) => state.user.userList
   );
+
 
   const debouncedInputValue = useMemo(() => {
     return debounce((value) => {
@@ -109,7 +110,20 @@ const Topbar = (props: any) => {
       alert("Please select user!");
       return;
     }
+
+    setTimeout(() => {
+      
+    setSearchValue(null);
+    }, 1000);
   };
+  // console.log(success, "jendf");
+
+// useEffect(()=>{
+//   if(success && childUsersData){
+//     setSearchValue(null);
+//   }
+// }, [success]);
+
 
   const customStyles = {
     control: (base: any, state: { isFocused: any }) => ({
