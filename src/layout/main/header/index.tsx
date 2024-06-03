@@ -1,4 +1,4 @@
-import React, { memo, useMemo, useState } from "react";
+import React, { memo, useEffect, useMemo, useState } from "react";
 import { Container, Form, Nav, NavDropdown, Navbar } from "react-bootstrap";
 import { FaSearchPlus, FaTimes } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
@@ -10,7 +10,7 @@ import MainHeader from "../../../components/mainHeader";
 import { logout } from "../../../store/actions/auth/authActions";
 import { AppDispatch, RootState } from "../../../store/store";
 import { debounce } from "lodash";
-import { searchList } from "../../../store/actions/user/userActions";
+import { searchList,} from "../../../store/actions/user/userActions";
 // import isMobile from "../../../utils/screenDimension";
 // import styled from '@emotion/styled';
 
@@ -53,9 +53,10 @@ const Topbar = (props: any) => {
   const [searchValue, setSearchValue] = useState<any>(null);
   const { userDetail } = useSelector((state: RootState) => state.user.profile);
 
-  const { searchListData } = useSelector(
+  const { searchListData, success,childUsersData} = useSelector(
     (state: RootState) => state.user.userList
   );
+
 
   const debouncedInputValue = useMemo(() => {
     return debounce((value) => {
@@ -109,7 +110,25 @@ const Topbar = (props: any) => {
       alert("Please select user!");
       return;
     }
+
+    // setTimeout(() => {
+      
+    // setSearchValue(null);
+    // }, 1000);
   };
+  console.log(success, "jendf");
+
+useEffect(()=>{
+  if(success && childUsersData){
+    setSearchValue(null);
+  }
+}, [success]);
+
+// useEffect(()=> {
+//   if(SearchModal){
+//     dispatch(userModalReset)
+//   }
+// }, [])
 
   const customStyles = {
     control: (base: any, state: { isFocused: any }) => ({
