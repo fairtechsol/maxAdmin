@@ -11,6 +11,7 @@ import {
   accountListModalReset,
   getAlreadyUserExist,
   getUserHeaderDetail,
+  userModalReset,
 } from "../../actions/user/userActions";
 
 interface InitialState {
@@ -184,6 +185,9 @@ export const userList = createSlice({
       })
       .addCase(accountListModalReset, (state) => {
         state.modalSuccess = false;
+      })
+      .addCase(userModalReset, (state) => {
+        state.childUsersData = null;
       });
   },
 });

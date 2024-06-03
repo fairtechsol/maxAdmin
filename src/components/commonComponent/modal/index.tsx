@@ -1,5 +1,7 @@
 import { Modal } from "react-bootstrap";
 import "./style.scss";
+import { userModalReset } from "../../../store/actions/user/userActions";
+import { useDispatch } from "react-redux";
 
 function CustomModal({
   show,
@@ -12,12 +14,17 @@ function CustomModal({
   headerStyle,
   ...props
 }: any) {
+  const dispatch = useDispatch();
+  const handleClose =() => {
+    setShow(false);
+    dispatch(userModalReset());
+  };
   return (
     <>
       <Modal
         {...props}
         show={show}
-        onHide={() => setShow(false)}
+        onHide={handleClose}
         className={`customModal ${customClass}`}
       >
         <Modal.Header
