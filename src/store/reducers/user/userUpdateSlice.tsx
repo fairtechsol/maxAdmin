@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addSuccessReset, addUser, successMessageReset } from "../../actions/user/userActions";
+import {
+  addSuccessReset,
+  addUser,
+  successMessageReset,
+} from "../../actions/user/userActions";
 // actions/user/userAction
 
 interface InitialState {
@@ -13,7 +17,7 @@ const initialState: InitialState = {
   loading: false,
   addSuccess: false,
   error: null,
-  successMessage: ""
+  successMessage: "",
 };
 
 const userUpdateSlice = createSlice({
@@ -32,7 +36,11 @@ const userUpdateSlice = createSlice({
         state.successMessage = "Successfully Insert";
       })
       .addCase(addUser.rejected, (state, action) => {
+        let attemptLeftData: any = action.payload;
         state.loading = false;
+        state.successMessage =
+          `transaction code not valid. You have ${attemptLeftData.data.data.attemptsLeft}attempt left` ||
+          " ";
         state.error = action?.error?.message;
       })
       .addCase(addSuccessReset, (state) => {
