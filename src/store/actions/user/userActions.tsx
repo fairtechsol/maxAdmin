@@ -36,7 +36,7 @@ interface RequestData {
 
 export const getUsers = createAsyncThunk<any, GetUsers | undefined>(
   "user/list",
-  async (requestData) => {
+  async (requestData, thunkApi) => {
     try {
       const resp = await service.get(
         `${ApiConstants.USER.LIST}?${
@@ -52,7 +52,7 @@ export const getUsers = createAsyncThunk<any, GetUsers | undefined>(
       }
     } catch (error: any) {
       const err = error as AxiosError;
-      throw err;
+      return thunkApi.rejectWithValue(err.response?.status);
     }
   }
 );
@@ -77,7 +77,7 @@ export const getTotalBalance = createAsyncThunk<any, RequestData | undefined>(
 
 export const searchList = createAsyncThunk<any, SearchUsers | undefined>(
   "user/searchList",
-  async (requestData) => {
+  async (requestData, thunkApi) => {
     try {
       const resp = await service.get(
         `${ApiConstants.USER.SEARCH_LIST}?createBy=${
@@ -89,14 +89,14 @@ export const searchList = createAsyncThunk<any, SearchUsers | undefined>(
       }
     } catch (error: any) {
       const err = error as AxiosError;
-      throw err;
+      return thunkApi.rejectWithValue(err.response?.status);
     }
   }
 );
 
 export const getUserHeaderDetail = createAsyncThunk<any, string>(
   "userHeaderDetail/searchList",
-  async (requestData) => {
+  async (requestData, thunkApi) => {
     try {
       const resp = await service.get(
         `${ApiConstants.USER.USER_DETAILS_FOR_PARENT}?userId=${requestData}`
@@ -106,7 +106,7 @@ export const getUserHeaderDetail = createAsyncThunk<any, string>(
       }
     } catch (error: any) {
       const err = error as AxiosError;
-      throw err;
+      return thunkApi.rejectWithValue(err.response?.status);
     }
   }
 );
@@ -114,7 +114,7 @@ export const getUserHeaderDetail = createAsyncThunk<any, string>(
 export const getAlreadyUserExist = createAsyncThunk<
   any,
   SearchUsers | undefined
->("user/clientName", async (requestData) => {
+>("user/clientName", async (requestData, thunkApi) => {
   try {
     const resp = await service.get(
       `${ApiConstants.USER.ALREADY_EXIST}?userName=${requestData}`
@@ -124,13 +124,13 @@ export const getAlreadyUserExist = createAsyncThunk<
     }
   } catch (error: any) {
     const err = error as AxiosError;
-    throw err;
+    return thunkApi.rejectWithValue(err.response?.status);
   }
 });
 
 export const updateUser = createAsyncThunk<any, any>(
   "user/updateUser",
-  async (requestData) => {
+  async (requestData, thunkApi) => {
     try {
       const resp = await service.post(
         `${ApiConstants.USER.UPDATE}`,
@@ -141,27 +141,30 @@ export const updateUser = createAsyncThunk<any, any>(
       }
     } catch (error: any) {
       const err = error as AxiosError;
-      throw err;
+      return thunkApi.rejectWithValue(err.response?.status);
     }
   }
 );
 
-export const getUsersProfile = createAsyncThunk("user/profile", async () => {
-  try {
-    const resp = await service.get(`${ApiConstants.USER.PROFILE}`);
-    if (resp) {
-      localStorage.setItem("key", resp?.data[0][0]?.id);
-      return resp?.data[0][0];
+export const getUsersProfile = createAsyncThunk(
+  "user/profile",
+  async (_, thunkApi) => {
+    try {
+      const resp = await service.get(`${ApiConstants.USER.PROFILE}`);
+      if (resp) {
+        localStorage.setItem("key", resp?.data[0][0]?.id);
+        return resp?.data[0][0];
+      }
+    } catch (error: any) {
+      const err = error as AxiosError;
+      return thunkApi.rejectWithValue(err.response?.status);
     }
-  } catch (error: any) {
-    const err = error as AxiosError;
-    throw err;
   }
-});
+);
 
 export const addUser = createAsyncThunk<any, any>(
   "user/add",
-  async (requestData) => {
+  async (requestData, thunkApi) => {
     try {
       const resp = await service.post("/user/add", requestData);
       if (resp) {
@@ -169,14 +172,14 @@ export const addUser = createAsyncThunk<any, any>(
       }
     } catch (error: any) {
       const err = error as AxiosError;
-      throw err;
+      return thunkApi.rejectWithValue(err.response);
     }
   }
 );
 
 export const changeAmmountUser = createAsyncThunk<any, any>(
   "balance/update",
-  async (requestData) => {
+  async (requestData, thunkApi) => {
     try {
       const resp = await service.post(
         `${ApiConstants.USER.BALANCEUPDATE}`,
@@ -186,27 +189,35 @@ export const changeAmmountUser = createAsyncThunk<any, any>(
         return resp?.data;
       }
     } catch (error: any) {
+      if (error?.response?.data?.data?.attemptsLeft) {
+        alert(
+          `transaction code not valid. You have ${error?.response?.data?.data?.attemptsLeft}attempt left`
+        );
+      }
       const err = error as AxiosError;
-      throw err;
+      return thunkApi.rejectWithValue(err.response?.status);
     }
   }
 );
 
-export const userBalance = createAsyncThunk<any>("user/balance", async () => {
-  try {
-    const resp = await service.get(`${ApiConstants.USER.USERBALANCE}`);
-    if (resp) {
-      return resp?.data?.response;
+export const userBalance = createAsyncThunk<any>(
+  "user/balance",
+  async (_, thunkApi) => {
+    try {
+      const resp = await service.get(`${ApiConstants.USER.USERBALANCE}`);
+      if (resp) {
+        return resp?.data?.response;
+      }
+    } catch (error: any) {
+      const err = error as AxiosError;
+      return thunkApi.rejectWithValue(err.response?.status);
     }
-  } catch (error: any) {
-    const err = error as AxiosError;
-    throw err;
   }
-});
+);
 
 export const setCreditRefference = createAsyncThunk<any, any>(
   "user/update/creditreferrence",
-  async (requestData) => {
+  async (requestData, thunkApi) => {
     try {
       const resp = await service.post(
         `${ApiConstants.USER.CREDITREFERRENCE}`,
@@ -216,15 +227,20 @@ export const setCreditRefference = createAsyncThunk<any, any>(
         return resp?.data;
       }
     } catch (error: any) {
+      if (error?.response?.data?.data?.attemptsLeft) {
+        alert(
+          `transaction code not valid. You have ${error?.response?.data?.data?.attemptsLeft}attempt left`
+        );
+      }
       const err = error as AxiosError;
-      throw err;
+      return thunkApi.rejectWithValue(err.response?.status);
     }
   }
 );
 
 export const setExposureLimit = createAsyncThunk<any, any>(
   "user/update/exposurelimit",
-  async (requestData) => {
+  async (requestData, thunkApi) => {
     try {
       const resp = await service.post(
         `${ApiConstants.USER.EXPOSURELIMIT}`,
@@ -234,15 +250,20 @@ export const setExposureLimit = createAsyncThunk<any, any>(
         return resp?.data;
       }
     } catch (error: any) {
+      if (error?.response?.data?.data?.attemptsLeft) {
+        alert(
+          `transaction code not valid. You have ${error?.response?.data?.data?.attemptsLeft}attempt left`
+        );
+      }
       const err = error as AxiosError;
-      throw err;
+      return thunkApi.rejectWithValue(err.response?.status);
     }
   }
 );
 
 export const setLockUnlockUser = createAsyncThunk<any, any>(
   "/user/lockUnlockUser",
-  async (requestData) => {
+  async (requestData, thunkApi) => {
     try {
       const resp = await service.post(
         `${ApiConstants.USER.LOCKUNLOCK}`,
@@ -252,8 +273,13 @@ export const setLockUnlockUser = createAsyncThunk<any, any>(
         return resp?.data;
       }
     } catch (error: any) {
+      if (error?.response?.data?.data?.attemptsLeft) {
+        alert(
+          `transaction code not valid. You have ${error?.response?.data?.data?.attemptsLeft}attempt left`
+        );
+      }
       const err = error as AxiosError;
-      throw err;
+      return thunkApi.rejectWithValue(err.response?.status);
     }
   }
 );
@@ -270,6 +296,11 @@ export const changePassword = createAsyncThunk<any, ChangePassword>(
         return resp?.data;
       }
     } catch (error: any) {
+      if (error?.response?.data?.data?.attemptsLeft) {
+        alert(
+          `transaction code not valid. You have ${error?.response?.data?.data?.attemptsLeft}attempt left`
+        );
+      }
       const err = error as AxiosError;
       return thunkApi.rejectWithValue(err.response?.status);
     }
