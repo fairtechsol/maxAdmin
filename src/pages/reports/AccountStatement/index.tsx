@@ -105,7 +105,8 @@ const AccountStatement = () => {
         { value: "all", label: "All" },
         { value: "cricket", label: "Cricket" },
         { value: "football", label: "Football" },
-        { value: "tennis", label: "Tennis" },
+        { value: "horseRacing", label: "Horse Racing" },
+        { value: "greyHound", label: "Greyhound Racing" },
       ]);
     } else if (selectedOption && (selectedOption as Option).value === "all") {
       setGameNameOptions([{ value: "all", label: "All" }]);
