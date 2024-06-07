@@ -171,6 +171,11 @@ export const addUser = createAsyncThunk<any, any>(
         return resp?.data;
       }
     } catch (error: any) {
+      if (error?.response?.data?.data?.attemptsLeft) {
+        alert(
+          `transaction code not valid. You have ${error?.response?.data?.data?.attemptsLeft}attempt left`
+        );
+      }
       const err = error as AxiosError;
       return thunkApi.rejectWithValue(err.response);
     }

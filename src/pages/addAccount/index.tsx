@@ -74,7 +74,7 @@ const AddAccount = () => {
   const { userAlreadyExist } = useSelector(
     (state: RootState) => state.user.userList
   );
-  const { addSuccess, successMessage } = useSelector(
+  const { addSuccess, successMessage, loading } = useSelector(
     (state: RootState) => state.user.userUpdate
   );
   const formik = useFormik({
@@ -82,6 +82,9 @@ const AddAccount = () => {
     validationSchema: addAccountValidationSchema(userAlreadyExist),
     onSubmit: (values: Values) => {
       try {
+        if (loading) {
+          return;
+        }
         let payload = {
           userName: values.clientName,
           fullName: values.fullName,
@@ -276,34 +279,51 @@ const AddAccount = () => {
     }
   }, [formik?.values?.accountType]);
   useEffect(() => {
-   if(successMessage != ""){
-    setSuccessInsert(true);
-    setTimeout(() => {
-      dispatch(successMessageReset());
-      setSuccessInsert(false);
-    }, 2000);
-  
-   }
+    if (successMessage != "") {
+      setSuccessInsert(true);
+      setTimeout(() => {
+        dispatch(successMessageReset());
+        setSuccessInsert(false);
+      }, 2000);
+    }
   }, [successMessage]);
-  
+
   return (
     <>
       <Card className="addAccount  border-0">
         <Card.Header className="border-0 pb-0">
           <Card.Title className="title-28 fw-normal ">Add Account</Card.Title>
-          {successInsert && <div style={{ backgroundColor: "#d4edda", height: "40px", alignItems: "center", display: "flex", paddingLeft: "5px"}}>{successMessage}</div>}
+          {successInsert && (
+            <div
+              style={{
+                backgroundColor: "#d4edda",
+                height: "40px",
+                alignItems: "center",
+                display: "flex",
+                paddingLeft: "5px",
+              }}
+            >
+              {successMessage}
+            </div>
+          )}
         </Card.Header>
-       
+
         <Card.Body className="bg-light">
           <Form
             onSubmit={(e) => {
-              e.preventDefault(); 
+              e.preventDefault();
               handleSubmit(e);
-              if(formik.values.accountType.value === "user"){setErrorHandle(true);}
-              
+              if (formik.values.accountType.value === "user") {
+                setErrorHandle(true);
+              }
+
               const hasErrors = Object.keys(errors).length > 0;
 
-              if (hasErrors || (formik.values.accountType.value === "user" && formik.values.exposureLimit ==='' )) {
+              if (
+                hasErrors ||
+                (formik.values.accountType.value === "user" &&
+                  formik.values.exposureLimit === "")
+              ) {
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }
             }}
@@ -446,8 +466,11 @@ const AddAccount = () => {
                         touched={touched.exposureLimit}
                         errors={errors.exposureLimit}
                       />
-                      {(errorHandle && formik.values.exposureLimit==='') &&(<div className="text-danger">Exposure Limit is required</div>)}
-                      
+                      {errorHandle && formik.values.exposureLimit === "" && (
+                        <div className="text-danger">
+                          Exposure Limit is required
+                        </div>
+                      )}
                     </Col>
                   )}
                 </Row>
