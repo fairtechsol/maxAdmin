@@ -392,7 +392,7 @@ const AccountStatement = () => {
                 <CustomButton
                   className="actionBtn"
                   variant="dark"
-                  onClick={() => setAccountStatementModalShow((prev) => !prev)}
+                  // onClick={() => setAccountStatementModalShow((prev) => !prev)}
                 >
                   {description}
                 </CustomButton>

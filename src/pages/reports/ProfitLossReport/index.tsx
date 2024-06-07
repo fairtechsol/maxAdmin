@@ -206,7 +206,7 @@ const ProfitLossReport = () => {
                   <CustomButton
                     className="actionBtn"
                     variant="dark"
-                    onClick={() => setProfitLossModalShow((prev) => !prev)}
+                    // onClick={() => setProfitLossModalShow((prev) => !prev)}
                   >
                     {marketType}
                   </CustomButton>
