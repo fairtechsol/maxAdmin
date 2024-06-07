@@ -100,6 +100,28 @@ export const getReportAccountList = createAsyncThunk<any, any>(
     }
   }
 );
+export const getBetAccountStatementModal = createAsyncThunk<any, any>(
+  "transaction/BetAccountStatementModal",
+  async ({ id, sort, betId, status }, thunkApi) => {
+    try {
+      const resp = await service.get(
+        `${
+          ApiConstants.REPORT.BET_ACCOUNTSTATEMENT
+        }?betPlaced.userId=${id}&sort=${
+          sort ? sort : ""
+        }&betId=inArr${JSON.stringify(betId)}${
+          status !== null ? `&status=${status}` : ""
+        }`
+      );
+      if (resp?.data) {
+        return resp?.data;
+      }
+    } catch (error) {
+      const err = error as AxiosError;
+      return thunkApi.rejectWithValue(err.response?.status);
+    }
+  }
+);
 export const getReportCurrentBet = createAsyncThunk<any, any>(
   "user/currentBetList",
   async ({ id, page, limit, searchBy, keyword, filter }, thunkApi) => {

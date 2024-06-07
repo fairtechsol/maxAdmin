@@ -1,15 +1,25 @@
+import moment from "moment-timezone";
 import { useEffect, useState } from "react";
 import { Col, Form, Row } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { Column, TableConfig } from "../../../../models/tableInterface";
+import { getBetAccountStatementModal } from "../../../../store/actions/match/matchAction";
+import { AppDispatch, RootState } from "../../../../store/store";
 import CustomTable from "../../../commonComponent/table";
 import "../style.scss";
 
-const AccountStatementModal = () => {
+const AccountStatementModal = ({ item }: any) => {
+  const { betAccountStatementModal } = useSelector(
+    (state: RootState) => state.match.reportList
+  );
+  const dispatch: AppDispatch = useDispatch();
+
+  const [selectedOption, setSelectedOption] = useState("all");
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
   useEffect(() => {}, [tableConfig]);
   const columns: Column[] = [
     // { id: "sr", label: "sr" },
-    { id: "DefaultBlue", label: "	DefaultBlue" },
+    { id: "upLevel", label: "	UpLevel" },
     { id: "UserName", label: "UserName" },
     { id: "Nation", label: "Nation" },
     { id: "UserRate", label: "UserRate" },
@@ -19,45 +29,6 @@ const AccountStatementModal = () => {
     { id: "MatchDate", label: "MatchDate" },
     { id: "IP", label: "IP" },
     { id: "BrowseDetail", label: "BrowseDetail" },
-  ];
-
-  const data: any = [
-    {
-      DefaultBlue: "Maccount",
-      UserName: "Maccount",
-      Nation: "Anthony",
-      UserRate: "4.45",
-      Amount: "100",
-      Winloss: "100",
-      PlaceDate: "2023-11-14 15:15:08",
-      MatchDate: "2023-11-14 15:15:08",
-      IP: "s",
-      BrowseDetail: "das",
-    },
-    {
-      DefaultBlue: "Maccount",
-      UserName: "Maccount",
-      Nation: "Anthony",
-      UserRate: "4.45",
-      Amount: "100",
-      Winloss: "100",
-      PlaceDate: "2023-11-14 15:15:08",
-      MatchDate: "2023-11-14 15:15:08",
-      IP: "s",
-      BrowseDetail: "das",
-    },
-    {
-      DefaultBlue: "Maccount",
-      UserName: "Maccount",
-      Nation: "Anthony",
-      UserRate: "4.45",
-      Amount: "100",
-      Winloss: "100",
-      PlaceDate: "2023-11-14 15:15:08",
-      MatchDate: "2023-11-14 15:15:08",
-      IP: "s",
-      BrowseDetail: "das",
-    },
   ];
 
   return (
@@ -71,7 +42,18 @@ const AccountStatementModal = () => {
                 label="All"
                 name="group1"
                 type="radio"
-                id={`All`}
+                id="all"
+                checked={selectedOption === "all"}
+                onChange={() => {
+                  setSelectedOption("all");
+                  dispatch(
+                    getBetAccountStatementModal({
+                      id: item?.user?.id,
+                      betId: item?.betId,
+                      sort: "betPlaced.createdAt:DESC",
+                    })
+                  );
+                }}
               />
               <Form.Check
                 color="secondary"
@@ -79,7 +61,19 @@ const AccountStatementModal = () => {
                 label="Matched"
                 name="group1"
                 type="radio"
-                id={`Matched`}
+                id="matched"
+                checked={selectedOption === "matched"}
+                onChange={() => {
+                  setSelectedOption("matched");
+                  dispatch(
+                    getBetAccountStatementModal({
+                      id: item?.user?.id,
+                      betId: item?.betId,
+                      status: "MATCHED",
+                      sort: "betPlaced.createdAt:DESC",
+                    })
+                  );
+                }}
               />
               <Form.Check
                 color="secondary"
@@ -87,7 +81,19 @@ const AccountStatementModal = () => {
                 label="Delete"
                 name="group1"
                 type="radio"
-                id={`Delete`}
+                id="delete"
+                checked={selectedOption === "delete"}
+                onChange={() => {
+                  setSelectedOption("delete");
+                  dispatch(
+                    getBetAccountStatementModal({
+                      id: item?.user?.id,
+                      betId: item?.betId,
+                      status: "DELETED",
+                      sort: "betPlaced.createdAt:DESC",
+                    })
+                  );
+                }}
               />
             </div>
           </div>
@@ -101,34 +107,98 @@ const AccountStatementModal = () => {
             itemCount={10}
             setTableConfig={setTableConfig}
           >
-            {data?.map((item: any, index: number) => {
-              const {
-                DefaultBlue,
-                UserName,
-                Nation,
-                UserRate,
-                Amount,
-                Winloss,
-                PlaceDate,
-                MatchDate,
-                IP,
-                BrowseDetail,
-              } = item;
-              return (
-                <tr key={index}>
-                  <td>{DefaultBlue}</td>
-                  <td>{UserName}</td>
-                  <td>{Nation}</td>
-                  <td>{UserRate}</td>
-                  <td>{Amount}</td>
-                  <td>{Winloss}</td>
-                  <td>{PlaceDate}</td>
-                  <td>{MatchDate}</td>
-                  <td>{IP}</td>
-                  <td>{BrowseDetail}</td>
-                </tr>
-              );
-            })}
+            {betAccountStatementModal &&
+              betAccountStatementModal?.rows?.map(
+                (item: any, index: number) => {
+                  const {
+                    user,
+                    teamName,
+                    betType,
+                    odds,
+                    amount,
+                    lossAmount,
+                    winAmount,
+                    result,
+                    createdAt,
+                    racingMatch,
+                    match,
+                    ipAddress,
+                    browserDetail,
+                  } = item;
+                  return (
+                    <tr key={index}>
+                      <td
+                        className={`${betType === "" ? "bg-blue3" : "bg-red1"}`}
+                      >
+                        {user?.createBy?.userName}
+                      </td>
+                      <td
+                        className={`${betType === "" ? "bg-blue3" : "bg-red1"}`}
+                      >
+                        {user?.userName}
+                      </td>
+                      <td
+                        className={`${betType === "" ? "bg-blue3" : "bg-red1"}`}
+                      >
+                        {teamName}
+                      </td>
+                      <td
+                        className={`${betType === "" ? "bg-blue3" : "bg-red1"}`}
+                      >
+                        {odds}
+                      </td>
+                      <td
+                        className={`${betType === "" ? "bg-blue3" : "bg-red1"}`}
+                      >
+                        {amount}
+                      </td>
+                      <td
+                        className={`${betType === "" ? "bg-blue3" : "bg-red1"}`}
+                        style={{
+                          color:
+                            result === "LOSS"
+                              ? "red"
+                              : result === "WIN"
+                              ? "green"
+                              : "",
+                        }}
+                      >
+                        {result === "LOSS"
+                          ? `-${lossAmount}`
+                          : result === "WIN"
+                          ? winAmount
+                          : 0}
+                      </td>
+                      <td
+                        className={`${betType === "" ? "bg-blue3" : "bg-red1"}`}
+                      >
+                        {moment(createdAt).format("YYYY-MM-DD hh:mm:ss")}
+                      </td>
+                      <td
+                        className={`${betType === "" ? "bg-blue3" : "bg-red1"}`}
+                      >
+                        {match
+                          ? moment(match?.startAt).format("YYYY-MM-DD hh:mm:ss")
+                          : moment(racingMatch?.startAt).format(
+                              "YYYY-MM-DD hh:mm:ss"
+                            )}
+                      </td>
+                      <td
+                        className={`${betType === "" ? "bg-blue3" : "bg-red1"}`}
+                      >
+                        {ipAddress}
+                      </td>
+                      <td
+                        className={`${betType === "" ? "bg-blue3" : "bg-red1"}`}
+                      >
+                        <a href="#" title={browserDetail}>
+                          Detail
+                        </a>
+                      </td>
+                    </tr>
+                  );
+                }
+              )}
           </CustomTable>
         </Col>
       </Row>
