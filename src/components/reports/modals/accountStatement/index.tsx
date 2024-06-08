@@ -7,6 +7,7 @@ import { getBetAccountStatementModal } from "../../../../store/actions/match/mat
 import { AppDispatch, RootState } from "../../../../store/store";
 import CustomTable from "../../../commonComponent/table";
 import "../style.scss";
+import TooltipCustom from "./tooltip";
 
 const AccountStatementModal = ({ item }: any) => {
   const { betAccountStatementModal } = useSelector(
@@ -191,9 +192,11 @@ const AccountStatementModal = ({ item }: any) => {
                       <td
                         className={`${betType === "" ? "bg-blue3" : "bg-red1"}`}
                       >
-                        <a href="#" title={browserDetail}>
-                          Detail
-                        </a>
+                        <TooltipCustom title={browserDetail}>
+                          <a href="#" title="">
+                            Detail
+                          </a>
+                        </TooltipCustom>
                       </td>
                     </tr>
                   );
