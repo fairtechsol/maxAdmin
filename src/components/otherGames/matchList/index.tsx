@@ -6,7 +6,6 @@ const NavComponent = ({ matchDetail }: any) => {
   function formatMarkets(matchDetail: any) {
     const formattedArray = [];
 
-    // Iterate through each type of market
     for (const marketType in matchDetail) {
       const marketValue: any = matchDetail[marketType];
       if (typeof marketValue === "object" && marketValue !== null) {
