@@ -147,10 +147,10 @@ const ProfitLossReport = () => {
                 if (value?.length > 1) {
                   let newValue = value[1];
                   setSelectedUser([newValue]);
-                } else if (value?.length === 1) {
-                  setSelectedUser(value);
-                } else {
+                } else if (value?.length === 0) {
                   setSelectedUser(null);
+                } else {
+                  setSelectedUser(value);
                 }
               }}
               placeholder={"Client Name:"}
