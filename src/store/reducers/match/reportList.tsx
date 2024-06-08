@@ -5,6 +5,7 @@ import {
   getGameReport,
   getGeneralReport,
   getProfitLossReport,
+  getBetAccountStatementModal,
 } from "../../actions/match/matchAction";
 
 interface InitialState {
@@ -13,6 +14,7 @@ interface InitialState {
   gameReportList: any;
   gameGeneralList: any;
   profitLossReport: any;
+  betAccountStatementModal: any;
   loading: boolean;
   success: boolean;
   error: any;
@@ -23,6 +25,7 @@ const initialState: InitialState = {
   CurrentBetAccountList: [],
   gameReportList: [],
   gameGeneralList: [],
+  betAccountStatementModal: null,
   profitLossReport: null,
   loading: false,
   success: false,
@@ -102,6 +105,18 @@ const reportListSlice = createSlice({
         state.loading = false;
       })
       .addCase(getProfitLossReport.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action?.error?.message;
+      })
+      .addCase(getBetAccountStatementModal.pending, (state) => {
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(getBetAccountStatementModal.fulfilled, (state, action) => {
+        state.betAccountStatementModal = action.payload;
+        state.loading = false;
+      })
+      .addCase(getBetAccountStatementModal.rejected, (state, action) => {
         state.loading = false;
         state.error = action?.error?.message;
       });

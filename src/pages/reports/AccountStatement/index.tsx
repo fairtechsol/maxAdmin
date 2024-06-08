@@ -7,7 +7,10 @@ import CustomModal from "../../../components/commonComponent/modal";
 import CustomTable from "../../../components/commonComponent/table";
 import AccountStatementModal from "../../../components/reports/modals/accountStatement";
 import { TableConfig } from "../../../models/tableInterface";
-import { getReportAccountList } from "../../../store/actions/match/matchAction";
+import {
+  getBetAccountStatementModal,
+  getReportAccountList,
+} from "../../../store/actions/match/matchAction";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../store/store";
 import { searchList } from "../../../store/actions/user/userActions";
@@ -60,6 +63,8 @@ const AccountStatement = () => {
   });
   const [AccountStatementModalShow, setAccountStatementModalShow] =
     useState(false);
+  const [itemForModal, setItemForModal] = useState(null);
+  useState(false);
   const [tableConfig, setTableConfig] = useState<TableConfig | null>({
     page: 1,
     sort: { direction: "ASC", key: null },
@@ -79,6 +84,10 @@ const AccountStatement = () => {
     (state: RootState) => state.user.userList
   );
   const { userDetail } = useSelector((state: RootState) => state.user.profile);
+
+  const { betAccountStatementModal } = useSelector(
+    (state: RootState) => state.match.reportList
+  );
 
   const aaccountTypeOptions: Option[] = [
     { value: "all", label: "All" },
@@ -148,9 +157,9 @@ const AccountStatement = () => {
       } else if (dateTo) {
         filter += `&createdAt=lte${moment(dateTo)?.format("YYYY-MM-DD")}`;
       }
-      if (selectedUser && selectedUser?.length > 0) {
-        filter += `&user.userName=${selectedUser[0]?.label}`;
-      }
+      // if (selectedUser && selectedUser?.length > 0) {
+      //   filter += `&user.userName=${selectedUser[0]?.label}`;
+      // }
       if (aaccountTypeValues && aaccountTypeValues?.value === "gameReport") {
         filter += `&transType=inArr${JSON.stringify([
           "win",
@@ -172,7 +181,9 @@ const AccountStatement = () => {
       }
       dispatch(
         getReportAccountList({
-          id: localStorage.getItem("key"),
+          id: selectedUser
+            ? selectedUser[0]?.value
+            : localStorage.getItem("key"),
           page: 1,
           limit: tableConfig?.rowPerPage,
           searchBy: "description",
@@ -206,9 +217,9 @@ const AccountStatement = () => {
       } else if (dateTo) {
         filter += `&createdAt=lte${moment(dateTo)?.format("YYYY-MM-DD")}`;
       }
-      if (selectedUser && selectedUser?.length > 0) {
-        filter += `&user.userName=${selectedUser[0]?.label}`;
-      }
+      // if (selectedUser && selectedUser?.length > 0) {
+      //   filter += `&user.userName=${selectedUser[0]?.label}`;
+      // }
       if (aaccountTypeValues && aaccountTypeValues?.value === "gameReport") {
         filter += `&transType=inArr${JSON.stringify([
           "win",
@@ -231,7 +242,9 @@ const AccountStatement = () => {
       if (firstTime) {
         dispatch(
           getReportAccountList({
-            id: localStorage.getItem("key"),
+            id: selectedUser
+              ? selectedUser[0]?.value
+              : localStorage.getItem("key"),
             page: tableConfig?.page,
             limit: tableConfig?.rowPerPage,
             searchBy: "description",
@@ -312,7 +325,16 @@ const AccountStatement = () => {
               label={"Search By Client Name"}
               options={userOptions}
               value={selectedUser}
-              onChange={setSelectedUser}
+              onChange={(value: any) => {
+                if (value?.length > 1) {
+                  let newValue = value[1];
+                  setSelectedUser([newValue]);
+                } else if (value?.length === 0) {
+                  setSelectedUser(null);
+                } else {
+                  setSelectedUser(value);
+                }
+              }}
               placeholder={"Please enter 3 or more characters"}
               isMultiOption={true}
               isSearchable={true}
@@ -392,7 +414,20 @@ const AccountStatement = () => {
                 <CustomButton
                   className="actionBtn"
                   variant="dark"
-                  onClick={() => setAccountStatementModalShow((prev) => !prev)}
+                  onClick={() => {
+                    if (item?.betId) {
+                      setAccountStatementModalShow((prev) => !prev);
+                      setItemForModal(item);
+                      dispatch(
+                        getBetAccountStatementModal({
+                          id: user?.id,
+                          betId: item?.betId,
+                          status: null,
+                          sort: "betPlaced.createdAt:DESC",
+                        })
+                      );
+                    }
+                  }}
                 >
                   {description}
                 </CustomButton>
@@ -400,10 +435,10 @@ const AccountStatement = () => {
               <td>
                 {"From: "}
                 <span className="badge bg-primary">
-                  {actionByUser.userName}
+                  {actionByUser?.userName}
                 </span>{" "}
                 {"To: "}
-                <span className="badge bg-primary">{user.userName}</span>{" "}
+                <span className="badge bg-primary">{user?.userName}</span>{" "}
               </td>
             </tr>
           );
@@ -415,15 +450,17 @@ const AccountStatement = () => {
         title={[
           <>
             <span className="f400">
-              Client Ledger (Total Win Loss : 100) (Total Count : 1) (Total Soda
-              : 1)
+              Client Ledger (Total Win Loss :{" "}
+              {betAccountStatementModal?.totalCount?.amount || 0}) (Total Count
+              : {betAccountStatementModal?.totalCount?.totalCount || 0}) (Total
+              Soda : {betAccountStatementModal?.totalCount?.soda || 0})
             </span>
           </>,
         ]}
         show={AccountStatementModalShow}
         setShow={setAccountStatementModalShow}
       >
-        <AccountStatementModal />
+        <AccountStatementModal item={itemForModal} />
       </CustomModal>
     </div>
   );

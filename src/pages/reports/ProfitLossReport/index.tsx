@@ -103,7 +103,7 @@ const ProfitLossReport = () => {
       setRowPerPage(tableConfig?.rowPerPage);
     }
   }, [tableConfig]);
-  
+
   const handleSubmit = (e: any) => {
     e.preventDefault();
     dispatch(
@@ -143,7 +143,16 @@ const ProfitLossReport = () => {
               label={"Search By Client Name"}
               options={userOptions}
               value={selectedUser}
-              onChange={setSelectedUser}
+              onChange={(value: any) => {
+                if (value?.length > 1) {
+                  let newValue = value[1];
+                  setSelectedUser([newValue]);
+                } else if (value?.length === 0) {
+                  setSelectedUser(null);
+                } else {
+                  setSelectedUser(value);
+                }
+              }}
               placeholder={"Client Name:"}
               isMultiOption={true}
               isSearchable={true}
@@ -206,7 +215,7 @@ const ProfitLossReport = () => {
                   <CustomButton
                     className="actionBtn"
                     variant="dark"
-                    onClick={() => setProfitLossModalShow((prev) => !prev)}
+                    // onClick={() => setProfitLossModalShow((prev) => !prev)}
                   >
                     {marketType}
                   </CustomButton>

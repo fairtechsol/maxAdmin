@@ -116,7 +116,6 @@ const Topbar = (props: any) => {
     // setSearchValue(null);
     // }, 1000);
   };
-  console.log(success, "jendf");
 
 useEffect(()=>{
   if(success && childUsersData){

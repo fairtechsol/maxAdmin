@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Pagination } from "react-bootstrap";
 // import CustomButton from "../../button";
 /*** */
@@ -7,19 +7,58 @@ interface PaginationComponentProps {
   currentPage: number;
   totalPages: number;
   onPageChange: (pageNumber: number) => void;
-  itemCount: number;
-  rowPerPage: number;
+  itemCount?: number;
+  rowPerPage?: number;
 }
 
 const PaginationComponent: React.FC<PaginationComponentProps> = ({
   currentPage,
   totalPages,
   onPageChange,
-  itemCount,
-  rowPerPage,
+  // itemCount,
+  // rowPerPage,
 }) => {
+  // const isSmallScreen = window.innerWidth <= 768;
 
-  const isSmallScreen = window.innerWidth <= 768;
+  const [pageComp, setPageComp] = useState([]);
+
+  useEffect(() => {
+    let isPageNumberOutOfRange: Boolean;
+    const pageNumbers: any = [...new Array(totalPages)].map((_, index) => {
+      const pageNumber = index + 1;
+      const isPageNumberFirst = pageNumber === 1;
+      const isPageNumberLast = pageNumber === totalPages;
+      const isCurrentPageWithinTwoPageNumbers =
+        Math.abs(pageNumber - currentPage) < 1;
+
+      if (
+        isPageNumberFirst ||
+        isPageNumberLast ||
+        isCurrentPageWithinTwoPageNumbers
+      ) {
+        isPageNumberOutOfRange = false;
+        return (
+          <Pagination.Item
+            key={pageNumber}
+            onClick={() => onPageChange(pageNumber)}
+            active={pageNumber === currentPage}
+          >
+            {pageNumber}
+          </Pagination.Item>
+        );
+      }
+
+      if (!isPageNumberOutOfRange) {
+        isPageNumberOutOfRange = true;
+        return <Pagination.Ellipsis key={pageNumber} className="muted" />;
+      }
+
+      return null;
+    });
+
+    setPageComp(pageNumbers);
+  }, [totalPages, currentPage]);
+
   return (
     <Pagination>
       <div className="paginationContainer title-14">
@@ -37,64 +76,7 @@ const PaginationComponent: React.FC<PaginationComponentProps> = ({
           Previous
           {/* </CustomButton> */}
         </Pagination.Prev>
-        {isSmallScreen ? (
-          <>
-            <Pagination.Item
-              key={1}
-              active={currentPage === 1}
-              onClick={() => onPageChange(1)}
-              className="cursor-pointer"
-            >
-              1
-            </Pagination.Item>
-            <Pagination.Item
-              key={2}
-              active={currentPage === 2}
-              onClick={() => onPageChange(2)}
-              className="cursor-pointer"
-            >
-              2
-            </Pagination.Item>
-          </>
-        ) : (
-          <>
-    {[...Array(Math.min(totalPages, 10))].map((_, index) => (
-      <Pagination.Item
-        key={index + 1}
-        active={index + 1 === currentPage}
-        onClick={() => onPageChange(index + 1)}
-        className="cursor-pointer"
-      >
-        {index + 1}
-      </Pagination.Item>
-    ))}
-    {totalPages > 10 && currentPage < totalPages - 5 && (
-      <Pagination.Ellipsis disabled />
-    )}
-    {totalPages > 10 && currentPage < totalPages - 5 && (
-      <Pagination.Item
-        key={totalPages}
-        active={currentPage === totalPages}
-        onClick={() => onPageChange(totalPages)}
-        className="cursor-pointer"
-      >
-        {totalPages}
-      </Pagination.Item>
-    )}
-  </>
-        )}
-        {/* {[...Array(totalPages)].map((_, index) => (
-          <Pagination.Item
-            key={index + 1}
-            active={index + 1 === currentPage}
-            onClick={() => onPageChange(index + 1)}
-            className="cursor-pointer"
-          >
-            {index + 1}
-          </Pagination.Item>
-        ))} */}
-        {/* <CustomButton
-          variant="primary" */}
+        {pageComp?.map((item) => item)}
         <Pagination.Next
           disabled={currentPage === totalPages}
           onClick={() => onPageChange(currentPage + 1)}
