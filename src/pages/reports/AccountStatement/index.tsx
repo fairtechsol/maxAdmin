@@ -263,7 +263,7 @@ const AccountStatement = () => {
     } catch (error) {
       console.log(error);
     }
-  }, [page, keyword, sort, rowPerPage, firstTime]);
+  }, [page, keyword, sort, rowPerPage]);
 
   useEffect(() => {
     if (page !== tableConfig?.page) {
