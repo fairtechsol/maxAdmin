@@ -92,17 +92,17 @@ export const userList = createSlice({
         state.error = action?.error?.message;
       })
       .addCase(userBalance.pending, (state) => {
-        state.loading = true;
+        // state.loading = true;
         state.success = false;
         state.error = null;
       })
       .addCase(userBalance.fulfilled, (state, action) => {
-        state.loading = false;
+        // state.loading = false;
         state.success = true;
         state.userBalanceList = action.payload;
       })
       .addCase(userBalance.rejected, (state, action) => {
-        state.loading = false;
+        // state.loading = false;
         state.error = action?.error?.message;
       })
       .addCase(changeAmmountUser.pending, (state) => {

@@ -22,7 +22,7 @@ const LoggedUserDetail = () => {
       <Accordion onSelect={handleAccordionSelect}>
         <Accordion.Item eventKey="0">
           <Accordion.Header>
-            <FaRegArrowAltCircleUp style={{fontSize: "20px"}} />
+            <FaRegArrowAltCircleUp style={{ fontSize: "20px" }} />
           </Accordion.Header>
           <Accordion.Body>
             <Row>
@@ -32,19 +32,19 @@ const LoggedUserDetail = () => {
                     Upper Level Credit Reference:
                   </div>
                   <div className="col-md-4 title-14">
-                    {+userBalanceList?.userCreditReference || 0}
+                    {parseFloat(userBalanceList?.userCreditReference || 0).toFixed(2)}
                   </div>
                 </div>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
                   <div className="col-md-8 title-14">Total Master Balance</div>
                   <div className="col-md-4 title-14">
-                    {+userBalanceList?.totalMasterBalance || 0}
+                    {parseFloat(userBalanceList?.totalMasterBalance || 0).toFixed(2)}
                   </div>
                 </div>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
                   <div className="col-md-8 title-14">Available Balance:</div>
                   <div className="col-md-4 title-14">
-                    {+userBalanceList?.availableBalance || 0}
+                    {parseFloat(userBalanceList?.availableBalance || 0).toFixed(2)}
                   </div>
                 </div>
               </Col>
@@ -54,18 +54,20 @@ const LoggedUserDetail = () => {
                     Down level Occupy Balance:
                   </div>
                   <div className="col-md-4 title-14">
-                    {+userBalanceList?.downLevelOccupyBalance || 0}
+                    {parseFloat(userBalanceList?.downLevelOccupyBalance || 0).toFixed(2)}
                     {/* (
-                    {+userBalanceList?.totalProfitLossDownlevel || 0}) */}
+                    {parseFloat(userBalanceList?.totalProfitLossDownlevel || 0}) */}
                   </div>
                 </div>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
                   <div className="col-md-8 title-14">Upper Level:</div>
                   <div className="col-md-4 title-14">
-                    {+userBalanceList?.upperLevelBalance}
+                    {parseFloat(
+                      userBalanceList?.upperLevelBalance || 0
+                    ).toFixed(2)}
                     {/* (
-                    {+userBalanceList?.upperLevelProfitLossPercent || 0}%)(
-                    {+userBalanceList?.totalProfitLossUpperlevel || 0}) */}
+                    {parseFloat(userBalanceList?.upperLevelProfitLossPercent || 0}%)(
+                    {parseFloat(userBalanceList?.totalProfitLossUpperlevel || 0}) */}
                   </div>
                 </div>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
@@ -73,7 +75,9 @@ const LoggedUserDetail = () => {
                     Available Balance With Profit/Loss:
                   </div>
                   <div className="col-md-4 title-14">
-                    {+userBalanceList?.availableBalanceWithProfitLoss || 0}
+                    {parseFloat(
+                      userBalanceList?.availableBalanceWithProfitLoss || 0
+                    ).toFixed(2)}
                   </div>
                 </div>
               </Col>
@@ -83,7 +87,7 @@ const LoggedUserDetail = () => {
                     Down Level Credit Reference:
                   </div>
                   <div className="col-md-4 title-14">
-                    {+userBalanceList?.downLevelCreditReference || 0}
+                    {parseFloat(userBalanceList?.downLevelCreditReference || 0).toFixed(2)}
                   </div>
                 </div>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
@@ -91,13 +95,13 @@ const LoggedUserDetail = () => {
                     Down Level Profit/Loss :
                   </div>
                   <div className="col-md-4 title-14">
-                    {+userBalanceList?.downLevelProfitLoss || 0}
+                    {parseFloat(userBalanceList?.downLevelProfitLoss || 0).toFixed(2)}
                   </div>
                 </div>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
                   <div className="col-md-8 title-14">My Profit/Loss:</div>
                   <div className="col-md-4 title-14">
-                    {+userBalanceList?.profitLoss || 0}
+                    {parseFloat(userBalanceList?.profitLoss || 0).toFixed(2)}
                   </div>
                 </div>
               </Col>

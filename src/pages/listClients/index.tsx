@@ -218,9 +218,9 @@ const ListClent: React.FC = () => {
                       <td className="text-end">
                         {roleName === "user" ? exposureLimit : "NA"}
                       </td>
-                      <td>{defaultPer}</td>
+                      <td>{defaultPer || 0}</td>
                       <td>{roleName}</td>
-                      <td className="text-end">{casinoTotal}</td>
+                      <td className="text-end">{casinoTotal || "0.00"}</td>
                       <td>
                         <div className="d-flex gap-1 border-right-0 border-left-0">
                           {type ? (
