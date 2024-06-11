@@ -14,7 +14,7 @@ import Sidebar from "./sidebar";
 import { socketService } from "../../socketManager";
 import Loader from "../../components/commonComponent/loader";
 
-function MainLayout({eventKey}:any) {
+function MainLayout({ eventKey }: any) {
   let location = useLocation();
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
@@ -24,10 +24,8 @@ function MainLayout({eventKey}:any) {
     setToggle(!toggle);
   };
 
-  const { summary } = useSelector(
-    (state: RootState) => state.user.profile
-  );
-  const { loading } = useSelector(
+  const { summary } = useSelector((state: RootState) => state.user.profile);
+  const { userBalanceLoading } = useSelector(
     (state: RootState) => state.user.userList
   );
   const updateLoggedUserBalance = (event: any) => {
@@ -56,14 +54,16 @@ function MainLayout({eventKey}:any) {
   return (
     <>
       {/* topbar */}
-      {loading ? <Loader /> : null}
+      {userBalanceLoading ? <Loader /> : null}
       <Topbar onClick={handleDrawer} toggle={toggle} />
       {/* sidebar start */}
       <div className={`sidebar ${toggle ? "sidebarActive" : ""}`}>
         <Sidebar clickHandler={handleDrawer} />
       </div>
       {/* layout */}
-      {location.pathname.includes("/admin/active-inactive-user-list") && summary && !type ? (
+      {location.pathname.includes("/admin/active-inactive-user-list") &&
+      summary &&
+      !type ? (
         <LoggedUserDetail />
       ) : (
         ""
