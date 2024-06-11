@@ -31,7 +31,7 @@ const HeaderUserLock = ({ data }: any) => {
               <Form>
                 <Form.Check
                   aria-label="option 1"
-                  checked={item?.userBlock}
+                  checked={!item?.userBlock}
                   disabled={true}
                 />
               </Form>
@@ -40,7 +40,7 @@ const HeaderUserLock = ({ data }: any) => {
               <Form>
                 <Form.Check
                   aria-label="option 2"
-                  checked={item?.betBlock}
+                  checked={!item?.betBlock}
                   disabled={true}
                 />
               </Form>

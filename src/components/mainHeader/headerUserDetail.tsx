@@ -6,11 +6,11 @@ const HeaderUserDetail = ({ data }: any) => {
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
   useEffect(() => {}, [tableConfig]);
   const columns: Column[] = [
-    { id: "username", label: "  UserName" },
-    { id: "exposure", label: "  Exposer" },
-    { id: "creditRefrence", label: "  Creditref" },
-    { id: "exposureLimit", label: "  ExpoLimits" },
-    { id: "currentBalance", label: "  General" },
+    { id: "username", label: "UserName" },
+    { id: "exposure", label: "Exposure" },
+    { id: "creditRefrence", label: "Creditref" },
+    { id: "exposureLimit", label: "ExpoLimits" },
+    { id: "currentBalance", label: "General" },
   ];
 
   return (

@@ -37,6 +37,11 @@ const MainHeader = ({ userId }: any) => {
                   ? childUsersData?.gameLock
                   : []
               }
+              userDetail={
+                childUsersData && childUsersData?.userDetails
+                  ? childUsersData?.userDetails
+                  : []
+              }
             />
           </div>
           <div className="col-lg-6">

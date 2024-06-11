@@ -57,7 +57,7 @@ export const getUsers = createAsyncThunk<any, GetUsers | undefined>(
   }
 );
 export const getTotalBalance = createAsyncThunk<any, RequestData | undefined>(
-  "user/balance",
+  "user/balance/total",
   async (requestData, thunkApi) => {
     try {
       const resp = await service.get(
