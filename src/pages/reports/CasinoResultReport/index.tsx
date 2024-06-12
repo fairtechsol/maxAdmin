@@ -95,7 +95,7 @@ const CasinoResultReport = () => {
         title="Result Detail"
         titleStyle="fw-normal"
       >
-        <h1>APi Fatch</h1>
+        <h1>APi Fetch</h1>
       </CustomModal>
     </div>
   );

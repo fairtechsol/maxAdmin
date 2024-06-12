@@ -14,7 +14,7 @@ const Rules = ({ teamName }: Props) => {
           <ul className="ruleTableList p-2 my-0 pb-1">
             {RuleTableData().map((item: any) => {
               return (
-                <li className="ruleTableList-box d-flex justify-content-between title-14 mb-1">
+                <li className="ruleTableList-box d-flex justify-content-between title-14 mb-1" key={item?.value}>
                   <div className="ruleTableList-boxCard d-flex align-items-center ">
                     <span className="ruleTableList-boxCard-name title-16 fw-bold d-flex align-items-center justify-content-center">
                       {item?.cardName}
