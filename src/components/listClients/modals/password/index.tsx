@@ -65,7 +65,7 @@ const Password = ({ userData, setShow }: any) => {
                   required={true}
                   id="newPassword"
                   type="password"
-                  customStyle="input-box"
+                  customstyle="input-box"
                   {...getFieldProps("newPassword")}
                   touched={touched.newPassword}
                   errors={errors.newPassword}
@@ -83,7 +83,7 @@ const Password = ({ userData, setShow }: any) => {
                   required={true}
                   id="confirmPassword"
                   type="password"
-                  customStyle="input-box"
+                  customstyle="input-box"
                   {...getFieldProps("confirmPassword")}
                   touched={touched.confirmPassword}
                   errors={errors.confirmPassword}
@@ -100,7 +100,7 @@ const Password = ({ userData, setShow }: any) => {
                 <CustomInput
                   required={true}
                   type="password"
-                  customStyle="input-box"
+                  customstyle="input-box"
                   id="transactionPassword"
                   {...getFieldProps("transactionPassword")}
                   touched={touched.transactionPassword}

@@ -48,7 +48,7 @@ const CasinoReport = () => {
             <CustomInput
               title={"From"}
               placeholder={""}
-              customStyle={"mb-3"}
+              customstyle={"mb-3"}
               type="date"
             />
           </Col>
@@ -56,7 +56,7 @@ const CasinoReport = () => {
             <CustomInput
               title={"To"}
               placeholder={""}
-              customStyle={"mb-3"}
+              customstyle={"mb-3"}
               type="date"
             />
           </Col>

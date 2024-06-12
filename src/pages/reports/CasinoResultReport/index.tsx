@@ -45,7 +45,7 @@ const CasinoResultReport = () => {
       <Form>
         <Row>
           <Col md={2}>
-            <CustomInput placeholder={""} customStyle={"mb-3"} type="date" />
+            <CustomInput placeholder={""} customstyle={"mb-3"} type="date" />
           </Col>
           <Col md={2}>
             <SelectSearch defaultValue="slotGame" options={options} />

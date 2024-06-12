@@ -96,7 +96,7 @@ const GameReport = () => {
             <CustomInput
               title={"From"}
               placeholder={""}
-              customStyle={"mb-3"}
+              customstyle={"mb-3"}
               onChange={(e: any) => {
                 setDateFrom(e.target.value);
               }}
@@ -107,7 +107,7 @@ const GameReport = () => {
             <CustomInput
               title={"To"}
               placeholder={""}
-              customStyle={"mb-3"}
+              customstyle={"mb-3"}
               onChange={(e: any) => setDateTo(e.target.value)}
               type="date"
             />

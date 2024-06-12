@@ -76,7 +76,7 @@ const Credit = ({ userData, setShow }: any) => {
                   value={values.creditRefrence}
                   onChange={handleChange}
                   type="text"
-                  customStyle="input-box"
+                  customstyle="input-box"
                   bgColor="gray"
                   disabled={true}
                 // id="oldCreditInput"
@@ -97,7 +97,7 @@ const Credit = ({ userData, setShow }: any) => {
                   value={values.amount}
                   onChange={handleChange}
                   type="number"
-                  customStyle="input-box"
+                  customstyle="input-box"
                   // id="newCreditInput"
                   min={0}
                 />
@@ -118,7 +118,7 @@ const Credit = ({ userData, setShow }: any) => {
                   value={values.transactionPassword}
                   onChange={handleChange}
                   type="password"
-                  customStyle="input-box"
+                  customstyle="input-box"
                 // id="transactionPasswordInput"
                 />
               </Col>

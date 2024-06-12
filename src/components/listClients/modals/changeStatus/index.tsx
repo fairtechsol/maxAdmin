@@ -190,7 +190,7 @@ const ChangeStatus = ({ setShow, userData }: any) => {
                   type="password"
                   name="transactionPassword"
                   id="transactionPassword"
-                  customStyle="input-box"
+                  customstyle="input-box"
                   value={values.transactionPassword}
                   onChange={handleChange}
                 />

@@ -165,7 +165,7 @@ const ProfitLossReport = () => {
               placeholder={""}
               value={fromDate}
               onChange={(e: any) => setFromDate(e.target.value)}
-              // customStyle={"mb-3"}
+              // customstyle={"mb-3"}
               type="date"
             />
           </Col>
@@ -174,7 +174,7 @@ const ProfitLossReport = () => {
               title={"To"}
               placeholder={""}
               value={toDate}
-              // customStyle={"mb-3"}
+              // customstyle={"mb-3"}
               onChange={(e: any) => setToDate(e.target.value)}
               type="date"
             />
