@@ -216,7 +216,7 @@ const ListClent: React.FC = () => {
                         </Form>
                       </td>
                       <td className="text-end">
-                        {roleName === "user" ? exposureLimit : "NA"}
+                        {roleName === "user" ? exposureLimit : "0"}
                       </td>
                       <td>{defaultPer || 0}</td>
                       <td>{roleName}</td>
