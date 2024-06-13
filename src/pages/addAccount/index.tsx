@@ -499,7 +499,7 @@ const AddAccount = () => {
                     </tr>
                     <tr>
                       <td className="w-25">Downline</td>
-                      <td>
+                      <td style={{ backgroundColor: "rgba(0, 0, 0, 0%)" }}>
                         <CustomInput
                           id={"commissionDownPartnership"}
                           type={"number"}
@@ -547,7 +547,7 @@ const AddAccount = () => {
                     </tr>
                     <tr>
                       <td className="w-25">Downline</td>
-                      <td>
+                      <td style={{ backgroundColor: "rgba(0, 0, 0, 0%)" }}>
                         <CustomInput
                           id={"downLinePartnership"}
                           min={0}
@@ -605,7 +605,12 @@ const AddAccount = () => {
                         <td>{formik.values.minBet || "0.00"}</td>
                       </tr>
                       <tr>
-                        <td style={{ verticalAlign: "middle" }}>
+                        <td
+                          style={{
+                            verticalAlign: "middle",
+                            backgroundColor: "rgba(0, 0, 0, 0%)",
+                          }}
+                        >
                           <CustomInput
                             id={"minBet"}
                             type={"number"}
@@ -624,7 +629,12 @@ const AddAccount = () => {
                         <td>{formik.values.maxBet || "0.00"}</td>
                       </tr>
                       <tr>
-                        <td style={{ verticalAlign: "middle" }}>
+                        <td
+                          style={{
+                            verticalAlign: "middle",
+                            backgroundColor: "rgba(0, 0, 0, 0%)",
+                          }}
+                        >
                           <CustomInput
                             id={"maxBet"}
                             type={"number"}
@@ -643,7 +653,12 @@ const AddAccount = () => {
                         <td>{formik.values.delay || "0.00"}</td>
                       </tr>
                       <tr>
-                        <td style={{ verticalAlign: "middle" }}>
+                        <td
+                          style={{
+                            verticalAlign: "middle",
+                            backgroundColor: "rgba(0, 0, 0, 0%)",
+                          }}
+                        >
                           <CustomInput
                             // disabled={true}
                             id={"delay"}
