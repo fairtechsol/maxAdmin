@@ -345,7 +345,7 @@ const AccountStatement = () => {
             <CustomInput
               title={"From"}
               placeholder={""}
-              customStyle={"mb-3"}
+              customstyle={"mb-3"}
               onChange={(e: any) => {
                 setDateFrom(e.target.value);
               }}
@@ -358,7 +358,7 @@ const AccountStatement = () => {
               title={"To"}
               placeholder={""}
               onChange={(e: any) => setDateTo(e.target.value)}
-              customStyle={"mb-3"}
+              customstyle={"mb-3"}
               type="date"
               bgColor="lightGray"
             />

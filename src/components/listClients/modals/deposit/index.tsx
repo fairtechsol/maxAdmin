@@ -101,7 +101,7 @@ const Deposit = ({ userData, setShow }: any) => {
                 <div className="d-flex gap-2 input-inner-container">
                   <CustomInput
                     type="number"
-                    customStyle="input-box"
+                    customstyle="input-box"
                     bgColor="gray"
                     min={0}
                     disabled={true}
@@ -109,7 +109,7 @@ const Deposit = ({ userData, setShow }: any) => {
                     {...getFieldProps("initialBalance")}
                   />
                   <CustomInput
-                    customStyle="input-box"
+                    customstyle="input-box"
                     bgColor="gray"
                     type="number"
                     min={0}
@@ -131,14 +131,14 @@ const Deposit = ({ userData, setShow }: any) => {
                   <CustomInput
                     id="userBalance"
                     type="number"
-                    customStyle="input-box"
+                    customstyle="input-box"
                     bgColor="gray"
                     disabled={true}
                     {...getFieldProps("userBalance")}
                   />
                   <CustomInput
                     id="userUpdatedBalance"
-                    customStyle="input-box"
+                    customstyle="input-box"
                     bgColor="gray"
                     type="number"
                     disabled={true}
@@ -160,7 +160,7 @@ const Deposit = ({ userData, setShow }: any) => {
                   id="amount"
                   value={values.amount}
                   onChange={handleAmountChange}
-                  customStyle="input-box"
+                  customstyle="input-box"
                   type="number"
                   touched={touched.amount}
                   errors={errors.amount}
@@ -180,7 +180,7 @@ const Deposit = ({ userData, setShow }: any) => {
                   type="textarea"
                   as="textarea"
                   rows={4}
-                  customStyle="input-box"
+                  customstyle="input-box"
                   touched={touched.remark}
                   errors={errors.remark}
                   {...getFieldProps("remark")}
@@ -199,7 +199,7 @@ const Deposit = ({ userData, setShow }: any) => {
                   required={true}
                   id="transactionPassword"
                   type="password"
-                  customStyle="input-box"
+                  customstyle="input-box"
                   touched={touched.transactionPassword}
                   errors={errors.transactionPassword}
                   {...getFieldProps("transactionPassword")}

@@ -86,7 +86,7 @@ const ExposureLimit = ({ setShow, userData }: any) => {
               <Col sm={8}>
                 <CustomInput
                   type="text"
-                  customStyle="input-box"
+                  customstyle="input-box"
                   bgColor="gray"
                   disabled={true}
                   id="oldLimitInput"
@@ -108,7 +108,7 @@ const ExposureLimit = ({ setShow, userData }: any) => {
                   value={values.amount}
                   onChange={handleChange}
                   type="number"
-                  customStyle="input-box"
+                  customstyle="input-box"
                   // id="newLimitInput"
                   min={0}
                 />
@@ -128,7 +128,7 @@ const ExposureLimit = ({ setShow, userData }: any) => {
                   value={values.transactionPassword}
                   onChange={handleChange}
                   type="password"
-                  customStyle="input-box"
+                  customstyle="input-box"
                   // id="transactionPasswordInput"
                 />
               </Col>

@@ -107,7 +107,7 @@ const Withdraw = ({ userData, setShow }: any) => {
                     value={values.initialBalance}
                     onChange={handleChange}
                     type="text"
-                    customStyle="input-box"
+                    customstyle="input-box"
                     bgColor="gray"
                     disabled={true}
                   />
@@ -116,7 +116,7 @@ const Withdraw = ({ userData, setShow }: any) => {
                     id="updatedBalance"
                     value={values.updatedBalance}
                     onChange={handleChange}
-                    customStyle="input-box"
+                    customstyle="input-box"
                     bgColor="gray"
                     type="text"
                     disabled={true}
@@ -138,7 +138,7 @@ const Withdraw = ({ userData, setShow }: any) => {
                     value={values.userBalance}
                     onChange={handleChange}
                     type="text"
-                    customStyle="input-box"
+                    customstyle="input-box"
                     bgColor="gray"
                     disabled={true}
                     // value={2}
@@ -149,7 +149,7 @@ const Withdraw = ({ userData, setShow }: any) => {
                     id="userUpdatedBalance"
                     value={values.userUpdatedBalance}
                     onChange={handleChange}
-                    customStyle="input-box"
+                    customstyle="input-box"
                     bgColor="gray"
                     type="text"
                     disabled={true}
@@ -172,7 +172,7 @@ const Withdraw = ({ userData, setShow }: any) => {
                   id="amount"
                   value={values.amount}
                   onChange={handleAmountChange}
-                  customStyle="input-box"
+                  customstyle="input-box"
                   type="number"
                   min={0}
                 />
@@ -193,7 +193,7 @@ const Withdraw = ({ userData, setShow }: any) => {
                   type="textarea"
                   as="textarea"
                   rows={4}
-                  customStyle="input-box"
+                  customstyle="input-box"
                 />
               </Col>
             </Row>
@@ -212,7 +212,7 @@ const Withdraw = ({ userData, setShow }: any) => {
                   value={values.transactionPassword}
                   onChange={handleChange}
                   type="password"
-                  customStyle="input-box"
+                  customstyle="input-box"
                 />
               </Col>
             </Row>
