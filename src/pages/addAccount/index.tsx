@@ -340,7 +340,7 @@ const AddAccount = () => {
                   <Col md={6}>
                     <CustomInput
                       id={"clientName"}
-                      title={"Client Name:"}
+                      title={"Client Name*:"}
                       name={"clientName"}
                       onBlur={formik.handleBlur}
                       placeholder={"Client Name:"}
@@ -355,7 +355,7 @@ const AddAccount = () => {
                   <Col md={6}>
                     <CustomInput
                       id={"userPassword"}
-                      title={"User Password:"}
+                      title={"User Password*:"}
                       placeholder={"User Password"}
                       type={"password"}
                       customstyle={"mb-3"}
@@ -367,7 +367,7 @@ const AddAccount = () => {
                   <Col md={6}>
                     <CustomInput
                       id={"retypePassword"}
-                      title={"Retype Password:"}
+                      title={"Retype Password*:"}
                       placeholder={"Retype Password"}
                       type={"password"}
                       customstyle={"mb-3"}
@@ -379,7 +379,7 @@ const AddAccount = () => {
                   <Col md={6}>
                     <CustomInput
                       id={"fullName"}
-                      title={"Full Name:"}
+                      title={"Full Name*:"}
                       placeholder={"Full Name"}
                       type={"text"}
                       customstyle={"mb-3"}
@@ -428,7 +428,7 @@ const AddAccount = () => {
                     <SelectSearch
                       id="accountType"
                       name="accountType"
-                      label={"Account Type:"}
+                      label={"Account Type*:"}
                       options={accountTypes}
                       placeholder={"- Select Your A/C. Type -"}
                       value={formik.values.accountType}
@@ -443,7 +443,7 @@ const AddAccount = () => {
                   <Col md={6}>
                     <CustomInput
                       id={"creditReference"}
-                      title={"Credit Reference:"}
+                      title={"Credit Reference*:"}
                       placeholder={"Enter Credit Reference"}
                       type={"number"}
                       min={0}
@@ -457,7 +457,7 @@ const AddAccount = () => {
                     <Col md={6}>
                       <CustomInput
                         id={"exposureLimit"}
-                        title={"Exposure Limit"}
+                        title={"Exposure Limit*"}
                         placeholder={"Enter Exposure Limit"}
                         type={"number"}
                         min={0}
