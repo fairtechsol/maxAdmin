@@ -593,7 +593,7 @@ const AddAccount = () => {
                   <Table striped bordered className="commonTable">
                     <thead>
                       <tr>
-                        <tr></tr>
+                        <th></th>
                         <th></th>
                       </tr>
                     </thead>
