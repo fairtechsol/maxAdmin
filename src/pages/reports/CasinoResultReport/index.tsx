@@ -24,6 +24,11 @@ const columns: Column[] = [
 
 const cardGames = [
   {
+    value: "",
+    label: "Select Casino Type",
+    disabled: true,
+  },
+  {
     value: "dt20",
     label: "20-20 Dragon Tiger",
   },
@@ -168,6 +173,7 @@ const CasinoResultReport = () => {
                       label: "20-20 Teen Patti",
                     }
               }
+              isOptionDisabled={(option: any) => option.disabled}
             />
           </Col>
           <Col md={2}>

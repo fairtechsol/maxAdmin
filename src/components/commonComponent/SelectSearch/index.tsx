@@ -21,6 +21,7 @@ const SelectSearch = (props: any) => {
     touched,
     errors,
     onInputChange,
+    isOptionDisabled,
   } = props;
 
   // const customStyles = {
@@ -56,9 +57,8 @@ const SelectSearch = (props: any) => {
             }),
             dropdownIndicator: (provided, state) => ({
               ...provided,
-              color: state.isFocused ? '#00000' : '#00000', 
+              color: state.isFocused ? "#00000" : "#00000",
             }),
-           
           }}
           minMenuHeight={20}
           maxMenuHeight={200}
@@ -72,6 +72,7 @@ const SelectSearch = (props: any) => {
           placeholder={placeholder}
           isMulti={isMultiOption}
           isSearchable={isMultiOption === undefined ? false : isSearchable}
+          isOptionDisabled={isOptionDisabled}
         />
         <CustomErrorMessage touched={touched} errors={errors} />
       </Form.Group>
