@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import SelectSearch from "../../../components/commonComponent/SelectSearch";
 import CustomInput from "../../../components/commonComponent/input";
 import CustomModal from "../../../components/commonComponent/modal";
 import CustomTable from "../../../components/commonComponent/table";
 import { TableConfig } from "../../../models/tableInterface";
+import { AppDispatch, RootState } from "../../../store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { getCardReport } from "../../../store/actions/match/matchAction";
+import moment from "moment-timezone";
 
 interface Column {
   id: string;
   label: string;
-}
-
-interface DataItem {
-  [key: string]: string | number;
 }
 
 // Example usage
@@ -22,36 +22,156 @@ const columns: Column[] = [
   { id: "winner", label: "Winner" },
 ];
 
-const data: DataItem[] = [
-  { RoundID: "1001254", winner: "Teen B" },
-  { RoundID: "1001254", winner: "Teen B" },
-];
-
-const options = [
-  { value: "slotGame", label: "Slot Game" },
-  { value: "liveCasino", label: "Live Casino" },
-  { value: "liveCasino1", label: "Live Casino 1" },
-  { value: "liveCasino2", label: "Live Casino 2" },
+const cardGames = [
+  {
+    value: "dt20",
+    label: "20-20 Dragon Tiger",
+  },
+  {
+    value: "abj",
+    label: "Andar Bahar 2",
+  },
+  {
+    value: "teen20",
+    label: "20-20 Teen Patti",
+  },
+  {
+    value: "card32",
+    label: "32 Cards - A",
+  },
+  {
+    value: "lucky7",
+    label: "Lucky 7 - A",
+  },
 ];
 
 const CasinoResultReport = () => {
+  const dispatch: AppDispatch = useDispatch();
+  const { state } = useLocation();
   const [casinoModalShow, setCasinoModalShow] = useState(false);
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
 
-  useEffect(() => {}, [tableConfig]);
+  const [date, setDate] = useState<any>(
+    moment(new Date()).format("YYYY-MM-DD")
+  );
+  const [type, setType] = useState<any>(null);
+
+  const [typeFromState, setTypeFromState] = useState<any>(null);
+
+  const { casinoResultReport } = useSelector(
+    (state: RootState) => state.match.reportList
+  );
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    try {
+      let filter = "";
+
+      if (date) {
+        filter += `&DATE(cardResult.createdAt)=${date}`;
+      }
+
+      dispatch(
+        getCardReport({
+          type: type
+            ? type.value
+            : typeFromState
+            ? typeFromState.value
+            : "teen20",
+          page: tableConfig?.page,
+          limit: tableConfig?.rowPerPage,
+          searchBy: "cardResult.result ->> 'mid'",
+          keyword: tableConfig?.keyword || "",
+          filter,
+        })
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    try {
+      if (state?.cardType) {
+        let newType = cardGames.filter((item: any) => {
+          if (item?.value === state?.cardType) {
+            return {
+              value: item?.value,
+              label: item?.label,
+            };
+          }
+        });
+        setTypeFromState(newType[0]);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }, [state]);
+
+  useEffect(() => {
+    try {
+      if (tableConfig && (type || typeFromState || "teen20")) {
+        let filter = "";
+
+        if (date) {
+          filter += `&DATE(cardResult.createdAt)=${date}`;
+        }
+
+        dispatch(
+          getCardReport({
+            type: type
+              ? type.value
+              : typeFromState
+              ? typeFromState.value
+              : "teen20",
+            page: tableConfig?.page,
+            limit: tableConfig?.rowPerPage,
+            searchBy: "cardResult.result ->> 'mid'",
+            keyword: tableConfig?.keyword || "",
+            filter,
+          })
+        );
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }, [tableConfig, typeFromState]);
+
   return (
     <div className="p-2 pt-0">
       <h5 className="title-22 fw-normal">Casino Result Report</h5>
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <Row>
           <Col md={2}>
-            <CustomInput placeholder={""} customstyle={"mb-3"} type="date" />
+            <CustomInput
+              placeholder={""}
+              customstyle={"mb-3"}
+              type="date"
+              onChange={(e: any) => {
+                setDate(moment(e.target.value).format("YYYY-MM-DD"));
+              }}
+              value={date}
+            />
           </Col>
           <Col md={2}>
-            <SelectSearch defaultValue="slotGame" options={options} />
+            <SelectSearch
+              defaultValue="slotGame"
+              options={cardGames}
+              onChange={setType}
+              value={
+                type
+                  ? type
+                  : typeFromState
+                  ? typeFromState
+                  : {
+                      value: "teen20",
+                      label: "20-20 Teen Patti",
+                    }
+              }
+            />
           </Col>
           <Col md={2}>
-            <Button>Submit</Button>
+            <Button type="submit">Submit</Button>
           </Col>
         </Row>
       </Form>
@@ -60,16 +180,18 @@ const CasinoResultReport = () => {
         striped
         columns={columns}
         isPagination={true}
-        isSort={true}
+        isSort={false}
         isSearch={true}
-        itemCount={data?.length}
+        itemCount={casinoResultReport ? casinoResultReport?.count : 0}
         setTableConfig={setTableConfig}
         enablePdfExcel={false}
       >
-        {data?.length === 0 && <tr>No data available in table </tr>}
-        {data?.length > 0 &&
-          data.map((item, index) => {
-            const { RoundID, winner } = item;
+        {casinoResultReport && casinoResultReport?.count === 0 && (
+          <tr>No data available in table </tr>
+        )}
+        {casinoResultReport &&
+          casinoResultReport?.results?.map((item: any, index: number) => {
+            const { mid, result } = item;
             return (
               // <tr key={index}>
               //   {columns.map((column) => (
@@ -81,10 +203,10 @@ const CasinoResultReport = () => {
               <tr key={index}>
                 <td>
                   <div onClick={() => setCasinoModalShow((prev) => !prev)}>
-                    <Link to="">{RoundID}</Link>
+                    <Link to="">{mid}</Link>
                   </div>
                 </td>
-                <td>{winner}</td>
+                <td>{result}</td>
               </tr>
             );
           })}
