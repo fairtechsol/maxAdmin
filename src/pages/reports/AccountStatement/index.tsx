@@ -1,5 +1,8 @@
+import { debounce } from "lodash";
+import moment from "moment-timezone";
 import { useEffect, useState } from "react";
 import { Col, Form, Row } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import SelectSearch from "../../../components/commonComponent/SelectSearch";
 import CustomButton from "../../../components/commonComponent/button";
 import CustomInput from "../../../components/commonComponent/input";
@@ -11,11 +14,8 @@ import {
   getBetAccountStatementModal,
   getReportAccountList,
 } from "../../../store/actions/match/matchAction";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../../store/store";
 import { searchList } from "../../../store/actions/user/userActions";
-import { debounce } from "lodash";
-import moment from "moment-timezone";
+import { AppDispatch, RootState } from "../../../store/store";
 import { ApiConstants } from "../../../utils/Constants";
 
 interface Column {
@@ -116,6 +116,11 @@ const AccountStatement = () => {
         { value: "football", label: "Football" },
         { value: "horseRacing", label: "Horse Racing" },
         { value: "greyHound", label: "Greyhound Racing" },
+        { value: "dt20", label: "Dragon Tiger 20-20" },
+        { value: "teen20", label: "Teenpatti 20-20" },
+        { value: "card32", label: "32 Cards-A" },
+        { value: "lucky7", label: "Lucky 7" },
+        { value: "abj", label: "Andar Bahar 2" },
       ]);
     } else if (selectedOption && (selectedOption as Option).value === "all") {
       setGameNameOptions([{ value: "all", label: "All" }]);
@@ -179,6 +184,11 @@ const AccountStatement = () => {
       if (gameNameValues && aaccountTypeValues?.value === "balanceReport") {
         filter += `&gameName=${gameNameValues?.value}`;
       }
+      if (gameNameValues && aaccountTypeValues?.value === "gameReport") {
+        if (gameNameValues?.value !== "all") {
+          filter += `&description=like%${gameNameValues?.value}/%`;
+        }
+      }
       dispatch(
         getReportAccountList({
           id: selectedUser
@@ -239,6 +249,10 @@ const AccountStatement = () => {
       if (gameNameValues && aaccountTypeValues?.value === "balanceReport") {
         filter += `&gameName=${gameNameValues?.value}`;
       }
+      if (gameNameValues && aaccountTypeValues?.value === "gameReport") {
+        filter += `&description=like%${gameNameValues?.value}/%`;
+      }
+
       if (firstTime) {
         dispatch(
           getReportAccountList({
