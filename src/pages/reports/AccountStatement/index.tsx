@@ -421,9 +421,19 @@ const AccountStatement = () => {
               <td key={column.id}>{item[column.id]}</td>
             ))} */}
               <td>{moment(createdAt).format("YYYY-MM-DD")} </td>
-              <td>{amount > 0 ? amount : ""}</td>
-              <td>{amount < 0 ? amount : ""}</td>
-              <td>{closingBalance}</td>
+              <td className={`${amount > 0 ? "color-green" : "color-red"}`}>
+                {amount > 0 ? amount : ""}
+              </td>
+              <td className={`${amount < 0 ? "color-red" : "color-green"}`}>
+                {amount < 0 ? amount : ""}
+              </td>
+              <td
+                className={`${
+                  closingBalance > 0 ? "color-green" : "color-red"
+                }`}
+              >
+                {closingBalance}
+              </td>
               <td>
                 <CustomButton
                   className="actionBtn"
