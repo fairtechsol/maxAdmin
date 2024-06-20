@@ -102,16 +102,18 @@ export const getReportAccountList = createAsyncThunk<any, any>(
 );
 export const getBetAccountStatementModal = createAsyncThunk<any, any>(
   "transaction/BetAccountStatementModal",
-  async ({ id, sort, betId, status }, thunkApi) => {
+  async ({ id, sort, betId, status, runnerId }, thunkApi) => {
     try {
       const resp = await service.get(
         `${
           ApiConstants.REPORT.BET_ACCOUNTSTATEMENT
-        }?betPlaced.userId=${id}&sort=${
-          sort ? sort : ""
-        }&betId=inArr${JSON.stringify(betId)}${
-          status !== null ? `&status=${status}` : ""
-        }`
+        }?betPlaced.userId=${id}&sort=${sort ? sort : ""}${
+          betId
+            ? `&betId=inArr${JSON.stringify(betId)}`
+            : runnerId
+            ? `&runnerId=eq${runnerId}`
+            : ""
+        }${status !== null ? `&status=${status}` : ""}`
       );
       if (resp?.data) {
         return resp?.data;
@@ -329,9 +331,9 @@ export const getCardReport = createAsyncThunk<any, any>(
   async ({ type, page, limit, searchBy, keyword, filter }) => {
     try {
       const resp = await service.get(
-        `${ApiConstants.REPORT.CARD_REPORT}${type}?page=${
-          page || 1
-        }&limit=${limit || 15}&searchBy=${searchBy}&keyword=${
+        `${ApiConstants.REPORT.CARD_REPORT}${type}?page=${page || 1}&limit=${
+          limit || 15
+        }&searchBy=${searchBy}&keyword=${
           keyword || ""
         }&sort=cardResult.createdAt:DESC${filter}`
       );

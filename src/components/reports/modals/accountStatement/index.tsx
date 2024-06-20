@@ -46,14 +46,25 @@ const AccountStatementModal = ({ item }: any) => {
                 id="all"
                 checked={selectedOption === "all"}
                 onChange={() => {
+                  const match = item?.description.match(/Rno\. (\d+\.\d+)/);
                   setSelectedOption("all");
-                  dispatch(
-                    getBetAccountStatementModal({
-                      id: item?.user?.id,
-                      betId: item?.betId,
-                      sort: "betPlaced.createdAt:DESC",
-                    })
-                  );
+                  if (item?.betId) {
+                    dispatch(
+                      getBetAccountStatementModal({
+                        id: item?.user?.id,
+                        betId: item?.betId,
+                        sort: "betPlaced.createdAt:DESC",
+                      })
+                    );
+                  } else if (match && match[1]) {
+                    dispatch(
+                      getBetAccountStatementModal({
+                        id: item?.user?.id,
+                        runnerId: match[1],
+                        sort: "betPlaced.createdAt:DESC",
+                      })
+                    );
+                  }
                 }}
               />
               <Form.Check
@@ -65,15 +76,27 @@ const AccountStatementModal = ({ item }: any) => {
                 id="matched"
                 checked={selectedOption === "matched"}
                 onChange={() => {
+                  const match = item?.description.match(/Rno\. (\d+\.\d+)/);
                   setSelectedOption("matched");
-                  dispatch(
-                    getBetAccountStatementModal({
-                      id: item?.user?.id,
-                      betId: item?.betId,
-                      status: "MATCHED",
-                      sort: "betPlaced.createdAt:DESC",
-                    })
-                  );
+                  if (item?.betId) {
+                    dispatch(
+                      getBetAccountStatementModal({
+                        id: item?.user?.id,
+                        betId: item?.betId,
+                        status: "MATCHED",
+                        sort: "betPlaced.createdAt:DESC",
+                      })
+                    );
+                  } else if (match && match[1]) {
+                    dispatch(
+                      getBetAccountStatementModal({
+                        id: item?.user?.id,
+                        runnerId: match[1],
+                        status: "MATCHED",
+                        sort: "betPlaced.createdAt:DESC",
+                      })
+                    );
+                  }
                 }}
               />
               <Form.Check
@@ -85,15 +108,27 @@ const AccountStatementModal = ({ item }: any) => {
                 id="delete"
                 checked={selectedOption === "delete"}
                 onChange={() => {
+                  const match = item?.description.match(/Rno\. (\d+\.\d+)/);
                   setSelectedOption("delete");
-                  dispatch(
-                    getBetAccountStatementModal({
-                      id: item?.user?.id,
-                      betId: item?.betId,
-                      status: "DELETED",
-                      sort: "betPlaced.createdAt:DESC",
-                    })
-                  );
+                  if (item?.betId) {
+                    dispatch(
+                      getBetAccountStatementModal({
+                        id: item?.user?.id,
+                        betId: item?.betId,
+                        status: "DELETED",
+                        sort: "betPlaced.createdAt:DESC",
+                      })
+                    );
+                  } else if (match && match[1]) {
+                    dispatch(
+                      getBetAccountStatementModal({
+                        id: item?.user?.id,
+                        runnerId: match[1],
+                        status: "DELETED",
+                        sort: "betPlaced.createdAt:DESC",
+                      })
+                    );
+                  }
                 }}
               />
             </div>
@@ -180,9 +215,11 @@ const AccountStatementModal = ({ item }: any) => {
                       >
                         {match
                           ? moment(match?.startAt).format("YYYY-MM-DD hh:mm:ss")
-                          : moment(racingMatch?.startAt).format(
+                          : racingMatch
+                          ? moment(racingMatch?.startAt).format(
                               "YYYY-MM-DD hh:mm:ss"
-                            )}
+                            )
+                          : moment(createdAt).format("YYYY-MM-DD hh:mm:ss")}
                       </td>
                       <td
                         className={`${betType === "" ? "bg-blue3" : "bg-red1"}`}

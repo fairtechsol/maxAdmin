@@ -439,6 +439,7 @@ const AccountStatement = () => {
                   className="actionBtn"
                   variant="dark"
                   onClick={() => {
+                    const match = item?.description.match(/Rno\. (\d+\.\d+)/);
                     if (item?.betId) {
                       setAccountStatementModalShow((prev) => !prev);
                       setItemForModal(item);
@@ -446,6 +447,17 @@ const AccountStatement = () => {
                         getBetAccountStatementModal({
                           id: user?.id,
                           betId: item?.betId,
+                          status: null,
+                          sort: "betPlaced.createdAt:DESC",
+                        })
+                      );
+                    } else if (match && match[1]) {
+                      setAccountStatementModalShow((prev) => !prev);
+                      setItemForModal(item);
+                      dispatch(
+                        getBetAccountStatementModal({
+                          id: user?.id,
+                          runnerId: match[1],
                           status: null,
                           sort: "betPlaced.createdAt:DESC",
                         })
