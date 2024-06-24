@@ -72,9 +72,9 @@ function BookmakerTable({
                 <td colSpan={backLayCount === 2 ? 2 : 6} className={""}>
                   <BetStatusOverlay
                     title={data?.[`statusTeam${item}`]}
-                    active={data?.[`statusTeam${item}`] != teamStatus.active}
+                    active={data?.[`statusTeam${item}`] !== teamStatus.active}
                   >
-                    {new Array(backLayCount == 2 ? 1 : 3)
+                    {new Array(backLayCount === 2 ? 1 : 3)
                       .fill(0)
                       ?.map((_: any, index: number) => (
                         <BackLayBox
@@ -84,11 +84,11 @@ function BookmakerTable({
                           bgColor={`blue${index + 1}`}
                           rate={data[`backTeam${item}`] - 2 + index}
                           active={
-                            data?.[`statusTeam${item}`] != teamStatus.active
+                            data?.[`statusTeam${item}`] !== teamStatus.active
                           }
                         />
                       ))}
-                    {new Array(backLayCount == 2 ? 1 : 3)
+                    {new Array(backLayCount === 2 ? 1 : 3)
                       .fill(0)
                       ?.map((_: any, index: number) => (
                         <BackLayBox
@@ -99,7 +99,7 @@ function BookmakerTable({
                           bgColor={`red${index + 1}`}
                           rate={data[`layTeam${item}`] + index}
                           active={
-                            data?.[`statusTeam${item}`] != teamStatus.active
+                            data?.[`statusTeam${item}`] !== teamStatus.active
                           }
                         />
                       ))}

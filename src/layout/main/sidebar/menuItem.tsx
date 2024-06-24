@@ -117,7 +117,7 @@ const MenuCollapse = (props: any) => {
               return (
                 <Accordion
                   onSelect={(e: any) => {
-                    if (e == 0) {
+                    if (e === 0) {
                       setSelectedCompetition(sideBarChild?.id);
                       dispatch(getCompetitionDates(sideBarChild?.id));
                     }
@@ -132,7 +132,7 @@ const MenuCollapse = (props: any) => {
                         (menuItemChild: any, indexes: number) => (
                           <Accordion
                             onSelect={(e: any) => {
-                              if (e == 0) {
+                              if (e === 0) {
                                 setSelectedDate(menuItemChild?.id);
                                 setSelectedCompetition(sideBarChild?.id);
                                 setSelectedCompetitionName(sideBarChild?.name);

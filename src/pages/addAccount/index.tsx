@@ -279,7 +279,7 @@ const AddAccount = () => {
     }
   }, [formik?.values?.accountType]);
   useEffect(() => {
-    if (successMessage != "") {
+    if (successMessage !== "") {
       setSuccessInsert(true);
       setTimeout(() => {
         dispatch(successMessageReset());

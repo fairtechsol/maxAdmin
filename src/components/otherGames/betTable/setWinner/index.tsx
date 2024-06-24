@@ -98,14 +98,14 @@ function SetWinner({
                     <BetStatusOverlay
                       title={data?.runners?.[indexes]?.status.toLowerCase()}
                       active={
-                        data?.activeStatus == "live" &&
+                        data?.activeStatus === "live" &&
                         data?.runners?.[indexes]?.status.toLowerCase() ===
                           "active"
                           ? false
                           : true
                       }
                     >
-                      {new Array(backLayCount == 2 ? 1 : 3)
+                      {new Array(backLayCount === 2 ? 1 : 3)
                         .fill(0)
                         ?.map((_: any, index: number) => (
                           <BackLayBox
@@ -125,12 +125,12 @@ function SetWinner({
                             active={
                               data?.runners?.[indexes]?.status
                                 .toLowerCase()
-                                ?.toLowerCase() !=
+                                ?.toLowerCase() !==
                               teamStatus.active?.toLowerCase()
                             }
                           />
                         ))}
-                      {new Array(backLayCount == 2 ? 1 : 3)
+                      {new Array(backLayCount === 2 ? 1 : 3)
                         .fill(0)
                         ?.map((_: any, index: number) => (
                           <BackLayBox
@@ -150,7 +150,7 @@ function SetWinner({
                             active={
                               data?.runners?.[indexes]?.status
                                 .toLowerCase()
-                                ?.toLowerCase() !=
+                                ?.toLowerCase() !==
                               teamStatus.active?.toLowerCase()
                             }
                           />

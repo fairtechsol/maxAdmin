@@ -34,7 +34,7 @@ const UserRow = ({ index, userName, userId, lock, type, setCheck }: any) => {
   };
 
   useEffect(() => {
-    if (statusSuccess && userMatchLock?.userId == userId) {
+    if (statusSuccess && userMatchLock?.userId === userId) {
       setUserLock((prev) => !prev);
     }
   }, [statusSuccess]);

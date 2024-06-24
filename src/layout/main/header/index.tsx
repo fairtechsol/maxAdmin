@@ -10,7 +10,7 @@ import MainHeader from "../../../components/mainHeader";
 import { logout } from "../../../store/actions/auth/authActions";
 import { AppDispatch, RootState } from "../../../store/store";
 import { debounce } from "lodash";
-import { searchList,} from "../../../store/actions/user/userActions";
+import { searchList } from "../../../store/actions/user/userActions";
 // import isMobile from "../../../utils/screenDimension";
 // import styled from '@emotion/styled';
 
@@ -53,10 +53,9 @@ const Topbar = (props: any) => {
   const [searchValue, setSearchValue] = useState<any>(null);
   const { userDetail } = useSelector((state: RootState) => state.user.profile);
 
-  const { searchListData, success,childUsersData} = useSelector(
+  const { searchListData, success, childUsersData } = useSelector(
     (state: RootState) => state.user.userList
   );
-
 
   const debouncedInputValue = useMemo(() => {
     return debounce((value) => {
@@ -112,22 +111,22 @@ const Topbar = (props: any) => {
     }
 
     // setTimeout(() => {
-      
+
     // setSearchValue(null);
     // }, 1000);
   };
 
-useEffect(()=>{
-  if(success && childUsersData){
-    setSearchValue(null);
-  }
-}, [success]);
+  useEffect(() => {
+    if (success && childUsersData) {
+      setSearchValue(null);
+    }
+  }, [success]);
 
-// useEffect(()=> {
-//   if(SearchModal){
-//     dispatch(userModalReset)
-//   }
-// }, [])
+  // useEffect(()=> {
+  //   if(SearchModal){
+  //     dispatch(userModalReset)
+  //   }
+  // }, [])
 
   const customStyles = {
     control: (base: any, state: { isFocused: any }) => ({
@@ -323,14 +322,14 @@ useEffect(()=>{
                     { name: "Sports Casino", link: "#4" },
                     { name: "Casino War", link: "#5" },
                     { name: "Worli", link: "#6" },
-                    { name: "3 Cards Judgement", link: "#7" },
-                    { name: "32 Cards Casino", link: "#8" },
+                    { name: "3 Cards Judgement", link: "" },
+                    { name: "32 Cards Casino", link: "/admin/casino/cards32" },
                     { name: "Live TeenPatti", link: "#9" },
-                    { name: "TeenPatti 2.0", link: "#10" },
+                    { name: "TeenPatti 2.0", link: "/admin/casino/teenPatti" },
                     { name: "Live Poker", link: "#11" },
-                    { name: "Andar Bahar", link: "#12" },
-                    { name: "Lucky 7", link: "#13" },
-                    { name: "Dragon Tiger", link: "#14" },
+                    { name: "Andar Bahar", link: "/admin/casino/abj" },
+                    { name: "Lucky 7", link: "/admin/casino/lucky7" },
+                    { name: "Dragon Tiger", link: "/admin/casino/dragonTiger" },
                     { name: "Bollywood Casino", link: "#15" },
                     { name: "Cricket Casino", link: "#16" },
                   ]}
@@ -413,23 +412,23 @@ useEffect(()=>{
               </Form.Group>
             </Form>
             */}
-            <Form className="headerSearch">
-              <div>
-                <Select
-                  value={searchValue}
-                  options={optionslist}
-                  onInputChange={handleSearch}
-                  placeholder="All Client"
-                  openMenuOnClick={false}
-                  styles={customStyles}
-                  classNamePrefix="select"
-                  onChange={(item: any) => {
-                    setSearchValue(item);
-                  }}
-                  components={{ DropdownIndicator }}
-                />
-              </div>
-            </Form>
+              <Form className="headerSearch">
+                <div>
+                  <Select
+                    value={searchValue}
+                    options={optionslist}
+                    onInputChange={handleSearch}
+                    placeholder="All Client"
+                    openMenuOnClick={false}
+                    styles={customStyles}
+                    classNamePrefix="select"
+                    onChange={(item: any) => {
+                      setSearchValue(item);
+                    }}
+                    components={{ DropdownIndicator }}
+                  />
+                </div>
+              </Form>
             </div>
           )}
 
