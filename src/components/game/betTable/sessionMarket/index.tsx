@@ -92,7 +92,7 @@ function SessionMarketTable({
                     rate={JSON.parse(item)?.noRate}
                     percent={JSON.parse(item)?.noPercent}
                     onClick={handleClick}
-                    active={JSON.parse(item)?.status != teamStatus.active}
+                    active={JSON.parse(item)?.status !== teamStatus.active}
                   />
                   <YesNoBox
                     style={{ width: "50px" }}
@@ -100,7 +100,7 @@ function SessionMarketTable({
                     rate={JSON.parse(item)?.yesRate}
                     percent={JSON.parse(item)?.yesPercent}
                     onClick={handleClick}
-                    active={JSON.parse(item)?.status != teamStatus.active}
+                    active={JSON.parse(item)?.status !== teamStatus.active}
                   />
                   <div className="minMaxBox d-flex flex-column justify-content-center text-end px-2 text-info title-14">
                     <span className="">Min:{JSON.parse(item)?.minBet}</span>

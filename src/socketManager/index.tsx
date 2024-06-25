@@ -2,9 +2,11 @@ import io from "socket.io-client";
 import { Constants, baseUrls } from "../utils/Constants";
 import { authSocketService } from "./authSocket";
 import { matchSocketService } from "./matchSocketService";
+import { cardSocketService } from "./cardSocket";
 
 export let socket: any = null;
 export let thirdParty: any = null;
+export let cardSocket: any = null;
 
 export const initialiseSocket = () => {
   socket = io(baseUrls.socket, {
@@ -23,6 +25,13 @@ export const initialiseSocket = () => {
       token: `${localStorage.getItem("jwtMaxAdmin")}`,
     },
   });
+  cardSocket = io(baseUrls.cardSocket, {
+    transports: [
+      process.env.NODE_ENV === "production"
+        ? `${Constants.POLLING}`
+        : `${Constants.WEBSOCKET}`,
+    ],
+  });
 };
 
 export const socketService = {
@@ -32,6 +41,7 @@ export const socketService = {
       // Connect to the socket server
       socket?.connect();
       thirdParty?.connect();
+      cardSocket?.connect();
     } catch (e) {
       console.log(e);
     }
@@ -40,6 +50,7 @@ export const socketService = {
     try {
       socket?.disconnect();
       thirdParty?.disconnect();
+      cardSocket?.disconnect();
     } catch (e) {
       console.log(e);
     }
@@ -47,4 +58,5 @@ export const socketService = {
   },
   auth: { ...authSocketService },
   match: { ...matchSocketService },
+  card: { ...cardSocketService },
 };

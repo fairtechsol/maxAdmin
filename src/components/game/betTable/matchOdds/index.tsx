@@ -97,10 +97,10 @@ function MatchOdds({
                       active={
                         data?.runners?.[indexes]?.status
                           .toLowerCase()
-                          ?.toLowerCase() != teamStatus.active?.toLowerCase()
+                          ?.toLowerCase() !== teamStatus.active?.toLowerCase()
                       }
                     >
-                      {new Array(backLayCount == 2 ? 1 : 3)
+                      {new Array(backLayCount === 2 ? 1 : 3)
                         .fill(0)
                         ?.map((_: any, index: number) => (
                           <BackLayBox
@@ -121,12 +121,12 @@ function MatchOdds({
                             active={
                               data?.runners?.[indexes]?.status
                                 .toLowerCase()
-                                ?.toLowerCase() !=
+                                ?.toLowerCase() !==
                               teamStatus.active?.toLowerCase()
                             }
                           />
                         ))}
-                      {new Array(backLayCount == 2 ? 1 : 3)
+                      {new Array(backLayCount === 2 ? 1 : 3)
                         .fill(0)
                         ?.map((_: any, index: number) => (
                           <BackLayBox
@@ -147,7 +147,7 @@ function MatchOdds({
                             active={
                               data?.runners?.[indexes]?.status
                                 .toLowerCase()
-                                ?.toLowerCase() !=
+                                ?.toLowerCase() !==
                               teamStatus.active?.toLowerCase()
                             }
                           />

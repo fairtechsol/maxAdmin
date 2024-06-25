@@ -1,3 +1,34 @@
+import {
+  dt6,
+  dt20,
+  dt2020,
+  dtl20,
+  lucky7A,
+  luck7B,
+  cards32A,
+  cards32B,
+  abjlist2,
+  abjlist,
+  testteen,
+  dayteen,
+  twentyteen,
+  teencasino,
+  teenplayer,
+  A,
+  two,
+  three,
+  four,
+  five,
+  six,
+  seven,
+  eight,
+  nine,
+  ten,
+  eleven,
+  twelve,
+  thirteen,
+} from "../../assets";
+
 export const ApiConstants = {
   AUTH: {
     LOGIN: "/auth/login",
@@ -52,6 +83,13 @@ export const ApiConstants = {
     GETPLACEDBETS: "bet",
     RUN_AMOUNT: "bet/session/profitLoss",
   },
+  CARDS: {
+    MATCH: {
+      GET_CARD_DETAIL: "/match/card",
+      PLACE_BET: "/bet/cardBetting",
+      RESULT: "/card/result/detail",
+    },
+  },
 };
 
 export const Constants = {
@@ -61,13 +99,17 @@ export const Constants = {
   apiBasePathLive: "https://betfairapi.fairgame7.com",
   thirdPartyLive: "https://serviceapi.fairgame7.com",
   expertPathLive: "https://expertapi.fairgame7.com",
+  thirdPartyCard: "https://casinoserviceapi.fairgame.club",
   localPath: "http://localhost:5000",
   localPathThird: "http://localhost:3200",
   localPathExpert: "http://localhost:6060",
+  localThirdCard: "http://localhost:3201",
   WEBSOCKET: "websocket",
   POLLING: "polling",
   PAGELIMIT: 15,
 };
+
+export const cardUrl = "https://video.proexch.in/route/?id=";
 
 // use below baseUrl for live build
 
@@ -84,6 +126,10 @@ export const baseUrls = {
     process.env.NODE_ENV === "production"
       ? `${Constants.expertPath}`
       : `${Constants.localPathExpert}`,
+  cardSocket:
+    process.env.NODE_ENV === "production"
+      ? Constants.thirdPartyCard
+      : Constants.localThirdCard,
 };
 
 // use below baseUrl for live build
@@ -217,4 +263,176 @@ export const profitLossDataForMatchConstants = {
     B: "userTeamBRateHalfTime",
     C: "userTeamCRateHalfTime",
   },
+};
+
+export const card3 = {
+  dragonTiger: [
+    {
+      url: "/admin/casinoDetail/dt202",
+      imgSrc: dt2020,
+      name: "20-20 DRAGON TIGER 2",
+    },
+    {
+      url: "/admin/casinoDetail/contact-admin",
+      imgSrc: dtl20,
+      name: "20-20 DRAGON TIGER LION",
+    },
+    {
+      url: "/admin/casinoDetail/contact-admin",
+      imgSrc: dt6,
+      name: "1 DAY DRAGON TIGER",
+    },
+    {
+      url: "/admin/casinoDetail/dt20",
+      imgSrc: dt20,
+      name: "20-20 DRAGON TIGER",
+    },
+  ],
+  teenPatti: [
+    {
+      url: "/admin/casinoDetail/contact-admin",
+      imgSrc: teencasino,
+      name: "TEENPATTI 2.0",
+    },
+    {
+      url: "/admin/casinoDetail/teenPatti20",
+      imgSrc: twentyteen,
+      name: "20-20 TEENPATTI",
+    },
+    {
+      url: "/admin/casinoDetail/contact-admin",
+      imgSrc: dayteen,
+      name: "1 DAY TEENPATTI",
+    },
+    {
+      url: "/admin/casinoDetail/contact-admin",
+      imgSrc: testteen,
+      name: "TEST TEENPATTI",
+    },
+    {
+      url: "/admin/casinoDetail/contact-admin",
+      imgSrc: teenplayer,
+      name: "OPEN TEENPATTI",
+    },
+  ],
+  lucky7: [
+    {
+      url: "/admin/casinoDetail/lucky7-A",
+      imgSrc: lucky7A,
+      name: "Lucky 7 A",
+    },
+    {
+      url: "/admin/casinoDetail/contact-admin",
+      imgSrc: luck7B,
+      name: "Lucky 7 B",
+    },
+  ],
+  cards32: [
+    {
+      url: "/admin/casinoDetail/32cards-A",
+      imgSrc: cards32A,
+      name: "Lucky 7 A",
+    },
+    {
+      url: "/admin/casinoDetail/contact-admin",
+      imgSrc: cards32B,
+      name: "Lucky 7 B",
+    },
+  ],
+  abj: [
+    {
+      url: "/admin/casinoDetail/abj2",
+      imgSrc: abjlist2,
+      name: "ANDAR BAHAR 2",
+    },
+    {
+      url: "/admin/casinoDetail/contact-admin",
+      imgSrc: abjlist,
+      name: "ANDAR BAHAR",
+    },
+  ],
+};
+
+export const dragonTigerCards = [
+  {
+    code: 0,
+    imgSrc: A,
+    value: 0,
+  },
+  {
+    code: 1,
+    imgSrc: two,
+    value: 0,
+  },
+  {
+    code: 2,
+    imgSrc: three,
+    value: 0,
+  },
+  {
+    code: 3,
+    imgSrc: four,
+    value: 0,
+  },
+  {
+    code: 4,
+    imgSrc: five,
+    value: 0,
+  },
+  {
+    code: 5,
+    imgSrc: six,
+    value: 0,
+  },
+  {
+    code: 6,
+    imgSrc: seven,
+    value: 0,
+  },
+  {
+    code: 7,
+    imgSrc: eight,
+    value: 0,
+  },
+  {
+    code: 8,
+    imgSrc: nine,
+    value: 0,
+  },
+  {
+    code: 9,
+    imgSrc: ten,
+    value: 0,
+  },
+  {
+    code: 10,
+    imgSrc: eleven,
+    value: 0,
+  },
+  {
+    code: 11,
+    imgSrc: twelve,
+    value: 0,
+  },
+  {
+    code: 12,
+    imgSrc: thirteen,
+    value: 0,
+  },
+];
+
+export const cardGamesType: any = {
+  dragonTiger20: "dt20",
+  andarBahar2: "abj",
+  teen20: "teen20",
+  card32: "card32",
+  lucky7: "lucky7",
+};
+
+export const cardGamesId: any = {
+  dragonTiger20: 3035,
+  andarBahar2: 3043,
+  teen20: 3030,
+  card32: 3055,
+  lucky7: 3058,
 };

@@ -1,0 +1,95 @@
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import service from "../../../service";
+import { AxiosError } from "axios";
+import { ApiConstants } from "../../../utils/Constants";
+
+export const getDragonTigerDetailHorseRacing = createAsyncThunk<any, any>(
+  "horseRacing/matchDetail",
+  async (requestData, thunkApi) => {
+    try {
+      const resp = await service.get(
+        `${ApiConstants.CARDS.MATCH.GET_CARD_DETAIL}/${requestData}`
+      );
+      if (resp?.data) {
+        return resp?.data;
+      }
+    } catch (error) {
+      const err = error as AxiosError;
+      return thunkApi.rejectWithValue(err.response?.status);
+    }
+  }
+);
+
+export const resultDragonTiger = createAsyncThunk<any, any>(
+  "result/placeBetDragonTiger",
+  async (requestData, thunkApi) => {
+    try {
+      const resp = await service.get(
+        `${ApiConstants.CARDS.MATCH.RESULT}/${requestData}`
+      );
+      if (resp?.data) {
+        return resp?.data;
+      }
+    } catch (error) {
+      const err = error as AxiosError;
+      return thunkApi.rejectWithValue(err.response?.status);
+    }
+  }
+);
+// export const updateTeamRatesForHorseRacingOnDelete = createAsyncThunk<any, any>(
+//   "horseRacing/teamRatesUpdateOnDelete",
+//   async (data) => {
+//     return data;
+//   }
+// );
+export const updateCardMatchRates = createAsyncThunk<any, any>(
+  "dt20/matchRatesUpdate",
+  async (data) => {
+    return data;
+  }
+);
+
+export const update7CardMatchRates = createAsyncThunk<any, any>(
+  "lucky7/matchRatesUpdate",
+  async (data) => {
+    return data;
+  }
+);
+
+export const updateTeenPattiMatchRates = createAsyncThunk<any, any>(
+  "teen20/matchRatesUpdate",
+  async (data) => {
+    return data;
+  }
+);
+export const updateCardAbjRates = createAsyncThunk<any, any>(
+  "abj2/matchRatesUpdate",
+  async (data) => {
+    return data;
+  }
+);
+
+export const updateCard32MatchRates = createAsyncThunk<any, any>(
+  "card32/matchRatesUpdate",
+  async (data) => {
+    return data;
+  }
+);
+export const updateLiveGameResultTop10 = createAsyncThunk<any, any>(
+  "update/LiveGameResultTop10",
+  async (data) => {
+    return data;
+  }
+);
+export const updateBalanceOnBetPlaceCards = createAsyncThunk<any, any>(
+  "update/balanceOnBetPlaceCards",
+  async (data) => {
+    return data;
+  }
+);
+export const updateProfitLossCards = createAsyncThunk<any, any>(
+  "update/profitLossCards",
+  async (data) => {
+    return data;
+  }
+);

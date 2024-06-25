@@ -5,6 +5,7 @@
   "private": true,
   "dependencies": {
     "@emotion/styled": "^11.11.0",
+    "@pqina/flip": "^1.8.3",
     "@reduxjs/toolkit": "^2.0.1",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",

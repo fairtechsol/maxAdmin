@@ -59,7 +59,7 @@ function MatchOdds({
         </thead>
         <tbody>
           {["A", "B", "C"]
-            ?.filter((item) => matchDetails?.[`team${item}`] != null)
+            ?.filter((item) => matchDetails?.[`team${item}`] !== null)
             ?.map((matchs, indexes) => {
               return (
                 <tr key={indexes}>
@@ -140,10 +140,10 @@ function MatchOdds({
                       active={
                         data?.runners?.[indexes]?.status
                           .toLowerCase()
-                          ?.toLowerCase() != teamStatus.active?.toLowerCase()
+                          ?.toLowerCase() !== teamStatus.active?.toLowerCase()
                       }
                     >
-                      {new Array(backLayCount == 2 ? 1 : 3)
+                      {new Array(backLayCount === 2 ? 1 : 3)
                         .fill(0)
                         ?.map((_: any, index: number) => (
                           <BackLayBox
@@ -164,12 +164,12 @@ function MatchOdds({
                             active={
                               data?.runners?.[indexes]?.status
                                 .toLowerCase()
-                                ?.toLowerCase() !=
+                                ?.toLowerCase() !==
                               teamStatus.active?.toLowerCase()
                             }
                           />
                         ))}
-                      {new Array(backLayCount == 2 ? 1 : 3)
+                      {new Array(backLayCount === 2 ? 1 : 3)
                         .fill(0)
                         ?.map((_: any, index: number) => (
                           <BackLayBox
@@ -190,7 +190,7 @@ function MatchOdds({
                             active={
                               data?.runners?.[indexes]?.status
                                 .toLowerCase()
-                                ?.toLowerCase() !=
+                                ?.toLowerCase() !==
                               teamStatus.active?.toLowerCase()
                             }
                           />
