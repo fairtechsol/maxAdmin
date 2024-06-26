@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import "./style.scss";
 import { RootState } from "../../../../store/store";
 import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
-import { cardGamesId } from "../../../../utils/Constants";
+import { cardGamesId, cardUrl } from "../../../../utils/Constants";
 import RulesModal from "../../../commonComponent/rulesModal";
 import { card32rules } from "../../../../assets";
 import CardResultBox from "../../../commonComponent/cardResultBox";
@@ -52,7 +52,7 @@ const Cards32AComponent = () => {
               <VideoFrame
                 time={dragonTigerDetail?.videoInfo?.autotime}
                 result={<Card32Result data={dragonTigerDetail?.videoInfo} />}
-                id={cardGamesId?.card32}
+                id={`${cardUrl}${cardGamesId.card32}`}
               />
             </div>
           </div>

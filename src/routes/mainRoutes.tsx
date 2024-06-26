@@ -1,17 +1,10 @@
 import { lazy } from "react";
 import { Navigate } from "react-router-dom";
 import MainLayout from "../layout/main";
-import ListActiveInactiveUser from "../pages/listActiveUser";
 import Loadable from "../utils/loadable";
-import AndarBahar2 from "../pages/cardGames/games/andarBahar2";
-import Lucky7 from "../pages/cardGames/games/lucky7";
-import DragonTiger2020 from "../pages/cardGames/games/dragonTiger2020";
-import Card32A from "../pages/cardGames/games/card32A";
-import TeenPatti2020 from "../pages/cardGames/games/teenpatti2020";
 // ==============================|| Main ROUTING ||============================== //
 const Game = Loadable(lazy(() => import("../pages/games")));
 const OtherGamesDetail = Loadable(lazy(() => import("../pages/otherGames")));
-// const Sample = Loadable(lazy(() => import("../components/Sample")));
 const ListClients = Loadable(lazy(() => import("../pages/listClients")));
 const ListAccount = Loadable(lazy(() => import("../pages/listActiveUser")));
 const AddAccount = Loadable(lazy(() => import("../pages/addAccount")));
@@ -23,6 +16,34 @@ const ChangePasswordFirst = Loadable(
 
 const SecureAuth = Loadable(lazy(() => import("../pages/secureAuth")));
 const CardList3 = Loadable(lazy(() => import("../pages/cardGames/cardsList")));
+const ListActiveInactiveUser = Loadable(
+  lazy(() => import("../pages/listActiveUser"))
+);
+const AndarBahar2 = Loadable(
+  lazy(() => import("../pages/cardGames/games/andarBahar2"))
+);
+const Lucky7 = Loadable(lazy(() => import("../pages/cardGames/games/lucky7")));
+const DragonTiger2020 = Loadable(
+  lazy(() => import("../pages/cardGames/games/dragonTiger2020"))
+);
+const Card32A = Loadable(
+  lazy(() => import("../pages/cardGames/games/card32A"))
+);
+const TeenPatti2020 = Loadable(
+  lazy(() => import("../pages/cardGames/games/teenpatti2020"))
+);
+const DragonTiger20Second = Loadable(
+  lazy(() => import("../pages/cardGames/games/dragonSecond20"))
+);
+const DragonTigerLion = Loadable(
+  lazy(() => import("../pages/cardGames/games/dragonTigerLion"))
+);
+const DragonTigerOneDay = Loadable(
+  lazy(() => import("../pages/cardGames/games/dragonTigerOneDay"))
+);
+const Lucky7B = Loadable(
+  lazy(() => import("../pages/cardGames/games/lucky7B"))
+);
 
 const MainRoutes = {
   path: "/admin",
@@ -40,10 +61,6 @@ const MainRoutes = {
       path: "other_match_detail/:id/:marketId",
       element: <OtherGamesDetail />,
     },
-    // {
-    //   path: "samplepage",
-    //   element: <Sample />,
-    // },
     {
       path: "listClients/:id",
       element: <ListClients />,
@@ -110,7 +127,19 @@ const MainRoutes = {
     },
     {
       path: "casinoDetail/dt202",
-      // element: <DragonTigerSecond20 />,
+      element: <DragonTiger20Second />,
+    },
+    {
+      path: "casinoDetail/dtl20",
+      element: <DragonTigerLion />,
+    },
+    {
+      path: "casinoDetail/dt6",
+      element: <DragonTigerOneDay />,
+    },
+    {
+      path: "casinoDetail/lucky7eu",
+      element: <Lucky7B />,
     },
     {
       path: "*",

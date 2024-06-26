@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
-import { Button, Col, Form, Row } from "react-bootstrap";
+import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
 import SelectSearch from "../../../components/commonComponent/SelectSearch";
 import CustomInput from "../../../components/commonComponent/input";
-import CustomModal from "../../../components/commonComponent/modal";
 import CustomTable from "../../../components/commonComponent/table";
 import { TableConfig } from "../../../models/tableInterface";
 import { AppDispatch, RootState } from "../../../store/store";
 import { useDispatch, useSelector } from "react-redux";
 import { getCardReport } from "../../../store/actions/match/matchAction";
 import moment from "moment-timezone";
+import { ResultComponent } from "../../../components/commonComponent/resultComponent";
+import { resultDragonTiger } from "../../../store/actions/card/cardDetail";
 
 interface Column {
   id: string;
@@ -48,6 +49,22 @@ const cardGames = [
     value: "lucky7",
     label: "Lucky 7 - A",
   },
+  {
+    value: "lucky7eu",
+    label: "Lucky 7 - B",
+  },
+  {
+    value: "dt202",
+    label: "20-20 Dragon Tiger 2",
+  },
+  {
+    value: "dtl20",
+    label: "Dragon Tiger Lion",
+  },
+  {
+    value: "dt6",
+    label: "Dragon Tiger 1 Day",
+  },
 ];
 
 const CasinoResultReport = () => {
@@ -55,7 +72,6 @@ const CasinoResultReport = () => {
   const { state } = useLocation();
   const [casinoModalShow, setCasinoModalShow] = useState(false);
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
-
   const [date, setDate] = useState<any>(
     moment(new Date()).format("YYYY-MM-DD")
   );
@@ -66,6 +82,8 @@ const CasinoResultReport = () => {
   const { casinoResultReport } = useSelector(
     (state: RootState) => state.match.reportList
   );
+
+  const { resultData } = useSelector((state: RootState) => state.card);
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -93,6 +111,11 @@ const CasinoResultReport = () => {
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const handleResult = (id: any) => {
+    setCasinoModalShow(true);
+    dispatch(resultDragonTiger(id));
   };
 
   useEffect(() => {
@@ -208,7 +231,7 @@ const CasinoResultReport = () => {
               // </tr>
               <tr key={index}>
                 <td>
-                  <div onClick={() => setCasinoModalShow((prev) => !prev)}>
+                  <div onClick={() => handleResult(item?.mid)}>
                     <Link to="">{mid}</Link>
                   </div>
                 </td>
@@ -217,14 +240,20 @@ const CasinoResultReport = () => {
             );
           })}
       </CustomTable>
-      <CustomModal
+      <Modal
+        size="lg"
         show={casinoModalShow}
-        setShow={setCasinoModalShow}
-        title="Result Detail"
-        titleStyle="fw-normal"
+        onHide={() => setCasinoModalShow(false)}
+        aria-labelledby="example-modal-sizes-title-lg"
       >
-        <h1>APi Fetch</h1>
-      </CustomModal>
+        <Modal.Body style={{ padding: "1rem" }}>
+          <ResultComponent
+            data={resultData}
+            setfalse={setCasinoModalShow}
+            type={resultData?.gameType}
+          />
+        </Modal.Body>
+      </Modal>
     </div>
   );
 };

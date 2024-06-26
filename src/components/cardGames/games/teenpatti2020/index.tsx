@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { useRef, useState } from "react";
 import { handleRoundId } from "../../../../helpers";
 import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
-import { cardGamesId } from "../../../../utils/Constants";
+import { cardGamesId, cardUrl } from "../../../../utils/Constants";
 import Teen20Result from "./teenCard";
 import CardResultBox from "../../../commonComponent/cardResultBox";
 import UserBets from "../../../game/userBet";
@@ -66,7 +66,7 @@ const TeentPatti2020Component = () => {
                 <VideoFrame
                   time={dragonTigerDetail?.videoInfo?.autotime}
                   result={<Teen20Result data={dragonTigerDetail?.videoInfo} />}
-                  id={cardGamesId?.teen20}
+                  id={`${cardUrl}${cardGamesId.teen20}`}
                 />
               </div>
             </div>
