@@ -38,7 +38,7 @@ const userUpdateSlice = createSlice({
       .addCase(addUser.rejected, (state, action) => {
         let attemptLeftData: any = action.payload;
         state.loading = false;
-        if (attemptLeftData.data.data.attemptsLeft) {
+        if (attemptLeftData?.data?.data?.attemptsLeft) {
           state.successMessage =
             `transaction code not valid. You have ${attemptLeftData.data.data.attemptsLeft}attempt left` ||
             " ";
