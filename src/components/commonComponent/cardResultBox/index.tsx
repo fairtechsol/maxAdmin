@@ -1,21 +1,26 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./index.scss";
-import { RootState } from "../../../store/store";
+import { AppDispatch, RootState } from "../../../store/store";
+import { Modal } from "react-bootstrap";
+import { useState } from "react";
+import { resultDragonTiger } from "../../../store/actions/card/cardDetail";
+import { ResultComponent } from "../resultComponent";
 // import { useState } from "react";
 // import Modal from "react-bootstrap/Modal";
 // import { ResultComponent } from "../resultComponent";
 
 const CardResultBox = ({ data, name, type }: any) => {
   const navigate = useNavigate();
-  // const [lgShow, setLgShow] = useState(false);
-  const { liveGameResultTop10 } = useSelector(
+  const dispatch: AppDispatch = useDispatch();
+  const [lgShow, setLgShow] = useState(false);
+  const { liveGameResultTop10, resultData } = useSelector(
     (state: RootState) => state.card
   );
 
   const handleResult = (id: any) => {
-    // setLgShow(true);
-    // dispatch(resultDragonTiger(id));
+    setLgShow(true);
+    dispatch(resultDragonTiger(id));
   };
 
   return (
@@ -94,20 +99,20 @@ const CardResultBox = ({ data, name, type }: any) => {
             </div>
           ))}
       </div>
-      {/* <Modal
+      <Modal
         size="lg"
         show={lgShow}
         onHide={() => setLgShow(false)}
         aria-labelledby="example-modal-sizes-title-lg"
       >
-        <Modal.Body style={{ padding: 0 }}>
+        <Modal.Body style={{ padding: "1rem" }}>
           <ResultComponent
             data={resultData}
             setfalse={setLgShow}
             type={resultData?.gameType}
           />
         </Modal.Body>
-      </Modal> */}
+      </Modal>
     </div>
   );
 };

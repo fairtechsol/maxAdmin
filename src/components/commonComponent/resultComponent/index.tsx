@@ -10,6 +10,10 @@ import AbjResultComponent from "../../cardGames/games/abj2/resultModalComponent"
 import Teen20ResultComponent from "../../cardGames/games/teenpatti2020/resultModalComponent";
 import Card32ResultComponent from "../../cardGames/games/card32A/resultModalComponent";
 import Lucky7ResultComponent from "../../cardGames/games/lucky7/resultModalComponent";
+import Lucky7BResultComponent from "../../cardGames/games/lucky7B/resultModalComponent";
+import Dragon202ResultComponent from "../../cardGames/games/dragon2nd20/resultModalComponent";
+import DragonTigerLionResultComponent from "../../cardGames/games/dragonTigerLion/resultModalComponent";
+import DragonTigerOneDayResultComponent from "../../cardGames/games/dragontigerOneDay/resultModalComponent";
 
 const title = {
   dt20: "20-20 Dragon Tiger",
@@ -79,18 +83,27 @@ export const ResultComponent: React.FC<ResultComponentProps> = ({
         <>
           <Lucky7ResultComponent data={data} />
         </>
+      ) : type === cardGamesType?.lucky7B ? (
+        <>
+          <Lucky7BResultComponent data={data} />
+        </>
+      ) : type === cardGamesType?.dragonTiger202 ? (
+        <>
+          <Dragon202ResultComponent data={data} />
+        </>
+      ) : type === cardGamesType?.dragonTigerLion ? (
+        <>
+          <DragonTigerLionResultComponent data={data} />
+        </>
+      ) : type === cardGamesType?.teenOneDay ? (
+        <>
+          <Lucky7BResultComponent data={data} />
+        </>
+      ) : type === cardGamesType?.dragonTigerOneDay ? (
+        <>
+          <DragonTigerOneDayResultComponent data={data} />
+        </>
       ) : (
-        // type === cardGamesType?.lucky7B ? (
-        //   <><Lucky7BResultComponent data={data}/></>
-        // ):type === cardGamesType?.dragonTiger202 ? (
-        //   <><Dragon202ResultComponent data={data}/></>
-        // ):type === cardGamesType?.dragonTigerLion ? (
-        //   <><DragonTigerLionResultComponent data={data}/></>
-        // ):type === cardGamesType?.teenOneDay ? (
-        //   <><Lucky7BResultComponent data={data}/></>
-        // ):type === cardGamesType?.dragonTigerOneDay ? (
-        //   <><DragonTigerOneDayResultComponent data={data}/></>
-        // ):
         <></>
       )}
     </Container>

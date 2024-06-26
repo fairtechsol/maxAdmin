@@ -2,10 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   getDragonTigerDetailHorseRacing,
   resultDragonTiger,
+  update7BCardMatchRates,
   update7CardMatchRates,
   updateCard32MatchRates,
   updateCardAbjRates,
   updateCardMatchRates,
+  updateDragonTigerLionRates,
+  updateDragonTigerOneDayRates,
   updateLiveGameResultTop10,
   updateProfitLossCards,
   updateTeenPattiMatchRates,
@@ -75,6 +78,23 @@ const cardDetail = createSlice({
         };
       })
       .addCase(update7CardMatchRates.fulfilled, (state, action) => {
+        const { t1, t2 } = action.payload;
+        state.loading = false;
+        const videoInfo = { ...t1[0] };
+        const lowHigh = t2.slice(0, 2);
+        const redBlack = t2.slice(2, 4);
+        const luckOdds = t2.slice(4, 6);
+        const luckyCards = t2.slice(6, 19);
+        state.dragonTigerDetail = {
+          ...state.dragonTigerDetail,
+          videoInfo,
+          lowHigh,
+          redBlack,
+          luckOdds,
+          luckyCards,
+        };
+      })
+      .addCase(update7BCardMatchRates.fulfilled, (state, action) => {
         const { t1, t2 } = action.payload;
         state.loading = false;
         const videoInfo = { ...t1[0] };
@@ -161,6 +181,44 @@ const cardDetail = createSlice({
       .addCase(resultDragonTiger.rejected, (state, action) => {
         // state.loading = false;
         state.error = action?.error?.message;
+      })
+      .addCase(updateDragonTigerLionRates.fulfilled, (state, action) => {
+        const { t1, t2 } = action.payload;
+        state.loading = false;
+        const videoInfo = { ...t1[0] };
+        const dragonData = t2.slice(0, 18);
+        const tigerData = t2.slice(18, 36);
+        const lionData = t2.slice(36, 54);
+
+        state.dragonTigerDetail = {
+          ...state.dragonTigerDetail,
+          profitLoss:
+            t1[0]?.mid === 0 ? {} : { ...state.dragonTigerDetail.profitLoss },
+          videoInfo,
+          dragonData,
+          tigerData,
+          lionData,
+        };
+      })
+      .addCase(updateDragonTigerOneDayRates.fulfilled, (state, action) => {
+        const { t1, t2 } = action.payload;
+        state.loading = false;
+        const videoInfo = { ...t1[0] };
+        const pair = { ...t2[2] };
+        const matchOddsData = t2.slice(0, 2);
+        const dragonData = t2.slice(3, 11);
+        const tigerData = t2.slice(11, 19);
+
+        state.dragonTigerDetail = {
+          ...state.dragonTigerDetail,
+          profitLoss:
+            t1[0]?.mid === 0 ? {} : { ...state.dragonTigerDetail.profitLoss },
+          videoInfo,
+          dragonData,
+          tigerData,
+          matchOddsData,
+          pair,
+        };
       });
   },
 });

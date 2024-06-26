@@ -1,7 +1,6 @@
 import { memo } from "react";
 import FlipClock from "./FlipClock";
 import isMobile from "../../../utils/screenDimension";
-import { cardUrl } from "../../../utils/Constants";
 
 const VideoFrame = ({ result, time, id }: any) => {
   // const [showModal, setModalOpen] = useState(false);
@@ -38,7 +37,7 @@ const VideoFrame = ({ result, time, id }: any) => {
               <iframe
                 width="100%"
                 height={isMobile ? "250" : "380"}
-                src={`${cardUrl}${id}`}
+                src={id}
                 // title="YouTube video player"
                 // frameborder="0"
                 // allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

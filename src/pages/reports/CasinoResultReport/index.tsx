@@ -49,6 +49,22 @@ const cardGames = [
     value: "lucky7",
     label: "Lucky 7 - A",
   },
+  {
+    value: "lucky7eu",
+    label: "Lucky 7 - B",
+  },
+  {
+    value: "dt202",
+    label: "20-20 Dragon Tiger 2",
+  },
+  {
+    value: "dtl20",
+    label: "Dragon Tiger Lion",
+  },
+  {
+    value: "dt6",
+    label: "Dragon Tiger 1 Day",
+  },
 ];
 
 const CasinoResultReport = () => {

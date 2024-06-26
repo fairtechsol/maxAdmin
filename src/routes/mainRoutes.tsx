@@ -8,10 +8,13 @@ import Lucky7 from "../pages/cardGames/games/lucky7";
 import DragonTiger2020 from "../pages/cardGames/games/dragonTiger2020";
 import Card32A from "../pages/cardGames/games/card32A";
 import TeenPatti2020 from "../pages/cardGames/games/teenpatti2020";
+import DragonTiger20Second from "../pages/cardGames/games/dragonSecond20";
+import DragonTigerLion from "../pages/cardGames/games/dragonTigerLion";
+import DragonTigerOneDay from "../pages/cardGames/games/dragonTigerOneDay";
+import Lucky7B from "../pages/cardGames/games/lucky7B";
 // ==============================|| Main ROUTING ||============================== //
 const Game = Loadable(lazy(() => import("../pages/games")));
 const OtherGamesDetail = Loadable(lazy(() => import("../pages/otherGames")));
-// const Sample = Loadable(lazy(() => import("../components/Sample")));
 const ListClients = Loadable(lazy(() => import("../pages/listClients")));
 const ListAccount = Loadable(lazy(() => import("../pages/listActiveUser")));
 const AddAccount = Loadable(lazy(() => import("../pages/addAccount")));
@@ -110,7 +113,19 @@ const MainRoutes = {
     },
     {
       path: "casinoDetail/dt202",
-      // element: <DragonTigerSecond20 />,
+      element: <DragonTiger20Second />,
+    },
+    {
+      path: "casinoDetail/dtl20",
+      element: <DragonTigerLion />,
+    },
+    {
+      path: "casinoDetail/dt6",
+      element: <DragonTigerOneDay />,
+    },
+    {
+      path: "casinoDetail/lucky7eu",
+      element: <Lucky7B />,
     },
     {
       path: "*",
