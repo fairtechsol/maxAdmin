@@ -143,8 +143,8 @@ const cardDetail = createSlice({
         };
       })
       .addCase(updateTeenPattiMatchRates.fulfilled, (state, action) => {
-        const { t1, t2 } = action.payload;
         state.loading = false;
+        const { t1, t2 } = action.payload;
         const videoInfo = { ...t1[0] };
         const playerA = t2.slice(0, 2);
         const playerB = t2.slice(2, 4);
