@@ -27,7 +27,6 @@ import {
   two,
 } from "../../../../assets";
 import UserBets from "../../../game/userBet";
-import InactivityModal from "../../../commonComponent/cards/userInactivityModal";
 import Dragon20Result from "./dragonCard";
 import { RootState } from "../../../../store/store";
 import { cardGamesId, cardUrl } from "../../../../utils/Constants";
@@ -148,20 +147,11 @@ const data2 = [
 ];
 const DragonTigerLionComponent = () => {
   const [show, setShow] = useState(false);
-  const [showInactivityModal, setShowInactivityModal] = useState(false);
-  const [lastActivityTime, setLastActivityTime] = useState(Date.now());
-  const [videoFrameId, setVideoFrameId] = useState(
-    `${cardUrl}${cardGamesId.dragonTigerLion}`
-  );
   const [firstArr, setFirstArr] = useState(data1);
   const [secondArr, setSecondArr] = useState(data2);
   const { dragonTigerDetail } = useSelector((state: RootState) => state.card);
   const placeBetRef = useRef<HTMLDivElement>(null);
   const [isSticky, setIsSticky] = useState(false);
-
-  const handleClose = () => {
-    setShowInactivityModal(false);
-  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -177,34 +167,6 @@ const DragonTigerLionComponent = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
-  useEffect(() => {
-    const resetTimer = () => {
-      setLastActivityTime(Date.now());
-    };
-
-    const checkInactivity = () => {
-      if (Date.now() - lastActivityTime > 5 * 60 * 1000) {
-        setShowInactivityModal(true);
-        setVideoFrameId("");
-      }
-    };
-
-    const activityEvents = ["mousemove", "keydown", "scroll", "click"];
-
-    activityEvents.forEach((event) => {
-      window.addEventListener(event, resetTimer);
-    });
-
-    const intervalId = setInterval(checkInactivity, 1000);
-
-    return () => {
-      activityEvents.forEach((event) => {
-        window.removeEventListener(event, resetTimer);
-      });
-      clearInterval(intervalId);
-    };
-  }, [lastActivityTime, showInactivityModal]);
 
   useEffect(() => {
     const mergedArray = data1?.map((item1: any) => {
@@ -288,7 +250,7 @@ const DragonTigerLionComponent = () => {
               <VideoFrame
                 time={dragonTigerDetail?.videoInfo?.autotime}
                 result={<Dragon20Result data={dragonTigerDetail?.videoInfo} />}
-                id={videoFrameId}
+                id={`${cardUrl}${cardGamesId.dragonTigerLion}`}
               />
             </div>
           </div>
@@ -438,7 +400,6 @@ const DragonTigerLionComponent = () => {
           </Container>
         </Col>
       </Row>
-      <InactivityModal show={showInactivityModal} handleClose={handleClose} />
     </div>
   );
 };

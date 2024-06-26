@@ -7,7 +7,7 @@ import CardResultBox from "../../../../components/commonComponent/cardResultBox"
 import RulesModal from "../../../../components/commonComponent/rulesModal";
 import { handleRoundId } from "../../../../helpers";
 import UserBets from "../../../../components/game/userBet";
-import { cardGamesId } from "../../../../utils/Constants";
+import { cardGamesId, cardUrl } from "../../../../utils/Constants";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../store/store";
 import { luckyrules } from "../../../../assets";
@@ -18,7 +18,6 @@ import CardBox from "./CardsBox";
 const Lucky7Component = () => {
   const [show, setShow] = useState(false);
   const placeBetRef = useRef<HTMLDivElement>(null);
-  // const [isSticky] = useState(false);
 
   const { dragonTigerDetail } = useSelector((state: RootState) => state.card);
 
@@ -59,7 +58,7 @@ const Lucky7Component = () => {
                 <VideoFrame
                   time={dragonTigerDetail?.videoInfo?.autotime}
                   result={<Lucky7Result data={dragonTigerDetail?.videoInfo} />}
-                  id={cardGamesId?.lucky7}
+                  id={`${cardUrl}${cardGamesId.lucky7}`}
                 />
               </div>
             </div>

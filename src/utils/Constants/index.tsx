@@ -273,12 +273,12 @@ export const card3 = {
       name: "20-20 DRAGON TIGER 2",
     },
     {
-      url: "/admin/casinoDetail/contact-admin",
+      url: "/admin/casinoDetail/dtl20",
       imgSrc: dtl20,
       name: "20-20 DRAGON TIGER LION",
     },
     {
-      url: "/admin/casinoDetail/contact-admin",
+      url: "/admin/casinoDetail/dt6",
       imgSrc: dt6,
       name: "1 DAY DRAGON TIGER",
     },
@@ -322,7 +322,7 @@ export const card3 = {
       name: "Lucky 7 A",
     },
     {
-      url: "/admin/casinoDetail/contact-admin",
+      url: "/admin/casinoDetail/lucky7eu",
       imgSrc: luck7B,
       name: "Lucky 7 B",
     },
@@ -427,6 +427,11 @@ export const cardGamesType: any = {
   teen20: "teen20",
   card32: "card32",
   lucky7: "lucky7",
+  dragonTiger202: "dt202",
+  dragonTigerLion: "dtl20",
+  teenOneDay: "teen",
+  dragonTigerOneDay: "dt6",
+  lucky7B: "lucky7eu",
 };
 
 export const cardGamesId: any = {
@@ -435,4 +440,9 @@ export const cardGamesId: any = {
   teen20: 3030,
   card32: 3055,
   lucky7: 3058,
+  dragonTiger202: 3059,
+  dragonTigerLion: 30470,
+  teenOneDay: 3031,
+  dragonTigerOneDay: 3057,
+  lucky7B: 3032,
 };

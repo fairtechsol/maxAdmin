@@ -6,7 +6,7 @@ import { RootState } from "../../../../store/store";
 import UserBets from "../../../game/userBet";
 import { handleRoundId } from "../../../../helpers";
 import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
-import { cardGamesId } from "../../../../utils/Constants";
+import { cardGamesId, cardUrl } from "../../../../utils/Constants";
 import SBetBox from "./Sbox";
 import OddEven from "./OddEvenBox";
 import CardBox from "./CardsBox";
@@ -59,7 +59,7 @@ const Abj2Component = () => {
                 <VideoFrame
                   time={dragonTigerDetail?.videoInfo?.autotime}
                   result={<Abj2Result data={dragonTigerDetail?.videoInfo} />}
-                  id={cardGamesId?.andarBahar2}
+                  id={`${cardUrl}${cardGamesId.andarBahar2}`}
                 />
               </div>
             </div>

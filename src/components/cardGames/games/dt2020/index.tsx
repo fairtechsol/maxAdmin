@@ -1,17 +1,16 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import "./style.scss";
 import { RootState } from "../../../../store/store";
 import { handleRoundId } from "../../../../helpers";
 import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
-import { cardGamesId } from "../../../../utils/Constants";
+import { cardGamesId, cardUrl } from "../../../../utils/Constants";
 import { dtrules } from "../../../../assets";
 import RulesModal from "../../../commonComponent/rulesModal";
 import CardResultBox from "../../../commonComponent/cardResultBox";
 import UserBets from "../../../game/userBet";
-import InactivityModal from "../../../commonComponent/cards/userInactivityModal";
 import Dragon20Result from "./dragonCard";
 import TiePairBox from "./TiePairBox";
 import OddEven from "./OddEvenBox";
@@ -19,21 +18,9 @@ import CardBox from "./CardsBox";
 
 const DragonTiger2020Component = () => {
   const [show, setShow] = useState(false);
-  const [showInactivityModal, setShowInactivityModal] = useState(false);
   const { dragonTigerDetail } = useSelector((state: RootState) => state.card);
   const placeBetRef = useRef<HTMLDivElement>(null);
   const [isSticky] = useState(false);
-
-  const handleClose = () => {
-    setShowInactivityModal(false);
-  };
-
-  useEffect(() => {
-    let timer = 5 * 1000 * 60;
-    setTimeout(() => {
-      setShowInactivityModal(true);
-    }, timer);
-  }, []);
 
   return (
     <div>
@@ -71,7 +58,7 @@ const DragonTiger2020Component = () => {
               <VideoFrame
                 time={dragonTigerDetail?.videoInfo?.autotime}
                 result={<Dragon20Result data={dragonTigerDetail?.videoInfo} />}
-                id={cardGamesId?.dragonTiger20}
+                id={`${cardUrl}${cardGamesId.dragonTiger20}`}
               />
             </div>
           </div>
@@ -80,7 +67,7 @@ const DragonTiger2020Component = () => {
               <TiePairBox
                 tiePair={dragonTigerDetail?.tiePair}
                 data={dragonTigerDetail}
-              />    
+              />
             </div>
             <div
               style={{
@@ -146,7 +133,6 @@ const DragonTiger2020Component = () => {
           </Container>
         </Col>
       </Row>
-      <InactivityModal show={showInactivityModal} handleClose={handleClose} />
     </div>
   );
 };

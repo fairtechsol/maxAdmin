@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import "./style.scss";
-import InactivityModal from "../../../commonComponent/cards/userInactivityModal";
 import UserBets from "../../../game/userBet";
 import { dtrules } from "../../../../assets";
 import RulesModal from "../../../commonComponent/rulesModal";
@@ -19,18 +18,9 @@ import CardBox from "./CardsBox";
 
 const DragonSecond20Component = () => {
   const [show, setShow] = useState(false);
-  const [showInactivityModal, setShowInactivityModal] = useState(false);
-  const [lastActivityTime, setLastActivityTime] = useState(Date.now());
-  const [videoFrameId, setVideoFrameId] = useState(
-    `${cardUrl}${cardGamesId.dragonTiger202}`
-  );
   const { dragonTigerDetail } = useSelector((state: RootState) => state.card);
   const placeBetRef = useRef<HTMLDivElement>(null);
   const [isSticky, setIsSticky] = useState(false);
-
-  const handleClose = () => {
-    setShowInactivityModal(false);
-  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,34 +36,6 @@ const DragonSecond20Component = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
-  useEffect(() => {
-    const resetTimer = () => {
-      setLastActivityTime(Date.now());
-    };
-
-    const checkInactivity = () => {
-      if (Date.now() - lastActivityTime > 5 * 60 * 1000) {
-        setShowInactivityModal(true);
-        setVideoFrameId("");
-      }
-    };
-
-    const activityEvents = ["mousemove", "keydown", "scroll", "click"];
-
-    activityEvents.forEach((event) => {
-      window.addEventListener(event, resetTimer);
-    });
-
-    const intervalId = setInterval(checkInactivity, 1000);
-
-    return () => {
-      activityEvents.forEach((event) => {
-        window.removeEventListener(event, resetTimer);
-      });
-      clearInterval(intervalId);
-    };
-  }, [lastActivityTime, showInactivityModal]);
 
   return (
     <div>
@@ -111,7 +73,7 @@ const DragonSecond20Component = () => {
               <VideoFrame
                 time={dragonTigerDetail?.videoInfo?.autotime}
                 result={<Dragon20Result data={dragonTigerDetail?.videoInfo} />}
-                id={videoFrameId}
+                id={`${cardUrl}${cardGamesId.dragonTiger202}`}
               />
             </div>
           </div>
@@ -186,7 +148,6 @@ const DragonSecond20Component = () => {
           </Container>
         </Col>
       </Row>
-      <InactivityModal show={showInactivityModal} handleClose={handleClose} />
     </div>
   );
 };
