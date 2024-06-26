@@ -21,11 +21,17 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
 
+  const { loading } = useSelector((state: RootState) => state.auth);
+
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: loginValidationSchema,
     onSubmit: (values: any) => {
-      dispatch(login(values));
+      if (loading) {
+        return;
+      } else {
+        dispatch(login(values));
+      }
     },
   });
 
