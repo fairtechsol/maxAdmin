@@ -199,7 +199,7 @@ const AccountStatement = () => {
           searchBy: "description",
           keyword: tableConfig?.keyword ?? "",
           filter: filter,
-          sort: "transaction.createdAt:DESC",
+          sort: "transaction.createdAt:DESC,transaction.uniqueId:DESC",
         })
       );
       setTableConfig((prev: any) => {
@@ -268,8 +268,8 @@ const AccountStatement = () => {
                 ? `transaction.${sortConstant[tableConfig?.sort?.key]}:${
                     tableConfig?.sort?.direction
                   }`
-                : "transaction.createdAt:DESC"
-              : "transaction.createdAt:DESC",
+                : "transaction.createdAt:DESC,transaction.uniqueId:DESC"
+              : "transaction.createdAt:DESC,transaction.uniqueId:DESC",
             filter,
           })
         );
