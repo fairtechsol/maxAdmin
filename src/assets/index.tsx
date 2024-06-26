@@ -1,5 +1,7 @@
 export { default as abjlist } from "./anderBahar/andar-bahar.webp";
 export { default as abjlist2 } from "./anderBahar/andar-bahar2.webp";
+export { default as leftArrow } from "./anderBahar/left-arrow-black.webp";
+export { default as rightArrow } from "./anderBahar/right_arrow_black.webp";
 export { default as back } from "./cards/back.png";
 export { default as club } from "./cards/clubs.png";
 export { default as diamond } from "./cards/diamond.png";
