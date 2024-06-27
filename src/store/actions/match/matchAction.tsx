@@ -361,3 +361,6 @@ export const successResetForLockUnlock = createAction(
 export const betReportAccountListReset = createAction(
   "betReportAccountList/reset"
 );
+export const resetGameReportList = createAction(
+  "gameReportList/reset"
+);

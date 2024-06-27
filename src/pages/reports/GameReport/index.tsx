@@ -5,7 +5,10 @@ import SelectSearch from "../../../components/commonComponent/SelectSearch";
 import CustomInput from "../../../components/commonComponent/input";
 import CustomTable from "../../../components/commonComponent/table";
 import { TableConfig } from "../../../models/tableInterface";
-import { getGameReport } from "../../../store/actions/match/matchAction";
+import {
+  getGameReport,
+  resetGameReportList,
+} from "../../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../../store/store";
 import moment from "moment-timezone";
 import _ from "lodash";
@@ -75,16 +78,20 @@ const GameReport = () => {
     } else if (dateTo) {
       filter += `&createdAt=lte${moment(dateTo)?.format("YYYY-MM-DD")}`;
     }
-    dispatch(
-      getGameReport({
-        type: selectType?.value,
-        // page: 1,
-        limit: tableConfig?.rowPerPage,
-        searchBy: "description",
-        keyword: tableConfig?.keyword || "",
-        filter,
-      })
-    );
+    if (selectType.value && selectType.value === "fancy") {
+      dispatch(resetGameReportList());
+    } else {
+      dispatch(
+        getGameReport({
+          type: selectType?.value,
+          // page: 1,
+          limit: tableConfig?.rowPerPage,
+          searchBy: "description",
+          keyword: tableConfig?.keyword || "",
+          filter,
+        })
+      );
+    }
   };
 
   return (
