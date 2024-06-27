@@ -51,7 +51,7 @@ const CardResultBox = ({ data, name, type }: any) => {
                   type === "card32"
                     ? ""
                     : item?.result === "3"
-                    ? "#ffc742"
+                    ? ""
                     : "",
               }}
               onClick={() => handleResult(item?.mid)}
@@ -80,10 +80,10 @@ const CardResultBox = ({ data, name, type }: any) => {
                     fontSize: "16px",
                     fontWeight: "600",
                     color:
-                      item?.result === "2"
+                      item?.result === "3"
                         ? "#ffff33"
                         : item?.result === "2"
-                        ? "00ff00"
+                        ? "#00ff00"
                         : "#ff4500",
                   }}
                 >
