@@ -7,6 +7,7 @@ import {
   getProfitLossReport,
   getBetAccountStatementModal,
   getCardReport,
+  resetGameReportList,
 } from "../../actions/match/matchAction";
 
 interface InitialState {
@@ -136,6 +137,9 @@ const reportListSlice = createSlice({
         // state.loading = false;
         // state.success = false;
         state.error = action?.error?.message;
+      })
+      .addCase(resetGameReportList, (state) => {
+        state.gameReportList = [];
       });
   },
 });
