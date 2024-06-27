@@ -1,10 +1,9 @@
 import React from "react";
-import {Container } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
-import { leftArrow, rightArrow } from "../../../../assets";
 interface Props {
   data: {
     C1: string;
@@ -22,44 +21,57 @@ const AbjResultComponent: React.FC<Props> = ({ data }: any) => {
   const teamB = cards?.filter(
     (item: any, index: number) => index % 2 !== 0 && item !== "1"
   );
-  const minLength =  10;
-  
-  // console.log('first',data)
-  function SampleNextArrow(props:any) {
-    const { className, style, onClick } = props;
-    return (
-      <div
-      className={className}
-      style={{ ...style, display: 'block', cursor: 'pointer' , marginBottom: "80px",position: "absolute" }}
-      onClick={onClick}
-    >
-      <img src={rightArrow} alt="Next" />
-    </div>
-    );
-  }
-  
-  function SamplePrevArrow(props:any) {
-    const { className, style, onClick } = props;
-    return (
-      <div
-      className={className}
-      style={{ ...style, display: 'block', cursor: 'pointer', marginBottom: "80px",position: "absolute"  }}
-      onClick={onClick}
-    >
-      <img src={leftArrow} alt="Previous" />
+  const minLength = 10;
 
-    </div>
+  // console.log('first',data)
+  function SampleNextArrow(props: any) {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={className}
+        style={{
+          ...style,
+          display: "block",
+          cursor: "pointer",
+          backgroundColor: "#9e9ba1",
+          borderRadius: "10px",
+        }}
+        onClick={onClick}
+      >
+        {/* <img src={rightArrow} alt="Next" /> */}
+      </div>
     );
   }
-  
+
+  function SamplePrevArrow(props: any) {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={className}
+        style={{
+          ...style,
+          display: "block",
+          cursor: "pointer",
+          backgroundColor: "#9e9ba1",
+          borderRadius: "10px",
+        }}
+        onClick={onClick}
+      >
+        {/* <img src={leftArrow} alt="Previous" /> */}
+      </div>
+    );
+  }
+
   const sliderSettings = (length: any, arrow: any) => ({
     infinite: false,
+    arrows: false,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: 10,
     slidesToScroll: 3,
+    // arrows: true,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
-    initialSlide: length > 3 ? length - 3 : 0,
+    initialSlide: 3,
 
     responsive: [
       {
@@ -137,47 +149,51 @@ const AbjResultComponent: React.FC<Props> = ({ data }: any) => {
           </div>
         </div>
         <div className="abjresultCardContainer2">
-        <div
-              style={{
-                width:  "110px",
-                margin: "0px 10px 20px 10px",
-              }}
-            >
-              <div>
-                {teamB?.length > minLength ? (
-                  <Slider {...sliderSettings(teamB.length, teamB.length > minLength)}>
-                  {teamB.map((item:any, index:any) => (
+          <div
+            style={{
+              width: "85%",
+              margin: "8px 9px 10px 11px",
+            }}
+          >
+            <div>
+              {teamB?.length > minLength ? (
+                <Slider
+                  {...sliderSettings(teamB.length, teamB.length > minLength)}
+                >
+                  {teamB?.map((item: any, index: any) => (
                     <div key={index}>
                       <HandleCards card={item} />
                     </div>
                   ))}
                 </Slider>
               ) : (
-                <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-                  {teamB.map((item:any, index:any) => (
+                <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+                  {teamB?.map((item: any, index: any) => (
                     <HandleCards key={index} card={item} />
                   ))}
                 </div>
-                )}
-              </div>
-              <div className="">
-              {teamA?.length > minLength ? (
-                      <Slider {...sliderSettings(teamA.length, teamA.length > minLength)}>
-                      {teamA.map((item:any, index:any) => (
-                        <div key={index}>
-                          <HandleCards card={item} />
-                        </div>
-                      ))}
-                    </Slider>
-                  ) : (
-                    <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-                      {teamA.map((item:any, index:any) => (
-                        <HandleCards key={index} card={item} />
-                      ))}
-                    </div>
-                )}
-              </div>
+              )}
             </div>
+            <div className="">
+              {teamA?.length > minLength ? (
+                <Slider
+                  {...sliderSettings(teamA.length, teamA.length > minLength)}
+                >
+                  {teamA?.map((item: any, index: any) => (
+                    <div key={index}>
+                      <HandleCards card={item} />
+                    </div>
+                  ))}
+                </Slider>
+              ) : (
+                <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+                  {teamA?.map((item: any, index: any) => (
+                    <HandleCards key={index} card={item} />
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </Container>
