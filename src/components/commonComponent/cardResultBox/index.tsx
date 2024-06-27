@@ -31,7 +31,7 @@ const CardResultBox = ({ data, name, type }: any) => {
           <span
             style={{ fontSize: "14px", cursor: "pointer" }}
             onClick={() =>
-              navigate("/casino-report", {
+              navigate("/admin/casinoresult", {
                 state: { cardType: data?.type },
               })
             }
@@ -48,11 +48,7 @@ const CardResultBox = ({ data, name, type }: any) => {
               key={item?.mid}
               style={{
                 backgroundColor:
-                  type === "card32"
-                    ? ""
-                    : item?.result === "3"
-                    ? ""
-                    : "",
+                  type === "card32" ? "" : item?.result === "3" ? "" : "",
               }}
               onClick={() => handleResult(item?.mid)}
             >
