@@ -28,15 +28,15 @@ export const authReducer = createReducer(initialState, (builder) => {
       state.loading = false;
     })
     .addCase(checkOldPassword.pending, (state) => {
-      state.loading = true;
+      // state.loading = true;
       state.oldPasswordMatched = false;
     })
     .addCase(checkOldPassword.fulfilled, (state, action) => {
-      state.loading = false;
+      // state.loading = false;
       state.oldPasswordMatched = action.payload;
     })
     .addCase(checkOldPassword.rejected, (state) => {
-      state.loading = false;
+      // state.loading = false;
     })
     .addCase(authReset, (state) => {
       // Reset the state to initial state

@@ -70,20 +70,21 @@ const ProfitLossReport = () => {
   }, 500);
 
   useEffect(() => {
-    dispatch(
-      getProfitLossReport({
-        userId: selectedUser[0]?.value,
-        startDate: fromDate ? fromDate : "",
-        endDate: toDate
-          ? moment(
-              new Date(toDate).setDate(new Date(toDate).getDate() + 1)
-            ).format("YYYY-MM-DD")
-          : "",
-        page: tableConfig?.page,
-        limit: tableConfig?.rowPerPage,
-        keyword: tableConfig?.keyword ?? "",
-      })
-    );
+    let payload: any = {
+      startDate: fromDate ? fromDate : "",
+      endDate: toDate
+        ? moment(
+            new Date(toDate).setDate(new Date(toDate).getDate() + 1)
+          ).format("YYYY-MM-DD")
+        : "",
+      page: tableConfig?.page,
+      limit: tableConfig?.rowPerPage,
+      keyword: tableConfig?.keyword ?? "",
+    };
+    if (selectedUser[0]?.value) {
+      payload.userId = selectedUser[0]?.value;
+    }
+    dispatch(getProfitLossReport(payload));
   }, [keyword, page, rowPerPage, sort]);
 
   useEffect(() => {
@@ -104,22 +105,26 @@ const ProfitLossReport = () => {
     }
   }, [tableConfig]);
 
+  console.log(selectedUser);
+
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    dispatch(
-      getProfitLossReport({
-        userId: selectedUser[0]?.value,
-        startDate: fromDate ? fromDate : "",
-        endDate: toDate
-          ? moment(
-              new Date(toDate).setDate(new Date(toDate).getDate() + 1)
-            ).format("YYYY-MM-DD")
-          : "",
-        page: 1,
-        limit: tableConfig?.rowPerPage,
-        keyword: tableConfig?.keyword ?? "",
-      })
-    );
+    let payload: any = {
+      startDate: fromDate ? fromDate : "",
+      endDate: toDate
+        ? moment(
+            new Date(toDate).setDate(new Date(toDate).getDate() + 1)
+          ).format("YYYY-MM-DD")
+        : "",
+      page: 1,
+      limit: tableConfig?.rowPerPage,
+      keyword: tableConfig?.keyword ?? "",
+    };
+
+    if (selectedUser[0]?.value) {
+      payload.userId = selectedUser[0].value;
+    }
+    dispatch(getProfitLossReport(payload));
   };
 
   useEffect(() => {
@@ -148,7 +153,7 @@ const ProfitLossReport = () => {
                   let newValue = value[1];
                   setSelectedUser([newValue]);
                 } else if (value?.length === 0) {
-                  setSelectedUser(null);
+                  setSelectedUser([]);
                 } else {
                   setSelectedUser(value);
                 }
