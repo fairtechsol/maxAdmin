@@ -45,6 +45,10 @@ const Lucky7B = Loadable(
   lazy(() => import("../pages/cardGames/games/lucky7B"))
 );
 
+const TeenPatti1D = Loadable(
+  lazy(() => import("../pages/cardGames/games/teenPatti1D"))
+);
+
 const MainRoutes = {
   path: "/admin",
   element: <MainLayout />,
@@ -140,6 +144,10 @@ const MainRoutes = {
     {
       path: "casinoDetail/lucky7eu",
       element: <Lucky7B />,
+    },
+    {
+      path: "casinoDetail/teen",
+      element: <TeenPatti1D />,
     },
     {
       path: "*",

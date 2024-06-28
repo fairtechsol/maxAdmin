@@ -100,7 +100,7 @@ export const Constants = {
   thirdPartyLive: "https://serviceapi.fairgame7.com",
   expertPathLive: "https://expertapi.fairgame7.com",
   thirdPartyCard: "https://casinoserviceapi.fairgame.club",
-  localPath: "http://localhost:5000",
+  localPath: "http://localhost:5001",
   localPathThird: "http://localhost:3200",
   localPathExpert: "http://localhost:6060",
   localThirdCard: "http://localhost:3201",
@@ -300,7 +300,7 @@ export const card3 = {
       name: "20-20 TEENPATTI",
     },
     {
-      url: "/admin/casinoDetail/contact-admin",
+      url: "/admin/casinoDetail/teen",
       imgSrc: dayteen,
       name: "1 DAY TEENPATTI",
     },
