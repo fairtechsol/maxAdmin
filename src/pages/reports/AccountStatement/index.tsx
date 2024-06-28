@@ -457,8 +457,13 @@ const AccountStatement = () => {
                       dispatch(
                         getBetAccountStatementModal({
                           id: user?.id,
+                          isCard: true,
                           runnerId: match[1],
-                          status: null,
+                          result: `inArr${JSON.stringify([
+                            "WIN",
+                            "LOSS",
+                            "TIE",
+                          ])}`,
                           sort: "betPlaced.createdAt:DESC",
                         })
                       );
