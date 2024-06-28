@@ -57,79 +57,87 @@ const cardDetail = createSlice({
         state.error = action?.error?.message;
       })
       .addCase(updateCardMatchRates.fulfilled, (state, action) => {
-        const { t1, t2 } = action.payload;
-        state.loading = false;
-        const videoInfo = { ...t1[0] };
-        const tiePair = t2.slice(0, 4);
-        const dragonOdds = t2.slice(4, 8);
-        const dragonCards = t2.slice(8, 21);
-        const tigerOdds = t2.slice(21, 25);
-        const tigerCards = t2.slice(25, 38);
+        if (action.payload) {
+          const { t1, t2 } = action.payload;
+          state.loading = false;
+          const videoInfo = { ...t1[0] };
+          const tiePair = t2.slice(0, 4);
+          const dragonOdds = t2.slice(4, 8);
+          const dragonCards = t2.slice(8, 21);
+          const tigerOdds = t2.slice(21, 25);
+          const tigerCards = t2.slice(25, 38);
 
-        state.dragonTigerDetail = {
-          ...state.dragonTigerDetail,
-          profitLoss:
-            t1[0]?.mid === 0 ? {} : { ...state.dragonTigerDetail.profitLoss },
-          videoInfo,
-          tiePair,
-          dragonOdds,
-          dragonCards,
-          tigerOdds,
-          tigerCards,
-        };
+          state.dragonTigerDetail = {
+            ...state.dragonTigerDetail,
+            profitLoss:
+              t1[0]?.mid === 0 ? {} : { ...state.dragonTigerDetail.profitLoss },
+            videoInfo,
+            tiePair,
+            dragonOdds,
+            dragonCards,
+            tigerOdds,
+            tigerCards,
+          };
+        }
       })
       .addCase(update7CardMatchRates.fulfilled, (state, action) => {
-        const { t1, t2 } = action.payload;
-        state.loading = false;
-        const videoInfo = { ...t1[0] };
-        const lowHigh = t2.slice(0, 2);
-        const redBlack = t2.slice(2, 4);
-        const luckOdds = t2.slice(4, 6);
-        const luckyCards = t2.slice(6, 19);
-        state.dragonTigerDetail = {
-          ...state.dragonTigerDetail,
-          videoInfo,
-          lowHigh,
-          redBlack,
-          luckOdds,
-          luckyCards,
-        };
+        if (action.payload) {
+          const { t1, t2 } = action.payload;
+          state.loading = false;
+          const videoInfo = { ...t1[0] };
+          const lowHigh = t2.slice(0, 2);
+          const redBlack = t2.slice(2, 4);
+          const luckOdds = t2.slice(4, 6);
+          const luckyCards = t2.slice(6, 19);
+          state.dragonTigerDetail = {
+            ...state.dragonTigerDetail,
+            videoInfo,
+            lowHigh,
+            redBlack,
+            luckOdds,
+            luckyCards,
+          };
+        }
       })
       .addCase(update7BCardMatchRates.fulfilled, (state, action) => {
-        const { t1, t2 } = action.payload;
-        state.loading = false;
-        const videoInfo = { ...t1[0] };
-        const lowHigh = t2.slice(0, 2);
-        const redBlack = t2.slice(2, 4);
-        const luckOdds = t2.slice(4, 6);
-        const luckyCards = t2.slice(6, 19);
-        state.dragonTigerDetail = {
-          ...state.dragonTigerDetail,
-          videoInfo,
-          lowHigh,
-          redBlack,
-          luckOdds,
-          luckyCards,
-        };
+        if (action.payload) {
+          state.loading = false;
+          const { t1, t2 } = action.payload;
+          const videoInfo = { ...t1[0] };
+          const lowHigh = t2.slice(0, 2);
+          const redBlack = t2.slice(2, 4);
+          const luckOdds = t2.slice(4, 6);
+          const luckyCards = t2.slice(6, 19);
+          state.dragonTigerDetail = {
+            ...state.dragonTigerDetail,
+            videoInfo,
+            lowHigh,
+            redBlack,
+            luckOdds,
+            luckyCards,
+          };
+        }
       })
       .addCase(updateCardAbjRates.fulfilled, (state, action) => {
-        const { t1, t2 } = action.payload;
-        state.loading = false;
-        const videoInfo = { ...t1[0] };
-        const abjSa = t2.slice(0, 3);
-        const abjSb = t2.slice(3, 6);
-        const oddEven = t2.slice(23, 25);
-        const abjCards = t2.slice(19, 23);
-        const cards = t2.slice(6, 19);
-        state.dragonTigerDetail = {
-          ...state.dragonTigerDetail,
-          videoInfo,
-          abjSa,
-          abjSb,
-          oddEven,
-          abjCards,
-          cards,
-        };
+        if (action.payload) {
+          state.loading = false;
+          const { t1, t2 } = action.payload;
+          const videoInfo = { ...t1[0] };
+          const abjSa = t2.slice(0, 3);
+          const abjSb = t2.slice(3, 6);
+          const oddEven = t2.slice(23, 25);
+          const abjCards = t2.slice(19, 23);
+          const cards = t2.slice(6, 19);
+          state.dragonTigerDetail = {
+            ...state.dragonTigerDetail,
+            videoInfo,
+            abjSa,
+            abjSb,
+            oddEven,
+            abjCards,
+            cards,
+          };
+        }
       })
       .addCase(updateLiveGameResultTop10.fulfilled, (state, action) => {
         state.liveGameResultTop10 = action.payload;
@@ -144,31 +152,35 @@ const cardDetail = createSlice({
         };
       })
       .addCase(updateTeenPattiMatchRates.fulfilled, (state, action) => {
-        state.loading = false;
-        const { t1, t2 } = action.payload;
-        const videoInfo = { ...t1[0] };
-        const playerA = t2.slice(0, 2);
-        const playerB = t2.slice(2, 4);
-        state.dragonTigerDetail = {
-          ...state.dragonTigerDetail,
-          videoInfo,
-          playerA,
-          playerB,
-        };
+        if (action.payload) {
+          state.loading = false;
+          const { t1, t2 } = action.payload;
+          const videoInfo = { ...t1[0] };
+          const playerA = t2.slice(0, 2);
+          const playerB = t2.slice(2, 4);
+          state.dragonTigerDetail = {
+            ...state.dragonTigerDetail,
+            videoInfo,
+            playerA,
+            playerB,
+          };
+        }
       })
       .addCase(updateCard32MatchRates.fulfilled, (state, action) => {
-        const { t1, t2 } = action.payload;
-        state.loading = false;
-        const videoInfo = { ...t1[0] };
-        const set1 = t2.slice(0, 2);
-        const set2 = t2.slice(2, 4);
+        if (action.payload) {
+          state.loading = false;
+          const { t1, t2 } = action.payload;
+          const videoInfo = { ...t1[0] };
+          const set1 = t2.slice(0, 2);
+          const set2 = t2.slice(2, 4);
 
-        state.dragonTigerDetail = {
-          ...state.dragonTigerDetail,
-          videoInfo,
-          set1,
-          set2,
-        };
+          state.dragonTigerDetail = {
+            ...state.dragonTigerDetail,
+            videoInfo,
+            set1,
+            set2,
+          };
+        }
       })
       .addCase(resultDragonTiger.pending, (state) => {
         // state.loading = true;
@@ -184,42 +196,46 @@ const cardDetail = createSlice({
         state.error = action?.error?.message;
       })
       .addCase(updateDragonTigerLionRates.fulfilled, (state, action) => {
-        const { t1, t2 } = action.payload;
-        state.loading = false;
-        const videoInfo = { ...t1[0] };
-        const dragonData = t2.slice(0, 18);
-        const tigerData = t2.slice(18, 36);
-        const lionData = t2.slice(36, 54);
+        if (action.payload) {
+          state.loading = false;
+          const { t1, t2 } = action.payload;
+          const videoInfo = { ...t1[0] };
+          const dragonData = t2.slice(0, 18);
+          const tigerData = t2.slice(18, 36);
+          const lionData = t2.slice(36, 54);
 
-        state.dragonTigerDetail = {
-          ...state.dragonTigerDetail,
-          profitLoss:
-            t1[0]?.mid === 0 ? {} : { ...state.dragonTigerDetail.profitLoss },
-          videoInfo,
-          dragonData,
-          tigerData,
-          lionData,
-        };
+          state.dragonTigerDetail = {
+            ...state.dragonTigerDetail,
+            profitLoss:
+              t1[0]?.mid === 0 ? {} : { ...state.dragonTigerDetail.profitLoss },
+            videoInfo,
+            dragonData,
+            tigerData,
+            lionData,
+          };
+        }
       })
       .addCase(updateDragonTigerOneDayRates.fulfilled, (state, action) => {
-        const { t1, t2 } = action.payload;
-        state.loading = false;
-        const videoInfo = { ...t1[0] };
-        const pair = { ...t2[2] };
-        const matchOddsData = t2.slice(0, 2);
-        const dragonData = t2.slice(3, 11);
-        const tigerData = t2.slice(11, 19);
+        if (action.payload) {
+          state.loading = false;
+          const { t1, t2 } = action.payload;
+          const videoInfo = { ...t1[0] };
+          const pair = { ...t2[2] };
+          const matchOddsData = t2.slice(0, 2);
+          const dragonData = t2.slice(3, 11);
+          const tigerData = t2.slice(11, 19);
 
-        state.dragonTigerDetail = {
-          ...state.dragonTigerDetail,
-          profitLoss:
-            t1[0]?.mid === 0 ? {} : { ...state.dragonTigerDetail.profitLoss },
-          videoInfo,
-          dragonData,
-          tigerData,
-          matchOddsData,
-          pair,
-        };
+          state.dragonTigerDetail = {
+            ...state.dragonTigerDetail,
+            profitLoss:
+              t1[0]?.mid === 0 ? {} : { ...state.dragonTigerDetail.profitLoss },
+            videoInfo,
+            dragonData,
+            tigerData,
+            matchOddsData,
+            pair,
+          };
+        }
       });
   },
 });
