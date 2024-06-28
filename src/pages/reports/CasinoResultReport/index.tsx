@@ -65,6 +65,10 @@ const cardGames = [
     value: "dt6",
     label: "Dragon Tiger 1 Day",
   },
+  {
+    value: "teen",
+    label: "Teen Patti One Day",
+  },
 ];
 
 const CasinoResultReport = () => {
