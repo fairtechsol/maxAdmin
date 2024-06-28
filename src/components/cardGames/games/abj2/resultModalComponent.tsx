@@ -24,7 +24,6 @@ const AbjResultComponent: React.FC<Props> = ({ data }: any) => {
   );
   const minLength = 10;
 
-  // console.log('first',data)
   function SampleNextArrow(props: any) {
     const { className, style, onClick } = props;
     return (
@@ -38,9 +37,7 @@ const AbjResultComponent: React.FC<Props> = ({ data }: any) => {
           borderRadius: "10px",
         }}
         onClick={onClick}
-      >
-        {/* <img src={rightArrow} alt="Next" /> */}
-      </div>
+      ></div>
     );
   }
 
@@ -57,9 +54,7 @@ const AbjResultComponent: React.FC<Props> = ({ data }: any) => {
           borderRadius: "10px",
         }}
         onClick={onClick}
-      >
-        {/* <img src={leftArrow} alt="Previous" /> */}
-      </div>
+      ></div>
     );
   }
 
@@ -72,7 +67,6 @@ const AbjResultComponent: React.FC<Props> = ({ data }: any) => {
     arrows: true,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
-    // initialSlide: isMobile ? (length > 3 ? length - 3 : 0) : 3,
 
     responsive: [
       {
@@ -97,22 +91,6 @@ const AbjResultComponent: React.FC<Props> = ({ data }: any) => {
     <Container style={{ display: "flex", flexDirection: "column" }}>
       <div className="abjresultModal mb-2">
         <div className="abjresultCardContainer">
-          {/* <div style={{ display: "flex", flexDirection: "column",marginLeft:isMobile?0:"20px" }}>
-            <div>
-              {data?.result?.win === "1" && (
-                <div className="casino-winner-icon">
-                  <FaTrophy size={isMobile ? 20 : 30} color="#169733" />
-                </div>
-              )}
-            </div>
-            <div>
-              {data?.result?.win === "2" && (
-                <div className="casino-winner-icon">
-                  <FaTrophy size={isMobile ? 20 : 30} color="#169733" />
-                </div>
-              )}
-            </div>
-          </div> */}
           <div style={{ display: "flex", flexDirection: "column" }}>
             <div style={{ display: "flex", flexDirection: "row" }}>
               <div style={{ width: "70%", marginRight: "5px" }}>
