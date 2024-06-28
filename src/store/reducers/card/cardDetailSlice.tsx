@@ -50,6 +50,7 @@ const cardDetail = createSlice({
       .addCase(getDragonTigerDetailHorseRacing.fulfilled, (state, action) => {
         state.success = true;
         state.dragonTigerDetail = action.payload;
+        state.liveGameResultTop10 = action.payload.topTenResult;
       })
       .addCase(getDragonTigerDetailHorseRacing.rejected, (state, action) => {
         state.loading = false;
