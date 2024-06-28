@@ -1,14 +1,11 @@
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import "./index.scss";
+import { useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../store/store";
-import { Modal } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { useState } from "react";
-import { resultDragonTiger } from "../../../store/actions/card/cardDetail";
+import Modal from "react-bootstrap/Modal";
 import { ResultComponent } from "../resultComponent";
-// import { useState } from "react";
-// import Modal from "react-bootstrap/Modal";
-// import { ResultComponent } from "../resultComponent";
+import { resultDragonTiger } from "../../../store/actions/card/cardDetail";
 
 const CardResultBox = ({ data, name, type }: any) => {
   const navigate = useNavigate();
@@ -22,7 +19,6 @@ const CardResultBox = ({ data, name, type }: any) => {
     setLgShow(true);
     dispatch(resultDragonTiger(id));
   };
-
   return (
     <div className="cardResultBoxContainer">
       <div className="cardResultBoxHeader">
@@ -31,7 +27,7 @@ const CardResultBox = ({ data, name, type }: any) => {
           <span
             style={{ fontSize: "14px", cursor: "pointer" }}
             onClick={() =>
-              navigate("/admin/casinoresult", {
+              navigate("/casino-report", {
                 state: { cardType: data?.type },
               })
             }
@@ -47,8 +43,7 @@ const CardResultBox = ({ data, name, type }: any) => {
               className="cardResultCircle"
               key={item?.mid}
               style={{
-                backgroundColor:
-                  type === "card32" ? "" : item?.result === "3" ? "" : "",
+                backgroundColor: "#355e3b",
               }}
               onClick={() => handleResult(item?.mid)}
             >
@@ -76,16 +71,22 @@ const CardResultBox = ({ data, name, type }: any) => {
                     fontSize: "16px",
                     fontWeight: "600",
                     color:
-                      item?.result === "3"
-                        ? "#ffff33"
-                        : item?.result === "2"
-                        ? "#00ff00"
+                      item?.result === "3" || item?.result === "41"
+                        ? "#f5cc03"
+                        : item?.result === "2" || item?.result === "21"
+                        ? "#ffffff"
                         : "#ff4500",
                   }}
                 >
-                  {item?.result === "1"
+                  {type === "teen20"
+                    ? item?.result === "0"
+                      ? name?.[1]
+                      : item?.result === "1"
+                      ? name?.[0]
+                      : name?.[2]
+                    : item?.result === "1"
                     ? name?.[0]
-                    : item?.result === "2"
+                    : item?.result === "2" || item?.result === "21"
                     ? name?.[1]
                     : name?.[2]
                     ? name?.[2]
@@ -101,11 +102,11 @@ const CardResultBox = ({ data, name, type }: any) => {
         onHide={() => setLgShow(false)}
         aria-labelledby="example-modal-sizes-title-lg"
       >
-        <Modal.Body style={{ padding: "1rem" }}>
+        <Modal.Body style={{ padding: 10 }}>
           <ResultComponent
             data={resultData}
             setfalse={setLgShow}
-            type={resultData?.gameType}
+            type={data?.type}
           />
         </Modal.Body>
       </Modal>

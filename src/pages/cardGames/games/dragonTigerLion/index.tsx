@@ -5,7 +5,7 @@ import { AppDispatch, RootState } from "../../../../store/store";
 import { socket, socketService } from "../../../../socketManager";
 import { cardGamesType } from "../../../../utils/Constants";
 import Loader from "../../../../components/commonComponent/loader";
-import { getPlacedBets } from "../../../../store/actions/match/matchAction";
+import { getPlacedBets, updateBetsPlaced } from "../../../../store/actions/match/matchAction";
 import {
   getDragonTigerDetailHorseRacing,
   updateBalanceOnBetPlaceCards,
@@ -31,7 +31,7 @@ const DragonTigerLion = () => {
 
   const handleBetPlacedOnDT20 = (event: any) => {
     if (event?.jobData?.matchType === cardGamesType.dragonTigerLion) {
-      dispatch(getPlacedBets(dragonTigerDetail?.id));
+      dispatch(updateBetsPlaced(event?.jobData));
       dispatch(updateBalanceOnBetPlaceCards(event?.jobData));
       dispatch(updateProfitLossCards(event?.userRedisObj));
     }
@@ -63,6 +63,7 @@ const DragonTigerLion = () => {
         socketService.card.getCardRatesOff(cardGamesType.dragonTigerLion);
         socketService.card.userCardBetPlacedOff();
         socketService.card.cardResultOff();
+        socketService.card.matchResultDeclareAllUserOff();
         socketService.card.joinMatchRoom(cardGamesType.dragonTigerLion);
         socketService.card.getCardRates(
           cardGamesType.dragonTigerLion,
@@ -74,6 +75,7 @@ const DragonTigerLion = () => {
         );
         socketService.card.userCardBetPlaced(handleBetPlacedOnDT20);
         socketService.card.cardResult(handleCardResult);
+        socketService.card.matchResultDeclareAllUser(handleCardResult);
       }
     } catch (error) {
       console.log(error);
@@ -88,6 +90,7 @@ const DragonTigerLion = () => {
           socketService.card.getCardRatesOff(cardGamesType.dragonTigerLion);
           socketService.card.userCardBetPlacedOff();
           socketService.card.cardResultOff();
+          socketService.card.matchResultDeclareAllUserOff();
         };
       }
     } catch (e) {

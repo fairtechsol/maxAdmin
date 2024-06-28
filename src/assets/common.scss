@@ -258,6 +258,41 @@ color: $defaultBlue !important ;
   font-weight: 900;
 }
 
+.cardResultBoxContainer{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5px;
+}
+.cardResultBoxHeader{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 6px 8px;
+  background-color: #ffc742D9;
+}
+.cardResultBoxRound{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
+  margin-top: 10px;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+.cardResultCircle{
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  background-color: #355e3b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 
 // === border css start ====
 

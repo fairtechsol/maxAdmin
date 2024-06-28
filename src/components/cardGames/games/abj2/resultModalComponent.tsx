@@ -3,6 +3,7 @@ import { Container } from "react-bootstrap";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { FaTrophy } from "react-icons/fa";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
 interface Props {
   data: {
@@ -64,14 +65,14 @@ const AbjResultComponent: React.FC<Props> = ({ data }: any) => {
 
   const sliderSettings = (length: any, arrow: any) => ({
     infinite: false,
-    arrows: false,
+    // arrows: false,
     speed: 500,
     slidesToShow: 10,
     slidesToScroll: 3,
-    // arrows: true,
+    arrows: true,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
-    initialSlide: 3,
+    // initialSlide: isMobile ? (length > 3 ? length - 3 : 0) : 3,
 
     responsive: [
       {
@@ -96,31 +97,70 @@ const AbjResultComponent: React.FC<Props> = ({ data }: any) => {
     <Container style={{ display: "flex", flexDirection: "column" }}>
       <div className="abjresultModal mb-2">
         <div className="abjresultCardContainer">
+          {/* <div style={{ display: "flex", flexDirection: "column",marginLeft:isMobile?0:"20px" }}>
+            <div>
+              {data?.result?.win === "1" && (
+                <div className="casino-winner-icon">
+                  <FaTrophy size={isMobile ? 20 : 30} color="#169733" />
+                </div>
+              )}
+            </div>
+            <div>
+              {data?.result?.win === "2" && (
+                <div className="casino-winner-icon">
+                  <FaTrophy size={isMobile ? 20 : 30} color="#169733" />
+                </div>
+              )}
+            </div>
+          </div> */}
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <span
-              style={{
-                color: "#00000",
-                width: "100%",
-                height: "100%",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "end",
-              }}
-            >
-              A
-            </span>
-            <span
-              style={{
-                color: "#00000",
-                width: "100%",
-                height: "100%",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "start",
-              }}
-            >
-              B
-            </span>
+            <div style={{ display: "flex", flexDirection: "row" }}>
+              <div style={{ width: "70%", marginRight: "5px" }}>
+                {data?.result?.win === "1" && (
+                  <div className="casino-winner-icon">
+                    <FaTrophy size={26} color="#169733" />
+                  </div>
+                )}
+              </div>
+              <div style={{ width: "30%" }}>
+                <span
+                  style={{
+                    color: "#00000",
+                    width: "100%",
+                    height: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "end",
+                  }}
+                >
+                  A
+                </span>
+              </div>
+            </div>
+            <div style={{ display: "flex", flexDirection: "row" }}>
+              <div style={{ width: "70%", marginRight: "5px" }}>
+                {data?.result?.win === "2" && (
+                  <div className="casino-winner-icon">
+                    <FaTrophy size={26} color="#169733" />
+                  </div>
+                )}
+              </div>
+              <div style={{ width: "30%" }}>
+                {" "}
+                <span
+                  style={{
+                    color: "#00000",
+                    width: "100%",
+                    height: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "start",
+                  }}
+                >
+                  B
+                </span>
+              </div>
+            </div>
           </div>
           <div
             style={{

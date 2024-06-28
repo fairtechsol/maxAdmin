@@ -2,7 +2,10 @@ import { useEffect } from "react";
 import Loader from "../../../../components/commonComponent/loader";
 import { socket, socketService } from "../../../../socketManager";
 import { cardGamesType } from "../../../../utils/Constants";
-import { getPlacedBets } from "../../../../store/actions/match/matchAction";
+import {
+  getPlacedBets,
+  updateBetsPlaced,
+} from "../../../../store/actions/match/matchAction";
 import {
   getDragonTigerDetailHorseRacing,
   updateBalanceOnBetPlaceCards,
@@ -30,7 +33,7 @@ const TeenPatti2020 = () => {
 
   const handleBetPlacedOnDT20 = (event: any) => {
     if (event?.jobData?.matchType === cardGamesType.teen20) {
-      dispatch(getPlacedBets(dragonTigerDetail?.id));
+      dispatch(updateBetsPlaced(event?.jobData));
       dispatch(updateBalanceOnBetPlaceCards(event?.jobData));
       dispatch(updateProfitLossCards(event?.userRedisObj));
     }
@@ -61,6 +64,7 @@ const TeenPatti2020 = () => {
         socketService.card.getCardRatesOff(cardGamesType.teen20);
         socketService.card.userCardBetPlacedOff();
         socketService.card.cardResultOff();
+        socketService.card.matchResultDeclareAllUserOff();
         socketService.card.joinMatchRoom(cardGamesType.teen20);
         socketService.card.getCardRates(
           cardGamesType.teen20,
@@ -72,6 +76,7 @@ const TeenPatti2020 = () => {
           handleLiveGameResultTop10
         );
         socketService.card.cardResult(handleCardResult);
+        socketService.card.matchResultDeclareAllUser(handleCardResult);
       }
     } catch (error) {
       console.log(error);
@@ -84,6 +89,7 @@ const TeenPatti2020 = () => {
       socketService.card.getCardRatesOff(cardGamesType.teen20);
       socketService.card.userCardBetPlacedOff();
       socketService.card.cardResultOff();
+      socketService.card.matchResultDeclareAllUserOff();
     };
   }, [dragonTigerDetail?.id]);
 

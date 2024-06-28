@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import Loader from "../../../../components/commonComponent/loader";
 import { socket, socketService } from "../../../../socketManager";
 import { cardGamesType } from "../../../../utils/Constants";
-import { getPlacedBets } from "../../../../store/actions/match/matchAction";
+import { getPlacedBets, updateBetsPlaced } from "../../../../store/actions/match/matchAction";
 import {
   getDragonTigerDetailHorseRacing,
   update7BCardMatchRates,
@@ -31,6 +31,7 @@ const Lucky7B = () => {
 
   const handleBetPlacedOnDT20 = (event: any) => {
     if (event?.jobData?.matchType === cardGamesType.lucky7B) {
+      dispatch(updateBetsPlaced(event?.jobData));
       dispatch(updateBalanceOnBetPlaceCards(event?.jobData));
       dispatch(updateProfitLossCards(event?.userRedisObj));
     }
@@ -61,6 +62,7 @@ const Lucky7B = () => {
         socketService.card.getCardRatesOff(cardGamesType.lucky7B);
         socketService.card.userCardBetPlacedOff();
         socketService.card.cardResultOff();
+        socketService.card.matchResultDeclareAllUserOff();
         socketService.card.joinMatchRoom(cardGamesType.lucky7B);
         socketService.card.getCardRates(
           cardGamesType.lucky7B,
@@ -72,12 +74,13 @@ const Lucky7B = () => {
           handleLiveGameResultTop10
         );
         socketService.card.cardResult(handleCardResult);
+        socketService.card.matchResultDeclareAllUser(handleCardResult);
       }
     } catch (error) {
       console.log(error);
     }
   }, [socket, dragonTigerDetail?.id]);
-
+  
   useEffect(() => {
     return () => {
       try {
@@ -85,6 +88,7 @@ const Lucky7B = () => {
         socketService.card.getCardRatesOff(cardGamesType.lucky7B);
         socketService.card.userCardBetPlacedOff();
         socketService.card.cardResultOff();
+        socketService.card.matchResultDeclareAllUserOff();
       } catch (e) {
         console.log(e);
       }

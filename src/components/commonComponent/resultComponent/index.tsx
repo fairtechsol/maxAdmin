@@ -64,45 +64,25 @@ export const ResultComponent: React.FC<ResultComponentProps> = ({
         </div>
       </div>
       {type === cardGamesType?.dragonTiger20 ? (
-        <>
-          <Dragon20ResultComponent data={data} />
-        </>
+        <Dragon20ResultComponent data={data} />
       ) : type === cardGamesType?.andarBahar2 ? (
-        <>
-          <AbjResultComponent data={data} />
-        </>
+        <AbjResultComponent data={data} />
       ) : type === cardGamesType?.teen20 ? (
-        <>
-          <Teen20ResultComponent data={data} />
-        </>
+        <Teen20ResultComponent data={data} />
       ) : type === cardGamesType?.card32 ? (
-        <>
-          <Card32ResultComponent data={data} />
-        </>
+        <Card32ResultComponent data={data} />
       ) : type === cardGamesType?.lucky7 ? (
-        <>
-          <Lucky7ResultComponent data={data} />
-        </>
+        <Lucky7ResultComponent data={data} />
       ) : type === cardGamesType?.lucky7B ? (
-        <>
-          <Lucky7BResultComponent data={data} />
-        </>
+        <Lucky7BResultComponent data={data} />
       ) : type === cardGamesType?.dragonTiger202 ? (
-        <>
-          <Dragon202ResultComponent data={data} />
-        </>
+        <Dragon202ResultComponent data={data} />
       ) : type === cardGamesType?.dragonTigerLion ? (
-        <>
-          <DragonTigerLionResultComponent data={data} />
-        </>
+        <DragonTigerLionResultComponent data={data} />
       ) : type === cardGamesType?.teenOneDay ? (
-        <>
-          <Lucky7BResultComponent data={data} />
-        </>
+        <Lucky7BResultComponent data={data} />
       ) : type === cardGamesType?.dragonTigerOneDay ? (
-        <>
-          <DragonTigerOneDayResultComponent data={data} />
-        </>
+        <DragonTigerOneDayResultComponent data={data} />
       ) : (
         <></>
       )}

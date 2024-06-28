@@ -29,6 +29,12 @@ export const cardSocketService = {
   cardResult: (callback: any) => {
     socket?.on("cardResult", callback);
   },
+  matchResultDeclareAllUser: (callback: any) => {
+    socket?.on("matchResultDeclareAllUser", callback);
+  },
+  matchResultDeclareAllUserOff: () => {
+    socket?.off("matchResultDeclareAllUser");
+  },
   userCardBetPlacedOff: () => {
     socket?.off("userCardBetPlaced");
   },

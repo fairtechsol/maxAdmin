@@ -13,7 +13,10 @@ import { cardGamesType } from "../../../../utils/Constants";
 import { socket, socketService } from "../../../../socketManager";
 import Loader from "../../../../components/commonComponent/loader";
 import DragonSecond20Component from "../../../../components/cardGames/games/dragon2nd20";
-import { getPlacedBets } from "../../../../store/actions/match/matchAction";
+import {
+  getPlacedBets,
+  updateBetsPlaced,
+} from "../../../../store/actions/match/matchAction";
 
 const DragonTiger20Second = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -31,7 +34,7 @@ const DragonTiger20Second = () => {
 
   const handleBetPlacedOnDT20 = (event: any) => {
     if (event?.jobData?.matchType === cardGamesType.dragonTiger202) {
-      dispatch(getPlacedBets(dragonTigerDetail?.id));
+      dispatch(updateBetsPlaced(event?.jobData));
       dispatch(updateBalanceOnBetPlaceCards(event?.jobData));
       dispatch(updateProfitLossCards(event?.userRedisObj));
     }
@@ -63,6 +66,7 @@ const DragonTiger20Second = () => {
         socketService.card.getCardRatesOff(cardGamesType.dragonTiger202);
         socketService.card.userCardBetPlacedOff();
         socketService.card.cardResultOff();
+        socketService.card.matchResultDeclareAllUserOff();
         socketService.card.joinMatchRoom(cardGamesType.dragonTiger202);
         socketService.card.getCardRates(
           cardGamesType.dragonTiger202,
@@ -74,6 +78,7 @@ const DragonTiger20Second = () => {
         );
         socketService.card.userCardBetPlaced(handleBetPlacedOnDT20);
         socketService.card.cardResult(handleCardResult);
+        socketService.card.matchResultDeclareAllUser(handleCardResult);
       }
     } catch (error) {
       console.log(error);
@@ -88,6 +93,7 @@ const DragonTiger20Second = () => {
           socketService.card.getCardRatesOff(cardGamesType.dragonTiger202);
           socketService.card.userCardBetPlacedOff();
           socketService.card.cardResultOff();
+          socketService.card.matchResultDeclareAllUserOff();
         };
       }
     } catch (e) {
