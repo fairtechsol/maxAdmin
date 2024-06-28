@@ -3,7 +3,7 @@ import { GiSpades } from "react-icons/gi";
 import { BiSolidHeart } from "react-icons/bi";
 import { ImDiamonds } from "react-icons/im";
 
-const OddEven = ({ title1, title2, tigerData, dragonData }: any) => {
+const OddEven = ({ title1, title2, data, tigerData, dragonData }: any) => {
   const tigerEvenOdd = tigerData?.slice(0, 2);
   const tigerRedBlack = tigerData?.slice(2, 4);
   const dragonEvenOdd = dragonData?.slice(0, 2);
@@ -24,6 +24,32 @@ const OddEven = ({ title1, title2, tigerData, dragonData }: any) => {
       }`}
     >
       {item?.b1}
+      {data?.profitLoss &&
+        data?.profitLoss[`${data?.videoInfo?.mid}_${item?.sid}_card`] && (
+          <span
+            className={
+              data?.profitLoss
+                ? data?.profitLoss[`${data?.videoInfo?.mid}_${item?.sid}_card`]
+                  ? data?.profitLoss[
+                      `${data?.videoInfo?.mid}_${item?.sid}_card`
+                    ] > 0
+                    ? "color-green"
+                    : data?.profitLoss[
+                        `${data?.videoInfo?.mid}_${item?.sid}_card`
+                      ] < 0
+                    ? "color-red"
+                    : ""
+                  : ""
+                : ""
+            }
+          >
+            {data?.profitLoss
+              ? data?.profitLoss[`${data?.videoInfo?.mid}_${item?.sid}_card`]
+                ? data?.profitLoss[`${data?.videoInfo?.mid}_${item?.sid}_card`]
+                : 0
+              : 0}
+          </span>
+        )}
     </div>
   );
   return (

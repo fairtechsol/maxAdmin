@@ -7,6 +7,7 @@ import {
   getUserDetailsOfLock,
   resetRunAmount,
   successResetForLockUnlock,
+  updateBetsPlaced,
   updateUserMatchLock,
 } from "../../actions/match/matchAction";
 
@@ -132,6 +133,19 @@ const placedBetsSlice = createSlice({
       .addCase(getUserDetailsOfLock.rejected, (state, action) => {
         state.loading = false;
         state.error = action?.error?.message;
+      })
+      .addCase(updateBetsPlaced.fulfilled, (state, action) => {
+        const { newBet, userName } = action.payload;
+
+        const isBetAlreadyPlaced = state.placedBets?.some(
+          (item: any) => item?.id === newBet?.betId
+        );
+        if (!isBetAlreadyPlaced) {
+          state.placedBets = [
+            { ...newBet, user: { userName } },
+            ...state.placedBets,
+          ];
+        }
       });
   },
 });

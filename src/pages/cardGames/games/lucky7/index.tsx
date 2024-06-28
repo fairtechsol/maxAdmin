@@ -11,7 +11,10 @@ import {
   updateLiveGameResultTop10,
   updateProfitLossCards,
 } from "../../../../store/actions/card/cardDetail";
-import { getPlacedBets } from "../../../../store/actions/match/matchAction";
+import {
+  getPlacedBets,
+  updateBetsPlaced,
+} from "../../../../store/actions/match/matchAction";
 import Loader from "../../../../components/commonComponent/loader";
 
 const Lucky7 = () => {
@@ -32,7 +35,7 @@ const Lucky7 = () => {
 
   const handleBetPlacedOnDT20 = (event: any) => {
     if (event?.jobData?.matchType === cardGamesType.lucky7) {
-      dispatch(getPlacedBets(dragonTigerDetail?.id));
+      dispatch(updateBetsPlaced(event?.jobData));
       dispatch(updateBalanceOnBetPlaceCards(event?.jobData));
       dispatch(updateProfitLossCards(event?.userRedisObj));
     }
@@ -43,13 +46,11 @@ const Lucky7 = () => {
   const handleCardResult = (event: any) => {
     if (event?.matchId === dragonTigerDetail?.id) {
       dispatch(getPlacedBets(dragonTigerDetail?.id));
-      // dispatch(getProfileInMatchDetail());
     }
   };
 
   useEffect(() => {
     try {
-      // dispatch(getButtonValue());
       dispatch(getDragonTigerDetailHorseRacing(cardGamesType.lucky7));
       if (dragonTigerDetail?.id) {
         dispatch(getPlacedBets(dragonTigerDetail?.id));
@@ -65,6 +66,7 @@ const Lucky7 = () => {
         socketService.card.getCardRatesOff(cardGamesType.lucky7);
         socketService.card.userCardBetPlacedOff();
         socketService.card.cardResultOff();
+        socketService.card.matchResultDeclareAllUserOff();
         socketService.card.joinMatchRoom(cardGamesType.lucky7);
         socketService.card.getCardRates(
           cardGamesType.lucky7,
@@ -76,6 +78,7 @@ const Lucky7 = () => {
           handleLiveGameResultTop10
         );
         socketService.card.cardResult(handleCardResult);
+        socketService.card.matchResultDeclareAllUser(handleCardResult);
       }
     } catch (error) {
       console.log(error);
@@ -88,6 +91,7 @@ const Lucky7 = () => {
       socketService.card.getCardRatesOff(cardGamesType.lucky7);
       socketService.card.userCardBetPlacedOff();
       socketService.card.cardResultOff();
+      socketService.card.matchResultDeclareAllUserOff();
     };
   }, [dragonTigerDetail?.id]);
 

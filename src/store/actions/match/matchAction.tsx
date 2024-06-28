@@ -356,6 +356,13 @@ export const updateMatchRates = createAsyncThunk<any, any>(
   }
 );
 
+export const updateBetsPlaced: any = createAsyncThunk<any, any>(
+  "/placed/bets",
+  async (placedBets) => {
+    return placedBets;
+  }
+);
+
 export const resetRunAmount = createAction("runAmount/reset");
 export const successResetForLockUnlock = createAction(
   "successResetForLockUnlock/reset"

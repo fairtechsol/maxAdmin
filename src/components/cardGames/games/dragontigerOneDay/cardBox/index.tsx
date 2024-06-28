@@ -19,6 +19,32 @@ const CardBox = ({ dragonData, tigerData, data }: any) => {
       }`}
     >
       {item?.b1}
+      {data?.profitLoss &&
+        data?.profitLoss[`${data?.videoInfo?.mid}_${item?.sid}_card`] && (
+          <span
+            className={
+              data?.profitLoss
+                ? data?.profitLoss[`${data?.videoInfo?.mid}_${item?.sid}_card`]
+                  ? data?.profitLoss[
+                      `${data?.videoInfo?.mid}_${item?.sid}_card`
+                    ] > 0
+                    ? "color-green"
+                    : data?.profitLoss[
+                        `${data?.videoInfo?.mid}_${item?.sid}_card`
+                      ] < 0
+                    ? "color-red"
+                    : ""
+                  : ""
+                : ""
+            }
+          >
+            {data?.profitLoss
+              ? data?.profitLoss[`${data?.videoInfo?.mid}_${item?.sid}_card`]
+                ? data?.profitLoss[`${data?.videoInfo?.mid}_${item?.sid}_card`]
+                : 0
+              : 0}
+          </span>
+        )}
     </div>
   );
   return (

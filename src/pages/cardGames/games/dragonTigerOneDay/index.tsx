@@ -10,7 +10,10 @@ import {
   updateProfitLossCards,
 } from "../../../../store/actions/card/cardDetail";
 import { cardGamesType } from "../../../../utils/Constants";
-import { getPlacedBets } from "../../../../store/actions/match/matchAction";
+import {
+  getPlacedBets,
+  updateBetsPlaced,
+} from "../../../../store/actions/match/matchAction";
 import { socket, socketService } from "../../../../socketManager";
 import Loader from "../../../../components/commonComponent/loader";
 import DragonTigerOneDayComponent from "../../../../components/cardGames/games/dragontigerOneDay";
@@ -30,7 +33,7 @@ const DragonTigerOneDay = () => {
   };
   const handleBetPlacedOnDT20 = (event: any) => {
     if (event?.jobData?.matchType === cardGamesType.dragonTigerOneDay) {
-      dispatch(getPlacedBets(dragonTigerDetail?.id));
+      dispatch(updateBetsPlaced(event?.jobData));
       dispatch(updateBalanceOnBetPlaceCards(event?.jobData));
       dispatch(updateProfitLossCards(event?.userRedisObj));
     }
@@ -64,6 +67,7 @@ const DragonTigerOneDay = () => {
         socketService.card.getCardRatesOff(cardGamesType.dragonTigerOneDay);
         socketService.card.userCardBetPlacedOff();
         socketService.card.cardResultOff();
+        socketService.card.matchResultDeclareAllUserOff();
         socketService.card.joinMatchRoom(cardGamesType.dragonTigerOneDay);
         socketService.card.getCardRates(
           cardGamesType.dragonTigerOneDay,
@@ -75,6 +79,7 @@ const DragonTigerOneDay = () => {
         );
         socketService.card.userCardBetPlaced(handleBetPlacedOnDT20);
         socketService.card.cardResult(handleCardResult);
+        socketService.card.matchResultDeclareAllUser(handleCardResult);
       }
     } catch (error) {
       console.log(error);
@@ -89,6 +94,7 @@ const DragonTigerOneDay = () => {
           socketService.card.getCardRatesOff(cardGamesType.dragonTigerOneDay);
           socketService.card.userCardBetPlacedOff();
           socketService.card.cardResultOff();
+          socketService.card.matchResultDeclareAllUserOff();
         };
       }
     } catch (e) {
