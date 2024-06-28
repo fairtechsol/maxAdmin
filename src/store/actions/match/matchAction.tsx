@@ -102,18 +102,20 @@ export const getReportAccountList = createAsyncThunk<any, any>(
 );
 export const getBetAccountStatementModal = createAsyncThunk<any, any>(
   "transaction/BetAccountStatementModal",
-  async ({ id, sort, betId, status, runnerId }, thunkApi) => {
+  async ({ id, sort, betId, status, runnerId, result, isCard }, thunkApi) => {
     try {
       const resp = await service.get(
-        `${
-          ApiConstants.REPORT.BET_ACCOUNTSTATEMENT
-        }?betPlaced.userId=${id}&sort=${sort ? sort : ""}${
+        `${ApiConstants.REPORT.BET_ACCOUNTSTATEMENT}?createBy=eq${id}&sort=${
+          sort ? sort : ""
+        }${
           betId
             ? `&betId=inArr${JSON.stringify(betId)}`
             : runnerId
-            ? `&runnerId=eq${runnerId}`
+            ? isCard
+              ? `&betPlaced.runnerId=${runnerId}`
+              : `&runnerId=eq${runnerId}`
             : ""
-        }${status !== null ? `&status=${status}` : ""}`
+        }${result ? `&result=${result}` : status ? `&status=${status}` : ""}`
       );
       if (resp?.data) {
         return resp?.data;
@@ -361,6 +363,4 @@ export const successResetForLockUnlock = createAction(
 export const betReportAccountListReset = createAction(
   "betReportAccountList/reset"
 );
-export const resetGameReportList = createAction(
-  "gameReportList/reset"
-);
+export const resetGameReportList = createAction("gameReportList/reset");

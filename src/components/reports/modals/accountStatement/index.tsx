@@ -60,7 +60,13 @@ const AccountStatementModal = ({ item }: any) => {
                     dispatch(
                       getBetAccountStatementModal({
                         id: item?.user?.id,
+                        isCard: true,
                         runnerId: match[1],
+                        result: `inArr${JSON.stringify([
+                          "WIN",
+                          "LOSS",
+                          "TIE",
+                        ])}`,
                         sort: "betPlaced.createdAt:DESC",
                       })
                     );
@@ -91,8 +97,13 @@ const AccountStatementModal = ({ item }: any) => {
                     dispatch(
                       getBetAccountStatementModal({
                         id: item?.user?.id,
+                        isCard: true,
                         runnerId: match[1],
-                        status: "MATCHED",
+                        result: `inArr${JSON.stringify([
+                          "WIN",
+                          "LOSS",
+                          "TIE",
+                        ])}`,
                         sort: "betPlaced.createdAt:DESC",
                       })
                     );
@@ -124,6 +135,7 @@ const AccountStatementModal = ({ item }: any) => {
                       getBetAccountStatementModal({
                         id: item?.user?.id,
                         runnerId: match[1],
+                        isCard: true,
                         status: "DELETED",
                         sort: "betPlaced.createdAt:DESC",
                       })
