@@ -11,6 +11,7 @@ import {
   updateDragonTigerOneDayRates,
   updateLiveGameResultTop10,
   updateProfitLossCards,
+  updateTeenPatti1DMatchRates,
   updateTeenPattiMatchRates,
 } from "../../actions/card/cardDetail";
 
@@ -234,6 +235,28 @@ const cardDetail = createSlice({
             tigerData,
             matchOddsData,
             pair,
+          };
+        }
+      })
+      .addCase(updateTeenPatti1DMatchRates.fulfilled, (state, action) => {
+        if (action.payload) {
+          const { t1 } = action.payload;
+          state.loading = false;
+
+          const videoInfo = {
+            ...t1[0],
+            C4: t1[1].C1,
+            C5: t1[1].C2,
+            C6: t1[1].C3,
+          };
+          const playerA = t1.slice(0, 1);
+          const playerB = t1.slice(1, 2);
+
+          state.dragonTigerDetail = {
+            ...state.dragonTigerDetail,
+            videoInfo,
+            playerA,
+            playerB,
           };
         }
       });

@@ -14,6 +14,7 @@ import Lucky7BResultComponent from "../../cardGames/games/lucky7B/resultModalCom
 import Dragon202ResultComponent from "../../cardGames/games/dragon2nd20/resultModalComponent";
 import DragonTigerLionResultComponent from "../../cardGames/games/dragonTigerLion/resultModalComponent";
 import DragonTigerOneDayResultComponent from "../../cardGames/games/dragontigerOneDay/resultModalComponent";
+import Teen1DResultComponent from "../../cardGames/games/teenpatti1D/resultModalComponent";
 
 const title = {
   dt20: "20-20 Dragon Tiger",
@@ -80,7 +81,7 @@ export const ResultComponent: React.FC<ResultComponentProps> = ({
       ) : type === cardGamesType?.dragonTigerLion ? (
         <DragonTigerLionResultComponent data={data} />
       ) : type === cardGamesType?.teenOneDay ? (
-        <Lucky7BResultComponent data={data} />
+        <Teen1DResultComponent data={data} />
       ) : type === cardGamesType?.dragonTigerOneDay ? (
         <DragonTigerOneDayResultComponent data={data} />
       ) : (
