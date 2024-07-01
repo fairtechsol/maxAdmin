@@ -1,7 +1,7 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 import { RxCross2 } from "react-icons/rx";
-import moment from "moment";
+// import moment from "moment";
 import isMobile from "../../../utils/screenDimension";
 import { handleRoundId } from "../../../helpers";
 import { cardGamesType } from "../../../utils/Constants";
@@ -55,14 +55,14 @@ export const ResultComponent: React.FC<ResultComponentProps> = ({
           <span style={{ fontWeight: "bold" }}>Round Id:</span>
           <span>{handleRoundId(data?.result?.mid)}</span>
         </div>
-        <div>
+        {/* <div>
           <span style={{ fontWeight: "bold" }}>Match Time:</span>
           <span>
             {data?.createdAt
               ? moment(data?.createdAt).format("DD/MM/YYYY hh:mm:ss A")
               : ""}
           </span>
-        </div>
+        </div> */}
       </div>
       {type === cardGamesType?.dragonTiger20 ? (
         <Dragon20ResultComponent data={data} />

@@ -55,7 +55,7 @@ const Sidebar = (props: any) => {
         {menuItemList?.map((item: any) => (
           <Accordion
             onSelect={(e: any) => {
-              if (e === 0) {
+              if (e == 0) {
                 setSelectedMatch(item?.id);
                 dispatch(getCompetitionList(item?.id));
               }
