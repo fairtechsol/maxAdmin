@@ -30,9 +30,17 @@ const CardsList = () => {
         {card3[listType as Card3Keys]?.map((item: any, index: number) => (
           <Col key={index} xs={12} sm={6} md={4} className="mb-4">
             <div className={"d-flex card-List"}>
-              <NavLink to={item?.url}>
+              {item?.url?.includes("contact-admin") ? (
                 <img src={item.imgSrc} className="img-fluid" alt={item.name} />
-              </NavLink>
+              ) : (
+                <NavLink to={item?.url}>
+                  <img
+                    src={item.imgSrc}
+                    className="img-fluid"
+                    alt={item.name}
+                  />
+                </NavLink>
+              )}
             </div>
           </Col>
         ))}
