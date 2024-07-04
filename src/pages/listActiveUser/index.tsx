@@ -12,6 +12,7 @@ import {
   dropdownSummary,
   getTotalBalance,
   getUsers,
+  handleExport,
 } from "../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../store/store";
 import { ApiConstants } from "../../utils/Constants";
@@ -132,6 +133,22 @@ const ListActiveInactiveUser: React.FC = () => {
   //   (state: RootState) => state.user.profile
   // );
 
+  const handleReportExport = (type: string) => {
+    if (id) {
+      dispatch(
+        handleExport({
+          endpoint: ApiConstants.USER.LIST,
+          type: type,
+          userId: id,
+          userName: keyword || "",
+          sort: sort?.key || "",
+          order: sort?.direction || "DESC",
+          name: "Users List",
+        })
+      );
+    }
+  };
+
   useEffect(() => {
     dispatch(getTotalBalance());
   }, []);
@@ -220,8 +237,8 @@ const ListActiveInactiveUser: React.FC = () => {
                     isSearch
                     isSort={true}
                     isPagination={false}
-                    endpoint={ApiConstants.USER.LIST}
                     sortData={sortData}
+                    handleReportExport={handleReportExport}
                   >
                     <tr>
                       {columns?.map((item, index) => {
@@ -454,8 +471,8 @@ const ListActiveInactiveUser: React.FC = () => {
                     enablePdfExcel={true}
                     isSearch
                     isPagination={false}
-                    endpoint={ApiConstants.USER.LIST}
                     sortData={sortData}
+                    handleReportExport={handleReportExport}
                   >
                     <tr>
                       {columns?.map((item, index) => {

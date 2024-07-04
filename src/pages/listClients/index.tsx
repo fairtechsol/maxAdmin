@@ -11,6 +11,7 @@ import { Column, TableConfig } from "../../models/tableInterface";
 import {
   getTotalBalance,
   getUsers,
+  handleExport,
 } from "../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../store/store";
 import { ApiConstants } from "../../utils/Constants";
@@ -88,6 +89,23 @@ const ListClent: React.FC = () => {
       onClick: showEventModals,
     },
   ];
+
+  const handleReportExport = (type: string) => {
+    if (id) {
+      dispatch(
+        handleExport({
+          endpoint: ApiConstants.USER.LIST,
+          type: type,
+          userId: id,
+          userName: keyWord,
+          sort: "user.createdAt",
+          order: "DESC",
+          name: "Users List",
+        })
+      );
+    }
+  };
+
   useEffect(() => {
     if (id) {
       dispatch(
@@ -141,8 +159,8 @@ const ListClent: React.FC = () => {
               setTableConfig={setTableConfig}
               enablePdfExcel={true}
               isSearch={true}
-              endpoint={ApiConstants.USER.LIST}
               isPagination={false}
+              handleReportExport={handleReportExport}
               // isSort={true}
             >
               <tr>
