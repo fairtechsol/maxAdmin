@@ -27,6 +27,7 @@ interface CustomTableProps extends React.HTMLAttributes<HTMLDivElement> {
   bordered?: boolean;
   striped?: boolean;
   CustomTableClass?: string;
+  endpoint?: string;
   sortData?: any;
   handleReportExport?: any;
 }

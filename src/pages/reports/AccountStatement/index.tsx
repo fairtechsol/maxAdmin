@@ -222,59 +222,63 @@ const AccountStatement = () => {
   };
 
   const handleReportExport = (type: string) => {
-    let filter = "";
-    if (dateFrom && dateTo) {
-      filter += `&createdAt=between${moment(new Date(dateFrom))?.format(
-        "YYYY-MM-DD"
-      )}|${moment(
-        new Date(dateTo).setDate(new Date(dateTo).getDate() + 1)
-      )?.format("YYYY-MM-DD")}`;
-    } else if (dateFrom) {
-      filter += `&createdAt=gte${moment(dateFrom)?.format("YYYY-MM-DD")}`;
-    } else if (dateTo) {
-      filter += `&createdAt=lte${moment(dateTo)?.format("YYYY-MM-DD")}`;
-    }
-    // if (selectedUser && selectedUser?.length > 0) {
-    //   filter += `&user.userName=${selectedUser[0]?.label}`;
-    // }
-    if (aaccountTypeValues && aaccountTypeValues?.value === "gameReport") {
-      filter += `&transType=inArr${JSON.stringify([
-        "win",
-        "loss",
-        // "bet",
-      ])}`;
-    } else if (
-      aaccountTypeValues &&
-      aaccountTypeValues?.value === "balanceReport"
-    ) {
-      filter += `&transType=inArr${JSON.stringify([
-        "add",
-        "withDraw",
-        "creditReference",
-      ])}`;
-    }
-    if (gameNameValues && aaccountTypeValues?.value === "balanceReport") {
-      filter += `&gameName=${gameNameValues?.value}`;
-    }
-    if (gameNameValues && aaccountTypeValues?.value === "gameReport") {
-      if (gameNameValues?.value !== "all") {
-        filter += `&description=like%${gameNameValues?.value}/%`;
+    if (firstTime) {
+      let filter = "";
+      if (dateFrom && dateTo) {
+        filter += `&createdAt=between${moment(new Date(dateFrom))?.format(
+          "YYYY-MM-DD"
+        )}|${moment(
+          new Date(dateTo).setDate(new Date(dateTo).getDate() + 1)
+        )?.format("YYYY-MM-DD")}`;
+      } else if (dateFrom) {
+        filter += `&createdAt=gte${moment(dateFrom)?.format("YYYY-MM-DD")}`;
+      } else if (dateTo) {
+        filter += `&createdAt=lte${moment(dateTo)?.format("YYYY-MM-DD")}`;
       }
+      // if (selectedUser && selectedUser?.length > 0) {
+      //   filter += `&user.userName=${selectedUser[0]?.label}`;
+      // }
+      if (aaccountTypeValues && aaccountTypeValues?.value === "gameReport") {
+        filter += `&transType=inArr${JSON.stringify([
+          "win",
+          "loss",
+          // "bet",
+        ])}`;
+      } else if (
+        aaccountTypeValues &&
+        aaccountTypeValues?.value === "balanceReport"
+      ) {
+        filter += `&transType=inArr${JSON.stringify([
+          "add",
+          "withDraw",
+          "creditReference",
+        ])}`;
+      }
+      if (gameNameValues && aaccountTypeValues?.value === "balanceReport") {
+        filter += `&gameName=${gameNameValues?.value}`;
+      }
+      if (gameNameValues && aaccountTypeValues?.value === "gameReport") {
+        if (gameNameValues?.value !== "all") {
+          filter += `&description=like%${gameNameValues?.value}/%`;
+        }
+      }
+      dispatch(
+        handleExport({
+          endpoint: `${ApiConstants.REPORT.ACCOUNTLIST}/${
+            selectedUser ? selectedUser[0]?.value : localStorage.getItem("key")
+          }`,
+          type: type,
+          id: selectedUser
+            ? selectedUser[0]?.value
+            : localStorage.getItem("key"),
+          filter: filter,
+          searchBy: "description",
+          keyword: tableConfig?.keyword ?? "",
+          sort: "transaction.createdAt:DESC,transaction.uniqueId:DESC",
+          name: "Account Statement",
+        })
+      );
     }
-    dispatch(
-      handleExport({
-        endpoint: `${ApiConstants.REPORT.ACCOUNTLIST}/${
-          selectedUser ? selectedUser[0]?.value : localStorage.getItem("key")
-        }`,
-        type: type,
-        id: selectedUser ? selectedUser[0]?.value : localStorage.getItem("key"),
-        filter: filter,
-        searchBy: "description",
-        keyword: tableConfig?.keyword ?? "",
-        sort: "transaction.createdAt:DESC,transaction.uniqueId:DESC",
-        name: "Account Statement",
-      })
-    );
   };
 
   useEffect(() => {

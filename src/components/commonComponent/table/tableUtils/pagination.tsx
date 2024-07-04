@@ -63,13 +63,13 @@ const PaginationComponent: React.FC<PaginationComponentProps> = ({
     <Pagination>
       <div className="paginationContainer title-14">
         <Pagination.First
-          disabled={currentPage === 1}
+          disabled={currentPage <= 1 ? true : false}
           onClick={() => onPageChange(1)}
         >
           First
         </Pagination.First>
         <Pagination.Prev
-          disabled={currentPage === 1}
+          disabled={currentPage <= 1 ? true : false}
           onClick={() => onPageChange(currentPage - 1)}
           className="paginationBtn"
         >
@@ -78,7 +78,7 @@ const PaginationComponent: React.FC<PaginationComponentProps> = ({
         </Pagination.Prev>
         {pageComp?.map((item) => item)}
         <Pagination.Next
-          disabled={currentPage === totalPages}
+          disabled={totalPages === 0 ? true : currentPage === totalPages}
           onClick={() => onPageChange(currentPage + 1)}
           // className="paginationBtn"
         >
@@ -86,7 +86,7 @@ const PaginationComponent: React.FC<PaginationComponentProps> = ({
           {/* </CustomButton> */}
         </Pagination.Next>
         <Pagination.Last
-          disabled={currentPage === totalPages}
+          disabled={totalPages === 0 ? true : currentPage === totalPages}
           onClick={() => onPageChange(totalPages)}
         >
           Last
