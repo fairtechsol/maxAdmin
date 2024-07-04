@@ -35,7 +35,7 @@ function BackLayBox({
     >
       <BetStatusOverlay active={parseInt(rate || 0) <= 0 && !active}>
         <div
-          className={`backLayBox text-center d-flex  cursor-pointer`}
+          className={`backLayBox text-center d-flex flex-column cursor-pointer`}
         >
           <h5 className="backLay-rate f600 title-16 m-0">
             {parseInt(rate || 0) <= 0 || active ? "-" : rate}{" "}

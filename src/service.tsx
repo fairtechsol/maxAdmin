@@ -47,7 +47,7 @@ service.interceptors.response.use(
   (response: any) => {
     const isGetRequest = response.config.method === "get";
 
-    if (!isGetRequest && response.data?.message) {
+    if (!isGetRequest && response.data?.message && !response.data?.message?.includes('User Balance')) {
       toast.success(response.data.message, toastOptions);
     }
     return response.data;

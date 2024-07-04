@@ -27,7 +27,19 @@ const columns: Column[] = [
   { id: "gameType", label: "Game Type" },
   { id: "profitLoss", label: "Profit & Loss" },
 ];
-
+const typeToTitle: { [key: string]: string } = {
+  dt20: "DRAGON TIGER 20-20",
+  teen20: "TEENPATTI 20-20",
+  lucky7: "LUCKY7A",
+  lucky7eu: "LUCKY7B",
+  card32: "CARDS32-A",
+  abj: "ANDAR BAHAR 2",
+  dt202: "20-20DRAGON TIGER 2",
+  dtl20: "DRAGON TIGER LION",
+  dt6: "DRAGON TIGER TEENPATTI",
+  teen: "TEENPATTI TEENPATTI",
+  // Add other mappings as needed
+};
 const ProfitLossReport = () => {
   const dispatch: AppDispatch = useDispatch();
   const [tableConfig, setTableConfig] = useState<TableConfig | null>({
@@ -214,6 +226,7 @@ const ProfitLossReport = () => {
           profitLossReport?.result?.length > 0 &&
           profitLossReport?.result?.map((item: any, index: number) => {
             const { eventType, marketType, aggregateAmount } = item;
+            const title = typeToTitle[eventType] || eventType;
             return (
               <tr key={index}>
                 <td>
