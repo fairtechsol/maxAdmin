@@ -317,7 +317,19 @@ export const handleExport = createAsyncThunk<any, any>(
   async (requestData, thunkApi) => {
     try {
       const response = await service.get(
-        `${requestData?.endpoint}?type=${requestData?.type}`
+        `${requestData?.endpoint}?type=${requestData?.type}${
+          requestData?.filter ? requestData?.filter : ""
+        }${requestData?.userId ? `&userId=${requestData.userId}&` : ""}${
+          requestData?.sort
+            ? requestData.order
+              ? `&sort=${requestData?.sort}:${requestData?.order}`
+              : `&sort=${requestData?.sort}`
+            : ""
+        }${requestData?.searchBy ? `&searchBy=${requestData?.searchBy}` : ""}${
+          requestData?.keyword || requestData?.userName
+            ? `&keyword=${requestData?.keyword || requestData?.userName}`
+            : ""
+        }`
       );
 
       const fileData = response?.data?.file;
@@ -347,7 +359,9 @@ export const handleExport = createAsyncThunk<any, any>(
       // Create an <a> element and trigger the download
       const link = document.createElement("a");
       link.href = url;
-      link.download = "userlist";
+      link.download = requestData.name
+        ? `${requestData?.name}`.replace(/[^\w\s]/g, "_")
+        : "userlist";
       link.click();
       // Clean up by revoking the URL
       window.URL.revokeObjectURL(url);
