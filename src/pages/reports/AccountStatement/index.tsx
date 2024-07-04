@@ -560,9 +560,12 @@ const AccountStatement = () => {
           <>
             <span className="f400">
               Client Ledger (Total Win Loss :{" "}
-              {betAccountStatementModal?.totalCount?.amount || 0}) (Total Count
-              : {betAccountStatementModal?.totalCount?.totalCount || 0}) (Total
-              Soda : {betAccountStatementModal?.totalCount?.soda || 0})
+              {betAccountStatementModal?.totalCount?.amount || 0})
+               {/* (Total Count
+              : {betAccountStatementModal?.totalCount?.totalCount || 0})  */}
+              {" "}
+              (Total
+              Bets : {betAccountStatementModal?.totalCount?.soda || 0})
             </span>
           </>,
         ]}
