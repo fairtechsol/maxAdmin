@@ -1,3 +1,4 @@
+import { cardGamesTypeNames } from "../../../utils/Constants";
 import "./style.scss";
 
 const ProfitLossEventType = (props: any) => {
@@ -27,7 +28,12 @@ const ProfitLossEventType = (props: any) => {
                 : "bg-green"
             } `}
           >
-            <label className="text-white title-12">{item?.name}:</label>
+            <label className="text-white title-12">
+              {cardGamesTypeNames[item?.name]
+                ? cardGamesTypeNames[item?.name]
+                : item?.name}
+              :
+            </label>
             <span className="text-white title-12"> {item?.amount}</span>
           </div>
         ))}

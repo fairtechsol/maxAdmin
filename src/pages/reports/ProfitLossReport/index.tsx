@@ -14,6 +14,7 @@ import { searchList } from "../../../store/actions/user/userActions";
 import { debounce } from "lodash";
 import { getProfitLossReport } from "../../../store/actions/match/matchAction";
 import moment from "moment-timezone";
+import { cardGamesTypeNames } from "../../../utils/Constants";
 
 interface Column {
   id: string;
@@ -215,7 +216,11 @@ const ProfitLossReport = () => {
             const { eventType, marketType, aggregateAmount } = item;
             return (
               <tr key={index}>
-                <td>{eventType}</td>
+                <td>
+                  {cardGamesTypeNames[eventType]
+                    ? cardGamesTypeNames[eventType]
+                    : eventType}
+                </td>
                 <td>
                   <CustomButton
                     className="actionBtn"
