@@ -1,11 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../../../store/store";
-import { cardGamesType } from "../../../../utils/Constants";
-import {
-  getPlacedBets,
-  updateBetsPlaced,
-} from "../../../../store/actions/match/matchAction";
+import TeentPatti1DComponent from "../../../../components/cardGames/games/teenpatti1D";
+import Loader from "../../../../components/commonComponent/loader";
+import { socket, socketService } from "../../../../socketManager";
 import {
   getDragonTigerDetailHorseRacing,
   updateBalanceOnBetPlaceCards,
@@ -13,9 +10,12 @@ import {
   updateProfitLossCards,
   updateTeenPatti1DMatchRates,
 } from "../../../../store/actions/card/cardDetail";
-import { socket, socketService } from "../../../../socketManager";
-import Loader from "../../../../components/commonComponent/loader";
-import TeentPatti1DComponent from "../../../../components/cardGames/games/teenpatti1D";
+import {
+  getPlacedBets,
+  updateBetsPlaced,
+} from "../../../../store/actions/match/matchAction";
+import { AppDispatch, RootState } from "../../../../store/store";
+import { cardGamesType } from "../../../../utils/Constants";
 
 const TeenPatti1D = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -64,7 +64,7 @@ const TeenPatti1D = () => {
         socketService.card.getCardRatesOff(cardGamesType.teenOneDay);
         socketService.card.userCardBetPlacedOff();
         socketService.card.cardResultOff();
-        socketService.card.matchResultDeclareAllUserOff()
+        socketService.card.matchResultDeclareAllUserOff();
         socketService.card.joinMatchRoom(cardGamesType.teenOneDay);
         socketService.card.getCardRates(
           cardGamesType.teenOneDay,
@@ -90,7 +90,7 @@ const TeenPatti1D = () => {
         socketService.card.getCardRatesOff(cardGamesType.teenOneDay);
         socketService.card.userCardBetPlacedOff();
         socketService.card.cardResultOff();
-        socketService.card.matchResultDeclareAllUserOff()
+        socketService.card.matchResultDeclareAllUserOff();
       } catch (e) {
         console.log(e);
       }
