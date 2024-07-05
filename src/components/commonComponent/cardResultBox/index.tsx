@@ -19,6 +19,7 @@ const CardResultBox = ({ data, name, type }: any) => {
     setLgShow(true);
     dispatch(resultDragonTiger(id));
   };
+
   return (
     <div className="cardResultBoxContainer">
       <div className="cardResultBoxHeader">
@@ -65,17 +66,40 @@ const CardResultBox = ({ data, name, type }: any) => {
                     ? name?.[3]
                     : null}
                 </span>
+              ) : type === "teen20" ? (
+                <span
+                  style={{
+                    fontSize: "16px",
+                    fontWeight: "600",
+                    color:
+                      item?.result === "3"
+                        ? "#ffff33"
+                        : item?.result === "1"
+                        ? "#ff4500"
+                        : "#fff",
+                  }}
+                >
+                  {item?.result === "1"
+                    ? name?.[0]
+                    : item?.result === "3"
+                    ? name?.[2]
+                    : item?.result === "0"
+                    ? name?.[1]
+                    : null}
+                </span>
               ) : (
                 <span
                   style={{
                     fontSize: "16px",
                     fontWeight: "600",
                     color:
-                      item?.result === "3" || item?.result === "41"
+                      item?.result === "3" ||
+                      item?.result === "41" ||
+                      item?.result === "1"
                         ? "#f5cc03"
                         : item?.result === "2" || item?.result === "21"
-                        ? "#ffffff"
-                        : "#ff4500",
+                        ? "#ff4500"
+                        : "#ffffff",
                   }}
                 >
                   {type === "teen20"
