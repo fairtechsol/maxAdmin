@@ -44,7 +44,7 @@ const Abj = () => {
 
   const handleBetPlacedOnDT20 = (event: any) => {
     if (event?.jobData?.matchType === cardGamesType.andarBahar1) {
-      dispatch(updateBetsPlaced(event?.jobData?.newBet));
+      dispatch(updateBetsPlaced(event?.jobData));
       dispatch(updateBalanceOnBetPlaceCards(event?.jobData));
       dispatch(updateProfitLossCards(event?.userRedisObj));
     }
@@ -64,6 +64,7 @@ const Abj = () => {
         socketService.card.getCardRatesOff(cardGamesType.andarBahar1);
         socketService.card.userCardBetPlacedOff();
         socketService.card.cardResultOff();
+        socketService.card.matchResultDeclareAllUserOff();
         socketService.card.joinMatchRoom(cardGamesType.andarBahar1);
         socketService.card.getCardRates(
           cardGamesType.andarBahar1,
@@ -75,6 +76,7 @@ const Abj = () => {
           handleLiveGameResultTop10
         );
         socketService.card.cardResult(handleCardResult);
+        socketService.card.matchResultDeclareAllUser(handleCardResult);
       }
     } catch (error) {
       console.log(error);
@@ -88,6 +90,7 @@ const Abj = () => {
         socketService.card.getCardRatesOff(cardGamesType.andarBahar1);
         socketService.card.userCardBetPlacedOff();
         socketService.card.cardResultOff();
+        socketService.card.matchResultDeclareAllUserOff();
       } catch (e) {
         console.log(e);
       }

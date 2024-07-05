@@ -33,7 +33,7 @@ const TeenPattiOpen = () => {
 
   const handleBetPlacedOnDT20 = (event: any) => {
     if (event?.jobData?.matchType === cardGamesType.teenOpen) {
-      dispatch(updateBetsPlaced(event?.jobData?.newBet));
+      dispatch(updateBetsPlaced(event?.jobData));
       dispatch(updateBalanceOnBetPlaceCards(event?.jobData));
       dispatch(updateProfitLossCards(event?.userRedisObj));
     }
@@ -64,6 +64,7 @@ const TeenPattiOpen = () => {
         socketService.card.getCardRatesOff(cardGamesType.teenOpen);
         socketService.card.userCardBetPlacedOff();
         socketService.card.cardResultOff();
+        socketService.card.matchResultDeclareAllUserOff();
         socketService.card.joinMatchRoom(cardGamesType.teenOpen);
         socketService.card.getCardRates(
           cardGamesType.teenOpen,
@@ -75,6 +76,7 @@ const TeenPattiOpen = () => {
           handleLiveGameResultTop10
         );
         socketService.card.cardResult(handleCardResult);
+        socketService.card.matchResultDeclareAllUser(handleCardResult);
       }
     } catch (error) {
       console.log(error);
@@ -88,6 +90,7 @@ const TeenPattiOpen = () => {
         socketService.card.getCardRatesOff(cardGamesType.teenOpen);
         socketService.card.userCardBetPlacedOff();
         socketService.card.cardResultOff();
+        socketService.card.matchResultDeclareAllUserOff();
       } catch (e) {
         console.log(e);
       }
