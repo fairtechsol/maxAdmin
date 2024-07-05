@@ -15,6 +15,8 @@ import Dragon202ResultComponent from "../../cardGames/games/dragon2nd20/resultMo
 import DragonTigerLionResultComponent from "../../cardGames/games/dragonTigerLion/resultModalComponent";
 import DragonTigerOneDayResultComponent from "../../cardGames/games/dragontigerOneDay/resultModalComponent";
 import Teen1DResultComponent from "../../cardGames/games/teenpatti1D/resultModalComponent";
+import TeenOpenResultComponent from "../../cardGames/games/teenpattiOpen/resultModalComponent";
+import Abj1ResultComponent from "../../cardGames/games/abj1/resultModalComponent";
 
 const title = {
   dt20: "20-20 Dragon Tiger",
@@ -84,6 +86,10 @@ export const ResultComponent: React.FC<ResultComponentProps> = ({
         <Teen1DResultComponent data={data} />
       ) : type === cardGamesType?.dragonTigerOneDay ? (
         <DragonTigerOneDayResultComponent data={data} />
+      ) : type === cardGamesType?.teenOpen ? (
+        <TeenOpenResultComponent data={data} />
+      ) : type === cardGamesType?.andarBahar1 ? (
+        <Abj1ResultComponent data={data} />
       ) : (
         <></>
       )}
