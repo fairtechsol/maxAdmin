@@ -25,7 +25,10 @@ const title = {
   Lucky7B: "Lucky 7 - B",
   card32: "32 Cards A",
   abj: "Andar Bahar 2",
-  // Add other mappings as needed
+  teen: "1 Day Teen Patti",
+  teen8: "Open Teen Patti",
+  teen9: "Test Teen Patti",
+  ab20: "Andar Bahar 1",
 };
 
 interface ResultComponentProps {
