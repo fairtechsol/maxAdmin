@@ -1,23 +1,23 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import TeentPatti1DComponent from "../../../../components/cardGames/games/teenpatti1D";
-import Loader from "../../../../components/commonComponent/loader";
 import { socket, socketService } from "../../../../socketManager";
+import { cardGamesType } from "../../../../utils/Constants";
+import {
+  getPlacedBets,
+  updateBetsPlaced,
+} from "../../../../store/actions/match/matchAction";
 import {
   getDragonTigerDetailHorseRacing,
   updateBalanceOnBetPlaceCards,
   updateLiveGameResultTop10,
   updateProfitLossCards,
-  updateTeenPatti1DMatchRates,
+  updateTeenPattiOpenMatchRates,
 } from "../../../../store/actions/card/cardDetail";
-import {
-  getPlacedBets,
-  updateBetsPlaced,
-} from "../../../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../../../store/store";
-import { cardGamesType } from "../../../../utils/Constants";
+import Loader from "../../../../components/commonComponent/loader";
+import TeenPattiOpenComponent from "../../../../components/cardGames/games/teenpattiOpen";
 
-const TeenPatti1D = () => {
+const TeenPattiOpen = () => {
   const dispatch: AppDispatch = useDispatch();
   const { loading, dragonTigerDetail } = useSelector(
     (state: RootState) => state.card
@@ -25,14 +25,14 @@ const TeenPatti1D = () => {
 
   const setMatchRatesInRedux = (event: any) => {
     try {
-      dispatch(updateTeenPatti1DMatchRates(event?.data?.data?.data));
+      dispatch(updateTeenPattiOpenMatchRates(event?.data?.data?.data));
     } catch (e) {
       console.log(e);
     }
   };
 
   const handleBetPlacedOnDT20 = (event: any) => {
-    if (event?.jobData?.matchType === cardGamesType.teenOneDay) {
+    if (event?.jobData?.matchType === cardGamesType.teenOpen) {
       dispatch(updateBetsPlaced(event?.jobData));
       dispatch(updateBalanceOnBetPlaceCards(event?.jobData));
       dispatch(updateProfitLossCards(event?.userRedisObj));
@@ -49,7 +49,7 @@ const TeenPatti1D = () => {
 
   useEffect(() => {
     try {
-      dispatch(getDragonTigerDetailHorseRacing(cardGamesType.teenOneDay));
+      dispatch(getDragonTigerDetailHorseRacing(cardGamesType.teenOpen));
       if (dragonTigerDetail?.id) {
         dispatch(getPlacedBets(dragonTigerDetail?.id));
       }
@@ -61,18 +61,18 @@ const TeenPatti1D = () => {
   useEffect(() => {
     try {
       if (socket && dragonTigerDetail?.id) {
-        socketService.card.getCardRatesOff(cardGamesType.teenOneDay);
+        socketService.card.getCardRatesOff(cardGamesType.teenOpen);
         socketService.card.userCardBetPlacedOff();
         socketService.card.cardResultOff();
         socketService.card.matchResultDeclareAllUserOff();
-        socketService.card.joinMatchRoom(cardGamesType.teenOneDay);
+        socketService.card.joinMatchRoom(cardGamesType.teenOpen);
         socketService.card.getCardRates(
-          cardGamesType.teenOneDay,
+          cardGamesType.teenOpen,
           setMatchRatesInRedux
         );
         socketService.card.userCardBetPlaced(handleBetPlacedOnDT20);
         socketService.card.getLiveGameResultTop10(
-          cardGamesType.teenOneDay,
+          cardGamesType.teenOpen,
           handleLiveGameResultTop10
         );
         socketService.card.cardResult(handleCardResult);
@@ -86,8 +86,8 @@ const TeenPatti1D = () => {
   useEffect(() => {
     return () => {
       try {
-        socketService.card.leaveMatchRoom(cardGamesType.teenOneDay);
-        socketService.card.getCardRatesOff(cardGamesType.teenOneDay);
+        socketService.card.leaveMatchRoom(cardGamesType.teenOpen);
+        socketService.card.getCardRatesOff(cardGamesType.teenOpen);
         socketService.card.userCardBetPlacedOff();
         socketService.card.cardResultOff();
         socketService.card.matchResultDeclareAllUserOff();
@@ -97,7 +97,7 @@ const TeenPatti1D = () => {
     };
   }, [dragonTigerDetail?.id]);
 
-  return loading ? <Loader /> : <TeentPatti1DComponent />;
+  return loading ? <Loader /> : <TeenPattiOpenComponent />;
 };
 
-export default TeenPatti1D;
+export default TeenPattiOpen;

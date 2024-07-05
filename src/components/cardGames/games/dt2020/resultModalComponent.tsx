@@ -2,6 +2,7 @@ import React from "react";
 import { Container } from "react-bootstrap";
 import { FaTrophy } from "react-icons/fa";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
+import "./style.scss";
 interface Props {
   data: {
     C1: string;
@@ -86,20 +87,20 @@ const Dragon20ResultComponent: React.FC<Props> = ({ data }: any) => {
           <div className="d-sm-flex flex-sm-row">
             <span className="dt20CommonText">Odd/Even</span>
             <span className="dt20CommonText-2">
-              D : {dragonData[1]} | T : {tigerData[1]}
+              D : {dragonData?.[1]} | T : {tigerData?.[1]}
             </span>
           </div>
           <div className="d-sm-flex flex-sm-row">
             <span className="dt20CommonText">Color</span>
             <span className="dt20CommonText-2">
-              D : {dragonData[0]} | T : {tigerData[0]}
+              D : {dragonData?.[0]} | T : {tigerData?.[0]}
             </span>
           </div>
           <div className="d-sm-flex flex-sm-row">
             <span className="dt20CommonText">Card</span>
             <span className="dt20CommonText-2">
-              D : {dragonCard[dragonCard?.length - 1]} | T :{" "}
-              {tigerCard[tigerCard?.length - 1]}
+              D : {dragonCard?.[dragonCard?.length - 1]} | T :{" "}
+              {tigerCard?.[tigerCard?.length - 1]}
             </span>
           </div>
         </div>

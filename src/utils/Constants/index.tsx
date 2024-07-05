@@ -310,7 +310,7 @@ export const card3 = {
       name: "TEST TEENPATTI",
     },
     {
-      url: "/admin/casinoDetail/contact-admin",
+      url: "/admin/casinoDetail/teen8",
       imgSrc: teenplayer,
       name: "OPEN TEENPATTI",
     },
@@ -346,7 +346,7 @@ export const card3 = {
       name: "ANDAR BAHAR 2",
     },
     {
-      url: "/admin/casinoDetail/contact-admin",
+      url: "/admin/casinoDetail/ab20",
       imgSrc: abjlist,
       name: "ANDAR BAHAR",
     },
@@ -424,14 +424,20 @@ export const dragonTigerCards = [
 export const cardGamesType: any = {
   dragonTiger20: "dt20",
   andarBahar2: "abj",
+  andarBahar1: "ab20",
   teen20: "teen20",
   card32: "card32",
+  card32B: "card32eu",
   lucky7: "lucky7",
   dragonTiger202: "dt202",
   dragonTigerLion: "dtl20",
   teenOneDay: "teen",
+  teenOpen: "teen8",
+  teenTest: "teen9",
   dragonTigerOneDay: "dt6",
   lucky7B: "lucky7eu",
+  casinoWar: "war",
+  race20: "race20",
 };
 
 export const cardGamesTypeNames: any = {
@@ -473,12 +479,18 @@ export const cardGamesTypeNames: any = {
 export const cardGamesId: any = {
   dragonTiger20: 3035,
   andarBahar2: 3043,
+  andarBahar1: 3053,
   teen20: 3030,
   card32: 3055,
+  card32B: 3034,
   lucky7: 3058,
   dragonTiger202: 3059,
   dragonTigerLion: 30470,
   teenOneDay: 3031,
+  teenOpen: 3049,
+  teenTest: 3048,
   dragonTigerOneDay: 3057,
   lucky7B: 3032,
+  casinoWar: 3038,
+  race20: 3036,
 };

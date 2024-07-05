@@ -1,7 +1,6 @@
 import Modal from "react-bootstrap/Modal";
 
 const RulesModal = ({ show, setShow, rule }: any) => {
-  // const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   return (

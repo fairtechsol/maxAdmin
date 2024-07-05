@@ -69,6 +69,14 @@ const cardGames = [
     value: "teen",
     label: "Teen Patti One Day",
   },
+  {
+    value: "teen8",
+    label: "Open Teen Patti",
+  },
+  {
+    value: "ab20",
+    label: "Andar Bahar 1"
+  }
 ];
 
 const CasinoResultReport = () => {

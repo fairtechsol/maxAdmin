@@ -5,6 +5,7 @@ import {
   update7BCardMatchRates,
   update7CardMatchRates,
   updateCard32MatchRates,
+  updateCardAbj1Rates,
   updateCardAbjRates,
   updateCardMatchRates,
   updateDragonTigerLionRates,
@@ -13,6 +14,7 @@ import {
   updateProfitLossCards,
   updateTeenPatti1DMatchRates,
   updateTeenPattiMatchRates,
+  updateTeenPattiOpenMatchRates,
 } from "../../actions/card/cardDetail";
 
 interface InitialState {
@@ -257,6 +259,58 @@ const cardDetail = createSlice({
             videoInfo,
             playerA,
             playerB,
+          };
+        }
+      })
+      .addCase(updateTeenPattiOpenMatchRates.fulfilled, (state, action) => {
+        const payload = action?.payload;
+        if (payload) {
+          const { t1, t2 } = payload;
+
+          state.loading = false;
+
+          const videoInfo = { ...t1[0] };
+
+          const players = t2
+            .slice(0, 8)
+            .map((player: any, index: any) => ({
+              [`player${index + 1}`]: player,
+            }))
+            .reduce((acc: any, curr: any) => ({ ...acc, ...curr }), {});
+
+          const pairsPlus = t2
+            .slice(8, 16)
+            .map((pair: any, index: any) => ({
+              [`pairPlus${index + 1}`]: pair,
+            }))
+            .reduce((acc: any, curr: any) => ({ ...acc, ...curr }), {});
+
+          state.dragonTigerDetail = {
+            ...state.dragonTigerDetail,
+            videoInfo,
+            players,
+            pairsPlus,
+          };
+        } else {
+          console.error("Action payload is undefined");
+          state.loading = false;
+        }
+      })
+      .addCase(updateCardAbj1Rates.fulfilled, (state, action) => {
+        const payload = action?.payload;
+        if (payload) {
+          state.loading = false;
+          const { t1, t2, t3 } = payload;
+          const videoInfo = { ...t1[0] };
+          const cardInfo = { ...t3[0] };
+          const ander = t2.slice(0, 13);
+          const bahar = t2.slice(13, 26);
+          state.dragonTigerDetail = {
+            ...state.dragonTigerDetail,
+            videoInfo,
+            cardInfo,
+            ander,
+            bahar,
           };
         }
       });

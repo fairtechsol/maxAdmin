@@ -2,6 +2,8 @@ import { lazy } from "react";
 import { Navigate } from "react-router-dom";
 import MainLayout from "../layout/main";
 import Loadable from "../utils/loadable";
+import TeenPattiOpen from "../pages/cardGames/games/teenpattiOpen";
+import Abj from "../pages/cardGames/games/andarBahar1";
 // ==============================|| Main ROUTING ||============================== //
 const Game = Loadable(lazy(() => import("../pages/games")));
 const OtherGamesDetail = Loadable(lazy(() => import("../pages/otherGames")));
@@ -148,6 +150,14 @@ const MainRoutes = {
     {
       path: "casinoDetail/teen",
       element: <TeenPatti1D />,
+    },
+    {
+      path: "casinoDetail/teen8",
+      element: <TeenPattiOpen />,
+    },
+    {
+      path: "casinoDetail/ab20",
+      element: <Abj />,
     },
     {
       path: "*",

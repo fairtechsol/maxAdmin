@@ -121,3 +121,17 @@ export const updateTeenPatti1DMatchRates = createAsyncThunk<any, any>(
     return data;
   }
 );
+
+export const updateTeenPattiOpenMatchRates = createAsyncThunk<any, any>(
+  "teen8/matchRatesUpdate",
+  async (data) => {
+    return data;
+  }
+); 
+
+export const updateCardAbj1Rates = createAsyncThunk<any, any>(
+  "abj1/matchRatesUpdate",
+  async (data) => {
+    return data;
+  }
+);
