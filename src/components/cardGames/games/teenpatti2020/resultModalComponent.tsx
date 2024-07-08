@@ -2,6 +2,7 @@ import React from "react";
 import { Container } from "react-bootstrap";
 import { FaTrophy } from "react-icons/fa";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
+import "./style.scss";
 interface Props {
   data: {
     C1: string;
