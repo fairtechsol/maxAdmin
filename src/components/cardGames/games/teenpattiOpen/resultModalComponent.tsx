@@ -26,16 +26,16 @@ const TeenOpenResultComponent: React.FC<Props> = ({ data }: any) => {
   });
 
   const layout = [
-    { index: 0, label: "Player1" },
+    { index: 0, label: "Player 1" },
     { index: 8, label: "Dealer" },
-    { index: 7, label: "Player8" },
-    { index: 1, label: "Player2" },
+    { index: 7, label: "Player 8" },
+    { index: 1, label: "Player 2" },
     { index: -1, label: "gap" },
-    { index: 6, label: "Player7" },
-    { index: 2, label: "Player3" },
-    { index: 3, label: "Player4" },
-    { index: 4, label: "Player5" },
-    { index: 5, label: "Player6" },
+    { index: 6, label: "Player 7" },
+    { index: 2, label: "Player 3" },
+    { index: 3, label: "Player 4" },
+    { index: 4, label: "Player 5" },
+    { index: 5, label: "Player 6" },
   ];
 
   const renderRow = (row: any) => (
