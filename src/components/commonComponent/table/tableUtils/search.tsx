@@ -1,5 +1,5 @@
 import { debounce } from "lodash";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Form, FormControl, InputGroup } from "react-bootstrap";
 /***** */
 interface SearchBoxProps {
@@ -7,11 +7,11 @@ interface SearchBoxProps {
   value: string;
 }
 
-const SearchBox: React.FC<SearchBoxProps> = ({ onSearch }) => {
+const SearchBox: React.FC<SearchBoxProps> = ({ value, onSearch }) => {
   const [keyword, setKeyword] = useState("");
 
   const debouncedInputValue = useMemo(() => {
-    return debounce((value:any) => {
+    return debounce((value: any) => {
       onSearch(value);
     }, 500);
   }, []);
@@ -21,6 +21,12 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onSearch }) => {
     setKeyword(query);
     debouncedInputValue(query);
   };
+
+  useEffect(() => {
+    if (value === "") {
+      setKeyword("");
+    }
+  }, [value]);
 
   return (
     <Form.Group

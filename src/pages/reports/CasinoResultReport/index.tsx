@@ -226,6 +226,7 @@ const CasinoResultReport = () => {
         itemCount={casinoResultReport ? casinoResultReport?.count : 0}
         setTableConfig={setTableConfig}
         enablePdfExcel={false}
+        tableConfig={tableConfig}
       >
         {casinoResultReport && casinoResultReport?.count === 0 && (
           <tr>No data available in table </tr>

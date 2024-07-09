@@ -30,6 +30,7 @@ interface CustomTableProps extends React.HTMLAttributes<HTMLDivElement> {
   endpoint?: string;
   sortData?: any;
   handleReportExport?: any;
+  tableConfig?: any
 }
 
 const CustomTable: React.FC<CustomTableProps> = ({
@@ -47,6 +48,7 @@ const CustomTable: React.FC<CustomTableProps> = ({
   CustomTableClass,
   sortData,
   handleReportExport,
+  tableConfig,
   ...props
 }) => {
   // State for sorting configuration and current page
@@ -109,6 +111,7 @@ const CustomTable: React.FC<CustomTableProps> = ({
         rowPerPage={rowPerPage}
         setRowPerPage={setRowPerPage}
         handleReportExport={handleReportExport}
+        tableConfig={tableConfig}
       />
       {/* Table for displaying data */}
       <Table {...props} className={`${CustomTableClass}`} responsive>

@@ -205,6 +205,7 @@ const ProfitLossReport = () => {
         itemCount={profitLossReport ? profitLossReport?.count : 1}
         setTableConfig={setTableConfig}
         enablePdfExcel={false}
+        tableConfig={tableConfig}
       >
         {profitLossReport && profitLossReport?.result?.length === 0 && (
           <tr>No data available in table </tr>

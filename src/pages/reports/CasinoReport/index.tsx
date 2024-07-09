@@ -83,6 +83,7 @@ const CasinoReport = () => {
         itemCount={data?.length}
         setTableConfig={setTableConfig}
         enablePdfExcel={false}
+        tableConfig={tableConfig}
       >
         {data?.length === 0 && <tr>No data available in table </tr>}
         {data?.length > 0 &&

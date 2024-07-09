@@ -150,6 +150,7 @@ const CurrentBets = () => {
         }
         setTableConfig={setTableConfig}
         enablePdfExcel={false}
+        tableConfig={tableConfig}
       >
         {ReportBetList && ReportBetList?.count === 0 && (
           <tr>

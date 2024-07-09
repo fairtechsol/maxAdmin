@@ -1,6 +1,7 @@
 import { Container } from "react-bootstrap";
 import { FaTrophy } from "react-icons/fa";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
+import "./style.scss";
 
 const DragonTigerOneDayResultComponent: any = ({ data }: any) => {
   const resultCards = data?.result?.cards?.split(",");
