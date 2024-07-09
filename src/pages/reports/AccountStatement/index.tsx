@@ -32,7 +32,7 @@ const columns: Column[] = [
   { id: "credit", label: "Credit" },
   { id: "debit", label: "Debit" },
   { id: "closing", label: "Closing" },
-  { id: "description", label: "Description" },
+  { id: "description", label: "Remarks" },
   { id: "fromto", label: "Fromto" },
 ];
 
