@@ -489,11 +489,11 @@ const AccountStatement = () => {
               <td key={column.id}>{item[column.id]}</td>
             ))} */}
               <td>{moment(createdAt).format("YYYY-MM-DD")} </td>
-              <td className={`${amount > 0 ? "color-green" : "color-red"}`}>
-                {amount > 0 ? amount : ""}
+              <td className={`${amount > 0 ? "color-green" : ""}`}>
+                {amount > 0 ? amount : 0}
               </td>
-              <td className={`${amount < 0 ? "color-red" : "color-green"}`}>
-                {amount < 0 ? amount : ""}
+              <td className={`${amount < 0 ? "color-red" : ""}`}>
+                {amount < 0 ? amount : 0}
               </td>
               <td
                 className={`${
@@ -561,11 +561,9 @@ const AccountStatement = () => {
             <span className="f400">
               Client Ledger (Total Win Loss :{" "}
               {betAccountStatementModal?.totalCount?.amount || 0})
-               {/* (Total Count
-              : {betAccountStatementModal?.totalCount?.totalCount || 0})  */}
-              {" "}
-              (Total
-              Bets : {betAccountStatementModal?.totalCount?.soda || 0})
+              {/* (Total Count
+              : {betAccountStatementModal?.totalCount?.totalCount || 0})  */}{" "}
+              (Total Bets : {betAccountStatementModal?.totalCount?.soda || 0})
             </span>
           </>,
         ]}
