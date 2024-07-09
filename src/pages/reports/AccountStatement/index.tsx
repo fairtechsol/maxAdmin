@@ -473,6 +473,7 @@ const AccountStatement = () => {
         setTableConfig={setTableConfig}
         enablePdfExcel={true}
         handleReportExport={handleReportExport}
+        tableConfig={tableConfig}
       >
         {ReportAccountList?.transactions?.map((item: any) => {
           const {

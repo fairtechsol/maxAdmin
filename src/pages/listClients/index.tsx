@@ -161,6 +161,7 @@ const ListClent: React.FC = () => {
               isSearch={true}
               isPagination={false}
               handleReportExport={handleReportExport}
+              tableConfig={tableConfig}
               // isSort={true}
             >
               <tr>

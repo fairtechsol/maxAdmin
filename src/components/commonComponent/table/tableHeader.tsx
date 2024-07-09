@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { FaRegFileExcel, FaRegFilePdf } from "react-icons/fa";
 import CustomButton from "../button";
 import RowPerPage from "./tableUtils/rowPerPage";
@@ -13,6 +13,7 @@ interface TableHeaderProps {
   rowPerPage: number;
   setRowPerPage: any;
   handleReportExport?: any;
+  tableConfig: any;
 }
 
 const TableHeader: React.FC<TableHeaderProps> = ({
@@ -23,13 +24,16 @@ const TableHeader: React.FC<TableHeaderProps> = ({
   rowPerPage,
   setRowPerPage,
   handleReportExport,
+  tableConfig,
 }) => {
-  const [keyword, setKeyword] = useState("");
-  useEffect(() => {
+  // const [keyword, setKeyword] = useState("");
+
+  const handleSearch = (keyword: string) => {
     setTableConfig((prev: any) => {
       return { ...prev, keyword: keyword };
     });
-  }, [keyword]);
+  };
+  // useEffect(() => {}, [keyword]);
 
   return (
     <div className="d-flex justify-content-between align-items-center">
@@ -60,7 +64,7 @@ const TableHeader: React.FC<TableHeaderProps> = ({
       )}
       {isSearch && (
         <>
-          <SearchBox value={keyword} onSearch={setKeyword} />
+          <SearchBox value={tableConfig.keyword} onSearch={handleSearch} />
         </>
       )}
     </div>

@@ -168,7 +168,6 @@ const ListActiveInactiveUser: React.FC = () => {
     setActiveUser(active);
     setDeactiveUser(deactive);
   }, [userList]);
-  useEffect(() => {}, [activeUser]);
 
   const sortData = (key: string) => {
     let array = [...activeUser];
@@ -206,7 +205,16 @@ const ListActiveInactiveUser: React.FC = () => {
                   <Nav.Link
                     className="rounded-0 "
                     eventKey="first"
-                    onClick={() => dispatch(dropdownSummary({ summary: true }))}
+                    onClick={() => {
+                      dispatch(dropdownSummary({ summary: true }));
+                      // setKeyWord("");
+                      setTableConfig((prev: any) => {
+                        return {
+                          ...prev,
+                          keyword: "",
+                        };
+                      });
+                    }}
                   >
                     Active User
                   </Nav.Link>
@@ -215,9 +223,16 @@ const ListActiveInactiveUser: React.FC = () => {
                   <Nav.Link
                     className="rounded-0 "
                     eventKey="second"
-                    onClick={() =>
-                      dispatch(dropdownSummary({ summary: false }))
-                    }
+                    onClick={() => {
+                      dispatch(dropdownSummary({ summary: false }));
+                      // setKeyWord("");
+                      setTableConfig((prev: any) => {
+                        return {
+                          ...prev,
+                          keyword: "",
+                        };
+                      });
+                    }}
                   >
                     Deactive User
                   </Nav.Link>
@@ -239,6 +254,7 @@ const ListActiveInactiveUser: React.FC = () => {
                     isPagination={false}
                     sortData={sortData}
                     handleReportExport={handleReportExport}
+                    tableConfig={tableConfig}
                   >
                     <tr>
                       {columns?.map((item, index) => {
@@ -473,6 +489,7 @@ const ListActiveInactiveUser: React.FC = () => {
                     isPagination={false}
                     sortData={sortData}
                     handleReportExport={handleReportExport}
+                    tableConfig={tableConfig}
                   >
                     <tr>
                       {columns?.map((item, index) => {
