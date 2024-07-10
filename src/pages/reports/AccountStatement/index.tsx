@@ -1,6 +1,6 @@
 import { debounce } from "lodash";
 import moment from "moment-timezone";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import SelectSearch from "../../../components/commonComponent/SelectSearch";
@@ -78,6 +78,7 @@ const AccountStatement = () => {
 
   const [gameNameOptions, setGameNameOptions] = useState<Option[]>([]);
   const [gameNameValues, setGameNameValues] = useState<any>(null);
+  const [inputValue, setInputValue] = useState("");
 
   const { ReportAccountList } = useSelector(
     (state: RootState) => state.match.reportList
@@ -142,18 +143,28 @@ const AccountStatement = () => {
     setGameNameValues(selectedOption);
   };
 
-  const searchClientName = debounce(async (value: any) => {
-    try {
+  const debouncedInputValue = useMemo(() => {
+    return debounce((value) => {
       dispatch(
         searchList({
           userName: value,
           createdBy: userDetail?.id,
         })
       );
-    } catch (e) {
-      console.log(e);
-    }
-  }, 500);
+    }, 500);
+  }, []);
+  // const searchClientName = debounce(async (value: any) => {
+  //   try {
+  //     dispatch(
+  //       searchList({
+  //         userName: value,
+  //         createdBy: userDetail?.id,
+  //       })
+  //     );
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // }, 500);
 
   const handleSubmit = (e: any) => {
     try {
@@ -405,6 +416,7 @@ const AccountStatement = () => {
           <Col md={2}>
             <SelectSearch
               label={"Search By Client Name"}
+              inputValue={inputValue}
               options={userOptions}
               value={selectedUser}
               onChange={(value: any) => {
@@ -420,7 +432,10 @@ const AccountStatement = () => {
               placeholder={"Please enter 3 or more characters"}
               isMultiOption={true}
               isSearchable={true}
-              onInputChange={searchClientName}
+              onInputChange={(value: any) => {
+                setInputValue(value);
+                debouncedInputValue(value);
+              }}
             />
           </Col>
           <Col md={2}>

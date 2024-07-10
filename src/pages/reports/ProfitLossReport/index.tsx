@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import SelectSearch from "../../../components/commonComponent/SelectSearch";
 import CustomButton from "../../../components/commonComponent/button";
@@ -47,6 +47,7 @@ const ProfitLossReport = () => {
   const [fromDate, setFromDate] = useState<any>();
   const [toDate, setToDate] = useState<any>();
   const [userOptions, setUserOptions] = useState([]);
+  const [inputValue, setInputValue] = useState("");
 
   const { userDetail } = useSelector((state: RootState) => state.user.profile);
   const { searchListData } = useSelector(
@@ -56,18 +57,29 @@ const ProfitLossReport = () => {
     (state: RootState) => state.match.reportList
   );
 
-  const searchClientName = debounce(async (value: any) => {
-    try {
+  // const searchClientName = debounce(async (value: any) => {
+  //   try {
+  //     dispatch(
+  //       searchList({
+  //         userName: value,
+  //         createdBy: userDetail?.id,
+  //       })
+  //     );
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // }, 500);
+
+  const debouncedInputValue = useMemo(() => {
+    return debounce((value) => {
       dispatch(
         searchList({
           userName: value,
           createdBy: userDetail?.id,
         })
       );
-    } catch (e) {
-      console.log(e);
-    }
-  }, 500);
+    }, 500);
+  }, []);
 
   useEffect(() => {
     let payload: any = {
@@ -148,6 +160,7 @@ const ProfitLossReport = () => {
               label={"Search By Client Name"}
               options={userOptions}
               value={selectedUser}
+              inputValue={inputValue}
               onChange={(value: any) => {
                 if (value?.length > 1) {
                   let newValue = value[1];
@@ -161,7 +174,10 @@ const ProfitLossReport = () => {
               placeholder={"Client Name:"}
               isMultiOption={true}
               isSearchable={true}
-              onInputChange={searchClientName}
+              onInputChange={(value: any) => {
+                setInputValue(value);
+                debouncedInputValue(value);
+              }}
             />
           </Col>
           <Col md={2}>

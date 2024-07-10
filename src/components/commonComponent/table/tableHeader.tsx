@@ -64,7 +64,7 @@ const TableHeader: React.FC<TableHeaderProps> = ({
       )}
       {isSearch && (
         <>
-          <SearchBox value={tableConfig.keyword} onSearch={handleSearch} />
+          <SearchBox value={tableConfig?.keyword} onSearch={handleSearch} />
         </>
       )}
     </div>
