@@ -75,8 +75,20 @@ const cardGames = [
   },
   {
     value: "ab20",
-    label: "Andar Bahar 1"
-  }
+    label: "Andar Bahar 1",
+  },
+  {
+    value: "cricketv3",
+    label: "Five Five Cricket",
+  },
+  {
+    value: "superover",
+    label: "Super Over",
+  },
+  {
+    value: "race20",
+    label: "Race 20 20",
+  },
 ];
 
 const CasinoResultReport = () => {

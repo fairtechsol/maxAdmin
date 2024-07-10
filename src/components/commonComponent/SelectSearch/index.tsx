@@ -22,6 +22,7 @@ const SelectSearch = (props: any) => {
     errors,
     onInputChange,
     isOptionDisabled,
+    inputValue
   } = props;
 
   // const customStyles = {
@@ -60,6 +61,7 @@ const SelectSearch = (props: any) => {
               color: state.isFocused ? "#00000" : "#00000",
             }),
           }}
+          inputValue={inputValue}
           minMenuHeight={20}
           maxMenuHeight={200}
           className={`selectSearch ${filedClass}`}
