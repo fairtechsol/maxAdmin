@@ -144,6 +144,7 @@ const ListActiveInactiveUser: React.FC = () => {
           sort: sort?.key || "",
           order: sort?.direction || "DESC",
           name: "Users List",
+          searchBy: "user.userName"
         })
       );
     }
