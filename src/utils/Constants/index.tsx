@@ -310,7 +310,7 @@ export const card3 = {
       name: "TEST TEENPATTI",
     },
     {
-      url: "/admin/casinoDetail/teen8",
+      url: "/admin/casinoDetail/contact-admin",
       imgSrc: teenplayer,
       name: "OPEN TEENPATTI",
     },
@@ -346,7 +346,7 @@ export const card3 = {
       name: "ANDAR BAHAR 2",
     },
     {
-      url: "/admin/casinoDetail/ab20",
+      url: "/admin/casinoDetail/contact-admin",
       imgSrc: abjlist,
       name: "ANDAR BAHAR",
     },

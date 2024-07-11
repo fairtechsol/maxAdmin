@@ -2,8 +2,6 @@ import { lazy } from "react";
 import { Navigate } from "react-router-dom";
 import MainLayout from "../layout/main";
 import Loadable from "../utils/loadable";
-import TeenPattiOpen from "../pages/cardGames/games/teenpattiOpen";
-import Abj from "../pages/cardGames/games/andarBahar1";
 // ==============================|| Main ROUTING ||============================== //
 const Game = Loadable(lazy(() => import("../pages/games")));
 const OtherGamesDetail = Loadable(lazy(() => import("../pages/otherGames")));
@@ -50,6 +48,12 @@ const Lucky7B = Loadable(
 const TeenPatti1D = Loadable(
   lazy(() => import("../pages/cardGames/games/teenPatti1D"))
 );
+// const TeenPattiOpen = Loadable(
+//   lazy(() => import("../pages/cardGames/games/teenpattiOpen"))
+// );
+// const Abj = Loadable(
+//   lazy(() => import("../pages/cardGames/games/andarBahar1"))
+// );
 
 const MainRoutes = {
   path: "/admin",
@@ -112,53 +116,53 @@ const MainRoutes = {
       element: <CardList3 />,
     },
     {
-      path: "casinoDetail/teenPatti20",
+      path: "casinoDetail/teenPatti20", //
       element: <TeenPatti2020 />,
     },
     {
-      path: "casinoDetail/lucky7-A",
+      path: "casinoDetail/lucky7-A", //
       element: <Lucky7 />,
     },
     {
-      path: "casinoDetail/32cards-A",
+      path: "casinoDetail/32cards-A", //
       element: <Card32A />,
     },
     {
-      path: "casinoDetail/abj2",
+      path: "casinoDetail/abj2", //
       element: <AndarBahar2 />,
     },
     {
       path: "casinoDetail/dt20",
-      element: <DragonTiger2020 />,
+      element: <DragonTiger2020 />, //
     },
     {
       path: "casinoDetail/dt202",
-      element: <DragonTiger20Second />,
+      element: <DragonTiger20Second />, //
     },
     {
       path: "casinoDetail/dtl20",
-      element: <DragonTigerLion />,
+      element: <DragonTigerLion />, //
     },
     {
       path: "casinoDetail/dt6",
-      element: <DragonTigerOneDay />,
+      element: <DragonTigerOneDay />, //
     },
     {
-      path: "casinoDetail/lucky7eu",
-      element: <Lucky7B />,
+      path: "casinoDetail/lucky7eu",//
+      element: <Lucky7B />, //
     },
     {
       path: "casinoDetail/teen",
-      element: <TeenPatti1D />,
+      element: <TeenPatti1D />, //
     },
-    {
-      path: "casinoDetail/teen8",
-      element: <TeenPattiOpen />,
-    },
-    {
-      path: "casinoDetail/ab20",
-      element: <Abj />,
-    },
+    // {
+    //   path: "casinoDetail/teen8",
+    //   element: <TeenPattiOpen />,
+    // },
+    // {
+    //   path: "casinoDetail/ab20",
+    //   element: <Abj />,
+    // },
     {
       path: "*",
       element: <Navigate to={"/admin/listAccount"} replace />,
