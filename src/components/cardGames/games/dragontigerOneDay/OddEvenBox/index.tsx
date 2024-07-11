@@ -1,16 +1,18 @@
-import { ImClubs } from "react-icons/im";
-import { GiSpades } from "react-icons/gi";
+import { useState } from "react";
 import { BiSolidHeart } from "react-icons/bi";
-import { ImDiamonds } from "react-icons/im";
+import { GiSpades } from "react-icons/gi";
+import { ImClubs, ImDiamonds } from "react-icons/im";
+import { IoInformationCircle } from "react-icons/io5";
+import SmoothDropdownModal from "../minMaxModal";
 
 const OddEven = ({ title1, title2, data, tigerData, dragonData }: any) => {
+  const [modelOpen, setModelOpen] = useState(false);
   const tigerEvenOdd = tigerData?.slice(0, 2);
   const tigerRedBlack = tigerData?.slice(2, 4);
   const dragonEvenOdd = dragonData?.slice(0, 2);
   const dragonRedBlack = dragonData?.slice(2, 4);
-  // console.log(dragonData, "first", tigerData);
   const handleLock = (status: any, value: any) => {
-    if (status != "ACTIVE" || value === "0.00") {
+    if (status !== "ACTIVE" || value === "0.00") {
       return true;
     } else {
       return false;
@@ -64,8 +66,32 @@ const OddEven = ({ title1, title2, data, tigerData, dragonData }: any) => {
           marginLeft: "5px",
         }}
       >
-        <div className="w-100 d-sm-flex flex-row" style={{ height: "30px" }}>
-          <div className="dtlTitle"> </div>
+        <div className="w-100 d-sm-flex flex-row" style={{ height: "35px" }}>
+          <div className="dtlTitle">
+            {" "}
+            <div style={{ width: "40%" }}>
+              <span className="minmaxi">
+                <IoInformationCircle
+                  color="#ffc742"
+                  onClick={() => setModelOpen(!modelOpen)}
+                />
+                <SmoothDropdownModal
+                  min={
+                    title1 === "even"
+                      ? dragonEvenOdd?.[0]?.max
+                      : dragonRedBlack?.[0]?.max
+                  }
+                  max={
+                    title1 === "even"
+                      ? dragonEvenOdd?.[0]?.min
+                      : dragonRedBlack?.[0]?.min
+                  }
+                  show={modelOpen}
+                  setShow={() => setModelOpen(false)}
+                />
+              </span>
+            </div>
+          </div>
           <div className="dtlsubTitle back-BackGround">
             <span style={{ fontSize: "14px" }}>
               {title1 === "even" ? (
@@ -93,48 +119,18 @@ const OddEven = ({ title1, title2, data, tigerData, dragonData }: any) => {
             </span>
           </div>
         </div>
-        <div className="w-100 d-sm-flex flex-row" style={{ height: "30px" }}>
+        <div className="w-100 d-sm-flex flex-row" style={{ height: "40px" }}>
           <div className="dtlTitle">Dragon </div>
-          {/* <div
-            className={`dtlsubTitle back-BackGround ${ title1 === "even" ?
-              dragonEvenOdd?.[0]?.gstatus === "CLOSED" ||
-              dragonEvenOdd?.[0]?.b1 === "0.00"
-                ? "suspended"
-                : ""
-                :  dragonRedBlack?.[0]?.gstatus === "CLOSED" ||
-                dragonRedBlack?.[0]?.b1 === "0.00"
-                  ? "suspended"
-                  : ""
-            }`}
-          >
-            {title1 === "even"
-              ? dragonEvenOdd?.[0]?.b1
-              : dragonRedBlack?.[0]?.b1}
-          </div>
-          <div className={`dtlsubTitle back-BackGround ${ title2 === "odd" ?
-              dragonEvenOdd?.[0]?.gstatus === "CLOSED" ||
-              dragonEvenOdd?.[0]?.b1 === "0.00"
-                ? "suspended"
-                : ""
-                :  dragonRedBlack?.[0]?.gstatus === "CLOSED" ||
-                dragonRedBlack?.[0]?.b1 === "0.00"
-                  ? "suspended"
-                  : ""
-            }`}>
-            {title2 === "odd"
-              ? dragonEvenOdd?.[1]?.b1
-              : dragonRedBlack?.[1]?.b1}
-          </div> */}
           {renderItem(
             title1 === "even" ? dragonEvenOdd?.[0] : dragonRedBlack?.[0],
             0
           )}
           {renderItem(
             title2 === "odd" ? dragonEvenOdd?.[1] : dragonRedBlack?.[1],
-            0
+            1
           )}
         </div>
-        <div className="w-100 d-sm-flex flex-row" style={{ height: "30px" }}>
+        <div className="w-100 d-sm-flex flex-row" style={{ height: "40px" }}>
           <div className="dtlTitle"> Tiger</div>
           {/* <div className={`dtlsubTitle back-BackGround ${ title1 === "even" ?
               tigerEvenOdd?.[0]?.gstatus === "CLOSED" ||
@@ -162,11 +158,11 @@ const OddEven = ({ title1, title2, data, tigerData, dragonData }: any) => {
           </div> */}
           {renderItem(
             title1 === "even" ? tigerEvenOdd?.[0] : tigerRedBlack?.[0],
-            0
+            2
           )}
           {renderItem(
             title2 === "odd" ? tigerEvenOdd?.[1] : tigerRedBlack?.[1],
-            0
+            3
           )}
         </div>
       </div>

@@ -2,22 +2,26 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useRef, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import "./style.scss";
-import { RootState } from "../../../../store/store";
-import { cardGamesId, cardUrl } from "../../../../utils/Constants";
-import { handleRoundId } from "../../../../helpers";
-import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
-import Dragon20Result from "./dragonCard";
 import BackLay from "./BackLay";
-import PairBox from "./PairBox";
 import OddEven from "./OddEvenBox";
+import PairBox from "./PairBox";
 import CardBox from "./cardBox";
+import Dragon20Result from "./dragonCard";
+import "./style.scss";
+import UserBets from "../../../game/userBet";
+import {
+  cardGamesId,
+  cardGamesType,
+  cardUrl,
+} from "../../../../utils/Constants";
+import { RootState } from "../../../../store/store";
+import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
+import { handleRoundId } from "../../../../helpers";
 import CardResultBox from "../../../commonComponent/cardResultBox";
 import RulesModal from "../../../commonComponent/rulesModal";
 import { dtrules } from "../../../../assets";
-import UserBets from "../../../game/userBet";
 
-const DragonTigerOneDayComponent = () => {
+const DragonTigerDesktop = () => {
   const [show, setShow] = useState(false);
   const { dragonTigerDetail } = useSelector((state: RootState) => state.card);
   const placeBetRef = useRef<HTMLDivElement>(null);
@@ -133,7 +137,11 @@ const DragonTigerOneDayComponent = () => {
               />
             </div>
             <div style={{ width: "100%", margin: "5px" }}>
-              <CardResultBox data={dragonTigerDetail} name={["D", "T"]} />
+              <CardResultBox
+                data={dragonTigerDetail}
+                name={["D", "T"]}
+                type={cardGamesType.dragonTigerOneDay}
+              />
             </div>
           </div>
 
@@ -160,4 +168,4 @@ const DragonTigerOneDayComponent = () => {
   );
 };
 
-export default DragonTigerOneDayComponent;
+export default DragonTigerDesktop;
