@@ -92,8 +92,7 @@ const DragonTigerOneDayResultComponent: any = ({ data }: any) => {
           <div className="d-sm-flex flex-sm-row">
             <span className="dt20CommonText">Card</span>
             <span className="dt20CommonText-2">
-              D : {dragonCard?.[dragonCard?.length - 1]} | T :{" "}
-              {tigerCard?.[tigerCard?.length - 1]}
+              D : {dragonCard} | T : {tigerCard}
             </span>
           </div>
         </div>
