@@ -1,14 +1,13 @@
-import { IoInformationCircle } from "react-icons/io5";
 import { useState } from "react";
+import { IoInformationCircle } from "react-icons/io5";
 import SmoothDropdownModal from "../minMaxModal";
 
 const BackLay = ({ matchOddsData, data }: any) => {
   const [modelOpen, setModelOpen] = useState(false);
   const min = matchOddsData?.[0]?.min;
   const max = matchOddsData?.[0]?.max;
-
   const handleLock = (status: any, value: any) => {
-    if (status != "ACTIVE" || value === "0.00") {
+    if (status !== "ACTIVE" || value === "0.00") {
       return true;
     } else {
       return false;
@@ -34,7 +33,6 @@ const BackLay = ({ matchOddsData, data }: any) => {
         {item?.l1}
       </div>
     );
-  // console.log('first',matchOddsData)
   return (
     <div className="w-100">
       <div
@@ -49,27 +47,37 @@ const BackLay = ({ matchOddsData, data }: any) => {
       >
         <div className="w-100 d-sm-flex flex-row" style={{ height: "30px" }}>
           <div className="dtlTitle">
-            <div style={{ width: "45%", textAlign: "start" }}>
-              <span className="minmaxi">
-                <IoInformationCircle
-                  color="#ffc742"
-                  onClick={() => setModelOpen(!modelOpen)}
-                />
-                <SmoothDropdownModal
-                  min={min}
-                  max={max}
-                  show={modelOpen}
-                  setShow={() => setModelOpen(false)}
-                />
-              </span>
-            </div>{" "}
+            {
+              <div style={{ width: "45%", textAlign: "start" }}>
+                <span className="minmaxi">
+                  <IoInformationCircle
+                    color="#ffc742"
+                    onClick={() => setModelOpen(!modelOpen)}
+                  />
+                  <SmoothDropdownModal
+                    min={min}
+                    max={max}
+                    show={modelOpen}
+                    setShow={() => setModelOpen(false)}
+                  />
+                </span>
+              </div>
+            }
           </div>
           <div className="dtlsubTitle back-BackGround">Back</div>
           <div className="dtlsubTitle lay-BackGround">Lay</div>
         </div>
-        <div className="w-100 d-sm-flex flex-row" style={{ height: "30px" }}>
-          <div className="dtlTitle">
-            Dragon{" "}
+        <div className="w-100 d-sm-flex flex-row" style={{ height: "40px" }}>
+          <div
+            className="dtlTitle"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              lineHeight: 1,
+            }}
+          >
+            <span>Dragon</span>
             <span
               className={
                 data?.profitLoss
@@ -104,15 +112,22 @@ const BackLay = ({ matchOddsData, data }: any) => {
                     )["dragon"]
                   : 0
                 : 0}
-            </span>{" "}
+            </span>
           </div>
           {renderItem(matchOddsData?.[0], 0, "back")}
           {renderItem(matchOddsData?.[0], 1, "lay")}
         </div>
-        <div className="w-100 d-sm-flex flex-row" style={{ height: "30px" }}>
-          <div className="dtlTitle">
-            {" "}
-            Tiger
+        <div className="w-100 d-sm-flex flex-row" style={{ height: "40px" }}>
+          <div
+            className="dtlTitle"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              lineHeight: 1,
+            }}
+          >
+            <span>Tiger</span>
             <span
               className={
                 data?.profitLoss

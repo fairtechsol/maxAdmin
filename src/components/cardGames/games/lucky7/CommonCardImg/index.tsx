@@ -46,7 +46,7 @@ const CommonCardImg = ({ cardData, data }: any) => {
                     : ""
                   : ""
                 : ""
-            }}`}
+            }`}
           >
             {data?.profitLoss
               ? data?.profitLoss[`${data?.videoInfo?.mid}_${item?.sid}_card`]

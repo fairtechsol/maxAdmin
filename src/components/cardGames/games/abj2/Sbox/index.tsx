@@ -92,7 +92,7 @@ const SBetBox = ({ type, odds, data }: any) => {
                     : ""
                   : ""
                 : ""
-            }}`}
+            }`}
           >
             {data?.profitLoss
               ? data?.profitLoss[
@@ -137,7 +137,7 @@ const SBetBox = ({ type, odds, data }: any) => {
                     : ""
                   : ""
                 : ""
-            }}`}
+            }`}
           >
             {data?.profitLoss
               ? data?.profitLoss[
