@@ -27,6 +27,23 @@ import {
   eleven,
   twelve,
   thirteen,
+  imgA,
+  ball0,
+  img2,
+  ball1,
+  img3,
+  ball2,
+  img4,
+  ball3,
+  img6,
+  ball4,
+  img10,
+  ball6,
+  imgK,
+  ballW,
+  ballByBall,
+  superover,
+  crick5,
 } from "../../assets";
 
 export const ApiConstants = {
@@ -89,6 +106,9 @@ export const ApiConstants = {
       PLACE_BET: "/bet/cardBetting",
       RESULT: "/card/result/detail",
     },
+  },
+  SCOREBOARD: {
+    match: "/api/tunnel/casino/sport-score",
   },
 };
 
@@ -310,7 +330,7 @@ export const card3 = {
       name: "TEST TEENPATTI",
     },
     {
-      url: "/admin/casinoDetail/contact-admin",
+      url: "/admin/casinoDetail/teen8",
       imgSrc: teenplayer,
       name: "OPEN TEENPATTI",
     },
@@ -346,9 +366,26 @@ export const card3 = {
       name: "ANDAR BAHAR 2",
     },
     {
-      url: "/admin/casinoDetail/contact-admin",
+      url: "/admin/casinoDetail/ab20",
       imgSrc: abjlist,
       name: "ANDAR BAHAR",
+    },
+  ],
+  sportCasino: [
+    {
+      url: "/",
+      imgSrc: ballByBall,
+      name: "BALL BY BALL",
+    },
+    {
+      url: "/admin/casinoDetail/superover",
+      imgSrc: superover,
+      name: "SUPER OVER",
+    },
+    {
+      url: "/admin/casinoDetail/cricketv3",
+      imgSrc: crick5,
+      name: "5 5 Cricket",
     },
   ],
 };
@@ -422,22 +459,28 @@ export const dragonTigerCards = [
 ];
 
 export const cardGamesType: any = {
-  dragonTiger20: "dt20",
-  andarBahar2: "abj",
-  andarBahar1: "ab20",
-  teen20: "teen20",
-  card32: "card32",
-  card32B: "card32eu",
-  lucky7: "lucky7",
-  dragonTiger202: "dt202",
-  dragonTigerLion: "dtl20",
-  teenOneDay: "teen",
-  teenOpen: "teen8",
-  teenTest: "teen9",
+  dragonTiger20: "dt20", //
+  andarBahar2: "abj", //
+  andarBahar1: "ab20", //
+  teen20: "teen20", //
+  card32: "card32", //
+  card32B: "card32eu", //
+  lucky7: "lucky7", //
+  dragonTiger202: "dt202", //
+  dragonTigerLion: "dtl20", //
+  teenOneDay: "teen", //
+  teenOpen: "teen8", //
+  teenTest: "teen9", //
   dragonTigerOneDay: "dt6",
   lucky7B: "lucky7eu",
   casinoWar: "war",
   race20: "race20",
+  superover: "superover",
+  poker6: "poker6",
+  poker1Day: "poker",
+  poker20: "poker20",
+  card3judge: "3cardj",
+  cricketv3: "cricketv3",
 };
 
 export const cardGamesTypeNames: any = {
@@ -493,4 +536,48 @@ export const cardGamesId: any = {
   lucky7B: 3032,
   casinoWar: 3038,
   race20: 3036,
+  superover: 3060,
+  poker: 30500,
+  poker1Day: 3051,
+  poker20: 3052,
+  cricketv3: 3042,
 };
+
+export const rulesData = [
+  {
+    cardImage: imgA,
+    count: 5,
+    valueImage: ball0,
+  },
+  {
+    cardImage: img2,
+    count: 5,
+    valueImage: ball1,
+  },
+  {
+    cardImage: img3,
+    count: 5,
+    valueImage: ball2,
+  },
+  {
+    cardImage: img4,
+    count: 5,
+    valueImage: ball3,
+  },
+  {
+    cardImage: img6,
+    count: 5,
+    valueImage: ball4,
+  },
+  {
+    cardImage: img10,
+    count: 5,
+    valueImage: ball6,
+  },
+  {
+    cardImage: imgK,
+    count: 5,
+    valueImage: ballW,
+    valueText: "Wicket",
+  },
+];

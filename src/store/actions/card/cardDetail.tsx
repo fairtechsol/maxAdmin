@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import service from "../../../service";
 import { AxiosError } from "axios";
-import { ApiConstants } from "../../../utils/Constants";
+import { ApiConstants, Constants } from "../../../utils/Constants";
 
 export const getDragonTigerDetailHorseRacing = createAsyncThunk<any, any>(
   "horseRacing/matchDetail",
@@ -131,6 +131,37 @@ export const updateTeenPattiOpenMatchRates = createAsyncThunk<any, any>(
 
 export const updateCardAbj1Rates = createAsyncThunk<any, any>(
   "abj1/matchRatesUpdate",
+  async (data) => {
+    return data;
+  }
+);
+
+export const casinoScoreboardMatchRates = createAsyncThunk<any, any>(
+  "casinoScoreboard/matchRatesUpdate",
+  async (requestData, thunkApi) => {
+    try {
+      const config = {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+        },
+      };
+      const resp = await service.get(
+        `${Constants.thirdPartyCard}${ApiConstants.SCOREBOARD.match}/${requestData?.id}?gameName=${requestData?.type}`,
+        config
+      );
+      if (resp?.data) {
+        return resp?.data?.data?.data;
+      }
+    } catch (error) {
+      const err = error as AxiosError;
+      return thunkApi.rejectWithValue(err.response?.status);
+    }
+  }
+);
+
+export const updateCardSuperoverRates = createAsyncThunk<any, any>(
+  "superover/matchRatesUpdate",
   async (data) => {
     return data;
   }

@@ -8,6 +8,7 @@ import {
   updateCardAbj1Rates,
   updateCardAbjRates,
   updateCardMatchRates,
+  updateCardSuperoverRates,
   updateDragonTigerLionRates,
   updateDragonTigerOneDayRates,
   updateLiveGameResultTop10,
@@ -26,6 +27,7 @@ interface InitialState {
   liveGameResultTop10: any;
   cards32Detail: any;
   resultData: any;
+  scoreBoardData: any;
 }
 
 const initialState: InitialState = {
@@ -37,6 +39,7 @@ const initialState: InitialState = {
   liveGameResultTop10: [],
   cards32Detail: [],
   resultData: null,
+  scoreBoardData: [],
 };
 
 const cardDetail = createSlice({
@@ -311,6 +314,24 @@ const cardDetail = createSlice({
             cardInfo,
             ander,
             bahar,
+          };
+        }
+      })
+      .addCase(updateCardSuperoverRates.fulfilled, (state, action) => {
+        const payload = action?.payload;
+        if (payload) {
+          state.loading = false;
+          const { t1, t2, t3, t4 } = payload;
+          const videoInfo = { ...t1[0] };
+          const bookmaker = { ...t2 };
+          const fancy = { ...t3 };
+          const fancy1 = { ...t4 };
+          state.dragonTigerDetail = {
+            ...state.dragonTigerDetail,
+            videoInfo,
+            bookmaker,
+            fancy,
+            fancy1,
           };
         }
       });
