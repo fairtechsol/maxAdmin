@@ -140,8 +140,6 @@ const UserBetModalForm = (props: any) => {
     }
   }, []);
 
-  console.log(selectedOption);
-
   return (
     <form
       className={`UserBetModalForm ${props.customClass}`}
