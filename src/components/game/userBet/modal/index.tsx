@@ -25,44 +25,7 @@ function UserBetModalTable() {
     { id: "matchDate", label: "MatchDate " },
     { id: "ip", label: "IP " },
     { id: "browserDetail", label: "BrowserDetail " },
-    // { id: "Checked", label: "Checked " },
   ];
-
-  // const data: any = [
-  //   {
-  //     username: "fuser1",
-  //     nation: "India",
-  //     betType: "Match1",
-  //     amount: "1000",
-  //     userRate: "94.5",
-  //     placeDate: "17-11-223",
-  //     matchDate: "17-11-223",
-  //     ip: "1000",
-  //     browserDetail: "http:",
-  //   },
-  //   {
-  //     username: "fuser1",
-  //     nation: "India",
-  //     betType: "Match1",
-  //     amount: "1000",
-  //     userRate: "94.5",
-  //     placeDate: "17-11-223",
-  //     matchDate: "17-11-223",
-  //     ip: "1000",
-  //     browserDetail: "http:",
-  //   },
-  //   {
-  //     username: "fuser1",
-  //     nation: "India",
-  //     betType: "Match1",
-  //     amount: "1000",
-  //     userRate: "94.5",
-  //     placeDate: "17-11-223",
-  //     matchDate: "17-11-223",
-  //     ip: "1000",
-  //     browserDetail: "http:",
-  //   },
-  // ];
 
   return (
     <div className="activeUsers-modal">
