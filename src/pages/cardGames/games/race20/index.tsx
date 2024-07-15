@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Loader from "../../../../components/commonComponent/loader";
 import { socket, socketService } from "../../../../socketManager";
 import { cardGamesType } from "../../../../utils/Constants";
 import {
@@ -8,47 +7,32 @@ import {
   updateBetsPlaced,
 } from "../../../../store/actions/match/matchAction";
 import {
-  casinoScoreboardMatchRates,
   getDragonTigerDetailHorseRacing,
   updateBalanceOnBetPlaceCards,
-  updateCardSuperoverRates,
+  updateCardRace20Rates,
   updateLiveGameResultTop10,
   updateProfitLossCards,
 } from "../../../../store/actions/card/cardDetail";
 import { AppDispatch, RootState } from "../../../../store/store";
-import SuperoverComponent from "../../../../components/cardGames/games/superOver";
+import Loader from "../../../../components/commonComponent/loader";
+import Race20Component from "../../../../components/cardGames/games/race20";
 
-const Superover = () => {
+const Race20 = () => {
   const dispatch: AppDispatch = useDispatch();
   const { loading, dragonTigerDetail } = useSelector(
     (state: RootState) => state.card
   );
-  useEffect(() => {
-    const scoreBoard = () => {
-      if (dragonTigerDetail?.videoInfo?.mid) {
-        const Id = dragonTigerDetail.videoInfo?.mid.split(".");
-        dispatch(
-          casinoScoreboardMatchRates({
-            id: Id[1],
-            type: cardGamesType.cricketv3,
-          })
-        );
-      }
-    };
-    const intervalId = setInterval(scoreBoard, 1000);
-
-    return () => clearInterval(intervalId);
-  }, [dispatch, dragonTigerDetail]);
 
   const setMatchRatesInRedux = (event: any) => {
     try {
-      dispatch(updateCardSuperoverRates(event?.data?.data?.data));
+      dispatch(updateCardRace20Rates(event?.data?.data?.data));
     } catch (e) {
       console.log(e);
     }
   };
+
   const handleBetPlacedOnDT20 = (event: any) => {
-    if (event?.jobData?.matchType === cardGamesType.superover) {
+    if (event?.jobData?.matchType === cardGamesType.race20) {
       dispatch(updateBetsPlaced(event?.jobData));
       dispatch(updateBalanceOnBetPlaceCards(event?.jobData));
       dispatch(updateProfitLossCards(event?.userRedisObj));
@@ -66,7 +50,7 @@ const Superover = () => {
 
   useEffect(() => {
     try {
-      dispatch(getDragonTigerDetailHorseRacing(cardGamesType.superover));
+      dispatch(getDragonTigerDetailHorseRacing(cardGamesType.race20));
       if (dragonTigerDetail?.id) {
         dispatch(getPlacedBets(dragonTigerDetail?.id));
       }
@@ -78,16 +62,16 @@ const Superover = () => {
   useEffect(() => {
     try {
       if (socket && dragonTigerDetail?.id) {
-        socketService.card.getCardRatesOff(cardGamesType.superover);
+        socketService.card.getCardRatesOff(cardGamesType.race20);
         socketService.card.userCardBetPlacedOff();
         socketService.card.cardResultOff();
-        socketService.card.joinMatchRoom(cardGamesType.superover);
+        socketService.card.joinMatchRoom(cardGamesType.race20);
         socketService.card.getCardRates(
-          cardGamesType.superover,
+          cardGamesType.race20,
           setMatchRatesInRedux
         );
         socketService.card.getLiveGameResultTop10(
-          cardGamesType.superover,
+          cardGamesType.race20,
           handleLiveGameResultTop10
         );
         socketService.card.userCardBetPlaced(handleBetPlacedOnDT20);
@@ -102,8 +86,8 @@ const Superover = () => {
     try {
       if (dragonTigerDetail?.id) {
         return () => {
-          socketService.card.leaveMatchRoom(cardGamesType.superover);
-          socketService.card.getCardRatesOff(cardGamesType.superover);
+          socketService.card.leaveMatchRoom(cardGamesType.race20);
+          socketService.card.getCardRatesOff(cardGamesType.race20);
           socketService.card.userCardBetPlacedOff();
           socketService.card.cardResultOff();
         };
@@ -113,7 +97,7 @@ const Superover = () => {
     }
   }, [dragonTigerDetail?.id]);
 
-  return loading ? <Loader /> : <SuperoverComponent />;
+  return loading ? <Loader /> : <Race20Component />;
 };
 
-export default Superover;
+export default Race20;

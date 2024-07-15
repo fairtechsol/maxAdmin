@@ -8,7 +8,9 @@ import {
   updateCardAbj1Rates,
   updateCardAbjRates,
   updateCardMatchRates,
+  updateCardRace20Rates,
   updateCardSuperoverRates,
+  updateCricket5MatchRates,
   updateDragonTigerLionRates,
   updateDragonTigerOneDayRates,
   updateLiveGameResultTop10,
@@ -332,6 +334,40 @@ const cardDetail = createSlice({
             bookmaker,
             fancy,
             fancy1,
+          };
+        }
+      })
+      .addCase(updateCardRace20Rates.fulfilled, (state, action) => {
+        const payload = action?.payload;
+        if (payload) {
+          const { t1, t2 } = payload;
+          state.loading = false;
+          const videoInfo = { ...t1[0] };
+          const cards = t2.slice(0, 4);
+          const total = t2.slice(4, 6);
+          const win = t2.slice(6, 12);
+          state.dragonTigerDetail = {
+            ...state.dragonTigerDetail,
+            videoInfo,
+            cards,
+            total,
+            win,
+          };
+        }
+      })
+      .addCase(updateCricket5MatchRates.fulfilled, (state, action) => {
+        const payload = action.payload;
+        if (payload) {
+          const { t1, t2, t3 } = payload;
+          state.loading = false;
+          const videoInfo = { ...t1[0] };
+          const odds = [...t2];
+          const fancy = [...t3];
+          state.dragonTigerDetail = {
+            ...state.dragonTigerDetail,
+            videoInfo,
+            odds,
+            fancy,
           };
         }
       });

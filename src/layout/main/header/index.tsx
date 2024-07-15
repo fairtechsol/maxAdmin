@@ -256,7 +256,10 @@ const Topbar = (props: any) => {
                     options={[
                       { name: "Ball By Ball", link: "#1" },
                       { name: "Binary", link: "#1" },
-                      { name: "Race 20-20", link: "#1" },
+                      {
+                        name: "Race 20-20",
+                        link: "/admin/casinoDetail/race20",
+                      },
                       { name: "Queen", link: "#2" },
                       { name: "Baccarat", link: "#3" },
                       {

@@ -2,6 +2,8 @@ import { lazy } from "react";
 import { Navigate } from "react-router-dom";
 import MainLayout from "../layout/main";
 import Loadable from "../utils/loadable";
+import Race20 from "../pages/cardGames/games/race20";
+import Cricket5 from "../pages/cardGames/games/cricket5";
 
 // ==============================|| Main ROUTING ||============================== //
 
@@ -173,12 +175,12 @@ const MainRoutes = {
       element: <Superover />,
     },
     {
-      path: "casinoDetail/ab20",
-      element: <Abj />,
+      path: "casinoDetail/race20",
+      element: <Race20 />,
     },
     {
-      path: "casinoDetail/ab20",
-      element: <Abj />,
+      path: "casinoDetail/cricketv3",
+      element: <Cricket5 />,
     },
     {
       path: "*",

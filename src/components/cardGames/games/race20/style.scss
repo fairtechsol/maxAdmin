@@ -36,37 +36,6 @@
   border-right: 10px solid transparent;
   border-top: 10px solid green;
 }
-.dt20resultModal {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  width: 100%;
-}
-.dt20resultCardContainer {
-  width: 30%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-}
-.dt20CommonText {
-  font-size: 16px;
-  font-weight: 400;
-  color: #a2a2a2;
-}
-.dt20CommonText-2 {
-  font-size: 16px;
-  font-weight: 400;
-  color: #000;
-  margin-left: 10px;
-}
-.casino-winner-icon {
-  // font-size: 26px;
-  box-shadow: 0 0 0 #ffc742;
-  animation: winnerbox 1.5s infinite;
-  border-radius: 50%;
-  color: #169733;
-}
 // .match-list-tabs {
 //   border-right: 1px solid $secondary !important;
 //   border-radius: 0px !important;
@@ -108,7 +77,6 @@
 }
 .table {
   margin-bottom: 0 !important;
-  // background-color: #f7f7f7
 }
 .coupon-table tr {
   margin: 0 !important;
@@ -173,91 +141,176 @@
   padding: 0; /* Remove padding from Nav.Link */
   margin: 0; /* Remove margin from Nav.Link */
 }
-.tiePairContainer {
+.sBoxContainer {
+  width: 50%;
+  background-color: #ddd;
+  padding-top: 5px;
+}
+.sBoxMainlucky {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  gap: 3%;
+}
+.commonButtonBoxContainerSbox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  // gap: 3px;
+  border: 3px solid yellow;
+  border-radius: 8px;
+  line-height: 1.2;
+  cursor: pointer;
+}
+.tiePairbtn-theme {
+  color: #fff !important;
+  background-image: linear-gradient(to right, #004a25, #ffc742) !important;
+  width: 100% !important;
+  border-radius: 4px !important;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2) !important;
+  border: 0 !important;
+  padding: 2px 8px !important;
+  cursor: pointer !important;
+  font-size: 16px !important;
+  font-weight: 600;
+  position: relative;
+  text-align: center;
+}
+.oddBoxContainer {
+  width: 100%;
+  background-color: #eee;
+  padding-top: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.oddBoxContainer-m {
+  width: 100%;
+  background-color: #eee;
+  padding-top: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.totalContainer {
+  width: 40%;
+  background-color: #eee;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.winContainer {
+  width: 60%;
+  background-color: #eee;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.totalContainer-m {
   width: 100%;
   background-color: #eee;
   padding: 10px;
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
 }
-.tiePairRateBoxMain {
+.winContainer-m {
+  width: 100%;
+  background-color: #eee;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.subwinContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.total-mainRateBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+.win-mainRateBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 30%;
+  margin-bottom: 12px;
+  gap: 10px;
+}
+.win-rateBox {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  padding: 5px;
+  line-height: 1;
+}
+.total-rateBox {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 30%;
+  padding: 5px;
+  line-height: 1;
+}
+.commonCardImgContainer {
   width: 100%;
   display: flex;
   flex-direction: row;
-  gap: 3%;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  // margin-top: 5px;
 }
-.dtlTitle {
-  width: 60%;
-  background-color: #ffffff;
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  border-bottom: 0.1px solid #c7c8ca;
-  padding: 5px;
-  font-weight: 600;
-  color: #000;
-}
-.dtlsubTitle {
-  width: 20%;
+
+.commonButtonBoxContainerOdd {
+  width: 50%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  border-bottom: 0.1px solid #c7c8ca;
-  border-right: 0.1px solid #c7c8ca;
-  font-weight: 600;
-  color: #000;
+  cursor: pointer;
 }
-.card32bTitle {
-  width: 60%;
-  background-color: #ffffff;
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  border-bottom: 0.1px solid #c7c8ca;
-  padding: 5px;
-  font-weight: 600;
+.evenOddbtn-theme {
+  padding: 8px 0;
+  font-weight: bold;
+  font-size: 18px;
   color: #000;
+  background-color: #72bbef !important;
+  text-align: center;
+  line-height: 1;
 }
-.card32bsubTitle {
-  width: 40%;
+.column-flex {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-bottom: 0.1px solid #c7c8ca;
-  border-right: 0.1px solid #c7c8ca;
-  font-weight: 600;
-  color: #000;
 }
-.cardNumberTitle {
-  width: 100%;
-  background-color: #ffffff;
+.row-flex {
   display: flex;
-  justify-content: start;
+  flex-direction: row;
+}
+.justify-space-a {
+  justify-content: space-around;
+}
+.align-center {
   align-items: center;
-  border-bottom: 0.1px solid #c7c8ca;
-  padding: 5px;
-  font-weight: 600;
-  color: #000;
-}
-.lay-BackGround {
-  background-color: #faa9ba;
-}
-.back-BackGround {
-  background-color: #72bbef;
-}
-.flex-justify-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.commonButtonBoxContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 3px;
 }
 .suspended {
   position: relative;
@@ -278,67 +331,70 @@
   font-weight: 900;
   font-size: 18px;
   top: 0;
+  z-index: 10;
 }
-.marketHeader {
-  width: 100%;
-  background-color: #ffc742d9;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 5px;
-}
-.boxContainer {
-  width: 100%;
+.abjresultModal {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  background-color: #eee;
-  padding-left: 5px;
-  border-bottom: 0.5px solid #c7c8ca;
+  width: 100%;
 }
-.blboxes {
-  width: 25%;
+.abjresultCardContainer {
+  width: 40%;
   display: flex;
   flex-direction: row;
-}
-.rateText {
-  font-size: 14px;
-  color: #000;
-  text-align: center;
-}
-.horseRacingTabHeader {
-  width: 100%;
-  height: 10%;
-  background-color: #ffc742;
-  display: flex;
-  justify-content: space-between;
-  padding: 6px 8px;
-}
-.resultTabHead {
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  padding: 5px;
-  background-color: rgba(0, 74, 37, 0.9);
-  align-items: center;
-}
-.resultTeamTab {
-  width: 100%;
-  display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: #f7f7f7;
+}
+.abjresultCardContainer2 {
+  width: 60%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.casino-winner-icon {
+  // font-size: 26px;
+  box-shadow: 0 0 0 #ffc742;
+  animation: winnerbox 1.5s infinite;
+  border-radius: 50%;
+  color: #169733;
+}
+.rate-box {
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1;
+}
+.casino-volume {
+  font-size: 12px;
+  font-weight: 100;
+  line-height: 1;
+  margin-top: 5px;
+}
+.lay-BackGround {
+  background-color: #faa9ba;
+}
+.back-BackGround {
+  background-color: #72bbef;
+}
+.result-card-container {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+.casino-winner-icon {
+  // font-size: 26px;
+  box-shadow: 0 0 0 #ffc742;
+  animation: winnerbox 1.5s infinite;
+  border-radius: 50%;
+  color: #169733;
 }
 // .horseRacingTab .nav-link{
 //   margin: 0 !important;
 // }
-.super-over-rule img {
-  height: 40px;
-}
-.super-over-rule .table-over th,
-.table-over td {
-  padding: 2px 8px;
-  vertical-align: middle;
+.oddsBoxProfitLoss {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media (max-width: 768px) {

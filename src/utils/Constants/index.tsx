@@ -581,3 +581,30 @@ export const rulesData = [
     valueText: "Wicket",
   },
 ];
+
+export const cardData = [
+  {
+    team: "AUS",
+    cards: [
+      { label: "A", imgSrc: imgA, value: "1 Run" },
+      { label: "2", imgSrc: img2, value: "2 Run" },
+      { label: "3", imgSrc: img3, value: "3 Run" },
+      { label: "4", imgSrc: img4, value: "4 Run" },
+      { label: "6", imgSrc: img6, value: "6 Run" },
+      { label: "10", imgSrc: img10, value: "0 Run" },
+      { label: "K", imgSrc: imgK, value: "Wicket" },
+    ],
+  },
+  {
+    team: "IND",
+    cards: [
+      { label: "A", imgSrc: imgA, value: "1 Run" },
+      { label: "2", imgSrc: img2, value: "2 Run" },
+      { label: "3", imgSrc: img3, value: "3 Run" },
+      { label: "4", imgSrc: img4, value: "4 Run" },
+      { label: "6", imgSrc: img6, value: "6 Run" },
+      { label: "10", imgSrc: img10, value: "0 Run" },
+      { label: "K", imgSrc: imgK, value: "Wicket" },
+    ],
+  },
+];
