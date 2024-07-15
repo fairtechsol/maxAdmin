@@ -263,7 +263,7 @@ const Games = () => {
               <div className="my-2">
                 <ScoreCard />
               </div>
-              <UserBets />
+              <UserBets matchId={id} />
               {/* <BetTableHeader
                 customClass="mt-2 fw-normal"
                 title="Rules"
