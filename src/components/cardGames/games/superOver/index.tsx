@@ -121,7 +121,7 @@ const SuperOverComponent = () => {
               }}
             >
               <Col md={12}>
-                <UserBets />
+                <UserBets matchId={dragonTigerDetail?.id} />
               </Col>
               <Col>
                 <div className="sidebar-box place-bet-container super-over-rule">
