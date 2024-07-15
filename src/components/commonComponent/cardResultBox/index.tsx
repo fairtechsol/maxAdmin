@@ -5,6 +5,10 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import { ResultComponent } from "../resultComponent";
+import { ImClubs } from "react-icons/im";
+import { GiSpades } from "react-icons/gi";
+import { BiSolidHeart } from "react-icons/bi";
+import { ImDiamonds } from "react-icons/im";
 import { resultDragonTiger } from "../../../store/actions/card/cardDetail";
 
 const CardResultBox = ({ data, name, type }: any) => {
@@ -28,7 +32,7 @@ const CardResultBox = ({ data, name, type }: any) => {
           <span
             style={{ fontSize: "14px", cursor: "pointer" }}
             onClick={() =>
-              navigate("/admin/casinoresult", {
+              navigate("/casino-report", {
                 state: { cardType: data?.type },
               })
             }
@@ -44,7 +48,7 @@ const CardResultBox = ({ data, name, type }: any) => {
               className="cardResultCircle"
               key={item?.mid}
               style={{
-                backgroundColor: "#355e3b",
+                backgroundColor: type === "race20" ? "#d5d5d5" : "#355e3b",
               }}
               onClick={() => handleResult(item?.mid)}
             >
@@ -87,6 +91,18 @@ const CardResultBox = ({ data, name, type }: any) => {
                     ? name?.[1]
                     : null}
                 </span>
+              ) : type === "race20" ? (
+                <>
+                  {item?.result === "1" ? (
+                    <GiSpades color="#000000" />
+                  ) : item?.result === "2" ? (
+                    <BiSolidHeart color="#ff0000" />
+                  ) : item?.result === "3" ? (
+                    <ImClubs color="#000000" />
+                  ) : (
+                    <ImDiamonds color="#ff0000" />
+                  )}
+                </>
               ) : (
                 <span
                   style={{
@@ -126,7 +142,7 @@ const CardResultBox = ({ data, name, type }: any) => {
         onHide={() => setLgShow(false)}
         aria-labelledby="example-modal-sizes-title-lg"
       >
-        <Modal.Body style={{ padding: 10 }}>
+        <Modal.Body style={{ padding: 0 }}>
           <ResultComponent
             data={resultData}
             setfalse={setLgShow}

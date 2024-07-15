@@ -2,7 +2,11 @@ import { lazy } from "react";
 import { Navigate } from "react-router-dom";
 import MainLayout from "../layout/main";
 import Loadable from "../utils/loadable";
+import Race20 from "../pages/cardGames/games/race20";
+import Cricket5 from "../pages/cardGames/games/cricket5";
+
 // ==============================|| Main ROUTING ||============================== //
+
 const Game = Loadable(lazy(() => import("../pages/games")));
 const OtherGamesDetail = Loadable(lazy(() => import("../pages/otherGames")));
 const ListClients = Loadable(lazy(() => import("../pages/listClients")));
@@ -48,12 +52,15 @@ const Lucky7B = Loadable(
 const TeenPatti1D = Loadable(
   lazy(() => import("../pages/cardGames/games/teenPatti1D"))
 );
-// const TeenPattiOpen = Loadable(
-//   lazy(() => import("../pages/cardGames/games/teenpattiOpen"))
-// );
-// const Abj = Loadable(
-//   lazy(() => import("../pages/cardGames/games/andarBahar1"))
-// );
+const TeenPattiOpen = Loadable(
+  lazy(() => import("../pages/cardGames/games/teenpattiOpen"))
+);
+const Abj = Loadable(
+  lazy(() => import("../pages/cardGames/games/andarBahar1"))
+);
+const Superover = Loadable(
+  lazy(() => import("../pages/cardGames/games/superOver"))
+);
 
 const MainRoutes = {
   path: "/admin",
@@ -148,21 +155,33 @@ const MainRoutes = {
       element: <DragonTigerOneDay />, //
     },
     {
-      path: "casinoDetail/lucky7eu",//
+      path: "casinoDetail/lucky7eu", //
       element: <Lucky7B />, //
     },
     {
       path: "casinoDetail/teen",
       element: <TeenPatti1D />, //
     },
-    // {
-    //   path: "casinoDetail/teen8",
-    //   element: <TeenPattiOpen />,
-    // },
-    // {
-    //   path: "casinoDetail/ab20",
-    //   element: <Abj />,
-    // },
+    {
+      path: "casinoDetail/teen8",
+      element: <TeenPattiOpen />,
+    },
+    {
+      path: "casinoDetail/ab20",
+      element: <Abj />,
+    },
+    {
+      path: "casinoDetail/superover",
+      element: <Superover />,
+    },
+    {
+      path: "casinoDetail/race20",
+      element: <Race20 />,
+    },
+    {
+      path: "casinoDetail/cricketv3",
+      element: <Cricket5 />,
+    },
     {
       path: "*",
       element: <Navigate to={"/admin/listAccount"} replace />,

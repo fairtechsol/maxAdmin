@@ -245,6 +245,24 @@ export const getPlacedBets = createAsyncThunk<any, any>(
     }
   }
 );
+export const getMorePlacedBets = createAsyncThunk<any, any>(
+  "/bet/more",
+  async (requestData, thunkApi) => {
+    try {
+      const resp = await service.get(
+        `${ApiConstants.BET.GETPLACEDBETS}?status=PENDING&betPlaced.matchId=${
+          requestData.matchId
+        }${requestData.filter ? requestData.filter : ""}`
+      );
+      if (resp) {
+        return resp?.data?.rows;
+      }
+    } catch (error: any) {
+      const err = error as AxiosError;
+      return thunkApi.rejectWithValue(err.response?.status);
+    }
+  }
+);
 
 export const updateUserMatchLock = createAsyncThunk<any, any>(
   "/userMatchLock",

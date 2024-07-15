@@ -127,7 +127,7 @@ const DragonTiger2020Component = () => {
               }}
             >
               <Col md={12}>
-                <UserBets />
+                <UserBets matchId={dragonTigerDetail?.id} />
               </Col>
             </Row>
           </Container>

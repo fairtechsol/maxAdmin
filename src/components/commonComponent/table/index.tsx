@@ -30,7 +30,7 @@ interface CustomTableProps extends React.HTMLAttributes<HTMLDivElement> {
   endpoint?: string;
   sortData?: any;
   handleReportExport?: any;
-  tableConfig?: any
+  tableConfig?: any;
 }
 
 const CustomTable: React.FC<CustomTableProps> = ({

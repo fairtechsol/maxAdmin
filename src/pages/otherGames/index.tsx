@@ -250,7 +250,7 @@ const OtherGamesDetail = () => {
                 ))}
             </Col>
             <Col md={4}>
-              <OtherUserBets />
+              <OtherUserBets matchId={id} />
             </Col>
           </Row>
         </div>

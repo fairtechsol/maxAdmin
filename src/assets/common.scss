@@ -2,18 +2,18 @@
 body {
   font-family: "Roboto Condensed", sans-serif !important;
 }
-body table.table{
+body table.table {
   margin-bottom: 0;
 }
 
 /* ====== excel csv btn ======= */
-.excel{
+.excel {
   background-color: $excel !important;
 }
-.pdf{
- background-color: $pdf !important;
+.pdf {
+  background-color: $pdf !important;
 }
-.divLoading{
+.divLoading {
   display: block;
   position: fixed;
   z-index: 9999;
@@ -29,17 +29,18 @@ body table.table{
   background-size: 100px 100px;
 }
 // action buttons
-.actionBtn{
+.actionBtn {
   padding: 0px 10px !important;
   height: auto !important;
 }
-.modalFull-90.customModal .modal-dialog{
+.modalFull-90.customModal .modal-dialog {
   width: 90vw;
   max-width: none;
 }
-.btn.focus, .btn:focus {
+.btn.focus,
+.btn:focus {
   outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
 body input.form-control {
@@ -47,29 +48,28 @@ body input.form-control {
   border-radius: 3px !important;
   font-size: 14px;
 }
-body{
-  input.form-check-input[type="checkbox"]{
-    border: 1px solid $black ;
+body {
+  input.form-check-input[type="checkbox"] {
+    border: 1px solid $black;
     border-radius: 0 !important;
     height: 20px;
     width: 20px;
-    &:focus{
-        border-color: $black;
-        box-shadow: none;                        
+    &:focus {
+      border-color: $black;
+      box-shadow: none;
     }
-    &:checked{
-        background-color: $dark !important;
+    &:checked {
+      background-color: $dark !important;
     }
   }
-  label{
+  label {
     font-size: 14px;
   }
-
 }
 // .css-13cymwt-control{
 //   height: 33px;
 // }
-th{
+th {
   font-size: 14px;
 }
 .btn {
@@ -77,74 +77,70 @@ th{
   height: 33px;
   font-size: 14px !important;
 }
-@media (min-width: 992px){
+@media (min-width: 992px) {
   body .modal-dialog {
-      min-width: 530px;
+    min-width: 530px;
   }
-
 }
-
 
 .nav-pills .nav-link:not(.active) {
   color: $defaultBlue;
-  transition: color 0.9s ease; 
+  transition: color 0.9s ease;
 }
-
 
 .nav-pills .nav-link.active {
-  color: black; 
+  color: black;
 }
 
-
 .nav-pills .nav-link:hover {
-  // border: .5px solid grey; 
+  // border: .5px solid grey;
 }
 
 .defaultBlue {
-  color: $defaultBlue; 
+  color: $defaultBlue;
 }
 
 /* ====== bg Colors start ====  */
-.bg-secondaryLight{
-  background-color: rgba( $secondary, 0.7) !important;
+.bg-secondaryLight {
+  background-color: rgba($secondary, 0.7) !important;
 }
-.bg-blue1{
+.bg-blue1 {
   background-color: $blue1 !important;
 }
-.bg-blue2{
+.bg-blue2 {
   background-color: $blue2 !important;
 }
-.bg-blue3{
+.bg-blue3 {
   background-color: $blue3 !important;
 }
-.bg-red1{
+.bg-red1 {
   background-color: $red1 !important;
 }
-.bg-red2{
+.bg-red2 {
   background-color: $red2 !important;
 }
-.bg-red3{
+.bg-red3 {
   background-color: $red3 !important;
 }
-.bg-pdf{
+.bg-pdf {
   background-color: $pdf;
 }
-.bg-defaultBlue{
+.bg-defaultBlue {
   background-color: $defaultBlue !important ;
 }
-.defaultBlue{
-color: $defaultBlue !important ;
+.defaultBlue {
+  color: $defaultBlue !important ;
 }
-.bg-green{
+.bg-green {
   background-color: $green;
 }
-.bg-lightGray{
+.bg-lightGray {
   background-color: $lightGray !important;
 }
-.bg-gray{
+.bg-gray {
   background-color: $gray !important;
 }
-.bg-extraGray{
+.bg-extraGray {
   background-color: $extraDark !important;
 }
 .btn-close {
@@ -176,10 +172,10 @@ color: $defaultBlue !important ;
 /* ====== bg Colors end ====  */
 
 /* ===== for title ====  */
-.text-green{
+.text-green {
   color: $green;
 }
-.text-red{
+.text-red {
   color: $pdf;
 }
 .title-46 {
@@ -236,43 +232,43 @@ color: $defaultBlue !important ;
 .title-10 {
   font-size: 10px;
 }
-.f300{
+.f300 {
   font-weight: 300;
 }
-.f400{
+.f400 {
   font-weight: 400;
 }
-.f500{
+.f500 {
   font-weight: 500;
 }
-.f600{
+.f600 {
   font-weight: 600;
 }
-.f700{
+.f700 {
   font-weight: 700;
 }
-.f800{
+.f800 {
   font-weight: 800;
 }
-.f900{
+.f900 {
   font-weight: 900;
 }
 
-.cardResultBoxContainer{
+.cardResultBoxContainer {
   width: 100%;
   display: flex;
   flex-direction: column;
   margin-bottom: 5px;
 }
-.cardResultBoxHeader{
+.cardResultBoxHeader {
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 6px 8px;
-  background-color: #ffc742D9;
+  background-color: #ffc742d9;
 }
-.cardResultBoxRound{
+.cardResultBoxRound {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -282,7 +278,7 @@ color: $defaultBlue !important ;
   gap: 5px;
   margin-bottom: 10px;
 }
-.cardResultCircle{
+.cardResultCircle {
   cursor: pointer;
   width: 30px;
   height: 30px;
@@ -293,6 +289,13 @@ color: $defaultBlue !important ;
   align-items: center;
 }
 
+.back {
+  background-color: #a7d8fd !important;
+}
+
+.lay {
+  background-color: #faa9ba !important;
+}
 
 // === border css start ====
 

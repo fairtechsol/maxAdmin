@@ -17,6 +17,9 @@ import DragonTigerOneDayResultComponent from "../../cardGames/games/dragontigerO
 import Teen1DResultComponent from "../../cardGames/games/teenpatti1D/resultModalComponent";
 import TeenOpenResultComponent from "../../cardGames/games/teenpattiOpen/resultModalComponent";
 import Abj1ResultComponent from "../../cardGames/games/abj1/resultModalComponent";
+import Race20ResultComponent from "../../cardGames/games/race20/resultModalComponent";
+import Cricket5ResultComponent from "../../cardGames/games/cricket5/resultModalComponent";
+import SuperOverResultComponent from "../../cardGames/games/superOver/resultModalComponent";
 
 const title = {
   dt20: "20-20 Dragon Tiger",
@@ -60,14 +63,6 @@ export const ResultComponent: React.FC<ResultComponentProps> = ({
           <span style={{ fontWeight: "bold" }}>Round Id:</span>
           <span>{handleRoundId(data?.result?.mid)}</span>
         </div>
-        {/* <div>
-          <span style={{ fontWeight: "bold" }}>Match Time:</span>
-          <span>
-            {data?.createdAt
-              ? moment(data?.createdAt).format("DD/MM/YYYY hh:mm:ss A")
-              : ""}
-          </span>
-        </div> */}
       </div>
       {type === cardGamesType?.dragonTiger20 ? (
         <Dragon20ResultComponent data={data} />
@@ -93,6 +88,12 @@ export const ResultComponent: React.FC<ResultComponentProps> = ({
         <TeenOpenResultComponent data={data} />
       ) : type === cardGamesType?.andarBahar1 ? (
         <Abj1ResultComponent data={data} />
+      ) : type === cardGamesType?.superover ? (
+        <SuperOverResultComponent data={data} />
+      ) : type === cardGamesType?.race20 ? (
+        <Race20ResultComponent data={data} />
+      ) : type === cardGamesType?.cricketv3 ? (
+        <Cricket5ResultComponent data={data} />
       ) : (
         <></>
       )}

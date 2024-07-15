@@ -6,7 +6,11 @@ import "./style.scss";
 import RulesModal from "../../../commonComponent/rulesModal";
 import UserBets from "../../../game/userBet";
 import { abjrules } from "../../../../assets";
-import { cardGamesId, cardGamesType, cardUrl } from "../../../../utils/Constants";
+import {
+  cardGamesId,
+  cardGamesType,
+  cardUrl,
+} from "../../../../utils/Constants";
 import CardResultBox from "../../../commonComponent/cardResultBox";
 import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
 import { RootState } from "../../../../store/store";
@@ -128,7 +132,7 @@ const AndarBahar1Component = () => {
               }}
             >
               <Col md={12}>
-                <UserBets />
+                <UserBets matchId={dragonTigerDetail?.id} />
               </Col>
             </Row>
           </Container>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import CustomButton from "../../commonComponent/button";
+// import CustomButton from "../../commonComponent/button";
 import CustomModal from "../../commonComponent/modal";
 import GameHeaderDropdown from "./dropdown";
 import ActiveUser from "./modals/activeUsers";
@@ -106,7 +106,7 @@ const GameHeader = () => {
               },
             ]}
           />
-          <CustomButton
+          {/* <CustomButton
             variant="secondary"
             type="submit"
             onClick={() => setUserBookShow(true)}
@@ -119,7 +119,7 @@ const GameHeader = () => {
             onClick={() => setBookmarkerShow(true)}
           >
             Bookmarkers Book
-          </CustomButton>
+          </CustomButton> */}
           <CustomModal
             customClass="modalFull-90"
             show={userBookShow}

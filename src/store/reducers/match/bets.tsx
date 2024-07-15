@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   getMatchLockAllChild,
+  getMorePlacedBets,
   getPlacedBets,
   getRunAmount,
   getUserDetailsForParent,
@@ -13,6 +14,7 @@ import {
 
 interface InitialState {
   placedBets: any;
+  morePlacedBets: any;
   runAmount: any;
   userMatchLock: any;
   matchLockAllChild: any;
@@ -26,6 +28,7 @@ interface InitialState {
 
 const initialState: InitialState = {
   placedBets: [],
+  morePlacedBets: [],
   runAmount: [],
   userMatchLock: [],
   matchLockAllChild: [],
@@ -54,6 +57,18 @@ const placedBetsSlice = createSlice({
         state.loading = false;
       })
       .addCase(getPlacedBets.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action?.error?.message;
+      })
+      .addCase(getMorePlacedBets.pending, (state) => {
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(getMorePlacedBets.fulfilled, (state, action) => {
+        state.morePlacedBets = action.payload;
+        state.loading = false;
+      })
+      .addCase(getMorePlacedBets.rejected, (state, action) => {
         state.loading = false;
         state.error = action?.error?.message;
       })

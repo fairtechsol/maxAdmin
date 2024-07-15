@@ -21,32 +21,43 @@ export const PlayingCard: React.FC<PlayingCardProps> = ({
     <div
       style={{
         borderRadius: "2px",
-        // border: "1px solid yellow",
+        border: "1px solid #fdf800",
         // lineHeight: isMobile ?  "2" :"0.8",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        // padding: isMobile ?  "0px" :"8px",
-        background: lock ? `url(${back})` : "white",
-        height: isMobile ? "20px" : "40px",
-        width: isMobile ? "16px" : "30px",
         backgroundSize: "100%",
+        WebkitBackgroundSize: "cover",
+        // padding: isMobile ?  "0px" :"8px",
+        background: "white",
+        height: isMobile ? "24px" : "40px",
+        width: isMobile ? "18px" : "30px",
+        padding: "0px",
+        // border:"1px solid yellow",
       }}
     >
-      {!lock && (
+      {!lock ? (
         <>
           <span
             style={{
               color: type === "heart" || type === "diamond" ? "red" : "black",
               fontWeight: "800",
-              lineHeight: "0.8",
-              fontSize: isMobile ? "12px" : "16px",
+              lineHeight: isMobile ? "1" : "1.2",
+              fontSize: isMobile ? "12px" : "18px",
             }}
           >
             {number}
           </span>
           <Icons type={type} />
+        </>
+      ) : (
+        <>
+          <img
+            src={back}
+            width={isMobile ? 16 : 30}
+            height={isMobile ? 20 : 40}
+          />
         </>
       )}
     </div>
@@ -92,7 +103,6 @@ export const HandleCards: React.FC<HandleCardsProps> = ({ card }) => {
   if (card === "1") {
     return <PlayingCard number="0" type="" lock={true} />;
   }
-  // console.log(card?.substring(0, card.length - 2),'jjjjjj',card)
   switch (type) {
     case "DD":
       return <PlayingCard number={number} type="heart" />;

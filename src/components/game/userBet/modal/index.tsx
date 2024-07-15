@@ -2,9 +2,17 @@ import { useEffect, useState } from "react";
 import { Column, TableConfig } from "../../../../models/tableInterface";
 import CustomTable from "../../../commonComponent/table";
 import "./style.scss";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../store/store";
+import moment from "moment-timezone";
+import TooltipCustom from "../../../reports/modals/accountStatement/tooltip";
 
 function UserBetModalTable() {
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
+
+  const { morePlacedBets } = useSelector(
+    (state: RootState) => state.match.placeBets
+  );
   useEffect(() => {}, [tableConfig]);
   const columns: Column[] = [
     { id: "sr", label: "S. NO" },
@@ -17,43 +25,6 @@ function UserBetModalTable() {
     { id: "matchDate", label: "MatchDate " },
     { id: "ip", label: "IP " },
     { id: "browserDetail", label: "BrowserDetail " },
-    // { id: "Checked", label: "Checked " },
-  ];
-
-  const data: any = [
-    {
-      username: "fuser1",
-      nation: "India",
-      betType: "Match1",
-      amount: "1000",
-      userRate: "94.5",
-      placeDate: "17-11-223",
-      matchDate: "17-11-223",
-      ip: "1000",
-      browserDetail: "http:",
-    },
-    {
-      username: "fuser1",
-      nation: "India",
-      betType: "Match1",
-      amount: "1000",
-      userRate: "94.5",
-      placeDate: "17-11-223",
-      matchDate: "17-11-223",
-      ip: "1000",
-      browserDetail: "http:",
-    },
-    {
-      username: "fuser1",
-      nation: "India",
-      betType: "Match1",
-      amount: "1000",
-      userRate: "94.5",
-      placeDate: "17-11-223",
-      matchDate: "17-11-223",
-      ip: "1000",
-      browserDetail: "http:",
-    },
   ];
 
   return (
@@ -63,40 +34,127 @@ function UserBetModalTable() {
         columns={columns}
         itemCount={10}
         setTableConfig={setTableConfig}
+        tHeadTheme=""
+        customClass=""
+        CustomTableClass=""
       >
-        {data?.map((item: any, index: number) => {
-          const {
-            username,
-            nation,
-            betType,
-            amount,
-            userRate,
-            placeDate,
-            matchDate,
-            ip,
-            browserDetail,
-          } = item;
+        {morePlacedBets?.length === 0 && (
+          <tr className="text-center">No Record Found!</tr>
+        )}
+        {morePlacedBets?.length > 0 &&
+          morePlacedBets?.map((item: any, index: number) => {
+            const {
+              id,
+              user,
+              eventName,
+              betType,
+              amount,
+              odds,
+              createdAt,
+              match,
+              ipAddress,
+              browserDetail,
+            } = item;
 
-          return (
-            <tr key={index}>
-              <td>{index++}</td>
-              <td>{username}</td>
-              <td>{nation}</td>
-              <td>{betType}</td>
-              <td>{amount}</td>
-              <td>{userRate}</td>
-              <td>{placeDate}</td>
-              <td>{matchDate}</td>
-              <td>{ip}</td>
-              <td>{browserDetail}</td>
-              {/* <td>
-                <Form>
-                  <Form.Check aria-label="option 1" />
-                </Form>
-              </td> */}
-            </tr>
-          );
-        })}
+            return (
+              <tr key={id}>
+                <td
+                  className={
+                    betType === "NO" || betType === "LAY"
+                      ? "bg-red1"
+                      : "bg-blue3"
+                  }
+                >
+                  {index + 1}
+                </td>
+                <td
+                  className={
+                    betType === "NO" || betType === "LAY"
+                      ? "bg-red1"
+                      : "bg-blue3"
+                  }
+                >
+                  {user?.userName}
+                </td>
+                <td
+                  className={
+                    betType === "NO" || betType === "LAY"
+                      ? "bg-red1"
+                      : "bg-blue3"
+                  }
+                >
+                  {eventName}
+                </td>
+                <td
+                  className={
+                    betType === "NO" || betType === "LAY"
+                      ? "bg-red1"
+                      : "bg-blue3"
+                  }
+                >
+                  {betType}
+                </td>
+                <td
+                  className={
+                    betType === "NO" || betType === "LAY"
+                      ? "bg-red1"
+                      : "bg-blue3"
+                  }
+                >
+                  {amount}
+                </td>
+                <td
+                  className={
+                    betType === "NO" || betType === "LAY"
+                      ? "bg-red1"
+                      : "bg-blue3"
+                  }
+                >
+                  {odds}
+                </td>
+                <td
+                  className={
+                    betType === "NO" || betType === "LAY"
+                      ? "bg-red1"
+                      : "bg-blue3"
+                  }
+                >
+                  {moment(createdAt).format("YYYY-MM-DD hh:mm:ss")}
+                </td>
+                <td
+                  className={
+                    betType === "NO" || betType === "LAY"
+                      ? "bg-red1"
+                      : "bg-blue3"
+                  }
+                >
+                  {moment(match?.startAt).format("YYYY-MM-DD hh:mm:ss")}
+                </td>
+                <td
+                  className={
+                    betType === "NO" || betType === "LAY"
+                      ? "bg-red1"
+                      : "bg-blue3"
+                  }
+                >
+                  {ipAddress}
+                </td>
+                <td
+                  className={
+                    betType === "NO" || betType === "LAY"
+                      ? "bg-red1"
+                      : "bg-blue3"
+                  }
+                >
+                  <TooltipCustom title={browserDetail}>
+                    <a href="#" title="">
+                      Detail
+                    </a>
+                  </TooltipCustom>
+                </td>
+              </tr>
+            );
+          })}
       </CustomTable>
     </div>
   );
