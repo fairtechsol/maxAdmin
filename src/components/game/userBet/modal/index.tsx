@@ -34,6 +34,9 @@ function UserBetModalTable() {
         columns={columns}
         itemCount={10}
         setTableConfig={setTableConfig}
+        tHeadTheme=""
+        customClass=""
+        CustomTableClass=""
       >
         {morePlacedBets?.length === 0 && (
           <tr className="text-center">No Record Found!</tr>
