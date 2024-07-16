@@ -273,10 +273,13 @@ const Topbar = (props: any) => {
                         name: "32 Cards Casino",
                         link: "/admin/casino/cards32",
                       },
-                      { name: "Live TeenPatti", link: "#9" },
+                      {
+                        name: "Live TeenPatti",
+                        link: "/admin/casino/teenPatti",
+                      },
                       {
                         name: "TeenPatti 2.0",
-                        link: "/admin/casino/teenPatti",
+                        link: "#9",
                       },
                       { name: "Live Poker", link: "#11" },
                       { name: "Andar Bahar", link: "/admin/casino/abj" },
