@@ -354,7 +354,7 @@ export const card3 = {
       name: "Lucky 7 A",
     },
     {
-      url: "/admin/casinoDetail/contact-admin",
+      url: "/admin/casinoDetail/card32eu",
       imgSrc: cards32B,
       name: "Lucky 7 B",
     },
@@ -606,5 +606,154 @@ export const cardData = [
       { label: "10", imgSrc: img10, value: "0 Run" },
       { label: "K", imgSrc: imgK, value: "Wicket" },
     ],
+  },
+];
+
+export const cardConstantsAccountStatement = [
+  { value: "all", label: "All" },
+  { value: "cricket", label: "Cricket" },
+  { value: "football", label: "Football" },
+  { value: "horseRacing", label: "Horse Racing" },
+  { value: "greyHound", label: "Greyhound Racing" },
+  { value: "dt20", label: "20-20 Dragon Tiger" },
+  {
+    value: "abj",
+    label: "Andar Bahar 2",
+  },
+  {
+    value: "teen20",
+    label: "20-20 Teen Patti",
+  },
+  {
+    value: "card32",
+    label: "32 Cards - A",
+  },
+  {
+    value: "lucky7",
+    label: "Lucky 7 - A",
+  },
+  {
+    value: "lucky7eu",
+    label: "Lucky 7 - B",
+  },
+  {
+    value: "dt202",
+    label: "20-20 Dragon Tiger 2",
+  },
+  {
+    value: "dtl20",
+    label: "Dragon Tiger Lion",
+  },
+  {
+    value: "dt6",
+    label: "Dragon Tiger 1 Day",
+  },
+  {
+    value: "teen",
+    label: "Teen Patti One Day",
+  },
+  {
+    value: "teen8",
+    label: "Open Teen Patti",
+  },
+  {
+    value: "ab20",
+    label: "Andar Bahar 1",
+  },
+  {
+    value: "cricketv3",
+    label: "Five Five Cricket",
+  },
+  {
+    value: "superover",
+    label: "Super Over",
+  },
+  {
+    value: "race20",
+    label: "Race 20 20",
+  },
+  {
+    value: "card32eu",
+    label: "32 Card - B",
+  },
+  {
+    value: "war",
+    label: "Casino War",
+  },
+];
+
+export const cardGamesCasinoResult = [
+  {
+    value: "",
+    label: "Select Casino Type",
+    disabled: true,
+  },
+  {
+    value: "dt20",
+    label: "20-20 Dragon Tiger",
+  },
+  {
+    value: "abj",
+    label: "Andar Bahar 2",
+  },
+  {
+    value: "teen20",
+    label: "20-20 Teen Patti",
+  },
+  {
+    value: "card32",
+    label: "32 Cards - A",
+  },
+  {
+    value: "lucky7",
+    label: "Lucky 7 - A",
+  },
+  {
+    value: "lucky7eu",
+    label: "Lucky 7 - B",
+  },
+  {
+    value: "dt202",
+    label: "20-20 Dragon Tiger 2",
+  },
+  {
+    value: "dtl20",
+    label: "Dragon Tiger Lion",
+  },
+  {
+    value: "dt6",
+    label: "Dragon Tiger 1 Day",
+  },
+  {
+    value: "teen",
+    label: "Teen Patti One Day",
+  },
+  {
+    value: "teen8",
+    label: "Open Teen Patti",
+  },
+  {
+    value: "ab20",
+    label: "Andar Bahar 1",
+  },
+  {
+    value: "cricketv3",
+    label: "Five Five Cricket",
+  },
+  {
+    value: "superover",
+    label: "Super Over",
+  },
+  {
+    value: "race20",
+    label: "Race 20 20",
+  },
+  {
+    value: "card32eu",
+    label: "32 Cards - B",
+  },
+  {
+    value: "war",
+    label: "Casino War",
   },
 ];

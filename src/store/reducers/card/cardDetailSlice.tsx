@@ -4,6 +4,7 @@ import {
   resultDragonTiger,
   update7BCardMatchRates,
   update7CardMatchRates,
+  updateCard32BMatchRates,
   updateCard32MatchRates,
   updateCardAbj1Rates,
   updateCardAbjRates,
@@ -368,6 +369,29 @@ const cardDetail = createSlice({
             videoInfo,
             odds,
             fancy,
+          };
+        }
+      })
+      .addCase(updateCard32BMatchRates.fulfilled, (state, action) => {
+        const payload = action.payload;
+        if (payload) {
+          const { t1, t2 } = payload;
+          state.loading = false;
+          const videoInfo = { ...t1[0] };
+          const matchOdd = t2.slice(0, 4);
+          const oddEven = t2.slice(4, 12);
+          const redBlack = [t2[12], t2[13], t2[26]];
+          const singleCard = t2.slice(14, 24);
+          const cardtotal = t2.slice(24, 26);
+
+          state.dragonTigerDetail = {
+            ...state.dragonTigerDetail,
+            videoInfo,
+            matchOdd,
+            oddEven,
+            redBlack,
+            singleCard,
+            cardtotal,
           };
         }
       });
