@@ -354,7 +354,7 @@ export const card3 = {
       name: "Lucky 7 A",
     },
     {
-      url: "/admin/casinoDetail/contact-admin",
+      url: "/admin/casinoDetail/card32eu",
       imgSrc: cards32B,
       name: "Lucky 7 B",
     },
