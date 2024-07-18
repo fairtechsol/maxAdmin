@@ -2,6 +2,7 @@ import { lazy } from "react";
 import { Navigate } from "react-router-dom";
 import MainLayout from "../layout/main";
 import Loadable from "../utils/loadable";
+import CasinoWar from "../pages/cardGames/games/casinoWar";
 
 // ==============================|| Main ROUTING ||============================== //
 
@@ -190,6 +191,10 @@ const MainRoutes = {
     {
       path: "casinoDetail/card32eu",
       element: <Cards32B />,
+    },
+    {
+      path: "casinoDetail/war",
+      element: <CasinoWar />,
     },
     {
       path: "*",
