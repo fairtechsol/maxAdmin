@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import BetTable from "../../components/game/betTable";
 import GameHeader from "../../components/game/gameHeader";
-import LiveMatch from "../../components/game/liveMatch";
 import ScoreCard from "../../components/game/scoreCard";
 import UserBets from "../../components/game/userBet";
 import { MatchType } from "../../utils/enum";
@@ -15,11 +14,14 @@ import {
 } from "../../store/actions/match/matchAction";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { socket, socketService } from "../../socketManager";
+import LiveStreamComponent from "../../components/commonComponent/liveStreamComponent";
+import { getChannelId } from "../../helpers";
 
 const Games = () => {
   const dispatch: AppDispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
+  const [channelId, setChannelId] = useState<string>("");
 
   const { id } = useParams();
 
@@ -168,6 +170,22 @@ const Games = () => {
 
   useEffect(() => {
     try {
+      if (matchDetails?.eventId) {
+        const callApiForLiveStream = async () => {
+          let result = await getChannelId(matchDetails?.eventId);
+          if (result) {
+            setChannelId(result?.channelNo);
+          }
+        };
+        callApiForLiveStream();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, [matchDetails?.id]);
+
+  useEffect(() => {
+    try {
       const handleVisibilityChange = () => {
         if (document.visibilityState === "visible") {
           if (id) {
@@ -259,7 +277,9 @@ const Games = () => {
               )}
             </Col>
             <Col md={4}>
-              <LiveMatch />
+              {channelId !== "0" && channelId !== "" && (
+                <LiveStreamComponent channelId={channelId} />
+              )}
               <div className="my-2">
                 <ScoreCard />
               </div>

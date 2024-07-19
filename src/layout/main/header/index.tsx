@@ -266,7 +266,7 @@ const Topbar = (props: any) => {
                         name: "Sports Casino",
                         link: "/admin/casino/sportCasino",
                       },
-                      { name: "Casino War", link: "#5" },
+                      { name: "Casino War", link: "/admin/casinoDetail/war" },
                       { name: "Worli", link: "#6" },
                       { name: "3 Cards Judgement", link: "" },
                       {

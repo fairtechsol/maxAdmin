@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  casinoWarMatchRates,
   getDragonTigerDetailHorseRacing,
   resultDragonTiger,
   update7BCardMatchRates,
@@ -20,6 +21,7 @@ import {
   updateTeenPattiMatchRates,
   updateTeenPattiOpenMatchRates,
 } from "../../actions/card/cardDetail";
+import _ from "lodash";
 
 interface InitialState {
   success: boolean;
@@ -392,6 +394,47 @@ const cardDetail = createSlice({
             redBlack,
             singleCard,
             cardtotal,
+          };
+        }
+      })
+      .addCase(casinoWarMatchRates.fulfilled, (state, action) => {
+        if (action.payload) {
+          const { t1, t2 } = action.payload;
+          state.loading = false;
+
+          const videoInfo = t1 && t1.length > 0 ? { ...t1[0] } : "";
+          const players = t2
+            ? t2.map(({ sid, nat, b1, gstatus, min, max }: any) => ({
+                sid,
+                nat,
+                b1,
+                gstatus,
+                min,
+                max,
+              }))
+            : [];
+          const categorizedPlayers = players.reduce((acc: any, player: any) => {
+            const category = player.nat.split(" ")[0];
+            if (!acc[category]) acc[category] = [];
+            acc[category].push(player);
+            return acc;
+          }, {});
+
+          const chunkedPlayers = Object.values(categorizedPlayers)
+            .map((category: any) => _.chunk(category, 6))
+            .flat();
+
+          state.dragonTigerDetail = {
+            ...state.dragonTigerDetail,
+            videoInfo,
+            players: chunkedPlayers,
+          };
+        } else {
+          state.loading = false;
+          state.dragonTigerDetail = {
+            ...state.dragonTigerDetail,
+            videoInfo: "",
+            players: [],
           };
         }
       });
