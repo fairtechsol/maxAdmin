@@ -1,3 +1,6 @@
+import service from "../service";
+import { ApiConstants } from "../utils/Constants";
+
 export const numberInputOnWheelPreventChange = (e: any) => {
   e.target.blur();
   e.stopPropagation();
@@ -14,3 +17,15 @@ export const handleRoundId = (id: any) => {
   return Id[1];
 };
 
+export const getChannelId = async (eventId: number) => {
+  try {
+    const res: any = await service.get(
+      `${ApiConstants.LIVESTREAM.GET_CHANNEL_ID}?Cno=${eventId}`
+    );
+    if (res) {
+      return res?.result;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
