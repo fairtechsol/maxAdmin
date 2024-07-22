@@ -26,73 +26,6 @@ const CasinoWarResultComponent: React.FC<Props> = ({ data }) => {
     id: playerIds[index], // Distribute player IDs cyclically
   }));
 
-  console.log("ids", data?.result);
-  const renderColumn = () => (
-    <div
-      className="d-flex flex-column align-items-center"
-      style={{ width: "100%" }}
-    >
-      {players?.map((player, index) => (
-        <div
-          key={index}
-          className="teen20resultCardContainer mb-3"
-          style={{
-            width: "100%",
-            display: "flex",
-            justifyContent: "center",
-            flexDirection: "row",
-            alignItems: "center",
-          }}
-        >
-          {index !== 6 && (
-            <div
-              style={{
-                width: "90%",
-                border: "0.5px solid",
-                display: "flex",
-                justifyContent: "start",
-                flexDirection: "row",
-                alignItems: "center",
-
-                gap: "20px",
-              }}
-            >
-              <span className="fs-6" style={{ marginLeft: "10px" }}>
-                Player {index + 1}
-              </span>
-              <div
-                className="d-flex flex-row justify-content-center align-items-center mb-2"
-                style={{ marginTop: "15px", marginLeft: "100px" }}
-              >
-                <div
-                  style={{
-                    border: "1px solid #fdef34",
-                    borderRadius: "1px",
-                    marginLeft: "15px",
-                    position: "relative",
-                    display: "flex",
-                    justifyContent: "space-between",
-                    gap: "5px",
-                  }}
-                >
-                  <HandleCards card={player.card} />
-                </div>
-                {data?.result?.sid.includes(`${index + 1}`) && (
-                  <div
-                    className="casino-winner-icon"
-                    style={{ marginLeft: "5px" }}
-                  >
-                    <FaTrophy size={30} color="#169733" />
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
-        </div>
-      ))}
-    </div>
-  );
-
   const renderRow = () => (
     <div
       className="flex-row justify-content-around"
@@ -159,6 +92,7 @@ const CasinoWarResultComponent: React.FC<Props> = ({ data }) => {
           position: "relative",
         }}
       ></div>
+
       {players && (
         <div
           style={{

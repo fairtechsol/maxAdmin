@@ -11,6 +11,7 @@ const typeToTitle: { [key: string]: string } = {
   lucky7: "LUCKY7",
   cards32: "CARDS32",
   abj: "ANDAR BAHAR",
+  sportCasino: "SPORTS CASINO",
   // Add other mappings as needed
 };
 
