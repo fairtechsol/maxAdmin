@@ -118,7 +118,6 @@ export const userList = createSlice({
         alert("Successfully balance transfer");
       })
       .addCase(changeAmmountUser.rejected, (state, action) => {
-        debugger;
         state.loading = false;
         state.error = action?.error?.message;
       })

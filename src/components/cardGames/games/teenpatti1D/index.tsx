@@ -289,7 +289,9 @@ const TeentPatti1DComponent = () => {
                       }`}
                       style={{ width: "50%", background: "#f9c9d4" }}
                     >
-                      <span className="f12-b">{playerB?.[0]?.l1}</span>
+                      <span className="f12-b">
+                        {updatedValue(playerB?.[0]?.l1)}
+                      </span>
 
                       <span className="f10-b">{playerB?.[0]?.ls1}</span>
                     </div>
