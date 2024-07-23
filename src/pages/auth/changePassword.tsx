@@ -13,8 +13,8 @@ import { changePasswordValidation } from "../../utils/fieldValidations/newPasswo
 import { checkOldPassword, logout } from "../../store/actions/auth/authActions";
 import NavigateModal from "../../components/commonComponent/customModal";
 import "./style.scss";
-import { FgLogo } from "../../assets/images";
 import { debounce } from "lodash";
+import { MaxBet07Logo } from "../../assets";
 
 // interface Values {
 //   newPassword: string;
@@ -78,7 +78,7 @@ const ChangePassword = () => {
         onSubmit={handleSubmit}
       >
         <div className="auth-box ">
-          <img src={FgLogo} alt="fairGame" />
+          <img src={MaxBet07Logo} alt="MAXBET07" />
           <div className="auth-box-form rounded-2 bg-light">
             <h2 className="auth-title text-center mb-4">Change Password</h2>
 

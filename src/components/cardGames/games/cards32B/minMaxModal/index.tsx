@@ -3,10 +3,10 @@ import { Dropdown } from "react-bootstrap";
 const SmoothDropdownModal = ({ show, min, max }: any) => {
   return (
     <Dropdown align="end" show={show}>
-      <div style={{ width: "10%" }}>
+      <div>
         <Dropdown.Menu
           className="min-max-info-lucky"
-          style={{ minWidth: "auto" }}
+          style={{ minWidth: "5rem" }}
         >
           <Dropdown.ItemText>
             <span style={{ display: "flex", flexDirection: "column" }}>

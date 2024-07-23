@@ -291,7 +291,7 @@ const CasinoWarComponent = () => {
               }}
             >
               <Col md={12}>
-                <UserBets />
+                <UserBets matchId={dragonTigerDetail?.id} />
               </Col>
               <Col>
                 <div className="casino-title" style={{ position: "relative" }}>

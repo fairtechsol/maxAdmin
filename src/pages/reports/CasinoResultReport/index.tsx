@@ -204,7 +204,7 @@ const CasinoResultReport = () => {
         onHide={() => setCasinoModalShow(false)}
         aria-labelledby="example-modal-sizes-title-lg"
       >
-        <Modal.Body style={{ padding: "1rem" }}>
+        <Modal.Body style={{ padding: 0 }}>
           <ResultComponent
             data={resultData}
             setfalse={setCasinoModalShow}
