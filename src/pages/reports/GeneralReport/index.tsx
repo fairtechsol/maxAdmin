@@ -84,7 +84,7 @@ const GeneralReport = () => {
             />
           </Col>
           <Col md={2}>
-            <Form.Label className="invisible d-block">
+            <Form.Label className="invisible d-block mt-1">
               just invisible
             </Form.Label>
             <Button type="submit">Load</Button>
