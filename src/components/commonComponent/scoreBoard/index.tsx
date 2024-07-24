@@ -4,11 +4,11 @@ import "./style.scss";
 import isMobile from "../../../utils/screenDimension";
 
 const ScoreBoard = ({ data }: any) => {
+  console.log(data);
   return (
     <Container className="scorecard mb-1">
       <Row>
         <Col xs={12} md={6}>
-          {/* {data?.teams?.map((team:any, index:any) => ( */}
           <div
             className={
               isMobile ? "title-12 team-1 row mb-2" : "team-1 row mb-2 "
@@ -16,7 +16,6 @@ const ScoreBoard = ({ data }: any) => {
           >
             <span className="team-name col-3">{data?.spnnation1}</span>
             <span className="score col-4 text-end">{data?.score1}</span>
-            {/* {index === 1 && ( */}
             <span
               className={
                 isMobile ? "title-12 team-name col-5" : "team-name col-5"
@@ -25,7 +24,6 @@ const ScoreBoard = ({ data }: any) => {
               <span>{data?.spnrunrate1 && `CRR ${data?.spnrunrate1} `}</span>
               <span>{data?.spnreqrate1 && `RR ${data?.spnreqrate1}`}</span>
             </span>
-            {/* )} */}
           </div>
 
           <div
@@ -35,7 +33,6 @@ const ScoreBoard = ({ data }: any) => {
           >
             <span className="team-name col-3">{data?.spnnation2}</span>
             <span className="score col-4 text-end">{data?.score2}</span>
-            {/* {index === 1 && ( */}
             <span
               className={
                 isMobile ? "title-12 team-name col-5" : "team-name col-5"
@@ -44,7 +41,6 @@ const ScoreBoard = ({ data }: any) => {
               <span>{data?.spnrunrate2 && `CRR ${data?.spnrunrate2} `}</span>
               <span>{data?.spnreqrate2 && `RR ${data?.spnreqrate2}`}</span>
             </span>
-            {/* )} */}
           </div>
         </Col>
         <Col xs={12} md={6}>

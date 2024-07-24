@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../../../components/commonComponent/loader";
 import { socket, socketService } from "../../../../socketManager";
@@ -10,6 +10,8 @@ import {
 import {
   casinoScoreboardMatchRates,
   getDragonTigerDetailHorseRacing,
+  resetCardDetail,
+  resetScoreBoard,
   updateBalanceOnBetPlaceCards,
   updateCardSuperoverRates,
   updateLiveGameResultTop10,
@@ -20,25 +22,10 @@ import SuperoverComponent from "../../../../components/cardGames/games/superOver
 
 const Superover = () => {
   const dispatch: AppDispatch = useDispatch();
+  const [errorCount, setErrorCount] = useState<number>(0);
   const { loading, dragonTigerDetail } = useSelector(
     (state: RootState) => state.card
   );
-  useEffect(() => {
-    const scoreBoard = () => {
-      if (dragonTigerDetail?.videoInfo?.mid) {
-        const Id = dragonTigerDetail.videoInfo?.mid.split(".");
-        dispatch(
-          casinoScoreboardMatchRates({
-            id: Id[1],
-            type: cardGamesType.cricketv3,
-          })
-        );
-      }
-    };
-    const intervalId = setInterval(scoreBoard, 1000);
-
-    return () => clearInterval(intervalId);
-  }, [dispatch, dragonTigerDetail]);
 
   const setMatchRatesInRedux = (event: any) => {
     try {
@@ -106,12 +93,46 @@ const Superover = () => {
           socketService.card.getCardRatesOff(cardGamesType.superover);
           socketService.card.userCardBetPlacedOff();
           socketService.card.cardResultOff();
+          dispatch(resetScoreBoard());
+          dispatch(resetCardDetail());
         };
       }
     } catch (e) {
       console.log(e);
     }
   }, [dragonTigerDetail?.id]);
+
+  const getScoreBoard = async (marketId: string) => {
+    try {
+      dispatch(
+        casinoScoreboardMatchRates({
+          id: marketId,
+          type: cardGamesType.superover,
+        })
+      );
+      setErrorCount(0);
+    } catch (e: any) {
+      console.log("Error:", e?.message);
+      setErrorCount((prevCount: number) => prevCount + 1);
+    }
+  };
+
+  useEffect(() => {
+    if (dragonTigerDetail?.videoInfo?.mid) {
+      const Id = dragonTigerDetail.videoInfo?.mid.split(".");
+      let intervalTime = 1000;
+      if (errorCount >= 5 && errorCount < 10) {
+        intervalTime = 60000;
+      } else if (errorCount >= 10) {
+        intervalTime = 600000;
+      }
+      const interval = setInterval(() => {
+        getScoreBoard(Id[1]);
+      }, intervalTime);
+
+      return () => clearInterval(interval);
+    }
+  }, [dragonTigerDetail?.videoInfo?.mid, errorCount]);
 
   return loading ? <Loader /> : <SuperoverComponent />;
 };

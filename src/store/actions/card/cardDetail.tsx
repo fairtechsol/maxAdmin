@@ -1,6 +1,6 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 import service from "../../../service";
-import { AxiosError } from "axios";
+import axios, { AxiosError } from "axios";
 import { ApiConstants, Constants } from "../../../utils/Constants";
 
 export const getDragonTigerDetailHorseRacing = createAsyncThunk<any, any>(
@@ -146,7 +146,7 @@ export const casinoScoreboardMatchRates = createAsyncThunk<any, any>(
           "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
         },
       };
-      const resp = await service.get(
+      const resp = await axios.get(
         `${Constants.thirdPartyCard}${ApiConstants.SCOREBOARD.match}/${requestData?.id}?gameName=${requestData?.type}`,
         config
       );
@@ -193,3 +193,6 @@ export const casinoWarMatchRates = createAsyncThunk<any, any>(
     return data;
   }
 );
+
+export const resetScoreBoard = createAction("scoreboard/reset");
+export const resetCardDetail = createAction("cardDetail/reset");

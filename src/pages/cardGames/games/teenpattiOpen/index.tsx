@@ -8,6 +8,7 @@ import {
 } from "../../../../store/actions/match/matchAction";
 import {
   getDragonTigerDetailHorseRacing,
+  resetCardDetail,
   updateBalanceOnBetPlaceCards,
   updateLiveGameResultTop10,
   updateProfitLossCards,
@@ -91,6 +92,7 @@ const TeenPattiOpen = () => {
         socketService.card.userCardBetPlacedOff();
         socketService.card.cardResultOff();
         socketService.card.matchResultDeclareAllUserOff();
+        dispatch(resetCardDetail());
       } catch (e) {
         console.log(e);
       }

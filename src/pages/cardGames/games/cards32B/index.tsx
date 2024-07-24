@@ -11,6 +11,7 @@ import {
 } from "../../../../store/actions/match/matchAction";
 import {
   getDragonTigerDetailHorseRacing,
+  resetCardDetail,
   updateBalanceOnBetPlaceCards,
   updateCard32BMatchRates,
   updateLiveGameResultTop10,
@@ -89,6 +90,7 @@ const Cards32B = () => {
         socketService.card.getCardRatesOff(cardGamesType.card32B);
         socketService.card.userCardBetPlacedOff();
         socketService.card.cardResultOff();
+        dispatch(resetCardDetail());
       } catch (e) {
         console.log(e);
       }

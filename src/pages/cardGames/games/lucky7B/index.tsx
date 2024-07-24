@@ -7,6 +7,7 @@ import { cardGamesType } from "../../../../utils/Constants";
 import { getPlacedBets, updateBetsPlaced } from "../../../../store/actions/match/matchAction";
 import {
   getDragonTigerDetailHorseRacing,
+  resetCardDetail,
   update7BCardMatchRates,
   updateBalanceOnBetPlaceCards,
   updateLiveGameResultTop10,
@@ -89,6 +90,7 @@ const Lucky7B = () => {
         socketService.card.userCardBetPlacedOff();
         socketService.card.cardResultOff();
         socketService.card.matchResultDeclareAllUserOff();
+        dispatch(resetCardDetail());
       } catch (e) {
         console.log(e);
       }

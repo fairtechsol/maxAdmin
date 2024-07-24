@@ -8,6 +8,7 @@ import Loader from "../../../../components/commonComponent/loader";
 import { getPlacedBets, updateBetsPlaced } from "../../../../store/actions/match/matchAction";
 import {
   getDragonTigerDetailHorseRacing,
+  resetCardDetail,
   updateBalanceOnBetPlaceCards,
   updateDragonTigerLionRates,
   updateLiveGameResultTop10,
@@ -91,6 +92,7 @@ const DragonTigerLion = () => {
           socketService.card.userCardBetPlacedOff();
           socketService.card.cardResultOff();
           socketService.card.matchResultDeclareAllUserOff();
+          dispatch(resetCardDetail());
         };
       }
     } catch (e) {

@@ -3,6 +3,7 @@ import Abj2Component from "../../../../components/cardGames/games/abj2";
 import { socket, socketService } from "../../../../socketManager";
 import {
   getDragonTigerDetailHorseRacing,
+  resetCardDetail,
   updateBalanceOnBetPlaceCards,
   updateCardAbjRates,
   updateLiveGameResultTop10,
@@ -91,6 +92,7 @@ const Abj2 = () => {
       socketService.card.userCardBetPlacedOff();
       socketService.card.cardResultOff();
       socketService.card.matchResultDeclareAllUserOff();
+      dispatch(resetCardDetail());
     };
   }, [dragonTigerDetail?.id]);
 

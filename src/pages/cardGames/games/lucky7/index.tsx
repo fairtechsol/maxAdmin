@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { socket, socketService } from "../../../../socketManager";
 import {
   getDragonTigerDetailHorseRacing,
+  resetCardDetail,
   update7CardMatchRates,
   updateBalanceOnBetPlaceCards,
   updateLiveGameResultTop10,
@@ -92,6 +93,7 @@ const Lucky7 = () => {
       socketService.card.userCardBetPlacedOff();
       socketService.card.cardResultOff();
       socketService.card.matchResultDeclareAllUserOff();
+      dispatch(resetCardDetail());
     };
   }, [dragonTigerDetail?.id]);
 
