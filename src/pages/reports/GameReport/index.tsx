@@ -128,7 +128,7 @@ const GameReport = () => {
             />
           </Col>
           <Col md={2}>
-            <Form.Label className="invisible d-block">dasd</Form.Label>
+            <Form.Label className="invisible d-block mt-1">dasd</Form.Label>
             <Button type="submit">Game List</Button>
           </Col>
         </Row>
