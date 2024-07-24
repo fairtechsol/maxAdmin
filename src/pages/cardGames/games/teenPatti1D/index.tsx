@@ -92,12 +92,17 @@ const TeenPatti1D = () => {
         socketService.card.userCardBetPlacedOff();
         socketService.card.cardResultOff();
         socketService.card.matchResultDeclareAllUserOff();
-        dispatch(resetCardDetail());
       } catch (e) {
         console.log(e);
       }
     };
   }, [dragonTigerDetail?.id]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetCardDetail());
+    };
+  }, []);
 
   return loading ? <Loader /> : <TeentPatti1DComponent />;
 };

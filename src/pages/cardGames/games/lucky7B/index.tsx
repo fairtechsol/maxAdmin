@@ -1,10 +1,8 @@
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Lucky7BComponent from "../../../../components/cardGames/games/lucky7B";
 import Loader from "../../../../components/commonComponent/loader";
 import { socket, socketService } from "../../../../socketManager";
-import { cardGamesType } from "../../../../utils/Constants";
-import { getPlacedBets, updateBetsPlaced } from "../../../../store/actions/match/matchAction";
 import {
   getDragonTigerDetailHorseRacing,
   resetCardDetail,
@@ -13,8 +11,12 @@ import {
   updateLiveGameResultTop10,
   updateProfitLossCards,
 } from "../../../../store/actions/card/cardDetail";
+import {
+  getPlacedBets,
+  updateBetsPlaced,
+} from "../../../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../../../store/store";
-import Lucky7BComponent from "../../../../components/cardGames/games/lucky7B";
+import { cardGamesType } from "../../../../utils/Constants";
 
 const Lucky7B = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -81,7 +83,7 @@ const Lucky7B = () => {
       console.log(error);
     }
   }, [socket, dragonTigerDetail?.id]);
-  
+
   useEffect(() => {
     return () => {
       try {
@@ -90,12 +92,18 @@ const Lucky7B = () => {
         socketService.card.userCardBetPlacedOff();
         socketService.card.cardResultOff();
         socketService.card.matchResultDeclareAllUserOff();
-        dispatch(resetCardDetail());
       } catch (e) {
         console.log(e);
       }
     };
   }, [dragonTigerDetail?.id]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetCardDetail());
+    };
+  }, []);
+
   return loading ? <Loader /> : <Lucky7BComponent />;
 };
 

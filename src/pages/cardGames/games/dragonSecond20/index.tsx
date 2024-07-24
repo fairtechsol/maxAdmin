@@ -1,7 +1,8 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../../../store/store";
+import { useDispatch, useSelector } from "react-redux";
+import DragonSecond20Component from "../../../../components/cardGames/games/dragon2nd20";
+import Loader from "../../../../components/commonComponent/loader";
+import { socket, socketService } from "../../../../socketManager";
 import {
   getDragonTigerDetailHorseRacing,
   resetCardDetail,
@@ -10,14 +11,12 @@ import {
   updateLiveGameResultTop10,
   updateProfitLossCards,
 } from "../../../../store/actions/card/cardDetail";
-import { cardGamesType } from "../../../../utils/Constants";
-import { socket, socketService } from "../../../../socketManager";
-import Loader from "../../../../components/commonComponent/loader";
-import DragonSecond20Component from "../../../../components/cardGames/games/dragon2nd20";
 import {
   getPlacedBets,
   updateBetsPlaced,
 } from "../../../../store/actions/match/matchAction";
+import { AppDispatch, RootState } from "../../../../store/store";
+import { cardGamesType } from "../../../../utils/Constants";
 
 const DragonTiger20Second = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -95,13 +94,18 @@ const DragonTiger20Second = () => {
           socketService.card.userCardBetPlacedOff();
           socketService.card.cardResultOff();
           socketService.card.matchResultDeclareAllUserOff();
-          dispatch(resetCardDetail());
         };
       }
     } catch (e) {
       console.log(e);
     }
   }, [dragonTigerDetail?.id]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetCardDetail());
+    };
+  }, []);
 
   return loading ? <Loader /> : <DragonSecond20Component />;
 };

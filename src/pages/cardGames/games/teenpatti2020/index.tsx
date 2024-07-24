@@ -1,11 +1,8 @@
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import TeentPatti2020Component from "../../../../components/cardGames/games/teenpatti2020";
 import Loader from "../../../../components/commonComponent/loader";
 import { socket, socketService } from "../../../../socketManager";
-import { cardGamesType } from "../../../../utils/Constants";
-import {
-  getPlacedBets,
-  updateBetsPlaced,
-} from "../../../../store/actions/match/matchAction";
 import {
   getDragonTigerDetailHorseRacing,
   resetCardDetail,
@@ -14,9 +11,12 @@ import {
   updateProfitLossCards,
   updateTeenPattiMatchRates,
 } from "../../../../store/actions/card/cardDetail";
+import {
+  getPlacedBets,
+  updateBetsPlaced,
+} from "../../../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../../../store/store";
-import { useDispatch, useSelector } from "react-redux";
-import TeentPatti2020Component from "../../../../components/cardGames/games/teenpatti2020";
+import { cardGamesType } from "../../../../utils/Constants";
 
 const TeenPatti2020 = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -91,9 +91,14 @@ const TeenPatti2020 = () => {
       socketService.card.userCardBetPlacedOff();
       socketService.card.cardResultOff();
       socketService.card.matchResultDeclareAllUserOff();
-      dispatch(resetCardDetail());
     };
   }, [dragonTigerDetail?.id]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetCardDetail());
+    };
+  }, []);
 
   return loading ? <Loader /> : <TeentPatti2020Component />;
 };

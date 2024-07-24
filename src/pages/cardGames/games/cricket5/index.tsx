@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Cricket5Component from "../../../../components/cardGames/games/cricket5";
+import Loader from "../../../../components/commonComponent/loader";
 import { socket, socketService } from "../../../../socketManager";
-import { cardGamesType } from "../../../../utils/Constants";
-import {
-  getPlacedBets,
-  updateBetsPlaced,
-} from "../../../../store/actions/match/matchAction";
 import {
   casinoScoreboardMatchRates,
   getDragonTigerDetailHorseRacing,
@@ -16,9 +13,12 @@ import {
   updateLiveGameResultTop10,
   updateProfitLossCards,
 } from "../../../../store/actions/card/cardDetail";
-import Loader from "../../../../components/commonComponent/loader";
+import {
+  getPlacedBets,
+  updateBetsPlaced,
+} from "../../../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../../../store/store";
-import Cricket5Component from "../../../../components/cardGames/games/cricket5";
+import { cardGamesType } from "../../../../utils/Constants";
 
 const Cricket5 = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -93,12 +93,17 @@ const Cricket5 = () => {
         socketService.card.userCardBetPlacedOff();
         socketService.card.cardResultOff();
         dispatch(resetScoreBoard());
-        dispatch(resetCardDetail());
       } catch (e) {
         console.log(e);
       }
     };
   }, [dragonTigerDetail?.id]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetCardDetail());
+    };
+  }, []);
 
   const getScoreBoard = async (marketId: string) => {
     try {

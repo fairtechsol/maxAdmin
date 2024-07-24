@@ -1,5 +1,7 @@
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Abj2Component from "../../../../components/cardGames/games/abj2";
+import Loader from "../../../../components/commonComponent/loader";
 import { socket, socketService } from "../../../../socketManager";
 import {
   getDragonTigerDetailHorseRacing,
@@ -9,14 +11,12 @@ import {
   updateLiveGameResultTop10,
   updateProfitLossCards,
 } from "../../../../store/actions/card/cardDetail";
-import { AppDispatch, RootState } from "../../../../store/store";
-import { useDispatch, useSelector } from "react-redux";
-import { cardGamesType } from "../../../../utils/Constants";
 import {
   getPlacedBets,
   updateBetsPlaced,
 } from "../../../../store/actions/match/matchAction";
-import Loader from "../../../../components/commonComponent/loader";
+import { AppDispatch, RootState } from "../../../../store/store";
+import { cardGamesType } from "../../../../utils/Constants";
 
 const Abj2 = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -92,9 +92,14 @@ const Abj2 = () => {
       socketService.card.userCardBetPlacedOff();
       socketService.card.cardResultOff();
       socketService.card.matchResultDeclareAllUserOff();
-      dispatch(resetCardDetail());
     };
   }, [dragonTigerDetail?.id]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetCardDetail());
+    };
+  }, []);
 
   return loading ? <Loader /> : <Abj2Component />;
 };
