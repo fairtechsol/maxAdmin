@@ -97,7 +97,7 @@ function ApiSessionMarketTable({
                     />
                     <div className="minMaxBox d-flex flex-column justify-content-center text-end px-2 text-info title-14">
                       <span className="">Min:{item?.minBet}</span>
-                      <span>Min:{item?.maxBet}</span>
+                      <span>Max:{item?.maxBet}</span>
                     </div>
                   </BetStatusOverlay>
                 </td>
