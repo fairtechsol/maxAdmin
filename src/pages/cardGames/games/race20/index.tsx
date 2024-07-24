@@ -8,6 +8,7 @@ import {
 } from "../../../../store/actions/match/matchAction";
 import {
   getDragonTigerDetailHorseRacing,
+  resetCardDetail,
   updateBalanceOnBetPlaceCards,
   updateCardRace20Rates,
   updateLiveGameResultTop10,
@@ -90,6 +91,7 @@ const Race20 = () => {
           socketService.card.getCardRatesOff(cardGamesType.race20);
           socketService.card.userCardBetPlacedOff();
           socketService.card.cardResultOff();
+          dispatch(resetCardDetail());
         };
       }
     } catch (e) {

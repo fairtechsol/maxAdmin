@@ -1,7 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  casinoScoreboardMatchRates,
   casinoWarMatchRates,
   getDragonTigerDetailHorseRacing,
+  resetCardDetail,
+  resetScoreBoard,
   resultDragonTiger,
   update7BCardMatchRates,
   update7CardMatchRates,
@@ -39,12 +42,12 @@ const initialState: InitialState = {
   loading: false,
   success: false,
   error: null,
-  dragonTigerDetail: [],
+  dragonTigerDetail: null,
   lucky7Detail: [],
   liveGameResultTop10: [],
   cards32Detail: [],
   resultData: null,
-  scoreBoardData: [],
+  scoreBoardData: null,
 };
 
 const cardDetail = createSlice({
@@ -361,11 +364,11 @@ const cardDetail = createSlice({
       .addCase(updateCricket5MatchRates.fulfilled, (state, action) => {
         const payload = action.payload;
         if (payload) {
-          const { t1, t2, t3 } = payload;
+          // const { t1, t2, t3 } = payload;
           state.loading = false;
-          const videoInfo = { ...t1[0] };
-          const odds = [...t2];
-          const fancy = [...t3];
+          const videoInfo = { ...(payload?.t1[0] ?? {}) };
+          const odds = [...(payload?.t2 ?? {})];
+          const fancy = [...(payload?.t3 ?? {})];
           state.dragonTigerDetail = {
             ...state.dragonTigerDetail,
             videoInfo,
@@ -437,6 +440,15 @@ const cardDetail = createSlice({
             players: [],
           };
         }
+      })
+      .addCase(casinoScoreboardMatchRates.fulfilled, (state, action) => {
+        state.scoreBoardData = action.payload;
+      })
+      .addCase(resetCardDetail, (state) => {
+        state.dragonTigerDetail = null;
+      })
+      .addCase(resetScoreBoard, (state) => {
+        state.scoreBoardData = null;
       });
   },
 });

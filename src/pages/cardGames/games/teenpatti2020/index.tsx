@@ -8,6 +8,7 @@ import {
 } from "../../../../store/actions/match/matchAction";
 import {
   getDragonTigerDetailHorseRacing,
+  resetCardDetail,
   updateBalanceOnBetPlaceCards,
   updateLiveGameResultTop10,
   updateProfitLossCards,
@@ -90,6 +91,7 @@ const TeenPatti2020 = () => {
       socketService.card.userCardBetPlacedOff();
       socketService.card.cardResultOff();
       socketService.card.matchResultDeclareAllUserOff();
+      dispatch(resetCardDetail());
     };
   }, [dragonTigerDetail?.id]);
 

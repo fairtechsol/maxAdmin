@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../../store/store";
 import {
   getDragonTigerDetailHorseRacing,
+  resetCardDetail,
   updateBalanceOnBetPlaceCards,
   updateCardAbj1Rates,
   updateLiveGameResultTop10,
@@ -91,6 +92,7 @@ const Abj = () => {
         socketService.card.userCardBetPlacedOff();
         socketService.card.cardResultOff();
         socketService.card.matchResultDeclareAllUserOff();
+        dispatch(resetCardDetail());
       } catch (e) {
         console.log(e);
       }

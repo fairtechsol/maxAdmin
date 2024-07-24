@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../../store/store";
 import {
   getDragonTigerDetailHorseRacing,
+  resetCardDetail,
   updateBalanceOnBetPlaceCards,
   updateCardMatchRates,
   updateLiveGameResultTop10,
@@ -94,6 +95,7 @@ const DragonTiger20Second = () => {
           socketService.card.userCardBetPlacedOff();
           socketService.card.cardResultOff();
           socketService.card.matchResultDeclareAllUserOff();
+          dispatch(resetCardDetail());
         };
       }
     } catch (e) {

@@ -8,6 +8,7 @@ import {
 } from "../../../../store/actions/match/matchAction";
 import {
   getDragonTigerDetailHorseRacing,
+  resetCardDetail,
   updateBalanceOnBetPlaceCards,
   updateCard32MatchRates,
   updateLiveGameResultTop10,
@@ -90,6 +91,7 @@ const Cards32A = () => {
       socketService.card.userCardBetPlacedOff();
       socketService.card.cardResultOff();
       socketService.card.matchResultDeclareAllUserOff();
+      dispatch(resetCardDetail());
     };
   }, [dragonTigerDetail?.id]);
 

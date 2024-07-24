@@ -9,6 +9,7 @@ import {
 import {
   casinoWarMatchRates,
   getDragonTigerDetailHorseRacing,
+  resetCardDetail,
   updateBalanceOnBetPlaceCards,
   updateLiveGameResultTop10,
   updateProfitLossCards,
@@ -88,6 +89,7 @@ const CasinoWar = () => {
         socketService.card.getCardRatesOff(cardGamesType.casinoWar);
         socketService.card.userCardBetPlacedOff();
         socketService.card.cardResultOff();
+        dispatch(resetCardDetail());
       } catch (e) {
         console.log(e);
       }

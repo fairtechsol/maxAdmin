@@ -5,6 +5,7 @@ import Loader from "../../../../components/commonComponent/loader";
 import { socket, socketService } from "../../../../socketManager";
 import {
   getDragonTigerDetailHorseRacing,
+  resetCardDetail,
   updateBalanceOnBetPlaceCards,
   updateLiveGameResultTop10,
   updateProfitLossCards,
@@ -91,6 +92,7 @@ const TeenPatti1D = () => {
         socketService.card.userCardBetPlacedOff();
         socketService.card.cardResultOff();
         socketService.card.matchResultDeclareAllUserOff();
+        dispatch(resetCardDetail());
       } catch (e) {
         console.log(e);
       }
