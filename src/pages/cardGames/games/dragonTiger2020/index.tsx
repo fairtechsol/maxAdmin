@@ -51,7 +51,6 @@ const DragonTiger2020 = () => {
 
   useEffect(() => {
     try {
-      dispatch(getDragonTigerDetailHorseRacing(cardGamesType.dragonTiger20));
       if (dragonTigerDetail?.id) {
         dispatch(getPlacedBets(dragonTigerDetail?.id));
       }
@@ -102,6 +101,7 @@ const DragonTiger2020 = () => {
   }, [dragonTigerDetail?.id]);
 
   useEffect(() => {
+    dispatch(getDragonTigerDetailHorseRacing(cardGamesType.dragonTiger20));
     return () => {
       dispatch(resetCardDetail());
     };

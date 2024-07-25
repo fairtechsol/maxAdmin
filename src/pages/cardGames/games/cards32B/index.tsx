@@ -50,7 +50,6 @@ const Cards32B = () => {
   };
   useEffect(() => {
     try {
-      dispatch(getDragonTigerDetailHorseRacing(cardGamesType.card32B));
       if (dragonTigerDetail?.id) {
         dispatch(getPlacedBets(dragonTigerDetail?.id));
       }
@@ -96,6 +95,7 @@ const Cards32B = () => {
   }, [dragonTigerDetail?.id]);
 
   useEffect(() => {
+    dispatch(getDragonTigerDetailHorseRacing(cardGamesType.card32B));
     return () => {
       dispatch(resetCardDetail());
     };

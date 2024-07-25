@@ -50,7 +50,6 @@ const CasinoWar = () => {
 
   useEffect(() => {
     try {
-      dispatch(getDragonTigerDetailHorseRacing(cardGamesType.casinoWar));
       if (dragonTigerDetail?.id) {
         dispatch(getPlacedBets(dragonTigerDetail?.id));
       }
@@ -96,6 +95,7 @@ const CasinoWar = () => {
   }, [dragonTigerDetail?.id]);
 
   useEffect(() => {
+    dispatch(getDragonTigerDetailHorseRacing(cardGamesType.casinoWar));
     return () => {
       dispatch(resetCardDetail());
     };

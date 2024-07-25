@@ -35,7 +35,6 @@ const Abj2 = () => {
 
   useEffect(() => {
     try {
-      dispatch(getDragonTigerDetailHorseRacing(cardGamesType.andarBahar2));
       if (dragonTigerDetail?.id) {
         dispatch(getPlacedBets(dragonTigerDetail?.id));
       }
@@ -96,6 +95,7 @@ const Abj2 = () => {
   }, [dragonTigerDetail?.id]);
 
   useEffect(() => {
+    dispatch(getDragonTigerDetailHorseRacing(cardGamesType.andarBahar2));
     return () => {
       dispatch(resetCardDetail());
     };
