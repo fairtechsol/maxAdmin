@@ -124,6 +124,7 @@ export const Constants = {
   thirdPartyLive: "https://serviceapi.fairgame7.com",
   expertPathLive: "https://expertapi.fairgame7.com",
   thirdPartyCard: "https://casinoserviceapi.fairgame.club",
+  thirdPartyCardLive: "https://casinoserviceapi.fairgame7.com",
   localPath: "http://localhost:5001",
   localPathThird: "http://localhost:3200",
   localPathExpert: "http://localhost:6060",
@@ -163,7 +164,7 @@ export const baseUrls = {
 //     process.env.NODE_ENV === "production"
 //       ? `${Constants.apiBasePathLive}`
 //       : `${Constants.localPath}`,
-//   matchSocket:
+//   thirdParty:
 //     process.env.NODE_ENV === "production"
 //       ? `${Constants.thirdPartyLive}`
 //       : `${Constants.localPathThird}`,
@@ -171,6 +172,10 @@ export const baseUrls = {
 //     process.env.NODE_ENV === "production"
 //       ? `${Constants.expertPathLive}`
 //       : `${Constants.localPathExpert}`,
+//  cardSocket:
+//     process.env.NODE_ENV === "production"
+//       ? Constants.thirdPartyCardLive
+//       : Constants.localThirdCard,
 // };
 
 export const teamStatus = {
@@ -626,42 +631,42 @@ export const cardConstantsAccountStatement = [
   { value: "football", label: "Football" },
   { value: "horseRacing", label: "Horse Racing" },
   { value: "greyHound", label: "Greyhound Racing" },
-  { value: "dt20", label: "20-20 Dragon Tiger" },//
+  { value: "dt20", label: "20-20 Dragon Tiger" }, //
   {
     value: "abj",
-    label: "Andar Bahar 2",//
+    label: "Andar Bahar 2", //
   },
   {
     value: "teen20",
-    label: "20-20 Teen Patti",//
+    label: "20-20 Teen Patti", //
   },
   {
     value: "card32",
-    label: "32 Cards - A",//
+    label: "32 Cards - A", //
   },
   {
     value: "lucky7",
-    label: "Lucky 7 - A",//
+    label: "Lucky 7 - A", //
   },
   {
     value: "lucky7eu",
-    label: "Lucky 7 - B",//
+    label: "Lucky 7 - B", //
   },
   {
     value: "dt202",
-    label: "20-20 Dragon Tiger 2",//
+    label: "20-20 Dragon Tiger 2", //
   },
   {
     value: "dtl20",
-    label: "Dragon Tiger Lion",//
+    label: "Dragon Tiger Lion", //
   },
   {
     value: "dt6",
-    label: "Dragon Tiger 1 Day",//
+    label: "Dragon Tiger 1 Day", //
   },
   {
     value: "teen",
-    label: "Teen Patti One Day",//
+    label: "Teen Patti One Day", //
   },
   {
     value: "teen8",
