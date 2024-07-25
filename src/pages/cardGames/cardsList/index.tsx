@@ -28,8 +28,8 @@ const CardsList = () => {
     <>
       <p className="cardList-title">{title}</p>
       <Row>
-        {card3[listType as Card3Keys]?.map((item: any, index: number) => (
-          <Col key={index} xs={12} sm={6} md={4} className="mb-4">
+        {card3[listType as Card3Keys]?.map((item: any) => (
+          <Col key={item?.id} xs={12} sm={6} md={4} className="mb-4">
             <div className={"d-flex card-List"}>
               {item?.url?.includes("contact-admin") ? (
                 <img src={item.imgSrc} className="img-fluid" alt={item.name} />

@@ -2,7 +2,6 @@ import { lazy } from "react";
 import { Navigate } from "react-router-dom";
 import MainLayout from "../layout/main";
 import Loadable from "../utils/loadable";
-import CasinoWar from "../pages/cardGames/games/casinoWar";
 
 // ==============================|| Main ROUTING ||============================== //
 
@@ -51,22 +50,25 @@ const Lucky7B = Loadable(
 const TeenPatti1D = Loadable(
   lazy(() => import("../pages/cardGames/games/teenPatti1D"))
 );
-const TeenPattiOpen = Loadable(
-  lazy(() => import("../pages/cardGames/games/teenpattiOpen"))
-);
-const Abj = Loadable(
-  lazy(() => import("../pages/cardGames/games/andarBahar1"))
-);
-const Superover = Loadable(
-  lazy(() => import("../pages/cardGames/games/superOver"))
-);
-const Race20 = Loadable(lazy(() => import("../pages/cardGames/games/race20")));
-const Cricket5 = Loadable(
-  lazy(() => import("../pages/cardGames/games/cricket5"))
-);
-const Cards32B = Loadable(
-  lazy(() => import("../pages/cardGames/games/cards32B"))
-);
+// const TeenPattiOpen = Loadable(
+//   lazy(() => import("../pages/cardGames/games/teenpattiOpen"))
+// );
+// const Abj = Loadable(
+//   lazy(() => import("../pages/cardGames/games/andarBahar1"))
+// );
+// const Superover = Loadable(
+//   lazy(() => import("../pages/cardGames/games/superOver"))
+// );
+// const Race20 = Loadable(lazy(() => import("../pages/cardGames/games/race20")));
+// const Cricket5 = Loadable(
+//   lazy(() => import("../pages/cardGames/games/cricket5"))
+// );
+// const Cards32B = Loadable(
+//   lazy(() => import("../pages/cardGames/games/cards32B"))
+// );
+// const CasinoWar = Loadable(
+//   lazy(() => import("../pages/cardGames/games/casinoWar"))
+// );
 
 const MainRoutes = {
   path: "/admin",
@@ -168,34 +170,34 @@ const MainRoutes = {
       path: "casinoDetail/teen",
       element: <TeenPatti1D />, //
     },
-    {
-      path: "casinoDetail/teen8",
-      element: <TeenPattiOpen />,
-    },
-    {
-      path: "casinoDetail/ab20",
-      element: <Abj />,
-    },
-    {
-      path: "casinoDetail/superover",
-      element: <Superover />,
-    },
-    {
-      path: "casinoDetail/race20",
-      element: <Race20 />,
-    },
-    {
-      path: "casinoDetail/cricketv3",
-      element: <Cricket5 />,
-    },
-    {
-      path: "casinoDetail/card32eu",
-      element: <Cards32B />,
-    },
-    {
-      path: "casinoDetail/war",
-      element: <CasinoWar />,
-    },
+    // {
+    //   path: "casinoDetail/teen8",
+    //   element: <TeenPattiOpen />,
+    // },
+    // {
+    //   path: "casinoDetail/ab20",
+    //   element: <Abj />,
+    // },
+    // {
+    //   path: "casinoDetail/superover",
+    //   element: <Superover />,
+    // },
+    // {
+    //   path: "casinoDetail/race20",
+    //   element: <Race20 />,
+    // },
+    // {
+    //   path: "casinoDetail/cricketv3",
+    //   element: <Cricket5 />,
+    // },
+    // {
+    //   path: "casinoDetail/card32eu",
+    //   element: <Cards32B />,
+    // },
+    // {
+    //   path: "casinoDetail/war",
+    //   element: <CasinoWar />,
+    // },
     {
       path: "*",
       element: <Navigate to={"/admin/listAccount"} replace />,
