@@ -337,7 +337,7 @@ export const card3 = {
     },
     {
       id: 8,
-      url: "",
+      url: "/admin/casinoDetail/teen8",
       imgSrc: teenplayer,
       name: "OPEN TEENPATTI",
     },
@@ -365,7 +365,7 @@ export const card3 = {
     },
     {
       id: 12,
-      url: "",
+      url: "/admin/casinoDetail/card32eu",
       imgSrc: cards32B,
       name: "Card 32 B",
     },
@@ -379,7 +379,7 @@ export const card3 = {
     },
     {
       id: 14,
-      url: "",
+      url: "/admin/casinoDetail/ab20",
       imgSrc: abjlist,
       name: "ANDAR BAHAR",
     },
@@ -388,13 +388,13 @@ export const card3 = {
     { id: 15, url: "", imgSrc: ballByBall, name: "BALL BY BALL" },
     {
       id: 16,
-      url: "",
+      url: "/admin/casinoDetail/superover",
       imgSrc: superover,
       name: "SUPER OVER",
     },
     {
       id: 17,
-      url: "",
+      url: "/admin/casinoDetail/cricketv3",
       imgSrc: crick5,
       name: "5 5 Cricket",
     },
@@ -663,34 +663,34 @@ export const cardConstantsAccountStatement = [
     value: "teen",
     label: "Teen Patti One Day",//
   },
-  // {
-  //   value: "teen8",
-  //   label: "Open Teen Patti",
-  // },
-  // {
-  //   value: "ab20",
-  //   label: "Andar Bahar 1",
-  // },
-  // {
-  //   value: "cricketv3",
-  //   label: "Five Five Cricket",
-  // },
-  // {
-  //   value: "superover",
-  //   label: "Super Over",
-  // },
-  // {
-  //   value: "race20",
-  //   label: "Race 20 20",
-  // },
-  // {
-  //   value: "card32eu",
-  //   label: "32 Card - B",
-  // },
-  // {
-  //   value: "war",
-  //   label: "Casino War",
-  // },
+  {
+    value: "teen8",
+    label: "Open Teen Patti",
+  },
+  {
+    value: "ab20",
+    label: "Andar Bahar 1",
+  },
+  {
+    value: "cricketv3",
+    label: "Five Five Cricket",
+  },
+  {
+    value: "superover",
+    label: "Super Over",
+  },
+  {
+    value: "race20",
+    label: "Race 20 20",
+  },
+  {
+    value: "card32eu",
+    label: "32 Card - B",
+  },
+  {
+    value: "war",
+    label: "Casino War",
+  },
 ];
 
 export const cardGamesCasinoResult = [
