@@ -120,7 +120,7 @@ export const Constants = {
   apiBasePath: "https://devmaxbet9api.fairgame.club",
   thirdParty: "https://devserviceapi.fairgame.club",
   expertPath: "https://devexpertapi.fairgame.club",
-  apiBasePathLive: "https://betfairapi.fairgame7.com",
+  apiBasePathLive: "https://api.maxbet07.com",
   thirdPartyLive: "https://serviceapi.fairgame7.com",
   expertPathLive: "https://expertapi.fairgame7.com",
   thirdPartyCard: "https://casinoserviceapi.fairgame.club",
