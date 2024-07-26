@@ -38,5 +38,5 @@ jobs:
         key: ${{ secrets.SERVER_KEY }}
         port: ${{ secrets.SERVER_PORT }}
         strip_components: 1
-        source: "dist"
+        source: "build"
         target: "/var/www/frontend/maxbet9/admin"
