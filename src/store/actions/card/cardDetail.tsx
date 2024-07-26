@@ -194,5 +194,24 @@ export const casinoWarMatchRates = createAsyncThunk<any, any>(
   }
 );
 
+export const updateCardPoker6Rates = createAsyncThunk<any, any>(
+  "poker6/matchRatesUpdate",
+  async (data) => {
+    return data;
+  }
+);
+export const updateCardPoker1DayRates = createAsyncThunk<any, any>(
+  "poker1day/matchRatesUpdate",
+  async (data) => {
+    return data;
+  }
+);
+export const updateCardPoker20Rates = createAsyncThunk<any, any>(
+  "poker20/matchRatesUpdate",
+  async (data) => {
+    return data;
+  }
+);
+
 export const resetScoreBoard = createAction("scoreboard/reset");
 export const resetCardDetail = createAction("cardDetail/reset");

@@ -50,7 +50,6 @@ const TeenPatti1D = () => {
 
   useEffect(() => {
     try {
-      dispatch(getDragonTigerDetailHorseRacing(cardGamesType.teenOneDay));
       if (dragonTigerDetail?.id) {
         dispatch(getPlacedBets(dragonTigerDetail?.id));
       }
@@ -92,12 +91,18 @@ const TeenPatti1D = () => {
         socketService.card.userCardBetPlacedOff();
         socketService.card.cardResultOff();
         socketService.card.matchResultDeclareAllUserOff();
-        dispatch(resetCardDetail());
       } catch (e) {
         console.log(e);
       }
     };
   }, [dragonTigerDetail?.id]);
+
+  useEffect(() => {
+    dispatch(getDragonTigerDetailHorseRacing(cardGamesType.teenOneDay));
+    return () => {
+      dispatch(resetCardDetail());
+    };
+  }, []);
 
   return loading ? <Loader /> : <TeentPatti1DComponent />;
 };

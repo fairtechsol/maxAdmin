@@ -1,6 +1,8 @@
 import { useEffect } from "react";
-import { AppDispatch, RootState } from "../../../../store/store";
 import { useDispatch, useSelector } from "react-redux";
+import DragonTiger2020Component from "../../../../components/cardGames/games/dt2020";
+import Loader from "../../../../components/commonComponent/loader";
+import { socket, socketService } from "../../../../socketManager";
 import {
   getDragonTigerDetailHorseRacing,
   resetCardDetail,
@@ -9,11 +11,12 @@ import {
   updateLiveGameResultTop10,
   updateProfitLossCards,
 } from "../../../../store/actions/card/cardDetail";
+import {
+  getPlacedBets,
+  updateBetsPlaced,
+} from "../../../../store/actions/match/matchAction";
+import { AppDispatch, RootState } from "../../../../store/store";
 import { cardGamesType } from "../../../../utils/Constants";
-import { getPlacedBets, updateBetsPlaced } from "../../../../store/actions/match/matchAction";
-import { socket, socketService } from "../../../../socketManager";
-import Loader from "../../../../components/commonComponent/loader";
-import DragonTiger2020Component from "../../../../components/cardGames/games/dt2020";
 
 const DragonTiger2020 = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -48,7 +51,6 @@ const DragonTiger2020 = () => {
 
   useEffect(() => {
     try {
-      dispatch(getDragonTigerDetailHorseRacing(cardGamesType.dragonTiger20));
       if (dragonTigerDetail?.id) {
         dispatch(getPlacedBets(dragonTigerDetail?.id));
       }
@@ -91,13 +93,19 @@ const DragonTiger2020 = () => {
           socketService.card.userCardBetPlacedOff();
           socketService.card.cardResultOff();
           socketService.card.matchResultDeclareAllUserOff();
-          dispatch(resetCardDetail());
         };
       }
     } catch (e) {
       console.log(e);
     }
   }, [dragonTigerDetail?.id]);
+
+  useEffect(() => {
+    dispatch(getDragonTigerDetailHorseRacing(cardGamesType.dragonTiger20));
+    return () => {
+      dispatch(resetCardDetail());
+    };
+  }, []);
 
   return loading ? <Loader /> : <DragonTiger2020Component />;
 };

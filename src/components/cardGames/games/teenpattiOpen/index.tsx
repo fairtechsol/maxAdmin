@@ -13,13 +13,11 @@ import UserBets from "../../../game/userBet";
 import TeenPattiTableRow from "./tableRow";
 import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
 import TeenOpenResult from "./teenCard";
-
 const TeenPattiOpenComponent = () => {
   const placeBetRef = useRef<HTMLDivElement>(null);
   const [isSticky, setIsSticky] = useState(false);
   const [show, setShow] = useState(false);
   const { dragonTigerDetail } = useSelector((state: RootState) => state.card);
-  const { players, pairsPlus } = dragonTigerDetail;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -130,8 +128,17 @@ const TeenPattiOpenComponent = () => {
                       className="teenPatti-table-item f12-b"
                       style={{ width: "50%" }}
                     >
-                      BACK(Min: {dragonTigerDetail?.players?.player1?.min} Max:{" "}
-                      {dragonTigerDetail?.players?.player1?.max})
+                      BACK(Min:{" "}
+                      {
+                        dragonTigerDetail?.dragonTigerDetail?.players?.player1
+                          ?.min
+                      }{" "}
+                      Max:{" "}
+                      {
+                        dragonTigerDetail?.dragonTigerDetail?.players?.player1
+                          ?.max
+                      }
+                      )
                     </div>
                     <div
                       className="teenPatti-table-item f12-b"
@@ -143,13 +150,15 @@ const TeenPattiOpenComponent = () => {
                   </div>
                 </div>
 
-                {players &&
-                  Object.keys(players).map((key, index) => (
+                {dragonTigerDetail?.players &&
+                  Object.keys(dragonTigerDetail?.players).map((key, index) => (
                     <TeenPattiTableRow
                       key={key}
                       indx={index}
-                      player={players[key]}
-                      pairPlus={pairsPlus[`pairPlus${index + 1}`]}
+                      player={dragonTigerDetail?.players[key]}
+                      pairPlus={
+                        dragonTigerDetail?.pairsPlus[`pairPlus${index + 1}`]
+                      }
                       cardsA={cardsArray1}
                       playersA={playersArray1}
                     />

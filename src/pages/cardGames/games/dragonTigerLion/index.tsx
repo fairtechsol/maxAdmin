@@ -1,11 +1,8 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../../../store/store";
-import { socket, socketService } from "../../../../socketManager";
-import { cardGamesType } from "../../../../utils/Constants";
+import { useDispatch, useSelector } from "react-redux";
+import DragonTigerLionComponent from "../../../../components/cardGames/games/dragonTigerLion";
 import Loader from "../../../../components/commonComponent/loader";
-import { getPlacedBets, updateBetsPlaced } from "../../../../store/actions/match/matchAction";
+import { socket, socketService } from "../../../../socketManager";
 import {
   getDragonTigerDetailHorseRacing,
   resetCardDetail,
@@ -14,7 +11,12 @@ import {
   updateLiveGameResultTop10,
   updateProfitLossCards,
 } from "../../../../store/actions/card/cardDetail";
-import DragonTigerLionComponent from "../../../../components/cardGames/games/dragonTigerLion";
+import {
+  getPlacedBets,
+  updateBetsPlaced,
+} from "../../../../store/actions/match/matchAction";
+import { AppDispatch, RootState } from "../../../../store/store";
+import { cardGamesType } from "../../../../utils/Constants";
 
 const DragonTigerLion = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -49,7 +51,6 @@ const DragonTigerLion = () => {
 
   useEffect(() => {
     try {
-      dispatch(getDragonTigerDetailHorseRacing(cardGamesType.dragonTigerLion));
       if (dragonTigerDetail?.id) {
         dispatch(getPlacedBets(dragonTigerDetail?.id));
       }
@@ -92,13 +93,19 @@ const DragonTigerLion = () => {
           socketService.card.userCardBetPlacedOff();
           socketService.card.cardResultOff();
           socketService.card.matchResultDeclareAllUserOff();
-          dispatch(resetCardDetail());
         };
       }
     } catch (e) {
       console.log(e);
     }
   }, [dragonTigerDetail?.id]);
+
+  useEffect(() => {
+    dispatch(getDragonTigerDetailHorseRacing(cardGamesType.dragonTigerLion));
+    return () => {
+      dispatch(resetCardDetail());
+    };
+  }, []);
 
   return loading ? <Loader /> : <DragonTigerLionComponent />;
 };

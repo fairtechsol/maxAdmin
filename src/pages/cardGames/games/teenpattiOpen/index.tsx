@@ -1,11 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import TeenPattiOpenComponent from "../../../../components/cardGames/games/teenpattiOpen";
+import Loader from "../../../../components/commonComponent/loader";
 import { socket, socketService } from "../../../../socketManager";
-import { cardGamesType } from "../../../../utils/Constants";
-import {
-  getPlacedBets,
-  updateBetsPlaced,
-} from "../../../../store/actions/match/matchAction";
 import {
   getDragonTigerDetailHorseRacing,
   resetCardDetail,
@@ -14,9 +11,12 @@ import {
   updateProfitLossCards,
   updateTeenPattiOpenMatchRates,
 } from "../../../../store/actions/card/cardDetail";
+import {
+  getPlacedBets,
+  updateBetsPlaced,
+} from "../../../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../../../store/store";
-import Loader from "../../../../components/commonComponent/loader";
-import TeenPattiOpenComponent from "../../../../components/cardGames/games/teenpattiOpen";
+import { cardGamesType } from "../../../../utils/Constants";
 
 const TeenPattiOpen = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -50,7 +50,6 @@ const TeenPattiOpen = () => {
 
   useEffect(() => {
     try {
-      dispatch(getDragonTigerDetailHorseRacing(cardGamesType.teenOpen));
       if (dragonTigerDetail?.id) {
         dispatch(getPlacedBets(dragonTigerDetail?.id));
       }
@@ -92,12 +91,18 @@ const TeenPattiOpen = () => {
         socketService.card.userCardBetPlacedOff();
         socketService.card.cardResultOff();
         socketService.card.matchResultDeclareAllUserOff();
-        dispatch(resetCardDetail());
       } catch (e) {
         console.log(e);
       }
     };
   }, [dragonTigerDetail?.id]);
+
+  useEffect(() => {
+    dispatch(getDragonTigerDetailHorseRacing(cardGamesType.teenOpen));
+    return () => {
+      dispatch(resetCardDetail());
+    };
+  }, []);
 
   return loading ? <Loader /> : <TeenPattiOpenComponent />;
 };

@@ -18,7 +18,6 @@ const TeentPatti1DComponent = () => {
   const [isSticky, setIsSticky] = useState(false);
   const [show, setShow] = useState(false);
   const { dragonTigerDetail } = useSelector((state: RootState) => state.card);
-  const { playerA, playerB } = dragonTigerDetail;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -136,23 +135,23 @@ const TeentPatti1DComponent = () => {
                     }}
                   >
                     <span style={{ fontSize: "14px", fontWeight: "bolder" }}>
-                      {playerA?.[0]?.nat}
+                      {dragonTigerDetail?.playerA?.[0]?.nat}
                     </span>
                     <span
                       className={
                         dragonTigerDetail?.profitLoss
                           ? dragonTigerDetail?.profitLoss[
-                              `${dragonTigerDetail?.videoInfo?.mid}_${playerA?.[0]?.sid}_card`
+                              `${dragonTigerDetail?.videoInfo?.mid}_${dragonTigerDetail?.playerA?.[0]?.sid}_card`
                             ]
                             ? JSON.parse(
                                 dragonTigerDetail?.profitLoss[
-                                  `${dragonTigerDetail?.videoInfo?.mid}_${playerA?.[0]?.sid}_card`
+                                  `${dragonTigerDetail?.videoInfo?.mid}_${dragonTigerDetail?.playerA?.[0]?.sid}_card`
                                 ]
                               )["playera"] > 0
                               ? "color-green"
                               : JSON.parse(
                                   dragonTigerDetail?.profitLoss[
-                                    `${dragonTigerDetail?.videoInfo?.mid}_${playerA?.[0]?.sid}_card`
+                                    `${dragonTigerDetail?.videoInfo?.mid}_${dragonTigerDetail?.playerA?.[0]?.sid}_card`
                                   ]
                                 )["playera"] < 0
                               ? "color-red"
@@ -163,11 +162,11 @@ const TeentPatti1DComponent = () => {
                     >
                       {dragonTigerDetail?.profitLoss
                         ? dragonTigerDetail?.profitLoss[
-                            `${dragonTigerDetail?.videoInfo?.mid}_${playerA?.[0]?.sid}_card`
+                            `${dragonTigerDetail?.videoInfo?.mid}_${dragonTigerDetail?.playerA?.[0]?.sid}_card`
                           ]
                           ? JSON.parse(
                               dragonTigerDetail?.profitLoss[
-                                `${dragonTigerDetail?.videoInfo?.mid}_${playerA?.[0]?.sid}_card`
+                                `${dragonTigerDetail?.videoInfo?.mid}_${dragonTigerDetail?.playerA?.[0]?.sid}_card`
                               ]
                             )["playera"]
                           : 0
@@ -176,7 +175,9 @@ const TeentPatti1DComponent = () => {
                   </div>
                   <div
                     className={
-                      playerA?.[0]?.gstatus === "SUSPENDED" ? "suspended" : ""
+                      dragonTigerDetail?.playerA?.[0]?.gstatus === "SUSPENDED"
+                        ? "suspended"
+                        : ""
                     }
                     style={{
                       width: "40%",
@@ -190,13 +191,15 @@ const TeentPatti1DComponent = () => {
                       style={{ width: "50%" }}
                     >
                       <span className="f12-b">
-                        {updatedValue(playerA?.[0]?.b1)}
+                        {updatedValue(dragonTigerDetail?.playerA?.[0]?.b1)}
                       </span>
-                      <span className="f10-b">{playerA?.[0]?.bs1}</span>
+                      <span className="f10-b">
+                        {dragonTigerDetail?.playerA?.[0]?.bs1}
+                      </span>
                     </div>
                     <div
                       className={`teenPatti-table-item ${
-                        // playerA?.[0]?.gstatus === "SUSPENDED"
+                        // dragonTigerDetail?.playerA?.[0]?.gstatus === "SUSPENDED"
                         //   ? "suspended"
                         //   : ""
                         ""
@@ -204,9 +207,11 @@ const TeentPatti1DComponent = () => {
                       style={{ width: "50%", background: "#f9c9d4" }}
                     >
                       <span className="f12-b">
-                        {updatedValue(playerA?.[0]?.l1)}
+                        {updatedValue(dragonTigerDetail?.playerA?.[0]?.l1)}
                       </span>
-                      <span className="f10-b">{playerA?.[0]?.ls1}</span>
+                      <span className="f10-b">
+                        {dragonTigerDetail?.playerA?.[0]?.ls1}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -221,23 +226,23 @@ const TeentPatti1DComponent = () => {
                     }}
                   >
                     <span style={{ fontSize: "14px", fontWeight: "bolder" }}>
-                      {playerB?.[0]?.nat}
+                      {dragonTigerDetail?.playerB?.[0]?.nat}
                     </span>
                     <span
                       className={
                         dragonTigerDetail?.profitLoss
                           ? dragonTigerDetail?.profitLoss[
-                              `${dragonTigerDetail?.videoInfo?.mid}_${playerA?.[0]?.sid}_card`
+                              `${dragonTigerDetail?.videoInfo?.mid}_${dragonTigerDetail?.playerA?.[0]?.sid}_card`
                             ]
                             ? JSON.parse(
                                 dragonTigerDetail?.profitLoss[
-                                  `${dragonTigerDetail?.videoInfo?.mid}_${playerA?.[0]?.sid}_card`
+                                  `${dragonTigerDetail?.videoInfo?.mid}_${dragonTigerDetail?.playerA?.[0]?.sid}_card`
                                 ]
                               )["playerb"] > 0
                               ? "color-green"
                               : JSON.parse(
                                   dragonTigerDetail?.profitLoss[
-                                    `${dragonTigerDetail?.videoInfo?.mid}_${playerA?.[0]?.sid}_card`
+                                    `${dragonTigerDetail?.videoInfo?.mid}_${dragonTigerDetail?.playerA?.[0]?.sid}_card`
                                   ]
                                 )["playerb"] < 0
                               ? "color-red"
@@ -248,11 +253,11 @@ const TeentPatti1DComponent = () => {
                     >
                       {dragonTigerDetail?.profitLoss
                         ? dragonTigerDetail?.profitLoss[
-                            `${dragonTigerDetail?.videoInfo?.mid}_${playerA?.[0]?.sid}_card`
+                            `${dragonTigerDetail?.videoInfo?.mid}_${dragonTigerDetail?.playerA?.[0]?.sid}_card`
                           ]
                           ? JSON.parse(
                               dragonTigerDetail?.profitLoss[
-                                `${dragonTigerDetail?.videoInfo?.mid}_${playerA?.[0]?.sid}_card`
+                                `${dragonTigerDetail?.videoInfo?.mid}_${dragonTigerDetail?.playerA?.[0]?.sid}_card`
                               ]
                             )["playerb"]
                           : 0
@@ -261,7 +266,9 @@ const TeentPatti1DComponent = () => {
                   </div>
                   <div
                     className={
-                      playerB?.[0]?.gstatus === "SUSPENDED" ? "suspended" : ""
+                      dragonTigerDetail?.playerB?.[0]?.gstatus === "SUSPENDED"
+                        ? "suspended"
+                        : ""
                     }
                     style={{
                       width: "40%",
@@ -275,14 +282,16 @@ const TeentPatti1DComponent = () => {
                       style={{ width: "50%" }}
                     >
                       <span className="f12-b">
-                        {updatedValue(playerB?.[0]?.b1)}
+                        {updatedValue(dragonTigerDetail?.playerB?.[0]?.b1)}
                       </span>
-                      <span className="f10-b">{playerB?.[0]?.bs1}</span>
+                      <span className="f10-b">
+                        {dragonTigerDetail?.playerB?.[0]?.bs1}
+                      </span>
                     </div>
                     <div
                       className={`teenPatti-table-item ${
-                        // playerB?.[0]?.gstatus != "0" &&
-                        // playerB?.[1]?.gstatus === "0"
+                        // dragonTigerDetail?.playerB?.[0]?.gstatus != "0" &&
+                        // dragonTigerDetail?.playerB?.[1]?.gstatus === "0"
                         //   ? "suspended"
                         //   : ""
                         ""
@@ -290,10 +299,12 @@ const TeentPatti1DComponent = () => {
                       style={{ width: "50%", background: "#f9c9d4" }}
                     >
                       <span className="f12-b">
-                        {updatedValue(playerB?.[0]?.l1)}
+                        {updatedValue(dragonTigerDetail?.playerB?.[0]?.l1)}
                       </span>
 
-                      <span className="f10-b">{playerB?.[0]?.ls1}</span>
+                      <span className="f10-b">
+                        {dragonTigerDetail?.playerB?.[0]?.ls1}
+                      </span>
                     </div>
                   </div>
                 </div>

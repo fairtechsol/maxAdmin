@@ -1,12 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import SuperoverComponent from "../../../../components/cardGames/games/superOver";
 import Loader from "../../../../components/commonComponent/loader";
 import { socket, socketService } from "../../../../socketManager";
-import { cardGamesType } from "../../../../utils/Constants";
-import {
-  getPlacedBets,
-  updateBetsPlaced,
-} from "../../../../store/actions/match/matchAction";
 import {
   casinoScoreboardMatchRates,
   getDragonTigerDetailHorseRacing,
@@ -17,8 +13,12 @@ import {
   updateLiveGameResultTop10,
   updateProfitLossCards,
 } from "../../../../store/actions/card/cardDetail";
+import {
+  getPlacedBets,
+  updateBetsPlaced,
+} from "../../../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../../../store/store";
-import SuperoverComponent from "../../../../components/cardGames/games/superOver";
+import { cardGamesType } from "../../../../utils/Constants";
 
 const Superover = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -53,7 +53,6 @@ const Superover = () => {
 
   useEffect(() => {
     try {
-      dispatch(getDragonTigerDetailHorseRacing(cardGamesType.superover));
       if (dragonTigerDetail?.id) {
         dispatch(getPlacedBets(dragonTigerDetail?.id));
       }
@@ -94,13 +93,19 @@ const Superover = () => {
           socketService.card.userCardBetPlacedOff();
           socketService.card.cardResultOff();
           dispatch(resetScoreBoard());
-          dispatch(resetCardDetail());
         };
       }
     } catch (e) {
       console.log(e);
     }
   }, [dragonTigerDetail?.id]);
+
+  useEffect(() => {
+    dispatch(getDragonTigerDetailHorseRacing(cardGamesType.superover));
+    return () => {
+      dispatch(resetCardDetail());
+    };
+  }, []);
 
   const getScoreBoard = async (marketId: string) => {
     try {

@@ -4,7 +4,7 @@ import { RxCross2 } from "react-icons/rx";
 // import moment from "moment";
 import isMobile from "../../../utils/screenDimension";
 import { handleRoundId } from "../../../helpers";
-import { cardGamesType } from "../../../utils/Constants";
+import { cardGamesType, cardGamesTypeNames } from "../../../utils/Constants";
 import Dragon20ResultComponent from "../../cardGames/games/dt2020/resultModalComponent";
 import AbjResultComponent from "../../cardGames/games/abj2/resultModalComponent";
 import Teen20ResultComponent from "../../cardGames/games/teenpatti2020/resultModalComponent";
@@ -22,24 +22,14 @@ import Cricket5ResultComponent from "../../cardGames/games/cricket5/resultModalC
 import SuperOverResultComponent from "../../cardGames/games/superOver/resultModalComponent";
 import Card32BResultComponent from "../../cardGames/games/cards32B/resultModalComponent";
 import CasinoWarResultComponent from "../../cardGames/games/casinoWar/resultModalComponent";
-
-const title = {
-  dt20: "20-20 Dragon Tiger",
-  teen20: "20-20 Teenpatti",
-  lucky7: "Lucky 7 - A",
-  Lucky7B: "Lucky 7 - B",
-  card32: "32 Cards A",
-  abj: "Andar Bahar 2",
-  teen: "1 Day Teen Patti",
-  teen8: "Open Teen Patti",
-  teen9: "Test Teen Patti",
-  ab20: "Andar Bahar 1",
-};
+import Poker1DayResultComponent from "../../cardGames/games/poker1Day/resultModalComponent";
+import Poker6ResultComponent from "../../cardGames/games/poker6/resultModalComponent";
+import Poker20ResultComponent from "../../cardGames/games/poker20/resultModalComponent";
 
 interface ResultComponentProps {
   data: any;
   setfalse: any;
-  type: keyof typeof title;
+  type: keyof typeof cardGamesTypeNames;
 }
 
 export const ResultComponent: React.FC<ResultComponentProps> = ({
@@ -47,13 +37,13 @@ export const ResultComponent: React.FC<ResultComponentProps> = ({
   setfalse,
   type,
 }) => {
-  // console.log("resultData", data);
+  console.log("resultData", type, cardGamesType?.poker1Day);
 
   return (
     <Container style={{ padding: 0 }}>
       <div className="resultModalHeader d-flex justify-content-between">
         <span style={{ fontSize: "20px", fontWeight: "bold" }}>
-          {title[type]} Result
+          {cardGamesTypeNames[type]} Result
         </span>
         <RxCross2 size={25} onClick={() => setfalse(false)} />
       </div>
@@ -100,6 +90,12 @@ export const ResultComponent: React.FC<ResultComponentProps> = ({
         <Card32BResultComponent data={data} />
       ) : type === cardGamesType?.casinoWar ? (
         <CasinoWarResultComponent data={data} />
+      ) : type === cardGamesType?.poker1Day ? (
+        <Poker1DayResultComponent data={data} />
+      ) : type === cardGamesType?.poker6 ? (
+        <Poker6ResultComponent data={data} />
+      ) : type === cardGamesType?.poker20 ? (
+        <Poker20ResultComponent data={data} />
       ) : (
         <></>
       )}
