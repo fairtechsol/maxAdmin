@@ -44,6 +44,9 @@ import {
   ballByBall,
   superover,
   crick5,
+  p6,
+  p1d,
+  p20,
 } from "../../assets";
 
 export const ApiConstants = {
@@ -404,6 +407,21 @@ export const card3 = {
       name: "5 5 Cricket",
     },
   ],
+  poker: [
+    { id: 18, url: "/admin/casinoDetail/poker6", imgSrc: p6, name: "POKER 6" },
+    {
+      id: 19,
+      url: "/admin/casinoDetail/poker",
+      imgSrc: p1d,
+      name: "POKER 1 DAY",
+    },
+    {
+      id: 20,
+      url: "/admin/casinoDetail/poker20",
+      imgSrc: p20,
+      name: "POKER 20 20",
+    },
+  ],
 };
 
 export const dragonTigerCards = [
@@ -696,6 +714,18 @@ export const cardConstantsAccountStatement = [
     value: "war",
     label: "Casino War",
   },
+  {
+    value: "poker",
+    label: "Poker 1 Day",
+  },
+  {
+    value: "poker6",
+    label: "6 Player Poker",
+  },
+  {
+    value: "poker20",
+    label: "20-20 Poker",
+  },
 ];
 
 export const cardGamesCasinoResult = [
@@ -771,5 +801,17 @@ export const cardGamesCasinoResult = [
   {
     value: "war",
     label: "Casino War",
+  },
+  {
+    value: "poker",
+    label: "Poker 1 Day",
+  },
+  {
+    value: "poker6",
+    label: "6 Player Poker",
+  },
+  {
+    value: "poker20",
+    label: "20-20 Poker",
   },
 ];

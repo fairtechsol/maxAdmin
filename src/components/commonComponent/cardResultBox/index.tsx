@@ -32,7 +32,7 @@ const CardResultBox = ({ data, name, type }: any) => {
           <span
             style={{ fontSize: "14px", cursor: "pointer" }}
             onClick={() =>
-              navigate("/admin/casinoresult", {
+              navigate("/casino-report", {
                 state: { cardType: data?.type },
               })
             }
@@ -43,7 +43,7 @@ const CardResultBox = ({ data, name, type }: any) => {
       </div>
       <div className="cardResultBoxRound">
         {liveGameResultTop10?.length > 0 &&
-          liveGameResultTop10.map((item: any) => (
+          liveGameResultTop10?.map((item: any) => (
             <div
               className="cardResultCircle"
               key={item?.mid}
@@ -91,6 +91,66 @@ const CardResultBox = ({ data, name, type }: any) => {
                     ? name?.[1]
                     : null}
                 </span>
+              ) : type === "teen9" ? (
+                <span
+                  style={{
+                    fontSize: "16px",
+                    fontWeight: "600",
+                    color:
+                      item?.result === "31" ||
+                      item?.result === "11" ||
+                      item?.result === "21"
+                        ? "#f5cc03"
+                        : "#ffffff",
+                  }}
+                >
+                  {item?.result === "21"
+                    ? name?.[1]
+                    : item?.result === "11"
+                    ? name?.[0]
+                    : item?.result === "31"
+                    ? name?.[2]
+                    : null}
+                </span>
+              ) : type === "poker" || type === "poker20" ? (
+                <>
+                  <span
+                    style={{
+                      fontSize: "16px",
+                      fontWeight: "600",
+                      color:
+                        item?.result === "11"
+                          ? "#f5cc03"
+                          : item?.result === "21"
+                          ? "#ff4500"
+                          : "#ffffff",
+                    }}
+                  >
+                    {item?.result === "11"
+                      ? name?.[0]
+                      : item?.result === "21"
+                      ? name?.[1]
+                      : name?.[2]}{" "}
+                  </span>
+                </>
+              ) : type === "card32eu" ? (
+                <>
+                  <span
+                    style={{
+                      fontSize: "16px",
+                      fontWeight: "600",
+                      color: "#f5cc03",
+                    }}
+                  >
+                    {item?.result === "1"
+                      ? name?.[0]
+                      : item?.result === "2"
+                      ? name?.[1]
+                      : item?.result === "3"
+                      ? name?.[2]
+                      : name?.[3]}
+                  </span>
+                </>
               ) : type === "race20" ? (
                 <>
                   {item?.result === "1" ? (
@@ -102,6 +162,18 @@ const CardResultBox = ({ data, name, type }: any) => {
                   ) : (
                     <ImDiamonds color="#ff0000" />
                   )}
+                </>
+              ) : type === "poker6" ? (
+                <>
+                  <span
+                    style={{
+                      fontSize: "16px",
+                      fontWeight: "600",
+                      color: item?.result === "0" ? "#ffffff" : "#f5cc03",
+                    }}
+                  >
+                    {item?.result === "0" ? name?.[0] : item?.result?.[1]}
+                  </span>
                 </>
               ) : (
                 <span
@@ -143,11 +215,7 @@ const CardResultBox = ({ data, name, type }: any) => {
         aria-labelledby="example-modal-sizes-title-lg"
       >
         <Modal.Body style={{ padding: 0 }}>
-          <ResultComponent
-            data={resultData}
-            setfalse={setLgShow}
-            type={data?.type}
-          />
+          <ResultComponent data={resultData} setfalse={setLgShow} type={type} />
         </Modal.Body>
       </Modal>
     </div>

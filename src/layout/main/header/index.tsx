@@ -281,7 +281,7 @@ const Topbar = (props: any) => {
                         name: "TeenPatti 2.0",
                         link: "#9",
                       },
-                      { name: "Live Poker", link: "#11" },
+                      { name: "Live Poker", link: "/admin/casino/poker" },
                       { name: "Andar Bahar", link: "/admin/casino/abj" },
                       { name: "Lucky 7", link: "/admin/casino/lucky7" },
                       {

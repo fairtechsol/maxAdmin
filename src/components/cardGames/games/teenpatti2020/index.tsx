@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { useRef, useState } from "react";
 import { handleRoundId } from "../../../../helpers";
 import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
-import { cardGamesId, cardUrl } from "../../../../utils/Constants";
+import { cardGamesId, cardGamesType, cardUrl } from "../../../../utils/Constants";
 import Teen20Result from "./teenCard";
 import CardResultBox from "../../../commonComponent/cardResultBox";
 import UserBets from "../../../game/userBet";
@@ -312,7 +312,7 @@ const TeentPatti2020Component = () => {
               </div>
             </div>
             <div style={{ width: "100%", marginTop: "10px" }}>
-              <CardResultBox data={dragonTigerDetail} name={["A", "T", "B"]} />
+              <CardResultBox data={dragonTigerDetail} name={["A", "T", "B"]} type={cardGamesType.teen20}/>
             </div>
           </div>
         </Col>

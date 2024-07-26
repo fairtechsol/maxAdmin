@@ -69,6 +69,13 @@ const Cards32B = Loadable(
 const CasinoWar = Loadable(
   lazy(() => import("../pages/cardGames/games/casinoWar"))
 );
+const Poker1day = Loadable(
+  lazy(() => import("../pages/cardGames/games/poker1day"))
+);
+const Poker20 = Loadable(
+  lazy(() => import("../pages/cardGames/games/poker20"))
+);
+const Poker6 = Loadable(lazy(() => import("../pages/cardGames/games/poker6")));
 
 const MainRoutes = {
   path: "/admin",
@@ -197,6 +204,18 @@ const MainRoutes = {
     {
       path: "casinoDetail/war",
       element: <CasinoWar />,
+    },
+    {
+      path: "casinoDetail/poker",
+      element: <Poker1day />,
+    },
+    {
+      path: "casinoDetail/poker6",
+      element: <Poker6 />,
+    },
+    {
+      path: "casinoDetail/poker20",
+      element: <Poker20 />,
     },
     {
       path: "*",
