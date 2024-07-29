@@ -4,7 +4,11 @@ import { Col, Container, Row, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import "./style.scss";
 import { RootState } from "../../../../store/store";
-import { cardGamesId, cardUrl } from "../../../../utils/Constants";
+import {
+  cardGamesId,
+  cardGamesType,
+  cardUrl,
+} from "../../../../utils/Constants";
 import { handleRoundId } from "../../../../helpers";
 import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
 import UserBets from "../../../game/userBet";
@@ -130,7 +134,7 @@ const Poker1DayComponent = () => {
                 <CardResultBox
                   data={dragonTigerDetail}
                   name={["A", "B", "T"]}
-                  type={"poker"}
+                  type={cardGamesType.poker1Day}
                 />
               </div>
             </div>

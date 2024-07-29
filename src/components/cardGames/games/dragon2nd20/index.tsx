@@ -11,7 +11,11 @@ import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
 import Dragon20Result from "./dragonCard";
 import { handleRoundId } from "../../../../helpers";
 import { RootState } from "../../../../store/store";
-import { cardGamesId, cardUrl } from "../../../../utils/Constants";
+import {
+  cardGamesId,
+  cardGamesType,
+  cardUrl,
+} from "../../../../utils/Constants";
 import TiePairBox from "./TiePairBox";
 import OddEven from "./OddEvenBox";
 import CardBox from "./CardsBox";
@@ -125,7 +129,11 @@ const DragonSecond20Component = () => {
               />
             </div>
             <div style={{ width: "100%", margin: "5px" }}>
-              <CardResultBox data={dragonTigerDetail} name={["D", "T"]} />
+              <CardResultBox
+                data={dragonTigerDetail}
+                name={["D", "T"]}
+                type={cardGamesType.dragonTiger202}
+              />
             </div>
           </div>
 

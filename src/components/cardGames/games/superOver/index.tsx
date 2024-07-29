@@ -3,7 +3,12 @@ import { useEffect, useRef, useState } from "react";
 import { Col, Container, Row, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import "./style.scss";
-import { cardGamesId, cardUrl, rulesData } from "../../../../utils/Constants";
+import {
+  cardGamesId,
+  cardGamesType,
+  cardUrl,
+  rulesData,
+} from "../../../../utils/Constants";
 import { RootState } from "../../../../store/store";
 import UserBets from "../../../game/userBet";
 import RulesModal from "../../../commonComponent/rulesModal";
@@ -103,7 +108,7 @@ const SuperOverComponent = () => {
               <CardResultBox
                 data={dragonTigerDetail}
                 name={["E", "R"]}
-                type={"card32eu"}
+                type={cardGamesType.superover}
               />
             </div>
           </div>

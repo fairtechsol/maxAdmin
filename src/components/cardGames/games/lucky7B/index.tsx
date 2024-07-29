@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import "./style.scss";
-import { cardGamesId, cardUrl } from "../../../../utils/Constants";
+import { cardGamesId, cardGamesType, cardUrl } from "../../../../utils/Constants";
 import { RootState } from "../../../../store/store";
 import { handleRoundId } from "../../../../helpers";
 import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
@@ -127,6 +127,7 @@ const Lucky7BComponent = () => {
                 <CardResultBox
                   data={dragonTigerDetail}
                   name={["L", "H", "T"]}
+                  type={cardGamesType.lucky7B}
                 />
               </div>
             </div>

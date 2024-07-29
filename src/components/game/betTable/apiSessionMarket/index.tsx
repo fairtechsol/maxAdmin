@@ -12,6 +12,7 @@ import {
 } from "../../../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../../../store/store";
 import { useDispatch, useSelector } from "react-redux";
+import isMobile from "../../../../utils/screenDimension";
 
 interface ApiSessionMarketTableProps {
   data: any;
@@ -52,7 +53,11 @@ function ApiSessionMarketTable({
             return (
               <tr key={item?.id}>
                 <td>
-                  <div className="backLayRunner d-flex flex-column title-10">
+                  <div
+                    className={`backLayRunner d-flex flex-column title-12 ${
+                      isMobile ? "f900" : "f600"
+                    }`}
+                  >
                     <div
                       onClick={() => {
                         dispatch(resetRunAmount());
@@ -60,9 +65,7 @@ function ApiSessionMarketTable({
                         dispatch(getRunAmount(item?.id));
                       }}
                     >
-                  
-                        {item?.name}
-                 
+                      {item?.name}
                     </div>
                     <span className="title-12">
                       {matchDetails?.profitLossDataSession.length > 0

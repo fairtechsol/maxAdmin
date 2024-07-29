@@ -203,6 +203,7 @@ const cardDetail = createSlice({
         // state.loading = true;
         state.success = false;
         state.error = null;
+        state.resultData = null;
       })
       .addCase(resultDragonTiger.fulfilled, (state, action) => {
         state.success = true;

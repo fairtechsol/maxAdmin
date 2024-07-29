@@ -1,12 +1,16 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useRef, useState } from "react";
-import { Col, Container, Row, Table } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import "./style.scss";
 import { RootState } from "../../../../store/store";
 import { handleRoundId } from "../../../../helpers";
 import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
-import { cardGamesId, cardUrl } from "../../../../utils/Constants";
+import {
+  cardGamesId,
+  cardGamesType,
+  cardUrl,
+} from "../../../../utils/Constants";
 import CardResultBox from "../../../commonComponent/cardResultBox";
 import UserBets from "../../../game/userBet";
 import RulesModal from "../../../commonComponent/rulesModal";
@@ -35,13 +39,13 @@ const CasinoWarComponent = () => {
     };
   }, []);
 
-  const rules = [
-    { label: "Pair (Double)", value: "1 To 1" },
-    { label: "Flush (Color)", value: "1 To 4" },
-    { label: "Straight (Rown)", value: "1 To 6" },
-    { label: "Trio (Teen)", value: "1 To 35" },
-    { label: "Straight Flush (Pakki Rown)", value: "1 To 45" },
-  ];
+  // const rules = [
+  //   { label: "Pair (Double)", value: "1 To 1" },
+  //   { label: "Flush (Color)", value: "1 To 4" },
+  //   { label: "Straight (Rown)", value: "1 To 6" },
+  //   { label: "Trio (Teen)", value: "1 To 35" },
+  //   { label: "Straight Flush (Pakki Rown)", value: "1 To 45" },
+  // ];
 
   return (
     <>
@@ -274,7 +278,7 @@ const CasinoWarComponent = () => {
                 <CardResultBox
                   data={dragonTigerDetail}
                   name={["R", "R", "R"]}
-                  type={"war"}
+                  type={cardGamesType.casinoWar}
                 />
               </div>
             </div>
@@ -294,7 +298,7 @@ const CasinoWarComponent = () => {
                 <UserBets matchId={dragonTigerDetail?.id} />
               </Col>
               <Col>
-                <div className="casino-title" style={{ position: "relative" }}>
+                {/* <div className="casino-title" style={{ position: "relative" }}>
                   <span>Rules</span>
                 </div>
                 <div className="table-responsive rules-table">
@@ -315,7 +319,7 @@ const CasinoWarComponent = () => {
                       ))}
                     </tbody>
                   </Table>
-                </div>
+                </div> */}
                 <RulesModal show={show} setShow={setShow} rule={tprules} />
               </Col>
             </Row>

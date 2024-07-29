@@ -6,7 +6,11 @@ import "./style.scss";
 import { RootState } from "../../../../store/store";
 import { handleRoundId } from "../../../../helpers";
 import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
-import { cardGamesId, cardUrl } from "../../../../utils/Constants";
+import {
+  cardGamesId,
+  cardGamesType,
+  cardUrl,
+} from "../../../../utils/Constants";
 import { dtrules } from "../../../../assets";
 import RulesModal from "../../../commonComponent/rulesModal";
 import CardResultBox from "../../../commonComponent/cardResultBox";
@@ -110,7 +114,11 @@ const DragonTiger2020Component = () => {
               />
             </div>
             <div style={{ width: "100%", margin: "5px" }}>
-              <CardResultBox data={dragonTigerDetail} name={["D", "T"]} />
+              <CardResultBox
+                data={dragonTigerDetail}
+                name={["D", "T"]}
+                type={cardGamesType.dragonTiger20}
+              />
             </div>
           </div>
 

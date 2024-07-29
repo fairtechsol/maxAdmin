@@ -65,6 +65,7 @@ const Poker6 = () => {
           handleLiveGameResultTop10
         );
         socketService.card.cardResult(handleCardResult);
+        socketService.card.matchResultDeclareAllUser(handleCardResult);
       }
     } catch (error) {
       console.log(error);
@@ -78,6 +79,7 @@ const Poker6 = () => {
         socketService.card.getCardRatesOff(cardGamesType.poker6);
         socketService.card.userCardBetPlacedOff();
         socketService.card.cardResultOff();
+        socketService.card.matchResultDeclareAllUserOff();
       } catch (e) {
         console.log(e);
       }
