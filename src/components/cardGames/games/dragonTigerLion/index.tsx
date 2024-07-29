@@ -10,7 +10,11 @@ import { GiSpades } from "react-icons/gi";
 import { BiSolidHeart } from "react-icons/bi";
 import { ImDiamonds } from "react-icons/im";
 import { RootState } from "../../../../store/store";
-import { cardGamesId, cardUrl } from "../../../../utils/Constants";
+import {
+  cardGamesId,
+  cardGamesType,
+  cardUrl,
+} from "../../../../utils/Constants";
 import {
   A,
   dtrules,
@@ -589,7 +593,11 @@ const DragonTigerDesktop = () => {
             </div>
 
             <div style={{ width: "100%", margin: "5px" }}>
-              <CardResultBox data={dragonTigerDetail} name={["D", "T", "L"]} />
+              <CardResultBox
+                data={dragonTigerDetail}
+                name={["D", "T", "L"]}
+                type={cardGamesType.dragonTigerLion}
+              />
             </div>
           </div>
 

@@ -37,7 +37,6 @@ export const ResultComponent: React.FC<ResultComponentProps> = ({
   setfalse,
   type,
 }) => {
-  console.log("resultData", type, cardGamesType?.poker1Day);
 
   return (
     <Container style={{ padding: 0 }}>

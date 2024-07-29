@@ -4,7 +4,12 @@ import { useSelector } from "react-redux";
 import "./style.scss";
 import RulesModal from "../../../commonComponent/rulesModal";
 import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
-import { cardData, cardGamesId, cardUrl } from "../../../../utils/Constants";
+import {
+  cardData,
+  cardGamesId,
+  cardGamesType,
+  cardUrl,
+} from "../../../../utils/Constants";
 import { RootState } from "../../../../store/store";
 import { handleRoundId } from "../../../../helpers";
 import Crick5Result from "./cric5Card";
@@ -98,7 +103,7 @@ const Cricket5Component = () => {
               <CardResultBox
                 data={dragonTigerDetail}
                 name={["A", "I", "T"]}
-                type={"cricketv3"}
+                type={cardGamesType.cricketv3}
               />
             </div>
           </div>

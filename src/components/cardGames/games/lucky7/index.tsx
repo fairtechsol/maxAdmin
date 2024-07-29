@@ -7,7 +7,11 @@ import CardResultBox from "../../../../components/commonComponent/cardResultBox"
 import RulesModal from "../../../../components/commonComponent/rulesModal";
 import { handleRoundId } from "../../../../helpers";
 import UserBets from "../../../../components/game/userBet";
-import { cardGamesId, cardUrl } from "../../../../utils/Constants";
+import {
+  cardGamesId,
+  cardGamesType,
+  cardUrl,
+} from "../../../../utils/Constants";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../store/store";
 import { luckyrules } from "../../../../assets";
@@ -111,6 +115,7 @@ const Lucky7Component = () => {
                 <CardResultBox
                   data={dragonTigerDetail}
                   name={["L", "H", "T"]}
+                  type={cardGamesType.lucky7}
                 />
               </div>
             </div>

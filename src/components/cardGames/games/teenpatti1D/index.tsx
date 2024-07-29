@@ -11,7 +11,11 @@ import CardResultBox from "../../../commonComponent/cardResultBox";
 import Teen1DResult from "./teenCard";
 import { handleRoundId } from "../../../../helpers";
 import { RootState } from "../../../../store/store";
-import { cardGamesId, cardUrl } from "../../../../utils/Constants";
+import {
+  cardGamesId,
+  cardGamesType,
+  cardUrl,
+} from "../../../../utils/Constants";
 
 const TeentPatti1DComponent = () => {
   const placeBetRef = useRef<HTMLDivElement>(null);
@@ -313,7 +317,7 @@ const TeentPatti1DComponent = () => {
                 <CardResultBox
                   data={dragonTigerDetail}
                   name={["A", "B", "T"]}
-                  type={"teen"}
+                  type={cardGamesType.teenOneDay}
                 />
               </div>
             </div>

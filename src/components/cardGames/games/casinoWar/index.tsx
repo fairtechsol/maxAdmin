@@ -6,7 +6,11 @@ import "./style.scss";
 import { RootState } from "../../../../store/store";
 import { handleRoundId } from "../../../../helpers";
 import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
-import { cardGamesId, cardUrl } from "../../../../utils/Constants";
+import {
+  cardGamesId,
+  cardGamesType,
+  cardUrl,
+} from "../../../../utils/Constants";
 import CardResultBox from "../../../commonComponent/cardResultBox";
 import UserBets from "../../../game/userBet";
 import RulesModal from "../../../commonComponent/rulesModal";
@@ -274,7 +278,7 @@ const CasinoWarComponent = () => {
                 <CardResultBox
                   data={dragonTigerDetail}
                   name={["R", "R", "R"]}
-                  type={"war"}
+                  type={cardGamesType.casinoWar}
                 />
               </div>
             </div>

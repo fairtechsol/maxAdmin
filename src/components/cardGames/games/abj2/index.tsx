@@ -6,7 +6,7 @@ import { RootState } from "../../../../store/store";
 import UserBets from "../../../game/userBet";
 import { handleRoundId } from "../../../../helpers";
 import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
-import { cardGamesId, cardUrl } from "../../../../utils/Constants";
+import { cardGamesId, cardGamesType, cardUrl } from "../../../../utils/Constants";
 import SBetBox from "./Sbox";
 import OddEven from "./OddEvenBox";
 import CardBox from "./CardsBox";
@@ -115,7 +115,7 @@ const Abj2Component = () => {
                 />
               </div>
               <div style={{ width: "100%", margin: "5px" }}>
-                <CardResultBox data={dragonTigerDetail} name={["A", "B"]} />
+                <CardResultBox data={dragonTigerDetail} name={["A", "B"]} type={cardGamesType.andarBahar2}/>
               </div>
             </div>
             <RulesModal show={show} setShow={setShow} rule={abjrules} />

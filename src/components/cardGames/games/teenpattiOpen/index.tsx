@@ -4,7 +4,7 @@ import { Col, Container, Row, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import "./style.scss";
 import { RootState } from "../../../../store/store";
-import { cardGamesId, cardUrl } from "../../../../utils/Constants";
+import { cardGamesId, cardGamesType, cardUrl } from "../../../../utils/Constants";
 import { handleRoundId } from "../../../../helpers";
 import RulesModal from "../../../commonComponent/rulesModal";
 import { tprules } from "../../../../assets";
@@ -168,7 +168,7 @@ const TeenPattiOpenComponent = () => {
                 <CardResultBox
                   data={dragonTigerDetail}
                   name={["R", "R", "R"]}
-                  type={"teen8"}
+                  type={cardGamesType.teenOpen}
                 />
               </div>
             </div>
