@@ -76,6 +76,7 @@ const Race20 = () => {
         );
         socketService.card.userCardBetPlaced(handleBetPlacedOnDT20);
         socketService.card.cardResult(handleCardResult);
+        socketService.card.matchResultDeclareAllUser(handleCardResult);
       }
     } catch (error) {
       console.log(error);
@@ -90,6 +91,7 @@ const Race20 = () => {
           socketService.card.getCardRatesOff(cardGamesType.race20);
           socketService.card.userCardBetPlacedOff();
           socketService.card.cardResultOff();
+          socketService.card.matchResultDeclareAllUserOff();
         };
       }
     } catch (e) {

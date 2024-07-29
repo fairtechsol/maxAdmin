@@ -78,6 +78,7 @@ const Superover = () => {
         );
         socketService.card.userCardBetPlaced(handleBetPlacedOnDT20);
         socketService.card.cardResult(handleCardResult);
+        socketService.card.matchResultDeclareAllUser(handleCardResult);
       }
     } catch (error) {
       console.log(error);
@@ -92,6 +93,7 @@ const Superover = () => {
           socketService.card.getCardRatesOff(cardGamesType.superover);
           socketService.card.userCardBetPlacedOff();
           socketService.card.cardResultOff();
+          socketService.card.matchResultDeclareAllUserOff();
           dispatch(resetScoreBoard());
         };
       }

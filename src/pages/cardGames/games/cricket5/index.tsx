@@ -78,6 +78,7 @@ const Cricket5 = () => {
           handleLiveGameResultTop10
         );
         socketService.card.cardResult(handleCardResult);
+        socketService.card.matchResultDeclareAllUser(handleCardResult);
       }
     } catch (error) {
       console.log(error);
@@ -91,6 +92,7 @@ const Cricket5 = () => {
         socketService.card.getCardRatesOff(cardGamesType.cricketv3);
         socketService.card.userCardBetPlacedOff();
         socketService.card.cardResultOff();
+        socketService.card.matchResultDeclareAllUserOff();
         dispatch(resetScoreBoard());
       } catch (e) {
         console.log(e);
