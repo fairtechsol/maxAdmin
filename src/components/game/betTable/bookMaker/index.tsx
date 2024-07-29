@@ -3,6 +3,7 @@ import BackLayBox from "../../../backLayBox";
 import BetStatusOverlay from "../../../commonComponent/betStatusOverlay";
 import "../../style.scss";
 import { teamStatus } from "../../../../utils/Constants";
+import isMobile from "../../../../utils/screenDimension";
 
 interface BookmakerTableProps {
   minMax?: any;
@@ -55,7 +56,11 @@ function BookmakerTable({
               <tr key={i}>
                 <td>
                   <div className="backLayRunner d-flex flex-column px-1 w-100">
-                    <span className={`backLayRunner-country title-12`}>
+                    <span
+                      className={`backLayRunner-country title-12 ${
+                        isMobile ? "f900" : "f600"
+                      }`}
+                    >
                       {data?.type === "tiedMatch2"
                         ? i === 0
                           ? "Yes"
