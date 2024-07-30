@@ -26,15 +26,12 @@ function SetWinner({
       className={`gameTable table-responsive sessionFancyTable borderTable border `}
     >
       <Table className="mb-0">
-      <thead>
+        <thead>
           <tr>
             <th className="border-0">
-          
-            
               {minMax && isMobile && (
                 <span className="f700 title-14">{minMax}</span>
               )}
-    
             </th>
             {backLayCount === 6 && (
               <>
@@ -84,11 +81,11 @@ function SetWinner({
                           {matchDetails?.profitLossDataMatch?.[
                             profitLossDataForMatchConstants[data?.type][matchs]
                           ]
-                            ? matchDetails?.profitLossDataMatch?.[
+                            ? parseFloat(matchDetails?.profitLossDataMatch?.[
                                 profitLossDataForMatchConstants[data?.type][
                                   matchs
                                 ]
-                              ]
+                              ]).toFixed(2)
                             : 0}
                         </span>
                       </div>

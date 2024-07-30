@@ -29,15 +29,12 @@ function OverUnderMarket({
       className={`gameTable table-responsive sessionFancyTable borderTable border `}
     >
       <Table className="mb-0">
-      <thead>
+        <thead>
           <tr>
             <th className="border-0">
-          
-            
               {minMax && isMobile && (
                 <span className="f700 title-14">{minMax}</span>
               )}
-    
             </th>
             {backLayCount === 6 && (
               <>
@@ -99,12 +96,14 @@ function OverUnderMarket({
                           }`}
                         >
                           {indexes === 0
-                            ? matchDetails?.profitLossDataMatch[
-                                profitLossDataForMatchConstants[data?.type]?.A
-                              ] ?? 0
-                            : matchDetails?.profitLossDataMatch[
+                            ? parseFloat(
+                                matchDetails?.profitLossDataMatch[
+                                  profitLossDataForMatchConstants[data?.type]?.A
+                                ] ?? 0
+                              ).toFixed(2)
+                            : parseFloat(matchDetails?.profitLossDataMatch[
                                 profitLossDataForMatchConstants[data?.type]?.B
-                              ] ?? 0}
+                              ] ?? 0).toFixed(2)}
                         </span>
                       </div>
                     </div>

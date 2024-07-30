@@ -88,8 +88,10 @@ function MatchOdds({
                                     : "color-green"
                                 }
                               >
-                                {matchDetails?.profitLossDataMatch
-                                  ?.yesRateTie ?? 0}
+                                {parseFloat(
+                                  matchDetails?.profitLossDataMatch
+                                    ?.yesRateTie ?? 0
+                                ).toFixed(2)}
                               </span>
                             ) : (
                               <span
@@ -103,11 +105,13 @@ function MatchOdds({
                                     : "color-green"
                                 }
                               >
-                                {matchDetails?.profitLossDataMatch[
-                                  profitLossDataForMatchConstants[data?.type]?.[
-                                    matchs
-                                  ]
-                                ] ?? 0}
+                                {parseFloat(
+                                  matchDetails?.profitLossDataMatch[
+                                    profitLossDataForMatchConstants[
+                                      data?.type
+                                    ]?.[matchs]
+                                  ] ?? 0
+                                ).toFixed(2)}
                               </span>
                             )
                           ) : (
@@ -122,11 +126,13 @@ function MatchOdds({
                                   : "color-green"
                               }
                             >
-                              {matchDetails?.profitLossDataMatch[
-                                profitLossDataForMatchConstants[data?.type]?.[
-                                  matchs
-                                ]
-                              ] ?? 0}
+                              {parseFloat(
+                                matchDetails?.profitLossDataMatch[
+                                  profitLossDataForMatchConstants[data?.type]?.[
+                                    matchs
+                                  ]
+                                ] ?? 0
+                              ).toFixed(2)}
                             </span>
                           )}
                         </span>
