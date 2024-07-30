@@ -77,9 +77,11 @@ function BookmakerTable({
                             : "color-green"
                         }`}
                       >
-                        {matchDetails?.profitLossDataMatch?.[
-                          `team${item}Rate`
-                        ] ?? 0}
+                        {parseFloat(
+                          matchDetails?.profitLossDataMatch?.[
+                            `team${item}Rate`
+                          ] ?? 0
+                        ).toFixed(2)}
                       </span>
                     </div>
                   </div>

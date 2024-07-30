@@ -71,7 +71,7 @@ function SessionMarketTable({
                           (accumulator: any, bet: any) => {
                             const maxLossToAdd =
                               bet?.betId === JSON.parse(item)?.id
-                                ? +bet?.maxLoss
+                                ? parseFloat(bet?.maxLoss).toFixed(2)
                                 : 0;
                             return accumulator + maxLossToAdd;
                           },
