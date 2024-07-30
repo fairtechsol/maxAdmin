@@ -63,8 +63,20 @@ function BookmakerTable({
                         : matchDetails?.[`team${item}`]}
                     </span>
                     <div className="d-flex align-items-center justify-content-between w-100">
-                      <span className={`title-14 ${matchDetails?.profitLossDataMatch?.[`team${item}Rate`] < 0 ? "color-red" : "color-green"}`}>
-                        {matchDetails?.profitLossDataMatch?.[`team${item}Rate`] ?? 0}
+                      <span
+                        className={`title-14 ${
+                          matchDetails?.profitLossDataMatch?.[
+                            `team${item}Rate`
+                          ] < 0
+                            ? "color-red"
+                            : "color-green"
+                        }`}
+                      >
+                        {parseFloat(
+                          matchDetails?.profitLossDataMatch?.[
+                            `team${item}Rate`
+                          ] ?? 0
+                        ).toFixed(2)}
                       </span>
                     </div>
                   </div>
