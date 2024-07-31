@@ -255,6 +255,10 @@ const CasinoWarComponent = () => {
                                     : ""
                                   : ""
                               }`}
+                              style={{
+                                marginTop: player.gstatus === "0" ? "15px" : "",
+                                zIndex: "100",
+                              }}
                             >
                               {dragonTigerDetail?.profitLoss
                                 ? dragonTigerDetail?.profitLoss[
