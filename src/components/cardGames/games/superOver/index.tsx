@@ -47,7 +47,7 @@ const SuperOverComponent = () => {
     <div>
       <Row>
         <Col md={8}>
-          <div style={{ width: "100%", height: "400px", margin: "5px" }}>
+          <div style={{ width: "100%", height: "400px" }}>
             <div className="horseRacingTabHeader">
               <div>
                 <span style={{ fontSize: "16px", fontWeight: "600" }}>
@@ -88,7 +88,7 @@ const SuperOverComponent = () => {
               />
             </div>
           </div>
-          <div style={{ height: "760px", marginLeft: "5px" }}>
+          <div>
             <div
               className="d-sm-flex flex-row justify-content-around align-items-center"
               style={{ width: "100%", marginTop: "7rem", gap: "10px" }}
@@ -104,7 +104,7 @@ const SuperOverComponent = () => {
               </div>
             </div>
 
-            <div style={{ width: "100%", margin: "5px" }}>
+            <div style={{ width: "100%", marginTop: "5px" }}>
               <CardResultBox
                 data={dragonTigerDetail}
                 name={["E", "R"]}

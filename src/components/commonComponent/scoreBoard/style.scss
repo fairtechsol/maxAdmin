@@ -14,7 +14,7 @@
   margin-bottom: 8px;
 }
 .scorecard {
-  width: calc(100% - 8px);
+  width: 100%;
   padding: 5px;
   background-image: url(../../../assets/sportCasino/scorecard-bg.webp);
   position: relative;
@@ -22,8 +22,8 @@
   background-size: cover;
   color: #fff;
   z-index: 1;
-  margin-left: 4px;
-  margin-right: 4px;
+  // margin-left: 4px;
+  // margin-right: 4px;
   object-fit: cover;
 }
 .ball-runs {
