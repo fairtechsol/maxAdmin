@@ -1,7 +1,6 @@
 const WinBox = ({ odds, data }: any) => {
   const min = odds?.[0]?.min;
   const max = odds?.[0]?.max;
-
   const handleLock = (item: any) => {
     if (item?.gstatus != "ACTIVE" || item?.b1 === "0.00") {
       return true;
@@ -26,36 +25,36 @@ const WinBox = ({ odds, data }: any) => {
                     }`}
                   >
                     <span className="rate-box">{item?.b1}</span>{" "}
-                    <span
-                      className={`casino-volume f400 ${
-                        data?.profitLoss
-                          ? data?.profitLoss[
-                              `${data?.videoInfo?.mid}_${item?.sid}_card`
-                            ]
-                            ? data?.profitLoss[
-                                `${data?.videoInfo?.mid}_${item?.sid}_card`
-                              ] > 0
-                              ? "color-green"
-                              : data?.profitLoss[
-                                  `${data?.videoInfo?.mid}_${item?.sid}_card`
-                                ] < 0
-                              ? "color-red"
-                              : ""
-                            : ""
-                          : ""
-                      }`}
-                    >
-                      {data?.profitLoss
+                  </div>
+                  <span
+                    className={`casino-volume mt-0 f600 ${
+                      data?.profitLoss
                         ? data?.profitLoss[
                             `${data?.videoInfo?.mid}_${item?.sid}_card`
                           ]
                           ? data?.profitLoss[
                               `${data?.videoInfo?.mid}_${item?.sid}_card`
-                            ]
-                          : 0
-                        : 0}
-                    </span>
-                  </div>
+                            ] > 0
+                            ? "color-green"
+                            : data?.profitLoss[
+                                `${data?.videoInfo?.mid}_${item?.sid}_card`
+                              ] < 0
+                            ? "color-red"
+                            : ""
+                          : ""
+                        : ""
+                    }`}
+                  >
+                    {data?.profitLoss
+                      ? data?.profitLoss[
+                          `${data?.videoInfo?.mid}_${item?.sid}_card`
+                        ]
+                        ? data?.profitLoss[
+                            `${data?.videoInfo?.mid}_${item?.sid}_card`
+                          ]
+                        : 0
+                      : 0}
+                  </span>
                 </div>
               </>
             );
