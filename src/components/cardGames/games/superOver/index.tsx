@@ -12,7 +12,7 @@ import {
 import { RootState } from "../../../../store/store";
 import UserBets from "../../../game/userBet";
 import RulesModal from "../../../commonComponent/rulesModal";
-import { card32rules } from "../../../../assets";
+import { superOverRules } from "../../../../assets";
 import CardResultBox from "../../../commonComponent/cardResultBox";
 import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
 import Dragon20Result from "./dragonCard";
@@ -113,7 +113,7 @@ const SuperOverComponent = () => {
             </div>
           </div>
 
-          <RulesModal show={show} setShow={setShow} rule={card32rules} />
+          <RulesModal show={show} setShow={setShow} rule={superOverRules} />
         </Col>
         <Col md={4}>
           <Container className="p-0" fluid ref={placeBetRef}>
