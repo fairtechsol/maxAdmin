@@ -4,8 +4,8 @@ const ScoreCard = () => {
   return (
     <>
       <BetTableHeader
-        title="Score Board"
-        customClass="fw-normal"
+        title="Scoreboard"
+        customClass="fw-semibold"
         style={{ height: "33px" }}
       />
     </>

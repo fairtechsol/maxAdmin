@@ -34,13 +34,17 @@ const UserBets = ({ matchId }: any) => {
                   </Nav.Item>
                   <Nav.Item>
                     <Nav.Link className="rounded-0" eventKey="second">
-                      unmatched
+                      Unmatched
                     </Nav.Link>
                   </Nav.Item>
                 </Nav>
               </div>
               <div className="userBets-headerRight">
-                <Button variant="secondary" onClick={() => setShowModal(true)}>
+                <Button
+                  variant="secondary"
+                  onClick={() => setShowModal(true)}
+                  style={{ height: "100%" }}
+                >
                   View More
                 </Button>
               </div>
@@ -142,7 +146,7 @@ const UserBets = ({ matchId }: any) => {
                   </Table>
                 </Tab.Pane>
                 <Tab.Pane eventKey="second">
-                  <Table striped bordered>
+                  <Table className="coupon-table" striped bordered>
                     <thead>
                       <tr>
                         <th>UserName</th>

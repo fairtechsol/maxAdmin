@@ -14,7 +14,7 @@ import {
 import CardResultBox from "../../../commonComponent/cardResultBox";
 import UserBets from "../../../game/userBet";
 import RulesModal from "../../../commonComponent/rulesModal";
-import { tprules } from "../../../../assets";
+import { warRules } from "../../../../assets";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
 import CasinoWarCard from "./casinoWarCard";
 
@@ -232,7 +232,7 @@ const CasinoWarComponent = () => {
                           <div
                             key={player.sid}
                             className={`teenPatti-table-item ${
-                              player.gstatus === "0" ? "suspended" : ""
+                              player.gstatus === "0" ? "locked" : ""
                             }`}
                             style={{ width: "16.7%" }}
                           >
@@ -255,6 +255,10 @@ const CasinoWarComponent = () => {
                                     : ""
                                   : ""
                               }`}
+                              style={{
+                                marginTop: player.gstatus === "0" ? "15px" : "",
+                                zIndex: "100",
+                              }}
                             >
                               {dragonTigerDetail?.profitLoss
                                 ? dragonTigerDetail?.profitLoss[
@@ -320,7 +324,7 @@ const CasinoWarComponent = () => {
                     </tbody>
                   </Table>
                 </div> */}
-                <RulesModal show={show} setShow={setShow} rule={tprules} />
+                <RulesModal show={show} setShow={setShow} rule={warRules} />
               </Col>
             </Row>
           </Container>

@@ -70,3 +70,5 @@ export { default as s4 } from "./superOver/4.webp";
 export { default as s6 } from "./superOver/6.webp";
 export { default as crick5rules } from "./sportCasino/cricketv3.webp";
 export { default as MaxBet07Logo } from "./images/MAXBET07LOGO.png";
+export { default as warRules } from "./casinowar/war.jpg";
+export { default as superOverRules } from "./superOver/superoverRules.webp";

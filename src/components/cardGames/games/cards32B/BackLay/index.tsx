@@ -39,7 +39,7 @@ const BackLay = ({ matchOddsData, data }: any) => {
       <div
         style={{
           width: "100%",
-          marginTop: "5%",
+          // marginTop: "5%",
           display: "flex",
           flexDirection: "column",
           border: "0.3px solid #c7c8ca",
