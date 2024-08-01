@@ -151,7 +151,7 @@ const Poker1DayComponent = () => {
               }}
             >
               <Col md={12}>
-                <UserBets />
+                <UserBets matchId={dragonTigerDetail?.id} />
               </Col>
               <Col
                 xs={12}

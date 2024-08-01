@@ -36,12 +36,13 @@ const options = [
 const GeneralReport = () => {
   const dispatch: AppDispatch = useDispatch();
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
   const [selectType, setSelectType] = useState({
     value: "balance",
     label: "General Report",
   });
 
-  useEffect(() => { }, [tableConfig]);
+  useEffect(() => {}, [tableConfig]);
 
   const handleType = (type: any) => {
     setSelectType(type);
@@ -102,6 +103,8 @@ const GeneralReport = () => {
         itemCount={gameGeneralList?.usersData?.length}
         setTableConfig={setTableConfig}
         enablePdfExcel={false}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
       >
         {gameGeneralList && gameGeneralList?.usersData?.length === 0 && (
           <tr>No data available in table </tr>
@@ -128,7 +131,11 @@ const GeneralReport = () => {
           <td>General Total</td>
           <td>
             {gameGeneralList?.usersData?.reduce((acc: any, user: any) => {
-              return acc + (user?.userBal?.currentBalance || 0) + (user?.creditRefrence || 0);
+              return (
+                acc +
+                (user?.userBal?.currentBalance || 0) +
+                (user?.creditRefrence || 0)
+              );
             }, 0)}
           </td>
         </tr>

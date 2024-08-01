@@ -62,6 +62,7 @@ const AccountStatement = () => {
   const [userOptions, setUserOptions] = useState([]);
   const [keyword, setKeyword] = useState<any>("");
   const [page, setPage] = useState<any>(1);
+  const [currentPage, setCurrentPage] = useState(1);
   const [rowPerPage, setRowPerPage] = useState<any>(10);
   const [sort, setSort] = useState({
     direction: "ASC",
@@ -195,6 +196,7 @@ const AccountStatement = () => {
           filter += `&description=like%${gameNameValues?.value}/%`;
         }
       }
+      setCurrentPage(1);
       dispatch(
         getReportAccountList({
           id: selectedUser
@@ -476,6 +478,8 @@ const AccountStatement = () => {
         enablePdfExcel={true}
         handleReportExport={handleReportExport}
         tableConfig={tableConfig}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
       >
         {ReportAccountList?.transactions?.map((item: any) => {
           const {

@@ -16,6 +16,7 @@ const AccountStatementModal = ({ item }: any) => {
   const dispatch: AppDispatch = useDispatch();
 
   const [selectedOption, setSelectedOption] = useState("all");
+  const [currentPage, setCurrentPage] = useState(1);
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
   useEffect(() => {}, [tableConfig]);
   const columns: Column[] = [
@@ -154,6 +155,8 @@ const AccountStatementModal = ({ item }: any) => {
             columns={columns}
             itemCount={10}
             setTableConfig={setTableConfig}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
           >
             {betAccountStatementModal &&
               betAccountStatementModal?.rows?.map(
@@ -176,32 +179,44 @@ const AccountStatementModal = ({ item }: any) => {
                   return (
                     <tr key={index}>
                       <td
-                        className={`${betType === "BACK" ? "bg-blue3" : "bg-red1"}`}
+                        className={`${
+                          betType === "BACK" ? "bg-blue3" : "bg-red1"
+                        }`}
                       >
                         {user?.createBy?.userName}
                       </td>
                       <td
-                        className={`${betType === "BACK" ? "bg-blue3" : "bg-red1"}`}
+                        className={`${
+                          betType === "BACK" ? "bg-blue3" : "bg-red1"
+                        }`}
                       >
                         {user?.userName}
                       </td>
                       <td
-                        className={`${betType === "BACK" ? "bg-blue3" : "bg-red1"}`}
+                        className={`${
+                          betType === "BACK" ? "bg-blue3" : "bg-red1"
+                        }`}
                       >
                         {teamName}
                       </td>
                       <td
-                        className={`${betType === "BACK" ? "bg-blue3" : "bg-red1"}`}
+                        className={`${
+                          betType === "BACK" ? "bg-blue3" : "bg-red1"
+                        }`}
                       >
                         {odds}
                       </td>
                       <td
-                        className={`${betType === "BACK" ? "bg-blue3" : "bg-red1"}`}
+                        className={`${
+                          betType === "BACK" ? "bg-blue3" : "bg-red1"
+                        }`}
                       >
                         {amount}
                       </td>
                       <td
-                        className={`${betType === "BACK" ? "bg-blue3" : "bg-red1"}`}
+                        className={`${
+                          betType === "BACK" ? "bg-blue3" : "bg-red1"
+                        }`}
                         style={{
                           color:
                             result === "LOSS"
@@ -218,12 +233,16 @@ const AccountStatementModal = ({ item }: any) => {
                           : 0}
                       </td>
                       <td
-                        className={`${betType === "BACK" ? "bg-blue3" : "bg-red1"}`}
+                        className={`${
+                          betType === "BACK" ? "bg-blue3" : "bg-red1"
+                        }`}
                       >
                         {moment(createdAt).format("YYYY-MM-DD hh:mm:ss")}
                       </td>
                       <td
-                        className={`${betType === "BACK" ? "bg-blue3" : "bg-red1"}`}
+                        className={`${
+                          betType === "BACK" ? "bg-blue3" : "bg-red1"
+                        }`}
                       >
                         {match
                           ? moment(match?.startAt).format("YYYY-MM-DD hh:mm:ss")
@@ -234,12 +253,16 @@ const AccountStatementModal = ({ item }: any) => {
                           : moment(createdAt).format("YYYY-MM-DD hh:mm:ss")}
                       </td>
                       <td
-                        className={`${betType === "BACK" ? "bg-blue3" : "bg-red1"}`}
+                        className={`${
+                          betType === "BACK" ? "bg-blue3" : "bg-red1"
+                        }`}
                       >
                         {ipAddress}
                       </td>
                       <td
-                        className={`${betType === "BACK" ? "bg-blue3" : "bg-red1"}`}
+                        className={`${
+                          betType === "BACK" ? "bg-blue3" : "bg-red1"
+                        }`}
                       >
                         <TooltipCustom title={browserDetail}>
                           <a href="#" title="">

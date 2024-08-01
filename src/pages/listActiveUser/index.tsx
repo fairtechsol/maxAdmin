@@ -37,7 +37,7 @@ const ListActiveInactiveUser: React.FC = () => {
   const navigate = useNavigate();
   const { id, type } = useParams();
   const dispatch: AppDispatch = useDispatch();
-
+  const [currentPage, setCurrentPage] = useState(1);
   const [tableConfig, setTableConfig] = useState<any>({
     keyword: "",
     page: 1,
@@ -144,7 +144,7 @@ const ListActiveInactiveUser: React.FC = () => {
           sort: sort?.key || "",
           order: sort?.direction || "DESC",
           name: "Users List",
-          searchBy: "user.userName"
+          searchBy: "user.userName",
         })
       );
     }
@@ -256,6 +256,8 @@ const ListActiveInactiveUser: React.FC = () => {
                     sortData={sortData}
                     handleReportExport={handleReportExport}
                     tableConfig={tableConfig}
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
                   >
                     <tr>
                       {columns?.map((item, index) => {
@@ -491,6 +493,8 @@ const ListActiveInactiveUser: React.FC = () => {
                     sortData={sortData}
                     handleReportExport={handleReportExport}
                     tableConfig={tableConfig}
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
                   >
                     <tr>
                       {columns?.map((item, index) => {

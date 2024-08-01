@@ -46,6 +46,7 @@ const secondOptions = [{ value: "all", label: "All" }];
 const GameReport = () => {
   const dispatch: AppDispatch = useDispatch();
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
   const [dateFrom, setDateFrom] = useState<any>();
   const [dateTo, setDateTo] = useState<any>();
 
@@ -162,6 +163,8 @@ const GameReport = () => {
         }
         setTableConfig={setTableConfig}
         enablePdfExcel={false}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
       >
         {gameReportList && gameReportList?.count === 0 && (
           <tr>No data available in table </tr>

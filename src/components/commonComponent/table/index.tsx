@@ -31,6 +31,8 @@ interface CustomTableProps extends React.HTMLAttributes<HTMLDivElement> {
   sortData?: any;
   handleReportExport?: any;
   tableConfig?: any;
+  currentPage: any;
+  setCurrentPage: any;
 }
 
 const CustomTable: React.FC<CustomTableProps> = ({
@@ -49,6 +51,8 @@ const CustomTable: React.FC<CustomTableProps> = ({
   sortData,
   handleReportExport,
   tableConfig,
+  currentPage,
+  setCurrentPage,
   ...props
 }) => {
   // State for sorting configuration and current page
@@ -56,7 +60,7 @@ const CustomTable: React.FC<CustomTableProps> = ({
     direction: "ASC",
     key: null,
   });
-  const [currentPage, setCurrentPage] = useState(1);
+
   const [rowPerPage, setRowPerPage] = useState(10);
 
   // Handle column click to change the sorting configuration

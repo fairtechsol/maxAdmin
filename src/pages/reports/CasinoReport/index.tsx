@@ -37,7 +37,7 @@ const options = [
 
 const CasinoReport = () => {
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
-
+  const [currentPage, setCurrentPage] = useState(1);
   useEffect(() => {}, [tableConfig]);
   return (
     <div className="p-2 pt-0">
@@ -84,6 +84,8 @@ const CasinoReport = () => {
         setTableConfig={setTableConfig}
         enablePdfExcel={false}
         tableConfig={tableConfig}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
       >
         {data?.length === 0 && <tr>No data available in table </tr>}
         {data?.length > 0 &&

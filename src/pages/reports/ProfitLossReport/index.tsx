@@ -35,6 +35,7 @@ const ProfitLossReport = () => {
     rowPerPage: 10,
     keyword: "",
   });
+  const [currentPage, setCurrentPage] = useState(1);
   const [keyword, setKeyword] = useState<any>("");
   const [page, setPage] = useState<any>(1);
   const [rowPerPage, setRowPerPage] = useState<any>(10);
@@ -117,8 +118,6 @@ const ProfitLossReport = () => {
     }
   }, [tableConfig]);
 
-  console.log(selectedUser);
-
   const handleSubmit = (e: any) => {
     e.preventDefault();
     let payload: any = {
@@ -136,6 +135,7 @@ const ProfitLossReport = () => {
     if (selectedUser[0]?.value) {
       payload.userId = selectedUser[0].value;
     }
+    setCurrentPage(1);
     dispatch(getProfitLossReport(payload));
   };
 
@@ -222,6 +222,8 @@ const ProfitLossReport = () => {
         setTableConfig={setTableConfig}
         enablePdfExcel={false}
         tableConfig={tableConfig}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
       >
         {profitLossReport && profitLossReport?.result?.length === 0 && (
           <tr>No data available in table </tr>

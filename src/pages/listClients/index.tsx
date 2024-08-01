@@ -33,6 +33,7 @@ const ListClent: React.FC = () => {
   const { id, type } = useParams();
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
+  const [currentPage, setCurrentPage] = useState(1);
   const [keyWord, setKeyWord] = useState<any>("");
   const [tableConfig, setTableConfig] = useState<TableConfig | null>({
     page: 1,
@@ -163,6 +164,8 @@ const ListClent: React.FC = () => {
               handleReportExport={handleReportExport}
               tableConfig={tableConfig}
               // isSort={true}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
             >
               <tr>
                 {columns?.map((item, index) => {
