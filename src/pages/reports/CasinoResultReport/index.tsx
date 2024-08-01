@@ -28,6 +28,7 @@ const CasinoResultReport = () => {
   const dispatch: AppDispatch = useDispatch();
   const { state } = useLocation();
   const [casinoModalShow, setCasinoModalShow] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
   const [date, setDate] = useState<any>(
     moment(new Date()).format("YYYY-MM-DD")
@@ -50,7 +51,7 @@ const CasinoResultReport = () => {
       if (date) {
         filter += `&DATE(cardResult.createdAt)=${date}`;
       }
-
+      setCurrentPage(1);
       dispatch(
         getCardReport({
           type: type
@@ -58,7 +59,7 @@ const CasinoResultReport = () => {
             : typeFromState
             ? typeFromState.value
             : "teen20",
-          page: tableConfig?.page,
+          page: 1,
           limit: tableConfig?.rowPerPage,
           searchBy: "cardResult.result ->> 'mid'",
           keyword: tableConfig?.keyword || "",
@@ -172,6 +173,8 @@ const CasinoResultReport = () => {
         setTableConfig={setTableConfig}
         enablePdfExcel={false}
         tableConfig={tableConfig}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
       >
         {casinoResultReport && casinoResultReport?.count === 0 && (
           <tr>No data available in table </tr>

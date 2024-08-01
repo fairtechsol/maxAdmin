@@ -44,6 +44,7 @@ const CurrentBets = () => {
     rowPerPage: 10,
     keyword: "",
   });
+  const [currentPage, setCurrentPage] = useState(1);
   const [keyword, setKeyword] = useState<any>("");
   const [page, setPage] = useState<any>(1);
   const [rowPerPage, setRowPerPage] = useState<any>(10);
@@ -92,8 +93,10 @@ const CurrentBets = () => {
           keyword: keyword || "",
         })
       );
+      setCurrentPage(1);
     } else if (selectType?.value === "UNMATCHED") {
       dispatch(betReportAccountListReset());
+      setCurrentPage(1);
     }
   };
 
@@ -115,7 +118,7 @@ const CurrentBets = () => {
     }
   }, [tableConfig]);
   const getStartAt = (item: any) => {
-    return item?.match?.startAt || item?.racingMatch?.startAt ;
+    return item?.match?.startAt || item?.racingMatch?.startAt;
   };
   return (
     <div className="p-2 pt-0">
@@ -151,6 +154,8 @@ const CurrentBets = () => {
         setTableConfig={setTableConfig}
         enablePdfExcel={false}
         tableConfig={tableConfig}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
       >
         {ReportBetList && ReportBetList?.count === 0 && (
           <tr>
@@ -170,16 +175,16 @@ const CurrentBets = () => {
             <tr key={index}>
               {columns.map((column, index: number) => (
                 <td key={index}>
-                {column?.id === "createdAt"
-                  ? moment(_.get(item, column?.id))
-                      .tz(timezone)
-                      .format("YYYY-MMM-DD h:mmA [IST]")
-                  : column?.id === "startAt"
-                  ? moment(getStartAt(item))
-                      .tz(timezone)
-                      .format("YYYY-MMM-DD h:mmA [IST]")
-                  : _.get(item, column?.id)}
-              </td>
+                  {column?.id === "createdAt"
+                    ? moment(_.get(item, column?.id))
+                        .tz(timezone)
+                        .format("YYYY-MMM-DD h:mmA [IST]")
+                    : column?.id === "startAt"
+                    ? moment(getStartAt(item))
+                        .tz(timezone)
+                        .format("YYYY-MMM-DD h:mmA [IST]")
+                    : _.get(item, column?.id)}
+                </td>
               ))}
             </tr>
           ))}

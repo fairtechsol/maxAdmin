@@ -9,7 +9,7 @@ import TooltipCustom from "../../../reports/modals/accountStatement/tooltip";
 
 function UserBetModalTable() {
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
-
+  const [currentPage, setCurrentPage] = useState(1);
   const { morePlacedBets } = useSelector(
     (state: RootState) => state.match.placeBets
   );
@@ -37,9 +37,13 @@ function UserBetModalTable() {
         tHeadTheme=""
         customClass=""
         CustomTableClass=""
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
       >
         {morePlacedBets?.length === 0 && (
-          <tr className="text-center">No Record Found!</tr>
+          <tr className="text-center">
+            <td colSpan={10}>No Record Found!</td>
+          </tr>
         )}
         {morePlacedBets?.length > 0 &&
           morePlacedBets?.map((item: any, index: number) => {

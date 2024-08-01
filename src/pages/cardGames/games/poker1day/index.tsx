@@ -34,7 +34,7 @@ const Poker1day = () => {
 
   const handleBetPlacedOnDT20 = (event: any) => {
     if (event?.jobData?.matchType === cardGamesType.poker1Day) {
-      dispatch(updateBetsPlaced(event?.jobData?.newBet));
+      dispatch(updateBetsPlaced(event?.jobData));
       dispatch(updateBalanceOnBetPlaceCards(event?.jobData));
       dispatch(updateProfitLossCards(event?.userRedisObj));
     }
@@ -70,7 +70,7 @@ const Poker1day = () => {
     } catch (error) {
       console.log(error);
     }
-  }, [socket, dragonTigerDetail]);
+  }, [socket, dragonTigerDetail?.id]);
 
   useEffect(() => {
     return () => {

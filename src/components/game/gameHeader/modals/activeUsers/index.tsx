@@ -12,6 +12,7 @@ const ActiveUser = (props: any) => {
   const { type } = props;
   const { id } = useParams();
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
   const [check, setCheck] = useState(false);
   const dispatch: AppDispatch = useDispatch();
   const { matchLockAllChild } = useSelector(
@@ -33,6 +34,8 @@ const ActiveUser = (props: any) => {
         columns={columns}
         itemCount={10}
         setTableConfig={setTableConfig}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
       >
         {matchLockAllChild &&
           matchLockAllChild?.map((item: any, index: number) => {
