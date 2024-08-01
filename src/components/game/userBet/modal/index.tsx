@@ -41,7 +41,9 @@ function UserBetModalTable() {
         setCurrentPage={setCurrentPage}
       >
         {morePlacedBets?.length === 0 && (
-          <tr className="text-center">No Record Found!</tr>
+          <tr className="text-center">
+            <td colSpan={10}>No Record Found!</td>
+          </tr>
         )}
         {morePlacedBets?.length > 0 &&
           morePlacedBets?.map((item: any, index: number) => {

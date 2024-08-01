@@ -23,7 +23,9 @@ const TableRunner = ({ runAmount }: any) => {
         setCurrentPage={setCurrentPage}
       >
         {runAmount?.length === 0 && (
-          <tr className="text-center">No Record Found!</tr>
+          <tr className="text-center">
+            <td colSpan={10}>No Record Found!</td>
+          </tr>
         )}
         {runAmount?.length > 0 &&
           runAmount?.map((item: any, index: number) => {
