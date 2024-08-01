@@ -1,10 +1,14 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { Col, Container, Row, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import "./style.scss";
 import { RootState } from "../../../../store/store";
-import { cardGamesId, cardGamesType, cardUrl } from "../../../../utils/Constants";
+import {
+  cardGamesId,
+  cardGamesType,
+  cardUrl,
+} from "../../../../utils/Constants";
 import { handleRoundId } from "../../../../helpers";
 import RulesModal from "../../../commonComponent/rulesModal";
 import { tprules } from "../../../../assets";
@@ -14,25 +18,8 @@ import TeenPattiTableRow from "./tableRow";
 import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
 import TeenOpenResult from "./teenCard";
 const TeenPattiOpenComponent = () => {
-  const placeBetRef = useRef<HTMLDivElement>(null);
-  const [isSticky, setIsSticky] = useState(false);
   const [show, setShow] = useState(false);
   const { dragonTigerDetail } = useSelector((state: RootState) => state.card);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (placeBetRef?.current && placeBetRef?.current?.offsetTop) {
-        const sticky = placeBetRef?.current.offsetTop;
-        setIsSticky(window.scrollY > sticky);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
 
   const rules = [
     { label: "Pair (Double)", value: "1 To 1" },
@@ -175,15 +162,8 @@ const TeenPattiOpenComponent = () => {
           </div>
         </Col>
         <Col md={4} className="ps-0">
-          <Container className="p-0" fluid ref={placeBetRef}>
-            <Row
-              className={` ${isSticky ? "position-fixed top-0" : ""}`}
-              style={{
-                width: isSticky
-                  ? placeBetRef.current?.offsetWidth + "px"
-                  : "100%",
-              }}
-            >
+          <Container className="p-0" fluid>
+            <Row>
               <Col md={12}>
                 <UserBets matchId={dragonTigerDetail?.id} />
               </Col>

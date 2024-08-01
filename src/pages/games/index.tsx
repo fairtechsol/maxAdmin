@@ -284,19 +284,6 @@ const Games = () => {
                 <ScoreCard />
               </div>
               <UserBets matchId={id} />
-              {/* <BetTableHeader
-                customClass="mt-2 fw-normal"
-                title="Rules"
-                style={{ height: "39px" }}
-              />
-              <Row>
-                <Col lg={6}>
-                  <Rules teamName="Banglore XI" />
-                </Col>
-                <Col lg={6}>
-                  <Rules teamName="Rajasthan XI" />
-                </Col>
-              </Row> */}
             </Col>
           </Row>
         </div>
