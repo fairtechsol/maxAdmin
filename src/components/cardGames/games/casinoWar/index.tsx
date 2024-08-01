@@ -1,5 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import "./style.scss";
@@ -19,25 +19,8 @@ import { HandleCards } from "../../../commonComponent/cardsComponent";
 import CasinoWarCard from "./casinoWarCard";
 
 const CasinoWarComponent = () => {
-  const placeBetRef = useRef<HTMLDivElement>(null);
-  const [isSticky, setIsSticky] = useState(false);
   const [show, setShow] = useState(false);
   const { dragonTigerDetail } = useSelector((state: RootState) => state.card);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (placeBetRef?.current && placeBetRef?.current?.offsetTop) {
-        const sticky = placeBetRef?.current.offsetTop;
-        setIsSticky(window.scrollY > sticky);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
 
   // const rules = [
   //   { label: "Pair (Double)", value: "1 To 1" },
@@ -289,15 +272,8 @@ const CasinoWarComponent = () => {
           </div>
         </Col>
         <Col md={4} className="ps-0">
-          <Container className="p-0" fluid ref={placeBetRef}>
-            <Row
-              className={` ${isSticky ? "position-fixed top-0" : ""}`}
-              style={{
-                width: isSticky
-                  ? placeBetRef.current?.offsetWidth + "px"
-                  : "100%",
-              }}
-            >
+          <Container className="p-0" fluid>
+            <Row>
               <Col md={12}>
                 <UserBets matchId={dragonTigerDetail?.id} />
               </Col>

@@ -1,10 +1,14 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import "./style.scss";
 import { RootState } from "../../../../store/store";
 import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
-import { cardGamesId, cardGamesType, cardUrl } from "../../../../utils/Constants";
+import {
+  cardGamesId,
+  cardGamesType,
+  cardUrl,
+} from "../../../../utils/Constants";
 import RulesModal from "../../../commonComponent/rulesModal";
 import { card32rules } from "../../../../assets";
 import CardResultBox from "../../../commonComponent/cardResultBox";
@@ -14,9 +18,7 @@ import UserBets from "../../../game/userBet";
 import Card32Result from "./card32Card";
 
 const Cards32AComponent = () => {
-  const placeBetRef = useRef<HTMLDivElement>(null);
   const [show, setShow] = useState(false);
-  const [isSticky] = useState(false);
   const { dragonTigerDetail } = useSelector((state: RootState) => state.card);
   return (
     <div>
@@ -82,15 +84,8 @@ const Cards32AComponent = () => {
           <RulesModal show={show} setShow={setShow} rule={card32rules} />
         </Col>
         <Col md={4}>
-          <Container className="p-0" fluid ref={placeBetRef}>
-            <Row
-              className={` ${isSticky ? "position-fixed top-0" : ""}`}
-              style={{
-                width: isSticky
-                  ? placeBetRef.current?.offsetWidth + "px"
-                  : "100%",
-              }}
-            >
+          <Container className="p-0" fluid>
+            <Row>
               <Col md={12}>
                 <UserBets matchId={dragonTigerDetail?.id} />
               </Col>

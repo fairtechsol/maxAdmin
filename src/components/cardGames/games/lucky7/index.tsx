@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import VideoFrame from "../../../../components/commonComponent/videoFrame/VideoFrame";
 import TiePairBox from "../../../../components/cardGames/games/lucky7/TiePairBox";
@@ -21,7 +21,6 @@ import CardBox from "./CardsBox";
 
 const Lucky7Component = () => {
   const [show, setShow] = useState(false);
-  const placeBetRef = useRef<HTMLDivElement>(null);
 
   const { dragonTigerDetail } = useSelector((state: RootState) => state.card);
 
@@ -124,15 +123,8 @@ const Lucky7Component = () => {
           </div>
         </Col>
         <Col md={4}>
-          <Container className="p-0" fluid ref={placeBetRef}>
-            <Row
-            // className={` ${isSticky ? "position-fixed top-0" : ""}`}
-            // style={{
-            //   width: isSticky
-            //     ? placeBetRef.current?.offsetWidth + "px"
-            //     : "100%",
-            // }}
-            >
+          <Container className="p-0" fluid>
+            <Row>
               <Col md={12}>
                 <UserBets matchId={dragonTigerDetail?.id} />
               </Col>

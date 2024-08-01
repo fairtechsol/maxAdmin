@@ -1,12 +1,16 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../store/store";
 import UserBets from "../../../game/userBet";
 import { handleRoundId } from "../../../../helpers";
 import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
-import { cardGamesId, cardGamesType, cardUrl } from "../../../../utils/Constants";
+import {
+  cardGamesId,
+  cardGamesType,
+  cardUrl,
+} from "../../../../utils/Constants";
 import SBetBox from "./Sbox";
 import OddEven from "./OddEvenBox";
 import CardBox from "./CardsBox";
@@ -17,8 +21,6 @@ import Abj2Result from "./abj2Card";
 
 const Abj2Component = () => {
   const [show, setShow] = useState(false);
-  const placeBetRef = useRef<HTMLDivElement>(null);
-  const [isSticky] = useState(false);
   const { dragonTigerDetail } = useSelector((state: RootState) => state.card);
   return (
     <div>
@@ -115,22 +117,19 @@ const Abj2Component = () => {
                 />
               </div>
               <div style={{ width: "100%", margin: "5px" }}>
-                <CardResultBox data={dragonTigerDetail} name={["A", "B"]} type={cardGamesType.andarBahar2}/>
+                <CardResultBox
+                  data={dragonTigerDetail}
+                  name={["A", "B"]}
+                  type={cardGamesType.andarBahar2}
+                />
               </div>
             </div>
             <RulesModal show={show} setShow={setShow} rule={abjrules} />
           </div>
         </Col>
         <Col md={4}>
-          <Container className="p-0" fluid ref={placeBetRef}>
-            <Row
-              className={` ${isSticky ? "position-fixed top-0" : ""}`}
-              style={{
-                width: isSticky
-                  ? placeBetRef.current?.offsetWidth + "px"
-                  : "100%",
-              }}
-            >
+          <Container className="p-0" fluid>
+            <Row>
               <Col md={12}>
                 <UserBets matchId={dragonTigerDetail?.id} />
               </Col>

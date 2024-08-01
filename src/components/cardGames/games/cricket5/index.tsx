@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { Col, Container, Row, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import "./style.scss";
@@ -20,28 +20,11 @@ import { crick5rules } from "../../../../assets";
 import ScoreBoard from "../../../commonComponent/scoreBoard";
 
 const Cricket5Component = () => {
-  const placeBetRef = useRef<HTMLDivElement>(null);
   const [show, setShow] = useState(false);
-  const [isSticky, setIsSticky] = useState(false);
 
   const { dragonTigerDetail, scoreBoardData } = useSelector(
     (state: RootState) => state.card
   );
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (placeBetRef?.current && placeBetRef?.current?.offsetTop) {
-        const sticky = placeBetRef?.current.offsetTop;
-        setIsSticky(window.scrollY > sticky);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
 
   return (
     <>
@@ -109,15 +92,8 @@ const Cricket5Component = () => {
           </div>
         </Col>
         <Col md={4}>
-          <Container className="p-0" fluid ref={placeBetRef}>
-            <Row
-              className={` ${isSticky ? "position-fixed top-0" : ""}`}
-              style={{
-                width: isSticky
-                  ? placeBetRef.current?.offsetWidth + "px"
-                  : "100%",
-              }}
-            >
+          <Container className="p-0" fluid>
+            <Row>
               <Col md={12}>
                 <UserBets matchId={dragonTigerDetail?.id} />
               </Col>

@@ -4,18 +4,20 @@ import RulesModal from "../../../commonComponent/rulesModal";
 import { tprules } from "../../../../assets";
 import { RootState } from "../../../../store/store";
 import { useSelector } from "react-redux";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { handleRoundId } from "../../../../helpers";
 import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
-import { cardGamesId, cardGamesType, cardUrl } from "../../../../utils/Constants";
+import {
+  cardGamesId,
+  cardGamesType,
+  cardUrl,
+} from "../../../../utils/Constants";
 import Teen20Result from "./teenCard";
 import CardResultBox from "../../../commonComponent/cardResultBox";
 import UserBets from "../../../game/userBet";
 import "./style.scss";
 
 const TeentPatti2020Component = () => {
-  const placeBetRef = useRef<HTMLDivElement>(null);
-  const [isSticky] = useState(false);
   const [show, setShow] = useState(false);
   const { dragonTigerDetail } = useSelector((state: RootState) => state.card);
 
@@ -312,20 +314,17 @@ const TeentPatti2020Component = () => {
               </div>
             </div>
             <div style={{ width: "100%", marginTop: "10px" }}>
-              <CardResultBox data={dragonTigerDetail} name={["A", "T", "B"]} type={cardGamesType.teen20}/>
+              <CardResultBox
+                data={dragonTigerDetail}
+                name={["A", "T", "B"]}
+                type={cardGamesType.teen20}
+              />
             </div>
           </div>
         </Col>
         <Col md={4} className="ps-0">
-          <Container className="p-0" fluid ref={placeBetRef}>
-            <Row
-              className={` ${isSticky ? "position-fixed top-0" : ""}`}
-              style={{
-                width: isSticky
-                  ? placeBetRef.current?.offsetWidth + "px"
-                  : "100%",
-              }}
-            >
+          <Container className="p-0" fluid>
+            <Row>
               <Col md={12}>
                 <UserBets matchId={dragonTigerDetail?.id} />
               </Col>

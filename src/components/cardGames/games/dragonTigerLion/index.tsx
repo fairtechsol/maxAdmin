@@ -1,5 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { IoInformationCircle } from "react-icons/io5";
 import { useSelector } from "react-redux";
@@ -156,27 +156,10 @@ const DragonTigerDesktop = () => {
   const [firstArr, setFirstArr] = useState(data1);
   const [secondArr, setSecondArr] = useState(data2);
   const { dragonTigerDetail } = useSelector((state: RootState) => state.card);
-  const placeBetRef = useRef<HTMLDivElement>(null);
-  const [isSticky, setIsSticky] = useState(false);
   const [openModalIndex, setOpenModalIndex] = useState(null);
   const handleModalOpen = (index: any) => {
     setOpenModalIndex(openModalIndex === index ? null : index);
   };
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (placeBetRef?.current && placeBetRef?.current?.offsetTop) {
-        const sticky = placeBetRef?.current.offsetTop;
-        setIsSticky(window.scrollY > sticky);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
 
   useEffect(() => {
     const mergedArray = data1?.map((item1: any) => {
@@ -604,15 +587,8 @@ const DragonTigerDesktop = () => {
           <RulesModal show={show} setShow={setShow} rule={dtrules} />
         </Col>
         <Col md={4}>
-          <Container className="p-0" fluid ref={placeBetRef}>
-            <Row
-              className={` ${isSticky ? "position-fixed top-0" : ""}`}
-              style={{
-                width: isSticky
-                  ? placeBetRef.current?.offsetWidth + "px"
-                  : "100%",
-              }}
-            >
+          <Container className="p-0" fluid>
+            <Row>
               <Col md={12}>
                 <UserBets matchId={dragonTigerDetail?.id} />
               </Col>
