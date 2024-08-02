@@ -115,6 +115,7 @@ const reportListSlice = createSlice({
       .addCase(getBetAccountStatementModal.pending, (state) => {
         state.loading = false;
         state.error = null;
+        state.betAccountStatementModal = null;
       })
       .addCase(getBetAccountStatementModal.fulfilled, (state, action) => {
         state.betAccountStatementModal = action.payload;

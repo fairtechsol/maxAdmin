@@ -158,6 +158,13 @@ const AccountStatementModal = ({ item }: any) => {
             currentPage={currentPage}
             setCurrentPage={setCurrentPage}
           >
+            {!betAccountStatementModal && (
+              <tr>
+                <td colSpan={10} style={{ textAlign: "center" }}>
+                  No Record Found
+                </td>
+              </tr>
+            )}
             {betAccountStatementModal &&
               betAccountStatementModal?.rows?.map(
                 (item: any, index: number) => {
