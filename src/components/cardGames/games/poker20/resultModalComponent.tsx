@@ -1,6 +1,7 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 import { FaTrophy } from "react-icons/fa";
+import "./style.scss";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
 interface Props {
   data: {
@@ -88,20 +89,41 @@ const Poker20ResultComponent: React.FC<Props> = ({ data }: any) => {
         style={{
           width: "80%",
           display: "flex",
-          flexDirection: "row",
+          flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
           gap: "5px",
           marginBottom: "10px",
         }}
       >
-        {lastCards?.map((item: any, index: number) => {
-          return (
-            <div key={index}>
-              <HandleCards card={item} />
-            </div>
-          );
-        })}
+        <div
+          style={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <span className="title-18 f500">Board</span>
+        </div>
+        <div
+          style={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "5px",
+            marginBottom: "10px",
+          }}
+        >
+          {lastCards?.map((item: any, index: number) => {
+            return (
+              <div key={index}>
+                <HandleCards card={item} />
+              </div>
+            );
+          })}
+        </div>
       </div>
     </Container>
   );
