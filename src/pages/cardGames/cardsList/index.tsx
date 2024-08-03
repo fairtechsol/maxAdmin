@@ -7,12 +7,12 @@ type Card3Keys = keyof typeof card3;
 
 const typeToTitle: { [key: string]: string } = {
   dragonTiger: "DRAGON TIGER",
-  teenPatti: "TEENPATTI",
+  teenPatti: "LIVE TEENPATTI",
   lucky7: "LUCKY7",
   cards32: "CARDS32",
   abj: "ANDAR BAHAR",
   sportCasino: "SPORTS CASINO",
-  poker: "LIVE POKER"
+  poker: "LIVE POKER",
   // Add other mappings as needed
 };
 
@@ -40,7 +40,7 @@ const CardsList = () => {
                     src={item.imgSrc}
                     className="img-fluid"
                     alt={item.name}
-                    style={{ width: '600px', height: '250px' }}
+                    style={{ width: "600px", height: "250px" }}
                   />
                 </NavLink>
               )}

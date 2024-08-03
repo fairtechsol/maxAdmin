@@ -49,6 +49,12 @@ const CardResultBox = ({ data, name, type }: any) => {
               key={item?.mid}
               style={{
                 backgroundColor: type === "race20" ? "#d5d5d5" : "#355e3b",
+                backgroundImage:
+                  type === "cmatch20"
+                    ? `url(https://versionobj.ecoassetsservice.com/v13/static/front/img/balls/cricket20/ball${item?.result}.png)`
+                    : "",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
               }}
               onClick={() => handleResult(item?.mid)}
             >
@@ -148,7 +154,7 @@ const CardResultBox = ({ data, name, type }: any) => {
                       ? name?.[1]
                       : item?.result === "3"
                       ? name?.[2]
-                      : name?.[3]}
+                      : name?.[3]}{" "}
                   </span>
                 </>
               ) : type === "race20" ? (
@@ -172,9 +178,39 @@ const CardResultBox = ({ data, name, type }: any) => {
                       color: item?.result === "0" ? "#ffffff" : "#f5cc03",
                     }}
                   >
-                    {item?.result === "0" ? name?.[0] : item?.result?.[1]}
+                    {item?.result === "0" ? name?.[0] : item?.result?.[1]}{" "}
                   </span>
                 </>
+              ) : type === "cmatch20" ? (
+                <span
+                  style={{
+                    fontSize: "16px",
+                    fontWeight: "600",
+                    color: "#ffff33",
+                  }}
+                >
+                  {/* {item?.result === "1"
+                    ? name?.[0]
+                    : item?.result === "2"
+                    ? name?.[1]
+                    : item?.result === "3"
+                    ? name?.[2]
+                    : item?.result === "4"
+                    ? name?.[3]
+                    : item?.result === "5"
+                    ? name?.[4]
+                    : item?.result === "6"
+                    ? name?.[5]
+                    : item?.result === "7"
+                    ? name?.[6]
+                    : item?.result === "8"
+                    ? name?.[7]
+                    : item?.result === "9"
+                    ? name?.[8]
+                    : item?.result === "10"
+                    ? name?.[9]
+                    : null} */}
+                </span>
               ) : (
                 <span
                   style={{

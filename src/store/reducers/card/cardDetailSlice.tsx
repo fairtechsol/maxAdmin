@@ -19,6 +19,7 @@ import {
   updateCardRace20Rates,
   updateCardSuperoverRates,
   updateCricket5MatchRates,
+  updateCricketMatch20MatchRates,
   updateDragonTigerLionRates,
   updateDragonTigerOneDayRates,
   updateLiveGameResultTop10,
@@ -26,6 +27,7 @@ import {
   updateTeenPatti1DMatchRates,
   updateTeenPattiMatchRates,
   updateTeenPattiOpenMatchRates,
+  updateTeenPattiTestMatchRates,
 } from "../../actions/card/cardDetail";
 import _ from "lodash";
 
@@ -486,6 +488,47 @@ const cardDetail = createSlice({
             ...state.dragonTigerDetail,
             videoInfo,
             odds,
+          };
+        }
+      })
+      .addCase(updateCricketMatch20MatchRates.fulfilled, (state, action) => {
+        if (action.payload) {
+          const { t1, t2 } = action.payload;
+          state.loading = false;
+          const videoInfo = { ...t1[0] };
+          const leftBoard = t2.slice(0, 5);
+          const rightBoard = t2.slice(5, 9);
+
+          state.dragonTigerDetail = {
+            ...state.dragonTigerDetail,
+            profitLoss:
+              t1[0]?.mid !== 0 ? {} : { ...state.dragonTigerDetail.profitLoss },
+            videoInfo,
+            leftBoard,
+            rightBoard,
+          };
+        }
+      })
+      .addCase(updateTeenPattiTestMatchRates.fulfilled, (state, action) => {
+        if (action.payload) {
+          const { t1, t2 } = action.payload;
+          state.loading = false;
+
+          const videoInfo = { ...t1[0] };
+
+          const sections = [
+            t2.slice(0, 1)[0],
+            t2.slice(1, 2)[0],
+            t2.slice(2, 3)[0],
+            t2.slice(3, 4)[0],
+            t2.slice(4, 5)[0],
+            t2.slice(5, 6)[0],
+          ];
+
+          state.dragonTigerDetail = {
+            ...state.dragonTigerDetail,
+            videoInfo,
+            sections,
           };
         }
       })

@@ -1,9 +1,14 @@
-import { memo } from "react";
+import { memo, useEffect } from "react";
 import FlipClock from "./FlipClock";
 import isMobile from "../../../utils/screenDimension";
 
-const VideoFrame = ({ result, time, id }: any) => {
-  // const [showModal, setModalOpen] = useState(false);
+const VideoFrame = ({ result, time, id, profitLoss }: any) => {
+  useEffect(() => {
+    const element = document.getElementById("middleView-playerDiv");
+    if (element) {
+      element.style.display = "none !important";
+    }
+  }, []);
 
   return (
     <>
@@ -13,37 +18,77 @@ const VideoFrame = ({ result, time, id }: any) => {
           position: "relative",
           display: "flex",
           backgroundColor: "white",
-          // padding: ".1vh",
           flexDirection: "column",
-          // marginY: ".5vh",
           marginTop: "0",
-          // width:  "97%",
-          // marginX: "0px",
           alignSelf: "flex-start",
         }}
       >
         <div>
           <div
             style={{
-              // height: isMobile ? "30vh" : "40vh",
               backgroundColor: "black",
               position: "relative",
             }}
           >
             {result && (
-              <div style={{ position: "absolute", top: "10x" }}>{result}</div>
+              <div style={{ position: "absolute", zIndex: "999" }}>
+                {result}
+              </div>
             )}
-            <div>
+            <div
+              style={
+                isMobile
+                  ? { display: "flex", overflow: "hidden" }
+                  : { position: "relative", width: "100%" }
+              }
+            >
               <iframe
                 width="100%"
-                height={isMobile ? "250" : "380"}
+                height={isMobile ? "250px" : "380px"}
                 src={id}
-                // title="YouTube video player"
-                // frameborder="0"
-                // allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 referrerPolicy={"strict-origin-when-cross-origin"}
-                // allowfullscreen
+                allowFullScreen
               ></iframe>
+              <ol
+                style={{
+                  background: "black",
+                  opacity: "60%",
+                  position: "absolute",
+                  top: isMobile ? "10px" : "20px",
+                  right: isMobile ? "30px" : "45px",
+                  padding: profitLoss ? "10px" : "0px",
+                }}
+              >
+                {profitLoss &&
+                  Object.entries(profitLoss)?.map(([key, value]: any) => (
+                    <li
+                      key={key}
+                      style={{
+                        color: "#fff",
+                        display: "flex",
+                        justifyContent: "space-between",
+                        fontSize: isMobile ? "10px" : "16px",
+                      }}
+                    >
+                      {key}
+                      {"->"}{" "}
+                      <span
+                        style={{
+                          color:
+                            value.pl >= 0
+                              ? "green"
+                              : value.pl < 0
+                              ? "red"
+                              : "white",
+                          textAlign: "end",
+                          fontSize: isMobile ? "10px" : "16px",
+                        }}
+                      >
+                        {value.pl}
+                      </span>
+                    </li>
+                  ))}
+              </ol>
             </div>
             {time && (
               <div
