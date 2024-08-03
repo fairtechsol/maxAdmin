@@ -499,10 +499,16 @@ const cardDetail = createSlice({
           const leftBoard = t2.slice(0, 5);
           const rightBoard = t2.slice(5, 9);
 
+          let newProfitLoss =
+            t1[0]?.mid === 0 ||
+            (t1[0]?.mid !== state.dragonTigerDetail?.videoInfo?.mid &&
+              state.dragonTigerDetail?.videoInfo?.mid !== undefined)
+              ? {}
+              : { ...state.dragonTigerDetail.profitLoss };
+
           state.dragonTigerDetail = {
             ...state.dragonTigerDetail,
-            profitLoss:
-              t1[0]?.mid !== 0 ? {} : { ...state.dragonTigerDetail.profitLoss },
+            profitLoss: newProfitLoss,
             videoInfo,
             leftBoard,
             rightBoard,

@@ -60,7 +60,7 @@ const CricketMatch20Component = () => {
         ]
       );
       setProfitLossData(parsedData);
-    }
+    } else setProfitLossData({});
   }, [dragonTigerDetail]);
 
   return (
