@@ -2,6 +2,7 @@ import { lazy } from "react";
 import { Navigate } from "react-router-dom";
 import MainLayout from "../layout/main";
 import Loadable from "../utils/loadable";
+import TeenPattiTest from "../pages/cardGames/games/teenPattiTest";
 
 // ==============================|| Main ROUTING ||============================== //
 
@@ -76,6 +77,9 @@ const Poker20 = Loadable(
   lazy(() => import("../pages/cardGames/games/poker20"))
 );
 const Poker6 = Loadable(lazy(() => import("../pages/cardGames/games/poker6")));
+const CricketMatch20 = Loadable(
+  lazy(() => import("../pages/cardGames/games/cricketMatch_20"))
+);
 
 const MainRoutes = {
   path: "/admin",
@@ -216,6 +220,14 @@ const MainRoutes = {
     {
       path: "casinoDetail/poker20",
       element: <Poker20 />,
+    },
+    {
+      path: "casinoDetail/teen9",
+      element: <TeenPattiTest />,
+    },
+    {
+      path: "casinoDetail/cmatch20",
+      element: <CricketMatch20 />,
     },
     {
       path: "*",

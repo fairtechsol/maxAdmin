@@ -25,6 +25,8 @@ import CasinoWarResultComponent from "../../cardGames/games/casinoWar/resultModa
 import Poker1DayResultComponent from "../../cardGames/games/poker1Day/resultModalComponent";
 import Poker6ResultComponent from "../../cardGames/games/poker6/resultModalComponent";
 import Poker20ResultComponent from "../../cardGames/games/poker20/resultModalComponent";
+import TeenTestResultComponent from "../../cardGames/games/teenPattiTest/resultModalComponent";
+import CricketMatch20ResultComponent from "../../cardGames/games/cricketMatch_20/resultModalComponent";
 
 interface ResultComponentProps {
   data: any;
@@ -37,7 +39,6 @@ export const ResultComponent: React.FC<ResultComponentProps> = ({
   setfalse,
   type,
 }) => {
-
   return (
     <Container style={{ padding: 0 }}>
       <div className="resultModalHeader d-flex justify-content-between">
@@ -95,6 +96,10 @@ export const ResultComponent: React.FC<ResultComponentProps> = ({
         <Poker6ResultComponent data={data} />
       ) : type === cardGamesType?.poker20 ? (
         <Poker20ResultComponent data={data} />
+      ) : type === cardGamesType?.teenTest ? (
+        <TeenTestResultComponent data={data} />
+      ) : type === cardGamesType?.cmatch20 ? (
+        <CricketMatch20ResultComponent data={data} />
       ) : (
         <></>
       )}

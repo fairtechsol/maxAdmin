@@ -212,6 +212,19 @@ export const updateCardPoker20Rates = createAsyncThunk<any, any>(
     return data;
   }
 );
+export const updateCricketMatch20MatchRates = createAsyncThunk<any, any>(
+  "cricketMatch20/matchRatesUpdate",
+  async (data) => {
+    return data;
+  }
+);
+
+export const updateTeenPattiTestMatchRates = createAsyncThunk<any, any>(
+  "teen9/matchRatesUpdate",
+  async (data) => {
+    return data;
+  }
+);
 
 export const resetScoreBoard = createAction("scoreboard/reset");
 export const resetCardDetail = createAction("cardDetail/reset");

@@ -339,7 +339,7 @@ export const card3 = {
     },
     {
       id: 7,
-      url: "",
+      url: "/admin/casinoDetail/teen9",
       imgSrc: testteen,
       name: "TEST TEENPATTI",
     },
@@ -405,6 +405,13 @@ export const card3 = {
       url: "/admin/casinoDetail/cricketv3",
       imgSrc: crick5,
       name: "5 5 Cricket",
+    },
+    {
+      id: 22,
+      url: "/admin/casinoDetail/cmatch20",
+      imgSrc:
+        "https://dataobj.ecoassetsservice.com/casino-icons/lc/cmatch20.jpg",
+      name: "Cricket Match 20-20",
     },
   ],
   poker: [
@@ -515,6 +522,7 @@ export const cardGamesType: any = {
   poker20: "poker20",
   card3judge: "3cardj",
   cricketv3: "cricketv3",
+  cmatch20: "cmatch20",
 };
 
 export const cardGamesTypeNames: any = {
@@ -575,6 +583,7 @@ export const cardGamesId: any = {
   poker1Day: 3051,
   poker20: 3052,
   cricketv3: 3042,
+  cmatch20: 3045,
 };
 
 export const rulesData = [
@@ -726,6 +735,14 @@ export const cardConstantsAccountStatement = [
     value: "poker20",
     label: "20-20 Poker",
   },
+  {
+    value: "teen9",
+    label: "Test Teen Patti",
+  },
+  {
+    value: "cmatch20",
+    label: "CRICKET MATCH 20-20",
+  },
 ];
 
 export const cardGamesCasinoResult = [
@@ -813,5 +830,13 @@ export const cardGamesCasinoResult = [
   {
     value: "poker20",
     label: "20-20 Poker",
+  },
+  {
+    value: "teen9",
+    label: "Test Teen Patti",
+  },
+  {
+    value: "cmatch20",
+    label: "CRICKET MATCH 20-20",
   },
 ];

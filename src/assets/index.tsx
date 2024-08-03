@@ -72,3 +72,5 @@ export { default as crick5rules } from "./sportCasino/cricketv3.webp";
 export { default as MaxBet07Logo } from "./images/MAXBET07LOGO.png";
 export { default as warRules } from "./casinowar/war.jpg";
 export { default as superOverRules } from "./superOver/superoverRules.webp";
+export { default as crick20rules } from "./cricketMatch_20-20/20-20cricketrules.webp";
+export { default as crick20ScoreBg } from "./cricketMatch_20-20/score-bg.png";
