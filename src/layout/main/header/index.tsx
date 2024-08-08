@@ -267,8 +267,11 @@ const Topbar = (props: any) => {
                         link: "/admin/casino/sportCasino",
                       },
                       { name: "Casino War", link: "/admin/casinoDetail/war" },
-                      { name: "Worli", link: "#6" },
-                      { name: "3 Cards Judgement", link: "" },
+                      { name: "Worli", link: "/admin/casinoDetail/worli2" },
+                      {
+                        name: "3 Cards Judgement",
+                        link: "/admin/casinoDetail/3cardj",
+                      },
                       {
                         name: "32 Cards Casino",
                         link: "/admin/casino/cards32",
@@ -288,7 +291,10 @@ const Topbar = (props: any) => {
                         name: "Dragon Tiger",
                         link: "/admin/casino/dragonTiger",
                       },
-                      { name: "Bollywood Casino", link: "#15" },
+                      {
+                        name: "Bollywood Casino",
+                        link: "/admin/casino/bollywoodCasino",
+                      },
                       { name: "Cricket Casino", link: "#16" },
                     ]}
                   />

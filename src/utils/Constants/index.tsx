@@ -429,6 +429,40 @@ export const card3 = {
       name: "POKER 20 20",
     },
   ],
+  bollywoodCasino: [
+    {
+      id: 23,
+      url: "/aaa",
+      imgSrc:
+        "https://ik.imagekit.io/bmaxmbpyx/https://247maharaja.com/assets/images/game-icon/-1016.webp",
+      name: "AMAR AKHBAR ANTHONY",
+    },
+    {
+      id: 24,
+      url: "/btable",
+      imgSrc:
+        "https://ik.imagekit.io/bmaxmbpyx/https://247maharaja.com/assets/images/game-icon/-1015.webp",
+      name: "BOLLYWOOD TABLE",
+    },
+  ],
+  worli: [
+    {
+      id: 25,
+      url: "/worli2",
+      imgSrc:
+        "https://ik.imagekit.io/bmaxmbpyx/https://247maharaja.com/assets/images/game-icon/-1013.webp",
+      name: "Worli",
+    },
+  ],
+
+  "3cardj": [
+    {
+      id: 26,
+      url: "/3cardj",
+      imgSrc: "https://dataobj.ecoassetsservice.com/casino-icons/lc/3cardj.jpg",
+      name: "3 Cards Judgement",
+    },
+  ],
 };
 
 export const dragonTigerCards = [
