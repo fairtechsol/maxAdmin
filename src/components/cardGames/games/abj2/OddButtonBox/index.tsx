@@ -28,7 +28,6 @@ const OddButtonBox = ({ profitLoss, value1, value2, lock, data }: any) => {
           )}
         </span>
       </div>
-      {/* <div className="tiePairbtn-theme suspended" onClick={handleBet}> */}
       <div
         className={`evenOddbtn-theme ${lock ? "suspended" : ""}`}
         style={{ width: "95%" }}

@@ -226,5 +226,20 @@ export const updateTeenPattiTestMatchRates = createAsyncThunk<any, any>(
   }
 );
 
+export const updateAmarAkbarAnthonyCardMatchRates = createAsyncThunk<any, any>(
+  "aaa/matchRatesUpdate",
+  async (data) => {
+    return data;
+  }
+);
+
+export const updateBollywoodTableCardMatchRates = createAsyncThunk<any, any>(
+  "btable/matchRatesUpdate",
+  async (data) => {
+    return data;
+  }
+);
+
+
 export const resetScoreBoard = createAction("scoreboard/reset");
 export const resetCardDetail = createAction("cardDetail/reset");

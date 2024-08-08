@@ -8,6 +8,8 @@ import {
   resultDragonTiger,
   update7BCardMatchRates,
   update7CardMatchRates,
+  updateAmarAkbarAnthonyCardMatchRates,
+  updateBollywoodTableCardMatchRates,
   updateCard32BMatchRates,
   updateCard32MatchRates,
   updateCardAbj1Rates,
@@ -538,6 +540,66 @@ const cardDetail = createSlice({
           };
         }
       })
+      .addCase(
+        updateAmarAkbarAnthonyCardMatchRates.fulfilled,
+        (state, action) => {
+          if (action.payload) {
+            const { t1, t2 } = action.payload;
+            state.loading = false;
+
+            const videoInfo = t1[0];
+
+            const players = t2.slice(0, 3);
+            const redBlack = t2.slice(5, 7);
+            const luckOdds = t2.slice(3, 5);
+            const seven = t2.slice(20, 22);
+            const luckyCards = t2.slice(7, 20);
+
+            state.dragonTigerDetail = {
+              ...state.dragonTigerDetail,
+              videoInfo,
+              players,
+              redBlack,
+              luckOdds,
+              seven,
+              luckyCards,
+            };
+          }
+        }
+      )
+      .addCase(
+        updateBollywoodTableCardMatchRates.fulfilled,
+        (state, action) => {
+          if (action.payload) {
+            const { t1, t2 } = action.payload;
+            state.loading = false;
+            const videoInfo = t1[0];
+            const players = t2.slice(0, 6);
+            const redBlack = t2.slice(7, 9);
+            const luckOdds = t2?.[6];
+            const seven = t2.slice(13, 15);
+            const luckyCards = t2.slice(9, 13);
+
+            let newProfitLoss =
+              t1[0]?.mid === 0 ||
+              (t1[0]?.mid !== state.dragonTigerDetail?.videoInfo?.mid &&
+                state.dragonTigerDetail?.videoInfo?.mid !== undefined)
+                ? {}
+                : { ...state.dragonTigerDetail.profitLoss };
+
+            state.dragonTigerDetail = {
+              ...state.dragonTigerDetail,
+              profitLoss: newProfitLoss,
+              videoInfo,
+              players,
+              redBlack,
+              luckOdds,
+              seven,
+              luckyCards,
+            };
+          }
+        }
+      )
       .addCase(casinoScoreboardMatchRates.fulfilled, (state, action) => {
         state.scoreBoardData = action.payload;
       })

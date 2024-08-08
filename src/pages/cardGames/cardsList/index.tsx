@@ -13,7 +13,9 @@ const typeToTitle: { [key: string]: string } = {
   abj: "ANDAR BAHAR",
   sportCasino: "SPORTS CASINO",
   poker: "LIVE POKER",
-  // Add other mappings as needed
+  bollywoodCasino: "BOLLYWOOD CASINO",
+  worli: "WORLI",
+  "3cardj": "3 CARD Judgement",
 };
 
 const CardsList = () => {

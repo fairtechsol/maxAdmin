@@ -429,6 +429,40 @@ export const card3 = {
       name: "POKER 20 20",
     },
   ],
+  bollywoodCasino: [
+    {
+      id: 23,
+      url: "/admin/casinoDetail/aaa",
+      imgSrc:
+        "https://ik.imagekit.io/bmaxmbpyx/https://247maharaja.com/assets/images/game-icon/-1016.webp",
+      name: "AMAR AKHBAR ANTHONY",
+    },
+    {
+      id: 24,
+      url: "/admin/casinoDetail/btable",
+      imgSrc:
+        "https://ik.imagekit.io/bmaxmbpyx/https://247maharaja.com/assets/images/game-icon/-1015.webp",
+      name: "BOLLYWOOD TABLE",
+    },
+  ],
+  worli: [
+    {
+      id: 25,
+      url: "/admin/casinoDetail/worli2",
+      imgSrc:
+        "https://ik.imagekit.io/bmaxmbpyx/https://247maharaja.com/assets/images/game-icon/-1013.webp",
+      name: "Worli",
+    },
+  ],
+
+  "3cardj": [
+    {
+      id: 26,
+      url: "/admin/casinoDetail/3cardj",
+      imgSrc: "https://dataobj.ecoassetsservice.com/casino-icons/lc/3cardj.jpg",
+      name: "3 Cards Judgement",
+    },
+  ],
 };
 
 export const dragonTigerCards = [
@@ -499,6 +533,29 @@ export const dragonTigerCards = [
   },
 ];
 
+export const bollywoodTableCards = [
+  {
+    code: 10,
+    imgSrc: eleven,
+    value: 0,
+  },
+  {
+    code: 11,
+    imgSrc: twelve,
+    value: 0,
+  },
+  {
+    code: 12,
+    imgSrc: thirteen,
+    value: 0,
+  },
+  {
+    code: 0,
+    imgSrc: A,
+    value: 0,
+  },
+];
+
 export const cardGamesType: any = {
   dragonTiger20: "dt20", //
   andarBahar2: "abj", //
@@ -523,6 +580,8 @@ export const cardGamesType: any = {
   card3judge: "3cardj",
   cricketv3: "cricketv3",
   cmatch20: "cmatch20",
+  amarAkbarAnthony: "aaa",
+  btable: "btable",
 };
 
 export const cardGamesTypeNames: any = {
@@ -584,6 +643,10 @@ export const cardGamesId: any = {
   poker20: 3052,
   cricketv3: 3042,
   cmatch20: 3045,
+  aaa: 3056,
+  btable: 3041,
+  worli: 3040,
+  cardj: 3040,
 };
 
 export const rulesData = [
@@ -743,6 +806,18 @@ export const cardConstantsAccountStatement = [
     value: "cmatch20",
     label: "CRICKET MATCH 20-20",
   },
+  {
+    value: "aaa",
+    label: "Amar Akbar Anthony",
+  },
+  {
+    value: "btable",
+    label: "Bollywood Casino",
+  },
+  {
+    value: "worli2",
+    label: "Instant Worli",
+  },
 ];
 
 export const cardGamesCasinoResult = [
@@ -838,5 +913,17 @@ export const cardGamesCasinoResult = [
   {
     value: "cmatch20",
     label: "CRICKET MATCH 20-20",
+  },
+  {
+    value: "aaa",
+    label: "Amar Akbar Anthony",
+  },
+  {
+    value: "btable",
+    label: "Bollywood Casino",
+  },
+  {
+    value: "worli2",
+    label: "Instant Worli",
   },
 ];
