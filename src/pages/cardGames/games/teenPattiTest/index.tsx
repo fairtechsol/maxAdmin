@@ -87,23 +87,6 @@ const TeenPattiTest = () => {
     }
   }, []);
 
-  useEffect(() => {
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === "visible") {
-        dispatch(getDragonTigerDetailHorseRacing(cardGamesType.teenTest));
-      } else if (document.visibilityState === "hidden") {
-        dispatch(resetCardDetail());
-        socketService.card.leaveMatchRoom(cardGamesType.teenTest);
-        socketService.card.getCardRatesOff(cardGamesType.teenTest);
-      }
-    };
-
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-    return () => {
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
-    };
-  }, []);
-
   return loading ? <Loader /> : <TeentPattiComponent />;
 };
 
