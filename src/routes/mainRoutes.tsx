@@ -88,6 +88,7 @@ const AmarAkbarAnthony = Loadable(
 const BollywoodTable = Loadable(
   lazy(() => import("../pages/cardGames/games/bollywoodTable"))
 );
+const Worli = Loadable(lazy(() => import("../pages/cardGames/games/worli")));
 
 const MainRoutes = {
   path: "/admin",
@@ -246,8 +247,8 @@ const MainRoutes = {
       element: <BollywoodTable />,
     },
     {
-      path: "casinoDetail/cmatch20",
-      element: <CricketMatch20 />,
+      path: "casinoDetail/worli2",
+      element: <Worli />,
     },
     {
       path: "*",
