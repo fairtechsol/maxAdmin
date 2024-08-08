@@ -135,7 +135,7 @@ const TeenPattiComponent = () => {
                     className="teenPatti-table-item"
                     style={{ width: "20%", backgroundColor: "#72bbef" }}
                   >
-                    <span className="f12-b">{"DRAGON"}</span>
+                    <span className="f12-b">{"TIGER"}</span>
                   </div>
                   <div
                     className={`teenPatti-table-item ${
@@ -157,7 +157,7 @@ const TeenPattiComponent = () => {
                     }`}
                     style={{ width: "20%", backgroundColor: "#72bbef" }}
                   >
-                    <span className="f12-b">{"TIGER"}</span>
+                    <span className="f12-b">{"DRAGON"}</span>
                   </div>
                 </div>
 
@@ -194,8 +194,8 @@ const TeenPattiComponent = () => {
                           }}
                         >
                           <TableItemList
-                            rate={section?.drate}
-                            profitLossKey={section?.dsectionid}
+                            rate={section?.trate}
+                            profitLossKey={section?.tsection}
                             dragonTigerDetail={dragonTigerDetail}
                           />
                           <TableItemList
@@ -204,8 +204,8 @@ const TeenPattiComponent = () => {
                             dragonTigerDetail={dragonTigerDetail}
                           />
                           <TableItemList
-                            rate={section?.trate}
-                            profitLossKey={section?.tsection}
+                            rate={section?.drate}
+                            profitLossKey={section?.dsectionid}
                             dragonTigerDetail={dragonTigerDetail}
                           />
                           {/* <div
