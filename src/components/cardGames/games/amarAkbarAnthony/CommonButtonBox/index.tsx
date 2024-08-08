@@ -1,5 +1,3 @@
-// import { useDispatch } from "react-redux";
-// import { AppDispatch } from "../../../../store/store";
 import { ImClubs } from "react-icons/im";
 import { GiSpades } from "react-icons/gi";
 import { BiSolidHeart } from "react-icons/bi";
@@ -13,25 +11,21 @@ const CommonButtonBox = ({
   lock,
   data,
 }: any) => {
-  // const dispatch: AppDispatch = useDispatch();
-
   return (
     <div className="commonButtonBoxContainer" style={{ width: width }}>
       <div>
         <span style={{ fontSize: "16px", fontWeight: "bolder" }}>
-          {parseFloat(isNaN(value1) ? 0 : value1).toFixed(2)}
+          {parseFloat(value1 ?? 0).toFixed(2)}
         </span>
       </div>
-      <div
-        className={`tiePairbtn-theme ${lock ? "suspended" : ""}`}
-      >
+      <div className={`tiePairbtn-theme ${lock ? "suspended" : ""}`}>
         <span>
-          {value2 === "icon1" ? (
+          {value2 === "Red" ? (
             <>
               <ImDiamonds color="#ff0000" />
               <BiSolidHeart color="#ff0000" />
             </>
-          ) : value2 === "icon2" ? (
+          ) : value2 === "Black" ? (
             <>
               <ImClubs color="#000000" />
               <GiSpades color="#000000" />
@@ -45,16 +39,14 @@ const CommonButtonBox = ({
         <span
           style={{ fontSize: "16px" }}
           className={`${
-            isNaN(value3)
-              ? ""
-              : value3 > 0
+            value3 && value3 > 0
               ? "color-green"
               : value3 < 0
-              ? "color-red"
+              ? " color-red"
               : ""
           }`}
         >
-          {isNaN(value3) ? 0 : value3}
+          {value3 || 0}
         </span>
       </div>
     </div>

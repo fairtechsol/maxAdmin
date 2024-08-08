@@ -2,7 +2,6 @@ import { lazy } from "react";
 import { Navigate } from "react-router-dom";
 import MainLayout from "../layout/main";
 import Loadable from "../utils/loadable";
-import TeenPattiTest from "../pages/cardGames/games/teenPattiTest";
 
 // ==============================|| Main ROUTING ||============================== //
 
@@ -79,6 +78,15 @@ const Poker20 = Loadable(
 const Poker6 = Loadable(lazy(() => import("../pages/cardGames/games/poker6")));
 const CricketMatch20 = Loadable(
   lazy(() => import("../pages/cardGames/games/cricketMatch_20"))
+);
+const TeenPattiTest = Loadable(
+  lazy(() => import("../pages/cardGames/games/teenPattiTest"))
+);
+const AmarAkbarAnthony = Loadable(
+  lazy(() => import("../pages/cardGames/games/amarAkbarAnthony"))
+);
+const BollywoodTable = Loadable(
+  lazy(() => import("../pages/cardGames/games/bollywoodTable"))
 );
 
 const MainRoutes = {
@@ -224,6 +232,18 @@ const MainRoutes = {
     {
       path: "casinoDetail/teen9",
       element: <TeenPattiTest />,
+    },
+    {
+      path: "casinoDetail/cmatch20",
+      element: <CricketMatch20 />,
+    },
+    {
+      path: "casinoDetail/aaa",
+      element: <AmarAkbarAnthony />,
+    },
+    {
+      path: "casinoDetail/btable",
+      element: <BollywoodTable />,
     },
     {
       path: "casinoDetail/cmatch20",
