@@ -240,6 +240,13 @@ export const updateBollywoodTableCardMatchRates = createAsyncThunk<any, any>(
   }
 );
 
+export const updateCardWorliRates = createAsyncThunk<any, any>(
+  "worli2/matchRatesUpdate",
+  async (data) => {
+    return data;
+  }
+);
+
 
 export const resetScoreBoard = createAction("scoreboard/reset");
 export const resetCardDetail = createAction("cardDetail/reset");

@@ -29,6 +29,7 @@ import TeenTestResultComponent from "../../cardGames/games/teenPattiTest/resultM
 import CricketMatch20ResultComponent from "../../cardGames/games/cricketMatch_20/resultModalComponent";
 import AmarAkbarAnthonyResultComponent from "../../cardGames/games/amarAkbarAnthony/resultModalComponent";
 import BollywoodTableResultComponent from "../../cardGames/games/bollywoodTable/resultModalComponent";
+import WorliResultComponent from "../../cardGames/games/worli/resultModalComponent";
 
 interface ResultComponentProps {
   data: any;
@@ -106,8 +107,8 @@ export const ResultComponent: React.FC<ResultComponentProps> = ({
         <AmarAkbarAnthonyResultComponent data={data} />
       ) : type === cardGamesType?.btable ? (
         <BollywoodTableResultComponent data={data} />
-      ) : type === cardGamesType?.cmatch20 ? (
-        <CricketMatch20ResultComponent data={data} />
+      ) : type === cardGamesType?.worli ? (
+        <WorliResultComponent data={data} />
       ) : (
         <></>
       )}

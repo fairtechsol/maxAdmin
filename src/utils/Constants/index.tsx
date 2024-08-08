@@ -582,6 +582,7 @@ export const cardGamesType: any = {
   cmatch20: "cmatch20",
   amarAkbarAnthony: "aaa",
   btable: "btable",
+  worli: "worli2",
 };
 
 export const cardGamesTypeNames: any = {

@@ -20,6 +20,7 @@ import {
   updateCardPoker6Rates,
   updateCardRace20Rates,
   updateCardSuperoverRates,
+  updateCardWorliRates,
   updateCricket5MatchRates,
   updateCricketMatch20MatchRates,
   updateDragonTigerLionRates,
@@ -600,6 +601,19 @@ const cardDetail = createSlice({
           }
         }
       )
+      .addCase(updateCardWorliRates.fulfilled, (state, action) => {
+        if (action.payload) {
+          const { t1, t2 } = action.payload;
+          state.loading = false;
+          const videoInfo = { ...t1[0] };
+          const worli = t2[0];
+          state.dragonTigerDetail = {
+            ...state.dragonTigerDetail,
+            videoInfo,
+            worli,
+          };
+        }
+      })
       .addCase(casinoScoreboardMatchRates.fulfilled, (state, action) => {
         state.scoreBoardData = action.payload;
       })
