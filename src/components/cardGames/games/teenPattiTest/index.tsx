@@ -185,7 +185,7 @@ const TeenPattiComponent = () => {
 
                         <div
                           className={`${
-                            section.dstatus !== true ? "suspended" : ""
+                            section.dstatus !== true ? "lock" : ""
                           }`}
                           style={{
                             width: "60%",
