@@ -44,9 +44,9 @@ const TiePairBox = ({ lowHigh, data }: any) => {
 
       <div className="tiePairRateBoxMainlucky">
         <PlayerButton
-          value1={lowHigh?.[0]?.b1}
-          value4={lowHigh?.[0]?.l1}
-          value2={`A. ${lowHigh?.[0]?.nat}`}
+          value1={lowHigh?.[0]?.b1 ?? 0}
+          value4={lowHigh?.[0]?.l1 ?? 0}
+          value2={`A. ${lowHigh?.[0]?.nat ?? ""}`}
           value3={getProfitLoss("don")}
           width={"30%"}
           lock={
@@ -58,9 +58,9 @@ const TiePairBox = ({ lowHigh, data }: any) => {
         />
 
         <PlayerButton
-          value1={lowHigh?.[1]?.b1}
-          value4={lowHigh?.[1]?.l1}
-          value2={`B. ${lowHigh?.[1]?.nat}`}
+          value1={lowHigh?.[1]?.b1 ?? 0}
+          value4={lowHigh?.[1]?.l1 ?? 0}
+          value2={`B. ${lowHigh?.[1]?.nat ?? ""}`}
           value3={getProfitLoss("amarakbaranthony")}
           width={"30%"}
           lock={
@@ -72,9 +72,9 @@ const TiePairBox = ({ lowHigh, data }: any) => {
         />
 
         <PlayerButton
-          value1={lowHigh?.[2]?.b1}
-          value4={lowHigh?.[2]?.l1}
-          value2={`C. ${lowHigh?.[2]?.nat}`}
+          value1={lowHigh?.[2]?.b1 ?? 0}
+          value4={lowHigh?.[2]?.l1 ?? 0}
+          value2={`C. ${lowHigh?.[2]?.nat ?? ""}`}
           value3={getProfitLoss("sahibbibiaurghulam")}
           width={"30%"}
           lock={
@@ -87,9 +87,9 @@ const TiePairBox = ({ lowHigh, data }: any) => {
       </div>
       <div className="tiePairRateBoxMainlucky">
         <PlayerButton
-          value1={lowHigh?.[3]?.b1}
-          value4={lowHigh?.[3]?.l1}
-          value2={`D. ${lowHigh?.[3]?.nat}`}
+          value1={lowHigh?.[3]?.b1 ?? 0}
+          value4={lowHigh?.[3]?.l1 ?? 0}
+          value2={`D. ${lowHigh?.[3]?.nat ?? ""}`}
           value3={getProfitLoss("dharamveer")}
           width={"30%"}
           lock={
@@ -101,9 +101,9 @@ const TiePairBox = ({ lowHigh, data }: any) => {
         />
 
         <PlayerButton
-          value1={lowHigh?.[4]?.b1}
-          value4={lowHigh?.[4]?.l1}
-          value2={`E. ${lowHigh?.[4]?.nat}`}
+          value1={lowHigh?.[4]?.b1 ?? 0}
+          value4={lowHigh?.[4]?.l1 ?? 0}
+          value2={`E. ${lowHigh?.[4]?.nat ?? ""}`}
           value3={getProfitLoss("kiskiskopyaarkaroon")}
           width={"30%"}
           lock={
@@ -115,9 +115,9 @@ const TiePairBox = ({ lowHigh, data }: any) => {
         />
 
         <PlayerButton
-          value1={lowHigh?.[5]?.b1}
-          value4={lowHigh?.[5]?.l1}
-          value2={`F. ${lowHigh?.[5]?.nat}`}
+          value1={lowHigh?.[5]?.b1 ?? 0}
+          value4={lowHigh?.[5]?.l1 ?? 0}
+          value2={`F. ${lowHigh?.[5]?.nat ?? ""}`}
           value3={getProfitLoss("ghulam")}
           width={"30%"}
           lock={

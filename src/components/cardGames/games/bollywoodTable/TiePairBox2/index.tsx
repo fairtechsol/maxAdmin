@@ -43,9 +43,9 @@ const TiePairBox2 = ({ lowHigh, data }: any) => {
 
       <div className="tiePairRateBoxMainlucky">
         <PlayerButton
-          value1={lowHigh?.b1}
-          value4={lowHigh?.l1}
-          value2={lowHigh?.nat}
+          value1={lowHigh?.b1 ?? 0}
+          value4={lowHigh?.l1 ?? 0}
+          value2={lowHigh?.nat ?? ""}
           value3={getProfitLoss("odd", lowHigh?.sid)}
           width={"100%"}
           lock={

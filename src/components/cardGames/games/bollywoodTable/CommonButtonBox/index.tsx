@@ -3,24 +3,15 @@ import { GiSpades } from "react-icons/gi";
 import { BiSolidHeart } from "react-icons/bi";
 import { ImDiamonds } from "react-icons/im";
 
-const CommonButtonBox = ({
-  value1,
-  value2,
-  value3,
-  width,
-  lock,
-}: any) => {
-
+const CommonButtonBox = ({ value1, value2, value3, width, lock }: any) => {
   return (
     <div className="commonButtonBoxContainer" style={{ width: width }}>
       <div>
         <span style={{ fontSize: "16px", fontWeight: "bolder" }}>
-          {parseFloat(value1).toFixed(2)}
+          {parseFloat(value1 ?? 0).toFixed(2)}
         </span>
       </div>
-      <div
-        className={`tiePairbtn-theme ${lock ? "suspended" : ""}`}
-      >
+      <div className={`tiePairbtn-theme ${lock ? "suspended" : ""}`}>
         <span>
           {value2 === "icon1" ? (
             <>
