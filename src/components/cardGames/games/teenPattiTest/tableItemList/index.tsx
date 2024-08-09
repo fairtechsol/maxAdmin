@@ -26,6 +26,7 @@ const TableItemList = ({ rate, profitLossKey, dragonTigerDetail }: any) => {
               : ""
             : ""
         }
+        style={{zIndex:"999"}}
       >
         {dragonTigerDetail?.profitLoss
           ? dragonTigerDetail?.profitLoss[
