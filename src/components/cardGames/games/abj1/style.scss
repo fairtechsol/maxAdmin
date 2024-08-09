@@ -250,6 +250,9 @@
 .suspended {
   position: relative;
 }
+.lock {
+  position: relative;
+}
 .suspended:after {
   position: absolute;
   display: flex;
