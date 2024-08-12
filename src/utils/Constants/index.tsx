@@ -839,11 +839,11 @@ export const cardConstantsAccountStatement = [
   },
   {
     value: "baccarat",
-    label: "BACCARAT",
+    label: "Baccarat",
   },
   {
     value: "baccarat2",
-    label: "BACCARAT2",
+    label: "Baccarat2",
   },
 ];
 
@@ -955,10 +955,10 @@ export const cardGamesCasinoResult = [
   },
   {
     value: "baccarat",
-    label: "BACCARAT",
+    label: "Baccarat",
   },
   {
     value: "baccarat2",
-    label: "BACCARAT2",
+    label: "Baccarat2",
   },
 ];
