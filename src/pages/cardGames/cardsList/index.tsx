@@ -16,6 +16,7 @@ const typeToTitle: { [key: string]: string } = {
   bollywoodCasino: "BOLLYWOOD CASINO",
   worli: "WORLI",
   "3cardj": "3 CARD Judgement",
+  baccarat: "BACCARAT",
 };
 
 const CardsList = () => {
@@ -25,7 +26,7 @@ const CardsList = () => {
     return <div>Invalid game</div>;
   }
 
-  const title = typeToTitle[listType] || "Unknown Game";
+  const title = typeToTitle[listType] || "";
 
   return (
     <>

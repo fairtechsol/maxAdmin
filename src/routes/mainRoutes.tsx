@@ -89,6 +89,12 @@ const BollywoodTable = Loadable(
   lazy(() => import("../pages/cardGames/games/bollywoodTable"))
 );
 const Worli = Loadable(lazy(() => import("../pages/cardGames/games/worli")));
+const Bacarrat1 = Loadable(
+  lazy(() => import("../pages/cardGames/games/baccarat1"))
+);
+const Bacarrat2 = Loadable(
+  lazy(() => import("../pages/cardGames/games/baccarat2"))
+);
 
 const MainRoutes = {
   path: "/admin",
@@ -249,6 +255,14 @@ const MainRoutes = {
     {
       path: "casinoDetail/worli2",
       element: <Worli />,
+    },
+    {
+      path: "casinoDetail/baccarat",
+      element: <Bacarrat1 />,
+    },
+    {
+      path: "casinoDetail/baccarat2",
+      element: <Bacarrat2 />,
     },
     {
       path: "*",

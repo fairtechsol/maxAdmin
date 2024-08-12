@@ -74,3 +74,6 @@ export { default as warRules } from "./casinowar/war.jpg";
 export { default as superOverRules } from "./superOver/superoverRules.webp";
 export { default as crick20rules } from "./cricketMatch_20-20/20-20cricketrules.webp";
 export { default as crick20ScoreBg } from "./cricketMatch_20-20/score-bg.png";
+export { default as Baccarat1rules } from "./rules/baccarat1rules.webp";
+export { default as bac1 } from "./baccarat/baccarat1.webp";
+export { default as bac2 } from "./baccarat/baccarat2.webp";

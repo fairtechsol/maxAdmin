@@ -3,12 +3,15 @@ import {
   casinoScoreboardMatchRates,
   casinoWarMatchRates,
   getDragonTigerDetailHorseRacing,
+  graphData,
   resetCardDetail,
   resetScoreBoard,
   resultDragonTiger,
   update7BCardMatchRates,
   update7CardMatchRates,
   updateAmarAkbarAnthonyCardMatchRates,
+  updateBaccarat1Rates,
+  updateBaccarat2Rates,
   updateBollywoodTableCardMatchRates,
   updateCard32BMatchRates,
   updateCard32MatchRates,
@@ -41,6 +44,7 @@ interface InitialState {
   dragonTigerDetail: any;
   lucky7Detail: any;
   liveGameResultTop10: any;
+  graphsData: any;
   cards32Detail: any;
   resultData: any;
   scoreBoardData: any;
@@ -53,6 +57,7 @@ const initialState: InitialState = {
   dragonTigerDetail: null,
   lucky7Detail: [],
   liveGameResultTop10: [],
+  graphsData: [],
   cards32Detail: [],
   resultData: null,
   scoreBoardData: null,
@@ -163,6 +168,9 @@ const cardDetail = createSlice({
       })
       .addCase(updateLiveGameResultTop10.fulfilled, (state, action) => {
         state.liveGameResultTop10 = action.payload;
+      })
+      .addCase(graphData.fulfilled, (state, action) => {
+        state.graphsData = action.payload;
       })
       .addCase(updateProfitLossCards.fulfilled, (state, action) => {
         state.dragonTigerDetail = {
@@ -611,6 +619,34 @@ const cardDetail = createSlice({
             ...state.dragonTigerDetail,
             videoInfo,
             worli,
+          };
+        }
+      })
+      .addCase(updateBaccarat1Rates.fulfilled, (state, action) => {
+        if (action.payload) {
+          const { t1, t2 } = action.payload;
+          state.loading = false;
+          const videoInfo = { ...t1[0] };
+          const odds = t2.slice(0, 9);
+
+          state.dragonTigerDetail = {
+            ...state.dragonTigerDetail,
+            videoInfo,
+            odds,
+          };
+        }
+      })
+      .addCase(updateBaccarat2Rates.fulfilled, (state, action) => {
+        if (action.payload) {
+          const { t1, t2 } = action.payload;
+          state.loading = false;
+          const videoInfo = { ...t1[0] };
+          const odds = t2.slice(0, 10);
+
+          state.dragonTigerDetail = {
+            ...state.dragonTigerDetail,
+            videoInfo,
+            odds,
           };
         }
       })
