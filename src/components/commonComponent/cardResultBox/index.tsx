@@ -243,6 +243,27 @@ const CardResultBox = ({ data, name, type }: any) => {
                 >
                   {name?.[0]}
                 </span>
+              ) : type === "baccarat" || type === "baccarat2" ? (
+                <span
+                  style={{
+                    fontSize: "16px",
+                    fontWeight: "600",
+                    color:
+                      item?.result === "1"
+                        ? "#f5cc03"
+                        : item?.result === "2"
+                        ? "#ff4500"
+                        : item?.result === "3"
+                        ? "#ffffff"
+                        : "#ffffff",
+                  }}
+                >
+                  {item?.result === "1"
+                    ? name?.[0]
+                    : item?.result === "2"
+                    ? name?.[1]
+                    : name?.[2]}
+                </span>
               ) : (
                 <span
                   style={{

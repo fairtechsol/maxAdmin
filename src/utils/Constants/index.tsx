@@ -47,6 +47,8 @@ import {
   p6,
   p1d,
   p20,
+  bac1,
+  bac2,
 } from "../../assets";
 
 export const ApiConstants = {
@@ -463,6 +465,18 @@ export const card3 = {
       name: "3 Cards Judgement",
     },
   ],
+  baccarat: [
+    {
+      url: "/admin/casinoDetail/baccarat2",
+      imgSrc: bac1,
+      name: "BACCARAT2",
+    },
+    {
+      url: "/admin/casinoDetail/baccarat",
+      imgSrc: bac2,
+      name: "BACCARAT",
+    },
+  ],
 };
 
 export const dragonTigerCards = [
@@ -583,6 +597,8 @@ export const cardGamesType: any = {
   amarAkbarAnthony: "aaa",
   btable: "btable",
   worli: "worli2",
+  baccarat: "baccarat",
+  baccarat2: "baccarat2",
 };
 
 export const cardGamesTypeNames: any = {
@@ -648,6 +664,8 @@ export const cardGamesId: any = {
   btable: 3041,
   worli: 3040,
   cardj: 3040,
+  baccarat: 3044,
+  baccarat2: 3033,
 };
 
 export const rulesData = [
@@ -819,6 +837,14 @@ export const cardConstantsAccountStatement = [
     value: "worli2",
     label: "Instant Worli",
   },
+  {
+    value: "baccarat",
+    label: "BACCARAT",
+  },
+  {
+    value: "baccarat2",
+    label: "BACCARAT2",
+  },
 ];
 
 export const cardGamesCasinoResult = [
@@ -926,5 +952,13 @@ export const cardGamesCasinoResult = [
   {
     value: "worli2",
     label: "Instant Worli",
+  },
+  {
+    value: "baccarat",
+    label: "BACCARAT",
+  },
+  {
+    value: "baccarat2",
+    label: "BACCARAT2",
   },
 ];

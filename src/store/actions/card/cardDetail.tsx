@@ -247,6 +247,25 @@ export const updateCardWorliRates = createAsyncThunk<any, any>(
   }
 );
 
+export const updateBaccarat1Rates = createAsyncThunk<any, any>(
+  "baccarat/matchRatesUpdate",
+  async (data) => {
+    return data;
+  }
+);
+export const updateBaccarat2Rates = createAsyncThunk<any, any>(
+  "baccarat2/matchRatesUpdate",
+  async (data) => {
+    return data;
+  }
+);
+
+export const graphData = createAsyncThunk<any, any>(
+  "update/graphData",
+  async (data) => {
+    return data;
+  }
+);
 
 export const resetScoreBoard = createAction("scoreboard/reset");
 export const resetCardDetail = createAction("cardDetail/reset");
