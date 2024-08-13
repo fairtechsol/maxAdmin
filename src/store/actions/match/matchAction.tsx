@@ -234,7 +234,7 @@ export const getPlacedBets = createAsyncThunk<any, any>(
   async (id, thunkApi) => {
     try {
       const resp = await service.get(
-        `${ApiConstants.BET.GETPLACEDBETS}?status=inArr${JSON.stringify([
+        `${ApiConstants.BET.GETPLACEDBETS}?result=inArr${JSON.stringify([
           "PENDING",
           "UNDECLARE",
         ])}&betPlaced.matchId=${id}`
@@ -253,7 +253,7 @@ export const getMorePlacedBets = createAsyncThunk<any, any>(
   async (requestData, thunkApi) => {
     try {
       const resp = await service.get(
-        `${ApiConstants.BET.GETPLACEDBETS}?status=inArr${JSON.stringify([
+        `${ApiConstants.BET.GETPLACEDBETS}?result=inArr${JSON.stringify([
           "PENDING",
           "UNDECLARE",
         ])}&betPlaced.matchId=${requestData.matchId}${
