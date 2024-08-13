@@ -7,6 +7,7 @@ import CustomModal from "../../commonComponent/modal";
 import UserBetModalForm from "../../game/userBet/modal/form";
 import UserBetModalTable from "../../game/userBet/modal";
 import moment from "moment-timezone";
+import DeleteBetOverlay from "../../commonComponent/deleteBetRow";
 // import UserBetModalForm from "../../game/userBet/modal/form";
 // import UserBetModalTable from "../../game/userBet/modal";
 // import "../../otherGames/style.scss";
@@ -66,7 +67,7 @@ const OtherUserBets = ({ matchId }: any) => {
                         {placedBets?.length > 0 ? (
                           placedBets?.map((bet: any) => {
                             return (
-                              <tr key={bet?.id}>
+                              <tr key={bet?.id} className="position-relative">
                                 <td
                                   className={
                                     bet?.betType === "NO" ||
@@ -143,6 +144,7 @@ const OtherUserBets = ({ matchId }: any) => {
                                 >
                                   {bet?.eventType}
                                 </td>
+                                <DeleteBetOverlay title={bet?.deleteReason} />
                               </tr>
                             );
                           })

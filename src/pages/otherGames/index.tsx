@@ -8,6 +8,7 @@ import {
   getPlacedBets,
   otherMatchDetailAction,
   updateMatchRates,
+  updatePlacedbetsDeleteReason,
 } from "../../store/actions/match/matchAction";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { socket, socketService } from "../../socketManager";
@@ -128,6 +129,16 @@ const OtherGamesDetail = () => {
   }
   const updatedMarket: any = formatMarkets(matchDetails);
 
+  const handleDeleteReasonUpdate = (event: any) => {
+    try {
+      if (event?.matchId === id) {
+        dispatch(updatePlacedbetsDeleteReason(event));
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   useEffect(() => {
     try {
       if (id) {
@@ -152,6 +163,7 @@ const OtherGamesDetail = () => {
         socketService.match.matchDeleteBetOff();
         socketService.match.sessionDeleteBetOff();
         socketService.match.sessionResultOff();
+        socketService.match.updateDeleteReasonOff();
         socketService.match.sessionResultUnDeclareOff();
         socketService.match.joinMatchRoom(id, "superAdmin");
         socketService.match.getMatchRates(id, updateMatchDetailToRedux);
@@ -167,6 +179,7 @@ const OtherGamesDetail = () => {
         socketService.match.sessionResultUnDeclare(
           handleSessionResultUnDeclare
         );
+        socketService.match.updateDeleteReason(handleDeleteReasonUpdate);
       }
     } catch (e) {
       console.log(e);
@@ -187,6 +200,7 @@ const OtherGamesDetail = () => {
           socketService.match.sessionDeleteBetOff();
           socketService.match.sessionResultOff();
           socketService.match.sessionResultUnDeclareOff();
+          socketService.match.updateDeleteReasonOff();
           // dispatch(resetUserProfitLoss());
           // dispatch(resetBetSessionProfitLossGraph());
         };

@@ -7,6 +7,7 @@ import "./style.scss";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import moment from "moment-timezone";
+import DeleteBetOverlay from "../../commonComponent/deleteBetRow";
 
 const UserBets = ({ matchId }: any) => {
   const { placedBets } = useSelector(
@@ -69,7 +70,7 @@ const UserBets = ({ matchId }: any) => {
                     <tbody className="bg-primary">
                       {placedBets?.map((bet: any) => {
                         return (
-                          <tr key={bet?.id}>
+                          <tr key={bet?.id} className="position-relative">
                             <td
                               className={
                                 bet?.betType === "NO" || bet?.betType === "LAY"
@@ -139,6 +140,7 @@ const UserBets = ({ matchId }: any) => {
                             >
                               {bet?.eventType}
                             </td>
+                            <DeleteBetOverlay title={bet?.deleteReason} />
                           </tr>
                         );
                       })}

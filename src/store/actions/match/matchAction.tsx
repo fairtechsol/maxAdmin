@@ -234,7 +234,10 @@ export const getPlacedBets = createAsyncThunk<any, any>(
   async (id, thunkApi) => {
     try {
       const resp = await service.get(
-        `${ApiConstants.BET.GETPLACEDBETS}?status=PENDING&betPlaced.matchId=${id}`
+        `${ApiConstants.BET.GETPLACEDBETS}?status=inArr${JSON.stringify([
+          "PENDING",
+          "UNDECLARE",
+        ])}&betPlaced.matchId=${id}`
       );
       if (resp) {
         return resp?.data?.rows;
@@ -250,9 +253,12 @@ export const getMorePlacedBets = createAsyncThunk<any, any>(
   async (requestData, thunkApi) => {
     try {
       const resp = await service.get(
-        `${ApiConstants.BET.GETPLACEDBETS}?status=PENDING&betPlaced.matchId=${
-          requestData.matchId
-        }${requestData.filter ? requestData.filter : ""}`
+        `${ApiConstants.BET.GETPLACEDBETS}?status=inArr${JSON.stringify([
+          "PENDING",
+          "UNDECLARE",
+        ])}&betPlaced.matchId=${requestData.matchId}${
+          requestData.filter ? requestData.filter : ""
+        }`
       );
       if (resp) {
         return resp?.data?.rows;
@@ -378,6 +384,13 @@ export const updateBetsPlaced: any = createAsyncThunk<any, any>(
   "/placed/bets",
   async (placedBets) => {
     return placedBets;
+  }
+);
+
+export const updatePlacedbetsDeleteReason = createAsyncThunk<any, any>(
+  "/updatePlacedbetsDeleteReason/bets",
+  async (data) => {
+    return data;
   }
 );
 

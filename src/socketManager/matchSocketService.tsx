@@ -55,6 +55,9 @@ export const matchSocketService = {
   sessionResultUnDeclare: (callback: any) => {
     socket?.on("sessionResultUnDeclare", callback);
   },
+  updateDeleteReason: (callback: any) => {
+    socket?.on("updateDeleteReason", callback);
+  },
   sessionResultUnDeclareOff: () => {
     socket?.off("sessionResultUnDeclareOff");
   },
@@ -78,5 +81,8 @@ export const matchSocketService = {
   },
   sessionDeleteBetOff: () => {
     socket?.off("sessionDeleteBet");
+  },
+  updateDeleteReasonOff: () => {
+    socket?.off("updateDeleteReason");
   },
 };

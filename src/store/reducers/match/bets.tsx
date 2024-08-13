@@ -9,6 +9,7 @@ import {
   resetRunAmount,
   successResetForLockUnlock,
   updateBetsPlaced,
+  updatePlacedbetsDeleteReason,
   updateUserMatchLock,
 } from "../../actions/match/matchAction";
 
@@ -161,6 +162,20 @@ const placedBetsSlice = createSlice({
             ...state.placedBets,
           ];
         }
+      })
+      .addCase(updatePlacedbetsDeleteReason.fulfilled, (state, action) => {
+        const { betIds, deleteReason } = action.payload;
+        const updateDeleteReason = (bet: any) => {
+          if (betIds?.includes(bet?.id)) {
+            bet.deleteReason = deleteReason;
+          }
+
+          return bet;
+        };
+
+        const updatedBetPlaced = state.placedBets?.map(updateDeleteReason);
+
+        state.placedBets = Array.from(new Set(updatedBetPlaced));
       });
   },
 });
