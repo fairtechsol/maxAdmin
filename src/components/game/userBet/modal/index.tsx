@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../../store/store";
 import moment from "moment-timezone";
 import TooltipCustom from "../../../reports/modals/accountStatement/tooltip";
+import DeleteBetOverlay from "../../../commonComponent/deleteBetRow";
 
 function UserBetModalTable() {
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
@@ -58,10 +59,11 @@ function UserBetModalTable() {
               match,
               ipAddress,
               browserDetail,
+              deleteReason,
             } = item;
 
             return (
-              <tr key={id}>
+              <tr key={id} className="position-relative">
                 <td
                   className={
                     betType === "NO" || betType === "LAY"
@@ -156,6 +158,7 @@ function UserBetModalTable() {
                     </a>
                   </TooltipCustom>
                 </td>
+                <DeleteBetOverlay title={deleteReason} />
               </tr>
             );
           })}
