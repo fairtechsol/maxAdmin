@@ -26,7 +26,7 @@ const TableItemList = ({ rate, profitLossKey, dragonTigerDetail }: any) => {
               : ""
             : ""
         }
-        style={{zIndex:"999"}}
+        style={{zIndex:"999",fontSize:"12px"}}
       >
         {dragonTigerDetail?.profitLoss
           ? dragonTigerDetail?.profitLoss[
@@ -35,8 +35,8 @@ const TableItemList = ({ rate, profitLossKey, dragonTigerDetail }: any) => {
             ? dragonTigerDetail?.profitLoss[
                 `${dragonTigerDetail?.videoInfo?.mid}_${profitLossKey}_card`
               ]
-            : 0
-          : 0}
+            : ''
+          : ''}
       </span>
     </div>
   );
