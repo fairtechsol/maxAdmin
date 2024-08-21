@@ -25,7 +25,7 @@ const Abj = () => {
   );
   const setMatchRatesInRedux = (event: any) => {
     try {
-      dispatch(updateCardAbj1Rates(event?.data?.data?.data));
+      dispatch(updateCardAbj1Rates(event?.data));
     } catch (e) {
       console.log(e);
     }

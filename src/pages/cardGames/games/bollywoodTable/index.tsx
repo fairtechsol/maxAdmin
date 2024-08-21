@@ -1,11 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../../../store/store";
-import { cardGamesType } from "../../../../utils/Constants";
-import {
-  getPlacedBets,
-  updateBetsPlaced,
-} from "../../../../store/actions/match/matchAction";
+import BollywoodTableComponent from "../../../../components/cardGames/games/bollywoodTable";
+import { socket, socketService } from "../../../../socketManager";
 import {
   getDragonTigerDetailHorseRacing,
   resetCardDetail,
@@ -14,8 +10,12 @@ import {
   updateLiveGameResultTop10,
   updateProfitLossCards,
 } from "../../../../store/actions/card/cardDetail";
-import { socket, socketService } from "../../../../socketManager";
-import BollywoodTableComponent from "../../../../components/cardGames/games/bollywoodTable";
+import {
+  getPlacedBets,
+  updateBetsPlaced,
+} from "../../../../store/actions/match/matchAction";
+import { AppDispatch, RootState } from "../../../../store/store";
+import { cardGamesType } from "../../../../utils/Constants";
 
 const BollywoodTable = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -23,7 +23,7 @@ const BollywoodTable = () => {
 
   const setMatchRatesInRedux = (event: any) => {
     try {
-      dispatch(updateBollywoodTableCardMatchRates(event?.data?.data?.data));
+      dispatch(updateBollywoodTableCardMatchRates(event?.data));
     } catch (e) {
       console.log(e);
     }

@@ -1,12 +1,7 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../../../store/store";
-import { cardGamesType } from "../../../../utils/Constants";
-import {
-  getPlacedBets,
-  updateBetsPlaced,
-} from "../../../../store/actions/match/matchAction";
+import { useDispatch, useSelector } from "react-redux";
+import WorliComponent from "../../../../components/cardGames/games/worli";
+import { socket, socketService } from "../../../../socketManager";
 import {
   getDragonTigerDetailHorseRacing,
   resetCardDetail,
@@ -15,8 +10,12 @@ import {
   updateLiveGameResultTop10,
   updateProfitLossCards,
 } from "../../../../store/actions/card/cardDetail";
-import { socket, socketService } from "../../../../socketManager";
-import WorliComponent from "../../../../components/cardGames/games/worli";
+import {
+  getPlacedBets,
+  updateBetsPlaced,
+} from "../../../../store/actions/match/matchAction";
+import { AppDispatch, RootState } from "../../../../store/store";
+import { cardGamesType } from "../../../../utils/Constants";
 
 const Worli = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -24,7 +23,7 @@ const Worli = () => {
 
   const setMatchRatesInRedux = (event: any) => {
     try {
-      dispatch(updateCardWorliRates(event?.data?.data?.data));
+      dispatch(updateCardWorliRates(event?.data));
     } catch (e) {
       console.log(e);
     }

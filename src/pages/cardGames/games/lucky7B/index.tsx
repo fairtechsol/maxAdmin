@@ -26,7 +26,7 @@ const Lucky7B = () => {
 
   const setMatchRatesInRedux = (event: any) => {
     try {
-      dispatch(update7BCardMatchRates(event?.data?.data?.data));
+      dispatch(update7BCardMatchRates(event?.data));
     } catch (e) {
       console.log(e);
     }

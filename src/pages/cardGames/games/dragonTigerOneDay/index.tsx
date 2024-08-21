@@ -26,7 +26,7 @@ const DragonTigerOneDay = () => {
 
   const setMatchRatesInRedux = (event: any) => {
     try {
-      dispatch(updateDragonTigerOneDayRates(event?.data?.data?.data));
+      dispatch(updateDragonTigerOneDayRates(event?.data));
     } catch (e) {
       console.log(e);
     }

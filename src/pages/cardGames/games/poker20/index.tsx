@@ -1,11 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { cardGamesType } from "../../../../utils/Constants";
-import { AppDispatch, RootState } from "../../../../store/store";
-import {
-  getPlacedBets,
-  updateBetsPlaced,
-} from "../../../../store/actions/match/matchAction";
+import Poker20Component from "../../../../components/cardGames/games/poker20";
+import Loader from "../../../../components/commonComponent/loader";
+import { socket, socketService } from "../../../../socketManager";
 import {
   getDragonTigerDetailHorseRacing,
   resetCardDetail,
@@ -14,9 +11,12 @@ import {
   updateLiveGameResultTop10,
   updateProfitLossCards,
 } from "../../../../store/actions/card/cardDetail";
-import { socket, socketService } from "../../../../socketManager";
-import Poker20Component from "../../../../components/cardGames/games/poker20";
-import Loader from "../../../../components/commonComponent/loader";
+import {
+  getPlacedBets,
+  updateBetsPlaced,
+} from "../../../../store/actions/match/matchAction";
+import { AppDispatch, RootState } from "../../../../store/store";
+import { cardGamesType } from "../../../../utils/Constants";
 
 const Poker20 = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -26,7 +26,7 @@ const Poker20 = () => {
 
   const setMatchRatesInRedux = (event: any) => {
     try {
-      dispatch(updateCardPoker20Rates(event?.data?.data?.data));
+      dispatch(updateCardPoker20Rates(event?.data));
     } catch (e) {
       console.log(e);
     }

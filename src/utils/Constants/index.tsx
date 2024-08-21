@@ -139,7 +139,7 @@ export const Constants = {
   PAGELIMIT: 15,
 };
 
-export const cardUrl = "https://video.proexch.in/route/?id=";
+export const cardUrl = "https://jmdapi.com/tablevideo/?id=";
 
 // use below baseUrl for live build
 

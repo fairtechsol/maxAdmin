@@ -29,7 +29,7 @@ const Superover = () => {
 
   const setMatchRatesInRedux = (event: any) => {
     try {
-      dispatch(updateCardSuperoverRates(event?.data?.data?.data));
+      dispatch(updateCardSuperoverRates(event?.data));
     } catch (e) {
       console.log(e);
     }

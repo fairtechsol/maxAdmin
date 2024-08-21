@@ -26,7 +26,7 @@ const Race20 = () => {
 
   const setMatchRatesInRedux = (event: any) => {
     try {
-      dispatch(updateCardRace20Rates(event?.data?.data?.data));
+      dispatch(updateCardRace20Rates(event?.data));
     } catch (e) {
       console.log(e);
     }
