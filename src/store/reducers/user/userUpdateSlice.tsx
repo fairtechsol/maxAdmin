@@ -49,7 +49,7 @@ const userUpdateSlice = createSlice({
         state.addSuccess = false;
       })
       .addCase(successMessageReset, (state) => {
-        state.successMessage = " ";
+        state.successMessage = "";
       });
   },
 });
