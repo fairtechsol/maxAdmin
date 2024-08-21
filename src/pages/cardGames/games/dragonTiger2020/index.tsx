@@ -26,7 +26,7 @@ const DragonTiger2020 = () => {
 
   const setMatchRatesInRedux = (event: any) => {
     try {
-      dispatch(updateCardMatchRates(event?.data?.data?.data));
+      dispatch(updateCardMatchRates(event?.data));
     } catch (e) {
       console.log(e);
     }

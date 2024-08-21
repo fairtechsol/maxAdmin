@@ -26,7 +26,7 @@ const CasinoWar = () => {
 
   const setMatchRatesInRedux = (event: any) => {
     try {
-      dispatch(casinoWarMatchRates(event?.data?.data?.data));
+      dispatch(casinoWarMatchRates(event?.data));
     } catch (e) {
       console.log(e);
     }

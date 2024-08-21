@@ -1,10 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { cardGamesType } from "../../../../utils/Constants";
-import {
-  getPlacedBets,
-  updateBetsPlaced,
-} from "../../../../store/actions/match/matchAction";
+import AmarAkbarAnthonyComponent from "../../../../components/cardGames/games/amarAkbarAnthony";
+import { socket, socketService } from "../../../../socketManager";
 import {
   getDragonTigerDetailHorseRacing,
   resetCardDetail,
@@ -13,9 +10,12 @@ import {
   updateLiveGameResultTop10,
   updateProfitLossCards,
 } from "../../../../store/actions/card/cardDetail";
-import { socket, socketService } from "../../../../socketManager";
+import {
+  getPlacedBets,
+  updateBetsPlaced,
+} from "../../../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../../../store/store";
-import AmarAkbarAnthonyComponent from "../../../../components/cardGames/games/amarAkbarAnthony";
+import { cardGamesType } from "../../../../utils/Constants";
 
 const AmarAkbarAnthony = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -23,7 +23,7 @@ const AmarAkbarAnthony = () => {
 
   const setMatchRatesInRedux = (event: any) => {
     try {
-      dispatch(updateAmarAkbarAnthonyCardMatchRates(event?.data?.data?.data));
+      dispatch(updateAmarAkbarAnthonyCardMatchRates(event?.data));
     } catch (e) {
       console.log(e);
     }

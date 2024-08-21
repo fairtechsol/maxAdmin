@@ -29,7 +29,7 @@ const Cricket5 = () => {
 
   const setMatchRatesInRedux = (event: any) => {
     try {
-      dispatch(updateCricket5MatchRates(event?.data?.data?.data));
+      dispatch(updateCricket5MatchRates(event?.data));
     } catch (e) {
       console.log(e);
     }

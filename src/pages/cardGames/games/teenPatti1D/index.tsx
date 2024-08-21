@@ -26,7 +26,7 @@ const TeenPatti1D = () => {
 
   const setMatchRatesInRedux = (event: any) => {
     try {
-      dispatch(updateTeenPatti1DMatchRates(event?.data?.data?.data));
+      dispatch(updateTeenPatti1DMatchRates(event?.data));
     } catch (e) {
       console.log(e);
     }

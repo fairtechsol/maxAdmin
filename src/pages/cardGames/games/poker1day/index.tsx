@@ -1,11 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Poker1DayComponent from "../../../../components/cardGames/games/poker1Day";
+import Loader from "../../../../components/commonComponent/loader";
 import { socket, socketService } from "../../../../socketManager";
-import {
-  getPlacedBets,
-  updateBetsPlaced,
-} from "../../../../store/actions/match/matchAction";
-import { cardGamesType } from "../../../../utils/Constants";
 import {
   getDragonTigerDetailHorseRacing,
   resetCardDetail,
@@ -14,9 +11,12 @@ import {
   updateLiveGameResultTop10,
   updateProfitLossCards,
 } from "../../../../store/actions/card/cardDetail";
+import {
+  getPlacedBets,
+  updateBetsPlaced,
+} from "../../../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../../../store/store";
-import Poker1DayComponent from "../../../../components/cardGames/games/poker1Day";
-import Loader from "../../../../components/commonComponent/loader";
+import { cardGamesType } from "../../../../utils/Constants";
 
 const Poker1day = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -26,7 +26,7 @@ const Poker1day = () => {
 
   const setMatchRatesInRedux = (event: any) => {
     try {
-      dispatch(updateCardPoker1DayRates(event?.data?.data?.data));
+      dispatch(updateCardPoker1DayRates(event?.data));
     } catch (e) {
       console.log(e);
     }

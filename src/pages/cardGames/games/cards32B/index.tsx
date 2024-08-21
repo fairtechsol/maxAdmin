@@ -26,7 +26,7 @@ const Cards32B = () => {
 
   const setMatchRatesInRedux = (event: any) => {
     try {
-      dispatch(updateCard32BMatchRates(event?.data?.data?.data));
+      dispatch(updateCard32BMatchRates(event?.data));
     } catch (e) {
       console.log(e);
     }

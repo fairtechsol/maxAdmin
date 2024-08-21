@@ -1,5 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import TeentPattiComponent from "../../../../components/cardGames/games/teenPattiTest";
+import Loader from "../../../../components/commonComponent/loader";
+import { socket, socketService } from "../../../../socketManager";
 import {
   getDragonTigerDetailHorseRacing,
   resetCardDetail,
@@ -8,15 +11,12 @@ import {
   updateProfitLossCards,
   updateTeenPattiTestMatchRates,
 } from "../../../../store/actions/card/cardDetail";
-import { cardGamesType } from "../../../../utils/Constants";
-import { socket, socketService } from "../../../../socketManager";
 import {
   getPlacedBets,
   updateBetsPlaced,
 } from "../../../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../../../store/store";
-import Loader from "../../../../components/commonComponent/loader";
-import TeentPattiComponent from "../../../../components/cardGames/games/teenPattiTest";
+import { cardGamesType } from "../../../../utils/Constants";
 
 const TeenPattiTest = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -26,7 +26,7 @@ const TeenPattiTest = () => {
 
   const setMatchRatesInRedux = (event: any) => {
     try {
-      dispatch(updateTeenPattiTestMatchRates(event?.data?.data?.data));
+      dispatch(updateTeenPattiTestMatchRates(event?.data));
     } catch (e) {
       console.log(e);
     }
