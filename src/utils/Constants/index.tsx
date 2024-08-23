@@ -130,7 +130,7 @@ export const Constants = {
   expertPathLive: "https://expertapi.fairgame7.com",
   thirdPartyCard: "https://casinoserviceapi.fairgame.club",
   thirdPartyCardLive: "https://casinoserviceapi.fairgame7.com",
-  localPath: "http://localhost:5000",
+  localPath: "http://localhost:5001",
   localPathThird: "http://localhost:3200",
   localPathExpert: "http://localhost:6060",
   localThirdCard: "http://localhost:3201",
@@ -139,7 +139,10 @@ export const Constants = {
   PAGELIMIT: 15,
 };
 
-export const cardUrl = "https://jmdapi.com/tablevideo/?id=";
+export const cardUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://jmdapi.com/tablevideo/?id="
+    : "https://video.proexch.in/route/?id=";
 
 // use below baseUrl for live build
 
