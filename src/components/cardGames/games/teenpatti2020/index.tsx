@@ -107,7 +107,7 @@ const TeentPatti2020Component = () => {
                   }}
                 >
                   <span style={{ fontSize: "14px", fontWeight: "bolder" }}>
-                    {dragonTigerDetail?.playerA?.[0]?.nat}
+                    {dragonTigerDetail?.playerA?.[0]?.nation}
                   </span>
                 </div>
                 <div
@@ -171,7 +171,7 @@ const TeentPatti2020Component = () => {
                     style={{ width: "60%" }}
                   >
                     <span className="f12-b">
-                      {dragonTigerDetail?.playerA?.[1]?.nat}
+                      {dragonTigerDetail?.playerA?.[1]?.nation}
                     </span>
                     <span
                       className={`f10-b ${
@@ -214,7 +214,7 @@ const TeentPatti2020Component = () => {
                   }}
                 >
                   <span style={{ fontSize: "14px", fontWeight: "bolder" }}>
-                    {dragonTigerDetail?.playerB?.[0]?.nat}
+                    {dragonTigerDetail?.playerB?.[0]?.nation}
                   </span>
                 </div>
                 <div
@@ -278,7 +278,7 @@ const TeentPatti2020Component = () => {
                     style={{ width: "60%" }}
                   >
                     <span className="f12-b">
-                      {dragonTigerDetail?.playerB?.[1]?.nat}
+                      {dragonTigerDetail?.playerB?.[1]?.nation}
                     </span>
                     <span
                       className={`f10-b ${

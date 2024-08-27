@@ -18,7 +18,7 @@ const TeenPattiTableRow = ({ player, pairPlus, indx, cardsA }: any) => {
         }}
       >
         <span style={{ fontSize: "14px", fontWeight: "bolder" }}>
-          {player?.nat}
+          {player?.nation}
         </span>
 
         <HandleCards2 card={cardsA[indx] !== "1" ? cardsA[indx] : ""} />
@@ -76,7 +76,7 @@ const TeenPattiTableRow = ({ player, pairPlus, indx, cardsA }: any) => {
           }`}
           style={{ width: "50%" }}
         >
-          <span className="f12-b">{pairPlus.nat}</span>
+          <span className="f12-b">{pairPlus.nation}</span>
           <span
             className={`f10-b ${"profit-loss-class"} ${
               dragonTigerDetail?.profitLoss

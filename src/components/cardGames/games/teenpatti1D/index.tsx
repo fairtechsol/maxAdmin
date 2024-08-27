@@ -122,7 +122,7 @@ const TeentPatti1DComponent = () => {
                     }}
                   >
                     <span style={{ fontSize: "14px", fontWeight: "bolder" }}>
-                      {dragonTigerDetail?.playerA?.[0]?.nat}
+                      {dragonTigerDetail?.playerA?.[0]?.nation}
                     </span>
                     <span
                       className={
@@ -213,7 +213,7 @@ const TeentPatti1DComponent = () => {
                     }}
                   >
                     <span style={{ fontSize: "14px", fontWeight: "bolder" }}>
-                      {dragonTigerDetail?.playerB?.[0]?.nat}
+                      {dragonTigerDetail?.playerB?.[0]?.nation}
                     </span>
                     <span
                       className={
