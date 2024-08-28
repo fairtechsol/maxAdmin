@@ -270,7 +270,7 @@ const Topbar = (props: any) => {
                       { name: "Worli", link: "/admin/casino/worli" },
                       {
                         name: "3 Cards Judgement",
-                        link: "/admin/casinoDetail/3cardj",
+                        link: "/admin/casino/3cardj",
                       },
                       {
                         name: "32 Cards Casino",

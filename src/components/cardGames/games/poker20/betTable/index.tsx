@@ -3,12 +3,17 @@ const DynamicTable = ({ odds, data, playerNum }: any) => {
   const array = odds?.slice(playerNum[0], playerNum[1]);
 
   const groupedData = (array || [])?.reduce((acc: any, item: any) => {
-    const { nat, sid, rate, gstatus } = item;
-    if (!acc[nat]) {
-      acc[nat] = { nat, entries: [] };
+    const { nation, sid, rate, gstatus } = item;
+    if (!acc[nation]) {
+      acc[nation] = { nation, entries: [] };
     }
-    const suffix = String.fromCharCode(65 + acc[nat].entries.length);
-    acc[nat].entries?.push({ nat: `${nat} ${suffix}`, sid, rate, gstatus });
+    const suffix = String.fromCharCode(65 + acc[nation].entries.length);
+    acc[nation].entries?.push({
+      nation: `${nation} ${suffix}`,
+      sid,
+      rate,
+      gstatus,
+    });
     return acc;
   }, {});
 
@@ -52,7 +57,7 @@ const DynamicTable = ({ odds, data, playerNum }: any) => {
                 }}
               >
                 <span style={{ fontSize: "14px", fontWeight: "bolder" }}>
-                  {item?.nat}
+                  {item?.nation}
                 </span>
               </div>
               <div

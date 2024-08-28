@@ -95,6 +95,7 @@ const Bacarrat1 = Loadable(
 const Bacarrat2 = Loadable(
   lazy(() => import("../pages/cardGames/games/baccarat2"))
 );
+const CardJ = Loadable(lazy(() => import("../pages/cardGames/games/3CardJ")));
 
 const MainRoutes = {
   path: "/admin",
@@ -263,6 +264,10 @@ const MainRoutes = {
     {
       path: "casinoDetail/baccarat2",
       element: <Bacarrat2 />,
+    },
+    {
+      path: "casinoDetail/3cardj",
+      element: <CardJ />,
     },
     {
       path: "*",

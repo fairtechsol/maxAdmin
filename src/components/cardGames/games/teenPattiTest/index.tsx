@@ -127,7 +127,7 @@ const TeenPattiComponent = () => {
                     }}
                   >
                     <span style={{ fontSize: "14px", fontWeight: "bolder" }}>
-                      {dragonTigerDetail?.playerA?.[0]?.nat}
+                      {dragonTigerDetail?.playerA?.[0]?.nation}
                     </span>
                   </div>
 
@@ -179,7 +179,7 @@ const TeenPattiComponent = () => {
                           <span
                             style={{ fontSize: "14px", fontWeight: "bolder" }}
                           >
-                            {section.nat}
+                            {section.nation}
                           </span>
                         </div>
 

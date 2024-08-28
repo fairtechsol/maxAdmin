@@ -38,7 +38,7 @@ const DynamicTable = ({ odds, data }: any) => {
           }}
         >
           <span style={{ fontSize: "14px", fontWeight: "bolder" }}>
-            {odds?.[0]?.nat}
+            {odds?.[0]?.nation}
           </span>
           <span
             className={`f400 ${
@@ -102,7 +102,7 @@ const DynamicTable = ({ odds, data }: any) => {
           }}
         >
           <span style={{ fontSize: "14px", fontWeight: "bolder" }}>
-            {odds?.[1]?.nat}
+            {odds?.[1]?.nation}
           </span>
           <span
             className={`f400 ${

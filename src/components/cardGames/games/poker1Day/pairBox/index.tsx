@@ -48,7 +48,7 @@ const PairBox = ({ odds, data }: any) => {
           }}
         >
           <div className="poker-table-item" style={{ width: "50%" }}>
-            <span className="f12-b">{odds?.[0]?.nat}</span>
+            <span className="f12-b">{odds?.[0]?.nation}</span>
             <span
               className={`f10-b f400 ${
                 data?.profitLoss
@@ -80,7 +80,7 @@ const PairBox = ({ odds, data }: any) => {
             </span>
           </div>
           <div className={`poker-table-item`} style={{ width: "50%" }}>
-            <span className="f12-b">{odds?.[1]?.nat}</span>
+            <span className="f12-b">{odds?.[1]?.nation}</span>
             <span
               className={`f10-b f400 ${
                 data?.profitLoss
@@ -141,7 +141,7 @@ const PairBox = ({ odds, data }: any) => {
           }}
         >
           <div className="poker-table-item" style={{ width: "50%" }}>
-            <span className="f12-b">{odds?.[2]?.nat}</span>
+            <span className="f12-b">{odds?.[2]?.nation}</span>
             <span
               className={`f10-b f400 ${
                 data?.profitLoss
@@ -173,7 +173,7 @@ const PairBox = ({ odds, data }: any) => {
             </span>
           </div>
           <div className={`poker-table-item `} style={{ width: "50%" }}>
-            <span className="f12-b">{odds?.[3]?.nat}</span>
+            <span className="f12-b">{odds?.[3]?.nation}</span>
             <span
               className={`f10-b f400 ${
                 data?.profitLoss
