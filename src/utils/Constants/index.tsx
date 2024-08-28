@@ -144,7 +144,6 @@ export const cardUrl =
     ? "https://jmdapi.com/tablevideo/?id="
     : "https://maxbet9.fairgame.club/videoPage/";
 
-
 // const oldVideoUrl = "https://video.proexch.in/route/?id="
 // use below baseUrl for live build
 
@@ -604,6 +603,7 @@ export const cardGamesType: any = {
   worli: "worli2",
   baccarat: "baccarat",
   baccarat2: "baccarat2",
+  cardj: "3cardj",
 };
 
 export const cardGamesTypeNames: any = {
@@ -668,7 +668,7 @@ export const cardGamesId: any = {
   aaa: 3056,
   btable: 3041,
   worli: 3040,
-  cardj: 3040,
+  cardj: 3039,
   baccarat: 3044,
   baccarat2: 3033,
 };
@@ -850,6 +850,10 @@ export const cardConstantsAccountStatement = [
     value: "baccarat2",
     label: "Baccarat2",
   },
+  {
+    value: "3cardj",
+    label: "3 Card Judgement",
+  },
 ];
 
 export const cardGamesCasinoResult = [
@@ -965,5 +969,9 @@ export const cardGamesCasinoResult = [
   {
     value: "baccarat2",
     label: "Baccarat2",
+  },
+  {
+    value: "3cardj",
+    label: "3 Card Judgement",
   },
 ];

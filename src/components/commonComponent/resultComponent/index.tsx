@@ -32,6 +32,7 @@ import BollywoodTableResultComponent from "../../cardGames/games/bollywoodTable/
 import WorliResultComponent from "../../cardGames/games/worli/resultModalComponent";
 import Bacarrat1ResultComponent from "../../cardGames/games/baccarat1/resultModalComponent";
 import Bacarrat2ResultComponent from "../../cardGames/games/baccarat2/resultModalComponent";
+import CardJResultComponent from "../../cardGames/games/3CardJ/resultModalComponent";
 
 interface ResultComponentProps {
   data: any;
@@ -48,7 +49,7 @@ export const ResultComponent: React.FC<ResultComponentProps> = ({
     <Container style={{ padding: 0 }}>
       <div className="resultModalHeader d-flex justify-content-between">
         <span style={{ fontSize: "20px", fontWeight: "bold" }}>
-          {cardGamesTypeNames[type]} Result
+          {cardGamesTypeNames[type]} RESULT
         </span>
         <RxCross2 size={25} onClick={() => setfalse(false)} />
       </div>
@@ -115,6 +116,8 @@ export const ResultComponent: React.FC<ResultComponentProps> = ({
         <Bacarrat1ResultComponent data={data} />
       ) : type === cardGamesType?.baccarat2 ? (
         <Bacarrat2ResultComponent data={data} />
+      ) : type === cardGamesType?.cardj ? (
+        <CardJResultComponent data={data} />
       ) : (
         <></>
       )}

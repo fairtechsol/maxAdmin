@@ -267,5 +267,12 @@ export const graphData = createAsyncThunk<any, any>(
   }
 );
 
+export const update3CardJRates = createAsyncThunk<any, any>(
+  "3cardj/matchRatesUpdate",
+  async (data) => {
+    return data;
+  }
+);
+
 export const resetScoreBoard = createAction("scoreboard/reset");
 export const resetCardDetail = createAction("cardDetail/reset");

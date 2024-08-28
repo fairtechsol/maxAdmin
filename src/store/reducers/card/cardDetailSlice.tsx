@@ -7,6 +7,7 @@ import {
   resetCardDetail,
   resetScoreBoard,
   resultDragonTiger,
+  update3CardJRates,
   update7BCardMatchRates,
   update7CardMatchRates,
   updateAmarAkbarAnthonyCardMatchRates,
@@ -647,6 +648,23 @@ const cardDetail = createSlice({
             ...state.dragonTigerDetail,
             videoInfo,
             odds,
+          };
+        }
+      })
+      .addCase(update3CardJRates.fulfilled, (state, action) => {
+        if (action.payload) {
+          const { t1, t2 } = action.payload;
+          state.loading = false;
+          const videoInfo = { ...t1[0] };
+          //const cardInfo = { ...t3[0] };
+          const yes = t2[0];
+          const no = t2[1];
+          state.dragonTigerDetail = {
+            ...state.dragonTigerDetail,
+            videoInfo,
+            // cardInfo,
+            yes,
+            no,
           };
         }
       })
