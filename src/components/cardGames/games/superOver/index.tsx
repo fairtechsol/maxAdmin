@@ -17,7 +17,6 @@ import CardResultBox from "../../../commonComponent/cardResultBox";
 import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
 import Dragon20Result from "./dragonCard";
 import ScoreBoard from "../../../commonComponent/scoreBoard";
-import { handleRoundId } from "../../../../helpers";
 import Bookmaker from "./bookmaker";
 
 const SuperOverComponent = () => {
@@ -50,9 +49,7 @@ const SuperOverComponent = () => {
               </div>
               <span>
                 {dragonTigerDetail?.videoInfo
-                  ? `Round ID:  ${handleRoundId(
-                      dragonTigerDetail?.videoInfo?.mid
-                    )}`
+                  ? `Round ID:  ${dragonTigerDetail?.videoInfo?.mid}`
                   : ""}
               </span>
             </div>
