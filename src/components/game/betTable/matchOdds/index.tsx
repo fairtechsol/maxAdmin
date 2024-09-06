@@ -1,9 +1,9 @@
 import { Table } from "react-bootstrap";
-import "../../style.scss";
-import BetStatusOverlay from "../../../commonComponent/betStatusOverlay";
-import BackLayBox from "../../../backLayBox";
 import { teamStatus } from "../../../../utils/Constants";
 import isMobile from "../../../../utils/screenDimension";
+import BackLayBox from "../../../backLayBox";
+import BetStatusOverlay from "../../../commonComponent/betStatusOverlay";
+import "../../style.scss";
 
 interface MatchOddsProps {
   title: string;
@@ -146,12 +146,12 @@ function MatchOdds({
                             bgColor={`blue${index + 1}`}
                             rate={
                               data?.runners?.[indexes]?.ex?.availableToBack?.[
-                                2 - index
+                                index
                               ]?.price
                             }
                             percent={
                               data?.runners?.[indexes]?.ex?.availableToBack?.[
-                                2 - index
+                                index
                               ]?.size
                             }
                             active={

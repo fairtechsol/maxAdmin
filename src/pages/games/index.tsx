@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import LiveStreamComponent from "../../components/commonComponent/liveStreamComponent";
 import BetTable from "../../components/game/betTable";
 import GameHeader from "../../components/game/gameHeader";
 import ScoreCard from "../../components/game/scoreCard";
 import UserBets from "../../components/game/userBet";
-import { MatchType } from "../../utils/enum";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../store/store";
+import { getChannelId } from "../../helpers";
+import { socket, socketService } from "../../socketManager";
 import {
   getPlacedBets,
   matchDetailAction,
   updateMatchRates,
   updatePlacedbetsDeleteReason,
 } from "../../store/actions/match/matchAction";
-import { useLocation, useParams, useNavigate } from "react-router-dom";
-import { socket, socketService } from "../../socketManager";
-import LiveStreamComponent from "../../components/commonComponent/liveStreamComponent";
-import { getChannelId } from "../../helpers";
+import { AppDispatch, RootState } from "../../store/store";
+import { sessionBettingType } from "../../utils/Constants";
+import { MatchType } from "../../utils/enum";
 
 const Games = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -224,7 +225,7 @@ const Games = () => {
       console.log(error);
     }
   }, []);
-
+  console.log(matchDetails);
   return (
     <div className="gamePage">
       <Container fluid>
@@ -263,16 +264,84 @@ const Games = () => {
                       />
                     </Col>
                   )}
+                  {matchDetails?.quickBookmaker
+                    ?.filter((item: any) => item?.isActive)
+                    ?.map((item: any) => {
+                      return (
+                        <Col md={12}>
+                          <BetTable
+                            title={item?.name}
+                            type={MatchType.QUICKBOOKMAKER}
+                            data={item}
+                          />
+                        </Col>
+                      );
+                    })}
+
+                  {matchDetails?.apiTideMatch?.isActive && (
+                    <Col md={12}>
+                      <BetTable
+                        title={matchDetails?.apiTideMatch?.name}
+                        type={MatchType.BOOKMAKER}
+                        data={matchDetails?.apiTideMatch}
+                        teamYesNo={true}
+                      />
+                    </Col>
+                  )}
+
+                  {matchDetails?.marketCompleteMatch?.isActive && (
+                    <Col md={12}>
+                      <BetTable
+                        title={matchDetails?.marketCompleteMatch?.name}
+                        type={MatchType.BOOKMAKER}
+                        data={matchDetails?.marketCompleteMatch}
+                        teamYesNo={true}
+                      />
+                    </Col>
+                  )}
+
+                  {matchDetails?.manualTiedMatch?.isActive && (
+                    <Col md={12}>
+                      <BetTable
+                        title={matchDetails?.manualTiedMatch?.name}
+                        type={MatchType.QUICKBOOKMAKER}
+                        data={matchDetails?.manualTiedMatch}
+                        teamYesNo={true}
+                      />
+                    </Col>
+                  )}
+
+                  {matchDetails?.manualCompleteMatch?.isActive && (
+                    <Col md={12}>
+                      <BetTable
+                        title={matchDetails?.manualCompleteMatch?.name}
+                        type={MatchType.QUICKBOOKMAKER}
+                        data={matchDetails?.manualCompleteMatch}
+                        teamYesNo={true}
+                      />
+                    </Col>
+                  )}
+
                   <Row className="no-gutters">
-                    {matchDetails?.apiSessionActive && (
-                      <Col md={6}>
-                        <BetTable
-                          title={"Session Market"}
-                          type={MatchType.API_SESSION_MARKET}
-                          data={matchDetails?.sessionBettings}
-                        />
-                      </Col>
-                    )}
+                    {matchDetails?.apiSessionActive &&
+                      Object.entries(matchDetails?.updatedSessionBettings || {})
+                        ?.filter(
+                          ([key, value]: any) =>
+                            value?.section?.length > 0 &&
+                            key != sessionBettingType.cricketCasino
+                        )
+                        ?.map(([key, value]: any) => {
+                          return (
+                            <Col md={12}>
+                              <BetTable
+                                title={value?.mname || key}
+                                type={MatchType.API_SESSION_MARKET}
+                                sessionType={key}
+                                data={value}
+                              />
+                            </Col>
+                          );
+                        })}
                     {/* <BetTableHeader title="runners" />
                     <div className="game-heading"><span className="card-header-title">SSD Bari v Ternana</span> <span className="float-right">5/17/2024 12:00:00 AM</span></div> */}
                     {/* {matchDetails?.manualSessionActive && (

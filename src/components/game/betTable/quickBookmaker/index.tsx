@@ -5,22 +5,20 @@ import BackLayBox from "../../../backLayBox";
 import BetStatusOverlay from "../../../commonComponent/betStatusOverlay";
 import "../../style.scss";
 
-interface BookmakerTableProps {
+interface QuickBookmakerTableProps {
   minMax?: any;
   data: any;
   backLayCount?: number;
   matchDetails: any;
   teamYesNo?: boolean;
 }
-function BookmakerTable({
+function QuickBookmakerTable({
   minMax,
   data,
   backLayCount = 6,
   matchDetails,
   teamYesNo
-}: BookmakerTableProps) {
-
-  console.log(data);
+}: QuickBookmakerTableProps) {
   return (
     <div
       className={`gameTable table-responsive sessionFancyTable borderTable border `}
@@ -92,12 +90,8 @@ function BookmakerTable({
                 </td>
                 <td colSpan={backLayCount === 2 ? 2 : 6} className={""}>
                   <BetStatusOverlay
-                    title={data?.runners?.[i]?.status.toLowerCase()}
-                    active={
-                      data?.runners?.[i]?.status
-                        .toLowerCase()
-                        ?.toLowerCase() !== teamStatus.active?.toLowerCase()
-                    }
+                    title={data?.[`statusTeam${item}`]}
+                    active={data?.[`statusTeam${item}`] !== teamStatus.active}
                   >
                     {new Array(backLayCount === 2 ? 1 : 3)
                       .fill(0)
@@ -107,21 +101,9 @@ function BookmakerTable({
                           key={index}
                           // customClass={`bookmaker-bet-place W-100`}
                           bgColor={`blue${index + 1}`}
-                          rate={
-                            data?.runners?.[i]?.ex?.availableToBack?.[
-                              index
-                            ]?.price
-                          }
-                          percent={
-                            data?.runners?.[i]?.ex?.availableToBack?.[
-                              index
-                            ]?.size
-                          }
+                          rate={data[`backTeam${item}`] - 2 + index}
                           active={
-                            data?.runners?.[i]?.status
-                              .toLowerCase()
-                              ?.toLowerCase() !==
-                            teamStatus.active?.toLowerCase()
+                            data?.[`statusTeam${item}`] !== teamStatus.active
                           }
                         />
                       ))}
@@ -134,21 +116,9 @@ function BookmakerTable({
                           //     customClass={`bookmaker-bet-place  ""
                           // `}
                           bgColor={`red${index + 1}`}
-                          rate={
-                            data?.runners?.[i]?.ex?.availableToLay?.[
-                              index
-                            ]?.price
-                          }
-                          percent={
-                            data?.runners?.[i]?.ex?.availableToLay?.[
-                              index
-                            ]?.size
-                          }
+                          rate={data[`layTeam${item}`] + index}
                           active={
-                            data?.runners?.[i   ]?.status
-                              .toLowerCase()
-                              ?.toLowerCase() !==
-                            teamStatus.active?.toLowerCase()
+                            data?.[`statusTeam${item}`] !== teamStatus.active
                           }
                         />
                       ))}
@@ -164,4 +134,4 @@ function BookmakerTable({
   );
 }
 
-export default BookmakerTable;
+export default QuickBookmakerTable;

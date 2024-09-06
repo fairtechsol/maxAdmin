@@ -1,4 +1,6 @@
 import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
+import { RootState } from "../../../store/store";
 import { MatchType } from "../../../utils/enum";
 import { formattedMinMax } from "../../../utils/formatMinMax";
 import BetTableHeader from "../../commonComponent/betTableHeader";
@@ -6,17 +8,25 @@ import CustomBreadcrumb from "../../commonComponent/breadcrumb";
 import ApiSessionMarketTable from "./apiSessionMarket";
 import BookmakerTable from "./bookMaker";
 import MatchOdds from "./matchOdds";
+import QuickBookmakerTable from "./quickBookmaker";
 import SessionMarketTable from "./sessionMarket";
-import { RootState } from "../../../store/store";
-import { useLocation } from "react-router-dom";
 
 interface BetTableProps {
   title: string;
   type: string;
   data: any;
   backLayCount?: number;
+  teamYesNo?: boolean;
+  sessionType?: any;
 }
-const BetTable = ({ title, type, data, backLayCount }: BetTableProps) => {
+const BetTable = ({
+  title,
+  type,
+  data,
+  backLayCount,
+  teamYesNo,
+  sessionType,
+}: BetTableProps) => {
   const { matchDetails } = useSelector(
     (state: RootState) => state.match.matchListSlice
   );
@@ -51,6 +61,15 @@ const BetTable = ({ title, type, data, backLayCount }: BetTableProps) => {
           data={data}
           backLayCount={backLayCount}
           matchDetails={matchDetails}
+          teamYesNo={teamYesNo}
+        />
+      ) : type === MatchType.QUICKBOOKMAKER ? (
+        <QuickBookmakerTable
+          minMax={formattedMinMax(data?.minBet, data?.maxBet)}
+          data={data}
+          backLayCount={backLayCount}
+          matchDetails={matchDetails}
+          teamYesNo={teamYesNo}
         />
       ) : type === MatchType.MATCH_ODDS ? (
         <MatchOdds
@@ -64,6 +83,7 @@ const BetTable = ({ title, type, data, backLayCount }: BetTableProps) => {
           data={data}
           title={title}
           matchDetails={matchDetails}
+          sessionType={sessionType}
         />
       ) : (
         <SessionMarketTable
