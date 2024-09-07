@@ -342,20 +342,35 @@ const Games = () => {
                             </Col>
                           );
                         })}
+                         {matchDetails?.apiSessionActive &&
+                      matchDetails?.updatedSessionBettings?.cricketCasino?.section
+                        ?.map((item: any) => {
+                          return (
+                            <Col md={12}>
+                              <BetTable
+                                title={item?.name}
+                                type={MatchType.CRICKET_CASINO_SESSION_MARKET}
+                                data={item}
+                              />
+                            </Col>
+                          );
+                        })}
                     {/* <BetTableHeader title="runners" />
                     <div className="game-heading"><span className="card-header-title">SSD Bari v Ternana</span> <span className="float-right">5/17/2024 12:00:00 AM</span></div> */}
-                    {/* {matchDetails?.manualSessionActive && (
-                      <Col md={6}>
-                        <BetTable
-                          title={"Fancy Market"}
-                          type={MatchType.SESSION_MARKET}
-                          data={matchDetails?.sessionBettings?.filter(
-                            (item: any) =>
-                              JSON.parse(item)?.selectionId === null
-                          )}
-                        />
-                      </Col>
-                    )} */}
+                    {matchDetails?.manualSessionActive &&
+                      matchDetails?.sessionBettings?.filter(
+                        (item: any) => JSON.parse(item)?.isManual
+                      )?.length && (
+                        <Col md={6}>
+                          <BetTable
+                            title={"Fancy Market"}
+                            type={MatchType.SESSION_MARKET}
+                            data={matchDetails?.sessionBettings?.filter(
+                              (item: any) => JSON.parse(item)?.isManual
+                            )}
+                          />
+                        </Col>
+                      )}
                   </Row>
                 </>
               )}

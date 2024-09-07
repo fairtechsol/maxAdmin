@@ -1,8 +1,9 @@
+import moment from "moment";
 import { useEffect, useState } from "react";
 import { Accordion } from "react-bootstrap";
 import { FaTimes } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { getCompetitionList } from "../../../store/actions/match/matchAction";
+import { getCompetitionDates } from "../../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../../store/store";
 import { MenuItem } from "./menuItem";
 import menuItemJson from "./menuItem.json";
@@ -17,7 +18,7 @@ const Sidebar = (props: any) => {
 
   const dispatch: AppDispatch = useDispatch();
 
-  const { competitionList } = useSelector(
+  const { competitionDates } = useSelector(
     (state: RootState) => state.match.sidebarList
   );
 
@@ -28,16 +29,16 @@ const Sidebar = (props: any) => {
         (item: any) => item?.id === selectedMatch
       );
 
-      tempList[matchIndex].children = competitionList?.map((item: any) => ({
-        name: item?.competitionName,
-        id: item?.competitionId,
+      tempList[matchIndex].children = competitionDates?.map((item: any) => ({
+        name: moment(item?.startdate).format("YYYY/MM/DD"),
+        id: item?.startdate,
         type: "collapse",
         children: [],
       }));
       setSelectedMatchIndex(matchIndex);
       setMenuItemList(tempList);
     }
-  }, [competitionList, selectedMatch]);
+  }, [competitionDates, selectedMatch]);
 
   return (
     <>
@@ -57,7 +58,7 @@ const Sidebar = (props: any) => {
             onSelect={(e: any) => {
               if (e == 0) {
                 setSelectedMatch(item?.id);
-                dispatch(getCompetitionList(item?.id));
+                dispatch(getCompetitionDates(item?.id));
               }
             }}
             key={item?.id}

@@ -7,6 +7,7 @@ import BetTableHeader from "../../commonComponent/betTableHeader";
 import CustomBreadcrumb from "../../commonComponent/breadcrumb";
 import ApiSessionMarketTable from "./apiSessionMarket";
 import BookmakerTable from "./bookMaker";
+import CricketCasinoMarketTable from "./cricketCasinoMarket";
 import MatchOdds from "./matchOdds";
 import QuickBookmakerTable from "./quickBookmaker";
 import SessionMarketTable from "./sessionMarket";
@@ -84,6 +85,13 @@ const BetTable = ({
           title={title}
           matchDetails={matchDetails}
           sessionType={sessionType}
+        />
+      ):
+      type === MatchType.CRICKET_CASINO_SESSION_MARKET ? (
+        <CricketCasinoMarketTable
+          data={data}
+          title={title}
+          matchDetails={matchDetails}
         />
       ) : (
         <SessionMarketTable

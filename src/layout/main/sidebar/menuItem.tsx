@@ -1,12 +1,10 @@
-import moment from "moment-timezone";
 import React, { useEffect, useState } from "react";
 import { Accordion } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
-  getCompetitionDates,
   getCompetitionMatches,
-  setBreadCrumb,
+  setBreadCrumb
 } from "../../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../../store/store";
 
@@ -42,51 +40,44 @@ const MenuCollapse = (props: any) => {
     onClickMenuItem,
   } = props;
 
-  const [selectedCompetition, setSelectedCompetition] = useState("");
-  const [selectedCompetitionName, setSelectedCompetitionName] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
 
   const dispatch: AppDispatch = useDispatch();
 
-  const { competitionDates, competitionMatches } = useSelector(
+  const {  competitionMatches } = useSelector(
     (state: RootState) => state.match.sidebarList
   );
-
-  useEffect(() => {
-    try {
-      if (selectedCompetition !== "") {
-        const tempList = [...menuItemList];
-        const selectedMatchChildren = tempList[selectedMatchIndex].children;
-        const competitionIndex = selectedMatchChildren.findIndex(
-          (item: any) => item?.id === selectedCompetition
-        );
-        selectedMatchChildren[competitionIndex].children =
-          competitionDates &&
-          competitionDates?.map((item: any) => ({
-            name: moment(item?.startdate).format("YYYY/MM/DD"),
-            id: item?.startdate,
-            type: "collapse",
-            children: [],
-          }));
-        setMenuItemList(tempList);
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  }, [competitionDates, selectedCompetition, selectedMatchIndex]);
+  // useEffect(() => {
+  //   try {
+  //     if (selectedCompetition !== "") {
+  //       const tempList = [...menuItemList];
+  //       const selectedMatchChildren = tempList[selectedMatchIndex].children;
+  //       const competitionIndex = selectedMatchChildren.findIndex(
+  //         (item: any) => item?.id === selectedCompetition
+  //       );
+  //       selectedMatchChildren[competitionIndex].children =
+  //         competitionDates &&
+  //         competitionDates?.map((item: any) => ({
+  //           name: moment(item?.startdate).format("YYYY/MM/DD"),
+  //           id: item?.startdate,
+  //           type: "collapse",
+  //           children: [],
+  //         }));
+  //       setMenuItemList(tempList);
+  //     }
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // }, [competitionDates, selectedCompetition, selectedMatchIndex]);
 
   useEffect(() => {
     try {
       if (selectedDate !== "") {
         const tempList = [...menuItemList];
         const selectedMatchChildren = tempList[selectedMatchIndex].children;
-        const competitionIndex = selectedMatchChildren.findIndex(
-          (item: any) => item?.id === selectedCompetition
-        );
-        const dateIndex = selectedMatchChildren[
-          competitionIndex
-        ].children.findIndex((item: any) => item?.id === selectedDate);
-        selectedMatchChildren[competitionIndex].children[dateIndex].children =
+       
+        const dateIndex = tempList[selectedMatchIndex].children.findIndex((item: any) => item?.id === selectedDate);
+        selectedMatchChildren[dateIndex].children =
           competitionMatches?.map((item: any) => ({
             name: item?.title,
             id: item?.id,
@@ -101,7 +92,6 @@ const MenuCollapse = (props: any) => {
   }, [
     competitionMatches,
     selectedDate,
-    selectedCompetition,
     selectedMatchIndex,
   ]);
 
@@ -118,8 +108,8 @@ const MenuCollapse = (props: any) => {
                 <Accordion
                   onSelect={(e: any) => {
                     if (e == 0) {
-                      setSelectedCompetition(sideBarChild?.id);
-                      dispatch(getCompetitionDates(sideBarChild?.id));
+                      setSelectedDate(sideBarChild?.id);
+                      dispatch(getCompetitionMatches({id: menuItemList?.[selectedMatchIndex]?.id,date:sideBarChild?.id}));
                     }
                   }}
                   key={sideBarChild?.id}
@@ -131,93 +121,62 @@ const MenuCollapse = (props: any) => {
                       {sideBarChild?.children?.map(
                         (menuItemChild: any, indexes: number) => (
                           <Accordion
-                            onSelect={(e: any) => {
-                              if (e == 0) {
-                                setSelectedDate(menuItemChild?.id);
-                                setSelectedCompetition(sideBarChild?.id);
-                                setSelectedCompetitionName(sideBarChild?.name);
-                                dispatch(
-                                  getCompetitionMatches({
-                                    date: menuItemChild?.id,
-                                    id: sideBarChild?.id,
-                                  })
+                          key={menuItemChild?.id}
+                          defaultActiveKey={[]}
+                        >
+                          <Accordion.Item eventKey="0">
+                            <Accordion.Header>
+                              {menuItemChild?.name}
+                            </Accordion.Header>
+                            {menuItemChild.matchBetting?.map(
+                              (item: any) => {
+                                return (
+                                  <Accordion.Body
+                                    key={item?.id}
+                                    onClick={() => {
+                                      onClickMenuItem();
+                                      if (
+                                        data?.id === "cricket"
+                                      ) {
+                                        dispatch(
+                                          setBreadCrumb({
+                                            competition:
+                                              data?.id,
+                                            matchName:
+                                            menuItemChild?.name,
+                                            type: item?.name,
+                                            date: selectedDate,
+                                          })
+                                        );
+                                      }
+                                    }}
+                                  >
+                                    <Accordion
+                                      key={indexes}
+                                      defaultActiveKey={[]}
+                                    >
+                                      <Accordion.Item eventKey="0">
+                                        <MenuItemChild
+                                          data={{
+                                            path:
+                                              data?.id ===
+                                              "cricket"
+                                                ? item?.name ===
+                                                  "tied_match"
+                                                  ? `/admin/match_details/${menuItemChild?.id}`
+                                                  : `/admin/match_detail/${menuItemChild?.id}`
+                                                : `/admin/other_match_detail/${menuItemChild?.id}/${item?.id}`,
+                                            name: item?.name,
+                                          }}
+                                        />
+                                      </Accordion.Item>
+                                    </Accordion>
+                                  </Accordion.Body>
                                 );
                               }
-                            }}
-                            key={menuItemChild?.id}
-                            defaultActiveKey={[]}
-                          >
-                            <Accordion.Item eventKey="0">
-                              <Accordion.Header>
-                                {menuItemChild?.name}
-                              </Accordion.Header>
-                              <Accordion.Body>
-                                {menuItemChild?.children?.map(
-                                  (matches: any) => {
-                                    return (
-                                      <Accordion
-                                        key={matches?.id}
-                                        defaultActiveKey={[]}
-                                      >
-                                        <Accordion.Item eventKey="0">
-                                          <Accordion.Header>
-                                            {matches?.name}
-                                          </Accordion.Header>
-                                          {matches.matchBetting?.map(
-                                            (item: any) => {
-                                              return (
-                                                <Accordion.Body
-                                                  key={item?.id}
-                                                  onClick={() => {
-                                                    onClickMenuItem();
-                                                    if (
-                                                      data?.id === "cricket"
-                                                    ) {
-                                                      dispatch(
-                                                        setBreadCrumb({
-                                                          competition:
-                                                            selectedCompetitionName,
-                                                          matchName:
-                                                            matches?.name,
-                                                          type: item?.name,
-                                                          date: selectedDate,
-                                                        })
-                                                      );
-                                                    }
-                                                  }}
-                                                >
-                                                  <Accordion
-                                                    key={indexes}
-                                                    defaultActiveKey={[]}
-                                                  >
-                                                    <Accordion.Item eventKey="0">
-                                                      <MenuItemChild
-                                                        data={{
-                                                          path:
-                                                            data?.id ===
-                                                            "cricket"
-                                                              ? item?.name ===
-                                                                "tied_match"
-                                                                ? `/admin/match_details/${matches?.id}`
-                                                                : `/admin/match_detail/${matches?.id}`
-                                                              : `/admin/other_match_detail/${matches?.id}/${item?.id}`,
-                                                          name: item?.name,
-                                                        }}
-                                                      />
-                                                    </Accordion.Item>
-                                                  </Accordion>
-                                                </Accordion.Body>
-                                              );
-                                            }
-                                          )}
-                                        </Accordion.Item>
-                                      </Accordion>
-                                    );
-                                  }
-                                )}
-                              </Accordion.Body>
-                            </Accordion.Item>
-                          </Accordion>
+                            )}
+                          </Accordion.Item>
+                        </Accordion>
                         )
                       )}
                     </Accordion.Body>
