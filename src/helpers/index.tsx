@@ -29,3 +29,11 @@ export const getChannelId = async (eventId: number) => {
     console.log(error);
   }
 };
+
+
+export const formatToINR = (amount: any) => {
+  const formatter = new Intl.NumberFormat("en-IN", {
+    currency: "INR",
+  });
+  return formatter.format(amount || 0);
+};
