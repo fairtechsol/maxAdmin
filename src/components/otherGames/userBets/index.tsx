@@ -12,11 +12,10 @@ import DeleteBetOverlay from "../../commonComponent/deleteBetRow";
 // import UserBetModalTable from "../../game/userBet/modal";
 // import "../../otherGames/style.scss";
 const OtherUserBets = ({ matchId }: any) => {
-  const { placedBets } = useSelector(
+  const [showModal, setShowModal] = useState(false);
+  const { placedBets,morePlacedBets } = useSelector(
     (state: RootState) => state.match.placeBets
   );
-  const [showModal, setShowModal] = useState(false);
-
   return (
     <>
       <div>
@@ -170,7 +169,7 @@ const OtherUserBets = ({ matchId }: any) => {
           title="View More Bet"
         >
           <UserBetModalForm customClass="mb-5" matchId={matchId} />
-          <UserBetModalTable />
+          <UserBetModalTable list={morePlacedBets}/>
         </CustomModal>
       </div>
     </>

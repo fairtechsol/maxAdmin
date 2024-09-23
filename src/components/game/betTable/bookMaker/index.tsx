@@ -20,7 +20,7 @@ function BookmakerTable({
   teamYesNo
 }: BookmakerTableProps) {
 
-  console.log(data);
+  // console.log(data);
   return (
     <div
       className={`gameTable table-responsive sessionFancyTable borderTable border `}

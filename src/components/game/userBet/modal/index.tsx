@@ -2,32 +2,31 @@ import { useEffect, useState } from "react";
 import { Column, TableConfig } from "../../../../models/tableInterface";
 import CustomTable from "../../../commonComponent/table";
 import "./style.scss";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../../store/store";
+// import { useSelector } from "react-redux";
+// import { RootState } from "../../../../store/store";
 import moment from "moment-timezone";
 import TooltipCustom from "../../../reports/modals/accountStatement/tooltip";
 import DeleteBetOverlay from "../../../commonComponent/deleteBetRow";
 
-function UserBetModalTable() {
+function UserBetModalTable({list}:any) {
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const { morePlacedBets } = useSelector(
-    (state: RootState) => state.match.placeBets
-  );
+  // const { morePlacedBets } = useSelector(
+  //   (state: RootState) => state.match.placeBets
+  // );
   useEffect(() => {}, [tableConfig]);
   const columns: Column[] = [
-    { id: "sr", label: "S. NO" },
+    // { id: "sr", label: "S. NO" },
     { id: "username", label: "	User Name " },
     { id: "nation", label: "Nation " },
-    { id: "betType", label: "BetType " },
+    { id: "rate", label: "Rate " },
     { id: "amount", label: "Amount " },
-    { id: "userRate", label: "UserRate " },
-    { id: "placeDate", label: "PlaceDate " },
+    // { id: "userRate", label: "UserRate " },
+    // { id: "placeDate", label: "PlaceDate " },
     { id: "matchDate", label: "MatchDate " },
     { id: "ip", label: "IP " },
     { id: "browserDetail", label: "BrowserDetail " },
   ];
-
   return (
     <div className="activeUsers-modal">
       <CustomTable
@@ -41,13 +40,13 @@ function UserBetModalTable() {
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
       >
-        {morePlacedBets?.length === 0 && (
+        {list?.length === 0 && (
           <tr className="text-center">
             <td colSpan={10}>No Record Found!</td>
           </tr>
         )}
-        {morePlacedBets?.length > 0 &&
-          morePlacedBets?.map((item: any, index: number) => {
+        {list?.length > 0 &&
+          list?.map((item: any, index: number) => {
             const {
               id,
               user,
@@ -55,7 +54,7 @@ function UserBetModalTable() {
               betType,
               amount,
               odds,
-              createdAt,
+              // createdAt,
               match,
               ipAddress,
               browserDetail,
@@ -64,7 +63,7 @@ function UserBetModalTable() {
 
             return (
               <tr key={id} className="position-relative">
-                <td
+                {/* <td
                   className={
                     betType === "NO" || betType === "LAY"
                       ? "bg-red1"
@@ -72,12 +71,12 @@ function UserBetModalTable() {
                   }
                 >
                   {index + 1}
-                </td>
+                </td> */}
                 <td
                   className={
                     betType === "NO" || betType === "LAY"
                       ? "bg-red1"
-                      : "bg-blue3"
+                      : "bg-blue1"
                   }
                 >
                   {user?.userName}
@@ -86,7 +85,7 @@ function UserBetModalTable() {
                   className={
                     betType === "NO" || betType === "LAY"
                       ? "bg-red1"
-                      : "bg-blue3"
+                      : "bg-blue1"
                   }
                 >
                   {eventName}
@@ -95,25 +94,7 @@ function UserBetModalTable() {
                   className={
                     betType === "NO" || betType === "LAY"
                       ? "bg-red1"
-                      : "bg-blue3"
-                  }
-                >
-                  {betType}
-                </td>
-                <td
-                  className={
-                    betType === "NO" || betType === "LAY"
-                      ? "bg-red1"
-                      : "bg-blue3"
-                  }
-                >
-                  {amount}
-                </td>
-                <td
-                  className={
-                    betType === "NO" || betType === "LAY"
-                      ? "bg-red1"
-                      : "bg-blue3"
+                      : "bg-blue1"
                   }
                 >
                   {odds}
@@ -122,16 +103,34 @@ function UserBetModalTable() {
                   className={
                     betType === "NO" || betType === "LAY"
                       ? "bg-red1"
-                      : "bg-blue3"
+                      : "bg-blue1"
                   }
                 >
-                  {moment(createdAt).format("YYYY-MM-DD hh:mm:ss")}
+                  {amount}
                 </td>
-                <td
+                {/* <td
                   className={
                     betType === "NO" || betType === "LAY"
                       ? "bg-red1"
                       : "bg-blue3"
+                  }
+                >
+                  {odds}
+                </td> */}
+                {/* <td
+                  className={
+                    betType === "NO" || betType === "LAY"
+                      ? "bg-red1"
+                      : "bg-blue3"
+                  }
+                >
+                  {moment(createdAt).format("YYYY-MM-DD hh:mm:ss")}
+                </td> */}
+                <td
+                  className={
+                    betType === "NO" || betType === "LAY"
+                      ? "bg-red1"
+                      : "bg-blue1"
                   }
                 >
                   {moment(match?.startAt).format("YYYY-MM-DD hh:mm:ss")}
@@ -140,7 +139,7 @@ function UserBetModalTable() {
                   className={
                     betType === "NO" || betType === "LAY"
                       ? "bg-red1"
-                      : "bg-blue3"
+                      : "bg-blue1"
                   }
                 >
                   {ipAddress}
@@ -149,7 +148,7 @@ function UserBetModalTable() {
                   className={
                     betType === "NO" || betType === "LAY"
                       ? "bg-red1"
-                      : "bg-blue3"
+                      : "bg-blue1"
                   }
                 >
                   <TooltipCustom title={browserDetail}>
