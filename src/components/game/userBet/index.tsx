@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button, Col, Nav, Row, Tab, Table } from "react-bootstrap";
 import CustomModal from "../../commonComponent/modal";
-import UserBetModalTable from "./modal";
+// import UserBetModalTable from "./modal";
 import UserBetModalForm from "./modal/form";
 import "./style.scss";
 import { useSelector } from "react-redux";
@@ -10,11 +10,10 @@ import moment from "moment-timezone";
 import DeleteBetOverlay from "../../commonComponent/deleteBetRow";
 
 const UserBets = ({ matchId }: any) => {
-  const { placedBets } = useSelector(
+  const { placedBets,morePlacedBets } = useSelector(
     (state: RootState) => state.match.placeBets
   );
   const [showModal, setShowModal] = useState(false);
-
   return (
     <div className={`userBets`}>
       <Tab.Container id="left-tabs-example" defaultActiveKey="first">
@@ -184,8 +183,8 @@ const UserBets = ({ matchId }: any) => {
         setShow={setShowModal}
         title="View More Bet"
       >
-        <UserBetModalForm customClass="mb-5" matchId={matchId} />
-        <UserBetModalTable />
+        <UserBetModalForm customClass="mb-5" matchId={matchId} morePlacedBets={morePlacedBets}/>
+        {/* <UserBetModalTable /> */}
       </CustomModal>
     </div>
   );
