@@ -649,6 +649,10 @@ export const cardGamesTypeNames: any = {
   tennis: "Tennis",
   horseRacing: "Horse Racing",
   greyHound: "Grey Hound",
+  ballbyball: "Ball By Ball",
+  cmeter: "Casino Meter",
+  queen: "Casino Queen",
+  worli: "Worli Matka",
 };
 
 export const cardGamesId: any = {
