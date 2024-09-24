@@ -21,8 +21,8 @@ function CustomBreadcrumb({ items, style }: Props) {
     ...style,
   };
   return (
-    <div className="customBreadcrumb bg-secondary d-flex justify-content-between align-items-center" style={{ ...inlineStyle }}>
-      <Breadcrumb bsPrefix="breadcrumb m-0 d-flex align-items-center">
+    <div className="customBreadcrumb bg-secondary d-flex justify-content-between align-items-center text-white" style={{ ...inlineStyle }}>
+      <Breadcrumb bsPrefix="breadcrumb m-0 d-flex align-items-center text-white">
         {items?.map((item, index) => (
           <Breadcrumb.Item
             key={index}

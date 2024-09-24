@@ -3,7 +3,6 @@ import { useLocation } from "react-router-dom";
 import { RootState } from "../../../store/store";
 import { MatchType } from "../../../utils/enum";
 import { formattedMinMax } from "../../../utils/formatMinMax";
-import BetTableHeader from "../../commonComponent/betTableHeader";
 import CustomBreadcrumb from "../../commonComponent/breadcrumb";
 import ApiSessionMarketTable from "./apiSessionMarket";
 import BookmakerTable from "./bookMaker";
@@ -11,6 +10,7 @@ import CricketCasinoMarketTable from "./cricketCasinoMarket";
 import MatchOdds from "./matchOdds";
 import QuickBookmakerTable from "./quickBookmaker";
 import SessionMarketTable from "./sessionMarket";
+import BetTableHeader from "../../commonComponent/betTableHeader";
 
 interface BetTableProps {
   title: string;
@@ -39,23 +39,23 @@ const BetTable = ({
   return (
     <>
       {type === MatchType.MATCH_ODDS ? (
-        <CustomBreadcrumb
+        <><CustomBreadcrumb
           items={[
             { name: breadCrumb?.competition || matchDetails?.competitionName },
             { name: breadCrumb?.matchName || matchDetails?.title },
             {
-              name:
-                breadCrumb?.type ||
+              name: breadCrumb?.type ||
                 (location.pathname.includes("match_details")
                   ? "tied_match"
                   : "Match Odd"),
             },
             { name: breadCrumb?.date || matchDetails?.startAt },
-          ]}
-        />
+          ]} /><BetTableHeader  type={""} customClass="" title={title} /></>
       ) : (
-        <BetTableHeader customClass="my-2" title={title} />
+        <><BetTableHeader type={""} customClass="mt-2" title={title} /></>
       )}
+      
+
       {type === MatchType.BOOKMAKER ? (
         <BookmakerTable
           minMax={formattedMinMax(data?.minBet, data?.maxBet)}
@@ -86,8 +86,7 @@ const BetTable = ({
           matchDetails={matchDetails}
           sessionType={sessionType}
         />
-      ):
-      type === MatchType.CRICKET_CASINO_SESSION_MARKET ? (
+      ) : type === MatchType.CRICKET_CASINO_SESSION_MARKET ? (
         <CricketCasinoMarketTable
           data={data}
           title={title}

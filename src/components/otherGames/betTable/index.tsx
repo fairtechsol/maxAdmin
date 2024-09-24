@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { MatchType } from "../../../utils/enum";
 import { formattedMinMax } from "../../../utils/formatMinMax";
-import BetTableHeader from "../../commonComponent/betTableHeader";
+// import BetTableHeader from "../../commonComponent/betTableHeader";
 import CustomBreadcrumb from "../../commonComponent/breadcrumb";
 import BookmakerTable from "./bookMaker";
 import MatchOdds from "./matchOdds";
@@ -9,6 +9,7 @@ import { RootState } from "../../../store/store";
 import OverUnderMarket from "./overUnder";
 import SetWinner from "./setWinner";
 import HTFTMarketTable from "./htftmarket";
+import BetTableHeader from "../../commonComponent/betTableHeader";
 
 interface BetTableProps {
   title: string;
@@ -29,7 +30,7 @@ const BetTable = ({ title, type, data, backLayCount }: BetTableProps) => {
       <CustomBreadcrumb
         items={[{ name: breadCrumb?.matchName || matchDetails?.title }]}
       />
-      <BetTableHeader customClass="mt-2" title={title} />
+      <BetTableHeader type={""} customClass="mt-2" title={title} />
       {type === MatchType.BOOKMAKER ? (
         <BookmakerTable
           minMax={formattedMinMax(data?.minBet, data?.maxBet)}
