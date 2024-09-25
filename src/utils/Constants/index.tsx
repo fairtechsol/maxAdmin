@@ -142,8 +142,8 @@ export const Constants = {
 
 export const cardUrl =
   process.env.NODE_ENV === "production"
-    ? "https://fairgame7.com/videoPage/"
-    : "https://fairgame7.com/videoPage/";
+    ? "https://maxbet07.com/videoPage/"
+    : "https://maxbet07.com/videoPage/";
 
 // const oldVideoUrl = "https://video.proexch.in/route/?id="
 // use below baseUrl for live build
