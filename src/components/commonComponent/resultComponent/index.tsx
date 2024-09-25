@@ -33,6 +33,8 @@ import WorliResultComponent from "../../cardGames/games/worli/resultModalCompone
 import Bacarrat1ResultComponent from "../../cardGames/games/baccarat1/resultModalComponent";
 import Bacarrat2ResultComponent from "../../cardGames/games/baccarat2/resultModalComponent";
 import CardJResultComponent from "../../cardGames/games/3CardJ/resultModalComponent";
+import CasinoMeterResultComponent from "../../cardGames/games/casinoMeter/resultModalComponent";
+import QueenResultComponent from "../../cardGames/games/casinoQueen/resultModalComponent";
 
 interface ResultComponentProps {
   data: any;
@@ -118,6 +120,10 @@ export const ResultComponent: React.FC<ResultComponentProps> = ({
         <Bacarrat2ResultComponent data={data} />
       ) : type === cardGamesType?.cardj ? (
         <CardJResultComponent data={data} />
+      ) : type === cardGamesType?.cmeter ? (
+        <CasinoMeterResultComponent data={data} />
+      ) : type === cardGamesType?.queen ? (
+        <QueenResultComponent data={data} />
       ) : (
         <></>
       )}

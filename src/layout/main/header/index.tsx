@@ -259,7 +259,7 @@ const Topbar = (props: any) => {
                         name: "Race 20-20",
                         link: "/admin/casinoDetail/race20",
                       },
-                      { name: "Queen", link: "#2" },
+                      { name: "Queen", link: "/admin/casinoDetail/queen" },
                       { name: "Baccarat", link: "/admin/casino/baccarat" },
                       {
                         name: "Sports Casino",

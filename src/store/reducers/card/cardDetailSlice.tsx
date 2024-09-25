@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  casinoMeterPattiMatchRates,
   casinoScoreboardMatchRates,
   casinoWarMatchRates,
   getDragonTigerDetailHorseRacing,
@@ -31,6 +32,7 @@ import {
   updateDragonTigerOneDayRates,
   updateLiveGameResultTop10,
   updateProfitLossCards,
+  updateQueenRates,
   updateTeenPatti1DMatchRates,
   updateTeenPattiMatchRates,
   updateTeenPattiOpenMatchRates,
@@ -665,6 +667,34 @@ const cardDetail = createSlice({
             // cardInfo,
             yes,
             no,
+          };
+        }
+      })
+      .addCase(updateQueenRates.fulfilled, (state, action) => {
+        if (action.payload) {
+          const { t1, t2 } = action.payload;
+          state.loading = false;
+          const videoInfo = { ...t1[0] };
+          const cards = t2.slice(0, 4);
+          state.dragonTigerDetail = {
+            ...state.dragonTigerDetail,
+            videoInfo,
+            cards,
+          };
+        }
+      })
+      .addCase(casinoMeterPattiMatchRates.fulfilled, (state, action) => {
+        if (action.payload) {
+          state.loading = false;
+          const { t1, t2 } = action.payload;
+          const videoInfo = { ...t1[0] };
+          const low = { ...t2[0] };
+          const high = { ...t2[1] };
+          state.dragonTigerDetail = {
+            ...state.dragonTigerDetail,
+            videoInfo,
+            low,
+            high,
           };
         }
       })
