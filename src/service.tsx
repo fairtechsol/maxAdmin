@@ -1,6 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-import { Constants } from "./utils/Constants";
+import { serviceUrl } from "./utils/Constants";
 
 const toastOptions = {
   autoClose: 1500,
@@ -9,23 +9,8 @@ const toastOptions = {
   pauseOnHover: true,
 };
 
-// use below baseUrl for live build
-
-// const service = axios.create({
-//   //PROD
-//   baseURL:
-//     process.env.NODE_ENV === "production"
-//       ? `${Constants.apiBasePath}`
-//       : `${Constants.localPath}`,
-// });
-
-// use below service for live build
-
 const service = axios.create({
-  baseURL:
-    process.env.NODE_ENV === "production"
-      ? `${Constants.apiBasePathLive}`
-      : `${Constants.localPath}`,
+  baseURL: serviceUrl,
 });
 
 service.defaults.timeout = 100000;
@@ -47,7 +32,11 @@ service.interceptors.response.use(
   (response: any) => {
     const isGetRequest = response.config.method === "get";
 
-    if (!isGetRequest && response.data?.message && !response.data?.message?.includes('User Balance')) {
+    if (
+      !isGetRequest &&
+      response.data?.message &&
+      !response.data?.message?.includes("User Balance")
+    ) {
       toast.success(response.data.message, toastOptions);
     }
     return response.data;
