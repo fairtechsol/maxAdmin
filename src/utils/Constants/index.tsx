@@ -141,8 +141,8 @@ export const Constants = {
 
 export const cardUrl =
   process.env.NODE_ENV === "production"
-    ? "https://jmdapi.com/tablevideo/?id="
-    : "https://maxbet9.fairgame.club/videoPage/";
+    ? "https://fairgame7.com/videoPage/"
+    : "https://fairgame7.com/videoPage/";
 
 // const oldVideoUrl = "https://video.proexch.in/route/?id="
 // use below baseUrl for live build
@@ -202,7 +202,7 @@ export const sessionBettingType = {
   overByOver: "overByover",
   ballByBall: "ballByBall",
   oddEven: "oddEven",
-  cricketCasino: "cricketCasino"
+  cricketCasino: "cricketCasino",
 };
 
 export const matchBettingType = {
