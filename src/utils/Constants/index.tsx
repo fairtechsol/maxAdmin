@@ -148,55 +148,55 @@ export const cardUrl =
 // const oldVideoUrl = "https://video.proexch.in/route/?id="
 // use below baseUrl for live build
 
-export const serviceUrl =
-  process.env.NODE_ENV === "production"
-    ? Constants.apiBasePath
-    : Constants.localPath;
-
-export const baseUrls = {
-  socket:
-    process.env.NODE_ENV === "production"
-      ? `${Constants.apiBasePath}`
-      : `${Constants.localPath}`,
-  thirdParty:
-    process.env.NODE_ENV === "production"
-      ? `${Constants.thirdParty}`
-      : `${Constants.localPathThird}`,
-  expertSocket:
-    process.env.NODE_ENV === "production"
-      ? `${Constants.expertPath}`
-      : `${Constants.localPathExpert}`,
-  cardSocket:
-    process.env.NODE_ENV === "production"
-      ? Constants.thirdPartyCard
-      : Constants.localThirdCard,
-};
-
-// use below baseUrl for live build
-
 // export const serviceUrl =
-//   process.env.NODE_ENV === Constants.PRODUCTION
-//     ? Constants.apiBasePathLive
+//   process.env.NODE_ENV === "production"
+//     ? Constants.apiBasePath
 //     : Constants.localPath;
 
 // export const baseUrls = {
 //   socket:
 //     process.env.NODE_ENV === "production"
-//       ? `${Constants.apiBasePathLive}`
+//       ? `${Constants.apiBasePath}`
 //       : `${Constants.localPath}`,
 //   thirdParty:
 //     process.env.NODE_ENV === "production"
-//       ? `${Constants.thirdPartyLive}`
+//       ? `${Constants.thirdParty}`
 //       : `${Constants.localPathThird}`,
 //   expertSocket:
 //     process.env.NODE_ENV === "production"
-//       ? `${Constants.expertPathLive}`
+//       ? `${Constants.expertPath}`
 //       : `${Constants.localPathExpert}`,
 //   cardSocket:
 //     process.env.NODE_ENV === "production"
-//       ? Constants.thirdPartyCardLive
+//       ? Constants.thirdPartyCard
 //       : Constants.localThirdCard,
 // };
+
+// use below baseUrl for live build
+
+export const serviceUrl =
+  process.env.NODE_ENV === "production"
+    ? Constants.apiBasePathLive
+    : Constants.localPath;
+
+export const baseUrls = {
+  socket:
+    process.env.NODE_ENV === "production"
+      ? `${Constants.apiBasePathLive}`
+      : `${Constants.localPath}`,
+  thirdParty:
+    process.env.NODE_ENV === "production"
+      ? `${Constants.thirdPartyLive}`
+      : `${Constants.localPathThird}`,
+  expertSocket:
+    process.env.NODE_ENV === "production"
+      ? `${Constants.expertPathLive}`
+      : `${Constants.localPathExpert}`,
+  cardSocket:
+    process.env.NODE_ENV === "production"
+      ? Constants.thirdPartyCardLive
+      : Constants.localThirdCard,
+};
 
 export const teamStatus = {
   suspended: "suspended",
