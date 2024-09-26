@@ -274,5 +274,17 @@ export const update3CardJRates = createAsyncThunk<any, any>(
   }
 );
 
+export const updateQueenRates = createAsyncThunk<any, any>(
+  "queen/matchRatesUpdate",
+  async (data) => {
+    return data;
+  }
+);
+export const casinoMeterPattiMatchRates = createAsyncThunk<any, any>(
+  "casinometer/matchRatesUpdate",
+  async (data) => {
+    return data;
+  }
+);
 export const resetScoreBoard = createAction("scoreboard/reset");
 export const resetCardDetail = createAction("cardDetail/reset");

@@ -14,6 +14,7 @@ import {
   ballW,
   cards32A,
   cards32B,
+  cmeter,
   crick5,
   dayteen,
   dt20,
@@ -147,6 +148,11 @@ export const cardUrl =
 // const oldVideoUrl = "https://video.proexch.in/route/?id="
 // use below baseUrl for live build
 
+export const serviceUrl =
+  process.env.NODE_ENV === "production"
+    ? Constants.apiBasePath
+    : Constants.localPath;
+
 export const baseUrls = {
   socket:
     process.env.NODE_ENV === "production"
@@ -167,6 +173,11 @@ export const baseUrls = {
 };
 
 // use below baseUrl for live build
+
+// export const serviceUrl =
+//   process.env.NODE_ENV === Constants.PRODUCTION
+//     ? Constants.apiBasePathLive
+//     : Constants.localPath;
 
 // export const baseUrls = {
 //   socket:
@@ -422,6 +433,12 @@ export const card3 = {
       name: "5 5 Cricket",
     },
     {
+      id: 21,
+      url: "/admin/casinoDetail/cmeter",
+      imgSrc: cmeter,
+      name: "CASINO METER",
+    },
+    {
       id: 22,
       url: "/admin/casinoDetail/cmatch20",
       imgSrc:
@@ -584,18 +601,18 @@ export const bollywoodTableCards = [
 ];
 
 export const cardGamesType: any = {
-  dragonTiger20: "dt20", //
-  andarBahar2: "abj", //
-  andarBahar1: "ab20", //
-  teen20: "teen20", //
-  card32: "card32", //
-  card32B: "card32eu", //
-  lucky7: "lucky7", //
-  dragonTiger202: "dt202", //
-  dragonTigerLion: "dtl20", //
-  teenOneDay: "teen", //
-  teenOpen: "teen8", //
-  teenTest: "teen9", //
+  dragonTiger20: "dt20",
+  andarBahar2: "abj",
+  andarBahar1: "ab20",
+  teen20: "teen20",
+  card32: "card32",
+  card32B: "card32eu",
+  lucky7: "lucky7",
+  dragonTiger202: "dt202",
+  dragonTigerLion: "dtl20",
+  teenOneDay: "teen",
+  teenOpen: "teen8",
+  teenTest: "teen9",
   dragonTigerOneDay: "dt6",
   lucky7B: "lucky7eu",
   casinoWar: "war",
@@ -613,6 +630,9 @@ export const cardGamesType: any = {
   baccarat: "baccarat",
   baccarat2: "baccarat2",
   cardj: "3cardj",
+  cmeter: "cmeter",
+  queen: "queen",
+  worli1: "worli",
 };
 
 export const cardGamesTypeNames: any = {
@@ -649,6 +669,10 @@ export const cardGamesTypeNames: any = {
   tennis: "Tennis",
   horseRacing: "Horse Racing",
   greyHound: "Grey Hound",
+  ballbyball: "Ball By Ball",
+  cmeter: "Casino Meter",
+  queen: "Casino Queen",
+  worli: "Worli Matka",
 };
 
 export const cardGamesId: any = {
@@ -680,6 +704,9 @@ export const cardGamesId: any = {
   cardj: 3039,
   baccarat: 3044,
   baccarat2: 3033,
+  cmeter: 3046,
+  ballbyball: 3061,
+  queen: 3037,
 };
 
 export const rulesData = [
