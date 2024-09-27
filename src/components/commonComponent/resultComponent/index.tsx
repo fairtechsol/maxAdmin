@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { RxCross2 } from "react-icons/rx";
 // import moment from "moment";
@@ -35,6 +35,7 @@ import Bacarrat2ResultComponent from "../../cardGames/games/baccarat2/resultModa
 import CardJResultComponent from "../../cardGames/games/3CardJ/resultModalComponent";
 import CasinoMeterResultComponent from "../../cardGames/games/casinoMeter/resultModalComponent";
 import QueenResultComponent from "../../cardGames/games/casinoQueen/resultModalComponent";
+import moment from "moment-timezone";
 
 interface ResultComponentProps {
   data: any;
@@ -47,6 +48,14 @@ export const ResultComponent: React.FC<ResultComponentProps> = ({
   setfalse,
   type,
 }) => {
+
+  const [date, setDate] = useState<any>();
+
+  useEffect(() => {
+    if (!date) {
+      setDate(Date.now());
+    }
+  }, []);
   return (
     <Container style={{ padding: 0 }}>
       <div className="resultModalHeader d-flex justify-content-between">
@@ -62,6 +71,14 @@ export const ResultComponent: React.FC<ResultComponentProps> = ({
         <div>
           <span style={{ fontWeight: "bold" }}>Round Id:</span>
           <span>{handleRoundId(data?.result?.mid)}</span>
+        </div>
+        <div>
+          <span style={{ fontWeight: "bold" }}>Match Time:</span>
+          <span>
+            {data?.createdAt
+              ? moment(data?.createdAt).format("DD/MM/YYYY hh:mm:ss A")
+              : moment(date).format("DD/MM/YYYY hh:mm:ss A")}
+          </span>
         </div>
       </div>
       {type === cardGamesType?.dragonTiger20 ? (
