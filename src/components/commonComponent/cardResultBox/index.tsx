@@ -54,10 +54,10 @@ const CardResultBox = ({ data, name, type }: any) => {
   return (
     <div className="cardResultBoxContainer">
       <div className="cardResultBoxHeader">
-        <span style={{ fontSize: "14px" }}>Last Result</span>
+        <span style={{ fontSize: "14px", color: "white" }}>Last Result</span>
         <a>
           <span
-            style={{ fontSize: "14px", cursor: "pointer" }}
+            style={{ fontSize: "14px", cursor: "pointer", color: "white" }}
             onClick={() =>
               navigate("/casino-report", {
                 state: { cardType: data?.type },
