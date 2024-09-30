@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import CommonCardImg from "../CommonCardImg";
 
-const CardBox = ({ title, odds, data, cards, bgColor }: any) => {
+const CardBox = ({ title, odds, data, cards, bgColor, remark }: any) => {
   const [nat, setNat] = useState("");
 
   const arCards = cards?.ar?.split(",");
@@ -100,7 +100,7 @@ const CardBox = ({ title, odds, data, cards, bgColor }: any) => {
           }}
         >
           <div style={{ fontSize: "16px", fontWeight: "bold" }}>
-            {odds?.rate}
+            {odds?.rate ?? 0}
           </div>
           <CommonCardImg
             cardData={[
@@ -124,6 +124,7 @@ const CardBox = ({ title, odds, data, cards, bgColor }: any) => {
             nat={nat}
             title={title}
           />
+          <div style={{ fontSize: "12px" }}>{remark}</div>
         </div>
       </div>
     </div>
