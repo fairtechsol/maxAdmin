@@ -102,6 +102,9 @@ const CasinoMeter = Loadable(
 const CasinoQueen = Loadable(
   lazy(() => import("../pages/cardGames/games/casinoQueen"))
 );
+const BallByBall = Loadable(
+  lazy(() => import("../pages/cardGames/games/ballByBall"))
+);
 
 const MainRoutes = {
   path: "/admin",
@@ -282,6 +285,10 @@ const MainRoutes = {
     {
       path: "casinoDetail/queen",
       element: <CasinoQueen />,
+    },
+    {
+      path: "casinoDetail/ballbyball",
+      element: <BallByBall />,
     },
     {
       path: "*",

@@ -633,6 +633,7 @@ export const cardGamesType: any = {
   cmeter: "cmeter",
   queen: "queen",
   worli1: "worli",
+  ballbyball: "ballbyball",
 };
 
 export const cardGamesTypeNames: any = {
