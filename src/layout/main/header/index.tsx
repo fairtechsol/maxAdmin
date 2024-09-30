@@ -253,7 +253,7 @@ const Topbar = (props: any) => {
                   <TopbarDropdown
                     name="Live Market"
                     options={[
-                      { name: "Ball By Ball", link: "#1" },
+                      { name: "Ball By Ball", link: "/admin/casinoDetail/ballbyball" },
                       { name: "Binary", link: "#1" },
                       {
                         name: "Race 20-20",
