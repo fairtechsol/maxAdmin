@@ -10,6 +10,7 @@ import OverUnderMarket from "./overUnder";
 import SetWinner from "./setWinner";
 import HTFTMarketTable from "./htftmarket";
 import BetTableHeader from "../../commonComponent/betTableHeader";
+import Tournament from "./tournament";
 
 interface BetTableProps {
   title: string;
@@ -40,6 +41,13 @@ const BetTable = ({ title, type, data, backLayCount }: BetTableProps) => {
         />
       ) : type === MatchType.MATCH_ODDS ? (
         <MatchOdds
+          title={formattedMinMax(data?.minBet, data?.maxBet)}
+          data={data}
+          backLayCount={backLayCount}
+          matchDetails={matchDetails}
+        />
+      ) : type === MatchType.TOURNAMENT ? (
+        <Tournament
           title={formattedMinMax(data?.minBet, data?.maxBet)}
           data={data}
           backLayCount={backLayCount}

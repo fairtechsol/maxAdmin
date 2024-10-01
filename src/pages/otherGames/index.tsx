@@ -254,6 +254,8 @@ const OtherGamesDetail = () => {
     }
   }, [matchDetails?.id]);
 
+  console.log(updatedMarket);
+
   return (
     <div className="gamePage">
       <Container fluid>
@@ -275,6 +277,8 @@ const OtherGamesDetail = () => {
                           ? MatchType.UNDER_OVER
                           : item.type.includes("setWinner")
                           ? MatchType.SET_WINNER
+                          : item.type.includes("tournament")
+                          ? MatchType.TOURNAMENT
                           : MatchType.MATCH_ODDS
                       }
                       data={item}
