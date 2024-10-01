@@ -34,11 +34,6 @@ const CricketMatch20ResultComponent: React.FC<Props> = ({ data }: any) => {
               "d-sm-flex flex-row justify-content-center align-items-center mb-2"
             }
           >
-            {/* {data?.result?.win === "1" && (
-              <div className="casino-winner-icon">
-                <FaTrophy size={30} color="#169733" />
-              </div>
-            )} */}
             <div
               style={{
                 border: "1px solid #fdef34",
