@@ -156,19 +156,45 @@ th {
 .color-red {
   color: $pdf !important;
 }
-// .btn-close::after{
-//  background: url(../../public/cross.svg) no-repeat !important;
-//   content: "";
-//   position: absolute;
-//   top: 50%;
-//   left: 50%;
-//   transform: translate(-50%, -50%);
-//   height: 12px;
-//   width: 12px;
-//   font-weight: bold;
-//   color: #fff;
-//   filter: invert(1);
-// }
+.suspended{
+  position: relative;
+  pointer-events: none;
+  cursor: none;
+}
+
+.suspended::before {
+  content: "";
+  background-image: url(../assets/images/lockblack.svg) !important;
+  background-size: 15px 15px;
+  // filter: invert(1);
+  background-repeat: no-repeat;
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  pointer-events: none;
+}
+
+.suspended:after {
+  content: "";
+  background-color: rgba(255, 255, 255, 0.70);
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  cursor: not-allowed;
+  border-radius: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
 /* ====== bg Colors end ====  */
 
 /* ===== for title ====  */

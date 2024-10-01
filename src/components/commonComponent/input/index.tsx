@@ -22,6 +22,8 @@ const CustomInput = (props: any) => {
   const inlineStyle: React.CSSProperties = {
     ...style,
   };
+
+  
     return (
     <>
       <Form.Group className={`${customstyle} ${formInline ? "row" : ""}`}>

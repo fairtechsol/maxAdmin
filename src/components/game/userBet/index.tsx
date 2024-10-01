@@ -10,7 +10,7 @@ import DeleteBetOverlay from "../../commonComponent/deleteBetRow";
 import moment from "moment-timezone";
 
 const UserBets = ({ matchId }: any) => {
-  const { placedBets,morePlacedBets } = useSelector(
+  const { placedBets, morePlacedBets } = useSelector(
     (state: RootState) => state.match.placeBets
   );
   const [showModal, setShowModal] = useState(false);
@@ -28,15 +28,17 @@ const UserBets = ({ matchId }: any) => {
               className={`userBets-header bg-secondaryLight d-flex justify-content-between py-2 px-3`}
             >
               <div className="userBets-headerRight w-100 d-flex justify-content-between align-items-center ">
-                <div className="text-white text-start f600 title-14 p-0" >MY BETS</div>
+                <div className="text-white text-start f600 title-14 p-0">
+                  MY BETS
+                </div>
                 <div className="d-flex flex-end">
-                <Button
-                  variant="secondary"
-                  onClick={() => setShowModal(true)}
-                  style={{ height: "100%" }}
-                >
-                  View More
-                </Button>
+                  <Button
+                    variant="secondary"
+                    onClick={() => setShowModal(true)}
+                    style={{ height: "100%", color: "white" }}
+                  >
+                    View More
+                  </Button>
                 </div>
               </div>
             </div>
@@ -82,7 +84,10 @@ const UserBets = ({ matchId }: any) => {
                         <th className="text-right" style={{ minWidth: "50px" }}>
                           Rate
                         </th>
-                        <th className="text-right text-end" style={{ minWidth: "90px" }}>
+                        <th
+                          className="text-right text-end"
+                          style={{ minWidth: "90px" }}
+                        >
                           Amount
                         </th>
                         {/* <th>PlaceDate</th>
@@ -107,7 +112,10 @@ const UserBets = ({ matchId }: any) => {
                                 }
                               >
                                 <div className="row">
-                                  <div className="col f500"> {bet?.marketType} </div>
+                                  <div className="col f500">
+                                    {" "}
+                                    {bet?.marketType}{" "}
+                                  </div>
                                 </div>
 
                                 <div className="col">
@@ -147,15 +155,15 @@ const UserBets = ({ matchId }: any) => {
                                     : "bg-blue3"
                                 } d-flex flex-column justify-content-end text-end`}
                               >
-                             
-                                  <div className="col">
-                                    {moment(bet?.createdAt).format(
-                                      "YYYY-MM-DD hh:mm:ss"
-                                    )}
-                              
+                                <div className="col">
+                                  {moment(bet?.createdAt).format(
+                                    "YYYY-MM-DD hh:mm:ss"
+                                  )}
                                 </div>
 
-                                <div className="col text-end">{bet?.amount}</div>
+                                <div className="col text-end">
+                                  {bet?.amount}
+                                </div>
                               </td>
                               {/* <td
                                 className={
@@ -221,7 +229,11 @@ const UserBets = ({ matchId }: any) => {
         setShow={setShowModal}
         title="View More Bet"
       >
-        <UserBetModalForm customClass="mb-5" matchId={matchId} morePlacedBets={morePlacedBets}/>
+        <UserBetModalForm
+          customClass="mb-5"
+          matchId={matchId}
+          morePlacedBets={morePlacedBets}
+        />
         {/* <UserBetModalTable /> */}
       </CustomModal>
     </div>

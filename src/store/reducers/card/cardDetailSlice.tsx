@@ -14,6 +14,7 @@ import {
   updateAmarAkbarAnthonyCardMatchRates,
   updateBaccarat1Rates,
   updateBaccarat2Rates,
+  ballbyballMatchRates,
   updateBollywoodTableCardMatchRates,
   updateCard32BMatchRates,
   updateCard32MatchRates,
@@ -667,6 +668,19 @@ const cardDetail = createSlice({
             // cardInfo,
             yes,
             no,
+          };
+        }
+      })
+      .addCase(ballbyballMatchRates.fulfilled, (state, action) => {
+        if (action.payload) {
+          const { t1 } = action.payload;
+          const videoInfo = { ...t1 };
+          const runs = t1?.sub;
+          console.log(runs, "runsss");
+          state.dragonTigerDetail = {
+            ...state.dragonTigerDetail,
+            videoInfo,
+            runs,
           };
         }
       })

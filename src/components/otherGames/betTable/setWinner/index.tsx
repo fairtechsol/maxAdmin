@@ -81,11 +81,13 @@ function SetWinner({
                           {matchDetails?.profitLossDataMatch?.[
                             profitLossDataForMatchConstants[data?.type][matchs]
                           ]
-                            ? parseFloat(matchDetails?.profitLossDataMatch?.[
-                                profitLossDataForMatchConstants[data?.type][
-                                  matchs
+                            ? parseFloat(
+                                matchDetails?.profitLossDataMatch?.[
+                                  profitLossDataForMatchConstants[data?.type][
+                                    matchs
+                                  ]
                                 ]
-                              ]).toFixed(2)
+                              ).toFixed(2)
                             : 0}
                         </span>
                       </div>
@@ -93,10 +95,10 @@ function SetWinner({
                   </td>
                   <td colSpan={backLayCount === 2 ? 2 : 6}>
                     <BetStatusOverlay
-                      title={data?.runners?.[indexes]?.status.toLowerCase()}
+                      title={data?.runners?.[indexes]?.status?.toLowerCase()}
                       active={
                         data?.activeStatus === "live" &&
-                        data?.runners?.[indexes]?.status.toLowerCase() ===
+                        data?.runners?.[indexes]?.status?.toLowerCase() ===
                           "active"
                           ? false
                           : true
@@ -121,7 +123,7 @@ function SetWinner({
                             }
                             active={
                               data?.runners?.[indexes]?.status
-                                .toLowerCase()
+                                ?.toLowerCase()
                                 ?.toLowerCase() !==
                               teamStatus.active?.toLowerCase()
                             }
@@ -146,7 +148,7 @@ function SetWinner({
                             }
                             active={
                               data?.runners?.[indexes]?.status
-                                .toLowerCase()
+                                ?.toLowerCase()
                                 ?.toLowerCase() !==
                               teamStatus.active?.toLowerCase()
                             }

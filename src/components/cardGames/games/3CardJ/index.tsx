@@ -82,17 +82,27 @@ const CardJComponent = () => {
               >
                 <CardBox
                   title={"Yes"}
-                  bgColor={"#72bbef"}
+                  // bgColor={"#72bbef"}
                   odds={dragonTigerDetail?.yes}
                   data={dragonTigerDetail}
                   cards={dragonTigerDetail?.cardInfo}
+                  remark={
+                    dragonTigerDetail?.videoInfo?.remark
+                      ?.split("|")?.[0]
+                      ?.trim() ?? ""
+                  }
                 />
                 <CardBox
                   title={"No"}
-                  bgColor={"#faa9ba"}
+                  // bgColor={"#faa9ba"}
                   odds={dragonTigerDetail?.no}
                   data={dragonTigerDetail}
                   cards={dragonTigerDetail?.cardInfo}
+                  remark={
+                    dragonTigerDetail?.videoInfo?.remark
+                      ?.split("|")?.[1]
+                      ?.trim() ?? ""
+                  }
                 />
                 <div className="ticker-container">
                   <div className="ticker-wrap">

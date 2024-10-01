@@ -142,10 +142,10 @@ function MatchOdds({
                   </td>
                   <td colSpan={backLayCount === 2 ? 2 : 6}>
                     <BetStatusOverlay
-                      title={data?.runners?.[indexes]?.status.toLowerCase()}
+                      title={data?.runners?.[indexes]?.status?.toLowerCase()}
                       active={
                         data?.runners?.[indexes]?.status
-                          .toLowerCase()
+                          ?.toLowerCase()
                           ?.toLowerCase() !== teamStatus.active?.toLowerCase()
                       }
                     >
@@ -169,7 +169,7 @@ function MatchOdds({
                             }
                             active={
                               data?.runners?.[indexes]?.status
-                                .toLowerCase()
+                                ?.toLowerCase()
                                 ?.toLowerCase() !==
                               teamStatus.active?.toLowerCase()
                             }
@@ -195,7 +195,7 @@ function MatchOdds({
                             }
                             active={
                               data?.runners?.[indexes]?.status
-                                .toLowerCase()
+                                ?.toLowerCase()
                                 ?.toLowerCase() !==
                               teamStatus.active?.toLowerCase()
                             }

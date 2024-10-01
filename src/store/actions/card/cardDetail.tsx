@@ -286,5 +286,12 @@ export const casinoMeterPattiMatchRates = createAsyncThunk<any, any>(
     return data;
   }
 );
+
+export const ballbyballMatchRates = createAsyncThunk<any, any>(
+  "ballbyballMatchRates/matchRatesUpdate",
+  async (data) => {
+    return data;
+  }
+);
 export const resetScoreBoard = createAction("scoreboard/reset");
 export const resetCardDetail = createAction("cardDetail/reset");
