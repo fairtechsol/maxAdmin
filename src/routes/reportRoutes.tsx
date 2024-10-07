@@ -52,7 +52,7 @@ const ReportRoutes = {
       element: <ProfitLossReport />,
     },
     {
-      path: "casinoresult",
+      path: "casino-result",
       element: <CasinoResultReport />,
     },
     {

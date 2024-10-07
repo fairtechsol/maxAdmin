@@ -891,6 +891,18 @@ export const cardConstantsAccountStatement = [
     value: "3cardj",
     label: "3 Card Judgement",
   },
+  {
+    value: "ballbyball",
+    label: "Ball By Ball",
+  },
+  {
+    value: "queen",
+    label: "Casino Queen",
+  },
+  {
+    value: "cmeter",
+    label: "Casino Meter",
+  },
 ];
 
 export const cardGamesCasinoResult = [
@@ -1010,5 +1022,17 @@ export const cardGamesCasinoResult = [
   {
     value: "3cardj",
     label: "3 Card Judgement",
+  },
+  {
+    value: "ballbyball",
+    label: "Ball By Ball",
+  },
+  {
+    value: "queen",
+    label: "Casino Queen",
+  },
+  {
+    value: "cmeter",
+    label: "Casino Meter",
   },
 ];
