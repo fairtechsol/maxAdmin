@@ -29,7 +29,7 @@ const Lucky7BComponent = () => {
       <Row>
         <Col md={8}>
           <div className="horseRacingTab">
-            <div style={{ width: "100%", height: "400px", margin: "5px" }}>
+            <div style={{ width: "100%" }}>
               <div className="horseRacingTabHeader">
                 <div>
                   <span style={{ fontSize: "16px", fontWeight: "600" }}>
@@ -54,7 +54,6 @@ const Lucky7BComponent = () => {
               <div
                 style={{
                   width: "100%",
-                  height: "92%",
                   backgroundColor: "#000",
                 }}
               >
@@ -65,8 +64,8 @@ const Lucky7BComponent = () => {
                 />
               </div>
             </div>
-            <div style={{ height: "550px" }}>
-              <div style={{ width: "100%", margin: "5% 5px" }}>
+            <div>
+              <div style={{ width: "100%" }}>
                 <TiePairBox
                   lowHigh={dragonTigerDetail?.lowHigh}
                   data={dragonTigerDetail}

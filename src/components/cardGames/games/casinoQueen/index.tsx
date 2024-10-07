@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import "./style.scss";
-import { handleRoundId } from "../../../../helpers";
 import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
 import RulesModal from "../../../commonComponent/rulesModal";
 import UserBets from "../../../game/userBet";
@@ -27,29 +26,14 @@ const CasinoQueenComponent = () => {
   useEffect(() => {
     setVideoFrameId(`${cardUrl}${cardGamesId?.queen}`);
   }, []);
-
+  const min = dragonTigerDetail?.minBet;
+  const max = dragonTigerDetail?.maxBet;
   return (
     <>
       <Row>
         <Col md={8}>
           <div className="horseRacingTab">
             <div style={{ width: "100%", margin: "5px" }}>
-              <div className="horseRacingTabHeader">
-                <div>
-                  <span style={{ fontSize: "16px", fontWeight: "600" }}>
-                    {dragonTigerDetail?.name}
-                  </span>
-                </div>
-                <span>
-                  {dragonTigerDetail?.videoInfo
-                    ? `Round ID:  ${handleRoundId(
-                        dragonTigerDetail?.videoInfo?.mid
-                      )}|Min: ${dragonTigerDetail?.videoInfo?.min}|Max: ${
-                        dragonTigerDetail?.videoInfo?.max
-                      }`
-                    : ""}
-                </span>
-              </div>
               <div
                 style={{
                   // flex: '1 0 auto',
@@ -59,6 +43,7 @@ const CasinoQueenComponent = () => {
                 }}
               >
                 <VideoFrame
+                data={dragonTigerDetail}
                   time={dragonTigerDetail?.videoInfo?.autotime}
                   result={<QueenCard data={dragonTigerDetail?.videoInfo} />}
                   id={videoFrameId}
@@ -79,11 +64,13 @@ const CasinoQueenComponent = () => {
                   data={dragonTigerDetail}
                   playerNum={[0, 1, 2, 3]}
                 />
+                <div className="col-12 text-end title-12 mt-1">
+                R:<span>{min}</span>-<span>{max}</span></div>
                 <div className="ticker-container mt-4">
                   <div className="ticker-wrap">
                     <div
-                      className="ticker-move"
-                      style={{ color: "#097c93", fontWeight: "700" }}
+                      className="ticker-move title-12"
+                      style={{ color: "#097c93", height: "32px" }}
                     >
                       {dragonTigerDetail?.videoInfo?.ramark}
                     </div>

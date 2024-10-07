@@ -11,7 +11,7 @@ const MarketComponent = ({ showFancy, odds, data, min, max }: any) => {
   return (
     <div className="casino-detail detail-page-container-c position-relative">
       <div className="game-market-c market-2">
-        <div className="market-title">
+        <div className="marketHeader5 text-white">
           <span>Bookmaker</span>
         </div>
         <div className="market-header-c">
@@ -20,7 +20,7 @@ const MarketComponent = ({ showFancy, odds, data, min, max }: any) => {
               className="f600"
               style={{ fontSize: "12px", color: "#097c93" }}
             >
-              Min: {min} Max: {max}
+              {/* Min: {min} Max: {max} */}
             </span>
           </div>
           <div className="market-odd-box-c back">
@@ -37,7 +37,7 @@ const MarketComponent = ({ showFancy, odds, data, min, max }: any) => {
               <span className="market-nation-name-c">{team1?.nat}</span>
               <div className="market-nation-book-c"></div>
               <span
-                className={`${
+                className={`color-red${
                   data?.profitLoss
                     ? data?.profitLoss[
                         `${data?.videoInfo?.mid}_${team1?.sid}_card`
@@ -99,7 +99,7 @@ const MarketComponent = ({ showFancy, odds, data, min, max }: any) => {
               <span className="market-nation-name-c">{team2?.nat}</span>
               <div className="market-nation-book-c"></div>
               <span
-                className={`${
+                className={`color-red${
                   data?.profitLoss
                     ? data?.profitLoss[
                         `${data?.videoInfo?.mid}_${team1?.sid}_card`

@@ -32,7 +32,7 @@ const Poker6Component = () => {
     <div>
       <Row>
         <Col md={8}>
-          <div style={{ width: "100%", height: "400px", margin: "5px" }}>
+          <div style={{ width: "100%" }}>
             <div className="horseRacingTabHeader">
               <div>
                 <span style={{ fontSize: "16px", fontWeight: "600" }}>
@@ -59,7 +59,7 @@ const Poker6Component = () => {
               </span>
             </div>
             <div
-              style={{ width: "100%", height: "92%", backgroundColor: "#000" }}
+              style={{ width: "100%", backgroundColor: "#000" }}
             >
               <VideoFrame
                 time={dragonTigerDetail?.videoInfo?.autotime}
@@ -68,7 +68,7 @@ const Poker6Component = () => {
               />
             </div>
           </div>
-          <div style={{ height: "760px", marginLeft: "10px" }}>
+          <div style={{  marginLeft: "10px" }}>
             <div className="tab-containerp">
               <div
                 className={`hands ${activeTab === "tab1" ? "active" : ""}`}

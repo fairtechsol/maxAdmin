@@ -40,6 +40,7 @@ const Race20Component = () => {
                 }}
               >
                 <VideoFrame
+                data={dragonTigerDetail}
                   time={dragonTigerDetail?.videoInfo?.autotime}
                   result={<Race20Result data={dragonTigerDetail?.videoInfo} />}
                   id={`${cardUrl}${cardGamesId?.race20}`}

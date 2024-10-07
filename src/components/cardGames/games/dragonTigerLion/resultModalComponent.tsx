@@ -16,11 +16,11 @@ const DragonTigerLionResultComponent: React.FC<Props> = ({ data }: any) => {
   return (
     <Container style={{ display: "flex", flexDirection: "column" }}>
       <div className="dt20resultModal mb-3">
-        <div className="dt20resultCardContainer">
+        <div className="d-flex row">
           <span className="fs-5">Dragon</span>
           <div
             className={
-              "d-sm-flex flex-row justify-content-center align-items-center"
+              "d-sm-flex flex-row "
             }
           >
             {data?.result?.win === "1" && (
@@ -39,11 +39,11 @@ const DragonTigerLionResultComponent: React.FC<Props> = ({ data }: any) => {
             </div>
           </div>
         </div>
-        <div className="dt20resultCardContainer">
+        <div className="d-flex row ">
           <span className="fs-5">Tiger</span>
           <div
             className={
-              "d-sm-flex flex-row justify-content-center align-items-center"
+              "d-sm-flex flex-row position-relative"
             }
           >
             {data?.result?.win === "21" && (
@@ -62,11 +62,11 @@ const DragonTigerLionResultComponent: React.FC<Props> = ({ data }: any) => {
             </div>
           </div>
         </div>
-        <div className="dt20resultCardContainer">
+        <div className="d-flex row ">
           <span className="fs-5">Lion</span>
           <div
             className={
-              "d-sm-flex flex-row justify-content-center align-items-center"
+              "d-sm-flex flex-row position-relative"
             }
           >
             {data?.result?.win === "41" && (

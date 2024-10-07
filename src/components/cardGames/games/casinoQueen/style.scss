@@ -61,10 +61,27 @@
   font-weight: bold;
 }
 .casino-odds-box-q {
-  width: 49%;
+  width: calc(50% - 2px);
+  height: 48px;
 }
-.casino-odds-box-q {
-  width: 49%;
+.casino-odds-wrapper {
+  position: relative; 
+  display: flex;
+  width: 100%;
+}
+.queenresultModal{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 100%;
+}
+.queenresultCardContainer{
+  width: 100%;
+  display: block;
+  text-align: center;
+  border-bottom: 1px solid rgba(0, 0, 0, .1);
+  padding-top: 1rem;
+  padding-bottom: 1rem
 }
 .casino-odds-box-q {
   display: flex;
@@ -74,19 +91,8 @@
   justify-content: center;
   padding: 5px 0;
   font-weight: bold;
-  border-left: 1px solid #c7c8ca;
-  cursor: pointer;
-  min-height: 46px;
-}
-.casino-odds-box-q {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 5px 0;
-  font-weight: bold;
-  border-left: 1px solid #c7c8ca;
+  // border-left: 1px solid #c7c8ca;
+  flex-direction: column-reverse;
   cursor: pointer;
   min-height: 46px;
 }

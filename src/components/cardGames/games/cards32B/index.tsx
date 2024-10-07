@@ -29,7 +29,7 @@ const Card32BComponent = () => {
     <div>
       <Row>
         <Col md={8}>
-          <div style={{ width: "100%", height: "400px", margin: "5px" }}>
+          <div style={{ width: "100%"}}>
             <div className="horseRacingTabHeader">
               <div>
                 <span style={{ fontSize: "16px", fontWeight: "600" }}>
@@ -56,7 +56,7 @@ const Card32BComponent = () => {
               </span>
             </div>
             <div
-              style={{ width: "100%", height: "92%", backgroundColor: "#000" }}
+              style={{ width: "100%",backgroundColor: "#000" }}
             >
               <VideoFrame
                 time={dragonTigerDetail?.videoInfo?.autotime}
@@ -65,10 +65,10 @@ const Card32BComponent = () => {
               />
             </div>
           </div>
-          <div style={{ height: "760px" }}>
+          <div>
             <div
               className="d-sm-flex flex-row justify-content-around align-items-center"
-              style={{ width: "100%", marginTop: "4%", gap: "10px" }}
+              style={{ width: "100%" }}
             >
               <div className="w-50">
                 <BackLay

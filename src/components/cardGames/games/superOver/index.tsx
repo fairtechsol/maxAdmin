@@ -30,7 +30,7 @@ const SuperOverComponent = () => {
     <div>
       <Row>
         <Col md={8}>
-          <div style={{ width: "100%", height: "400px" }}>
+          <div style={{ width: "100%" }}>
             <div className="horseRacingTabHeader">
               <div>
                 <span style={{ fontSize: "16px", fontWeight: "600" }}>
@@ -62,7 +62,7 @@ const SuperOverComponent = () => {
               )}
             </div>
             <div
-              style={{ width: "100%", height: "92%", backgroundColor: "#000" }}
+              style={{ width: "100%", backgroundColor: "#000" }}
             >
               <VideoFrame
                 time={dragonTigerDetail?.videoInfo?.autotime}
@@ -74,7 +74,7 @@ const SuperOverComponent = () => {
           <div>
             <div
               className="d-sm-flex flex-row justify-content-around align-items-center"
-              style={{ width: "100%", marginTop: "7rem", gap: "10px" }}
+              style={{ width: "100%", gap: "10px" }}
             >
               <div className="w-100">
                 <Bookmaker
@@ -106,7 +106,7 @@ const SuperOverComponent = () => {
               </Col>
               <Col>
                 <div className="sidebar-box place-bet-container super-over-rule">
-                  <div className="marketHeader">
+                  <div className="marketHeader text-white f700">
                     ENGLAND vs RSA Inning's Card Rules
                   </div>
                   <div className="table-responsive">

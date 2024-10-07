@@ -156,6 +156,45 @@ th {
 .color-red {
   color: $pdf !important;
 }
+
+.suspended-box-3{
+  position: relative;
+  pointer-events: none;
+  cursor: none;
+}
+
+.suspended-box-3::before {
+  content: "";
+  background-image: url(../assets/images/lockblack.svg) !important;
+  background-size: 35px 35px;
+  // filter: invert(1);
+  background-repeat: no-repeat;
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  pointer-events: none;
+}
+
+.suspended-box-3:after {
+  content: "";
+  background-color: rgba(255, 255, 255, 0.70);
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  cursor: not-allowed;
+  border-radius: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .suspended{
   position: relative;
   pointer-events: none;
@@ -247,7 +286,7 @@ th {
   content: "";
   position: absolute;
   z-index: 1;
-  top: 0;
+  top: -10px;
   left: 0;
   width: 100%;
   height: 100%;
@@ -575,9 +614,11 @@ th {
   font-weight: bold;
 }
 
-.custom-iframe-container {
-  width: 100vw;
-  height: 400px; /* Set the desired height */
+.teenPatti-table-row {
+  background-color: #f8f8fb;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
 }
 
 .custom-iframe {
@@ -585,7 +626,16 @@ th {
   height: 100%;
   border: none;
 }
-
+.dtlsubTitle {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  color: #000;
+  cursor: pointer;
+}
 .casino-result-cards-item {
   position: absolute;
   // right: -100px;
@@ -615,4 +665,11 @@ th {
   // font-size: 26px;
   box-shadow: 0 0 0 #FFC742;
   border-radius: 50%;
+}
+
+.teenPatti-table-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  // margin-top: 5%;
 }

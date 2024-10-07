@@ -53,8 +53,8 @@ const QueenResultComponent: React.FC<Props> = ({ data }: any) => {
     <Container
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
-      <div className={"card32resultModal"}>
-        <div className="card32resultCardContainer mb-3">
+      <div className={"queenresultModal"}>
+        <div className="queenresultCardContainer mb-3">
           <span style={{ fontSize: "20px" }}>
             Total 0 - <span className="bg-success badge">{total0} </span>
           </span>
@@ -79,13 +79,13 @@ const QueenResultComponent: React.FC<Props> = ({ data }: any) => {
               );
             })}
             {data?.result?.win === "1" && (
-              <div className="casino-winner-icon">
+              <div className="casino-winner-icon mb-5">
               <Winner />
             </div>
             )}
           </div>
         </div>
-        <div className="card32resultCardContainer mb-3">
+        <div className="queenresultCardContainer mb-3">
           <span style={{ fontSize: "20px" }}>
             Total 1 - <span className="bg-success badge">{total1} </span>
           </span>
@@ -110,13 +110,13 @@ const QueenResultComponent: React.FC<Props> = ({ data }: any) => {
               );
             })}
             {data?.result?.win === "2" && (
-              <div className="casino-winner-icon">
+              <div className="casino-winner-icon mb-5">
               <Winner />
             </div>
             )}
           </div>
         </div>
-        <div className="card32resultCardContainer mb-3">
+        <div className="queenresultCardContainer mb-3">
           <span style={{ fontSize: "20px" }}>
             Total 2 - <span className="bg-success badge">{total2} </span>
           </span>
@@ -141,13 +141,13 @@ const QueenResultComponent: React.FC<Props> = ({ data }: any) => {
               );
             })}
             {data?.result?.win === "3" && (
-              <div className="casino-winner-icon">
+              <div className="casino-winner-icon mb-5">
               <Winner />
             </div>
             )}
           </div>
         </div>
-        <div className="card32resultCardContainer mb-3">
+        <div className="queenresultCardContainer mb-3">
           <span style={{ fontSize: "20px" }}>
             Total 3 - <span className="bg-success badge">{total3} </span>
           </span>
@@ -172,7 +172,7 @@ const QueenResultComponent: React.FC<Props> = ({ data }: any) => {
               );
             })}
             {data?.result?.win === "4" && (
-              <div className="casino-winner-icon">
+              <div className="casino-winner-icon mb-5">
               <Winner />
             </div>
             )}
