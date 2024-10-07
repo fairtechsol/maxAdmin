@@ -311,7 +311,7 @@ const Topbar = (props: any) => {
                       { name: "Profit And Loss", link: "/admin/profit-loss" },
                       {
                         name: "Casino Result Report",
-                        link: "/admin/casinoresult",
+                        link: "/admin/casino-result",
                       },
                     ]}
                   />
