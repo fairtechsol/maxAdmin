@@ -1,8 +1,8 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import { FaTrophy } from "react-icons/fa";
 import "./style.scss";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
+import Winner from "../../../commonComponent/trophyWinner";
 
 interface Props {
   data: {
@@ -58,12 +58,9 @@ const CasinoMeterResultComponent: React.FC<Props> = ({ data }) => {
                   <HandleCards card={player.card} />
                 </div>
                 {data?.result?.sid.includes(`${index + 1}`) && (
-                  <div
-                    className="casino-winner-icon"
-                    style={{ marginLeft: "5px" }}
-                  >
-                    <FaTrophy size={30} color="#169733" />
-                  </div>
+                  <div className="casino-winner-icon me-1">
+                  <Winner />
+                </div>
                 )}
               </div>
             </div>

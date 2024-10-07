@@ -30,7 +30,7 @@ const Cricket5Component = () => {
     <>
       <Row>
         <Col md={8} className="five-cricket">
-          <div style={{ width: "100%", height: "400px", margin: "5px" }}>
+          <div style={{ width: "100%"}}>
             <div className="horseRacingTabHeader">
               <div>
                 <span style={{ fontSize: "16px", fontWeight: "600" }}>
@@ -64,7 +64,7 @@ const Cricket5Component = () => {
               )}
             </div>
             <div
-              style={{ width: "100%", height: "90%", backgroundColor: "#000" }}
+              style={{ width: "100%", backgroundColor: "#000" }}
             >
               <VideoFrame
                 time={dragonTigerDetail?.videoInfo?.autotime}
@@ -73,8 +73,8 @@ const Cricket5Component = () => {
               />
             </div>
           </div>
-          <div style={{ height: "350px" }}>
-            <div style={{ marginTop: "7rem" }}>
+          <div>
+            <div>
               <MarketComponent
                 odds={dragonTigerDetail?.odds}
                 min={dragonTigerDetail?.videoInfo?.min}

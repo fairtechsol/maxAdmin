@@ -89,9 +89,7 @@
 
 .suspended-box::before {
   background-image: url(../../../../assets/baccarat/lock.svg);
-  background-size: 17px 17px;
-  filter: invert(1);
-  -webkit-filter: invert(1);
+  background-size: 15px 15px;
   background-repeat: no-repeat;
   content: "";
   position: absolute;
@@ -106,17 +104,17 @@
 
 .suspended-box::after {
   content: "";
-  background-color: #373636d6;
+  background-color: rgba(255, 255, 255, 0.70);
   position: absolute;
   height: 100%;
   width: 100%;
   left: 0;
   top: 0;
   cursor: not-allowed;
+  border-radius: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  pointer-events: none;
 }
 
 .player-pair-box-container {

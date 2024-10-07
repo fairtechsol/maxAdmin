@@ -1,12 +1,12 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import { FaTrophy } from "react-icons/fa";
 import { ImClubs } from "react-icons/im";
 import { GiSpades } from "react-icons/gi";
 import { BiSolidHeart } from "react-icons/bi";
 import { ImDiamonds } from "react-icons/im";
 import "./style.scss";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
+import Winner from "../../../commonComponent/trophyWinner";
 interface Props {
   data: {
     C1: string;
@@ -90,7 +90,7 @@ const Race20ResultComponent: React.FC<Props> = ({ data }: any) => {
             border: "0.5px solid #097c93",
           }}
         >
-          <span style={{ fontSize: "26px", color: "#097c93" }}>WINNER</span>
+          <div className="video-winner-text">WINNER</div>
         </div>
         <div
           style={{
@@ -108,7 +108,7 @@ const Race20ResultComponent: React.FC<Props> = ({ data }: any) => {
               >
                 <HandleCards card={"KHH"} />{" "}
                 <div className="casino-winner-icon">
-                  <FaTrophy size={33} color="#169733" />
+                  <Winner />
                 </div>
               </div>
             ) : (
@@ -122,8 +122,8 @@ const Race20ResultComponent: React.FC<Props> = ({ data }: any) => {
               >
                 <HandleCards card={"KDD"} />
                 <div className="casino-winner-icon">
-                  <FaTrophy size={33} color="#169733" />
-                </div>{" "}
+              <Winner />
+            </div>{" "}
               </div>
             ) : (
               ""
@@ -136,8 +136,8 @@ const Race20ResultComponent: React.FC<Props> = ({ data }: any) => {
               >
                 <HandleCards card={"KCC"} />
                 <div className="casino-winner-icon">
-                  <FaTrophy size={33} color="#169733" />
-                </div>{" "}
+              <Winner />
+            </div>{" "}
               </div>
             ) : (
               ""
@@ -150,8 +150,8 @@ const Race20ResultComponent: React.FC<Props> = ({ data }: any) => {
               >
                 <HandleCards card={"KSS"} />
                 <div className="casino-winner-icon">
-                  <FaTrophy size={33} color="#169733" />
-                </div>{" "}
+              <Winner />
+            </div>{" "}
               </div>
             ) : (
               ""

@@ -1,7 +1,7 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import { FaTrophy } from "react-icons/fa";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
+import Winner from "../../../commonComponent/trophyWinner";
 interface Props {
   data: {
     C1: string;
@@ -39,9 +39,9 @@ const Poker1DayResultComponent: React.FC<Props> = ({ data }: any) => {
           }}
         >
           {data?.result?.win === "11" && (
-            <div className="casino-winner-icon mt-3 p-2">
-              <FaTrophy size={40} color="#169733" />
-            </div>
+            <div className="casino-winner-icon">
+            <Winner />
+          </div>
           )}
           <div style={{ display: "flex", flexDirection: "column" }}>
             <span className="title-18 f500">Player A</span>
@@ -78,9 +78,9 @@ const Poker1DayResultComponent: React.FC<Props> = ({ data }: any) => {
             </div>
           </div>
           {data?.result?.win === "21" && (
-            <div className="casino-winner-icon mt-3 p-2">
-              <FaTrophy size={40} color="#169733" />
-            </div>
+            <div className="casino-winner-icon">
+            <Winner />
+          </div>
           )}
         </div>
       </div>

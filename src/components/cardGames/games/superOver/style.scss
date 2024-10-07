@@ -60,13 +60,7 @@
   color: #000;
   margin-left: 10px;
 }
-.casino-winner-icon {
-  // font-size: 26px;
-  box-shadow: 0 0 0 #ffc742;
-  animation: winnerbox 1.5s infinite;
-  border-radius: 50%;
-  color: #169733;
-}
+
 // .match-list-tabs {
 //   border-right: 1px solid $secondary !important;
 //   border-radius: 0px !important;
@@ -197,17 +191,7 @@
   font-weight: 600;
   color: #000;
 }
-.dtlsubTitle {
-  width: 20%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-bottom: 0.1px solid #c7c8ca;
-  border-right: 0.1px solid #c7c8ca;
-  font-weight: 600;
-  color: #000;
-}
+
 .card32bTitle {
   width: 60%;
   background-color: #ffffff;
@@ -241,12 +225,7 @@
   font-weight: 600;
   color: #000;
 }
-.lay-BackGround {
-  background-color: #faa9ba;
-}
-.back-BackGround {
-  background-color: #72bbef;
-}
+
 .flex-justify-center {
   display: flex;
   justify-content: center;
@@ -264,7 +243,7 @@
   width: 100%;
   background-color: #ffc742d9;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   padding: 5px;
 }

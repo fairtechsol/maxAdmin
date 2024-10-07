@@ -35,7 +35,7 @@ const CasinoWarComponent = () => {
       <Row>
         <Col md={8}>
           <div style={{ margin: "5px" }}>
-            <div style={{ height: "400px", marginBottom: ".30px" }}>
+            <div>
               <div className="horseRacingTabHeader">
                 <div>
                   <span style={{ fontSize: "16px", fontWeight: "600" }}>
@@ -66,7 +66,6 @@ const CasinoWarComponent = () => {
               <div
                 style={{
                   width: "100%",
-                  height: "90%",
                   backgroundColor: "#000",
                 }}
               >
@@ -81,7 +80,7 @@ const CasinoWarComponent = () => {
               <div className="teenPatti-table-container">
                 <div
                   className="teenPatti-table-row"
-                  style={{ lineHeight: 2, marginTop: "2px", background: "fff" }}
+                  style={{ lineHeight: 2, background: "fff" }}
                 >
                   <div style={{ width: "40%" }}></div>
                   <div
@@ -138,7 +137,6 @@ const CasinoWarComponent = () => {
                   <div
                     style={{
                       width: "60%",
-                      backgroundColor: "#72bbef",
                       display: "flex",
                       flexDirection: "row",
                     }}
@@ -221,7 +219,7 @@ const CasinoWarComponent = () => {
                           >
                             <span className="f12-b">{player.b1}</span>
                             <span
-                              className={`f400 title-14 ${
+                              className={`f600 title-14 color-red ${
                                 dragonTigerDetail?.profitLoss
                                   ? dragonTigerDetail?.profitLoss[
                                       `${dragonTigerDetail?.videoInfo?.mid}_${player?.sid}_card`

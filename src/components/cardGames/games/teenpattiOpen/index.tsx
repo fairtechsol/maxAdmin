@@ -57,7 +57,7 @@ const TeenPattiOpenComponent = () => {
       <Row>
         <Col md={8}>
           <div style={{ margin: "5px" }}>
-            <div style={{ height: "400px", marginBottom: ".30px" }}>
+            <div>
               <div className="horseRacingTabHeader">
                 <div>
                   <span style={{ fontSize: "16px", fontWeight: "600" }}>
@@ -86,7 +86,6 @@ const TeenPattiOpenComponent = () => {
               <div
                 style={{
                   width: "100%",
-                  height: "90%",
                   backgroundColor: "#000",
                 }}
               >

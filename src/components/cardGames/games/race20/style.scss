@@ -259,7 +259,7 @@
   justify-content: space-around;
   align-items: center;
   width: 100%;
-  padding: 5px;
+  padding: 14px;
   line-height: 1;
 }
 .total-rateBox {
@@ -332,13 +332,7 @@
   justify-content: space-around;
   align-items: center;
 }
-.casino-winner-icon {
-  // font-size: 26px;
-  box-shadow: 0 0 0 #ffc742;
-  animation: winnerbox 1.5s infinite;
-  border-radius: 50%;
-  color: #169733;
-}
+
 .rate-box {
   font-size: 16px;
   font-weight: bold;
@@ -350,24 +344,14 @@
   line-height: 1;
   margin-top: 5px;
 }
-.lay-BackGround {
-  background-color: #faa9ba;
-}
-.back-BackGround {
-  background-color: #72bbef;
-}
+
+
 .result-card-container {
   display: flex;
   flex-direction: row;
   gap: 8px;
 }
-.casino-winner-icon {
-  // font-size: 26px;
-  box-shadow: 0 0 0 #ffc742;
-  animation: winnerbox 1.5s infinite;
-  border-radius: 50%;
-  color: #169733;
-}
+
 // .horseRacingTab .nav-link{
 //   margin: 0 !important;
 // }

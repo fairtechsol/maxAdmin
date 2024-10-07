@@ -1,6 +1,4 @@
 const WinBox = ({ odds, data }: any) => {
-  const min = odds?.[0]?.min;
-  const max = odds?.[0]?.max;
   const handleLock = (item: any) => {
     if (item?.gstatus != "ACTIVE" || item?.b1 === "0.00") {
       return true;
@@ -27,7 +25,7 @@ const WinBox = ({ odds, data }: any) => {
                     <span className="rate-box">{item?.b1}</span>{" "}
                   </div>
                   <span
-                    className={`casino-volume mt-0 f600 ${
+                    className={`casino-volume color-red mt-0 f600 ${
                       data?.profitLoss
                         ? data?.profitLoss[
                             `${data?.videoInfo?.mid}_${item?.sid}_card`
@@ -59,12 +57,6 @@ const WinBox = ({ odds, data }: any) => {
               </>
             );
           })}
-        </div>
-        <div style={{ width: "100%", textAlign: "end", padding: "5px" }}>
-          <span style={{ fontWeight: "bolder" }}>Min:</span>
-          <span>{min}</span>
-          <span style={{ fontWeight: "bolder", marginLeft: "10px" }}>Max:</span>
-          <span>{max}</span>
         </div>
       </div>
     </>

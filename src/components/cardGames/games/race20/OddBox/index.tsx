@@ -1,8 +1,12 @@
+import { useState } from "react";
 import { HandleCards } from "../../../../commonComponent/cardsComponent";
 
 const OddBox = ({ odds, data }: any) => {
-  const min = odds?.[0]?.min;
-  const max = odds?.[0]?.max;
+  const [openDivId, setOpenDivId] = useState(null); // To keep track of the open div
+
+  const toggleDiv = (id: any) => {
+    setOpenDivId(openDivId === id ? null : id); // Toggle div visibility based on its id
+  };
 
   const handleCardRender = (card: string) => {
     if (card?.includes("spade")) {
@@ -67,6 +71,7 @@ const OddBox = ({ odds, data }: any) => {
                   key={index}
                 >
                   <div
+                  className="position-relative"
                     style={{
                       width: "100%",
                       display: "flex",
@@ -75,6 +80,22 @@ const OddBox = ({ odds, data }: any) => {
                     }}
                   >
                     <HandleCards card={handleCardRender(item?.nat)} />
+                    <div
+                      onClick={() => toggleDiv("demo0")}
+                      className="range-icon d-inline-block ms-2"
+                    >
+                      <i
+                        className="fas fa-info-circle float-right"
+                      ></i>{" "}
+                      <div
+                        id="demo0"
+                        className={`icon-range collapse ${
+                          openDivId === "demo0" ? "show" : ""
+                        }`}
+                      >
+                        R:<span>100</span>-<span>3L</span>
+                      </div>
+                    </div>
                   </div>
                   <div
                     style={{
@@ -95,11 +116,10 @@ const OddBox = ({ odds, data }: any) => {
                         justifyContent: "center",
                         alignItems: "center",
                         flexDirection: "column",
-                        paddingTop: "7px",
+                        padding: "14px",
                       }}
                     >
                       <span className="rate-box">{item?.b1}</span>
-                      <span className="casino-volume f400">{item?.bs1}</span>
                     </div>
                     <div
                       className={`lay-BackGround cursor-pointer ${
@@ -115,11 +135,10 @@ const OddBox = ({ odds, data }: any) => {
                       }}
                     >
                       <span className="rate-box">{item?.l1}</span>
-                      <span className="casino-volume f400">{item?.ls1}</span>
                     </div>
                   </div>
                   <span
-                    className={`oddsBoxProfitLoss ${
+                    className={`oddsBoxProfitLoss color-red ${
                       data?.profitLoss
                         ? data?.profitLoss[
                             `${data?.videoInfo?.mid}_${data?.cards?.[0]?.sid}_card`
@@ -157,12 +176,6 @@ const OddBox = ({ odds, data }: any) => {
               </>
             );
           })}
-        </div>
-        <div style={{ width: "100%", textAlign: "end", padding: "5px" }}>
-          <span style={{ fontWeight: "bolder" }}>Min:</span>
-          <span>{min}</span>
-          <span style={{ fontWeight: "bolder", marginLeft: "10px" }}>Max:</span>
-          <span>{max}</span>
         </div>
       </div>
     </>
