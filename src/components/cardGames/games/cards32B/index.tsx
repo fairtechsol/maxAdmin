@@ -15,11 +15,12 @@ import RulesModal from "../../../commonComponent/rulesModal";
 import { card32rules } from "../../../../assets";
 import UserBets from "../../../game/userBet";
 import CardResultBox from "../../../commonComponent/cardResultBox";
-import BackLay from "./BackLay";
+// import BackLay from "./BackLay";
 import OddEven from "./OddEvenBox";
 import PairBox from "./PairBox";
 import TotalCards from "./totalCards";
 import CardBox from "./cardBox";
+import RateBox from "./ratebox";
 
 const Card32BComponent = () => {
   const [show, setShow] = useState(false);
@@ -67,21 +68,15 @@ const Card32BComponent = () => {
           </div>
           <div>
             <div
-              className="d-sm-flex flex-row justify-content-around align-items-center"
-              style={{ width: "100%" }}
+              className="d-sm-flex flex-row justify-content-around mt-2"
+              style={{ width: "100%",gap:"15px" }}
             >
-              <div className="w-50">
-                <BackLay
-                  matchOddsData={dragonTigerDetail?.matchOdd}
-                  data={dragonTigerDetail}
-                />
-              </div>
-              <div className="w-50">
-                <OddEven
+              <RateBox odds={dragonTigerDetail?.matchOdd}/>
+              <OddEven
                   odds={dragonTigerDetail?.oddEven}
                   data={dragonTigerDetail}
                 />
-              </div>
+             
             </div>
             <div
               style={{
@@ -89,11 +84,12 @@ const Card32BComponent = () => {
                 margin: "5px",
                 display: "flex",
                 flexDirection: "row",
-                gap: "8px",
+                gap: "15px",
               }}
             >
+             
               <PairBox
-                matchOddsData={dragonTigerDetail?.redBlack}
+                odds={dragonTigerDetail?.redBlack}
                 data={dragonTigerDetail}
               />
               <TotalCards

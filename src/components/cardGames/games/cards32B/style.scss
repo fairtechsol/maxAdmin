@@ -225,9 +225,9 @@
   font-weight: 600;
   color: #000;
 }
-.cardNumberTitle {
+.cardNumberTitleb {
   width: 100%;
-  background-color: #ffffff;
+  background-color: #dddddd;
   display: flex;
   justify-content: start;
   align-items: center;
@@ -281,6 +281,17 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+}
+.card32bsubTitle{
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  color: #000;
+  border: 0.5px solid #fff;
+  // cursor: pointer;
 }
 
 @media (max-width: 768px) {
