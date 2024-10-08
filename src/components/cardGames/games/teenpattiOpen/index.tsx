@@ -157,13 +157,13 @@ const TeenPattiOpenComponent = () => {
                     Object.keys(dragonTigerDetail?.players).map(
                       (key, index) => (
                         <CasinoBox
-                          playerNames={dragonTigerDetail?.players[key]}
-                          cards={cardsArray1}
-                          odds={index}
+                          key={key}
+                          indx={index}
+                          player={dragonTigerDetail?.players[key]}
                           pairPlus={
                             dragonTigerDetail?.pairsPlus[`pairPlus${index + 1}`]
                           }
-                          total={playersArray1}
+                          cards={cardsArray1} 
                         />
                       )
                     )}

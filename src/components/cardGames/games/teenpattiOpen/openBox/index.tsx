@@ -1,15 +1,20 @@
 import React from 'react';
-import "./style.scss";
-const CasinoBox = ({ playerNames, cards, odds, pairPlus, total }:any) => {
+import "./style.scss"; // Make sure this path is correct
+
+const CasinoBox = ({ player, pairPlus, cards, indx }: any) => {
+    const playerName = player?.nation;
+    const odds = player?.rate; // Assuming rate is the odds
+    const total = player?.total; // Assuming total is part of player data
+
     return (
         <div className="casino-box mb-2 d-none-small">
             <div className="casino-open-card-box">
-                {cards?.map((cardGroup:any, index:any) => (
+                {cards?.map((cardGroup: any, index: any) => (
                     <div key={index}>
                         <div><b>{index + 1}</b></div>
                         <div>
-                            {cardGroup?.map((card:any, cardIndex:any) => (
-                                <span key={cardIndex} >
+                            {cardGroup?.map((card: any, cardIndex: any) => (
+                                <span key={cardIndex}>
                                     <img src={card} alt={`Card ${cardIndex + 1}`} />
                                 </span>
                             ))}
@@ -18,13 +23,13 @@ const CasinoBox = ({ playerNames, cards, odds, pairPlus, total }:any) => {
                 ))}
             </div>
             <div className="casino-box-header">
-                <div className="casino-nation-name no-border"></div>
+                <div className="casino-nation-name no-border">
+                    <span>{playerName}</span>
+                </div>
                 <div className="casino-bl-box text-right">
-                    {playerNames?.map((name:any, index:any) => (
-                        <div className="casino-bl-box-item" key={index}>
-                            <span>{name}</span>
-                        </div>
-                    ))}
+                    <div className="casino-bl-box-item">
+                        <span>{playerName}</span>
+                    </div>
                 </div>
             </div>
             <div className="casino-box-content">
@@ -37,12 +42,10 @@ const CasinoBox = ({ playerNames, cards, odds, pairPlus, total }:any) => {
                         </div>
                     </div>
                     <div className="casino-bl-box">
-                        {odds?.map((odd:any, index:any) => (
-                            <div className="back casino-bl-box-item suspended lock-top" key={index}>
-                                <span className="casino-box-odd">{odd}</span>
-                                <span className="casino-book book-red">0</span>
-                            </div>
-                        ))}
+                        <div className="back casino-bl-box-item suspended lock-top">
+                            <span className="casino-box-odd">{odds}</span>
+                            <span className="casino-book book-red">0</span>
+                        </div>
                     </div>
                 </div>
                 <div className="casino-box-row mb-4">
@@ -54,12 +57,10 @@ const CasinoBox = ({ playerNames, cards, odds, pairPlus, total }:any) => {
                         </div>
                     </div>
                     <div className="casino-bl-box">
-                        {pairPlus?.map((pair:any, index:any) => (
-                            <div className="back casino-bl-box-item suspended lock-top" key={index}>
-                                <span className="casino-box-odd open-pair">{pair}</span>
-                                <span className="casino-book book-red">0</span>
-                            </div>
-                        ))}
+                        <div className="back casino-bl-box-item suspended lock-top">
+                            <span className="casino-box-odd open-pair">{pairPlus?.nation}</span>
+                            <span className="casino-book book-red">0</span>
+                        </div>
                     </div>
                 </div>
                 <div className="casino-box-row mb-4">
@@ -71,12 +72,10 @@ const CasinoBox = ({ playerNames, cards, odds, pairPlus, total }:any) => {
                         </div>
                     </div>
                     <div className="casino-bl-box">
-                        {total?.map((totalOdd:any, index:any) => (
-                            <div className="back casino-bl-box-item suspended lock-top" key={index}>
-                                <span className="casino-box-odd">{totalOdd}</span>
-                                <span className="casino-book book-red">0</span>
-                            </div>
-                        ))}
+                        <div className="back casino-bl-box-item suspended lock-top">
+                            <span className="casino-box-odd">{total}</span>
+                            <span className="casino-book book-red">0</span>
+                        </div>
                     </div>
                 </div>
             </div>
