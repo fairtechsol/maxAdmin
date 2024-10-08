@@ -141,9 +141,9 @@
   padding: 0; /* Remove padding from Nav.Link */
   margin: 0; /* Remove margin from Nav.Link */
 }
-.sBoxContainer {
+.sBoxContainer-ab2 {
   width: 50%;
-  background-color: #ddd;
+  // background-color: #ddd;
   padding-top: 5px;
 }
 .sBoxMainlucky {
@@ -154,14 +154,15 @@
   align-items: center;
   gap: 3%;
 }
-.commonButtonBoxContainerSbox {
+.commonButtonBoxContainerSbox-ab2 {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 60px;
   // gap: 3px;
-  border: 3px solid yellow;
-  border-radius: 8px;
+  border: 1px solid #fdcf13;
+  border-radius: 4px;
   line-height: 1.2;
   cursor: pointer;
 }
@@ -180,9 +181,9 @@
   position: relative;
   text-align: center;
 }
-.oddEvenContainer {
+.oddEvenContainer-ab2 {
   width: 50%;
-  background-color: #eee;
+  // background-color: #eee;
   padding-top: 5px;
   display: flex;
   flex-direction: column;
@@ -190,15 +191,21 @@
 }
 .cardContainer {
   width: 100%;
-  background-color: #eee;
+  background-color: #ddd;
   padding: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
 
-.cardContainerAbj {
+.cardContainerAbj-ab2 {
   width: 100%;
+  background-color: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 5px;
 }
 .commonCardImgContainer {
   width: 100%;
@@ -219,12 +226,13 @@
   align-items: center;
   cursor: pointer;
 }
-.evenOddbtn-theme {
+.evenOddbtn-theme-abj2 {
   padding: 8px 0;
   font-weight: bold;
   font-size: 18px;
   color: #000;
-  background-color: #72bbef !important;
+  // background-color: #72bbef !important;
+  border: 2px solid #72bbef;
   text-align: center;
   line-height: 1;
 }
@@ -266,6 +274,11 @@
 // .horseRacingTab .nav-link{
 //   margin: 0 !important;
 // }
+
+.teen20center {
+  width: 2px;
+  background-color: #e0e0e0;
+}
 
 @media (max-width: 768px) {
   .tabs-navs .nav-link {

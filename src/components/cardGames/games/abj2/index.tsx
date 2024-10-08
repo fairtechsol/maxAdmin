@@ -65,15 +65,13 @@ const Abj2Component = () => {
               </div>
             </div>
             <div>
-              <div
-                className="row-flex"
-                style={{ width: "100%" }}
-              >
+              <div className="row-flex" style={{ width: "100%" }}>
                 <SBetBox
                   type={"A"}
                   odds={dragonTigerDetail?.abjSa}
                   data={dragonTigerDetail}
                 />
+                <div className="teen20center"></div>
                 <SBetBox
                   type={"B"}
                   odds={dragonTigerDetail?.abjSb}
@@ -81,7 +79,6 @@ const Abj2Component = () => {
                 />
               </div>
               <div
-              className="mt-2"
                 style={{
                   width: "100%",
                   display: "flex",
@@ -94,6 +91,7 @@ const Abj2Component = () => {
                   odds={dragonTigerDetail?.oddEven}
                   data={dragonTigerDetail}
                 />
+                <div className="teen20center"></div>
                 <OddEven
                   card={false}
                   odds={dragonTigerDetail?.abjCards}
@@ -105,7 +103,7 @@ const Abj2Component = () => {
                   width: "100%",
                   margin: "5px",
                   display: "flex",
-                  flexDirection: "row",
+                  flexDirection: "column",
                   gap: "8px",
                 }}
               >

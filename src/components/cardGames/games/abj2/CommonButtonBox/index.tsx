@@ -2,7 +2,7 @@ import "../style.scss";
 const CommonButtonBox = ({ name, value1, background, text, lock }: any) => {
   return (
     <div
-      className={`commonButtonBoxContainerSbox ${lock ? "suspended" : ""}`}
+      className={`commonButtonBoxContainerSbox-ab2 ${lock ? "locked" : ""}`}
       style={{ width: "100%", backgroundColor: background }}
     >
       <div className={``}>
