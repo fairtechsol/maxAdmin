@@ -96,7 +96,7 @@ const TeenPattiOpenComponent = () => {
                 />
               </div>
             </div>
-            <div style={{}}>
+            <div>
               <div className="teenPatti-table-container">
                 <div className="teenPatti-table-row" style={{ lineHeight: 2 }}>
                   <div

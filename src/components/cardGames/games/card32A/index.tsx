@@ -24,7 +24,7 @@ const Cards32AComponent = () => {
     <div>
       <Row>
         <Col md={8}>
-          <div style={{ height: "400px", margin: "5px" }}>
+          <div>
             <div className="horseRacingTabHeader">
               <div>
                 <span style={{ fontSize: "16px", fontWeight: "600" }}>
@@ -49,7 +49,7 @@ const Cards32AComponent = () => {
               </span>
             </div>
             <div
-              style={{ width: "100%", height: "90%", backgroundColor: "#000" }}
+              style={{ width: "100%", backgroundColor: "#000" }}
             >
               <VideoFrame
                 time={dragonTigerDetail?.videoInfo?.autotime}
@@ -58,8 +58,8 @@ const Cards32AComponent = () => {
               />
             </div>
           </div>
-          <div style={{ height: "350px" }}>
-            <div className="d-flex px-2 mt-5">
+          <div >
+            <div className="d-flex px-2 mt-1">
               <DynamicTable
                 odds={dragonTigerDetail?.set1}
                 data={dragonTigerDetail}

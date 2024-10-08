@@ -18,7 +18,7 @@ const CommonButtonBox = ({
           {parseFloat(value1 ?? 0).toFixed(2)}
         </span>
       </div>
-      <div className={`tiePairbtn-theme ${lock ? "suspended" : ""}`}>
+      <div className={`tiePairbtn-theme back-BackGround ${lock ? "suspended" : ""}`}>
         <span>
           {value2 === "Red" ? (
             <>
@@ -38,7 +38,7 @@ const CommonButtonBox = ({
       <div>
         <span
           style={{ fontSize: "16px" }}
-          className={`${
+          className={`color-red${
             value3 && value3 > 0
               ? "color-green"
               : value3 < 0
