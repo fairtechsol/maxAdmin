@@ -67,6 +67,8 @@ const matchListSlice = createSlice({
           halfTime,
           overUnder,
           completeManual,
+          tournament,
+          other,
         } = action.payload;
 
         let parsedSessionBettings = state?.matchDetails?.sessionBettings?.map(
@@ -98,6 +100,8 @@ const matchListSlice = createSlice({
           overUnder,
           manualCompleteMatch: completeManual,
           updatedSessionBettings: updatedSessionBettings,
+          tournament,
+          other,
         };
       });
   },
