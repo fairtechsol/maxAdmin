@@ -1,0 +1,126 @@
+/* General Reset */
+* {
+    outline: 0 !important;
+}
+*, :after, :before {
+    box-sizing: border-box;
+}
+
+/* Body and Font Settings */
+html, body {
+    height: 100%;
+    font-family: 'Roboto Condensed', sans-serif;
+    color: #1E1E1E;
+    font-size: 14px;
+    line-height: 15px;
+    background-color: #fff;
+}
+body {
+    margin: 0;
+    font-size: 0.8125rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    text-align: left;
+    background-color: #f8f8fb;
+}
+
+/* Casino Box Styles */
+.casino-box {
+    margin-bottom: 1rem; /* Adjust as needed */
+    background-color: #fff; /* Background color for casino box */
+    border: 1px solid #ddd; /* Border styling */
+    border-radius: 4px; /* Rounded corners */
+    padding: 1rem; /* Padding inside the box */
+}
+
+/* Header Styles */
+.casino-box-header {
+    display: flex;
+    justify-content: space-between; /* Space out elements */
+    margin-bottom: 1rem; /* Spacing below header */
+}
+
+/* Player Names */
+.casino-bl-box {
+    display: flex;
+    flex-wrap: wrap; /* Wrap player names */
+}
+.casino-bl-box-item {
+    margin-left: 1rem; /* Spacing between player names */
+}
+
+/* Odds, Pair Plus, and Total Styles */
+.casino-box-content {
+    display: flex;
+    flex-direction: column; /* Stack rows vertically */
+}
+
+/* Row Styles */
+.casino-box-row {
+    display: flex;
+    justify-content: space-between; /* Space between odds and names */
+    align-items: center; /* Center content vertically */
+    margin-bottom: 1.5rem; /* Spacing below each row */
+}
+
+/* Nation Name Styles */
+.casino-nation-name {
+    padding: 4px;
+    background-color: #ddd; /* Background for nation name */
+}
+
+/* Odds Box Styles */
+.casino-bl-box {
+    display: flex;
+    flex-wrap: wrap; /* Wrap odds boxes */
+}
+
+/* Odds Item Styles */
+.back {
+    position: relative; /* Positioning for elements */
+    background-color: #f8f8fb; /* Background color for odds */
+    padding: 5px; /* Padding around odds */
+    margin: 0.5rem; /* Spacing around each odds box */
+    border-radius: 4px; /* Rounded corners */
+}
+
+/* Odds and Book Styles */
+.casino-box-odd {
+    font-weight: bold; /* Bold for odds */
+}
+.casino-book {
+    font-weight: normal; /* Regular for book */
+}
+
+/* Suspended Styles */
+.suspended {
+    opacity: 0.5; /* Make suspended items look faded */
+}
+
+/* Lock-top Styles */
+.lock-top {
+    border-top: 2px solid red; /* Red top border for locked items */
+}
+
+/* Info Icon Styles */
+.fas.fa-info-circle {
+    cursor: pointer; /* Pointer cursor for info icon */
+}
+
+/* Collapse Styles */
+.icon-range {
+    padding: 5px; /* Padding for icon range */
+    background-color: #f0f0f0; /* Background for collapsed range */
+    border-radius: 4px; /* Rounded corners */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .casino-box {
+        padding: 0.5rem; /* Less padding on smaller screens */
+    }
+    .casino-bl-box-item {
+        margin-left: 0.5rem; /* Less margin on smaller screens */
+    }
+}

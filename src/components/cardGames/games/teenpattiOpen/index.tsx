@@ -17,6 +17,7 @@ import UserBets from "../../../game/userBet";
 import TeenPattiTableRow from "./tableRow";
 import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
 import TeenOpenResult from "./teenCard";
+import CasinoBox from "./openBox";
 const TeenPattiOpenComponent = () => {
   const [show, setShow] = useState(false);
   const { dragonTigerDetail } = useSelector((state: RootState) => state.card);
@@ -150,6 +151,23 @@ const TeenPattiOpenComponent = () => {
                       playersA={playersArray1}
                     />
                   ))}
+
+                <div>
+                  {dragonTigerDetail?.players &&
+                    Object.keys(dragonTigerDetail?.players).map(
+                      (key, index) => (
+                        <CasinoBox
+                          playerNames={dragonTigerDetail?.players[key]}
+                          cards={cardsArray1}
+                          odds={index}
+                          pairPlus={
+                            dragonTigerDetail?.pairsPlus[`pairPlus${index + 1}`]
+                          }
+                          total={playersArray1}
+                        />
+                      )
+                    )}
+                </div>
               </div>
               <div style={{ width: "100%", marginTop: "10px" }}>
                 <CardResultBox
