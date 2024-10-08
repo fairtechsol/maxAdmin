@@ -42,7 +42,7 @@ const CommonCardImg = ({ cardData, data }: any) => {
                 display: "flex",
                 justifyContent: "center",
               }}
-              className={`${
+              className={`color-red${
                 data?.profitLoss
                   ? data?.profitLoss[
                       `${data?.videoInfo?.mid}_${item?.sid}_card`

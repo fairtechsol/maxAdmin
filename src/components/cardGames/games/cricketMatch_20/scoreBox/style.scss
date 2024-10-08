@@ -27,17 +27,7 @@
     transform: translateX(-50%);
   }
   
-  .cricket20 .blbox {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    left: 50%;
-    width: 170px;
-    height: 40px;
-    transform: translateX(-50%);
-    bottom: -15px;
-  }
+
   
   .cricket20 .blbox div {
     width: 35%;
@@ -56,7 +46,6 @@
     justify-content: center;
     padding: 5px 0;
     font-weight: bold;
-    border-left: 1px solid var(--table-border);
     cursor: pointer;
     min-height: 46px;
   }
