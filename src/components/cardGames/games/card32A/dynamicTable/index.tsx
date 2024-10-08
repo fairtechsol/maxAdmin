@@ -1,11 +1,18 @@
+import { useState } from "react";
 import "./style.scss";
+import { formatNumber } from "../../../../../helpers";
 const DynamicTable = ({ odds, data, playerNum }: any) => {
   let player1Key = `player${playerNum[0]}`;
   let player2Key = `player${playerNum[1]}`;
+  const [openDivId, setOpenDivId] = useState(null);
 
+  const toggleDiv = (id: any) => {
+    setOpenDivId(openDivId === id ? null : id); 
+  };
+  console.log('first',odds);
   return (
     <div className="card32-table-container">
-      <div className="card32-table-row" style={{ lineHeight: 2 }}>
+      {/* <div className="card32-table-row" style={{ lineHeight: 2 }}>
         <div style={{ width: "50%" }}></div>
         <div
           style={{
@@ -21,7 +28,7 @@ const DynamicTable = ({ odds, data, playerNum }: any) => {
             LAY
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="card32-table-row" style={{ lineHeight: 1 }}>
         <div
           style={{
@@ -29,15 +36,18 @@ const DynamicTable = ({ odds, data, playerNum }: any) => {
             padding: "8px",
             border: "0.1px solid #fff",
             display: "flex",
-            flexDirection: "column",
+            flexDirection: "row",
+            justifyContent:"space-between",
             cursor: "pointer",
+            position:"relative"
           }}
         >
           <span style={{ fontSize: "14px", fontWeight: "bolder" }}>
             {odds?.[0]?.nat || odds?.[0]?.nation}
           </span>
+          <div>
           <span
-            className={`${
+            className={`me-1 ${
               data?.profitLoss
                 ? data?.profitLoss[`${data?.videoInfo?.mid}_1_card`]
                   ? JSON.parse(
@@ -61,6 +71,24 @@ const DynamicTable = ({ odds, data, playerNum }: any) => {
                 : 0
               : 0}
           </span>
+          <div
+                      onClick={() => toggleDiv("demo0")}
+                      className="range-icon d-inline-block"
+                    >
+                      <i
+                        className="fas fa-info-circle float-right"
+                      ></i>{" "}
+                      <div
+                        id="demo0"
+                        className={`icon-range-A collapse ${
+                          openDivId === "demo0" ? "show" : ""
+                        }`}
+                      >
+                        R:<span>{data?.videoInfo?.min}</span>-<span>{formatNumber(data?.videoInfo?.max)}</span>
+                      </div>
+                    </div>
+          </div>
+         
         </div>
         <div
           className={
@@ -76,11 +104,11 @@ const DynamicTable = ({ odds, data, playerNum }: any) => {
             cursor: "pointer",
           }}
         >
-          <div className="card32-table-item back-cell" style={{ width: "50%" }}>
+          <div className="card32-table-item back-cell-A" style={{ width: "50%" }}>
             <span className="f12-b">{odds?.[0]?.b1}</span>
             <span className="f10-b">{odds?.[0]?.bs1}</span>
           </div>
-          <div className="card32-table-item lay-cell" style={{ width: "50%" }}>
+          <div className="card32-table-item lay-cell-A" style={{ width: "50%" }}>
             <span className="f12-b">{odds?.[0]?.l1}</span>
             <span className="f10-b">{odds?.[0]?.ls1}</span>
           </div>
@@ -93,15 +121,18 @@ const DynamicTable = ({ odds, data, playerNum }: any) => {
             padding: "10px",
             border: "0.1px solid #fff",
             display: "flex",
-            flexDirection: "column",
+            flexDirection: "row",
             cursor: "pointer",
+            justifyContent:"space-between",
+            position:"relative"
           }}
         >
           <span style={{ fontSize: "14px", fontWeight: "bolder" }}>
-            {odds?.[1]?.nat || odds?.[0]?.nation}
+            {odds?.[1]?.nat || odds?.[1]?.nation}
           </span>
+          <div>
           <span
-            className={`${
+            className={`me-1 ${
               data?.profitLoss
                 ? data?.profitLoss[`${data?.videoInfo?.mid}_1_card`]
                   ? JSON.parse(
@@ -125,6 +156,24 @@ const DynamicTable = ({ odds, data, playerNum }: any) => {
                 : 0
               : 0}
           </span>
+          <div
+                      onClick={() => toggleDiv("demo0")}
+                      className="range-icon d-inline-block"
+                    >
+                      <i
+                        className="fas fa-info-circle float-right"
+                      ></i>{" "}
+                      <div
+                        id="demo0"
+                        className={`icon-range-A collapse ${
+                          openDivId === "demo0" ? "show" : ""
+                        }`}
+                      >
+                        R:<span>{data?.videoInfo?.min}</span>-<span>{formatNumber(data?.videoInfo?.max)}</span>
+                      </div>
+                    </div>
+          </div>
+          
         </div>
         <div
           className={
@@ -140,11 +189,11 @@ const DynamicTable = ({ odds, data, playerNum }: any) => {
             cursor: "pointer",
           }}
         >
-          <div className="card32-table-item back-cell" style={{ width: "50%" }}>
+          <div className="card32-table-item back-cell-A" style={{ width: "50%" }}>
             <span className="f12-b">{odds?.[1]?.b1}</span>
             <span className="f10-b">{odds?.[1]?.bs1}</span>
           </div>
-          <div className="card32-table-item lay-cell" style={{ width: "50%" }}>
+          <div className="card32-table-item lay-cell-A" style={{ width: "50%" }}>
             <span className="f12-b">{odds?.[1]?.l1}</span>
             <span className="f10-b">{odds?.[1]?.ls1}</span>
           </div>
