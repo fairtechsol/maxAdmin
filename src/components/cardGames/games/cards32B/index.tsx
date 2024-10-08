@@ -21,6 +21,7 @@ import PairBox from "./PairBox";
 import TotalCards from "./totalCards";
 import CardBox from "./cardBox";
 import RateBox from "./ratebox";
+import Card32BResult from "./card32B";
 
 const Card32BComponent = () => {
   const [show, setShow] = useState(false);
@@ -61,7 +62,7 @@ const Card32BComponent = () => {
             >
               <VideoFrame
                 time={dragonTigerDetail?.videoInfo?.autotime}
-                // result={<Card32BResult data={dragonTigerDetail?.videoInfo} />}
+                result={<Card32BResult data={dragonTigerDetail?.videoInfo} />}
                 id={`${cardUrl}${cardGamesId.card32B}`}
               />
             </div>
