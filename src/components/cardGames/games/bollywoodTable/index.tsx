@@ -35,7 +35,7 @@ const BollywoodTableComponent = () => {
       <Row>
         <Col md={8}>
           <div className="horseRacingTab">
-            <div style={{ width: "100%", margin: "5px" }}>
+            <div style={{ width: "100%"}}>
               <div className="horseRacingTabHeader">
                 <div>
                   <span style={{ fontSize: "16px", fontWeight: "600" }}>
@@ -78,7 +78,7 @@ const BollywoodTableComponent = () => {
               </div>
             </div>
             <div>
-              <div style={{ width: "100%", margin: "5% 5px" }}>
+              <div style={{ width: "100%" }}>
                 <TiePairBox
                   lowHigh={dragonTigerDetail?.players}
                   data={dragonTigerDetail}

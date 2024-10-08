@@ -15,7 +15,7 @@ const CommonCardImg = ({ cardData, data }: any) => {
   }, [cardData]);
 
   return (
-    <div className="commonCardImgContainer">
+    <div className="commonCardImgContainerA">
       {cardImg?.map((item: any) => {
         return (
           <div>
@@ -24,13 +24,13 @@ const CommonCardImg = ({ cardData, data }: any) => {
               style={{
                 display: "flex",
                 flexDirection: "column",
-                justifyContent: "space-around",
+                justifyContent: "space-between",
                 alignItems: "center",
               }}
               key={item?.code}
             >
               {" "}
-              <img src={item?.imgSrc} width={"40px"} />
+              <img src={item?.imgSrc} width={"60px"} />
             </div>
             <span
               style={{
@@ -38,7 +38,7 @@ const CommonCardImg = ({ cardData, data }: any) => {
                 display: "flex",
                 justifyContent: "center",
               }}
-              className={`${
+              className={`color-red${
                 data?.profitLoss
                   ? data?.profitLoss[
                       `${data?.videoInfo?.mid}_${item?.sid}_card`

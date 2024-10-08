@@ -15,23 +15,23 @@ const PlayerButton = ({
       </div>
       <div className="teenPatti-table-row" style={{ lineHeight: 1 }}>
         <div
-          className={lock ? "suspended" : ""}
           style={{
             width: "100%",
-            backgroundColor: "#72bbef",
+            // backgroundColor: "#72bbef",
             display: "flex",
             flexDirection: "row",
+            gap: "10px"
           }}
         >
-          <div className="teenPatti-table-item" style={{ width: "50%" }}>
+          <div  className={lock ? "suspended teenPatti-table-item back-BackGround" : `teenPatti-table-item back-BackGround`} style={{ width: "50%" }}>
             <span className="f18-b my-2 fw-bold">
               {parseFloat(value1).toFixed(2)}
             </span>
             <span className="f10-b">{}</span>
           </div>
           <div
-            className={`teenPatti-table-item`}
-            style={{ width: "50%", background: "#f9c9d4" }}
+            className={lock ? "suspended teenPatti-table-item lay-BackGround" : `teenPatti-table-item lay-BackGround`}
+            style={{ width: "50%" }}
           >
             <span className="f18-b my-2 fw-bold">
               {parseFloat(value4).toFixed(2)}
@@ -44,7 +44,7 @@ const PlayerButton = ({
       <div>
         <span
           style={{ fontSize: "16px" }}
-          className={`${
+          className={`color-red${
             value3 && value3 > 0
               ? "color-green"
               : value3 < 0
