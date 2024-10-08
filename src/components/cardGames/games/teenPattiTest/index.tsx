@@ -5,14 +5,15 @@ import { useSelector } from "react-redux";
 import "./style.scss";
 import { cardGamesId, cardUrl } from "../../../../utils/Constants";
 import { RootState } from "../../../../store/store";
-import { handleRoundId } from "../../../../helpers";
+import { formatNumber, handleRoundId } from "../../../../helpers";
 import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
 import CardResultBox from "../../../commonComponent/cardResultBox";
 import UserBets from "../../../game/userBet";
 import RulesModal from "../../../commonComponent/rulesModal";
 import { tprules } from "../../../../assets";
 import TeenTestResult from "./teenCard";
-import TableItemList from "./tableItemList";
+import OddsRateBox from "./oddsRateBox";
+// import TableItemList from "./tableItemList";
 
 const TeenPattiComponent = () => {
   const placeBetRef = useRef<HTMLDivElement>(null);
@@ -20,6 +21,16 @@ const TeenPattiComponent = () => {
   const [show, setShow] = useState(false);
   const [videoFrameId, setVideoFrameId] = useState("");
   const { dragonTigerDetail } = useSelector((state: RootState) => state.card);
+
+  const [openDivIds, setOpenDivIds] = useState<string[]>([]);
+
+  const toggleDiv = (id: string) => {
+    if (openDivIds.includes(id)) {
+      setOpenDivIds(openDivIds.filter((openId) => openId !== id));
+    } else {
+      setOpenDivIds([...openDivIds, id]);
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -97,247 +108,104 @@ const TeenPattiComponent = () => {
                 />
               </div>
             </div>
-
-            <div>
-              <div className="teenPatti-table-container-20">
-                <div className="teenPatti-table-row" style={{ lineHeight: 2 }}>
-                  <div style={{ width: "40%" }}></div>
-                  <div
-                    style={{
-                      width: "60%",
-                      backgroundColor: "#72bbef",
-                      display: "flex",
-                      flexDirection: "row",
-                    }}
-                  >
-                    <div
-                      className="teenPatti-table-item f12-b"
-                      style={{ width: "100%" }}
-                    >
-                      BACK
+            <div className="casino-detail">
+              <div className="teen1daycasino-container">
+                <div className="teentestother">
+                  <div className="casino-box-row">
+                    <div className="casino-nation-name"></div>
+                    {dragonTigerDetail?.sections &&
+                      dragonTigerDetail?.sections.map(
+                        (section: any, index: any) => (
+                          <div key={index} className="casino-bl-box">
+                            <div className="casino-bl-box-item">
+                              <b>{section?.nation}</b>
+                              <div className="float-end">
+                                <i
+                                  className="fas fa-info-circle float-end"
+                                  onClick={() => toggleDiv(index)}
+                                ></i>
+                                <div
+                                  id="demo0"
+                                  className={`icon-range collapse ${
+                                    openDivIds.includes(index) ? "show" : ""
+                                  }`}
+                                >
+                                  R:
+                                  <span>
+                                    {dragonTigerDetail?.videoInfo?.min}
+                                  </span>
+                                  -
+                                  <span>
+                                    {formatNumber(
+                                      dragonTigerDetail?.videoInfo?.max
+                                    )}
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        )
+                      )}
+                  </div>
+                  <div className="casino-box-row mb-4">
+                    <div className="casino-nation-name casino-nation-name-bg">
+                      <b>Tiger</b>
                     </div>
-                  </div>
-                </div>
-                <div className="teenPatti-table-row" style={{ lineHeight: 1 }}>
-                  <div
-                    style={{
-                      width: "40%",
-                      padding: "10px",
-                      border: "0.1px solid #fff",
-                    }}
-                  >
-                    <span style={{ fontSize: "14px", fontWeight: "bolder" }}>
-                      {dragonTigerDetail?.playerA?.[0]?.nation}
-                    </span>
-                  </div>
-
-                  <div
-                    className="teenPatti-table-item"
-                    style={{ width: "20%", backgroundColor: "#72bbef" }}
-                  >
-                    <span className="f12-b">{"TIGER"}</span>
-                  </div>
-                  <div
-                    className={`teenPatti-table-item ${
-                      dragonTigerDetail?.playerA?.[0]?.gstatus != "0" &&
-                      dragonTigerDetail?.playerA?.[1]?.gstatus === "0"
-                        ? "suspended"
-                        : ""
-                    }`}
-                    style={{ width: "20%", backgroundColor: "#72bbef" }}
-                  >
-                    <span className="f12-b">{"LION"}</span>
-                  </div>
-                  <div
-                    className={`teenPatti-table-item ${
-                      dragonTigerDetail?.playerA?.[0]?.gstatus != "0" &&
-                      dragonTigerDetail?.playerA?.[1]?.gstatus === "0"
-                        ? "suspended"
-                        : ""
-                    }`}
-                    style={{ width: "20%", backgroundColor: "#72bbef" }}
-                  >
-                    <span className="f12-b">{"DRAGON"}</span>
-                  </div>
-                </div>
-
-                {dragonTigerDetail?.sections &&
-                  dragonTigerDetail?.sections.map(
-                    (section: any, index: any) => (
-                      <div
-                        className="teenPatti-table-row"
-                        style={{ lineHeight: 1 }}
-                        key={index}
-                      >
-                        <div
-                          style={{
-                            width: "40%",
-                            padding: "10px",
-                            border: "0.1px solid #fff",
-                          }}
-                        >
-                          <span
-                            style={{ fontSize: "14px", fontWeight: "bolder" }}
-                          >
-                            {section.nation}
-                          </span>
-                        </div>
-
-                        <div
-                          className={`${
-                            section.dstatus !== true ? "lock" : ""
-                          }`}
-                          style={{
-                            width: "60%",
-                            display: "flex",
-                            flexDirection: "row",
-                          }}
-                        >
-                          <TableItemList
+                    {dragonTigerDetail?.sections &&
+                      dragonTigerDetail?.sections.map(
+                        (section: any, index: any) => (
+                          <OddsRateBox
+                            key={index}
+                            status={section?.tstatus}
                             rate={section?.trate}
-                            profitLossKey={section?.tsection}
-                            dragonTigerDetail={dragonTigerDetail}
+                            profitLoss={
+                              dragonTigerDetail?.profitLoss?.[
+                                `${section?.mid}_${section?.tsection}_card`
+                              ]
+                            }
                           />
-                          <TableItemList
-                            rate={section?.lrate}
-                            profitLossKey={section?.lsection}
-                            dragonTigerDetail={dragonTigerDetail}
-                          />
-                          <TableItemList
-                            rate={section?.drate}
-                            profitLossKey={section?.dsectionid}
-                            dragonTigerDetail={dragonTigerDetail}
-                          />
-                          {/* <div
-                            className={`teenPatti-table-item`}
-                            style={{
-                              width: "33.3%",
-                              backgroundColor: "#72bbef",
-                            }}
-                          >
-                            <span className="f12-b">{section.drate}</span>
-                            <span
-                              className={
-                                dragonTigerDetail?.profitLoss
-                                  ? dragonTigerDetail?.profitLoss[
-                                      `${dragonTigerDetail?.videoInfo?.mid}_${section?.dsectionid}_card`
-                                    ]
-                                    ? dragonTigerDetail?.profitLoss[
-                                        `${dragonTigerDetail?.videoInfo?.mid}_${section?.dsectionid}_card`
-                                      ] > 0
-                                      ? "color-green"
-                                      : dragonTigerDetail?.profitLoss[
-                                          `${dragonTigerDetail?.videoInfo?.mid}_${section?.dsectionid}_card`
-                                        ] < 0
-                                      ? "color-red"
-                                      : ""
-                                    : ""
-                                  : ""
-                              }
-                            >
-                              {dragonTigerDetail?.profitLoss
-                                ? dragonTigerDetail?.profitLoss[
-                                    `${dragonTigerDetail?.videoInfo?.mid}_${section?.dsectionid}_card`
-                                  ]
-                                  ? dragonTigerDetail?.profitLoss[
-                                      `${dragonTigerDetail?.videoInfo?.mid}_${section?.dsectionid}_card`
-                                    ]
-                                  : 0
-                                : 0}
-                            </span>
-                          </div> */}
-
-                          {/* <div
-                            className={`teenPatti-table-item`}
-                            style={{
-                              width: "33.3%",
-                              backgroundColor: "#72bbef",
-                            }}
-                          >
-                            <span className="f12-b">{section.lrate}</span>
-                            <span
-                              className={
-                                dragonTigerDetail?.profitLoss
-                                  ? dragonTigerDetail?.profitLoss[
-                                      `${dragonTigerDetail?.videoInfo?.mid}_${section?.lsection}_card`
-                                    ]
-                                    ? dragonTigerDetail?.profitLoss[
-                                        `${dragonTigerDetail?.videoInfo?.mid}_${section?.lsection}_card`
-                                      ] > 0
-                                      ? "color-green"
-                                      : dragonTigerDetail?.profitLoss[
-                                          `${dragonTigerDetail?.videoInfo?.mid}_${section?.lsection}_card`
-                                        ] < 0
-                                      ? "color-red"
-                                      : ""
-                                    : ""
-                                  : ""
-                              }
-                            >
-                              {dragonTigerDetail?.profitLoss
-                                ? dragonTigerDetail?.profitLoss[
-                                    `${dragonTigerDetail?.videoInfo?.mid}_${section?.lsection}_card`
-                                  ]
-                                  ? dragonTigerDetail?.profitLoss[
-                                      `${dragonTigerDetail?.videoInfo?.mid}_${section?.lsection}_card`
-                                    ]
-                                  : 0
-                                : 0}
-                            </span>
-                          </div> */}
-
-                          {/* <div
-                            className={`teenPatti-table-item`}
-                            style={{
-                              width: "33.3%",
-                              backgroundColor: "#72bbef",
-                            }}
-                          >
-                            <span className="f12-b">{section.trate}</span>
-                            <span
-                              className={
-                                dragonTigerDetail?.profitLoss
-                                  ? dragonTigerDetail?.profitLoss[
-                                      `${dragonTigerDetail?.videoInfo?.mid}_${section?.tsection}_card`
-                                    ]
-                                    ? dragonTigerDetail?.profitLoss[
-                                        `${dragonTigerDetail?.videoInfo?.mid}_${section?.tsection}_card`
-                                      ] > 0
-                                      ? "color-green"
-                                      : dragonTigerDetail?.profitLoss[
-                                          `${dragonTigerDetail?.videoInfo?.mid}_${section?.tsection}_card`
-                                        ] < 0
-                                      ? "color-red"
-                                      : ""
-                                    : ""
-                                  : ""
-                              }
-                            >
-                              {dragonTigerDetail?.profitLoss
-                                ? dragonTigerDetail?.profitLoss[
-                                    `${dragonTigerDetail?.videoInfo?.mid}_${section?.tsection}_card`
-                                  ]
-                                  ? dragonTigerDetail?.profitLoss[
-                                      `${dragonTigerDetail?.videoInfo?.mid}_${section?.tsection}_card`
-                                    ]
-                                  : 0
-                                : 0}
-                            </span>
-                          </div> */}
-                        </div>
-                      </div>
-                    )
-                  )}
-
-                <div className="ticker-container">
-                  <div className="ticker-wrap">
-                    <div
-                      className="ticker-move"
-                      style={{ color: "#8b0000", fontWeight: "700" }}
-                    >
-                      {dragonTigerDetail?.videoInfo &&
-                        dragonTigerDetail?.videoInfo?.remark}
+                        )
+                      )}
+                  </div>
+                  <div className="casino-box-row mb-4">
+                    <div className="casino-nation-name casino-nation-name-bg">
+                      <b>Lion</b>
                     </div>
+                    {dragonTigerDetail?.sections &&
+                      dragonTigerDetail?.sections.map(
+                        (section: any, index: any) => (
+                          <OddsRateBox
+                            key={index}
+                            status={section?.lstatus}
+                            rate={section?.lrate}
+                            profitLoss={
+                              dragonTigerDetail?.profitLoss?.[
+                                `${section?.mid}_${section?.lsection}_card`
+                              ]
+                            }
+                          />
+                        )
+                      )}
+                  </div>
+                  <div className="casino-box-row mb-4">
+                    <div className="casino-nation-name casino-nation-name-bg">
+                      <b>Dragon</b>
+                    </div>
+                    {dragonTigerDetail?.sections &&
+                      dragonTigerDetail?.sections.map(
+                        (section: any, index: any) => (
+                          <OddsRateBox
+                            key={index}
+                            status={section?.dstatus}
+                            rate={section?.drate}
+                            profitLoss={
+                              dragonTigerDetail?.profitLoss?.[
+                                `${section?.mid}_${section?.dsectionid}_card`
+                              ]
+                            }
+                          />
+                        )
+                      )}
                   </div>
                 </div>
               </div>

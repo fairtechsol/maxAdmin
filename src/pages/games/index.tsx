@@ -225,7 +225,6 @@ const Games = () => {
       console.log(error);
     }
   }, []);
-  console.log(matchDetails);
   return (
     <div className="gamePage">
       <Container fluid>
@@ -342,9 +341,9 @@ const Games = () => {
                             </Col>
                           );
                         })}
-                         {matchDetails?.apiSessionActive &&
-                      matchDetails?.updatedSessionBettings?.cricketCasino?.section
-                        ?.map((item: any) => {
+                    {matchDetails?.apiSessionActive &&
+                      matchDetails?.updatedSessionBettings?.cricketCasino?.section?.map(
+                        (item: any) => {
                           return (
                             <Col md={12}>
                               <BetTable
@@ -354,7 +353,8 @@ const Games = () => {
                               />
                             </Col>
                           );
-                        })}
+                        }
+                      )}
                     {/* <BetTableHeader title="runners" />
                     <div className="game-heading"><span className="card-header-title">SSD Bari v Ternana</span> <span className="float-right">5/17/2024 12:00:00 AM</span></div> */}
                     {matchDetails?.manualSessionActive &&

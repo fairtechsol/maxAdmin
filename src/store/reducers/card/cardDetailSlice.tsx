@@ -676,7 +676,6 @@ const cardDetail = createSlice({
           const { t1 } = action.payload;
           const videoInfo = { ...t1 };
           const runs = t1?.sub;
-          console.log(runs, "runsss");
           state.dragonTigerDetail = {
             ...state.dragonTigerDetail,
             videoInfo,
