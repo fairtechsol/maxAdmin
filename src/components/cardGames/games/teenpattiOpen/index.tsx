@@ -14,7 +14,7 @@ import RulesModal from "../../../commonComponent/rulesModal";
 import { tprules } from "../../../../assets";
 import CardResultBox from "../../../commonComponent/cardResultBox";
 import UserBets from "../../../game/userBet";
-import TeenPattiTableRow from "./tableRow";
+//import TeenPattiTableRow from "./tableRow";
 import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
 import TeenOpenResult from "./teenCard";
 import OddsRateBox from "./oddsRateBox";
@@ -59,7 +59,7 @@ const TeenPattiOpenComponent = () => {
     };
   };
 
-  const { cardsArray: cardsArray1, playersArray: playersArray1 } =
+  const { cardsArray: cardsArray1 } =
     extractCardAndPlayerInfo(dragonTigerDetail?.videoInfo?.cards);
 
   console.log("dt", dragonTigerDetail);
@@ -147,20 +147,6 @@ const TeenPattiOpenComponent = () => {
                     </div>
                   </div>
                 </div>
-
-                {dragonTigerDetail?.players &&
-                  Object.keys(dragonTigerDetail?.players).map((key, index) => (
-                    <TeenPattiTableRow
-                      key={key}
-                      indx={index}
-                      player={dragonTigerDetail?.players[key]}
-                      pairPlus={
-                        dragonTigerDetail?.pairsPlus[`pairPlus${index + 1}`]
-                      }
-                      cardsA={cardsArray1}
-                      playersA={playersArray1}
-                    />
-                  ))}
 
                 <div className="teentestother">
                   <div className="casino-box-row">

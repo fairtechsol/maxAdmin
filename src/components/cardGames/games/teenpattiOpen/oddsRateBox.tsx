@@ -5,7 +5,7 @@ const OddsRateBox = ({ status, rate, profitLoss }: any) => {
     <div className="casino-bl-box">
       <div
         className={`border-back casino-bl-box-item ${
-          status === "False" ? "locked" : ""
+          status === "0" ? "locked" : ""
         }`}
       >
         <span className="casino-box-odd">{rate}</span>
