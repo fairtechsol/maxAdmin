@@ -267,6 +267,59 @@
   cursor: not-allowed;
   height: 40px;
 }
+
+.teenpattiopen .casino-open-card-box {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #434343;
+  padding: 10px;
+  border-radius: 16px;
+  margin-bottom: 10px;
+  width: 100% ;
+}
+
+.casino-open-card-box {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #434343;
+  padding: 10px;
+  border-radius: 16px;
+  margin-bottom: 10px;
+  width: 100% ;
+  margin-top: 10px;
+}
+.detail-page-container {
+  line-height: 15px;
+  letter-spacing: 0;
+  color: var(--text-black);
+  font-size: 14px;
+}
+.teenpattiopen > div {
+  width: 12.5%;
+  text-align: center;
+  
+  
+  color: #fdcf13;
+}
+
+.casino-open-card-box > div {
+  width: 12.5%;
+  text-align: center;
+  
+  flex-wrap: wrap;
+  color: #fdcf13;
+
+}
+
+.casino-open-card-box > div > div {
+  text-align: center;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 5px;
+  justify-content: center;
+}
+
 @media (max-width: 768px) {
   .tabs-navs .nav-link {
     flex: 1 0 10%;

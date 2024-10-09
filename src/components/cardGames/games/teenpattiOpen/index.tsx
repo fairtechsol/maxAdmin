@@ -18,6 +18,7 @@ import UserBets from "../../../game/userBet";
 import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
 import TeenOpenResult from "./teenCard";
 import OddsRateBox from "./oddsRateBox";
+import { HandleCards } from "../../../commonComponent/cardsComponent";
 //import { formatNumber } from "../../../../helpers";
 const TeenPattiOpenComponent = () => {
   const [show, setShow] = useState(false);
@@ -73,6 +74,24 @@ const TeenPattiOpenComponent = () => {
     "Player 7",
     "Player 8",
   ];
+
+  const cardArray = dragonTigerDetail?.videoInfo?.cards?.split(",");
+
+  interface CardSection {
+    number: number;
+    cards: string[];
+  }
+
+  const groupedCards: CardSection[] = [];
+  let sectionNumber = 1;
+
+  cardArray?.forEach((card: any, index: any) => {
+    if (index % 3 === 0) {
+      groupedCards.push({ number: sectionNumber++, cards: [] });
+    }
+
+    groupedCards[groupedCards.length - 1].cards.push(card);
+  });
 
   console.log("dt", dragonTigerDetail);
 
@@ -160,8 +179,24 @@ const TeenPattiOpenComponent = () => {
                   </div>
                 </div> */}
 
+                <div className="teenpattiopen casino-open-card-box">
+                  {groupedCards?.map((section) => (
+                    <div key={section.number} >
+                      <div>
+                        <b>{section.number}</b>
+                      </div>
+                      <div >
+                        {section.cards.map((cardSrc: string, index: number) => (
+                          <span key={index}>
+                            <HandleCards card={cardSrc} />
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
                 <div className="teentestother">
-                 
                   <div className="casino-box-header">
                     <div className="casino-nation-name no-border"></div>
 
