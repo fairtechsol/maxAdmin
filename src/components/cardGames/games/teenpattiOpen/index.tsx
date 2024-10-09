@@ -18,19 +18,19 @@ import UserBets from "../../../game/userBet";
 import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
 import TeenOpenResult from "./teenCard";
 import OddsRateBox from "./oddsRateBox";
-import { formatNumber } from "../../../../helpers";
+//import { formatNumber } from "../../../../helpers";
 const TeenPattiOpenComponent = () => {
   const [show, setShow] = useState(false);
   const { dragonTigerDetail } = useSelector((state: RootState) => state.card);
-  const [openDivIds, setOpenDivIds] = useState<string[]>([]);
+  //const [openDivIds, setOpenDivIds] = useState<string[]>([]);
 
-  const toggleDiv = (id: string) => {
-    if (openDivIds.includes(id)) {
-      setOpenDivIds(openDivIds.filter((openId) => openId !== id));
-    } else {
-      setOpenDivIds([...openDivIds, id]);
-    }
-  };
+  // const toggleDiv = (id: string) => {
+  //   if (openDivIds.includes(id)) {
+  //     setOpenDivIds(openDivIds.filter((openId) => openId !== id));
+  //   } else {
+  //     setOpenDivIds([...openDivIds, id]);
+  //   }
+  // };
   const rules = [
     { label: "Pair (Double)", value: "1 To 1" },
     { label: "Flush (Color)", value: "1 To 4" },
@@ -59,8 +59,20 @@ const TeenPattiOpenComponent = () => {
     };
   };
 
-  const { cardsArray: cardsArray1 } =
-    extractCardAndPlayerInfo(dragonTigerDetail?.videoInfo?.cards);
+  const { cardsArray: cardsArray1 } = extractCardAndPlayerInfo(
+    dragonTigerDetail?.videoInfo?.cards
+  );
+
+  const players = [
+    "Player 1",
+    "Player 2",
+    "Player 3",
+    "Player 4",
+    "Player 5",
+    "Player 6",
+    "Player 7",
+    "Player 8",
+  ];
 
   console.log("dt", dragonTigerDetail);
 
@@ -110,7 +122,7 @@ const TeenPattiOpenComponent = () => {
             </div>
             <div>
               <div className="teenPatti-table-container">
-                <div className="teenPatti-table-row" style={{ lineHeight: 2 }}>
+                {/* <div className="teenPatti-table-row" style={{ lineHeight: 2 }}>
                   <div
                     style={{ width: "40%", border: "0.1px solid #fff" }}
                   ></div>
@@ -146,45 +158,25 @@ const TeenPattiOpenComponent = () => {
                       {dragonTigerDetail?.pairsPlus?.pairPlus1?.max})
                     </div>
                   </div>
-                </div>
+                </div> */}
 
                 <div className="teentestother">
-                  <div className="casino-box-row">
-                    <div className="casino-nation-name"></div>
-                    {dragonTigerDetail?.sections &&
-                      dragonTigerDetail?.sections.map(
-                        (section: any, index: any) => (
-                          <div key={index} className="casino-bl-box">
-                            <div className="casino-bl-box-item">
-                              <b>{section?.nation}</b>
-                              <div className="float-end">
-                                <i
-                                  className="fas fa-info-circle float-end"
-                                  onClick={() => toggleDiv(index)}
-                                ></i>
-                                <div
-                                  id="demo0"
-                                  className={`icon-range collapse ${
-                                    openDivIds.includes(index) ? "show" : ""
-                                  }`}
-                                >
-                                  R:
-                                  <span>
-                                    {dragonTigerDetail?.videoInfo?.min}
-                                  </span>
-                                  -
-                                  <span>
-                                    {formatNumber(
-                                      dragonTigerDetail?.videoInfo?.max
-                                    )}
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        )
-                      )}
+                 
+                  <div className="casino-box-header">
+                    <div className="casino-nation-name no-border"></div>
+
+                    {players.map((player, index) => (
+                      <div className="casino-bl-box" key={index}>
+                        <span
+                          className=" casino-bl-box-item"
+                          style={{ fontSize: "12px" }}
+                        >
+                          {player}
+                        </span>
+                      </div>
+                    ))}
                   </div>
+
                   <div className="casino-box-row mb-4">
                     <div className="casino-nation-name casino-nation-name-bg">
                       <b>Odds</b>
