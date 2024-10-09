@@ -30,7 +30,7 @@ const OddEven = ({ name, data, odds,cards }: any) => {
       setOpenDivIds([...openDivIds, id]);
     }
   };
-  console.log('cards',cards);
+  // console.log('cards',cards);
   return (
     <>
       <div className="dt20oddEvenContainer">
