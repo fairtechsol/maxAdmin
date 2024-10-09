@@ -53,6 +53,7 @@ const TeenPattiOpenComponent = () => {
   const { cardsArray: cardsArray1, playersArray: playersArray1 } =
     extractCardAndPlayerInfo(dragonTigerDetail?.videoInfo?.cards);
 
+  console.log("dt", dragonTigerDetail);
   return (
     <>
       <Row>
@@ -163,7 +164,7 @@ const TeenPattiOpenComponent = () => {
                           pairPlus={
                             dragonTigerDetail?.pairsPlus[`pairPlus${index + 1}`]
                           }
-                          cards={cardsArray1} 
+                          cards={cardsArray1[index] || []} // Pass correct card data for each player
                         />
                       )
                     )}

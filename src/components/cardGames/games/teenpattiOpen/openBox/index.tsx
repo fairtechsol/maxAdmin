@@ -1,43 +1,39 @@
 import React from 'react';
-import "./style.scss"; // Make sure this path is correct
+import './style.scss';
 
 const CasinoBox = ({ player, pairPlus, cards, indx }: any) => {
-    const playerName = player?.nation;
-    const odds = player?.rate; // Assuming rate is the odds
-    const total = player?.total; // Assuming total is part of player data
+    //const playerName = `Player ${indx + 1}`;
+    const odds = player?.rate || "1.98"; // Default odds
+    const total = player?.max || "1.98"; // Default total
+    const pairPlusName = pairPlus?.nation || `Pair Plus ${indx + 1}`; // Pair Plus naming
+    const pairPlusRate = pairPlus?.rate || "0"; // Pair Plus rate
+
+    const validCards = Array.isArray(cards) ? cards : [];
 
     return (
         <div className="casino-box mb-2 d-none-small">
+            {/* Cards Display */}
             <div className="casino-open-card-box">
-                {cards?.map((cardGroup: any, index: any) => (
-                    <div key={index}>
-                        <div><b>{index + 1}</b></div>
-                        <div>
-                            {cardGroup?.map((card: any, cardIndex: any) => (
-                                <span key={cardIndex}>
-                                    <img src={card} alt={`Card ${cardIndex + 1}`} />
-                                </span>
-                            ))}
-                        </div>
-                    </div>
-                ))}
-            </div>
-            <div className="casino-box-header">
-                <div className="casino-nation-name no-border">
-                    <span>{playerName}</span>
-                </div>
-                <div className="casino-bl-box text-right">
-                    <div className="casino-bl-box-item">
-                        <span>{playerName}</span>
+                <div>
+                    <b>{indx + 1}</b> {/* Player number */}
+                    <div>
+                        {validCards.map((card: any, cardIndex: any) => (
+                            <span key={cardIndex} data-showclosecard="true">
+                                <img src={card} alt={`Card ${cardIndex + 1}`} />
+                            </span>
+                        ))}
                     </div>
                 </div>
             </div>
+
+            {/* Odds, Pair Plus, and Total Rows */}
             <div className="casino-box-content">
+                {/* Odds Row */}
                 <div className="casino-box-row mb-4">
                     <div className="casino-nation-name">
                         <b>Odds</b>
-                        <i data-target="#range1" data-toggle="collapse" className="fas fa-info-circle float-right" aria-expanded="true"></i>
-                        <div id="range1" className="icon-range collapse show">
+                        <i data-target={`#rangeOdds${indx}`} data-toggle="collapse" className="fas fa-info-circle float-right"></i>
+                        <div id={`rangeOdds${indx}`} className="collapse icon-range">
                             R:<span>100</span>-<span>1L</span>
                         </div>
                     </div>
@@ -48,26 +44,30 @@ const CasinoBox = ({ player, pairPlus, cards, indx }: any) => {
                         </div>
                     </div>
                 </div>
+
+                {/* Pair Plus Row */}
                 <div className="casino-box-row mb-4">
                     <div className="casino-nation-name">
                         <b>Pair Plus</b>
-                        <i data-target="#range3" data-toggle="collapse" className="fas fa-info-circle float-right"></i>
-                        <div id="range3" className="collapse icon-range">
+                        <i data-target={`#rangePairPlus${indx}`} data-toggle="collapse" className="fas fa-info-circle float-right"></i>
+                        <div id={`rangePairPlus${indx}`} className="collapse icon-range">
                             R:<span>100</span>-<span>10K</span>
                         </div>
                     </div>
                     <div className="casino-bl-box">
                         <div className="back casino-bl-box-item suspended lock-top">
-                            <span className="casino-box-odd open-pair">{pairPlus?.nation}</span>
-                            <span className="casino-book book-red">0</span>
+                            <span className="casino-box-odd open-pair">{pairPlusRate}</span>
+                            <span className="casino-book book-red">{pairPlusName}</span>
                         </div>
                     </div>
                 </div>
+
+                {/* Total Row */}
                 <div className="casino-box-row mb-4">
                     <div className="casino-nation-name">
                         <b>Total</b>
-                        <i data-target="#range2" data-toggle="collapse" className="fas fa-info-circle float-right"></i>
-                        <div id="range2" className="collapse icon-range">
+                        <i data-target={`#rangeTotal${indx}`} data-toggle="collapse" className="fas fa-info-circle float-right"></i>
+                        <div id={`rangeTotal${indx}`} className="collapse icon-range">
                             R:<span>100</span>-<span>10K</span>
                         </div>
                     </div>
