@@ -21,7 +21,7 @@ const Bookmaker = ({ matchOddsData, data, title, min, max }: any) => {
         </span>
         <div className="blboxes">
           <div
-            className="w-50 back flex-justify-center"
+            className="w-50 back-cell-A flex-justify-center"
             style={{ height: "20px" }}
           >
             <span
@@ -32,7 +32,7 @@ const Bookmaker = ({ matchOddsData, data, title, min, max }: any) => {
             </span>
           </div>
           <div
-            className="w-50 lay flex-justify-center"
+            className="w-50 lay-cell-A flex-justify-center"
             style={{ height: "20px" }}
           >
             <span
@@ -91,7 +91,7 @@ const Bookmaker = ({ matchOddsData, data, title, min, max }: any) => {
           data-title={handleLock(team1?.status, team1?.b1) ? "SUSPENDED" : ""}
         >
           <div
-            className={`w-50 back flex-justify-center cursor-pointer`}
+            className={`w-50 back-cell-A flex-justify-center cursor-pointer`}
             style={{ height: "42px", flexDirection: "column" }}
           >
             <span className="f600 rateText lh-1">
@@ -102,7 +102,7 @@ const Bookmaker = ({ matchOddsData, data, title, min, max }: any) => {
             </span>
           </div>
           <div
-            className={`w-50 lay flex-justify-center cursor-pointer`}
+            className={`w-50 lay-cell-A flex-justify-center cursor-pointer`}
             style={{ height: "42px", flexDirection: "column" }}
           >
             <span className="f600 rateText lh-1">
@@ -161,7 +161,7 @@ const Bookmaker = ({ matchOddsData, data, title, min, max }: any) => {
           data-title={handleLock(team2?.status, team2?.b1) ? "SUSPENDED" : ""}
         >
           <div
-            className={`w-50 back flex-justify-center cursor-pointer`}
+            className={`w-50 back-cell-A flex-justify-center cursor-pointer`}
             style={{ height: "42px", flexDirection: "column" }}
           >
             <span className="f600 rateText">
@@ -172,7 +172,7 @@ const Bookmaker = ({ matchOddsData, data, title, min, max }: any) => {
             </span>
           </div>
           <div
-            className={`w-50 lay flex-justify-center cursor-pointer`}
+            className={`w-50 lay-cell-A flex-justify-center cursor-pointer`}
             style={{ height: "42px", flexDirection: "column" }}
           >
             <span className="f600 rateText">

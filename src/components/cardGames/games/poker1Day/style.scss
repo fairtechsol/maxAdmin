@@ -147,7 +147,6 @@
   width: 100%;
   display: flex;
   flex-direction: row;
-  margin-top: 4%;
   gap: 20px;
 }
 .poker-table-row{
@@ -165,14 +164,7 @@
   cursor: pointer;
   padding: 4px;
 }
-.f12-b{
-  font-size: 16px;
-  font-weight: bolder;
-}
-.f10-b{
-  font-size: 16px;
-  font-weight: bolder;
-}
+
 
 .teen20resultModal{
   display: flex;
@@ -187,9 +179,13 @@
   justify-content: space-between;
   align-items: center;
 }
-// .horseRacingTab .nav-link{
-//   margin: 0 !important;
-// }
+.casino-result-content-diveder {
+  width: 2px;
+  height: 130px;
+  background-color: #ddd;
+}
+
+
 
 .casino-title {
   background-color: #ffc742;

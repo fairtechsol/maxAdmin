@@ -324,6 +324,16 @@ th {
   align-items: center;
   flex-direction: column;
   cursor: pointer;
+  border: 0.1px solid #fff;
+}
+
+.teenPatti-table-item-aaa {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  cursor: pointer;
+  // border: 0.1px solid #fff;
 }
 
 .tiePairbtn-theme {
@@ -347,6 +357,12 @@ th {
   border-radius: 4px;
 }
 
+.casino-minmax{
+  position: relative;
+  right: 0;
+  top: 0;
+}
+
 .oddEvenContainer {
   width: 50%;
   background-color: #eee;
@@ -355,7 +371,16 @@ th {
   flex-direction: column;
   justify-content: space-around;
 }
-
+.commonCardImgContainerabj1 {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  margin-top: 5px;
+}
 .commonCardImgContainer {
   width: 100%;
   display: flex;
@@ -440,12 +465,14 @@ th {
   content: "\F05A";
 }
 
-.icon-range {
-  left: 50%;
-  transform: translateX(-50%);
-  right: unset;
+.f12-b{
+  font-size: 12px;
+  font-weight: bolder;
 }
-
+.f10-b{
+  font-size: 10px;
+  font-weight: bolder;
+}
 .icon-range {
   position: absolute;
   top: 100%;

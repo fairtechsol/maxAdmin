@@ -27,7 +27,7 @@ const CardBox = ({ title, odds, data, cards,cardClass, remark }: any) => {
   }, [odds?.gstatus === "0"]);
 
   return (
-    <div className={handlock()}>
+    <div >
       <div
         className={`abjcardContainer ${cardClass}`}
       >
@@ -89,7 +89,7 @@ const CardBox = ({ title, odds, data, cards,cardClass, remark }: any) => {
           </span>
         </div>
         <div
-          className="p-3  "
+        className={`${handlock()} p-3`}
           style={{
             width: "80%",
             display: "flex",

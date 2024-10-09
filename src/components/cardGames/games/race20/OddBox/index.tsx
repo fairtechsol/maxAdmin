@@ -85,7 +85,7 @@ const OddBox = ({ odds, data }: any) => {
                       className="range-icon d-inline-block ms-2"
                     >
                       <i
-                        className="fas fa-info-circle float-right"
+                        className="fas fa-info-circle float-end"
                       ></i>{" "}
                       <div
                         id="demo0"

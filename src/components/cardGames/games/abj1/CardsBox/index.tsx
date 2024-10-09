@@ -1,25 +1,32 @@
+import { formatNumber } from "../../../../../helpers";
 import CommonCardImg from "../CommonCardImg";
 
-const CardBox = ({ title, odds, data, cards, bgColor }: any) => {
+const CardBox = ({ title, odds, data, cards, bgColor, border, color }: any) => {
   const arCards = cards?.ar?.split(",");
   const brCards = cards?.br?.split(",");
   return (
     <>
       <div
-        className="abjcardContainer"
-        style={{ backgroundColor: bgColor, border: "0.5px solid #000" }}
+        className="abjcardContainer-abj"
+        style={{ backgroundColor: bgColor, border: border  }}
       >
         <div
           style={{
             width: "20%",
             display: "flex",
-            justifyContent: "center",
+            textAlign: "center",
+            // justifyContent: "space-between",
             alignItems: "center",
-            borderRight: "0.5px solid #000",
           }}
         >
-          <span style={{ fontSize: "16px" }}>{title}</span>
+          <span style={{ fontSize: "20px", color: color, }} className="f600">{title}</span>
+          <div className="text-end casino-minmax title-12">
+              <span>R:</span>
+              <span>{data?.videoInfo?.min}</span>-
+              <span>{formatNumber(data?.videoInfo?.max)}</span>
         </div>
+        </div>
+       
         <div className="p-3">
           <CommonCardImg
             cardData={odds}

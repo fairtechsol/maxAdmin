@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
-import { dragonTigerCards } from "../../../../../utils/Constants";
-import { back } from "../../../../../assets";
+import { andarBaharCards } from "../../../../../utils/Constants";
+import { back0 } from "../../../../../assets";
+
 
 const CommonCardImg = ({ cardData, data, cardInfo }: any) => {
-  const [cardImg, setCardImg] = useState(dragonTigerCards);
+  const [cardImg, setCardImg] = useState(andarBaharCards);
   useEffect(() => {
     const mergedArray = cardData?.map((item: any, index: any) => {
       return {
         ...item,
-        ...dragonTigerCards[index],
+        ...andarBaharCards[index],
         show: cardInfo?.[index] !== "0",
       };
     });
@@ -25,24 +26,23 @@ const CommonCardImg = ({ cardData, data, cardInfo }: any) => {
     }
   };
   return (
-    <div className="commonCardImgContainer">
+    <div className="commonCardImgContainerabj1">
       {cardImg?.map((item: any) => {
         return (
-          <div>
+          <div className="casino-card-item mx-3">
             <div
               key={item?.code}
               className={handlock(item)}
               style={{
                 display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-around",
+                flexDirection: "row",
                 alignItems: "center",
               }}
             >
               {item?.show ? (
-                <img src={item?.imgSrc} width={"30px"} />
+                <img src={item?.imgSrc} width={"48px"} />
               ) : (
-                <img src={back} width={"30px"} />
+                <img src={back0} width={"48px"} />
               )}
             </div>
             <span
@@ -51,7 +51,7 @@ const CommonCardImg = ({ cardData, data, cardInfo }: any) => {
                 display: "flex",
                 justifyContent: "center",
               }}
-              className={`${
+              className={`title-18 fbold ${
                 data?.profitLoss
                   ? data?.profitLoss[
                       `${data?.videoInfo?.mid}_${item?.sid}_card`
@@ -64,9 +64,9 @@ const CommonCardImg = ({ cardData, data, cardInfo }: any) => {
                           `${data?.videoInfo?.mid}_${item?.sid}_card`
                         ] < 0
                       ? "color-red"
-                      : ""
-                    : ""
-                  : ""
+                      : "color-red"
+                    : "color-red"
+                  : "color-red"
               }`}
             >
               {" "}
