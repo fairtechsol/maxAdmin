@@ -34,7 +34,7 @@ const OddEven = ({ name, data, odds,cards }: any) => {
   return (
     <>
       <div className="dt20oddEvenContainer">
-       <div className="w-100 position-relative d-flex justify-content-between align-item-center g-back">
+       <div className="w-100 position-relative d-flex justify-content-between align-items-center g-back">
        <span className="title-14 f-bold p-1" style={{color:name==="Dragon"?"#fc4242":"#ef910f"}}>{name}</span>
        <div
           onClick={() => toggleDiv("demo0")}
@@ -51,13 +51,13 @@ const OddEven = ({ name, data, odds,cards }: any) => {
           </div>
         </div>
        </div>
-        <div className="w-100 d-flex justify-content-around align-item-center">
+        <div className="w-100 d-flex justify-content-around align-items-center">
           <span className="title-14 f-bold">{odds?.[0]?.rate}</span>
           <span className="title-14 f-bold">{odds?.[1]?.rate}</span>
           <span className="title-14 f-bold">{odds?.[3]?.rate}</span>
           <span className="title-14 f-bold">{odds?.[2]?.rate}</span>
         </div>
-        <div className="w-100 d-flex justify-content-around align-item-center">
+        <div className="w-100 d-flex justify-content-around align-items-center">
           <div className="dt20OEbox">
           {odds?.[0]?.gstatus==="0" && <div className="dt20bLock"></div>}
              <span className="title-15 f-bold">Even</span>
@@ -77,7 +77,7 @@ const OddEven = ({ name, data, odds,cards }: any) => {
           <BiSolidHeart color="#ff0000" size={23}/>
           </div>
         </div>
-        <div className="w-100 d-flex justify-content-around align-item-center text-red">
+        <div className="w-100 d-flex justify-content-around align-items-center text-red">
           <span className="title-14 f-bold">{ data?.profitLoss[
                     `${data?.videoInfo?.mid}_${odds?.[0]?.sid}_card`
                   ]
@@ -107,7 +107,7 @@ const OddEven = ({ name, data, odds,cards }: any) => {
                   ]
                 : 0}</span>
         </div>
-        <div className="w-100 position-relative d-flex flex-row align-item-center g-back">
+        <div className="w-100 position-relative d-flex flex-row align-items-center g-back">
           <div className="w-50 text-end title-14 f-bold">{parseFloat(cards?.[0]?.rate)}
           </div>
           <div
@@ -127,9 +127,9 @@ const OddEven = ({ name, data, odds,cards }: any) => {
          
       </div>
 
-      <div className="w-100 d-flex flex-row justify-content-center align-item-center mt-2 flex-wrap" style={{gap:"40px"}}>
+      <div className="w-100 d-flex flex-row justify-content-center align-items-center mt-2 flex-wrap" style={{gap:"40px"}}>
       {cardImg?.map((item: any) => (
-        <div className="d-flex flex-column justify-content-around align-item-center">
+        <div className="d-flex flex-column justify-content-around align-items-center">
           <div
             key={item?.code}
             className={item?.gstatus === "0" ? "suspended" : ""}

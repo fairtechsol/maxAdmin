@@ -54,7 +54,7 @@ const TotalCards = ({ data, odds }: any) => {
               style={{ backgroundColor: "#fff", height: "30px" }}
             >
               <div style={{width:"34%"}}></div>
-              <div className="d-flex justify-content-center align-item-center" style={{width:"66%"}}>
+              <div className="d-flex justify-content-center align-items-center" style={{width:"66%"}}>
               <span
                 className={`title-14 f400 ${
                   data?.profitLoss
