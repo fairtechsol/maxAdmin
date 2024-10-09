@@ -1,8 +1,8 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import { FaTrophy } from "react-icons/fa";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
 import "./style.scss";
+import Winner from "../../../commonComponent/trophyWinner";
 interface Props {
   data: {
     C1: string;
@@ -16,17 +16,17 @@ const DragonTigerLionResultComponent: React.FC<Props> = ({ data }: any) => {
   return (
     <Container style={{ display: "flex", flexDirection: "column" }}>
       <div className="dt20resultModal mb-3">
-        <div className="dt20resultCardContainer">
+        <div className="d-flex row">
           <span className="fs-5">Dragon</span>
           <div
             className={
-              "d-sm-flex flex-row justify-content-center align-items-center"
+              "d-sm-flex flex-row "
             }
           >
             {data?.result?.win === "1" && (
               <div className="casino-winner-icon">
-                <FaTrophy size={30} color="#169733" />
-              </div>
+              <Winner />
+            </div>
             )}
             <div
               style={{
@@ -39,17 +39,17 @@ const DragonTigerLionResultComponent: React.FC<Props> = ({ data }: any) => {
             </div>
           </div>
         </div>
-        <div className="dt20resultCardContainer">
+        <div className="d-flex row ">
           <span className="fs-5">Tiger</span>
           <div
             className={
-              "d-sm-flex flex-row justify-content-center align-items-center"
+              "d-sm-flex flex-row position-relative"
             }
           >
             {data?.result?.win === "21" && (
               <div className="casino-winner-icon">
-                <FaTrophy size={30} color="#169733" />
-              </div>
+              <Winner />
+            </div>
             )}
             <div
               style={{
@@ -62,17 +62,17 @@ const DragonTigerLionResultComponent: React.FC<Props> = ({ data }: any) => {
             </div>
           </div>
         </div>
-        <div className="dt20resultCardContainer">
+        <div className="d-flex row ">
           <span className="fs-5">Lion</span>
           <div
             className={
-              "d-sm-flex flex-row justify-content-center align-items-center"
+              "d-sm-flex flex-row position-relative"
             }
           >
             {data?.result?.win === "41" && (
               <div className="casino-winner-icon">
-                <FaTrophy size={30} color="#169733" />
-              </div>
+              <Winner />
+            </div>
             )}
             <div
               style={{

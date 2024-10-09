@@ -2,9 +2,9 @@ import React from "react";
 import { Container } from "react-bootstrap";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { FaTrophy } from "react-icons/fa";
 import "./style.scss";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
+import Winner from "../../../commonComponent/trophyWinner";
 interface Props {
   data: {
     C1: string;
@@ -23,8 +23,8 @@ const Bacarrat1ResultComponent: React.FC<Props> = ({ data }: any) => {
           <div className="bacarrate-player-card">
             {data?.result?.win === "1" && (
               <div className="casino-winner-icon">
-                <FaTrophy size={26} color="#169733" />
-              </div>
+              <Winner />
+            </div>
             )}
             {elements?.[4] != "1" && (
               <div style={{ transform: "rotate(270deg)" }}>
@@ -54,8 +54,8 @@ const Bacarrat1ResultComponent: React.FC<Props> = ({ data }: any) => {
             )}
             {(data?.result?.win === "2" || data?.result?.win === "4") && (
               <div className="casino-winner-icon">
-                <FaTrophy size={26} color="#169733" />
-              </div>
+              <Winner />
+            </div>
             )}
           </div>
         </div>

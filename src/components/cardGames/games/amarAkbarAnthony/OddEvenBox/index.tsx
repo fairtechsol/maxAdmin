@@ -13,9 +13,10 @@ const OddEven = ({ data, card, odds }: any) => {
             <div
               style={{
                 display: "flex",
-                flexDirection: "column",
+                flexDirection: "row",
                 justifyContent: "space-around",
                 alignItems: "center",
+                gap: "4px"
               }}
             >
               <CommonButtonBox
@@ -48,11 +49,8 @@ const OddEven = ({ data, card, odds }: any) => {
               />
             </div>
             <div style={{ textAlign: "end" }}>
-              <span style={{ fontWeight: "bolder" }}>Min:</span>
-              <span>{min}</span>
-              <span style={{ fontWeight: "bolder", marginLeft: "10px" }}>
-                Max:
-              </span>
+              <span>R:</span>
+              <span>{min}</span>-
               <span>{max}</span>
             </div>
           </>
@@ -62,9 +60,10 @@ const OddEven = ({ data, card, odds }: any) => {
             <div
               style={{
                 display: "flex",
-                flexDirection: "column",
+                flexDirection: "row",
                 justifyContent: "space-around",
                 alignItems: "center",
+                gap: "4px"
               }}
             >
               <CommonButtonBox
@@ -97,11 +96,8 @@ const OddEven = ({ data, card, odds }: any) => {
               />
             </div>
             <div style={{ textAlign: "end" }}>
-              <span style={{ fontWeight: "bolder" }}>Min:</span>
-              <span>{min}</span>
-              <span style={{ fontWeight: "bolder", marginLeft: "10px" }}>
-                Max:
-              </span>
+            <span>R:</span>
+              <span>{min}</span>-
               <span>{max}</span>
             </div>
           </>

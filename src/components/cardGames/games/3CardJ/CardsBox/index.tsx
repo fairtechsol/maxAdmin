@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import CommonCardImg from "../CommonCardImg";
 
-const CardBox = ({ title, odds, data, cards, bgColor }: any) => {
+const CardBox = ({ title, odds, data, cards,cardClass, remark }: any) => {
   const [nat, setNat] = useState("");
 
   const arCards = cards?.ar?.split(",");
@@ -14,7 +14,7 @@ const CardBox = ({ title, odds, data, cards, bgColor }: any) => {
         setNat("");
       }
 
-      return "suspended";
+      return "suspended-box-3";
     } else {
       return "";
     }
@@ -29,8 +29,7 @@ const CardBox = ({ title, odds, data, cards, bgColor }: any) => {
   return (
     <div className={handlock()}>
       <div
-        className={`abjcardContainer`}
-        style={{ backgroundColor: bgColor, border: "0.5px solid #000" }}
+        className={`abjcardContainer ${cardClass}`}
       >
         <div
           style={{
@@ -58,7 +57,7 @@ const CardBox = ({ title, odds, data, cards, bgColor }: any) => {
               display: "flex",
               justifyContent: "center",
             }}
-            className={`${
+            className={`color-red${
               data?.profitLoss
                 ? data?.profitLoss[
                     `${data?.videoInfo?.mid}_${title === "Yes" ? 1 : 2}_card`
@@ -100,7 +99,7 @@ const CardBox = ({ title, odds, data, cards, bgColor }: any) => {
           }}
         >
           <div style={{ fontSize: "16px", fontWeight: "bold" }}>
-            {odds?.rate}
+            {odds?.rate ?? 0}
           </div>
           <CommonCardImg
             cardData={[
@@ -124,6 +123,7 @@ const CardBox = ({ title, odds, data, cards, bgColor }: any) => {
             nat={nat}
             title={title}
           />
+          <div className="d-flex text-end" style={{ fontSize: "12px" }}>{remark}</div>
         </div>
       </div>
     </div>

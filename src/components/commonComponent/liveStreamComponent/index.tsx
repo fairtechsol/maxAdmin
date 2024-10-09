@@ -9,7 +9,7 @@ const LiveStreamComponent = ({ channelId }: any) => {
     <>
       <RightPanelContainer title={"Live Stream"} setShowVideo={setShowVideo}>
         {showVideo && (
-          <Container>
+          <Container className="p-0">
             <Row className="justify-content-md-center">
               <Col md={12}>
                 <Ratio aspectRatio="16x9">

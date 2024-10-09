@@ -66,7 +66,7 @@ function BookmakerTable({
                       <span
                         className={`title-14 ${
                           matchDetails?.profitLossDataMatch?.[
-                            `team${item}Rate`
+                            `team${item}Rate_${matchDetails?.id}`
                           ] < 0
                             ? "color-red"
                             : "color-green"
@@ -74,7 +74,7 @@ function BookmakerTable({
                       >
                         {parseFloat(
                           matchDetails?.profitLossDataMatch?.[
-                            `team${item}Rate`
+                            `team${item}Rate_${matchDetails?.id}`
                           ] ?? 0
                         ).toFixed(2)}
                       </span>

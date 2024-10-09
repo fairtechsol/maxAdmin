@@ -22,7 +22,8 @@ const CardJComponent = () => {
   const [show, setShow] = useState(false);
   const placeBetRef = useRef<HTMLDivElement>(null);
   const { dragonTigerDetail } = useSelector((state: RootState) => state.card);
-
+// const title = dragonTigerDetail?.title;
+// console.log(dragonTigerDetail)
   return (
     <>
       <Row>
@@ -78,27 +79,38 @@ const CardJComponent = () => {
                   margin: "5px",
                   display: "flex",
                   flexDirection: "column",
+                  gap: 6
                 }}
               >
                 <CardBox
                   title={"Yes"}
-                  bgColor={"#03b2cb"}
+                  cardClass={"back-BackGround"} 
                   odds={dragonTigerDetail?.yes}
                   data={dragonTigerDetail}
                   cards={dragonTigerDetail?.cardInfo}
+                  remark={
+                    dragonTigerDetail?.videoInfo?.remark
+                      ?.split("|")?.[0]
+                      ?.trim() ?? ""
+                  }
                 />
                 <CardBox
                   title={"No"}
-                  bgColor={"#FAA9BA"}
+                  cardClass={"lay-BackGround"}
                   odds={dragonTigerDetail?.no}
                   data={dragonTigerDetail}
                   cards={dragonTigerDetail?.cardInfo}
+                  remark={
+                    dragonTigerDetail?.videoInfo?.remark
+                      ?.split("|")?.[1]
+                      ?.trim() ?? ""
+                  }
                 />
                 <div className="ticker-container">
                   <div className="ticker-wrap">
                     <div
                       className="ticker-move"
-                      style={{ color: "#8b0000", fontWeight: "700" }}
+                      style={{ color: "#17a2b8" }}
                     >
                       {dragonTigerDetail?.videoInfo?.remark}
                     </div>

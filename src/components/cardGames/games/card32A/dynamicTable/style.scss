@@ -40,12 +40,27 @@
 background-color: rgba(0, 0, 0, 0.05);
   }
   
-  .back-cell {
-    background-color: #add8e6;
+  .back-cell-A {
+    background-color: #72bbef;
   }
   
-  .lay-cell {
-    background-color: #ffcccb;
+  .lay-cell-A {
+    background-color: #f994ba;
+  }
+  .icon-range-A {
+    position: absolute;
+    // top: 100%;
+    background-color: #16191c;
+    padding: 4px;
+    width: 60px;
+    word-wrap: break-word;
+    font-size: 12px;
+    z-index: 10;
+    right: 0;
+    transition: 0.1s;
+    text-transform: capitalize;
+    color: #aaafb5;
+    z-index: 150;
   }
   .box-6 {
     width: 60%;
@@ -86,23 +101,4 @@ background-color: rgba(0, 0, 0, 0.05);
     flex-direction: column;
     border: 0.2px solid #fff;
   }
-  .suspended {
-    position: relative;
-  }
-.card32-table-row .suspended:after {
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.6);
-  color: #ffffff;
-  text-transform: uppercase;
-  font-family: "Font Awesome 5 Free";
-  content: "\f023";
-  font-weight: 900;
-  font-size: 18px;
-  top: 0;
-}
+

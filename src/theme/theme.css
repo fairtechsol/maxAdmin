@@ -4686,7 +4686,7 @@ textarea.form-control-lg {
 .breadcrumb-item + .breadcrumb-item::before {
   float: left;
   padding-right: var(--bs-breadcrumb-item-padding-x);
-  color: var(--bs-breadcrumb-divider-color);
+  color: white;
   content: var(--bs-breadcrumb-divider, "/") /* rtl: var(--bs-breadcrumb-divider, "/") */;
 }
 .breadcrumb-item.active {
@@ -7600,10 +7600,19 @@ textarea.form-control-lg {
   --bs-border-opacity: 1;
 }
 
+.w-10 {
+  width: 10% !important;
+}
+.w-20 {
+  width: 20% !important;
+}
 .w-25 {
   width: 25% !important;
 }
 
+.w-30 {
+  width: 30% !important;
+}
 .w-50 {
   width: 50% !important;
 }
@@ -7956,6 +7965,10 @@ textarea.form-control-lg {
 
 .mt-5 {
   margin-top: 3rem !important;
+}
+
+.mt-8{
+  margin-top: 10rem !important;
 }
 
 .mt-auto {

@@ -16,6 +16,7 @@ import {
 } from "../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../store/store";
 import { ApiConstants } from "../../utils/Constants";
+import { formatToINR } from "../../helpers";
 // Example usage
 const columns: Column[] = [
   { id: "user.userName", label: "User Name", colSpan: 2 },
@@ -284,39 +285,39 @@ const ListActiveInactiveUser: React.FC = () => {
                               totalBalance?.availableBalance} */}
                             {index === 1 &&
                               userList &&
-                              parseFloat(
+                              formatToINR(
                                 activeUser?.reduce((acc: any, match: any) => {
                                   return acc + +match?.creditRefrence;
                                 }, 0) || 0
-                              ).toFixed(2)}
+                              )}
                             {index === 2 &&
                               userList &&
-                              parseFloat(
+                              formatToINR(
                                 activeUser?.reduce((acc: any, match: any) => {
                                   return acc + +match?.balance;
                                 }, 0) || 0
-                              ).toFixed(2)}
+                              )}
                             {index === 3 &&
                               userList &&
-                              parseFloat(
+                              formatToINR(
                                 activeUser?.reduce((acc: any, match: any) => {
                                   return acc + +match?.userBal?.profitLoss;
                                 }, 0) || 0
-                              ).toFixed(2)}
+                              )}
                             {index === 4 &&
                               userList &&
-                              parseFloat(
+                              formatToINR(
                                 activeUser?.reduce((acc: any, match: any) => {
                                   return acc + +match?.userBal?.exposure;
                                 }, 0) || 0
-                              ).toFixed(2)}
+                              )}
                             {index === 5 &&
                               userList &&
-                              parseFloat(
+                              formatToINR(
                                 activeUser?.reduce((acc: any, match: any) => {
                                   return acc + +match?.availableBalance;
                                 }, 0) || 0
-                              ).toFixed(2)}
+                              )}
                           </td>
                         );
                       })}
@@ -363,11 +364,11 @@ const ListActiveInactiveUser: React.FC = () => {
                               )}
                             </td>
 
-                            <td className="text-end">{creditRefrence}</td>
-                            <td className="text-end">{balance}</td>
-                            <td className="text-end">{userBal?.profitLoss}</td>
-                            <td className="text-end">{userBal?.exposure}</td>
-                            <td className="text-end">{availableBalance}</td>
+                            <td className="text-end">{formatToINR(creditRefrence)}</td>
+                            <td className="text-end">{formatToINR(balance)}</td>
+                            <td className="text-end">{formatToINR(userBal?.profitLoss)}</td>
+                            <td className="text-end">{formatToINR(userBal?.exposure)}</td>
+                            <td className="text-end">{formatToINR(availableBalance)}</td>
                             <td className="text-center">
                               <Form>
                                 <Form.Check
@@ -389,7 +390,7 @@ const ListActiveInactiveUser: React.FC = () => {
                               </Form>
                             </td>
                             <td className="text-end">
-                              {roleName === "user" ? exposureLimit : "NA"}
+                              {roleName === "user" ? formatToINR(exposureLimit) : "NA"}
                             </td>
                             <td>0</td>
                             <td>{roleName}</td>
@@ -579,11 +580,11 @@ const ListActiveInactiveUser: React.FC = () => {
                               )}
                             </td>
 
-                            <td className="text-end">{creditRefrence}</td>
-                            <td className="text-end">{balance}</td>
-                            <td className="text-end">{userBal?.profitLoss}</td>
-                            <td className="text-end">{userBal?.exposure}</td>
-                            <td className="text-end">{availableBalance}</td>
+                            <td className="text-end">{formatToINR(creditRefrence)}</td>
+                            <td className="text-end">{formatToINR(balance)}</td>
+                            <td className="text-end">{formatToINR(userBal?.profitLoss)}</td>
+                            <td className="text-end">{formatToINR(userBal?.exposure)}</td>
+                            <td className="text-end">{formatToINR(availableBalance)}</td>
                             <td className="text-center">
                               <Form>
                                 <Form.Check
@@ -604,7 +605,7 @@ const ListActiveInactiveUser: React.FC = () => {
                                 />
                               </Form>
                             </td>
-                            <td className="text-end">{exposureLimit}</td>
+                            <td className="text-end">{formatToINR(exposureLimit)}</td>
                             <td>0</td>
                             <td>{roleName}</td>
                             <td className="text-end">0</td>

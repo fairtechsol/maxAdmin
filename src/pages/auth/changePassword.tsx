@@ -126,7 +126,7 @@ const ChangePassword = () => {
               Submit
             </Button>
           </div>
-          <p className="text-white mt-3 mb-0 title-14">© MAXXBET7</p>
+          <p className="text-white mt-3 mb-0 title-14">© MAXBET07</p>
         </div>
       </Form>
       {showModal && (

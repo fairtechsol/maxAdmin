@@ -96,6 +96,15 @@ const Bacarrat2 = Loadable(
   lazy(() => import("../pages/cardGames/games/baccarat2"))
 );
 const CardJ = Loadable(lazy(() => import("../pages/cardGames/games/3CardJ")));
+const CasinoMeter = Loadable(
+  lazy(() => import("../pages/cardGames/games/casinoMeter"))
+);
+const CasinoQueen = Loadable(
+  lazy(() => import("../pages/cardGames/games/casinoQueen"))
+);
+const BallByBall = Loadable(
+  lazy(() => import("../pages/cardGames/games/ballByBall"))
+);
 
 const MainRoutes = {
   path: "/admin",
@@ -268,6 +277,18 @@ const MainRoutes = {
     {
       path: "casinoDetail/3cardj",
       element: <CardJ />,
+    },
+    {
+      path: "casinoDetail/cmeter",
+      element: <CasinoMeter />,
+    },
+    {
+      path: "casinoDetail/queen",
+      element: <CasinoQueen />,
+    },
+    {
+      path: "casinoDetail/ballbyball",
+      element: <BallByBall />,
     },
     {
       path: "*",

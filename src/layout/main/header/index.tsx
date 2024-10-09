@@ -216,20 +216,19 @@ const Topbar = (props: any) => {
               )}`}
               className="me-2 mt-1 d-flex"
             >
-              <LogoSection width="110px" height="38px" />
+              <LogoSection width="100%" height="50px" />
             </a>
 
             <span
-              className="mt-2 m-2 cursor"
+              className=" m-3 cursor"
               onClick={props.onClick}
-              style={{ marginTop: "1rem !important" }}
             >
               {props.toggle ? (
-                <div style={{ width: "28px" }}>
-                  <FaTimes color="white" size={20} />
+                <div style={{ width: "25px" }}>
+                  <FaTimes color="white" size={18} />
                 </div>
               ) : (
-                <div className="menuHamBurger d-flex flex-column me-2">
+                <div className="menuHamBurger d-flex flex-column me-2 mt-1">
                   <span className="mb-1"></span>
                   <span className="mb-1"></span>
                   <span></span>
@@ -254,13 +253,13 @@ const Topbar = (props: any) => {
                   <TopbarDropdown
                     name="Live Market"
                     options={[
-                      { name: "Ball By Ball", link: "#1" },
+                      { name: "Ball By Ball", link: "/admin/casinoDetail/ballbyball" },
                       { name: "Binary", link: "#1" },
                       {
                         name: "Race 20-20",
                         link: "/admin/casinoDetail/race20",
                       },
-                      { name: "Queen", link: "#2" },
+                      { name: "Queen", link: "/admin/casinoDetail/queen" },
                       { name: "Baccarat", link: "/admin/casino/baccarat" },
                       {
                         name: "Sports Casino",
@@ -312,7 +311,7 @@ const Topbar = (props: any) => {
                       { name: "Profit And Loss", link: "/admin/profit-loss" },
                       {
                         name: "Casino Result Report",
-                        link: "/admin/casinoresult",
+                        link: "/admin/casino-result",
                       },
                     ]}
                   />

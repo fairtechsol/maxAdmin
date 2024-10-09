@@ -375,6 +375,20 @@ const AccountStatement = () => {
     }
   }, [searchListData]);
 
+  useEffect(() => {
+  
+    const currentDate = new Date();
+    const formattedCurrentDate = currentDate.toISOString().split("T")[0]; // Format as YYYY-MM-DD
+
+    const pastDate = new Date();
+    pastDate.setDate(pastDate.getDate() - 7);
+    const formattedPastDate = pastDate.toISOString().split("T")[0]; // Format as YYYY-MM-DD
+
+
+    setDateFrom(formattedPastDate);
+    setDateTo(formattedCurrentDate);
+  }, []);
+
   return (
     <div className="p-2 pt-0">
       <h5 className="title-22 fw-normal">Account Statement</h5>
@@ -437,6 +451,7 @@ const AccountStatement = () => {
               }}
               type="date"
               bgColor="lightGray"
+              value={dateFrom} 
             />
           </Col>
           <Col md={2}>
@@ -447,6 +462,7 @@ const AccountStatement = () => {
               customstyle={"mb-3"}
               type="date"
               bgColor="lightGray"
+              value={dateTo} 
             />
           </Col>
           <Col md={2}>

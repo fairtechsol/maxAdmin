@@ -6,7 +6,7 @@ const OddButtonBox = ({ profitLoss, value1, value2, lock, data }: any) => {
   return (
     <div className="commonButtonBoxContainerOdd">
       <div>
-        <span style={{ fontSize: "20px", fontWeight: "bolder" }}>
+        <span style={{ fontSize: "14px", fontWeight: "bolder" }}>
           {value2 === "icon1" ? (
             <>
               <ImClubs size={20} color="#000000" />
@@ -29,22 +29,22 @@ const OddButtonBox = ({ profitLoss, value1, value2, lock, data }: any) => {
         </span>
       </div>
       <div
-        className={`evenOddbtn-theme ${lock ? "suspended" : ""}`}
+        className={`evenOddbtn-theme-abj2 ${lock ? "suspended" : ""}`}
         style={{ width: "95%" }}
       >
         <span> {parseFloat(isNaN(value1) ? 0 : value1).toFixed(2)}</span>
       </div>
       <div>
         <span
-          style={{ fontSize: "16px" }}
+          style={{ fontSize: "18px", fontWeight: "bold" }}
           className={`${
             profitLoss && profitLoss > 0
               ? "color-green"
               : profitLoss < 0
               ? profitLoss < 0
                 ? "color-red"
-                : ""
-              : ""
+                : "color-red"
+              : "color-red"
           }`}
         >
           {profitLoss || 0}

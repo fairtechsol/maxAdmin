@@ -1,15 +1,22 @@
 import { memo, useEffect } from "react";
 import FlipClock from "./FlipClock";
 import isMobile from "../../../utils/screenDimension";
+import { Col, Row, Container } from "react-bootstrap";
+import { handleRoundId } from "../../../helpers";
 
-const VideoFrame = ({ result, time, id, profitLoss }: any) => {
+const VideoFrame = ({
+  result,
+  time,
+  id,
+  profitLoss,
+  data
+}: any) => {
   useEffect(() => {
     const element = document.getElementById("middleView-playerDiv");
     if (element) {
       element.style.display = "none !important";
     }
   }, []);
-
   return (
     <>
       <div
@@ -30,25 +37,55 @@ const VideoFrame = ({ result, time, id, profitLoss }: any) => {
               position: "relative",
             }}
           >
+            {" "}
+            .
+            {data?.type === "race20" ||
+            data?.type === "queen" ? (
+              <div
+                style={{ position: "absolute", zIndex: "999" }}
+                className="casino-video-title"
+              >
+                <span className="casino-name">{data?.name}</span>
+                <div className="casino-video-rid">
+                  Round ID: {handleRoundId(data?.videoInfo?.mid)}
+                </div>
+              </div>
+            ) : null}
             {result && (
-              <div style={{ position: "absolute", zIndex: "999" }}>
+              <div
+                className="mt-5"
+                style={{ position: "absolute", zIndex: "999" }}
+              >
                 {result}
               </div>
             )}
             <div
-              style={
-                isMobile
-                  ? { display: "flex", overflow: "hidden" }
-                  : { position: "relative", width: "100%" }
-              }
+              style={{ position: "absolute", zIndex: "999" }}
+              className="casino-video-right-icons"
             >
-              <iframe
-                width="100%"
-                height={isMobile ? "250px" : "380px"}
-                src={id}
-                referrerPolicy={"strict-origin-when-cross-origin"}
-                allowFullScreen
-              ></iframe>
+              <div title="Rules" className="casino-video-rules-icon">
+                <i className="fas fa-info-circle title-24"></i>
+              </div>
+            </div>
+            <div>
+              <Container className="p-0">
+                <Row className="justify-content-md-center p-0">
+                  <Col>
+                    <div style={{ width: "100%", height: "460px" }}>
+                      <iframe
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          border: "none",
+                        }}
+                        src={id}
+                        referrerPolicy={"strict-origin-when-cross-origin"}
+                        allowFullScreen
+                      ></iframe>
+                    </div>
+                  </Col>
+                </Row>
+              </Container>
               <ol
                 style={{
                   background: "black",

@@ -1,5 +1,4 @@
 import { HandleGameCards } from "../card";
-import PieChart from "../chart";
 
 export const options = {
   is3D: true,
@@ -7,19 +6,11 @@ export const options = {
   chartArea: { left: 0, top: 0, width: "180", height: "200" },
 };
 const BaccaratStatistics = ({ odds, graphsData, cardData, data }: any) => {
-  const dataa = [
-    ["Task", "Hours per Day"],
-    ["Player", graphsData ? graphsData?.P : 45],
-    ["Banker", graphsData ? graphsData?.B : 45],
-    ["Tie", graphsData ? graphsData?.T : 10],
-  ];
+ 
   return (
     <div className="baccarateContainer">
-      <div className="baccarateChartContainer">
-        <h4>Statistics</h4>
-        <PieChart data={dataa} options={options} />
-      </div>
-      <div className="baccarateRateContainer">
+     
+      <div className="baccarateRateContainer w-100">
         <div className="baccarateRateContainer1">
           <div
             className={`perfectpairBox ${
@@ -79,7 +70,7 @@ const BaccaratStatistics = ({ odds, graphsData, cardData, data }: any) => {
               ? data?.profitLoss[
                   `${data?.videoInfo?.mid}_${odds?.[5]?.sid}_card`
                 ]
-              : ""}
+              : 0}
           </div>
           <div
             className={`perfectpairBoxpl ${
@@ -104,7 +95,7 @@ const BaccaratStatistics = ({ odds, graphsData, cardData, data }: any) => {
               ? data?.profitLoss[
                   `${data?.videoInfo?.mid}_${odds?.[6]?.sid}_card`
                 ]
-              : ""}
+              : 0}
           </div>
           <div
             className={`perfectpairBoxpl ${
@@ -129,7 +120,7 @@ const BaccaratStatistics = ({ odds, graphsData, cardData, data }: any) => {
               ? data?.profitLoss[
                   `${data?.videoInfo?.mid}_${odds?.[7]?.sid}_card`
                 ]
-              : ""}
+              : 0}
           </div>
           <div
             className={`perfectpairBoxpl ${
@@ -154,7 +145,7 @@ const BaccaratStatistics = ({ odds, graphsData, cardData, data }: any) => {
               ? data?.profitLoss[
                   `${data?.videoInfo?.mid}_${odds?.[8]?.sid}_card`
                 ]
-              : ""}
+              : 0}
           </div>
         </div>
 
@@ -173,8 +164,11 @@ const BaccaratStatistics = ({ odds, graphsData, cardData, data }: any) => {
                 odds?.[0]?.gstatus == "0" ? "suspended-box" : ""
               }`}
             >
+              <div className="d-flex flex-row ">
               <span>Player</span>
               <span>{parseFloat(odds?.[0]?.b1 ?? 0)}:1</span>
+              </div>
+             
               <div
                 className="bacarrateCards"
                 style={{ width: cardData?.C5 != "1" ? "75px" : "45px" }}
@@ -201,8 +195,11 @@ const BaccaratStatistics = ({ odds, graphsData, cardData, data }: any) => {
                 odds?.[1]?.gstatus == "0" ? "suspended-box" : ""
               }`}
             >
+              <div className="d-flex flex-row">
               <span>Banker</span>
               <span>{parseFloat(odds?.[1]?.b1 ?? 0)}:1</span>
+              </div>
+             
               <div
                 className="bacarrateCards"
                 style={{ width: cardData?.C6 != "1" ? "75px" : "45px" }}
@@ -250,7 +247,7 @@ const BaccaratStatistics = ({ odds, graphsData, cardData, data }: any) => {
               ? data?.profitLoss[
                   `${data?.videoInfo?.mid}_${odds?.[3]?.sid}_card`
                 ]
-              : ""}
+              : 0}
           </div>
           <div
             className={`perfectpairBoxpl ${
@@ -275,7 +272,7 @@ const BaccaratStatistics = ({ odds, graphsData, cardData, data }: any) => {
               ? data?.profitLoss[
                   `${data?.videoInfo?.mid}_${odds?.[0]?.sid}_card`
                 ]
-              : ""}
+              : 0}
           </div>
           <div
             className={`perfectpairBoxpl ${
@@ -300,7 +297,7 @@ const BaccaratStatistics = ({ odds, graphsData, cardData, data }: any) => {
               ? data?.profitLoss[
                   `${data?.videoInfo?.mid}_${odds?.[2]?.sid}_card`
                 ]
-              : ""}
+              : 0}
           </div>
           <div
             className={`perfectpairBoxpl ${
@@ -325,7 +322,7 @@ const BaccaratStatistics = ({ odds, graphsData, cardData, data }: any) => {
               ? data?.profitLoss[
                   `${data?.videoInfo?.mid}_${odds?.[1]?.sid}_card`
                 ]
-              : ""}
+              : 0}
           </div>
           <div
             className={`perfectpairBoxpl ${
@@ -350,14 +347,14 @@ const BaccaratStatistics = ({ odds, graphsData, cardData, data }: any) => {
               ? data?.profitLoss[
                   `${data?.videoInfo?.mid}_${odds?.[4]?.sid}_card`
                 ]
-              : ""}
+              : 0}
           </div>
         </div>
-        <div className="baccarateMinMax">
+        {/* <div className="baccarateMinMax">
           <span className="f600">Min:</span>
           {odds?.[0]?.min} <span className="f600">Max:</span>
           {odds?.[0]?.max}
-        </div>
+        </div> */}
       </div>
     </div>
   );

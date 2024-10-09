@@ -27,7 +27,7 @@ const Abj2Component = () => {
       <Row>
         <Col md={8}>
           <div className="horseRacingTab">
-            <div style={{ width: "100%", height: "400px", margin: "5px" }}>
+            <div style={{ width: "100%" }}>
               <div className="horseRacingTabHeader">
                 <div>
                   <span style={{ fontSize: "16px", fontWeight: "600" }}>
@@ -54,7 +54,6 @@ const Abj2Component = () => {
               <div
                 style={{
                   width: "100%",
-                  height: "92%",
                   backgroundColor: "#000",
                 }}
               >
@@ -65,16 +64,14 @@ const Abj2Component = () => {
                 />
               </div>
             </div>
-            <div style={{ height: "460px" }}>
-              <div
-                className="row-flex"
-                style={{ width: "100%", margin: "4% 2% 5px 5px" }}
-              >
+            <div>
+              <div className="row-flex" style={{ width: "100%" }}>
                 <SBetBox
                   type={"A"}
                   odds={dragonTigerDetail?.abjSa}
                   data={dragonTigerDetail}
                 />
+                <div className="teen20center"></div>
                 <SBetBox
                   type={"B"}
                   odds={dragonTigerDetail?.abjSb}
@@ -84,7 +81,6 @@ const Abj2Component = () => {
               <div
                 style={{
                   width: "100%",
-                  margin: "5px",
                   display: "flex",
                   flexDirection: "row",
                   gap: "8px",
@@ -95,6 +91,7 @@ const Abj2Component = () => {
                   odds={dragonTigerDetail?.oddEven}
                   data={dragonTigerDetail}
                 />
+                <div className="teen20center"></div>
                 <OddEven
                   card={false}
                   odds={dragonTigerDetail?.abjCards}
@@ -106,7 +103,7 @@ const Abj2Component = () => {
                   width: "100%",
                   margin: "5px",
                   display: "flex",
-                  flexDirection: "row",
+                  flexDirection: "column",
                   gap: "8px",
                 }}
               >

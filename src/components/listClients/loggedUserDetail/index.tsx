@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../store/store";
 import "./style.scss";
 import { userBalance } from "../../../store/actions/user/userActions";
+import { formatToINR } from "../../../helpers";
 
 const LoggedUserDetail = () => {
   const { userBalanceList } = useSelector(
@@ -32,19 +33,19 @@ const LoggedUserDetail = () => {
                     Upper Level Credit Reference:
                   </div>
                   <div className="col-md-4 title-14">
-                    {parseFloat(userBalanceList?.userCreditReference || 0).toFixed(2)}
+                    {formatToINR(userBalanceList?.userCreditReference || 0)}
                   </div>
                 </div>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
                   <div className="col-md-8 title-14">Total Master Balance</div>
                   <div className="col-md-4 title-14">
-                    {parseFloat(userBalanceList?.totalMasterBalance || 0).toFixed(2)}
+                    {formatToINR(userBalanceList?.totalMasterBalance || 0)}
                   </div>
                 </div>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
                   <div className="col-md-8 title-14">Available Balance:</div>
                   <div className="col-md-4 title-14">
-                    {parseFloat(userBalanceList?.availableBalance || 0).toFixed(2)}
+                    {formatToINR(userBalanceList?.availableBalance || 0)}
                   </div>
                 </div>
               </Col>
@@ -54,7 +55,7 @@ const LoggedUserDetail = () => {
                     Down level Occupy Balance:
                   </div>
                   <div className="col-md-4 title-14">
-                    {parseFloat(userBalanceList?.downLevelOccupyBalance || 0).toFixed(2)}
+                    {formatToINR(userBalanceList?.downLevelOccupyBalance || 0)}
                     {/* (
                     {parseFloat(userBalanceList?.totalProfitLossDownlevel || 0}) */}
                   </div>
@@ -62,9 +63,9 @@ const LoggedUserDetail = () => {
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
                   <div className="col-md-8 title-14">Upper Level:</div>
                   <div className="col-md-4 title-14">
-                    {parseFloat(
+                    {formatToINR(
                       userBalanceList?.upperLevelBalance || 0
-                    ).toFixed(2)}
+                    )}
                     {/* (
                     {parseFloat(userBalanceList?.upperLevelProfitLossPercent || 0}%)(
                     {parseFloat(userBalanceList?.totalProfitLossUpperlevel || 0}) */}
@@ -75,9 +76,9 @@ const LoggedUserDetail = () => {
                     Available Balance With Profit/Loss:
                   </div>
                   <div className="col-md-4 title-14">
-                    {parseFloat(
+                    {formatToINR(
                       userBalanceList?.availableBalanceWithProfitLoss || 0
-                    ).toFixed(2)}
+                    )}
                   </div>
                 </div>
               </Col>
@@ -87,7 +88,7 @@ const LoggedUserDetail = () => {
                     Down Level Credit Reference:
                   </div>
                   <div className="col-md-4 title-14">
-                    {parseFloat(userBalanceList?.downLevelCreditReference || 0).toFixed(2)}
+                    {formatToINR(userBalanceList?.downLevelCreditReference || 0)}
                   </div>
                 </div>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
@@ -95,13 +96,13 @@ const LoggedUserDetail = () => {
                     Down Level Profit/Loss :
                   </div>
                   <div className="col-md-4 title-14">
-                    {parseFloat(userBalanceList?.downLevelProfitLoss || 0).toFixed(2)}
+                    {formatToINR(userBalanceList?.downLevelProfitLoss || 0)}
                   </div>
                 </div>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
                   <div className="col-md-8 title-14">My Profit/Loss:</div>
                   <div className="col-md-4 title-14">
-                    {parseFloat(userBalanceList?.profitLoss || 0).toFixed(2)}
+                    {formatToINR(userBalanceList?.profitLoss || 0)}
                   </div>
                 </div>
               </Col>

@@ -16,7 +16,15 @@ const CommonCardImg = ({ cardData, data }: any) => {
   return (
     <div className="commonCardImgContainer">
       {cardImg?.map((item: any) => (
-        <div>
+        <div
+          style={{
+            marginRight: "5px",
+            marginLeft: "5px",
+            width: "auto",
+            marginBottom: "10px",
+            minWidth: "80px",
+          }}
+        >
           <div
             key={item?.code}
             className={item?.gstatus === "0" ? "suspended" : ""}
@@ -31,9 +39,10 @@ const CommonCardImg = ({ cardData, data }: any) => {
           </div>
           <span
             style={{
-              fontSize: "12px",
+              fontSize: "18px",
               display: "flex",
               justifyContent: "center",
+              fontWeight: "bold",
             }}
             className={`${
               data?.profitLoss
@@ -46,12 +55,11 @@ const CommonCardImg = ({ cardData, data }: any) => {
                         `${data?.videoInfo?.mid}_${item?.sid}_card`
                       ] < 0
                     ? "color-red"
-                    : ""
-                  : ""
-                : ""
+                    : "color-red"
+                  : "color-red"
+                : "color-red"
             }`}
           >
-            {" "}
             {data?.profitLoss
               ? data?.profitLoss[`${data?.videoInfo?.mid}_${item?.sid}_card`]
                 ? data?.profitLoss[`${data?.videoInfo?.mid}_${item?.sid}_card`]

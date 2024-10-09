@@ -128,26 +128,9 @@
   padding: 0; /* Remove padding from Nav.Link */
   margin: 0; /* Remove margin from Nav.Link */
 }
-.teenPatti-table-container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin-top: 5%;
-}
-.teenPatti-table-row {
-  background-color: #dee2e6;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-}
-.teenPatti-table-item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  border: 0.2px solid #fff;
-  cursor: pointer;
-}
+
+
+
 .f12-b {
   font-size: 12px;
   font-weight: bolder;
@@ -157,24 +140,7 @@
   font-weight: bolder;
 }
 
-.suspended:after {
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.6);
-  color: #ffffff;
-  text-transform: uppercase;
-  font-family: "Font Awesome 5 Free";
-  content: "\f023";
-  font-weight: 900;
-  font-size: 18px;
-  top: 0;
-  z-index: 10;
-}
+
 .teen20resultModal {
   display: flex;
   flex-direction: row;
@@ -238,7 +204,7 @@
   align-items: center;
   position: absolute;
   left: 50%;
-  width: 170px;
+  width: 150px;
   height: 40px;
   transform: translateX(-50%);
   bottom: -15px;
@@ -261,15 +227,8 @@
   justify-content: center;
   padding: 5px 0;
   font-weight: bold;
-  border-left: 1px solid var(--table-border);
   cursor: pointer;
   min-height: 46px;
-}
-
-.suspended-box {
-  position: relative;
-  pointer-events: none;
-  cursor: none;
 }
 
 .back {
@@ -292,10 +251,10 @@
   background: #f7f7f7;
   border-top: 0px;
 
-  border-bottom: 2px solid #ddd;
+  // border-bottom: 2px solid #ddd;
 
   margin-top: 5px;
-  box-shadow: 0 0 3px #aaa;
+  // box-shadow: 0 0 3px #aaa;
 }
 
 .ticker-wrap {

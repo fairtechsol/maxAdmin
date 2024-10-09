@@ -110,10 +110,10 @@ function OverUnderMarket({
                   </td>
                   <td colSpan={backLayCount === 2 ? 2 : 6}>
                     <BetStatusOverlay
-                      title={data?.runners?.[indexes]?.status.toLowerCase()}
+                      title={data?.runners?.[indexes]?.status?.toLowerCase()}
                       active={
                         data?.activeStatus === "live" &&
-                        data?.runners?.[indexes]?.status.toLowerCase() ===
+                        data?.runners?.[indexes]?.status?.toLowerCase() ===
                           "active"
                           ? false
                           : true
@@ -138,7 +138,7 @@ function OverUnderMarket({
                             }
                             active={
                               data?.runners?.[indexes]?.status
-                                .toLowerCase()
+                                ?.toLowerCase()
                                 ?.toLowerCase() !==
                               teamStatus.active?.toLowerCase()
                             }
@@ -163,7 +163,7 @@ function OverUnderMarket({
                             }
                             active={
                               data?.runners?.[indexes]?.status
-                                .toLowerCase()
+                                ?.toLowerCase()
                                 ?.toLowerCase() !==
                               teamStatus.active?.toLowerCase()
                             }

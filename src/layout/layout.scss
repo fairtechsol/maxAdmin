@@ -38,10 +38,9 @@
     height: 52px;
     .menuHamBurger{
         span{
-            height: 3px;
+            height: 2px;
             background-color: $white;
-            width: 20px;
-            
+            width: 16px;
         }
     }
     a.nav-link{
@@ -241,7 +240,7 @@
 }
 .page-content{
     background-color: $light;
-    height: calc(100vh - 76px);
+    // height: calc(100vh - 76px);
     margin: 12px;
     padding: 10px 0;
 }

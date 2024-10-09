@@ -270,11 +270,8 @@ const OtherGamesDetail = () => {
                     <BetTable
                       title={item?.name}
                       type={
-                        item.type.includes("overUnder") ||
-                        item.type.includes("firstHalfGoal")
-                          ? MatchType.UNDER_OVER
-                          : item.type.includes("setWinner")
-                          ? MatchType.SET_WINNER
+                        ["other", "tournament"]?.includes(item.type)
+                          ? MatchType.OTHER
                           : MatchType.MATCH_ODDS
                       }
                       data={item}

@@ -17,11 +17,20 @@ import UserBets from "../../../game/userBet";
 import TeenPattiTableRow from "./tableRow";
 import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
 import TeenOpenResult from "./teenCard";
-import CasinoBox from "./openBox";
+import OddsRateBox from "./oddsRateBox";
+import { formatNumber } from "../../../../helpers";
 const TeenPattiOpenComponent = () => {
   const [show, setShow] = useState(false);
   const { dragonTigerDetail } = useSelector((state: RootState) => state.card);
+  const [openDivIds, setOpenDivIds] = useState<string[]>([]);
 
+  const toggleDiv = (id: string) => {
+    if (openDivIds.includes(id)) {
+      setOpenDivIds(openDivIds.filter((openId) => openId !== id));
+    } else {
+      setOpenDivIds([...openDivIds, id]);
+    }
+  };
   const rules = [
     { label: "Pair (Double)", value: "1 To 1" },
     { label: "Flush (Color)", value: "1 To 4" },
@@ -54,12 +63,13 @@ const TeenPattiOpenComponent = () => {
     extractCardAndPlayerInfo(dragonTigerDetail?.videoInfo?.cards);
 
   console.log("dt", dragonTigerDetail);
+
   return (
     <>
       <Row>
         <Col md={8}>
           <div style={{ margin: "5px" }}>
-            <div style={{ height: "400px", marginBottom: ".30px" }}>
+            <div>
               <div className="horseRacingTabHeader">
                 <div>
                   <span style={{ fontSize: "16px", fontWeight: "600" }}>
@@ -88,7 +98,6 @@ const TeenPattiOpenComponent = () => {
               <div
                 style={{
                   width: "100%",
-                  height: "90%",
                   backgroundColor: "#000",
                 }}
               >
@@ -99,7 +108,7 @@ const TeenPattiOpenComponent = () => {
                 />
               </div>
             </div>
-            <div style={{}}>
+            <div>
               <div className="teenPatti-table-container">
                 <div className="teenPatti-table-row" style={{ lineHeight: 2 }}>
                   <div
@@ -153,21 +162,109 @@ const TeenPattiOpenComponent = () => {
                     />
                   ))}
 
-                <div>
-                  {dragonTigerDetail?.players &&
-                    Object.keys(dragonTigerDetail?.players).map(
-                      (key, index) => (
-                        <CasinoBox
-                          key={key}
-                          indx={index}
-                          player={dragonTigerDetail?.players[key]}
-                          pairPlus={
-                            dragonTigerDetail?.pairsPlus[`pairPlus${index + 1}`]
-                          }
-                          cards={cardsArray1[index] || []} // Pass correct card data for each player
-                        />
-                      )
-                    )}
+                <div className="teentestother">
+                  <div className="casino-box-row">
+                    <div className="casino-nation-name"></div>
+                    {dragonTigerDetail?.sections &&
+                      dragonTigerDetail?.sections.map(
+                        (section: any, index: any) => (
+                          <div key={index} className="casino-bl-box">
+                            <div className="casino-bl-box-item">
+                              <b>{section?.nation}</b>
+                              <div className="float-end">
+                                <i
+                                  className="fas fa-info-circle float-end"
+                                  onClick={() => toggleDiv(index)}
+                                ></i>
+                                <div
+                                  id="demo0"
+                                  className={`icon-range collapse ${
+                                    openDivIds.includes(index) ? "show" : ""
+                                  }`}
+                                >
+                                  R:
+                                  <span>
+                                    {dragonTigerDetail?.videoInfo?.min}
+                                  </span>
+                                  -
+                                  <span>
+                                    {formatNumber(
+                                      dragonTigerDetail?.videoInfo?.max
+                                    )}
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        )
+                      )}
+                  </div>
+                  <div className="casino-box-row mb-4">
+                    <div className="casino-nation-name casino-nation-name-bg">
+                      <b>Odds</b>
+                    </div>
+                    {dragonTigerDetail?.players &&
+                      Object.keys(dragonTigerDetail.players).map(
+                        (key, index) => {
+                          const section = dragonTigerDetail.players[key];
+                          return (
+                            <OddsRateBox
+                              key={index}
+                              status={section?.gstatus}
+                              rate={section?.rate}
+                              profitLoss={
+                                dragonTigerDetail?.profitLoss?.[
+                                  `${section?.mid}_${section?.section}_card`
+                                ]
+                              }
+                            />
+                          );
+                        }
+                      )}
+                  </div>
+                  <div className="casino-box-row mb-4">
+                    <div className="casino-nation-name casino-nation-name-bg">
+                      <b>Pair Plus</b>
+                    </div>
+                    {dragonTigerDetail?.pairsPlus &&
+                      Object.keys(dragonTigerDetail.pairsPlus).map(
+                        (key, index) => {
+                          const section = dragonTigerDetail.pairsPlus[key];
+                          return (
+                            <OddsRateBox
+                              key={index}
+                              status={section?.gstatus}
+                              rate={section?.rate}
+                              profitLoss={
+                                dragonTigerDetail?.profitLoss?.[
+                                  `${section?.mid}_${section?.section}_card`
+                                ]
+                              }
+                            />
+                          );
+                        }
+                      )}
+                  </div>
+                  {/* <div className="casino-box-row mb-4">
+                    <div className="casino-nation-name casino-nation-name-bg">
+                      <b>Total</b>
+                    </div>
+                    {dragonTigerDetail?.sections &&
+                      dragonTigerDetail?.sections.map(
+                        (section: any, index: any) => (
+                          <OddsRateBox
+                            key={index}
+                            status={section?.dstatus}
+                            rate={section?.drate}
+                            profitLoss={
+                              dragonTigerDetail?.profitLoss?.[
+                                `${section?.mid}_${section?.dsectionid}_card`
+                              ]
+                            }
+                          />
+                        )
+                      )}
+                  </div> */}
                 </div>
               </div>
               <div style={{ width: "100%", marginTop: "10px" }}>

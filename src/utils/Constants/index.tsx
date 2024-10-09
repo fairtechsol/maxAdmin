@@ -1,54 +1,55 @@
 import {
-  dt6,
-  dt20,
-  dt2020,
-  dtl20,
-  lucky7A,
-  luck7B,
-  cards32A,
-  cards32B,
-  abjlist2,
-  abjlist,
-  testteen,
-  dayteen,
-  twentyteen,
-  // teencasino,
-  teenplayer,
   A,
-  two,
-  three,
-  four,
-  five,
-  six,
-  seven,
-  eight,
-  nine,
-  ten,
-  eleven,
-  twelve,
-  thirteen,
-  imgA,
-  ball0,
-  img2,
-  ball1,
-  img3,
-  ball2,
-  img4,
-  ball3,
-  img6,
-  ball4,
-  img10,
-  ball6,
-  imgK,
-  ballW,
-  ballByBall,
-  superover,
-  crick5,
-  p6,
-  p1d,
-  p20,
+  abjlist,
+  abjlist2,
   bac1,
   bac2,
+  ball0,
+  ball1,
+  ball2,
+  ball3,
+  ball4,
+  ball6,
+  ballByBall,
+  ballW,
+  cards32A,
+  cards32B,
+  cmeter,
+  crick5,
+  dayteen,
+  dt20,
+  dt2020,
+  dt6,
+  dtl20,
+  eight,
+  eleven,
+  five,
+  four,
+  img10,
+  img2,
+  img3,
+  img4,
+  img6,
+  imgA,
+  imgK,
+  luck7B,
+  lucky7A,
+  nine,
+  p1d,
+  p20,
+  p6,
+  seven,
+  six,
+  superover,
+  // teencasino,
+  teenplayer,
+  ten,
+  testteen,
+  thirteen,
+  three,
+  twelve,
+  twentyteen,
+  two,
 } from "../../assets";
 
 export const ApiConstants = {
@@ -141,11 +142,16 @@ export const Constants = {
 
 export const cardUrl =
   process.env.NODE_ENV === "production"
-    ? "https://jmdapi.com/tablevideo/?id="
-    : "https://maxbet9.fairgame.club/videoPage/";
+    ? "https://maxbet07.com/videoPage/"
+    : "https://maxbet07.com/videoPage/";
 
 // const oldVideoUrl = "https://video.proexch.in/route/?id="
 // use below baseUrl for live build
+
+export const serviceUrl =
+  process.env.NODE_ENV === "production"
+    ? Constants.apiBasePath
+    : Constants.localPath;
 
 export const baseUrls = {
   socket:
@@ -167,6 +173,11 @@ export const baseUrls = {
 };
 
 // use below baseUrl for live build
+
+// export const serviceUrl =
+//   process.env.NODE_ENV === Constants.PRODUCTION
+//     ? Constants.apiBasePathLive
+//     : Constants.localPath;
 
 // export const baseUrls = {
 //   socket:
@@ -194,6 +205,15 @@ export const teamStatus = {
   ballStart: "ball start",
   ballStop: "ball stop",
   ballRunning: "ball running",
+};
+
+export const sessionBettingType = {
+  session: "session",
+  fancy1: "fancy1",
+  overByOver: "overByover",
+  ballByBall: "ballByBall",
+  oddEven: "oddEven",
+  cricketCasino: "cricketCasino",
 };
 
 export const matchBettingType = {
@@ -413,6 +433,12 @@ export const card3 = {
       name: "5 5 Cricket",
     },
     {
+      id: 21,
+      url: "/admin/casinoDetail/cmeter",
+      imgSrc: cmeter,
+      name: "CASINO METER",
+    },
+    {
       id: 22,
       url: "/admin/casinoDetail/cmatch20",
       imgSrc:
@@ -575,18 +601,18 @@ export const bollywoodTableCards = [
 ];
 
 export const cardGamesType: any = {
-  dragonTiger20: "dt20", //
-  andarBahar2: "abj", //
-  andarBahar1: "ab20", //
-  teen20: "teen20", //
-  card32: "card32", //
-  card32B: "card32eu", //
-  lucky7: "lucky7", //
-  dragonTiger202: "dt202", //
-  dragonTigerLion: "dtl20", //
-  teenOneDay: "teen", //
-  teenOpen: "teen8", //
-  teenTest: "teen9", //
+  dragonTiger20: "dt20",
+  andarBahar2: "abj",
+  andarBahar1: "ab20",
+  teen20: "teen20",
+  card32: "card32",
+  card32B: "card32eu",
+  lucky7: "lucky7",
+  dragonTiger202: "dt202",
+  dragonTigerLion: "dtl20",
+  teenOneDay: "teen",
+  teenOpen: "teen8",
+  teenTest: "teen9",
   dragonTigerOneDay: "dt6",
   lucky7B: "lucky7eu",
   casinoWar: "war",
@@ -604,6 +630,10 @@ export const cardGamesType: any = {
   baccarat: "baccarat",
   baccarat2: "baccarat2",
   cardj: "3cardj",
+  cmeter: "cmeter",
+  queen: "queen",
+  worli1: "worli",
+  ballbyball: "ballbyball",
 };
 
 export const cardGamesTypeNames: any = {
@@ -640,6 +670,10 @@ export const cardGamesTypeNames: any = {
   tennis: "Tennis",
   horseRacing: "Horse Racing",
   greyHound: "Grey Hound",
+  ballbyball: "Ball By Ball",
+  cmeter: "Casino Meter",
+  queen: "Casino Queen",
+  worli: "Worli Matka",
 };
 
 export const cardGamesId: any = {
@@ -671,6 +705,9 @@ export const cardGamesId: any = {
   cardj: 3039,
   baccarat: 3044,
   baccarat2: 3033,
+  cmeter: 3046,
+  ballbyball: 3061,
+  queen: 3037,
 };
 
 export const rulesData = [
@@ -854,6 +891,18 @@ export const cardConstantsAccountStatement = [
     value: "3cardj",
     label: "3 Card Judgement",
   },
+  {
+    value: "ballbyball",
+    label: "Ball By Ball",
+  },
+  {
+    value: "queen",
+    label: "Casino Queen",
+  },
+  {
+    value: "cmeter",
+    label: "Casino Meter",
+  },
 ];
 
 export const cardGamesCasinoResult = [
@@ -973,5 +1022,17 @@ export const cardGamesCasinoResult = [
   {
     value: "3cardj",
     label: "3 Card Judgement",
+  },
+  {
+    value: "ballbyball",
+    label: "Ball By Ball",
+  },
+  {
+    value: "queen",
+    label: "Casino Queen",
+  },
+  {
+    value: "cmeter",
+    label: "Casino Meter",
   },
 ];
