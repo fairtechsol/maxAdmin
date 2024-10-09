@@ -183,7 +183,19 @@
   flex-direction: row;
   // justify-content: space-around;
 }
-
+.casino-card-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 48px;
+  height: auto;
+  margin-bottom: 5px;
+}
+.casino-card-item {
+  // margin-right: 5px;
+  // margin-left: 5px;
+  margin-bottom: 10px;
+}
 
 .commonButtonBoxContainerOdd {
   width: 50%;

@@ -101,7 +101,7 @@ const Cricket5Component = () => {
                 <div className="casino-title" style={{ position: "relative" }}>
                   <span>Rules</span>
                 </div>
-                <div className="table-responsive rules-table d-flex">
+                <div className="table-responsive rules-table d-flex lh-1">
                   {cardData?.map((teamData, index) => (
                     <Table bordered key={index} className="mb-4">
                       <thead>

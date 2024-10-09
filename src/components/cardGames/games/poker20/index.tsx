@@ -30,7 +30,7 @@ const Poker20Component = () => {
     <>
       <Row>
         <Col md={8}>
-          <div style={{ height: "400px", margin: "5px" }}>
+          <div>
             <div className="horseRacingTabHeader">
               <div>
                 <span style={{ fontSize: "16px", fontWeight: "600" }}>
@@ -59,7 +59,7 @@ const Poker20Component = () => {
               </span>
             </div>
             <div
-              style={{ width: "100%", height: "90%", backgroundColor: "#000" }}
+              style={{ width: "100%", backgroundColor: "#000" }}
             >
               <VideoFrame
                 time={dragonTigerDetail?.videoInfo?.autotime}
@@ -68,8 +68,8 @@ const Poker20Component = () => {
               />
             </div>
           </div>
-          <div style={{ height: "350px" }}>
-            <div className="d-flex px-2 mt-5">
+          <div>
+            <div className="d-flex">
               <DynamicTable
                 odds={dragonTigerDetail?.odds}
                 data={dragonTigerDetail}

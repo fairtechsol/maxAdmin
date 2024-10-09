@@ -9,10 +9,8 @@ const DynamicTable = ({ odds, data, playerNum }: any) => {
 
   const toggleDiv = (id: string) => {
     if (openDivIds.includes(id)) {
-      // If the ID is already in the array, remove it to close the div
       setOpenDivIds(openDivIds.filter(openId => openId !== id));
     } else {
-      // Otherwise, add the ID to the array to open the div
       setOpenDivIds([...openDivIds, id]);
     }
   };

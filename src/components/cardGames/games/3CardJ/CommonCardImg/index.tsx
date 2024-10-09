@@ -48,7 +48,7 @@ const CommonCardImg = ({ cardData, data, cardInfo }: any) => {
               }}
             >
               {item?.show ? (
-                <img src={item?.imgSrc} width={"30px"} />
+                <img src={item?.imgSrc} width={"50px"} />
               ) : (
                 <img src={back} width={"30px"} />
               )}

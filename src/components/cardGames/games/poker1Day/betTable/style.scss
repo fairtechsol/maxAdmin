@@ -87,3 +87,117 @@ background-color: rgba(0, 0, 0, 0.05);
     border: 0.2px solid #fff;
   }
 
+.playerabox {
+    width: 39%;
+}
+.playerbbox {
+  width: 39%;
+}
+.playerafabcy {
+  padding: 6px;
+  border: 2px solid #fc4242;
+  background-color: #fc42422e;
+  min-height: 72px;
+}
+
+.playerbfabcy {
+  padding: 6px;
+  padding-bottom: 6px;
+  border: 2px solid #fdcf13;
+  background-color: #fdcf132e;
+  min-height: 72px;
+}
+
+.casino-box-row {
+  display: flex;
+  display: -webkit-flex;
+  flex-wrap: wrap;
+  padding: 2px 0;
+  align-items: center;
+  position: relative;
+}
+
+.casino-nation-name {
+  width: 50%;
+  padding-right: 10px;
+  position: relative;
+  background-color: transparent;
+}
+
+.casino-nation-name {
+  padding: 4px;
+}
+
+.casino-bl-box {
+  width: 50%;
+}
+.casino-bl-box {
+  display: flex;
+  display: -webkit-flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.casino-bl-box-item {
+  width: calc(50% - 2px);
+}
+
+.poker1dayother .casino-bl-box {
+  width: 100%;
+}
+
+.playerabcardbox {
+  width: 20%;
+  background-color: #434343;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  border-radius: 8px;
+  height: 180px;
+}
+
+.poker-icon img {
+  width: 120px;
+}
+
+
+ .dealer-name.playera {
+  color: #fc4242;
+}
+.dealer-name {
+  font-size: 16px;
+  font-weight: bold;
+}
+.dealer-name.playerb {
+  color: #fdcf13;
+}
+
+.casino-detail-poker20 {
+  padding: 10px 10px 40px;
+  background-color: #f8f8fb;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 2px 6px #e2e2e2;
+}
+
+.casino-box-odd {
+  font-weight: bold;
+  font-size: 16px;
+  height: 16px;
+  line-height: 16px;
+  margin-bottom: 2px;
+  width: 100%;
+  color: #333;
+}
+
+.casino-bl-box-item > span {
+  font-size: 12px;
+  line-height: 1;
+}
+.casino-bl-box-item > span, .casino-rb-box-player > span {
+  display: block;
+  width: 100%;
+  line-height: 14px;
+}

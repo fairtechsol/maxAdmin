@@ -73,29 +73,33 @@ const AndarBahar1Component = () => {
             <div>
               <div
                 style={{
-                  width: "100%",
-                  margin: "5px",
+                  padding: "10px",
                   display: "flex",
-                  flexDirection: "column",
+                  flexWrap: "wrap",
+                  justifyContent: "space-between",
                 }}
               >
                 <CardBox
                   title={"ANDAR"}
-                  bgColor={"#ffa07a"}
+                  border={"3px solid #fc4242"}
+                  color={"#fc4242"}
+                  bgColor={"#fc424214"}
                   odds={dragonTigerDetail?.ander}
                   data={dragonTigerDetail}
                   cards={dragonTigerDetail?.cardInfo}
                 />
                 <CardBox
                   title={"BAHAR"}
-                  bgColor={"#90ee90"}
+                  color={"#ef910f"}
+                  border={"3px solid #fdcf13"}
+                  bgColor={"#fdcf1314"}
                   odds={dragonTigerDetail?.bahar}
                   data={dragonTigerDetail}
                   cards={dragonTigerDetail?.cardInfo}
                 />
               </div>
 
-              <div style={{ width: "100%"}}>
+              <div style={{ width: "100%" }}>
                 <CardResultBox
                   data={dragonTigerDetail}
                   name={["R", "R", "R"]}
