@@ -1,172 +1,220 @@
 import { useState } from "react";
-import { IoInformationCircle } from "react-icons/io5";
-import SmoothDropdownModal from "../minMaxModal";
+import { formatNumber } from "../../../../../helpers";
+// import { IoInformationCircle } from "react-icons/io5";
+// import SmoothDropdownModal from "../minMaxModal";
 
-const BackLay = ({ matchOddsData, data }: any) => {
-  const [modelOpen, setModelOpen] = useState(false);
-  const min = matchOddsData?.[0]?.min;
-  const max = matchOddsData?.[0]?.max;
-  const handleLock = (status: any, value: any) => {
-    if (status !== "ACTIVE" || value === "0.00") {
-      return true;
+const BackLay = ({ matchOddsData, data, odds }: any) => {
+  const [openDivIds, setOpenDivIds] = useState<string[]>([]);
+
+  const toggleDiv = (id: string) => {
+    if (openDivIds.includes(id)) {
+      setOpenDivIds(openDivIds.filter((openId) => openId !== id));
     } else {
-      return false;
+      setOpenDivIds([...openDivIds, id]);
     }
   };
-  const renderItem = (item: any, index: number, type: any) =>
-    type === "back" ? (
-      <div
-        key={index}
-        className={`dtlsubTitle ${type}-BackGround ${
-          handleLock(item?.gstatus, item?.b1) ? "suspended" : ""
-        }`}
-      >
-        {item?.b1}
-      </div>
-    ) : (
-      <div
-        key={index}
-        className={`dtlsubTitle ${type}-BackGround ${
-          handleLock(item?.gstatus, item?.l1) ? "suspended" : ""
-        }`}
-      >
-        {item?.l1}
-      </div>
-    );
   return (
-    <div className="w-100">
+    <div className="w-100 d-flex flex-column">
       <div
-        style={{
-          width: "100%",
-          marginTop: "5%",
-          display: "flex",
-          flexDirection: "column",
-          border: "0.3px solid #c7c8ca",
-          marginLeft: "5px",
-        }}
+        className="w-100 d-flex flex-row justify-content-around align-items-center mt-2"
+        style={{ gap: "10px" }}
       >
-        <div className="w-100 d-sm-flex flex-row" style={{ height: "30px" }}>
-          <div className="dtlTitle">
-            {
-              <div style={{ width: "45%", textAlign: "start" }}>
-                <span className="minmaxi">
-                  <IoInformationCircle
-                    color="#ffc742"
-                    onClick={() => setModelOpen(!modelOpen)}
-                  />
-                  <SmoothDropdownModal
-                    min={min}
-                    max={max}
-                    show={modelOpen}
-                    setShow={() => setModelOpen(false)}
-                  />
-                </span>
+        <div className="d-flex flex-column" style={{ width: "40%" }}>
+          <div className="dt1dayDragon">
+            <div className="w-50 d-flex flex-row justify-content-start align-items-center position-relative">
+              <div
+                onClick={() => toggleDiv("demo0")}
+                className="range-icon d-inline-block ms-1"
+              >
+                <i className="fas fa-info-circle float-right"></i>{" "}
+                <div
+                  id="demo0"
+                  className={`icon-range-dt1day collapse ${
+                    openDivIds.includes("demo0") ? "show" : ""
+                  }`}
+                >
+                  R:<span>{parseFloat(matchOddsData?.[0]?.min)}</span>-
+                  <span>{formatNumber(matchOddsData?.[0]?.max)}</span>
+                </div>
               </div>
-            }
-          </div>
-          <div className="dtlsubTitle back-BackGround">Back</div>
-          <div className="dtlsubTitle lay-BackGround">Lay</div>
-        </div>
-        <div className="w-100 d-sm-flex flex-row" style={{ height: "40px" }}>
-          <div
-            className="dtlTitle"
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start",
-              lineHeight: 1,
-            }}
-          >
-            <span>Dragon</span>
-            <span
-              className={
-                data?.profitLoss
-                  ? data?.profitLoss[
-                      `${data?.videoInfo?.mid}_${matchOddsData?.[0]?.sid}_card`
-                    ]
-                    ? JSON.parse(
-                        data?.profitLoss[
-                          `${data?.videoInfo?.mid}_${matchOddsData?.[0]?.sid}_card`
-                        ]
-                      )["dragon"] > 0
-                      ? "color-green"
-                      : JSON.parse(
-                          data?.profitLoss[
-                            `${data?.videoInfo?.mid}_${matchOddsData?.[0]?.sid}_card`
-                          ]
-                        )["dragon"] < 0
-                      ? "color-red"
-                      : ""
-                    : ""
-                  : ""
-              }
+              <span className="title-14 f-bold ms-1">
+                {matchOddsData?.[0]?.nat || matchOddsData?.[0]?.nation}
+              </span>
+            </div>
+            <div
+              className="w-50 d-flex flex-row justify-content-around align-items-center p-2"
+              style={{ gap: "5px" }}
             >
-              {data?.profitLoss
-                ? data?.profitLoss[
+              <div
+                className="w-50 d-flex justify-content-center align-items-center  title-15 f-bold position-relative"
+                style={{ border: "2px solid #72bbef", height: "40px" }}
+              >
+                {(matchOddsData?.[0]?.gstatus === "SUSPENDED" ||
+                  matchOddsData?.[0]?.gstatus === "CLOSED") && (
+                  <div className="dt20bLock"></div>
+                )}
+                {parseFloat(matchOddsData?.[0]?.b1)}
+              </div>
+              <div
+                className="w-50 d-flex justify-content-center align-items-center title-15 f-bold position-relative"
+                style={{ border: "2px solid #f994ba", height: "40px" }}
+              >
+                {(matchOddsData?.[0]?.gstatus === "SUSPENDED" ||
+                  matchOddsData?.[0]?.gstatus === "CLOSED") && (
+                  <div className="dt20bLock"></div>
+                )}
+                {parseFloat(matchOddsData?.[0]?.l1)}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="d-flex flex-column" style={{ width: "20%" }}>
+          <div className="dt1dayPair">
+            <div className="w-50 d-flex flex-row justify-content-start align-items-center position-relative">
+              <div
+                onClick={() => toggleDiv("demo1")}
+                className="range-icon d-inline-block ms-1"
+              >
+                <i className="fas fa-info-circle float-right"></i>{" "}
+                <div
+                  id="demo1"
+                  className={`icon-range-dt1day collapse ${
+                    openDivIds.includes("demo1") ? "show" : ""
+                  }`}
+                >
+                  R:<span>{parseFloat(odds?.min)}</span>-
+                  <span>{formatNumber(odds?.max)}</span>
+                </div>
+              </div>
+              <span className="title-14 f-bold ms-1">
+                {odds?.nat || odds?.nation}
+              </span>
+            </div>
+            <div
+              className="w-50 d-flex flex-row justify-content-around align-items-center p-2"
+              style={{ gap: "5px" }}
+            >
+              <div
+                className="w-100 d-flex justify-content-center align-items-center title-15 f-bold position-relative"
+                style={{ border: "2px solid #72bbef", height: "40px" }}
+              >
+                {(odds?.gstatus === "SUSPENDED" ||
+                  odds?.gstatus === "CLOSED") && (
+                  <div className="dt20bLock"></div>
+                )}
+                {parseFloat(odds?.b1)}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="d-flex flex-column" style={{ width: "40%" }}>
+          <div className="dt1dayTiger">
+            <div className="w-50 d-flex flex-row justify-content-start align-items-center position-relative">
+              <div
+                onClick={() => toggleDiv("demo2")}
+                className="range-icon d-inline-block ms-1"
+              >
+                <i className="fas fa-info-circle float-right"></i>{" "}
+                <div
+                  id="demo2"
+                  className={`icon-range-dt1day collapse ${
+                    openDivIds.includes("demo2") ? "show" : ""
+                  }`}
+                >
+                  R:<span>{parseFloat(matchOddsData?.[1]?.min)}</span>-
+                  <span>{formatNumber(matchOddsData?.[1]?.max)}</span>
+                </div>
+              </div>
+              <span className="title-14 f-bold ms-1">
+                {matchOddsData?.[1]?.nat || matchOddsData?.[1]?.nation}
+              </span>
+            </div>
+            <div
+              className="w-50 d-flex flex-row justify-content-around align-items-center p-2"
+              style={{ gap: "5px" }}
+            >
+              <div
+                className="w-50 d-flex justify-content-center align-items-center title-15 f-bold position-relative"
+                style={{ border: "2px solid #72bbef", height: "40px" }}
+              >
+                {(matchOddsData?.[1]?.gstatus === "SUSPENDED" ||
+                  matchOddsData?.[1]?.gstatus === "CLOSED") && (
+                  <div className="dt20bLock"></div>
+                )}
+                {parseFloat(matchOddsData?.[1]?.b1)}
+              </div>
+              <div
+                className="w-50 d-flex justify-content-center align-items-center title-15 f-bold position-relative"
+                style={{ border: "2px solid #f994ba", height: "40px" }}
+              >
+                {(matchOddsData?.[1]?.gstatus === "SUSPENDED" ||
+                  matchOddsData?.[1]?.gstatus === "CLOSED") && (
+                  <div className="dt20bLock"></div>
+                )}
+                {parseFloat(matchOddsData?.[1]?.l1)}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="w-100 d-flex flex-row justify-content-around">
+        <span
+          className={
+           `text-red f-bold `
+          }
+        >
+          {data?.profitLoss
+            ? data?.profitLoss[
+                `${data?.videoInfo?.mid}_${matchOddsData?.[0]?.sid}_card`
+              ]
+              ? JSON.parse(
+                  data?.profitLoss[
                     `${data?.videoInfo?.mid}_${matchOddsData?.[0]?.sid}_card`
                   ]
-                  ? JSON.parse(
+                )["dragon"]
+              : 0
+            : 0}
+        </span>
+        <span className="title-16 f-bold text-red">
+          {data?.profitLoss[`${data?.videoInfo?.mid}_${odds?.sid}_card`]
+            ? data?.profitLoss[`${data?.videoInfo?.mid}_${odds?.sid}_card`]
+            : 0}
+        </span>
+        <span
+          className={
+            `text-red f-bold ${data?.profitLoss
+              ? data?.profitLoss[
+                  `${data?.videoInfo?.mid}_${matchOddsData?.[0]?.sid}_card`
+                ]
+                ? JSON.parse(
+                    data?.profitLoss[
+                      `${data?.videoInfo?.mid}_${matchOddsData?.[0]?.sid}_card`
+                    ]
+                  )["tiger"] > 0
+                  ? "color-green title-16 f-bold"
+                  : JSON.parse(
                       data?.profitLoss[
                         `${data?.videoInfo?.mid}_${matchOddsData?.[0]?.sid}_card`
                       ]
-                    )["dragon"]
-                  : 0
-                : 0}
-            </span>
-          </div>
-          {renderItem(matchOddsData?.[0], 0, "back")}
-          {renderItem(matchOddsData?.[0], 1, "lay")}
-        </div>
-        <div className="w-100 d-sm-flex flex-row" style={{ height: "40px" }}>
-          <div
-            className="dtlTitle"
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start",
-              lineHeight: 1,
-            }}
-          >
-            <span>Tiger</span>
-            <span
-              className={
-                data?.profitLoss
-                  ? data?.profitLoss[
-                      `${data?.videoInfo?.mid}_${matchOddsData?.[0]?.sid}_card`
-                    ]
-                    ? JSON.parse(
-                        data?.profitLoss[
-                          `${data?.videoInfo?.mid}_${matchOddsData?.[0]?.sid}_card`
-                        ]
-                      )["tiger"] > 0
-                      ? "color-green"
-                      : JSON.parse(
-                          data?.profitLoss[
-                            `${data?.videoInfo?.mid}_${matchOddsData?.[0]?.sid}_card`
-                          ]
-                        )["tiger"] < 0
-                      ? "color-red"
-                      : ""
-                    : ""
+                    )["tiger"] < 0
+                  ? "color-red title-16 f-bold"
                   : ""
-              }
-            >
-              {data?.profitLoss
-                ? data?.profitLoss[
+                : ""
+              : ""}`
+          }
+        >
+          {data?.profitLoss
+            ? data?.profitLoss[
+                `${data?.videoInfo?.mid}_${matchOddsData?.[0]?.sid}_card`
+              ]
+              ? JSON.parse(
+                  data?.profitLoss[
                     `${data?.videoInfo?.mid}_${matchOddsData?.[0]?.sid}_card`
                   ]
-                  ? JSON.parse(
-                      data?.profitLoss[
-                        `${data?.videoInfo?.mid}_${matchOddsData?.[0]?.sid}_card`
-                      ]
-                    )["tiger"]
-                  : 0
-                : 0}
-            </span>
-          </div>
-          {renderItem(matchOddsData?.[1], 2, "back")}
-          {renderItem(matchOddsData?.[1], 3, "lay")}
-        </div>
+                )["tiger"]
+              : 0
+            : 0}
+        </span>
       </div>
     </div>
   );

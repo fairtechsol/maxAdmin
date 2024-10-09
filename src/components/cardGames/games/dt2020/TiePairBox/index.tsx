@@ -17,7 +17,7 @@ const TiePairBox = ({ tiePair, data }: any) => {
   // console.log(data, "first", data?.profitLoss);
   return (
     <div className="tiePairContainer">
-      <div className="w-100 d-flex justify-content-end align-item-center position-relative">
+      <div className="w-100 d-flex justify-content-end align-items-center position-relative">
         <div
           onClick={() => toggleDiv("demo0")}
           className="range-icon d-inline-block"

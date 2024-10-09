@@ -62,7 +62,7 @@ const OddEven = ({ data, odds }: any) => {
               style={{ backgroundColor: "#fff", height: "30px" }}
             >
               <div style={{width:"34%"}}></div>
-              <div className="d-flex justify-content-center align-item-center" style={{width:"33%"}}>
+              <div className="d-flex justify-content-center align-items-center" style={{width:"33%"}}>
               <span
                 className={`title-14 f400 ${
                   data?.profitLoss
@@ -93,7 +93,7 @@ const OddEven = ({ data, odds }: any) => {
                   : 0}
               </span>
               </div>
-              <div className="d-flex justify-content-center align-item-center" style={{width:"33%"}}>
+              <div className="d-flex justify-content-center align-items-center" style={{width:"33%"}}>
               <span
                 className={`title-14 f400 ${
                   data?.profitLoss
@@ -162,7 +162,7 @@ const OddEven = ({ data, odds }: any) => {
               style={{ backgroundColor: "#fff", height: "30px" }}
             >
               <div style={{width:"34%"}}></div>
-              <div className="d-flex justify-content-center align-item-center" style={{width:"33%"}}>
+              <div className="d-flex justify-content-center align-items-center" style={{width:"33%"}}>
               <span
                 className={`title-14 f400 ${
                   data?.profitLoss
@@ -193,7 +193,7 @@ const OddEven = ({ data, odds }: any) => {
                   : 0}
               </span>
               </div>
-              <div className="d-flex justify-content-center align-item-center" style={{width:"33%"}}>
+              <div className="d-flex justify-content-center align-items-center" style={{width:"33%"}}>
               <span
                 className={`title-14 f400 ${
                   data?.profitLoss
@@ -262,7 +262,7 @@ const OddEven = ({ data, odds }: any) => {
               style={{ backgroundColor: "#fff", height: "30px" }}
             >
               <div style={{width:"34%"}}></div>
-              <div className="d-flex justify-content-center align-item-center" style={{width:"33%"}}>
+              <div className="d-flex justify-content-center align-items-center" style={{width:"33%"}}>
               <span
                 className={`title-14 f400 ${
                   data?.profitLoss
@@ -293,7 +293,7 @@ const OddEven = ({ data, odds }: any) => {
                   : 0}
               </span>
               </div>
-              <div className="d-flex justify-content-center align-item-center" style={{width:"33%"}}>
+              <div className="d-flex justify-content-center align-items-center" style={{width:"33%"}}>
               <span
                 className={`title-14 f400 ${
                   data?.profitLoss
@@ -362,7 +362,7 @@ const OddEven = ({ data, odds }: any) => {
               style={{ backgroundColor: "#fff", height: "30px" }}
             >
               <div style={{width:"34%"}}></div>
-              <div className="d-flex justify-content-center align-item-center" style={{width:"33%"}}>
+              <div className="d-flex justify-content-center align-items-center" style={{width:"33%"}}>
               <span
                 className={`title-14 f400 ${
                   data?.profitLoss
@@ -393,7 +393,7 @@ const OddEven = ({ data, odds }: any) => {
                   : 0}
               </span>
               </div>
-              <div className="d-flex justify-content-center align-item-center" style={{width:"33%"}}>
+              <div className="d-flex justify-content-center align-items-center" style={{width:"33%"}}>
               <span
                 className={`title-14 f400 ${
                   data?.profitLoss
