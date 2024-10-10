@@ -158,6 +158,8 @@ export const cardUrl =
     ? "https://maxbet07.com/videoPage/"
     : "https://maxbet07.com/videoPage/";
 
+export const liveStreamUrl = "https://maxbet07.com/liveStream/";
+
 // const oldVideoUrl = "https://video.proexch.in/route/?id="
 // use below baseUrl for live build
 
@@ -589,7 +591,6 @@ export const dragonTigerCards = [
     value: 0,
   },
 ];
-
 
 export const andarBaharCards = [
   {

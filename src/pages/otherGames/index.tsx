@@ -282,8 +282,8 @@ const OtherGamesDetail = () => {
                 ))}
             </Col>
             <Col md={4}>
-              {channelId !== "0" && channelId !== "" && (
-                <LiveStreamComponent channelId={channelId} />
+              {matchDetails?.eventId && (
+                <LiveStreamComponent eventId={matchDetails?.eventId} />
               )}
               <OtherUserBets matchId={id} />
             </Col>

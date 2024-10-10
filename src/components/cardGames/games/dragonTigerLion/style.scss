@@ -206,9 +206,9 @@
   justify-content: space-between;
   padding: 6px 8px;
 }
-.dtlTitle {
-  width: 40%;
-  background-color: #ffffff;
+.dtlTitle-dtl {
+  width: 60%;
+  background-color: #ddd;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -218,9 +218,16 @@
   color: #000;
 }
 
-// .horseRacingTab .nav-link{
-//   margin: 0 !important;
-// }
+.dtlsubTitle-dtl {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  color: #000;
+  cursor: pointer;
+}
 
 @media (max-width: 768px) {
   .tabs-navs .nav-link {

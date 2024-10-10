@@ -74,14 +74,12 @@ const Cricket5Component = () => {
             </div>
           </div>
           <div>
-            <div>
               <MarketComponent
                 odds={dragonTigerDetail?.odds}
                 min={dragonTigerDetail?.videoInfo?.min}
                 max={dragonTigerDetail?.videoInfo?.max}
                 data={dragonTigerDetail}
               />
-            </div>
             <div className="mt-2">
               <CardResultBox
                 data={dragonTigerDetail}

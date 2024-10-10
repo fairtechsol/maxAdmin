@@ -739,7 +739,7 @@ th {
 }
 
 .casino-result-cards-item .winner-icon {
-  height: 55px;
+  height: 40px;
 }
 
 .casino-winner-icon {
@@ -753,4 +753,26 @@ th {
   display: flex;
   flex-direction: column;
   // margin-top: 5%;
+}
+
+.casino-result-content-diveder {
+  width: 2px;
+  height: 100px;
+  background-color: #ddd;
+}
+
+.teen20resultCardContainer {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.back-cell-A {
+  background-color: #72bbef !important;
+}
+
+.lay-cell-A {
+  background-color: #f994ba !important;
 }

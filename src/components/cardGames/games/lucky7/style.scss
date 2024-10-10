@@ -48,6 +48,19 @@
   margin-left: 10px;
 }
 
+.lucky7Lock{
+  position: absolute;
+  width: 100%;
+  display: flex;
+  // justify-content: start;
+  // align-items: center;
+  height: 100%;
+  background-color: #ffffffb8;
+  background-image: url(../../../../assets/baccarat/lock.svg);
+  background-size: 15px 15px;
+  background-repeat: no-repeat;
+  background-position: 50% 5%;
+}
 // .match-list-tabs {
 //   border-right: 1px solid $secondary !important;
 //   border-radius: 0px !important;
