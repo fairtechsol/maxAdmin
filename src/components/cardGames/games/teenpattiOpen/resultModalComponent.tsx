@@ -1,6 +1,6 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import { FaTrophy } from "react-icons/fa";
+//import { FaTrophy } from "react-icons/fa";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
 import "./style.scss";
 
@@ -38,7 +38,7 @@ const TeenOpenResultComponent: React.FC<Props> = ({ data }: any) => {
   //   { index: 5, label: "Player 6" },
   // ];
 
-  console.log("openResult", players);
+  console.log("openResult", data);
 
   const renderRow = () => (
     <div className="d-flex justify-content-between mb-3">
@@ -59,26 +59,39 @@ const TeenOpenResultComponent: React.FC<Props> = ({ data }: any) => {
                   marginBottom: "10px",
                 }}
               >
-                <span style={{color:rowIndex==8?"#f1b44c":"" ,marginTop:"3px",marginLeft:"10px",textAlign:"center"}}>{rowIndex==8?"D":rowIndex+1}</span>
+                <span
+                  style={{
+                    color: rowIndex == 8 ? "#f1b44c" : "",
+                    marginTop: "3px",
+                    marginLeft: "10px",
+                    textAlign: "center",
+                  }}
+                >
+                  {rowIndex == 8 ? "D" : rowIndex + 1}
+                </span>
                 {row.map((card: any, cardIndex: any) => (
-                  <div style={{marginTop:"3px",marginLeft:"10px"}}>
-                  <HandleCards card={card} />
+                  <div style={{ marginTop: "3px", marginLeft: "10px" }}>
+                    <HandleCards card={card} />
                   </div>
                 ))}
+                {data?.result?.sid.split("|")[0].includes(rowIndex + 1) ? (
+                  <div
+                    className="casino-winner-ico"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      marginTop:"5px"
+                    }}
+                  >
+                    <img src="https://versionobj.ecoassetsservice.com/v21/static/admin/img/winner.png" style={{height:"55px",width:"50px"}}/>
+                  </div>
+                ) : (
+                  ""
+                )}
               </div>
             ))}
           </div>
-        </div>
-
-        <div
-          className="casino-winner-ico"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <FaTrophy size={30} color="#169733" />
         </div>
       </>
     </div>
