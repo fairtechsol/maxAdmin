@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import VideoFrame from "../../../../components/commonComponent/videoFrame/VideoFrame";
 import TiePairBox from "../../../../components/cardGames/games/lucky7/TiePairBox";
-import OddEven from "../../../../components/cardGames/games/lucky7/OddEvenBox";
+// import OddEven from "../../../../components/cardGames/games/lucky7/OddEvenBox";
 import CardResultBox from "../../../../components/commonComponent/cardResultBox";
 import RulesModal from "../../../../components/commonComponent/rulesModal";
 import { handleRoundId } from "../../../../helpers";
@@ -68,32 +68,12 @@ const Lucky7Component = () => {
               <div style={{ width: "100%"}}>
                 <TiePairBox
                   lowHigh={dragonTigerDetail?.lowHigh}
-                  data={dragonTigerDetail}
-                />
-              </div>
-              <div
-                style={{
-                  width: "100%",
-                  margin: "5px",
-                  display: "flex",
-                  flexDirection: "row",
-                  gap: "8px",
-                }}
-              >
-                <OddEven
-                  name={"DRAGON"}
                   odds={dragonTigerDetail?.redBlack}
-                  data={dragonTigerDetail}
-                  card={true}
-                />
-
-                <OddEven
-                  name={"TIGER"}
-                  odds={dragonTigerDetail?.luckOdds}
-                  card={false}
+                  cards={dragonTigerDetail?.luckOdds}
                   data={dragonTigerDetail}
                 />
               </div>
+             
               <div
                 style={{
                   width: "100%",

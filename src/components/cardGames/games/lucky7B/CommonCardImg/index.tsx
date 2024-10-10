@@ -14,9 +14,9 @@ const CommonCardImg = ({ cardData, data }: any) => {
   }, [cardData]);
 
   return (
-    <div className="commonCardImgContainer">
+    <div className="commonCardImgContainer" style={{gap:"50px"}}>
       {cardImg?.map((item: any) => (
-        <div>
+        <div className="d-flex flex-column justify-content-center align-items-center">
           <div
             className={item?.gstatus === "0" ? "suspended" : ""}
             style={{
@@ -28,15 +28,11 @@ const CommonCardImg = ({ cardData, data }: any) => {
             key={item?.code}
           >
             {" "}
-            <img src={item?.imgSrc} width={"40px"} alt="card" />
+            <img src={item?.imgSrc} width={"48px"} height={"67px"} />
           </div>
           <span
-            style={{
-              fontSize: "12px",
-              display: "flex",
-              justifyContent: "center",
-            }}
-            className={`${
+            // style={{ fontSize: "16px" }}
+            className={`title-16 text-red f-bold ${
               data?.profitLoss
                 ? data?.profitLoss[`${data?.videoInfo?.mid}_${item?.sid}_card`]
                   ? data?.profitLoss[
