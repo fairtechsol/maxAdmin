@@ -182,11 +182,6 @@ const CasinoWarComponent = () => {
                 </div>
 
                 {dragonTigerDetail?.players?.map((playerA: any, index: any) => {
-                  console.log(
-                    openDivIds?.includes(playerA[0]?.nat.split(" ")[0]),
-                    "abc",
-                    playerA[0]?.nat.split(" ")[0]
-                  );
                   return (
                     <div
                       key={playerA[0]?.nat.split(" ")[0]}
@@ -195,10 +190,11 @@ const CasinoWarComponent = () => {
                     >
                       <div
                         style={{
+                          display: "flex",
                           width: "40%",
                           padding: "10px",
                           border: "0.1px solid #fff",
-                        
+                          justifyContent: "space-between"
                         }}
                       >
                         <span
@@ -206,28 +202,24 @@ const CasinoWarComponent = () => {
                         >
                           {playerA[0]?.nat.split(" ")[0]}
                         </span>
-                      </div>
-                      <div
-                        onClick={() => toggleDiv(playerA[0]?.nat.split(" ")[0])}
-                        className="range-icon d-inline-block p-1"
-                      >
-                        <i className="fas fa-info-circle float-end "></i>{" "}
-                       
-                      </div>
-                      {openDivIds?.includes(
-                          playerA[0]?.nat.split(" ")[0]
-                        ) && (
+                        <span
+                          onClick={() => toggleDiv(`demo${index}`)}
+                          className="range-icon d-inline-block right-0"
+                        >
+                          <i className="fas fa-info-circle"></i>{" "}
                           <div
-                            // id={index}
-                            className={`icon-range collapse show `}
+                            id={`demo${index}`}
+                            className={`icon-range-dt1day collapse ${
+                              openDivIds.includes(`demo${index}`) ? "show" : ""
+                            }`}
                           >
-                            R:<span>{playerA[index]?.min}</span>-
-                            <span>{formatNumber(playerA[index]?.max)}</span>
+                            R:<span>{parseFloat(playerA?.[0]?.min)}</span>-
+                            <span>{formatNumber(playerA?.[0]?.max)}</span>
                           </div>
-                        )}
+                        </span>
+                      </div>
 
                       <div
-                        className={""}
                         style={{
                           width: "60%",
                           backgroundColor: "#72bbef",

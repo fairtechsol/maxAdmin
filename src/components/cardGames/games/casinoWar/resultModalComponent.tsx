@@ -36,31 +36,30 @@ const CasinoWarResultComponent: React.FC<Props> = ({ data }) => {
           return (
             <div
               key={index}
-              className="teen20resultCardContainer mb-3"
+              className="teen20resultCardContainer mb-3 pb-5"
               style={{ marginLeft: "5px" }}
             >
               <span className="fs-6">Player {index + 1}</span>
-              <div className="d-sm-flex flex-row justify-content-center align-items-center">
+              <div className="d-sm-flex flex-column justify-content-center align-items-center me-5">
                 <div
                   style={{
-                    border: "1px solid #fdef34",
+                    width: "100%",
                     borderRadius: "1px",
-                    marginLeft: "5px",
-                    // position: "relative",
+                    flexDirection: "column",
                     display: "flex",
                     justifyContent: "space-between",
-                    gap: "5px",
                   }}
                 >
                   <HandleCards card={player.card} />
-                </div>
-               
-              </div>
-              {data?.result?.sid.includes(`${index + 1}`) && (
-                  <div className="casino-winner-icon me-5 pb- position-absolute">
+                  {data?.result?.sid.includes(`${index + 1}`) && (
+                  <div className="casino-winner-icon">
                   <Winner />
                 </div>
                 )}
+                </div>
+               
+              </div>
+             
             </div>
           );
         } else {

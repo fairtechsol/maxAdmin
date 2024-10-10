@@ -1,15 +1,15 @@
 import "./style.scss";
 
-const fancyData = [
-  { nation: "Ind Over 3", backOdd: "-", layOdd: "-", suspended: true },
-];
+// const fancyData = [
+//   { nation: "Ind Over 3", backOdd: "-", layOdd: "-", suspended: true },
+// ];
 
-const MarketComponent = ({ showFancy, odds, data, min, max }: any) => {
+const MarketComponent = ({ odds, data  }: any) => {
   const team1 = odds?.[0];
   const team2 = odds?.[1];
 
   return (
-    <div className="casino-detail detail-page-container-c position-relative">
+    <div className="detail-page-container-c">
       <div className="game-market-c market-2">
         <div className="marketHeader5 text-white">
           <span>Bookmaker</span>
@@ -20,7 +20,6 @@ const MarketComponent = ({ showFancy, odds, data, min, max }: any) => {
               className="f600"
               style={{ fontSize: "12px", color: "#097c93" }}
             >
-              {/* Min: {min} Max: {max} */}
             </span>
           </div>
           <div className="market-odd-box-c back-cell-A">
@@ -160,7 +159,7 @@ const MarketComponent = ({ showFancy, odds, data, min, max }: any) => {
         </div>
       </div>
 
-      {showFancy && (
+      {/* {showFancy && (
         <div className="game-market market-6 mt-2">
           <div className="market-title">
             <span>Fancy</span>
@@ -210,7 +209,7 @@ const MarketComponent = ({ showFancy, odds, data, min, max }: any) => {
             ))}
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

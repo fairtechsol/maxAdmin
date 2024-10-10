@@ -1,24 +1,41 @@
+import { useState } from "react";
 import { HandleCards } from "../../../../commonComponent/cardsComponent";
 import "./style.scss";
+import { formatNumber } from "../../../../../helpers";
 const DynamicTable = ({ odds, data }: any) => {
   // let player1Key = `playera`;
   // let player2Key = `playerb`;
+  const [openDivIds, setOpenDivIds] = useState<string[]>([]);
+
+  const toggleDiv = (id: string) => {
+    if (openDivIds.includes(id)) {
+      setOpenDivIds(openDivIds.filter((openId) => openId !== id));
+    } else {
+      setOpenDivIds([...openDivIds, id]);
+    }
+  };
+  console.log(data, "data");
   return (
     <div className="d-flex justify-content-sm-between casino-detail-poker20">
       {/* Player A */}
       <div className="playerabox">
         <div className="casino-box-row playerafabcy">
           <div className="casino-nation-name">
-            <div className="float-start ms-2">
-              <i
-                data-toggle="collapse"
-                data-target="#demo1"
-                className="fas fa-info-circle"
-              ></i>
-              <div id="demo1" className="collapse icon-range">
-                R:<span>100</span>-<span>3L</span>
+          <span
+              onClick={() => toggleDiv(`demo`)}
+              className="range-icon d-inline-block ms-1"
+            >
+              <i className="fas fa-info-circle float-right"></i>{" "}
+              <div
+                id={`demo`}
+                className={`icon-range-dt1day collapse ${
+                  openDivIds.includes(`demo`) ? "show" : ""
+                }`}
+              >
+                R:<span>{parseFloat(data?.videoInfo?.min)}</span>-
+                <span>{formatNumber(data?.videoInfo?.max)}</span>
               </div>
-            </div>
+            </span>
             <b>{odds?.[0]?.nation}</b>
           </div>
 
@@ -49,7 +66,21 @@ const DynamicTable = ({ odds, data }: any) => {
 
         {/* Game Status and Book Info */}
         <div className="casino-nation-name text-center w-100">
-        {/* <span style={{position: "absolute", bottom: "-20px", right: "60px"}}>0</span> */}
+        <span
+              onClick={() => toggleDiv(`demo`)}
+              className="range-icon d-inline-block ms-1"
+            >
+              <i className="fas fa-info-circle float-right"></i>{" "}
+              <div
+                id={`demo`}
+                className={`icon-range-dt1day collapse ${
+                  openDivIds.includes(`demo`) ? "show" : ""
+                }`}
+              >
+                R:<span>{parseFloat(data?.videoInfo?.min)}</span>-
+                <span>{formatNumber(data?.videoInfo?.max)}</span>
+              </div>
+            </span>
         </div>
 
         {/* Bonus Section for Player A */}
@@ -112,16 +143,21 @@ const DynamicTable = ({ odds, data }: any) => {
       <div className="playerbbox">
         <div className="casino-box-row playerbfabcy">
           <div className="casino-nation-name">
-            <div className="float-start ms-2">
-              <i
-                data-toggle="collapse"
-                data-target="#demo2"
-                className="fas fa-info-circle"
-              ></i>
-              <div id="demo2" className="collapse icon-range">
-                R:<span>100</span>-<span>3L</span>
+          <span
+              onClick={() => toggleDiv(`demo`)}
+              className="range-icon d-inline-block ms-1"
+            >
+              <i className="fas fa-info-circle float-right"></i>{" "}
+              <div
+                id={`demo`}
+                className={`icon-range-dt1day collapse ${
+                  openDivIds.includes(`demo`) ? "show" : ""
+                }`}
+              >
+                R:<span>{parseFloat(data?.videoInfo?.min)}</span>-
+                <span>{formatNumber(data?.videoInfo?.max)}</span>
               </div>
-            </div>
+            </span>
             <b>{odds?.[1]?.nation}</b>
           </div>
 
@@ -152,7 +188,21 @@ const DynamicTable = ({ odds, data }: any) => {
 
         {/* Game Status and Book Info */}
         <div className="casino-nation-name text-center w-100">
-        {/* <span style={{position: "absolute", bottom: "-20px", right: "60px"}}>0</span> */}
+        <span
+              onClick={() => toggleDiv(`demo`)}
+              className="range-icon d-inline-block ms-1"
+            >
+              <i className="fas fa-info-circle float-right"></i>{" "}
+              <div
+                id={`demo`}
+                className={`icon-range-dt1day collapse ${
+                  openDivIds.includes(`demo`) ? "show" : ""
+                }`}
+              >
+                R:<span>{parseFloat(data?.videoInfo?.min)}</span>-
+                <span>{formatNumber(data?.videoInfo?.max)}</span>
+              </div>
+            </span>
         </div>
 
         {/* Bonus Section for Player B */}
