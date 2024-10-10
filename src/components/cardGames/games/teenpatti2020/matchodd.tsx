@@ -10,7 +10,7 @@ const Matchodd = ({ data, odds, name }: any) => {
       setOpenDivIds([...openDivIds, id]);
     }
   };
-  console.log("odds", odds);
+//   console.log("odds", odds);
   return (
     <div className="w-100 d-flex flex-column">
       <div
