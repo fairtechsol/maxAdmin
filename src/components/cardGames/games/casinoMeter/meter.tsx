@@ -44,10 +44,25 @@ const Meter = ({
   });
 
   return (
-    <div style={{ background: "#ffc742d9", marginTop: "5px", padding: "10px" }}>
-      <div style={{ display: "flex", alignItems: "center" }}>
-        <strong style={{ textAlign: "center", color: "#17ec17", width: "10%" }}>
-          {lowCardSum}
+    <div style={{ marginTop: "5px", padding: "10px", gap: "15px" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          background: "#ccc",
+          justifyContent: "center",
+        }}
+      >
+        <strong
+          style={{
+            textAlign: "center",
+            color: "#17ec17",
+            width: "10%",
+            whiteSpace: "pre",
+          }}
+        >
+          <span style={{ color: "#ef910f" }}>Low</span> {lowCardSum}
         </strong>
         <div
           style={{ display: "flex", alignItems: "center", flexWrap: "wrap" }}
@@ -70,11 +85,39 @@ const Meter = ({
             </span>
           )}
         </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            width: "97%",
+          }}
+        >
+           <span style={{fontSize:"18px",color:"#BB2834",fontWeight:"bold"}}>0</span>{" "}
+          <span style={{fontSize:"12px"}}>
+            R:<span>10</span>-<span>25K</span>
+          </span>
+        </div>
       </div>
 
-      <div style={{ display: "flex", alignItems: "center" }}>
-        <strong style={{ textAlign: "center", color: "#17ec17", width: "10%" }}>
-          {highCardSum}
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          background: "#ccc",
+          marginTop: "10px",
+          justifyContent: "center",
+        }}
+      >
+        <strong
+          style={{
+            textAlign: "center",
+            color: "#17ec17",
+            width: "10%",
+            whiteSpace: "pre",
+          }}
+        >
+          <span style={{ color: "#ef910f" }}>High</span> {highCardSum}
         </strong>
         <div
           style={{ display: "flex", alignItems: "center", flexWrap: "wrap" }}
@@ -96,6 +139,18 @@ const Meter = ({
               </span>
             </span>
           )}
+        </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            width: "97%",
+          }}
+        >
+          <span style={{fontSize:"18px",color:"#BB2834",fontWeight:"bold"}}>0</span>{" "}
+          <span style={{fontSize:"12px"}}>
+            R:<span>10</span>-<span>25K</span>
+          </span>
         </div>
       </div>
     </div>
