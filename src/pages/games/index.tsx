@@ -376,8 +376,8 @@ const Games = () => {
               )}
             </Col>
             <Col md={4} className="text-white">
-              {channelId !== "0" && channelId !== "" && (
-                <LiveStreamComponent channelId={channelId} />
+              {matchDetails?.eventId && (
+                <LiveStreamComponent eventId={matchDetails?.eventId} />
               )}
               <div className="my-2">
                 <ScoreCard />
