@@ -1,12 +1,10 @@
-import { useState } from "react";
-import { IoInformationCircle } from "react-icons/io5";
-import SmoothDropdownModal from "../minMaxModal";
+
 import PlayerButton from "../PlayerButton";
+import { formatNumber } from "../../../../../helpers";
 
 const TiePairBox2 = ({ lowHigh, data }: any) => {
   const min = lowHigh?.min;
   const max = lowHigh?.max;
-  const [modelOpen, setModelOpen] = useState(false);
 
   const getProfitLoss = (gameName: string, sid: any) => {
     try {
@@ -26,20 +24,6 @@ const TiePairBox2 = ({ lowHigh, data }: any) => {
   };
   return (
     <div className="tiePairContainer">
-      <div style={{ width: "98%", textAlign: "end" }}>
-        <span className="minmaxi">
-          <IoInformationCircle
-            color="#ffc742"
-            onClick={() => setModelOpen(!modelOpen)}
-          />
-          <SmoothDropdownModal
-            min={min}
-            max={max}
-            show={modelOpen}
-            setShow={() => setModelOpen(false)}
-          />
-        </span>
-      </div>
 
       <div className="tiePairRateBoxMainlucky">
         <PlayerButton
@@ -54,6 +38,11 @@ const TiePairBox2 = ({ lowHigh, data }: any) => {
           data={lowHigh}
         />
       </div>
+      <div className="title-12" style={{ textAlign: "end" }}>
+          <span>R:</span>
+          <span>{min}</span>-
+          <span>{formatNumber(max)}</span>
+        </div>
     </div>
   );
 };
