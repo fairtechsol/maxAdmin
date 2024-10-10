@@ -38,8 +38,6 @@ const TeenOpenResultComponent: React.FC<Props> = ({ data }: any) => {
   //   { index: 5, label: "Player 6" },
   // ];
 
-  console.log("openResult", data);
-
   const renderRow = () => (
     <div className="d-flex justify-content-between mb-3">
       <>
@@ -81,10 +79,13 @@ const TeenOpenResultComponent: React.FC<Props> = ({ data }: any) => {
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      marginTop:"5px"
+                      marginTop: "5px",
                     }}
                   >
-                    <img src="https://versionobj.ecoassetsservice.com/v21/static/admin/img/winner.png" style={{height:"55px",width:"50px"}}/>
+                    <img
+                      src="https://versionobj.ecoassetsservice.com/v21/static/admin/img/winner.png"
+                      style={{ height: "55px", width: "50px" }}
+                    />
                   </div>
                 ) : (
                   ""
@@ -94,6 +95,18 @@ const TeenOpenResultComponent: React.FC<Props> = ({ data }: any) => {
           </div>
         </div>
       </>
+
+      <div style={{ width: "30%" }}>
+        <div className="casino-result-desc">
+          <span style={{ opacity: "0.6", display: "flex" }}>Winner</span>
+          {data?.result?.sid
+            .split("|")[0]
+            .split(",")
+            .map((v: any) => (
+              <span style={{ marginLeft: "5px", display: "flex" }}>{v}</span>
+            ))}
+        </div>
+      </div>
     </div>
   );
 
