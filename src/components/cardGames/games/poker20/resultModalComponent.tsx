@@ -17,14 +17,15 @@ const Poker20ResultComponent: React.FC<Props> = ({ data }: any) => {
     <Container
       style={{
         display: "flex",
-        flexDirection: "column",
+        // flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
+        padding: "20px"
       }}
     >
       <div
         style={{
-          width: "80%",
+          width: "40%",
           display: "flex",
           flexDirection: "row",
           justifyContent: "space-between",
@@ -39,19 +40,21 @@ const Poker20ResultComponent: React.FC<Props> = ({ data }: any) => {
             alignItems: "center",
           }}
         >
-          {data?.result?.win === "11" && (
-            <div className="casino-winner-icon">
-            <Winner />
-          </div>
-          )}
+          
           <div style={{ display: "flex", flexDirection: "column" }}>
             <span className="title-18 f500">Player A</span>
             <div style={{ display: "flex", flexDirection: "row", gap: "5px" }}>
+            {data?.result?.win === "11" && (
+            <div className="casino-winner-icon me-5">
+            <Winner />
+          </div>
+          )}
               <HandleCards card={resultCards?.[0]} />
               <HandleCards card={resultCards?.[1]} />
             </div>
           </div>
         </div>
+        <div className="casino-result-content-diveder"></div>
         {data?.result?.win === "0" && (
           <div
             style={{
@@ -74,15 +77,16 @@ const Poker20ResultComponent: React.FC<Props> = ({ data }: any) => {
           <div style={{ display: "flex", flexDirection: "column" }}>
             <span className="title-18 f500">Player B</span>
             <div style={{ display: "flex", flexDirection: "row", gap: "5px" }}>
+            {data?.result?.win === "21" && (
+            <div className="casino-winner-icon me-5">
+            <Winner />
+          </div>
+          )}
               <HandleCards card={resultCards?.[2]} />
               <HandleCards card={resultCards?.[3]} />
             </div>
           </div>
-          {data?.result?.win === "21" && (
-            <div className="casino-winner-icon">
-            <Winner />
-          </div>
-          )}
+         
         </div>
       </div>
       <div
