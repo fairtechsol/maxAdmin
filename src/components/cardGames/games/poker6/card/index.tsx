@@ -17,14 +17,14 @@ export const PlayingCard: React.FC<PlayingCardProps> = ({
       style={{
         borderRadius: "2px",
         display: "flex",
-        flexDirection: "row",
+        flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
         backgroundSize: "100%",
         WebkitBackgroundSize: "cover",
         background: "white",
-        height: "28px",
-        width: "30px",
+        height: "30px",
+        width: "25px",
         padding: "0px",
       }}
     >
@@ -35,7 +35,7 @@ export const PlayingCard: React.FC<PlayingCardProps> = ({
               color: type === "heart" || type === "diamond" ? "red" : "black",
               fontWeight: "800",
               lineHeight: "1.2",
-              fontSize: "18px",
+              fontSize: "14px",
             }}
           >
             {number}
@@ -44,7 +44,7 @@ export const PlayingCard: React.FC<PlayingCardProps> = ({
         </>
       ) : (
         <>
-          <img src={back} width={30} height={40} />
+          <img src={back} width={25} height={30} />
         </>
       )}
     </div>
@@ -57,7 +57,7 @@ interface IconsProps {
 
 export const Icons: React.FC<IconsProps> = ({ type }) => {
   const renderImage = (src: string) => {
-    return <img width={"15"} alt={type} src={src} />;
+    return <img width={"12"} alt={type} src={src} />;
   };
 
   switch (type) {

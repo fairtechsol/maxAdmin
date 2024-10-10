@@ -79,20 +79,20 @@ const UserBets = ({ matchId }: any) => {
                   <Table className="" striped>
                     <thead>
                       <tr className="lh-1">
-                        <th style={{ minWidth: "90px" }}>UserName</th>
-                        <th style={{ minWidth: "120px" }}>Nation</th>
-                        <th className="text-right" style={{ minWidth: "50px" }}>
+                        <th >UserName</th>
+                        <th >Nation</th>
+                        <th className="text-right">
                           Rate
                         </th>
                         <th
                           className="text-right text-end"
-                          style={{ minWidth: "90px" }}
+                          // style={{ minWidth: "90px" }}
                         >
                           Amount
                         </th>
-                        {/* <th>PlaceDate</th>
-                        <th>MatchDate</th>
-                        <th>Gametype</th> */}
+                        <th>PlaceDate</th>
+                        {/* <th>MatchDate</th> */}
+                        <th>Gametype</th>
                       </tr>
                     </thead>
                     <tbody className="bg-primary">
@@ -111,17 +111,11 @@ const UserBets = ({ matchId }: any) => {
                                     : "bg-blue3"
                                 }
                               >
-                                <div className="row">
-                                  <div className="col f500">
-                                    {" "}
-                                    {bet?.marketType}{" "}
-                                  </div>
-                                </div>
+                                
 
-                                <div className="col">
-                                  {" "}
+                                
                                   {bet?.user?.userName}
-                                </div>
+                               
                               </td>
                               <td
                                 className={
@@ -131,7 +125,7 @@ const UserBets = ({ matchId }: any) => {
                                     : "bg-blue3"
                                 }
                               >
-                                <br></br>
+                               
                                 {bet?.marketBetType === "SESSION"
                                   ? bet?.eventName
                                   : bet?.teamName}
@@ -144,7 +138,7 @@ const UserBets = ({ matchId }: any) => {
                                     : "bg-blue3"
                                 }
                               >
-                                <br></br>
+                                
                                 {bet?.odds}
                               </td>
                               <td
@@ -153,19 +147,15 @@ const UserBets = ({ matchId }: any) => {
                                   bet?.betType === "LAY"
                                     ? "bg-red1"
                                     : "bg-blue3"
-                                } d-flex flex-column justify-content-end text-end`}
+                                } `}
                               >
-                                <div className="col">
-                                  {moment(bet?.createdAt).format(
-                                    "YYYY-MM-DD hh:mm:ss"
-                                  )}
-                                </div>
+                               
 
-                                <div className="col text-end">
+                               
                                   {bet?.amount}
-                                </div>
+                                
                               </td>
-                              {/* <td
+                              <td
                                 className={
                                   bet?.betType === "NO" ||
                                   bet?.betType === "LAY"
@@ -173,10 +163,18 @@ const UserBets = ({ matchId }: any) => {
                                     : "bg-blue3"
                                 }
                               >
-                                {moment(bet?.match?.startAt).format(
+                                {moment(bet?.createdAt).format(
                                   "YYYY-MM-DD hh:mm:ss"
                                 )}
-                              </td> */}
+                              </td>
+                              <td  className={
+                                  bet?.betType === "NO" ||
+                                  bet?.betType === "LAY"
+                                    ? "bg-red1"
+                                    : "bg-blue3"
+                                }>
+                                {bet?.eventType}
+                              </td>
 
                               <DeleteBetOverlay title={bet?.deleteReason} />
                             </tr>

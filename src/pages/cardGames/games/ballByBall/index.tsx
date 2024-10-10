@@ -33,7 +33,7 @@ const BallByBall = () => {
 
   const handleBetPlacedOnDT20 = (event: any) => {
     if (event?.jobData?.matchType === cardGamesType.ballbyball) {
-      dispatch(updateBetsPlaced(event?.jobData?.newBet));
+      dispatch(updateBetsPlaced(event?.jobData));
       dispatch(updateBalanceOnBetPlaceCards(event?.jobData));
       dispatch(updateProfitLossCards(event?.userRedisObj));
     }
