@@ -31,7 +31,7 @@ const CasinoMeterComponent = () => {
   useEffect(() => {
     setVideoFrameId(`${cardUrl}${cardGamesId?.cmeter}`);
   }, []);
-
+console.log("dtcm",dragonTigerDetail);
   return (
     <>
       <Row>
@@ -89,6 +89,7 @@ const CasinoMeterComponent = () => {
                       : "High"
                     : ""
                 }
+                dragonTigerDetai={dragonTigerDetail}
               />
 
               {/* <div

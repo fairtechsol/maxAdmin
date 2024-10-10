@@ -1,11 +1,13 @@
 import { HandleCards } from "../../../commonComponent/cardsComponent";
-
+import { formatNumber } from "../../../../helpers";
 const Meter = ({
   data,
   runPosition,
+  dragonTigerDetai,
 }: {
   data: string;
   runPosition: string;
+  dragonTigerDetai: any;
 }) => {
   const cards = data?.split(",");
 
@@ -62,7 +64,8 @@ const Meter = ({
             whiteSpace: "pre",
           }}
         >
-          <span style={{ color: "#ef910f" }}>Low</span> {lowCardSum}
+          <span style={{ color: "#ef910f" }}>Low</span>{" "}
+          {lowCardSum > 0 && lowCardSum}
         </strong>
         <div
           style={{ display: "flex", alignItems: "center", flexWrap: "wrap" }}
@@ -92,9 +95,22 @@ const Meter = ({
             width: "97%",
           }}
         >
-           <span style={{fontSize:"18px",color:"#BB2834",fontWeight:"bold"}}>0</span>{" "}
-          <span style={{fontSize:"12px"}}>
-            R:<span>10</span>-<span>25K</span>
+          <span
+            style={{ fontSize: "18px", color: "#BB2834", fontWeight: "bold" }}
+          >
+            {dragonTigerDetai?.profitLoss
+              ? dragonTigerDetai?.profitLoss[
+                  `${dragonTigerDetai?.videoInfo?.mid}_1_card`
+                ]
+                ? dragonTigerDetai?.profitLoss[
+                    `${dragonTigerDetai?.videoInfo?.mid}_1_card`
+                  ]
+                : 0
+              : 0}
+          </span>{" "}
+          <span style={{ fontSize: "12px" }}>
+            R:<span>{dragonTigerDetai?.low?.min}</span>-
+            <span>{formatNumber(dragonTigerDetai?.low?.max)}</span>
           </span>
         </div>
       </div>
@@ -117,7 +133,8 @@ const Meter = ({
             whiteSpace: "pre",
           }}
         >
-          <span style={{ color: "#ef910f" }}>High</span> {highCardSum}
+          <span style={{ color: "#ef910f" }}>High</span>{" "}
+          {highCardSum > 0 && highCardSum}
         </strong>
         <div
           style={{ display: "flex", alignItems: "center", flexWrap: "wrap" }}
@@ -147,9 +164,22 @@ const Meter = ({
             width: "97%",
           }}
         >
-          <span style={{fontSize:"18px",color:"#BB2834",fontWeight:"bold"}}>0</span>{" "}
-          <span style={{fontSize:"12px"}}>
-            R:<span>10</span>-<span>25K</span>
+          <span
+            style={{ fontSize: "18px", color: "#BB2834", fontWeight: "bold" }}
+          >
+            {dragonTigerDetai?.profitLoss
+              ? dragonTigerDetai?.profitLoss[
+                  `${dragonTigerDetai?.videoInfo?.mid}_2_card`
+                ]
+                ? dragonTigerDetai?.profitLoss[
+                    `${dragonTigerDetai?.videoInfo?.mid}_2_card`
+                  ]
+                : 0
+              : 0}
+          </span>{" "}
+          <span style={{ fontSize: "12px" }}>
+            R:<span>{dragonTigerDetai?.high?.min}</span>-
+            <span>{formatNumber(dragonTigerDetai?.high?.max)}</span>
           </span>
         </div>
       </div>
