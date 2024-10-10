@@ -40,13 +40,13 @@ const CasinoWarResultComponent: React.FC<Props> = ({ data }) => {
               style={{ marginLeft: "5px" }}
             >
               <span className="fs-6">Player {index + 1}</span>
-              <div className="d-sm-flex flex-row justify-content-center align-items-center mb-2">
+              <div className="d-sm-flex flex-row justify-content-center align-items-center">
                 <div
                   style={{
                     border: "1px solid #fdef34",
                     borderRadius: "1px",
                     marginLeft: "5px",
-                    position: "relative",
+                    // position: "relative",
                     display: "flex",
                     justifyContent: "space-between",
                     gap: "5px",
@@ -54,12 +54,13 @@ const CasinoWarResultComponent: React.FC<Props> = ({ data }) => {
                 >
                   <HandleCards card={player.card} />
                 </div>
-                {data?.result?.sid.includes(`${index + 1}`) && (
-                  <div className="casino-winner-icon ms-1">
+               
+              </div>
+              {data?.result?.sid.includes(`${index + 1}`) && (
+                  <div className="casino-winner-icon me-5 pb- position-absolute">
                   <Winner />
                 </div>
                 )}
-              </div>
             </div>
           );
         } else {

@@ -1,7 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { IoInformationCircle } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import Dragon20Result from "./dragonCard";
 import "./style.scss";
@@ -31,12 +30,11 @@ import {
   twelve,
   two,
 } from "../../../../assets";
-import { handleRoundId } from "../../../../helpers";
+import { formatNumber, handleRoundId } from "../../../../helpers";
 import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
 import CardResultBox from "../../../commonComponent/cardResultBox";
 import RulesModal from "../../../commonComponent/rulesModal";
 import UserBets from "../../../game/userBet";
-import SmoothDropdownModal from "./minMaxModal";
 
 const cardImg = (type: any) => {
   return <img src={type} width={25} />;
@@ -156,10 +154,17 @@ const DragonTigerDesktop = () => {
   const [firstArr, setFirstArr] = useState(data1);
   const [secondArr, setSecondArr] = useState(data2);
   const { dragonTigerDetail } = useSelector((state: RootState) => state.card);
-  const [openModalIndex, setOpenModalIndex] = useState(null);
-  const handleModalOpen = (index: any) => {
-    setOpenModalIndex(openModalIndex === index ? null : index);
+
+  const [openDivIds, setOpenDivIds] = useState<string[]>([]);
+
+  const toggleDiv = (id: string) => {
+    if (openDivIds.includes(id)) {
+      setOpenDivIds(openDivIds.filter((openId) => openId !== id));
+    } else {
+      setOpenDivIds([...openDivIds, id]);
+    }
   };
+
 
   useEffect(() => {
     const mergedArray = data1?.map((item1: any) => {
@@ -268,9 +273,9 @@ const DragonTigerDesktop = () => {
                   style={{ height: "30px" }}
                 >
                   <div className="dtlTitle"></div>
-                  <div className="dtlsubTitle">D</div>
-                  <div className="dtlsubTitle">T</div>
-                  <div className="dtlsubTitle">L</div>
+                  <div className="dtlsubTitle-dtl">D</div>
+                  <div className="dtlsubTitle-dtl">T</div>
+                  <div className="dtlsubTitle-dtl">L</div>
                 </div>
                 {firstArr?.map((item: any, index: number) => (
                   <div
@@ -278,9 +283,9 @@ const DragonTigerDesktop = () => {
                     style={{ height: "50px" }}
                     key={index}
                   >
-                    <div className="dtlTitle ">
+                    <div className="dtlTitle-dtl ">
                       {item?.title}
-                      <div style={{ width: "45%", textAlign: "end" }}>
+                      {/* <div style={{ width: "45%", textAlign: "end" }}>
                         <span className="minmaxi">
                           <IoInformationCircle
                             color="#ffc742"
@@ -295,11 +300,28 @@ const DragonTigerDesktop = () => {
                             />
                           )}
                         </span>
+                      </div> */}
+                      <div className="w-50 d-flex flex-row justify-content-end align-items-center position-relative">
+                        <div
+                          onClick={() => toggleDiv(`demo${index}`)}
+                          className="range-icon d-inline-block ms-1"
+                        >
+                          <i className="fas fa-info-circle float-right"></i>{" "}
+                          <div
+                            id={`demo${index}`}
+                            className={`icon-range-dt1day collapse ${
+                              openDivIds.includes(`demo${index}`) ? "show" : ""
+                            }`}
+                          >
+                            R:<span>{parseFloat(item?.dragon?.min)}</span>-
+                            <span>{formatNumber(item?.dragon?.max)}</span>
+                          </div>
+                        </div>
                       </div>
                     </div>
                     <div
-                      className={`dtlsubTitle me-2 back-BackGround ${
-                        item?.dragon?.gstatus === "0" ? "suspended" : ""
+                      className={`dtlsubTitle-dtl me-2 back-BackGround ${
+                        item?.dragon?.gstatus === "0" ? "locked" : ""
                       }`}
                     >
                       {item?.dragon?.b1 || 0}
@@ -339,8 +361,8 @@ const DragonTigerDesktop = () => {
                       </span>
                     </div>
                     <div
-                      className={`dtlsubTitle me-2 back-BackGround ${
-                        item?.tiger?.gstatus === "0" ? "suspended" : ""
+                      className={`dtlsubTitle-dtl me-2 back-BackGround ${
+                        item?.tiger?.gstatus === "0" ? "locked" : ""
                       }`}
                     >
                       {item?.tiger?.b1 || 0}
@@ -380,8 +402,8 @@ const DragonTigerDesktop = () => {
                       </span>
                     </div>
                     <div
-                      className={`dtlsubTitle me-2 back-BackGround ${
-                        item?.lion?.gstatus === "0" ? "suspended" : ""
+                      className={`dtlsubTitle-dtl me-2 back-BackGround ${
+                        item?.lion?.gstatus === "0" ? "locked" : ""
                       }`}
                     >
                       {item?.lion?.b1 || 0}
@@ -436,9 +458,9 @@ const DragonTigerDesktop = () => {
                   style={{ height: "30px" }}
                 >
                   <div className="dtlTitle"> </div>
-                  <div className="dtlsubTitle">D</div>
-                  <div className="dtlsubTitle">T</div>
-                  <div className="dtlsubTitle">L</div>
+                  <div className="dtlsubTitle-dtl">D</div>
+                  <div className="dtlsubTitle-dtl">T</div>
+                  <div className="dtlsubTitle-dtl">L</div>
                 </div>
                 {secondArr?.map((item: any, index: any) => (
                   <div
@@ -446,28 +468,29 @@ const DragonTigerDesktop = () => {
                     style={{ height: "50px" }}
                     key={index}
                   >
-                    <div className="dtlTitle">
+                    <div className="dtlTitle-dtl">
                       {item?.title}{" "}
-                      <div style={{ width: "45%", textAlign: "end" }}>
-                        <span className="minmaxi">
-                          <IoInformationCircle
-                            color="#ffc742"
-                            onClick={() => handleModalOpen(index + 9)}
-                          />
-                          {openModalIndex === index + 9 && (
-                            <SmoothDropdownModal
-                              min={item?.dragon?.min}
-                              max={item?.dragon?.max}
-                              show={openModalIndex === index + 9}
-                              setShow={() => setOpenModalIndex(null)}
-                            />
-                          )}
-                        </span>
+                      <div className="w-50 d-flex flex-row justify-content-end align-items-center position-relative">
+                        <div
+                          onClick={() => toggleDiv(`${index}`)}
+                          className="range-icon d-inline-block ms-1"
+                        >
+                          <i className="fas fa-info-circle float-right"></i>{" "}
+                          <div
+                            id={`${index}`}
+                            className={`icon-range-dt1day collapse ${
+                              openDivIds.includes(`${index}`) ? "show" : ""
+                            }`}
+                          >
+                            R:<span>{parseFloat(item?.dragon?.min)}</span>-
+                            <span>{formatNumber(item?.dragon?.max)}</span>
+                          </div>
+                        </div>
                       </div>
                     </div>
                     <div
-                      className={`dtlsubTitle me-2 back-BackGround ${
-                        item?.dragon?.gstatus === "0" ? "suspended" : ""
+                      className={`dtlsubTitle-dtl me-2 back-BackGround ${
+                        item?.dragon?.gstatus === "0" ? "locked" : ""
                       }`}
                     >
                       {item?.dragon?.b1 || 0}
@@ -507,8 +530,8 @@ const DragonTigerDesktop = () => {
                       </span>
                     </div>
                     <div
-                      className={`dtlsubTitle me-2 back-BackGround ${
-                        item?.tiger?.gstatus === "0" ? "suspended" : ""
+                      className={`dtlsubTitle-dtl me-2 back-BackGround ${
+                        item?.tiger?.gstatus === "0" ? "locked" : ""
                       }`}
                     >
                       {item?.tiger?.b1 || 0}
@@ -549,8 +572,8 @@ const DragonTigerDesktop = () => {
                       </span>
                     </div>
                     <div
-                      className={`dtlsubTitle me-2 back-BackGround ${
-                        item?.lion?.gstatus === "0" ? "suspended" : ""
+                      className={`dtlsubTitle-dtl me-2 back-BackGround ${
+                        item?.lion?.gstatus === "0" ? "locked" : ""
                       }`}
                     >
                       {item?.lion?.b1 || 0}
