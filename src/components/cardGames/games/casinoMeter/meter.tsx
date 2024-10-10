@@ -72,7 +72,7 @@ const Meter = ({
               <HandleCards card={card} />
             </span>
           ))}
-          {runPosition == "Low" && (
+          {/* {runPosition == "Low" && (
             <span style={{ color: "#FFFFFF", marginLeft: "5px" }}>
               Run Position:
               <span
@@ -83,7 +83,7 @@ const Meter = ({
                 {lowCardSum - highCardSum}
               </span>
             </span>
-          )}
+          )} */}
         </div>
         <div
           style={{
@@ -127,7 +127,7 @@ const Meter = ({
               <HandleCards card={card} />
             </span>
           ))}
-          {runPosition == "High" && (
+          {/* {runPosition == "High" && (
             <span style={{ color: "#FFFFFF", marginLeft: "5px" }}>
               Run Position:
               <span
@@ -138,7 +138,7 @@ const Meter = ({
                 {highCardSum - lowCardSum}
               </span>
             </span>
-          )}
+          )} */}
         </div>
         <div
           style={{
