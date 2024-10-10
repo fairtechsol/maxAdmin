@@ -4,8 +4,8 @@ import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import BackLay from "./BackLay";
 import OddEven from "./OddEvenBox";
-import PairBox from "./PairBox";
-import CardBox from "./cardBox";
+// import PairBox from "./PairBox";
+// import CardBox from "./cardBox";
 import Dragon20Result from "./dragonCard";
 import "./style.scss";
 import UserBets from "../../../game/userBet";
@@ -24,12 +24,11 @@ import { dtrules } from "../../../../assets";
 const DragonTigerDesktop = () => {
   const [show, setShow] = useState(false);
   const { dragonTigerDetail } = useSelector((state: RootState) => state.card);
-
   return (
     <div>
       <Row>
         <Col md={8}>
-          <div style={{ width: "100%", height: "400px", margin: "5px" }}>
+          <div style={{ width: "100%" }}>
             <div className="horseRacingTabHeader">
               <div>
                 <span style={{ fontSize: "16px", fontWeight: "600" }}>
@@ -56,7 +55,7 @@ const DragonTigerDesktop = () => {
               </span>
             </div>
             <div
-              style={{ width: "100%", height: "92%", backgroundColor: "#000" }}
+              style={{ width: "100%", backgroundColor: "#000" }}
             >
               <VideoFrame
                 time={dragonTigerDetail?.videoInfo?.autotime}
@@ -65,60 +64,47 @@ const DragonTigerDesktop = () => {
               />
             </div>
           </div>
-          <div style={{ height: "760px" }}>
+          <div>
             <div
               className="d-sm-flex flex-row justify-content-around align-items-center"
-              style={{ width: "100%", marginTop: "4%", gap: "10px" }}
+              style={{ width: "100%"}}
             >
-              <div className="w-50">
+              <div className="w-100">
                 <BackLay
                   matchOddsData={dragonTigerDetail?.matchOddsData}
                   data={dragonTigerDetail}
+                  odds={dragonTigerDetail?.pair}
                 />
               </div>
-              <div className="w-50">
+              {/* <div className="w-50">
                 <PairBox
                   odds={dragonTigerDetail?.pair}
                   data={dragonTigerDetail}
                 />
-              </div>
+              </div> */}
             </div>
             <div
               style={{
                 width: "100%",
-                margin: "5px",
                 display: "flex",
                 flexDirection: "row",
-                gap: "8px",
+                gap:"10px",
+                marginTop:"10px"
               }}
             >
               <OddEven
-                title1={"even"}
-                title2={"odd"}
-                dragonData={dragonTigerDetail?.dragonData}
-                tigerData={dragonTigerDetail?.tigerData}
+                name={"Dragon"}
+                odds={dragonTigerDetail?.dragonData}
                 data={dragonTigerDetail}
               />
+              <div style={{width:"4px",backgroundColor:"#000"}}></div>
               <OddEven
-                title1={"red"}
-                title2={"black"}
-                dragonData={dragonTigerDetail?.dragonData}
-                tigerData={dragonTigerDetail?.tigerData}
+                name={"Tiger"}
+                odds={dragonTigerDetail?.tigerData}
                 data={dragonTigerDetail}
               />
             </div>
-            <div
-              style={{
-                width: "100%",
-                marginLeft: "5px",
-              }}
-            >
-              <CardBox
-                dragonData={dragonTigerDetail?.dragonData}
-                tigerData={dragonTigerDetail?.tigerData}
-                data={dragonTigerDetail}
-              />
-            </div>
+           
             <div style={{ width: "100%", margin: "5px" }}>
               <CardResultBox
                 data={dragonTigerDetail}

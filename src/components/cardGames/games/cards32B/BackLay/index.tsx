@@ -1,12 +1,12 @@
-import { IoInformationCircle } from "react-icons/io5";
-import { useState } from "react";
+// import { IoInformationCircle } from "react-icons/io5";
+// import { useState } from "react";
 import "../../cards32B/style.scss";
-import SmoothDropdownModal from "../minMaxModal";
+// import SmoothDropdownModal from "../minMaxModal";
 
 const BackLay = ({ matchOddsData, data }: any) => {
-  const [modelOpen, setModelOpen] = useState(false);
-  const min = matchOddsData?.[0]?.min;
-  const max = matchOddsData?.[0]?.max;
+  // const [modelOpen, setModelOpen] = useState(false);
+  // const min = matchOddsData?.[0]?.min;
+  // const max = matchOddsData?.[0]?.max;
   const handleLock = (status: any, value: any) => {
     if (status != "ACTIVE" || value === "0.00") {
       return true;
@@ -46,9 +46,9 @@ const BackLay = ({ matchOddsData, data }: any) => {
           marginLeft: "5px",
         }}
       >
-        <div className={"w-100 d-sm-flex flex-row"} style={{ height: "30px" }}>
-          <div className="dtlTitle">
-            <div style={{ width: "45%", textAlign: "start" }}>
+        <div className={"w-100 d-sm-flex flex-row"} style={{ height: "25px",backgroundColor:"#dddddd" }}>
+          <div className="dtlTitle" style={{backgroundColor:"#dddddd",border:"0.5px solid #fff"}}>
+            {/* <div style={{ width: "45%", textAlign: "start" }}>
               <span className="minmaxi">
                 <IoInformationCircle
                   color="#ffc742"
@@ -61,10 +61,10 @@ const BackLay = ({ matchOddsData, data }: any) => {
                   setShow={() => setModelOpen(false)}
                 />
               </span>
-            </div>
+            </div> */}
           </div>
-          <div className="dtlsubTitle back-BackGround">Back</div>
-          <div className="dtlsubTitle lay-BackGround">Lay</div>
+          <div className="card32bsubTitle">Back</div>
+          <div className="card32bsubTitle">Lay</div>
         </div>
         <div
           className={"w-100 d-sm-flex"}

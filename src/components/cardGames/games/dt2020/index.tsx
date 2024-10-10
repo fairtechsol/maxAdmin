@@ -18,7 +18,7 @@ import UserBets from "../../../game/userBet";
 import Dragon20Result from "./dragonCard";
 import TiePairBox from "./TiePairBox";
 import OddEven from "./OddEvenBox";
-import CardBox from "./CardsBox";
+// import CardBox from "./CardsBox";
 
 const DragonTiger2020Component = () => {
   const [show, setShow] = useState(false);
@@ -28,7 +28,7 @@ const DragonTiger2020Component = () => {
     <div>
       <Row>
         <Col md={8}>
-          <div style={{ width: "100%", height: "400px", margin: "5px" }}>
+          <div style={{ width: "100%" }}>
             <div className="horseRacingTabHeader">
               <div>
                 <span style={{ fontSize: "16px", fontWeight: "600" }}>
@@ -55,7 +55,7 @@ const DragonTiger2020Component = () => {
               </span>
             </div>
             <div
-              style={{ width: "100%", height: "92%", backgroundColor: "#000" }}
+              style={{ width: "100%",backgroundColor: "#000" }}
             >
               <VideoFrame
                 time={dragonTigerDetail?.videoInfo?.autotime}
@@ -64,8 +64,8 @@ const DragonTiger2020Component = () => {
               />
             </div>
           </div>
-          <div style={{ height: "760px" }}>
-            <div style={{ width: "100%", margin: "4% 5px" }}>
+          <div style={{backgroundColor:"#eee"}}>
+            <div style={{ width: "100%" }}>
               <TiePairBox
                 tiePair={dragonTigerDetail?.tiePair}
                 data={dragonTigerDetail}
@@ -74,27 +74,30 @@ const DragonTiger2020Component = () => {
             <div
               style={{
                 width: "100%",
-                margin: "5px",
+                // margin: "5px",
                 display: "flex",
                 flexDirection: "row",
                 gap: "8px",
               }}
             >
               <OddEven
-                name={"DRAGON"}
+                name={"Dragon"}
                 odds={dragonTigerDetail?.dragonOdds}
                 data={dragonTigerDetail}
+                cards={dragonTigerDetail?.dragonCards}
               />
+              <div style={{width:"4px",backgroundColor:"#000"}}></div>
               <OddEven
-                name={"TIGER"}
+                name={"Tiger"}
                 odds={dragonTigerDetail?.tigerOdds}
                 data={dragonTigerDetail}
+                cards={dragonTigerDetail?.tigerCards}
               />
             </div>
-            <div
+            {/* <div
               style={{
                 width: "100%",
-                margin: "5px",
+                // margin: "5px",
                 display: "flex",
                 flexDirection: "row",
                 gap: "8px",
@@ -110,8 +113,8 @@ const DragonTiger2020Component = () => {
                 cardData={dragonTigerDetail?.tigerCards}
                 data={dragonTigerDetail}
               />
-            </div>
-            <div style={{ width: "100%", margin: "5px" }}>
+            </div> */}
+            <div className="mt-4" style={{ width: "100%" }}>
               <CardResultBox
                 data={dragonTigerDetail}
                 name={["D", "T"]}

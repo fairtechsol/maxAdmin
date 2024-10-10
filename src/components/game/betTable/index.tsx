@@ -39,22 +39,30 @@ const BetTable = ({
   return (
     <>
       {type === MatchType.MATCH_ODDS ? (
-        <><CustomBreadcrumb
-          items={[
-            { name: breadCrumb?.competition || matchDetails?.competitionName },
-            { name: breadCrumb?.matchName || matchDetails?.title },
-            {
-              name: breadCrumb?.type ||
-                (location.pathname.includes("match_details")
-                  ? "tied_match"
-                  : "Match Odd"),
-            },
-            { name: breadCrumb?.date || matchDetails?.startAt },
-          ]} /><BetTableHeader  type={""} customClass="" title={title} /></>
+        <>
+          <CustomBreadcrumb
+            items={[
+              {
+                name: breadCrumb?.competition || matchDetails?.competitionName,
+              },
+              { name: breadCrumb?.matchName || matchDetails?.title },
+              {
+                name:
+                  breadCrumb?.type ||
+                  (location.pathname.includes("match_details")
+                    ? "tied_match"
+                    : "Match Odd"),
+              },
+              { name: breadCrumb?.date || matchDetails?.startAt },
+            ]}
+          />
+          <BetTableHeader type={""} customClass="" title={title} />
+        </>
       ) : (
-        <><BetTableHeader type={""} customClass="mt-2" title={title} /></>
+        <>
+          <BetTableHeader type={""} customClass="mt-2" title={title} />
+        </>
       )}
-      
 
       {type === MatchType.BOOKMAKER ? (
         <BookmakerTable

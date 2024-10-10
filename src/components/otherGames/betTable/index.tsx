@@ -11,6 +11,7 @@ import SetWinner from "./setWinner";
 import HTFTMarketTable from "./htftmarket";
 import BetTableHeader from "../../commonComponent/betTableHeader";
 import Tournament from "./tournament";
+import OtherMarkets from "./otherMarket";
 
 interface BetTableProps {
   title: string;
@@ -64,6 +65,13 @@ const BetTable = ({ title, type, data, backLayCount }: BetTableProps) => {
       ) : type === MatchType.SET_WINNER ? (
         <SetWinner
           minMax={formattedMinMax(data?.minBet, data?.maxBet)}
+          data={data}
+          backLayCount={backLayCount}
+          matchDetails={matchDetails}
+        />
+      ) : type === MatchType.OTHER ? (
+        <OtherMarkets
+          title={formattedMinMax(data?.minBet, data?.maxBet)}
           data={data}
           backLayCount={backLayCount}
           matchDetails={matchDetails}

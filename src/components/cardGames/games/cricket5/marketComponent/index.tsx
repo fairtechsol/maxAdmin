@@ -11,7 +11,7 @@ const MarketComponent = ({ showFancy, odds, data, min, max }: any) => {
   return (
     <div className="casino-detail detail-page-container-c position-relative">
       <div className="game-market-c market-2">
-        <div className="market-title">
+        <div className="marketHeader5 text-white">
           <span>Bookmaker</span>
         </div>
         <div className="market-header-c">
@@ -20,13 +20,13 @@ const MarketComponent = ({ showFancy, odds, data, min, max }: any) => {
               className="f600"
               style={{ fontSize: "12px", color: "#097c93" }}
             >
-              Min: {min} Max: {max}
+              {/* Min: {min} Max: {max} */}
             </span>
           </div>
-          <div className="market-odd-box-c back">
+          <div className="market-odd-box-c back-cell-A">
             <b>Back</b>
           </div>
-          <div className="market-odd-box-c lay">
+          <div className="market-odd-box-c lay-cell-A">
             <b>Lay</b>
           </div>
         </div>
@@ -37,7 +37,7 @@ const MarketComponent = ({ showFancy, odds, data, min, max }: any) => {
               <span className="market-nation-name-c">{team1?.nat}</span>
               <div className="market-nation-book-c"></div>
               <span
-                className={`${
+                className={`color-red${
                   data?.profitLoss
                     ? data?.profitLoss[
                         `${data?.videoInfo?.mid}_${team1?.sid}_card`
@@ -80,13 +80,13 @@ const MarketComponent = ({ showFancy, odds, data, min, max }: any) => {
                 team1?.status === "SUSPENDED" ? "SUSPENDED" : "ACTIVE"
               }
             >
-              <div className="market-odd-box-c back lh-1">
+              <div className="market-odd-box-c back-cell-A lh-1">
                 <span className="market-odd-c">
                   {team1?.b1 === "0.00" ? "-" : team1?.b1}
                 </span>
                 <span className="market-volume-c">{team1?.bs1}</span>
               </div>
-              <div className="market-odd-box-c lay lh-1">
+              <div className="market-odd-box-c lay-cell-A lh-1">
                 <span className="market-odd-c">
                   {team1?.l1 === "0.00" ? "-" : team1?.l1}
                 </span>
@@ -99,7 +99,7 @@ const MarketComponent = ({ showFancy, odds, data, min, max }: any) => {
               <span className="market-nation-name-c">{team2?.nat}</span>
               <div className="market-nation-book-c"></div>
               <span
-                className={`${
+                className={`color-red${
                   data?.profitLoss
                     ? data?.profitLoss[
                         `${data?.videoInfo?.mid}_${team1?.sid}_card`
@@ -142,13 +142,13 @@ const MarketComponent = ({ showFancy, odds, data, min, max }: any) => {
                 team2?.status === "SUSPENDED" ? "SUSPENDED" : "ACTIVE"
               }
             >
-              <div className="market-odd-box-c back lh-1">
+              <div className="market-odd-box-c back-cell-A lh-1">
                 <span className="market-odd-c">
                   {team2?.b1 === "0.00" ? "-" : team2?.b1}
                 </span>
                 <span className="market-volume-c">{team2?.bs1}</span>
               </div>
-              <div className="market-odd-box-c lay lh-1">
+              <div className="market-odd-box-c lay-cell-A lh-1">
                 <span className="market-odd-c">
                   {team2?.l1 === "0.00" ? "-" : team2?.l1}
                 </span>
@@ -167,10 +167,10 @@ const MarketComponent = ({ showFancy, odds, data, min, max }: any) => {
           </div>
           <div className="market-header-c">
             <div className="market-nation-detail-c"></div>
-            <div className="market-odd-box-c lay">
+            <div className="market-odd-box-c lay-cell-A">
               <b>No</b>
             </div>
-            <div className="market-odd-box-c back">
+            <div className="market-odd-box-c back-cell-A">
               <b>Yes</b>
             </div>
             <div className="fancy-min-max-box"></div>
@@ -192,10 +192,10 @@ const MarketComponent = ({ showFancy, odds, data, min, max }: any) => {
                     data-title={row.suspended ? "SUSPENDED" : "ACTIVE"}
                     key={index}
                   >
-                    <div className="market-odd-box-c lay">
+                    <div className="market-odd-box-c lay-cell-A">
                       <span className="market-odd-c">{row.layOdd}</span>
                     </div>
-                    <div className="market-odd-box-c back">
+                    <div className="market-odd-box-c back-cell-A">
                       <span className="market-odd-c">{row.backOdd}</span>
                     </div>
                     <div className="fancy-min-max-box">

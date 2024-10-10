@@ -225,7 +225,6 @@ const Games = () => {
       console.log(error);
     }
   }, []);
-
   return (
     <div className="gamePage">
       <Container fluid>

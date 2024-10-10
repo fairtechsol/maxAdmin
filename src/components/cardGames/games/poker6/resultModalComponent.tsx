@@ -1,7 +1,7 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import { FaTrophy } from "react-icons/fa";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
+import Winner from "../../../commonComponent/trophyWinner";
 interface Props {
   data: {
     C1: string;
@@ -70,9 +70,9 @@ const Poker6ResultComponent: React.FC<Props> = ({ data }: any) => {
           }}
         >
           {data?.result?.win === "11" && (
-            <div className="casino-winner-icon mt-3 p-2">
-              <FaTrophy size={40} color="#169733" />
-            </div>
+            <div className="casino-winner-icon">
+            <Winner />
+          </div>
           )}
           <div
             style={{
@@ -111,9 +111,9 @@ const Poker6ResultComponent: React.FC<Props> = ({ data }: any) => {
             </div>
           </div>
           {data?.result?.win === "16" && (
-            <div className="casino-winner-icon mt-3 p-2">
-              <FaTrophy size={40} color="#169733" />
-            </div>
+            <div className="casino-winner-icon">
+            <Winner />
+          </div>
           )}
         </div>
       </div>
@@ -135,9 +135,9 @@ const Poker6ResultComponent: React.FC<Props> = ({ data }: any) => {
           }}
         >
           {data?.result?.win === "12" && (
-            <div className="casino-winner-icon mt-3 p-2">
-              <FaTrophy size={40} color="#169733" />
-            </div>
+            <div className="casino-winner-icon">
+            <Winner />
+          </div>
           )}
           <div
             style={{
@@ -186,9 +186,9 @@ const Poker6ResultComponent: React.FC<Props> = ({ data }: any) => {
             </div>
           </div>
           {data?.result?.win === "15" && (
-            <div className="casino-winner-icon mt-3 p-2">
-              <FaTrophy size={40} color="#169733" />
-            </div>
+            <div className="casino-winner-icon">
+            <Winner />
+          </div>
           )}
         </div>
       </div>
@@ -211,9 +211,9 @@ const Poker6ResultComponent: React.FC<Props> = ({ data }: any) => {
           }}
         >
           {data?.result?.win === "13" && (
-            <div className="casino-winner-icon mt-3 p-2">
-              <FaTrophy size={40} color="#169733" />
-            </div>
+            <div className="casino-winner-icon">
+            <Winner />
+          </div>
           )}
           <div
             style={{
@@ -252,9 +252,9 @@ const Poker6ResultComponent: React.FC<Props> = ({ data }: any) => {
             </div>
           </div>
           {data?.result?.win === "14" && (
-            <div className="casino-winner-icon mt-3 p-2">
-              <FaTrophy size={40} color="#169733" />
-            </div>
+            <div className="casino-winner-icon">
+            <Winner />
+          </div>
           )}
         </div>
       </div>

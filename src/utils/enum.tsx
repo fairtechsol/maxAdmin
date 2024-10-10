@@ -7,5 +7,6 @@ export const MatchType = {
   CRICKET_CASINO_SESSION_MARKET: "cricketCasinoMarket",
   UNDER_OVER: "underOver",
   SET_WINNER: "setWinner",
+  OTHER: "other",
   TOURNAMENT: "tournament",
 };

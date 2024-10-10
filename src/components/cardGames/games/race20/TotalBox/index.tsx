@@ -59,7 +59,7 @@ const TotalsBox = ({ odds, data }: any) => {
             style={{ width: "65%", display: "flex" }}
           >
             <span
-              className={`${
+              className={`color-red ${
                 data?.profitLoss
                   ? data?.profitLoss[
                       `${data?.videoInfo?.mid}_${odds?.[0]?.sid}_card`
@@ -90,12 +90,7 @@ const TotalsBox = ({ odds, data }: any) => {
           </div>
         </div>
 
-        <div style={{ width: "100%", textAlign: "end", padding: "5px" }}>
-          <span style={{ fontWeight: "bolder" }}>Min:</span>
-          <span>{odds?.[0]?.min}</span>
-          <span style={{ fontWeight: "bolder", marginLeft: "10px" }}>Max:</span>
-          <span>{odds?.[0]?.max}</span>
-        </div>
+  
 
         <div className="total-mainRateBox">
           <div style={{ width: "30%" }}>
@@ -138,7 +133,7 @@ const TotalsBox = ({ odds, data }: any) => {
             style={{ width: "65%", display: "flex" }}
           >
             <span
-              className={`${
+              className={`color-red ${
                 data?.profitLoss
                   ? data?.profitLoss[
                       `${data?.videoInfo?.mid}_${odds?.[1]?.sid}_card`
@@ -167,12 +162,6 @@ const TotalsBox = ({ odds, data }: any) => {
                 : 0}
             </span>
           </div>
-        </div>
-        <div style={{ width: "100%", textAlign: "end", padding: "5px" }}>
-          <span style={{ fontWeight: "bolder" }}>Min:</span>
-          <span>{odds?.[1]?.min}</span>
-          <span style={{ fontWeight: "bolder", marginLeft: "10px" }}>Max:</span>
-          <span>{odds?.[1]?.max}</span>
         </div>
       </div>
     </>

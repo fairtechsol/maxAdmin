@@ -37,13 +37,7 @@
   border-right: 10px solid transparent;
   border-top: 10px solid green;
 }
-.casino-winner-icon{
-  // font-size: 26px;
-  box-shadow: 0 0 0 #FFC742;
-  animation: winnerbox 1.5s infinite;;
-  border-radius: 50%;
-  color: #169733;
-}
+
 // .match-list-tabs {
 //   border-right: 1px solid $secondary !important;
 //   border-radius: 0px !important;
@@ -153,7 +147,6 @@
   width: 100%;
   display: flex;
   flex-direction: row;
-  margin-top: 4%;
   gap: 20px;
 }
 .poker-table-row{
@@ -171,14 +164,7 @@
   cursor: pointer;
   padding: 4px;
 }
-.f12-b{
-  font-size: 16px;
-  font-weight: bolder;
-}
-.f10-b{
-  font-size: 16px;
-  font-weight: bolder;
-}
+
 
 .teen20resultModal{
   display: flex;
@@ -193,9 +179,13 @@
   justify-content: space-between;
   align-items: center;
 }
-// .horseRacingTab .nav-link{
-//   margin: 0 !important;
-// }
+.casino-result-content-diveder {
+  width: 2px;
+  height: 130px;
+  background-color: #ddd;
+}
+
+
 
 .casino-title {
   background-color: #ffc742;

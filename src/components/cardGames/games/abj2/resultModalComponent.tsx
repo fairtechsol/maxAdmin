@@ -3,9 +3,9 @@ import { Container } from "react-bootstrap";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { FaTrophy } from "react-icons/fa";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
 import "./style.scss";
+import Winner from "../../../commonComponent/trophyWinner";
 interface Props {
   data: {
     C1: string;
@@ -96,9 +96,9 @@ const AbjResultComponent: React.FC<Props> = ({ data }: any) => {
             <div style={{ display: "flex", flexDirection: "row" }}>
               <div style={{ width: "70%", marginRight: "5px" }}>
                 {data?.result?.win === "1" && (
-                  <div className="casino-winner-icon">
-                    <FaTrophy size={26} color="#169733" />
-                  </div>
+                 <div className="casino-winner-icon">
+                 <Winner />
+               </div>
                 )}
               </div>
               <div style={{ width: "30%" }}>
@@ -119,9 +119,9 @@ const AbjResultComponent: React.FC<Props> = ({ data }: any) => {
             <div style={{ display: "flex", flexDirection: "row" }}>
               <div style={{ width: "70%", marginRight: "5px" }}>
                 {data?.result?.win === "2" && (
-                  <div className="casino-winner-icon">
-                    <FaTrophy size={26} color="#169733" />
-                  </div>
+                <div className="casino-winner-icon">
+                <Winner />
+              </div>
                 )}
               </div>
               <div style={{ width: "30%" }}>

@@ -1,8 +1,8 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import { FaTrophy } from "react-icons/fa";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
 import "./style.scss";
+import Winner from "../../../commonComponent/trophyWinner";
 interface Props {
   data: {
     C1: string;
@@ -32,8 +32,8 @@ const Card32ResultComponent: React.FC<Props> = ({ data }: any) => {
           <div className="d-sm-flex flex-row justify-content-center align-items-center">
             {data?.result?.win === "1" && (
               <div className="casino-winner-icon">
-                <FaTrophy size={30} color="#169733" />
-              </div>
+              <Winner />
+            </div>
             )}
             {result?.[0]?.map((item: any) => {
               return item != "1" && (
@@ -56,8 +56,8 @@ const Card32ResultComponent: React.FC<Props> = ({ data }: any) => {
           <div className="d-sm-flex flex-row justify-content-center align-items-center">
             {data?.result?.win === "2" && (
               <div className="casino-winner-icon">
-                <FaTrophy size={30} color="#169733" />
-              </div>
+              <Winner />
+            </div>
             )}
            {result?.[1]?.map((item: any) => {
               return item != "1" && (
@@ -79,8 +79,8 @@ const Card32ResultComponent: React.FC<Props> = ({ data }: any) => {
           <div className="d-sm-flex flex-row justify-content-center align-items-center">
             {data?.result?.win === "3" && (
               <div className="casino-winner-icon">
-                <FaTrophy size={30} color="#169733" />
-              </div>
+              <Winner />
+            </div>
             )}
             {result?.[2]?.map((item: any) => {
               return item != "1" && (
@@ -102,8 +102,8 @@ const Card32ResultComponent: React.FC<Props> = ({ data }: any) => {
           <div className="d-sm-flex flex-row justify-content-center align-items-center">
             {data?.result?.win === "4" && (
               <div className="casino-winner-icon">
-                <FaTrophy size={30} color="#169733" />
-              </div>
+              <Winner />
+            </div>
             )}
             {result?.[3]?.map((item: any) => {
               return item != "1" && (

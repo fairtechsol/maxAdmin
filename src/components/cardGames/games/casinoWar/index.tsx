@@ -4,7 +4,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import "./style.scss";
 import { RootState } from "../../../../store/store";
-import { handleRoundId } from "../../../../helpers";
+import { formatNumber, handleRoundId } from "../../../../helpers";
 import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
 import {
   cardGamesId,
@@ -22,20 +22,21 @@ const CasinoWarComponent = () => {
   const [show, setShow] = useState(false);
   const { dragonTigerDetail } = useSelector((state: RootState) => state.card);
 
-  // const rules = [
-  //   { label: "Pair (Double)", value: "1 To 1" },
-  //   { label: "Flush (Color)", value: "1 To 4" },
-  //   { label: "Straight (Rown)", value: "1 To 6" },
-  //   { label: "Trio (Teen)", value: "1 To 35" },
-  //   { label: "Straight Flush (Pakki Rown)", value: "1 To 45" },
-  // ];
+  const [openDivIds, setOpenDivIds] = useState<string[]>([]);
 
+  const toggleDiv = (id: string) => {
+    if (openDivIds.includes(id)) {
+      setOpenDivIds(openDivIds.filter((openId) => openId !== id));
+    } else {
+      setOpenDivIds([...openDivIds, id]);
+    }
+  };
   return (
     <>
       <Row>
         <Col md={8}>
           <div style={{ margin: "5px" }}>
-            <div style={{ height: "400px", marginBottom: ".30px" }}>
+            <div>
               <div className="horseRacingTabHeader">
                 <div>
                   <span style={{ fontSize: "16px", fontWeight: "600" }}>
@@ -66,7 +67,6 @@ const CasinoWarComponent = () => {
               <div
                 style={{
                   width: "100%",
-                  height: "90%",
                   backgroundColor: "#000",
                 }}
               >
@@ -81,7 +81,7 @@ const CasinoWarComponent = () => {
               <div className="teenPatti-table-container">
                 <div
                   className="teenPatti-table-row"
-                  style={{ lineHeight: 2, marginTop: "2px", background: "fff" }}
+                  style={{ lineHeight: 2, background: "fff" }}
                 >
                   <div style={{ width: "40%" }}></div>
                   <div
@@ -138,7 +138,6 @@ const CasinoWarComponent = () => {
                   <div
                     style={{
                       width: "60%",
-                      backgroundColor: "#72bbef",
                       display: "flex",
                       flexDirection: "row",
                     }}
@@ -183,9 +182,14 @@ const CasinoWarComponent = () => {
                 </div>
 
                 {dragonTigerDetail?.players?.map((playerA: any, index: any) => {
+                  console.log(
+                    openDivIds?.includes(playerA[0]?.nat.split(" ")[0]),
+                    "abc",
+                    playerA[0]?.nat.split(" ")[0]
+                  );
                   return (
                     <div
-                      key={index}
+                      key={playerA[0]?.nat.split(" ")[0]}
                       className="teenPatti-table-row"
                       style={{ lineHeight: 1 }}
                     >
@@ -194,6 +198,7 @@ const CasinoWarComponent = () => {
                           width: "40%",
                           padding: "10px",
                           border: "0.1px solid #fff",
+                        
                         }}
                       >
                         <span
@@ -202,6 +207,25 @@ const CasinoWarComponent = () => {
                           {playerA[0]?.nat.split(" ")[0]}
                         </span>
                       </div>
+                      <div
+                        onClick={() => toggleDiv(playerA[0]?.nat.split(" ")[0])}
+                        className="range-icon d-inline-block p-1"
+                      >
+                        <i className="fas fa-info-circle float-end "></i>{" "}
+                       
+                      </div>
+                      {openDivIds?.includes(
+                          playerA[0]?.nat.split(" ")[0]
+                        ) && (
+                          <div
+                            // id={index}
+                            className={`icon-range collapse show `}
+                          >
+                            R:<span>{playerA[index]?.min}</span>-
+                            <span>{formatNumber(playerA[index]?.max)}</span>
+                          </div>
+                        )}
+
                       <div
                         className={""}
                         style={{
@@ -221,7 +245,7 @@ const CasinoWarComponent = () => {
                           >
                             <span className="f12-b">{player.b1}</span>
                             <span
-                              className={`f400 title-14 ${
+                              className={`f600 title-14 color-red ${
                                 dragonTigerDetail?.profitLoss
                                   ? dragonTigerDetail?.profitLoss[
                                       `${dragonTigerDetail?.videoInfo?.mid}_${player?.sid}_card`

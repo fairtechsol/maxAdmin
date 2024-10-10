@@ -88,10 +88,10 @@
 }
 
 .suspended-box::before {
-  background-image: url(../../../../assets/baccarat/lock.svg);
-  background-size: 17px 17px;
-  filter: invert(1);
-  -webkit-filter: invert(1);
+  background-image: url(../../../../assets/images/lockblack.svg);
+  background-size: 15px 15px;
+  // filter: invert(1);
+  // -webkit-filter: invert(1);
   background-repeat: no-repeat;
   content: "";
   position: absolute;
@@ -106,17 +106,17 @@
 
 .suspended-box::after {
   content: "";
-  background-color: #373636d6;
+  background-color: rgba(255, 255, 255, 0.70);
   position: absolute;
   height: 100%;
   width: 100%;
   left: 0;
   top: 0;
   cursor: not-allowed;
+  border-radius: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  pointer-events: none;
 }
 
 .player-pair-box-container {
@@ -291,12 +291,12 @@
 }
 .perfectpairBox {
   width: 100%;
-  background-color: #ffc742;
+  background-color: #434343;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
-  height: 80px;
+  height: 30px;
   color: #fff;
   cursor: pointer;
 }

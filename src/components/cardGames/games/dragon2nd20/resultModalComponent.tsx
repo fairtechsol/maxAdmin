@@ -1,8 +1,8 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import { FaTrophy } from "react-icons/fa";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
 import "./style.scss";
+import Winner from "../../../commonComponent/trophyWinner";
 interface Props {
   data: {
     C1: string;
@@ -24,9 +24,9 @@ const Dragon202ResultComponent: React.FC<Props> = ({ data }: any) => {
             }
           >
             {data?.result?.win === "1" && (
-              <div className="casino-winner-icon">
-                <FaTrophy size={30} color="#169733" />
-              </div>
+             <div className="casino-winner-icon">
+             <Winner />
+           </div>
             )}
             <div
               style={{
@@ -48,8 +48,8 @@ const Dragon202ResultComponent: React.FC<Props> = ({ data }: any) => {
           >
             {data?.result?.win === "2" && (
               <div className="casino-winner-icon">
-                <FaTrophy size={30} color="#169733" />
-              </div>
+              <Winner />
+            </div>
             )}
             <div
               style={{

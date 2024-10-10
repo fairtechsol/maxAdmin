@@ -211,7 +211,7 @@ const DragonTigerDesktop = () => {
     <div>
       <Row>
         <Col md={8}>
-          <div style={{ width: "100%", height: "400px", margin: "5px" }}>
+          <div style={{ width: "100%" }}>
             <div className="horseRacingTabHeader">
               <div>
                 <span style={{ fontSize: "16px", fontWeight: "600" }}>
@@ -237,9 +237,7 @@ const DragonTigerDesktop = () => {
                   : ""}
               </span>
             </div>
-            <div
-              style={{ width: "100%", height: "92%", backgroundColor: "#000" }}
-            >
+            <div style={{ width: "100%", backgroundColor: "#000" }}>
               <VideoFrame
                 time={dragonTigerDetail?.videoInfo?.autotime}
                 result={<Dragon20Result data={dragonTigerDetail?.videoInfo} />}
@@ -247,7 +245,7 @@ const DragonTigerDesktop = () => {
               />
             </div>
           </div>
-          <div style={{ height: "660px" }}>
+          <div>
             <div
               style={{
                 width: "100%",
@@ -259,7 +257,6 @@ const DragonTigerDesktop = () => {
               <div
                 style={{
                   width: "50%",
-                  marginTop: "5%",
                   display: "flex",
                   flexDirection: "column",
                   border: "0.3px solid #c7c8ca",
@@ -271,17 +268,17 @@ const DragonTigerDesktop = () => {
                   style={{ height: "30px" }}
                 >
                   <div className="dtlTitle"></div>
-                  <div className="dtlsubTitle">Dragon</div>
-                  <div className="dtlsubTitle">Tiger</div>
-                  <div className="dtlsubTitle">Lion</div>
+                  <div className="dtlsubTitle">D</div>
+                  <div className="dtlsubTitle">T</div>
+                  <div className="dtlsubTitle">L</div>
                 </div>
                 {firstArr?.map((item: any, index: number) => (
                   <div
-                    className="w-100 d-sm-flex flex-row"
+                    className="w-100 d-sm-flex flex-row mb-4"
                     style={{ height: "50px" }}
                     key={index}
                   >
-                    <div className="dtlTitle">
+                    <div className="dtlTitle ">
                       {item?.title}
                       <div style={{ width: "45%", textAlign: "end" }}>
                         <span className="minmaxi">
@@ -301,14 +298,18 @@ const DragonTigerDesktop = () => {
                       </div>
                     </div>
                     <div
-                      className={`dtlsubTitle ${
+                      className={`dtlsubTitle me-2 back-BackGround ${
                         item?.dragon?.gstatus === "0" ? "suspended" : ""
                       }`}
                     >
                       {item?.dragon?.b1 || 0}
                       <span
-                        style={{ fontSize: "12px" }}
-                        className={
+                        style={{
+                          fontSize: "12px",
+                          marginBottom: "-70px",
+                          position: "absolute",
+                        }}
+                        className={`color-red${
                           dragonTigerDetail?.profitLoss
                             ? dragonTigerDetail?.profitLoss[
                                 `${dragonTigerDetail?.videoInfo?.mid}_${item?.dragon?.sid}_card`
@@ -324,7 +325,7 @@ const DragonTigerDesktop = () => {
                                 : ""
                               : ""
                             : ""
-                        }
+                        }`}
                       >
                         {dragonTigerDetail?.profitLoss
                           ? dragonTigerDetail?.profitLoss[
@@ -338,14 +339,18 @@ const DragonTigerDesktop = () => {
                       </span>
                     </div>
                     <div
-                      className={`dtlsubTitle ${
+                      className={`dtlsubTitle me-2 back-BackGround ${
                         item?.tiger?.gstatus === "0" ? "suspended" : ""
                       }`}
                     >
                       {item?.tiger?.b1 || 0}
                       <span
-                        style={{ fontSize: "12px" }}
-                        className={
+                        style={{
+                          fontSize: "12px",
+                          marginBottom: "-70px",
+                          position: "absolute",
+                        }}
+                        className={`color-red ${
                           dragonTigerDetail?.profitLoss
                             ? dragonTigerDetail?.profitLoss[
                                 `${dragonTigerDetail?.videoInfo?.mid}_${item?.tiger?.sid}_card`
@@ -361,7 +366,7 @@ const DragonTigerDesktop = () => {
                                 : ""
                               : ""
                             : ""
-                        }
+                        }`}
                       >
                         {dragonTigerDetail?.profitLoss
                           ? dragonTigerDetail?.profitLoss[
@@ -375,14 +380,18 @@ const DragonTigerDesktop = () => {
                       </span>
                     </div>
                     <div
-                      className={`dtlsubTitle ${
+                      className={`dtlsubTitle me-2 back-BackGround ${
                         item?.lion?.gstatus === "0" ? "suspended" : ""
                       }`}
                     >
                       {item?.lion?.b1 || 0}
                       <span
-                        style={{ fontSize: "12px" }}
-                        className={
+                        style={{
+                          fontSize: "12px",
+                          marginBottom: "-70px",
+                          position: "absolute",
+                        }}
+                        className={`color-red  ${
                           dragonTigerDetail?.profitLoss
                             ? dragonTigerDetail?.profitLoss[
                                 `${dragonTigerDetail?.videoInfo?.mid}_${item?.lion?.sid}_card`
@@ -398,7 +407,7 @@ const DragonTigerDesktop = () => {
                                 : ""
                               : ""
                             : ""
-                        }
+                        }`}
                       >
                         {dragonTigerDetail?.profitLoss
                           ? dragonTigerDetail?.profitLoss[
@@ -417,7 +426,6 @@ const DragonTigerDesktop = () => {
               <div
                 style={{
                   width: "50%",
-                  marginTop: "5%",
                   display: "flex",
                   flexDirection: "column",
                   border: "0.3px solid #c7c8ca",
@@ -428,13 +436,13 @@ const DragonTigerDesktop = () => {
                   style={{ height: "30px" }}
                 >
                   <div className="dtlTitle"> </div>
-                  <div className="dtlsubTitle">Dragon</div>
-                  <div className="dtlsubTitle">Tiger</div>
-                  <div className="dtlsubTitle">Lion</div>
+                  <div className="dtlsubTitle">D</div>
+                  <div className="dtlsubTitle">T</div>
+                  <div className="dtlsubTitle">L</div>
                 </div>
                 {secondArr?.map((item: any, index: any) => (
                   <div
-                    className="w-100 d-sm-flex flex-row"
+                    className="w-100 d-sm-flex flex-row mb-4"
                     style={{ height: "50px" }}
                     key={index}
                   >
@@ -458,14 +466,18 @@ const DragonTigerDesktop = () => {
                       </div>
                     </div>
                     <div
-                      className={`dtlsubTitle ${
+                      className={`dtlsubTitle me-2 back-BackGround ${
                         item?.dragon?.gstatus === "0" ? "suspended" : ""
                       }`}
                     >
                       {item?.dragon?.b1 || 0}
                       <span
-                        style={{ fontSize: "12px" }}
-                        className={
+                        style={{
+                          fontSize: "12px",
+                          marginBottom: "-70px",
+                          position: "absolute",
+                        }}
+                        className={`color-red ${
                           dragonTigerDetail?.profitLoss
                             ? dragonTigerDetail?.profitLoss[
                                 `${dragonTigerDetail?.videoInfo?.mid}_${item?.dragon?.sid}_card`
@@ -481,7 +493,7 @@ const DragonTigerDesktop = () => {
                                 : ""
                               : ""
                             : ""
-                        }
+                        }`}
                       >
                         {dragonTigerDetail?.profitLoss
                           ? dragonTigerDetail?.profitLoss[
@@ -495,14 +507,18 @@ const DragonTigerDesktop = () => {
                       </span>
                     </div>
                     <div
-                      className={`dtlsubTitle ${
+                      className={`dtlsubTitle me-2 back-BackGround ${
                         item?.tiger?.gstatus === "0" ? "suspended" : ""
                       }`}
                     >
                       {item?.tiger?.b1 || 0}
                       <span
-                        style={{ fontSize: "12px" }}
-                        className={
+                        style={{
+                          fontSize: "12px",
+                          marginBottom: "-70px",
+                          position: "absolute",
+                        }}
+                        className={`color-red${
                           dragonTigerDetail?.profitLoss
                             ? dragonTigerDetail?.profitLoss[
                                 `${dragonTigerDetail?.videoInfo?.mid}_${item?.tiger?.sid}_card`
@@ -518,7 +534,7 @@ const DragonTigerDesktop = () => {
                                 : ""
                               : ""
                             : ""
-                        }
+                        }`}
                       >
                         {" "}
                         {dragonTigerDetail?.profitLoss
@@ -533,14 +549,18 @@ const DragonTigerDesktop = () => {
                       </span>
                     </div>
                     <div
-                      className={`dtlsubTitle ${
+                      className={`dtlsubTitle me-2 back-BackGround ${
                         item?.lion?.gstatus === "0" ? "suspended" : ""
                       }`}
                     >
                       {item?.lion?.b1 || 0}
                       <span
-                        style={{ fontSize: "12px" }}
-                        className={
+                        style={{
+                          fontSize: "12px",
+                          marginBottom: "-70px",
+                          position: "absolute",
+                        }}
+                        className={`color-red ${
                           dragonTigerDetail?.profitLoss
                             ? dragonTigerDetail?.profitLoss[
                                 `${dragonTigerDetail?.videoInfo?.mid}_${item?.lion?.sid}_card`
@@ -556,7 +576,7 @@ const DragonTigerDesktop = () => {
                                 : ""
                               : ""
                             : ""
-                        }
+                        }`}
                       >
                         {" "}
                         {dragonTigerDetail?.profitLoss
