@@ -1,33 +1,18 @@
-import { useState } from "react";
-import { IoInformationCircle } from "react-icons/io5";
-import SmoothDropdownModal from "../minMaxModal";
+
+import { formatNumber } from "../../../../../helpers";
 import CommonButtonBox from "../CommonButtonBox";
 
 const OddEven = ({ data, card, odds }: any) => {
   const min = odds?.[0]?.min;
   const max = odds?.[0]?.max;
 
-  const [modelOpen, setModelOpen] = useState(false);
 
   return (
     <>
       <div className="oddEvenContaine">
         {card ? (
           <>
-            <div style={{ width: "98%", textAlign: "end", marginTop: "12px" }}>
-              <span className="minmaxi">
-                <IoInformationCircle
-                  color="#ffc742"
-                  onClick={() => setModelOpen(!modelOpen)}
-                />
-                <SmoothDropdownModal
-                  min={min}
-                  max={max}
-                  show={modelOpen}
-                  setShow={() => setModelOpen(false)}
-                />
-              </span>
-            </div>
+           
             <div
               style={{
                 display: "flex",
@@ -74,23 +59,15 @@ const OddEven = ({ data, card, odds }: any) => {
                 data={odds?.[1]}
               />
             </div>
+            <div className="title-12" style={{ textAlign: "end" }}>
+          <span>R:</span>
+          <span>{min}</span>-
+          <span>{formatNumber(max)}</span>
+        </div>
           </>
         ) : (
           <>
-            <div style={{ width: "98%", textAlign: "end", marginTop: "12px" }}>
-              <span className="minmaxi">
-                <IoInformationCircle
-                  color="#ffc742"
-                  onClick={() => setModelOpen(!modelOpen)}
-                />
-                <SmoothDropdownModal
-                  min={min}
-                  max={max}
-                  show={modelOpen}
-                  setShow={() => setModelOpen(false)}
-                />
-              </span>
-            </div>
+           
             <div
               style={{
                 display: "flex",
@@ -137,6 +114,11 @@ const OddEven = ({ data, card, odds }: any) => {
                 data={odds?.[1]}
               />
             </div>
+            <div className="title-12" style={{ textAlign: "end" }}>
+          <span>R:</span>
+          <span>{min}</span>-
+          <span>{formatNumber(max)}</span>
+        </div>
           </>
         )}
       </div>

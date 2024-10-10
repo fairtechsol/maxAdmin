@@ -1,10 +1,8 @@
-import { IoInformationCircle } from "react-icons/io5";
-import { useState } from "react";
+
 import CommonCardImg from "../CommonCardImg";
-import SmoothDropdownModal from "../minMaxModal";
+import { formatNumber } from "../../../../../helpers";
 
 const CardBox = ({ cardData, data }: any) => {
-  const [modelOpen, setModelOpen] = useState(false);
   const min = cardData?.[0]?.min;
   const max = cardData?.[0]?.max;
   return (
@@ -24,23 +22,15 @@ const CardBox = ({ cardData, data }: any) => {
               ).toFixed(2)}
             </span>
           </div>
-          <div style={{ width: "45%", textAlign: "end" }}>
-            <span className="minmaxi">
-              <IoInformationCircle
-                color="#ffc742"
-                onClick={() => setModelOpen(!modelOpen)}
-              />
-              <SmoothDropdownModal
-                min={min}
-                max={max}
-                show={modelOpen}
-                setShow={() => setModelOpen(false)}
-              />
-            </span>
-          </div>
+          
         </div>
         <div>
           <CommonCardImg cardData={cardData} data={data} />
+        </div>
+        <div className="title-12" style={{ textAlign: "end" }}>
+          <span>R:</span>
+          <span>{min}</span>-
+          <span>{formatNumber(max)}</span>
         </div>
       </div>
     </>
