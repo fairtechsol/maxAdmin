@@ -8404,7 +8404,9 @@ textarea.form-control-lg {
 .text-end {
   text-align: right !important;
 }
-
+.right-0 {
+  right: 0 !important;
+}
 .text-center {
   text-align: center !important;
 }

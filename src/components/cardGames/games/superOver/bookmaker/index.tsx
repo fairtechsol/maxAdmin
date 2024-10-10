@@ -11,7 +11,7 @@ const Bookmaker = ({ matchOddsData, data, title, min, max }: any) => {
   return (
     <div className="w-100" style={{ display: "flex", flexDirection: "column" }}>
       <div className="marketHeader">
-        <span className="f600" style={{ color: "#fff" }}>
+        <span className="f600 text-start" style={{ color: "#fff" }}>
           {title}
         </span>
       </div>

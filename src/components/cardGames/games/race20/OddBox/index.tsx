@@ -1,13 +1,8 @@
 import { useState } from "react";
 import { HandleCards } from "../../../../commonComponent/cardsComponent";
+import { formatNumber } from "../../../../../helpers";
 
 const OddBox = ({ odds, data }: any) => {
-  const [openDivId, setOpenDivId] = useState(null); // To keep track of the open div
-
-  const toggleDiv = (id: any) => {
-    setOpenDivId(openDivId === id ? null : id); // Toggle div visibility based on its id
-  };
-
   const handleCardRender = (card: string) => {
     if (card?.includes("spade")) {
       return "KHH";
@@ -47,6 +42,16 @@ const OddBox = ({ odds, data }: any) => {
     }
   };
 
+  const [openDivIds, setOpenDivIds] = useState<string[]>([]);
+
+  const toggleDiv = (id: string) => {
+    if (openDivIds.includes(id)) {
+      setOpenDivIds(openDivIds.filter((openId) => openId !== id));
+    } else {
+      setOpenDivIds([...openDivIds, id]);
+    }
+  };
+
   return (
     <>
       <div
@@ -59,6 +64,7 @@ const OddBox = ({ odds, data }: any) => {
       >
         <div className="oddBoxContainer" style={{ gap: "5px" }}>
           {odds?.map((item: any, index: number) => {
+            // console.log(item, "jhvf");
             return (
               <>
                 <div
@@ -71,7 +77,7 @@ const OddBox = ({ odds, data }: any) => {
                   key={index}
                 >
                   <div
-                  className="position-relative"
+                    className="position-relative"
                     style={{
                       width: "100%",
                       display: "flex",
@@ -80,22 +86,21 @@ const OddBox = ({ odds, data }: any) => {
                     }}
                   >
                     <HandleCards card={handleCardRender(item?.nat)} />
-                    <div
-                      onClick={() => toggleDiv("demo0")}
-                      className="range-icon d-inline-block ms-2"
+                    <span
+                      onClick={() => toggleDiv(`demo${index}`)}
+                      className="range-icon d-inline-block ms-1"
                     >
-                      <i
-                        className="fas fa-info-circle float-end"
-                      ></i>{" "}
+                      <i className="fas fa-info-circle float-right"></i>{" "}
                       <div
-                        id="demo0"
-                        className={`icon-range collapse ${
-                          openDivId === "demo0" ? "show" : ""
+                        id={`demo${index}`}
+                        className={`icon-range-dt1day collapse ${
+                          openDivIds.includes(`demo${index}`) ? "show" : ""
                         }`}
                       >
-                        R:<span>100</span>-<span>3L</span>
+                        R:<span>{parseFloat(item?.min)}</span>-
+                        <span>{formatNumber(item?.max)}</span>
                       </div>
-                    </div>
+                    </span>
                   </div>
                   <div
                     style={{
