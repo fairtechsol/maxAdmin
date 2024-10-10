@@ -282,10 +282,10 @@
   display: flex;
   flex-wrap: wrap;
   background-color: #434343;
-  padding: 10px;
+  padding: 20px;
   border-radius: 16px;
   margin-bottom: 10px;
-  width: 100% ;
+  width: 95%;
   margin-top: 10px;
 }
 .detail-page-container {
@@ -305,10 +305,9 @@
 .casino-open-card-box > div {
   width: 12.5%;
   text-align: center;
-  
+  display: flex;
   flex-wrap: wrap;
   color: #fdcf13;
-
 }
 
 .casino-open-card-box > div > div {

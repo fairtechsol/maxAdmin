@@ -85,13 +85,31 @@ const TeenPattiOpenComponent = () => {
   const groupedCards: CardSection[] = [];
   let sectionNumber = 1;
 
-  cardArray?.forEach((card: any, index: any) => {
-    if (index % 3 === 0) {
-      groupedCards.push({ number: sectionNumber++, cards: [] });
-    }
+  // cardArray?.forEach((card: any, index: any) => {
+  //   if (index % 3 === 0) {
+  //     groupedCards.push({ number: sectionNumber++, cards: [] });
+  //   }
 
-    groupedCards[groupedCards.length - 1].cards.push(card);
-  });
+  //   groupedCards[groupedCards.length - 1].cards.push(card);
+  // });
+
+  if (cardArray?.length > 0) {
+    for (let i = 0; i < 8; i++) {
+      groupedCards.push({ number: sectionNumber++, cards: [] });
+
+      groupedCards[groupedCards.length - 1]?.cards.push(cardArray?.[i]); // Index i is safe as long as i < 9
+
+      if (cardArray[i + 9] !== undefined) {
+        // Add bounds check
+        groupedCards[groupedCards.length - 1]?.cards.push(cardArray?.[i + 9]);
+      }
+
+      if (cardArray[i + 18] !== undefined) {
+        // Add bounds check
+        groupedCards[groupedCards.length - 1]?.cards.push(cardArray?.[i + 18]);
+      }
+    }
+  }
 
   console.log("dt", dragonTigerDetail);
 
@@ -140,7 +158,10 @@ const TeenPattiOpenComponent = () => {
               </div>
             </div>
             <div>
-              <div className="teenPatti-table-container">
+              <div
+                className="teenPatti-table-container"
+                style={{ display: "flex", alignItems: "center" }}
+              >
                 {/* <div className="teenPatti-table-row" style={{ lineHeight: 2 }}>
                   <div
                     style={{ width: "40%", border: "0.1px solid #fff" }}
@@ -181,16 +202,18 @@ const TeenPattiOpenComponent = () => {
 
                 <div className="teenpattiopen casino-open-card-box">
                   {groupedCards?.map((section) => (
-                    <div key={section.number} >
+                    <div key={section.number}>
                       <div>
                         <b>{section.number}</b>
                       </div>
-                      <div >
-                        {section.cards.map((cardSrc: string, index: number) => (
-                          <span key={index}>
-                            <HandleCards card={cardSrc} />
-                          </span>
-                        ))}
+                      <div>
+                        {section?.cards?.map(
+                          (cardSrc: string, index: number) => (
+                            <span key={index}>
+                              <HandleCards card={cardSrc} />
+                            </span>
+                          )
+                        )}
                       </div>
                     </div>
                   ))}
@@ -217,7 +240,7 @@ const TeenPattiOpenComponent = () => {
                       <b>Odds</b>
                     </div>
                     {dragonTigerDetail?.players &&
-                      Object.keys(dragonTigerDetail.players).map(
+                      Object?.keys(dragonTigerDetail.players)?.map(
                         (key, index) => {
                           const section = dragonTigerDetail.players[key];
                           return (
@@ -240,7 +263,7 @@ const TeenPattiOpenComponent = () => {
                       <b>Pair Plus</b>
                     </div>
                     {dragonTigerDetail?.pairsPlus &&
-                      Object.keys(dragonTigerDetail.pairsPlus).map(
+                      Object?.keys(dragonTigerDetail.pairsPlus)?.map(
                         (key, index) => {
                           const section = dragonTigerDetail.pairsPlus[key];
                           return (
