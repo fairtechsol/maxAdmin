@@ -111,7 +111,6 @@ const TeenPattiOpenComponent = () => {
     }
   }
 
-  console.log("dt", dragonTigerDetail);
 
   return (
     <>

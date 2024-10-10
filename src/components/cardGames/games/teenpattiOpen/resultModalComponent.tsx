@@ -25,73 +25,68 @@ const TeenOpenResultComponent: React.FC<Props> = ({ data }: any) => {
     players[index % 9].push(card);
   });
 
-  const layout = [
-    { index: 0, label: "Player 1" },
-    { index: 8, label: "Dealer" },
-    { index: 7, label: "Player 8" },
-    { index: 1, label: "Player 2" },
-    { index: -1, label: "gap" },
-    { index: 6, label: "Player 7" },
-    { index: 2, label: "Player 3" },
-    { index: 3, label: "Player 4" },
-    { index: 4, label: "Player 5" },
-    { index: 5, label: "Player 6" },
-  ];
+  // const layout = [
+  //   { index: 0, label: "Player 1" },
+  //   { index: 8, label: "Dealer" },
+  //   { index: 7, label: "Player 8" },
+  //   { index: 1, label: "Player 2" },
+  //   { index: -1, label: "gap" },
+  //   { index: 6, label: "Player 7" },
+  //   { index: 2, label: "Player 3" },
+  //   { index: 3, label: "Player 4" },
+  //   { index: 4, label: "Player 5" },
+  //   { index: 5, label: "Player 6" },
+  // ];
 
-  const renderRow = (row: any) => (
+  console.log("openResult", players);
+
+  const renderRow = () => (
     <div className="d-flex justify-content-between mb-3">
-      {row?.map((position: any, posIndex: any) => (
-        <div key={posIndex} className="teen20resultCardContainer mx-">
-          {position.label !== "gap" && (
-            <>
-              <div>
-                <span className="fs-5">{position.label}</span>
-                <div
-                  className={
-                    "d-sm-flex flex-row justify-content-center align-items-between mb-2"
-                  }
-                >
-                  {players[position.index]?.map((card: any, cardIndex: any) => (
-                    <div
-                      key={cardIndex}
-                      style={{
-                        border: "1px solid #fdef34",
-                        borderRadius: "1px",
-                        marginLeft: "0px",
-                        position: "relative",
-                      }}
-                    >
-                      <HandleCards card={card} />
-                    </div>
-                  ))}
-                </div>
+      <>
+        <div>
+          <span className="fs-5"></span>
+          <div
+            className={
+              "d-sm-flex flex-row justify-content-center align-items-between mb-2"
+            }
+          >
+            {players.map((row: any, rowIndex: any) => (
+              <div
+                key={rowIndex}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  marginBottom: "10px",
+                }}
+              >
+                <span style={{color:rowIndex==8?"#f1b44c":"" ,marginTop:"3px",marginLeft:"10px",textAlign:"center"}}>{rowIndex==8?"D":rowIndex+1}</span>
+                {row.map((card: any, cardIndex: any) => (
+                  <div style={{marginTop:"3px",marginLeft:"10px"}}>
+                  <HandleCards card={card} />
+                  </div>
+                ))}
               </div>
-              {data?.result?.sid.includes((position.index + 1).toString()) && (
-                <div
-                  className="casino-winner-ico"
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <FaTrophy size={30} color="#169733" />
-                </div>
-              )}
-            </>
-          )}
+            ))}
+          </div>
         </div>
-      ))}
+
+        <div
+          className="casino-winner-ico"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <FaTrophy size={30} color="#169733" />
+        </div>
+      </>
     </div>
   );
 
   return (
     <Container style={{ display: "flex", flexDirection: "column" }}>
-      <>
-        {renderRow(layout.slice(0, 3))}
-        {renderRow(layout.slice(3, 6))}
-        {renderRow(layout.slice(6, 10))}
-      </>
+      <>{renderRow()}</>
     </Container>
   );
 };
