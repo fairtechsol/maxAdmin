@@ -739,7 +739,7 @@ th {
 }
 
 .casino-result-cards-item .winner-icon {
-  height: 55px;
+  height: 40px;
 }
 
 .casino-winner-icon {
@@ -753,4 +753,10 @@ th {
   display: flex;
   flex-direction: column;
   // margin-top: 5%;
+}
+
+.casino-result-content-diveder {
+  width: 2px;
+  height: 100px;
+  background-color: #ddd;
 }

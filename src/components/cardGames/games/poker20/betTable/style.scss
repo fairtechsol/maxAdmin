@@ -68,11 +68,12 @@ background-color: rgba(0, 0, 0, 0.05);
     font-size: 1.5rem;
   }
 
-  .card32-table-container{
+  .poker20-table-container{
     width: 100%;
     background-color: #f3f1f1;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    // gap: 20px;
   }
   .card32-table-row{
     width: 100%;
@@ -116,17 +117,17 @@ background-color: rgba(0, 0, 0, 0.05);
   width: 100%;
 }
 
-.casino-bl-box-title .casino-bl-box-item {
+.casino-bl-box-title .casino-bl-box-item-20 {
   margin-bottom: 0;
 }
-.casino-bl-box-title .casino-bl-box-item {
+.casino-bl-box-title .casino-bl-box-item-20 {
   color: #000000;
   height: 24px !important;
   font-size: 14px;
   flex-direction: column;
 }
-.casino-bl-box-item {
-  margin-right: 4px;
+.casino-bl-box-item-20 {
+  // margin-right: 4px;
   border-radius: 0;
   text-align: center;
   display: -webkit-flex;
@@ -162,23 +163,24 @@ background-color: rgba(0, 0, 0, 0.05);
   width: 100%;
   color: #333;
 }
-.casino-bl-box-item .casino-book {
+.casino-bl-box-item-20 .casino-book {
   position: absolute;
   bottom: -20px;
 }
 
-.casino-bl-box-item > span {
+.casino-bl-box-item-20 > span {
   font-size: 12px;
   line-height: 1;
 }
 
-.casino-bl-box-item {
-  width: calc(33.33% - 3px);
+.casino-bl-box-item-20 {
+  // width: calc(33.33% - 3px);
+  // width: 100%;
   height: 40px;
   text-transform: uppercase;
   position: relative;
 }
 
-.casino-bl-box-item {
+.casino-bl-box-item-20 {
   margin-bottom: 22px;
 }
