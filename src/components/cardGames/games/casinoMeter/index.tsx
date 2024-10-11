@@ -6,12 +6,16 @@ import "./style.scss";
 import { RootState } from "../../../../store/store";
 import { handleRoundId } from "../../../../helpers";
 import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
-import { cardGamesId, cardGamesType, cardUrl } from "../../../../utils/Constants";
+import {
+  cardGamesId,
+  cardGamesType,
+  cardUrl,
+} from "../../../../utils/Constants";
 import UserBets from "../../../game/userBet";
 import Meter from "./meter";
-import LowCards from "./LowCards";
+//import LowCards from "./LowCards";
 import CardResultBox from "../../../commonComponent/cardResultBox";
-import HighCards from "./HighCards";
+//import HighCards from "./HighCards";
 import RulesModal from "../../../commonComponent/rulesModal";
 
 const CasinoMeterComponent = () => {
@@ -27,7 +31,7 @@ const CasinoMeterComponent = () => {
   useEffect(() => {
     setVideoFrameId(`${cardUrl}${cardGamesId?.cmeter}`);
   }, []);
-
+console.log("dtcm",dragonTigerDetail);
   return (
     <>
       <Row>
@@ -76,20 +80,19 @@ const CasinoMeterComponent = () => {
               </div>
             </div>
             <div>
-              {dragonTigerDetail?.videoInfo?.cards?.split(",")[0] !== "1" && (
-                <Meter
-                  data={dragonTigerDetail?.videoInfo?.cards}
-                  runPosition={
-                    dragonTigerDetail?.videoInfo?.mid ==
-                    placedBets?.[0]?.runnerId
-                      ? placedBets?.[0]?.teamName == "Low"
-                        ? "Low"
-                        : "High"
-                      : ""
-                  }
-                />
-              )}
-              <div
+              <Meter
+                data={dragonTigerDetail?.videoInfo?.cards}
+                runPosition={
+                  dragonTigerDetail?.videoInfo?.mid == placedBets?.[0]?.runnerId
+                    ? placedBets?.[0]?.teamName == "Low"
+                      ? "Low"
+                      : "High"
+                    : ""
+                }
+                dragonTigerDetai={dragonTigerDetail}
+              />
+
+              {/* <div
                 style={{
                   width: "100%",
                   display: "flex",
@@ -123,7 +126,7 @@ const CasinoMeterComponent = () => {
                       : true
                   }
                 />
-              </div>
+              </div> */}
               <div style={{ width: "100%", marginTop: "10px" }}>
                 <CardResultBox
                   data={dragonTigerDetail}

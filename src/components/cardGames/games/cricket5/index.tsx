@@ -11,7 +11,6 @@ import {
   cardUrl,
 } from "../../../../utils/Constants";
 import { RootState } from "../../../../store/store";
-import { handleRoundId } from "../../../../helpers";
 import Crick5Result from "./cric5Card";
 import MarketComponent from "./marketComponent";
 import CardResultBox from "../../../commonComponent/cardResultBox";
@@ -50,11 +49,7 @@ const Cricket5Component = () => {
               </div>
               <span>
                 {dragonTigerDetail?.videoInfo
-                  ? `Round ID:  ${handleRoundId(
-                      dragonTigerDetail?.videoInfo?.mid
-                    )}|Min: ${dragonTigerDetail?.videoInfo?.min}|Max: ${
-                      dragonTigerDetail?.videoInfo?.max
-                    }`
+                  ? `Round ID:  ${dragonTigerDetail?.videoInfo?.mid}|Min: ${dragonTigerDetail?.videoInfo?.min}|Max: ${dragonTigerDetail?.videoInfo?.max}`
                   : ""}
               </span>
             </div>
