@@ -30,7 +30,7 @@ const Dragon20ResultComponent: React.FC<Props> = ({ data }: any) => {
             }
           >
             {data?.result?.win === "1" && (
-              <div className="casino-winner-icon">
+              <div className="casino-winner-icon me-5 mb-5">
               <Winner />
             </div>
             )}
@@ -52,11 +52,7 @@ const Dragon20ResultComponent: React.FC<Props> = ({ data }: any) => {
               "d-sm-flex flex-row justify-content-center align-items-center"
             }
           >
-            {data?.result?.win === "2" && (
-              <div className="casino-winner-icon">
-              <Winner />
-            </div>
-            )}
+           
             <div
               style={{
                 border: "1px solid #fdef34",
@@ -66,6 +62,11 @@ const Dragon20ResultComponent: React.FC<Props> = ({ data }: any) => {
             >
               <HandleCards card={resultCards?.[1]} />
             </div>
+            {data?.result?.win === "2" && (
+              <div className="casino-winner-icon me-2 mb-5">
+              <Winner />
+            </div>
+            )}
           </div>
         </div>
       </div>

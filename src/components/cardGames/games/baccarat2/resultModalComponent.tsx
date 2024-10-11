@@ -22,7 +22,7 @@ const Bacarrat2ResultComponent: React.FC<Props> = ({ data }: any) => {
           <span className="title-18 f500 mb-2">Player</span>
           <div className="bacarrate-player-card">
             {data?.result?.win === "1" && (
-             <div className="casino-winner-icon">
+             <div className="casino-winner-icon  position-relative text-start me-5 mb-5">
              <Winner />
            </div>
             )}
@@ -53,7 +53,7 @@ const Bacarrat2ResultComponent: React.FC<Props> = ({ data }: any) => {
               </div>
             )}
             {data?.result?.win === "2" && (
-              <div className="casino-winner-icon">
+              <div className="casino-winner-icon mb-5">
               <Winner />
             </div>
             )}
