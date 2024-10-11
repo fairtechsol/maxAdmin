@@ -24,6 +24,7 @@ const DragonTiger2020Component = () => {
   const [show, setShow] = useState(false);
   const { dragonTigerDetail } = useSelector((state: RootState) => state.card);
 
+  console.log('dt1',dragonTigerDetail);
   return (
     <div>
       <Row>
