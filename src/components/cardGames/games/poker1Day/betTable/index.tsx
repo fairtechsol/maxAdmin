@@ -14,7 +14,7 @@ const DynamicTable = ({ odds, data }: any) => {
       setOpenDivIds([...openDivIds, id]);
     }
   };
-  console.log(data, "data");
+  // console.log(data, "data");
   return (
     <div className="d-flex justify-content-sm-between casino-detail-poker20">
       {/* Player A */}
@@ -22,14 +22,14 @@ const DynamicTable = ({ odds, data }: any) => {
         <div className="casino-box-row playerafabcy">
           <div className="casino-nation-name">
           <span
-              onClick={() => toggleDiv(`demo`)}
+              onClick={() => toggleDiv(`demo4`)}
               className="range-icon d-inline-block ms-1"
             >
               <i className="fas fa-info-circle float-right"></i>{" "}
               <div
-                id={`demo`}
+                id={`demo4`}
                 className={`icon-range-dt1day collapse ${
-                  openDivIds.includes(`demo`) ? "show" : ""
+                  openDivIds.includes(`demo4`) ? "show" : ""
                 }`}
               >
                 R:<span>{parseFloat(data?.videoInfo?.min)}</span>-
@@ -62,19 +62,20 @@ const DynamicTable = ({ odds, data }: any) => {
               <span className="casino-box-odd">{odds?.[0]?.l1}</span>
             </div>
           </div>
+          
         </div>
-
+        <span className="color-red f700 title-16">0</span>
         {/* Game Status and Book Info */}
         <div className="casino-nation-name text-center w-100">
         <span
-              onClick={() => toggleDiv(`demo`)}
+              onClick={() => toggleDiv(`demo5`)}
               className="range-icon d-inline-block ms-1"
             >
               <i className="fas fa-info-circle float-right"></i>{" "}
               <div
-                id={`demo`}
+                id={`demo5`}
                 className={`icon-range-dt1day collapse ${
-                  openDivIds.includes(`demo`) ? "show" : ""
+                  openDivIds.includes(`demo5`) ? "show" : ""
                 }`}
               >
                 R:<span>{parseFloat(data?.videoInfo?.min)}</span>-
@@ -99,6 +100,7 @@ const DynamicTable = ({ odds, data }: any) => {
                   ?.replace("Player A", "")
                   .trim()}
               </span>
+              <span className="color-red f700 title-16" style={{position: "absolute", bottom: "-20px", right: "60px"}}>0</span>
             </div>
             <div
               className={
@@ -113,6 +115,7 @@ const DynamicTable = ({ odds, data }: any) => {
                   ?.replace("Player A", "")
                   .trim()}
               </span>
+              <span className="color-red f700 title-16" style={{position: "absolute", bottom: "-20px", right: "60px"}}>0</span>
             </div>
           </div>
         </div>
@@ -144,14 +147,14 @@ const DynamicTable = ({ odds, data }: any) => {
         <div className="casino-box-row playerbfabcy">
           <div className="casino-nation-name">
           <span
-              onClick={() => toggleDiv(`demo`)}
+              onClick={() => toggleDiv(`demo6`)}
               className="range-icon d-inline-block ms-1"
             >
               <i className="fas fa-info-circle float-right"></i>{" "}
               <div
-                id={`demo`}
+                id={`demo6`}
                 className={`icon-range-dt1day collapse ${
-                  openDivIds.includes(`demo`) ? "show" : ""
+                  openDivIds.includes(`demo6`) ? "show" : ""
                 }`}
               >
                 R:<span>{parseFloat(data?.videoInfo?.min)}</span>-
@@ -185,18 +188,18 @@ const DynamicTable = ({ odds, data }: any) => {
             </div>
           </div>
         </div>
-
+        <span className="color-red f700 title-16" >0</span>
         {/* Game Status and Book Info */}
         <div className="casino-nation-name text-center w-100">
         <span
-              onClick={() => toggleDiv(`demo`)}
+              onClick={() => toggleDiv(`demo7`)}
               className="range-icon d-inline-block ms-1"
             >
               <i className="fas fa-info-circle float-right"></i>{" "}
               <div
-                id={`demo`}
+                id={`demo7`}
                 className={`icon-range-dt1day collapse ${
-                  openDivIds.includes(`demo`) ? "show" : ""
+                  openDivIds.includes(`demo7`) ? "show" : ""
                 }`}
               >
                 R:<span>{parseFloat(data?.videoInfo?.min)}</span>-
@@ -221,7 +224,7 @@ const DynamicTable = ({ odds, data }: any) => {
                   ?.replace("Player B", "")
                   .trim()}
               </span>
-              {/* <span style={{position: "absolute", bottom: "-20px", right: "60px"}}>0</span> */}
+              <span className="color-red f700 title-16" style={{position: "absolute", bottom: "-20px", right: "60px"}}>0</span>
             </div>
             
             <div
@@ -237,7 +240,7 @@ const DynamicTable = ({ odds, data }: any) => {
                   ?.replace("Player B", "")
                   .trim()}
               </span>
-              {/* <span style={{position: "absolute", bottom: "-20px", right: "60px"}}>0</span> */}
+              <span className="color-red f700 title-16" style={{position: "absolute", bottom: "-20px", right: "60px"}}>0</span>
             </div>
           </div>
         </div>

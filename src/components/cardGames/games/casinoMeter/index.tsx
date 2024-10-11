@@ -31,7 +31,6 @@ const CasinoMeterComponent = () => {
   useEffect(() => {
     setVideoFrameId(`${cardUrl}${cardGamesId?.cmeter}`);
   }, []);
-console.log("dtcm",dragonTigerDetail);
   return (
     <>
       <Row>

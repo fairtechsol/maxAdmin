@@ -29,7 +29,7 @@ const TeentPatti2020Component = () => {
     { label: "Trio (Teen)", value: "1 To 35" },
     { label: "Straight Flush (Pakki Rown)", value: "1 To 45" },
   ];
-  console.log('first',dragonTigerDetail);
+  
   return (
     <div>
       <Row>
