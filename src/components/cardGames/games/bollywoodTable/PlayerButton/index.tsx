@@ -23,14 +23,14 @@ const PlayerButton = ({
             gap: "10px"
           }}
         >
-          <div  className={lock ? "suspended teenPatti-table-item back-BackGround" : `teenPatti-table-item back-BackGround`} style={{ width: "50%" }}>
+          <div  className={lock ? "suspended teenPatti-table-item-aaa back-BackGround" : `teenPatti-table-item-aaa back-BackGround`} style={{ width: "50%" }}>
             <span className="f18-b my-2 fw-bold">
               {parseFloat(value1).toFixed(2)}
             </span>
             <span className="f10-b">{}</span>
           </div>
           <div
-            className={lock ? "suspended teenPatti-table-item lay-BackGround" : `teenPatti-table-item lay-BackGround`}
+            className={lock ? "suspended teenPatti-table-item-aaa lay-BackGround" : `teenPatti-table-item-aaa lay-BackGround`}
             style={{ width: "50%" }}
           >
             <span className="f18-b my-2 fw-bold">

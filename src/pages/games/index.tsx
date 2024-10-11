@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
@@ -7,7 +7,6 @@ import BetTable from "../../components/game/betTable";
 import GameHeader from "../../components/game/gameHeader";
 import ScoreCard from "../../components/game/scoreCard";
 import UserBets from "../../components/game/userBet";
-import { getChannelId } from "../../helpers";
 import { socket, socketService } from "../../socketManager";
 import {
   getPlacedBets,
@@ -23,7 +22,6 @@ const Games = () => {
   const dispatch: AppDispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
-  const [channelId, setChannelId] = useState<string>("");
 
   const { id } = useParams();
 
@@ -184,21 +182,7 @@ const Games = () => {
     }
   }, [id]);
 
-  useEffect(() => {
-    try {
-      if (matchDetails?.eventId) {
-        const callApiForLiveStream = async () => {
-          let result = await getChannelId(matchDetails?.eventId);
-          if (result) {
-            setChannelId(result?.channelNo);
-          }
-        };
-        callApiForLiveStream();
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }, [matchDetails?.id]);
+
 
   useEffect(() => {
     try {
@@ -376,8 +360,8 @@ const Games = () => {
               )}
             </Col>
             <Col md={4} className="text-white">
-              {channelId !== "0" && channelId !== "" && (
-                <LiveStreamComponent channelId={channelId} />
+              {matchDetails?.eventId && (
+                <LiveStreamComponent eventId={matchDetails?.eventId} />
               )}
               <div className="my-2">
                 <ScoreCard />

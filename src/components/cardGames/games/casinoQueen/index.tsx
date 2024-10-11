@@ -1,5 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import "./style.scss";
@@ -19,7 +19,6 @@ import BetBox from "./betBox";
 
 const CasinoQueenComponent = () => {
   const [show, setShow] = useState(false);
-  const placeBetRef = useRef<HTMLDivElement>(null);
   const [videoFrameId, setVideoFrameId] = useState("");
   const { dragonTigerDetail } = useSelector((state: RootState) => state.card);
 
@@ -33,7 +32,7 @@ const CasinoQueenComponent = () => {
       <Row>
         <Col md={8}>
           <div className="horseRacingTab">
-            <div style={{ width: "100%", margin: "5px" }}>
+            <div style={{ width: "100%"}}>
               <div
                 style={{
                   // flex: '1 0 auto',
@@ -54,7 +53,7 @@ const CasinoQueenComponent = () => {
               <div
                 style={{
                   width: "100%",
-                  margin: "5px",
+                  // margin: "5px",
                   display: "flex",
                   flexDirection: "column",
                 }}
@@ -89,8 +88,8 @@ const CasinoQueenComponent = () => {
             <RulesModal show={show} setShow={setShow} rule={abjrules} />
           </div>
         </Col>
-        <Col className="p-0" md={4}>
-          <Container className="p-0" fluid ref={placeBetRef}>
+        <Col  md={4}>
+          <Container className="p-0" fluid >
             <Row>
               <Col md={12}>
                 <UserBets matchId={dragonTigerDetail?.id} />

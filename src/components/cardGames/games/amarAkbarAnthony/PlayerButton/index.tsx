@@ -19,8 +19,8 @@ const PlayerButton = ({ value1, value2, value3, value4, width, lock }: any) => {
           <div
             className={
               lock
-                ? "suspended teenPatti-table-item back-BackGround"
-                : `teenPatti-table-item back-BackGround`
+                ? "suspended teenPatti-table-item-aaa back-BackGround"
+                : `teenPatti-table-item-aaa back-BackGround`
             }
             style={{ width: "50%" }}
           >
@@ -32,8 +32,8 @@ const PlayerButton = ({ value1, value2, value3, value4, width, lock }: any) => {
           <div
             className={
               lock
-                ? "suspended teenPatti-table-item lay-BackGround"
-                : `teenPatti-table-item lay-BackGround`
+                ? "suspended teenPatti-table-item-aaa lay-BackGround"
+                : `teenPatti-table-item-aaa lay-BackGround`
             }
             style={{ width: "50%" }}
           >

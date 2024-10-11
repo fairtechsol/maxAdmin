@@ -4,13 +4,7 @@ import isMobile from "../../../utils/screenDimension";
 import { Col, Row, Container } from "react-bootstrap";
 import { handleRoundId } from "../../../helpers";
 
-const VideoFrame = ({
-  result,
-  time,
-  id,
-  profitLoss,
-  data
-}: any) => {
+const VideoFrame = ({ result, time, id, profitLoss, data }: any) => {
   useEffect(() => {
     const element = document.getElementById("middleView-playerDiv");
     if (element) {
@@ -39,8 +33,7 @@ const VideoFrame = ({
           >
             {" "}
             .
-            {data?.type === "race20" ||
-            data?.type === "queen" ? (
+            {data?.type === "race20" || data?.type === "queen" ? (
               <div
                 style={{ position: "absolute", zIndex: "999" }}
                 className="casino-video-title"
@@ -53,7 +46,11 @@ const VideoFrame = ({
             ) : null}
             {result && (
               <div
-                className="mt-5"
+                className={
+                  data?.type === "race20" || data?.type === "queen"
+                    ? "mt-5"
+                    : ""
+                }
                 style={{ position: "absolute", zIndex: "999" }}
               >
                 {result}

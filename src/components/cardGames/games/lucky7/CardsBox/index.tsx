@@ -1,4 +1,6 @@
+
 import CommonCardImg from "../CommonCardImg";
+import { formatNumber } from "../../../../../helpers";
 
 const CardBox = ({ cardData, data }: any) => {
   const min = cardData?.[0]?.min;
@@ -10,17 +12,14 @@ const CardBox = ({ cardData, data }: any) => {
           <span style={{ fontSize: "16px", fontWeight: "bolder" }}>
             {parseFloat(
               isNaN(cardData?.[0]?.rate) ? 0 : cardData?.[0]?.rate
-            ).toFixed(2)}
+            )}
           </span>
         </div>
         <div>
           <CommonCardImg cardData={cardData} data={data} />
         </div>
         <div style={{ textAlign: "end" }}>
-          <span style={{ fontWeight: "bolder" }}>Min:</span>
-          <span>{min}</span>
-          <span style={{ fontWeight: "bolder", marginLeft: "10px" }}>Max:</span>
-          <span>{max}</span>
+          <span className="title-13">R:{parseFloat(min)}-{formatNumber(max)}</span>          
         </div>
       </div>
     </>

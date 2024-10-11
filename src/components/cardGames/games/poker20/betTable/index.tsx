@@ -1,151 +1,76 @@
+import { useState } from "react";
+import { formatNumber } from "../../../../../helpers";
 import "./style.scss";
-const DynamicTable = ({ odds, data, playerNum }: any) => {
-  const array = odds?.slice(playerNum[0], playerNum[1]);
+const DynamicTable = ({ odds, data }: any) => {
+  const [openDivIds, setOpenDivIds] = useState<string[]>([]);
 
-  const groupedData = (array || [])?.reduce((acc: any, item: any) => {
-    const { nation, sid, rate, gstatus } = item;
-    if (!acc[nation]) {
-      acc[nation] = { nation, entries: [] };
+  const toggleDiv = (id: string) => {
+    if (openDivIds.includes(id)) {
+      setOpenDivIds(openDivIds.filter((openId) => openId !== id));
+    } else {
+      setOpenDivIds([...openDivIds, id]);
     }
-    const suffix = String.fromCharCode(65 + acc[nation].entries.length);
-    acc[nation].entries?.push({
-      nation: `${nation} ${suffix}`,
-      sid,
-      rate,
-      gstatus,
-    });
-    return acc;
-  }, {});
-
-  const result = Object.values(groupedData);
+  };
 
   return (
-    <div className="card32-table-container">
-      <div className="card32-table-row" style={{ lineHeight: 2 }}>
-        <div style={{ width: "50%" }}></div>
+    <div className="poker20-table-container">
+      {odds?.map((item: any, index: number) => (
         <div
-          style={{
-            width: "50%",
-            display: "flex",
-            flexDirection: "row",
-          }}
+          className="ms-2 d-flex justify-content-center align-items-center flex-column title-14"
+          style={{ width: "31%" }}
         >
-          <div className="card32-table-item back" style={{ width: "50%" }}>
-            PLAYER A
-          </div>
-          <div className="card32-table-item back" style={{ width: "50%" }}>
-            PLAYER B
-          </div>
-        </div>
-      </div>
-      {result &&
-        result?.map((item: any, index: number) => {
-          return (
-            <div
-              className="card32-table-row"
-              style={{ lineHeight: 1 }}
-              key={index + playerNum[0]}
+          <div>
+            <span>{item?.nation}</span>
+            <span
+              onClick={() => toggleDiv(`demo${index}`)}
+              className="range-icon d-inline-block ms-1"
             >
+              <i className="fas fa-info-circle float-right"></i>{" "}
               <div
-                style={{
-                  width: "50%",
-                  padding: "8px",
-                  border: "0.1px solid #fff",
-                  display: "flex",
-                  flexDirection: "column",
-                  cursor: "pointer",
-                }}
+                id={`demo${index}`}
+                className={`icon-range-dt1day collapse ${
+                  openDivIds.includes(`demo${index}`) ? "show" : ""
+                }`}
               >
-                <span style={{ fontSize: "14px", fontWeight: "bolder" }}>
-                  {item?.nation}
-                </span>
+                R:<span>{parseFloat(data?.videoInfo?.min)}</span>-
+                <span>{formatNumber(data?.videoInfo?.max)}</span>
               </div>
-              <div
-                className={
-                  item?.entries?.[0]?.gstatus === "0" ? "suspended" : ""
-                }
-                style={{
-                  width: "50%",
-                  display: "flex",
-                  flexDirection: "row",
-                  cursor: "pointer",
-                  height: "40px",
-                }}
-              >
-                <div
-                  className="card32-table-item back"
-                  style={{ width: "50%" }}
-                >
-                  <span className="f12-b">{item?.entries?.[0]?.rate}</span>
-                  <span
-                    className={`f400 title-14 ${
-                      data?.profitLoss
-                        ? data?.profitLoss[
-                            `${data?.videoInfo?.mid}_${item?.entries?.[0]?.sid}_card`
-                          ]
-                          ? data?.profitLoss[
-                              `${data?.videoInfo?.mid}_${item?.entries?.[0]?.sid}_card`
-                            ] > 0
-                            ? "color-green"
-                            : data?.profitLoss[
-                                `${data?.videoInfo?.mid}_${item?.entries?.[0]?.sid}_card`
-                              ] < 0
-                            ? "color-red"
-                            : ""
-                          : ""
-                        : ""
-                    }`}
-                  >
-                    {data?.profitLoss
-                      ? data?.profitLoss[
-                          `${data?.videoInfo?.mid}_${item?.entries?.[0]?.sid}_card`
-                        ]
-                        ? data?.profitLoss[
-                            `${data?.videoInfo?.mid}_${item?.entries?.[0]?.sid}_card`
-                          ]
-                        : 0
-                      : 0}
-                  </span>
-                </div>
-                <div
-                  className="card32-table-item back"
-                  style={{ width: "50%" }}
-                >
-                  <span className="f12-b">{item?.entries?.[1]?.rate}</span>
-                  <span
-                    className={`f400 title-14 ${
-                      data?.profitLoss
-                        ? data?.profitLoss[
-                            `${data?.videoInfo?.mid}_${item?.entries?.[1]?.sid}_card`
-                          ]
-                          ? data?.profitLoss[
-                              `${data?.videoInfo?.mid}_${item?.entries?.[1]?.sid}_card`
-                            ] > 0
-                            ? "color-green"
-                            : data?.profitLoss[
-                                `${data?.videoInfo?.mid}_${item?.entries?.[1]?.sid}_card`
-                              ] < 0
-                            ? "color-red"
-                            : ""
-                          : ""
-                        : ""
-                    }`}
-                  >
-                    {data?.profitLoss
-                      ? data?.profitLoss[
-                          `${data?.videoInfo?.mid}_${item?.entries?.[1]?.sid}_card`
-                        ]
-                        ? data?.profitLoss[
-                            `${data?.videoInfo?.mid}_${item?.entries?.[1]?.sid}_card`
-                          ]
-                        : 0
-                      : 0}
-                  </span>
-                </div>
-              </div>
-            </div>
-          );
-        })}
+            </span>
+          </div>
+          <div
+            key={index}
+            className={`w-100 d-flex back-BackGround justify-content-center align-items-center title-16 f600 ${
+              item?.gstatus === "SUSPENDED" || item?.gstatus === "0" ? "locked" : ""
+            }`}
+            style={{ height: "40px" }}
+          >
+            <span>{item?.rate}</span>
+          </div>
+          <span
+            className={`f800 title-14 ${
+              data?.profitLoss
+                ? data?.profitLoss[`${data?.videoInfo?.mid}_${item?.sid}_card`]
+                  ? data?.profitLoss[
+                      `${data?.videoInfo?.mid}_${item?.sid}_card`
+                    ] > 0
+                    ? "color-green"
+                    : data?.profitLoss[
+                        `${data?.videoInfo?.mid}_${item?.sid}_card`
+                      ] < 0
+                    ? "color-red"
+                    : "color-red"
+                  : "color-red"
+                : "color-red"
+            }`}
+          >
+            {data?.profitLoss
+              ? data?.profitLoss[`${data?.videoInfo?.mid}_${item?.sid}_card`]
+                ? data?.profitLoss[`${data?.videoInfo?.mid}_${item?.sid}_card`]
+                : 0
+              : 0}
+          </span>
+        </div>
+      ))}
     </div>
   );
 };

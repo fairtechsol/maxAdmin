@@ -1,3 +1,4 @@
+import { formatNumber } from "../../../../../helpers";
 import CommonButtonBox from "../CommonButtonBox";
 
 const OddEven = ({ data, card, odds }: any) => {
@@ -48,10 +49,10 @@ const OddEven = ({ data, card, odds }: any) => {
                 data={odds?.[1]}
               />
             </div>
-            <div style={{ textAlign: "end" }}>
+            <div className="title-12" style={{ textAlign: "end" }}>
               <span>R:</span>
               <span>{min}</span>-
-              <span>{max}</span>
+              <span>{formatNumber(max)}</span>
             </div>
           </>
         ) : (
@@ -95,10 +96,10 @@ const OddEven = ({ data, card, odds }: any) => {
                 data={odds?.[1]}
               />
             </div>
-            <div style={{ textAlign: "end" }}>
+            <div className="title-12" style={{ textAlign: "end" }}>
             <span>R:</span>
               <span>{min}</span>-
-              <span>{max}</span>
+              <span>{formatNumber(max)}</span>
             </div>
           </>
         )}

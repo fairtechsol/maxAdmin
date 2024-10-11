@@ -4,7 +4,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import "./style.scss";
 import { RootState } from "../../../../store/store";
-import { handleRoundId } from "../../../../helpers";
+import { formatNumber, handleRoundId } from "../../../../helpers";
 import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
 import {
   cardGamesId,
@@ -22,14 +22,15 @@ const CasinoWarComponent = () => {
   const [show, setShow] = useState(false);
   const { dragonTigerDetail } = useSelector((state: RootState) => state.card);
 
-  // const rules = [
-  //   { label: "Pair (Double)", value: "1 To 1" },
-  //   { label: "Flush (Color)", value: "1 To 4" },
-  //   { label: "Straight (Rown)", value: "1 To 6" },
-  //   { label: "Trio (Teen)", value: "1 To 35" },
-  //   { label: "Straight Flush (Pakki Rown)", value: "1 To 45" },
-  // ];
+  const [openDivIds, setOpenDivIds] = useState<string[]>([]);
 
+  const toggleDiv = (id: string) => {
+    if (openDivIds.includes(id)) {
+      setOpenDivIds(openDivIds.filter((openId) => openId !== id));
+    } else {
+      setOpenDivIds([...openDivIds, id]);
+    }
+  };
   return (
     <>
       <Row>
@@ -183,15 +184,17 @@ const CasinoWarComponent = () => {
                 {dragonTigerDetail?.players?.map((playerA: any, index: any) => {
                   return (
                     <div
-                      key={index}
+                      key={playerA[0]?.nat.split(" ")[0]}
                       className="teenPatti-table-row"
                       style={{ lineHeight: 1 }}
                     >
                       <div
                         style={{
+                          display: "flex",
                           width: "40%",
                           padding: "10px",
                           border: "0.1px solid #fff",
+                          justifyContent: "space-between"
                         }}
                       >
                         <span
@@ -199,9 +202,24 @@ const CasinoWarComponent = () => {
                         >
                           {playerA[0]?.nat.split(" ")[0]}
                         </span>
+                        <span
+                          onClick={() => toggleDiv(`demo${index}`)}
+                          className="range-icon d-inline-block right-0"
+                        >
+                          <i className="fas fa-info-circle"></i>{" "}
+                          <div
+                            id={`demo${index}`}
+                            className={`icon-range-dt1day collapse ${
+                              openDivIds.includes(`demo${index}`) ? "show" : ""
+                            }`}
+                          >
+                            R:<span>{parseFloat(playerA?.[0]?.min)}</span>-
+                            <span>{formatNumber(playerA?.[0]?.max)}</span>
+                          </div>
+                        </span>
                       </div>
+
                       <div
-                        className={""}
                         style={{
                           width: "60%",
                           backgroundColor: "#72bbef",

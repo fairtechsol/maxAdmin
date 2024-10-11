@@ -18,70 +18,63 @@ const DragonTigerLionResultComponent: React.FC<Props> = ({ data }: any) => {
       <div className="dt20resultModal mb-3">
         <div className="d-flex row">
           <span className="fs-5">Dragon</span>
-          <div
-            className={
-              "d-sm-flex flex-row "
-            }
-          >
-            {data?.result?.win === "1" && (
-              <div className="casino-winner-icon">
-              <Winner />
-            </div>
-            )}
+          <div className={"d-sm-flex flex-row"}>
             <div
               style={{
-                border: "1px solid #fdef34",
                 borderRadius: "1px",
                 marginLeft: "5px",
+                display: "flex",
+                gap: 10
               }}
             >
               <HandleCards card={resultCards?.[0]} />
+              {data?.result?.win === "1" && (
+                <div className="casino-winner-icon">
+                  <Winner />
+                </div>
+              )}
             </div>
           </div>
         </div>
         <div className="d-flex row ">
           <span className="fs-5">Tiger</span>
-          <div
-            className={
-              "d-sm-flex flex-row position-relative"
-            }
-          >
-            {data?.result?.win === "21" && (
-              <div className="casino-winner-icon">
-              <Winner />
-            </div>
-            )}
+          <div className={"d-sm-flex flex-row position-relative"}>
+           
             <div
               style={{
-                border: "1px solid #fdef34",
+                display: "flex",
+                gap: 10,
                 borderRadius: "1px",
                 marginLeft: "5px",
               }}
             >
               <HandleCards card={resultCards?.[1]} />
+              {data?.result?.win === "21" && (
+              <div className="casino-winner-icon">
+                <Winner />
+              </div>
+            )}
             </div>
           </div>
         </div>
         <div className="d-flex row ">
           <span className="fs-5">Lion</span>
-          <div
-            className={
-              "d-sm-flex flex-row position-relative"
-            }
-          >
-            {data?.result?.win === "41" && (
-              <div className="casino-winner-icon">
-              <Winner />
-            </div>
-            )}
+          <div className={"d-sm-flex flex-row position-relative"}>
+           
             <div
               style={{
-                border: "1px solid #fdef34",
+                display: "flex",
+                gap: 10,
                 borderRadius: "1px",
                 marginLeft: "5px",
               }}
             >
               <HandleCards card={resultCards?.[2]} />
+              {data?.result?.win === "41" && (
+              <div className="casino-winner-icon">
+                <Winner />
+              </div>
+            )}
             </div>
           </div>
         </div>

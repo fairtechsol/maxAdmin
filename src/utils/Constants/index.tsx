@@ -1,5 +1,6 @@
 import {
   A,
+  A1,
   abjlist,
   abjlist2,
   bac1,
@@ -22,9 +23,13 @@ import {
   dt6,
   dtl20,
   eight,
+  eight8,
   eleven,
+  eleven11,
   five,
+  five5,
   four,
+  four4,
   img10,
   img2,
   img3,
@@ -35,21 +40,29 @@ import {
   luck7B,
   lucky7A,
   nine,
+  nine9,
   p1d,
   p20,
   p6,
   seven,
+  seven7,
   six,
+  six6,
   superover,
   // teencasino,
   teenplayer,
   ten,
+  ten10,
   testteen,
   thirteen,
+  thirteen13,
   three,
+  three3,
   twelve,
+  twelve12,
   twentyteen,
   two,
+  two2,
 } from "../../assets";
 
 export const ApiConstants = {
@@ -144,6 +157,8 @@ export const cardUrl =
   process.env.NODE_ENV === "production"
     ? "https://maxbet07.com/videoPage/"
     : "https://maxbet07.com/videoPage/";
+
+export const liveStreamUrl = "https://maxbet07.com/liveStream/";
 
 // const oldVideoUrl = "https://video.proexch.in/route/?id="
 // use below baseUrl for live build
@@ -573,6 +588,74 @@ export const dragonTigerCards = [
   {
     code: 12,
     imgSrc: thirteen,
+    value: 0,
+  },
+];
+
+export const andarBaharCards = [
+  {
+    code: 0,
+    imgSrc: A1,
+    value: 0,
+  },
+  {
+    code: 1,
+    imgSrc: two2,
+    value: 0,
+  },
+  {
+    code: 2,
+    imgSrc: three3,
+    value: 0,
+  },
+  {
+    code: 3,
+    imgSrc: four4,
+    value: 0,
+  },
+  {
+    code: 4,
+    imgSrc: five5,
+    value: 0,
+  },
+  {
+    code: 5,
+    imgSrc: six6,
+    value: 0,
+  },
+  {
+    code: 6,
+    imgSrc: seven7,
+    value: 0,
+  },
+  {
+    code: 7,
+    imgSrc: eight8,
+    value: 0,
+  },
+  {
+    code: 8,
+    imgSrc: nine9,
+    value: 0,
+  },
+  {
+    code: 9,
+    imgSrc: ten10,
+    value: 0,
+  },
+  {
+    code: 10,
+    imgSrc: eleven11,
+    value: 0,
+  },
+  {
+    code: 11,
+    imgSrc: twelve12,
+    value: 0,
+  },
+  {
+    code: 12,
+    imgSrc: thirteen13,
     value: 0,
   },
 ];

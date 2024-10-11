@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import GameHeader from "../../components/game/gameHeader";
 import { MatchType } from "../../utils/enum";
@@ -16,13 +16,12 @@ import NavComponent from "../../components/otherGames/matchList";
 import OtherUserBets from "../../components/otherGames/userBets";
 import BetTable from "../../components/otherGames/betTable";
 import LiveStreamComponent from "../../components/commonComponent/liveStreamComponent";
-import { getChannelId } from "../../helpers";
+
 
 const OtherGamesDetail = () => {
   const dispatch: AppDispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
-  const [channelId, setChannelId] = useState<string>("");
 
   const { id, marketId } = useParams();
 
@@ -238,21 +237,7 @@ const OtherGamesDetail = () => {
     }
   }, []);
 
-  useEffect(() => {
-    try {
-      if (matchDetails?.eventId) {
-        const callApiForLiveStream = async () => {
-          let result = await getChannelId(matchDetails?.eventId);
-          if (result) {
-            setChannelId(result?.channelNo);
-          }
-        };
-        callApiForLiveStream();
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }, [matchDetails?.id]);
+
 
   return (
     <div className="gamePage">
@@ -280,8 +265,8 @@ const OtherGamesDetail = () => {
                 ))}
             </Col>
             <Col md={4}>
-              {channelId !== "0" && channelId !== "" && (
-                <LiveStreamComponent channelId={channelId} />
+              {matchDetails?.eventId && (
+                <LiveStreamComponent eventId={matchDetails?.eventId} />
               )}
               <OtherUserBets matchId={id} />
             </Col>

@@ -69,11 +69,7 @@ const SuperOverComponent = () => {
             </div>
           </div>
           <div>
-            <div
-              className="d-sm-flex flex-row justify-content-around align-items-center"
-              style={{ width: "100%", gap: "10px" }}
-            >
-              <div className="w-100">
+              <div className="w-100 mt-2">
                 <Bookmaker
                   title={"Bookmaker"}
                   min={dragonTigerDetail?.videoInfo?.min}
@@ -81,7 +77,6 @@ const SuperOverComponent = () => {
                   matchOddsData={dragonTigerDetail?.bookmaker}
                   data={dragonTigerDetail}
                 />
-              </div>
             </div>
 
             <div style={{ width: "100%", marginTop: "5px" }}>

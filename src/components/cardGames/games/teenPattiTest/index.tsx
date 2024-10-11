@@ -240,7 +240,7 @@ const TeenPattiComponent = () => {
                 >
                   <span>Rules</span>
                 </div>
-                <div className="table-responsive rules-table">
+                <div className="table-responsive rules-table lh-1">
                   <Table bordered>
                     <thead>
                       <tr>
