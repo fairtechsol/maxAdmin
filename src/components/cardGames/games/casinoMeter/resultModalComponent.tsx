@@ -2,7 +2,7 @@ import React from "react";
 import { Container } from "react-bootstrap";
 import "./style.scss";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
-import Winner from "../../../commonComponent/trophyWinner";
+//import Winner from "../../../commonComponent/trophyWinner";
 
 interface Props {
   data: {
@@ -17,96 +17,116 @@ interface Props {
 }
 
 const CasinoMeterResultComponent: React.FC<Props> = ({ data }) => {
-  const resultCards = data?.result?.cards?.split(",");
-  const playerIds = data?.result?.sid?.split(",");
+  //const resultCards = data?.result?.cards?.split(",");
+  //const playerIds = data?.result?.sid?.split(",");
 
-  const players = resultCards?.map((card, index) => ({
-    card,
-    id: playerIds[index],
-  }));
+  // const players = resultCards?.map((card, index) => ({
+  //   card,
+  //   id: playerIds[index],
+  // }));
 
-  const renderRow = () => (
-    <div
-      className="flex-row justify-content-around"
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        width: "100%",
-      }}
-    >
-      {players?.map((player, index) => {
-        if (index !== 6) {
-          return (
-            <div
-              key={index}
-              className="teen20resultCardContainer mb-3"
-              style={{ marginLeft: "5px" }}
-            >
-              <span className="fs-6">Player {index + 1}</span>
-              <div className="d-sm-flex flex-row justify-content-center align-items-center mb-2">
-                <div
-                  style={{
-                    border: "1px solid #fdef34",
-                    borderRadius: "1px",
-                    marginLeft: "5px",
-                    position: "relative",
-                    display: "flex",
-                    justifyContent: "space-between",
-                    gap: "5px",
-                  }}
-                >
-                  <HandleCards card={player.card} />
-                </div>
-                {data?.result?.sid.includes(`${index + 1}`) && (
-                  <div className="casino-winner-icon me-1">
-                  <Winner />
-                </div>
-                )}
-              </div>
-            </div>
-          );
-        } else {
-          return <></>;
-        }
-      })}
-      {data?.result?.win === "0" && (
-        <div className="d-sm-flex flex-row justify-content-center align-items-center"></div>
-      )}
-    </div>
-  );
+  const cards = data?.result?.cards?.split(",");
+
+  const lowCards: string[] = [];
+  const highCards: string[] = [];
+
+  let lowCardSum = 0;
+  let highCardSum = 0;
+  let spadeCard = "";
+
+  cards?.forEach((card) => {
+    if (card?.length < 3) return;
+    const firstChar = card[0];
+
+    if (card == "9HH" || card == "10HH") {
+      spadeCard = spadeCard + card + ",";
+      return;
+    }
+
+    if (
+      firstChar === "1" ||
+      firstChar === "J" ||
+      firstChar === "Q" ||
+      firstChar === "K"
+    ) {
+      highCards.push(card);
+      highCardSum =
+        highCardSum +
+        (firstChar == "1"
+          ? 10
+          : firstChar == "J"
+          ? 11
+          : firstChar == "Q"
+          ? 12
+          : firstChar == "K"
+          ? 13
+          : 0);
+    } else {
+      lowCards.push(card);
+      lowCardSum = lowCardSum + (firstChar == "A" ? 1 : Number(firstChar));
+    }
+  });
+
   return (
     <Container
       style={{
         display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
+        flexDirection: "row",
+        justifyContent: "space-between",
       }}
     >
-      <div
-        style={{
-          border: "1px solid #fdef34",
-          borderRadius: "1px",
-          marginLeft: "5px",
-          position: "relative",
-        }}
-      ></div>
+      <>
+        <div className="d-flex align-items-center ">
+          <span className="fs-5"></span>
+          <div
+            className={
+              "d-sm-flex flex-column justify-content-center align-items-between mb-2 gap-2"
+            }
+          >
+            <div className="d-flex align-items-center ">
+              <span style={{ fontSize: "14px", fontWeight: "bold" }}>
+                Low Cards
+              </span>
+              {lowCards?.map((cd: any) => {
+                return (
+                  <div style={{ marginLeft: "5px" }}>
+                    <HandleCards card={cd} />
+                  </div>
+                );
+              })}
+            </div>
 
-      {players && (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <span className="fs-6">Dealer</span>
-          <HandleCards card={players[6]?.card} />
+            <div className="d-flex align-items-center ">
+              <span style={{ fontSize: "14px", fontWeight: "bold" }}>
+                High Cards
+              </span>
+              {highCards?.map((cd: any) => {
+                return (
+                  <div style={{ marginLeft: "5px" }}>
+                    <HandleCards card={cd} />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          <div style={{ display: "flex", gap: "5px", marginLeft: "30px" }}>
+            {spadeCard?.split(",")?.map((crd) => {
+              return <HandleCards card={crd} />;
+            })}
+          </div>
         </div>
-      )}
+      </>
 
-      {renderRow()}
+      <div style={{ width: "30%" }}>
+        <div className="casino-result-desc">
+          <span style={{ opacity: "0.6", display: "flex" }}>Winner</span>
+
+          <span style={{ marginLeft: "5px", display: "flex" }}>
+            {lowCardSum > highCardSum ? "Low" : "High"}
+          </span>
+        </div>
+      </div>
     </Container>
   );
 };
