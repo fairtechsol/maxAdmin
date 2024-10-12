@@ -21,12 +21,12 @@ const Card32BResultComponent: React.FC<Props> = ({ data }: any) => {
   }
   return (
     <Container style={{ display: "flex", flexDirection: "column" }}>
-      <div className="card32resultModal">
+      <div className="card32resultModal mb-5">
         <div className="card32resultCardContainer mb-3">
           <span style={{ fontSize: "20px" }}>Player 8</span>
           <div className="d-sm-flex flex-row justify-content-center align-items-center">
             {data?.result?.win === "1" && (
-              <div className="casino-winner-icon">
+              <div className="casino-winner-icon mt-5">
               <Winner />
             </div>
             )}
@@ -51,7 +51,7 @@ const Card32BResultComponent: React.FC<Props> = ({ data }: any) => {
           <span style={{ fontSize: "20px" }}>Player 9</span>
           <div className="d-sm-flex flex-row justify-content-center align-items-center">
             {data?.result?.win === "2" && (
-              <div className="casino-winner-icon">
+              <div className="casino-winner-icon mt-5">
               <Winner />
             </div>
             )}
@@ -76,7 +76,7 @@ const Card32BResultComponent: React.FC<Props> = ({ data }: any) => {
           <span style={{ fontSize: "20px" }}>Player 10</span>
           <div className="d-sm-flex flex-row justify-content-center align-items-center">
             {data?.result?.win === "3" && (
-              <div className="casino-winner-icon">
+              <div className="casino-winner-icon mt-5">
               <Winner />
             </div>
             )}
@@ -101,7 +101,7 @@ const Card32BResultComponent: React.FC<Props> = ({ data }: any) => {
           <span style={{ fontSize: "20px" }}>Player 11</span>
           <div className="d-sm-flex flex-row justify-content-center align-items-center">
             {data?.result?.win === "4" && (
-              <div className="casino-winner-icon">
+              <div className="casino-winner-icon mt-5">
               <Winner />
             </div>
             )}

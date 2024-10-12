@@ -1,11 +1,13 @@
 import { HandleCards } from "../../../commonComponent/cardsComponent";
-
+import { formatNumber } from "../../../../helpers";
 const Meter = ({
   data,
   runPosition,
+  dragonTigerDetai,
 }: {
   data: string;
   runPosition: string;
+  dragonTigerDetai: any;
 }) => {
   const cards = data?.split(",");
 
@@ -44,10 +46,26 @@ const Meter = ({
   });
 
   return (
-    <div style={{ background: "#ffc742d9", marginTop: "5px", padding: "10px" }}>
-      <div style={{ display: "flex", alignItems: "center" }}>
-        <strong style={{ textAlign: "center", color: "#17ec17", width: "10%" }}>
-          {lowCardSum}
+    <div style={{ marginTop: "5px", padding: "10px", gap: "15px" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          background: "#ccc",
+          justifyContent: "center",
+        }}
+      >
+        <strong
+          style={{
+            textAlign: "center",
+            color: "#17ec17",
+            width: "10%",
+            whiteSpace: "pre",
+          }}
+        >
+          <span style={{ color: "#ef910f" }}>Low</span>{" "}
+          {lowCardSum > 0 && lowCardSum}
         </strong>
         <div
           style={{ display: "flex", alignItems: "center", flexWrap: "wrap" }}
@@ -57,7 +75,7 @@ const Meter = ({
               <HandleCards card={card} />
             </span>
           ))}
-          {runPosition == "Low" && (
+          {/* {runPosition == "Low" && (
             <span style={{ color: "#FFFFFF", marginLeft: "5px" }}>
               Run Position:
               <span
@@ -68,13 +86,55 @@ const Meter = ({
                 {lowCardSum - highCardSum}
               </span>
             </span>
-          )}
+          )} */}
+        </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            width: "97%",
+          }}
+        >
+          <span
+            style={{ fontSize: "18px", color: "#BB2834", fontWeight: "bold" }}
+          >
+            {dragonTigerDetai?.profitLoss
+              ? dragonTigerDetai?.profitLoss[
+                  `${dragonTigerDetai?.videoInfo?.mid}_1_card`
+                ]
+                ? dragonTigerDetai?.profitLoss[
+                    `${dragonTigerDetai?.videoInfo?.mid}_1_card`
+                  ]
+                : 0
+              : 0}
+          </span>{" "}
+          <span style={{ fontSize: "12px" }}>
+            R:<span>{dragonTigerDetai?.low?.min}</span>-
+            <span>{formatNumber(dragonTigerDetai?.low?.max)}</span>
+          </span>
         </div>
       </div>
 
-      <div style={{ display: "flex", alignItems: "center" }}>
-        <strong style={{ textAlign: "center", color: "#17ec17", width: "10%" }}>
-          {highCardSum}
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          background: "#ccc",
+          marginTop: "10px",
+          justifyContent: "center",
+        }}
+      >
+        <strong
+          style={{
+            textAlign: "center",
+            color: "#17ec17",
+            width: "10%",
+            whiteSpace: "pre",
+          }}
+        >
+          <span style={{ color: "#ef910f" }}>High</span>{" "}
+          {highCardSum > 0 && highCardSum}
         </strong>
         <div
           style={{ display: "flex", alignItems: "center", flexWrap: "wrap" }}
@@ -84,7 +144,7 @@ const Meter = ({
               <HandleCards card={card} />
             </span>
           ))}
-          {runPosition == "High" && (
+          {/* {runPosition == "High" && (
             <span style={{ color: "#FFFFFF", marginLeft: "5px" }}>
               Run Position:
               <span
@@ -95,7 +155,32 @@ const Meter = ({
                 {highCardSum - lowCardSum}
               </span>
             </span>
-          )}
+          )} */}
+        </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            width: "97%",
+          }}
+        >
+          <span
+            style={{ fontSize: "18px", color: "#BB2834", fontWeight: "bold" }}
+          >
+            {dragonTigerDetai?.profitLoss
+              ? dragonTigerDetai?.profitLoss[
+                  `${dragonTigerDetai?.videoInfo?.mid}_2_card`
+                ]
+                ? dragonTigerDetai?.profitLoss[
+                    `${dragonTigerDetai?.videoInfo?.mid}_2_card`
+                  ]
+                : 0
+              : 0}
+          </span>{" "}
+          <span style={{ fontSize: "12px" }}>
+            R:<span>{dragonTigerDetai?.high?.min}</span>-
+            <span>{formatNumber(dragonTigerDetai?.high?.max)}</span>
+          </span>
         </div>
       </div>
     </div>

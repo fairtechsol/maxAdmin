@@ -23,7 +23,7 @@ const TeenTestResultComponent: React.FC<Props> = ({ data }: any) => {
   return (
     <Container style={{ display: "flex", flexDirection: "column" }}>
       <div
-        className="flex-row justify-content-around"
+        className="flex-row justify-content-around mb-5"
         style={{ display: "flex" }}
       >
         <div className="teen20resultCardContainer mb-3">
@@ -34,9 +34,9 @@ const TeenTestResultComponent: React.FC<Props> = ({ data }: any) => {
             }
           >
             {data?.result?.win === "11" && (
-              <div className="casino-winner-icon">
-                <Winner />
-              </div>
+              <div className="casino-winner-icon me-5 mb-5">
+              <Winner />
+            </div>
             )}
             <div
               style={{
@@ -80,9 +80,9 @@ const TeenTestResultComponent: React.FC<Props> = ({ data }: any) => {
             }
           >
             {data?.result?.win === "21" && (
-              <div className="casino-winner-icon">
-                <Winner />
-              </div>
+              <div className="casino-winner-icon me-5 mb-5">
+              <Winner />
+            </div>
             )}
             <div
               style={{
@@ -122,9 +122,9 @@ const TeenTestResultComponent: React.FC<Props> = ({ data }: any) => {
             }
           >
             {data?.result?.win === "31" && (
-              <div className="casino-winner-icon">
-                <Winner />
-              </div>
+             <div className="casino-winner-icon me-5 mb-5">
+             <Winner />
+           </div>
             )}
             <div
               style={{

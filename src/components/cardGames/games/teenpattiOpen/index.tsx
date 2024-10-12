@@ -14,13 +14,24 @@ import RulesModal from "../../../commonComponent/rulesModal";
 import { tprules } from "../../../../assets";
 import CardResultBox from "../../../commonComponent/cardResultBox";
 import UserBets from "../../../game/userBet";
-import TeenPattiTableRow from "./tableRow";
+//import TeenPattiTableRow from "./tableRow";
 import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
 import TeenOpenResult from "./teenCard";
+import OddsRateBox from "./oddsRateBox";
+import { HandleCards } from "../../../commonComponent/cardsComponent";
+//import { formatNumber } from "../../../../helpers";
 const TeenPattiOpenComponent = () => {
   const [show, setShow] = useState(false);
   const { dragonTigerDetail } = useSelector((state: RootState) => state.card);
+  //const [openDivIds, setOpenDivIds] = useState<string[]>([]);
 
+  // const toggleDiv = (id: string) => {
+  //   if (openDivIds.includes(id)) {
+  //     setOpenDivIds(openDivIds.filter((openId) => openId !== id));
+  //   } else {
+  //     setOpenDivIds([...openDivIds, id]);
+  //   }
+  // };
   const rules = [
     { label: "Pair (Double)", value: "1 To 1" },
     { label: "Flush (Color)", value: "1 To 4" },
@@ -49,8 +60,57 @@ const TeenPattiOpenComponent = () => {
     };
   };
 
-  const { cardsArray: cardsArray1, playersArray: playersArray1 } =
-    extractCardAndPlayerInfo(dragonTigerDetail?.videoInfo?.cards);
+  const { cardsArray: cardsArray1 } = extractCardAndPlayerInfo(
+    dragonTigerDetail?.videoInfo?.cards
+  );
+
+  const players = [
+    "Player 1",
+    "Player 2",
+    "Player 3",
+    "Player 4",
+    "Player 5",
+    "Player 6",
+    "Player 7",
+    "Player 8",
+  ];
+
+  const cardArray = dragonTigerDetail?.videoInfo?.cards?.split(",");
+
+  interface CardSection {
+    number: number;
+    cards: string[];
+  }
+
+  const groupedCards: CardSection[] = [];
+  let sectionNumber = 1;
+
+  // cardArray?.forEach((card: any, index: any) => {
+  //   if (index % 3 === 0) {
+  //     groupedCards.push({ number: sectionNumber++, cards: [] });
+  //   }
+
+  //   groupedCards[groupedCards.length - 1].cards.push(card);
+  // });
+
+  if (cardArray?.length > 0) {
+    for (let i = 0; i < 8; i++) {
+      groupedCards.push({ number: sectionNumber++, cards: [] });
+
+      groupedCards[groupedCards.length - 1]?.cards.push(cardArray?.[i]); // Index i is safe as long as i < 9
+
+      if (cardArray[i + 9] !== undefined) {
+        // Add bounds check
+        groupedCards[groupedCards.length - 1]?.cards.push(cardArray?.[i + 9]);
+      }
+
+      if (cardArray[i + 18] !== undefined) {
+        // Add bounds check
+        groupedCards[groupedCards.length - 1]?.cards.push(cardArray?.[i + 18]);
+      }
+    }
+  }
+
 
   return (
     <>
@@ -97,8 +157,11 @@ const TeenPattiOpenComponent = () => {
               </div>
             </div>
             <div>
-              <div className="teenPatti-table-container">
-                <div className="teenPatti-table-row" style={{ lineHeight: 2 }}>
+              <div
+                className="teenPatti-table-container"
+                style={{ display: "flex", alignItems: "center" }}
+              >
+                {/* <div className="teenPatti-table-row" style={{ lineHeight: 2 }}>
                   <div
                     style={{ width: "40%", border: "0.1px solid #fff" }}
                   ></div>
@@ -134,21 +197,110 @@ const TeenPattiOpenComponent = () => {
                       {dragonTigerDetail?.pairsPlus?.pairPlus1?.max})
                     </div>
                   </div>
+                </div> */}
+
+                <div className="teenpattiopen casino-open-card-box">
+                  {groupedCards?.map((section) => (
+                    <div key={section.number}>
+                      <div>
+                        <b>{section.number}</b>
+                      </div>
+                      <div>
+                        {section?.cards?.map(
+                          (cardSrc: string, index: number) => (
+                            <span key={index}>
+                              <HandleCards card={cardSrc} />
+                            </span>
+                          )
+                        )}
+                      </div>
+                    </div>
+                  ))}
                 </div>
 
-                {dragonTigerDetail?.players &&
-                  Object.keys(dragonTigerDetail?.players).map((key, index) => (
-                    <TeenPattiTableRow
-                      key={key}
-                      indx={index}
-                      player={dragonTigerDetail?.players[key]}
-                      pairPlus={
-                        dragonTigerDetail?.pairsPlus[`pairPlus${index + 1}`]
-                      }
-                      cardsA={cardsArray1}
-                      playersA={playersArray1}
-                    />
-                  ))}
+                <div className="teentestother">
+                  <div className="casino-box-header">
+                    <div className="casino-nation-name no-border"></div>
+
+                    {players.map((player, index) => (
+                      <div className="casino-bl-box" key={index}>
+                        <span
+                          className=" casino-bl-box-item"
+                          style={{ fontSize: "12px" }}
+                        >
+                          {player}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="casino-box-row mb-4">
+                    <div className="casino-nation-name casino-nation-name-bg">
+                      <b>Odds</b>
+                    </div>
+                    {dragonTigerDetail?.players &&
+                      Object?.keys(dragonTigerDetail.players)?.map(
+                        (key, index) => {
+                          const section = dragonTigerDetail.players[key];
+                          return (
+                            <OddsRateBox
+                              key={index}
+                              status={section?.gstatus}
+                              rate={section?.rate}
+                              profitLoss={
+                                dragonTigerDetail?.profitLoss?.[
+                                  `${section?.mid}_${section?.section}_card`
+                                ]
+                              }
+                            />
+                          );
+                        }
+                      )}
+                  </div>
+                  <div className="casino-box-row mb-4">
+                    <div className="casino-nation-name casino-nation-name-bg">
+                      <b>Pair Plus</b>
+                    </div>
+                    {dragonTigerDetail?.pairsPlus &&
+                      Object?.keys(dragonTigerDetail.pairsPlus)?.map(
+                        (key, index) => {
+                          const section = dragonTigerDetail.pairsPlus[key];
+                          return (
+                            <OddsRateBox
+                              key={index}
+                              status={section?.gstatus}
+                              rate={section?.rate}
+                              profitLoss={
+                                dragonTigerDetail?.profitLoss?.[
+                                  `${section?.mid}_${section?.section}_card`
+                                ]
+                              }
+                            />
+                          );
+                        }
+                      )}
+                  </div>
+                  {/* <div className="casino-box-row mb-4">
+                    <div className="casino-nation-name casino-nation-name-bg">
+                      <b>Total</b>
+                    </div>
+                    {dragonTigerDetail?.sections &&
+                      dragonTigerDetail?.sections.map(
+                        (section: any, index: any) => (
+                          <OddsRateBox
+                            key={index}
+                            status={section?.dstatus}
+                            rate={section?.drate}
+                            profitLoss={
+                              dragonTigerDetail?.profitLoss?.[
+                                `${section?.mid}_${section?.dsectionid}_card`
+                              ]
+                            }
+                          />
+                        )
+                      )}
+                  </div> */}
+                </div>
               </div>
               <div style={{ width: "100%", marginTop: "10px" }}>
                 <CardResultBox

@@ -252,7 +252,7 @@ const ListActiveInactiveUser: React.FC = () => {
                     setTableConfig={setTableConfig}
                     enablePdfExcel={true}
                     isSearch
-                    isSort={true}
+                    isSort={false}
                     isPagination={false}
                     sortData={sortData}
                     handleReportExport={handleReportExport}
