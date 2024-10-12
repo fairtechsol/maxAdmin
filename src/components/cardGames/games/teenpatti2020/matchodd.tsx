@@ -81,14 +81,14 @@ const Matchodd = ({ data, odds, name }: any) => {
           className={`title-12 text-red f-bold ${
             data?.profitLoss
               ? data?.profitLoss[
-                  `${data?.videoInfo?.mid}_${data?.playerA?.[0]?.sid}_card`
+                  `${data?.videoInfo?.mid}_${odds?.[0]?.sid}_card`
                 ]
                 ? data?.profitLoss[
-                    `${data?.videoInfo?.mid}_${data?.playerA?.[0]?.sid}_card`
+                    `${data?.videoInfo?.mid}_${odds?.[0]?.sid}_card`
                   ] > 0
                   ? "color-green"
                   : data?.profitLoss[
-                      `${data?.videoInfo?.mid}_${data?.playerA?.[0]?.sid}_card`
+                      `${data?.videoInfo?.mid}_${odds?.[0]?.sid}_card`
                     ] < 0
                   ? "color-red"
                   : ""
@@ -98,10 +98,10 @@ const Matchodd = ({ data, odds, name }: any) => {
         >
           {data?.profitLoss
             ? data?.profitLoss[
-                `${data?.videoInfo?.mid}_${data?.playerA?.[0]?.sid}_card`
+                `${data?.videoInfo?.mid}_${odds?.[0]?.sid}_card`
               ]
               ? data?.profitLoss[
-                  `${data?.videoInfo?.mid}_${data?.playerA?.[0]?.sid}_card`
+                  `${data?.videoInfo?.mid}_${odds?.[0]?.sid}_card`
                 ]
               : 0
             : 0}
@@ -110,14 +110,14 @@ const Matchodd = ({ data, odds, name }: any) => {
           className={`title-12 text-red f-bold ${
             data?.profitLoss
               ? data?.profitLoss[
-                  `${data?.videoInfo?.mid}_${data?.playerB?.[0]?.sid}_card`
+                  `${data?.videoInfo?.mid}_${odds?.[1]?.sid}_card`
                 ]
                 ? data?.profitLoss[
-                    `${data?.videoInfo?.mid}_${data?.playerB?.[0]?.sid}_card`
+                    `${data?.videoInfo?.mid}_${odds?.[1]?.sid}_card`
                   ] > 0
                   ? "color-green"
                   : data?.profitLoss[
-                      `${data?.videoInfo?.mid}_${data?.playerB?.[0]?.sid}_card`
+                      `${data?.videoInfo?.mid}_${odds?.[1]?.sid}_card`
                     ] < 0
                   ? "color-red"
                   : ""
@@ -127,10 +127,10 @@ const Matchodd = ({ data, odds, name }: any) => {
         >
           {data?.profitLoss
             ? data?.profitLoss[
-                `${data?.videoInfo?.mid}_${data?.playerB?.[0]?.sid}_card`
+                `${data?.videoInfo?.mid}_${odds?.[1]?.sid}_card`
               ]
               ? data?.profitLoss[
-                  `${data?.videoInfo?.mid}_${data?.playerB?.[0]?.sid}_card`
+                  `${data?.videoInfo?.mid}_${odds?.[1]?.sid}_card`
                 ]
               : 0
             : 0}
