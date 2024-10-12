@@ -39,14 +39,14 @@ const WorliResultComponent: React.FC<Props> = ({ data }: any) => {
   return (
     <Container style={{ display: "flex", flexDirection: "column" }}>
       <div className="abjresultModal mb-2">
-        <div className="w-100 abjresultCardContainer2">
+        <div className="w-100 abjresultCardContainer2 justify-content-end">
           <div
             style={{
-              width: "90%",
+              width: "80%",
               margin: "8px 9px 10px 11px",
             }}
           >
-            <div className="d-flex flex-column gap-4 align-items-center justify-content-center">
+            <div className="d-flex  gap-4 align-items-center justify-content-between">
               <div
                 style={{
                   display: "flex",
@@ -54,22 +54,31 @@ const WorliResultComponent: React.FC<Props> = ({ data }: any) => {
                   flexWrap: "wrap",
                   justifyContent: "space-around",
                   alignItems: "center",
+                  borderBottom:"1px solid rgba(0, 0, 0, .1)",
+                  paddingBottom:"1rem"
                 }}
               >
                 {elementsAndar?.map((item: any, index: any) => {
                   return <HandleCards key={index} card={item} />;
                 })}
               </div>
-              <span
-                style={{
-                  background: "#28a745",
-                  color: "#fff",
-                  paddingLeft: "30px",
-                  paddingRight: "30px",
-                }}
-              >
-                {sortString} -{sum}
-              </span>
+
+              <div style={{ width: "30%" }}>
+                <div className="casino-result-desc">
+                  <div style={{display:"flex"}}>
+                    <span style={{ opacity: "0.6", display: "flex" }}>
+                      Pana:
+                    </span>
+                    {sortString}
+                  </div>
+                  <div style={{display:"flex"}}>
+                    <span style={{ opacity: "0.6", display: "flex" }}>
+                      Ocada:
+                    </span>
+                    {sum}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
