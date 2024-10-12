@@ -72,7 +72,7 @@ const Card32BComponent = () => {
               className="d-sm-flex flex-row justify-content-around mt-2"
               style={{ width: "100%",gap:"15px" }}
             >
-              <RateBox odds={dragonTigerDetail?.matchOdd}/>
+              <RateBox data={dragonTigerDetail} odds={dragonTigerDetail?.matchOdd}/>
               <OddEven
                   odds={dragonTigerDetail?.oddEven}
                   data={dragonTigerDetail}

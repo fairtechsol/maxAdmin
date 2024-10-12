@@ -21,7 +21,7 @@ const Teen20ResultComponent: React.FC<Props> = ({ data }: any) => {
 
   return (
     <Container style={{ display: "flex", flexDirection: "column" }}>
-      <div className="teen20resultModal">
+      <div className="teen20resultModal mb-5">
         <div className="teen20resultCardContainer">
           <span className="fs-5">Player A</span>
           <div
@@ -30,7 +30,7 @@ const Teen20ResultComponent: React.FC<Props> = ({ data }: any) => {
             }
           >
             {data?.result?.win === "1" && (
-              <div className="casino-winner-icon">
+              <div className="casino-winner-icon me-5 mb-5">
               <Winner />
             </div>
             )}
@@ -71,7 +71,7 @@ const Teen20ResultComponent: React.FC<Props> = ({ data }: any) => {
             }
           >
             {data?.result?.win === "3" && (
-              <div className="casino-winner-icon">
+              <div className="casino-winner-icon me-5 mb-5">
               <Winner />
             </div>
             )}
