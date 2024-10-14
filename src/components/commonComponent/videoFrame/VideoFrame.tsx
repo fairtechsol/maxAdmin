@@ -11,6 +11,7 @@ const VideoFrame = ({ result, time, id, profitLoss, data }: any) => {
       element.style.display = "none !important";
     }
   }, []);
+
   return (
     <>
       <div
@@ -51,7 +52,18 @@ const VideoFrame = ({ result, time, id, profitLoss, data }: any) => {
                     ? "mt-5"
                     : ""
                 }
-                style={{ position: "absolute", zIndex: "99" }}
+                style={{
+                  position: "absolute",
+                  zIndex: "999",
+                  right:
+                    data?.type == "teen" || data?.type == "poker20"
+                      ? "0px"
+                      : "",
+                  top:
+                    data?.type == "teen" || data?.type == "poker20"
+                      ? "55px"
+                      : "",
+                }}
               >
                 {result}
               </div>

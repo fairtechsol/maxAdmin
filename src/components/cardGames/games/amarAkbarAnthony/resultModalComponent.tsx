@@ -13,7 +13,10 @@ const AmarAkbarAnthonyResultComponent: React.FC<Props> = ({ data }: any) => {
   const pair = resultCards?.[0]?.split(" ");
 
   return (
-    <Container style={{ display: "flex", flexDirection: "column" }}>
+    <Container
+      className="d-flex align-items-start flex-md-column flex-lg-row"
+      style={{ display: "flex", alignItems: "start" }}
+    >
       <div className="lucky7resultModal">
         <div className="lucky7resultCardContainer">
           <div className="d-sm-flex flex-row justify-content-center align-items-center">
@@ -29,43 +32,100 @@ const AmarAkbarAnthonyResultComponent: React.FC<Props> = ({ data }: any) => {
           </div>
         </div>
       </div>
-      <div className="w-100 d-sm-flex justify-content-center align-items-center mt-2">
+      <div className="w-100 d-sm-flex justify-content-cente  mt-">
         <div
           className={
-            "w-80 d-sm-flex flex-sm-row justify-content-center align-items-center p-4 mb-2"
+            "casino-result-desc w-80 d-sm-flex flex-sm-column justify-content-center align-items-center pe-4 mb-2"
           }
         >
-          <div className="lucky7CommonText-2 d-sm-flex flex-sm-row ">
-            Result:
-          </div>
-          <div className="d-sm-flex flex-sm-row p-1">
-            <span className="lucky7CommonText-2">{pair?.[0]}</span>
+          <div className="d-sm-flex flex-sm-row p- title-14 w-100">
+            <div
+              className="lucky7CommonText-2 d-sm-flex flex-sm-row title-14 w-50 justify-content-right"
+              style={{
+                opacity: "0.6",
+                display: "flex",
+                justifyContent: "right",
+              }}
+            >
+              Winner
+            </div>
+            <span className="lucky7CommonText-2 title-14 w-50 align-items-left">
+              {pair?.[0]}
+            </span>
           </div>
 
           <div
-            className="d-sm-flex flex-sm-row border-start border-2 border-primary mr-2 "
+            className="d-sm-flex flex-sm-row w-100  "
             style={{ marginRight: "5px" }}
           >
-            <span className="lucky7CommonText-2 mr-2">{resultCards?.[2]}</span>
+            <div
+              className="lucky7CommonText-2 d-sm-flex flex-sm-row title-14 w-50 justify-content-right"
+              style={{
+                opacity: "0.6",
+                display: "flex",
+                justifyContent: "right",
+              }}
+            >
+              Odd/Even
+            </div>
+            <span className="lucky7CommonText-2 mr-2 title-14 w-50 align-items-left">
+              {resultCards?.[2]}
+            </span>
           </div>
 
           <div
-            className="d-sm-flex flex-sm-row border-start border-2 border-primary "
+            className="d-sm-flex flex-sm-row w-100 "
             style={{ marginRight: "5px" }}
           >
-            <span className="lucky7CommonText-2">{resultCards?.[1]}</span>
+            <div
+              className="lucky7CommonText-2 d-sm-flex flex-sm-row title-14 w-50"
+              style={{
+                opacity: "0.6",
+                display: "flex",
+                justifyContent: "right",
+              }}
+            >
+              Color
+            </div>
+            <span className="lucky7CommonText-2 title-14 w-50">
+              {resultCards?.[1]}
+            </span>
           </div>
           <div
-            className="d-sm-flex flex-sm-row border-start border-2 border-primary "
+            className="d-sm-flex flex-sm-row w-100 "
             style={{ marginRight: "5px" }}
           >
-            <span className="lucky7CommonText-2">{resultCards?.[3]}</span>
+            <div
+              className="lucky7CommonText-2 d-sm-flex flex-sm-row title-14 w-50"
+              style={{
+                opacity: "0.6",
+                display: "flex",
+                justifyContent: "right",
+              }}
+            >
+              Under/Over
+            </div>
+            <span className="lucky7CommonText-2 title-14 w-50">
+              {resultCards?.[3]}
+            </span>
           </div>
           <div
-            className="d-sm-flex flex-sm-row border-start border-2 border-primary "
+            className="d-sm-flex flex-sm-row w-100 "
             style={{ marginRight: "5px" }}
           >
-            <span className="lucky7CommonText-2">{resultCards?.[4]}</span>
+            <div
+              className="lucky7CommonText-2 d-sm-flex flex-sm-row title-14 w-50"
+              style={{
+                opacity: "0.6",
+                display: "flex",
+                justifyContent: "right",
+              }}
+            >
+              Card
+            </div>
+            <span className="lucky7CommonText-2 title-14 w-50">
+              {resultCards?.[4]}
+            </span>
           </div>
         </div>
       </div>

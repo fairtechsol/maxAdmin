@@ -13,6 +13,8 @@ interface Props {
 const Poker20ResultComponent: React.FC<Props> = ({ data }: any) => {
   const resultCards = data?.result?.cards?.split(",");
   const lastCards = resultCards?.slice(4, 9);
+
+  console.log("res", data);
   return (
     <Container
       style={{
@@ -20,8 +22,9 @@ const Poker20ResultComponent: React.FC<Props> = ({ data }: any) => {
         // flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        padding: "20px"
+        padding: "20px",
       }}
+      className="d-flex flex-column flex-lg-row gap-4 gap-lg-0"
     >
       <div
         style={{
@@ -40,15 +43,14 @@ const Poker20ResultComponent: React.FC<Props> = ({ data }: any) => {
             alignItems: "center",
           }}
         >
-          
           <div style={{ display: "flex", flexDirection: "column" }}>
             <span className="title-18 f500">Player A</span>
             <div style={{ display: "flex", flexDirection: "row", gap: "5px" }}>
-            {data?.result?.win === "11" && (
-            <div className="casino-winner-icon me-5">
-            <Winner />
-          </div>
-          )}
+              {data?.result?.win === "11" && (
+                <div className="casino-winner-icon me-5">
+                  <Winner />
+                </div>
+              )}
               <HandleCards card={resultCards?.[0]} />
               <HandleCards card={resultCards?.[1]} />
             </div>
@@ -77,57 +79,54 @@ const Poker20ResultComponent: React.FC<Props> = ({ data }: any) => {
           <div style={{ display: "flex", flexDirection: "column" }}>
             <span className="title-18 f500">Player B</span>
             <div style={{ display: "flex", flexDirection: "row", gap: "5px" }}>
-            {data?.result?.win === "21" && (
-            <div className="casino-winner-icon me-5">
-            <Winner />
-          </div>
-          )}
+              {data?.result?.win === "21" && (
+                <div className="casino-winner-icon me-5">
+                  <Winner />
+                </div>
+              )}
               <HandleCards card={resultCards?.[2]} />
               <HandleCards card={resultCards?.[3]} />
             </div>
           </div>
-         
         </div>
       </div>
       <div
         style={{
-          width: "80%",
+          width: "40%",
           display: "flex",
-          flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          gap: "5px",
-          marginBottom: "10px",
+          marginBottom: "0px",
+          flexWrap: "wrap",
         }}
+        className="d-flex flex-column flex-lg-row"
       >
         <div
           style={{
-            width: "100%",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <span className="title-18 f500">Board</span>
-        </div>
-        <div
-          style={{
-            width: "100%",
+            width: "60%",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
             gap: "5px",
-            marginBottom: "10px",
+            marginBottom: "0px",
+            flexDirection: "column",
           }}
         >
-          {lastCards?.map((item: any, index: number) => {
-            return (
-              <div key={index}>
-                <HandleCards card={item} />
-              </div>
-            );
-          })}
+          <span className="title-18 f500">Board</span>
+          <div style={{ display: "flex" }}>
+            {lastCards?.map((item: any, index: number) => {
+              return (
+                <div key={index}>
+                  <HandleCards card={item} />
+                </div>
+              );
+            })}
+          </div>
         </div>
+      </div>
+      <div className="casino-result-desc w-lg-[15%] w-[70%]">
+        <span style={{ opacity: "0.6" }}>Main:</span>
+        <span>{data?.result?.desc?.split("##")[0]}</span>
       </div>
     </Container>
   );
