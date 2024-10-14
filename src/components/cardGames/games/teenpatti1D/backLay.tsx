@@ -15,29 +15,29 @@ const BackLay = ({ data, odds }: any) => {
       <div className="w-50 d-flex flex-column">
         <div className="w-100" style={{ height: "30px" }}></div>
         <div
-          className="w-100 d-flex flex-row justify-content-between align-items-center mt-1 px-1"
+          className="w-80 d-flex flex-row gap-5 align-items-center justify-content-between mt-1 px-2"
           style={{ height: "30px", backgroundColor: "#ddd" }}
         >
           <span className="title-14 f-bold">{odds?.[0]?.nation}</span>
           <div
-            className="d-flex flex-row justify-content-between position-relative"
-            style={{ width: "14%" }}
+            className="d-flex flex-row gap-2 position-relative justify-content-between"
+            style={{ width: "30%" }}
           >
             <span
-              className={`title-16 text-red f-bold ${
+              className={`title-16 text-red f-bold  ${
                 data?.profitLoss
                   ? data?.profitLoss[
-                      `${data?.videoInfo?.mid}_${data?.playerA?.[0]?.sid}_card`
+                      `${data?.videoInfo?.mid}_${odds?.[0]?.sectionId}_card`
                     ]
                     ? JSON.parse(
                         data?.profitLoss[
-                          `${data?.videoInfo?.mid}_${data?.playerA?.[0]?.sid}_card`
+                          `${data?.videoInfo?.mid}_${odds?.[0]?.sectionId}_card`
                         ]
                       )["playera"] > 0
                       ? "color-green"
                       : JSON.parse(
                           data?.profitLoss[
-                            `${data?.videoInfo?.mid}_${data?.playerA?.[0]?.sid}_card`
+                            `${data?.videoInfo?.mid}_${odds?.[0]?.sectionId}_card`
                           ]
                         )["playera"] < 0
                       ? "color-red"
@@ -48,11 +48,11 @@ const BackLay = ({ data, odds }: any) => {
             >
               {data?.profitLoss
                 ? data?.profitLoss[
-                    `${data?.videoInfo?.mid}_${data?.playerA?.[0]?.sid}_card`
+                    `${data?.videoInfo?.mid}_${odds?.[0]?.sectionId}_card`
                   ]
                   ? JSON.parse(
                       data?.profitLoss[
-                        `${data?.videoInfo?.mid}_${data?.playerA?.[0]?.sid}_card`
+                        `${data?.videoInfo?.mid}_${odds?.[0]?.sectionId}_card`
                       ]
                     )["playera"]
                   : 0
@@ -60,7 +60,7 @@ const BackLay = ({ data, odds }: any) => {
             </span>
             <div
               onClick={() => toggleDiv("demo0")}
-              className="range-icon d-inline-block me-1"
+              className="range-icon d-inline-block me-"
             >
               <i className="fas fa-info-circle float-right"></i>{" "}
               <div
