@@ -160,7 +160,7 @@ const TeenPattiDesktop = () => {
               )}
 
                 <VideoFrame
-                  time={dragonTigerDetail?.videoInfo?.lt}
+                  time={JSON.stringify(dragonTigerDetail?.videoInfo?.lt)}
                   id={videoFrameId}
                 />
               </div>
