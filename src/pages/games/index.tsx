@@ -6,7 +6,6 @@ import LiveStreamComponent from "../../components/commonComponent/liveStreamComp
 import BetTable from "../../components/game/betTable";
 import GameHeader from "../../components/game/gameHeader";
 import ScoreCard from "../../components/game/scoreCard";
-import UserBets from "../../components/game/userBet";
 import { socket, socketService } from "../../socketManager";
 import {
   getPlacedBets,
@@ -17,6 +16,7 @@ import {
 import { AppDispatch, RootState } from "../../store/store";
 import { sessionBettingType } from "../../utils/Constants";
 import { MatchType } from "../../utils/enum";
+import GameUserBets from "../../components/game/gameUserBets";
 
 const Games = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -366,7 +366,7 @@ const Games = () => {
               <div className="my-2">
                 <ScoreCard />
               </div>
-              <UserBets matchId={id} />
+              <GameUserBets matchId={id} />
             </Col>
           </Row>
         </div>
