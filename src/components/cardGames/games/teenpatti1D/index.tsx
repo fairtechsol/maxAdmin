@@ -78,6 +78,7 @@ console.log('dragonTigerDetail',dragonTigerDetail);
                   time={dragonTigerDetail?.videoInfo?.lasttime}
                   result={<Teen1DResult data={dragonTigerDetail?.videoInfo} />}
                   id={`${cardUrl}${cardGamesId.teenOneDay}`}
+                  data={dragonTigerDetail}
                 />
               </div>
             </div>
