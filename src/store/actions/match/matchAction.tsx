@@ -261,6 +261,7 @@ export const getMorePlacedBets = createAsyncThunk<any, any>(
         }`
       );
       if (resp) {
+        // console.log('resp',resp);
         return resp?.data?.rows;
       }
     } catch (error: any) {
@@ -402,3 +403,4 @@ export const betReportAccountListReset = createAction(
   "betReportAccountList/reset"
 );
 export const resetGameReportList = createAction("gameReportList/reset");
+export const getMorePlacedBetsReset = createAction("getMorePlacedBets/reset");

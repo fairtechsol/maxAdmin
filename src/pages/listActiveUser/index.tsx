@@ -218,7 +218,7 @@ const ListActiveInactiveUser: React.FC = () => {
                       });
                     }}
                   >
-                    Active User
+                    Active Users
                   </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
@@ -236,7 +236,7 @@ const ListActiveInactiveUser: React.FC = () => {
                       });
                     }}
                   >
-                    Deactive User
+                    Deactive Users
                   </Nav.Link>
                 </Nav.Item>
               </Nav>
