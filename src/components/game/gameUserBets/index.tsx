@@ -1,24 +1,23 @@
 import { useState } from "react";
-import { Button, Col, Row, Tab, Table } from "react-bootstrap";
+import { Button, Col, Nav, Row, Tab, Table } from "react-bootstrap";
 import CustomModal from "../../commonComponent/modal";
-// import UserBetModalTable from "./modal";
-import UserBetModalForm from "./modal/form";
 import "./style.scss";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import DeleteBetOverlay from "../../commonComponent/deleteBetRow";
 import moment from "moment-timezone";
+import UserBetModalForm from "../userBet/modal/form";
 
-const UserBets = ({ matchId }: any) => {
+const GameUserBets = ({ matchId }: any) => {
   const { placedBets, morePlacedBets } = useSelector(
     (state: RootState) => state.match.placeBets
   );
   const [showModal, setShowModal] = useState(false);
-  // const [activeTab, setActiveTab] = useState("first");
+  const [activeTab, setActiveTab] = useState("first");
 
-  // const handleSelect = (selectedKey: any) => {
-  //   setActiveTab(selectedKey);
-  // };
+  const handleSelect = (selectedKey: any) => {
+    setActiveTab(selectedKey);
+  };
   return (
     <div className={`userBets`}>
       <Tab.Container id="left-tabs-example" defaultActiveKey="first">
@@ -43,7 +42,7 @@ const UserBets = ({ matchId }: any) => {
               </div>
             </div>
           </Col>
-          {/* <div className="userBets-headerLeft mt-1">
+          <div className="userBets-headerLeft mt-1">
             <Nav
               activeKey={activeTab}
               onSelect={handleSelect}
@@ -71,7 +70,7 @@ const UserBets = ({ matchId }: any) => {
                 </Nav.Link>
               </Nav.Item>
             </Nav>
-          </div> */}
+          </div>
           <div className="bet-head">
             <Col sm={12}>
               <Tab.Content>
@@ -79,20 +78,20 @@ const UserBets = ({ matchId }: any) => {
                   <Table className="" striped>
                     <thead>
                       <tr className="lh-1">
-                        <th >UserName</th>
-                        <th >Nation</th>
-                        <th className="text-right">
+                        <th style={{ minWidth: "90px" }}>UserName</th>
+                        <th style={{ minWidth: "120px" }}>Nation</th>
+                        <th className="text-right" style={{ minWidth: "50px" }}>
                           Rate
                         </th>
                         <th
                           className="text-right text-end"
-                          // style={{ minWidth: "90px" }}
+                          style={{ minWidth: "90px" }}
                         >
                           Amount
                         </th>
-                        <th>PlaceDate</th>
-                        {/* <th>MatchDate</th> */}
-                        <th>Gametype</th>
+                        {/* <th>PlaceDate</th>
+                        <th>MatchDate</th>
+                        <th>Gametype</th> */}
                       </tr>
                     </thead>
                     <tbody className="bg-primary">
@@ -111,11 +110,17 @@ const UserBets = ({ matchId }: any) => {
                                     : "bg-blue3"
                                 }
                               >
-                                
+                                <div className="row">
+                                  <div className="col f500">
+                                    {" "}
+                                    {bet?.marketType}{" "}
+                                  </div>
+                                </div>
 
-                                
+                                <div className="col">
+                                  {" "}
                                   {bet?.user?.userName}
-                               
+                                </div>
                               </td>
                               <td
                                 className={
@@ -125,7 +130,7 @@ const UserBets = ({ matchId }: any) => {
                                     : "bg-blue3"
                                 }
                               >
-                               
+                                <br></br>
                                 {bet?.marketBetType === "SESSION"
                                   ? bet?.eventName
                                   : bet?.teamName}
@@ -138,7 +143,7 @@ const UserBets = ({ matchId }: any) => {
                                     : "bg-blue3"
                                 }
                               >
-                                
+                                <br></br>
                                 {bet?.odds}
                               </td>
                               <td
@@ -147,15 +152,19 @@ const UserBets = ({ matchId }: any) => {
                                   bet?.betType === "LAY"
                                     ? "bg-red1"
                                     : "bg-blue3"
-                                } `}
+                                } d-flex flex-column justify-content-end text-end`}
                               >
-                               
+                                <div className="col">
+                                  {moment(bet?.createdAt).format(
+                                    "YYYY-MM-DD hh:mm:ss"
+                                  )}
+                                </div>
 
-                               
+                                <div className="col text-end">
                                   {bet?.amount}
-                                
+                                </div>
                               </td>
-                              <td
+                              {/* <td
                                 className={
                                   bet?.betType === "NO" ||
                                   bet?.betType === "LAY"
@@ -163,18 +172,10 @@ const UserBets = ({ matchId }: any) => {
                                     : "bg-blue3"
                                 }
                               >
-                                {moment(bet?.createdAt).format(
+                                {moment(bet?.match?.startAt).format(
                                   "YYYY-MM-DD hh:mm:ss"
                                 )}
-                              </td>
-                              <td  className={
-                                  bet?.betType === "NO" ||
-                                  bet?.betType === "LAY"
-                                    ? "bg-red1"
-                                    : "bg-blue3"
-                                }>
-                                {bet?.eventType}
-                              </td>
+                              </td> */}
 
                               <DeleteBetOverlay title={bet?.deleteReason} />
                             </tr>
@@ -238,4 +239,4 @@ const UserBets = ({ matchId }: any) => {
   );
 };
 
-export default UserBets;
+export default GameUserBets;

@@ -35,7 +35,7 @@ const VideoFrame = ({ result, time, id, profitLoss, data }: any) => {
             .
             {data?.type === "race20" || data?.type === "queen" ? (
               <div
-                style={{ position: "absolute", zIndex: "999" }}
+                style={{ position: "absolute", zIndex: "99" }}
                 className="casino-video-title"
               >
                 <span className="casino-name">{data?.name}</span>
@@ -51,13 +51,13 @@ const VideoFrame = ({ result, time, id, profitLoss, data }: any) => {
                     ? "mt-5"
                     : ""
                 }
-                style={{ position: "absolute", zIndex: "999" }}
+                style={{ position: "absolute", zIndex: "99" }}
               >
                 {result}
               </div>
             )}
             <div
-              style={{ position: "absolute", zIndex: "999" }}
+              style={{ position: "absolute", zIndex: "99" }}
               className="casino-video-right-icons"
             >
               <div title="Rules" className="casino-video-rules-icon">
