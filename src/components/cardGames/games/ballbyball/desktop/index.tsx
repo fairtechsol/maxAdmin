@@ -166,16 +166,16 @@ const TeenPattiDesktop = () => {
               </div>
             </div>
       
-              <div>
+              <div style={{paddingTop:"5px"}}>
                 <div
                   style={{
                     background: "rgb(255 199 66 / 85%)",
                     color: "#fff",
                     fontWeight: "bold",
-                    lineHeight: 2,
+                    
                   }}
                 >
-                  <span style={{ marginLeft: "10px" }}> Runs</span>
+                  <span style={{ marginLeft: "10px",fontSize:"14px" }}> Runs</span>
                 </div>
                 <div
                   style={{
