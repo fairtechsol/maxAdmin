@@ -12,7 +12,6 @@ const VideoFrame = ({ result, time, id, profitLoss, data }: any) => {
     }
   }, []);
 
-  console.log("video", data);
   return (
     <>
       <div
