@@ -85,8 +85,15 @@ const BackLay = ({ data, odds }: any) => {
             className="w-100 d-flex justify-content-center align-items-center position-relative"
             style={{ height: "40px", border: "2px solid #72bbef" }}
           >
-            {(odds?.[0]?.gstatus==="SUSPENDED" || odds?.[0]?.gstatus==="CLOSED") && <div className="dt20bLock"></div>}
-            <span className="title-15 f-bold">{odds?.[0]?.b1}</span>
+            {(odds?.[0]?.gstatus === "SUSPENDED" ||
+              odds?.[0]?.gstatus === "CLOSED") && (
+              <div className="dt20bLock"></div>
+            )}
+            <span className="title-15 f-bold">
+              {odds?.[0]?.b1 == "0"
+                ? "0"
+                : parseFloat((Number(odds?.[0]?.b1) * 0.01 + 1).toFixed(2))}
+            </span>
           </div>
         </div>
         <div className="w-50 d-flex flex-column justify-content-center align-items-center">
@@ -97,8 +104,15 @@ const BackLay = ({ data, odds }: any) => {
             className="w-100 d-flex justify-content-center align-items-center position-relative"
             style={{ height: "40px", border: "2px solid #f994ba" }}
           >
-            {(odds?.[0]?.gstatus==="SUSPENDED" || odds?.[0]?.gstatus==="CLOSED") && <div className="dt20bLock"></div>}
-            <span className="title-15 f-bold">{odds?.[0]?.l1}</span>
+            {(odds?.[0]?.gstatus === "SUSPENDED" ||
+              odds?.[0]?.gstatus === "CLOSED") && (
+              <div className="dt20bLock"></div>
+            )}
+            <span className="title-15 f-bold">
+              {odds?.[0]?.l1 == "0"
+                ? "0"
+                : parseFloat((Number(odds?.[0]?.l1) * 0.01 + 1).toFixed(2))}
+            </span>
           </div>
         </div>
       </div>
