@@ -37,7 +37,7 @@ const TeentPatti1DComponent = () => {
   //   }
   //   return parsedValue.toFixed(2);
   // };
-console.log('dragonTigerDetail',dragonTigerDetail);
+// console.log('dragonTigerDetail',dragonTigerDetail);
   return (
     <>
       <Row>

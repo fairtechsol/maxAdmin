@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Col, Nav, Row, Tab, Table } from "react-bootstrap";
+import { Button, Col, Row, Tab, Table } from "react-bootstrap";
 import CustomModal from "../../commonComponent/modal";
 // import UserBetModalTable from "./modal";
 import UserBetModalForm from "./modal/form";
@@ -14,11 +14,11 @@ const UserBets = ({ matchId }: any) => {
     (state: RootState) => state.match.placeBets
   );
   const [showModal, setShowModal] = useState(false);
-  const [activeTab, setActiveTab] = useState("first");
+  // const [activeTab, setActiveTab] = useState("first");
 
-  const handleSelect = (selectedKey: any) => {
-    setActiveTab(selectedKey);
-  };
+  // const handleSelect = (selectedKey: any) => {
+  //   setActiveTab(selectedKey);
+  // };
   return (
     <div className={`userBets`}>
       <Tab.Container id="left-tabs-example" defaultActiveKey="first">
@@ -43,7 +43,7 @@ const UserBets = ({ matchId }: any) => {
               </div>
             </div>
           </Col>
-          <div className="userBets-headerLeft mt-1">
+          {/* <div className="userBets-headerLeft mt-1">
             <Nav
               activeKey={activeTab}
               onSelect={handleSelect}
@@ -71,7 +71,7 @@ const UserBets = ({ matchId }: any) => {
                 </Nav.Link>
               </Nav.Item>
             </Nav>
-          </div>
+          </div> */}
           <div className="bet-head">
             <Col sm={12}>
               <Tab.Content>
@@ -79,11 +79,9 @@ const UserBets = ({ matchId }: any) => {
                   <Table className="" striped>
                     <thead>
                       <tr className="lh-1">
-                        <th >UserName</th>
-                        <th >Nation</th>
-                        <th className="text-right">
-                          Rate
-                        </th>
+                        <th>UserName</th>
+                        <th>Nation</th>
+                        <th className="text-right">Rate</th>
                         <th
                           className="text-right text-end"
                           // style={{ minWidth: "90px" }}
@@ -96,97 +94,97 @@ const UserBets = ({ matchId }: any) => {
                       </tr>
                     </thead>
                     <tbody className="bg-primary">
-                      {placedBets?.map((bet: any) => {
-                        return (
-                          <>
-                            <tr
-                              key={bet?.id}
-                              className="position-relative title-14 lh-sm"
-                            >
-                              <td
-                                className={
-                                  bet?.betType === "NO" ||
-                                  bet?.betType === "LAY"
-                                    ? "bg-red1"
-                                    : "bg-blue3"
-                                }
+                      {placedBets?.length > 0 ? (
+                        placedBets?.map((bet: any) => {
+                          return (
+                            <>
+                              <tr
+                                key={bet?.id}
+                                className="position-relative title-14 lh-sm"
                               >
-                                
-
-                                
+                                <td
+                                  className={
+                                    bet?.betType === "NO" ||
+                                    bet?.betType === "LAY"
+                                      ? "bg-red1"
+                                      : "bg-blue3"
+                                  }
+                                >
                                   {bet?.user?.userName}
-                               
-                              </td>
-                              <td
-                                className={
-                                  bet?.betType === "NO" ||
-                                  bet?.betType === "LAY"
-                                    ? "bg-red1"
-                                    : "bg-blue3"
-                                }
-                              >
-                               
-                                {bet?.marketBetType === "SESSION"
-                                  ? bet?.eventName
-                                  : bet?.teamName}
-                              </td>
-                              <td
-                                className={
-                                  bet?.betType === "NO" ||
-                                  bet?.betType === "LAY"
-                                    ? "bg-red1"
-                                    : "bg-blue3"
-                                }
-                              >
-                                
-                                {bet?.odds}
-                              </td>
-                              <td
-                                className={`${
-                                  bet?.betType === "NO" ||
-                                  bet?.betType === "LAY"
-                                    ? "bg-red1"
-                                    : "bg-blue3"
-                                } `}
-                              >
-                               
-
-                               
+                                </td>
+                                <td
+                                  className={
+                                    bet?.betType === "NO" ||
+                                    bet?.betType === "LAY"
+                                      ? "bg-red1"
+                                      : "bg-blue3"
+                                  }
+                                >
+                                  {bet?.marketBetType === "SESSION"
+                                    ? bet?.eventName
+                                    : bet?.teamName}
+                                </td>
+                                <td
+                                  className={
+                                    bet?.betType === "NO" ||
+                                    bet?.betType === "LAY"
+                                      ? "bg-red1"
+                                      : "bg-blue3"
+                                  }
+                                >
+                                  {bet?.odds}
+                                </td>
+                                <td
+                                  className={`${
+                                    bet?.betType === "NO" ||
+                                    bet?.betType === "LAY"
+                                      ? "bg-red1"
+                                      : "bg-blue3"
+                                  } `}
+                                >
                                   {bet?.amount}
-                                
-                              </td>
-                              <td
-                                className={
-                                  bet?.betType === "NO" ||
-                                  bet?.betType === "LAY"
-                                    ? "bg-red1"
-                                    : "bg-blue3"
-                                }
-                              >
-                                {moment(bet?.createdAt).format(
-                                  "YYYY-MM-DD hh:mm:ss"
-                                )}
-                              </td>
-                              <td  className={
-                                  bet?.betType === "NO" ||
-                                  bet?.betType === "LAY"
-                                    ? "bg-red1"
-                                    : "bg-blue3"
-                                }>
-                                {bet?.eventType}
-                              </td>
+                                </td>
+                                <td
+                                  className={
+                                    bet?.betType === "NO" ||
+                                    bet?.betType === "LAY"
+                                      ? "bg-red1"
+                                      : "bg-blue3"
+                                  }
+                                >
+                                  {moment(bet?.createdAt).format(
+                                    "YYYY-MM-DD hh:mm:ss"
+                                  )}
+                                </td>
+                                <td
+                                  className={
+                                    bet?.betType === "NO" ||
+                                    bet?.betType === "LAY"
+                                      ? "bg-red1"
+                                      : "bg-blue3"
+                                  }
+                                >
+                                  {bet?.eventType}
+                                </td>
 
-                              <DeleteBetOverlay title={bet?.deleteReason} />
-                            </tr>
-                            <tr>
-                              <td
-                                colSpan={4}
-                                style={{ height: "3px", padding: "0px" }}
-                              ></td>
-                            </tr>
-                          </>
-                        );
-                      })}
+                                <DeleteBetOverlay title={bet?.deleteReason} />
+                              </tr>
+                              <tr>
+                                <td
+                                  colSpan={4}
+                                  style={{ height: "3px", padding: "0px" }}
+                                ></td>
+                              </tr>
+                            </>
+                          );
+                        })
+                      ) : (
+                        <tr>
+                          <td colSpan={7} className="text-center">
+                            No records found
+                          </td>
+                        </tr>
+                      )}
                     </tbody>
                   </Table>
                 </Tab.Pane>

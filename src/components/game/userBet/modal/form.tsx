@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../../store/store";
 // import { searchList } from "../../../../store/actions/user/userActions";
-import { getMorePlacedBets } from "../../../../store/actions/match/matchAction";
+import { getMorePlacedBets, getMorePlacedBetsReset } from "../../../../store/actions/match/matchAction";
 import CustomButton from "../../../commonComponent/button";
 import UserBetModalTable from ".";
 
@@ -115,7 +115,12 @@ const UserBetModalForm = (props: any) => {
       (item: any) => item?.deleteReason === null
     );
     setFilteredItems(filtered);
+    return () => {
+      dispatch(getMorePlacedBetsReset());
+    };
   }, []);
+  
+  
 
   const handleDelete = (type: any) => {
     if (type === "delete") {
@@ -376,8 +381,8 @@ const UserBetModalForm = (props: any) => {
                 </div>
               </div>
               <div className="d-flex flex-row justify-content-around align-items-center w-20">
-                <span>Total SODA : 1</span>
-                <span>Total Amount : 100.00</span>
+                {/* <span>Total SODA: 1</span>
+                <span>Total Amount : 100.00</span> */}
               </div>
             </div>
           </div>

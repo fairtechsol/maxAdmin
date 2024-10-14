@@ -32,14 +32,14 @@ const PairBox = ({ odds, data }: any) => {
                     <span
                   className={`title-14 f400 me-1 ${
                     data?.profitLoss
-                      ? data?.profitLoss[`${data?.videoInfo?.mid}_1_card`]
+                      ? data?.profitLoss[`${data?.videoInfo?.mid}_${item?.sid}_card`]
                         ? JSON.parse(
-                            data?.profitLoss[`${data?.videoInfo?.mid}_1_card`]
-                          )[item?.nation] > 0
+                            data?.profitLoss[`${data?.videoInfo?.mid}_${item?.sid}_card`]
+                          )["p2"] > 0
                           ? "color-green"
                           : JSON.parse(
-                              data?.profitLoss[`${data?.videoInfo?.mid}_1_card`]
-                            )[item?.nation] < 0
+                              data?.profitLoss[`${data?.videoInfo?.mid}_${item?.sid}_card`]
+                            )["p2"] < 0
                           ? "color-red"
                           : ""
                         : ""
@@ -47,10 +47,10 @@ const PairBox = ({ odds, data }: any) => {
                   }`}
                 >
                   {data?.profitLoss
-                    ? data?.profitLoss[`${data?.videoInfo?.mid}_1_card`]
+                    ? data?.profitLoss[`${data?.videoInfo?.mid}_${item?.sid}_card`]
                       ? JSON.parse(
-                          data?.profitLoss[`${data?.videoInfo?.mid}_1_card`]
-                        )[item?.nation]
+                          data?.profitLoss[`${data?.videoInfo?.mid}_${item?.sid}_card`]
+                        )["p2"]
                       : 0
                     : 0}
                 </span>
