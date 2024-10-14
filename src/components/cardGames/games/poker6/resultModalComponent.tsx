@@ -69,11 +69,6 @@ const Poker6ResultComponent: React.FC<Props> = ({ data }: any) => {
             alignItems: "center",
           }}
         >
-          {data?.result?.win === "11" && (
-            <div className="casino-winner-icon">
-            <Winner />
-          </div>
-          )}
           <div
             style={{
               display: "flex",
@@ -85,6 +80,11 @@ const Poker6ResultComponent: React.FC<Props> = ({ data }: any) => {
             <div style={{ display: "flex", flexDirection: "row", gap: "5px" }}>
               <HandleCards card={resultCards?.[0]} />
               <HandleCards card={resultCards?.[6]} />
+              {data?.result?.win === "11" && (
+                <div className="casino-winner-icon">
+                  <Winner />
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -108,13 +108,13 @@ const Poker6ResultComponent: React.FC<Props> = ({ data }: any) => {
             <div style={{ display: "flex", flexDirection: "row", gap: "5px" }}>
               <HandleCards card={resultCards?.[5]} />
               <HandleCards card={resultCards?.[11]} />
+              {data?.result?.win === "16" && (
+                <div className="casino-winner-icon">
+                  <Winner />
+                </div>
+              )}
             </div>
           </div>
-          {data?.result?.win === "16" && (
-            <div className="casino-winner-icon">
-            <Winner />
-          </div>
-          )}
         </div>
       </div>
       <div
@@ -134,11 +134,6 @@ const Poker6ResultComponent: React.FC<Props> = ({ data }: any) => {
             alignItems: "center",
           }}
         >
-          {data?.result?.win === "12" && (
-            <div className="casino-winner-icon">
-            <Winner />
-          </div>
-          )}
           <div
             style={{
               display: "flex",
@@ -150,6 +145,11 @@ const Poker6ResultComponent: React.FC<Props> = ({ data }: any) => {
             <div style={{ display: "flex", flexDirection: "row", gap: "5px" }}>
               <HandleCards card={resultCards?.[1]} />
               <HandleCards card={resultCards?.[7]} />
+              {data?.result?.win === "12" && (
+                <div className="casino-winner-icon">
+                  <Winner />
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -183,13 +183,13 @@ const Poker6ResultComponent: React.FC<Props> = ({ data }: any) => {
             <div style={{ display: "flex", flexDirection: "row", gap: "5px" }}>
               <HandleCards card={resultCards?.[4]} />
               <HandleCards card={resultCards?.[10]} />
+              {data?.result?.win === "15" && (
+                <div className="casino-winner-icon">
+                  <Winner />
+                </div>
+              )}
             </div>
           </div>
-          {data?.result?.win === "15" && (
-            <div className="casino-winner-icon">
-            <Winner />
-          </div>
-          )}
         </div>
       </div>
       <div
@@ -210,11 +210,6 @@ const Poker6ResultComponent: React.FC<Props> = ({ data }: any) => {
             alignItems: "center",
           }}
         >
-          {data?.result?.win === "13" && (
-            <div className="casino-winner-icon">
-            <Winner />
-          </div>
-          )}
           <div
             style={{
               display: "flex",
@@ -226,6 +221,11 @@ const Poker6ResultComponent: React.FC<Props> = ({ data }: any) => {
             <div style={{ display: "flex", flexDirection: "row", gap: "5px" }}>
               <HandleCards card={resultCards?.[2]} />
               <HandleCards card={resultCards?.[8]} />
+              {data?.result?.win === "13" && (
+                <div className="casino-winner-icon">
+                  <Winner />
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -249,13 +249,13 @@ const Poker6ResultComponent: React.FC<Props> = ({ data }: any) => {
             <div style={{ display: "flex", flexDirection: "row", gap: "5px" }}>
               <HandleCards card={resultCards?.[3]} />
               <HandleCards card={resultCards?.[9]} />
+              {data?.result?.win === "14" && (
+                <div className="casino-winner-icon">
+                  <Winner />
+                </div>
+              )}
             </div>
           </div>
-          {data?.result?.win === "14" && (
-            <div className="casino-winner-icon">
-            <Winner />
-          </div>
-          )}
         </div>
       </div>
     </Container>
