@@ -190,7 +190,7 @@ const TeenPattiDesktop = () => {
                   <div
                     style={{
                       display: "flex",
-                      width: "30%",
+                      width: "32%",
 
                       borderBottom: "0.01em solid #c7c8ca",
                       background: "#f2f2f2",
@@ -206,7 +206,7 @@ const TeenPattiDesktop = () => {
                     ></div>
                     <div
                       style={{
-                        width: "20%",
+                        width: "30%",
                         backgroundColor: "#72bbef",
                         display: "flex",
                         flexDirection: "column",
@@ -220,7 +220,7 @@ const TeenPattiDesktop = () => {
                     </div>
                     <div
                       style={{
-                        width: "40%",
+                        width: "30%",
                         display: "flex",
                         flexDirection: "column",
                         alignItems: "center",
@@ -233,7 +233,7 @@ const TeenPattiDesktop = () => {
                   <div
                     style={{
                       display: "flex",
-                      width: "30%",
+                      width: "32%",
 
                       borderBottom: "0.01em solid #c7c8ca",
                       background: "#f2f2f2",
@@ -248,7 +248,7 @@ const TeenPattiDesktop = () => {
                     ></div>
                     <div
                       style={{
-                        width: "20%",
+                        width: "30%",
                         backgroundColor: "#72bbef",
                         display: "flex",
                         flexDirection: "column",
@@ -262,7 +262,7 @@ const TeenPattiDesktop = () => {
                     </div>
                     <div
                       style={{
-                        width: "40%",
+                        width: "30%",
                         display: "flex",
                         flexDirection: "column",
                         alignItems: "center",
@@ -275,7 +275,7 @@ const TeenPattiDesktop = () => {
                   <div
                     style={{
                       display: "flex",
-                      width: "30%",
+                      width: "32%",
 
                       borderBottom: "0.01em solid #c7c8ca",
                       background: "#f2f2f2",
@@ -290,7 +290,7 @@ const TeenPattiDesktop = () => {
                     ></div>
                     <div
                       style={{
-                        width: "20%",
+                        width: "30%",
                         backgroundColor: "#72bbef",
                         display: "flex",
                         flexDirection: "column",
@@ -304,7 +304,7 @@ const TeenPattiDesktop = () => {
                     </div>
                     <div
                       style={{
-                        width: "40%",
+                        width: "30%",
                         display: "flex",
                         flexDirection: "column",
                         alignItems: "center",
@@ -329,7 +329,7 @@ const TeenPattiDesktop = () => {
                     <div
                       style={{
                         display: "flex",
-                        width: "30%",
+                        width: "32%",
 
                         borderBottom: "0.01em solid #c7c8ca",
                         background: "#f2f2f2",
@@ -385,7 +385,7 @@ const TeenPattiDesktop = () => {
                       </div>
                       <div
                         style={{
-                          width: "20%",
+                          width: "30%",
                           backgroundColor: "#72bbef",
                           display: "flex",
                           flexDirection: "column",
@@ -405,7 +405,7 @@ const TeenPattiDesktop = () => {
                       </div>
                       <div
                         style={{
-                          width: "40%",
+                          width: "30%",
                           display: "flex",
                           flexDirection: "column",
                           alignItems: "end",
