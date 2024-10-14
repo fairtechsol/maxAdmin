@@ -76,21 +76,33 @@ function OtherMarkets({
                       <span className="title-14">
                         <span
                           className={
-                            JSON.parse(
-                              matchDetails?.profitLossDataMatch?.[
-                                `${data?.id}_profitLoss_${matchDetails?.id}`
-                              ]
-                            )?.[`${matchs?.id}`] < 0
-                              ? "color-red"
+                            matchDetails?.profitLossDataMatch
+                              ? matchDetails?.profitLossDataMatch?.[
+                                  `${data?.id}_profitLoss_${matchDetails?.id}`
+                                ]
+                                ? JSON.parse(
+                                    matchDetails?.profitLossDataMatch?.[
+                                      `${data?.id}_profitLoss_${matchDetails?.id}`
+                                    ]
+                                  )?.[`${matchs?.id}`] < 0
+                                  ? "color-red"
+                                  : "color-green"
+                                : "color-green"
                               : "color-green"
                           }
                         >
                           {parseFloat(
-                            JSON.parse(
-                              matchDetails?.profitLossDataMatch?.[
-                                `${data?.id}_profitLoss_${matchDetails?.id}`
-                              ]
-                            )?.[`${matchs?.id}`] ?? 0
+                            matchDetails?.profitLossDataMatch
+                              ? matchDetails?.profitLossDataMatch?.[
+                                  `${data?.id}_profitLoss_${matchDetails?.id}`
+                                ]
+                                ? JSON.parse(
+                                    matchDetails?.profitLossDataMatch?.[
+                                      `${data?.id}_profitLoss_${matchDetails?.id}`
+                                    ]
+                                  )?.[`${matchs?.id}`]
+                                : 0
+                              : 0
                           ).toFixed(2)}
                         </span>
                       </span>
