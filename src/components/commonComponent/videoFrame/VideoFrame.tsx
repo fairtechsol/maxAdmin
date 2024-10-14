@@ -12,7 +12,7 @@ const VideoFrame = ({ result, time, id, profitLoss, data }: any) => {
     }
   }, []);
 
-  console.log("video",data);
+  console.log("video", data);
   return (
     <>
       <div
@@ -56,8 +56,14 @@ const VideoFrame = ({ result, time, id, profitLoss, data }: any) => {
                 style={{
                   position: "absolute",
                   zIndex: "999",
-                  right: data?.type == "teen" ? "0px" : "",
-                  top: data?.type == "teen" ? "55px" : "",
+                  right:
+                    data?.type == "teen" || data?.type == "poker20"
+                      ? "0px"
+                      : "",
+                  top:
+                    data?.type == "teen" || data?.type == "poker20"
+                      ? "55px"
+                      : "",
                 }}
               >
                 {result}

@@ -66,6 +66,7 @@ const Poker20Component = () => {
                 time={dragonTigerDetail?.videoInfo?.autotime}
                 result={<Poker20Result data={dragonTigerDetail?.videoInfo} />}
                 id={videoFrameId}
+                data={dragonTigerDetail}
               />
             </div>
           </div>
