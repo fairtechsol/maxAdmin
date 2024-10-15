@@ -1,0 +1,156 @@
+.market-analysis-container {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    box-shadow: 0 0 5px;
+}
+
+.market-analysis-title {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px;
+    background-color: #ffc742;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.market-analysis-content {
+    padding: 10px 10px 0 10px;
+}
+
+.row.row5 {
+    margin-left: -5px;
+    margin-right: -5px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -12px;
+    margin-left: -12px;
+}
+
+.market-analysis-content-detail {
+    max-height: 250px;
+    overflow: auto;
+    margin-bottom: 10px;
+}
+
+.simplebar-wrapper {
+    overflow: hidden;
+    width: inherit;
+    height: inherit;
+    max-width: inherit;
+    max-height: inherit;
+}
+
+.simplebar-height-auto-observer-wrapper {
+    box-sizing: inherit !important;
+    height: 100%;
+    width: 100%;
+    max-width: 1px;
+    position: relative;
+    float: left;
+    max-height: 1px;
+    overflow: hidden;
+    z-index: -1;
+    padding: 0;
+    margin: 0;
+    pointer-events: none;
+    flex-grow: inherit;
+    flex-shrink: 0;
+    flex-basis: 0;
+}
+
+.simplebar-mask,
+.simplebar-offset {
+    //position: absolute;
+    padding: 0;
+    margin: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.simplebar-mask {
+    direction: inherit;
+    overflow: hidden;
+    left: 0;
+    right: 0;
+    width: auto !important;
+    height: auto !important;
+    z-index: 0;
+}
+
+.simplebar-offset {
+    direction: inherit !important;
+    box-sizing: inherit !important;
+    resize: none !important;
+    left: 0 !important;
+    right: 0 !important;
+    -webkit-overflow-scrolling: touch;
+}
+
+.simplebar-content-wrapper {
+    direction: inherit;
+    box-sizing: border-box !important;
+    position: relative;
+    display: block;
+    height: 100%;
+    width: auto;
+    visibility: visible;
+    overflow: auto;
+    max-width: 100%;
+    max-height: 100%;
+    scrollbar-width: none;
+    padding: 0 !important;
+}
+
+.market-analysis-container .table {
+    background-color: transparent;
+    margin-bottom: 10px;
+}
+
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #495057;
+    border-collapse: collapse;
+}
+
+.market-analysis-container .table thead {
+    background-color: var(--bg-table-header);
+    color: #fff;
+}
+
+tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    unicode-bidi: isolate;
+    border-color: inherit;
+}
+
+.market-analysis-container .table th,
+.market-analysis-container .table td {
+    border: 1px solid #dee2e6;
+}
+
+.table th,
+.table td {
+    font-size: 14px;
+    color: #1e1e1e;
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid #eff2f7;
+}
+
+@media only screen and (max-width: 1450px) {
+    .table td,
+    .table th {
+        padding: 4px 6px;
+    }
+}
+
+.table td,
+.table th {
+    padding: 4px 0.75rem;
+    vertical-align: middle;
+}
