@@ -33,7 +33,7 @@ const SuperOverComponent = () => {
             <div className="horseRacingTabHeader">
               <div>
                 <span style={{ fontSize: "16px", fontWeight: "600" }}>
-                  {dragonTigerDetail?.name}
+                ENG Vs RSA {dragonTigerDetail?.name}
                 </span>
                 <span
                   style={{
