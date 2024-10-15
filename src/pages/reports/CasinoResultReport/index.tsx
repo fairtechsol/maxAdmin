@@ -168,7 +168,7 @@ const CasinoResultReport = () => {
               )}
             </div>
           </Col>
-          <Col md={2}>
+          <Col className="lh-lg" md={2}>
             <SelectSearch
               defaultValue="slotGame"
               options={cardGamesCasinoResult}
@@ -186,7 +186,7 @@ const CasinoResultReport = () => {
               isOptionDisabled={(option: any) => option.disabled}
             />
           </Col>
-          <Col md={2}>
+          <Col className="mt-1" md={2}>
             <Button type="submit">Submit</Button>
           </Col>
         </Row>
