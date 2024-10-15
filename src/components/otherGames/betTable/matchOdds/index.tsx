@@ -2,10 +2,7 @@ import { Table } from "react-bootstrap";
 import "../../style.scss";
 import BetStatusOverlay from "../../../commonComponent/betStatusOverlay";
 import BackLayBox from "../../../backLayBox";
-import {
-  profitLossDataForMatchConstants,
-  teamStatus,
-} from "../../../../utils/Constants";
+import { profitLossDataForMatchConstants } from "../../../../utils/Constants";
 import isMobile from "../../../../utils/screenDimension";
 
 interface MatchOddsProps {
@@ -90,7 +87,7 @@ function MatchOdds({
                             indexes === 0 ? (
                               <span
                                 className={
-                                  matchDetails?.profitLossDataMatch?.[
+                                  matchDetails?.teamRates?.[
                                     `yesRateTie_${matchDetails?.id}`
                                   ] < 0
                                     ? "color-red"
@@ -98,7 +95,7 @@ function MatchOdds({
                                 }
                               >
                                 {parseFloat(
-                                  matchDetails?.profitLossDataMatch?.[
+                                  matchDetails?.teamRates?.[
                                     `yesRateTie_${matchDetails?.id}`
                                   ] ?? 0
                                 ).toFixed(2)}
@@ -106,7 +103,7 @@ function MatchOdds({
                             ) : (
                               <span
                                 className={
-                                  matchDetails?.profitLossDataMatch[
+                                  matchDetails?.teamRates?.[
                                     `${
                                       profitLossDataForMatchConstants[
                                         data?.type
@@ -118,7 +115,7 @@ function MatchOdds({
                                 }
                               >
                                 {parseFloat(
-                                  matchDetails?.profitLossDataMatch[
+                                  matchDetails?.teamRates?.[
                                     `${
                                       profitLossDataForMatchConstants[
                                         data?.type
@@ -131,7 +128,7 @@ function MatchOdds({
                           ) : (
                             <span
                               className={
-                                matchDetails?.profitLossDataMatch[
+                                matchDetails?.teamRates?.[
                                   `${
                                     profitLossDataForMatchConstants[
                                       data?.type
@@ -143,7 +140,7 @@ function MatchOdds({
                               }
                             >
                               {parseFloat(
-                                matchDetails?.profitLossDataMatch[
+                                matchDetails?.teamRates?.[
                                   `${
                                     profitLossDataForMatchConstants[
                                       data?.type
@@ -162,9 +159,9 @@ function MatchOdds({
                     <BetStatusOverlay
                       title={data?.runners?.[indexes]?.status?.toLowerCase()}
                       active={
-                        data?.runners?.[indexes]?.status
-                          ?.toLowerCase()
-                          ?.toLowerCase() !== teamStatus.active?.toLowerCase()
+                        !["ACTIVE", "", undefined, null, "OPEN"].includes(
+                          data?.runners?.[indexes]?.status
+                        )
                       }
                     >
                       {new Array(backLayCount === 2 ? 1 : 3)
@@ -185,10 +182,9 @@ function MatchOdds({
                               ]?.size
                             }
                             active={
-                              data?.runners?.[indexes]?.status
-                                ?.toLowerCase()
-                                ?.toLowerCase() !==
-                              teamStatus.active?.toLowerCase()
+                              !["ACTIVE", "", undefined, null, "OPEN"].includes(
+                                data?.runners?.[indexes]?.status
+                              )
                             }
                           />
                         ))}
@@ -210,10 +206,9 @@ function MatchOdds({
                               ]?.size
                             }
                             active={
-                              data?.runners?.[indexes]?.status
-                                ?.toLowerCase()
-                                ?.toLowerCase() !==
-                              teamStatus.active?.toLowerCase()
+                              !["ACTIVE", "", undefined, null, "OPEN"].includes(
+                                data?.runners?.[indexes]?.status
+                              )
                             }
                           />
                         ))}

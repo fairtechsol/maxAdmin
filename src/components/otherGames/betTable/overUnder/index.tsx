@@ -83,12 +83,12 @@ function OverUnderMarket({
                         <span
                           className={`title-14  ${
                             indexes === 0
-                              ? matchDetails?.profitLossDataMatch[
+                              ? matchDetails?.teamRates?.[
                                   profitLossDataForMatchConstants[data?.type]?.A
                                 ] < 0
                                 ? "color-red"
                                 : "color-green"
-                              : matchDetails?.profitLossDataMatch[
+                              : matchDetails?.teamRates?.[
                                   profitLossDataForMatchConstants[data?.type]?.B
                                 ] < 0
                               ? "color-red"
@@ -97,13 +97,15 @@ function OverUnderMarket({
                         >
                           {indexes === 0
                             ? parseFloat(
-                                matchDetails?.profitLossDataMatch[
+                                matchDetails?.teamRates?.[
                                   profitLossDataForMatchConstants[data?.type]?.A
                                 ] ?? 0
                               ).toFixed(2)
-                            : parseFloat(matchDetails?.profitLossDataMatch[
-                                profitLossDataForMatchConstants[data?.type]?.B
-                              ] ?? 0).toFixed(2)}
+                            : parseFloat(
+                                matchDetails?.teamRates?.[
+                                  profitLossDataForMatchConstants[data?.type]?.B
+                                ] ?? 0
+                              ).toFixed(2)}
                         </span>
                       </div>
                     </div>

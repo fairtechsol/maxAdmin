@@ -12,7 +12,7 @@ const BetStatusOverlay = ({ title, children, active }: Props) => {
     <>
       <div className={`d-flex position-relative`}>
         {active && (
-          <div className="betStatusOverlay">
+          <div className={"betStatusOverlay"}>
             {title && title !== "Lock" && (
               <h5 className="text-uppercase">{title}</h5>
             )}

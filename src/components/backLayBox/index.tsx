@@ -33,7 +33,7 @@ function BackLayBox({
       } bg-${bgColor}`}
       style={{ ...inlineStyle }}
     >
-      <BetStatusOverlay active={parseInt(rate || 0) <= 0 && !active}>
+      <BetStatusOverlay >
         <div
           className={`backLayBox text-center d-flex flex-column cursor-pointer`}
         >
