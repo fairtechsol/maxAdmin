@@ -216,6 +216,7 @@ export const baseUrls = {
 export const teamStatus = {
   suspended: "suspended",
   active: "active",
+  open: "open",
   closed: "closed",
   ballStart: "ball start",
   ballStop: "ball stop",
