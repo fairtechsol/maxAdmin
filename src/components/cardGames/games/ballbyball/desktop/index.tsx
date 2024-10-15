@@ -106,7 +106,7 @@ const TeenPattiDesktop = () => {
   }, []);
 
 
-
+console.log("resultData",dragonTigerDetail);
   return (
     <>
       <Row>
@@ -147,7 +147,7 @@ const TeenPattiDesktop = () => {
                 {curR && (
                   <img
                     className="elem"
-                    src={`https://versionobj.ecoassetsservice.com/v13/static/front/img/balls/cricket20/ball${resultData?.result?.win}.png`}
+                    src={`https://versionobj.ecoassetsservice.com/v13/static/front/img/balls/cricket20/ball${resultData?.result?.desc.split(" ")[0]}.png`}
                     style={{
                       position: "absolute",
                       top: "50%",
@@ -430,7 +430,7 @@ const TeenPattiDesktop = () => {
                     alignItems: "center",
                   }}
                 >
-                  <div
+                  {/* <div
                     style={{
                       width: "10%",
                       background: "#ffffff",
@@ -446,12 +446,12 @@ const TeenPattiDesktop = () => {
                         background: "#ffffff",
                       }}
                     ></img>
-                  </div>
+                  </div> */}
 
                   <div
                     className="ticker-container"
                     style={{
-                      width: "90%",
+                      width: "100%",
 
                       background: "#ffffff",
                       border: "#086f3f",
@@ -472,7 +472,8 @@ const TeenPattiDesktop = () => {
                           height: "100%",
                         }}
                       >
-                        {dragonTigerDetail?.videoInfo?.remark}
+                        {/* {dragonTigerDetail?.videoInfo?.remark} */}
+                        {"rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"}
                       </div>
                     </div>
                   </div>
