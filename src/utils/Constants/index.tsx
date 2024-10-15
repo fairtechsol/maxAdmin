@@ -768,7 +768,7 @@ export const cardGamesId: any = {
   card32B: 3034,
   lucky7: 3058,
   dragonTiger202: 3059,
-  dragonTigerLion: 30470,
+  dragonTigerLion: 3047,
   teenOneDay: 3031,
   teenOpen: 3049,
   teenTest: 3048,
