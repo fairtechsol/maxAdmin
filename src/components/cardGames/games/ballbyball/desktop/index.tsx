@@ -105,8 +105,6 @@ const TeenPattiDesktop = () => {
     setVideoFrameId(`${cardUrl}${cardGamesId?.ballbyball}`);
   }, []);
 
-
-console.log("resultData",dragonTigerDetail);
   return (
     <>
       <Row>
