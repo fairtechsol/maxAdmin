@@ -77,7 +77,7 @@ function ApiSessionMarketTable({
                           }
                         }}
                       >
-                        {item?.name}
+                        {data?.gtype===sessionBettingType.khado?`${item?.name}-${item?.ex?.availableToLay?.[0]?.price}`:item?.name}
                       </div>
                       <span className={`title-12 f400 ${
                           -Number(
