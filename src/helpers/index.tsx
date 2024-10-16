@@ -1,6 +1,16 @@
 import service from "../service";
 import { ApiConstants } from "../utils/Constants";
 
+const order: any = {
+  session: 1,
+  overByover: 2,
+  ballByBall: 3,
+  fancy1: 4,
+  khado: 5,
+  meter: 6,
+  oddEven: 5,
+};
+
 export const numberInputOnWheelPreventChange = (e: any) => {
   e.target.blur();
   e.stopPropagation();
@@ -44,4 +54,13 @@ export const formatNumber = (num: any) => {
     return (num / 100000)?.toFixed(1)?.replace(/\.0$/, "") + "L";
   }
   return num?.toString();
+};
+
+export const customSortBySessionMarketName = (
+  [_, nameA]: any,
+  [__, nameB]: any
+) => {
+  const orderA = order[nameA] || Infinity;
+  const orderB = order[nameB] || Infinity;
+  return orderA - orderB;
 };

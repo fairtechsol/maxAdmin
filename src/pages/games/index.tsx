@@ -17,6 +17,7 @@ import { AppDispatch, RootState } from "../../store/store";
 import { sessionBettingType } from "../../utils/Constants";
 import { MatchType } from "../../utils/enum";
 import GameUserBets from "../../components/game/gameUserBets";
+import { customSortBySessionMarketName } from "../../helpers";
 
 const Games = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -313,6 +314,8 @@ const Games = () => {
                             value?.section?.length > 0 &&
                             key != sessionBettingType.cricketCasino
                         )
+                        ?.slice()
+                        ?.sort(customSortBySessionMarketName)
                         ?.map(([key, value]: any) => {
                           return (
                             <Col md={12}>
