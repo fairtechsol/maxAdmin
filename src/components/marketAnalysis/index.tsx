@@ -8,7 +8,7 @@ const MarketAnalysisComp = () => {
           <a
             href="/admin/game/details/SeK7puKGhm+IDlF%2FzygDVg==/jampfwXl+NNXQsYvzyR81Q=="
             className="ma-lin "
-            style={{color:"#ffffff"}}
+            style={{ color: "#ffffff" }}
           >
             Sri Lanka v West Indies
           </a>
