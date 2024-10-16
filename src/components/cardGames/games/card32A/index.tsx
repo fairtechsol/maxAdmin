@@ -52,6 +52,7 @@ const Cards32AComponent = () => {
               style={{ width: "100%", backgroundColor: "#000" }}
             >
               <VideoFrame
+              data={dragonTigerDetail}
                 time={dragonTigerDetail?.videoInfo?.autotime}
                 result={<Card32Result data={dragonTigerDetail?.videoInfo} />}
                 id={`${cardUrl}${cardGamesId.card32}`}
