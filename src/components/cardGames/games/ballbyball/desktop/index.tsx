@@ -117,17 +117,6 @@ const TeenPattiDesktop = () => {
                   <span style={{ fontSize: "16px", fontWeight: "600" }}>
                     BallbyBall
                   </span>
-                  <span
-                    style={{
-                      fontSize: "14px",
-                      textDecoration: "underline",
-                      cursor: "pointer",
-                    }}
-                    onClick={() => setShow(true)}
-                  >
-                    {" "}
-                    Rules
-                  </span>
                 </div>
                 <span>
                   {dragonTigerDetail?.videoInfo
@@ -161,6 +150,7 @@ const TeenPattiDesktop = () => {
                 <VideoFrame
                   time={JSON.stringify(dragonTigerDetail?.videoInfo?.lt)}
                   id={videoFrameId}
+                  data={dragonTigerDetail}
                 />
               </div>
             </div>

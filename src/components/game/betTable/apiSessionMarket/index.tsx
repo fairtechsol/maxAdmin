@@ -32,7 +32,6 @@ function ApiSessionMarketTable({
   const { runAmount } = useSelector(
     (state: RootState) => state.match.placeBets
   );
-
   const handleClick = () => {};
   return (
     <div className={`gameTable sessionFancyTable borderTable border `}>
@@ -41,11 +40,13 @@ function ApiSessionMarketTable({
           <tr>
             <th className="border-0"></th>
 
-            <th className={`text-center ${sessionType==sessionBettingType.oddEven?"bg-blue3":"bg-red1"}`}style={{ width: "50px" }}>
+           {data?.gtype==="khado"?<th style={{ width: "50px" }}>
+              
+            </th> :<th className={`text-center ${sessionType==sessionBettingType.oddEven?"bg-blue3":"bg-red1"}`}style={{ width: "50px" }}>
               {sessionType==sessionBettingType.oddEven?"Back":sessionType==sessionBettingType.fancy1?"Lay":"No"}
-            </th>
+            </th>}
             <th className="text-center bg-blue3" style={{ width: "50px" }}>
-            {sessionType==sessionBettingType.oddEven||sessionType==sessionBettingType.fancy1?"Back":"Yes"}
+            {sessionType==sessionBettingType.oddEven||sessionType==sessionBettingType.fancy1||sessionType==sessionBettingType.khado?"Back":"Yes"}
             </th>
             <th className="border-0" style={{ width: "100px" }}></th>
           </tr>
@@ -76,7 +77,7 @@ function ApiSessionMarketTable({
                           }
                         }}
                       >
-                        {item?.name}
+                        {data?.gtype===sessionBettingType.khado?`${item?.name}-${item?.ex?.availableToLay?.[0]?.price}`:item?.name}
                       </div>
                       <span className={`title-12 f400 ${
                           -Number(
@@ -120,7 +121,7 @@ function ApiSessionMarketTable({
                             onClick={handleClick}
                           />
                         )}
-                        {item?.ex?.availableToLay?.map((oddData: any) => {
+                        {data?.gtype==="khado" ? <div style={{ width: "50px" }}></div> :item?.ex?.availableToLay?.map((oddData: any) => {
                           return (
                             <YesNoBox
                               style={{ width: "50px" }}

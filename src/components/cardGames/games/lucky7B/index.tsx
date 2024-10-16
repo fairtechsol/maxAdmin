@@ -58,6 +58,7 @@ const Lucky7BComponent = () => {
                 }}
               >
                 <VideoFrame
+                  data={dragonTigerDetail}
                   time={dragonTigerDetail?.videoInfo?.autotime}
                   result={<Lucky7BResult data={dragonTigerDetail?.videoInfo} />}
                   id={`${cardUrl}${cardGamesId.lucky7B}`}

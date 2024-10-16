@@ -123,17 +123,6 @@ const TeenPattiOpenComponent = () => {
                   <span style={{ fontSize: "16px", fontWeight: "600" }}>
                     OPEN TEENPATTI
                   </span>
-                  <span
-                    style={{
-                      fontSize: "14px",
-                      textDecoration: "underline",
-                      cursor: "pointer",
-                    }}
-                    onClick={() => setShow(true)}
-                  >
-                    {" "}
-                    RULES
-                  </span>
                 </div>
                 <span>
                   {dragonTigerDetail?.videoInfo
@@ -150,6 +139,7 @@ const TeenPattiOpenComponent = () => {
                 }}
               >
                 <VideoFrame
+                  data={dragonTigerDetail}
                   time={dragonTigerDetail?.videoInfo?.autotime}
                   result={<TeenOpenResult data={cardsArray1} />}
                   id={`${cardUrl}${cardGamesId.teenOpen}`}

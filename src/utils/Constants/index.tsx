@@ -64,7 +64,24 @@ import {
   two,
   two2,
 } from "../../assets";
-
+import BaccaratRules from "../../components/cardGames/games/baccarat1/rules";
+import BaccaratRules2 from "../../components/cardGames/games/baccarat2/rules";
+import BallByBallRules from "../../components/cardGames/games/ballbyball/desktop/rules";
+import Race20Rules from "../../components/cardGames/games/race20/rules";
+import React from "react";
+import SuperOverRules from "../../components/cardGames/games/superOver/rules";
+import Cricket5Rules from "../../components/cardGames/games/cricket5/rules";
+import CasinoRulesImage from "../../components/cardGames/games/casinoMeter/rules";
+import Cricket20Rules from "../../components/cardGames/games/cricketMatch_20/rules";
+import CasinoWarRules from "../../components/cardGames/games/casinoWar/rules";
+import Card32ARules from "../../components/cardGames/games/card32A/rules";
+import Teen20Rules from "../../components/cardGames/games/teenpatti2020/rules";
+import TeenpattiRules from "../../components/cardGames/games/teenpatti1D/rules";
+import PokerRules from "../../components/cardGames/games/poker1Day/rules";
+import AndarBaharRules from "../../components/cardGames/games/abj2/rules";
+import Lucky7Rules from "../../components/cardGames/games/lucky7/rules";
+import DTLGameRules from "../../components/cardGames/games/dragonTigerLion/rules";
+import DragonRules from "../../components/cardGames/games/dragon2nd20/rules";
 export const ApiConstants = {
   AUTH: {
     LOGIN: "/auth/login",
@@ -216,6 +233,7 @@ export const baseUrls = {
 export const teamStatus = {
   suspended: "suspended",
   active: "active",
+  open: "open",
   closed: "closed",
   ballStart: "ball start",
   ballStop: "ball stop",
@@ -229,6 +247,7 @@ export const sessionBettingType = {
   ballByBall: "ballByBall",
   oddEven: "oddEven",
   cricketCasino: "cricketCasino",
+  khado: "khado",
 };
 
 export const matchBettingType = {
@@ -768,7 +787,7 @@ export const cardGamesId: any = {
   card32B: 3034,
   lucky7: 3058,
   dragonTiger202: 3059,
-  dragonTigerLion: 30470,
+  dragonTigerLion: 3047,
   teenOneDay: 3031,
   teenOpen: 3049,
   teenTest: 3048,
@@ -777,7 +796,7 @@ export const cardGamesId: any = {
   casinoWar: 3038,
   race20: 3036,
   superover: 3060,
-  poker: 30500,
+  poker: 3050,
   poker1Day: 3051,
   poker20: 3052,
   cricketv3: 3042,
@@ -1119,3 +1138,63 @@ export const cardGamesCasinoResult = [
     label: "Casino Meter",
   },
 ];
+
+export const rulesData1 = [
+  {
+    title: "Run Section:",
+    rules: [
+      "In 1, 2, 3, 4, 6, and boundary (4 or 6) events, only bat runs will be considered.",
+      "In 0 runs, only dot balls will be considered.",
+      "Note: Wickets or extras with runs will not be considered in the above-mentioned events.",
+    ],
+  },
+  {
+    title: "Wicket Section:",
+    rules: [
+      "Particular Wickets (Caught, Bowled, Run Out, LBW, Stumped, and Others) or Wickets (Any Wickets) only wicket will be considered.",
+      "Note: Any runs with Wickets will not be considered in these events.",
+    ],
+  },
+  {
+    title: "Extra Section:",
+    rules: [
+      "Extra balls (no ball, wide, bye, and Leg Bye) & Extras (any extras) Only extras will be considered.",
+      "Note: Any runs or wicket on extra balls will not be considered in these events.",
+      "In the case of No Ball with runout, the result will be No Ball.",
+    ],
+  },
+  {
+    title: "Disclaimer:",
+    rules: [
+      "The videos are from different broadcasters, so in such cases, the scoreboard will update late. We will give results only on the basis of our rules and as per the videos displayed.",
+    ],
+  },
+];
+
+export const gameRulesComponents: any = {
+  ballbyball: <BallByBallRules />,
+  race20: <Race20Rules />,
+  baccarat: <BaccaratRules/>,
+  baccarat2: <BaccaratRules2/>,
+  superover: <SuperOverRules/>,
+  cricketv3: <Cricket5Rules/>,
+  cmeter: <CasinoRulesImage/>,
+  cmatch20: <Cricket20Rules/>,
+  war: <CasinoWarRules/>,
+  card32: <Card32ARules/>,
+  card32eu : <Card32ARules/>,
+  teen20: <Teen20Rules/>,
+  teen: <Teen20Rules/>,
+  teen9: <TeenpattiRules/>,
+  teen8: <TeenpattiRules/>,
+  poker6: <PokerRules/>,
+  poker20: <PokerRules/>,
+  poker1: <PokerRules/>,
+  abj: <AndarBaharRules/>,
+  lucky7: <Lucky7Rules/>,
+  lucky7eu: <Lucky7Rules/>,
+  dtl20: <DTLGameRules/>,
+  dt6: <DragonRules/>,
+  dt202: <DragonRules/>,
+  dt20: <DragonRules/>,
+};

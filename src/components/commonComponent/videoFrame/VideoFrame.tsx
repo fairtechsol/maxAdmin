@@ -1,16 +1,33 @@
-import { memo, useEffect } from "react";
+import { memo, useEffect, useState } from "react";
 import FlipClock from "./FlipClock";
 import isMobile from "../../../utils/screenDimension";
 import { Col, Row, Container } from "react-bootstrap";
 import { handleRoundId } from "../../../helpers";
+import { gameRulesComponents } from "../../../utils/Constants";
 
 const VideoFrame = ({ result, time, id, profitLoss, data }: any) => {
+
   useEffect(() => {
     const element = document.getElementById("middleView-playerDiv");
     if (element) {
       element.style.display = "none !important";
     }
   }, []);
+
+  const [showModal, setShowModal] = useState(false);
+  const [currentGameRules, setCurrentGameRules] = useState<any>(null);
+
+  const openModal = (game: string | null) => {
+    if (game) {
+      setCurrentGameRules(game);
+      setShowModal(true);
+    }
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    setCurrentGameRules(null);
+  };
 
   return (
     <>
@@ -69,18 +86,32 @@ const VideoFrame = ({ result, time, id, profitLoss, data }: any) => {
               </div>
             )}
             <div
-              style={{ position: "absolute", zIndex: "99" }}
+              style={{ zIndex: "99" }}
               className="casino-video-right-icons"
             >
-              <div title="Rules" className="casino-video-rules-icon">
+              <div
+                title="Rules"
+                className="casino-video-rules-icon"
+                onClick={() => openModal(data?.type)}
+              >
                 <i className="fas fa-info-circle title-24"></i>
               </div>
-            </div>
+              </div>
+              {showModal && (
+                <div className="modal-new" >
+                  <div className="rules-header-new"><div>Rules</div><span className="close-new" onClick={closeModal}>
+                      &times;
+                    </span></div>
+                    
+                    {currentGameRules && gameRulesComponents[currentGameRules]}
+                  </div>
+              )}
+          
             <div>
               <Container className="p-0">
                 <Row className="justify-content-md-center p-0">
                   <Col>
-                    <div style={{ width: "100%", height: "460px" }}>
+                    <div style={{ width: "100%", height: "480px" }}>
                       <iframe
                         style={{
                           width: "100%",

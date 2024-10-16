@@ -80,6 +80,7 @@ const Baccarat2Component = () => {
                 }}
               >
                 <VideoFrame
+                data={dragonTigerDetail}
                   time={dragonTigerDetail?.videoInfo?.autotime}
                   //   result={<Abj2Result data={dragonTigerDetail?.videoInfo} />}
                   id={videoFrameId}

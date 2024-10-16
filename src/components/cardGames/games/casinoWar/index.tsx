@@ -13,13 +13,10 @@ import {
 } from "../../../../utils/Constants";
 import CardResultBox from "../../../commonComponent/cardResultBox";
 import UserBets from "../../../game/userBet";
-import RulesModal from "../../../commonComponent/rulesModal";
-import { warRules } from "../../../../assets";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
 import CasinoWarCard from "./casinoWarCard";
 
 const CasinoWarComponent = () => {
-  const [show, setShow] = useState(false);
   const { dragonTigerDetail } = useSelector((state: RootState) => state.card);
 
   const [openDivIds, setOpenDivIds] = useState<string[]>([]);
@@ -42,17 +39,6 @@ const CasinoWarComponent = () => {
                   <span style={{ fontSize: "16px", fontWeight: "600" }}>
                     CASINO WAR
                   </span>
-                  <span
-                    style={{
-                      fontSize: "14px",
-                      textDecoration: "underline",
-                      cursor: "pointer",
-                    }}
-                    onClick={() => setShow(true)}
-                  >
-                    {" "}
-                    RULES
-                  </span>
                 </div>
                 <span>
                   {dragonTigerDetail?.videoInfo
@@ -71,6 +57,7 @@ const CasinoWarComponent = () => {
                 }}
               >
                 <VideoFrame
+                  data={dragonTigerDetail}
                   time={dragonTigerDetail?.videoInfo?.autotime}
                   result={<CasinoWarCard data={dragonTigerDetail?.videoInfo} />}
                   id={`${cardUrl}${cardGamesId.casinoWar}`}
@@ -316,7 +303,6 @@ const CasinoWarComponent = () => {
                     </tbody>
                   </Table>
                 </div> */}
-                <RulesModal show={show} setShow={setShow} rule={warRules} />
               </Col>
             </Row>
           </Container>

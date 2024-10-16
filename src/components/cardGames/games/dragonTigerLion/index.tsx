@@ -222,17 +222,6 @@ const DragonTigerDesktop = () => {
                 <span style={{ fontSize: "16px", fontWeight: "600" }}>
                   {dragonTigerDetail?.name}
                 </span>
-                <span
-                  style={{
-                    fontSize: "14px",
-                    textDecoration: "underline",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => setShow(true)}
-                >
-                  {" "}
-                  RULES
-                </span>
               </div>
               <span>
                 {dragonTigerDetail?.videoInfo
@@ -244,6 +233,7 @@ const DragonTigerDesktop = () => {
             </div>
             <div style={{ width: "100%", backgroundColor: "#000" }}>
               <VideoFrame
+               data={dragonTigerDetail}
                 time={dragonTigerDetail?.videoInfo?.autotime}
                 result={<Dragon20Result data={dragonTigerDetail?.videoInfo} />}
                 id={`${cardUrl}${cardGamesId.dragonTigerLion}`}
