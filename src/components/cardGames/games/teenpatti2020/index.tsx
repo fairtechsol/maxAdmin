@@ -41,13 +41,6 @@ const TeentPatti2020Component = () => {
                   <span style={{ fontSize: "16px", fontWeight: "600" }}>
                     20-20 TEENPATTI
                   </span>
-                  <span
-                    style={{ fontSize: "14px", textDecoration: "underline" }}
-                    onClick={() => setShow(true)}
-                  >
-                    {" "}
-                    RULES
-                  </span>
                 </div>
                 <span>
                   {dragonTigerDetail?.videoInfo
@@ -66,6 +59,7 @@ const TeentPatti2020Component = () => {
                 }}
               >
                 <VideoFrame
+                data={dragonTigerDetail}
                   time={dragonTigerDetail?.videoInfo?.autotime}
                   result={<Teen20Result data={dragonTigerDetail?.videoInfo} />}
                   id={`${cardUrl}${cardGamesId.teen20}`}

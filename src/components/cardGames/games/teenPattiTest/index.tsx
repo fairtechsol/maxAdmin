@@ -70,17 +70,6 @@ const TeenPattiComponent = () => {
                   <span style={{ fontSize: "16px", fontWeight: "600" }}>
                     TEST TEENPATTI
                   </span>
-                  <span
-                    style={{
-                      fontSize: "14px",
-                      textDecoration: "underline",
-                      cursor: "pointer",
-                    }}
-                    onClick={() => setShow(true)}
-                  >
-                    {" "}
-                    RULES
-                  </span>
                 </div>
                 <span>
                   {dragonTigerDetail?.videoInfo
@@ -100,6 +89,7 @@ const TeenPattiComponent = () => {
                 }}
               >
                 <VideoFrame
+                  data={dragonTigerDetail}
                   time={dragonTigerDetail?.videoInfo?.autotime}
                   result={
                     <TeenTestResult data={dragonTigerDetail?.videoInfo} />

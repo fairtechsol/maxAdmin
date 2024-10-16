@@ -88,6 +88,7 @@ const Poker1DayComponent = () => {
                 }}
               >
                 <VideoFrame
+                  data={dragonTigerDetail}
                   time={dragonTigerDetail?.videoInfo?.autotime}
                   result={
                     <Poker1DayResult data={dragonTigerDetail?.videoInfo} />
