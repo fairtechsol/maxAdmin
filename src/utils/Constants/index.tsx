@@ -247,6 +247,7 @@ export const sessionBettingType = {
   ballByBall: "ballByBall",
   oddEven: "oddEven",
   cricketCasino: "cricketCasino",
+  khado: "khado",
 };
 
 export const matchBettingType = {
