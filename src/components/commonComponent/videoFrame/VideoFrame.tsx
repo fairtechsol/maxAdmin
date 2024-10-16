@@ -71,7 +71,7 @@ const VideoFrame = ({ result, time, id, profitLoss, data }: any) => {
                 }
                 style={{
                   position: "absolute",
-                  zIndex: "999",
+                  zIndex: "9",
                   right:
                     data?.type == "teen" || data?.type == "poker20"
                       ? "0px"

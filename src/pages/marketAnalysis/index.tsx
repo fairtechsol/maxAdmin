@@ -1,3 +1,5 @@
+import MarketAnalysisComp from "../../components/marketAnalysis";
+
 const MarketAnalysis = () => {
   return (
     <>
@@ -6,6 +8,7 @@ const MarketAnalysis = () => {
         <p className="mb-0 title-14">
           You can view your cricket card books from sport menu.
         </p>
+        <MarketAnalysisComp/>
       </div>
     </>
   );

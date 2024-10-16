@@ -17,14 +17,15 @@ const AmarAkbarAnthonyResultComponent: React.FC<Props> = ({ data }: any) => {
       className="d-flex align-items-start flex-md-column flex-lg-row"
       style={{ display: "flex", alignItems: "start" }}
     >
-      <div className="lucky7resultModal">
+      <div className="lucky7resultModal mt-5 ">
         <div className="lucky7resultCardContainer">
-          <div className="d-sm-flex flex-row justify-content-center align-items-center">
+          <div className="d-sm-flex flex-row justify-content-center align-items-center pb-2 border-bottom border-bottom-1">
             <div
               style={{
                 border: "1px solid #fdef34",
                 borderRadius: "1px",
                 marginLeft: "5px",
+                
               }}
             >
               <HandleCards card={data?.result?.cards} />
@@ -32,10 +33,10 @@ const AmarAkbarAnthonyResultComponent: React.FC<Props> = ({ data }: any) => {
           </div>
         </div>
       </div>
-      <div className="w-100 d-sm-flex justify-content-cente  mt-">
+      <div className="w-100 d-sm-flex justify-content-center  mb-4">
         <div
           className={
-            "casino-result-desc w-80 d-sm-flex flex-sm-column justify-content-center align-items-center pe-4 mb-2"
+            "casino-result-desc-aaa w-80 d-sm-flex flex-sm-column justify-content-center align-items-center pe-4 mb-2"
           }
         >
           <div className="d-sm-flex flex-sm-row p- title-14 w-100">

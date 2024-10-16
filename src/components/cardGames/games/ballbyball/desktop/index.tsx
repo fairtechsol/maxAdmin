@@ -105,6 +105,7 @@ const TeenPattiDesktop = () => {
     setVideoFrameId(`${cardUrl}${cardGamesId?.ballbyball}`);
   }, []);
 
+
   return (
     <>
       <Row>
@@ -460,8 +461,8 @@ const TeenPattiDesktop = () => {
                           height: "100%",
                         }}
                       >
-                        {/* {dragonTigerDetail?.videoInfo?.remark} */}
-                        {"rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"}
+                       {dragonTigerDetail?.videoInfo?.remark}
+                        
                       </div>
                     </div>
                   </div>
