@@ -106,7 +106,6 @@ const TeenPattiDesktop = () => {
   }, []);
 
 
-
   return (
     <>
       <Row>
@@ -117,17 +116,6 @@ const TeenPattiDesktop = () => {
                 <div>
                   <span style={{ fontSize: "16px", fontWeight: "600" }}>
                     BallbyBall
-                  </span>
-                  <span
-                    style={{
-                      fontSize: "14px",
-                      textDecoration: "underline",
-                      cursor: "pointer",
-                    }}
-                    onClick={() => setShow(true)}
-                  >
-                    {" "}
-                    Rules
                   </span>
                 </div>
                 <span>
@@ -147,7 +135,7 @@ const TeenPattiDesktop = () => {
                 {curR && (
                   <img
                     className="elem"
-                    src={`https://versionobj.ecoassetsservice.com/v13/static/front/img/balls/cricket20/ball${resultData?.result?.win}.png`}
+                    src={`https://versionobj.ecoassetsservice.com/v13/static/front/img/balls/cricket20/ball${resultData?.result?.desc.split(" ")[0]}.png`}
                     style={{
                       position: "absolute",
                       top: "50%",
@@ -160,22 +148,23 @@ const TeenPattiDesktop = () => {
               )}
 
                 <VideoFrame
-                  time={dragonTigerDetail?.videoInfo?.lt}
+                  time={JSON.stringify(dragonTigerDetail?.videoInfo?.lt)}
                   id={videoFrameId}
+                  data={dragonTigerDetail}
                 />
               </div>
             </div>
       
-              <div>
+              <div style={{paddingTop:"5px"}}>
                 <div
                   style={{
                     background: "rgb(255 199 66 / 85%)",
                     color: "#fff",
                     fontWeight: "bold",
-                    lineHeight: 2,
+                    
                   }}
                 >
-                  <span style={{ marginLeft: "10px" }}> Runs</span>
+                  <span style={{ marginLeft: "10px",fontSize:"14px" }}> Runs</span>
                 </div>
                 <div
                   style={{
@@ -190,7 +179,7 @@ const TeenPattiDesktop = () => {
                   <div
                     style={{
                       display: "flex",
-                      width: "30%",
+                      width: "32%",
 
                       borderBottom: "0.01em solid #c7c8ca",
                       background: "#f2f2f2",
@@ -206,7 +195,7 @@ const TeenPattiDesktop = () => {
                     ></div>
                     <div
                       style={{
-                        width: "20%",
+                        width: "30%",
                         backgroundColor: "#72bbef",
                         display: "flex",
                         flexDirection: "column",
@@ -220,7 +209,7 @@ const TeenPattiDesktop = () => {
                     </div>
                     <div
                       style={{
-                        width: "40%",
+                        width: "30%",
                         display: "flex",
                         flexDirection: "column",
                         alignItems: "center",
@@ -233,7 +222,7 @@ const TeenPattiDesktop = () => {
                   <div
                     style={{
                       display: "flex",
-                      width: "30%",
+                      width: "32%",
 
                       borderBottom: "0.01em solid #c7c8ca",
                       background: "#f2f2f2",
@@ -248,7 +237,7 @@ const TeenPattiDesktop = () => {
                     ></div>
                     <div
                       style={{
-                        width: "20%",
+                        width: "30%",
                         backgroundColor: "#72bbef",
                         display: "flex",
                         flexDirection: "column",
@@ -262,7 +251,7 @@ const TeenPattiDesktop = () => {
                     </div>
                     <div
                       style={{
-                        width: "40%",
+                        width: "30%",
                         display: "flex",
                         flexDirection: "column",
                         alignItems: "center",
@@ -275,7 +264,7 @@ const TeenPattiDesktop = () => {
                   <div
                     style={{
                       display: "flex",
-                      width: "30%",
+                      width: "32%",
 
                       borderBottom: "0.01em solid #c7c8ca",
                       background: "#f2f2f2",
@@ -290,7 +279,7 @@ const TeenPattiDesktop = () => {
                     ></div>
                     <div
                       style={{
-                        width: "20%",
+                        width: "30%",
                         backgroundColor: "#72bbef",
                         display: "flex",
                         flexDirection: "column",
@@ -304,7 +293,7 @@ const TeenPattiDesktop = () => {
                     </div>
                     <div
                       style={{
-                        width: "40%",
+                        width: "30%",
                         display: "flex",
                         flexDirection: "column",
                         alignItems: "center",
@@ -329,7 +318,7 @@ const TeenPattiDesktop = () => {
                     <div
                       style={{
                         display: "flex",
-                        width: "30%",
+                        width: "32%",
 
                         borderBottom: "0.01em solid #c7c8ca",
                         background: "#f2f2f2",
@@ -385,7 +374,7 @@ const TeenPattiDesktop = () => {
                       </div>
                       <div
                         style={{
-                          width: "20%",
+                          width: "30%",
                           backgroundColor: "#72bbef",
                           display: "flex",
                           flexDirection: "column",
@@ -405,7 +394,7 @@ const TeenPattiDesktop = () => {
                       </div>
                       <div
                         style={{
-                          width: "40%",
+                          width: "30%",
                           display: "flex",
                           flexDirection: "column",
                           alignItems: "end",
@@ -430,7 +419,7 @@ const TeenPattiDesktop = () => {
                     alignItems: "center",
                   }}
                 >
-                  <div
+                  {/* <div
                     style={{
                       width: "10%",
                       background: "#ffffff",
@@ -446,12 +435,12 @@ const TeenPattiDesktop = () => {
                         background: "#ffffff",
                       }}
                     ></img>
-                  </div>
+                  </div> */}
 
                   <div
                     className="ticker-container"
                     style={{
-                      width: "90%",
+                      width: "100%",
 
                       background: "#ffffff",
                       border: "#086f3f",
@@ -472,7 +461,8 @@ const TeenPattiDesktop = () => {
                           height: "100%",
                         }}
                       >
-                        {dragonTigerDetail?.videoInfo?.remark}
+                       {dragonTigerDetail?.videoInfo?.remark}
+                        
                       </div>
                     </div>
                   </div>

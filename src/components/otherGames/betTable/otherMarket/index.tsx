@@ -2,7 +2,6 @@ import { Table } from "react-bootstrap";
 import "../../style.scss";
 import BetStatusOverlay from "../../../commonComponent/betStatusOverlay";
 import BackLayBox from "../../../backLayBox";
-import { teamStatus } from "../../../../utils/Constants";
 import isMobile from "../../../../utils/screenDimension";
 
 interface OtherMarketProps {
@@ -19,11 +18,6 @@ function OtherMarkets({
   matchDetails,
   backLayCount,
 }: OtherMarketProps) {
-  console.log(
-    matchDetails?.profitLossDataMatch?.[
-      `${data?.id}_profitLoss_${matchDetails?.id}`
-    ]
-  );
   return (
     <div
       className={`gameTable table-responsive sessionFancyTable borderTable border `}
@@ -76,21 +70,33 @@ function OtherMarkets({
                       <span className="title-14">
                         <span
                           className={
-                            JSON.parse(
-                              matchDetails?.profitLossDataMatch?.[
-                                `${data?.id}_profitLoss_${matchDetails?.id}`
-                              ]
-                            )?.[`${matchs?.id}`] < 0
-                              ? "color-red"
+                            matchDetails?.teamRates
+                              ? matchDetails?.teamRates?.[
+                                  `${data?.id}_profitLoss_${matchDetails?.id}`
+                                ]
+                                ? JSON.parse(
+                                    matchDetails?.teamRates?.[
+                                      `${data?.id}_profitLoss_${matchDetails?.id}`
+                                    ]
+                                  )?.[`${matchs?.id}`] < 0
+                                  ? "color-red"
+                                  : "color-green"
+                                : "color-green"
                               : "color-green"
                           }
                         >
                           {parseFloat(
-                            JSON.parse(
-                              matchDetails?.profitLossDataMatch?.[
-                                `${data?.id}_profitLoss_${matchDetails?.id}`
-                              ]
-                            )?.[`${matchs?.id}`] ?? 0
+                            matchDetails?.teamRates
+                              ? matchDetails?.teamRates?.[
+                                  `${data?.id}_profitLoss_${matchDetails?.id}`
+                                ]
+                                ? JSON.parse(
+                                    matchDetails?.teamRates?.[
+                                      `${data?.id}_profitLoss_${matchDetails?.id}`
+                                    ]
+                                  )?.[`${matchs?.id}`]
+                                : 0
+                              : 0
                           ).toFixed(2)}
                         </span>
                       </span>
@@ -102,9 +108,9 @@ function OtherMarkets({
                   <BetStatusOverlay
                     title={data?.runners?.[indexes]?.status?.toLowerCase()}
                     active={
-                      data?.runners?.[indexes]?.status
-                        ?.toLowerCase()
-                        ?.toLowerCase() !== teamStatus.active?.toLowerCase()
+                      !["ACTIVE", "", undefined, null, "OPEN"].includes(
+                        data?.runners?.[indexes]?.status
+                      )
                     }
                   >
                     {new Array(backLayCount === 2 ? 1 : 3)
@@ -119,8 +125,9 @@ function OtherMarkets({
                             matchs?.ex?.availableToBack?.[2 - index]?.size
                           }
                           active={
-                            matchs?.status?.toLowerCase()?.toLowerCase() !==
-                            teamStatus.active?.toLowerCase()
+                            !["ACTIVE", "", undefined, null, "OPEN"].includes(
+                              data?.runners?.[indexes]?.status
+                            )
                           }
                         />
                       ))}
@@ -134,8 +141,9 @@ function OtherMarkets({
                           rate={matchs?.ex?.availableToLay?.[index]?.price}
                           percent={matchs?.ex?.availableToLay?.[index]?.size}
                           active={
-                            matchs?.status?.toLowerCase()?.toLowerCase() !==
-                            teamStatus.active?.toLowerCase()
+                            !["ACTIVE", "", undefined, null, "OPEN"].includes(
+                              data?.runners?.[indexes]?.status
+                            )
                           }
                         />
                       ))}

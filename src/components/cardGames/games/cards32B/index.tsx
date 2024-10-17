@@ -61,6 +61,7 @@ const Card32BComponent = () => {
               style={{ width: "100%",backgroundColor: "#000" }}
             >
               <VideoFrame
+                data={dragonTigerDetail}
                 time={dragonTigerDetail?.videoInfo?.autotime}
                 result={<Card32BResult data={dragonTigerDetail?.videoInfo} />}
                 id={`${cardUrl}${cardGamesId.card32B}`}
@@ -72,7 +73,7 @@ const Card32BComponent = () => {
               className="d-sm-flex flex-row justify-content-around mt-2"
               style={{ width: "100%",gap:"15px" }}
             >
-              <RateBox odds={dragonTigerDetail?.matchOdd}/>
+              <RateBox data={dragonTigerDetail} odds={dragonTigerDetail?.matchOdd}/>
               <OddEven
                   odds={dragonTigerDetail?.oddEven}
                   data={dragonTigerDetail}

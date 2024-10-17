@@ -1,12 +1,9 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useState } from "react";
 import { Col, Container, Row, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import "./style.scss";
 import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
 import UserBets from "../../../game/userBet";
-import RulesModal from "../../../commonComponent/rulesModal";
-import { tprules } from "../../../../assets";
 import CardResultBox from "../../../commonComponent/cardResultBox";
 import Teen1DResult from "./teenCard";
 import { handleRoundId } from "../../../../helpers";
@@ -19,7 +16,6 @@ import {
 import BackLay from "./backLay";
 
 const TeentPatti1DComponent = () => {
-  const [show, setShow] = useState(false);
   const { dragonTigerDetail } = useSelector((state: RootState) => state.card);
 
   const rules = [
@@ -37,7 +33,7 @@ const TeentPatti1DComponent = () => {
   //   }
   //   return parsedValue.toFixed(2);
   // };
-console.log('dragonTigerDetail',dragonTigerDetail);
+// console.log('dragonTigerDetail',dragonTigerDetail);
   return (
     <>
       <Row>
@@ -48,13 +44,6 @@ console.log('dragonTigerDetail',dragonTigerDetail);
                 <div>
                   <span style={{ fontSize: "16px", fontWeight: "600" }}>
                     1 DAY TEEN PATTI
-                  </span>
-                  <span
-                    style={{ fontSize: "14px", textDecoration: "underline" }}
-                    onClick={() => setShow(true)}
-                  >
-                    {" "}
-                    RULES
                   </span>
                 </div>
                 <span>
@@ -78,6 +67,7 @@ console.log('dragonTigerDetail',dragonTigerDetail);
                   time={dragonTigerDetail?.videoInfo?.lasttime}
                   result={<Teen1DResult data={dragonTigerDetail?.videoInfo} />}
                   id={`${cardUrl}${cardGamesId.teenOneDay}`}
+                  data={dragonTigerDetail}
                 />
               </div>
             </div>
@@ -131,7 +121,6 @@ console.log('dragonTigerDetail',dragonTigerDetail);
                     </tbody>
                   </Table>
                 </div>
-                <RulesModal show={show} setShow={setShow} rule={tprules} />
               </Col>
             </Row>
           </Container>

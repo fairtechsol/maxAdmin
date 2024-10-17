@@ -74,17 +74,6 @@ const CricketMatch20Component = () => {
                   <span style={{ fontSize: "16px", fontWeight: "600" }}>
                     CRICKET MATCH 20-20
                   </span>
-                  <span
-                    style={{
-                      fontSize: "14px",
-                      textDecoration: "underline",
-                      cursor: "pointer",
-                    }}
-                    onClick={() => setShow(true)}
-                  >
-                    {" "}
-                    RULES
-                  </span>
                 </div>
                 <span>
                   {dragonTigerDetail?.videoInfo
@@ -103,6 +92,7 @@ const CricketMatch20Component = () => {
                 }}
               >
                 <VideoFrame
+                  data={dragonTigerDetail}
                   time={dragonTigerDetail?.videoInfo?.autotime}
                   result={<Teen20Result data={dragonTigerDetail?.videoInfo} />}
                   id={videoFrameId}
@@ -111,7 +101,7 @@ const CricketMatch20Component = () => {
               </div>
             </div>
 
-            <div style={{}}>
+            <div>
               <div className="teenPatti-table-container">
                 <div
                   style={{

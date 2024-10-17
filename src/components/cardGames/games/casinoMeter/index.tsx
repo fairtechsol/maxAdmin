@@ -42,17 +42,6 @@ const CasinoMeterComponent = () => {
                   <span style={{ fontSize: "16px", fontWeight: "600" }}>
                     CASINO METER
                   </span>
-                  <span
-                    style={{
-                      fontSize: "14px",
-                      textDecoration: "underline",
-                      cursor: "pointer",
-                    }}
-                    onClick={() => setShow(true)}
-                  >
-                    {" "}
-                    Rules
-                  </span>
                 </div>
                 <span>
                   {dragonTigerDetail?.videoInfo
@@ -75,6 +64,7 @@ const CasinoMeterComponent = () => {
                   time={dragonTigerDetail?.videoInfo?.autotime}
                   result={""}
                   id={videoFrameId}
+                  data={dragonTigerDetail}
                 />
               </div>
             </div>

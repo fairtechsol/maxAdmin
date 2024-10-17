@@ -25,15 +25,16 @@ const CardJResultComponent: React.FC<Props> = ({ data }: any) => {
               margin: "8px 9px 10px 11px",
             }}
           >
-            <div>
+            <div style={{ display: "flex", justifyContent: "end" }}>
               <div
                 style={{
                   display: "flex",
                   gap: "5px",
                   flexWrap: "wrap",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  alignItems: "center",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "start",
+                  width: "83%",
                 }}
               >
                 <div
@@ -44,6 +45,8 @@ const CardJResultComponent: React.FC<Props> = ({ data }: any) => {
                     flexDirection: "row",
                     justifyContent: "center",
                     alignItems: "center",
+                    borderBottom: "1px solid rgba(0, 0, 0, .1)",
+                    paddingBottom:"15px"
                   }}
                 >
                   {elementsAndar?.map((item: any, index: any) => (
@@ -56,11 +59,11 @@ const CardJResultComponent: React.FC<Props> = ({ data }: any) => {
                     gap: "5px",
                     flexWrap: "wrap",
                     flexDirection: "row",
-                    justifyContent: "center",
-                    alignItems: "center",
+                    justifyContent: "start",
+                    
                     padding: "6px",
                     boxShadow: "0 0 4px -1px rgba(0, 0, 0, 0.5)",
-                    marginTop: "10px",
+                    marginTop: "0px",
                     color: "#9e9e9e",
                     paddingRight: "30px",
                     paddingLeft: "30px",

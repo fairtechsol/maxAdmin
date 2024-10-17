@@ -6,7 +6,6 @@ import LiveStreamComponent from "../../components/commonComponent/liveStreamComp
 import BetTable from "../../components/game/betTable";
 import GameHeader from "../../components/game/gameHeader";
 import ScoreCard from "../../components/game/scoreCard";
-import UserBets from "../../components/game/userBet";
 import { socket, socketService } from "../../socketManager";
 import {
   getPlacedBets,
@@ -17,6 +16,8 @@ import {
 import { AppDispatch, RootState } from "../../store/store";
 import { sessionBettingType } from "../../utils/Constants";
 import { MatchType } from "../../utils/enum";
+import GameUserBets from "../../components/game/gameUserBets";
+import { customSortBySessionMarketName } from "../../helpers";
 
 const Games = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -230,7 +231,7 @@ const Games = () => {
                   {matchDetails?.matchOdd?.isActive && (
                     <Col md={12}>
                       <BetTable
-                        title={"Runners"}
+                        title={matchDetails?.matchOdd?.name}
                         type={MatchType.MATCH_ODDS}
                         data={matchDetails?.matchOdd}
                       />
@@ -311,6 +312,8 @@ const Games = () => {
                             value?.section?.length > 0 &&
                             key != sessionBettingType.cricketCasino
                         )
+                        ?.slice()
+                        ?.sort(customSortBySessionMarketName)
                         ?.map(([key, value]: any) => {
                           return (
                             <Col md={12}>
@@ -364,7 +367,7 @@ const Games = () => {
               <div className="my-2">
                 <ScoreCard />
               </div>
-              <UserBets matchId={id} />
+              <GameUserBets matchId={id} />
             </Col>
           </Row>
         </div>

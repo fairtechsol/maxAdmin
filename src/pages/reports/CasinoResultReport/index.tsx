@@ -12,6 +12,7 @@ import moment from "moment-timezone";
 import { ResultComponent } from "../../../components/commonComponent/resultComponent";
 import { resultDragonTiger } from "../../../store/actions/card/cardDetail";
 import { cardGamesCasinoResult } from "../../../utils/Constants";
+import { FaTimes } from "react-icons/fa";
 
 interface Column {
   id: string;
@@ -30,9 +31,11 @@ const CasinoResultReport = () => {
   const [casinoModalShow, setCasinoModalShow] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
-  const [date, setDate] = useState<any>(
-    moment(new Date()).format("YYYY-MM-DD")
-  );
+  // const [date, setDate] = useState<any>(
+  //   moment(new Date()).format("YYYY-MM-DD")
+  // );
+  const [date, setDate] = useState<any>("");
+
   const [type, setType] = useState<any>(null);
 
   const [typeFromState, setTypeFromState] = useState<any>(null);
@@ -123,23 +126,49 @@ const CasinoResultReport = () => {
     }
   }, [tableConfig, typeFromState]);
 
+  const [cross, setCross] = useState("");
+
+  const clearDate = () => {
+    setCross(""); // Clear the selected date
+  };
   return (
     <div className="p-2 pt-0">
       <h5 className="title-22 fw-normal">Casino Result Report</h5>
       <Form onSubmit={handleSubmit}>
         <Row>
           <Col md={2}>
-            <CustomInput
-              placeholder={""}
-              customstyle={"mb-3"}
-              type="date"
-              onChange={(e: any) => {
-                setDate(moment(e.target.value).format("YYYY-MM-DD"));
-              }}
-              value={date}
-            />
+            <div className="position-relative">
+              <CustomInput
+                placeholder={""}
+                customstyle={"mb-3"}
+                type="date"
+                onChange={(e: any) => {
+                  setDate(moment(e.target.value).format("YYYY-MM-DD"));
+                  setCross("");
+                }}
+                value={date}
+                onClick={()=>setCross("cross")}
+              />
+
+              {cross && (
+                <button
+                  type="button"
+                  onClick={clearDate}
+                  className="btn btn-link position-absolute"
+                  style={{
+                    top: "46%",
+                    right: "2px",
+                    transform: "translateY(-50%)",
+                    background:"#fff",
+                    height:"30px"
+                  }}
+                >
+                  <FaTimes />
+                </button>
+              )}
+            </div>
           </Col>
-          <Col md={2}>
+          <Col className="lh-lg" md={2}>
             <SelectSearch
               defaultValue="slotGame"
               options={cardGamesCasinoResult}
@@ -157,7 +186,7 @@ const CasinoResultReport = () => {
               isOptionDisabled={(option: any) => option.disabled}
             />
           </Col>
-          <Col md={2}>
+          <Col className="mt-1" md={2}>
             <Button type="submit">Submit</Button>
           </Col>
         </Row>

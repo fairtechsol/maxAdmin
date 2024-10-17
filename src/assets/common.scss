@@ -33,6 +33,65 @@ body table.table {
   padding: 0px 10px !important;
   height: auto !important;
 }
+
+.rules-header-new {
+  background-color: #333;
+  display: flex;
+  justify-content: center;
+  font-size: 16px;
+  padding: 2px;
+  width: 100%;
+  color: #ffffff;
+}
+
+.rules-header-new span {
+  position: absolute;
+  right: 10px;
+  top: 0px;
+  cursor: pointer;
+  color: #fff;
+  font-size: 24px;
+}
+
+.modal-new {
+  // padding: 10px;
+  z-index: 999;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #666666 #333333;
+  height: 250px;
+  line-height: normal;
+  width: 72%;
+  background-color: #000;
+  position: absolute;
+  top: 10%;
+  left: 62%; 
+  transform: translateX(-50%);
+}
+
+
+.close-new {
+  color: #aaa;
+  float: right;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.casino-vieo-rules {
+  flex-wrap: wrap;
+  background-color: #000;
+  color: #fff;
+  font-size: 12px;
+  width: 0;
+  // top: 50px;
+  right: 0;
+  height: calc(100% - 160px);
+  border-radius: 8px;
+  display: none;
+  position: absolute;
+  text-align: left;
+}
 .modalFull-90.customModal .modal-dialog {
   width: 90vw;
   max-width: none;
@@ -427,8 +486,6 @@ th {
   position: absolute;
   right: 5px;
   top: 5px;
-  display: flex;
-  display: -webkit-flex;
 }
 
 .casino-video-rules-icon {
@@ -443,6 +500,7 @@ th {
   justify-content: center;
   margin-right: 5px;
   cursor: pointer;
+
 }
 
 .casino-video-rules-icon .fa-info-circle {
@@ -775,4 +833,26 @@ th {
 
 .lay-cell-A {
   background-color: #f994ba !important;
+}
+
+.suspended-row {
+  position: relative;
+}
+.suspended-row::after {
+  content: attr(data-title);
+  background-color: #373636d6;
+  color: #ff0000;
+  font-weight: bold;
+  font-size: 16px;
+  text-transform: uppercase;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  right: 0;
+  top: 0;
+  cursor: not-allowed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
 }

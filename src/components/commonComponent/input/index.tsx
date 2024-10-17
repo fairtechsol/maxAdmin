@@ -16,6 +16,7 @@ const CustomInput = (props: any) => {
     disabled,
     required,
     customstyle,
+    onClick,
     ...prop
   } = props;
 
@@ -23,19 +24,20 @@ const CustomInput = (props: any) => {
     ...style,
   };
 
-  
-    return (
+  return (
     <>
       <Form.Group className={`${customstyle} ${formInline ? "row" : ""}`}>
         {title ? (
-          <Form.Label className={`col-${formInline ? labelCol : ""} custom-label`}>
+          <Form.Label
+            className={`col-${formInline ? labelCol : ""} custom-label`}
+          >
             {title}
           </Form.Label>
         ) : (
           ""
         )}
         <Form.Control
-        required={required}
+          required={required}
           disabled={disabled}
           autoComplete="new-password"
           className={`col-${formInline ? inputCol : ""} bg-${bgColor}`}
@@ -43,6 +45,7 @@ const CustomInput = (props: any) => {
           onWheel={numberInputOnWheelPreventChange}
           {...prop}
           style={{ ...inlineStyle }}
+          onClick={onClick}
         />
         <CustomErrorMessage touched={touched} errors={errors} />
       </Form.Group>

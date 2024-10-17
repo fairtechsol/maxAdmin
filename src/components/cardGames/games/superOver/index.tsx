@@ -33,7 +33,7 @@ const SuperOverComponent = () => {
             <div className="horseRacingTabHeader">
               <div>
                 <span style={{ fontSize: "16px", fontWeight: "600" }}>
-                  {dragonTigerDetail?.name}
+                ENG Vs RSA {dragonTigerDetail?.name}
                 </span>
                 <span
                   style={{
@@ -62,6 +62,7 @@ const SuperOverComponent = () => {
               style={{ width: "100%", backgroundColor: "#000" }}
             >
               <VideoFrame
+              data={dragonTigerDetail}
                 time={dragonTigerDetail?.videoInfo?.autotime}
                 result={<Dragon20Result data={dragonTigerDetail?.videoInfo} />}
                 id={`${cardUrl}${cardGamesId.superover}`}

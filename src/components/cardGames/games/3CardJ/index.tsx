@@ -22,8 +22,8 @@ const CardJComponent = () => {
   const [show, setShow] = useState(false);
   const placeBetRef = useRef<HTMLDivElement>(null);
   const { dragonTigerDetail } = useSelector((state: RootState) => state.card);
-// const title = dragonTigerDetail?.title;
-// console.log(dragonTigerDetail)
+  // const title = dragonTigerDetail?.title;
+  // console.log(dragonTigerDetail)
   return (
     <>
       <Row>
@@ -35,17 +35,6 @@ const CardJComponent = () => {
                   <span style={{ fontSize: "16px", fontWeight: "600" }}>
                     {dragonTigerDetail?.name}
                   </span>
-                  <a
-                    style={{
-                      fontSize: "14px",
-                      textDecoration: "underline",
-                      cursor: "pointer",
-                    }}
-                    onClick={() => setShow(true)}
-                  >
-                    {" "}
-                    RULES
-                  </a>
                 </div>
                 <span>
                   {dragonTigerDetail?.videoInfo
@@ -79,12 +68,12 @@ const CardJComponent = () => {
                   margin: "5px",
                   display: "flex",
                   flexDirection: "column",
-                  gap: 6
+                  gap: 6,
                 }}
               >
                 <CardBox
                   title={"Yes"}
-                  cardClass={"back-BackGround"} 
+                  cardClass={"back-BackGround"}
                   odds={dragonTigerDetail?.yes}
                   data={dragonTigerDetail}
                   cards={dragonTigerDetail?.cardInfo}
@@ -108,10 +97,7 @@ const CardJComponent = () => {
                 />
                 <div className="ticker-container">
                   <div className="ticker-wrap">
-                    <div
-                      className="ticker-move"
-                      style={{ color: "#17a2b8" }}
-                    >
+                    <div className="ticker-move" style={{ color: "#17a2b8" }}>
                       {dragonTigerDetail?.videoInfo?.remark}
                     </div>
                   </div>

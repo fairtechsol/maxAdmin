@@ -1,7 +1,7 @@
 import { debounce } from "lodash";
 import React, { useEffect, useMemo, useState } from "react";
-import { Form, FormControl, InputGroup } from "react-bootstrap";
-/***** */
+import { Form, FormControl, InputGroup, Button } from "react-bootstrap";
+
 interface SearchBoxProps {
   onSearch: (query: string) => void;
   value: string;
@@ -10,21 +10,26 @@ interface SearchBoxProps {
 const SearchBox: React.FC<SearchBoxProps> = ({ value, onSearch }) => {
   const [keyword, setKeyword] = useState("");
 
-  const debouncedInputValue = useMemo(() => {
-    return debounce((value: any) => {
-      onSearch(value);
-    }, 500);
-  }, []);
+  const debouncedInputValue = useMemo(
+    () =>
+      debounce((query: string) => {
+        onSearch(query);
+      }, 500),
+    [onSearch]
+  );
 
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const query = e.target.value;
-    setKeyword(query);
-    debouncedInputValue(query);
+  const handleButtonClick = () => {
+    debouncedInputValue(keyword); // Trigger search with the current keyword
+  };
+
+  const handleReset = () => {
+    setKeyword(""); // Clear the input field
+    onSearch(""); // Trigger search with an empty query
   };
 
   useEffect(() => {
     if (value === "") {
-      setKeyword("");
+      setKeyword(""); // Sync with external value prop
     }
   }, [value]);
 
@@ -39,9 +44,21 @@ const SearchBox: React.FC<SearchBoxProps> = ({ value, onSearch }) => {
           value={keyword}
           type="text"
           placeholder=""
-          onChange={handleSearchChange}
+          onInput={(e: React.FormEvent<HTMLInputElement>) =>
+            setKeyword(e.currentTarget.value)
+          } // Directly update state without onChange
         />
       </InputGroup>
+      <Button className="float-end ms-2" onClick={handleButtonClick}>
+        Load
+      </Button>
+      <Button
+        className="float-end ms-2"
+        style={{ backgroundColor: "#74788d", border: "0" }}
+        onClick={handleReset}
+      >
+        Reset
+      </Button>
     </Form.Group>
   );
 };

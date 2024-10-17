@@ -194,7 +194,16 @@
   margin-top: 5px;
 }
 
-
+.casino-result-desc-aaa {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  //padding: 6px;
+  box-shadow: 0 0 5px;
+  margin-top: 0px;
+  width: 80% !important;
+  margin-left: auto;
+}
 
 // .horseRacingTab .nav-link{
 //   margin: 0 !important;

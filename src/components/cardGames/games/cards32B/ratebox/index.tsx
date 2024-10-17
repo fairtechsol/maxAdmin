@@ -17,7 +17,7 @@ const RateBox = ({ data, odds }: any) => {
         <div className="card32bBackLay borderBox">Back</div>
         <div className="card32bBackLay borderBox">Lay</div>
       </div>
-      {odds?.map((item: any) => {
+      {odds?.map((item: any, index: number) => {
         return (
           <>
             <div className="d-flex w-100 flex-column">
@@ -33,26 +33,30 @@ const RateBox = ({ data, odds }: any) => {
                                 data?.profitLoss[
                                   `${data?.videoInfo?.mid}_1_card`
                                 ]
-                              )[item?.nation] > 0
+                              )[`player${index + 8}`] > 0
                               ? "color-green"
                               : JSON.parse(
                                   data?.profitLoss[
                                     `${data?.videoInfo?.mid}_1_card`
                                   ]
-                                )[item?.nation] < 0
+                                )[`player${index + 8}`] < 0
                               ? "color-red"
                               : ""
                             : ""
                           : ""
                       }`}
                     >
-                      {data?.profitLoss
-                        ? data?.profitLoss[`${data?.videoInfo?.mid}_1_card`]
-                          ? JSON.parse(
-                              data?.profitLoss[`${data?.videoInfo?.mid}_1_card`]
-                            )[item?.nation]
-                          : 0
-                        : 0}
+                      {data?.profitLoss ? (
+                        data?.profitLoss[`${data?.videoInfo?.mid}_1_card`] ? (
+                          JSON.parse(
+                            data?.profitLoss[`${data?.videoInfo?.mid}_1_card`]
+                          )[`player${index + 8}`]
+                        ) : (
+                          <br></br>
+                        )
+                      ) : (
+                        0
+                      )}
                     </span>
                     <div
                       onClick={() => toggleDiv(item?.sid)}

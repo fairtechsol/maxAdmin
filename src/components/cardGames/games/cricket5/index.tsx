@@ -1,8 +1,7 @@
-import { useState } from "react";
+
 import { Col, Container, Row, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import "./style.scss";
-import RulesModal from "../../../commonComponent/rulesModal";
 import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
 import {
   cardData,
@@ -15,11 +14,9 @@ import Crick5Result from "./cric5Card";
 import MarketComponent from "./marketComponent";
 import CardResultBox from "../../../commonComponent/cardResultBox";
 import UserBets from "../../../game/userBet";
-import { crick5rules } from "../../../../assets";
 import ScoreBoard from "../../../commonComponent/scoreBoard";
 
 const Cricket5Component = () => {
-  const [show, setShow] = useState(false);
 
   const { dragonTigerDetail, scoreBoardData } = useSelector(
     (state: RootState) => state.card
@@ -35,17 +32,6 @@ const Cricket5Component = () => {
                 <span style={{ fontSize: "16px", fontWeight: "600" }}>
                   {dragonTigerDetail?.name}
                 </span>
-                <a
-                  style={{
-                    fontSize: "14px",
-                    textDecoration: "underline",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => setShow(true)}
-                >
-                  {" "}
-                  RULES
-                </a>
               </div>
               <span>
                 {dragonTigerDetail?.videoInfo
@@ -62,6 +48,7 @@ const Cricket5Component = () => {
               style={{ width: "100%", backgroundColor: "#000" }}
             >
               <VideoFrame
+                data={dragonTigerDetail}
                 time={dragonTigerDetail?.videoInfo?.autotime}
                 result={<Crick5Result data={dragonTigerDetail?.videoInfo} />}
                 id={`${cardUrl}${cardGamesId?.cricketv3}`}
@@ -141,7 +128,6 @@ const Cricket5Component = () => {
                     </Table>
                   ))}
                 </div>
-                <RulesModal show={show} setShow={setShow} rule={crick5rules} />
               </Col>
             </Row>
           </Container>
