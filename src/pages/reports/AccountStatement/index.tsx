@@ -433,7 +433,7 @@ const AccountStatement = () => {
                 }
               }}
               placeholder={"Please enter 3 or more characters"}
-              isMultiOption={true}
+              isMultiOption={false}
               isSearchable={true}
               onInputChange={(value: any) => {
                 setInputValue(value);

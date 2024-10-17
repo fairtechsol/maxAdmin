@@ -233,7 +233,7 @@ const Games = () => {
                   {matchDetails?.matchOdd?.isActive && (
                     <Col md={12}>
                       <BetTable
-                        title={"Runners"}
+                        title={matchDetails?.matchOdd?.name}
                         type={MatchType.MATCH_ODDS}
                         data={matchDetails?.matchOdd}
                       />
