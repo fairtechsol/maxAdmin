@@ -54,7 +54,7 @@ const DragonTigerDesktop = () => {
               />
             </div>
           </div>
-          <div>
+          <div >
             <div
               className="d-sm-flex flex-row justify-content-around align-items-center"
               style={{ width: "100%"}}

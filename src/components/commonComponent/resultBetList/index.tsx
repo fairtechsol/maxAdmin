@@ -1,6 +1,9 @@
 import { useState } from "react";
 import moment from "moment";
 import { Column } from "../../../models/tableInterface";
+import CustomTable2 from "../table2";
+import DeleteBetOverlay from "../deleteBetRow";
+
 const columns: Column[] = [
   { id: "nation", label: "Nation " },
   { id: "rate", label: "Rate " },
@@ -36,8 +39,8 @@ const ResultBetList = ({ bets, total }: any) => {
   };
   return (
     <div className="w-100 d-flex flex-column">
-      <div className="w-100 d-flex flex-row justify-content-between">
-        <div className="w-25 d-flex flex-row justify-content-around">
+      <div className={"w-100 d-flex flex-row justify-content-between"}>
+        <div className={"w-25 lh-2 d-flex flex-row justify-content-between"}>
           <input
             type="radio"
             id={selected}
@@ -68,10 +71,153 @@ const ResultBetList = ({ bets, total }: any) => {
           />
           <label>Deleted</label>
         </div>
-        <div className="w-25 d-flex flex-row justify-content-around">
-          <span>Total Bets: 1</span>
-          <span>Total Amount: {total}</span>
-        </div>
+      </div>
+      <div
+        className={"title-16 d-flex flex-row justify-content-end  float-end"}
+      >
+        <span className="px-2">Total Bets: {total}</span>
+        <span>
+          Total Amount:{" "}
+          {list?.reduce((acc: number, bet: any) => {
+            return acc + bet?.amount;
+          }, 0)}
+        </span>
+      </div>
+
+      <div className="w-100">
+        <CustomTable2
+          // striped
+          columns={columns}
+          itemCount={10}
+          setTableConfig={() => {}}
+          tHeadTheme=""
+          customClass=""
+          // CustomTableClass=""
+          // currentPage={currentPage}
+          // setCurrentPage={setCurrentPage}
+        >
+          {list?.length === 0 && (
+            <tr className="text-center">
+              <td colSpan={10}>No Record Found!</td>
+            </tr>
+          )}
+          {list?.length > 0 &&
+            list?.map((item: any) => {
+              const {
+                id,
+                teamName,
+                odds,
+                amount,
+                winAmount,
+                createdAt,
+                ipAddress,
+                deleteReason,
+                betType,
+                result,
+                lossAmount,
+              } = item;
+              return (
+                <tr key={id} className="position-relative">
+                  {/* <td
+                  className={
+                    betType === "NO" || betType === "LAY"
+                      ? "bg-red1"
+                      : "bg-blue3"
+                  }
+                >
+                  {index + 1}
+                </td> */}
+                  <td
+                    className={
+                      betType === "NO" || betType === "LAY"
+                        ? "bg-red1"
+                        : "bg-blue3"
+                    }
+                    style={{ borderRight: "1px solid #aaa" }}
+                  >
+                    {teamName}
+                  </td>
+                  <td
+                    className={
+                      betType === "NO" || betType === "LAY"
+                        ? "bg-red1"
+                        : "bg-blue3"
+                    }
+                    style={{ borderRight: "1px solid #aaa" }}
+                  >
+                    {odds}
+                  </td>
+                  <td
+                    className={
+                      betType === "NO" || betType === "LAY"
+                        ? "bg-red1"
+                        : "bg-blue3"
+                    }
+                    style={{ borderRight: "1px solid #aaa" }}
+                  >
+                    {amount}
+                  </td>
+                  <td
+                    className={
+                      betType === "NO" || betType === "LAY"
+                        ? "bg-red1"
+                        : "bg-blue3"
+                    }
+                    style={{
+                      borderRight: "1px solid #aaa",
+                      color: result === "LOSS" ? "red" : "green",
+                    }}
+                  >
+                    {result === "LOSS" ? -lossAmount : winAmount}
+                  </td>
+                  <td
+                    className={
+                      betType === "NO" || betType === "LAY"
+                        ? "bg-red1"
+                        : "bg-blue3"
+                    }
+                    style={{ borderRight: "1px solid #aaa" }}
+                  >
+                    {moment(createdAt).format("YYYY-MM-DD hh:mm:ss")}
+                  </td>
+                  <td
+                    className={
+                      betType === "NO" || betType === "LAY"
+                        ? "bg-red1"
+                        : "bg-blue3"
+                    }
+                    style={{ borderRight: "1px solid #aaa" }}
+                  >
+                    {ipAddress}
+                  </td>
+                  <td
+                    className={
+                      betType === "NO" || betType === "LAY"
+                        ? "bg-red1"
+                        : "bg-blue3"
+                    }
+                    style={{ borderRight: "1px solid #aaa" }}
+                  >
+                    {/* <TooltipCustom title={browserDetail}> */}
+                    <a href="#" title="">
+                      Detail
+                    </a>
+                    {/* </TooltipCustom> */}
+                  </td>
+                  <td
+                    className={
+                      betType === "NO" || betType === "LAY"
+                        ? "bg-red1"
+                        : "bg-blue3"
+                    }
+                  >
+                    <input type="checkbox" />
+                  </td>
+                  <DeleteBetOverlay title={deleteReason} />
+                </tr>
+              );
+            })}
+        </CustomTable2>
       </div>
     </div>
   );

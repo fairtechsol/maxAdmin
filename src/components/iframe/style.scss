@@ -1,0 +1,59 @@
+.scorecard {
+  padding: 5px;
+  background-image:url("../../assets/images/scorecard-bg.png");
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #fff;
+  z-index: 1;
+
+  display: flex;
+}
+.m-scorecard {
+  padding: 5px;
+  background-image: url("../../assets/images/scorecard-bg.png");
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #fff;
+  z-index: 1;
+}
+.scorecard::before {
+  content: "";
+  background-color: rgba(0, 0, 0, 0.55);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+.m-scorecard::before {
+  content: "";
+  background-color: rgba(0, 0, 0, 0.55);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+.team-1 {
+  margin-bottom: 0;
+  font-size: 16px;
+}
+.m-team-1 {
+  margin-bottom: 0;
+  font-size: 12px;
+}
+.ball-runs {
+  display: inline-block;
+  height: 25px;
+  line-height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  font-size: var(--font-small);
+  color: #fff;
+  text-align: center;
+  margin-right: 4px;
+}
