@@ -82,7 +82,7 @@ const BetTable = ({
         />
       ) : type === MatchType.MATCH_ODDS ? (
         <MatchOdds
-          title={"Runners"}
+          title={""}
           data={data}
           backLayCount={backLayCount}
           matchDetails={matchDetails}

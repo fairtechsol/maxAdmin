@@ -8755,7 +8755,12 @@ textarea.form-control-lg {
   --bs-bg-opacity: 1;
   background-color: rgba(var(--bs-secondary-rgb), var(--bs-bg-opacity)) !important;
 }
-
+.bg-rateChange1{
+  background-color: #f46a6a;
+}
+.bg-rateChange2{
+  background-color: #34c38f;
+}
 .bg-success {
   --bs-bg-opacity: 1;
   background-color: rgba(var(--bs-success-rgb), var(--bs-bg-opacity)) !important;
