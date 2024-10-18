@@ -269,7 +269,7 @@ const AddAccount = () => {
       formik.setValues({
         ...formik.values,
         minBet: "100",
-        maxBet: "1000",
+        maxBet: "5000000",
         delay: "5",
         uplinePartnership: res,
         downlinePartnership: 100 - res,
