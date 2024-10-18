@@ -1,11 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import LiveStreamComponent from "../../components/commonComponent/liveStreamComponent";
 import BetTable from "../../components/game/betTable";
 import GameHeader from "../../components/game/gameHeader";
-import ScoreCard from "../../components/game/scoreCard";
+//import ScoreCard from "../../components/game/scoreCard";
+import { Constants } from "../../utils/Constants";
+import service from "../../service";
 import { socket, socketService } from "../../socketManager";
 import {
   getPlacedBets,
@@ -18,6 +20,7 @@ import { sessionBettingType } from "../../utils/Constants";
 import { MatchType } from "../../utils/enum";
 import GameUserBets from "../../components/game/gameUserBets";
 import { customSortBySessionMarketName } from "../../helpers";
+import Iframe from "../../components/iframe/back";
 
 const Games = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -32,6 +35,13 @@ const Games = () => {
   const { breadCrumb } = useSelector(
     (state: RootState) => state.match.sidebarList
   );
+
+  // const { matchDetails, marketId, loading } = useSelector(
+  //   (state: RootState) => state.match.matchList
+  // );
+
+  const [liveScoreBoardData, setLiveScoreBoardData] = useState(null);
+  const [errorCount, setErrorCount] = useState<number>(0);
   const updateMatchDetailToRedux = (event: any) => {
     try {
       if (id === event?.id) {
@@ -210,6 +220,48 @@ const Games = () => {
       console.log(error);
     }
   }, []);
+
+  const getScoreBoard = async (eventId: string) => {
+    try {
+      const response: any = await service.get(
+        // `https://fairscore7.com/score/getMatchScore/${marketId}`
+        // `https://dpmatka.in/dcasino/score.php?matchId=${marketId}`
+        //`https://devscore.fairgame.club/score/getMatchScore/${marketId}`
+        `${Constants.thirdParty}/cricketScore?eventId=${eventId}`
+      );
+      // {"success":false,"msg":"Not found"}
+      //console.log("response 11:", response);
+      if (response?.success !== false) {
+        setLiveScoreBoardData(response?.data);
+        setErrorCount(0);
+      }
+    } catch (e: any) {
+      console.log("Error:", e?.message);
+      setLiveScoreBoardData(null);
+      setErrorCount((prevCount: number) => prevCount + 1);
+    }
+  };
+
+  useEffect(() => {
+    //if (matchDetails?.marketId === marketId) {
+      let intervalTime = 5000;
+      if (errorCount >= 5 && errorCount < 10) {
+        intervalTime = 60000;
+      } else if (errorCount >= 10) {
+        intervalTime = 600000;
+      }
+      const interval = setInterval(() => {
+        getScoreBoard(matchDetails?.eventId);
+      }, intervalTime);
+
+      return () => {
+        clearInterval(interval);
+        setLiveScoreBoardData(null);
+      };
+    //}
+  }, [matchDetails?.id, matchDetails?.eventId, errorCount]);
+
+
   return (
     <div className="gamePage">
       <Container fluid>
@@ -367,7 +419,10 @@ const Games = () => {
                 <LiveStreamComponent eventId={matchDetails?.eventId} />
               )}
               <div className="my-2">
-                <ScoreCard />
+                {/* <ScoreCard /> */}
+                {liveScoreBoardData && (
+                  <Iframe data={liveScoreBoardData} width="100%" />
+                )}
               </div>
               <GameUserBets matchId={id} />
             </Col>
