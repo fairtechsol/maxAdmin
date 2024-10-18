@@ -40,6 +40,18 @@ export const getChannelId = async (eventId: number) => {
   }
 };
 
+export const calculateMaxLoss = (profitLossDataSession: any, betId: any) => {
+  if (!profitLossDataSession || !Array.isArray(profitLossDataSession)) {
+    return 0;
+  }
+
+  const totalMaxLoss = profitLossDataSession.reduce((accumulator, bet) => {
+    const maxLossToAdd = bet?.betId === betId ? +bet?.maxLoss : 0;
+    return accumulator + maxLossToAdd;
+  }, 0);
+
+  return totalMaxLoss;
+};
 
 export const formatToINR = (amount: any) => {
   const formatter = new Intl.NumberFormat("en-IN", {
@@ -55,7 +67,35 @@ export const formatNumber = (num: any) => {
   }
   return num?.toString();
 };
+export const dummyArray = [
+  {
+    price: 0,
+    size: 0,
+  },
+  {
+    price: 0,
+    size: 0,
+  },
+  {
+    price: 0,
+    size: 0,
+  },
+];
 
+export const handleSize = (rate: any) => {
+  if (rate && rate != 0) {
+    return rate;
+  } else {
+    return "";
+  }
+};
+export const handlePrice = (rate: any) => {
+  if (rate && rate != 0) {
+    return rate;
+  } else {
+    return "-";
+  }
+};
 export const customSortBySessionMarketName = (
   [_, nameA]: any,
   [__, nameB]: any
