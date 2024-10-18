@@ -200,7 +200,7 @@ const AccountStatement = () => {
       dispatch(
         getReportAccountList({
           id: selectedUser
-            ? selectedUser[0]?.value
+            ? selectedUser?.value
             : localStorage.getItem("key"),
           page: 1,
           limit: tableConfig?.rowPerPage,

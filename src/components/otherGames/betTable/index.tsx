@@ -10,7 +10,8 @@ import OverUnderMarket from "./overUnder";
 import SetWinner from "./setWinner";
 import HTFTMarketTable from "./htftmarket";
 import BetTableHeader from "../../commonComponent/betTableHeader";
-import OtherMarkets from "./otherMarket";
+// import OtherMarkets from "./otherMarket";
+import Tournament from "../../game/tournament";
 
 interface BetTableProps {
   title: string;
@@ -62,11 +63,12 @@ const BetTable = ({ title, type, data, backLayCount }: BetTableProps) => {
           matchDetails={matchDetails}
         />
       ) : type === MatchType.OTHER ? (
-        <OtherMarkets
-          title={formattedMinMax(data?.minBet, data?.maxBet)}
+        <Tournament
+          title={data?.name}
+          box={data?.runners?.[0]?.ex?.availableToBack?.length > 2 ? 6 : 2}
           data={data}
-          backLayCount={backLayCount}
-          matchDetails={matchDetails}
+          detail={matchDetails}
+          // data={matchDetails?.matchOdd}
         />
       ) : (
         <HTFTMarketTable
