@@ -288,6 +288,11 @@ export const profitLossDataForMatchConstants = {
     B: "teamBRate",
     C: "teamCRate",
   },
+  [matchBettingType.bookmaker2]: {
+    A: "teamARate",
+    B: "teamBRate",
+    C: "teamCRate",
+  },
   [matchBettingType.quickbookmaker1]: {
     A: "teamARate",
     B: "teamBRate",
@@ -303,6 +308,11 @@ export const profitLossDataForMatchConstants = {
     B: "teamBRate",
     C: "teamCRate",
   },
+  [matchBettingType.other]: {
+    A: "userTeamARateOther",
+    B: "userTeamBRateOther",
+    C: "userTeamCRateOther",
+  },
   [matchBettingType.tiedMatch1]: {
     A: "yesRateTie",
     B: "noRateTie",
@@ -311,7 +321,15 @@ export const profitLossDataForMatchConstants = {
     A: "yesRateTie",
     B: "noRateTie",
   },
+  [matchBettingType.tiedMatch3]: {
+    A: "yesRateTie",
+    B: "noRateTie",
+  },
   [matchBettingType.completeMatch]: {
+    A: "yesRateComplete",
+    B: "noRateComplete",
+  },
+  [matchBettingType.completeMatch1]: {
     A: "yesRateComplete",
     B: "noRateComplete",
   },
