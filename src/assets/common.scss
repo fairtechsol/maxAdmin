@@ -856,3 +856,341 @@ th {
   align-items: center;
   pointer-events: none;
 }
+
+@media (max-width: 760px) {
+  .backLayBoxWidth {
+    width: 48% !important;
+  }
+  .backLayBoxWidth2 {
+    width: 40% !important;
+  }
+  .rateBoxWidth {
+    width: 72% !important;
+  }
+  .rateBoxWidth2 {
+    width: 40% !important;
+  }
+  .rateBoxWidth3 {
+    width: 20% !important;
+  }
+  .rateFont{
+    font-size: 15px !important;
+    font-weight: bold !important;
+    color: #333 !important;
+  }
+  .sizeFont{
+    font-size: 11px !important;
+    font-weight: 200 !important;
+  }
+  .teamFont{
+    font-size: 13px !important;
+  }
+  .side-W{
+    display: none !important;
+  }
+  .sideBet-W{
+    display: none !important;
+    width: 0 !important;
+  }
+  .betMain-W{
+    width: 100% !important;
+  }
+  .suspendTextCmmn{
+    font-size: 12px !important;
+    font-weight: bold;
+    color: #ff0000;
+  }
+  .deatilShow-m{
+    display: block !important;
+  }
+  .deatilShow-d{
+    display: none !important;
+  }
+  .rateBoxWidthKhado {
+    width: 20% !important;
+  }
+}
+
+/* Styles for width 760px to 1200px */
+
+
+@media (min-width: 761px) and (max-width: 1200px) {
+  .backLayBoxWidth {
+    width: 240px !important;
+  }
+  .backLayBoxWidth2 {
+    width: 120px !important;
+  }
+  .rateBoxWidth {
+    width: 360px !important;
+  }
+  .rateBoxWidth2 {
+    width: 120px !important;
+  }
+  .rateBoxWidth3 {
+    width: 60px !important;
+  }
+  .rateBoxWidthNormal {
+    width: 180px !important;
+  }
+  .rateBoxWidthKhado {
+    width: 120px !important;
+  }
+  .rateFont{
+    font-size: 16px !important;
+    font-weight: bold !important;
+    color: #333 !important;
+  }
+  .sizeFont{
+    font-size: 12px !important;
+    font-weight: 200 !important;
+  }
+  .teamFont{
+    font-size: 14px !important;
+  }
+  .side-W{
+    display: none !important;
+  }
+  .sideBet-W{
+    display: none !important;
+    width: 0 !important;
+  }
+  .betMain-W{
+    width: 100% !important;
+  }
+  .suspendTextCmmn{
+    font-size: 13px !important;
+    font-weight: bold;
+    color: #ff0000;
+  }
+  .bookTeamWidth{
+    width: 27% !important;
+  }
+  .deatilShow-m{
+    display: block;
+  }
+  .deatilShow-d{
+    display: none;
+  }
+  .sessionMinMaxFont{
+    font-size: 9px !important;
+  }
+}
+
+/* Styles for width 1200px to 1399px */
+
+
+@media (min-width: 1201px) and (max-width: 1399px) {
+  .backLayBoxWidth {
+    width: 220px !important;
+  }
+  .backLayBoxWidth2 {
+    width: 110px !important;
+  }
+  .rateBoxWidth{
+    width: 330px !important;
+  }
+  .rateBoxWidth2 {
+    width: 110px !important;
+  }
+  .rateBoxWidth3 {
+    width: 55px !important;
+  }
+  .rateBoxWidthNormal {
+    width: 165px !important;
+  }
+  .rateBoxWidthKhado {
+    width: 110px !important;
+  }
+  .runnerWidthNormal {
+    flex-grow: 1;
+    width: 48% !important;
+  }
+  .rateFont {
+    font-size: 16px !important;
+    font-weight: bold !important;
+    color: #333 !important;
+  }
+  .sizeFont{
+    font-size: 12px !important;
+    font-weight: 200 !important;
+  }
+  .teamFont{
+    font-size: 13px !important;
+  }
+  .side-W{
+    width: 210px !important;
+  }
+  .betMain-W{
+    width: calc(100% - 352px) !important;
+  }
+  .suspendTextCmmn{
+    font-size: 14px !important;
+    font-weight: bold;
+    color: #ff0000;
+  }
+  .bookTeamWidth{
+    width: 26% !important;
+  }
+  .deatilShow-m{
+    display: none;
+  }
+  .deatilShow-d{
+    display: block;
+  }
+  .placeBet-w{
+    width: 350px !important;
+  }
+  .sessionMinMaxFont{
+    font-size: 9px !important;
+  }
+}
+
+
+/* Styles for width 1400px to 1599px */
+
+
+@media (min-width: 1400px) and (max-width: 1599px) {
+
+  .backLayBoxWidth{
+    width: 240px !important;
+  }
+  .backLayBoxWidth2 {
+    width: 120px !important;
+  }
+  .rateBoxWidth {
+    width: 360px !important;
+  }
+  .rateBoxWidth2 {
+    width: 120px !important;
+  }
+  .rateBoxWidth3 {
+    width: 60px !important;
+  }
+  .rateBoxWidthNormal {
+    width: 180px !important;
+  }
+  .rateBoxWidthKhado {
+    width: 120px !important;
+  }
+  .runnerWidthNormal {
+    flex-grow: 1;
+    width: 48% !important;
+  }
+  .rateFont{
+    font-size: 16px !important;
+    font-weight: bold !important;
+    color: #333 !important;
+  }
+  .sizeFont{
+    font-size: 12px !important;
+    font-weight: 200 !important;
+  }
+  .teamFont{
+    font-size: 14px !important;
+  }
+  .side-W{
+    width: 240px !important;
+  }
+  .betMain-W{
+    width: calc(100% - 402px) !important;
+  }
+  .suspendTextCmmn{
+    font-size: 15px !important;
+    font-weight: bold;
+    color: #ff0000;
+  }
+  .bookTeamWidth{
+    width: 27% !important;
+  }
+  .deatilShow-m{
+    display: none;
+  }
+  .deatilShow-d{
+    display: block;
+  }
+  .placeBet-w{
+    width: 400px !important;
+  }
+  .sessionMinMaxFont{
+    font-size: 10px !important;
+  }
+}
+
+/* Styles for width 1600px and above */
+
+
+@media (min-width: 1600px) {
+ .backLayBoxWidth {
+    width: 320px !important;
+  }
+  .backLayBoxWidth2 {
+    width: 160px !important;
+  }
+  .rateBoxWidth {
+    width: 480px !important;
+  }
+  .rateBoxWidth2 {
+    width: 160px !important;
+  }
+  .rateBoxWidth3 {
+    width: 80px !important;
+  }
+  .rateBoxWidthNormal {
+    width: 240px !important;
+  }
+  .rateBoxWidthKhado {
+    width: 160px !important;
+  }
+  .runnerWidthNormal {
+    flex-grow: 1;
+    width: 45% !important;
+  }
+  .rateFont{
+    font-size: 18px !important;
+    font-weight: bold !important;
+    color: #333 !important;
+  }
+  .sizeFont{
+    font-size: 12px !important;
+    font-weight: 200 !important;
+  }
+  .teamFont{
+    font-size: 14px !important;
+  }
+  .side-W{
+    width: 280px !important;
+  }
+  .betMain-W{
+    width: calc(100% - 452px) !important;
+  }
+  .suspendTextCmmn{
+    font-size: 16px !important;
+    font-weight: bold;
+    color: #ff0000;
+  }
+  .bookTeamWidth{
+    width: 28% !important;
+  }
+  .deatilShow-m{
+    display: none;
+  }
+  .deatilShow-d{
+    display: block;
+  }
+  .placeBet-w{
+    width: 450px !important;
+  }
+  .sessionMinMaxFont{
+    font-size: 12px !important;
+  }
+}
+
+.matchOddBackBox {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  // cursor: pointer;
+}
