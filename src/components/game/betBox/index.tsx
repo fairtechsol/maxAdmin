@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { handlePrice, handleSize } from "../../../helpers";
+import { formatNumber, handlePrice, handleSize } from "../../../helpers";
 
 const BetBox = ({ data, type,detail,runner }: any) => {
   const [tempRate, setTempRate] = useState("0");
@@ -44,7 +44,7 @@ const BetBox = ({ data, type,detail,runner }: any) => {
         {handlePrice(data?.price)}
       </span>
       <span className={`sizeFont matchOddRate2Box`}>
-        {handleSize(data?.size)}
+        {formatNumber(handleSize(data?.size))}
       </span>
     </div>
   );

@@ -16,7 +16,7 @@ const Tournament = ({ title, box, data, detail }:any) => {
   return (
     <>
       <div className="tournamentContainer">
-        <div className="tournamentTitle">
+       {detail?.matchType==="cricket"  && <div className="tournamentTitle">
           <span
             className={`tournamentTitleTxt ${
               isMobile ? "f-size13" : "f-size15"
@@ -24,7 +24,7 @@ const Tournament = ({ title, box, data, detail }:any) => {
           >
             {title}
           </span>
-        </div>
+        </div>}
 
         <div className="tournamentBackLayTab">
           <div className="tournamentMinMaxBox">
