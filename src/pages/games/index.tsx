@@ -20,8 +20,8 @@ import { sessionBettingType } from "../../utils/Constants";
 import { MatchType } from "../../utils/enum";
 import GameUserBets from "../../components/game/gameUserBets";
 import { customSortBySessionMarketName } from "../../helpers";
-import Iframe from "../../components/iframe/back";
-
+//import Iframe from "../../components/iframe/back";
+import Iframe from "../../components/iframe/iframe";
 const Games = () => {
   const dispatch: AppDispatch = useDispatch();
   const location = useLocation();
