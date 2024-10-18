@@ -24,6 +24,8 @@ import SessionNormal from "../../components/game/sessionNormal";
 import SessionKhado from "../../components/game/sessionKhado";
 import SessionFancy from "../../components/game/sessionFancy";
 import moment from "moment-timezone";
+import Tournament from "../../components/game/tournament";
+import OtherMarket from "../../components/game/otherMarket";
 
 const Games = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -290,7 +292,7 @@ const Games = () => {
                     ?.map((item: any) => {
                       return (
                         <Col md={12}>
-                          <MarketBox
+                          <OtherMarket
                             title={item?.name}
                             box={
                               item?.runners?.[0]?.ex?.availableToBack?.length >
@@ -310,7 +312,7 @@ const Games = () => {
                     ?.map((item: any) => {
                       return (
                         <Col md={12}>
-                          <MarketBox
+                          <Tournament
                             title={item?.name}
                             box={
                               item?.runners?.[0]?.ex?.availableToBack?.length >
