@@ -82,7 +82,7 @@ const MenuCollapse = (props: any) => {
             name: item?.title,
             id: item?.id,
             type: "collapse",
-            matchBetting: item?.matchBetting || [],
+            matchBetting: [...(item?.matchBetting || []),...(item?.tournamentBetting || [])],
           }));
         setMenuItemList(tempList);
       }
