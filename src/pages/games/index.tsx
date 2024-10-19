@@ -12,6 +12,8 @@ import { socket, socketService } from "../../socketManager";
 import {
   getPlacedBets,
   matchDetailAction,
+  updateBalance,
+  updateBetsPlaced,
   updateMatchRates,
   updatePlacedbetsDeleteReason,
 } from "../../store/actions/match/matchAction";
@@ -86,8 +88,10 @@ const Games = () => {
   const handleMatchBetPlaced = (event: any) => {
     try {
       if (event?.jobData?.matchId === id) {
-        dispatch(matchDetailAction(id));
-        dispatch(getPlacedBets(id));
+        // dispatch(matchDetailAction(id));
+        // dispatch(getPlacedBets(id));
+        dispatch(updateBetsPlaced(event?.jobData));
+        dispatch(updateBalance(event));
       }
     } catch (e) {
       console.log(e);
