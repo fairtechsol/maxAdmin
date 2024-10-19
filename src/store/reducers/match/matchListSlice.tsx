@@ -3,6 +3,7 @@ import { convertData, updateSessionBettingsItem } from "../../../utils/helper";
 import {
   matchDetailAction,
   otherMatchDetailAction,
+  updateBalance,
   updateMatchRates,
 } from "../../actions/match/matchAction";
 interface InitialState {
@@ -103,7 +104,41 @@ const matchListSlice = createSlice({
           tournament,
           other,
         };
+      })
+      
+      .addCase(updateBalance.fulfilled, (state, action) => {
+        const {jobData,userRedisObj} = action.payload;
+        // const {
+        //   newTeamRateData,
+        //   teamArateRedisKey,
+        //   teamBrateRedisKey,
+        //   teamCrateRedisKey,
+        //   betId,
+        //   matchBetType,
+        //   matchId,
+        // } = action.payload;
+        if (jobData?.matchBetType === "tournament") {
+          state.matchDetails = {
+            ...state.matchDetails,
+            profitLossDataMatch: {
+              ...state.matchDetails.profitLossDataMatch,
+              [jobData?.betId + "_profitLoss_" + jobData?.matchId]:
+                JSON.stringify(jobData?.newTeamRateData),
+            },
+          };
+        } else {
+          state.matchDetails = {
+            ...state.matchDetails,
+            profitLossDataMatch: {
+              ...state.matchDetails.profitLossDataMatch,
+              [jobData?.teamArateRedisKey]: userRedisObj[jobData?.teamArateRedisKey],
+              [jobData?.teamBrateRedisKey]: userRedisObj[jobData?.teamBrateRedisKey],
+              [jobData?.teamCrateRedisKey]: userRedisObj[jobData?.teamCrateRedisKey],
+            },
+          };
+        }
       });
+      
   },
 });
 
