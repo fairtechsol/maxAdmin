@@ -193,6 +193,7 @@ const ChangeStatus = ({ setShow, userData }: any) => {
                   customstyle="input-box"
                   value={values.transactionPassword}
                   onChange={handleChange}
+                  textAlign="left" 
                 />
               </Col>
             </Row>

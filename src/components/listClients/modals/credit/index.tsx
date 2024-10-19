@@ -119,6 +119,7 @@ const Credit = ({ userData, setShow }: any) => {
                   onChange={handleChange}
                   type="password"
                   customstyle="input-box"
+                  textAlign="left" 
                 // id="transactionPasswordInput"
                 />
               </Col>

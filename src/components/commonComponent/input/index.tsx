@@ -17,10 +17,12 @@ const CustomInput = (props: any) => {
     required,
     customstyle,
     onClick,
+    textAlign, // Add textAlign as a prop
     ...prop
   } = props;
 
   const inlineStyle: React.CSSProperties = {
+    textAlign: textAlign || 'right',
     ...style,
   };
 
