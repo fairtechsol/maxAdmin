@@ -3,7 +3,7 @@ import './style.scss'; // Create a CSS file to hold the styles
 
 const BaccaratRules2 = () => {
   return (
-    <div className="rules-body">
+    <div className="rules-body text-white title-14 lh-1">
       <div className="rules-section">
         <ul className="pl-2 pr-2 list-style">
           <li>
