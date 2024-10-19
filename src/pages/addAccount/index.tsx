@@ -168,11 +168,18 @@ const AddAccount = () => {
       if (remainingDownline < 0) {
         return;
       }
+      if (formik?.values.accountType.value === "user"){
+        formik.setValues({
+          ...formik.values,
+          ourPartnership: newValue,
+          downlinePartnership: 0,
+        });
+      }else{
       formik.setValues({
         ...formik.values,
         ourPartnership: remainingDownline,
         downlinePartnership: newValue,
-      });
+      });}
     } catch (e: any) {
       console.log(e);
     }
@@ -272,8 +279,8 @@ const AddAccount = () => {
         maxBet: "5000000",
         delay: "5",
         uplinePartnership: res,
-        downlinePartnership: 100 - res,
-        ourPartnership: 0,
+        downlinePartnership: 0,
+        ourPartnership: 100 - res,
       });
       setDown(100 - res);
     }

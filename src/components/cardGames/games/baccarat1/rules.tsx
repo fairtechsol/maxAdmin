@@ -5,7 +5,7 @@ const BaccaratRules = () => {
   return (
     <>
  
-    <div className="ball-rules-section-container">
+    <div className="ball-rules-section-container text-white title-14 lh-1">
       <ul className="ps-2 pe-2 list-style">
         <li>
           In the Baccarat game two hands are dealt; once for the banker and
