@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
@@ -239,7 +239,7 @@ const Games = () => {
         // `https://fairscore7.com/score/getMatchScore/${marketId}`
         // `https://dpmatka.in/dcasino/score.php?matchId=${marketId}`
         //`https://devscore.fairgame.club/score/getMatchScore/${marketId}`
-        `${Constants.thirdParty}/cricketScore?eventId=${eventId}`
+        `${Constants.thirdPartyLive}/cricketScore?eventId=${eventId}`
       );
       // {"success":false,"msg":"Not found"}
       //console.log("response 11:", response);
@@ -256,23 +256,22 @@ const Games = () => {
 
   useEffect(() => {
     //if (matchDetails?.marketId === marketId) {
-      let intervalTime = 5000;
-      if (errorCount >= 5 && errorCount < 10) {
-        intervalTime = 60000;
-      } else if (errorCount >= 10) {
-        intervalTime = 600000;
-      }
-      const interval = setInterval(() => {
-        getScoreBoard(matchDetails?.eventId);
-      }, intervalTime);
+    let intervalTime = 5000;
+    if (errorCount >= 5 && errorCount < 10) {
+      intervalTime = 60000;
+    } else if (errorCount >= 10) {
+      intervalTime = 600000;
+    }
+    const interval = setInterval(() => {
+      getScoreBoard(matchDetails?.eventId);
+    }, intervalTime);
 
-      return () => {
-        clearInterval(interval);
-        setLiveScoreBoardData(null);
-      };
+    return () => {
+      clearInterval(interval);
+      setLiveScoreBoardData(null);
+    };
     //}
   }, [matchDetails?.id, matchDetails?.eventId, errorCount]);
-
 
   const normalizedData = matchDetails?.sessionBettings?.map((item: any) =>
     JSON.parse(item)
@@ -305,10 +304,16 @@ const Games = () => {
                     className="w-100 d-flex flex-row justify-content-between align-items-center p-1"
                     style={{ backgroundColor: "#ffc742", color: "#fff" }}
                   >
-                    <span className="f-bold title-16">{matchDetails?.competitionName?`${matchDetails?.competitionName} > ${matchDetails?.title}`: matchDetails?.title}</span>
-                    <span className="title-14">{moment(matchDetails?.startAt).format(
-          "DD-MM-YYYY hh:mm:ss"
-        )}</span>
+                    <span className="f-bold title-16">
+                      {matchDetails?.competitionName
+                        ? `${matchDetails?.competitionName} > ${matchDetails?.title}`
+                        : matchDetails?.title}
+                    </span>
+                    <span className="title-14">
+                      {moment(matchDetails?.startAt).format(
+                        "DD-MM-YYYY hh:mm:ss"
+                      )}
+                    </span>
                   </div>
                   {matchDetails?.matchOdd?.activeStatus === "live" &&
                     matchDetails?.matchOdd?.isActive && (
@@ -647,7 +652,10 @@ const Games = () => {
             </Col>
             <Col md={4} className="text-white">
               {matchDetails?.eventId && (
-                <LiveStreamComponent eventId={matchDetails?.eventId} />
+                <LiveStreamComponent
+                  eventId={matchDetails?.eventId}
+                  sportId={4}
+                />
               )}
               <div className="my-2">
                 {/* <ScoreCard /> */}

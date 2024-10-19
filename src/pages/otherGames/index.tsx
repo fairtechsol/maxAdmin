@@ -263,7 +263,10 @@ const OtherGamesDetail = () => {
             </Col>
             <Col md={4}>
               {matchDetails?.eventId && (
-                <LiveStreamComponent eventId={matchDetails?.eventId} />
+                <LiveStreamComponent
+                  eventId={matchDetails?.eventId}
+                  sportId={matchDetails?.matchType === "football" ? 1 : 2}
+                />
               )}
               <OtherUserBets matchId={id} />
             </Col>
