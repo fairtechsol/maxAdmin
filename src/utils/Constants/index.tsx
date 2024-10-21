@@ -174,6 +174,7 @@ export const cardUrl =
     ? "https://maxbet07.com/videoPage/"
     : "https://maxbet07.com/videoPage/";
 
+export const liveStreamUrlCricket = "https://maxbet07.com/liveStreamCricket/";
 export const liveStreamUrl = "https://maxbet07.com/liveStream/";
 
 // const oldVideoUrl = "https://video.proexch.in/route/?id="

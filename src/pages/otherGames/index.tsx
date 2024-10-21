@@ -16,6 +16,7 @@ import NavComponent from "../../components/otherGames/matchList";
 import OtherUserBets from "../../components/otherGames/userBets";
 import BetTable from "../../components/otherGames/betTable";
 import LiveStreamComponent from "../../components/commonComponent/liveStreamComponent";
+import { liveStreamUrl } from "../../utils/Constants";
 
 const OtherGamesDetail = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -264,8 +265,9 @@ const OtherGamesDetail = () => {
             <Col md={4}>
               {matchDetails?.eventId && (
                 <LiveStreamComponent
-                  eventId={matchDetails?.eventId}
-                  sportId={matchDetails?.matchType === "football" ? 1 : 2}
+                  url={`${liveStreamUrl}${matchDetails?.eventId}/${
+                    matchDetails?.matchType === "football" ? 1 : 2
+                  }`}
                 />
               )}
               <OtherUserBets matchId={id} />
