@@ -94,13 +94,13 @@ const GameUserBets = ({ matchId }: any) => {
                         <th>Gametype</th> */}
                       </tr>
                     </thead>
-                    <tbody className="bg-primary">
+                    <tbody>
                       {placedBets?.map((bet: any) => {
                         return (
                           <>
                             <tr
                               key={bet?.id}
-                              className="position-relative title-14 lh-sm"
+                              className="position-relative title-14"
                             >
                               <td
                                 className={
@@ -152,15 +152,15 @@ const GameUserBets = ({ matchId }: any) => {
                                   bet?.betType === "LAY"
                                     ? "bg-red1"
                                     : "bg-blue3"
-                                } d-flex flex-column justify-content-end text-end`}
-                              >
-                                <div className="col">
+                                }`}
+                              > 
+                                <div className="col text-end">
                                   {moment(bet?.createdAt).format(
                                     "YYYY-MM-DD hh:mm:ss"
                                   )}
                                 </div>
 
-                                <div className="col text-end">
+                                <div className="col  text-end">
                                   {bet?.amount}
                                 </div>
                               </td>
