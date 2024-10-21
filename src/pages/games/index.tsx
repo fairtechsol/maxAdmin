@@ -212,12 +212,12 @@ const Games = () => {
       const handleVisibilityChange = () => {
         if (document.visibilityState === "visible") {
           if (id) {
-            dispatch(matchDetailAction(id));
+            // dispatch(matchDetailAction(id));
             dispatch(getPlacedBets(id));
           }
         } else if (document.visibilityState === "hidden") {
-          socketService.match.leaveMatchRoom(id);
-          socketService.match.getMatchRatesOff(id);
+          // socketService.match.leaveMatchRoom(id);
+          // socketService.match.getMatchRatesOff(id);
         }
       };
 
