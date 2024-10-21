@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
@@ -256,23 +256,22 @@ const Games = () => {
 
   useEffect(() => {
     //if (matchDetails?.marketId === marketId) {
-      let intervalTime = 5000;
-      if (errorCount >= 5 && errorCount < 10) {
-        intervalTime = 60000;
-      } else if (errorCount >= 10) {
-        intervalTime = 600000;
-      }
-      const interval = setInterval(() => {
-        getScoreBoard(matchDetails?.eventId);
-      }, intervalTime);
+    let intervalTime = 5000;
+    if (errorCount >= 5 && errorCount < 10) {
+      intervalTime = 60000;
+    } else if (errorCount >= 10) {
+      intervalTime = 600000;
+    }
+    const interval = setInterval(() => {
+      getScoreBoard(matchDetails?.eventId);
+    }, intervalTime);
 
-      return () => {
-        clearInterval(interval);
-        setLiveScoreBoardData(null);
-      };
+    return () => {
+      clearInterval(interval);
+      setLiveScoreBoardData(null);
+    };
     //}
   }, [matchDetails?.id, matchDetails?.eventId, errorCount]);
-
 
   const normalizedData = matchDetails?.sessionBettings?.map((item: any) =>
     JSON.parse(item)
@@ -305,10 +304,16 @@ const Games = () => {
                     className="w-100 d-flex flex-row justify-content-between align-items-center p-1"
                     style={{ backgroundColor: "#ffc742", color: "#fff" }}
                   >
-                    <span className="f-bold title-16">{matchDetails?.competitionName?`${matchDetails?.competitionName} > ${matchDetails?.title}`: matchDetails?.title}</span>
-                    <span className="title-14">{moment(matchDetails?.startAt).format(
-          "DD-MM-YYYY hh:mm:ss"
-        )}</span>
+                    <span className="f-bold title-16">
+                      {matchDetails?.competitionName
+                        ? `${matchDetails?.competitionName} > ${matchDetails?.title}`
+                        : matchDetails?.title}
+                    </span>
+                    <span className="title-14">
+                      {moment(matchDetails?.startAt).format(
+                        "DD-MM-YYYY hh:mm:ss"
+                      )}
+                    </span>
                   </div>
                   {matchDetails?.matchOdd?.activeStatus === "live" &&
                     matchDetails?.matchOdd?.isActive && (
@@ -346,7 +351,7 @@ const Games = () => {
                     )}
 
                   {matchDetails?.other
-                    ?.filter((item: any) => item?.isActive)
+                    ?.filter((item: any) => (item?.isActive && item?.activeStatus === "live"))
                     ?.map((item: any) => {
                       return (
                         <Col md={12}>
@@ -366,7 +371,7 @@ const Games = () => {
                       );
                     })}
                   {matchDetails?.tournament
-                    ?.filter((item: any) => item?.isActive)
+                    ?.filter((item: any) =>(item?.isActive && item?.activeStatus === "live"))
                     ?.map((item: any) => {
                       return (
                         <Col md={12}>
@@ -385,7 +390,7 @@ const Games = () => {
                         </Col>
                       );
                     })}
-                  {matchDetails?.bookmaker2?.isActive && (
+                  {matchDetails?.bookmaker2?.activeStatus === "live" && matchDetails?.bookmaker2?.isActive && (
                     <Col md={12}>
                       <MarketBox
                         title={matchDetails?.bookmaker2?.name}
@@ -402,7 +407,7 @@ const Games = () => {
                     </Col>
                   )}
                   {matchDetails?.quickBookmaker
-                    ?.filter((item: any) => item?.isActive)
+                    ?.filter((item: any) => (item?.isActive && item?.activeStatus === "live"))
                     ?.map((item: any) => {
                       return (
                         <Col md={12}>
@@ -415,7 +420,8 @@ const Games = () => {
                         </Col>
                       );
                     })}
-                  {matchDetails?.apiTideMatch2?.isActive && (
+                  {matchDetails?.apiTideMatch2?.activeStatus === "live" &&
+                matchDetails?.apiTideMatch2?.isActive && (
                     <Col md={12}>
                       <MarketBox
                         title={matchDetails?.apiTideMatch2?.name}
@@ -431,17 +437,27 @@ const Games = () => {
                       />
                     </Col>
                   )}
-                  {matchDetails?.manualTiedMatch?.isActive && (
+                  {((matchDetails?.manualTiedMatch?.activeStatus === "live" &&
+                matchDetails?.manualTiedMatch?.isActive) ||
+                (matchDetails?.manualTideMatch?.activeStatus === "live" &&
+                  matchDetails?.manualTideMatch?.isActive)) && (
                     <Col md={12}>
                       <ManualMarket
-                        title={matchDetails?.manualTiedMatch?.name}
-                        data={matchDetails?.manualTiedMatch}
+                        title={
+                          matchDetails?.manualTiedMatch?.name ||
+                          matchDetails?.manualTideMatch?.name
+                        }
+                        data={
+                          matchDetails?.manualTiedMatch ||
+                          matchDetails?.manualTideMatch
+                        }
                         detail={matchDetails}
                         // data={matchDetails?.matchOdd}
                       />
                     </Col>
                   )}
-                  {matchDetails?.marketCompleteMatch1?.isActive && (
+                  {matchDetails?.marketCompleteMatch1?.activeStatus === "live" &&
+                matchDetails?.marketCompleteMatch1?.isActive && (
                     <Col md={12}>
                       <MarketBox
                         title={matchDetails?.marketCompleteMatch1?.name}
@@ -458,7 +474,8 @@ const Games = () => {
                     </Col>
                   )}
 
-                  {matchDetails?.manualCompleteMatch?.isActive && (
+                  {matchDetails?.manualCompleteMatch?.activeStatus === "live" &&
+                matchDetails?.manualCompleteMatch?.isActive && (
                     <Col md={12}>
                       <ManualMarket
                         title={matchDetails?.manualCompleteMatch?.name}
@@ -610,7 +627,8 @@ const Games = () => {
                       )}
                   </div>
 
-                  {matchDetails?.apiTideMatch?.isActive && (
+                  {matchDetails?.apiTideMatch?.activeStatus === "live" &&
+                matchDetails?.apiTideMatch?.isActive && (
                     <Col md={12}>
                       <MarketBox
                         title={matchDetails?.apiTideMatch?.name}
@@ -626,7 +644,8 @@ const Games = () => {
                       />
                     </Col>
                   )}
-                  {matchDetails?.marketCompleteMatch?.isActive && (
+                  {matchDetails?.marketCompleteMatch?.activeStatus === "live" &&
+                matchDetails?.marketCompleteMatch?.isActive && (
                     <Col md={12}>
                       <MarketBox
                         title={matchDetails?.marketCompleteMatch?.name}
