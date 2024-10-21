@@ -6,7 +6,7 @@ import LiveStreamComponent from "../../components/commonComponent/liveStreamComp
 import BetTable from "../../components/game/betTable";
 import GameHeader from "../../components/game/gameHeader";
 //import ScoreCard from "../../components/game/scoreCard";
-import { Constants } from "../../utils/Constants";
+import { Constants, liveStreamUrlCricket } from "../../utils/Constants";
 import service from "../../service";
 import { socket, socketService } from "../../socketManager";
 import {
@@ -653,8 +653,7 @@ const Games = () => {
             <Col md={4} className="text-white">
               {matchDetails?.eventId && (
                 <LiveStreamComponent
-                  eventId={matchDetails?.eventId}
-                  sportId={4}
+                  url={`${liveStreamUrlCricket}${matchDetails?.eventId}`}
                 />
               )}
               <div className="my-2">
