@@ -17,8 +17,9 @@ export const login = createAsyncThunk<any, LoginData>(
         `${ApiConstants.AUTH.LOGIN}`,
         requestData
       );
-      const { token } = data;
+      const { token, userId } = data;
       localStorage.setItem("jwtMaxAdmin", token);
+      localStorage.setItem("uid", userId);
       return data;
     } catch (error) {
       const err = error as AxiosError;
