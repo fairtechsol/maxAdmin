@@ -300,7 +300,7 @@ const Topbar = (props: any) => {
                     name="Reports"
                     options={[
                       {
-                        name: "Account's Statement",
+                        name: "Account Statement",
                         link: "/admin/account-statement",
                       },
                       { name: "Current Bets", link: "/admin/current-bets" },

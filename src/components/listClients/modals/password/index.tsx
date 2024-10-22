@@ -58,7 +58,7 @@ const Password = ({ userData, setShow }: any) => {
           <div className="input-container">
             <Row>
               <Col sm={4}>
-                <span>New Password</span>
+                <span style={{fontSize:"0.9rem"}}>New Password</span>
               </Col>
               <Col sm={8}>
                 <CustomInput
@@ -77,7 +77,7 @@ const Password = ({ userData, setShow }: any) => {
           <div className="input-container mt-3">
             <Row>
               <Col sm={4}>
-                <span>Confirm Password</span>
+                <span style={{fontSize:"0.9rem"}}>Confirm Password</span>
               </Col>
               <Col sm={8}>
                 <CustomInput
@@ -96,7 +96,7 @@ const Password = ({ userData, setShow }: any) => {
           <div className="input-container mt-3">
             <Row>
               <Col sm={4}>
-                <span>Transaction Password</span>
+                <span style={{fontSize:"0.9rem"}}>Transaction Password</span>
               </Col>
               <Col sm={8}>
                 <CustomInput

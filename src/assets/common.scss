@@ -918,6 +918,10 @@ th {
   .rateBoxWidthKhado {
     width: 20% !important;
   }
+  .open3Patticards{
+    // flex-direction: column !important;
+    flex-wrap: nowrap;
+  }
 }
 
 /* Styles for width 760px to 1200px */
@@ -983,6 +987,10 @@ th {
   }
   .sessionMinMaxFont{
     font-size: 9px !important;
+  }
+  .open3Patticards{
+    // flex-direction: column !important;
+    flex-wrap: nowrap;
   }
 }
 
