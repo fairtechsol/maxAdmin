@@ -318,6 +318,7 @@ const Topbar = (props: any) => {
               </Navbar>
               <div className="user-dropdown-container">
               <NavDropdown
+                className="mt-1 pe-1"
                 id="nav-dropdown-dark-example"
                 title={userDetail && userDetail?.userName}
                 menuVariant="dark"

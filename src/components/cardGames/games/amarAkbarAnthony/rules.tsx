@@ -2,7 +2,7 @@ import React from 'react';
 
 const AmarAkbarRules = () => {
   return (
-    <div className="rules-section">
+    <div className="rules-section text-white title-14">
       <p>
         <b className="rules-sub-highlight">EVEN</b>
         <span className="ml-2">(PAYOUT 2.12)</span>

@@ -63,6 +63,7 @@ const BollywoodTableComponent = () => {
                     <BollywoodTableCard data={dragonTigerDetail?.videoInfo} />
                   }
                   id={videoFrameId}
+                  data={dragonTigerDetail}
                 />
               </div>
             </div>
