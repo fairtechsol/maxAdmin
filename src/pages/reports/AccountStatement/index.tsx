@@ -465,7 +465,9 @@ const AccountStatement = () => {
               value={dateTo} 
             />
           </Col>
-          <Col md={2}>
+          
+        </Row>
+        <Col md={2}>
             <Form.Label className="invisible d-block">dasd</Form.Label>
             <CustomButton
               type={"submit"}
@@ -476,7 +478,6 @@ const AccountStatement = () => {
               Load
             </CustomButton>
           </Col>
-        </Row>
       </Form>
       <CustomTable
         striped
@@ -491,7 +492,7 @@ const AccountStatement = () => {
             : 0
         }
         setTableConfig={setTableConfig}
-        enablePdfExcel={true}
+        enablePdfExcel={false}
         handleReportExport={handleReportExport}
         tableConfig={tableConfig}
         currentPage={currentPage}
