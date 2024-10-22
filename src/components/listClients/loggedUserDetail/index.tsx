@@ -1,4 +1,4 @@
-import { Accordion, Col, Row } from "react-bootstrap";
+import { Accordion, Col } from "react-bootstrap";
 import { FaRegArrowAltCircleUp } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../store/store";
@@ -28,7 +28,7 @@ const LoggedUserDetail = () => {
             />
           </Accordion.Header>
           <Accordion.Body>
-            <Row className="text-white">
+            <div className="text-white d-flex column gap-5">
               <Col lg={4}>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
                   <div className="col-md-8 title-14">
@@ -103,7 +103,7 @@ const LoggedUserDetail = () => {
                   </div>
                 </div>
               </Col>
-            </Row>
+            </div>
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>
