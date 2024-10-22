@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import SelectSearch from "../../../components/commonComponent/SelectSearch";
+//import SelectSearch from "../../../components/commonComponent/SelectSearch";
+import SelectSearch2 from "../../../components/commonComponent/SelectSearch2";
 import CustomTable from "../../../components/commonComponent/table";
 import { TableConfig } from "../../../models/tableInterface";
 import {
@@ -126,7 +127,7 @@ const CurrentBets = () => {
       <Form onSubmit={(e) => handleLoad(e)}>
         <Row className="mb-4">
           <Col md={2}>
-            <SelectSearch
+            <SelectSearch2
               defaultValue={[selectType]}
               // defaultValue="matched"
               options={options}
@@ -156,6 +157,8 @@ const CurrentBets = () => {
         tableConfig={tableConfig}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
+
+        
       >
         {ReportBetList && ReportBetList?.count === 0 && (
           <tr>
@@ -172,7 +175,7 @@ const CurrentBets = () => {
         )}
         {ReportBetList?.count > 0 &&
           ReportBetList?.rows?.map((item: any, index: number) => (
-            <tr key={index}>
+            <tr key={index} >
               {columns.map((column, index: number) => (
                 <td key={index}>
                   {column?.id === "createdAt"
