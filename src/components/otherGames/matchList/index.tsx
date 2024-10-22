@@ -9,7 +9,7 @@ const NavComponent = ({ matchDetail }: any) => {
     for (const marketType in matchDetail) {
       const marketValue: any = matchDetail[marketType];
       if (typeof marketValue === "object" && marketValue !== null) {
-        if (Array.isArray(marketValue) && marketType !== "quickBookmaker") {
+        if (Array.isArray(marketValue)) {
           formattedArray.push(
             ...marketValue.map((market: any) => ({
               type: market?.type,
@@ -18,7 +18,7 @@ const NavComponent = ({ matchDetail }: any) => {
             }))
           );
         } else {
-          if (marketValue?.id && marketType !== "bookmaker") {
+          if (marketValue?.id ) {
             formattedArray.push({
               type: marketValue?.type,
               id: marketValue?.id,

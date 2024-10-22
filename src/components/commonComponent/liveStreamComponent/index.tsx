@@ -1,9 +1,8 @@
 import { Col, Container, Ratio, Row } from "react-bootstrap";
 import RightPanelContainer from "./RightPanelContainer";
 import { useState } from "react";
-import { liveStreamUrl } from "../../../utils/Constants";
 
-const LiveStreamComponent = ({ eventId }: any) => {
+const LiveStreamComponent = ({ url }: any) => {
   const [showVideo, setShowVideo] = useState<boolean>(false);
   return (
     <>
@@ -14,7 +13,7 @@ const LiveStreamComponent = ({ eventId }: any) => {
               <Col md={12}>
                 <Ratio aspectRatio="16x9">
                   <iframe
-                    src={`${liveStreamUrl}${eventId}`}
+                    src={url}
                     title="Live Stream"
                     referrerPolicy={"strict-origin-when-cross-origin"}
                   ></iframe>

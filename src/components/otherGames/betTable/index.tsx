@@ -47,6 +47,13 @@ const BetTable = ({ title, type, data, backLayCount }: BetTableProps) => {
           backLayCount={backLayCount}
           matchDetails={matchDetails}
         />
+      ) : type === MatchType.TOURNAMENT ? (
+        <Tournament
+          title={formattedMinMax(data?.minBet, data?.maxBet)}
+          data={data}
+          backLayCount={backLayCount}
+          matchDetails={matchDetails}
+        />
       ) : type === MatchType.UNDER_OVER ? (
         <OverUnderMarket
           minMax={formattedMinMax(data?.minBet, data?.maxBet)}

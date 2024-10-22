@@ -184,6 +184,7 @@ const Deposit = ({ userData, setShow }: any) => {
                   touched={touched.remark}
                   errors={errors.remark}
                   {...getFieldProps("remark")}
+                  textAlign="left" 
                 />
               </Col>
             </Row>
@@ -203,6 +204,7 @@ const Deposit = ({ userData, setShow }: any) => {
                   touched={touched.transactionPassword}
                   errors={errors.transactionPassword}
                   {...getFieldProps("transactionPassword")}
+                  textAlign="left" 
                 />
               </Col>
             </Row>

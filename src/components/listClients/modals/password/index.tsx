@@ -69,6 +69,7 @@ const Password = ({ userData, setShow }: any) => {
                   {...getFieldProps("newPassword")}
                   touched={touched.newPassword}
                   errors={errors.newPassword}
+                  textAlign="left" 
                 />
               </Col>
             </Row>
@@ -87,6 +88,7 @@ const Password = ({ userData, setShow }: any) => {
                   {...getFieldProps("confirmPassword")}
                   touched={touched.confirmPassword}
                   errors={errors.confirmPassword}
+                  textAlign="left" 
                 />
               </Col>
             </Row>
@@ -105,6 +107,7 @@ const Password = ({ userData, setShow }: any) => {
                   {...getFieldProps("transactionPassword")}
                   touched={touched.transactionPassword}
                   errors={errors.transactionPassword}
+                  textAlign="left" 
                 />
               </Col>
             </Row>

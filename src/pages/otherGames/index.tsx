@@ -16,7 +16,7 @@ import NavComponent from "../../components/otherGames/matchList";
 import OtherUserBets from "../../components/otherGames/userBets";
 import BetTable from "../../components/otherGames/betTable";
 import LiveStreamComponent from "../../components/commonComponent/liveStreamComponent";
-
+import { liveStreamUrl } from "../../utils/Constants";
 
 const OtherGamesDetail = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -114,7 +114,7 @@ const OtherGamesDetail = () => {
     for (const marketType in matchDetail) {
       const marketValue: any = matchDetail[marketType];
       if (typeof marketValue === "object" && marketValue !== null) {
-        if (Array.isArray(marketValue) && marketType !== "quickBookmaker") {
+        if (Array.isArray(marketValue)) {
           formattedArray.push(...marketValue.map((market: any) => market));
         } else {
           if (marketValue?.id) {
@@ -237,8 +237,6 @@ const OtherGamesDetail = () => {
     }
   }, []);
 
-
-
   return (
     <div className="gamePage">
       <Container fluid>
@@ -257,6 +255,12 @@ const OtherGamesDetail = () => {
                       type={
                         ["other", "tournament"]?.includes(item.type)
                           ? MatchType.OTHER
+                          : [
+                              "quickbookmaker1",
+                              "quickbookmaker2",
+                              "quickbookmaker3",
+                            ]?.includes(item.type)
+                          ? MatchType.BOOKMAKER
                           : MatchType.MATCH_ODDS
                       }
                       data={item}
@@ -266,7 +270,11 @@ const OtherGamesDetail = () => {
             </Col>
             <Col md={4}>
               {matchDetails?.eventId && (
-                <LiveStreamComponent eventId={matchDetails?.eventId} />
+                <LiveStreamComponent
+                  url={`${liveStreamUrl}${matchDetails?.eventId}/${
+                    matchDetails?.matchType === "football" ? 1 : 2
+                  }`}
+                />
               )}
               <OtherUserBets matchId={id} />
             </Col>

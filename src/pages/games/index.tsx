@@ -6,7 +6,7 @@ import LiveStreamComponent from "../../components/commonComponent/liveStreamComp
 import BetTable from "../../components/game/betTable";
 import GameHeader from "../../components/game/gameHeader";
 //import ScoreCard from "../../components/game/scoreCard";
-import { Constants } from "../../utils/Constants";
+import { Constants, liveStreamUrlCricket } from "../../utils/Constants";
 import service from "../../service";
 import { socket, socketService } from "../../socketManager";
 import {
@@ -239,7 +239,7 @@ const Games = () => {
         // `https://fairscore7.com/score/getMatchScore/${marketId}`
         // `https://dpmatka.in/dcasino/score.php?matchId=${marketId}`
         //`https://devscore.fairgame.club/score/getMatchScore/${marketId}`
-        `${Constants.thirdParty}/cricketScore?eventId=${eventId}`
+        `${Constants.thirdPartyLive}/cricketScore?eventId=${eventId}`
       );
       // {"success":false,"msg":"Not found"}
       //console.log("response 11:", response);
@@ -666,7 +666,9 @@ const Games = () => {
             </Col>
             <Col md={4} className="text-white">
               {matchDetails?.eventId && (
-                <LiveStreamComponent eventId={matchDetails?.eventId} />
+                <LiveStreamComponent
+                  url={`${liveStreamUrlCricket}${matchDetails?.eventId}`}
+                />
               )}
               <div className="my-2">
                 {/* <ScoreCard /> */}
