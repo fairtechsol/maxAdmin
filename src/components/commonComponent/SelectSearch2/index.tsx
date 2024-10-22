@@ -26,7 +26,7 @@ const SelectSearch2 = (props: any) => {
       >
         {label && <Form.Label>{label}</Form.Label>}
         <div className={`modal-chekbox ${filedClass}`}>
-          <div className="custom-radio-group">
+          <div className="custom-radio-group" >
             {options.map((option: any, index: number) => (
               <label className="custom-radio" key={index}>
                 <input

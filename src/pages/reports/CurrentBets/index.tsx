@@ -125,7 +125,7 @@ const CurrentBets = () => {
     <div className="p-2 pt-0">
       <h5 className="title-22 fw-normal">Current Bets</h5>
       <Form onSubmit={(e) => handleLoad(e)}>
-        <Row className="mb-4">
+        <Row className="mb-4 ">
           <Col md={2}>
             <SelectSearch2
               defaultValue={[selectType]}
@@ -136,7 +136,7 @@ const CurrentBets = () => {
               onChange={handleType}
             />
           </Col>
-          <Col md={2}>
+          <Col md={2} className="ml-">
             <Form.Label className="invisible d-block mt-1">dasd</Form.Label>
             <Button type="submit">Load</Button>
           </Col>
