@@ -51,7 +51,9 @@ const Login = () => {
         );
         navigate("/admin/change-password");
       } else {
-        navigate("/admin/market-analysis");
+        navigate(
+          `/admin/active-inactive-user-list/${localStorage.getItem("uid")}`
+        );
       }
       dispatch(authReset());
     }
@@ -77,7 +79,9 @@ const Login = () => {
             />
 
             {touched.userName && errors.userName && (
-              <p style={{ color: "#fa1e1e",textAlign:"left" }}>{errors.userName as string}</p>
+              <p style={{ color: "#fa1e1e", textAlign: "left" }}>
+                {errors.userName as string}
+              </p>
             )}
           </Form.Group>
           <Form.Group className="mb-4 d-block">
@@ -90,7 +94,9 @@ const Login = () => {
               onChange={formik.handleChange}
             />
             {touched.password && errors.password && (
-              <p style={{ color: "#fa1e1e",textAlign:"left" }}>{errors.password as string}</p>
+              <p style={{ color: "#fa1e1e", textAlign: "left" }}>
+                {errors.password as string}
+              </p>
             )}
           </Form.Group>
           <CustomButton className="w-100" variant="primary" type="submit">

@@ -388,6 +388,12 @@ export const updateBetsPlaced: any = createAsyncThunk<any, any>(
   }
 );
 
+export const updateBalance = createAsyncThunk<any, any>(
+  "/user/balance",
+  async (balance) => {
+    return balance;
+  }
+);
 export const updatePlacedbetsDeleteReason = createAsyncThunk<any, any>(
   "/updatePlacedbetsDeleteReason/bets",
   async (data) => {

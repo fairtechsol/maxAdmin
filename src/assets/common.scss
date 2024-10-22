@@ -13,6 +13,15 @@ body table.table {
 .pdf {
   background-color: $pdf !important;
 }
+.ball-rules-section-container{
+  font-size: 14px;
+  color: #ffffff;
+  padding: 10px;
+}
+.rules-highlight {
+  color: #fdcf13;
+  font-size: 16px;
+}
 .divLoading {
   display: block;
   position: fixed;

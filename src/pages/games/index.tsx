@@ -6,12 +6,14 @@ import LiveStreamComponent from "../../components/commonComponent/liveStreamComp
 import BetTable from "../../components/game/betTable";
 import GameHeader from "../../components/game/gameHeader";
 //import ScoreCard from "../../components/game/scoreCard";
-import { Constants } from "../../utils/Constants";
+import { Constants, liveStreamUrlCricket } from "../../utils/Constants";
 import service from "../../service";
 import { socket, socketService } from "../../socketManager";
 import {
   getPlacedBets,
   matchDetailAction,
+  updateBalance,
+  updateBetsPlaced,
   updateMatchRates,
   updatePlacedbetsDeleteReason,
 } from "../../store/actions/match/matchAction";
@@ -86,8 +88,10 @@ const Games = () => {
   const handleMatchBetPlaced = (event: any) => {
     try {
       if (event?.jobData?.matchId === id) {
-        dispatch(matchDetailAction(id));
-        dispatch(getPlacedBets(id));
+        // dispatch(matchDetailAction(id));
+        // dispatch(getPlacedBets(id));
+        dispatch(updateBetsPlaced(event?.jobData));
+        dispatch(updateBalance(event));
       }
     } catch (e) {
       console.log(e);
@@ -235,7 +239,7 @@ const Games = () => {
         // `https://fairscore7.com/score/getMatchScore/${marketId}`
         // `https://dpmatka.in/dcasino/score.php?matchId=${marketId}`
         //`https://devscore.fairgame.club/score/getMatchScore/${marketId}`
-        `${Constants.thirdParty}/cricketScore?eventId=${eventId}`
+        `${Constants.thirdPartyLive}/cricketScore?eventId=${eventId}`
       );
       // {"success":false,"msg":"Not found"}
       //console.log("response 11:", response);
@@ -347,7 +351,7 @@ const Games = () => {
                     )}
 
                   {matchDetails?.other
-                    ?.filter((item: any) => item?.isActive)
+                    ?.filter((item: any) => (item?.isActive && item?.activeStatus === "live"))
                     ?.map((item: any) => {
                       return (
                         <Col md={12}>
@@ -367,7 +371,7 @@ const Games = () => {
                       );
                     })}
                   {matchDetails?.tournament
-                    ?.filter((item: any) => item?.isActive)
+                    ?.filter((item: any) =>(item?.isActive && item?.activeStatus === "live"))
                     ?.map((item: any) => {
                       return (
                         <Col md={12}>
@@ -386,7 +390,7 @@ const Games = () => {
                         </Col>
                       );
                     })}
-                  {matchDetails?.bookmaker2?.isActive && (
+                  {matchDetails?.bookmaker2?.activeStatus === "live" && matchDetails?.bookmaker2?.isActive && (
                     <Col md={12}>
                       <MarketBox
                         title={matchDetails?.bookmaker2?.name}
@@ -403,7 +407,7 @@ const Games = () => {
                     </Col>
                   )}
                   {matchDetails?.quickBookmaker
-                    ?.filter((item: any) => item?.isActive)
+                    ?.filter((item: any) => (item?.isActive && item?.activeStatus === "live"))
                     ?.map((item: any) => {
                       return (
                         <Col md={12}>
@@ -416,7 +420,8 @@ const Games = () => {
                         </Col>
                       );
                     })}
-                  {matchDetails?.apiTideMatch2?.isActive && (
+                  {matchDetails?.apiTideMatch2?.activeStatus === "live" &&
+                matchDetails?.apiTideMatch2?.isActive && (
                     <Col md={12}>
                       <MarketBox
                         title={matchDetails?.apiTideMatch2?.name}
@@ -432,17 +437,27 @@ const Games = () => {
                       />
                     </Col>
                   )}
-                  {matchDetails?.manualTiedMatch?.isActive && (
+                  {((matchDetails?.manualTiedMatch?.activeStatus === "live" &&
+                matchDetails?.manualTiedMatch?.isActive) ||
+                (matchDetails?.manualTideMatch?.activeStatus === "live" &&
+                  matchDetails?.manualTideMatch?.isActive)) && (
                     <Col md={12}>
                       <ManualMarket
-                        title={matchDetails?.manualTiedMatch?.name}
-                        data={matchDetails?.manualTiedMatch}
+                        title={
+                          matchDetails?.manualTiedMatch?.name ||
+                          matchDetails?.manualTideMatch?.name
+                        }
+                        data={
+                          matchDetails?.manualTiedMatch ||
+                          matchDetails?.manualTideMatch
+                        }
                         detail={matchDetails}
                         // data={matchDetails?.matchOdd}
                       />
                     </Col>
                   )}
-                  {matchDetails?.marketCompleteMatch1?.isActive && (
+                  {matchDetails?.marketCompleteMatch1?.activeStatus === "live" &&
+                matchDetails?.marketCompleteMatch1?.isActive && (
                     <Col md={12}>
                       <MarketBox
                         title={matchDetails?.marketCompleteMatch1?.name}
@@ -459,7 +474,8 @@ const Games = () => {
                     </Col>
                   )}
 
-                  {matchDetails?.manualCompleteMatch?.isActive && (
+                  {matchDetails?.manualCompleteMatch?.activeStatus === "live" &&
+                matchDetails?.manualCompleteMatch?.isActive && (
                     <Col md={12}>
                       <ManualMarket
                         title={matchDetails?.manualCompleteMatch?.name}
@@ -611,7 +627,8 @@ const Games = () => {
                       )}
                   </div>
 
-                  {matchDetails?.apiTideMatch?.isActive && (
+                  {matchDetails?.apiTideMatch?.activeStatus === "live" &&
+                matchDetails?.apiTideMatch?.isActive && (
                     <Col md={12}>
                       <MarketBox
                         title={matchDetails?.apiTideMatch?.name}
@@ -627,7 +644,8 @@ const Games = () => {
                       />
                     </Col>
                   )}
-                  {matchDetails?.marketCompleteMatch?.isActive && (
+                  {matchDetails?.marketCompleteMatch?.activeStatus === "live" &&
+                matchDetails?.marketCompleteMatch?.isActive && (
                     <Col md={12}>
                       <MarketBox
                         title={matchDetails?.marketCompleteMatch?.name}
@@ -648,7 +666,9 @@ const Games = () => {
             </Col>
             <Col md={4} className="text-white">
               {matchDetails?.eventId && (
-                <LiveStreamComponent eventId={matchDetails?.eventId} />
+                <LiveStreamComponent
+                  url={`${liveStreamUrlCricket}${matchDetails?.eventId}`}
+                />
               )}
               <div className="my-2">
                 {/* <ScoreCard /> */}

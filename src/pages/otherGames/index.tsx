@@ -16,6 +16,7 @@ import NavComponent from "../../components/otherGames/matchList";
 import OtherUserBets from "../../components/otherGames/userBets";
 import BetTable from "../../components/otherGames/betTable";
 import LiveStreamComponent from "../../components/commonComponent/liveStreamComponent";
+import { liveStreamUrl } from "../../utils/Constants";
 
 const OtherGamesDetail = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -236,8 +237,6 @@ const OtherGamesDetail = () => {
     }
   }, []);
 
-  console.log(updatedMarket);
-
   return (
     <div className="gamePage">
       <Container fluid>
@@ -271,7 +270,11 @@ const OtherGamesDetail = () => {
             </Col>
             <Col md={4}>
               {matchDetails?.eventId && (
-                <LiveStreamComponent eventId={matchDetails?.eventId} />
+                <LiveStreamComponent
+                  url={`${liveStreamUrl}${matchDetails?.eventId}/${
+                    matchDetails?.matchType === "football" ? 1 : 2
+                  }`}
+                />
               )}
               <OtherUserBets matchId={id} />
             </Col>

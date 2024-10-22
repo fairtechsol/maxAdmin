@@ -51,6 +51,7 @@ const ListActiveInactiveUser: React.FC = () => {
     userData: null,
   });
   const [activeUser, setActiveUser] = useState<any>([]);
+  const [value, setValue] = useState<any>(25);
   const [deactiveUser, setDeactiveUser] = useState<any>([]);
   const [keyword, setKeyWord] = useState<any>("");
   const [sort, setSort] = useState<any>({
@@ -69,15 +70,15 @@ const ListActiveInactiveUser: React.FC = () => {
       dispatch(
         getUsers({
           userId: id,
-          // page: tableConfig?.page || 1,
-          // limit: tableConfig?.rowPerPage,
+          page: tableConfig?.page || 1,
+          limit: value,
           userName: keyword || "",
           sort: sort?.key || "",
           order: sort?.direction || "DESC",
         })
       );
     }
-  }, [id, keyword, sort]);
+  }, [id, keyword, sort,value]);
 
   useEffect(() => {
     if (keyword !== tableConfig?.keyword) {
@@ -189,6 +190,19 @@ const ListActiveInactiveUser: React.FC = () => {
         <Row>
           <Col>
             <p className="title-22">Account List</p>
+            <div className="d-flex flex-row mb-1">
+              <span className="title-12">Show</span>
+              <select name="cars" id="cars" className="title-12" onChange={(e)=>setValue(e.target.value)}>
+                <option value={25}>25</option>
+                <option value={50}>50</option>
+                <option value={100}>100</option>
+                <option value={250}>250</option>
+                <option value={500}>500</option>
+                <option value={750}>750</option>
+                <option value={1000}>1000</option>
+              </select>
+              <span className="title-12">Entries</span>{" "}
+            </div>
           </Col>
           <Col>
             <CustomButton
@@ -197,6 +211,7 @@ const ListActiveInactiveUser: React.FC = () => {
             >
               Add Account
             </CustomButton>
+           
           </Col>
         </Row>
         <Row>
@@ -364,11 +379,19 @@ const ListActiveInactiveUser: React.FC = () => {
                               )}
                             </td>
 
-                            <td className="text-end">{formatToINR(creditRefrence)}</td>
+                            <td className="text-end">
+                              {formatToINR(creditRefrence)}
+                            </td>
                             <td className="text-end">{formatToINR(balance)}</td>
-                            <td className="text-end">{formatToINR(userBal?.profitLoss)}</td>
-                            <td className="text-end">{formatToINR(userBal?.exposure)}</td>
-                            <td className="text-end">{formatToINR(availableBalance)}</td>
+                            <td className="text-end">
+                              {formatToINR(userBal?.profitLoss)}
+                            </td>
+                            <td className="text-end">
+                              {formatToINR(userBal?.exposure)}
+                            </td>
+                            <td className="text-end">
+                              {formatToINR(availableBalance)}
+                            </td>
                             <td className="text-center">
                               <Form>
                                 <Form.Check
@@ -390,7 +413,9 @@ const ListActiveInactiveUser: React.FC = () => {
                               </Form>
                             </td>
                             <td className="text-end">
-                              {roleName === "user" ? formatToINR(exposureLimit) : "NA"}
+                              {roleName === "user"
+                                ? formatToINR(exposureLimit)
+                                : "NA"}
                             </td>
                             <td>0</td>
                             <td>{roleName}</td>
@@ -580,11 +605,19 @@ const ListActiveInactiveUser: React.FC = () => {
                               )}
                             </td>
 
-                            <td className="text-end">{formatToINR(creditRefrence)}</td>
+                            <td className="text-end">
+                              {formatToINR(creditRefrence)}
+                            </td>
                             <td className="text-end">{formatToINR(balance)}</td>
-                            <td className="text-end">{formatToINR(userBal?.profitLoss)}</td>
-                            <td className="text-end">{formatToINR(userBal?.exposure)}</td>
-                            <td className="text-end">{formatToINR(availableBalance)}</td>
+                            <td className="text-end">
+                              {formatToINR(userBal?.profitLoss)}
+                            </td>
+                            <td className="text-end">
+                              {formatToINR(userBal?.exposure)}
+                            </td>
+                            <td className="text-end">
+                              {formatToINR(availableBalance)}
+                            </td>
                             <td className="text-center">
                               <Form>
                                 <Form.Check
@@ -605,7 +638,9 @@ const ListActiveInactiveUser: React.FC = () => {
                                 />
                               </Form>
                             </td>
-                            <td className="text-end">{formatToINR(exposureLimit)}</td>
+                            <td className="text-end">
+                              {formatToINR(exposureLimit)}
+                            </td>
                             <td>0</td>
                             <td>{roleName}</td>
                             <td className="text-end">0</td>
