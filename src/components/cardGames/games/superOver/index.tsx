@@ -35,17 +35,6 @@ const SuperOverComponent = () => {
                 <span style={{ fontSize: "16px", fontWeight: "600" }}>
                 ENG Vs RSA {dragonTigerDetail?.name}
                 </span>
-                <span
-                  style={{
-                    fontSize: "14px",
-                    textDecoration: "underline",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => setShow(true)}
-                >
-                  {" "}
-                  RULES
-                </span>
               </div>
               <span>
                 {dragonTigerDetail?.videoInfo

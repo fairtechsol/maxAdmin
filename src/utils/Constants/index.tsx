@@ -11,7 +11,6 @@ import {
   ball3,
   ball4,
   ball6,
-  ballByBall,
   ballW,
   cards32A,
   cards32B,
@@ -471,7 +470,7 @@ export const card3 = {
     },
   ],
   sportCasino: [
-    { id: 15, url: "", imgSrc: ballByBall, name: "BALL BY BALL" },
+    // { id: 15, url: "", imgSrc: ballByBall, name: "BALL BY BALL" },
     {
       id: 16,
       url: "/admin/casinoDetail/superover",
