@@ -194,6 +194,7 @@ const Withdraw = ({ userData, setShow }: any) => {
                   as="textarea"
                   rows={4}
                   customstyle="input-box"
+                  textAlign="left" 
                 />
               </Col>
             </Row>
@@ -213,6 +214,7 @@ const Withdraw = ({ userData, setShow }: any) => {
                   onChange={handleChange}
                   type="password"
                   customstyle="input-box"
+                  textAlign="left" 
                 />
               </Col>
             </Row>

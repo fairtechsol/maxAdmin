@@ -114,7 +114,7 @@ const OtherGamesDetail = () => {
     for (const marketType in matchDetail) {
       const marketValue: any = matchDetail[marketType];
       if (typeof marketValue === "object" && marketValue !== null) {
-        if (Array.isArray(marketValue) && marketType !== "quickBookmaker") {
+        if (Array.isArray(marketValue)) {
           formattedArray.push(...marketValue.map((market: any) => market));
         } else {
           if (marketValue?.id) {
@@ -255,6 +255,12 @@ const OtherGamesDetail = () => {
                       type={
                         ["other", "tournament"]?.includes(item.type)
                           ? MatchType.OTHER
+                          : [
+                              "quickbookmaker1",
+                              "quickbookmaker2",
+                              "quickbookmaker3",
+                            ]?.includes(item.type)
+                          ? MatchType.BOOKMAKER
                           : MatchType.MATCH_ODDS
                       }
                       data={item}

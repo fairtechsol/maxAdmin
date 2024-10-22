@@ -93,6 +93,7 @@ function BookmakerTable({
                           style={{ width: "60px" }}
                           key={index}
                           // customClass={`bookmaker-bet-place W-100`}
+                          customClass="match-odd-bet-place-box"
                           bgColor={`blue${index + 1}`}
                           rate={data[`backTeam${item}`] - 2 + index}
                           active={
@@ -108,6 +109,7 @@ function BookmakerTable({
                           key={index}
                           //     customClass={`bookmaker-bet-place  ""
                           // `}
+                          customClass="match-odd-bet-place-box"
                           bgColor={`red${index + 1}`}
                           rate={data[`layTeam${item}`] + index}
                           active={
