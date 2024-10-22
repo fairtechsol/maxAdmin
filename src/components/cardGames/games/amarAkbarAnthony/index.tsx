@@ -63,6 +63,7 @@ const AmarAkbarAnthonyComponent = () => {
                     <AmarAkbarAnthonyCard data={dragonTigerDetail?.videoInfo} />
                   }
                   id={videoFrameId}
+                  data={dragonTigerDetail}
                 />
               </div>
             </div>

@@ -3,7 +3,7 @@ import './style.scss';
 
 const BollywoodTableGameRules = () => {
   return (
-    <div className="rules-section">
+    <div className="rules-section text-white title-14">
       <ul className="pl-4 pr-4 list-style">
         <li>
           The Bollywood table game will be played with a total of 16 cards including (J, Q, K, A). These cards are from 2 decks, meaning the game is played with a total of 16 * 2 = 32 cards.

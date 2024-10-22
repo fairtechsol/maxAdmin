@@ -64,9 +64,11 @@ import {
   two2,
 } from "../../assets";
 import AndarBaharRules from "../../components/cardGames/games/abj2/rules";
+import AmarAkbarRules from "../../components/cardGames/games/amarAkbarAnthony/rules";
 import BaccaratRules from "../../components/cardGames/games/baccarat1/rules";
 import BaccaratRules2 from "../../components/cardGames/games/baccarat2/rules";
 import BallByBallRules from "../../components/cardGames/games/ballbyball/desktop/rules";
+import BollywoodTableGameRules from "../../components/cardGames/games/bollywoodTable/rules";
 import Card32ARules from "../../components/cardGames/games/card32A/rules";
 import CasinoRulesImage from "../../components/cardGames/games/casinoMeter/rules";
 import CasinoWarRules from "../../components/cardGames/games/casinoWar/rules";
@@ -1215,4 +1217,6 @@ export const gameRulesComponents: any = {
   dt6: <DragonRules />,
   dt202: <DragonRules />,
   dt20: <DragonRules />,
+  aaa: <AmarAkbarRules/>,
+  btable: <BollywoodTableGameRules/>
 };
