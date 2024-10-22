@@ -338,7 +338,7 @@ const AddAccount = () => {
             <Row>
               <Col md={6}>
                 <h6
-                  className="mb-3 bg-warning title-18 fw-bold"
+                  className="mb-3 bg-warning title-18 fw-bold text-white"
                   style={addAccountHedingStyle}
                 >
                   Personal Details
@@ -425,7 +425,7 @@ const AddAccount = () => {
               </Col>
               <Col md={6}>
                 <h6
-                  className="mb-3 bg-warning title-18 fw-bold "
+                  className="mb-3 bg-warning title-18 fw-bold text-white "
                   style={addAccountHedingStyle}
                 >
                   Account Details
@@ -486,7 +486,7 @@ const AddAccount = () => {
             <Row>
               <Col md={12}>
                 <h6
-                  className="mb-3 bg-warning title-18 fw-bold "
+                  className="mb-3 bg-warning title-18 fw-bold text-white"
                   style={addAccountHedingStyle}
                 >
                   Commission Settings
@@ -534,7 +534,7 @@ const AddAccount = () => {
             <Row>
               <Col md={12}>
                 <h6
-                  className="mb-3 bg-warning title-18 fw-bold "
+                  className="mb-3 bg-warning title-18 fw-bold text-white"
                   style={addAccountHedingStyle}
                 >
                   Partnership

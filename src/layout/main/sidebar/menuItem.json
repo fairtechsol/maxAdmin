@@ -12,32 +12,33 @@
     "children": []
   },
   {
+    "id": "mixed_martial_arts",
+    "name": "Mixed Martial Arts",
+    "type": "collapse",
+    "children": []
+  },
+  {
     "id": "cricket",
     "name": "Cricket",
     "type": "collapse",
     "children": []
   },
   {
-    "id": "ice_hockey",
-    "name": "Ice Hockey",
+    "id": "golf",
+    "name": "Golf",
     "type": "collapse",
     "children": []
   },
   {
-    "id": "volleyball",
-    "name": "Volleyball",
+    "id": "boxing",
+    "name": "Boxing",
     "type": "collapse",
     "children": []
   },
+  
   {
-    "id": "politics",
-    "name": "Politics",
-    "type": "collapse",
-    "children": []
-  },
-  {
-    "id": "basketball",
-    "name": "Basketball",
+    "id": "beach_volleyball",
+    "name": "Beach Volleyball",
     "type": "collapse",
     "children": []
   },
@@ -48,8 +49,50 @@
     "children": []
   },
   {
-    "id": "darts",
-    "name": "Darts",
+    "id": "futsal",
+    "name": "Futsal",
+    "type": "collapse",
+    "children": []
+  },
+  {
+    "id": "horse_racing",
+    "name": "Horse Racing",
+    "type": "collapse",
+    "children": []
+  },
+  {
+    "id": "e_games",
+    "name": "E Games",
+    "type": "collapse",
+    "children": []
+  },
+  {
+    "id": "basketball",
+    "name": "Basketball",
+    "type": "collapse",
+    "children": []
+  },
+  {
+    "id": "motogp",
+    "name": "MotoGP",
+    "type": "collapse",
+    "children": []
+  },
+  {
+    "id": "chess",
+    "name": "Chess",
+    "type": "collapse",
+    "children": []
+  },
+  {
+    "id": "volleyball",
+    "name": "Volleyball",
+    "type": "collapse",
+    "children": []
+  },
+  {
+    "id": "ice_hockey",
+    "name": "Ice Hockey",
     "type": "collapse",
     "children": []
   },
@@ -60,14 +103,80 @@
     "children": []
   },
   {
-    "id": "kabaddi",
-    "name": "Kabaddi",
+    "id": "cycling",
+    "name": "Cycling",
     "type": "collapse",
     "children": []
   },
   {
-    "id": "boxing",
-    "name": "Boxing",
+    "id": "motorbikes",
+    "name": "Motorbikes",
+    "type": "collapse",
+    "children": []
+  },
+  {
+    "id": "athletics",
+    "name": "Athletics",
+    "type": "collapse",
+    "children": []
+  },
+  {
+    "id": "basketball3x3",
+    "name": "Basketball 3X3",
+    "type": "collapse",
+    "children": []
+  },
+  {
+    "id": "sumo",
+    "name": "Sumo",
+    "type": "collapse",
+    "children": []
+  },
+  {
+    "id": "virtual_sports",
+    "name": "Virtual sports",
+    "type": "collapse",
+    "children": []
+  },
+  {
+    "id": "handball",
+    "name": "Handball",
+    "type": "collapse",
+    "children": []
+  },
+  {
+    "id": "politics",
+    "name": "Politics",
+    "type": "collapse",
+    "children": []
+  },
+  {
+    "id": "motor_sports",
+    "name": "Motor Sports",
+    "type": "collapse",
+    "children": []
+  },
+  {
+    "id": "baseball",
+    "name": "Baseball",
+    "type": "collapse",
+    "children": []
+  },
+  {
+    "id": "rugby_union",
+    "name": "Rugby Union",
+    "type": "collapse",
+    "children": []
+  },
+  {
+    "id": "rugby_league",
+    "name": "Rugby League",
+    "type": "collapse",
+    "children": []
+  },
+  {
+    "id": "darts",
+    "name": "Darts",
     "type": "collapse",
     "children": []
   },
@@ -78,14 +187,44 @@
     "children": []
   },
   {
-    "id": "mixed_martial_arts",
-    "name": "Mixed Martial Arts",
+    "id": "snooker",
+    "name": "Snooker",
     "type": "collapse",
     "children": []
   },
   {
-    "id": "motor_sport",
-    "name": "Motor Sport",
+    "id": "soccer",
+    "name": "Soccer",
+    "type": "collapse",
+    "children": []
+  },
+  {
+    "id": "esports",
+    "name": "Esports",
+    "type": "collapse",
+    "children": []
+  },
+  {
+    "id": "greyhound_racing",
+    "name": "Greyhound Racing",
+    "type": "collapse",
+    "children": []
+  },
+  {
+    "id": "kabaddi",
+    "name": "Kabaddi",
+    "type": "collapse",
+    "children": []
+  },
+  {
+    "id": "boat_racing",
+    "name": "Boat Racing",
+    "type": "collapse",
+    "children": []
+  },
+  {
+    "id": "esoccer",
+    "name": "Esoccer",
     "type": "collapse",
     "children": []
   }
