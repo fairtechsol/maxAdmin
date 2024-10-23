@@ -19,14 +19,14 @@ const SearchBox: React.FC<SearchBoxProps> = ({ value, onSearch,load }:any) => {
     [onSearch]
   );
 
-  const handleButtonClick = () => {
-    debouncedInputValue(keyword); // Trigger search with the current keyword
-  };
+  // const handleButtonClick = () => {
+  //   debouncedInputValue(keyword); // Trigger search with the current keyword
+  // };
 
-  const handleReset = () => {
-    setKeyword(""); // Clear the input field
-    onSearch(""); // Trigger search with an empty query
-  };
+  // const handleReset = () => {
+  //   setKeyword(""); // Clear the input field
+  //   onSearch(""); // Trigger search with an empty query
+  // };
 
   useEffect(() => {
     if (value === "") {

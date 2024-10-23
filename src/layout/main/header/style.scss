@@ -1,6 +1,6 @@
 /* Custom styles for the Select component */
 .my-custom-select {
-    width: 300px; /* Set the width of the select box */
+    //width: 160px; /* Set the width of the select box */
     border: none; /* Remove border to eliminate the line */
     border-radius: 5px;
     background-color: #fff;
@@ -10,7 +10,7 @@
 /* Control styling */
 .my-custom-select .select__control {
     border: none; /* Remove border to eliminate the line */
-    padding: 1px 12px;
+    padding: 0px 12px;
 }
 
 /* Placeholder styling */
@@ -61,7 +61,7 @@
     -ms-flex-item-align: stretch;
     align-self: stretch;
     width: 0px !important;
-    background-color: hsl(0, 0%, 80%);
+    background-color:#fff !important;
     margin-bottom: 8px;
     margin-top: 8px;
     box-sizing: border-box;

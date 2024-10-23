@@ -1,6 +1,6 @@
 import React, { memo, useEffect, useMemo, useState } from "react";
-import {  Form, Nav, NavDropdown, Navbar } from "react-bootstrap";
-import { FaSearchPlus } from "react-icons/fa";
+import { Container, Form, Nav, NavDropdown, Navbar } from "react-bootstrap";
+import { FaSearchPlus, FaTimes } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import LogoSection from "../../../components/commonComponent/logoSection";
 import Select, { components } from "react-select";
@@ -208,30 +208,35 @@ const Topbar = (props: any) => {
   }, []);
   return (
     <>
-      <Navbar expand="lg" className="bg-primary p-0 px-0" data-bs-theme="light">
-        
-          <div className="d-flex ms-0">
+      <Navbar expand="lg" className="bg-primary" data-bs-theme="light">
+        <Container fluid>
+          <div className="d-flex">
             <a
               href={`/admin/active-inactive-user-list/${localStorage.getItem(
                 "key"
               )}`}
               className="me-2 mt-1 d-flex"
             >
-              <LogoSection />
+              <LogoSection width="100%" height="50px" />
             </a>
 
             <span
               className=" m-3 cursor"
               onClick={props.onClick}
             >
-          
+              {props.toggle ? (
+                <div style={{ width: "25px" }}>
+                  <FaTimes color="white" size={18} />
+                </div>
+              ) : (
                 <div className="menuHamBurger d-flex flex-column me-2 mt-1">
                   <span className="mb-1"></span>
                   <span className="mb-1"></span>
                   <span></span>
                 </div>
-       
+              )}
             </span>
+            {!isMobile && (
               <Navbar id="basic-navbar-nav">
                 <Nav className="me-auto">
                   <Nav.Link
@@ -297,13 +302,13 @@ const Topbar = (props: any) => {
                     name="Reports"
                     options={[
                       {
-                        name: "Account Statement",
+                        name: "Account's Statement",
                         link: "/admin/account-statement",
                       },
                       { name: "Current Bets", link: "/admin/current-bets" },
                       { name: "General Report", link: "/admin/general-report" },
                       { name: "Game Report", link: "/admin/game-report" },
-                      // { name: "Casino Report", link: "/admin/casino-report" },
+                      { name: "Casino Report", link: "/admin/casino-report" },
                       { name: "Profit And Loss", link: "/admin/profit-loss" },
                       {
                         name: "Casino Result Report",
@@ -313,15 +318,16 @@ const Topbar = (props: any) => {
                   />
                 </Nav>
               </Navbar>
-              <div className="user-dropdown-container">
+            )}
+          </div>
+
+          {isMobile && (
+            <div className="user-dropdown-containerM">
               <NavDropdown
-                className="mt-1 pe-1"
                 id="nav-dropdown-dark-example"
                 title={userDetail && userDetail?.userName}
                 menuVariant="dark"
-                // style={{marginBottom:"40px"}}
               >
-                
                 <NavDropdown.Item href="/admin/secure-auth">
                   Secure Auth Verification
                 </NavDropdown.Item>
@@ -347,6 +353,7 @@ const Topbar = (props: any) => {
                     openMenuOnClick={false}
                     styles={customStyles}
                     classNamePrefix="select"
+                    className="my-custom-select " 
                     onChange={(item) => {
                       setSearchValue(item);
                     }}
@@ -355,11 +362,7 @@ const Topbar = (props: any) => {
                 </div>
               </Form>
             </div>
-          </div>
-
-
-         
-      
+          )}
           {/* {isMobile && (
             <Form className="headerSearch">
               <div>
@@ -449,7 +452,7 @@ const Topbar = (props: any) => {
                     openMenuOnClick={false}
                     styles={customStyles}
                     classNamePrefix="select"
-                    className="my-custom-select"
+                    className="my-custom-select" 
                     onChange={(item: any) => {
                       setSearchValue(item);
                     }}
@@ -459,11 +462,11 @@ const Topbar = (props: any) => {
               </Form>
             </div>
           )}
-         
 
           {/* {!isMobile && (
             
           )} */}
+        </Container>
       </Navbar>
 
       <CustomModal
