@@ -13,6 +13,7 @@ import { AppDispatch, RootState } from "../../../store/store";
 import _ from "lodash";
 import moment from "moment-timezone";
 import SelectSearch3 from "../../../components/commonComponent/SelectSearch3";
+import { Tabs, Tab } from "react-bootstrap";
 import "./style.scss";
 
 interface Column {
@@ -83,6 +84,7 @@ const CurrentBets = () => {
         limit: rowPerPage,
         searchBy: "user.userName",
         keyword: keyword || "",
+        //marketBetType:"ne.CARD",
       })
     );
   }, [keyword, page, rowPerPage, sort]);
@@ -107,6 +109,7 @@ const CurrentBets = () => {
           limit: rowPerPage,
           searchBy: "user.userName",
           keyword: keyword || "",
+          //marketBetType:"ne.CARD",
         })
       );
       setCurrentPage(1);
@@ -142,170 +145,195 @@ const CurrentBets = () => {
   return (
     <div className="p-2 pt-0">
       <h5 className="title-22 fw-normal">Current Bets</h5>
-      <Form onSubmit={(e) => handleLoad(e)}>
-        <Row className="mb-4 d-flex  align-items-center">
-          <Col md={3}>
-            <SelectSearch2
-              defaultValue={[selectType]}
-              // defaultValue="matched"
-              //id="1"
-              options={options}
-              label={"Choose Type"}
-              value={selectType}
-              onChange={handleType}
-            />
-            <SelectSearch3
-              defaultValue={[selectType2]}
-              // defaultValue="matched"
-              //id="2"
-              options={options2}
-              label={"Choose Type2"}
-              value={selectType2}
-              onChange={handleType2}
-            />
-          </Col>
-          <Col md={2} className="d-flex  align-items-center ">
-            <Form.Label className="invisible d-block mt-1">dasd</Form.Label>
-            <Button type="submit">Load</Button>
-          </Col>
-        </Row>
-      </Form>
-      <CustomTable
-        customClass="commonTable reportTable"
-        striped
-        columns={columns}
-        isPagination={true}
-        isSort={true}
-        isSearch={true}
-        itemCount={
-          ReportBetList && ReportBetList?.count > 0 ? ReportBetList?.count : 1
-        }
-        setTableConfig={setTableConfig}
-        enablePdfExcel={false}
-        tableConfig={tableConfig}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-      >
-        {ReportBetList && ReportBetList?.count === 0 && (
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>No data available in table</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-        )}
-        {ReportBetList?.count > 0 &&
-          ReportBetList?.rows?.map((item: any, index: number) => {
-            if (
-              (item?.betType == "BACK" || item?.betType == "YES") &&
-              selectType2?.value == "BACK"
-            ) {
-              return (
-                <tr
-                  key={index}
-                  className={
-                    item?.betType == "BACK" || item?.betType == "YES"
-                      ? "back-border"
-                      : "lay-border"
-                  }
-                >
-                  {columns.map((column: any, index: number) => (
-                    <td
-                      key={index}
-                      className={
-                        item?.betType == "BACK" || item?.betType == "YES"
-                          ? "back-border"
-                          : "lay-border"
-                      }
-                    >
-                      {column?.id === "createdAt"
-                        ? moment(_.get(item, column?.id))
-                            .tz(timezone)
-                            .format("YYYY-MMM-DD h:mmA [IST]")
-                        : column?.id === "startAt"
-                        ? moment(getStartAt(item))
-                            .tz(timezone)
-                            .format("YYYY-MMM-DD h:mmA [IST]")
-                        : _.get(item, column?.id)}
-                    </td>
-                  ))}
-                </tr>
-              );
-            } else if (
-              (item?.betType == "LAY" || item?.betType == "NO") &&
-              selectType2?.value == "LAY"
-            ) {
-              return (
-                <tr
-                  key={index}
-                  className={
-                    item?.betType == "BACK" || item?.betType == "YES"
-                      ? "back-border"
-                      : "lay-border"
-                  }
-                >
-                  {columns.map((column: any, index: number) => (
-                    <td
-                      key={index}
-                      className={
-                        item?.betType == "BACK" || item?.betType == "YES"
-                          ? "back-border"
-                          : "lay-border"
-                      }
-                    >
-                      {column?.id === "createdAt"
-                        ? moment(_.get(item, column?.id))
-                            .tz(timezone)
-                            .format("YYYY-MMM-DD h:mmA [IST]")
-                        : column?.id === "startAt"
-                        ? moment(getStartAt(item))
-                            .tz(timezone)
-                            .format("YYYY-MMM-DD h:mmA [IST]")
-                        : _.get(item, column?.id)}
-                    </td>
-                  ))}
-                </tr>
-              );
-            } else if (selectType2?.value == "ALL") {
-              return (
-                <tr
-                  key={index}
-                  className={
-                    item?.betType == "BACK" || item?.betType == "YES"
-                      ? "back-border"
-                      : "lay-border"
-                  }
-                >
-                  {columns.map((column: any, index: number) => (
-                    <td
-                      key={index}
-                      className={
-                        item?.betType == "BACK" || item?.betType == "YES"
-                          ? "back-border"
-                          : "lay-border"
-                      }
-                    >
-                      {column?.id === "createdAt"
-                        ? moment(_.get(item, column?.id))
-                            .tz(timezone)
-                            .format("YYYY-MMM-DD h:mmA [IST]")
-                        : column?.id === "startAt"
-                        ? moment(getStartAt(item))
-                            .tz(timezone)
-                            .format("YYYY-MMM-DD h:mmA [IST]")
-                        : _.get(item, column?.id)}
-                    </td>
-                  ))}
-                </tr>
-              );
+
+      <Tabs defaultActiveKey="tab1" id="betReportTabs">
+        {/* Tab 1 */}
+        <Tab eventKey="tab1" title="Sports">
+          <Form onSubmit={(e) => handleLoad(e)} className="mt-1">
+            <Row className="mb-4 d-flex align-items-center">
+              <Col md={3}>
+                <SelectSearch2
+                  defaultValue={[selectType]}
+                  options={options}
+                  label={"Choose Type"}
+                  value={selectType}
+                  onChange={handleType}
+                />
+                <SelectSearch3
+                  defaultValue={[selectType2]}
+                  options={options2}
+                  label={"Choose Type2"}
+                  value={selectType2}
+                  onChange={handleType2}
+                />
+              </Col>
+              <Col md={2} className="d-flex align-items-center">
+                <Form.Label className="invisible d-block mt-1">
+                  Label
+                </Form.Label>
+                <Button type="submit">Load</Button>
+              </Col>
+            </Row>
+          </Form>
+
+          <CustomTable
+            customClass="commonTable reportTable"
+            striped
+            columns={columns}
+            isPagination={true}
+            isSort={true}
+            isSearch={true}
+            itemCount={
+              ReportBetList && ReportBetList?.count > 0
+                ? ReportBetList?.count
+                : 1
             }
-          })}
-      </CustomTable>
+            setTableConfig={setTableConfig}
+            enablePdfExcel={false}
+            tableConfig={tableConfig}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          >
+            {ReportBetList && ReportBetList?.count === 0 && (
+              <tr>
+                <td colSpan={columns.length}>No data available in table</td>
+              </tr>
+            )}
+            {ReportBetList?.count > 0 &&
+              ReportBetList?.rows?.map((item: any, index: number) => {
+                const isBackBet =
+                  item?.betType === "BACK" || item?.betType === "YES";
+                const isLayBet =
+                  item?.betType === "LAY" || item?.betType === "NO";
+
+                if (
+                  (isBackBet && selectType2?.value === "BACK") ||
+                  (isLayBet && selectType2?.value === "LAY") ||
+                  selectType2?.value === "ALL"
+                ) {
+                  return (
+                    <tr
+                      key={index}
+                      className={isBackBet ? "back-border" : "lay-border"}
+                    >
+                      {columns.map((column: any, columnIndex: number) => (
+                        <td
+                          key={columnIndex}
+                          className={isBackBet ? "back-border" : "lay-border"}
+                        >
+                          {column?.id === "createdAt"
+                            ? moment(_.get(item, column.id))
+                                .tz(timezone)
+                                .format("YYYY-MMM-DD h:mmA [IST]")
+                            : column?.id === "startAt"
+                            ? moment(getStartAt(item))
+                                .tz(timezone)
+                                .format("YYYY-MMM-DD h:mmA [IST]")
+                            : _.get(item, column.id)}
+                        </td>
+                      ))}
+                    </tr>
+                  );
+                }
+                return null;
+              })}
+          </CustomTable>
+        </Tab>
+
+        {/* Tab 2 */}
+        <Tab eventKey="tab2" title="Casino">
+          {/* Render the same form and table, you can customize based on tab if necessary */}
+          <Form onSubmit={(e) => handleLoad(e)} className="mt-1">
+            <Row className="mb-4 d-flex align-items-center">
+              <Col md={3}>
+                <SelectSearch2
+                  defaultValue={[selectType]}
+                  options={options}
+                  label={"Choose Type"}
+                  value={selectType}
+                  onChange={handleType}
+                />
+                <SelectSearch3
+                  defaultValue={[selectType2]}
+                  options={options2}
+                  label={"Choose Type2"}
+                  value={selectType2}
+                  onChange={handleType2}
+                />
+              </Col>
+              <Col md={2} className="d-flex align-items-center">
+                <Form.Label className="invisible d-block mt-1">
+                  Label
+                </Form.Label>
+                <Button type="submit">Load</Button>
+              </Col>
+            </Row>
+          </Form>
+
+          <CustomTable
+            customClass="commonTable reportTable"
+            striped
+            columns={columns}
+            isPagination={true}
+            isSort={true}
+            isSearch={true}
+            itemCount={
+              ReportBetList && ReportBetList?.count > 0
+                ? ReportBetList?.count
+                : 1
+            }
+            setTableConfig={setTableConfig}
+            enablePdfExcel={false}
+            tableConfig={tableConfig}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          >
+            {ReportBetList && ReportBetList?.count === 0 && (
+              <tr>
+                <td colSpan={columns.length}>No data available in table</td>
+              </tr>
+            )}
+            {ReportBetList?.count > 0 &&
+              ReportBetList?.rows?.map((item: any, index: number) => {
+                const isBackBet =
+                  item?.betType === "BACK" || item?.betType === "YES";
+                const isLayBet =
+                  item?.betType === "LAY" || item?.betType === "NO";
+
+                if (
+                  (isBackBet && selectType2?.value === "BACK") ||
+                  (isLayBet && selectType2?.value === "LAY") ||
+                  selectType2?.value === "ALL"
+                ) {
+                  return (
+                    <tr
+                      key={index}
+                      className={isBackBet ? "back-border" : "lay-border"}
+                    >
+                      {columns.map((column: any, columnIndex: number) => (
+                        <td
+                          key={columnIndex}
+                          className={isBackBet ? "back-border" : "lay-border"}
+                        >
+                          {column?.id === "createdAt"
+                            ? moment(_.get(item, column.id))
+                                .tz(timezone)
+                                .format("YYYY-MMM-DD h:mmA [IST]")
+                            : column?.id === "startAt"
+                            ? moment(getStartAt(item))
+                                .tz(timezone)
+                                .format("YYYY-MMM-DD h:mmA [IST]")
+                            : _.get(item, column.id)}
+                        </td>
+                      ))}
+                    </tr>
+                  );
+                }
+                return null;
+              })}
+          </CustomTable>
+        </Tab>
+      </Tabs>
     </div>
   );
 };
