@@ -245,9 +245,13 @@ const CurrentBets = () => {
               );
             } else if (selectType2?.value == "ALL") {
               return (
-                <tr key={index} className={(item?.betType == "BACK" || item?.betType == "YES")?"back-border":"lay-border"}>
+                <tr key={index} className={(item?.betType == "BACK" || item?.betType == "YES")?"back-border":"lay-border"}
+                
+                >
                   {columns.map((column: any, index: number) => (
-                    <td key={index}>
+                    <td key={index}
+                    className={(item?.betType == "BACK" || item?.betType == "YES")?"back-border":"lay-border"}
+                    >
                       {column?.id === "createdAt"
                         ? moment(_.get(item, column?.id))
                             .tz(timezone)
