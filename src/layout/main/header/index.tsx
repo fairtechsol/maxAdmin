@@ -11,6 +11,7 @@ import { logout } from "../../../store/actions/auth/authActions";
 import { AppDispatch, RootState } from "../../../store/store";
 import { debounce } from "lodash";
 import { searchList } from "../../../store/actions/user/userActions";
+import "./style.scss";
 // import isMobile from "../../../utils/screenDimension";
 // import styled from '@emotion/styled';
 
@@ -450,6 +451,7 @@ const Topbar = (props: any) => {
                     openMenuOnClick={false}
                     styles={customStyles}
                     classNamePrefix="select"
+                    className="my-custom-select"
                     onChange={(item: any) => {
                       setSearchValue(item);
                     }}

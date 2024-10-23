@@ -1,31 +1,32 @@
-import { debounce } from "lodash";
-import React, { useEffect, useMemo, useState } from "react";
-import { Form, FormControl, InputGroup, Button } from "react-bootstrap";
+//import { debounce } from "lodash";
+import React, { useEffect, useState } from "react";
+import { Form, FormControl, InputGroup } from "react-bootstrap";
 
 interface SearchBoxProps {
   onSearch: (query: string) => void;
   value: string;
 }
 
-const SearchBox: React.FC<SearchBoxProps> = ({ value, onSearch }) => {
+//const SearchBox: React.FC<SearchBoxProps> = ({ value, onSearch }) => {
+  const SearchBox: React.FC<SearchBoxProps> = ({ value}) => {
   const [keyword, setKeyword] = useState("");
 
-  const debouncedInputValue = useMemo(
-    () =>
-      debounce((query: string) => {
-        onSearch(query);
-      }, 500),
-    [onSearch]
-  );
+  // const debouncedInputValue = useMemo(
+  //   () =>
+  //     debounce((query: string) => {
+  //       onSearch(query);
+  //     }, 500),
+  //   [onSearch]
+  // );
 
-  const handleButtonClick = () => {
-    debouncedInputValue(keyword); // Trigger search with the current keyword
-  };
+  // const handleButtonClick = () => {
+  //   debouncedInputValue(keyword); // Trigger search with the current keyword
+  // };
 
-  const handleReset = () => {
-    setKeyword(""); // Clear the input field
-    onSearch(""); // Trigger search with an empty query
-  };
+  // const handleReset = () => {
+  //   setKeyword(""); // Clear the input field
+  //   onSearch(""); // Trigger search with an empty query
+  // };
 
   useEffect(() => {
     if (value === "") {
@@ -36,7 +37,8 @@ const SearchBox: React.FC<SearchBoxProps> = ({ value, onSearch }) => {
   return (
     <Form.Group
       controlId="searchBox"
-      className="tableSearchBox mb-3 d-flex align-items-center"
+      className="tableSearchBox mb-3 d-flex align-items-center mr-4"
+      style={{marginRight:"20px"}}
     >
       <Form.Label className="mb-0">Search:</Form.Label>
       <InputGroup>
@@ -49,7 +51,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ value, onSearch }) => {
           } // Directly update state without onChange
         />
       </InputGroup>
-      <Button className="float-end ms-2" onClick={handleButtonClick}>
+      {/* <Button className="float-end ms-2" onClick={handleButtonClick}>
         Load
       </Button>
       <Button
@@ -58,7 +60,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ value, onSearch }) => {
         onClick={handleReset}
       >
         Reset
-      </Button>
+      </Button> */}
     </Form.Group>
   );
 };

@@ -23,11 +23,12 @@ interface Column {
 
 // Example usage
 const columns: Column[] = [
-  { id: "user.userName", label: "Username" },
+  
   { id: "eventType", label: "Event Type" },
   { id: "eventName", label: "Event Name" },
+  { id: "user.userName", label: "Username" },
   { id: "teamName", label: "Runner Name" },
-  { id: "betType", label: "Bet Type" },
+  //{ id: "betType", label: "Bet Type" },
   { id: "odds", label: "User Rate" },
   { id: "amount", label: "Amount" },
   { id: "createdAt", label: "Place Date" },
@@ -57,6 +58,7 @@ const CurrentBets = () => {
   const [keyword, setKeyword] = useState<any>("");
   const [page, setPage] = useState<any>(1);
   const [rowPerPage, setRowPerPage] = useState<any>(10);
+  const [tab, setTab] = useState<any>("neCARD");
   const [sort, setSort] = useState({
     direction: "ASC",
     key: null,
@@ -70,6 +72,7 @@ const CurrentBets = () => {
     value: "ALL",
     label: "All",
   });
+
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
   const { ReportBetList } = useSelector(
@@ -84,10 +87,10 @@ const CurrentBets = () => {
         limit: rowPerPage,
         searchBy: "user.userName",
         keyword: keyword || "",
-        //marketBetType:"ne.CARD",
+        marketBetType: tab ,
       })
     );
-  }, [keyword, page, rowPerPage, sort]);
+  }, [keyword, page, rowPerPage, sort,tab]);
 
   const handleType = (type: any) => {
     setSelectType(type);
@@ -109,7 +112,7 @@ const CurrentBets = () => {
           limit: rowPerPage,
           searchBy: "user.userName",
           keyword: keyword || "",
-          //marketBetType:"ne.CARD",
+          marketBetType:  tab ,
         })
       );
       setCurrentPage(1);
@@ -143,12 +146,12 @@ const CurrentBets = () => {
   console.log("ReportBetList", ReportBetList);
   console.log("mapin", selectType2?.value);
   return (
-    <div className="p-2 pt-0">
+    <div className="p-2 pt-0" >
       <h5 className="title-22 fw-normal">Current Bets</h5>
 
       <Tabs defaultActiveKey="tab1" id="betReportTabs">
         {/* Tab 1 */}
-        <Tab eventKey="tab1" title="Sports">
+        <Tab eventKey="tab1" title="Sports" onClick={() => setTab("neCARD")}>
           <Form onSubmit={(e) => handleLoad(e)} className="mt-1">
             <Row className="mb-4 d-flex align-items-center">
               <Col md={3}>
@@ -241,7 +244,7 @@ const CurrentBets = () => {
         </Tab>
 
         {/* Tab 2 */}
-        <Tab eventKey="tab2" title="Casino">
+        <Tab eventKey="tab2" title="Casino" onClick={() => setTab("eqCARD")}>
           {/* Render the same form and table, you can customize based on tab if necessary */}
           <Form onSubmit={(e) => handleLoad(e)} className="mt-1">
             <Row className="mb-4 d-flex align-items-center">
