@@ -54,6 +54,19 @@ const Games = () => {
 
   const [liveScoreBoardData, setLiveScoreBoardData] = useState(null);
   const [errorCount, setErrorCount] = useState<number>(0);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 1199);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 1199);
+    };
+    // Add event listener to update isMobile on window resize
+    window.addEventListener("resize", handleResize);
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   const updateMatchDetailToRedux = (event: any) => {
     try {
       if (id === event?.id) {
@@ -212,12 +225,12 @@ const Games = () => {
       const handleVisibilityChange = () => {
         if (document.visibilityState === "visible") {
           if (id) {
-            dispatch(matchDetailAction(id));
+            // dispatch(matchDetailAction(id));
             dispatch(getPlacedBets(id));
           }
         } else if (document.visibilityState === "hidden") {
-          socketService.match.leaveMatchRoom(id);
-          socketService.match.getMatchRatesOff(id);
+          // socketService.match.leaveMatchRoom(id);
+          // socketService.match.getMatchRatesOff(id);
         }
       };
 
@@ -351,7 +364,10 @@ const Games = () => {
                     )}
 
                   {matchDetails?.other
-                    ?.filter((item: any) => (item?.isActive && item?.activeStatus === "live"))
+                    ?.filter(
+                      (item: any) =>
+                        item?.isActive && item?.activeStatus === "live"
+                    )
                     ?.map((item: any) => {
                       return (
                         <Col md={12}>
@@ -371,7 +387,10 @@ const Games = () => {
                       );
                     })}
                   {matchDetails?.tournament
-                    ?.filter((item: any) =>(item?.isActive && item?.activeStatus === "live"))
+                    ?.filter(
+                      (item: any) =>
+                        item?.isActive && item?.activeStatus === "live"
+                    )
                     ?.map((item: any) => {
                       return (
                         <Col md={12}>
@@ -390,24 +409,28 @@ const Games = () => {
                         </Col>
                       );
                     })}
-                  {matchDetails?.bookmaker2?.activeStatus === "live" && matchDetails?.bookmaker2?.isActive && (
-                    <Col md={12}>
-                      <MarketBox
-                        title={matchDetails?.bookmaker2?.name}
-                        box={
-                          matchDetails?.bookmaker2?.runners?.[0]?.ex
-                            ?.availableToBack?.length > 2
-                            ? 6
-                            : 2
-                        }
-                        data={matchDetails?.bookmaker2}
-                        detail={matchDetails}
-                        // data={matchDetails?.matchOdd}
-                      />
-                    </Col>
-                  )}
+                  {matchDetails?.bookmaker2?.activeStatus === "live" &&
+                    matchDetails?.bookmaker2?.isActive && (
+                      <Col md={12}>
+                        <MarketBox
+                          title={matchDetails?.bookmaker2?.name}
+                          box={
+                            matchDetails?.bookmaker2?.runners?.[0]?.ex
+                              ?.availableToBack?.length > 2
+                              ? 6
+                              : 2
+                          }
+                          data={matchDetails?.bookmaker2}
+                          detail={matchDetails}
+                          // data={matchDetails?.matchOdd}
+                        />
+                      </Col>
+                    )}
                   {matchDetails?.quickBookmaker
-                    ?.filter((item: any) => (item?.isActive && item?.activeStatus === "live"))
+                    ?.filter(
+                      (item: any) =>
+                        item?.isActive && item?.activeStatus === "live"
+                    )
                     ?.map((item: any) => {
                       return (
                         <Col md={12}>
@@ -421,26 +444,26 @@ const Games = () => {
                       );
                     })}
                   {matchDetails?.apiTideMatch2?.activeStatus === "live" &&
-                matchDetails?.apiTideMatch2?.isActive && (
-                    <Col md={12}>
-                      <MarketBox
-                        title={matchDetails?.apiTideMatch2?.name}
-                        box={
-                          matchDetails?.apiTideMatch2?.runners?.[0]?.ex
-                            ?.availableToBack?.length > 2
-                            ? 6
-                            : 2
-                        }
-                        data={matchDetails?.apiTideMatch2}
-                        detail={matchDetails}
-                        // data={matchDetails?.matchOdd}
-                      />
-                    </Col>
-                  )}
+                    matchDetails?.apiTideMatch2?.isActive && (
+                      <Col md={12}>
+                        <MarketBox
+                          title={matchDetails?.apiTideMatch2?.name}
+                          box={
+                            matchDetails?.apiTideMatch2?.runners?.[0]?.ex
+                              ?.availableToBack?.length > 2
+                              ? 6
+                              : 2
+                          }
+                          data={matchDetails?.apiTideMatch2}
+                          detail={matchDetails}
+                          // data={matchDetails?.matchOdd}
+                        />
+                      </Col>
+                    )}
                   {((matchDetails?.manualTiedMatch?.activeStatus === "live" &&
-                matchDetails?.manualTiedMatch?.isActive) ||
-                (matchDetails?.manualTideMatch?.activeStatus === "live" &&
-                  matchDetails?.manualTideMatch?.isActive)) && (
+                    matchDetails?.manualTiedMatch?.isActive) ||
+                    (matchDetails?.manualTideMatch?.activeStatus === "live" &&
+                      matchDetails?.manualTideMatch?.isActive)) && (
                     <Col md={12}>
                       <ManualMarket
                         title={
@@ -456,47 +479,49 @@ const Games = () => {
                       />
                     </Col>
                   )}
-                  {matchDetails?.marketCompleteMatch1?.activeStatus === "live" &&
-                matchDetails?.marketCompleteMatch1?.isActive && (
-                    <Col md={12}>
-                      <MarketBox
-                        title={matchDetails?.marketCompleteMatch1?.name}
-                        box={
-                          matchDetails?.marketCompleteMatch1?.runners?.[0]?.ex
-                            ?.availableToBack?.length > 2
-                            ? 6
-                            : 2
-                        }
-                        data={matchDetails?.marketCompleteMatch1}
-                        detail={matchDetails}
-                        // data={matchDetails?.matchOdd}
-                      />
-                    </Col>
-                  )}
+                  {matchDetails?.marketCompleteMatch1?.activeStatus ===
+                    "live" &&
+                    matchDetails?.marketCompleteMatch1?.isActive && (
+                      <Col md={12}>
+                        <MarketBox
+                          title={matchDetails?.marketCompleteMatch1?.name}
+                          box={
+                            matchDetails?.marketCompleteMatch1?.runners?.[0]?.ex
+                              ?.availableToBack?.length > 2
+                              ? 6
+                              : 2
+                          }
+                          data={matchDetails?.marketCompleteMatch1}
+                          detail={matchDetails}
+                          // data={matchDetails?.matchOdd}
+                        />
+                      </Col>
+                    )}
 
                   {matchDetails?.manualCompleteMatch?.activeStatus === "live" &&
-                matchDetails?.manualCompleteMatch?.isActive && (
-                    <Col md={12}>
-                      <ManualMarket
-                        title={matchDetails?.manualCompleteMatch?.name}
-                        data={matchDetails?.manualCompleteMatch}
-                        detail={matchDetails}
-                        // data={matchDetails?.matchOdd}
-                      />
-                    </Col>
-                  )}
+                    matchDetails?.manualCompleteMatch?.isActive && (
+                      <Col md={12}>
+                        <ManualMarket
+                          title={matchDetails?.manualCompleteMatch?.name}
+                          data={matchDetails?.manualCompleteMatch}
+                          detail={matchDetails}
+                          // data={matchDetails?.matchOdd}
+                        />
+                      </Col>
+                    )}
 
                   <div
                     style={{
                       display: "flex",
                       width: "100%",
-                      flexWrap: "wrap",
+                      flexWrap: isMobile?"nowrap":"wrap",
                       gap: "1%",
                     }}
+                    className={`${isMobile?"flex-column":""}`}
                   >
                     {(matchDetails?.apiSession?.session?.section?.length > 0 ||
                       manualEntries?.length > 0) && (
-                      <div style={{ width: "49.5%" }}>
+                      <div style={{ width:isMobile?"100%":"49.5%" }}>
                         <Col md={12}>
                           <SessionNormal
                             title={"Normal"}
@@ -510,7 +535,7 @@ const Games = () => {
                     )}
                     {matchDetails?.apiSession?.overByover?.section?.length >
                       0 && (
-                      <div style={{ width: "49.5%" }}>
+                      <div style={{ width: isMobile?"100%":"49.5%" }}>
                         <Col md={12}>
                           <SessionNormal
                             title={"overByover"}
@@ -523,7 +548,7 @@ const Games = () => {
                     )}
                     {matchDetails?.apiSession?.ballByBall?.section?.length >
                       0 && (
-                      <div style={{ width: "49.5%" }}>
+                      <div style={{ width: isMobile?"100%":"49.5%" }}>
                         <Col md={12}>
                           <SessionNormal
                             title={"Ballbyball"}
@@ -535,7 +560,7 @@ const Games = () => {
                       </div>
                     )}
                     {matchDetails?.apiSession?.fancy1?.section?.length > 0 && (
-                      <div style={{ width: "49.5%" }}>
+                      <div style={{ width: isMobile?"100%":"49.5%" }}>
                         <Col md={12}>
                           <SessionFancy
                             title={"fancy1"}
@@ -547,7 +572,7 @@ const Games = () => {
                       </div>
                     )}{" "}
                     {matchDetails?.apiSession?.khado?.section?.length > 0 && (
-                      <div style={{ width: "49.5%" }}>
+                      <div style={{ width: isMobile?"100%":"49.5%" }}>
                         <Col md={12}>
                           <SessionKhado
                             title={"khado"}
@@ -558,7 +583,7 @@ const Games = () => {
                       </div>
                     )}
                     {matchDetails?.apiSession?.meter?.section?.length > 0 && (
-                      <div style={{ width: "49.5%" }}>
+                      <div style={{ width: isMobile?"100%":"49.5%" }}>
                         <Col md={12}>
                           <SessionNormal
                             title={"meter"}
@@ -570,7 +595,7 @@ const Games = () => {
                       </div>
                     )}
                     {matchDetails?.apiSession?.oddEven?.section?.length > 0 && (
-                      <div style={{ width: "49.5%" }}>
+                      <div style={{ width: isMobile?"100%":"49.5%" }}>
                         <Col md={12}>
                           <SessionOddEven
                             title={"oddeven"}
@@ -604,7 +629,7 @@ const Games = () => {
                             <div
                               key={index}
                               style={{
-                                width:
+                                width:isMobile?"100%":
                                   length % 2 === 0
                                     ? "49.5%"
                                     : index === length - 1
@@ -628,39 +653,39 @@ const Games = () => {
                   </div>
 
                   {matchDetails?.apiTideMatch?.activeStatus === "live" &&
-                matchDetails?.apiTideMatch?.isActive && (
-                    <Col md={12}>
-                      <MarketBox
-                        title={matchDetails?.apiTideMatch?.name}
-                        box={
-                          matchDetails?.apiTideMatch?.runners?.[0]?.ex
-                            ?.availableToBack?.length > 2
-                            ? 6
-                            : 2
-                        }
-                        data={matchDetails?.apiTideMatch}
-                        detail={matchDetails}
-                        // data={matchDetails?.matchOdd}
-                      />
-                    </Col>
-                  )}
+                    matchDetails?.apiTideMatch?.isActive && (
+                      <Col md={12}>
+                        <MarketBox
+                          title={matchDetails?.apiTideMatch?.name}
+                          box={
+                            matchDetails?.apiTideMatch?.runners?.[0]?.ex
+                              ?.availableToBack?.length > 2
+                              ? 6
+                              : 2
+                          }
+                          data={matchDetails?.apiTideMatch}
+                          detail={matchDetails}
+                          // data={matchDetails?.matchOdd}
+                        />
+                      </Col>
+                    )}
                   {matchDetails?.marketCompleteMatch?.activeStatus === "live" &&
-                matchDetails?.marketCompleteMatch?.isActive && (
-                    <Col md={12}>
-                      <MarketBox
-                        title={matchDetails?.marketCompleteMatch?.name}
-                        box={
-                          matchDetails?.marketCompleteMatch?.runners?.[0]?.ex
-                            ?.availableToBack?.length > 2
-                            ? 6
-                            : 2
-                        }
-                        data={matchDetails?.marketCompleteMatch}
-                        detail={matchDetails}
-                        // data={matchDetails?.matchOdd}
-                      />
-                    </Col>
-                  )}
+                    matchDetails?.marketCompleteMatch?.isActive && (
+                      <Col md={12}>
+                        <MarketBox
+                          title={matchDetails?.marketCompleteMatch?.name}
+                          box={
+                            matchDetails?.marketCompleteMatch?.runners?.[0]?.ex
+                              ?.availableToBack?.length > 2
+                              ? 6
+                              : 2
+                          }
+                          data={matchDetails?.marketCompleteMatch}
+                          detail={matchDetails}
+                          // data={matchDetails?.matchOdd}
+                        />
+                      </Col>
+                    )}
                 </>
               )}
             </Col>

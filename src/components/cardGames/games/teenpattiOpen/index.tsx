@@ -191,7 +191,7 @@ const TeenPattiOpenComponent = () => {
 
                 <div className="teenpattiopen casino-open-card-box">
                   {groupedCards?.map((section) => (
-                    <div key={section.number}>
+                    <div  key={section.number}>
                       <div>
                         <b>{section.number}</b>
                       </div>

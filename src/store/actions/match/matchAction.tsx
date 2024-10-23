@@ -374,6 +374,21 @@ export const getCardReport = createAsyncThunk<any, any>(
   }
 );
 
+export const getMarketAnalysis = createAsyncThunk<any, any>(
+  "/marketAnalysis",
+  async (_, thunkApi) => {
+    try {
+      const resp = await service.get(ApiConstants.MATCH.MARKETANALYSIS);
+      if (resp) {
+        return resp?.data;
+      }
+    } catch (error: any) {
+      const err = error as AxiosError;
+      return thunkApi.rejectWithValue(err.response?.status);
+    }
+  }
+);
+
 export const updateMatchRates = createAsyncThunk<any, any>(
   "/match/rates",
   async (matchDetails) => {

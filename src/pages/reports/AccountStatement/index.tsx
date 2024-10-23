@@ -23,6 +23,7 @@ import {
   ApiConstants,
   cardConstantsAccountStatement,
 } from "../../../utils/Constants";
+// import isMobile from "../../../utils/screenDimension";
 
 interface Column {
   id: string;
@@ -35,7 +36,7 @@ const columns: Column[] = [
   { id: "credit", label: "Credit" },
   { id: "debit", label: "Debit" },
   { id: "closing", label: "Closing" },
-  { id: "description", label: "Remarks" },
+  { id: "description", label: "Description" },
   { id: "fromto", label: "Fromto" },
 ];
 
@@ -102,7 +103,7 @@ const AccountStatement = () => {
     { value: "balanceReport", label: "Balance Report" },
     { value: "gameReport", label: "Game Report" },
   ];
-
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 1199);
   const handleAccountTypeChange = (selectedOption: any) => {
     setSelectedOption1(selectedOption);
     if (
@@ -389,12 +390,26 @@ const AccountStatement = () => {
     setDateTo(formattedCurrentDate);
   }, []);
 
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 1199);
+    };
+    // Add event listener to update isMobile on window resize
+    window.addEventListener("resize", handleResize);
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+
   return (
     <div className="p-2 pt-0">
       <h5 className="title-22 fw-normal">Account Statement</h5>
       <Form onSubmit={handleSubmit}>
         <Row>
-          <Col md={2}>
+          <Col md={isMobile ? 12 : 2 }>
             <SelectSearch
               defaultValue="All"
               // options={options}
@@ -405,7 +420,7 @@ const AccountStatement = () => {
               options={aaccountTypeOptions}
             />
           </Col>
-          <Col md={2}>
+          <Col md={isMobile ? 12 : 2 }>
             <SelectSearch
               defaultValue="All"
               label={"Game Name"}
@@ -416,7 +431,7 @@ const AccountStatement = () => {
               options={gameNameOptions}
             />
           </Col>
-          <Col md={2}>
+          <Col md={isMobile ? 12 : 2 }>
             <SelectSearch
               label={"Search By Client Name"}
               inputValue={inputValue}
@@ -441,7 +456,7 @@ const AccountStatement = () => {
               }}
             />
           </Col>
-          <Col md={2}>
+          <Col md={isMobile ? 12 : 2 }>
             <CustomInput
               title={"From"}
               placeholder={""}
@@ -454,7 +469,7 @@ const AccountStatement = () => {
               value={dateFrom} 
             />
           </Col>
-          <Col md={2}>
+          <Col md={isMobile ? 12 : 2 }>
             <CustomInput
               title={"To"}
               placeholder={""}
@@ -465,7 +480,9 @@ const AccountStatement = () => {
               value={dateTo} 
             />
           </Col>
-          <Col md={2}>
+          
+        </Row>
+        <Col md={2}>
             <Form.Label className="invisible d-block">dasd</Form.Label>
             <CustomButton
               type={"submit"}
@@ -476,7 +493,6 @@ const AccountStatement = () => {
               Load
             </CustomButton>
           </Col>
-        </Row>
       </Form>
       <CustomTable
         striped
@@ -491,7 +507,7 @@ const AccountStatement = () => {
             : 0
         }
         setTableConfig={setTableConfig}
-        enablePdfExcel={true}
+        enablePdfExcel={false}
         handleReportExport={handleReportExport}
         tableConfig={tableConfig}
         currentPage={currentPage}

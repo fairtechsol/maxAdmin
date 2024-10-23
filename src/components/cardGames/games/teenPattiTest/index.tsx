@@ -102,7 +102,7 @@ const TeenPattiComponent = () => {
               <div className="teen1daycasino-container">
                 <div className="teentestother">
                   <div className="casino-box-row">
-                    <div className="casino-nation-name"></div>
+                    <div className="casino-nation-name" style={{flex:1}}></div>
                     {dragonTigerDetail?.sections &&
                       dragonTigerDetail?.sections.map(
                         (section: any, index: any) => (
@@ -138,7 +138,7 @@ const TeenPattiComponent = () => {
                       )}
                   </div>
                   <div className="casino-box-row mb-4">
-                    <div className="casino-nation-name casino-nation-name-bg">
+                    <div className="casino-nation-name casino-nation-name-bg" style={{flex:1}}>
                       <b>Tiger</b>
                     </div>
                     {dragonTigerDetail?.sections &&
@@ -158,7 +158,7 @@ const TeenPattiComponent = () => {
                       )}
                   </div>
                   <div className="casino-box-row mb-4">
-                    <div className="casino-nation-name casino-nation-name-bg">
+                    <div className="casino-nation-name casino-nation-name-bg" style={{flex:1}}>
                       <b>Lion</b>
                     </div>
                     {dragonTigerDetail?.sections &&
@@ -178,7 +178,7 @@ const TeenPattiComponent = () => {
                       )}
                   </div>
                   <div className="casino-box-row mb-4">
-                    <div className="casino-nation-name casino-nation-name-bg">
+                    <div className="casino-nation-name casino-nation-name-bg" style={{flex:1}}>
                       <b>Dragon</b>
                     </div>
                     {dragonTigerDetail?.sections &&

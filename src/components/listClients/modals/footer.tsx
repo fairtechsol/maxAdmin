@@ -6,7 +6,7 @@ const ModalFooter = ({ clickHandler }: any) => {
   return (
     <div className="d-flex gap-2">
       <CustomButton
-        className="d-flex gap-2 align-items-center"
+        className="d-flex gap-2 align-items-center text-white"
         variant="secondary"
         onClick={clickHandler}
       >

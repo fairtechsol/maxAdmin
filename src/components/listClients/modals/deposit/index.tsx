@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Col, Modal, Row, Stack } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -26,7 +26,11 @@ const initialValues: any = {
 
 const Deposit = ({ userData, setShow }: any) => {
   const dispatch: AppDispatch = useDispatch();
-
+  const [border, setBorder] = useState({
+    amount:false,
+    remark:false,
+    Tpass:false
+  });
   const { userList, modalSuccess, loading } = useSelector(
     (state: RootState) => state.user.userList
   );
@@ -87,9 +91,15 @@ const Deposit = ({ userData, setShow }: any) => {
     }
   }, [modalSuccess]);
 
+  const handleBlur = (val: any, type: string) => {
+    setBorder((prevState) => ({
+      ...prevState,
+      [type]: val?.length === 0, 
+    }));
+  };
   return (
     <>
-   {loading ? <Loader /> : null}
+      {loading ? <Loader /> : null}
       <form onSubmit={handleSubmit}>
         <Stack className="listClientModals" gap={0}>
           <div className="input-container w-100">
@@ -165,6 +175,8 @@ const Deposit = ({ userData, setShow }: any) => {
                   touched={touched.amount}
                   errors={errors.amount}
                   min={0}
+                  style={{border:border?.amount?"1px solid red":"1px solid #000"}}
+                  onBlur={()=>handleBlur(values.amount,"amount")}
                 />
               </Col>
             </Row>
@@ -184,7 +196,9 @@ const Deposit = ({ userData, setShow }: any) => {
                   touched={touched.remark}
                   errors={errors.remark}
                   {...getFieldProps("remark")}
-                  textAlign="left" 
+                  textAlign="left"
+                  style={{border:border?.remark ?"1px solid red":"1px solid #000"}}
+                  onBlur={()=>handleBlur(values.remark,"remark")}
                 />
               </Col>
             </Row>
@@ -193,7 +207,7 @@ const Deposit = ({ userData, setShow }: any) => {
           <div className="input-container mt-3">
             <Row>
               <Col sm={4}>
-                <span>Transition password</span>
+                <span>Transaction password</span>
               </Col>
               <Col sm={8}>
                 <CustomInput
@@ -204,7 +218,9 @@ const Deposit = ({ userData, setShow }: any) => {
                   touched={touched.transactionPassword}
                   errors={errors.transactionPassword}
                   {...getFieldProps("transactionPassword")}
-                  textAlign="left" 
+                  textAlign="left"
+                  style={{border:border?.Tpass ?"1px solid red":"1px solid #000"}}
+                  onBlur={()=>handleBlur(values.transactionPassword,"Tpass")}
                 />
               </Col>
             </Row>

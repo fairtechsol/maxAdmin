@@ -11,7 +11,6 @@ import {
   ball3,
   ball4,
   ball6,
-  ballByBall,
   ballW,
   cards32A,
   cards32B,
@@ -65,9 +64,11 @@ import {
   two2,
 } from "../../assets";
 import AndarBaharRules from "../../components/cardGames/games/abj2/rules";
+import AmarAkbarRules from "../../components/cardGames/games/amarAkbarAnthony/rules";
 import BaccaratRules from "../../components/cardGames/games/baccarat1/rules";
 import BaccaratRules2 from "../../components/cardGames/games/baccarat2/rules";
 import BallByBallRules from "../../components/cardGames/games/ballbyball/desktop/rules";
+import BollywoodTableGameRules from "../../components/cardGames/games/bollywoodTable/rules";
 import Card32ARules from "../../components/cardGames/games/card32A/rules";
 import CasinoRulesImage from "../../components/cardGames/games/casinoMeter/rules";
 import CasinoWarRules from "../../components/cardGames/games/casinoWar/rules";
@@ -128,6 +129,7 @@ export const ApiConstants = {
     MATCHDETAILS: "/match/",
     OTHERMATCHDETAILS: "/match/other/",
     CURRENTBET: "/bet",
+    MARKETANALYSIS: "/match/marketAnalysis",
   },
   BET: {
     PLACEBETSESSION: "bet/session",
@@ -471,7 +473,7 @@ export const card3 = {
     },
   ],
   sportCasino: [
-    { id: 15, url: "", imgSrc: ballByBall, name: "BALL BY BALL" },
+    // { id: 15, url: "", imgSrc: ballByBall, name: "BALL BY BALL" },
     {
       id: 16,
       url: "/admin/casinoDetail/superover",
@@ -1215,4 +1217,6 @@ export const gameRulesComponents: any = {
   dt6: <DragonRules />,
   dt202: <DragonRules />,
   dt20: <DragonRules />,
+  aaa: <AmarAkbarRules/>,
+  btable: <BollywoodTableGameRules/>
 };

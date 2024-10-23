@@ -1,5 +1,5 @@
 import React, { memo, useEffect, useMemo, useState } from "react";
-import { Container, Form, Nav, NavDropdown, Navbar } from "react-bootstrap";
+import {  Form, Nav, NavDropdown, Navbar } from "react-bootstrap";
 import { FaSearchPlus, FaTimes } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import LogoSection from "../../../components/commonComponent/logoSection";
@@ -208,9 +208,9 @@ const Topbar = (props: any) => {
   }, []);
   return (
     <>
-      <Navbar expand="lg" className="bg-primary" data-bs-theme="light">
-        <Container fluid>
-          <div className="d-flex">
+      <Navbar expand="lg" className="bg-primary p-0 px-0" data-bs-theme="light">
+        
+          <div className="d-flex ms-0">
             <a
               href={`/admin/active-inactive-user-list/${localStorage.getItem(
                 "key"
@@ -236,7 +236,6 @@ const Topbar = (props: any) => {
                 </div>
               )}
             </span>
-            {!isMobile && (
               <Navbar id="basic-navbar-nav">
                 <Nav className="me-auto">
                   <Nav.Link
@@ -302,7 +301,7 @@ const Topbar = (props: any) => {
                     name="Reports"
                     options={[
                       {
-                        name: "Account's Statement",
+                        name: "Account Statement",
                         link: "/admin/account-statement",
                       },
                       { name: "Current Bets", link: "/admin/current-bets" },
@@ -318,12 +317,9 @@ const Topbar = (props: any) => {
                   />
                 </Nav>
               </Navbar>
-            )}
-          </div>
-
-          {isMobile && (
-            <div className="user-dropdown-containerM">
+              <div className="user-dropdown-container">
               <NavDropdown
+                className="mt-1 pe-1"
                 id="nav-dropdown-dark-example"
                 title={userDetail && userDetail?.userName}
                 menuVariant="dark"
@@ -361,7 +357,11 @@ const Topbar = (props: any) => {
                 </div>
               </Form>
             </div>
-          )}
+          </div>
+
+
+         
+      
           {/* {isMobile && (
             <Form className="headerSearch">
               <div>
@@ -461,11 +461,11 @@ const Topbar = (props: any) => {
               </Form>
             </div>
           )}
+         
 
           {/* {!isMobile && (
             
           )} */}
-        </Container>
       </Navbar>
 
       <CustomModal
