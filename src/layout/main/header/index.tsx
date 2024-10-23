@@ -306,7 +306,7 @@ const Topbar = (props: any) => {
                       { name: "Current Bets", link: "/admin/current-bets" },
                       { name: "General Report", link: "/admin/general-report" },
                       { name: "Game Report", link: "/admin/game-report" },
-                      { name: "Casino Report", link: "/admin/casino-report" },
+                      // { name: "Casino Report", link: "/admin/casino-report" },
                       { name: "Profit And Loss", link: "/admin/profit-loss" },
                       {
                         name: "Casino Result Report",
@@ -322,7 +322,9 @@ const Topbar = (props: any) => {
                 id="nav-dropdown-dark-example"
                 title={userDetail && userDetail?.userName}
                 menuVariant="dark"
+                // style={{marginBottom:"40px"}}
               >
+                
                 <NavDropdown.Item href="/admin/secure-auth">
                   Secure Auth Verification
                 </NavDropdown.Item>

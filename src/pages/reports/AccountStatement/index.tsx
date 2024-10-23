@@ -100,8 +100,10 @@ const AccountStatement = () => {
 
   const aaccountTypeOptions: Option[] = [
     { value: "all", label: "All" },
-    { value: "balanceReport", label: "Balance Report" },
+    { value: "balanceReport", label: "Deposite/Withdraw Report" },
     { value: "gameReport", label: "Game Report" },
+    { value: "casino",
+      label: "Casino Reports",}
   ];
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 1199);
   const handleAccountTypeChange = (selectedOption: any) => {
@@ -423,7 +425,7 @@ const AccountStatement = () => {
           <Col md={isMobile ? 12 : 2 }>
             <SelectSearch
               defaultValue="All"
-              label={"Game Name"}
+              label={aaccountTypeValues?.value==="gameReport"?"Sports List":aaccountTypeValues?.value==="casino"?"Casino List":"Game Name"}
               // options={options}
               placeholder={"All"}
               value={gameNameValues}

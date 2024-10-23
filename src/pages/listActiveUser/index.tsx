@@ -206,13 +206,13 @@ const ListActiveInactiveUser: React.FC = () => {
                 <option value={750}>750</option>
                 <option value={1000}>1000</option>
               </select>
-              <span className="title-12 ms-1">Entries</span>{" "}
+              <span className="title-12 ms-1">entries</span>{" "}
             </div>
           </Col>
           <Col className="d-flex flex-column align-items-end">
             <CustomButton
               className="float-end mb-2"
-              style={{width:"15%"}}
+              style={{width:"100px"}}
               onClick={() => navigate(`/admin/add-account`)}
             >
               Add Account
