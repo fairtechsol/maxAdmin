@@ -31,7 +31,7 @@ const columns: Column[] = [
   { id: "exposureLimit", label: "Exposure Limit" },
   { id: "default", label: "Default%" },
   { id: "user.roleName", label: "Account Type" },
-  { id: "casino", label: "Casino Total" },
+  // { id: "casino", label: "Casino Total" },
   { id: "actions", label: "Actions" },
 ];
 
@@ -206,13 +206,13 @@ const ListActiveInactiveUser: React.FC = () => {
                 <option value={750}>750</option>
                 <option value={1000}>1000</option>
               </select>
-              <span className="title-12 ms-1">Entries</span>{" "}
+              <span className="title-12 ms-1">entries</span>{" "}
             </div>
           </Col>
           <Col className="d-flex flex-column align-items-end">
             <CustomButton
               className="float-end mb-2"
-              style={{width:"15%"}}
+              style={{width:"100px"}}
               onClick={() => navigate(`/admin/add-account`)}
             >
               Add Account
@@ -424,7 +424,7 @@ const ListActiveInactiveUser: React.FC = () => {
                             </td>
                             <td>0</td>
                             <td>{roleName}</td>
-                            <td className="text-end">0</td>
+                            {/* <td className="text-end">0</td> */}
                             <td>
                               <div className="d-flex gap-1 border-right-0 border-left-0">
                                 {type ? (

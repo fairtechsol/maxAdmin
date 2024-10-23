@@ -78,7 +78,7 @@ export { default as crick20ScoreBg } from "./cricketMatch_20-20/score-bg.png";
 export { default as Baccarat1rules } from "./rules/baccarat1rules.webp";
 export { default as bac1 } from "./baccarat/baccarat1.webp";
 export { default as bac2 } from "./baccarat/baccarat2.webp";
-export { default as cmeter } from "./ballbyball/cmeter.webp";
+export { default as cmeter } from "./ballbyball/cmeters.webp";
 export { default as A1 } from "./anderBahar/21.webp";
 export { default as two2 } from "./anderBahar/2.webp";
 export { default as three3 } from "./anderBahar/3.webp";

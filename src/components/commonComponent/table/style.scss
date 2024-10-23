@@ -25,6 +25,9 @@
     justify-content: space-between;
     .paginationContainer{
         display: flex;
+        right: 20px;
+        position: absolute;
+        margin-top: 20px;
     }
 }
 .rowPerPageSelect{

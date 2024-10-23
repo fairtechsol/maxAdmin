@@ -32,9 +32,35 @@ const matchListSlice = createSlice({
         state.error = null;
       })
       .addCase(matchDetailAction.fulfilled, (state, action) => {
-        state.loading = false;
+        // state.loading = false;
         state.success = true;
-        state.matchDetails = action.payload;
+        // state.matchDetails = action.payload;
+        state.matchDetails = {
+          ...state.matchDetails,
+          isBookmaker: action.payload.isBookmaker,
+          marketId: action.payload?.marketId,
+          rateThan100: action.payload?.rateThan100,
+          title: action.payload?.title,
+          manualSessionActive: action.payload?.manualSessionActive,
+          eventId: action.payload?.eventId,
+          isTv: action.payload?.isTv,
+          matchType: action.payload?.matchType,
+          betFairSessionMinBet: action.payload?.betFairSessionMinBet,
+          competitionId: action.payload?.competitionId,
+          teamB: action.payload?.teamB,
+          teamA: action.payload?.teamA,
+          teamC: action.payload?.teamC ?? null,
+          betFairSessionMaxBet: action.payload?.betFairSessionMaxBet,
+          startAt: action.payload?.startAt,
+          apiSessionActive: action.payload?.apiSessionActive,
+          competitionName: action.payload?.competitionName,
+          id: action.payload?.id,
+          isFancy: action.payload?.isFancy,
+          teamRates: action.payload?.teamRates,
+          profitLossDataSession: action.payload?.profitLossDataSession,
+          profitLossDataMatch: action.payload?.profitLossDataMatch,
+          stopAt: action.payload?.stopAt ?? null,
+        };
       })
       .addCase(matchDetailAction.rejected, (state, action) => {
         state.loading = false;
@@ -46,9 +72,35 @@ const matchListSlice = createSlice({
         state.error = null;
       })
       .addCase(otherMatchDetailAction.fulfilled, (state, action) => {
-        state.loading = false;
+        // state.loading = false;
         state.success = true;
-        state.matchDetails = action.payload;
+        // state.matchDetails = action.payload;
+        state.matchDetails = {
+          ...state.matchDetails,
+          isBookmaker: action.payload.isBookmaker,
+          marketId: action.payload?.marketId,
+          rateThan100: action.payload?.rateThan100,
+          title: action.payload?.title,
+          manualSessionActive: action.payload?.manualSessionActive,
+          eventId: action.payload?.eventId,
+          isTv: action.payload?.isTv,
+          matchType: action.payload?.matchType,
+          betFairSessionMinBet: action.payload?.betFairSessionMinBet,
+          competitionId: action.payload?.competitionId,
+          teamB: action.payload?.teamB,
+          teamA: action.payload?.teamA,
+          teamC: action.payload?.teamC ?? null,
+          betFairSessionMaxBet: action.payload?.betFairSessionMaxBet,
+          startAt: action.payload?.startAt,
+          apiSessionActive: action.payload?.apiSessionActive,
+          competitionName: action.payload?.competitionName,
+          id: action.payload?.id,
+          isFancy: action.payload?.isFancy,
+          teamRates: action.payload?.teamRates,
+          profitLossDataSession: action.payload?.profitLossDataSession,
+          profitLossDataMatch: action.payload?.profitLossDataMatch,
+          stopAt: action.payload?.stopAt ?? null,
+        };
       })
       .addCase(otherMatchDetailAction.rejected, (state, action) => {
         state.loading = false;
@@ -71,6 +123,8 @@ const matchListSlice = createSlice({
           tournament,
           other,
         } = action.payload;
+
+        state.loading = false;
 
         let parsedSessionBettings = state?.matchDetails?.sessionBettings?.map(
           (item: any) => {
@@ -105,9 +159,9 @@ const matchListSlice = createSlice({
           other,
         };
       })
-      
+
       .addCase(updateBalance.fulfilled, (state, action) => {
-        const {jobData,userRedisObj} = action.payload;
+        const { jobData, userRedisObj } = action.payload;
         // const {
         //   newTeamRateData,
         //   teamArateRedisKey,
@@ -131,14 +185,16 @@ const matchListSlice = createSlice({
             ...state.matchDetails,
             profitLossDataMatch: {
               ...state.matchDetails.profitLossDataMatch,
-              [jobData?.teamArateRedisKey]: userRedisObj[jobData?.teamArateRedisKey],
-              [jobData?.teamBrateRedisKey]: userRedisObj[jobData?.teamBrateRedisKey],
-              [jobData?.teamCrateRedisKey]: userRedisObj[jobData?.teamCrateRedisKey],
+              [jobData?.teamArateRedisKey]:
+                userRedisObj[jobData?.teamArateRedisKey],
+              [jobData?.teamBrateRedisKey]:
+                userRedisObj[jobData?.teamBrateRedisKey],
+              [jobData?.teamCrateRedisKey]:
+                userRedisObj[jobData?.teamCrateRedisKey],
             },
           };
         }
       });
-      
   },
 });
 

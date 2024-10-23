@@ -227,10 +227,12 @@ const Games = () => {
           if (id) {
             // dispatch(matchDetailAction(id));
             dispatch(getPlacedBets(id));
+            socketService.match.joinMatchRoom(id, "superAdmin");
+            socketService.match.getMatchRates(id, updateMatchDetailToRedux);
           }
         } else if (document.visibilityState === "hidden") {
-          // socketService.match.leaveMatchRoom(id);
-          // socketService.match.getMatchRatesOff(id);
+          socketService.match.leaveMatchRoom(id);
+          socketService.match.getMatchRatesOff(id);
         }
       };
 
@@ -244,7 +246,7 @@ const Games = () => {
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [id]);
 
   const getScoreBoard = async (eventId: string) => {
     try {
@@ -514,14 +516,14 @@ const Games = () => {
                     style={{
                       display: "flex",
                       width: "100%",
-                      flexWrap: isMobile?"nowrap":"wrap",
+                      flexWrap: isMobile ? "nowrap" : "wrap",
                       gap: "1%",
                     }}
-                    className={`${isMobile?"flex-column":""}`}
+                    className={`${isMobile ? "flex-column" : ""}`}
                   >
                     {(matchDetails?.apiSession?.session?.section?.length > 0 ||
                       manualEntries?.length > 0) && (
-                      <div style={{ width:isMobile?"100%":"49.5%" }}>
+                      <div style={{ width: isMobile ? "100%" : "49.5%" }}>
                         <Col md={12}>
                           <SessionNormal
                             title={"Normal"}
@@ -535,7 +537,7 @@ const Games = () => {
                     )}
                     {matchDetails?.apiSession?.overByover?.section?.length >
                       0 && (
-                      <div style={{ width: isMobile?"100%":"49.5%" }}>
+                      <div style={{ width: isMobile ? "100%" : "49.5%" }}>
                         <Col md={12}>
                           <SessionNormal
                             title={"overByover"}
@@ -548,7 +550,7 @@ const Games = () => {
                     )}
                     {matchDetails?.apiSession?.ballByBall?.section?.length >
                       0 && (
-                      <div style={{ width: isMobile?"100%":"49.5%" }}>
+                      <div style={{ width: isMobile ? "100%" : "49.5%" }}>
                         <Col md={12}>
                           <SessionNormal
                             title={"Ballbyball"}
@@ -560,7 +562,7 @@ const Games = () => {
                       </div>
                     )}
                     {matchDetails?.apiSession?.fancy1?.section?.length > 0 && (
-                      <div style={{ width: isMobile?"100%":"49.5%" }}>
+                      <div style={{ width: isMobile ? "100%" : "49.5%" }}>
                         <Col md={12}>
                           <SessionFancy
                             title={"fancy1"}
@@ -572,7 +574,7 @@ const Games = () => {
                       </div>
                     )}{" "}
                     {matchDetails?.apiSession?.khado?.section?.length > 0 && (
-                      <div style={{ width: isMobile?"100%":"49.5%" }}>
+                      <div style={{ width: isMobile ? "100%" : "49.5%" }}>
                         <Col md={12}>
                           <SessionKhado
                             title={"khado"}
@@ -583,7 +585,7 @@ const Games = () => {
                       </div>
                     )}
                     {matchDetails?.apiSession?.meter?.section?.length > 0 && (
-                      <div style={{ width: isMobile?"100%":"49.5%" }}>
+                      <div style={{ width: isMobile ? "100%" : "49.5%" }}>
                         <Col md={12}>
                           <SessionNormal
                             title={"meter"}
@@ -595,7 +597,7 @@ const Games = () => {
                       </div>
                     )}
                     {matchDetails?.apiSession?.oddEven?.section?.length > 0 && (
-                      <div style={{ width: isMobile?"100%":"49.5%" }}>
+                      <div style={{ width: isMobile ? "100%" : "49.5%" }}>
                         <Col md={12}>
                           <SessionOddEven
                             title={"oddeven"}
@@ -629,12 +631,13 @@ const Games = () => {
                             <div
                               key={index}
                               style={{
-                                width:isMobile?"100%":
-                                  length % 2 === 0
-                                    ? "49.5%"
-                                    : index === length - 1
-                                    ? "100%"
-                                    : "49.5%",
+                                width: isMobile
+                                  ? "100%"
+                                  : length % 2 === 0
+                                  ? "49.5%"
+                                  : index === length - 1
+                                  ? "100%"
+                                  : "49.5%",
                               }}
                             >
                               {item?.activeStatus === "live" && (

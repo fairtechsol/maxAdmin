@@ -5,12 +5,13 @@ import {
   login,
 } from "../../actions/auth/authActions";
 
-const initialState = {
+const initialState: any = {
   success: false,
   loading: false,
   forceChangePassword: false,
   userRole: "",
   oldPasswordMatched: false,
+  loginData: null,
 };
 
 export const authReducer = createReducer(initialState, (builder) => {
@@ -23,6 +24,7 @@ export const authReducer = createReducer(initialState, (builder) => {
       state.success = true;
       state.userRole = action.payload.roleName;
       state.forceChangePassword = action?.payload?.forceChangePassword;
+      state.loginData = action.payload;
     })
     .addCase(login.rejected, (state, action) => {
       state.loading = false;

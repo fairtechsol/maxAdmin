@@ -15,6 +15,7 @@ import CardResultBox from "../../../commonComponent/cardResultBox";
 import UserBets from "../../../game/userBet";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
 import CasinoWarCard from "./casinoWarCard";
+import { club, diamond, heart, spade } from "../../../../assets";
 
 const CasinoWarComponent = () => {
   const { dragonTigerDetail } = useSelector((state: RootState) => state.card);
@@ -181,14 +182,85 @@ const CasinoWarComponent = () => {
                           width: "40%",
                           padding: "10px",
                           border: "0.1px solid #fff",
-                          justifyContent: "space-between"
+                          justifyContent: "space-between",
                         }}
                       >
                         <span
                           style={{ fontSize: "14px", fontWeight: "bolder" }}
                         >
-                          {playerA[0]?.nat.split(" ")[0]}
+                          {index !== 1 &&
+                            index !== 2 &&
+                            index !== 5 &&
+                            index !== 6 &&
+                            index !== 7 &&
+                            index !== 8 && (
+                              <span
+                                style={{
+                                  fontSize: "14px",
+                                  fontWeight: "bolder",
+                                }}
+                              >
+                                {playerA[0]?.nat.split(" ")[0]}
+                              </span>
+                            )}
+                          {index === 1 && (
+                            <>
+                              <img
+                                src={spade}
+                                alt="Player 1 Image"
+                                style={{ width: "15px", height: "15px", marginRight: "5px"}}
+                              />
+                              <img
+                                src={club}
+                                alt="Player 6 Image"
+                                style={{ width: "15px", height: "15px", marginLeft: "5px"  }}
+                              />
+                            </>
+                          )}
+                          {index === 2 && (
+                            <>
+                              <img
+                                src={heart}
+                                alt="Player 2 Image"
+                                style={{ width: "15px", height: "15px", marginRight: "5px" }}
+                              />
+                              <img
+                                src={diamond}
+                                alt="Player 8 Image"
+                                style={{ width: "18px", height: "18px", marginLeft: "5px" }}
+                              />
+                            </>
+                          )}
+                          {index === 5 && (
+                            <img
+                              src={spade}
+                              alt="Player 5 Image"
+                              style={{ width: "15px", height: "15px" }}
+                            />
+                          )}
+                          {index === 6 && (
+                            <img
+                              src={club}
+                              alt="Player 6 Image"
+                              style={{ width: "15px", height: "15px" }}
+                            />
+                          )}
+                          {index === 7 && (
+                            <img
+                              src={heart}
+                              alt="Player 7 Image"
+                              style={{ width: "15px", height: "15px" }}
+                            />
+                          )}
+                          {index === 8 && (
+                            <img
+                              src={diamond}
+                              alt="Player 8 Image"
+                              style={{ width: "18px", height: "18px" }}
+                            />
+                          )}
                         </span>
+
                         <span
                           onClick={() => toggleDiv(`demo${index}`)}
                           className="range-icon d-inline-block right-0"

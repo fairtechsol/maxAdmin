@@ -28,7 +28,7 @@
 }
 
 .market-analysis-content-detail {
-  max-height: 250px;
+  // max-height: 250px;
   overflow: auto;
   margin-bottom: 10px;
 }
@@ -52,7 +52,7 @@
 }
 
 .market-analysis-container .table thead {
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: rgba(0, 0, 0, 0.05) !important;
   color: #fff;
 }
 

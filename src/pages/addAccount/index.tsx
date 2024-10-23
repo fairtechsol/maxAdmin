@@ -350,7 +350,7 @@ const AddAccount = () => {
                       title={"Client Name*:"}
                       name={"clientName"}
                       onBlur={formik.handleBlur}
-                      placeholder={"Client Name:"}
+                      placeholder={"Client Name"}
                       type={"text"}
                       customstyle={"mb-3"}
                       value={formik.values.clientName}

@@ -37,7 +37,7 @@ const Login = () => {
 
   const { handleSubmit, touched, errors } = formik;
 
-  const { success, forceChangePassword, userRole } = useSelector(
+  const { success, forceChangePassword, userRole, loginData } = useSelector(
     (state: RootState) => state.auth
   );
 
@@ -51,9 +51,13 @@ const Login = () => {
         );
         navigate("/admin/change-password");
       } else {
-        navigate(
-          `/admin/active-inactive-user-list/${localStorage.getItem("uid")}`
-        );
+        if (loginData?.exposure) {
+          navigate("/admin/market-analysis");
+        } else {
+          navigate(
+            `/admin/active-inactive-user-list/${localStorage.getItem("uid")}`
+          );
+        }
       }
       dispatch(authReset());
     }

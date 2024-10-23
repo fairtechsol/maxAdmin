@@ -214,10 +214,12 @@ const OtherGamesDetail = () => {
       const handleVisibilityChange = () => {
         if (document.visibilityState === "visible") {
           if (id) {
-            dispatch(
-              otherMatchDetailAction({ matchId: id, matchType: "football" })
-            );
+            // dispatch(
+            //   otherMatchDetailAction({ matchId: id, matchType: "football" })
+            // );
             dispatch(getPlacedBets(id));
+            socketService.match.joinMatchRoom(id, "superAdmin");
+            socketService.match.getMatchRates(id, updateMatchDetailToRedux);
           }
         } else if (document.visibilityState === "hidden") {
           socketService.match.leaveMatchRoom(id);
