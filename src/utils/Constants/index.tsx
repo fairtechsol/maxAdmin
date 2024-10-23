@@ -354,7 +354,7 @@ export const profitLossDataForMatchConstants = {
       prev[`setWinner${curr}`] = {
         A: `userTeamARateSetWinner${curr}`,
         B: `userTeamBRateSetWinner${curr}`,
-        C: `userTeamRateSetWinner${curr}`,
+        C: `userprofitLossDataMatchetWinner${curr}`,
       };
       return prev;
     },
@@ -1217,6 +1217,6 @@ export const gameRulesComponents: any = {
   dt6: <DragonRules />,
   dt202: <DragonRules />,
   dt20: <DragonRules />,
-  aaa: <AmarAkbarRules/>,
-  btable: <BollywoodTableGameRules/>
+  aaa: <AmarAkbarRules />,
+  btable: <BollywoodTableGameRules />,
 };
