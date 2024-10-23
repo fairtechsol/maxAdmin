@@ -33,7 +33,13 @@ const MarketAnalysisComp = ({ match }: any) => {
       <div className="market-analysis-container">
         <div className="market-analysis-title">
           <div>
-            <a href={`/admin/match_details/${match?.matchId}`}>
+            <a
+              href={
+                match?.eventType === "cricket"
+                  ? `/admin/match_details/${match?.matchId}`
+                  : `/admin/other_match_detail/${match?.matchId}/${match?.betType?.match?.[0]?.betId}`
+              }
+            >
               {match?.title}
             </a>
           </div>
@@ -86,33 +92,31 @@ const MarketAnalysisComp = ({ match }: any) => {
                     >
                       <div className="simplebar-wrapper">
                         <table className="table">
-                          <thead
-                            style={{
-                              backgroundColor: "rgba(0, 0, 0, 0.05)",
-                            }}
-                          >
+                          <thead>
                             <tr>
                               <th colSpan={2}>{items?.eventName}</th>
                             </tr>
                           </thead>
                           <tbody>
-                            {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]?.map((i: any) => (
-                              <tr key={i}>
-                                <td>{i} number</td>
-                                <td className="text-end">
-                                  {parseFloat(
-                                    items?.profitLoss?.betPlaced?.[i]
-                                  ).toFixed(2) || "0.00"}
-                                </td>
-                              </tr>
-                            ))}
+                            {Array.from({ length: 10 }, (_, i) => i)?.map(
+                              (i: any) => (
+                                <tr key={i}>
+                                  <td>{i} number</td>
+                                  <td className="text-end">
+                                    {parseFloat(
+                                      items?.profitLoss?.betPlaced?.[i]
+                                    ).toFixed(2) || "0.00"}
+                                  </td>
+                                </tr>
+                              )
+                            )}
                           </tbody>
                         </table>
                       </div>
                     </div>
                   </div>
                 ));
-              } else
+              } else {
                 return (
                   <div className="col-lg-4">
                     <div
@@ -145,6 +149,7 @@ const MarketAnalysisComp = ({ match }: any) => {
                     </div>
                   </div>
                 );
+              }
             })}
           </div>
         </div>

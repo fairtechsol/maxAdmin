@@ -22,14 +22,14 @@ const marketAnalysisSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getMarketAnalysis.pending, (state) => {
-        state.loading = false;
+        state.loading = true;
         state.success = false;
         state.error = null;
       })
       .addCase(getMarketAnalysis.fulfilled, (state, action) => {
+        state.loading = false;
         state.success = true;
         state.marketAnalysisDetail = action.payload;
-        state.loading = false;
       })
       .addCase(getMarketAnalysis.rejected, (state, action) => {
         state.loading = false;
