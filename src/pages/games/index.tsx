@@ -227,10 +227,12 @@ const Games = () => {
           if (id) {
             // dispatch(matchDetailAction(id));
             dispatch(getPlacedBets(id));
+            socketService.match.joinMatchRoom(id, "superAdmin");
+            socketService.match.getMatchRates(id, updateMatchDetailToRedux);
           }
         } else if (document.visibilityState === "hidden") {
-          // socketService.match.leaveMatchRoom(id);
-          // socketService.match.getMatchRatesOff(id);
+          socketService.match.leaveMatchRoom(id);
+          socketService.match.getMatchRatesOff(id);
         }
       };
 
@@ -244,7 +246,7 @@ const Games = () => {
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [id]);
 
   const getScoreBoard = async (eventId: string) => {
     try {
