@@ -13,6 +13,7 @@ import { AppDispatch, RootState } from "../../../store/store";
 import _ from "lodash";
 import moment from "moment-timezone";
 import SelectSearch3 from "../../../components/commonComponent/SelectSearch3";
+import "./style.scss";
 
 interface Column {
   id: string;
@@ -205,7 +206,7 @@ const CurrentBets = () => {
               selectType2?.value == "BACK"
             ) {
               return (
-                <tr key={index}>
+                <tr key={index} className={(item?.betType == "BACK" || item?.betType == "YES")?"back-border":"lay-border"}>
                   {columns.map((column: any, index: number) => (
                     <td key={index}>
                       {column?.id === "createdAt"
@@ -226,7 +227,7 @@ const CurrentBets = () => {
               selectType2?.value == "LAY"
             ) {
               return (
-                <tr key={index}>
+                <tr key={index} className={(item?.betType == "BACK" || item?.betType == "YES")?"back-border":"lay-border"}>
                   {columns.map((column: any, index: number) => (
                     <td key={index}>
                       {column?.id === "createdAt"
@@ -244,7 +245,7 @@ const CurrentBets = () => {
               );
             } else if (selectType2?.value == "ALL") {
               return (
-                <tr key={index}>
+                <tr key={index} className={(item?.betType == "BACK" || item?.betType == "YES")?"back-border":"lay-border"}>
                   {columns.map((column: any, index: number) => (
                     <td key={index}>
                       {column?.id === "createdAt"
