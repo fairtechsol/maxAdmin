@@ -1,6 +1,6 @@
 import React, { memo, useEffect, useMemo, useState } from "react";
 import {  Form, Nav, NavDropdown, Navbar } from "react-bootstrap";
-import { FaSearchPlus, FaTimes } from "react-icons/fa";
+import { FaSearchPlus } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import LogoSection from "../../../components/commonComponent/logoSection";
 import Select, { components } from "react-select";
@@ -216,24 +216,20 @@ const Topbar = (props: any) => {
               )}`}
               className="me-2 mt-1 d-flex"
             >
-              <LogoSection width="100%" height="50px" />
+              <LogoSection />
             </a>
 
             <span
               className=" m-3 cursor"
               onClick={props.onClick}
             >
-              {props.toggle ? (
-                <div style={{ width: "25px" }}>
-                  <FaTimes color="white" size={18} />
-                </div>
-              ) : (
+          
                 <div className="menuHamBurger d-flex flex-column me-2 mt-1">
                   <span className="mb-1"></span>
                   <span className="mb-1"></span>
                   <span></span>
                 </div>
-              )}
+       
             </span>
               <Navbar id="basic-navbar-nav">
                 <Nav className="me-auto">

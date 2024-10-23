@@ -22,7 +22,7 @@ interface Column {
 
 // Example usage
 const columns: Column[] = [
-  { id: "roundId", label: "Round Id" },
+  { id: "roundId", label: "Market Id" },
   { id: "winner", label: "Winner" },
 ];
 

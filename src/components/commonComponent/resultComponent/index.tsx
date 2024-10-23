@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Container } from "react-bootstrap";
+import {  Container } from "react-bootstrap";
+// import CloseButton from 'react-bootstrap/CloseButton';
 // import { RxCross2 } from "react-icons/rx";
 // import moment from "moment";
 import isMobile from "../../../utils/screenDimension";
@@ -58,12 +59,14 @@ export const ResultComponent: React.FC<ResultComponentProps> = ({
   }, []);
   return (
     <Container style={{ padding: 0 }}>
-      <div className="resultModalHeader d-flex justify-content-between">
+      <div className="resultModalHeader">
         <span style={{ fontSize: "20px"}}>
           {cardGamesTypeNames[type]} RESULT
         </span>
         {/* <RxCross2 size={25} onClick={() => setfalse(false)} /> */}
-        <button type="button" onClick={() => setfalse(false)}  className="close">×</button>
+        {/* <CloseButton onClick={() => setfalse(false)}   className="close text-white" /> */}
+        {/* <Button  >×</Button> */}
+        <span className="close" onClick={() => setfalse(false)}  >×</span>
       </div>
       <div
         className="resultModalSubHead"
