@@ -12,6 +12,7 @@ import {
 import { AppDispatch, RootState } from "../../../store/store";
 import _ from "lodash";
 import moment from "moment-timezone";
+import SelectSearch3 from "../../../components/commonComponent/SelectSearch3";
 
 interface Column {
   id: string;
@@ -37,6 +38,11 @@ const options = [
   { value: "DELETED", label: "Deleted" },
 ];
 
+const options2 = [
+  { value: "ALL", label: "All" },
+  { value: "BACK", label: "Back" },
+  { value: "LAY", label: "Lay" },
+];
 const CurrentBets = () => {
   const dispatch: AppDispatch = useDispatch();
   const [tableConfig, setTableConfig] = useState<TableConfig | null>({
@@ -58,6 +64,10 @@ const CurrentBets = () => {
     label: "Matched",
   });
 
+  const [selectType2, setSelectType2] = useState({
+    value: "ALL",
+    label: "All",
+  });
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
   const { ReportBetList } = useSelector(
@@ -78,6 +88,10 @@ const CurrentBets = () => {
 
   const handleType = (type: any) => {
     setSelectType(type);
+  };
+
+  const handleType2 = (type: any) => {
+    setSelectType2(type);
   };
 
   const handleLoad = (e?: any) => {
@@ -121,19 +135,32 @@ const CurrentBets = () => {
   const getStartAt = (item: any) => {
     return item?.match?.startAt || item?.racingMatch?.startAt;
   };
+
+  console.log("ReportBetList", ReportBetList);
+  console.log("mapin", selectType2?.value);
   return (
     <div className="p-2 pt-0">
       <h5 className="title-22 fw-normal">Current Bets</h5>
       <Form onSubmit={(e) => handleLoad(e)}>
         <Row className="mb-4 ">
-          <Col md={2}>
+          <Col md={3}>
             <SelectSearch2
               defaultValue={[selectType]}
               // defaultValue="matched"
+              //id="1"
               options={options}
               label={"Choose Type"}
               value={selectType}
               onChange={handleType}
+            />
+            <SelectSearch3
+              defaultValue={[selectType2]}
+              // defaultValue="matched"
+              //id="2"
+              options={options2}
+              label={"Choose Type2"}
+              value={selectType2}
+              onChange={handleType2}
             />
           </Col>
           <Col md={2} className="ml-">
@@ -157,8 +184,6 @@ const CurrentBets = () => {
         tableConfig={tableConfig}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
-
-        
       >
         {ReportBetList && ReportBetList?.count === 0 && (
           <tr>
@@ -174,23 +199,69 @@ const CurrentBets = () => {
           </tr>
         )}
         {ReportBetList?.count > 0 &&
-          ReportBetList?.rows?.map((item: any, index: number) => (
-            <tr key={index} >
-              {columns.map((column, index: number) => (
-                <td key={index}>
-                  {column?.id === "createdAt"
-                    ? moment(_.get(item, column?.id))
-                        .tz(timezone)
-                        .format("YYYY-MMM-DD h:mmA [IST]")
-                    : column?.id === "startAt"
-                    ? moment(getStartAt(item))
-                        .tz(timezone)
-                        .format("YYYY-MMM-DD h:mmA [IST]")
-                    : _.get(item, column?.id)}
-                </td>
-              ))}
-            </tr>
-          ))}
+          ReportBetList?.rows?.map((item: any, index: number) => {
+            if (
+              (item?.betType == "BACK" || item?.betType == "YES") &&
+              selectType2?.value == "BACK"
+            ) {
+              return (
+                <tr key={index}>
+                  {columns.map((column: any, index: number) => (
+                    <td key={index}>
+                      {column?.id === "createdAt"
+                        ? moment(_.get(item, column?.id))
+                            .tz(timezone)
+                            .format("YYYY-MMM-DD h:mmA [IST]")
+                        : column?.id === "startAt"
+                        ? moment(getStartAt(item))
+                            .tz(timezone)
+                            .format("YYYY-MMM-DD h:mmA [IST]")
+                        : _.get(item, column?.id)}
+                    </td>
+                  ))}
+                </tr>
+              );
+            } else if (
+              (item?.betType == "LAY" || item?.betType == "NO") &&
+              selectType2?.value == "LAY"
+            ) {
+              return (
+                <tr key={index}>
+                  {columns.map((column: any, index: number) => (
+                    <td key={index}>
+                      {column?.id === "createdAt"
+                        ? moment(_.get(item, column?.id))
+                            .tz(timezone)
+                            .format("YYYY-MMM-DD h:mmA [IST]")
+                        : column?.id === "startAt"
+                        ? moment(getStartAt(item))
+                            .tz(timezone)
+                            .format("YYYY-MMM-DD h:mmA [IST]")
+                        : _.get(item, column?.id)}
+                    </td>
+                  ))}
+                </tr>
+              );
+            } else if (selectType2?.value == "ALL") {
+              return (
+                <tr key={index}>
+                  {columns.map((column: any, index: number) => (
+                    <td key={index}>
+                      {column?.id === "createdAt"
+                        ? moment(_.get(item, column?.id))
+                            .tz(timezone)
+                            .format("YYYY-MMM-DD h:mmA [IST]")
+                        : column?.id === "startAt"
+                        ? moment(getStartAt(item))
+                            .tz(timezone)
+                            .format("YYYY-MMM-DD h:mmA [IST]")
+                        : _.get(item, column?.id)}
+                    </td>
+                  ))}
+                </tr>
+              );
+            }
+          })}
       </CustomTable>
     </div>
   );

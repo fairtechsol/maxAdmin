@@ -2,16 +2,16 @@ import { Form } from "react-bootstrap";
 import CustomErrorMessage from "../input/CustomErrorMessage";
 import "./style.scss";
 
-const SelectSearch2 = (props: any) => {
+const SelectSearch3 = (props: any) => {
   const {
     //id,
     options,
     value,
     onChange,
     label,
-    customClass,
-    filedClass,
-    SelectInline,
+    //customClass,
+    //filedClass,
+    //SelectInline,
     onBlur,
     touched,
     errors,
@@ -19,24 +19,20 @@ const SelectSearch2 = (props: any) => {
 
   return (
     <>
-      <Form.Group
-        className={`customSelect ${SelectInline ? "SelectInline" : ""} ${
-          customClass ?? ""
-        }`}
-      >
+      <Form.Group>
         {label && <Form.Label>{label}</Form.Label>}
-        <div className={`modal-chekbox ${filedClass}`}>
-          <div className="custom-radio-group" >
+        <div>
+          <div className="custom-radio-group2">
             {options.map((option: any, index: number) => (
-              <label className="custom-radio" key={index}>
+              <label className="custom-radio2" key={index}>
                 <input
                   type="radio"
-                  name="customRadio"
+                  name="customRadio2"
                   value={value}
                   onChange={() => onChange(option)}
                   onBlur={onBlur}
                 />
-                <span className="custom-radio-checkmark"></span>
+                <span className="custom-radio-checkmark2"></span>
                 {option.label}
               </label>
             ))}
@@ -49,4 +45,4 @@ const SelectSearch2 = (props: any) => {
   );
 };
 
-export default SelectSearch2;
+export default SelectSearch3;

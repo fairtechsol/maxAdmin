@@ -34,12 +34,12 @@
   padding-left: 30px; /* Spacing for the radio button */
 }
 
-.custom-radio-group {
+.custom-radio-group2 {
   display: flex;
   
 }
 
-.custom-radio {
+.custom-radio2 {
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -50,13 +50,13 @@
   margin-left: 5px;
 }
 
-.custom-radio input[type="radio"] {
+.custom-radio2 input[type="radio"] {
   position: absolute;
   opacity: 0;
   cursor: pointer;
 }
 
-.custom-radio .custom-radio-checkmark {
+.custom-radio2 .custom-radio-checkmark2 {
   position: absolute;
   top: 0;
   left: 0;
@@ -68,21 +68,21 @@
   transition: background-color 0.2s ease;
 }
 
-.custom-radio input[type="radio"]:checked ~ .custom-radio-checkmark {
+.custom-radio2 input[type="radio"]:checked ~ .custom-radio-checkmark2 {
   background-color: #fff;
 }
 
-.custom-radio .custom-radio-checkmark::after {
+.custom-radio2 .custom-radio-checkmark2::after {
   content: "";
   position: absolute;
   display: none;
 }
 
-.custom-radio input[type="radio"]:checked ~ .custom-radio-checkmark::after {
+.custom-radio2 input[type="radio"]:checked ~ .custom-radio-checkmark2::after {
   display: block;
 }
 
-.custom-radio .custom-radio-checkmark::after {
+.custom-radio2 .custom-radio-checkmark2::after {
   top: 0.2rem;
   left: 0.2rem;
   width: 5px;
