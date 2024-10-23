@@ -8,7 +8,7 @@ const SelectSearch3 = (props: any) => {
     options,
     value,
     onChange,
-    label,
+    //label,
     //customClass,
     //filedClass,
     //SelectInline,
@@ -20,7 +20,7 @@ const SelectSearch3 = (props: any) => {
   return (
     <>
       <Form.Group>
-        {label && <Form.Label>{label}</Form.Label>}
+        {/* {label && <Form.Label>{label}</Form.Label>} */}
         <div>
           <div className="custom-radio-group2">
             {options.map((option: any, index: number) => (

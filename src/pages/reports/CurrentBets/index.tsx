@@ -143,7 +143,7 @@ const CurrentBets = () => {
     <div className="p-2 pt-0">
       <h5 className="title-22 fw-normal">Current Bets</h5>
       <Form onSubmit={(e) => handleLoad(e)}>
-        <Row className="mb-4 ">
+        <Row className="mb-4 d-flex  align-items-center">
           <Col md={3}>
             <SelectSearch2
               defaultValue={[selectType]}
@@ -164,7 +164,7 @@ const CurrentBets = () => {
               onChange={handleType2}
             />
           </Col>
-          <Col md={2} className="ml-">
+          <Col md={2} className="d-flex  align-items-center ">
             <Form.Label className="invisible d-block mt-1">dasd</Form.Label>
             <Button type="submit">Load</Button>
           </Col>
@@ -206,9 +206,23 @@ const CurrentBets = () => {
               selectType2?.value == "BACK"
             ) {
               return (
-                <tr key={index} className={(item?.betType == "BACK" || item?.betType == "YES")?"back-border":"lay-border"}>
+                <tr
+                  key={index}
+                  className={
+                    item?.betType == "BACK" || item?.betType == "YES"
+                      ? "back-border"
+                      : "lay-border"
+                  }
+                >
                   {columns.map((column: any, index: number) => (
-                    <td key={index}>
+                    <td
+                      key={index}
+                      className={
+                        item?.betType == "BACK" || item?.betType == "YES"
+                          ? "back-border"
+                          : "lay-border"
+                      }
+                    >
                       {column?.id === "createdAt"
                         ? moment(_.get(item, column?.id))
                             .tz(timezone)
@@ -227,9 +241,23 @@ const CurrentBets = () => {
               selectType2?.value == "LAY"
             ) {
               return (
-                <tr key={index} className={(item?.betType == "BACK" || item?.betType == "YES")?"back-border":"lay-border"}>
+                <tr
+                  key={index}
+                  className={
+                    item?.betType == "BACK" || item?.betType == "YES"
+                      ? "back-border"
+                      : "lay-border"
+                  }
+                >
                   {columns.map((column: any, index: number) => (
-                    <td key={index}>
+                    <td
+                      key={index}
+                      className={
+                        item?.betType == "BACK" || item?.betType == "YES"
+                          ? "back-border"
+                          : "lay-border"
+                      }
+                    >
                       {column?.id === "createdAt"
                         ? moment(_.get(item, column?.id))
                             .tz(timezone)
@@ -245,12 +273,22 @@ const CurrentBets = () => {
               );
             } else if (selectType2?.value == "ALL") {
               return (
-                <tr key={index} className={(item?.betType == "BACK" || item?.betType == "YES")?"back-border":"lay-border"}
-                
+                <tr
+                  key={index}
+                  className={
+                    item?.betType == "BACK" || item?.betType == "YES"
+                      ? "back-border"
+                      : "lay-border"
+                  }
                 >
                   {columns.map((column: any, index: number) => (
-                    <td key={index}
-                    className={(item?.betType == "BACK" || item?.betType == "YES")?"back-border":"lay-border"}
+                    <td
+                      key={index}
+                      className={
+                        item?.betType == "BACK" || item?.betType == "YES"
+                          ? "back-border"
+                          : "lay-border"
+                      }
                     >
                       {column?.id === "createdAt"
                         ? moment(_.get(item, column?.id))

@@ -8,7 +8,7 @@ const SelectSearch2 = (props: any) => {
     options,
     value,
     onChange,
-    label,
+    //label,
     customClass,
     filedClass,
     SelectInline,
@@ -24,7 +24,7 @@ const SelectSearch2 = (props: any) => {
           customClass ?? ""
         }`}
       >
-        {label && <Form.Label>{label}</Form.Label>}
+        {/* {label && <Form.Label>{label}</Form.Label>} */}
         <div className={`modal-chekbox ${filedClass}`}>
           <div className="custom-radio-group" >
             {options.map((option: any, index: number) => (
