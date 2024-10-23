@@ -13,6 +13,7 @@ import { ResultComponent } from "../../../components/commonComponent/resultCompo
 import { resultDragonTiger } from "../../../store/actions/card/cardDetail";
 import { cardGamesCasinoResult } from "../../../utils/Constants";
 import { FaTimes } from "react-icons/fa";
+import SearchBox from "../../../components/commonComponent/table/tableUtils/search";
 
 interface Column {
   id: string;
@@ -34,7 +35,7 @@ const CasinoResultReport = () => {
   // const [date, setDate] = useState<any>(
   //   moment(new Date()).format("YYYY-MM-DD")
   // );
-  const [date, setDate] = useState<any>("");
+  const [date, setDate] = useState<any>(new Date().toISOString().split('T')[0]);
 
   const [type, setType] = useState<any>(null);
 
@@ -131,6 +132,11 @@ const CasinoResultReport = () => {
   const clearDate = () => {
     setCross(""); // Clear the selected date
   };
+  const handleSearch = (keyword: string) => {
+    setTableConfig((prev: any) => {
+      return { ...prev, keyword: keyword };
+    });
+  };
   return (
     <div className="p-2 pt-0">
       <h5 className="title-22 fw-normal">Casino Result Report</h5>
@@ -190,6 +196,17 @@ const CasinoResultReport = () => {
             <Button type="submit">Submit</Button>
           </Col>
         </Row>
+        <Row>
+          <div className="w-75"></div>
+          <div className="w-25">
+          {tableConfig?.keyword !== undefined ? (
+  <SearchBox value={tableConfig.keyword} onSearch={handleSearch} load={false}/>
+) : (
+  <SearchBox value="" onSearch={handleSearch}  load={false}/>
+)}
+          </div>
+       
+        </Row>
       </Form>
       <CustomTable
         customClass="commonTable reportTable"
@@ -197,7 +214,7 @@ const CasinoResultReport = () => {
         columns={columns}
         isPagination={true}
         isSort={false}
-        isSearch={true}
+        // isSearch={true}
         itemCount={casinoResultReport ? casinoResultReport?.count : 0}
         setTableConfig={setTableConfig}
         enablePdfExcel={false}

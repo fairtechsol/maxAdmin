@@ -11,7 +11,7 @@ import {
 import { AppDispatch, RootState } from "../../../../store/store";
 import CustomInput from "../../../commonComponent/input";
 import ModalFooter from "../footer";
-import { depositAmountValidations } from "../../../../utils/fieldValidations/addAccount";
+// import { depositAmountValidations } from "../../../../utils/fieldValidations/addAccount";
 import Loader from "../../../commonComponent/loader";
 
 const initialValues: any = {
@@ -38,8 +38,34 @@ const Deposit = ({ userData, setShow }: any) => {
 
   const formik = useFormik({
     initialValues: initialValues,
-    validationSchema: depositAmountValidations,
+    // validationSchema: depositAmountValidations,
     onSubmit: (values: any) => {
+      if(values?.amount ==="" && values?.remark ==="" && values?.transactionPassword ===""){
+        setBorder({
+          amount: true,
+          remark: true,
+          Tpass: true,   
+        });
+        return ;
+      }else if(values?.amount ===""){
+        setBorder((prevState) => ({
+          ...prevState,
+          amount: true, 
+        }));
+        return ;
+      }else if(values?.remark ===""){
+        setBorder((prevState) => ({
+          ...prevState,
+          remark: true, 
+        }));
+        return;
+      }else if(values?.transactionPassword ===""){
+        setBorder((prevState) => ({
+          ...prevState,
+          Tpass: true, 
+        }));
+        return;
+      }
       try {
         let payload = {
           userId: userData?.id,
@@ -165,7 +191,7 @@ const Deposit = ({ userData, setShow }: any) => {
               </Col>
               <Col sm={8}>
                 <CustomInput
-                  required={true}
+                  // required={true}
                   name="amount"
                   id="amount"
                   value={values.amount}
@@ -175,6 +201,7 @@ const Deposit = ({ userData, setShow }: any) => {
                   touched={touched.amount}
                   errors={errors.amount}
                   min={0}
+                  placeholder={"Amount"}
                   style={{border:border?.amount?"1px solid red":"1px solid #000"}}
                   onBlur={()=>handleBlur(values.amount,"amount")}
                 />
@@ -192,6 +219,7 @@ const Deposit = ({ userData, setShow }: any) => {
                   type="textarea"
                   as="textarea"
                   rows={4}
+                  placeholder={"Remark"}
                   customstyle="input-box"
                   touched={touched.remark}
                   errors={errors.remark}
@@ -211,7 +239,7 @@ const Deposit = ({ userData, setShow }: any) => {
               </Col>
               <Col sm={8}>
                 <CustomInput
-                  required={true}
+                  // required={true}
                   id="transactionPassword"
                   type="password"
                   customstyle="input-box"

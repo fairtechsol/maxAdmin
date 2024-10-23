@@ -5,9 +5,10 @@ import { Form, FormControl, InputGroup, Button } from "react-bootstrap";
 interface SearchBoxProps {
   onSearch: (query: string) => void;
   value: string;
+  load?:boolean;
 }
 
-const SearchBox: React.FC<SearchBoxProps> = ({ value, onSearch }) => {
+const SearchBox: React.FC<SearchBoxProps> = ({ value, onSearch,load }:any) => {
   const [keyword, setKeyword] = useState("");
 
   const debouncedInputValue = useMemo(
@@ -32,7 +33,11 @@ const SearchBox: React.FC<SearchBoxProps> = ({ value, onSearch }) => {
       setKeyword(""); // Sync with external value prop
     }
   }, [value]);
-
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const query = e.target.value;
+    setKeyword(query);
+    debouncedInputValue(query);
+  };
   return (
     <Form.Group
       controlId="searchBox"
@@ -40,16 +45,30 @@ const SearchBox: React.FC<SearchBoxProps> = ({ value, onSearch }) => {
     >
       <Form.Label className="mb-0">Search:</Form.Label>
       <InputGroup>
-        <FormControl
+      {load ? <FormControl
           value={keyword}
           type="text"
           placeholder=""
           onInput={(e: React.FormEvent<HTMLInputElement>) =>
             setKeyword(e.currentTarget.value)
           } // Directly update state without onChange
-        />
+        /> : 
+        <FormControl
+          value={keyword}
+          type="text"
+          placeholder="Search..."
+          onChange={handleSearchChange}
+        />}
+        {/* <FormControl
+          value={keyword}
+          type="text"
+          placeholder=""
+          onInput={(e: React.FormEvent<HTMLInputElement>) =>
+            setKeyword(e.currentTarget.value)
+          } // Directly update state without onChange
+        /> */}
       </InputGroup>
-      <Button className="float-end ms-2" onClick={handleButtonClick}>
+     {load && (<><Button className="float-end ms-2" onClick={handleButtonClick}>
         Load
       </Button>
       <Button
@@ -58,7 +77,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ value, onSearch }) => {
         onClick={handleReset}
       >
         Reset
-      </Button>
+      </Button></>)}
     </Form.Group>
   );
 };
