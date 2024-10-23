@@ -22,7 +22,7 @@ const CustomInput = (props: any) => {
   } = props;
 
   const inlineStyle: React.CSSProperties = {
-    textAlign: textAlign || 'right',
+    textAlign: textAlign || '',
     ...style,
   };
 
