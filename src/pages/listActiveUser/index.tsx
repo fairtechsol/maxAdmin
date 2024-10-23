@@ -31,7 +31,7 @@ const columns: Column[] = [
   { id: "exposureLimit", label: "Exposure Limit" },
   { id: "default", label: "Default%" },
   { id: "user.roleName", label: "Account Type" },
-  { id: "casino", label: "Casino Total" },
+  // { id: "casino", label: "Casino Total" },
   { id: "actions", label: "Actions" },
 ];
 
@@ -424,7 +424,7 @@ const ListActiveInactiveUser: React.FC = () => {
                             </td>
                             <td>0</td>
                             <td>{roleName}</td>
-                            <td className="text-end">0</td>
+                            {/* <td className="text-end">0</td> */}
                             <td>
                               <div className="d-flex gap-1 border-right-0 border-left-0">
                                 {type ? (

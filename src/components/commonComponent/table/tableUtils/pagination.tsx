@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Pagination } from "react-bootstrap";
 // import CustomButton from "../../button";
 /*** */
+import { MdOutlineKeyboardDoubleArrowLeft,MdOutlineKeyboardArrowRight, MdOutlineKeyboardDoubleArrowRight, MdOutlineKeyboardArrowLeft } from "react-icons/md";
 
 interface PaginationComponentProps {
   currentPage: number;
@@ -43,7 +44,7 @@ const PaginationComponent: React.FC<PaginationComponentProps> = ({
             onClick={() => onPageChange(pageNumber)}
             active={pageNumber === currentPage}
           >
-            {pageNumber}
+           <span className="text-black">{pageNumber}</span> 
           </Pagination.Item>
         );
       }
@@ -66,14 +67,14 @@ const PaginationComponent: React.FC<PaginationComponentProps> = ({
           disabled={currentPage <= 1 ? true : false}
           onClick={() => onPageChange(1)}
         >
-          First
+          <MdOutlineKeyboardDoubleArrowLeft />
         </Pagination.First>
         <Pagination.Prev
           disabled={currentPage <= 1 ? true : false}
           onClick={() => onPageChange(currentPage - 1)}
           className="paginationBtn"
         >
-          Previous
+          <MdOutlineKeyboardArrowLeft />
           {/* </CustomButton> */}
         </Pagination.Prev>
         {pageComp?.map((item) => item)}
@@ -82,14 +83,14 @@ const PaginationComponent: React.FC<PaginationComponentProps> = ({
           onClick={() => onPageChange(currentPage + 1)}
           // className="paginationBtn"
         >
-          Next
+          <MdOutlineKeyboardArrowRight />
           {/* </CustomButton> */}
         </Pagination.Next>
         <Pagination.Last
           disabled={totalPages === 0 ? true : currentPage === totalPages}
           onClick={() => onPageChange(totalPages)}
         >
-          Last
+          <MdOutlineKeyboardDoubleArrowRight />
         </Pagination.Last>
       </div>
     </Pagination>
