@@ -18,7 +18,7 @@ const NavComponent = ({ matchDetail }: any) => {
             }))
           );
         } else {
-          if (marketValue?.id ) {
+          if (marketValue?.id) {
             formattedArray.push({
               type: marketValue?.type,
               id: marketValue?.id,

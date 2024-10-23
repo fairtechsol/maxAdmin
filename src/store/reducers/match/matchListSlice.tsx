@@ -32,9 +32,9 @@ const matchListSlice = createSlice({
         state.error = null;
       })
       .addCase(matchDetailAction.fulfilled, (state, action) => {
-        state.loading = false;
+        // state.loading = false;
         state.success = true;
-        state.matchDetails = action.payload;
+        // state.matchDetails = action.payload;
       })
       .addCase(matchDetailAction.rejected, (state, action) => {
         state.loading = false;
@@ -46,9 +46,9 @@ const matchListSlice = createSlice({
         state.error = null;
       })
       .addCase(otherMatchDetailAction.fulfilled, (state, action) => {
-        state.loading = false;
+        // state.loading = false;
         state.success = true;
-        state.matchDetails = action.payload;
+        // state.matchDetails = action.payload;
       })
       .addCase(otherMatchDetailAction.rejected, (state, action) => {
         state.loading = false;
@@ -71,6 +71,8 @@ const matchListSlice = createSlice({
           tournament,
           other,
         } = action.payload;
+
+        state.loading = false;
 
         let parsedSessionBettings = state?.matchDetails?.sessionBettings?.map(
           (item: any) => {
@@ -105,9 +107,9 @@ const matchListSlice = createSlice({
           other,
         };
       })
-      
+
       .addCase(updateBalance.fulfilled, (state, action) => {
-        const {jobData,userRedisObj} = action.payload;
+        const { jobData, userRedisObj } = action.payload;
         // const {
         //   newTeamRateData,
         //   teamArateRedisKey,
@@ -131,14 +133,16 @@ const matchListSlice = createSlice({
             ...state.matchDetails,
             profitLossDataMatch: {
               ...state.matchDetails.profitLossDataMatch,
-              [jobData?.teamArateRedisKey]: userRedisObj[jobData?.teamArateRedisKey],
-              [jobData?.teamBrateRedisKey]: userRedisObj[jobData?.teamBrateRedisKey],
-              [jobData?.teamCrateRedisKey]: userRedisObj[jobData?.teamCrateRedisKey],
+              [jobData?.teamArateRedisKey]:
+                userRedisObj[jobData?.teamArateRedisKey],
+              [jobData?.teamBrateRedisKey]:
+                userRedisObj[jobData?.teamBrateRedisKey],
+              [jobData?.teamCrateRedisKey]:
+                userRedisObj[jobData?.teamCrateRedisKey],
             },
           };
         }
       });
-      
   },
 });
 
