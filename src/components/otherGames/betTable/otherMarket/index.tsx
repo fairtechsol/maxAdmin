@@ -1,8 +1,8 @@
 import { Table } from "react-bootstrap";
-import "../../style.scss";
-import BetStatusOverlay from "../../../commonComponent/betStatusOverlay";
-import BackLayBox from "../../../backLayBox";
 import isMobile from "../../../../utils/screenDimension";
+import BackLayBox from "../../../backLayBox";
+import BetStatusOverlay from "../../../commonComponent/betStatusOverlay";
+import "../../style.scss";
 
 interface OtherMarketProps {
   title: string;
@@ -70,12 +70,12 @@ function OtherMarkets({
                       <span className="title-14">
                         <span
                           className={
-                            matchDetails?.teamRates
-                              ? matchDetails?.teamRates?.[
+                            matchDetails?.profitLossDataMatch
+                              ? matchDetails?.profitLossDataMatch?.[
                                   `${data?.id}_profitLoss_${matchDetails?.id}`
                                 ]
                                 ? JSON.parse(
-                                    matchDetails?.teamRates?.[
+                                    matchDetails?.profitLossDataMatch?.[
                                       `${data?.id}_profitLoss_${matchDetails?.id}`
                                     ]
                                   )?.[`${matchs?.id}`] < 0
@@ -86,12 +86,12 @@ function OtherMarkets({
                           }
                         >
                           {parseFloat(
-                            matchDetails?.teamRates
-                              ? matchDetails?.teamRates?.[
+                            matchDetails?.profitLossDataMatch
+                              ? matchDetails?.profitLossDataMatch?.[
                                   `${data?.id}_profitLoss_${matchDetails?.id}`
                                 ]
                                 ? JSON.parse(
-                                    matchDetails?.teamRates?.[
+                                    matchDetails?.profitLossDataMatch?.[
                                       `${data?.id}_profitLoss_${matchDetails?.id}`
                                     ]
                                   )?.[`${matchs?.id}`]

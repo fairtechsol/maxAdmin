@@ -87,7 +87,7 @@ function MatchOdds({
                             indexes === 0 ? (
                               <span
                                 className={
-                                  matchDetails?.teamRates?.[
+                                  matchDetails?.profitLossDataMatch?.[
                                     `yesRateTie_${matchDetails?.id}`
                                   ] < 0
                                     ? "color-red"
@@ -95,7 +95,7 @@ function MatchOdds({
                                 }
                               >
                                 {parseFloat(
-                                  matchDetails?.teamRates?.[
+                                  matchDetails?.profitLossDataMatch?.[
                                     `yesRateTie_${matchDetails?.id}`
                                   ] ?? 0
                                 ).toFixed(2)}
@@ -103,7 +103,7 @@ function MatchOdds({
                             ) : (
                               <span
                                 className={
-                                  matchDetails?.teamRates?.[
+                                  matchDetails?.profitLossDataMatch?.[
                                     `${
                                       profitLossDataForMatchConstants[
                                         data?.type
@@ -115,7 +115,7 @@ function MatchOdds({
                                 }
                               >
                                 {parseFloat(
-                                  matchDetails?.teamRates?.[
+                                  matchDetails?.profitLossDataMatch?.[
                                     `${
                                       profitLossDataForMatchConstants[
                                         data?.type
@@ -128,7 +128,7 @@ function MatchOdds({
                           ) : (
                             <span
                               className={
-                                matchDetails?.teamRates?.[
+                                matchDetails?.profitLossDataMatch?.[
                                   `${
                                     profitLossDataForMatchConstants[
                                       data?.type
@@ -140,7 +140,7 @@ function MatchOdds({
                               }
                             >
                               {parseFloat(
-                                matchDetails?.teamRates?.[
+                                matchDetails?.profitLossDataMatch?.[
                                   `${
                                     profitLossDataForMatchConstants[
                                       data?.type
