@@ -33,7 +33,13 @@ const MarketAnalysisComp = ({ match }: any) => {
       <div className="market-analysis-container">
         <div className="market-analysis-title">
           <div>
-            <a href={`/admin/match_details/${match?.matchId}`}>
+            <a
+              href={
+                match?.eventType === "cricket"
+                  ? `/admin/match_details/${match?.matchId}`
+                  : `/admin/other_match_detail/${match?.matchId}/${match?.betType?.match?.[0]?.betId}`
+              }
+            >
               {match?.title}
             </a>
           </div>
