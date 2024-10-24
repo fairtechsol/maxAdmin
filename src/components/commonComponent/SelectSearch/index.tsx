@@ -58,12 +58,14 @@ const SelectSearch = (props: any) => {
 
             menu: (provided) => ({
               ...provided,
-              maxHeight: "75vh", // Fixing max height to 800px
-              overflowY: "auto",  // Enables scrolling if content overflows
+              maxHeight: "72vh", 
+              overflowY: "auto", 
+              fontSize:"14px"
             }),
             menuList: (provided) => ({
               ...provided,
-              maxHeight: "75vh", // Ensures inner list does not exceed 800px
+              maxHeight: "72vh", 
+              fontSize:"14px"
             }),
       
          
