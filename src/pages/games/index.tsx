@@ -296,8 +296,8 @@ const Games = () => {
     : [];
   return (
     <div className="gamePage">
-      <Container fluid>
-        <GameHeader />
+      <Container fluid >
+        {/* <GameHeader /> */}
         {/* table start here */}
         <div className="gamePage-table">
           <Row className="no-gutters">
@@ -693,6 +693,7 @@ const Games = () => {
               )}
             </Col>
             <Col md={4} className="text-white">
+            <GameHeader />
               {matchDetails?.eventId && (
                 <LiveStreamComponent
                   url={`${liveStreamUrlCricket}${matchDetails?.eventId}`}
