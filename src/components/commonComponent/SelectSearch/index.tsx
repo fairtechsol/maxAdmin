@@ -63,7 +63,7 @@ const SelectSearch = (props: any) => {
           }}
           inputValue={inputValue}
           minMenuHeight={20}
-          maxMenuHeight={500}
+          maxMenuHeight={700}
           className={`selectSearch ${filedClass}`}
           value={value}
           defaultValue={defaultValue}
