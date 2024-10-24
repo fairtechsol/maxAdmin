@@ -287,6 +287,7 @@ const ListActiveInactiveUser: React.FC = () => {
                             colSpan={index === 0 ? 2 : undefined}
                             key={index}
                             className=" fw-bold text-end"
+                            style={{ ...([6,7].includes(index)?{padding: "0px 17px"}:{})}}
                           >
                             {/* {index === 1 &&
                               totalBalance &&
