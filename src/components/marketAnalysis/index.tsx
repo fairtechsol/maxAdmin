@@ -1,7 +1,6 @@
-import React from "react";
-import "./styles.scss";
 import moment from "moment-timezone";
 import { sessionBettingType } from "../../utils/Constants";
+import "./styles.scss";
 
 const profitLossObj: Record<number, string> = {
   0: "a",
