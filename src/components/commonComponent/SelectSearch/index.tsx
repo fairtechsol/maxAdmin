@@ -58,13 +58,13 @@ const SelectSearch = (props: any) => {
 
             menu: (provided) => ({
               ...provided,
-              maxHeight: "70vh", 
+              maxHeight: "72vh", 
               overflowY: "auto", 
               fontSize:"14px"
             }),
             menuList: (provided) => ({
               ...provided,
-              maxHeight: "70vh", 
+              maxHeight: "72vh", 
               fontSize:"14px"
             }),
       
