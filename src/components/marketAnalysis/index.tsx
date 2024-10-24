@@ -1,6 +1,7 @@
 import React from "react";
 import "./styles.scss";
 import moment from "moment-timezone";
+import { sessionBettingType } from "../../utils/Constants";
 
 const profitLossObj: Record<number, string> = {
   0: "a",
@@ -139,7 +140,60 @@ const MarketAnalysisComp = ({ match }: any) => {
                               <tr>
                                 <td>{items?.eventName}</td>
                                 <td className="text-end">
-                                  {items?.maxLoss || "0.00"}
+                                  {Math.min(
+                                    ...Object.values(
+                                      items?.profitLoss?.betPlaced || {}
+                                    ).map((item: any) =>
+                                      [
+                                        sessionBettingType.ballByBall,
+                                        sessionBettingType.khado,
+                                        sessionBettingType.meter,
+                                        sessionBettingType.session,
+                                        sessionBettingType.overByOver,
+                                      ]?.includes(name)
+                                        ? +parseFloat(item?.profitLoss).toFixed(
+                                            2
+                                          )
+                                        : +parseFloat(item).toFixed(2)
+                                    ),
+                                    0
+                                  ) == 0
+                                    ? Math.max(
+                                        ...Object.values(
+                                          items?.profitLoss?.betPlaced || {}
+                                        ).map((item: any) =>
+                                          [
+                                            sessionBettingType.ballByBall,
+                                            sessionBettingType.khado,
+                                            sessionBettingType.meter,
+                                            sessionBettingType.session,
+                                            sessionBettingType.overByOver,
+                                          ]?.includes(name)
+                                            ? +parseFloat(
+                                                item?.profitLoss
+                                              ).toFixed(2)
+                                            : +parseFloat(item).toFixed(2)
+                                        ),
+                                        0
+                                      )
+                                    : Math.min(
+                                        ...Object.values(
+                                          items?.profitLoss?.betPlaced || {}
+                                        ).map((item: any) =>
+                                          [
+                                            sessionBettingType.ballByBall,
+                                            sessionBettingType.khado,
+                                            sessionBettingType.meter,
+                                            sessionBettingType.session,
+                                            sessionBettingType.overByOver,
+                                          ]?.includes(name)
+                                            ? +parseFloat(
+                                                item?.profitLoss
+                                              ).toFixed(2)
+                                            : +parseFloat(item).toFixed(2)
+                                        ),
+                                        0
+                                      ) || "0.00"}
                                 </td>
                               </tr>
                             ))}

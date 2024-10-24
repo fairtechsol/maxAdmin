@@ -2,7 +2,6 @@ import { useSelector } from "react-redux";
 import { MatchType } from "../../../utils/enum";
 import { formattedMinMax } from "../../../utils/formatMinMax";
 // import BetTableHeader from "../../commonComponent/betTableHeader";
-import CustomBreadcrumb from "../../commonComponent/breadcrumb";
 import BookmakerTable from "./bookMaker";
 import MatchOdds from "./matchOdds";
 import { RootState } from "../../../store/store";
@@ -23,17 +22,15 @@ const BetTable = ({ title, type, data, backLayCount }: BetTableProps) => {
   const { matchDetails } = useSelector(
     (state: RootState) => state.match.matchListSlice
   );
-  const { breadCrumb } = useSelector(
-    (state: RootState) => state.match.sidebarList
-  );
 
   return (
     <>
-      <CustomBreadcrumb
-        items={[{ name: breadCrumb?.matchName || matchDetails?.title }]}
-      />
-      <BetTableHeader type={""} customClass="mt-2" title={title} />
-      {type === MatchType.BOOKMAKER ? (
+      {data?.activeStatus === "live" && (
+        <BetTableHeader type={""} customClass="mt-2" title={title} />
+      )}
+      {data?.activeStatus !== "live" ? (
+        <p>No Record Found</p>
+      ) : type === MatchType.BOOKMAKER ? (
         <BookmakerTable
           minMax={formattedMinMax(data?.minBet, data?.maxBet)}
           data={data}
