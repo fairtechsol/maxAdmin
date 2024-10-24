@@ -52,3 +52,65 @@
     border-radius: 0.3rem;
     padding: .5rem 1rem;
 }
+
+.security-auth {
+    font-size: 14px;
+}
+.page-title-box {
+    margin-top: 0;
+    margin-bottom: 6px;
+    padding-bottom: 0;
+}
+.casino-report-tabs .nav-tabs {
+    justify-content: center;
+}
+
+.badge-danger {
+    color: #fff;
+    background-color: #f46a6a;
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.25em 0.4em;
+    font-size: 75%;
+    font-weight: 500;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.verify-code {
+    width: auto;
+    font-size: 56px;
+    line-height: 1;
+    color: #aaafb5;
+    background: #3c444b;
+    padding: 10px;
+    border-radius: 8px;
+    display: inline-block;
+    letter-spacing: 40px;
+    font-weight: 600;
+    padding-left: 40px;
+}
+
+.form-group-s {
+    margin-bottom: 1rem;
+}
+
+.form-group-s {
+    position: relative;
+}
+
+.form-control-s {
+    height: 38px;
+    display: inline-block;
+    width: auto;
+}
+
+.form-control-s {
+    font-size: 1rem;
+}
