@@ -55,7 +55,7 @@ let sortConstant: any = {
 
 const AccountStatement = () => {
   const dispatch: AppDispatch = useDispatch();
-
+  const [excel, setExcel] = useState(false);
   const [dateFrom, setDateFrom] = useState<any>();
   const [dateTo, setDateTo] = useState<any>();
   const [firstTime, setFirstTime] = useState(false);
@@ -160,6 +160,7 @@ const AccountStatement = () => {
   const handleSubmit = (e: any) => {
     try {
       e.preventDefault();
+      setExcel(true);
       let filter = "";
       if (dateFrom && dateTo) {
         filter += `&createdAt=between${moment(new Date(dateFrom))?.format(
@@ -509,7 +510,7 @@ const AccountStatement = () => {
             : 0
         }
         setTableConfig={setTableConfig}
-        enablePdfExcel={false}
+        enablePdfExcel={excel}
         handleReportExport={handleReportExport}
         tableConfig={tableConfig}
         currentPage={currentPage}

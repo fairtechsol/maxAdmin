@@ -37,7 +37,11 @@ const TableHeader: React.FC<TableHeaderProps> = ({
 
   return (
     <div className="d-flex justify-content-between align-items-center">
-      {enablePdfExcel && (
+      <div className="d-flex flex-column">
+      {isPagination && (
+        <RowPerPage value={rowPerPage} onChange={setRowPerPage} />
+      )}
+       {enablePdfExcel && (
         <div className="d-flex gap-1 mb-2">
           <CustomButton
             onClick={() => {
@@ -59,9 +63,9 @@ const TableHeader: React.FC<TableHeaderProps> = ({
           </CustomButton>
         </div>
       )}
-      {isPagination && (
-        <RowPerPage value={rowPerPage} onChange={setRowPerPage} />
-      )}
+      </div>
+     
+      
       {isSearch && (
         <>
           <SearchBox value={tableConfig?.keyword} onSearch={handleSearch} />
