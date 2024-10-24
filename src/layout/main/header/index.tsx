@@ -302,13 +302,13 @@ const Topbar = (props: any) => {
                     name="Reports"
                     options={[
                       {
-                        name: "Account's Statement",
+                        name: "Account Statement",
                         link: "/admin/account-statement",
                       },
                       { name: "Current Bets", link: "/admin/current-bets" },
                       { name: "General Report", link: "/admin/general-report" },
                       { name: "Game Report", link: "/admin/game-report" },
-                      { name: "Casino Report", link: "/admin/casino-report" },
+                      // { name: "Casino Report", link: "/admin/casino-report" },
                       { name: "Profit And Loss", link: "/admin/profit-loss" },
                       {
                         name: "Casino Result Report",
