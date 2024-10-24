@@ -1,12 +1,9 @@
-
 import { dummyArray, formatNumber } from "../../../helpers";
 import BetBox from "../betBox";
 import isMobile from "../../../utils/screenDimension";
 import "./style.scss";
 
-const Tournament = ({ title, box, data, detail }:any) => {
- 
-
+const Tournament = ({ title, box, data, detail }: any) => {
   const key = `${data.id}_profitLoss_${detail.id}`;
 
   const profitLossJson = detail?.profitLossDataMatch?.[key];
@@ -16,20 +13,26 @@ const Tournament = ({ title, box, data, detail }:any) => {
   return (
     <>
       <div className="tournamentContainer">
-       {detail?.matchType==="cricket"  && <div className="tournamentTitle">
-          <span
-            className={`tournamentTitleTxt ${
-              isMobile ? "f-size13" : "f-size15"
-            }`}
-          >
-            {title}
-          </span>
-        </div>}
+        {detail?.matchType === "cricket" && (
+          <div className="tournamentTitle">
+            <span
+              className={`tournamentTitleTxt ${
+                isMobile ? "f-size13" : "f-size15"
+              }`}
+            >
+              {title}
+            </span>
+          </div>
+        )}
 
         <div className="tournamentBackLayTab">
           <div className="tournamentMinMaxBox">
             <span className="tournamentMinMax">
-            {data?.minBet===data?.maxBet? `Max:${formatNumber(data?.maxBet)}` :`Min:${formatNumber(data?.minBet)} Max:${formatNumber(data?.maxBet)}`}
+              {data?.minBet === data?.maxBet
+                ? `Max:${formatNumber(data?.maxBet)}`
+                : `Min:${formatNumber(data?.minBet)} Max:${formatNumber(
+                    data?.maxBet
+                  )}`}
             </span>
           </div>
           <div
@@ -71,16 +74,13 @@ const Tournament = ({ title, box, data, detail }:any) => {
                   <div className="d-flex flex-row justify-content-between w-100">
                     <span
                       className={`${
-                        parseFloat(profitLossObj?.[item.id]) >
-                        0
+                        parseFloat(profitLossObj?.[item.id]) > 0
                           ? "color-green"
                           : "color-red"
                       } ${isMobile ? "fbold title-12" : "fbold title-14"}`}
                     >
-                     {profitLossObj?.[item.id] ?profitLossObj?.[item.id]:""}
+                      {profitLossObj?.[item.id] ? profitLossObj?.[item.id] : ""}
                     </span>
-                   
-                    
                   </div>
                 </div>
                 <div
@@ -90,11 +90,18 @@ const Tournament = ({ title, box, data, detail }:any) => {
                       : "tournament2RateBox rateBoxWidth2"
                   }
                 >
-                  {item?.status !== "ACTIVE" && item?.status !== "OPEN" && item?.status !== "" && (
-                    <div className="suspended-overlayRatestournament">
-                      <span className={`suspendTextCmmn`} style={{textTransform:"uppercase"}}>{item?.status}</span>
-                    </div>
-                  )}
+                  {item?.status !== "ACTIVE" &&
+                    item?.status !== "OPEN" &&
+                    item?.status !== "" && (
+                      <div className="suspended-overlayRatestournament">
+                        <span
+                          className={`suspendTextCmmn`}
+                          style={{ textTransform: "uppercase" }}
+                        >
+                          {item?.status}
+                        </span>
+                      </div>
+                    )}
                   {box === 6 ? (
                     <>
                       {(item?.ex?.availableToBack?.length > 0

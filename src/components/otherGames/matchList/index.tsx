@@ -1,8 +1,8 @@
-import { NavLink, useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import "./style.scss";
 
-const NavComponent = ({ matchDetail }: any) => {
-  const { marketId } = useParams();
+const NavComponent = ({ matchDetail, setMarketToShow, marketToShow }: any) => {
+  // const { marketId } = useParams();
   function formatMarkets(matchDetail: any) {
     const formattedArray = [];
 
@@ -67,14 +67,15 @@ const NavComponent = ({ matchDetail }: any) => {
             ?.sort(handleSort)
             ?.map((item: any) => (
               <li key={item.id} className="nav-items">
-                <NavLink
-                  to={`/admin/other_match_detail/${matchDetail?.id}/${item?.id}`}
+                <span
+                  onClick={() => setMarketToShow(item?.id)}
+                  // to={`/admin/other_match_detail/${matchDetail?.id}/${item?.id}`}
                   className={`market-tab-link ${
-                    item?.id === marketId ? "active" : ""
+                    item?.id === marketToShow ? "active" : ""
                   }`}
                 >
                   {item.name}
-                </NavLink>
+                </span>
               </li>
             ))}
         </ul>
