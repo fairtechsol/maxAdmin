@@ -21,6 +21,7 @@ import {
 import { AppDispatch, RootState } from "../../../store/store";
 import {
   ApiConstants,
+  card2ConstantsAccountStatement,
   cardConstantsAccountStatement,
 } from "../../../utils/Constants";
 // import isMobile from "../../../utils/screenDimension";
@@ -101,7 +102,7 @@ const AccountStatement = () => {
   const aaccountTypeOptions: Option[] = [
     { value: "all", label: "All" },
     { value: "balanceReport", label: "Deposite/Withdraw Report" },
-    { value: "gameReport", label: "Game Report" },
+    { value: "gameReport", label: "Sport Report" },
     { value: "casino",
       label: "Casino Reports",}
   ];
@@ -122,6 +123,11 @@ const AccountStatement = () => {
       (selectedOption as Option).value === "gameReport"
     ) {
       setGameNameOptions(cardConstantsAccountStatement);
+    } else if (
+      selectedOption &&
+      (selectedOption as Option).value === "casino"
+    ) {
+      setGameNameOptions(card2ConstantsAccountStatement);
     } else if (selectedOption && (selectedOption as Option).value === "all") {
       setGameNameOptions([{ value: "all", label: "All" }]);
     } else {

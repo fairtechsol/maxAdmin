@@ -903,7 +903,10 @@ export const cardConstantsAccountStatement = [
   { value: "cricket", label: "Cricket" },
   { value: "football", label: "Football" },
   { value: "horseRacing", label: "Horse Racing" },
-  { value: "greyHound", label: "Greyhound Racing" },
+  { value: "greyHound", label: "Greyhound Racing" }
+];
+export const card2ConstantsAccountStatement = [
+  { value: "all", label: "All" },
   { value: "dt20", label: "20-20 Dragon Tiger" }, //
   {
     value: "abj",
@@ -1026,7 +1029,6 @@ export const cardConstantsAccountStatement = [
     label: "Casino Meter",
   },
 ];
-
 export const cardGamesCasinoResult = [
   {
     value: "",
