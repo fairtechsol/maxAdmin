@@ -130,6 +130,7 @@ const ExposureLimit = ({ setShow, userData }: any) => {
                   type="password"
                   customstyle="input-box"
                   // id="transactionPasswordInput"
+                  textAlign="left" 
                 />
               </Col>
             </Row>

@@ -52,18 +52,32 @@ const SelectSearch = (props: any) => {
           styles={{
             control: (baseStyles, state) => ({
               ...baseStyles,
-              // borderColor: state.isFocused ? "grey" : "red",
-              // minHeight: 20,
-              // maxHeight: "20px",
+            
             }),
+         
+
+            menu: (provided) => ({
+              ...provided,
+              maxHeight: "72vh", 
+              overflowY: "auto", 
+              fontSize:"14px"
+            }),
+            menuList: (provided) => ({
+              ...provided,
+              maxHeight: "72vh", 
+              fontSize:"14px"
+            }),
+      
+         
+            
             dropdownIndicator: (provided, state) => ({
               ...provided,
               color: state.isFocused ? "#00000" : "#00000",
             }),
           }}
           inputValue={inputValue}
-          minMenuHeight={20}
-          maxMenuHeight={200}
+          minMenuHeight={100}
+          maxMenuHeight={600}
           className={`selectSearch ${filedClass}`}
           value={value}
           defaultValue={defaultValue}

@@ -4,6 +4,7 @@ import { reportListReducer } from "./reportList";
 import { bettListReducer } from "./betListSlice";
 import { matchListReducer } from "./matchListSlice";
 import { placedBetsReducer } from "./bets";
+import { marketAnalysisReducer } from "./marketAnalysisSlice";
 
 export const matchReducer = combineReducers({
   sidebarList: sidebarListReducer,
@@ -11,4 +12,5 @@ export const matchReducer = combineReducers({
   bettListSlice: bettListReducer,
   matchListSlice: matchListReducer,
   placeBets: placedBetsReducer,
+  marketAnalysis: marketAnalysisReducer,
 });

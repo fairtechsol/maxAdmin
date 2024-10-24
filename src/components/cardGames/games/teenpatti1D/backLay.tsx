@@ -18,7 +18,7 @@ const BackLay = ({ data, odds }: any) => {
           className="w-80 d-flex flex-row gap-5 align-items-center justify-content-between mt-1 px-2"
           style={{ height: "30px", backgroundColor: "#ddd" }}
         >
-          <span className="title-14 f-bold">{odds?.[0]?.nation}</span>
+          <span className="title-14 w-100 f-bold">{odds?.[0]?.nation}</span>
           <div
             className="d-flex flex-row gap-2 position-relative justify-content-between"
             style={{ width: "30%" }}

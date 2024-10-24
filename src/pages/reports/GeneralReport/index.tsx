@@ -18,9 +18,6 @@ interface Column {
 
 // Example usage
 const columns: Column[] = [
-  { id: "sr", label: "Sr No" },
-  { id: "name", label: "Name" },
-  { id: "bl", label: "Amount" },
   { id: "srNo", label: "Sr No." },
   { id: "userName", label: "Name" },
   { id: "amount", label: "Amount" },
@@ -124,12 +121,12 @@ const GeneralReport = () => {
             </tr>
           ))}
         <tr>
-          <td></td>
+          {/* <td></td>
           <td>General Total</td>
           <td>0</td>
           <td></td>
-          <td>General Total</td>
-          <td>
+          <td>General Total</td> */}
+          {/* <td>
             {gameGeneralList?.usersData?.reduce((acc: any, user: any) => {
               return (
                 acc +
@@ -137,7 +134,7 @@ const GeneralReport = () => {
                 (user?.creditRefrence || 0)
               );
             }, 0)}
-          </td>
+          </td> */}
         </tr>
       </CustomTable>
     </div>

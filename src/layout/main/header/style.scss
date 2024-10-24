@@ -1,0 +1,68 @@
+/* Custom styles for the Select component */
+.my-custom-select {
+    //width: 160px; /* Set the width of the select box */
+    border: none; /* Remove border to eliminate the line */
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: none;
+}
+
+/* Control styling */
+.my-custom-select .select__control {
+    border: none; /* Remove border to eliminate the line */
+    padding: 0px 12px;
+}
+
+/* Placeholder styling */
+.my-custom-select .select__placeholder {
+    color: #d3d3d3; /* Lighter color for the placeholder */
+    font-size: 14px; /* Font size for the placeholder */
+}
+
+/* Input styling */
+.my-custom-select .select__input {
+    padding: 8px 10px;
+    border: none;
+    background: transparent;
+}
+
+/* Dropdown indicator styling */
+.my-custom-select .select__dropdown-indicator {
+    color: #495057; /* Color for the dropdown indicator */
+}
+
+/* Menu styling */
+.my-custom-select .select__menu {
+    max-height: 200px; /* Max height for dropdown */
+    overflow-y: auto;
+    border: 1px solid #ced4da; /* Border for dropdown */
+    border-radius: 5px;
+    background-color: #fff; /* Background color for dropdown */
+    z-index: 1000; /* Ensure dropdown appears above other content */
+}
+
+/* Option styling */
+.my-custom-select .select__option {
+    padding: 10px 12px; /* Padding for options */
+    color: #495057; /* Color for options */
+    cursor: pointer; /* Cursor style for options */
+}
+
+.my-custom-select .select__option:hover {
+    background-color: #f1f1f1; /* Hover effect for options */
+}
+
+/* Additional styles to ensure consistency */
+.my-custom-select * {
+    box-sizing: border-box; /* Ensures consistent box-sizing */
+}
+.css-1u9des2-indicatorSeparator {
+    -webkit-align-self: stretch;
+    -ms-flex-item-align: stretch;
+    align-self: stretch;
+    width: 0px !important;
+    background-color:#fff !important;
+    margin-bottom: 8px;
+    margin-top: 8px;
+    box-sizing: border-box;
+}

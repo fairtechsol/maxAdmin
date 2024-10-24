@@ -80,7 +80,7 @@ const ChangePassword = () => {
               required={true}
               id={"newPassword"}
               title={"New Password"}
-              placeholder={"New Password"}
+              placeholder={""}
               type={"password"}
               customstyle={"mb-3"}
               {...getFieldProps("newPassword")}
@@ -96,7 +96,7 @@ const ChangePassword = () => {
               required={true}
               id={"confirmPassword"}
               title={"Confirm Password"}
-              placeholder={"Confirm Password"}
+              placeholder={""}
               type={"password"}
               customstyle={"mb-3"}
               {...getFieldProps("confirmPassword")}
@@ -112,7 +112,7 @@ const ChangePassword = () => {
               required={true}
               id={"transactionPassword"}
               title={"Transaction Password"}
-              placeholder={"Transaction Password"}
+              placeholder={""}
               type={"password"}
               customstyle={"mb-3"}
               {...getFieldProps("transactionPassword")}

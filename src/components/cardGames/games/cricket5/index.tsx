@@ -79,7 +79,7 @@ const Cricket5Component = () => {
               </Col>
               <Col>
                 <div className="casino-title" style={{ position: "relative" }}>
-                  <span>Rules</span>
+                  {/* <span>Rules</span> */}
                 </div>
                 <div className="table-responsive rules-table d-flex lh-1">
                   {cardData?.map((teamData, index) => (

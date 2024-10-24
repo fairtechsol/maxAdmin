@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import GameHeader from "../../components/game/gameHeader";
 import { MatchType } from "../../utils/enum";
@@ -17,11 +17,16 @@ import OtherUserBets from "../../components/otherGames/userBets";
 import BetTable from "../../components/otherGames/betTable";
 import LiveStreamComponent from "../../components/commonComponent/liveStreamComponent";
 import { liveStreamUrl } from "../../utils/Constants";
+import CustomBreadcrumb from "../../components/commonComponent/breadcrumb";
 
 const OtherGamesDetail = () => {
   const dispatch: AppDispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
+  const [marketToShow, setMarketToShow] = useState<any>("");
+  const { breadCrumb } = useSelector(
+    (state: RootState) => state.match.sidebarList
+  );
 
   const { id, marketId } = useParams();
 
@@ -114,7 +119,7 @@ const OtherGamesDetail = () => {
     for (const marketType in matchDetail) {
       const marketValue: any = matchDetail[marketType];
       if (typeof marketValue === "object" && marketValue !== null) {
-        if (Array.isArray(marketValue) && marketType !== "quickBookmaker") {
+        if (Array.isArray(marketValue)) {
           formattedArray.push(...marketValue.map((market: any) => market));
         } else {
           if (marketValue?.id) {
@@ -214,10 +219,12 @@ const OtherGamesDetail = () => {
       const handleVisibilityChange = () => {
         if (document.visibilityState === "visible") {
           if (id) {
-            dispatch(
-              otherMatchDetailAction({ matchId: id, matchType: "football" })
-            );
+            // dispatch(
+            //   otherMatchDetailAction({ matchId: id, matchType: "football" })
+            // );
             dispatch(getPlacedBets(id));
+            socketService.match.joinMatchRoom(id, "superAdmin");
+            socketService.match.getMatchRates(id, updateMatchDetailToRedux);
           }
         } else if (document.visibilityState === "hidden") {
           socketService.match.leaveMatchRoom(id);
@@ -237,17 +244,28 @@ const OtherGamesDetail = () => {
     }
   }, []);
 
+  useEffect(() => {
+    setMarketToShow(marketId);
+  }, []);
+
   return (
     <div className="gamePage">
       <Container fluid>
         <GameHeader />
-        <NavComponent matchDetail={matchDetails} />
+        <NavComponent
+          matchDetail={matchDetails}
+          setMarketToShow={setMarketToShow}
+          marketToShow={marketToShow}
+        />
         {/* table start here */}
         <div className="gamePage-table">
           <Row className="no-gutters">
             <Col md={8}>
+              <CustomBreadcrumb
+                items={[{ name: breadCrumb?.matchName || matchDetails?.title }]}
+              />
               {updatedMarket
-                ?.filter((item: any) => item?.id === marketId)
+                ?.filter((item: any) => item?.id === marketToShow)
                 ?.map((item: any) => (
                   <Col md={12} key={item?.id}>
                     <BetTable
@@ -255,6 +273,12 @@ const OtherGamesDetail = () => {
                       type={
                         ["other", "tournament"]?.includes(item.type)
                           ? MatchType.OTHER
+                          : [
+                              "quickbookmaker1",
+                              "quickbookmaker2",
+                              "quickbookmaker3",
+                            ]?.includes(item.type)
+                          ? MatchType.BOOKMAKER
                           : MatchType.MATCH_ODDS
                       }
                       data={item}

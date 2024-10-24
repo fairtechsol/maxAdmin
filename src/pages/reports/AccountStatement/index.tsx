@@ -21,8 +21,10 @@ import {
 import { AppDispatch, RootState } from "../../../store/store";
 import {
   ApiConstants,
+  card2ConstantsAccountStatement,
   cardConstantsAccountStatement,
 } from "../../../utils/Constants";
+// import isMobile from "../../../utils/screenDimension";
 
 interface Column {
   id: string;
@@ -35,7 +37,7 @@ const columns: Column[] = [
   { id: "credit", label: "Credit" },
   { id: "debit", label: "Debit" },
   { id: "closing", label: "Closing" },
-  { id: "description", label: "Remarks" },
+  { id: "description", label: "Description" },
   { id: "fromto", label: "Fromto" },
 ];
 
@@ -54,7 +56,7 @@ let sortConstant: any = {
 
 const AccountStatement = () => {
   const dispatch: AppDispatch = useDispatch();
-
+  const [excel, setExcel] = useState(false);
   const [dateFrom, setDateFrom] = useState<any>();
   const [dateTo, setDateTo] = useState<any>();
   const [firstTime, setFirstTime] = useState(false);
@@ -99,10 +101,12 @@ const AccountStatement = () => {
 
   const aaccountTypeOptions: Option[] = [
     { value: "all", label: "All" },
-    { value: "balanceReport", label: "Balance Report" },
-    { value: "gameReport", label: "Game Report" },
+    { value: "balanceReport", label: "Deposite/Withdraw Report" },
+    { value: "gameReport", label: "Sport Report" },
+    { value: "casino",
+      label: "Casino Reports",}
   ];
-
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 1199);
   const handleAccountTypeChange = (selectedOption: any) => {
     setSelectedOption1(selectedOption);
     if (
@@ -119,6 +123,11 @@ const AccountStatement = () => {
       (selectedOption as Option).value === "gameReport"
     ) {
       setGameNameOptions(cardConstantsAccountStatement);
+    } else if (
+      selectedOption &&
+      (selectedOption as Option).value === "casino"
+    ) {
+      setGameNameOptions(card2ConstantsAccountStatement);
     } else if (selectedOption && (selectedOption as Option).value === "all") {
       setGameNameOptions([{ value: "all", label: "All" }]);
     } else {
@@ -157,6 +166,7 @@ const AccountStatement = () => {
   const handleSubmit = (e: any) => {
     try {
       e.preventDefault();
+      setExcel(true);
       let filter = "";
       if (dateFrom && dateTo) {
         filter += `&createdAt=between${moment(new Date(dateFrom))?.format(
@@ -389,12 +399,26 @@ const AccountStatement = () => {
     setDateTo(formattedCurrentDate);
   }, []);
 
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 1199);
+    };
+    // Add event listener to update isMobile on window resize
+    window.addEventListener("resize", handleResize);
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+
   return (
     <div className="p-2 pt-0">
       <h5 className="title-22 fw-normal">Account Statement</h5>
       <Form onSubmit={handleSubmit}>
         <Row>
-          <Col md={2}>
+          <Col md={isMobile ? 12 : 2 }>
             <SelectSearch
               defaultValue="All"
               // options={options}
@@ -405,10 +429,10 @@ const AccountStatement = () => {
               options={aaccountTypeOptions}
             />
           </Col>
-          <Col md={2}>
+          <Col md={isMobile ? 12 : 2 }>
             <SelectSearch
               defaultValue="All"
-              label={"Game Name"}
+              label={aaccountTypeValues?.value==="gameReport"?"Sports List":aaccountTypeValues?.value==="casino"?"Casino List":"Game Name"}
               // options={options}
               placeholder={"All"}
               value={gameNameValues}
@@ -416,7 +440,7 @@ const AccountStatement = () => {
               options={gameNameOptions}
             />
           </Col>
-          <Col md={2}>
+          <Col md={isMobile ? 12 : 2 }>
             <SelectSearch
               label={"Search By Client Name"}
               inputValue={inputValue}
@@ -441,7 +465,7 @@ const AccountStatement = () => {
               }}
             />
           </Col>
-          <Col md={2}>
+          <Col md={isMobile ? 12 : 2 }>
             <CustomInput
               title={"From"}
               placeholder={""}
@@ -454,7 +478,7 @@ const AccountStatement = () => {
               value={dateFrom} 
             />
           </Col>
-          <Col md={2}>
+          <Col md={isMobile ? 12 : 2 }>
             <CustomInput
               title={"To"}
               placeholder={""}
@@ -465,7 +489,9 @@ const AccountStatement = () => {
               value={dateTo} 
             />
           </Col>
-          <Col md={2}>
+          
+        </Row>
+        <Col md={2}>
             <Form.Label className="invisible d-block">dasd</Form.Label>
             <CustomButton
               type={"submit"}
@@ -476,7 +502,6 @@ const AccountStatement = () => {
               Load
             </CustomButton>
           </Col>
-        </Row>
       </Form>
       <CustomTable
         striped
@@ -491,7 +516,7 @@ const AccountStatement = () => {
             : 0
         }
         setTableConfig={setTableConfig}
-        enablePdfExcel={true}
+        enablePdfExcel={excel}
         handleReportExport={handleReportExport}
         tableConfig={tableConfig}
         currentPage={currentPage}

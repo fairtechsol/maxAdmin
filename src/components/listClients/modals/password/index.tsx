@@ -58,7 +58,7 @@ const Password = ({ userData, setShow }: any) => {
           <div className="input-container">
             <Row>
               <Col sm={4}>
-                <span>New Password</span>
+                <span style={{fontSize:"0.9rem"}}>New Password</span>
               </Col>
               <Col sm={8}>
                 <CustomInput
@@ -69,6 +69,7 @@ const Password = ({ userData, setShow }: any) => {
                   {...getFieldProps("newPassword")}
                   touched={touched.newPassword}
                   errors={errors.newPassword}
+                  textAlign="left" 
                 />
               </Col>
             </Row>
@@ -76,7 +77,7 @@ const Password = ({ userData, setShow }: any) => {
           <div className="input-container mt-3">
             <Row>
               <Col sm={4}>
-                <span>Confirm Password</span>
+                <span style={{fontSize:"0.9rem"}}>Confirm Password</span>
               </Col>
               <Col sm={8}>
                 <CustomInput
@@ -87,6 +88,7 @@ const Password = ({ userData, setShow }: any) => {
                   {...getFieldProps("confirmPassword")}
                   touched={touched.confirmPassword}
                   errors={errors.confirmPassword}
+                  textAlign="left" 
                 />
               </Col>
             </Row>
@@ -94,7 +96,7 @@ const Password = ({ userData, setShow }: any) => {
           <div className="input-container mt-3">
             <Row>
               <Col sm={4}>
-                <span>Transaction Password</span>
+                <span style={{fontSize:"0.9rem"}}>Transaction Password</span>
               </Col>
               <Col sm={8}>
                 <CustomInput
@@ -105,6 +107,7 @@ const Password = ({ userData, setShow }: any) => {
                   {...getFieldProps("transactionPassword")}
                   touched={touched.transactionPassword}
                   errors={errors.transactionPassword}
+                  textAlign="left" 
                 />
               </Col>
             </Row>

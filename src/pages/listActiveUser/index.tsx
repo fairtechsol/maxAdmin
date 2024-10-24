@@ -17,6 +17,7 @@ import {
 import { AppDispatch, RootState } from "../../store/store";
 import { ApiConstants } from "../../utils/Constants";
 import { formatToINR } from "../../helpers";
+import SearchBox from "../../components/commonComponent/table/tableUtils/search";
 // Example usage
 const columns: Column[] = [
   { id: "user.userName", label: "User Name", colSpan: 2 },
@@ -30,7 +31,7 @@ const columns: Column[] = [
   { id: "exposureLimit", label: "Exposure Limit" },
   { id: "default", label: "Default%" },
   { id: "user.roleName", label: "Account Type" },
-  { id: "casino", label: "Casino Total" },
+  // { id: "casino", label: "Casino Total" },
   { id: "actions", label: "Actions" },
 ];
 
@@ -183,7 +184,11 @@ const ListActiveInactiveUser: React.FC = () => {
 
     setActiveUser(array);
   };
-
+  const handleSearch = (keyword: string) => {
+    setTableConfig((prev: any) => {
+      return { ...prev, keyword: keyword };
+    });
+  };
   return (
     <>
       <Container className="listClient listActiveUser" fluid>
@@ -191,7 +196,7 @@ const ListActiveInactiveUser: React.FC = () => {
           <Col>
             <p className="title-22">Account List</p>
             <div className="d-flex flex-row mb-1">
-              <span className="title-12">Show</span>
+              <span className="title-12 me-1">Show</span>
               <select name="cars" id="cars" className="title-12" onChange={(e)=>setValue(e.target.value)}>
                 <option value={25}>25</option>
                 <option value={50}>50</option>
@@ -201,17 +206,18 @@ const ListActiveInactiveUser: React.FC = () => {
                 <option value={750}>750</option>
                 <option value={1000}>1000</option>
               </select>
-              <span className="title-12">Entries</span>{" "}
+              <span className="title-12 ms-1">entries</span>{" "}
             </div>
           </Col>
-          <Col>
+          <Col className="d-flex flex-column align-items-end">
             <CustomButton
-              className="float-end"
+              className="float-end mb-2"
+              style={{width:"100px"}}
               onClick={() => navigate(`/admin/add-account`)}
             >
               Add Account
             </CustomButton>
-           
+            <SearchBox value={tableConfig?.keyword} onSearch={handleSearch} />
           </Col>
         </Row>
         <Row>
@@ -266,7 +272,6 @@ const ListActiveInactiveUser: React.FC = () => {
                     itemCount={userList && userList?.count}
                     setTableConfig={setTableConfig}
                     enablePdfExcel={true}
-                    isSearch
                     isSort={false}
                     isPagination={false}
                     sortData={sortData}
@@ -282,6 +287,7 @@ const ListActiveInactiveUser: React.FC = () => {
                             colSpan={index === 0 ? 2 : undefined}
                             key={index}
                             className=" fw-bold text-end"
+                            style={{ ...([6,7].includes(index)?{padding: "0px 17px"}:{})}}
                           >
                             {/* {index === 1 &&
                               totalBalance &&
@@ -419,7 +425,7 @@ const ListActiveInactiveUser: React.FC = () => {
                             </td>
                             <td>0</td>
                             <td>{roleName}</td>
-                            <td className="text-end">0</td>
+                            {/* <td className="text-end">0</td> */}
                             <td>
                               <div className="d-flex gap-1 border-right-0 border-left-0">
                                 {type ? (
@@ -514,7 +520,6 @@ const ListActiveInactiveUser: React.FC = () => {
                     itemCount={userList && userList?.count}
                     setTableConfig={setTableConfig}
                     enablePdfExcel={true}
-                    isSearch
                     isPagination={false}
                     sortData={sortData}
                     handleReportExport={handleReportExport}

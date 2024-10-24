@@ -5,9 +5,7 @@ import { profitLossDataForMatchConstants } from "../../../utils/Constants";
 import isMobile from "../../../utils/screenDimension";
 import "./style.scss";
 
-const ManualMarket = ({ title, data, detail }:any) => {
-  
-
+const ManualMarket = ({ title, data, detail }: any) => {
   return (
     <>
       <div
@@ -25,7 +23,11 @@ const ManualMarket = ({ title, data, detail }:any) => {
         <div className="manualBackLayTab">
           <div className="manualMinMaxBox">
             <span className="manualMinMax">
-            {data?.minBet===data?.maxBet? `Max:${formatNumber(data?.maxBet)}` :`Min:${formatNumber(data?.minBet)} Max:${formatNumber(data?.maxBet)}`}
+              {data?.minBet === data?.maxBet
+                ? `Max:${formatNumber(data?.maxBet)}`
+                : `Min:${formatNumber(data?.minBet)} Max:${formatNumber(
+                    data?.maxBet
+                  )}`}
             </span>
           </div>
           <div
@@ -46,7 +48,7 @@ const ManualMarket = ({ title, data, detail }:any) => {
             >
               <span className={`f-size16 manualBackTxt`}>Lay</span>
             </div>
-             <div className="manualEmptyBox"></div>
+            <div className="manualEmptyBox"></div>
           </div>
         </div>
 
@@ -82,8 +84,7 @@ const ManualMarket = ({ title, data, detail }:any) => {
                         "_" +
                         detail?.id
                     ]
-                  )  >
-                  0
+                  ) > 0
                     ? "color-green"
                     : "color-red"
                 } ${isMobile ? "fbold title-12" : "fbold title-14"}`}
@@ -105,10 +106,9 @@ const ManualMarket = ({ title, data, detail }:any) => {
                             "_" +
                             detail?.id
                         ]
-                      ) 
+                      ).toFixed(2)
                   : ""}
               </span>
-              
             </div>
           </div>
           <div
@@ -125,58 +125,62 @@ const ManualMarket = ({ title, data, detail }:any) => {
               </div>
             )}
             {/* {!isMobile && ( */}
-              <div
-                className="manualBackBox back3Background"
-               
-              >
-                <span className={`rateFont manualRate1Box`}>
-                  {data?.backTeamA != 0 ? data?.backTeamA - 2 >0 ? data?.backTeamA - 2:"-" : "-"}
-                </span>
-              </div>
-            
+            <div className="manualBackBox back3Background">
+              <span className={`rateFont manualRate1Box`}>
+                {data?.backTeamA != 0
+                  ? data?.backTeamA - 2 > 0
+                    ? data?.backTeamA - 2
+                    : "-"
+                  : "-"}
+              </span>
+            </div>
+
             {/* {!isMobile && ( */}
-              <div
-                className="manualBackBox back2Background"
-               
-              >
-                <span className={`rateFont manualRate1Box`}>
-                  {data?.backTeamA != 0 ?data?.backTeamA - 1 >0 ? data?.backTeamA - 1:"-" : "-"}
-                </span>
-              </div>
-            
-            <div
-              className="manualBackBox back1Background"
-             
-            >
+            <div className="manualBackBox back2Background">
+              <span className={`rateFont manualRate1Box`}>
+                {data?.backTeamA != 0
+                  ? data?.backTeamA - 1 > 0
+                    ? data?.backTeamA - 1
+                    : "-"
+                  : "-"}
+              </span>
+            </div>
+
+            <div className="manualBackBox back1Background">
               <span className={`rateFont manualRate1Box`}>
                 {data?.backTeamA != 0 ? data?.backTeamA : "-"}
               </span>
             </div>
-            <div
-              className="manualBackBox lay1Background"
-             
-            >
+            <div className="manualBackBox lay1Background">
               <span className={`rateFont manualRate1Box`}>
                 {data?.layTeamA != 0 ? data?.layTeamA : "-"}
               </span>
             </div>
             {/* {!isMobile && ( */}
-              <div
-                className="manualBackBox lay2Background"
-              >
-                <span className={`rateFont manualRate1Box`}>
-                  {data?.layTeamA != 0 ? detail?.rateThan100? data?.layTeamA + 1 : data?.layTeamA + 1>100?"-": data?.layTeamA + 1 : "-"}
-                </span>
-              </div>
-           
+            <div className="manualBackBox lay2Background">
+              <span className={`rateFont manualRate1Box`}>
+                {data?.layTeamA != 0
+                  ? detail?.rateThan100
+                    ? data?.layTeamA + 1
+                    : data?.layTeamA + 1 > 100
+                    ? "-"
+                    : data?.layTeamA + 1
+                  : "-"}
+              </span>
+            </div>
+
             {/* {!isMobile && ( */}
-              <div
-                className="manualBackBox lay3Background">
-                <span className={`rateFont manualRate1Box`}>
-                  {data?.layTeamA != 0 ? detail?.rateThan100? data?.layTeamA + 2 : data?.layTeamA + 2>100?"-": data?.layTeamA + 2 : "-"}
-                </span>
-              </div>
-           
+            <div className="manualBackBox lay3Background">
+              <span className={`rateFont manualRate1Box`}>
+                {data?.layTeamA != 0
+                  ? detail?.rateThan100
+                    ? data?.layTeamA + 2
+                    : data?.layTeamA + 2 > 100
+                    ? "-"
+                    : data?.layTeamA + 2
+                  : "-"}
+              </span>
+            </div>
           </div>
         </div>
 
@@ -211,8 +215,7 @@ const ManualMarket = ({ title, data, detail }:any) => {
                         "_" +
                         detail?.id
                     ]
-                  )  >
-                  0
+                  ) > 0
                     ? "color-green"
                     : "color-red"
                 } ${isMobile ? "fbold title-12" : "fbold title-14"}`}
@@ -234,10 +237,9 @@ const ManualMarket = ({ title, data, detail }:any) => {
                             "_" +
                             detail?.id
                         ]
-                      ) 
+                      ).toFixed(2)
                   : ""}
               </span>
-             
             </div>
           </div>
           <div
@@ -254,61 +256,62 @@ const ManualMarket = ({ title, data, detail }:any) => {
               </div>
             )}
             {/* {!isMobile && ( */}
-              <div
-                className="manualBackBox back3Background"
-                
-              >
-                <span className={`rateFont manualRate1Box`}>
-                  {data?.backTeamB != 0 ? data?.backTeamB - 2 >0 ? data?.backTeamB - 2:"-" : "-"}
-                </span>
-              </div>
-            
-             {/* {!isMobile && ( */}
-              <div
-                className="manualBackBox back2Background"
-                
-              >
-                <span className={`rateFont manualRate1Box`}>
-                  {data?.backTeamB != 0 ? data?.backTeamB - 1 >0 ? data?.backTeamB - 1:"-" : "-"}
-                </span>
-              </div>
-            
-            <div
-              className="manualBackBox back1Background"
-             
-            >
+            <div className="manualBackBox back3Background">
+              <span className={`rateFont manualRate1Box`}>
+                {data?.backTeamB != 0
+                  ? data?.backTeamB - 2 > 0
+                    ? data?.backTeamB - 2
+                    : "-"
+                  : "-"}
+              </span>
+            </div>
+
+            {/* {!isMobile && ( */}
+            <div className="manualBackBox back2Background">
+              <span className={`rateFont manualRate1Box`}>
+                {data?.backTeamB != 0
+                  ? data?.backTeamB - 1 > 0
+                    ? data?.backTeamB - 1
+                    : "-"
+                  : "-"}
+              </span>
+            </div>
+
+            <div className="manualBackBox back1Background">
               <span className={`rateFont manualRate1Box`}>
                 {data?.backTeamB != 0 ? data?.backTeamB : "-"}
               </span>
             </div>
-            <div
-              className="manualBackBox lay1Background"
-             
-            >
+            <div className="manualBackBox lay1Background">
               <span className={`rateFont manualRate1Box`}>
                 {data?.layTeamB != 0 ? data?.layTeamB : "-"}
               </span>
             </div>
-             {/* {!isMobile && ( */}
-              <div
-                className="manualBackBox lay2Background"
-                
-              >
-                <span className={`rateFont manualRate1Box`}>
-                  {data?.layTeamB != 0 ? detail?.rateThan100 ? data?.layTeamB + 1 : data?.layTeamB + 1>100?"-": data?.layTeamB + 1 : "-"}
-                </span>
-              </div>
-            
-             {/* {!isMobile && ( */}
-              <div
-                className="manualBackBox lay3Background"
-               
-              >
-                <span className={`rateFont manualRate1Box`}>
-                  {data?.layTeamB != 0 ? detail?.rateThan100 ? data?.layTeamB + 2 : data?.layTeamB + 2>100 ? "-" : data?.layTeamB + 2 : "-"}
-                </span>
-              </div>
-            
+            {/* {!isMobile && ( */}
+            <div className="manualBackBox lay2Background">
+              <span className={`rateFont manualRate1Box`}>
+                {data?.layTeamB != 0
+                  ? detail?.rateThan100
+                    ? data?.layTeamB + 1
+                    : data?.layTeamB + 1 > 100
+                    ? "-"
+                    : data?.layTeamB + 1
+                  : "-"}
+              </span>
+            </div>
+
+            {/* {!isMobile && ( */}
+            <div className="manualBackBox lay3Background">
+              <span className={`rateFont manualRate1Box`}>
+                {data?.layTeamB != 0
+                  ? detail?.rateThan100
+                    ? data?.layTeamB + 2
+                    : data?.layTeamB + 2 > 100
+                    ? "-"
+                    : data?.layTeamB + 2
+                  : "-"}
+              </span>
+            </div>
           </div>
         </div>
 
@@ -341,8 +344,7 @@ const ManualMarket = ({ title, data, detail }:any) => {
                           "_" +
                           detail?.id
                       ]
-                    )  >
-                    0
+                    ) > 0
                       ? "color-green"
                       : "color-red"
                   } ${isMobile ? "fbold title-12" : "fbold title-14"}`}
@@ -364,10 +366,9 @@ const ManualMarket = ({ title, data, detail }:any) => {
                               "_" +
                               detail?.id
                           ]
-                        )
+                        ).toFixed(2)
                     : ""}
                 </span>
-              
               </div>
             </div>
             <div
@@ -384,59 +385,60 @@ const ManualMarket = ({ title, data, detail }:any) => {
                 </div>
               )}
               {/* {!isMobile && ( */}
-                <div
-                  className="manualBackBox back3Background"
-                 
-                >
-                  <span className={`rateFont manualRate1Box`}>
-                    {data?.backTeamC != 0 ? data?.backTeamC - 2 >0 ? data?.backTeamC - 2:"-" : "-"}
-                  </span>
-                </div>
-              
+              <div className="manualBackBox back3Background">
+                <span className={`rateFont manualRate1Box`}>
+                  {data?.backTeamC != 0
+                    ? data?.backTeamC - 2 > 0
+                      ? data?.backTeamC - 2
+                      : "-"
+                    : "-"}
+                </span>
+              </div>
+
               {/* {!isMobile && ( */}
-                <div
-                  className="manualBackBox back2Background"
-                 
-                >
-                  <span className={`rateFont manualRate1Box`}>
-                    {data?.backTeamC != 0 ? data?.backTeamC - 1 >0 ? data?.backTeamC - 1:"-" : "-"}
-                  </span>
-                </div>
-              
-              <div
-                className="manualBackBox back1Background"
-                
-              >
+              <div className="manualBackBox back2Background">
+                <span className={`rateFont manualRate1Box`}>
+                  {data?.backTeamC != 0
+                    ? data?.backTeamC - 1 > 0
+                      ? data?.backTeamC - 1
+                      : "-"
+                    : "-"}
+                </span>
+              </div>
+
+              <div className="manualBackBox back1Background">
                 <span className={`rateFont manualRate1Box`}>
                   {data?.backTeamC != 0 ? data?.backTeamC : "-"}
                 </span>
               </div>
-              <div
-                className="manualBackBox lay1Background"
-               
-              >
+              <div className="manualBackBox lay1Background">
                 <span className={`rateFont manualRate1Box`}>
                   {data?.layTeamC != 0 ? data?.layTeamC : "-"}
                 </span>
               </div>
-                <div
-                  className="manualBackBox lay2Background"
-                 
-                >
-                  <span className={`rateFont manualRate1Box`}>
-                    {data?.layTeamC != 0 ? detail?.rateThan100 ? data?.layTeamC + 1 : data?.layTeamC + 1>100?"-": data?.layTeamC + 1 : "-"}
-                  </span>
-                </div>
-              
-                <div
-                  className="manualBackBox lay3Background"
-                 
-                >
-                  <span className={`rateFont manualRate1Box`}>
-                    {data?.layTeamC != 0 ? detail?.rateThan100 ? data?.layTeamC + 2 : data?.layTeamC + 2 > 100 ? "-" : data?.layTeamC + 2 : "-"}
-                  </span>
-                </div>
-              
+              <div className="manualBackBox lay2Background">
+                <span className={`rateFont manualRate1Box`}>
+                  {data?.layTeamC != 0
+                    ? detail?.rateThan100
+                      ? data?.layTeamC + 1
+                      : data?.layTeamC + 1 > 100
+                      ? "-"
+                      : data?.layTeamC + 1
+                    : "-"}
+                </span>
+              </div>
+
+              <div className="manualBackBox lay3Background">
+                <span className={`rateFont manualRate1Box`}>
+                  {data?.layTeamC != 0
+                    ? detail?.rateThan100
+                      ? data?.layTeamC + 2
+                      : data?.layTeamC + 2 > 100
+                      ? "-"
+                      : data?.layTeamC + 2
+                    : "-"}
+                </span>
+              </div>
             </div>
           </div>
         )}

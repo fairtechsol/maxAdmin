@@ -65,7 +65,7 @@ function BookmakerTable({
                     <div className="d-flex align-items-center justify-content-between w-100">
                       <span
                         className={`title-14 ${
-                          matchDetails?.teamRates?.[
+                          matchDetails?.profitLossDataMatch?.[
                             `team${item}Rate_${matchDetails?.id}`
                           ] < 0
                             ? "color-red"
@@ -73,7 +73,7 @@ function BookmakerTable({
                         }`}
                       >
                         {parseFloat(
-                          matchDetails?.teamRates?.[
+                          matchDetails?.profitLossDataMatch?.[
                             `team${item}Rate_${matchDetails?.id}`
                           ] ?? 0
                         ).toFixed(2)}
@@ -93,6 +93,7 @@ function BookmakerTable({
                           style={{ width: "60px" }}
                           key={index}
                           // customClass={`bookmaker-bet-place W-100`}
+                          customClass="match-odd-bet-place-box"
                           bgColor={`blue${index + 1}`}
                           rate={data[`backTeam${item}`] - 2 + index}
                           active={
@@ -108,6 +109,7 @@ function BookmakerTable({
                           key={index}
                           //     customClass={`bookmaker-bet-place  ""
                           // `}
+                          customClass="match-odd-bet-place-box"
                           bgColor={`red${index + 1}`}
                           rate={data[`layTeam${item}`] + index}
                           active={

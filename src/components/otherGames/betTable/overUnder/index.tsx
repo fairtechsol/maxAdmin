@@ -1,9 +1,9 @@
 import { Table } from "react-bootstrap";
-import isMobile from "../../../../utils/screenDimension";
 import {
   profitLossDataForMatchConstants,
   teamStatus,
 } from "../../../../utils/Constants";
+import isMobile from "../../../../utils/screenDimension";
 import BackLayBox from "../../../backLayBox";
 import BetStatusOverlay from "../../../commonComponent/betStatusOverlay";
 
@@ -83,12 +83,12 @@ function OverUnderMarket({
                         <span
                           className={`title-14  ${
                             indexes === 0
-                              ? matchDetails?.teamRates?.[
+                              ? matchDetails?.profitLossDataMatch?.[
                                   profitLossDataForMatchConstants[data?.type]?.A
                                 ] < 0
                                 ? "color-red"
                                 : "color-green"
-                              : matchDetails?.teamRates?.[
+                              : matchDetails?.profitLossDataMatch?.[
                                   profitLossDataForMatchConstants[data?.type]?.B
                                 ] < 0
                               ? "color-red"
@@ -97,12 +97,12 @@ function OverUnderMarket({
                         >
                           {indexes === 0
                             ? parseFloat(
-                                matchDetails?.teamRates?.[
+                                matchDetails?.profitLossDataMatch?.[
                                   profitLossDataForMatchConstants[data?.type]?.A
                                 ] ?? 0
                               ).toFixed(2)
                             : parseFloat(
-                                matchDetails?.teamRates?.[
+                                matchDetails?.profitLossDataMatch?.[
                                   profitLossDataForMatchConstants[data?.type]?.B
                                 ] ?? 0
                               ).toFixed(2)}

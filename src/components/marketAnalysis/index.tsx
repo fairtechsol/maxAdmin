@@ -1,105 +1,210 @@
 import React from "react";
-import "./style.scss";
-const MarketAnalysisComp = () => {
+import "./styles.scss";
+import moment from "moment-timezone";
+import { sessionBettingType } from "../../utils/Constants";
+
+const profitLossObj: Record<number, string> = {
+  0: "a",
+  1: "b",
+  2: "c",
+  3: "d",
+  4: "e",
+  5: "f",
+  6: "g",
+  7: "h",
+  8: "i",
+  9: "j",
+  10: "k",
+  11: "l",
+  12: "m",
+  13: "n",
+  14: "o",
+  15: "p",
+  16: "q",
+  17: "r",
+  18: "s",
+  19: "t",
+  20: "u",
+  21: "v",
+};
+
+const MarketAnalysisComp = ({ match }: any) => {
   return (
     <div className="market-analysis-container">
-      <div className="market-analysis-title">
-        <div>
-          <a
-            href="/admin/game/details/SeK7puKGhm+IDlF%2FzygDVg==/jampfwXl+NNXQsYvzyR81Q=="
-            className="ma-lin "
-            style={{ color: "#ffffff" }}
-          >
-            Sri Lanka v West Indies
-          </a>
-        </div>
-        <div>15/10/2024 19:00:00</div>
-      </div>
-      <div className="market-analysis-content">
-        <div className="row row5">
-          <div className="col-lg-4">
-            <div
-              data-simplebar="init"
-              className="market-analysis-content-detail"
+      <div className="market-analysis-container">
+        <div className="market-analysis-title">
+          <div>
+            <a
+              href={
+                match?.eventType === "cricket"
+                  ? `/admin/match_details/${match?.matchId}`
+                  : `/admin/other_match_detail/${match?.matchId}/${match?.betType?.match?.[0]?.betId}`
+              }
             >
-              <div className="simplebar-wrapper" style={{ margin: 0 }}>
-                <div className="simplebar-height-auto-observer-wrapper">
-                  <div className="simplebar-height-auto-observer"></div>
-                </div>
-                <div className="simplebar-mask">
-                  <div
-                    className="simplebar-offset"
-                    style={{ right: 0, bottom: 0 }}
-                  >
-                    <div
-                      className="simplebar-content-wrapper"
-                      //tabIndex="0"
-                      role="region"
-                      aria-label="scrollable content"
-                      style={{ height: "auto", overflow: "hidden" }}
-                    >
-                      <div className="simplebar-content" style={{ padding: 0 }}>
-                        <table className="table">
-                          <thead>
-                            <tr>
-                              <th colSpan={2}>khado</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td>6 over Khado run SL adv</td>
-                              <td className="text-right">0.00</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+              {match?.title}
+            </a>
           </div>
-          <div className="col-lg-4">
-            <div
-              data-simplebar="init"
-              className="market-analysis-content-detail"
-            >
-              <div className="simplebar-wrapper" style={{ margin: 0 }}>
-                <div className="simplebar-height-auto-observer-wrapper">
-                  <div className="simplebar-height-auto-observer"></div>
-                </div>
-                <div className="simplebar-mask">
-                  <div
-                    className="simplebar-offset"
-                    style={{ right: 0, bottom: 0 }}
-                  >
+          <div>{moment(match?.startAt).format("DD/MM/YYYY hh:mm:ss")}</div>
+        </div>
+        <div className="market-analysis-content">
+          <div className="row row5">
+            {Object.entries(match?.betType)?.map(([name, item]: any) => {
+              if (name === "match") {
+                return item?.map((items: any) => (
+                  <div className="col-lg-4">
                     <div
-                      className="simplebar-content-wrapper"
-                      //tabIndex="0"
-                      role="region"
-                      aria-label="scrollable content"
-                      style={{ height: "auto", overflow: "hidden" }}
+                      data-simplebar="init"
+                      className="market-analysis-content-detail"
                     >
-                      <div className="simplebar-content" style={{ padding: 0 }}>
+                      <div className="simplebar-wrapper">
                         <table className="table">
-                          <thead>
+                          <thead
+                            style={{
+                              backgroundColor: "rgba(0, 0, 0, 0.05)",
+                            }}
+                          >
                             <tr>
-                              <th colSpan={2}>meter</th>
+                              <th colSpan={2}>{items?.marketName}</th>
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <td>E Lewis meter adv</td>
-                              <td className="text-right">0.00</td>
-                            </tr>
+                            {items?.teams?.map((i: any, index: number) => (
+                              <tr key={index}>
+                                <td>{i}</td>
+                                <td className="text-end">
+                                  {parseFloat(
+                                    items?.profitLoss?.[profitLossObj[index]]
+                                  ).toFixed(2) || "0.00"}
+                                </td>
+                              </tr>
+                            ))}
                           </tbody>
                         </table>
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
+                ));
+              } else if (name === "cricketCasino") {
+                return item?.map((items: any) => (
+                  <div className="col-lg-4">
+                    <div
+                      data-simplebar="init"
+                      className="market-analysis-content-detail"
+                    >
+                      <div className="simplebar-wrapper">
+                        <table className="table">
+                          <thead>
+                            <tr>
+                              <th colSpan={2}>{items?.eventName}</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {Array.from({ length: 10 }, (_, i) => i)?.map(
+                              (i: any) => (
+                                <tr key={i}>
+                                  <td>{i} number</td>
+                                  <td className="text-end">
+                                    {parseFloat(
+                                      items?.profitLoss?.betPlaced?.[i]
+                                    ).toFixed(2) || "0.00"}
+                                  </td>
+                                </tr>
+                              )
+                            )}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                ));
+              } else {
+                return (
+                  <div className="col-lg-4">
+                    <div
+                      data-simplebar="init"
+                      className="market-analysis-content-detail"
+                    >
+                      <div className="simplebar-wrapper">
+                        <table className="table">
+                          <thead
+                            style={{
+                              backgroundColor: "rgba(0, 0, 0, 0.05)",
+                            }}
+                          >
+                            <tr>
+                              <th colSpan={2}>{name}</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {item?.map((items: any) => (
+                              <tr>
+                                <td>{items?.eventName}</td>
+                                <td className="text-end">
+                                  {Math.min(
+                                    ...Object.values(
+                                      items?.profitLoss?.betPlaced || {}
+                                    ).map((item: any) =>
+                                      [
+                                        sessionBettingType.ballByBall,
+                                        sessionBettingType.khado,
+                                        sessionBettingType.meter,
+                                        sessionBettingType.session,
+                                        sessionBettingType.overByOver,
+                                      ]?.includes(name)
+                                        ? +parseFloat(item?.profitLoss).toFixed(
+                                            2
+                                          )
+                                        : +parseFloat(item).toFixed(2)
+                                    ),
+                                    0
+                                  ) == 0
+                                    ? Math.max(
+                                        ...Object.values(
+                                          items?.profitLoss?.betPlaced || {}
+                                        ).map((item: any) =>
+                                          [
+                                            sessionBettingType.ballByBall,
+                                            sessionBettingType.khado,
+                                            sessionBettingType.meter,
+                                            sessionBettingType.session,
+                                            sessionBettingType.overByOver,
+                                          ]?.includes(name)
+                                            ? +parseFloat(
+                                                item?.profitLoss
+                                              ).toFixed(2)
+                                            : +parseFloat(item).toFixed(2)
+                                        ),
+                                        0
+                                      )
+                                    : Math.min(
+                                        ...Object.values(
+                                          items?.profitLoss?.betPlaced || {}
+                                        ).map((item: any) =>
+                                          [
+                                            sessionBettingType.ballByBall,
+                                            sessionBettingType.khado,
+                                            sessionBettingType.meter,
+                                            sessionBettingType.session,
+                                            sessionBettingType.overByOver,
+                                          ]?.includes(name)
+                                            ? +parseFloat(
+                                                item?.profitLoss
+                                              ).toFixed(2)
+                                            : +parseFloat(item).toFixed(2)
+                                        ),
+                                        0
+                                      ) || "0.00"}
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                );
+              }
+            })}
           </div>
         </div>
       </div>

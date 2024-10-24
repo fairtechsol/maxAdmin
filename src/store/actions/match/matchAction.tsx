@@ -44,7 +44,7 @@ export const betReportAccountList = createAsyncThunk<any, any>(
           requestData.page || 1
         }&limit=${requestData.limit || 15}&searchBy=${
           requestData.searchBy ?? ""
-        }&keyword=${requestData.keyword ?? ""}&isCurrentBets=${true}`
+        }&keyword=${requestData.keyword ?? ""}&isCurrentBets=${true}&marketBetType=${requestData.marketBetType ?? ""}`
       );
       if (resp?.data) {
         return resp?.data;
@@ -370,6 +370,21 @@ export const getCardReport = createAsyncThunk<any, any>(
     } catch (error: any) {
       const err = error as AxiosError;
       throw err;
+    }
+  }
+);
+
+export const getMarketAnalysis = createAsyncThunk<any, any>(
+  "/marketAnalysis",
+  async (_, thunkApi) => {
+    try {
+      const resp = await service.get(ApiConstants.MATCH.MARKETANALYSIS);
+      if (resp) {
+        return resp?.data;
+      }
+    } catch (error: any) {
+      const err = error as AxiosError;
+      return thunkApi.rejectWithValue(err.response?.status);
     }
   }
 );

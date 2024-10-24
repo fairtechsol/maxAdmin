@@ -5,7 +5,7 @@ const CardBox = ({ cardData, data }: any) => {
   const max = cardData?.[0]?.max;
   return (
     <>
-      <div className="cardContainer">
+      <div className="cardContainer-l">
         <div style={{ textAlign: "center" }}>
           <span style={{ fontSize: "16px", fontWeight: "bolder" }}>
             {parseFloat(

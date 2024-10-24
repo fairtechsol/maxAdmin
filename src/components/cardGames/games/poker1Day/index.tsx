@@ -59,17 +59,6 @@ const Poker1DayComponent = () => {
                   <span style={{ fontSize: "16px", fontWeight: "600" }}>
                     Poker 1 Day
                   </span>
-                  <span
-                    style={{
-                      fontSize: "14px",
-                      textDecoration: "underline",
-                      cursor: "pointer",
-                    }}
-                    onClick={() => setShow(true)}
-                  >
-                    {" "}
-                    RULES
-                  </span>
                 </div>
                 <span>
                   {dragonTigerDetail?.videoInfo

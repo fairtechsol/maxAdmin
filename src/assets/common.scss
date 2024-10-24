@@ -37,6 +37,27 @@ body table.table {
   top: 0;
   background-size: 100px 100px;
 }
+
+.logo-sec{
+  max-width: 100%;
+  max-height: 46px;
+  height: auto;
+  width: 245px;
+}
+
+@media (max-width: 1024px) {
+  .logo-sec {
+    width: 200px;
+    max-height: 40px; 
+  }
+}
+
+@media (max-width: 767px) {
+  .logo-sec {
+    width: 190px;
+    max-height: 40px;
+  }
+}
 // action buttons
 .actionBtn {
   padding: 0px 10px !important;
@@ -713,7 +734,7 @@ th {
 }
 
 .resultModalHeader .close {
-  background: #004a25;
+  background-color: #004a25;
   opacity: 1;
   color: #fff;
   border-radius: 50%;
@@ -723,15 +744,19 @@ th {
   height: 35px;
   font-size: 22px;
   padding: 0;
-  // margin: -2px -1rem -1rem auto;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1;
+  cursor: pointer;
 }
 
 .close {
-  float: right;
+  // float: right;
   font-size: 1.21875rem;
   font-weight: 600;
   line-height: 1;
-  // color: #000;
+  color: #000;
   text-shadow: 0 1px 0 #fff;
   opacity: 0.5;
 }
@@ -918,6 +943,10 @@ th {
   .rateBoxWidthKhado {
     width: 20% !important;
   }
+  .open3Patticards{
+    // flex-direction: column !important;
+    flex-wrap: nowrap;
+  }
 }
 
 /* Styles for width 760px to 1200px */
@@ -983,6 +1012,10 @@ th {
   }
   .sessionMinMaxFont{
     font-size: 9px !important;
+  }
+  .open3Patticards{
+    // flex-direction: column !important;
+    flex-wrap: nowrap;
   }
 }
 
@@ -1202,4 +1235,10 @@ th {
   justify-content: center;
   align-items: center;
   // cursor: pointer;
+}
+.nav-dropdown-dark-example {
+  // background-color: #004a25;
+  // border: 0;
+  // border-radius: 0;
+  // margin-top: 40px !important;
 }

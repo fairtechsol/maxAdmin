@@ -11,7 +11,6 @@ import {
   ball3,
   ball4,
   ball6,
-  ballByBall,
   ballW,
   cards32A,
   cards32B,
@@ -65,9 +64,11 @@ import {
   two2,
 } from "../../assets";
 import AndarBaharRules from "../../components/cardGames/games/abj2/rules";
+import AmarAkbarRules from "../../components/cardGames/games/amarAkbarAnthony/rules";
 import BaccaratRules from "../../components/cardGames/games/baccarat1/rules";
 import BaccaratRules2 from "../../components/cardGames/games/baccarat2/rules";
 import BallByBallRules from "../../components/cardGames/games/ballbyball/desktop/rules";
+import BollywoodTableGameRules from "../../components/cardGames/games/bollywoodTable/rules";
 import Card32ARules from "../../components/cardGames/games/card32A/rules";
 import CasinoRulesImage from "../../components/cardGames/games/casinoMeter/rules";
 import CasinoWarRules from "../../components/cardGames/games/casinoWar/rules";
@@ -128,6 +129,7 @@ export const ApiConstants = {
     MATCHDETAILS: "/match/",
     OTHERMATCHDETAILS: "/match/other/",
     CURRENTBET: "/bet",
+    MARKETANALYSIS: "/match/marketAnalysis",
   },
   BET: {
     PLACEBETSESSION: "bet/session",
@@ -176,6 +178,7 @@ export const cardUrl =
 
 export const liveStreamUrlCricket = "https://maxbet07.com/liveStreamCricket/";
 export const liveStreamUrl = "https://maxbet07.com/liveStream/";
+export const scoreBoardUrlMain = "https://maxbet07.com/scoreBoardPage/";
 
 // const oldVideoUrl = "https://video.proexch.in/route/?id="
 // use below baseUrl for live build
@@ -248,6 +251,7 @@ export const sessionBettingType = {
   oddEven: "oddEven",
   cricketCasino: "cricketCasino",
   khado: "khado",
+  meter: "meter",
 };
 
 export const matchBettingType = {
@@ -352,7 +356,7 @@ export const profitLossDataForMatchConstants = {
       prev[`setWinner${curr}`] = {
         A: `userTeamARateSetWinner${curr}`,
         B: `userTeamBRateSetWinner${curr}`,
-        C: `userTeamRateSetWinner${curr}`,
+        C: `userprofitLossDataMatchetWinner${curr}`,
       };
       return prev;
     },
@@ -471,7 +475,7 @@ export const card3 = {
     },
   ],
   sportCasino: [
-    { id: 15, url: "", imgSrc: ballByBall, name: "BALL BY BALL" },
+    // { id: 15, url: "", imgSrc: ballByBall, name: "BALL BY BALL" },
     {
       id: 16,
       url: "/admin/casinoDetail/superover",
@@ -901,7 +905,10 @@ export const cardConstantsAccountStatement = [
   { value: "cricket", label: "Cricket" },
   { value: "football", label: "Football" },
   { value: "horseRacing", label: "Horse Racing" },
-  { value: "greyHound", label: "Greyhound Racing" },
+  { value: "greyHound", label: "Greyhound Racing" }
+];
+export const card2ConstantsAccountStatement = [
+  { value: "all", label: "All" },
   { value: "dt20", label: "20-20 Dragon Tiger" }, //
   {
     value: "abj",
@@ -1024,7 +1031,6 @@ export const cardConstantsAccountStatement = [
     label: "Casino Meter",
   },
 ];
-
 export const cardGamesCasinoResult = [
   {
     value: "",
@@ -1215,4 +1221,6 @@ export const gameRulesComponents: any = {
   dt6: <DragonRules />,
   dt202: <DragonRules />,
   dt20: <DragonRules />,
+  aaa: <AmarAkbarRules />,
+  btable: <BollywoodTableGameRules />,
 };
