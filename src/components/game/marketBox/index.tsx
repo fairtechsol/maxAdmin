@@ -9,9 +9,7 @@ import { dummyArray, formatNumber } from "../../../helpers";
 import BetBox from "../betBox";
 // import { useSelector } from "react-redux";
 
-const MarketBox = ({ title, box, data, detail }:any) => {
-
-
+const MarketBox = ({ title, box, data, detail }: any) => {
   return (
     <>
       <div className="bookmakerContainer">
@@ -83,8 +81,7 @@ const MarketBox = ({ title, box, data, detail }:any) => {
                         "_" +
                         detail?.id
                     ]
-                  ) >
-                  0
+                  ) > 0
                     ? "color-green"
                     : "color-red"
                 } ${isMobile ? "fbold title-12" : "fbold title-14"}`}
@@ -106,10 +103,9 @@ const MarketBox = ({ title, box, data, detail }:any) => {
                             "_" +
                             detail?.id
                         ]
-                      )
+                      ).toFixed(2)
                   : ""}
               </span>
-            
             </div>
           </div>
           <div
@@ -203,8 +199,7 @@ const MarketBox = ({ title, box, data, detail }:any) => {
                         "_" +
                         detail?.id
                     ]
-                  )  >
-                  0
+                  ) > 0
                     ? "color-green"
                     : "color-red"
                 } ${isMobile ? "fbold title-12" : "fbold title-14"}`}
@@ -226,10 +221,9 @@ const MarketBox = ({ title, box, data, detail }:any) => {
                             "_" +
                             detail?.id
                         ]
-                      ) 
+                      ).toFixed(2)
                   : ""}
               </span>
-              
             </div>
           </div>
           <div
@@ -324,8 +318,7 @@ const MarketBox = ({ title, box, data, detail }:any) => {
                           "_" +
                           detail?.id
                       ]
-                    )  >
-                    0
+                    ) > 0
                       ? "color-green"
                       : "color-red"
                   } ${isMobile ? "fbold title-12" : "fbold title-14"}`}
@@ -347,10 +340,9 @@ const MarketBox = ({ title, box, data, detail }:any) => {
                               "_" +
                               detail?.id
                           ]
-                        ) 
+                        ).toFixed(2)
                     : ""}
                 </span>
-               
               </div>
             </div>
             <div
