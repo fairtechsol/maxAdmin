@@ -41,7 +41,9 @@ function MainLayout({ eventKey }: any) {
   }, [dispatch]);
 
   useEffect(() => {
-    setToggle((prev) => !prev);
+    if(toggle){
+      setToggle((prev) => !prev);
+    }
   }, [location.pathname]);
 
   useEffect(() => {
