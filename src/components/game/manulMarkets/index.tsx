@@ -5,7 +5,29 @@ import { profitLossDataForMatchConstants } from "../../../utils/Constants";
 import isMobile from "../../../utils/screenDimension";
 import "./style.scss";
 
-const ManualMarket = ({ title, data, detail }: any) => {
+const ManualMarket = ({ title, data, detail, teamARates, teamBRates }: any) => {
+  const bookRatioB: any = (() => {
+    if (teamARates === 0) {
+      return 0;
+    } else {
+      const bookRatio = teamBRates != 0 ? teamARates / teamBRates || 0 : 0;
+      const formattedRatio = Math.abs(bookRatio).toFixed(2);
+      return teamBRates < 0 ? `-${formattedRatio}` : formattedRatio;
+    }
+  })();
+
+  const bookRatioA: any = (() => {
+    if (teamARates === 0) {
+      return 0;
+    } else {
+      const bookRatio = teamARates != 0 ? teamBRates / teamARates || 0 : 0;
+      const formattedRatio = Math.abs(bookRatio).toFixed(2);
+      return teamARates < 0 ? `-${formattedRatio}` : formattedRatio;
+    }
+  })();
+
+  console.log(bookRatioA, bookRatioB, "");
+
   return (
     <>
       <div
@@ -75,7 +97,7 @@ const ManualMarket = ({ title, data, detail }: any) => {
                 ? detail?.teamA
                 : "Yes"}
             </span>
-            <div className="d-flex flex-row justify-content-between w-100">
+            <div className="d-flex flex-row w-100">
               <span
                 className={`${
                   parseFloat(
@@ -108,7 +130,12 @@ const ManualMarket = ({ title, data, detail }: any) => {
                         ]
                       ).toFixed(2)
                   : ""}
-              </span>
+              </span>{" "}
+              {![0, "0"].includes(bookRatioA) && (
+                <span className="bookRatio">
+                  {parseFloat(bookRatioA).toFixed(2)}
+                </span>
+              )}
             </div>
           </div>
           <div
@@ -206,7 +233,7 @@ const ManualMarket = ({ title, data, detail }: any) => {
                 ? detail?.teamB
                 : "No"}
             </span>
-            <div className="d-flex flex-row justify-content-between w-100">
+            <div className="d-flex flex-row w-100">
               <span
                 className={`${
                   parseFloat(
@@ -240,6 +267,11 @@ const ManualMarket = ({ title, data, detail }: any) => {
                       ).toFixed(2)
                   : ""}
               </span>
+              {![0, "0"].includes(bookRatioB) && (
+                <span className="bookRatio">
+                  {parseFloat(bookRatioB).toFixed(2)}
+                </span>
+              )}
             </div>
           </div>
           <div
@@ -335,7 +367,7 @@ const ManualMarket = ({ title, data, detail }: any) => {
                   ? `${detail?.teamC?.slice(0, 25)}...`
                   : detail?.teamC}
               </span>{" "}
-              <div className="d-flex flex-row justify-content-between w-100">
+              <div className="d-flex flex-row w-100">
                 <span
                   className={`${
                     parseFloat(
