@@ -27,12 +27,12 @@ const columns: Column[] = [
   { id: "eventType", label: "Event Type" },
   { id: "eventName", label: "Event Name" },
   { id: "user.userName", label: "Username" },
-  { id: "teamName", label: "Runner Name" },
-  //{ id: "betType", label: "Bet Type" },
+  { id: "marketType", label: "M Name" },
+  { id: "teamName", label: "Nation" },
   { id: "odds", label: "User Rate" },
   { id: "amount", label: "Amount" },
   { id: "createdAt", label: "Place Date" },
-  { id: "startAt", label: "Match Date" },
+  // { id: "startAt", label: "Match Date" },
 ];
 
 const options = [
@@ -143,8 +143,6 @@ const CurrentBets = () => {
     return item?.match?.startAt || item?.racingMatch?.startAt;
   };
 
-  console.log("ReportBetList", ReportBetList);
-  console.log("mapin", selectType2?.value);
   return (
     <div className="p-2 pt-0" >
       <h5 className="title-22 fw-normal">Current Bets</h5>
@@ -156,14 +154,14 @@ const CurrentBets = () => {
             <Row className="mb-4 d-flex align-items-center">
               <Col md={3}>
                 <SelectSearch2
-                  defaultValue={[selectType]}
+                  defaultValue={"PENDING"}
                   options={options}
                   label={"Choose Type"}
                   value={selectType}
                   onChange={handleType}
                 />
                 <SelectSearch3
-                  defaultValue={[selectType2]}
+                  defaultValue={"ALL"}
                   options={options2}
                   label={"Choose Type2"}
                   value={selectType2}
@@ -181,10 +179,10 @@ const CurrentBets = () => {
 
           <CustomTable
             customClass="commonTable reportTable"
-            striped
+            // striped
             columns={columns}
             isPagination={true}
-            isSort={true}
+            // isSort={true}
             isSearch={true}
             itemCount={
               ReportBetList && ReportBetList?.count > 0
@@ -220,7 +218,8 @@ const CurrentBets = () => {
                       className={isBackBet ? "back-border" : "lay-border"}
                     >
                       {columns.map((column: any, columnIndex: number) => (
-                        <td
+                        <td 
+                        style={{fontSize: "14px"}}
                           key={columnIndex}
                           className={isBackBet ? "back-border" : "lay-border"}
                         >

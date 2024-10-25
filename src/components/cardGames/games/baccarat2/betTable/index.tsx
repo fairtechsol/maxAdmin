@@ -206,7 +206,7 @@ const BaccaratStatistics = ({ odds, graphsData, cardData, data }: any) => {
                 style={{ width: cardData?.C5 != "1" ? "75px" : "45px" }}
               >
                 {cardData?.C5 != "1" && (
-                  <div style={{ transform: "rotate(270deg)", zIndex: "999" }}>
+                  <div style={{ transform: "rotate(270deg)", zIndex: "" }}>
                     <HandleGameCards card={cardData?.C5} />
                   </div>
                 )}
@@ -239,7 +239,7 @@ const BaccaratStatistics = ({ odds, graphsData, cardData, data }: any) => {
                 <HandleGameCards card={cardData?.C2} />
                 <HandleGameCards card={cardData?.C4} />
                 {cardData?.C6 != "1" && (
-                  <div style={{ transform: "rotate(90deg)", zIndex: "999" }}>
+                  <div style={{ transform: "rotate(90deg)"}}>
                     <HandleGameCards card={cardData?.C6} />
                   </div>
                 )}
