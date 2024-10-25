@@ -17,9 +17,8 @@ function BookmakerTable({
   data,
   backLayCount = 6,
   matchDetails,
-  teamYesNo
+  teamYesNo,
 }: BookmakerTableProps) {
-
   // console.log(data);
   return (
     <div
@@ -108,14 +107,12 @@ function BookmakerTable({
                           // customClass={`bookmaker-bet-place W-100`}
                           bgColor={`blue${index + 1}`}
                           rate={
-                            data?.runners?.[i]?.ex?.availableToBack?.[
-                              index
-                            ]?.price
+                            data?.runners?.[i]?.ex?.availableToBack?.[index]
+                              ?.price
                           }
                           percent={
-                            data?.runners?.[i]?.ex?.availableToBack?.[
-                              index
-                            ]?.size
+                            data?.runners?.[i]?.ex?.availableToBack?.[index]
+                              ?.size
                           }
                           active={
                             data?.runners?.[i]?.status
@@ -135,17 +132,15 @@ function BookmakerTable({
                           // `}
                           bgColor={`red${index + 1}`}
                           rate={
-                            data?.runners?.[i]?.ex?.availableToLay?.[
-                              index
-                            ]?.price
+                            data?.runners?.[i]?.ex?.availableToLay?.[index]
+                              ?.price
                           }
                           percent={
-                            data?.runners?.[i]?.ex?.availableToLay?.[
-                              index
-                            ]?.size
+                            data?.runners?.[i]?.ex?.availableToLay?.[index]
+                              ?.size
                           }
                           active={
-                            data?.runners?.[i   ]?.status
+                            data?.runners?.[i]?.status
                               .toLowerCase()
                               ?.toLowerCase() !==
                             teamStatus.active?.toLowerCase()
