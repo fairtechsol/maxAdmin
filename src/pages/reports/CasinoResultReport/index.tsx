@@ -146,7 +146,7 @@ const CasinoResultReport = () => {
             <div className="position-relative">
               <CustomInput
                 placeholder={""}
-                customstyle={"mb-3"}
+                // customstyle={"mb-3"}
                 type="date"
                 onChange={(e: any) => {
                   setDate(moment(e.target.value).format("YYYY-MM-DD"));
@@ -174,7 +174,7 @@ const CasinoResultReport = () => {
               )}
             </div>
           </Col>
-          <Col className="lh-lg" md={2}>
+          <Col className="lh-lg px-0" md={2}>
             <SelectSearch
               defaultValue="slotGame"
               options={cardGamesCasinoResult}
@@ -192,7 +192,7 @@ const CasinoResultReport = () => {
               isOptionDisabled={(option: any) => option.disabled}
             />
           </Col>
-          <Col className="mt-1" md={2}>
+          <Col md={2}>
             <Button type="submit">Submit</Button>
           </Col>
         </Row>

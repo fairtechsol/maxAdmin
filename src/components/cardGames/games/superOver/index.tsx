@@ -52,7 +52,7 @@ const SuperOverComponent = () => {
             >
               <VideoFrame
               data={dragonTigerDetail}
-                time={dragonTigerDetail?.videoInfo?.autotime}
+                time={JSON.stringify(dragonTigerDetail?.videoInfo?.autotime)}
                 result={<Dragon20Result data={dragonTigerDetail?.videoInfo} />}
                 id={`${cardUrl}${cardGamesId.superover}`}
               />

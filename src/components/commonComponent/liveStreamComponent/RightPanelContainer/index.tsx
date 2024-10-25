@@ -20,6 +20,7 @@ const RightPanelContainer = ({
           title={title}
           rightComponent={
             <FiMonitor
+              className="text-white"
               onClick={() => setShowVideo((prev: boolean) => !prev)}
               style={{ cursor: "pointer" }}
             />
