@@ -32,7 +32,7 @@ const CasinoMeter = () => {
 
   const handleBetPlacedOnDT20 = (event: any) => {
     if (event?.jobData?.matchType === cardGamesType.cmeter) {
-      dispatch(updateBetsPlaced(event?.jobData?.newBet));
+      dispatch(updateBetsPlaced(event?.jobData));
       dispatch(updateBalanceOnBetPlaceCards(event?.jobData));
       dispatch(updateProfitLossCards(event?.userRedisObj));
     }
