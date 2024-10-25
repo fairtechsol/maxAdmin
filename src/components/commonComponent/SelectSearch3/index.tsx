@@ -31,6 +31,7 @@ const SelectSearch3 = (props: any) => {
                   value={value}
                   onChange={() => onChange(option)}
                   onBlur={onBlur}
+                  defaultChecked={option.value === "ALL"}
                 />
                 <span className="custom-radio-checkmark2"></span>
                 {option.label}
