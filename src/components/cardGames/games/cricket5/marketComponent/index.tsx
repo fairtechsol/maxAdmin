@@ -36,7 +36,7 @@ const MarketComponent = ({ odds, data  }: any) => {
               <span className="market-nation-name-c">{team1?.nat}</span>
               <div className="market-nation-book-c"></div>
               <span
-                className={`color-red${
+                className={`${
                   data?.profitLoss
                     ? data?.profitLoss[
                         `${data?.videoInfo?.mid}_${team1?.sid}_card`
@@ -46,13 +46,13 @@ const MarketComponent = ({ odds, data  }: any) => {
                             `${data?.videoInfo?.mid}_${team1?.sid}_card`
                           ]
                         )["aus"] > 0
-                        ? "color-green"
+                        ? " color-green"
                         : JSON.parse(
                             data?.profitLoss[
                               `${data?.videoInfo?.mid}_${team1?.sid}_card`
                             ]
                           )["aus"] < 0
-                        ? "color-red"
+                        ? " color-red"
                         : ""
                       : ""
                     : ""
@@ -98,7 +98,7 @@ const MarketComponent = ({ odds, data  }: any) => {
               <span className="market-nation-name-c">{team2?.nat}</span>
               <div className="market-nation-book-c"></div>
               <span
-                className={`color-red${
+                className={`${
                   data?.profitLoss
                     ? data?.profitLoss[
                         `${data?.videoInfo?.mid}_${team1?.sid}_card`
@@ -108,13 +108,13 @@ const MarketComponent = ({ odds, data  }: any) => {
                             `${data?.videoInfo?.mid}_${team1?.sid}_card`
                           ]
                         )["ind"] > 0
-                        ? "color-green"
+                        ? " color-green"
                         : JSON.parse(
                             data?.profitLoss[
                               `${data?.videoInfo?.mid}_${team1?.sid}_card`
                             ]
                           )["ind"] < 0
-                        ? "color-red"
+                        ? " color-red"
                         : ""
                       : ""
                     : ""
