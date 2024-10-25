@@ -35,6 +35,7 @@ const SelectSearch2 = (props: any) => {
                   value={value}
                   onChange={() => onChange(option)}
                   onBlur={onBlur}
+                  defaultChecked={option.value === "PENDING"}
                 />
                 <span className="custom-radio-checkmark"></span>
                 {option.label}
