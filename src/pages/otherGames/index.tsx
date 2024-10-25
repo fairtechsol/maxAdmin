@@ -83,9 +83,9 @@ const OtherGamesDetail = () => {
   };
   const handleMatchResultDeclarted = (event: any) => {
     try {
-      if (event?.matchId === id) {
+      if (event?.matchId === id && event?.isMatchDeclare) {
         navigate("/admin/market-analysis");
-      }
+      } else dispatch(getPlacedBets(id));
     } catch (e) {
       console.log(e);
     }
@@ -261,9 +261,13 @@ const OtherGamesDetail = () => {
         <div className="gamePage-table">
           <Row className="no-gutters">
             <Col md={8}>
-              <CustomBreadcrumb
-                items={[{ name: breadCrumb?.matchName || matchDetails?.title }]}
-              />
+              {["football", "tennis"]?.includes(matchDetails?.matchType) && (
+                <CustomBreadcrumb
+                  items={[
+                    { name: breadCrumb?.matchName || matchDetails?.title },
+                  ]}
+                />
+              )}
               {updatedMarket
                 ?.filter((item: any) => item?.id === marketToShow)
                 ?.map((item: any) => (

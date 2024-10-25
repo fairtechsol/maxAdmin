@@ -9,7 +9,34 @@ import { dummyArray, formatNumber } from "../../../helpers";
 import BetBox from "../betBox";
 // import { useSelector } from "react-redux";
 
-const MarketBox = ({ title, box, data, detail }: any) => {
+const MarketBox = ({
+  title,
+  box,
+  data,
+  detail,
+  teamARates,
+  teamBRates,
+}: any) => {
+  const bookRatioB: any = (() => {
+    if (teamARates === 0) {
+      return 0;
+    } else {
+      const bookRatio = teamBRates != 0 ? teamARates / teamBRates || 0 : 0;
+      const formattedRatio = Math.abs(bookRatio).toFixed(2);
+      return formattedRatio;
+    }
+  })();
+
+  const bookRatioA: any = (() => {
+    if (teamBRates === 0) {
+      return 0;
+    } else {
+      const bookRatio = teamARates != 0 ? teamBRates / teamARates || 0 : 0;
+      const formattedRatio = Math.abs(bookRatio).toFixed(2);
+      return formattedRatio;
+    }
+  })();
+
   return (
     <>
       <div className="bookmakerContainer">
@@ -72,7 +99,7 @@ const MarketBox = ({ title, box, data, detail }: any) => {
                   )}...`
                 : data?.runners?.[0]?.nat || detail?.teamA}
             </span>
-            <div className="d-flex flex-row justify-content-between w-100">
+            <div className="d-flex flex-row w-100">
               <span
                 className={`${
                   parseFloat(
@@ -106,6 +133,11 @@ const MarketBox = ({ title, box, data, detail }: any) => {
                       ).toFixed(2)
                   : ""}
               </span>
+              {![0, "0"].includes(bookRatioB) && (
+                <span className="bookRatio">
+                  {`${parseFloat(bookRatioB).toFixed(2)}%`}
+                </span>
+              )}
             </div>
           </div>
           <div
@@ -190,7 +222,7 @@ const MarketBox = ({ title, box, data, detail }: any) => {
                   )}...`
                 : data?.runners?.[1]?.nat || detail?.teamB}
             </span>
-            <div className="d-flex flex-row justify-content-between w-100">
+            <div className="d-flex flex-row w-100">
               <span
                 className={`${
                   parseFloat(
@@ -224,6 +256,11 @@ const MarketBox = ({ title, box, data, detail }: any) => {
                       ).toFixed(2)
                   : ""}
               </span>
+              {![0, "0"].includes(bookRatioA) && (
+                <span className="bookRatio">
+                  {`${parseFloat(bookRatioA).toFixed(2)}%`}
+                </span>
+              )}
             </div>
           </div>
           <div

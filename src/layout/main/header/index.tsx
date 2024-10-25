@@ -2,10 +2,10 @@ import { debounce } from "lodash";
 import React, { memo, useEffect, useMemo, useState } from "react";
 import { Form, Nav, NavDropdown, Navbar } from "react-bootstrap";
 import { FaSearchPlus } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
-import Select, { components } from "react-select";
+import { NavLink, useLocation } from "react-router-dom";
 import LogoSection from "../../../components/commonComponent/logoSection";
+import Select, { components } from "react-select";
+import { useDispatch, useSelector } from "react-redux";
 import CustomModal from "../../../components/commonComponent/modal";
 import MainHeader from "../../../components/mainHeader";
 import { logout } from "../../../store/actions/auth/authActions";
@@ -22,14 +22,19 @@ interface ItemProps {
 
 const TopbarDropdown = ({ name, options }: ItemProps) => {
   const [show, setShow] = useState(false);
+  let location = useLocation();
   const handleMouseEnter = () => {
     setShow(true);
   };
-
+  const handleMouseClick = () => {
+    setShow(!show);
+  };
   const handleMouseLeave = () => {
     setShow(false);
   };
-
+  useEffect(() => {
+    handleMouseLeave();
+  }, [location.pathname]);
   return (
     <NavDropdown
       onMouseEnter={handleMouseEnter}
@@ -38,6 +43,7 @@ const TopbarDropdown = ({ name, options }: ItemProps) => {
       className="navbar-mainLink"
       title={name}
       id="basic-nav-dropdown"
+      onClick={handleMouseClick}
     >
       {options?.map((option, index) => (
         <NavDropdown.Item key={index}>
@@ -179,7 +185,11 @@ const Topbar = (props: any) => {
       borderRadius: "10px",
       marginRight: "10px",
     }),
-
+    placeholder: (provided: any) => ({
+      ...provided,
+      fontSize: "14px",
+      color: "#ced4da",
+    }),
     dropdownIndicator: (provided: any) => ({
       ...provided,
     }),
@@ -189,7 +199,7 @@ const Topbar = (props: any) => {
     return (
       components.DropdownIndicator && (
         <components.DropdownIndicator {...props}>
-          <FaSearchPlus size={24} onClick={handleSubmit} />
+          <FaSearchPlus color="#333" size={24} onClick={handleSubmit} />
         </components.DropdownIndicator>
       )
     );

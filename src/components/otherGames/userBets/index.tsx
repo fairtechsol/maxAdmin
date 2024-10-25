@@ -163,7 +163,7 @@ const OtherUserBets = ({ matchId }: any) => {
           </Card>
         </Card>
         <CustomModal
-          customClass="userBetModal"
+          customClass="modalFull-90"
           show={showModal}
           setShow={setShowModal}
           title="View More Bet"

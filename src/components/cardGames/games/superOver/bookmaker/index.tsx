@@ -1,6 +1,5 @@
 const Bookmaker = ({ matchOddsData, data, title, min, max }: any) => {
   const handleLock = (status: any, value: any) => {
-    console.log(status, "status");
     if (status != "ACTIVE" || value === "0.00") {
       return true;
     } else {

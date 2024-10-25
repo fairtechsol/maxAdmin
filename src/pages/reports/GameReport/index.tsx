@@ -44,8 +44,14 @@ const GameReport = () => {
   const dispatch: AppDispatch = useDispatch();
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [dateFrom, setDateFrom] = useState<any>();
-  const [dateTo, setDateTo] = useState<any>();
+  const [dateFrom, setDateFrom] = useState<any>(
+    new Date(new Date().setDate(new Date().getDate() - 7))
+      .toISOString()
+      .split("T")[0]
+  );
+  const [dateTo, setDateTo] = useState<any>(
+    new Date().toISOString().split("T")[0]
+  );
 
   useEffect(() => {}, [tableConfig]);
 
@@ -112,7 +118,8 @@ const GameReport = () => {
                 setDateFrom(e.target.value);
               }}
               type="date"
-              // max={getTodayDate()}
+              value={dateFrom}
+              max={new Date().toISOString().split("T")[0]}
             />
           </Col>
           <Col md={2}>
@@ -122,8 +129,9 @@ const GameReport = () => {
               customstyle={"mb-3"}
               onChange={(e: any) => setDateTo(e.target.value)}
               type="date"
-              // min={dateFrom || getTodayDate()} 
-              // max={dateFrom ? getMaxToDate(dateFrom) : getTodayDate()}
+              value={dateTo}
+              // min={dateFrom || getTodayDate()}
+              max={new Date().toISOString().split("T")[0]}
             />
           </Col>
           <Col md={2}>

@@ -234,10 +234,10 @@ const UserBetModalForm = (props: any) => {
         <div className="row">
           <div className="d-flex flex-row">
             <div className="flex-column d-flex align-items-start">
-              <div className="col-md-12">
+              <div className="">
                 <Form.Label>Usename</Form.Label>
               </div>
-              <div className="col-md-12">
+              <div className="">
                 <CustomInput
                   placeholder="Search Username"
                   type="text"
@@ -247,10 +247,10 @@ const UserBetModalForm = (props: any) => {
               </div>
             </div>
             <div className="flex-column d-flex align-items-start me-2 ms-2">
-              <div className="col-md-12">
+              <div className="">
                 <Form.Label>IP Address</Form.Label>
               </div>
-              <div className="col-md-12">
+              <div className="">
                 <CustomInput
                   placeholder="Enter IP Address"
                   type="text"
@@ -260,10 +260,10 @@ const UserBetModalForm = (props: any) => {
               </div>
             </div>
             <div className="flex-column d-flex align-items-start">
-              <div className="col-md-12">
+              <div className="">
                 <Form.Label>Amount From</Form.Label>
               </div>
-              <div className="col-md-12">
+              <div className="">
                 <div className="d-flex">
                   <div className="me-2">
                     <CustomInput
@@ -279,10 +279,10 @@ const UserBetModalForm = (props: any) => {
               </div>
             </div>
             <div className="flex-column d-flex align-items-start">
-              <div className="col-md-12">
+              <div className="">
                 <Form.Label>Amount To</Form.Label>
               </div>
-              <div className="col-md-12">
+              <div className="">
                 <div className="d-flex">
                   <div className="me-2">
                     <CustomInput
@@ -348,7 +348,7 @@ const UserBetModalForm = (props: any) => {
                 onChange={handleChange}
               />
             </div> */}
-            <div className="d-flex flex-row justify-content-between w-100 mt-2">
+            <div className="d-flex flex-row justify-content-between w-100 mt-5">
               <div className="d-flex flex-row justify-content-around align-items-center w-20">
                 <div className="d-flex flex-row justify-content-around align-items-center w-25">
                   <input
