@@ -179,7 +179,11 @@ const Topbar = (props: any) => {
       borderRadius: "10px",
       marginRight: "10px",
     }),
-
+    placeholder: (provided:any) => ({
+      ...provided,
+      fontSize: '14px',
+      color: '#ced4da', 
+    }),
     dropdownIndicator: (provided: any) => ({
       ...provided,
     }),
@@ -189,7 +193,7 @@ const Topbar = (props: any) => {
     return (
       components.DropdownIndicator && (
         <components.DropdownIndicator {...props}>
-          <FaSearchPlus size={24} onClick={handleSubmit} />
+          <FaSearchPlus color="#333" size={24} onClick={handleSubmit} />
         </components.DropdownIndicator>
       )
     );
