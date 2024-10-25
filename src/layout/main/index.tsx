@@ -41,6 +41,10 @@ function MainLayout({ eventKey }: any) {
   }, [dispatch]);
 
   useEffect(() => {
+    setToggle((prev) => !prev);
+  }, [location.pathname]);
+
+  useEffect(() => {
     if (localStorage.getItem("jwtMaxAdmin")) {
       socketService.connect();
       socketService.auth.logout();
