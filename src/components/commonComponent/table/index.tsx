@@ -61,7 +61,7 @@ const CustomTable: React.FC<CustomTableProps> = ({
     key: null,
   });
 
-  const [rowPerPage, setRowPerPage] = useState(10);
+  const [rowPerPage, setRowPerPage] = useState<any>(25);
 
   // Handle column click to change the sorting configuration
   const handleSort = (key: string | number) => {

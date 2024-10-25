@@ -8,7 +8,7 @@ interface RowPerPageProps {
 
 const RowPerPage: React.FC<RowPerPageProps> = ({ value, onChange }) => {
   // Define an array of options
-  const options = [2, 10, 15, 20];
+  const options = [25, 50, 100, 250,500,750,1000];
 
   return (
     <Form.Group controlId="itemsPerPage" className="mb-3">

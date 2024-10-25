@@ -326,7 +326,7 @@ const Games = () => {
                     </span>
                     <span className="title-14">
                       {moment(matchDetails?.startAt).format(
-                        "DD-MM-YYYY hh:mm:ss"
+                        "DD/MM/YYYY HH:mm:ss"
                       )}
                     </span>
                   </div>
