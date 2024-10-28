@@ -110,7 +110,7 @@ const GameUserBets = ({ matchId }: any) => {
                                 <div className="row">
                                   <div className="col f500">
                                     {" "}
-                                    {bet?.marketType}{" "}
+                                    {bet?.bettingName}{" "}
                                   </div>
                                 </div>
 
