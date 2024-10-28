@@ -112,7 +112,7 @@ const Cricket5 = () => {
       dispatch(
         casinoScoreboardMatchRates({
           id: marketId,
-          type: cardGamesType.superover,
+          type: cardGamesType.cricketv3,
         })
       );
       setErrorCount(0);
