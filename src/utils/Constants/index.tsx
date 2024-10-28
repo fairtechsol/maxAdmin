@@ -905,7 +905,7 @@ export const cardConstantsAccountStatement = [
   { value: "cricket", label: "Cricket" },
   { value: "football", label: "Football" },
   { value: "horseRacing", label: "Horse Racing" },
-  { value: "greyHound", label: "Greyhound Racing" }
+  { value: "greyHound", label: "Greyhound Racing" },
 ];
 export const card2ConstantsAccountStatement = [
   { value: "all", label: "All" },

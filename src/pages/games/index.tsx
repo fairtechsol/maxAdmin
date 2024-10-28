@@ -6,7 +6,11 @@ import LiveStreamComponent from "../../components/commonComponent/liveStreamComp
 import BetTable from "../../components/game/betTable";
 import GameHeader from "../../components/game/gameHeader";
 //import ScoreCard from "../../components/game/scoreCard";
-import { Constants, liveStreamUrlCricket } from "../../utils/Constants";
+import {
+  Constants,
+  liveStreamUrlCricket,
+  profitLossDataForMatchConstants,
+} from "../../utils/Constants";
 import service from "../../service";
 import { socket, socketService } from "../../socketManager";
 import {
@@ -296,7 +300,7 @@ const Games = () => {
     : [];
   return (
     <div className="gamePage">
-      <Container fluid >
+      <Container fluid>
         {/* <GameHeader /> */}
         {/* table start here */}
         <div className="gamePage-table">
@@ -344,6 +348,24 @@ const Games = () => {
                           data={matchDetails?.matchOdd}
                           detail={matchDetails}
                           // data={matchDetails?.matchOdd}
+                          teamARates={
+                            matchDetails?.profitLossDataMatch?.[
+                              profitLossDataForMatchConstants?.[
+                                matchDetails?.matchOdd?.type
+                              ]?.A +
+                                "_" +
+                                matchDetails?.id
+                            ] ?? 0
+                          }
+                          teamBRates={
+                            matchDetails?.profitLossDataMatch?.[
+                              profitLossDataForMatchConstants?.[
+                                matchDetails?.matchOdd?.type
+                              ]?.B +
+                                "_" +
+                                matchDetails?.id
+                            ] ?? 0
+                          }
                         />
                       </Col>
                     )}
@@ -361,6 +383,24 @@ const Games = () => {
                           data={matchDetails?.bookmaker}
                           detail={matchDetails}
                           // data={matchDetails?.matchOdd}
+                          teamARates={
+                            matchDetails?.profitLossDataMatch?.[
+                              profitLossDataForMatchConstants?.[
+                                matchDetails?.bookmaker?.type
+                              ]?.A +
+                                "_" +
+                                matchDetails?.id
+                            ] ?? 0
+                          }
+                          teamBRates={
+                            matchDetails?.profitLossDataMatch?.[
+                              profitLossDataForMatchConstants?.[
+                                matchDetails?.bookmaker?.type
+                              ]?.B +
+                                "_" +
+                                matchDetails?.id
+                            ] ?? 0
+                          }
                         />
                       </Col>
                     )}
@@ -425,6 +465,24 @@ const Games = () => {
                           data={matchDetails?.bookmaker2}
                           detail={matchDetails}
                           // data={matchDetails?.matchOdd}
+                          teamARates={
+                            matchDetails?.profitLossDataMatch?.[
+                              profitLossDataForMatchConstants?.[
+                                matchDetails?.bookmaker2?.type
+                              ]?.A +
+                                "_" +
+                                matchDetails?.id
+                            ] ?? 0
+                          }
+                          teamBRates={
+                            matchDetails?.profitLossDataMatch?.[
+                              profitLossDataForMatchConstants?.[
+                                matchDetails?.bookmaker2?.type
+                              ]?.B +
+                                "_" +
+                                matchDetails?.id
+                            ] ?? 0
+                          }
                         />
                       </Col>
                     )}
@@ -441,6 +499,22 @@ const Games = () => {
                             data={item}
                             detail={matchDetails}
                             // data={matchDetails?.matchOdd}
+                            teamARates={
+                              matchDetails?.profitLossDataMatch?.[
+                                profitLossDataForMatchConstants?.[item?.type]
+                                  ?.A +
+                                  "_" +
+                                  matchDetails?.id
+                              ] ?? 0
+                            }
+                            teamBRates={
+                              matchDetails?.profitLossDataMatch?.[
+                                profitLossDataForMatchConstants?.[item?.type]
+                                  ?.B +
+                                  "_" +
+                                  matchDetails?.id
+                              ] ?? 0
+                            }
                           />
                         </Col>
                       );
@@ -459,6 +533,24 @@ const Games = () => {
                           data={matchDetails?.apiTideMatch2}
                           detail={matchDetails}
                           // data={matchDetails?.matchOdd}
+                          teamARates={
+                            matchDetails?.profitLossDataMatch?.[
+                              profitLossDataForMatchConstants?.[
+                                matchDetails?.apiTideMatch2?.type
+                              ]?.A +
+                                "_" +
+                                matchDetails?.id
+                            ] ?? 0
+                          }
+                          teamBRates={
+                            matchDetails?.profitLossDataMatch?.[
+                              profitLossDataForMatchConstants?.[
+                                matchDetails?.apiTideMatch2?.type
+                              ]?.B +
+                                "_" +
+                                matchDetails?.id
+                            ] ?? 0
+                          }
                         />
                       </Col>
                     )}
@@ -478,6 +570,26 @@ const Games = () => {
                         }
                         detail={matchDetails}
                         // data={matchDetails?.matchOdd}
+                        teamARates={
+                          matchDetails?.profitLossDataMatch?.[
+                            profitLossDataForMatchConstants?.[
+                              matchDetails?.manualTideMatch?.type ||
+                                matchDetails?.manualTiedMatch?.type
+                            ]?.A +
+                              "_" +
+                              matchDetails?.id
+                          ] ?? 0
+                        }
+                        teamBRates={
+                          matchDetails?.profitLossDataMatch?.[
+                            profitLossDataForMatchConstants?.[
+                              matchDetails?.manualTideMatch?.type ||
+                                matchDetails?.manualTiedMatch?.type
+                            ]?.B +
+                              "_" +
+                              matchDetails?.id
+                          ] ?? 0
+                        }
                       />
                     </Col>
                   )}
@@ -496,6 +608,24 @@ const Games = () => {
                           data={matchDetails?.marketCompleteMatch1}
                           detail={matchDetails}
                           // data={matchDetails?.matchOdd}
+                          teamARates={
+                            matchDetails?.profitLossDataMatch?.[
+                              profitLossDataForMatchConstants?.[
+                                matchDetails?.marketCompleteMatch1?.type
+                              ]?.A +
+                                "_" +
+                                matchDetails?.id
+                            ] ?? 0
+                          }
+                          teamBRates={
+                            matchDetails?.profitLossDataMatch?.[
+                              profitLossDataForMatchConstants?.[
+                                matchDetails?.marketCompleteMatch1?.type
+                              ]?.B +
+                                "_" +
+                                matchDetails?.id
+                            ] ?? 0
+                          }
                         />
                       </Col>
                     )}
@@ -508,6 +638,24 @@ const Games = () => {
                           data={matchDetails?.manualCompleteMatch}
                           detail={matchDetails}
                           // data={matchDetails?.matchOdd}
+                          teamARates={
+                            matchDetails?.profitLossDataMatch?.[
+                              profitLossDataForMatchConstants?.[
+                                matchDetails?.manualCompleteMatch?.type
+                              ]?.A +
+                                "_" +
+                                matchDetails?.id
+                            ] ?? 0
+                          }
+                          teamBRates={
+                            matchDetails?.profitLossDataMatch?.[
+                              profitLossDataForMatchConstants?.[
+                                matchDetails?.manualCompleteMatch?.type
+                              ]?.B +
+                                "_" +
+                                matchDetails?.id
+                            ] ?? 0
+                          }
                         />
                       </Col>
                     )}
@@ -669,6 +817,24 @@ const Games = () => {
                           data={matchDetails?.apiTideMatch}
                           detail={matchDetails}
                           // data={matchDetails?.matchOdd}
+                          teamARates={
+                            matchDetails?.profitLossDataMatch?.[
+                              profitLossDataForMatchConstants?.[
+                                matchDetails?.apiTideMatch?.type
+                              ]?.A +
+                                "_" +
+                                matchDetails?.id
+                            ] ?? 0
+                          }
+                          teamBRates={
+                            matchDetails?.profitLossDataMatch?.[
+                              profitLossDataForMatchConstants?.[
+                                matchDetails?.apiTideMatch?.type
+                              ]?.B +
+                                "_" +
+                                matchDetails?.id
+                            ] ?? 0
+                          }
                         />
                       </Col>
                     )}
@@ -686,6 +852,24 @@ const Games = () => {
                           data={matchDetails?.marketCompleteMatch}
                           detail={matchDetails}
                           // data={matchDetails?.matchOdd}
+                          teamARates={
+                            matchDetails?.profitLossDataMatch?.[
+                              profitLossDataForMatchConstants?.[
+                                matchDetails?.marketCompleteMatch?.type
+                              ]?.A +
+                                "_" +
+                                matchDetails?.id
+                            ] ?? 0
+                          }
+                          teamBRates={
+                            matchDetails?.profitLossDataMatch?.[
+                              profitLossDataForMatchConstants?.[
+                                matchDetails?.marketCompleteMatch?.type
+                              ]?.B +
+                                "_" +
+                                matchDetails?.id
+                            ] ?? 0
+                          }
                         />
                       </Col>
                     )}
@@ -693,7 +877,7 @@ const Games = () => {
               )}
             </Col>
             <Col md={4} className="text-white">
-            <GameHeader />
+              <GameHeader />
               {matchDetails?.eventId && (
                 <LiveStreamComponent
                   url={`${liveStreamUrlCricket}${matchDetails?.eventId}`}

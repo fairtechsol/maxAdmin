@@ -1,7 +1,7 @@
 import React, { memo, useEffect, useMemo, useState } from "react";
 import { Form, Nav, NavDropdown, Navbar } from "react-bootstrap";
 import { FaSearchPlus } from "react-icons/fa";
-import { NavLink } from "react-router-dom";
+import { NavLink,useLocation } from "react-router-dom";
 import LogoSection from "../../../components/commonComponent/logoSection";
 import Select, { components } from "react-select";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,14 +22,19 @@ interface ItemProps {
 
 const TopbarDropdown = ({ name, options }: ItemProps) => {
   const [show, setShow] = useState(false);
+  let location = useLocation();
   const handleMouseEnter = () => {
     setShow(true);
   };
-
+  const handleMouseClick = () => {
+    setShow(!show);
+  };
   const handleMouseLeave = () => {
     setShow(false);
   };
-
+  useEffect(() => {
+    handleMouseLeave();
+  }, [location.pathname]);
   return (
     <NavDropdown
       onMouseEnter={handleMouseEnter}
@@ -38,6 +43,7 @@ const TopbarDropdown = ({ name, options }: ItemProps) => {
       className="navbar-mainLink"
       title={name}
       id="basic-nav-dropdown"
+      onClick={handleMouseClick}
     >
       {options?.map((option, index) => (
         <NavDropdown.Item key={index}>
