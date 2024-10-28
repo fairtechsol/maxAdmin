@@ -14,18 +14,18 @@ const DynamicTable = ({ odds, data }: any) => {
       setOpenDivIds([...openDivIds, id]);
     }
   };
-  // console.log(data, "data");
+  console.log(data, "data");
   return (
     <div className="d-flex justify-content-sm-between casino-detail-poker20">
       {/* Player A */}
       <div className="playerabox">
         <div className="casino-box-row playerafabcy">
           <div className="casino-nation-name">
-          <span
+            <span
               onClick={() => toggleDiv(`demo4`)}
               className="range-icon d-inline-block ms-1"
             >
-              <i className="fas fa-info-circle float-right"></i>{" "}
+              <i className="fas fa-info-circle float-right"></i>
               <div
                 id={`demo4`}
                 className={`icon-range-dt1day collapse ${
@@ -62,26 +62,41 @@ const DynamicTable = ({ odds, data }: any) => {
               <span className="casino-box-odd">{odds?.[0]?.l1}</span>
             </div>
           </div>
-          
         </div>
-        <span className="color-red f700 title-16">0</span>
+        <span
+          className={`${
+            data?.profitLoss?.[`${odds?.[0]?.mid}_${odds?.[0]?.sid}_card`]
+              ? JSON.parse(
+                  data?.profitLoss?.[`${odds?.[0]?.mid}_${odds?.[0]?.sid}_card`]
+                )?.["playera"] < 0
+                ? "color-red"
+                : "color-green"
+              : "color-red"
+          } f700 title-16`}
+        >
+          {data?.profitLoss?.[`${odds?.[0]?.mid}_${odds?.[0]?.sid}_card`]
+            ? JSON.parse(
+                data?.profitLoss?.[`${odds?.[0]?.mid}_${odds?.[0]?.sid}_card`]
+              )?.["playera"]
+            : 0}
+        </span>
         {/* Game Status and Book Info */}
         <div className="casino-nation-name text-center w-100">
-        <span
-              onClick={() => toggleDiv(`demo5`)}
-              className="range-icon d-inline-block ms-1"
+          <span
+            onClick={() => toggleDiv(`demo5`)}
+            className="range-icon d-inline-block ms-1"
+          >
+            <i className="fas fa-info-circle float-right"></i>{" "}
+            <div
+              id={`demo5`}
+              className={`icon-range-dt1day collapse ${
+                openDivIds.includes(`demo5`) ? "show" : ""
+              }`}
             >
-              <i className="fas fa-info-circle float-right"></i>{" "}
-              <div
-                id={`demo5`}
-                className={`icon-range-dt1day collapse ${
-                  openDivIds.includes(`demo5`) ? "show" : ""
-                }`}
-              >
-                R:<span>{parseFloat(data?.videoInfo?.min)}</span>-
-                <span>{formatNumber(data?.videoInfo?.max)}</span>
-              </div>
-            </span>
+              R:<span>{parseFloat(data?.videoInfo?.min)}</span>-
+              <span>{formatNumber(data?.videoInfo?.max)}</span>
+            </div>
+          </span>
         </div>
 
         {/* Bonus Section for Player A */}
@@ -100,7 +115,28 @@ const DynamicTable = ({ odds, data }: any) => {
                   ?.replace("Player A", "")
                   .trim()}
               </span>
-              <span className="color-red f700 title-16" style={{position: "absolute", bottom: "-20px", right: "60px"}}>0</span>
+              <span
+                className={`${
+                  data?.profitLoss?.[
+                    `${data?.playersBonusPair?.[0]?.mid}_${data?.playersBonusPair?.[0]?.sid}_card`
+                  ]
+                    ? data?.profitLoss?.[
+                        `${data?.playersBonusPair?.[0]?.mid}_${data?.playersBonusPair?.[0]?.sid}_card`
+                      ] < 0
+                      ? "color-red"
+                      : "color-green"
+                    : "color-red"
+                } f700 title-16`}
+                style={{ position: "absolute", bottom: "-20px", right: "60px" }}
+              >
+                {data?.profitLoss?.[
+                  `${data?.playersBonusPair?.[0]?.mid}_${data?.playersBonusPair?.[0]?.sid}_card`
+                ]
+                  ? data?.profitLoss?.[
+                      `${data?.playersBonusPair?.[0]?.mid}_${data?.playersBonusPair?.[0]?.sid}_card`
+                    ]
+                  : 0}
+              </span>
             </div>
             <div
               className={
@@ -115,7 +151,28 @@ const DynamicTable = ({ odds, data }: any) => {
                   ?.replace("Player A", "")
                   .trim()}
               </span>
-              <span className="color-red f700 title-16" style={{position: "absolute", bottom: "-20px", right: "60px"}}>0</span>
+              <span
+                className={`${
+                  data?.profitLoss?.[
+                    `${data?.playersBonusPair?.[1]?.mid}_${data?.playersBonusPair?.[1]?.sid}_card`
+                  ]
+                    ? data?.profitLoss?.[
+                        `${data?.playersBonusPair?.[1]?.mid}_${data?.playersBonusPair?.[1]?.sid}_card`
+                      ] < 0
+                      ? "color-red"
+                      : "color-green"
+                    : "coor-red"
+                } f700 title-16`}
+                style={{ position: "absolute", bottom: "-20px", right: "60px" }}
+              >
+                {data?.profitLoss?.[
+                  `${data?.playersBonusPair?.[1]?.mid}_${data?.playersBonusPair?.[1]?.sid}_card`
+                ]
+                  ? data?.profitLoss?.[
+                      `${data?.playersBonusPair?.[1]?.mid}_${data?.playersBonusPair?.[1]?.sid}_card`
+                    ]
+                  : 0}
+              </span>
             </div>
           </div>
         </div>
@@ -125,32 +182,40 @@ const DynamicTable = ({ odds, data }: any) => {
         <div className="poker-icon">
           <img src="https://versionobj.ecoassetsservice.com/v21/static/admin/img/poker.png" />
         </div>{" "}
-       { data?.videoInfo?.mid != "0" && ( <div className="row row5 w-100">
-          <div className="col-12 col-md-6">
-            <div className="dealer-name playera">Player A</div>{" "}
-            <div style={{ display: "flex", flexDirection: "column" }}>
-              <HandleCards card={data?.videoInfo?.C1} />
-              <HandleCards card={data?.videoInfo?.C2} />
-            </div>
-          </div>{" "}
-          <div className="col-12 col-md-6 text-end">
-            <div className="dealer-name playerb">Player B</div>{" "}
-            <div style={{ display: "flex",  flexDirection: "column", alignItems: "end" }}>
-              <HandleCards card={data?.videoInfo?.C3} />
-              <HandleCards card={data?.videoInfo?.C4} />
+        {data?.videoInfo?.mid != "0" && (
+          <div className="row row5 w-100">
+            <div className="col-12 col-md-6">
+              <div className="dealer-name playera">Player A</div>{" "}
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <HandleCards card={data?.videoInfo?.C1} />
+                <HandleCards card={data?.videoInfo?.C2} />
+              </div>
+            </div>{" "}
+            <div className="col-12 col-md-6 text-end">
+              <div className="dealer-name playerb">Player B</div>{" "}
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "end",
+                }}
+              >
+                <HandleCards card={data?.videoInfo?.C3} />
+                <HandleCards card={data?.videoInfo?.C4} />
+              </div>
             </div>
           </div>
-        </div> )}
+        )}
       </div>
       {/* Player B */}
       <div className="playerbbox">
         <div className="casino-box-row playerbfabcy">
           <div className="casino-nation-name">
-          <span
+            <span
               onClick={() => toggleDiv(`demo6`)}
               className="range-icon d-inline-block ms-1"
             >
-              <i className="fas fa-info-circle float-right"></i>{" "}
+              <i className="fas fa-info-circle float-right"></i>
               <div
                 id={`demo6`}
                 className={`icon-range-dt1day collapse ${
@@ -188,24 +253,40 @@ const DynamicTable = ({ odds, data }: any) => {
             </div>
           </div>
         </div>
-        <span className="color-red f700 title-16" >0</span>
+        <span
+          className={`${
+            data?.profitLoss?.[`${odds?.[0]?.mid}_${odds?.[0]?.sid}_card`]
+              ? JSON.parse(
+                  data?.profitLoss?.[`${odds?.[0]?.mid}_${odds?.[0]?.sid}_card`]
+                )?.["playerb"] < 0
+                ? "color-red"
+                : "color-green"
+              : "color-red"
+          } f700 title-16`}
+        >
+          {data?.profitLoss?.[`${odds?.[0]?.mid}_${odds?.[0]?.sid}_card`]
+            ? JSON.parse(
+                data?.profitLoss?.[`${odds?.[0]?.mid}_${odds?.[0]?.sid}_card`]
+              )?.["playerb"]
+            : 0}
+        </span>
         {/* Game Status and Book Info */}
         <div className="casino-nation-name text-center w-100">
-        <span
-              onClick={() => toggleDiv(`demo7`)}
-              className="range-icon d-inline-block ms-1"
+          <span
+            onClick={() => toggleDiv(`demo7`)}
+            className="range-icon d-inline-block ms-1"
+          >
+            <i className="fas fa-info-circle float-right"></i>{" "}
+            <div
+              id={`demo7`}
+              className={`icon-range-dt1day collapse ${
+                openDivIds.includes(`demo7`) ? "show" : ""
+              }`}
             >
-              <i className="fas fa-info-circle float-right"></i>{" "}
-              <div
-                id={`demo7`}
-                className={`icon-range-dt1day collapse ${
-                  openDivIds.includes(`demo7`) ? "show" : ""
-                }`}
-              >
-                R:<span>{parseFloat(data?.videoInfo?.min)}</span>-
-                <span>{formatNumber(data?.videoInfo?.max)}</span>
-              </div>
-            </span>
+              R:<span>{parseFloat(data?.videoInfo?.min)}</span>-
+              <span>{formatNumber(data?.videoInfo?.max)}</span>
+            </div>
+          </span>
         </div>
 
         {/* Bonus Section for Player B */}
@@ -224,9 +305,30 @@ const DynamicTable = ({ odds, data }: any) => {
                   ?.replace("Player B", "")
                   .trim()}
               </span>
-              <span className="color-red f700 title-16" style={{position: "absolute", bottom: "-20px", right: "60px"}}>0</span>
+              <span
+                className={`${
+                  data?.profitLoss?.[
+                    `${data?.playersBonusPair?.[2]?.mid}_${data?.playersBonusPair?.[2]?.sid}_card`
+                  ]
+                    ? data?.profitLoss?.[
+                        `${data?.playersBonusPair?.[2]?.mid}_${data?.playersBonusPair?.[2]?.sid}_card`
+                      ] < 0
+                      ? "color-red"
+                      : "color-green"
+                    : "color-red"
+                } f700 title-16`}
+                style={{ position: "absolute", bottom: "-20px", right: "60px" }}
+              >
+                {data?.profitLoss?.[
+                  `${data?.playersBonusPair?.[2]?.mid}_${data?.playersBonusPair?.[2]?.sid}_card`
+                ]
+                  ? data?.profitLoss?.[
+                      `${data?.playersBonusPair?.[2]?.mid}_${data?.playersBonusPair?.[2]?.sid}_card`
+                    ]
+                  : 0}
+              </span>
             </div>
-            
+
             <div
               className={
                 odds?.[1]?.gstatus === "SUSPENDED" ||
@@ -240,7 +342,28 @@ const DynamicTable = ({ odds, data }: any) => {
                   ?.replace("Player B", "")
                   .trim()}
               </span>
-              <span className="color-red f700 title-16" style={{position: "absolute", bottom: "-20px", right: "60px"}}>0</span>
+              <span
+                className={`${
+                  data?.profitLoss?.[
+                    `${data?.playersBonusPair?.[2]?.mid}_${data?.playersBonusPair?.[2]?.sid}_card`
+                  ]
+                    ? data?.profitLoss?.[
+                        `${data?.playersBonusPair?.[2]?.mid}_${data?.playersBonusPair?.[2]?.sid}_card`
+                      ] < 0
+                      ? "color-red"
+                      : "color-green"
+                    : "color-red"
+                } f700 title-16`}
+                style={{ position: "absolute", bottom: "-20px", right: "60px" }}
+              >
+                {data?.profitLoss?.[
+                  `${data?.playersBonusPair?.[3]?.mid}_${data?.playersBonusPair?.[3]?.sid}_card`
+                ]
+                  ? data?.profitLoss?.[
+                      `${data?.playersBonusPair?.[3]?.mid}_${data?.playersBonusPair?.[3]?.sid}_card`
+                    ]
+                  : 0}
+              </span>
             </div>
           </div>
         </div>
