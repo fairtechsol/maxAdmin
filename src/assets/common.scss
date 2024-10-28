@@ -1265,3 +1265,12 @@ th {
   .shadow{
       box-shadow: inset 3px 0 0px #72bbef !important;
   }
+
+
+
+/* Tablet devices (width between 768px and 1024px) */
+@media  (min-width: 768px) and (max-width: 1024px) {
+    .bet-table-right {
+      font-size: 10px; /* Adjust font size for tablets */
+    }
+  }
