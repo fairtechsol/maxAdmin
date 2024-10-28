@@ -1236,9 +1236,41 @@ th {
   align-items: center;
   // cursor: pointer;
 }
-.nav-dropdown-dark-example {
-  // background-color: #004a25;
-  // border: 0;
-  // border-radius: 0;
-  // margin-top: 40px !important;
-}
+.tab-new{
+  color: #495057 !important;
+  background-color: #fff !important;
+  border-color: #ced4da #ced4da #fff !important;
+  border: 1px solid transparent;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+  }
+  .coupon-table thead th {
+      font-size: 12px;
+      font-weight: 500;
+      text-align: center;
+      padding: 6px 0;
+      padding-left: 0px;
+      text-indent: -6px;
+      overflow-x: auto;
+      width: 10vw;
+  }
+  .bet-head{
+      // display: flex;
+      overflow-x: auto;
+      ::-webkit-scrollbar {
+          display: none;
+        }
+  }
+  
+  .shadow{
+      box-shadow: inset 3px 0 0px #72bbef !important;
+  }
+
+
+
+/* Tablet devices (width between 768px and 1024px) */
+@media  (min-width: 768px) and (max-width: 1024px) {
+    .bet-table-right {
+      font-size: 10px; /* Adjust font size for tablets */
+    }
+  }

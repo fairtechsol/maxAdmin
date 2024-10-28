@@ -29,7 +29,7 @@ export const PlayingCard: React.FC<PlayingCardProps> = ({
         height: "24px",
         width: "20px",
         padding: "0px",
-        zIndex: "999",
+        zIndex: "",
         // border:"1px solid yellow",
       }}
     >

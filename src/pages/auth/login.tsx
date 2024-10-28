@@ -51,7 +51,7 @@ const Login = () => {
         );
         navigate("/admin/change-password");
       } else {
-        if (loginData?.exposure) {
+        if (loginData?.isBetExist) {
           navigate("/admin/market-analysis");
         } else {
           navigate(

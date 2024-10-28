@@ -146,12 +146,16 @@ export const casinoScoreboardMatchRates = createAsyncThunk<any, any>(
           "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
         },
       };
+      // const resp = await axios.get(
+      //   `${Constants.thirdPartyCard}${ApiConstants.SCOREBOARD.match}/${requestData?.id}?gameName=${requestData?.type}`,
+      //   config
+      // );
       const resp = await axios.get(
-        `${Constants.thirdPartyCard}${ApiConstants.SCOREBOARD.match}/${requestData?.id}?gameName=${requestData?.type}`,
+        `${Constants.thirdPartyLive}/cricketScore?eventId=${requestData?.id}`,
         config
       );
       if (resp?.data) {
-        return resp?.data?.data?.data;
+        return resp?.data?.data;
       }
     } catch (error) {
       const err = error as AxiosError;

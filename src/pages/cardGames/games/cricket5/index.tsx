@@ -112,7 +112,7 @@ const Cricket5 = () => {
       dispatch(
         casinoScoreboardMatchRates({
           id: marketId,
-          type: cardGamesType.superover,
+          type: cardGamesType.cricketv3,
         })
       );
       setErrorCount(0);
@@ -132,7 +132,7 @@ const Cricket5 = () => {
         intervalTime = 600000;
       }
       const interval = setInterval(() => {
-        getScoreBoard(Id[1]);
+        getScoreBoard(Id[Id?.length-1]);
       }, intervalTime);
 
       return () => clearInterval(interval);

@@ -23,17 +23,17 @@ const MarketBox = ({
     } else {
       const bookRatio = teamBRates != 0 ? teamARates / teamBRates || 0 : 0;
       const formattedRatio = Math.abs(bookRatio).toFixed(2);
-      return teamBRates < 0 ? `-${formattedRatio}` : formattedRatio;
+      return formattedRatio;
     }
   })();
 
   const bookRatioA: any = (() => {
-    if (teamARates === 0) {
+    if (teamBRates === 0) {
       return 0;
     } else {
       const bookRatio = teamARates != 0 ? teamBRates / teamARates || 0 : 0;
       const formattedRatio = Math.abs(bookRatio).toFixed(2);
-      return teamARates < 0 ? `-${formattedRatio}` : formattedRatio;
+      return formattedRatio;
     }
   })();
 
@@ -133,9 +133,9 @@ const MarketBox = ({
                       ).toFixed(2)
                   : ""}
               </span>
-              {![0, "0"].includes(bookRatioA) && (
+              {![0, "0"].includes(bookRatioB) && (
                 <span className="bookRatio">
-                  {parseFloat(bookRatioA).toFixed(2)}
+                  {`${parseFloat(bookRatioB).toFixed(2)}%`}
                 </span>
               )}
             </div>
@@ -256,9 +256,9 @@ const MarketBox = ({
                       ).toFixed(2)
                   : ""}
               </span>
-              {![0, "0"].includes(bookRatioB) && (
+              {![0, "0"].includes(bookRatioA) && (
                 <span className="bookRatio">
-                  {parseFloat(bookRatioB).toFixed(2)}
+                  {`${parseFloat(bookRatioA).toFixed(2)}%`}
                 </span>
               )}
             </div>

@@ -57,6 +57,7 @@ const Games = () => {
   // );
 
   const [liveScoreBoardData, setLiveScoreBoardData] = useState(null);
+  const [showScore, setShowScore] = useState(false);
   const [errorCount, setErrorCount] = useState<number>(0);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 1199);
 
@@ -198,7 +199,7 @@ const Games = () => {
     } catch (e) {
       console.log(e);
     }
-  }, [location?.pathname, success, socket]);
+  }, [location?.pathname, success, socket, id]);
 
   useEffect(() => {
     try {
@@ -349,22 +350,26 @@ const Games = () => {
                           detail={matchDetails}
                           // data={matchDetails?.matchOdd}
                           teamARates={
-                            matchDetails?.profitLossDataMatch?.[
-                              profitLossDataForMatchConstants?.[
-                                matchDetails?.matchOdd?.type
-                              ]?.A +
-                                "_" +
-                                matchDetails?.id
-                            ] ?? 0
+                            matchDetails?.teamC
+                              ? 0
+                              : matchDetails?.profitLossDataMatch?.[
+                                  profitLossDataForMatchConstants?.[
+                                    matchDetails?.matchOdd?.type
+                                  ]?.A +
+                                    "_" +
+                                    matchDetails?.id
+                                ] ?? 0
                           }
                           teamBRates={
-                            matchDetails?.profitLossDataMatch?.[
-                              profitLossDataForMatchConstants?.[
-                                matchDetails?.matchOdd?.type
-                              ]?.B +
-                                "_" +
-                                matchDetails?.id
-                            ] ?? 0
+                            matchDetails?.teamC
+                              ? 0
+                              : matchDetails?.profitLossDataMatch?.[
+                                  profitLossDataForMatchConstants?.[
+                                    matchDetails?.matchOdd?.type
+                                  ]?.B +
+                                    "_" +
+                                    matchDetails?.id
+                                ] ?? 0
                           }
                         />
                       </Col>
@@ -384,22 +389,26 @@ const Games = () => {
                           detail={matchDetails}
                           // data={matchDetails?.matchOdd}
                           teamARates={
-                            matchDetails?.profitLossDataMatch?.[
-                              profitLossDataForMatchConstants?.[
-                                matchDetails?.bookmaker?.type
-                              ]?.A +
-                                "_" +
-                                matchDetails?.id
-                            ] ?? 0
+                            matchDetails?.teamC
+                              ? 0
+                              : matchDetails?.profitLossDataMatch?.[
+                                  profitLossDataForMatchConstants?.[
+                                    matchDetails?.bookmaker?.type
+                                  ]?.A +
+                                    "_" +
+                                    matchDetails?.id
+                                ] ?? 0
                           }
                           teamBRates={
-                            matchDetails?.profitLossDataMatch?.[
-                              profitLossDataForMatchConstants?.[
-                                matchDetails?.bookmaker?.type
-                              ]?.B +
-                                "_" +
-                                matchDetails?.id
-                            ] ?? 0
+                            matchDetails?.teamC
+                              ? 0
+                              : matchDetails?.profitLossDataMatch?.[
+                                  profitLossDataForMatchConstants?.[
+                                    matchDetails?.bookmaker?.type
+                                  ]?.B +
+                                    "_" +
+                                    matchDetails?.id
+                                ] ?? 0
                           }
                         />
                       </Col>
@@ -410,9 +419,9 @@ const Games = () => {
                       (item: any) =>
                         item?.isActive && item?.activeStatus === "live"
                     )
-                    ?.map((item: any) => {
+                    ?.map((item: any, index: number) => {
                       return (
-                        <Col md={12}>
+                        <Col md={12} key={index}>
                           <OtherMarket
                             title={item?.name}
                             box={
@@ -433,9 +442,9 @@ const Games = () => {
                       (item: any) =>
                         item?.isActive && item?.activeStatus === "live"
                     )
-                    ?.map((item: any) => {
+                    ?.map((item: any, index: number) => {
                       return (
-                        <Col md={12}>
+                        <Col md={12} key={index}>
                           <Tournament
                             title={item?.name}
                             box={
@@ -466,22 +475,26 @@ const Games = () => {
                           detail={matchDetails}
                           // data={matchDetails?.matchOdd}
                           teamARates={
-                            matchDetails?.profitLossDataMatch?.[
-                              profitLossDataForMatchConstants?.[
-                                matchDetails?.bookmaker2?.type
-                              ]?.A +
-                                "_" +
-                                matchDetails?.id
-                            ] ?? 0
+                            matchDetails?.teamC
+                              ? 0
+                              : matchDetails?.profitLossDataMatch?.[
+                                  profitLossDataForMatchConstants?.[
+                                    matchDetails?.bookmaker2?.type
+                                  ]?.A +
+                                    "_" +
+                                    matchDetails?.id
+                                ] ?? 0
                           }
                           teamBRates={
-                            matchDetails?.profitLossDataMatch?.[
-                              profitLossDataForMatchConstants?.[
-                                matchDetails?.bookmaker2?.type
-                              ]?.B +
-                                "_" +
-                                matchDetails?.id
-                            ] ?? 0
+                            matchDetails?.teamC
+                              ? 0
+                              : matchDetails?.profitLossDataMatch?.[
+                                  profitLossDataForMatchConstants?.[
+                                    matchDetails?.bookmaker2?.type
+                                  ]?.B +
+                                    "_" +
+                                    matchDetails?.id
+                                ] ?? 0
                           }
                         />
                       </Col>
@@ -491,29 +504,35 @@ const Games = () => {
                       (item: any) =>
                         item?.isActive && item?.activeStatus === "live"
                     )
-                    ?.map((item: any) => {
+                    ?.map((item: any, index: number) => {
                       return (
-                        <Col md={12}>
+                        <Col md={12} key={index}>
                           <ManualMarket
                             title={item?.name}
                             data={item}
                             detail={matchDetails}
                             // data={matchDetails?.matchOdd}
                             teamARates={
-                              matchDetails?.profitLossDataMatch?.[
-                                profitLossDataForMatchConstants?.[item?.type]
-                                  ?.A +
-                                  "_" +
-                                  matchDetails?.id
-                              ] ?? 0
+                              matchDetails?.teamC
+                                ? 0
+                                : matchDetails?.profitLossDataMatch?.[
+                                    profitLossDataForMatchConstants?.[
+                                      item?.type
+                                    ]?.A +
+                                      "_" +
+                                      matchDetails?.id
+                                  ] ?? 0
                             }
                             teamBRates={
-                              matchDetails?.profitLossDataMatch?.[
-                                profitLossDataForMatchConstants?.[item?.type]
-                                  ?.B +
-                                  "_" +
-                                  matchDetails?.id
-                              ] ?? 0
+                              matchDetails?.teamC
+                                ? 0
+                                : matchDetails?.profitLossDataMatch?.[
+                                    profitLossDataForMatchConstants?.[
+                                      item?.type
+                                    ]?.B +
+                                      "_" +
+                                      matchDetails?.id
+                                  ] ?? 0
                             }
                           />
                         </Col>
@@ -534,22 +553,26 @@ const Games = () => {
                           detail={matchDetails}
                           // data={matchDetails?.matchOdd}
                           teamARates={
-                            matchDetails?.profitLossDataMatch?.[
-                              profitLossDataForMatchConstants?.[
-                                matchDetails?.apiTideMatch2?.type
-                              ]?.A +
-                                "_" +
-                                matchDetails?.id
-                            ] ?? 0
+                            matchDetails?.teamC
+                              ? 0
+                              : matchDetails?.profitLossDataMatch?.[
+                                  profitLossDataForMatchConstants?.[
+                                    matchDetails?.apiTideMatch2?.type
+                                  ]?.A +
+                                    "_" +
+                                    matchDetails?.id
+                                ] ?? 0
                           }
                           teamBRates={
-                            matchDetails?.profitLossDataMatch?.[
-                              profitLossDataForMatchConstants?.[
-                                matchDetails?.apiTideMatch2?.type
-                              ]?.B +
-                                "_" +
-                                matchDetails?.id
-                            ] ?? 0
+                            matchDetails?.teamC
+                              ? 0
+                              : matchDetails?.profitLossDataMatch?.[
+                                  profitLossDataForMatchConstants?.[
+                                    matchDetails?.apiTideMatch2?.type
+                                  ]?.B +
+                                    "_" +
+                                    matchDetails?.id
+                                ] ?? 0
                           }
                         />
                       </Col>
@@ -571,24 +594,28 @@ const Games = () => {
                         detail={matchDetails}
                         // data={matchDetails?.matchOdd}
                         teamARates={
-                          matchDetails?.profitLossDataMatch?.[
-                            profitLossDataForMatchConstants?.[
-                              matchDetails?.manualTideMatch?.type ||
-                                matchDetails?.manualTiedMatch?.type
-                            ]?.A +
-                              "_" +
-                              matchDetails?.id
-                          ] ?? 0
+                          matchDetails?.teamC
+                            ? 0
+                            : matchDetails?.profitLossDataMatch?.[
+                                profitLossDataForMatchConstants?.[
+                                  matchDetails?.manualTideMatch?.type ||
+                                    matchDetails?.manualTiedMatch?.type
+                                ]?.A +
+                                  "_" +
+                                  matchDetails?.id
+                              ] ?? 0
                         }
                         teamBRates={
-                          matchDetails?.profitLossDataMatch?.[
-                            profitLossDataForMatchConstants?.[
-                              matchDetails?.manualTideMatch?.type ||
-                                matchDetails?.manualTiedMatch?.type
-                            ]?.B +
-                              "_" +
-                              matchDetails?.id
-                          ] ?? 0
+                          matchDetails?.teamC
+                            ? 0
+                            : matchDetails?.profitLossDataMatch?.[
+                                profitLossDataForMatchConstants?.[
+                                  matchDetails?.manualTideMatch?.type ||
+                                    matchDetails?.manualTiedMatch?.type
+                                ]?.B +
+                                  "_" +
+                                  matchDetails?.id
+                              ] ?? 0
                         }
                       />
                     </Col>
@@ -609,22 +636,26 @@ const Games = () => {
                           detail={matchDetails}
                           // data={matchDetails?.matchOdd}
                           teamARates={
-                            matchDetails?.profitLossDataMatch?.[
-                              profitLossDataForMatchConstants?.[
-                                matchDetails?.marketCompleteMatch1?.type
-                              ]?.A +
-                                "_" +
-                                matchDetails?.id
-                            ] ?? 0
+                            matchDetails?.teamC
+                              ? 0
+                              : matchDetails?.profitLossDataMatch?.[
+                                  profitLossDataForMatchConstants?.[
+                                    matchDetails?.marketCompleteMatch1?.type
+                                  ]?.A +
+                                    "_" +
+                                    matchDetails?.id
+                                ] ?? 0
                           }
                           teamBRates={
-                            matchDetails?.profitLossDataMatch?.[
-                              profitLossDataForMatchConstants?.[
-                                matchDetails?.marketCompleteMatch1?.type
-                              ]?.B +
-                                "_" +
-                                matchDetails?.id
-                            ] ?? 0
+                            matchDetails?.teamC
+                              ? 0
+                              : matchDetails?.profitLossDataMatch?.[
+                                  profitLossDataForMatchConstants?.[
+                                    matchDetails?.marketCompleteMatch1?.type
+                                  ]?.B +
+                                    "_" +
+                                    matchDetails?.id
+                                ] ?? 0
                           }
                         />
                       </Col>
@@ -639,22 +670,26 @@ const Games = () => {
                           detail={matchDetails}
                           // data={matchDetails?.matchOdd}
                           teamARates={
-                            matchDetails?.profitLossDataMatch?.[
-                              profitLossDataForMatchConstants?.[
-                                matchDetails?.manualCompleteMatch?.type
-                              ]?.A +
-                                "_" +
-                                matchDetails?.id
-                            ] ?? 0
+                            matchDetails?.teamC
+                              ? 0
+                              : matchDetails?.profitLossDataMatch?.[
+                                  profitLossDataForMatchConstants?.[
+                                    matchDetails?.manualCompleteMatch?.type
+                                  ]?.A +
+                                    "_" +
+                                    matchDetails?.id
+                                ] ?? 0
                           }
                           teamBRates={
-                            matchDetails?.profitLossDataMatch?.[
-                              profitLossDataForMatchConstants?.[
-                                matchDetails?.manualCompleteMatch?.type
-                              ]?.B +
-                                "_" +
-                                matchDetails?.id
-                            ] ?? 0
+                            matchDetails?.teamC
+                              ? 0
+                              : matchDetails?.profitLossDataMatch?.[
+                                  profitLossDataForMatchConstants?.[
+                                    matchDetails?.manualCompleteMatch?.type
+                                  ]?.B +
+                                    "_" +
+                                    matchDetails?.id
+                                ] ?? 0
                           }
                         />
                       </Col>
@@ -818,22 +853,26 @@ const Games = () => {
                           detail={matchDetails}
                           // data={matchDetails?.matchOdd}
                           teamARates={
-                            matchDetails?.profitLossDataMatch?.[
-                              profitLossDataForMatchConstants?.[
-                                matchDetails?.apiTideMatch?.type
-                              ]?.A +
-                                "_" +
-                                matchDetails?.id
-                            ] ?? 0
+                            matchDetails?.teamC
+                              ? 0
+                              : matchDetails?.profitLossDataMatch?.[
+                                  profitLossDataForMatchConstants?.[
+                                    matchDetails?.apiTideMatch?.type
+                                  ]?.A +
+                                    "_" +
+                                    matchDetails?.id
+                                ] ?? 0
                           }
                           teamBRates={
-                            matchDetails?.profitLossDataMatch?.[
-                              profitLossDataForMatchConstants?.[
-                                matchDetails?.apiTideMatch?.type
-                              ]?.B +
-                                "_" +
-                                matchDetails?.id
-                            ] ?? 0
+                            matchDetails?.teamC
+                              ? 0
+                              : matchDetails?.profitLossDataMatch?.[
+                                  profitLossDataForMatchConstants?.[
+                                    matchDetails?.apiTideMatch?.type
+                                  ]?.B +
+                                    "_" +
+                                    matchDetails?.id
+                                ] ?? 0
                           }
                         />
                       </Col>
@@ -853,22 +892,26 @@ const Games = () => {
                           detail={matchDetails}
                           // data={matchDetails?.matchOdd}
                           teamARates={
-                            matchDetails?.profitLossDataMatch?.[
-                              profitLossDataForMatchConstants?.[
-                                matchDetails?.marketCompleteMatch?.type
-                              ]?.A +
-                                "_" +
-                                matchDetails?.id
-                            ] ?? 0
+                            matchDetails?.teamC
+                              ? 0
+                              : matchDetails?.profitLossDataMatch?.[
+                                  profitLossDataForMatchConstants?.[
+                                    matchDetails?.marketCompleteMatch?.type
+                                  ]?.A +
+                                    "_" +
+                                    matchDetails?.id
+                                ] ?? 0
                           }
                           teamBRates={
-                            matchDetails?.profitLossDataMatch?.[
-                              profitLossDataForMatchConstants?.[
-                                matchDetails?.marketCompleteMatch?.type
-                              ]?.B +
-                                "_" +
-                                matchDetails?.id
-                            ] ?? 0
+                            matchDetails?.teamC
+                              ? 0
+                              : matchDetails?.profitLossDataMatch?.[
+                                  profitLossDataForMatchConstants?.[
+                                    matchDetails?.marketCompleteMatch?.type
+                                  ]?.B +
+                                    "_" +
+                                    matchDetails?.id
+                                ] ?? 0
                           }
                         />
                       </Col>
@@ -885,9 +928,18 @@ const Games = () => {
               )}
               <div className="my-2">
                 {/* <ScoreCard /> */}
-                {liveScoreBoardData && (
-                  <Iframe data={liveScoreBoardData} width="100%" />
-                )}
+                <div className="d-flex w-100 flex-column">
+                  <div
+                    className="w-100 d-flex justify-content-start title-15 text-white align-items-center f500 ps-2"
+                    style={{ height: "42px", backgroundColor: "#ffc742b3",cursor:"pointer" }}
+                    onClick={() => setShowScore(!showScore)}
+                  >
+                    Score Card
+                  </div>
+                  {showScore && liveScoreBoardData && (
+                    <Iframe data={liveScoreBoardData} width="100%" />
+                  )}
+                </div>
               </div>
               <GameUserBets matchId={id} />
             </Col>

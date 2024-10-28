@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Card, Nav, Tab, Table } from "react-bootstrap";
+import { Fragment, useState } from "react";
+import { Col, Row, Tab, Table, Button } from "react-bootstrap";
 // import CustomModal from "../../commonComponent/modal";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
@@ -8,171 +8,233 @@ import UserBetModalForm from "../../game/userBet/modal/form";
 import UserBetModalTable from "../../game/userBet/modal";
 import moment from "moment-timezone";
 import DeleteBetOverlay from "../../commonComponent/deleteBetRow";
+import { Nav } from "react-bootstrap";
 // import UserBetModalForm from "../../game/userBet/modal/form";
 // import UserBetModalTable from "../../game/userBet/modal";
 // import "../../otherGames/style.scss";
 const OtherUserBets = ({ matchId }: any) => {
   const [showModal, setShowModal] = useState(false);
-  const { placedBets,morePlacedBets } = useSelector(
+  const { placedBets, morePlacedBets } = useSelector(
     (state: RootState) => state.match.placeBets
   );
+  const [activeTab, setActiveTab] = useState("first");
+  const handleSelect = (selectedKey: any) => {
+    setActiveTab(selectedKey);
+  };
   return (
-    <>
-      <div>
-        <Card
-          className="m-b-10 scorecard responsive-card"
-          style={{ marginBottom: "0px" }}
-        >
-          <Card className="m-b-10 my-bet">
-            <Card.Header>
-              <Nav variant="tabs" defaultActiveKey="#matched-bet">
-                <Nav.Item>
-                  <Nav.Link
-                    eventKey="#matched-bet"
-                    className="nav-link-a active"
+    <div className={`userBets`}>
+      <Tab.Container id="left-tabs-example" defaultActiveKey="first">
+        <Row>
+          <Col sm={12}>
+            <div
+              className={`userBets-header bg-secondaryLight d-flex justify-content-between py-2 px-3`}
+            >
+              <div className="userBets-headerRight w-100 d-flex justify-content-between align-items-center ">
+                <div className="text-white text-start f600 title-14 p-0">
+                  MY BETS
+                </div>
+                <div className="d-flex flex-end">
+                  <Button
+                    variant="secondary"
+                    onClick={() => setShowModal(true)}
+                    style={{ height: "100%", color: "white" }}
                   >
-                    Matched {`(${placedBets.length})`}
-                  </Nav.Link>
-                </Nav.Item>
-              </Nav>
-              <a
-                href="javascript:void(0)"
-                className="nav-link-a btn btn-back float-right"
-                onClick={() => setShowModal(true)}
-              >
-                View More
-              </a>
-            </Card.Header>
-            <Card.Body>
+                    View More
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </Col>
+          <div className="userBets-headerLeft mt-1">
+            <Nav
+              activeKey={activeTab}
+              onSelect={handleSelect}
+              // variant="pills"
+              className="flex-row userBets-headerLeft-tabs"
+            >
+              <Nav.Item>
+                <Nav.Link
+                  className={`rounded-0 title-12 lh-1 ${
+                    activeTab === "first" ? "tab-new" : ""
+                  }`}
+                  eventKey="first"
+                >
+                  Matched{`(${placedBets?.length})`}
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link
+                  className={`rounded-0 title-12 lh-1 ${
+                    activeTab === "second" ? "tab-new" : ""
+                  }`}
+                  eventKey="second"
+                >
+                  Unmatched
+                </Nav.Link>
+              </Nav.Item>
+            </Nav>
+          </div>
+          <div>
+            <Col sm={12}>
               <Tab.Content>
-                <Tab.Pane eventKey="#matched-bet" className="active show">
-                  <div className="table-responsive">
-                    <Table
-                      id="matched"
-                      className="table coupon-table table-bordered table-striped"
-                    >
-                      <thead>
-                        <tr>
-                          <th>UserName</th>
-                          <th style={{ minWidth: "140px" }}>Nation</th>
-                          <th style={{ minWidth: "50px" }}>Rate</th>
-                          <th>Amount</th>
-                          <th>PlaceDate</th>
-                          <th>MatchDate</th>
-                          <th style={{ minWidth: "70px" }}>Gametype</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {placedBets?.length > 0 ? (
-                          placedBets?.map((bet: any) => {
-                            return (
-                              <tr key={bet?.id} className="position-relative">
-                                <td
-                                  className={
-                                    bet?.betType === "NO" ||
-                                    bet?.betType === "LAY"
-                                      ? "bg-red1"
-                                      : "bg-blue3"
-                                  }
-                                >
+                <Tab.Pane eventKey="first">
+                  <Table striped>
+                    <thead>
+                      <tr className="lh-1">
+                        <th style={{ minWidth: "1vw" }}>UserName</th>
+                        <th style={{ minWidth: "1vw" }}>Nation</th>
+                        <th
+                          className="text-right"
+                          style={{ minWidth: "0.5vw" }}
+                        >
+                          Rate
+                        </th>
+                        <th
+                          className="text-right text-end"
+                          style={{ minWidth: "1vw" }}
+                        >
+                          Amount
+                        </th>
+                        {/* <th>PlaceDate</th>
+                        <th>MatchDate</th>
+                        <th>Gametype</th> */}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {placedBets?.map((bet: any, index: number) => {
+                        return (
+                          <Fragment key={index}>
+                            <tr className="position-relative bet-table-right">
+                              <td
+                                className={
+                                  bet?.betType === "NO" ||
+                                  bet?.betType === "LAY"
+                                    ? "bg-red1"
+                                    : "bg-blue3"
+                                }
+                              >
+                                <div className="row">
+                                  <div className="col f500">
+                                    {" "}
+                                    {bet?.marketType}{" "}
+                                  </div>
+                                </div>
+
+                                <div className="col">
+                                  {" "}
                                   {bet?.user?.userName}
-                                </td>
-                                <td
-                                  className={
-                                    bet?.betType === "NO" ||
-                                    bet?.betType === "LAY"
-                                      ? "bg-red1"
-                                      : "bg-blue3"
-                                  }
-                                >
-                                  {bet?.marketBetType === "SESSION"
-                                    ? bet?.eventName
-                                    : bet?.teamName}
-                                </td>
-                                <td
-                                  className={
-                                    bet?.betType === "NO" ||
-                                    bet?.betType === "LAY"
-                                      ? "bg-red1"
-                                      : "bg-blue3"
-                                  }
-                                >
-                                  {bet?.odds}
-                                </td>
-                                <td
-                                  className={
-                                    bet?.betType === "NO" ||
-                                    bet?.betType === "LAY"
-                                      ? "bg-red1"
-                                      : "bg-blue3"
-                                  }
-                                >
-                                  {bet?.amount}
-                                </td>
-                                <td
-                                  className={
-                                    bet?.betType === "NO" ||
-                                    bet?.betType === "LAY"
-                                      ? "bg-red1"
-                                      : "bg-blue3"
-                                  }
-                                >
+                                </div>
+                              </td>
+                              <td
+                                className={
+                                  bet?.betType === "NO" ||
+                                  bet?.betType === "LAY"
+                                    ? "bg-red1"
+                                    : "bg-blue3"
+                                }
+                              >
+                                <br></br>
+                                {bet?.marketBetType === "SESSION"
+                                  ? bet?.eventName
+                                  : bet?.teamName}
+                              </td>
+                              <td
+                                className={
+                                  bet?.betType === "NO" ||
+                                  bet?.betType === "LAY"
+                                    ? "bg-red1"
+                                    : "bg-blue3"
+                                }
+                              >
+                                <br></br>
+                                {bet?.odds}
+                              </td>
+                              <td
+                                className={`${
+                                  bet?.betType === "NO" ||
+                                  bet?.betType === "LAY"
+                                    ? "bg-red1"
+                                    : "bg-blue3"
+                                }`}
+                              >
+                                <div className="col text-end">
                                   {moment(bet?.createdAt).format(
                                     "YYYY-MM-DD hh:mm:ss"
                                   )}
-                                </td>
-                                <td
-                                  className={
-                                    bet?.betType === "NO" ||
-                                    bet?.betType === "LAY"
-                                      ? "bg-red1"
-                                      : "bg-blue3"
-                                  }
-                                >
-                                  {moment(bet?.match?.startAt).format(
-                                    "YYYY-MM-DD hh:mm:ss"
-                                  )}
-                                </td>
-                                <td
-                                  className={
-                                    bet?.betType === "NO" ||
-                                    bet?.betType === "LAY"
-                                      ? "bg-red1"
-                                      : "bg-blue3"
-                                  }
-                                >
-                                  {bet?.eventType}
-                                </td>
-                                <DeleteBetOverlay title={bet?.deleteReason} />
-                              </tr>
-                            );
-                          })
-                        ) : (
-                          <tr>
-                            <td colSpan={7} className="text-center">
-                              No records found
-                            </td>
-                          </tr>
-                        )}
-                      </tbody>
-                    </Table>
-                  </div>
+                                </div>
+
+                                <div className="col  text-end">
+                                  {bet?.amount}
+                                </div>
+                              </td>
+                              {/* <td
+                                className={
+                                  bet?.betType === "NO" ||
+                                  bet?.betType === "LAY"
+                                    ? "bg-red1"
+                                    : "bg-blue3"
+                                }
+                              >
+                                {moment(bet?.match?.startAt).format(
+                                  "YYYY-MM-DD hh:mm:ss"
+                                )}
+                              </td> */}
+
+                              <DeleteBetOverlay title={bet?.deleteReason} />
+                            </tr>
+                            <tr>
+                              <td
+                                colSpan={4}
+                                style={{ height: "3px", padding: "0px" }}
+                              ></td>
+                            </tr>
+                          </Fragment>
+                        );
+                      })}
+                    </tbody>
+                  </Table>
+                </Tab.Pane>
+                <Tab.Pane eventKey="second">
+                  <Table className="coupon-table" striped>
+                    <thead>
+                      <tr>
+                        <th>UserName</th>
+                        <th>Nation</th>
+                        <th>Rate</th>
+                        <th>Amount</th>
+                        <th>MatchDate</th>
+                        <th>Gametype</th>
+                      </tr>
+                    </thead>
+                    <tbody className="bg-primary">
+                      {/* {UsreBetsData?.map((item) => ( */}
+                      {/* <tr>
+                      <td>UAccount</td>
+                      <td>India</td>
+                      <td>35</td>
+                      <td>100</td>
+                      <td>2023-11-14 15:15:08</td>
+                      <td>Match1</td>
+                    </tr> */}
+                      {/* ))} */}
+                    </tbody>
+                  </Table>
                 </Tab.Pane>
               </Tab.Content>
-            </Card.Body>
-          </Card>
-        </Card>
-        <CustomModal
-          customClass="modalFull-90"
-          show={showModal}
-          setShow={setShowModal}
-          title="View More Bet"
-        >
-          <UserBetModalForm customClass="mb-5" matchId={matchId} />
-          <UserBetModalTable list={morePlacedBets}/>
-        </CustomModal>
-      </div>
-    </>
+            </Col>
+          </div>
+        </Row>
+      </Tab.Container>
+      <CustomModal
+        customClass="modalFull-90"
+        show={showModal}
+        setShow={setShowModal}
+        title="View More Bet"
+      >
+        <UserBetModalForm customClass="mb-5" matchId={matchId} />
+        <UserBetModalTable list={morePlacedBets} />
+      </CustomModal>
+    </div>
   );
 };
 
