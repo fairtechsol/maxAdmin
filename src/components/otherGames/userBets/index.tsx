@@ -74,21 +74,21 @@ const OtherUserBets = ({ matchId }: any) => {
               </Nav.Item>
             </Nav>
           </div>
-          <div className="bet-head">
+          <div>
             <Col sm={12}>
               <Tab.Content>
                 <Tab.Pane eventKey="first">
-                  <Table className="" striped>
+                  <Table striped>
                     <thead>
                       <tr className="lh-1">
-                        <th style={{ minWidth: "90px" }}>UserName</th>
-                        <th style={{ minWidth: "120px" }}>Nation</th>
-                        <th className="text-right" style={{ minWidth: "50px" }}>
+                        <th style={{ minWidth: "1vw" }}>UserName</th>
+                        <th style={{ minWidth: "1vw" }}>Nation</th>
+                        <th className="text-right" style={{ minWidth: "0.5vw" }}>
                           Rate
                         </th>
                         <th
                           className="text-right text-end"
-                          style={{ minWidth: "90px" }}
+                          style={{ minWidth: "1vw" }}
                         >
                           Amount
                         </th>
@@ -103,7 +103,7 @@ const OtherUserBets = ({ matchId }: any) => {
                           <>
                             <tr
                               key={bet?.id}
-                              className="position-relative title-14"
+                              className="bet-table-right"
                             >
                               <td
                                 className={
