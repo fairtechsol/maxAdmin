@@ -23,7 +23,6 @@ interface Column {
 
 // Example usage
 const columns: Column[] = [
-  
   { id: "eventType", label: "Event Type" },
   { id: "eventName", label: "Event Name" },
   { id: "user.userName", label: "Username" },
@@ -87,10 +86,11 @@ const CurrentBets = () => {
         limit: rowPerPage,
         searchBy: "user.userName",
         keyword: keyword || "",
-        marketBetType: tab ,
+        marketBetType: tab,
       })
     );
-  }, [keyword, page, rowPerPage, sort,tab]);
+    console.log("tb", tab);
+  }, [keyword, page, rowPerPage, sort, tab]);
 
   const handleType = (type: any) => {
     setSelectType(type);
@@ -112,7 +112,7 @@ const CurrentBets = () => {
           limit: rowPerPage,
           searchBy: "user.userName",
           keyword: keyword || "",
-          marketBetType:  tab ,
+          marketBetType: tab,
         })
       );
       setCurrentPage(1);
@@ -143,15 +143,22 @@ const CurrentBets = () => {
     return item?.match?.startAt || item?.racingMatch?.startAt;
   };
 
-  console.log("ReportBetList", ReportBetList);
-  console.log("mapin", selectType2?.value);
+  const handleSelect = (k: any) => {
+    if (k === "tab1") {
+      setTab("neCARD");
+    } else if (k === "tab2") {
+      setTab("eqCARD");
+    }
+    console.log("Selected Tab Value:", tab);
+  };
+
   return (
-    <div className="p-2 pt-0" >
+    <div className="p-2 pt-0">
       <h5 className="title-22 fw-normal">Current Bets</h5>
 
-      <Tabs defaultActiveKey="tab1" id="betReportTabs">
+      <Tabs defaultActiveKey="tab1" id="betReportTabs" onSelect={handleSelect}>
         {/* Tab 1 */}
-        <Tab eventKey="tab1" title="Sports" onClick={() => setTab("neCARD")}>
+        <Tab eventKey="tab1" title="Sports">
           <Form onSubmit={(e) => handleLoad(e)} className="mt-1">
             <Row className="mb-4 d-flex align-items-center">
               <Col md={3}>
@@ -244,7 +251,7 @@ const CurrentBets = () => {
         </Tab>
 
         {/* Tab 2 */}
-        <Tab eventKey="tab2" title="Casino" onClick={() => setTab("eqCARD")}>
+        <Tab eventKey="tab2" title="Casino">
           {/* Render the same form and table, you can customize based on tab if necessary */}
           <Form onSubmit={(e) => handleLoad(e)} className="mt-1">
             <Row className="mb-4 d-flex align-items-center">
