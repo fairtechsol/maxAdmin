@@ -418,9 +418,9 @@ const Games = () => {
                       (item: any) =>
                         item?.isActive && item?.activeStatus === "live"
                     )
-                    ?.map((item: any) => {
+                    ?.map((item: any, index: number) => {
                       return (
-                        <Col md={12}>
+                        <Col md={12} key={index}>
                           <OtherMarket
                             title={item?.name}
                             box={
@@ -441,9 +441,9 @@ const Games = () => {
                       (item: any) =>
                         item?.isActive && item?.activeStatus === "live"
                     )
-                    ?.map((item: any) => {
+                    ?.map((item: any, index: number) => {
                       return (
-                        <Col md={12}>
+                        <Col md={12} key={index}>
                           <Tournament
                             title={item?.name}
                             box={
@@ -503,9 +503,9 @@ const Games = () => {
                       (item: any) =>
                         item?.isActive && item?.activeStatus === "live"
                     )
-                    ?.map((item: any) => {
+                    ?.map((item: any, index: number) => {
                       return (
-                        <Col md={12}>
+                        <Col md={12} key={index}>
                           <ManualMarket
                             title={item?.name}
                             data={item}
