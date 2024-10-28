@@ -293,7 +293,7 @@ const OtherGamesDetail = () => {
             <Col md={4}>
               {matchDetails?.eventId && (
                 <LiveStreamComponent
-                  url={`${liveStreamUrl}${matchDetails?.eventId}/${
+                  url={`${liveStreamUrl}${matchDetails?.eventId}&sportid=${
                     matchDetails?.matchType === "football" ? 1 : 2
                   }`}
                 />

@@ -62,7 +62,7 @@ function CustomBreadcrumb({ items, style }: Props) {
               left: 0,
               top: 0,
             }}
-            src={`${scoreBoardUrlMain}${matchDetails?.eventId}/${
+            src={`${scoreBoardUrlMain}${matchDetails?.eventId}&sportid=${
               matchDetails?.matchType === "football" ? "1" : "2"
             }`}
             title="Live Stream"
