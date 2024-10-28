@@ -28,7 +28,7 @@ const LoggedUserDetail = () => {
             />
           </Accordion.Header>
           <Accordion.Body>
-            <div className="text-white d-flex column">
+            <div className="text-white d-flex column justify-content-between">
               <Col lg={4}>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
                   <div className="col-md-6 title-14">
