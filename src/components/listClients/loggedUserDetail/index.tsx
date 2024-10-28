@@ -28,49 +28,49 @@ const LoggedUserDetail = () => {
             />
           </Accordion.Header>
           <Accordion.Body>
-            <div className="text-white d-flex column gap-5">
+            <div className="text-white d-flex column">
               <Col lg={4}>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
-                  <div className="col-md-8 title-14">
+                  <div className="col-md-6 title-14">
                     Upper Level Credit Reference:
                   </div>
-                  <div className="col-md-4 title-14">
+                  <div className="col-md-6 title-14">
                     {formatToINR(userBalanceList?.userCreditReference || 0)}
                   </div>
                 </div>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
-                  <div className="col-md-8 title-14">Total Master Balance</div>
-                  <div className="col-md-4 title-14">
+                  <div className="col-md-6 title-14">Total Master Balance</div>
+                  <div className="col-md-6 title-14">
                     {formatToINR(userBalanceList?.totalMasterBalance || 0)}
                   </div>
                 </div>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
-                  <div className="col-md-8 title-14">Available Balance:</div>
-                  <div className="col-md-4 title-14">
+                  <div className="col-md-6 title-14">Available Balance:</div>
+                  <div className="col-md-6 title-14">
                     {formatToINR(userBalanceList?.availableBalance || 0)}
                   </div>
                 </div>
               </Col>
               <Col lg={4}>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
-                  <div className="col-md-8 title-14">
+                  <div className="col-md-6 title-14">
                     Down level Occupy Balance:
                   </div>
-                  <div className="col-md-4 title-14">
+                  <div className="col-md-6 title-14">
                     {formatToINR(userBalanceList?.downLevelOccupyBalance || 0)}
                   </div>
                 </div>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
-                  <div className="col-md-8 title-14">Upper Level:</div>
-                  <div className="col-md-4 title-14">
+                  <div className="col-md-6 title-14">Upper Level:</div>
+                  <div className="col-md-6 title-14">
                     {formatToINR(userBalanceList?.upperLevelBalance || 0)}
                   </div>
                 </div>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
-                  <div className="col-md-8 title-14">
+                  <div className="col-md-6 title-14">
                     Available Balance With Profit/Loss:
                   </div>
-                  <div className="col-md-4 title-14">
+                  <div className="col-md-6 title-14">
                     {formatToINR(
                       userBalanceList?.availableBalanceWithProfitLoss || 0
                     )}
@@ -79,26 +79,26 @@ const LoggedUserDetail = () => {
               </Col>
               <Col lg={4}>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
-                  <div className="col-md-8 title-14">
+                  <div className="col-md-6 title-14">
                     Down Level Credit Reference:
                   </div>
-                  <div className="col-md-4 title-14">
+                  <div className="col-md-6 title-14">
                     {formatToINR(
                       userBalanceList?.downLevelCreditReference || 0
                     )}
                   </div>
                 </div>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
-                  <div className="col-md-8 title-14">
+                  <div className="col-md-6 title-14">
                     Down Level Profit/Loss :
                   </div>
-                  <div className="col-md-4 title-14">
+                  <div className="col-md-6 title-14">
                     {formatToINR(userBalanceList?.downLevelProfitLoss || 0)}
                   </div>
                 </div>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
-                  <div className="col-md-8 title-14">My Profit/Loss:</div>
-                  <div className="col-md-4 title-14">
+                  <div className="col-md-6 title-14">My Profit/Loss:</div>
+                  <div className="col-md-6 title-14">
                     {formatToINR(userBalanceList?.profitLoss || 0)}
                   </div>
                 </div>
