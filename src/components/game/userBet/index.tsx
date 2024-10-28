@@ -57,7 +57,7 @@ const UserBets = ({ matchId }: any) => {
                   }`}
                   eventKey="first"
                 >
-                  Matched{`(${placedBets.length})`}
+                  Matched{`(${placedBets?.length})`}
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item>

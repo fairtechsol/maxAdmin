@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Button, Col, Nav, Row, Tab, Table } from "react-bootstrap";
 import CustomModal from "../../commonComponent/modal";
 import "./style.scss";
@@ -56,7 +56,7 @@ const GameUserBets = ({ matchId }: any) => {
                   }`}
                   eventKey="first"
                 >
-                  Matched{`(${placedBets.length})`}
+                  Matched{`(${placedBets?.length})`}
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item>
@@ -97,11 +97,8 @@ const GameUserBets = ({ matchId }: any) => {
                     <tbody>
                       {placedBets?.map((bet: any) => {
                         return (
-                          <>
-                            <tr
-                              key={bet?.id}
-                              className="position-relative title-14"
-                            >
+                          <React.Fragment key={bet?.id}>
+                            <tr className="position-relative title-14">
                               <td
                                 className={
                                   bet?.betType === "NO" ||
@@ -153,7 +150,7 @@ const GameUserBets = ({ matchId }: any) => {
                                     ? "bg-red1"
                                     : "bg-blue3"
                                 }`}
-                              > 
+                              >
                                 <div className="col text-end">
                                   {moment(bet?.createdAt).format(
                                     "YYYY-MM-DD hh:mm:ss"
@@ -185,7 +182,7 @@ const GameUserBets = ({ matchId }: any) => {
                                 style={{ height: "3px", padding: "0px" }}
                               ></td>
                             </tr>
-                          </>
+                          </React.Fragment>
                         );
                       })}
                     </tbody>

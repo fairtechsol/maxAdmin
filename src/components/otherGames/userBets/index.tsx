@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Col, Row, Tab, Table,Button } from "react-bootstrap";
+import { Fragment, useState } from "react";
+import { Col, Row, Tab, Table, Button } from "react-bootstrap";
 // import CustomModal from "../../commonComponent/modal";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
@@ -14,7 +14,7 @@ import { Nav } from "react-bootstrap";
 // import "../../otherGames/style.scss";
 const OtherUserBets = ({ matchId }: any) => {
   const [showModal, setShowModal] = useState(false);
-  const { placedBets,morePlacedBets } = useSelector(
+  const { placedBets, morePlacedBets } = useSelector(
     (state: RootState) => state.match.placeBets
   );
   const [activeTab, setActiveTab] = useState("first");
@@ -59,7 +59,7 @@ const OtherUserBets = ({ matchId }: any) => {
                   }`}
                   eventKey="first"
                 >
-                  Matched{`(${placedBets.length})`}
+                  Matched{`(${placedBets?.length})`}
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item>
@@ -98,13 +98,10 @@ const OtherUserBets = ({ matchId }: any) => {
                       </tr>
                     </thead>
                     <tbody>
-                      {placedBets?.map((bet: any) => {
+                      {placedBets?.map((bet: any, index: number) => {
                         return (
-                          <>
-                            <tr
-                              key={bet?.id}
-                              className="position-relative title-14"
-                            >
+                          <Fragment key={index}>
+                            <tr className="position-relative title-14">
                               <td
                                 className={
                                   bet?.betType === "NO" ||
@@ -156,7 +153,7 @@ const OtherUserBets = ({ matchId }: any) => {
                                     ? "bg-red1"
                                     : "bg-blue3"
                                 }`}
-                              > 
+                              >
                                 <div className="col text-end">
                                   {moment(bet?.createdAt).format(
                                     "YYYY-MM-DD hh:mm:ss"
@@ -188,7 +185,7 @@ const OtherUserBets = ({ matchId }: any) => {
                                 style={{ height: "3px", padding: "0px" }}
                               ></td>
                             </tr>
-                          </>
+                          </Fragment>
                         );
                       })}
                     </tbody>
@@ -225,16 +222,16 @@ const OtherUserBets = ({ matchId }: any) => {
           </div>
         </Row>
       </Tab.Container>
-        <CustomModal
-          customClass="modalFull-90"
-          show={showModal}
-          setShow={setShowModal}
-          title="View More Bet"
-        >
-          <UserBetModalForm customClass="mb-5" matchId={matchId} />
-          <UserBetModalTable list={morePlacedBets}/>
-        </CustomModal>
-      </div>
+      <CustomModal
+        customClass="modalFull-90"
+        show={showModal}
+        setShow={setShowModal}
+        title="View More Bet"
+      >
+        <UserBetModalForm customClass="mb-5" matchId={matchId} />
+        <UserBetModalTable list={morePlacedBets} />
+      </CustomModal>
+    </div>
   );
 };
 
