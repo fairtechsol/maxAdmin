@@ -98,7 +98,7 @@ const GameUserBets = ({ matchId }: any) => {
                       {placedBets?.map((bet: any) => {
                         return (
                           <React.Fragment key={bet?.id}>
-                            <tr className="bet-table-right back-border">
+                            <tr className="position-relative bet-table-right back-border">
                               <td
                                 className={
                                   bet?.betType === "NO" ||

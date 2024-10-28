@@ -188,7 +188,7 @@ const OtherGamesDetail = () => {
     } catch (e) {
       console.log(e);
     }
-  }, [location?.pathname, success, socket]);
+  }, [location?.pathname, success, socket, id]);
 
   useEffect(() => {
     try {
