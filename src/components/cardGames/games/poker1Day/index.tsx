@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
-import { Col, Container, Row,Table } from "react-bootstrap";
+import { Col, Container, Row, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import "./style.scss";
 import { RootState } from "../../../../store/store";
@@ -92,7 +92,7 @@ const Poker1DayComponent = () => {
                   <DynamicTable
                     odds={dragonTigerDetail?.oddsData}
                     data={dragonTigerDetail}
-                    playerNum={[8, 9]}    
+                    playerNum={[8, 9]}
                   />
                 </div>
                 {/* <div style={{ width: "60%" }}>
@@ -123,7 +123,15 @@ const Poker1DayComponent = () => {
                 className="no-scrollbar"
                 style={{ height: "400px", overflow: "auto" }}
               >
-                 <div className="casino-title mt-2" style={{ position: "relative",textAlign:"center",fontSize:"16px",fontWeight:"600" }}>
+                <div
+                  className="casino-title mt-2"
+                  style={{
+                    position: "relative",
+                    textAlign: "center",
+                    fontSize: "16px",
+                    fontWeight: "600",
+                  }}
+                >
                   <span>Rules</span>
                 </div>
                 <div className="table-responsive rules-table lh-1">

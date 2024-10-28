@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Button, Col, Nav, Row, Tab, Table } from "react-bootstrap";
 import CustomModal from "../../commonComponent/modal";
 import "./style.scss";
@@ -56,7 +56,7 @@ const GameUserBets = ({ matchId }: any) => {
                   }`}
                   eventKey="first"
                 >
-                  Matched{`(${placedBets.length})`}
+                  Matched{`(${placedBets?.length})`}
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item>
@@ -71,21 +71,21 @@ const GameUserBets = ({ matchId }: any) => {
               </Nav.Item>
             </Nav>
           </div>
-          <div className="bet-head">
+          <div>
             <Col sm={12}>
               <Tab.Content>
                 <Tab.Pane eventKey="first">
-                  <Table className="" striped>
+                  <Table striped>
                     <thead>
                       <tr className="lh-1">
-                        <th style={{ minWidth: "90px" }}>UserName</th>
-                        <th style={{ minWidth: "120px" }}>Nation</th>
-                        <th className="text-right" style={{ minWidth: "50px" }}>
+                        <th style={{ minWidth: "1vw" }}>UserName</th>
+                        <th style={{ minWidth: "1vw" }}>Nation</th>
+                        <th className="text-right" style={{ minWidth: ".5vw" }}>
                           Rate
                         </th>
                         <th
                           className="text-right text-end"
-                          style={{ minWidth: "90px" }}
+                          style={{ minWidth: "1vw" }}
                         >
                           Amount
                         </th>
@@ -97,11 +97,8 @@ const GameUserBets = ({ matchId }: any) => {
                     <tbody>
                       {placedBets?.map((bet: any) => {
                         return (
-                          <>
-                            <tr
-                              key={bet?.id}
-                              className="position-relative title-14"
-                            >
+                          <React.Fragment key={bet?.id}>
+                            <tr className="position-relative bet-table-right back-border">
                               <td
                                 className={
                                   bet?.betType === "NO" ||
@@ -113,7 +110,7 @@ const GameUserBets = ({ matchId }: any) => {
                                 <div className="row">
                                   <div className="col f500">
                                     {" "}
-                                    {bet?.marketType}{" "}
+                                    {bet?.bettingName}{" "}
                                   </div>
                                 </div>
 
@@ -153,7 +150,7 @@ const GameUserBets = ({ matchId }: any) => {
                                     ? "bg-red1"
                                     : "bg-blue3"
                                 }`}
-                              > 
+                              >
                                 <div className="col text-end">
                                   {moment(bet?.createdAt).format(
                                     "YYYY-MM-DD hh:mm:ss"
@@ -185,7 +182,7 @@ const GameUserBets = ({ matchId }: any) => {
                                 style={{ height: "3px", padding: "0px" }}
                               ></td>
                             </tr>
-                          </>
+                          </React.Fragment>
                         );
                       })}
                     </tbody>

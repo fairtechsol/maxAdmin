@@ -57,6 +57,7 @@ const Games = () => {
   // );
 
   const [liveScoreBoardData, setLiveScoreBoardData] = useState(null);
+  const [showScore, setShowScore] = useState(false);
   const [errorCount, setErrorCount] = useState<number>(0);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 1199);
 
@@ -198,7 +199,7 @@ const Games = () => {
     } catch (e) {
       console.log(e);
     }
-  }, [location?.pathname, success, socket]);
+  }, [location?.pathname, success, socket, id]);
 
   useEffect(() => {
     try {
@@ -418,9 +419,9 @@ const Games = () => {
                       (item: any) =>
                         item?.isActive && item?.activeStatus === "live"
                     )
-                    ?.map((item: any) => {
+                    ?.map((item: any, index: number) => {
                       return (
-                        <Col md={12}>
+                        <Col md={12} key={index}>
                           <OtherMarket
                             title={item?.name}
                             box={
@@ -441,9 +442,9 @@ const Games = () => {
                       (item: any) =>
                         item?.isActive && item?.activeStatus === "live"
                     )
-                    ?.map((item: any) => {
+                    ?.map((item: any, index: number) => {
                       return (
-                        <Col md={12}>
+                        <Col md={12} key={index}>
                           <Tournament
                             title={item?.name}
                             box={
@@ -503,9 +504,9 @@ const Games = () => {
                       (item: any) =>
                         item?.isActive && item?.activeStatus === "live"
                     )
-                    ?.map((item: any) => {
+                    ?.map((item: any, index: number) => {
                       return (
-                        <Col md={12}>
+                        <Col md={12} key={index}>
                           <ManualMarket
                             title={item?.name}
                             data={item}
@@ -927,9 +928,18 @@ const Games = () => {
               )}
               <div className="my-2">
                 {/* <ScoreCard /> */}
-                {liveScoreBoardData && (
-                  <Iframe data={liveScoreBoardData} width="100%" />
-                )}
+                <div className="d-flex w-100 flex-column">
+                  <div
+                    className="w-100 d-flex justify-content-start title-15 text-white align-items-center f500 ps-2"
+                    style={{ height: "42px", backgroundColor: "#ffc742b3",cursor:"pointer" }}
+                    onClick={() => setShowScore(!showScore)}
+                  >
+                    Score Card
+                  </div>
+                  {showScore && liveScoreBoardData && (
+                    <Iframe data={liveScoreBoardData} width="100%" />
+                  )}
+                </div>
               </div>
               <GameUserBets matchId={id} />
             </Col>
