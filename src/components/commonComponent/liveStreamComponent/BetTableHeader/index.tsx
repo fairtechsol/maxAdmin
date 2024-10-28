@@ -29,13 +29,10 @@ function BetTableHeader({
         padding ? padding : "px-2"
       } ${customClass ?? ""}
       `}
-      style={{ ...inlineStyle,cursor: "pointer" }}
+      style={{ ...inlineStyle, cursor: "pointer" }}
       onClick={() => setShowVideo((prev: boolean) => !prev)}
     >
-      <span
-        className={`text-black ${customTextClass ?? "title-15 f700"}`}
-        
-      >
+      <span className={`text-black ${customTextClass ?? "title-15 f700"}`}>
         {title}
       </span>
 
