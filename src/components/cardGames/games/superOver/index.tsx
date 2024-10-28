@@ -43,8 +43,8 @@ const SuperOverComponent = () => {
               </span>
             </div>
             <div>
-              {scoreBoardData?.data && (
-                <ScoreBoard data={scoreBoardData?.data} />
+              {scoreBoardData && (
+                <ScoreBoard data={scoreBoardData} />
               )}
             </div>
             <div
