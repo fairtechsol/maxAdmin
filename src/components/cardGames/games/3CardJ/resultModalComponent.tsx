@@ -4,6 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./style.scss";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
+import ResultBetList from "../../../commonComponent/resultBetList";
 interface Props {
   data: {
     C1: string;
@@ -80,6 +81,14 @@ const CardJResultComponent: React.FC<Props> = ({ data }: any) => {
           </div>
         </div>
       </div>
+      {data?.bets?.count > 0 && (
+        <div className="w-100 m-2">
+          <ResultBetList
+            bets={data?.bets?.rows ?? 12}
+            total={data?.bets?.count}
+          />
+        </div>
+      )}
     </Container>
   );
 };
