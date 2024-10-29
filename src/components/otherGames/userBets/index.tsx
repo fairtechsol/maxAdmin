@@ -146,6 +146,9 @@ const OtherUserBets = ({ matchId }: any) => {
                                     : "bg-blue3"
                                 }
                               >
+                                  {moment(bet?.createdAt).format(
+                                  "DD-MM-YYYY"
+                                )}
                                 <br></br>
                                 {bet?.odds}
                               </td>
@@ -157,28 +160,15 @@ const OtherUserBets = ({ matchId }: any) => {
                                     : "bg-blue3"
                                 }`}
                               >
-                                <div className="col text-end">
-                                  {moment(bet?.createdAt).format(
-                                    "YYYY-MM-DD hh:mm:ss"
-                                  )}
-                                </div>
-
-                                <div className="col  text-end">
-                                  {bet?.amount}
+                              <div className="bet-amount text-end">
+                                  <span className="bet-time text-end">
+                                    {moment(bet?.createdAt).format("hh:mm:ss")}
+                                  </span>
+                                  <div className="col  text-end">
+                                    {bet?.amount}
+                                  </div>
                                 </div>
                               </td>
-                              {/* <td
-                                className={
-                                  bet?.betType === "NO" ||
-                                  bet?.betType === "LAY"
-                                    ? "bg-red1"
-                                    : "bg-blue3"
-                                }
-                              >
-                                {moment(bet?.match?.startAt).format(
-                                  "YYYY-MM-DD hh:mm:ss"
-                                )}
-                              </td> */}
 
                               <DeleteBetOverlay title={bet?.deleteReason} />
                             </tr>
