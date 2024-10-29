@@ -140,8 +140,11 @@ const GameUserBets = ({ matchId }: any) => {
                                     : "bg-blue3"
                                 }
                               >
+                                {" "}
+                                  {moment(bet?.createdAt).format("DD-MM-YYYY")}
+                        
                                 <br></br>
-                                {bet?.odds}
+                                {bet?.odds}{" "}
                               </td>
                               <td
                                 className={`${
@@ -151,14 +154,13 @@ const GameUserBets = ({ matchId }: any) => {
                                     : "bg-blue3"
                                 }`}
                               >
-                                <div className="col text-end">
-                                  {moment(bet?.createdAt).format(
-                                    "YYYY-MM-DD hh:mm:ss"
-                                  )}
-                                </div>
-
-                                <div className="col  text-end">
-                                  {bet?.amount}
+                                <div className="bet-amount text-end">
+                                  <span className="bet-time text-end">
+                                    {moment(bet?.createdAt).format("hh:mm:ss")}
+                                  </span>
+                                  <div className="col  text-end">
+                                    {bet?.amount}
+                                  </div>
                                 </div>
                               </td>
                               {/* <td

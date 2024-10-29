@@ -392,6 +392,25 @@ const CardResultBox = ({ data, name, type }: any) => {
                     ? name?.[1]
                     : name?.[2]}
                 </span>
+              ) : type === "superover" ? (
+                <span
+                  style={{
+                    fontSize: "16px",
+                    fontWeight: "600",
+                    color:
+                      item?.result === "1"
+                        ? "#ff4500"
+                        : item?.result === "2"
+                        ? "#ffff33"
+                        : "#ffffff",
+                  }}
+                >
+                  {item?.result === "1"
+                    ? name?.[0]
+                    : item?.result === "2"
+                    ? name?.[1]
+                    : name?.[2]}
+                </span>
               ) : (
                 <span
                   style={{

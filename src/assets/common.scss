@@ -1274,3 +1274,40 @@ th {
       font-size: 10px; /* Adjust font size for tablets */
     }
   }
+
+
+  .bet-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .bet-date,
+  .bet-odds {
+    display: inline-block;
+    font-size: 14px;
+  }
+  
+  @media (min-width: 768px) {
+    .bet-info {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    .bet-date {
+      margin-right: 10px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .bet-info {
+      flex-direction: column;
+    }
+    .bet-date {
+      display: block;
+    }
+    .bet-amount {
+      margin-top: 5px;
+    }
+  }
+  
+
+  
