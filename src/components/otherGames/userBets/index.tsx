@@ -4,11 +4,12 @@ import { Col, Row, Tab, Table, Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import CustomModal from "../../commonComponent/modal";
-import UserBetModalForm from "../../game/userBet/modal/form";
-import UserBetModalTable from "../../game/userBet/modal";
+// import UserBetModalForm from "../../game/userBet/modal/form";
+// import UserBetModalTable from "../../game/userBet/modal";
 import moment from "moment-timezone";
 import DeleteBetOverlay from "../../commonComponent/deleteBetRow";
 import { Nav } from "react-bootstrap";
+import UserBetModalForm2 from "../../game/userBet/modal/form2";
 // import UserBetModalForm from "../../game/userBet/modal/form";
 // import UserBetModalTable from "../../game/userBet/modal";
 // import "../../otherGames/style.scss";
@@ -221,8 +222,9 @@ const OtherUserBets = ({ matchId }: any) => {
         setShow={setShowModal}
         title="View More Bet"
       >
-        <UserBetModalForm customClass="mb-5" matchId={matchId} />
-        <UserBetModalTable list={morePlacedBets} />
+        <UserBetModalForm2 customClass="mb-5" matchId={matchId} 
+          morePlacedBets={morePlacedBets}/>
+        {/* <UserBetModalTable list={morePlacedBets} /> */}
       </CustomModal>
     </div>
   );

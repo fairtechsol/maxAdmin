@@ -6,7 +6,8 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import DeleteBetOverlay from "../../commonComponent/deleteBetRow";
 import moment from "moment-timezone";
-import UserBetModalForm from "../userBet/modal/form";
+// import UserBetModalForm from "../userBet/modal/form";
+import UserBetModalForm2 from "../userBet/modal/form2";
 
 const GameUserBets = ({ matchId }: any) => {
   const { placedBets, morePlacedBets } = useSelector(
@@ -227,7 +228,7 @@ const GameUserBets = ({ matchId }: any) => {
         setShow={setShowModal}
         title="View More Bet"
       >
-        <UserBetModalForm
+        <UserBetModalForm2
           customClass="mb-5"
           matchId={matchId}
           morePlacedBets={morePlacedBets}
