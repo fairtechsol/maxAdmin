@@ -77,7 +77,7 @@ const UserBets = ({ matchId }: any) => {
             <Col sm={12}>
               <Tab.Content>
                 <Tab.Pane eventKey="first">
-                  <Table striped>
+                  <Table>
                     <thead>
                       <tr className="lh-1">
                         <th style={{ minWidth: "15vw" }}>UserName</th>
