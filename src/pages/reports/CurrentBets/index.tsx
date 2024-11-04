@@ -36,7 +36,7 @@ const columns: Column[] = [
 
 const options = [
   { value: "PENDING", label: "Matched" },
-  { value: "UNMATCHED", label: "UnMatched" },
+  // { value: "UNMATCHED", label: "UnMatched" },
   { value: "DELETED", label: "Deleted" },
 ];
 
@@ -87,9 +87,9 @@ const CurrentBets = () => {
         searchBy: "user.userName",
         keyword: keyword || "",
         marketBetType: tab,
+        // betType: "BACK",
       })
     );
-    console.log("tb", tab);
   }, [keyword, page, rowPerPage, sort, tab]);
 
   const handleType = (type: any) => {
@@ -113,6 +113,7 @@ const CurrentBets = () => {
           searchBy: "user.userName",
           keyword: keyword || "",
           marketBetType: tab,
+          // betType: "BACK",
         })
       );
       setCurrentPage(1);
@@ -160,7 +161,7 @@ const CurrentBets = () => {
         {/* Tab 1 */}
         <Tab eventKey="tab1" title="Sports">
           <Form onSubmit={(e) => handleLoad(e)} className="mt-1">
-            <Row className="mb-4 d-flex align-items-center">
+            <Row className="d-flex align-items-center">
               <Col md={3}>
                 <SelectSearch2
                   defaultValue={"PENDING"}
@@ -169,6 +170,10 @@ const CurrentBets = () => {
                   value={selectType}
                   onChange={handleType}
                 />
+              </Col>
+            </Row>
+            <Row className="d-flex align-items-center">
+              <Col md={3}>
                 <SelectSearch3
                   defaultValue={"ALL"}
                   options={options2}
@@ -177,11 +182,20 @@ const CurrentBets = () => {
                   onChange={handleType2}
                 />
               </Col>
-              <Col md={2} className="d-flex align-items-center">
-                <Form.Label className="invisible d-block mt-1">
-                  Label
-                </Form.Label>
+              <Col md={2}>
                 <Button type="submit">Load</Button>
+              </Col>
+              <Col md={{ span: 4 }} />
+              <Col md={3} className="text-end">
+                <span>
+                  {`Total Soda: ${
+                    ReportBetList?.rows?.length
+                  } Total Amount: ${parseFloat(
+                    ReportBetList?.rows?.reduce((acc: any, match: any) => {
+                      return acc + +match?.amount;
+                    }, 0) || "0.00"
+                  ).toFixed(2)}`}
+                </span>
               </Col>
             </Row>
           </Form>
@@ -227,8 +241,8 @@ const CurrentBets = () => {
                       className={isBackBet ? "back-border" : "lay-border"}
                     >
                       {columns.map((column: any, columnIndex: number) => (
-                        <td 
-                        style={{fontSize: "14px"}}
+                        <td
+                          style={{ fontSize: "14px" }}
                           key={columnIndex}
                           className={isBackBet ? "back-border" : "lay-border"}
                         >
