@@ -115,6 +115,7 @@ const CasinoWarResultComponent: React.FC<Props> = ({ data }) => {
         </div>
       )}
     </Container>
+    
   );
 };
 
