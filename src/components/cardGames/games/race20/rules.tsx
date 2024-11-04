@@ -1,9 +1,9 @@
 import React from "react";
-import { superOverRules } from "../../../../assets";
+import { race20rules } from "../../../../assets";
 const Race20Rules = () => {
   return (
     <div className="ball-rules-section-container p-2">
-      <img className="w-50 h-50" src={superOverRules} alt="reks"/>
+      <img className="w-50 h-50" src={race20rules} alt="reks"/>
     </div>
   );
 };

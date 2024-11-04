@@ -44,7 +44,11 @@ export const betReportAccountList = createAsyncThunk<any, any>(
           requestData.page || 1
         }&limit=${requestData.limit || 15}&searchBy=${
           requestData.searchBy ?? ""
-        }&keyword=${requestData.keyword ?? ""}&isCurrentBets=${true}&marketBetType=${requestData.marketBetType ?? ""}`
+        }&keyword=${
+          requestData.keyword ?? ""
+        }&isCurrentBets=${true}&marketBetType=${
+          requestData.marketBetType ?? ""
+        }${requestData.betType ? "&betType=eq" + requestData.betType : ""}`
       );
       if (resp?.data) {
         return resp?.data;

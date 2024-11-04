@@ -1213,7 +1213,7 @@ export const gameRulesComponents: any = {
   teen8: <TeenpattiRules />,
   poker6: <PokerRules />,
   poker20: <PokerRules />,
-  poker1: <PokerRules />,
+  poker: <PokerRules />,
   abj: <AndarBaharRules />,
   lucky7: <Lucky7Rules />,
   lucky7eu: <Lucky7Rules />,

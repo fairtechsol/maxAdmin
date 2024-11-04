@@ -18,6 +18,7 @@ interface GetUsers {
   sort?: any;
   order?: any;
   userId?: string;
+  activeTab?: string;
 }
 interface SearchUsers {
   userName?: string;
@@ -45,7 +46,11 @@ export const getUsers = createAsyncThunk<any, GetUsers | undefined>(
           requestData?.userName ? requestData?.userName : ""
         }${requestData?.page ? `&page=${requestData.page}` : ""}${
           requestData?.limit ? `&limit=${requestData.limit}` : ""
-        }&sort=${requestData?.sort}:${requestData?.order}`
+        }&sort=${requestData?.sort}:${requestData?.order}${
+          requestData?.activeTab === "active"
+            ? "&user.betBlock=false&userBlock=eqfalse"
+            : "&orVal=user.betBlock=true|or|userBlock=eqtrue"
+        }`
       );
       if (resp) {
         return resp?.data;
@@ -328,6 +333,12 @@ export const handleExport = createAsyncThunk<any, any>(
         }${requestData?.searchBy ? `&searchBy=${requestData?.searchBy}` : ""}${
           requestData?.keyword || requestData?.userName
             ? `&keyword=${requestData?.keyword || requestData?.userName}`
+            : ""
+        }${
+          requestData?.activeTab
+            ? requestData?.activeTab === "active"
+              ? "&user.betBlock=false&userBlock=eqfalse"
+              : "&orVal=user.betBlock=true|or|userBlock=eqtrue"
             : ""
         }`
       );

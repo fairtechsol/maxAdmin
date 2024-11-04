@@ -41,10 +41,10 @@ const SearchBox: React.FC<SearchBoxProps> = ({ value, onSearch,load }:any) => {
   return (
     <Form.Group
       controlId="searchBox"
-      className="tableSearchBox mb-3 d-flex align-items-center mr-4"
-      style={{marginRight:"20px"}}
+      className="tableSearchBox mb-3 mt-2 d-flex align-items-center mr-4"
+      // style={{marginRight:"20px"}}
     >
-      <Form.Label className="mb-0">Search:</Form.Label>
+      <Form.Label className="mb-0 me-2">Search:</Form.Label>
       <InputGroup>
       {load ? <FormControl
           value={keyword}
