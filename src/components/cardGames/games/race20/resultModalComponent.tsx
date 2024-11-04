@@ -7,6 +7,7 @@ import { ImDiamonds } from "react-icons/im";
 import "./style.scss";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
 import Winner from "../../../commonComponent/trophyWinner";
+import ResultBetList from "../../../commonComponent/resultBetList";
 interface Props {
   data: {
     C1: string;
@@ -180,6 +181,14 @@ const Race20ResultComponent: React.FC<Props> = ({ data }: any) => {
           </div>
         </div>
       </div>
+      {data?.bets?.count > 0 && (
+        <div className="w-100 m-2">
+          <ResultBetList
+            bets={data?.bets?.rows ?? 12}
+            total={data?.bets?.count}
+          />
+        </div>
+      )}
     </Container>
   );
 };
