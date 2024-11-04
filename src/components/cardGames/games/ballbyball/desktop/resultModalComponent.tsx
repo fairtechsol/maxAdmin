@@ -1,6 +1,7 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 import "./style.scss";
+import ResultBetList from "../../../../commonComponent/resultBetList";
 interface Props {
   data: {
     C1: string;
@@ -25,6 +26,14 @@ const BallByBallResultComponent: React.FC<Props> = ({ data }: any) => {
           </div>
         )}
       </div>
+      {data?.bets?.count > 0 && (
+        <div className="w-100 m-2">
+          <ResultBetList
+            bets={data?.bets?.rows ?? 12}
+            total={data?.bets?.count}
+          />
+        </div>
+      )}
     </Container>
   );
 };

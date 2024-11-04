@@ -2,6 +2,7 @@ import React from "react";
 import { Container } from "react-bootstrap";
 import "./style.scss";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
+import ResultBetList from "../../../commonComponent/resultBetList";
 interface Props {
   data: {
     C1: string;
@@ -58,6 +59,15 @@ const CricketMatch20ResultComponent: React.FC<Props> = ({ data }: any) => {
       >
         Run {data?.result?.win}
       </div>
+
+      {data?.bets?.count > 0 && (
+        <div className="w-100 m-2">
+          <ResultBetList
+            bets={data?.bets?.rows ?? 12}
+            total={data?.bets?.count}
+          />
+        </div>
+      )}
     </Container>
   );
 };

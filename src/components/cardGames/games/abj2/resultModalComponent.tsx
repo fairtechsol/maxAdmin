@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
 import "./style.scss";
 import Winner from "../../../commonComponent/trophyWinner";
+import ResultBetList from "../../../commonComponent/resultBetList";
 interface Props {
   data: {
     C1: string;
@@ -96,9 +97,9 @@ const AbjResultComponent: React.FC<Props> = ({ data }: any) => {
             <div style={{ display: "flex", flexDirection: "row" }}>
               <div style={{ width: "70%", marginRight: "5px" }}>
                 {data?.result?.win === "1" && (
-                 <div className="casino-winner-icon">
-                 <Winner />
-               </div>
+                  <div className="casino-winner-icon">
+                    <Winner />
+                  </div>
                 )}
               </div>
               <div style={{ width: "30%" }}>
@@ -119,9 +120,9 @@ const AbjResultComponent: React.FC<Props> = ({ data }: any) => {
             <div style={{ display: "flex", flexDirection: "row" }}>
               <div style={{ width: "70%", marginRight: "5px" }}>
                 {data?.result?.win === "2" && (
-                <div className="casino-winner-icon">
-                <Winner />
-              </div>
+                  <div className="casino-winner-icon">
+                    <Winner />
+                  </div>
                 )}
               </div>
               <div style={{ width: "30%" }}>
@@ -215,6 +216,14 @@ const AbjResultComponent: React.FC<Props> = ({ data }: any) => {
           </div>
         </div>
       </div>
+      {data?.bets?.count > 0 && (
+        <div className="w-100 m-2">
+          <ResultBetList
+            bets={data?.bets?.rows ?? 12}
+            total={data?.bets?.count}
+          />
+        </div>
+      )}
     </Container>
   );
 };
