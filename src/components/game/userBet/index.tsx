@@ -103,7 +103,7 @@ const UserBets = ({ matchId }: any) => {
                       {placedBets?.map((bet: any, index: number) => {
                         return (
                           <Fragment key={index}>
-                            <tr className="position-relative bet-table-right">
+                            <tr className="position-relative bet-table-right lh-1">
                               <td
                                 className={
                                   bet?.betType === "NO" ||

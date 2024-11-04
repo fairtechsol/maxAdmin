@@ -1019,6 +1019,12 @@ th {
     // flex-direction: column !important;
     flex-wrap: nowrap;
   }
+  .bet-table-right{
+    font-size: 11px;
+  }
+  .custom-modal-content{
+    width: 100% !important; 
+  }
 }
 
 /* Styles for width 1200px to 1399px */
@@ -1087,6 +1093,12 @@ th {
   }
   .sessionMinMaxFont{
     font-size: 9px !important;
+  }
+  .bet-table-right{
+    font-size: 12px;
+  }
+  .custom-modal-content{
+    width: 100% !important; 
   }
 }
 
@@ -1312,4 +1324,47 @@ th {
   }
   
 
-  
+  /* Overlay styling */
+.custom-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh !important;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1050;
+}
+
+.custom-modal-content {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%); /* Center horizontally */
+  background-color: #fff;
+  width: 50%; /* Adjust width as needed */
+  max-width: 90%; /* Limit max width */
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 1051;
+  margin-top: 60px; /* Optional: add margin from the top */
+}
+
+/* Header styling */
+.custom-modal-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+}
+
+/* Close button styling */
+.close-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+}
+
