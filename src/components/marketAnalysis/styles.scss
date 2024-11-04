@@ -38,6 +38,9 @@
   height: inherit;
   max-width: inherit;
   max-height: inherit;
+  .table th {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
 }
 
 .market-analysis-container .table {
