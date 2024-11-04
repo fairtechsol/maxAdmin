@@ -40,6 +40,7 @@ const ListActiveInactiveUser: React.FC = () => {
   const { id, type } = useParams();
   const dispatch: AppDispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
+  const [activeTab, setActiveTab] = useState("active");
   const [tableConfig, setTableConfig] = useState<any>({
     keyword: "",
     page: 1,
@@ -51,9 +52,7 @@ const ListActiveInactiveUser: React.FC = () => {
     eventId: null,
     userData: null,
   });
-  const [activeUser, setActiveUser] = useState<any>([]);
   const [value, setValue] = useState<any>(25);
-  const [deactiveUser, setDeactiveUser] = useState<any>([]);
   const [keyword, setKeyWord] = useState<any>("");
   const [sort, setSort] = useState<any>({
     direction: "ASC",
@@ -66,32 +65,6 @@ const ListActiveInactiveUser: React.FC = () => {
       userData: userData,
     });
   };
-  useEffect(() => {
-    if (id) {
-      dispatch(
-        getUsers({
-          userId: id,
-          page: tableConfig?.page || 1,
-          limit: value,
-          userName: keyword || "",
-          sort: sort?.key || "",
-          order: sort?.direction || "DESC",
-        })
-      );
-    }
-  }, [id, keyword, sort,value]);
-
-  useEffect(() => {
-    if (keyword !== tableConfig?.keyword) {
-      setKeyWord(tableConfig?.keyword);
-    }
-    if (
-      sort.direction !== tableConfig?.sort?.direction ||
-      sort.key !== tableConfig?.sort?.key
-    ) {
-      setSort(tableConfig?.sort);
-    }
-  }, [tableConfig]);
 
   const actionButtons = [
     {
@@ -132,9 +105,27 @@ const ListActiveInactiveUser: React.FC = () => {
   ];
 
   const { userList } = useSelector((state: RootState) => state.user.userList);
+  const [localUserList, setLocalUserList] = useState([]);
   // const { totalBalance } = useSelector(
   //   (state: RootState) => state.user.profile
   // );
+
+  const sortData = (key: string) => {
+    let array = [...localUserList];
+
+    if (array[0][key] > array[array?.length - 1][key]) {
+      array.sort((a: any, b: any) => a[key] - b[key]);
+    } else {
+      array.sort((a: any, b: any) => b[key] - a[key]);
+    }
+
+    setLocalUserList(array);
+  };
+  const handleSearch = (keyword: string) => {
+    setTableConfig((prev: any) => {
+      return { ...prev, keyword: keyword };
+    });
+  };
 
   const handleReportExport = (type: string) => {
     if (id) {
@@ -148,47 +139,50 @@ const ListActiveInactiveUser: React.FC = () => {
           order: sort?.direction || "DESC",
           name: "Users List",
           searchBy: "user.userName",
+          activeTab: activeTab,
         })
       );
     }
   };
 
   useEffect(() => {
+    if (id) {
+      dispatch(
+        getUsers({
+          userId: id,
+          page: tableConfig?.page || 1,
+          limit: value,
+          userName: keyword || "",
+          sort: tableConfig?.key || "",
+          order: tableConfig?.direction || "DESC",
+          activeTab: activeTab,
+        })
+      );
+    }
+  }, [id, tableConfig, value, keyword, activeTab]);
+
+  useEffect(() => {
+    if (keyword !== tableConfig?.keyword) {
+      setKeyWord(tableConfig?.keyword);
+    }
+    if (
+      sort.direction !== tableConfig?.sort?.direction ||
+      sort.key !== tableConfig?.sort?.key
+    ) {
+      setSort(tableConfig?.sort);
+    }
+  }, [tableConfig]);
+
+  useEffect(() => {
     dispatch(getTotalBalance());
   }, []);
 
   useEffect(() => {
-    const active: Array<object> = [];
-    const deactive: Array<object> = [];
-
-    userList?.list?.forEach((user: any) => {
-      if (user.userBlock === false) {
-        active.push(user);
-      } else {
-        deactive.push(user);
-      }
-    });
-
-    setActiveUser(active);
-    setDeactiveUser(deactive);
+    if (userList?.list) {
+      setLocalUserList(userList?.list);
+    }
   }, [userList]);
 
-  const sortData = (key: string) => {
-    let array = [...activeUser];
-
-    if (array[0][key] > array[array?.length - 1][key]) {
-      array.sort((a: any, b: any) => a[key] - b[key]);
-    } else {
-      array.sort((a: any, b: any) => b[key] - a[key]);
-    }
-
-    setActiveUser(array);
-  };
-  const handleSearch = (keyword: string) => {
-    setTableConfig((prev: any) => {
-      return { ...prev, keyword: keyword };
-    });
-  };
   return (
     <>
       <Container className="listClient listActiveUser" fluid>
@@ -197,7 +191,15 @@ const ListActiveInactiveUser: React.FC = () => {
             <p className="title-22">Account List</p>
             <div className="d-flex flex-row mb-1">
               <span className="title-12 me-1">Show</span>
-              <select name="cars" id="cars" className="title-12" onChange={(e)=>setValue(e.target.value)}>
+              <select
+                name="cars"
+                id="cars"
+                className="title-12"
+                onChange={(e) => {
+                  setCurrentPage(1);
+                  setValue(e.target.value);
+                }}
+              >
                 <option value={25}>25</option>
                 <option value={50}>50</option>
                 <option value={100}>100</option>
@@ -212,7 +214,7 @@ const ListActiveInactiveUser: React.FC = () => {
           <Col className="d-flex flex-column align-items-end">
             <CustomButton
               className="float-end mb-2"
-              style={{width:"100px"}}
+              style={{ width: "100px" }}
               onClick={() => navigate(`/admin/add-account`)}
             >
               Add Account
@@ -230,13 +232,15 @@ const ListActiveInactiveUser: React.FC = () => {
                     eventKey="first"
                     onClick={() => {
                       dispatch(dropdownSummary({ summary: true }));
-                      // setKeyWord("");
+                      setCurrentPage(1);
                       setTableConfig((prev: any) => {
                         return {
                           ...prev,
                           keyword: "",
+                          // page: 1,
                         };
                       });
+                      setActiveTab("active");
                     }}
                   >
                     Active Users
@@ -248,13 +252,15 @@ const ListActiveInactiveUser: React.FC = () => {
                     eventKey="second"
                     onClick={() => {
                       dispatch(dropdownSummary({ summary: false }));
-                      // setKeyWord("");
+                      setCurrentPage(1);
                       setTableConfig((prev: any) => {
                         return {
                           ...prev,
                           keyword: "",
+                          // page: 1,
                         };
                       });
+                      setActiveTab("deactive");
                     }}
                   >
                     Deactive Users
@@ -269,25 +275,30 @@ const ListActiveInactiveUser: React.FC = () => {
                     bordered
                     striped
                     columns={columns}
-                    itemCount={userList && userList?.count}
+                    itemCount={userList ? userList?.count : 1}
                     setTableConfig={setTableConfig}
                     enablePdfExcel={true}
-                    isSort={false}
-                    isPagination={false}
+                    isPagination={true}
+                    showHeaderEntries={true}
                     sortData={sortData}
                     handleReportExport={handleReportExport}
                     tableConfig={tableConfig}
                     currentPage={currentPage}
                     setCurrentPage={setCurrentPage}
+                    value={value}
                   >
                     <tr>
-                      {columns?.map((item, index) => {
+                      {columns?.map((_, index) => {
                         return (
                           <td
                             colSpan={index === 0 ? 2 : undefined}
                             key={index}
                             className=" fw-bold text-end"
-                            style={{ ...([6,7].includes(index)?{padding: "0px 17px"}:{})}}
+                            style={{
+                              ...([6, 7].includes(index)
+                                ? { padding: "0px 17px" }
+                                : {}),
+                            }}
                           >
                             {/* {index === 1 &&
                               totalBalance &&
@@ -307,44 +318,59 @@ const ListActiveInactiveUser: React.FC = () => {
                             {index === 1 &&
                               userList &&
                               formatToINR(
-                                activeUser?.reduce((acc: any, match: any) => {
-                                  return acc + +match?.creditRefrence;
-                                }, 0) || 0
+                                localUserList?.reduce(
+                                  (acc: any, match: any) => {
+                                    return acc + +match?.creditRefrence;
+                                  },
+                                  0
+                                ) || 0
                               )}
                             {index === 2 &&
                               userList &&
                               formatToINR(
-                                activeUser?.reduce((acc: any, match: any) => {
-                                  return acc + +match?.balance;
-                                }, 0) || 0
+                                localUserList?.reduce(
+                                  (acc: any, match: any) => {
+                                    return acc + +match?.balance;
+                                  },
+                                  0
+                                ) || 0
                               )}
                             {index === 3 &&
                               userList &&
                               formatToINR(
-                                activeUser?.reduce((acc: any, match: any) => {
-                                  return acc + +match?.userBal?.profitLoss;
-                                }, 0) || 0
+                                localUserList?.reduce(
+                                  (acc: any, match: any) => {
+                                    return acc + +match?.userBal?.profitLoss;
+                                  },
+                                  0
+                                ) || 0
                               )}
                             {index === 4 &&
                               userList &&
                               formatToINR(
-                                activeUser?.reduce((acc: any, match: any) => {
-                                  return acc + +match?.userBal?.exposure;
-                                }, 0) || 0
+                                localUserList?.reduce(
+                                  (acc: any, match: any) => {
+                                    return acc + +match?.userBal?.exposure;
+                                  },
+                                  0
+                                ) || 0
                               )}
                             {index === 5 &&
                               userList &&
                               formatToINR(
-                                activeUser?.reduce((acc: any, match: any) => {
-                                  return acc + +match?.availableBalance;
-                                }, 0) || 0
+                                localUserList?.reduce(
+                                  (acc: any, match: any) => {
+                                    return acc + +match?.availableBalance;
+                                  },
+                                  0
+                                ) || 0
                               )}
                           </td>
                         );
                       })}
                     </tr>
                     {userList &&
-                      activeUser.map((userItem: any, index: number) => {
+                      localUserList?.map((userItem: any, index: number) => {
                         const {
                           userName,
                           balance,
@@ -472,7 +498,7 @@ const ListActiveInactiveUser: React.FC = () => {
                         );
                       })}
                   </CustomTable>
-                  {activeUser?.length > 0 && (
+                  {/* {activeUser?.length > 0 && (
                     <div
                       style={{
                         width: "100%",
@@ -508,7 +534,7 @@ const ListActiveInactiveUser: React.FC = () => {
                         </CustomButton>
                       </div>
                     </div>
-                  )}
+                  )} */}
                 </Tab.Pane>
                 <Tab.Pane eventKey="second">
                   <CustomTable
@@ -516,11 +542,12 @@ const ListActiveInactiveUser: React.FC = () => {
                     customClass="listClientTable commonTable border-top-0 "
                     bordered
                     striped
+                    showHeaderEntries={true}
                     columns={columns}
-                    itemCount={userList && userList?.count}
+                    itemCount={userList ? userList?.count : 1}
                     setTableConfig={setTableConfig}
                     enablePdfExcel={true}
-                    isPagination={false}
+                    isPagination={true}
                     sortData={sortData}
                     handleReportExport={handleReportExport}
                     tableConfig={tableConfig}
@@ -528,7 +555,7 @@ const ListActiveInactiveUser: React.FC = () => {
                     setCurrentPage={setCurrentPage}
                   >
                     <tr>
-                      {columns?.map((item, index) => {
+                      {columns?.map((_, index) => {
                         return (
                           <td
                             colSpan={index === 0 ? 2 : undefined}
@@ -537,31 +564,31 @@ const ListActiveInactiveUser: React.FC = () => {
                           >
                             {index === 1 &&
                               userList &&
-                              (deactiveUser?.reduce((acc: any, match: any) => {
+                              (localUserList?.reduce((acc: any, match: any) => {
                                 return acc + +match?.creditRefrence;
                               }, 0) ||
                                 0)}
                             {index === 2 &&
                               userList &&
-                              (deactiveUser?.reduce((acc: any, match: any) => {
+                              (localUserList?.reduce((acc: any, match: any) => {
                                 return acc + +match?.balance;
                               }, 0) ||
                                 0)}
                             {index === 3 &&
                               userList &&
-                              (deactiveUser?.reduce((acc: any, match: any) => {
+                              (localUserList?.reduce((acc: any, match: any) => {
                                 return acc + +match?.userBal?.profitLoss;
                               }, 0) ||
                                 0)}
                             {index === 4 &&
                               userList &&
-                              (deactiveUser?.reduce((acc: any, match: any) => {
+                              (localUserList?.reduce((acc: any, match: any) => {
                                 return acc + +match?.userBal?.exposure;
                               }, 0) ||
                                 0)}
                             {index === 5 &&
                               userList &&
-                              (deactiveUser?.reduce((acc: any, match: any) => {
+                              (localUserList?.reduce((acc: any, match: any) => {
                                 return acc + +match?.availableBalance;
                               }, 0) ||
                                 0)}
@@ -570,7 +597,7 @@ const ListActiveInactiveUser: React.FC = () => {
                       })}
                     </tr>
                     {userList &&
-                      deactiveUser.map((userItem: any, index: number) => {
+                      localUserList?.map((userItem: any, index: number) => {
                         const {
                           userName,
                           balance,
@@ -695,7 +722,7 @@ const ListActiveInactiveUser: React.FC = () => {
                         );
                       })}
                   </CustomTable>
-                  {deactiveUser?.length > 0 && (
+                  {/* {deactiveUser?.length > 0 && (
                     <div
                       style={{
                         width: "100%",
@@ -731,7 +758,7 @@ const ListActiveInactiveUser: React.FC = () => {
                         </CustomButton>
                       </div>
                     </div>
-                  )}
+                  )} */}
                 </Tab.Pane>
               </Tab.Content>
             </Tab.Container>
@@ -739,6 +766,13 @@ const ListActiveInactiveUser: React.FC = () => {
         </Row>
         {eventDetails.eventId && (
           <ListClientModals
+            userId={id}
+            page={tableConfig?.page || 1}
+            limit={value}
+            userName={keyword || ""}
+            sort={tableConfig?.key || ""}
+            order={tableConfig?.direction || "DESC"}
+            activeTab={activeTab}
             userData={eventDetails.userData}
             show={eventDetails.show}
             setShow={(data) => {

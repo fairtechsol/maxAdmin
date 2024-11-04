@@ -72,6 +72,8 @@ body table.table {
   padding: 2px;
   width: 100%;
   color: #ffffff;
+  position: sticky;
+  top: 0;
 }
 
 .rules-header-new span {
@@ -1017,6 +1019,12 @@ th {
     // flex-direction: column !important;
     flex-wrap: nowrap;
   }
+  .bet-table-right{
+    font-size: 14px;
+  }
+  .custom-modal-content{
+    width: 100% !important; 
+  }
 }
 
 /* Styles for width 1200px to 1399px */
@@ -1085,6 +1093,12 @@ th {
   }
   .sessionMinMaxFont{
     font-size: 9px !important;
+  }
+  .bet-table-right{
+    font-size: 14px;
+  }
+  .custom-modal-content{
+    width: 100% !important; 
   }
 }
 
@@ -1266,11 +1280,98 @@ th {
       box-shadow: inset 3px 0 0px #72bbef !important;
   }
 
+  .bor-red1{
+    border-color: #FDDAE7;
+  }
+
+  .bor-blue3{
+    border-color: #CFE8FA;
+  }
+
+  .bg-blu{
+    background-color: #CFE8FA !important;
+  }
+
+  .bg-pink{
+    background-color: #FDDAE7 !important;
+  }
 
 
-/* Tablet devices (width between 768px and 1024px) */
-@media  (min-width: 768px) and (max-width: 1024px) {
-    .bet-table-right {
-      font-size: 10px; /* Adjust font size for tablets */
+  .bet-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .bet-date,
+  .bet-odds {
+    display: inline-block;
+    font-size: 14px;
+  }
+  
+  @media (min-width: 768px) {
+    .bet-info {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    .bet-date {
+      margin-right: 10px;
     }
   }
+  
+  @media (max-width: 768px) {
+    .bet-info {
+      flex-direction: column;
+    }
+    .bet-date {
+      display: block;
+    }
+    .bet-amount {
+      margin-top: 5px;
+    }
+  }
+  
+
+  /* Overlay styling */
+.custom-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh !important;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1050;
+}
+
+.custom-modal-content {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%); /* Center horizontally */
+  background-color: #fff;
+  width: 50%; /* Adjust width as needed */
+  max-width: 90%; /* Limit max width */
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 1051;
+  margin-top: 60px; /* Optional: add margin from the top */
+}
+
+/* Header styling */
+.custom-modal-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+}
+
+/* Close button styling */
+.close-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+}
+

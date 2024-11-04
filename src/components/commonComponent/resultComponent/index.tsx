@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {  Container } from "react-bootstrap";
+// import {  Container } from "react-bootstrap";
 // import CloseButton from 'react-bootstrap/CloseButton';
 // import { RxCross2 } from "react-icons/rx";
 // import moment from "moment";
@@ -58,7 +58,7 @@ export const ResultComponent: React.FC<ResultComponentProps> = ({
     }
   }, []);
   return (
-    <Container style={{ padding: 0 }}>
+    <div style={{ padding: 0 }}>
       <div className="resultModalHeader">
         <span style={{ fontSize: "20px"}}>
           {cardGamesTypeNames[type]} RESULT
@@ -73,11 +73,11 @@ export const ResultComponent: React.FC<ResultComponentProps> = ({
         style={{ fontSize: isMobile ? "0.8rem" : "1.1rem" }}
       >
         <div>
-          <span style={{ fontWeight: "bold" }}>Round Id:</span>
+          <span className="px-1" style={{ fontWeight: "bold" }}>Round Id:</span>
           <span>{type==="cricketv3"? data?.result?.mid:handleRoundId(data?.result?.mid)}</span>
         </div>
         <div>
-          <span style={{ fontWeight: "bold" }}>Match Time:</span>
+          <span className="px-1" style={{ fontWeight: "bold" }}>Match Time:</span>
           <span>
             {data?.createdAt
               ? moment(data?.createdAt).format("DD/MM/YYYY hh:mm:ss A")
@@ -148,6 +148,6 @@ export const ResultComponent: React.FC<ResultComponentProps> = ({
       ) : (
         <></>
       )}
-    </Container>
+    </div>
   );
 };

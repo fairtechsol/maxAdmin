@@ -23,7 +23,6 @@ interface Column {
 
 // Example usage
 const columns: Column[] = [
-  
   { id: "eventType", label: "Event Type" },
   { id: "eventName", label: "Event Name" },
   { id: "user.userName", label: "Username" },
@@ -37,7 +36,7 @@ const columns: Column[] = [
 
 const options = [
   { value: "PENDING", label: "Matched" },
-  { value: "UNMATCHED", label: "UnMatched" },
+  // { value: "UNMATCHED", label: "UnMatched" },
   { value: "DELETED", label: "Deleted" },
 ];
 
@@ -87,10 +86,11 @@ const CurrentBets = () => {
         limit: rowPerPage,
         searchBy: "user.userName",
         keyword: keyword || "",
-        marketBetType: tab ,
+        marketBetType: tab,
+        // betType: "BACK",
       })
     );
-  }, [keyword, page, rowPerPage, sort,tab]);
+  }, [keyword, page, rowPerPage, sort, tab]);
 
   const handleType = (type: any) => {
     setSelectType(type);
@@ -112,7 +112,8 @@ const CurrentBets = () => {
           limit: rowPerPage,
           searchBy: "user.userName",
           keyword: keyword || "",
-          marketBetType:  tab ,
+          marketBetType: tab,
+          // betType: "BACK",
         })
       );
       setCurrentPage(1);
@@ -143,15 +144,24 @@ const CurrentBets = () => {
     return item?.match?.startAt || item?.racingMatch?.startAt;
   };
 
+  const handleSelect = (k: any) => {
+    if (k === "tab1") {
+      setTab("neCARD");
+    } else if (k === "tab2") {
+      setTab("eqCARD");
+    }
+    console.log("Selected Tab Value:", tab);
+  };
+
   return (
-    <div className="p-2 pt-0" >
+    <div className="p-2 pt-0">
       <h5 className="title-22 fw-normal">Current Bets</h5>
 
-      <Tabs defaultActiveKey="tab1" id="betReportTabs">
+      <Tabs defaultActiveKey="tab1" id="betReportTabs" onSelect={handleSelect}>
         {/* Tab 1 */}
-        <Tab eventKey="tab1" title="Sports" onClick={() => setTab("neCARD")}>
+        <Tab eventKey="tab1" title="Sports">
           <Form onSubmit={(e) => handleLoad(e)} className="mt-1">
-            <Row className="mb-4 d-flex align-items-center">
+            <Row className="d-flex align-items-center">
               <Col md={3}>
                 <SelectSearch2
                   defaultValue={"PENDING"}
@@ -160,6 +170,10 @@ const CurrentBets = () => {
                   value={selectType}
                   onChange={handleType}
                 />
+              </Col>
+            </Row>
+            <Row className="d-flex align-items-center">
+              <Col md={3}>
                 <SelectSearch3
                   defaultValue={"ALL"}
                   options={options2}
@@ -168,11 +182,20 @@ const CurrentBets = () => {
                   onChange={handleType2}
                 />
               </Col>
-              <Col md={2} className="d-flex align-items-center">
-                <Form.Label className="invisible d-block mt-1">
-                  Label
-                </Form.Label>
+              <Col md={2}>
                 <Button type="submit">Load</Button>
+              </Col>
+              <Col md={{ span: 4 }} />
+              <Col md={3} className="text-end">
+                <span>
+                  {`Total Soda: ${
+                    ReportBetList?.rows?.length
+                  } Total Amount: ${parseFloat(
+                    ReportBetList?.rows?.reduce((acc: any, match: any) => {
+                      return acc + +match?.amount;
+                    }, 0) || "0.00"
+                  ).toFixed(2)}`}
+                </span>
               </Col>
             </Row>
           </Form>
@@ -218,8 +241,8 @@ const CurrentBets = () => {
                       className={isBackBet ? "back-border" : "lay-border"}
                     >
                       {columns.map((column: any, columnIndex: number) => (
-                        <td 
-                        style={{fontSize: "14px"}}
+                        <td
+                          style={{ fontSize: "14px" }}
                           key={columnIndex}
                           className={isBackBet ? "back-border" : "lay-border"}
                         >
@@ -243,7 +266,7 @@ const CurrentBets = () => {
         </Tab>
 
         {/* Tab 2 */}
-        <Tab eventKey="tab2" title="Casino" onClick={() => setTab("eqCARD")}>
+        <Tab eventKey="tab2" title="Casino">
           {/* Render the same form and table, you can customize based on tab if necessary */}
           <Form onSubmit={(e) => handleLoad(e)} className="mt-1">
             <Row className="mb-4 d-flex align-items-center">
