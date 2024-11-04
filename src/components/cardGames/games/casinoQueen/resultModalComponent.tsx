@@ -3,6 +3,7 @@ import { Container } from "react-bootstrap";
 import "./style.scss";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
 import Winner from "../../../commonComponent/trophyWinner";
+import ResultBetList from "../../../commonComponent/resultBetList";
 interface Props {
   data: {
     C1: string;
@@ -190,14 +191,14 @@ const QueenResultComponent: React.FC<Props> = ({ data }: any) => {
         <span style={{ opacity: "0.6" }}>Winner</span> Total{" "}
         {(data?.result?.win || 0) - 1}
       </div>
-      {/* {data?.bets?.count > 0 && (
+      {data?.bets?.count > 0 && (
         <div className="w-100">
           <ResultBetList
             bets={data?.bets?.rows ?? 12}
             total={data?.bets?.count}
           />
         </div>
-      )} */}
+      )}
     </Container>
   );
 };
