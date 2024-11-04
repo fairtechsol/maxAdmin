@@ -83,15 +83,15 @@ const OtherUserBets = ({ matchId }: any) => {
                     <thead>
                       <tr className="lh-1">
                         <th style={{ minWidth: "1vw" }}>UserName</th>
-                        <th style={{ minWidth: "1vw" }}>Nation</th>
+                        <th style={{ minWidth: "3vw" }}>Nation</th>
                         <th
                           className="text-right"
-                          style={{ minWidth: "0.5vw" }}
+                          style={{ minWidth: "0.7vw" }}
                         >
                           Rate
                         </th>
                         <th
-                          className="text-right text-end"
+                          className="text-end"
                           style={{ minWidth: "1vw" }}
                         >
                           Amount
@@ -105,7 +105,7 @@ const OtherUserBets = ({ matchId }: any) => {
                       {placedBets?.map((bet: any, index: number) => {
                         return (
                           <Fragment key={index}>
-                            <tr className="position-relative bet-table-right">
+                            <tr className="position-relative lh-1 bet-table-right">
                               <td
                                 className={
                                   bet?.betType === "NO" ||

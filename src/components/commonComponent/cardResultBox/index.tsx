@@ -3,7 +3,7 @@ import { AppDispatch, RootState } from "../../../store/store";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-import Modal from "react-bootstrap/Modal";
+// import Modal from "react-bootstrap/Modal";
 import { ResultComponent } from "../resultComponent";
 import { ImClubs } from "react-icons/im";
 import { GiSpades } from "react-icons/gi";
@@ -444,16 +444,19 @@ const CardResultBox = ({ data, name, type }: any) => {
             </div>
           ))}
       </div>
-      <Modal
-        size="lg"
-        show={lgShow}
-        onHide={() => setLgShow(false)}
-        aria-labelledby="example-modal-sizes-title-lg"
-      >
-        <Modal.Body style={{ padding: 0, width: "100%" }}>
-          <ResultComponent data={resultData} setfalse={setLgShow} type={type} />
-        </Modal.Body>
-      </Modal>
+      {lgShow && (
+  <div className="custom-modal-overlay mb-2" >
+    <div
+      className="custom-modal-content"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <div className="custom-modal-body">
+        <ResultComponent data={resultData} setfalse={setLgShow} type={type} />
+      </div>
+    </div>
+  </div>
+)}
+
     </div>
   );
 };
