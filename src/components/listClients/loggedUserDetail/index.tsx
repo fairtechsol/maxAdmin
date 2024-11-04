@@ -35,19 +35,31 @@ const LoggedUserDetail = () => {
                     Upper Level Credit Reference:
                   </div>
                   <div className="col-md-6 title-14">
-                    {formatToINR(userBalanceList?.userCreditReference || 0)}
+                    {formatToINR(
+                      parseFloat(userBalanceList?.userCreditReference).toFixed(
+                        2
+                      ) || 0
+                    )}
                   </div>
                 </div>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
                   <div className="col-md-6 title-14">Total Master Balance</div>
                   <div className="col-md-6 title-14">
-                    {formatToINR(userBalanceList?.totalMasterBalance || 0)}
+                    {formatToINR(
+                      parseFloat(userBalanceList?.totalMasterBalance).toFixed(
+                        2
+                      ) || 0
+                    )}
                   </div>
                 </div>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
                   <div className="col-md-6 title-14">Available Balance:</div>
                   <div className="col-md-6 title-14">
-                    {formatToINR(userBalanceList?.availableBalance || 0)}
+                    {formatToINR(
+                      parseFloat(userBalanceList?.availableBalance).toFixed(
+                        2
+                      ) || 0
+                    )}
                   </div>
                 </div>
               </Col>
@@ -57,13 +69,21 @@ const LoggedUserDetail = () => {
                     Down level Occupy Balance:
                   </div>
                   <div className="col-md-6 title-14">
-                    {formatToINR(userBalanceList?.downLevelOccupyBalance || 0)}
+                    {formatToINR(
+                      parseFloat(
+                        userBalanceList?.downLevelOccupyBalance
+                      ).toFixed(2) || 0
+                    )}
                   </div>
                 </div>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
                   <div className="col-md-6 title-14">Upper Level:</div>
                   <div className="col-md-6 title-14">
-                    {formatToINR(userBalanceList?.upperLevelBalance || 0)}
+                    {formatToINR(
+                      parseFloat(userBalanceList?.upperLevelBalance).toFixed(
+                        2
+                      ) || 0
+                    )}
                   </div>
                 </div>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
@@ -72,7 +92,9 @@ const LoggedUserDetail = () => {
                   </div>
                   <div className="col-md-6 title-14">
                     {formatToINR(
-                      userBalanceList?.availableBalanceWithProfitLoss || 0
+                      parseFloat(
+                        userBalanceList?.availableBalanceWithProfitLoss
+                      ).toFixed(2) || 0
                     )}
                   </div>
                 </div>
@@ -84,7 +106,9 @@ const LoggedUserDetail = () => {
                   </div>
                   <div className="col-md-6 title-14">
                     {formatToINR(
-                      userBalanceList?.downLevelCreditReference || 0
+                      parseFloat(
+                        userBalanceList?.downLevelCreditReference
+                      ).toFixed(2) || 0
                     )}
                   </div>
                 </div>
@@ -93,13 +117,19 @@ const LoggedUserDetail = () => {
                     Down Level Profit/Loss :
                   </div>
                   <div className="col-md-6 title-14">
-                    {formatToINR(userBalanceList?.downLevelProfitLoss || 0)}
+                    {formatToINR(
+                      parseFloat(userBalanceList?.downLevelProfitLoss).toFixed(
+                        2
+                      ) || 0
+                    )}
                   </div>
                 </div>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
                   <div className="col-md-6 title-14">My Profit/Loss:</div>
                   <div className="col-md-6 title-14">
-                    {formatToINR(userBalanceList?.profitLoss || 0)}
+                    {formatToINR(
+                      parseFloat(userBalanceList?.profitLoss).toFixed(2) || 0
+                    )}
                   </div>
                 </div>
               </Col>
