@@ -22,7 +22,17 @@ const initialValues: any = {
   transactionPassword: "",
 };
 
-const ExposureLimit = ({ setShow, userData }: any) => {
+const ExposureLimit = ({
+  setShow,
+  userData,
+  userId,
+  page,
+  limit,
+  userName,
+  sort,
+  order,
+  activeTab,
+}: any) => {
   const dispatch: AppDispatch = useDispatch();
 
   const { modalSuccess, loading } = useSelector(
@@ -67,7 +77,15 @@ const ExposureLimit = ({ setShow, userData }: any) => {
   useEffect(() => {
     if (modalSuccess) {
       setShow(false);
-      dispatch(getUsers());
+      dispatch(getUsers({
+        userId: userId,
+        page: page,
+        limit: limit,
+        userName: userName,
+        sort: sort,
+        order: order,
+        activeTab: activeTab,
+      }));
       dispatch(getUsersProfile());
       dispatch(accountListModalReset());
     }
@@ -75,7 +93,7 @@ const ExposureLimit = ({ setShow, userData }: any) => {
 
   return (
     <>
-     {loading ? <Loader /> : null}
+      {loading ? <Loader /> : null}
       <form onSubmit={handleSubmit}>
         <Stack className="listClientModals" gap={0}>
           <div className="input-container mt-3">
@@ -102,7 +120,7 @@ const ExposureLimit = ({ setShow, userData }: any) => {
               </Col>
               <Col sm={8}>
                 <CustomInput
-                required={true}
+                  required={true}
                   name="amount"
                   id="amount"
                   value={values.amount}
@@ -130,7 +148,7 @@ const ExposureLimit = ({ setShow, userData }: any) => {
                   type="password"
                   customstyle="input-box"
                   // id="transactionPasswordInput"
-                  textAlign="left" 
+                  textAlign="left"
                 />
               </Col>
             </Row>

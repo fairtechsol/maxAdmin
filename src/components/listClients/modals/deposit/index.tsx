@@ -24,12 +24,22 @@ const initialValues: any = {
   transactionPassword: "",
 };
 
-const Deposit = ({ userData, setShow }: any) => {
+const Deposit = ({
+  userData,
+  setShow,
+  userId,
+  page,
+  limit,
+  userName,
+  sort,
+  order,
+  activeTab,
+}: any) => {
   const dispatch: AppDispatch = useDispatch();
   const [border, setBorder] = useState({
-    amount:false,
-    remark:false,
-    Tpass:false
+    amount: false,
+    remark: false,
+    Tpass: false,
   });
   const { userList, modalSuccess, loading } = useSelector(
     (state: RootState) => state.user.userList
@@ -40,29 +50,33 @@ const Deposit = ({ userData, setShow }: any) => {
     initialValues: initialValues,
     // validationSchema: depositAmountValidations,
     onSubmit: (values: any) => {
-      if(values?.amount ==="" && values?.remark ==="" && values?.transactionPassword ===""){
+      if (
+        values?.amount === "" &&
+        values?.remark === "" &&
+        values?.transactionPassword === ""
+      ) {
         setBorder({
           amount: true,
           remark: true,
-          Tpass: true,   
+          Tpass: true,
         });
-        return ;
-      }else if(values?.amount ===""){
+        return;
+      } else if (values?.amount === "") {
         setBorder((prevState) => ({
           ...prevState,
-          amount: true, 
-        }));
-        return ;
-      }else if(values?.remark ===""){
-        setBorder((prevState) => ({
-          ...prevState,
-          remark: true, 
+          amount: true,
         }));
         return;
-      }else if(values?.transactionPassword ===""){
+      } else if (values?.remark === "") {
         setBorder((prevState) => ({
           ...prevState,
-          Tpass: true, 
+          remark: true,
+        }));
+        return;
+      } else if (values?.transactionPassword === "") {
+        setBorder((prevState) => ({
+          ...prevState,
+          Tpass: true,
         }));
         return;
       }
@@ -111,7 +125,15 @@ const Deposit = ({ userData, setShow }: any) => {
   useEffect(() => {
     if (modalSuccess) {
       setShow(false);
-      dispatch(getUsers());
+      dispatch(getUsers({
+        userId: userId,
+        page: page,
+        limit: limit,
+        userName: userName,
+        sort: sort,
+        order: order,
+        activeTab: activeTab,
+      }));
       dispatch(getUsersProfile());
       dispatch(accountListModalReset());
     }
@@ -120,7 +142,7 @@ const Deposit = ({ userData, setShow }: any) => {
   const handleBlur = (val: any, type: string) => {
     setBorder((prevState) => ({
       ...prevState,
-      [type]: val?.length === 0, 
+      [type]: val?.length === 0,
     }));
   };
   return (
@@ -202,8 +224,10 @@ const Deposit = ({ userData, setShow }: any) => {
                   errors={errors.amount}
                   min={0}
                   placeholder={"Amount"}
-                  style={{border:border?.amount?"1px solid red":"1px solid #000"}}
-                  onBlur={()=>handleBlur(values.amount,"amount")}
+                  style={{
+                    border: border?.amount ? "1px solid red" : "1px solid #000",
+                  }}
+                  onBlur={() => handleBlur(values.amount, "amount")}
                 />
               </Col>
             </Row>
@@ -225,8 +249,10 @@ const Deposit = ({ userData, setShow }: any) => {
                   errors={errors.remark}
                   {...getFieldProps("remark")}
                   textAlign="left"
-                  style={{border:border?.remark ?"1px solid red":"1px solid #000"}}
-                  onBlur={()=>handleBlur(values.remark,"remark")}
+                  style={{
+                    border: border?.remark ? "1px solid red" : "1px solid #000",
+                  }}
+                  onBlur={() => handleBlur(values.remark, "remark")}
                 />
               </Col>
             </Row>
@@ -247,8 +273,10 @@ const Deposit = ({ userData, setShow }: any) => {
                   errors={errors.transactionPassword}
                   {...getFieldProps("transactionPassword")}
                   textAlign="left"
-                  style={{border:border?.Tpass ?"1px solid red":"1px solid #000"}}
-                  onBlur={()=>handleBlur(values.transactionPassword,"Tpass")}
+                  style={{
+                    border: border?.Tpass ? "1px solid red" : "1px solid #000",
+                  }}
+                  onBlur={() => handleBlur(values.transactionPassword, "Tpass")}
                 />
               </Col>
             </Row>
