@@ -21,7 +21,17 @@ const initialValues: any = {
   transactionPassword: "",
 };
 
-const ChangeStatus = ({ setShow, userData }: any) => {
+const ChangeStatus = ({
+  setShow,
+  userData,
+  userId,
+  page,
+  limit,
+  userName,
+  sort,
+  order,
+  activeTab,
+}: any) => {
   // const [userChecked, setUserChecked] = useState(false);
   const defaultLockUnlockObj = {
     allBlocked: userData?.userBlock,
@@ -54,7 +64,17 @@ const ChangeStatus = ({ setShow, userData }: any) => {
   useEffect(() => {
     if (modalSuccess) {
       setShow(false);
-      dispatch(getUsers());
+      dispatch(
+        getUsers({
+          userId: userId,
+          page: page,
+          limit: limit,
+          userName: userName,
+          sort: sort,
+          order: order,
+          activeTab: activeTab,
+        })
+      );
       dispatch(getUsersProfile());
       dispatch(accountListModalReset());
     }
@@ -73,8 +93,9 @@ const ChangeStatus = ({ setShow, userData }: any) => {
                     {userData?.userName}
                   </h3>
                   <h3
-                    className={`${!lockUnlockObj?.allBlocked ? "text-green" : "text-red"
-                      } title-14`}
+                    className={`${
+                      !lockUnlockObj?.allBlocked ? "text-green" : "text-red"
+                    } title-14`}
                   >
                     {/* {!lockUnlockObj?.allBlocked ? "Active" : "InActive"} */}
                   </h3>
@@ -195,7 +216,7 @@ const ChangeStatus = ({ setShow, userData }: any) => {
                   customstyle="input-box"
                   value={values.transactionPassword}
                   onChange={handleChange}
-                  textAlign="left" 
+                  textAlign="left"
                 />
               </Col>
             </Row>

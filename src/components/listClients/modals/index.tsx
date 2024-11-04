@@ -12,6 +12,13 @@ interface ListClientModalsProps {
   show: boolean;
   setShow: (value: boolean) => void;
   userData?: any;
+  userId?: string;
+  page?: number;
+  limit?: number;
+  userName?: string;
+  sort?: string;
+  order?: string;
+  activeTab?: string;
 }
 
 const modalTitle: any = {
@@ -34,6 +41,13 @@ const ListClientModals = ({
   show,
   setShow,
   userData,
+  userId,
+  page,
+  limit,
+  userName,
+  sort,
+  order,
+  activeTab,
 }: ListClientModalsProps) => {
   const { item: ModalComponent } = modalTitle[id];
 
@@ -52,7 +66,17 @@ const ListClientModals = ({
       //   />
       // }
     >
-      <ModalComponent userData={userData} setShow={setShow} />
+      <ModalComponent
+        userData={userData}
+        setShow={setShow}
+        userId={userId}
+        page={page}
+        limit={limit}
+        userName={userName}
+        sort={sort}
+        order={order}
+        activeTab={activeTab}
+      />
     </CustomModal>
   );
 };
