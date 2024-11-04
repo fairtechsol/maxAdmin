@@ -103,8 +103,7 @@ const AccountStatement = () => {
     { value: "all", label: "All" },
     { value: "balanceReport", label: "Deposite/Withdraw Report" },
     { value: "gameReport", label: "Sport Report" },
-    { value: "casino",
-      label: "Casino Reports",}
+    { value: "casino", label: "Casino Reports" },
   ];
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 1199);
   const handleAccountTypeChange = (selectedOption: any) => {
@@ -209,9 +208,7 @@ const AccountStatement = () => {
       setCurrentPage(1);
       dispatch(
         getReportAccountList({
-          id: selectedUser
-            ? selectedUser?.value
-            : localStorage.getItem("key"),
+          id: selectedUser ? selectedUser?.value : localStorage.getItem("key"),
           page: 1,
           limit: tableConfig?.rowPerPage,
           searchBy: "description",
@@ -336,6 +333,8 @@ const AccountStatement = () => {
           getReportAccountList({
             id: selectedUser
               ? selectedUser[0]?.value
+                ? selectedUser[0]?.value
+                : selectedUser?.value
               : localStorage.getItem("key"),
             page: tableConfig?.page,
             limit: tableConfig?.rowPerPage,
@@ -386,7 +385,6 @@ const AccountStatement = () => {
   }, [searchListData]);
 
   useEffect(() => {
-  
     const currentDate = new Date();
     const formattedCurrentDate = currentDate.toISOString().split("T")[0]; // Format as YYYY-MM-DD
 
@@ -394,11 +392,9 @@ const AccountStatement = () => {
     pastDate.setDate(pastDate.getDate() - 7);
     const formattedPastDate = pastDate.toISOString().split("T")[0]; // Format as YYYY-MM-DD
 
-
     setDateFrom(formattedPastDate);
     setDateTo(formattedCurrentDate);
   }, []);
-
 
   useEffect(() => {
     const handleResize = () => {
@@ -412,13 +408,12 @@ const AccountStatement = () => {
     };
   }, []);
 
-
   return (
     <div className="p-2 pt-0">
       <h5 className="title-22 fw-normal">Account Statement</h5>
       <Form onSubmit={handleSubmit}>
         <Row>
-          <Col md={isMobile ? 12 : 2 }>
+          <Col md={isMobile ? 12 : 2}>
             <SelectSearch
               defaultValue="All"
               // options={options}
@@ -429,10 +424,16 @@ const AccountStatement = () => {
               options={aaccountTypeOptions}
             />
           </Col>
-          <Col md={isMobile ? 12 : 2 }>
+          <Col md={isMobile ? 12 : 2}>
             <SelectSearch
               defaultValue="All"
-              label={aaccountTypeValues?.value==="gameReport"?"Sports List":aaccountTypeValues?.value==="casino"?"Casino List":"Game Name"}
+              label={
+                aaccountTypeValues?.value === "gameReport"
+                  ? "Sports List"
+                  : aaccountTypeValues?.value === "casino"
+                  ? "Casino List"
+                  : "Game Name"
+              }
               // options={options}
               placeholder={"All"}
               value={gameNameValues}
@@ -440,7 +441,7 @@ const AccountStatement = () => {
               options={gameNameOptions}
             />
           </Col>
-          <Col md={isMobile ? 12 : 2 }>
+          <Col md={isMobile ? 12 : 2}>
             <SelectSearch
               label={"Search By Client Name"}
               inputValue={inputValue}
@@ -465,7 +466,7 @@ const AccountStatement = () => {
               }}
             />
           </Col>
-          <Col md={isMobile ? 12 : 2 }>
+          <Col md={isMobile ? 12 : 2}>
             <CustomInput
               title={"From"}
               placeholder={""}
@@ -475,10 +476,10 @@ const AccountStatement = () => {
               }}
               type="date"
               bgColor="lightGray"
-              value={dateFrom} 
+              value={dateFrom}
             />
           </Col>
-          <Col md={isMobile ? 12 : 2 }>
+          <Col md={isMobile ? 12 : 2}>
             <CustomInput
               title={"To"}
               placeholder={""}
@@ -486,22 +487,21 @@ const AccountStatement = () => {
               customstyle={"mb-3"}
               type="date"
               bgColor="lightGray"
-              value={dateTo} 
+              value={dateTo}
             />
           </Col>
-          
         </Row>
         <Col md={2}>
-            <Form.Label className="invisible d-block">dasd</Form.Label>
-            <CustomButton
-              type={"submit"}
-              onClick={() => {
-                setFirstTime(true);
-              }}
-            >
-              Load
-            </CustomButton>
-          </Col>
+          <Form.Label className="invisible d-block">dasd</Form.Label>
+          <CustomButton
+            type={"submit"}
+            onClick={() => {
+              setFirstTime(true);
+            }}
+          >
+            Load
+          </CustomButton>
+        </Col>
       </Form>
       <CustomTable
         striped
