@@ -900,7 +900,7 @@ export const cardData = [
   },
 ];
 
-export const cardConstantsAccountStatement = [
+export const gameConstantsAccountStatement = [
   { value: "all", label: "All" },
   { value: "cricket", label: "Cricket" },
   { value: "football", label: "Football" },
