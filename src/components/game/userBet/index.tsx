@@ -10,7 +10,7 @@ import DeleteBetOverlay from "../../commonComponent/deleteBetRow";
 import moment from "moment-timezone";
 
 const UserBets = ({ matchId }: any) => {
-  const { placedBets, morePlacedBets } = useSelector(
+  const { placedBets } = useSelector(
     (state: RootState) => state.match.placeBets
   );
 
@@ -224,7 +224,7 @@ const UserBets = ({ matchId }: any) => {
         <UserBetModalForm
           customClass="mb-5"
           matchId={matchId}
-          morePlacedBets={morePlacedBets}
+          morePlacedBets={placedBets}
         />
         {/* <UserBetModalTable /> */}
       </CustomModal>
