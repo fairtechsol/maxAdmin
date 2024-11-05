@@ -22,7 +22,7 @@ import { AppDispatch, RootState } from "../../../store/store";
 import {
   ApiConstants,
   card2ConstantsAccountStatement,
-  cardConstantsAccountStatement,
+  gameConstantsAccountStatement,
 } from "../../../utils/Constants";
 // import isMobile from "../../../utils/screenDimension";
 
@@ -121,7 +121,7 @@ const AccountStatement = () => {
       selectedOption &&
       (selectedOption as Option).value === "gameReport"
     ) {
-      setGameNameOptions(cardConstantsAccountStatement);
+      setGameNameOptions(gameConstantsAccountStatement);
     } else if (
       selectedOption &&
       (selectedOption as Option).value === "casino"
@@ -178,32 +178,25 @@ const AccountStatement = () => {
       } else if (dateTo) {
         filter += `&createdAt=lte${moment(dateTo)?.format("YYYY-MM-DD")}`;
       }
-      // if (selectedUser && selectedUser?.length > 0) {
-      //   filter += `&user.userName=${selectedUser[0]?.label}`;
-      // }
       if (aaccountTypeValues && aaccountTypeValues?.value === "gameReport") {
-        filter += `&transType=inArr${JSON.stringify([
-          "win",
-          "loss",
-          // "bet",
-        ])}`;
+        filter += `&statementType=game&betId=notNull`;
       } else if (
         aaccountTypeValues &&
         aaccountTypeValues?.value === "balanceReport"
       ) {
-        filter += `&transType=inArr${JSON.stringify([
-          "add",
-          "withDraw",
-          "creditReference",
-        ])}`;
+        filter += `&statementType=addWithdraw`;
+      } else if (aaccountTypeValues && aaccountTypeValues?.value === "casino") {
+        filter += `&statementType=game&betId=isNull`;
       }
       if (gameNameValues && aaccountTypeValues?.value === "balanceReport") {
         filter += `&gameName=${gameNameValues?.value}`;
       }
-      if (gameNameValues && aaccountTypeValues?.value === "gameReport") {
-        if (gameNameValues?.value !== "all") {
-          filter += `&description=like%${gameNameValues?.value}/%`;
-        }
+      if (
+        gameNameValues?.value &&
+        aaccountTypeValues?.value !== "balanceReport" &&
+        gameNameValues?.value !== "all"
+      ) {
+        filter += `&description=like%${gameNameValues?.value}/%`;
       }
       setCurrentPage(1);
       dispatch(
@@ -242,32 +235,25 @@ const AccountStatement = () => {
       } else if (dateTo) {
         filter += `&createdAt=lte${moment(dateTo)?.format("YYYY-MM-DD")}`;
       }
-      // if (selectedUser && selectedUser?.length > 0) {
-      //   filter += `&user.userName=${selectedUser[0]?.label}`;
-      // }
       if (aaccountTypeValues && aaccountTypeValues?.value === "gameReport") {
-        filter += `&transType=inArr${JSON.stringify([
-          "win",
-          "loss",
-          // "bet",
-        ])}`;
+        filter += `&statementType=game&betId=notNull`;
       } else if (
         aaccountTypeValues &&
         aaccountTypeValues?.value === "balanceReport"
       ) {
-        filter += `&transType=inArr${JSON.stringify([
-          "add",
-          "withDraw",
-          "creditReference",
-        ])}`;
+        filter += `&statementType=addWithdraw`;
+      } else if (aaccountTypeValues && aaccountTypeValues?.value === "casino") {
+        filter += `&statementType=game&betId=isNull`;
       }
       if (gameNameValues && aaccountTypeValues?.value === "balanceReport") {
         filter += `&gameName=${gameNameValues?.value}`;
       }
-      if (gameNameValues && aaccountTypeValues?.value === "gameReport") {
-        if (gameNameValues?.value !== "all") {
-          filter += `&description=like%${gameNameValues?.value}/%`;
-        }
+      if (
+        gameNameValues?.value &&
+        aaccountTypeValues?.value !== "balanceReport" &&
+        gameNameValues?.value !== "all"
+      ) {
+        filter += `&description=like%${gameNameValues?.value}/%`;
       }
       dispatch(
         handleExport({
@@ -302,29 +288,24 @@ const AccountStatement = () => {
       } else if (dateTo) {
         filter += `&createdAt=lte${moment(dateTo)?.format("YYYY-MM-DD")}`;
       }
-      // if (selectedUser && selectedUser?.length > 0) {
-      //   filter += `&user.userName=${selectedUser[0]?.label}`;
-      // }
       if (aaccountTypeValues && aaccountTypeValues?.value === "gameReport") {
-        filter += `&transType=inArr${JSON.stringify([
-          "win",
-          "loss",
-          // "bet",
-        ])}`;
+        filter += `&statementType=game&betId=notNull`;
       } else if (
         aaccountTypeValues &&
         aaccountTypeValues?.value === "balanceReport"
       ) {
-        filter += `&transType=inArr${JSON.stringify([
-          "add",
-          "withDraw",
-          "creditReference",
-        ])}`;
+        filter += `&statementType=addWithdraw`;
+      } else if (aaccountTypeValues && aaccountTypeValues?.value === "casino") {
+        filter += `&statementType=game&betId=isNull`;
       }
       if (gameNameValues && aaccountTypeValues?.value === "balanceReport") {
         filter += `&gameName=${gameNameValues?.value}`;
       }
-      if (gameNameValues && aaccountTypeValues?.value === "gameReport") {
+      if (
+        gameNameValues?.value &&
+        aaccountTypeValues?.value !== "balanceReport" &&
+        gameNameValues?.value !== "all"
+      ) {
         filter += `&description=like%${gameNameValues?.value}/%`;
       }
 
