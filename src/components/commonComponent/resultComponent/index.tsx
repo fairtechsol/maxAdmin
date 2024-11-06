@@ -74,7 +74,7 @@ export const ResultComponent: React.FC<ResultComponentProps> = ({
       >
         <div>
           <span className="px-1" style={{ fontWeight: "bold" }}>Round Id:</span>
-          <span>{type==="cricketv3"? data?.result?.mid:handleRoundId(data?.result?.mid)}</span>
+          <span>{type==="cricketv3"||type==="ballbyball"? data?.result?.mid:handleRoundId(data?.result?.mid)}</span>
         </div>
         <div>
           <span className="px-1" style={{ fontWeight: "bold" }}>Match Time:</span>

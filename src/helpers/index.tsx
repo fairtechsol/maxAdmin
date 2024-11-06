@@ -57,7 +57,7 @@ export const formatToINR = (amount: any) => {
   const formatter = new Intl.NumberFormat("en-IN", {
     currency: "INR",
   });
-  return formatter.format(amount || 0);
+  return formatter.format(isNaN(amount)?0:amount);
 };
 export const formatNumber = (num: any) => {
   if (num >= 1000 && num < 100000) {
