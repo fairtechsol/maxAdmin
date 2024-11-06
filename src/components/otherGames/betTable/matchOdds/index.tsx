@@ -173,12 +173,12 @@ function MatchOdds({
                             bgColor={`blue${index + 1}`}
                             rate={
                               data?.runners?.[indexes]?.ex?.availableToBack?.[
-                                2 - index
+                                index
                               ]?.price
                             }
                             percent={
                               data?.runners?.[indexes]?.ex?.availableToBack?.[
-                                2 - index
+                                index
                               ]?.size
                             }
                             active={
