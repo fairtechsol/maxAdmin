@@ -56,7 +56,7 @@ const PaginationComponent: React.FC<PaginationComponentProps> = ({
 
       return null;
     });
-console.log('first',pageNumbers);
+console.warn('first',pageNumbers);
     // setPageComp(pageNumbers);
   }, [totalPages, currentPage]);
 

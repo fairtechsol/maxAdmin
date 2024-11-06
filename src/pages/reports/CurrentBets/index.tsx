@@ -50,13 +50,13 @@ const CurrentBets = () => {
   const [tableConfig, setTableConfig] = useState<TableConfig | null>({
     page: 1,
     sort: { direction: "ASC", key: null },
-    rowPerPage: 10,
+    rowPerPage: 25,
     keyword: "",
   });
   const [currentPage, setCurrentPage] = useState(1);
   const [keyword, setKeyword] = useState<any>("");
   const [page, setPage] = useState<any>(1);
-  const [rowPerPage, setRowPerPage] = useState<any>(10);
+  const [rowPerPage, setRowPerPage] = useState<any>(25);
   const [tab, setTab] = useState<any>("neCARD");
   const [sort, setSort] = useState({
     direction: "ASC",
@@ -71,12 +71,15 @@ const CurrentBets = () => {
     value: "ALL",
     label: "All",
   });
-
-  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
   const { ReportBetList } = useSelector(
     (state: RootState) => state.match.bettListSlice
   );
+  const [betList, setBetList] = useState<any>(ReportBetList);
+  useEffect(() => {
+    setBetList(ReportBetList);
+  }, [ReportBetList]);
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+// console.log('betList',betList);
 
   useEffect(() => {
     dispatch(
@@ -90,14 +93,30 @@ const CurrentBets = () => {
         // betType: "BACK",
       })
     );
-  }, [keyword, page, rowPerPage, sort, tab]);
+  }, [keyword, page, rowPerPage, tab]);
 
   const handleType = (type: any) => {
     setSelectType(type);
+     const filteredBets = ReportBetList?.rows?.filter((bet:any) => bet.result === type.value);
+     setBetList({
+    ...ReportBetList,
+    rows: filteredBets,
+    count: filteredBets.length, 
+  });
   };
 
   const handleType2 = (type: any) => {
     setSelectType2(type);
+    if(type.value==="ALL"){
+      setBetList(ReportBetList);
+    }else{
+      const filteredBets = ReportBetList?.rows?.filter((bet:any) => bet.betType === type.value);
+      setBetList({
+      ...ReportBetList,
+      rows: filteredBets,
+      count: filteredBets.length, 
+    });
+    }
   };
 
   const handleLoad = (e?: any) => {
@@ -189,9 +208,9 @@ const CurrentBets = () => {
               <Col md={3} className="text-end">
                 <span>
                   {`Total Soda: ${
-                    ReportBetList?.rows?.length
+                    betList?.rows?.length
                   } Total Amount: ${parseFloat(
-                    ReportBetList?.rows?.reduce((acc: any, match: any) => {
+                    betList?.rows?.reduce((acc: any, match: any) => {
                       return acc + +match?.amount;
                     }, 0) || "0.00"
                   ).toFixed(2)}`}
@@ -208,8 +227,8 @@ const CurrentBets = () => {
             // isSort={true}
             isSearch={true}
             itemCount={
-              ReportBetList && ReportBetList?.count > 0
-                ? ReportBetList?.count
+              betList && betList?.count > 0
+                ? betList?.count
                 : 1
             }
             setTableConfig={setTableConfig}
@@ -218,13 +237,13 @@ const CurrentBets = () => {
             currentPage={currentPage}
             setCurrentPage={setCurrentPage}
           >
-            {ReportBetList && ReportBetList?.count === 0 && (
+            {betList && betList?.count === 0 && (
               <tr>
                 <td colSpan={columns.length}>No data available in table</td>
               </tr>
             )}
-            {ReportBetList?.count > 0 &&
-              ReportBetList?.rows?.map((item: any, index: number) => {
+            {betList?.count > 0 &&
+              betList?.rows?.map((item: any, index: number) => {
                 const isBackBet =
                   item?.betType === "BACK" || item?.betType === "YES";
                 const isLayBet =
@@ -303,8 +322,8 @@ const CurrentBets = () => {
             isSort={true}
             isSearch={true}
             itemCount={
-              ReportBetList && ReportBetList?.count > 0
-                ? ReportBetList?.count
+              betList && betList?.count > 0
+                ? betList?.count
                 : 1
             }
             setTableConfig={setTableConfig}
@@ -313,13 +332,13 @@ const CurrentBets = () => {
             currentPage={currentPage}
             setCurrentPage={setCurrentPage}
           >
-            {ReportBetList && ReportBetList?.count === 0 && (
+            {betList && betList?.count === 0 && (
               <tr>
                 <td colSpan={columns.length}>No data available in table</td>
               </tr>
             )}
-            {ReportBetList?.count > 0 &&
-              ReportBetList?.rows?.map((item: any, index: number) => {
+            {betList?.count > 0 &&
+              betList?.rows?.map((item: any, index: number) => {
                 const isBackBet =
                   item?.betType === "BACK" || item?.betType === "YES";
                 const isLayBet =
