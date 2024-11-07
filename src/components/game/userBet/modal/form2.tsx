@@ -68,66 +68,30 @@ const UserBetModalForm2 = ({ customClass, matchId, morePlacedBets }: any) => {
     setBetType(type);
   };
 
-  // const handleDelete = (type: any) => {
-  //   if (type === "delete") {
-  //     const filtered = morePlacedBets?.filter(
-  //       (item: any) => item?.deleteReason != null
-  //     );
-  //     setFilteredItems(filtered);
-  //     setSelectedUser(false);
-  //   } else {
-  //     const filtered = morePlacedBets?.filter(
-  //       (item: any) => item?.deleteReason === null
-  //     );
-  //     setFilteredItems(filtered);
-  //     setSelectedUser(true);
-  //   }
-  // };
-
   useEffect(() => {
-    if (matchBetType === "matched") {
-      let filteredMatchedBet = morePlacedBets?.filter(
-        (item: any) => item?.deleteReason === null
-      );
-      if (betType === "all") {
-        setFilteredItems(filteredMatchedBet);
-      } else if (betType === "back") {
-        const filtered = filteredMatchedBet?.filter((item: any) =>
-          ["BACK", "YES", "back", "yes"].includes(item?.betType)
-        );
-        setFilteredItems(filtered);
-      } else if (betType === "lay") {
-        const filtered = filteredMatchedBet?.filter((item: any) =>
-          ["LAY", "NO", "lay", "no"].includes(item?.betType)
-        );
-        setFilteredItems(filtered);
-      }
-    } else if (matchBetType === "deleted") {
-      let filteredDeletedBet = morePlacedBets?.filter(
-        (item: any) => item?.deleteReason !== null
-      );
-      if (betType === "all") {
-        setFilteredItems(filteredDeletedBet);
-      } else if (betType === "back") {
-        const filtered = filteredDeletedBet?.filter((item: any) =>
-          ["BACK", "YES", "back", "yes"].includes(item?.betType)
-        );
-        setFilteredItems(filtered);
-      } else if (betType === "lay") {
-        const filtered = filteredDeletedBet?.filter((item: any) =>
-          ["LAY", "NO", "lay", "no"].includes(item?.betType)
-        );
-        setFilteredItems(filtered);
-      }
-    }
-  }, [matchBetType, betType, morePlacedBets.length]);
+    const filterBets = () => {
+      const isDeleted = matchBetType === "deleted";
 
-  // useEffect(() => {
-  //   const filtered = morePlacedBets?.filter(
-  //     (item: any) => item?.deleteReason === null
-  //   );
-  //   setFilteredItems(filtered);
-  // }, [morePlacedBets.length]);
+      let filteredBets = morePlacedBets?.filter((item: any) =>
+        isDeleted ? item?.deleteReason !== null : item?.deleteReason === null
+      );
+
+      if (betType !== "all") {
+        const betTypeValues =
+          betType === "back"
+            ? ["BACK", "YES", "back", "yes"]
+            : ["LAY", "NO", "lay", "no"];
+
+        filteredBets = filteredBets?.filter((item: any) =>
+          betTypeValues.includes(item?.betType)
+        );
+      }
+
+      setFilteredItems(filteredBets);
+    };
+
+    filterBets();
+  }, [matchBetType, betType, morePlacedBets.length]);
 
   useEffect(() => {
     try {
