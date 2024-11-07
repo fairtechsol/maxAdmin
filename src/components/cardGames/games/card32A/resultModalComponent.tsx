@@ -32,7 +32,7 @@ const Card32ResultComponent: React.FC<Props> = ({ data }: any) => {
           <span className="fs-5">Player 8</span>
           <div className="d-sm-flex flex-row justify-content-center align-items-center">
             {data?.result?.win === "1" && (
-              <div className="casino-winner-icon me-1 mt-5">
+              <div className="casino-winner-icon ">
               <Winner />
             </div>
             )}
@@ -56,7 +56,7 @@ const Card32ResultComponent: React.FC<Props> = ({ data }: any) => {
           <span className="fs-5">Player 9</span>
           <div className="d-sm-flex flex-row justify-content-center align-items-center">
             {data?.result?.win === "2" && (
-              <div className="casino-winner-icon me-1 mt-5">
+              <div className="casino-winner-icon ">
               <Winner />
             </div>
             )}
@@ -79,7 +79,7 @@ const Card32ResultComponent: React.FC<Props> = ({ data }: any) => {
           <span className="fs-5">Player 10</span>
           <div className="d-sm-flex flex-row justify-content-center align-items-center">
             {data?.result?.win === "3" && (
-              <div className="casino-winner-icon me-1 mt-5">
+              <div className="casino-winner-icon ">
               <Winner />
             </div>
             )}
@@ -102,7 +102,7 @@ const Card32ResultComponent: React.FC<Props> = ({ data }: any) => {
           <span className="fs-5">Player 11</span>
           <div className="d-sm-flex flex-row justify-content-center align-items-center pb-5">
             {data?.result?.win === "4" && (
-              <div className="casino-winner-icon me-1 mt-5">
+              <div className="casino-winner-icon ">
               <Winner />
             </div>
             )}

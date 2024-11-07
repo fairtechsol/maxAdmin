@@ -92,7 +92,11 @@ const VideoFrame = ({ result, time, id, profitLoss, data }: any) => {
               <div
                 title="Rules"
                 className="casino-video-rules-icon"
-                onClick={() => openModal(data?.type)}
+                onClick={() => {
+                  if (data?.type !== "queen") {
+                    openModal(data?.type);
+                  }
+                }}
               >
                 <i className="fas fa-info-circle title-24"></i>
               </div>
