@@ -84,10 +84,7 @@ const GameUserBets = ({ matchId }: any) => {
                         <th className="text-end" style={{ minWidth: ".5vw" }}>
                           Rate
                         </th>
-                        <th
-                          className="text-end"
-                          style={{ minWidth: "1vw" }}
-                        >
+                        <th className="text-end" style={{ minWidth: "1vw" }}>
                           Amount
                         </th>
                         {/* <th>PlaceDate</th>
@@ -98,100 +95,97 @@ const GameUserBets = ({ matchId }: any) => {
                     <tbody>
                       {placedBets?.map((bet: any) => {
                         return (
-                           <Fragment key={bet?.id}>
-                           <tr
-                            className={`position-relative lh-1 bet-table-right border-none ${
-                              bet?.betType === "NO" || bet?.betType === "LAY"
-                                ? "bor-red1"
-                                : "bor-blue3"
-                            }`
-                           }
-                           >
-                             {" "}
-                             <td
-                               colSpan={4}
-                               className={
-                                 bet?.betType === "NO" ||
-                                 bet?.betType === "LAY"
-                                   ? "bg-pink"
-                                   : "bg-blu"
-                               }
-                             >
-                               <div className="position-relative lh-1 bet-table-right d-flex  justify-content-between w-100">
-                                 <span className="f700">{bet?.marketType} </span>
-                                 <span className="text-end">
-                                   {moment(bet?.createdAt).format(
-                                     "DD-MM-YYYY hh:mm:ss"
-                                   )}{" "}
-                                 </span>
-                               </div>
-                             </td>
-                             {bet?.deleteReason && (
+                          <Fragment key={bet?.id}>
+                            <tr
+                              className={`position-relative lh-1 bet-table-right border-none ${
+                                bet?.betType === "NO" || bet?.betType === "LAY"
+                                  ? "bor-red1"
+                                  : "bor-blue3"
+                              }`}
+                            >
+                              {" "}
+                              <td
+                                colSpan={4}
+                                className={
+                                  bet?.betType === "NO" ||
+                                  bet?.betType === "LAY"
+                                    ? "bg-pink"
+                                    : "bg-blu"
+                                }
+                              >
+                                <div className="position-relative lh-1 bet-table-right d-flex  justify-content-between w-100">
+                                  <span className="f700">
+                                    {bet?.marketType}{" "}
+                                  </span>
+                                  <span className="text-end pe-2">
+                                    {moment(bet?.createdAt).format(
+                                      "DD-MM-YYYY hh:mm:ss"
+                                    )}{" "}
+                                  </span>
+                                </div>
+                              </td>
+                              {bet?.deleteReason && (
                                 <div className="betDeleteOverlay"></div>
                               )}
-                           </tr>
-                           <tr className="position-relative lh-1 bet-table-right">
-                             <td
-                               className={
-                                 bet?.betType === "NO" ||
-                                 bet?.betType === "LAY"
-                                   ? "bg-pink"
-                                   : "bg-blu"
-                               }
-                             >
-                               <div className="col">
-                                 {" "}
-                                 {bet?.user?.userName}
-                               </div>
-                             </td>
-                             <td
-                               className={
-                                 bet?.betType === "NO" ||
-                                 bet?.betType === "LAY"
-                                   ? "bg-pink"
-                                   : "bg-blu"
-                               }
-                             >
-                               {/* <br></br> */}
-                               {bet?.marketBetType === "SESSION"
-                                 ? bet?.eventName
-                                 : bet?.teamName}
-                             </td>
-                             <td
-                               className={
-                                 bet?.betType === "NO" ||
-                                 bet?.betType === "LAY"
-                                   ? "bg-pink text-end"
-                                   : "bg-blu text-end"
-                               }
-                             >
-                               {/* <br></br> */}
-                               {bet?.odds}
-                             </td>
-                             <td
-                               className={`${
-                                 bet?.betType === "NO" ||
-                                 bet?.betType === "LAY"
-                                   ? "bg-pink"
-                                   : "bg-blu"
-                               }`}
-                             >
-                               <div className="bet-amount text-end">
-                                 <div className="col  text-end">
-                                   {bet?.amount}
-                                 </div>
-                               </div>
-                             </td>
+                            </tr>
+                            <tr className="position-relative lh-1 bet-table-right">
+                              <td
+                                className={
+                                  bet?.betType === "NO" ||
+                                  bet?.betType === "LAY"
+                                    ? "bg-pink"
+                                    : "bg-blu"
+                                }
+                              >
+                                <div className="col">
+                                  {" "}
+                                  {bet?.user?.userName}
+                                </div>
+                              </td>
+                              <td
+                                className={
+                                  bet?.betType === "NO" ||
+                                  bet?.betType === "LAY"
+                                    ? "bg-pink"
+                                    : "bg-blu"
+                                }
+                              >
+                                {/* <br></br> */}
+                                {bet?.marketBetType === "SESSION"
+                                  ? bet?.eventName
+                                  : bet?.teamName}
+                              </td>
+                              <td
+                                className={
+                                  bet?.betType === "NO" ||
+                                  bet?.betType === "LAY"
+                                    ? "bg-pink text-end"
+                                    : "bg-blu text-end"
+                                }
+                              >
+                                {/* <br></br> */}
+                                {bet?.odds}
+                              </td>
+                              <td
+                                className={`${
+                                  bet?.betType === "NO" ||
+                                  bet?.betType === "LAY"
+                                    ? "bg-pink"
+                                    : "bg-blu"
+                                }`}
+                              >
+                                <div className="bet-amount text-end">
+                                  <div className="col  text-end">
+                                    {bet?.amount}
+                                  </div>
+                                </div>
+                              </td>
 
-                             <DeleteBetOverlay title={bet?.deleteReason} />
-                           </tr>
-                           <tr>
-                             <td
-                               colSpan={4}
-                               style={{ height: "1px" }}
-                             ></td>
-                           </tr>
-                         </Fragment>
+                              <DeleteBetOverlay title={bet?.deleteReason} />
+                            </tr>
+
+                            <div style={{ height: "4px" }}></div>
+                          </Fragment>
                         );
                       })}
                     </tbody>

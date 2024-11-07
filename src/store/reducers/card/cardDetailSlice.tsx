@@ -180,7 +180,7 @@ const cardDetail = createSlice({
         state.dragonTigerDetail = {
           ...state.dragonTigerDetail,
           profitLoss: {
-            ...state.dragonTigerDetail.profitLoss,
+            ...state.dragonTigerDetail?.profitLoss,
             ...action.payload,
           },
         };
