@@ -26,8 +26,6 @@ const ManualMarket = ({ title, data, detail, teamARates, teamBRates }: any) => {
     }
   })();
 
-  console.log(bookRatioA, bookRatioB, "");
-
   return (
     <>
       <div
