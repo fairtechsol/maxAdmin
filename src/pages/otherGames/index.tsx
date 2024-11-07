@@ -28,7 +28,7 @@ const OtherGamesDetail = () => {
     (state: RootState) => state.match.sidebarList
   );
 
-  const { id, marketId, gameType } = useParams();
+  const { gameType, id, marketId } = useParams();
 
   const { matchDetails, success } = useSelector(
     (state: RootState) => state.match.matchListSlice
@@ -238,7 +238,7 @@ const OtherGamesDetail = () => {
 
   useEffect(() => {
     setMarketToShow(marketId);
-  }, []);
+  }, [marketId]);
 
   return (
     <div className="gamePage">
