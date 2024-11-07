@@ -6,48 +6,24 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../../store/store";
 // import { searchList } from "../../../../store/actions/user/userActions";
-import { getMorePlacedBets, getMorePlacedBetsReset } from "../../../../store/actions/match/matchAction";
+import {
+  getMorePlacedBets,
+  getMorePlacedBetsReset,
+} from "../../../../store/actions/match/matchAction";
 import CustomButton from "../../../commonComponent/button";
 import UserBetModalTable from ".";
 
-const UserBetModalForm2 = (props: any) => {
+const UserBetModalForm2 = ({ customClass, matchId, morePlacedBets }: any) => {
   const dispatch: AppDispatch = useDispatch();
   const [filteredItems, setFilteredItems] = useState([]);
-  const [inputValue, setInputValue] = useState("all");
-  // const [userOptions, setUserOptions] = useState([]);
-  const [selectedUser, setSelectedUser] = useState<any>(true);
+  const [betType, setBetType] = useState("all");
+  const [matchBetType, setMatchBetType] = useState("matched");
   const [inputFields, setInputFields] = useState({
     minAmount: "",
     maxAmount: "",
     ipAddress: "",
     userName: "",
   });
-  // const { props.morePlacedBets } = useSelector(
-  //   (state: RootState) => state.match.placeBets
-  // );
-  // const options = [
-  //   { value: "all", label: "All" },
-  //   { value: "BACK,YES", label: "BACK" },
-  //   { value: "LAY,NO", label: "LAY" },
-  // ];
-  // const [selectedOption, setSelectedOption] = useState<any>(options[0]);
-
-  // const { searchListData } = useSelector(
-  //   (state: RootState) => state.user.userList
-  // );
-
-  // const { userDetail } = useSelector((state: RootState) => state.user.profile);
-
-  // const debouncedInputValue = useMemo(() => {
-  //   return debounce((value) => {
-  //     dispatch(
-  //       searchList({
-  //         userName: value,
-  //         createdBy: userDetail?.id,
-  //       })
-  //     );
-  //   }, 500);
-  // }, []);
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
@@ -58,11 +34,6 @@ const UserBetModalForm2 = (props: any) => {
       };
     });
   };
-
-  // const handleChange = (selectedOption: any) => {
-  //   setSelectedOption(selectedOption);
-  // };
-
   const handleSubmit = (e: any) => {
     e.preventDefault();
     try {
@@ -81,62 +52,82 @@ const UserBetModalForm2 = (props: any) => {
       if (inputFields?.userName) {
         filter += `&searchBy=user.userName&keyword=${inputFields?.userName}`;
       }
-      // if (selectedUser) {
-      //   filter += `&createBy=eq${selectedUser[0]?.value}`;
-      // }
-
-      // if (selectedOption && selectedOption.value !== "all") {
-      //   filter += `&betType=inArr${JSON.stringify(
-      //     selectedOption.value?.split(",")
-      //   )}`;
-      // }
 
       dispatch(
         getMorePlacedBets({
           filter,
-          matchId: props?.matchId,
+          matchId: matchId,
         })
       );
     } catch (error) {
       console.log(error);
     }
   };
-  // useEffect(() => {
-  //   if (searchListData) {
-  //     const options = searchListData?.users?.map((user: any) => ({
-  //       value: user.id,
-  //       label: user.userName,
-  //     }));
-  //     setUserOptions(options);
-  //   }
-  // }, [searchListData]);
-  useEffect(() => {
-    const filtered = props?.morePlacedBets?.filter(
-      (item: any) => item?.deleteReason === null
-    );
-    setFilteredItems(filtered);
-    return () => {
-      dispatch(getMorePlacedBetsReset());
-    };
-  }, []);
-  
-  
 
-  const handleDelete = (type: any) => {
-    if (type === "delete") {
-      const filtered = props?.morePlacedBets?.filter(
-        (item: any) => item?.deleteReason != null
-      );
-      setFilteredItems(filtered);
-      setSelectedUser(false);
-    } else {
-      const filtered = props?.morePlacedBets?.filter(
+  const handleRadioChange = (type: any) => {
+    setBetType(type);
+  };
+
+  // const handleDelete = (type: any) => {
+  //   if (type === "delete") {
+  //     const filtered = morePlacedBets?.filter(
+  //       (item: any) => item?.deleteReason != null
+  //     );
+  //     setFilteredItems(filtered);
+  //     setSelectedUser(false);
+  //   } else {
+  //     const filtered = morePlacedBets?.filter(
+  //       (item: any) => item?.deleteReason === null
+  //     );
+  //     setFilteredItems(filtered);
+  //     setSelectedUser(true);
+  //   }
+  // };
+
+  useEffect(() => {
+    if (matchBetType === "matched") {
+      let filteredMatchedBet = morePlacedBets?.filter(
         (item: any) => item?.deleteReason === null
       );
-      setFilteredItems(filtered);
-      setSelectedUser(true);
+      if (betType === "all") {
+        setFilteredItems(filteredMatchedBet);
+      } else if (betType === "back") {
+        const filtered = filteredMatchedBet?.filter((item: any) =>
+          ["BACK", "YES", "back", "yes"].includes(item?.betType)
+        );
+        setFilteredItems(filtered);
+      } else if (betType === "lay") {
+        const filtered = filteredMatchedBet?.filter((item: any) =>
+          ["LAY", "NO", "lay", "no"].includes(item?.betType)
+        );
+        setFilteredItems(filtered);
+      }
+    } else if (matchBetType === "deleted") {
+      let filteredDeletedBet = morePlacedBets?.filter(
+        (item: any) => item?.deleteReason !== null
+      );
+      if (betType === "all") {
+        setFilteredItems(filteredDeletedBet);
+      } else if (betType === "back") {
+        const filtered = filteredDeletedBet?.filter((item: any) =>
+          ["BACK", "YES", "back", "yes"].includes(item?.betType)
+        );
+        setFilteredItems(filtered);
+      } else if (betType === "lay") {
+        const filtered = filteredDeletedBet?.filter((item: any) =>
+          ["LAY", "NO", "lay", "no"].includes(item?.betType)
+        );
+        setFilteredItems(filtered);
+      }
     }
-  };
+  }, [matchBetType, betType, morePlacedBets.length]);
+
+  // useEffect(() => {
+  //   const filtered = morePlacedBets?.filter(
+  //     (item: any) => item?.deleteReason === null
+  //   );
+  //   setFilteredItems(filtered);
+  // }, [morePlacedBets.length]);
 
   useEffect(() => {
     try {
@@ -153,47 +144,23 @@ const UserBetModalForm2 = (props: any) => {
         filter += `&betPlaced.ipAddress=${inputFields?.ipAddress}`;
       }
 
-      // if (selectedUser) {
-      //   filter += `&createBy=eq${selectedUser[0]?.value}`;
-      // }
-
-      // if (selectedOption && selectedOption?.value !== "all") {
-      //   filter += `&betType=inArr${JSON.stringify(
-      //     selectedOption?.value?.split(",")
-      //   )}`;
-      // }
-
       dispatch(
         getMorePlacedBets({
           filter,
-          matchId: props?.matchId,
+          matchId: matchId,
         })
       );
+      return () => {
+        dispatch(getMorePlacedBetsReset());
+      };
     } catch (error) {
       console.log(error);
     }
   }, []);
 
-  const handleRadioChange = (type: any) => {
-    setInputValue(type);
-    if (type === "back") {
-      const filtered = props?.morePlacedBets?.filter(
-        (item: any) => item?.betType === "BACK" || item?.betType === "back"
-      );
-      setFilteredItems(filtered);
-    } else if (type === "lay") {
-      const filtered = props?.morePlacedBets?.filter(
-        (item: any) => item?.betType === "LAY" || item?.betType === "lay"
-      );
-      setFilteredItems(filtered);
-    } else {
-      setFilteredItems(props.morePlacedBets);
-    }
-  };
-
   return (
     <form
-      className={`UserBetModalForm ${props.customClass} `}
+      className={`UserBetModalForm ${customClass} `}
       onSubmit={handleSubmit}
     >
       <div
@@ -204,12 +171,12 @@ const UserBetModalForm2 = (props: any) => {
           style={{
             fontSize: "14px",
             padding: "6px",
-            backgroundColor: selectedUser ? "#556ee6" : "#eee",
+            backgroundColor: matchBetType === "matched" ? "#556ee6" : "#eee",
             border: 0,
-            color: selectedUser ? "#fff" : "#333",
+            color: matchBetType === "matched" ? "#fff" : "#333",
             borderRadius: "5px",
           }}
-          onClick={() => handleDelete("match")}
+          onClick={() => setMatchBetType("matched")}
         >
           Matched Bets
         </button>
@@ -217,12 +184,12 @@ const UserBetModalForm2 = (props: any) => {
           style={{
             fontSize: "14px",
             padding: "6px",
-            backgroundColor: selectedUser ? "#eee" : "#556ee6",
+            backgroundColor: matchBetType === "deleted" ? "#556ee6" : "#eee",
             border: 0,
-            color: selectedUser ? "#333" : "#fff",
+            color: matchBetType === "deleted" ? "#fff" : "#333",
             borderRadius: "5px",
           }}
-          onClick={() => handleDelete("delete")}
+          onClick={() => setMatchBetType("deleted")}
         >
           Deleted Bets
         </button>
@@ -354,7 +321,7 @@ const UserBetModalForm2 = (props: any) => {
                   <input
                     type="radio"
                     name="betType"
-                    id={inputValue}
+                    id={betType}
                     onChange={() => handleRadioChange("all")}
                     defaultChecked
                   />
@@ -365,7 +332,7 @@ const UserBetModalForm2 = (props: any) => {
                   <input
                     type="radio"
                     name="betType"
-                    id={inputValue}
+                    id={betType}
                     onChange={() => handleRadioChange("back")}
                   />
                   <span>Back</span>
@@ -374,7 +341,7 @@ const UserBetModalForm2 = (props: any) => {
                   <input
                     type="radio"
                     name="betType"
-                    id={inputValue}
+                    id={betType}
                     onChange={() => handleRadioChange("lay")}
                   />
                   <span>Lay</span>
