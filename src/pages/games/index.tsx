@@ -128,7 +128,7 @@ const Games = () => {
     try {
       if (event?.matchId === id) {
         // dispatch(removeRunAmount(event));
-        dispatch(getPlacedBets(`eq${id}`));
+        dispatch(getPlacedBets(id));
         // dispatch(amountupdate(event));
       }
     } catch (error) {
@@ -139,7 +139,7 @@ const Games = () => {
     try {
       if (event?.matchId === id) {
         // dispatch(updateMaxLossForBetOnUndeclare(event));
-        dispatch(getPlacedBets(`eq${id}`));
+        dispatch(getPlacedBets(id));
       }
     } catch (error) {
       console.log(error);

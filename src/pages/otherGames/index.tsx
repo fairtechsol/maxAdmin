@@ -28,7 +28,7 @@ const OtherGamesDetail = () => {
     (state: RootState) => state.match.sidebarList
   );
 
-  const { id, marketId } = useParams();
+  const { id, marketId, gameType } = useParams();
 
   const { matchDetails, success } = useSelector(
     (state: RootState) => state.match.matchListSlice
@@ -47,9 +47,7 @@ const OtherGamesDetail = () => {
   const handleDeleteBet = (event: any) => {
     try {
       if (event?.matchId === id) {
-        dispatch(
-          otherMatchDetailAction({ matchId: id, matchType: "football" })
-        );
+        dispatch(otherMatchDetailAction({ matchId: id, matchType: gameType }));
         dispatch(getPlacedBets(id));
       }
     } catch (e) {
@@ -60,9 +58,7 @@ const OtherGamesDetail = () => {
   const handleSessionBetPlaced = (event: any) => {
     try {
       if (event?.jobData?.placedBet?.matchId === id) {
-        dispatch(
-          otherMatchDetailAction({ matchId: id, matchType: "football" })
-        );
+        dispatch(otherMatchDetailAction({ matchId: id, matchType: gameType }));
         dispatch(getPlacedBets(id));
       }
     } catch (e) {
@@ -72,9 +68,7 @@ const OtherGamesDetail = () => {
   const handleMatchBetPlaced = (event: any) => {
     try {
       if (event?.jobData?.matchId === id) {
-        dispatch(
-          otherMatchDetailAction({ matchId: id, matchType: "football" })
-        );
+        dispatch(otherMatchDetailAction({ matchId: id, matchType: gameType }));
         dispatch(getPlacedBets(id));
       }
     } catch (e) {
@@ -94,7 +88,7 @@ const OtherGamesDetail = () => {
     try {
       if (event?.matchId === id) {
         // dispatch(removeRunAmount(event));
-        dispatch(getPlacedBets(`eq${id}`));
+        dispatch(getPlacedBets(id));
         // dispatch(amountupdate(event));
       }
     } catch (error) {
@@ -105,7 +99,7 @@ const OtherGamesDetail = () => {
     try {
       if (event?.matchId === id) {
         // dispatch(updateMaxLossForBetOnUndeclare(event));
-        dispatch(getPlacedBets(`eq${id}`));
+        dispatch(getPlacedBets(id));
       }
     } catch (error) {
       console.log(error);
@@ -146,9 +140,7 @@ const OtherGamesDetail = () => {
   useEffect(() => {
     try {
       if (id) {
-        dispatch(
-          otherMatchDetailAction({ matchId: id, matchType: "football" })
-        );
+        dispatch(otherMatchDetailAction({ matchId: id, matchType: gameType }));
         dispatch(getPlacedBets(id));
       }
     } catch (e) {
