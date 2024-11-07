@@ -31,7 +31,7 @@ const Teen20ResultComponent: React.FC<Props> = ({ data }: any) => {
             }
           >
             {data?.result?.win === "1" && (
-              <div className="casino-winner-icon me-5 mb-5">
+              <div className="casino-winner-icon ">
               <Winner />
             </div>
             )}
@@ -72,7 +72,7 @@ const Teen20ResultComponent: React.FC<Props> = ({ data }: any) => {
             }
           >
             {data?.result?.win === "3" && (
-              <div className="casino-winner-icon me-5 mb-5">
+              <div className="casino-winner-icon ">
               <Winner />
             </div>
             )}

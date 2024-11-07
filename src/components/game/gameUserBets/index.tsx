@@ -72,7 +72,7 @@ const GameUserBets = ({ matchId }: any) => {
               </Nav.Item>
             </Nav>
           </div>
-          <div>
+          <div className="your-container">
             <Col sm={12}>
               <Tab.Content>
                 <Tab.Pane eventKey="first">
@@ -100,11 +100,11 @@ const GameUserBets = ({ matchId }: any) => {
                         return (
                            <Fragment key={bet?.id}>
                            <tr
-                            className={
-                             bet?.betType === "NO" ||
-                             bet?.betType === "LAY"
-                               ? "bor-red1 position-relative lh-1 bet-table-right border-none"
-                               : "bor-blue3 position-relative lh-1 bet-table-right border-none"
+                            className={`position-relative lh-1 bet-table-right border-none ${
+                              bet?.betType === "NO" || bet?.betType === "LAY"
+                                ? "bor-red1"
+                                : "bor-blue3"
+                            }`
                            }
                            >
                              {" "}
@@ -126,6 +126,9 @@ const GameUserBets = ({ matchId }: any) => {
                                  </span>
                                </div>
                              </td>
+                             {bet?.deleteReason && (
+                                <div className="betDeleteOverlay"></div>
+                              )}
                            </tr>
                            <tr className="position-relative lh-1 bet-table-right">
                              <td
@@ -185,7 +188,7 @@ const GameUserBets = ({ matchId }: any) => {
                            <tr>
                              <td
                                colSpan={4}
-                               style={{ height: "3px", padding: "0px" }}
+                               style={{ height: "1px" }}
                              ></td>
                            </tr>
                          </Fragment>

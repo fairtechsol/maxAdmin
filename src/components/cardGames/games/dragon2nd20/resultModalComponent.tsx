@@ -25,7 +25,7 @@ const Dragon202ResultComponent: React.FC<Props> = ({ data }: any) => {
             }
           >
             {data?.result?.win === "1" && (
-             <div className="casino-winner-icon mb-5 me-5">
+             <div className="casino-winner-icon">
              <Winner />
            </div>
             )}
@@ -58,7 +58,7 @@ const Dragon202ResultComponent: React.FC<Props> = ({ data }: any) => {
               <HandleCards card={resultCards?.[1]} />
             </div>
             {data?.result?.win === "2" && (
-              <div className="casino-winner-icon mb-5 me-5">
+              <div className="casino-winner-icon">
               <Winner />
             </div>
             )}

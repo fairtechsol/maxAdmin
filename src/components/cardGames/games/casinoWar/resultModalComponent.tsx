@@ -38,7 +38,7 @@ const CasinoWarResultComponent: React.FC<Props> = ({ data }) => {
           return (
             <div
               key={index}
-              className="teen20resultCardContainer mb-3 pb-5"
+              className="teen20resultCardContainer"
               style={{ marginLeft: "5px" }}
             >
               <span className="fs-6">Player {index + 1}</span>
