@@ -264,7 +264,7 @@ const OtherGamesDetail = () => {
               {["football", "tennis"]?.includes(matchDetails?.matchType) && (
                 <CustomBreadcrumb
                   items={[
-                    { name: breadCrumb?.matchName || matchDetails?.title },
+                    { name: matchDetails?.title || breadCrumb?.matchName },
                   ]}
                 />
               )}
