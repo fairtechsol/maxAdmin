@@ -75,7 +75,7 @@ const OtherUserBets = ({ matchId }: any) => {
               </Nav.Item>
             </Nav>
           </div>
-          <div>
+          <div className="your-container">
             <Col sm={12}>
               <Tab.Content>
                 <Tab.Pane eventKey="first">
@@ -100,12 +100,12 @@ const OtherUserBets = ({ matchId }: any) => {
                         return (
                           <Fragment key={index}>
                             <tr
-                             className={
-                              bet?.betType === "NO" ||
-                              bet?.betType === "LAY"
-                                ? "bor-red1 position-relative lh-1 bet-table-right border-none"
-                                : "bor-blue3 position-relative lh-1 bet-table-right border-none"
-                            }
+                              className={`position-relative lh-1 bet-table-right border-none ${
+                                bet?.betType === "NO" || bet?.betType === "LAY"
+                                  ? "bor-red1"
+                                  : "bor-blue3"
+                              }`
+                             }
                             >
                               {" "}
                               <td
@@ -126,6 +126,9 @@ const OtherUserBets = ({ matchId }: any) => {
                                   </span>
                                 </div>
                               </td>
+                              {bet?.deleteReason && (
+                                <div className="betDeleteOverlay"></div>
+                              )}
                             </tr>
                             <tr className="position-relative lh-1 bet-table-right">
                               <td

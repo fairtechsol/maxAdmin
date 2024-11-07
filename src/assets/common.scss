@@ -811,10 +811,7 @@ th {
   color: #000;
   cursor: pointer;
 }
-.casino-result-cards-item {
-  position: absolute;
-  // right: -100px;
-}
+
 .casino-result-cards-item:last-child {
   margin-right: 0;
 }
@@ -1356,7 +1353,7 @@ th {
   border-radius: 8px;
   overflow: hidden;
   z-index: 1051;
-  margin-top: 60px; /* Optional: add margin from the top */
+  margin-top: 40px; /* Optional: add margin from the top */
 }
 
 /* Header styling */
@@ -1375,3 +1372,12 @@ th {
   color: #333;
 }
 
+.custom-modal-body{
+  overflow-y: auto;
+  max-height: 480px;
+  min-height: 300px;
+}
+
+.your-container .table tbody td:not(:nth-child(5)) {
+  padding: 2px !important;
+}

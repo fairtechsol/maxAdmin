@@ -80,7 +80,7 @@ const QueenResultComponent: React.FC<Props> = ({ data }: any) => {
               );
             })}
             {data?.result?.win === "1" && (
-              <div className="casino-winner-icon mb-5">
+              <div className="casino-winner-icon">
               <Winner />
             </div>
             )}
@@ -111,7 +111,7 @@ const QueenResultComponent: React.FC<Props> = ({ data }: any) => {
               );
             })}
             {data?.result?.win === "2" && (
-              <div className="casino-winner-icon mb-5">
+              <div className="casino-winner-icon">
               <Winner />
             </div>
             )}
@@ -142,7 +142,7 @@ const QueenResultComponent: React.FC<Props> = ({ data }: any) => {
               );
             })}
             {data?.result?.win === "3" && (
-              <div className="casino-winner-icon mb-5">
+              <div className="casino-winner-icon">
               <Winner />
             </div>
             )}
@@ -173,7 +173,7 @@ const QueenResultComponent: React.FC<Props> = ({ data }: any) => {
               );
             })}
             {data?.result?.win === "4" && (
-              <div className="casino-winner-icon mb-5">
+              <div className="casino-winner-icon">
               <Winner />
             </div>
             )}

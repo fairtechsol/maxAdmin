@@ -152,9 +152,9 @@ const ManualMarket = ({ title, data, detail, teamARates, teamBRates }: any) => {
             {/* {!isMobile && ( */}
             <div className="manualBackBox back3Background">
               <span className={`rateFont manualRate1Box`}>
-                {data?.backTeamA != 0
-                  ? data?.backTeamA - 2 > 0
-                    ? data?.backTeamA - 2
+                {Math.floor(data?.backTeamA) != 0
+                  ? Math.floor(data?.backTeamA) - 2 > 0
+                    ? Math.floor(data?.backTeamA) - 2
                     : "-"
                   : "-"}
               </span>
@@ -163,9 +163,9 @@ const ManualMarket = ({ title, data, detail, teamARates, teamBRates }: any) => {
             {/* {!isMobile && ( */}
             <div className="manualBackBox back2Background">
               <span className={`rateFont manualRate1Box`}>
-                {data?.backTeamA != 0
-                  ? data?.backTeamA - 1 > 0
-                    ? data?.backTeamA - 1
+                {Math.floor(data?.backTeamA) != 0
+                  ? Math.floor(data?.backTeamA) - 1 > 0
+                    ? Math.floor(data?.backTeamA) - 1
                     : "-"
                   : "-"}
               </span>
@@ -184,12 +184,12 @@ const ManualMarket = ({ title, data, detail, teamARates, teamBRates }: any) => {
             {/* {!isMobile && ( */}
             <div className="manualBackBox lay2Background">
               <span className={`rateFont manualRate1Box`}>
-                {data?.layTeamA != 0
+                {Math.floor(data?.layTeamA) != 0
                   ? detail?.rateThan100
-                    ? data?.layTeamA + 1
-                    : data?.layTeamA + 1 > 100
+                    ? Math.floor(data?.layTeamA) + 1
+                    : Math.floor(data?.layTeamA) + 1 > 100
                     ? "-"
-                    : data?.layTeamA + 1
+                    : Math.floor(data?.layTeamA) + 1
                   : "-"}
               </span>
             </div>
@@ -197,12 +197,12 @@ const ManualMarket = ({ title, data, detail, teamARates, teamBRates }: any) => {
             {/* {!isMobile && ( */}
             <div className="manualBackBox lay3Background">
               <span className={`rateFont manualRate1Box`}>
-                {data?.layTeamA != 0
+                {Math.floor(data?.layTeamA) != 0
                   ? detail?.rateThan100
-                    ? data?.layTeamA + 2
-                    : data?.layTeamA + 2 > 100
+                    ? Math.floor(data?.layTeamA) + 2
+                    : Math.floor(data?.layTeamA) + 2 > 100
                     ? "-"
-                    : data?.layTeamA + 2
+                    : Math.floor(data?.layTeamA) + 2
                   : "-"}
               </span>
             </div>
@@ -288,9 +288,9 @@ const ManualMarket = ({ title, data, detail, teamARates, teamBRates }: any) => {
             {/* {!isMobile && ( */}
             <div className="manualBackBox back3Background">
               <span className={`rateFont manualRate1Box`}>
-                {data?.backTeamB != 0
-                  ? data?.backTeamB - 2 > 0
-                    ? data?.backTeamB - 2
+                {Math.floor(data?.backTeamB) != 0
+                  ? Math.floor(data?.backTeamB) - 2 > 0
+                    ? Math.floor(data?.backTeamB) - 2
                     : "-"
                   : "-"}
               </span>
@@ -299,9 +299,9 @@ const ManualMarket = ({ title, data, detail, teamARates, teamBRates }: any) => {
             {/* {!isMobile && ( */}
             <div className="manualBackBox back2Background">
               <span className={`rateFont manualRate1Box`}>
-                {data?.backTeamB != 0
-                  ? data?.backTeamB - 1 > 0
-                    ? data?.backTeamB - 1
+                {Math.floor(data?.backTeamB) != 0
+                  ? Math.floor(data?.backTeamB) - 1 > 0
+                    ? Math.floor(data?.backTeamB) - 1
                     : "-"
                   : "-"}
               </span>
@@ -320,12 +320,12 @@ const ManualMarket = ({ title, data, detail, teamARates, teamBRates }: any) => {
             {/* {!isMobile && ( */}
             <div className="manualBackBox lay2Background">
               <span className={`rateFont manualRate1Box`}>
-                {data?.layTeamB != 0
+                {Math.floor(data?.layTeamB) != 0
                   ? detail?.rateThan100
-                    ? data?.layTeamB + 1
-                    : data?.layTeamB + 1 > 100
+                    ? Math.floor(data?.layTeamB) + 1
+                    : Math.floor(data?.layTeamB) + 1 > 100
                     ? "-"
-                    : data?.layTeamB + 1
+                    : Math.floor(data?.layTeamB) + 1
                   : "-"}
               </span>
             </div>
@@ -333,12 +333,12 @@ const ManualMarket = ({ title, data, detail, teamARates, teamBRates }: any) => {
             {/* {!isMobile && ( */}
             <div className="manualBackBox lay3Background">
               <span className={`rateFont manualRate1Box`}>
-                {data?.layTeamB != 0
+                {Math.floor(data?.layTeamB) != 0
                   ? detail?.rateThan100
-                    ? data?.layTeamB + 2
-                    : data?.layTeamB + 2 > 100
+                    ? Math.floor(data?.layTeamB) + 2
+                    : Math.floor(data?.layTeamB) + 2 > 100
                     ? "-"
-                    : data?.layTeamB + 2
+                    : Math.floor(data?.layTeamB) + 2
                   : "-"}
               </span>
             </div>
@@ -417,9 +417,9 @@ const ManualMarket = ({ title, data, detail, teamARates, teamBRates }: any) => {
               {/* {!isMobile && ( */}
               <div className="manualBackBox back3Background">
                 <span className={`rateFont manualRate1Box`}>
-                  {data?.backTeamC != 0
-                    ? data?.backTeamC - 2 > 0
-                      ? data?.backTeamC - 2
+                  {Math.floor(data?.backTeamC) != 0
+                    ? Math.floor(data?.backTeamC) - 2 > 0
+                      ? Math.floor(data?.backTeamC) - 2
                       : "-"
                     : "-"}
                 </span>
@@ -428,9 +428,9 @@ const ManualMarket = ({ title, data, detail, teamARates, teamBRates }: any) => {
               {/* {!isMobile && ( */}
               <div className="manualBackBox back2Background">
                 <span className={`rateFont manualRate1Box`}>
-                  {data?.backTeamC != 0
-                    ? data?.backTeamC - 1 > 0
-                      ? data?.backTeamC - 1
+                  {Math.floor(data?.backTeamC) != 0
+                    ? Math.floor(data?.backTeamC) - 1 > 0
+                      ? Math.floor(data?.backTeamC) - 1
                       : "-"
                     : "-"}
                 </span>
@@ -448,24 +448,24 @@ const ManualMarket = ({ title, data, detail, teamARates, teamBRates }: any) => {
               </div>
               <div className="manualBackBox lay2Background">
                 <span className={`rateFont manualRate1Box`}>
-                  {data?.layTeamC != 0
+                  {Math.floor(data?.layTeamC) != 0
                     ? detail?.rateThan100
-                      ? data?.layTeamC + 1
-                      : data?.layTeamC + 1 > 100
+                      ? Math.floor(data?.layTeamC) + 1
+                      : Math.floor(data?.layTeamC) + 1 > 100
                       ? "-"
-                      : data?.layTeamC + 1
+                      : Math.floor(data?.layTeamC) + 1
                     : "-"}
                 </span>
               </div>
 
               <div className="manualBackBox lay3Background">
                 <span className={`rateFont manualRate1Box`}>
-                  {data?.layTeamC != 0
+                  {Math.floor(data?.layTeamC) != 0
                     ? detail?.rateThan100
-                      ? data?.layTeamC + 2
-                      : data?.layTeamC + 2 > 100
+                      ? Math.floor(data?.layTeamC) + 2
+                      : Math.floor(data?.layTeamC) + 2 > 100
                       ? "-"
-                      : data?.layTeamC + 2
+                      : Math.floor(data?.layTeamC) + 2
                     : "-"}
                 </span>
               </div>

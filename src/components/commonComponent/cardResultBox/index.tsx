@@ -445,7 +445,7 @@ const CardResultBox = ({ data, name, type }: any) => {
           ))}
       </div>
       {lgShow && (
-  <div className="custom-modal-overlay mb-2" >
+  <div className="custom-modal-overlay mb-2" onClick={() => setLgShow(false)}>
     <div
       className="custom-modal-content"
       onClick={(e) => e.stopPropagation()}

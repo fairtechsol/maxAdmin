@@ -23,7 +23,7 @@ const Bacarrat1ResultComponent: React.FC<Props> = ({ data }: any) => {
           <span className="title-18 f500 mb-2">Player</span>
           <div className="bacarrate-player-card" >
             {data?.result?.win === "1" && (
-              <div className="casino-winner-icon position-relative text-start me-5 mb-5" style={{ transform: "rotate(-360deg)" }}>
+              <div className="casino-winner-icon position-relative text-start" style={{ transform: "rotate(-360deg)" }}>
               <Winner />
             </div>
             )}
@@ -52,7 +52,7 @@ const Bacarrat1ResultComponent: React.FC<Props> = ({ data }: any) => {
               <div style={{ transform: "rotate(90deg)" }}>
                 <HandleCards card={elements?.[5]} />
                 {(data?.result?.win === "2" || data?.result?.win === "4") && (
-              <div className="casino-winner-icon ms-5 mb-5 text-end position-relative" style={{ transform: "rotate(-90deg)" }} >
+              <div className="casino-winner-icon text-end position-relative" style={{ transform: "rotate(-90deg)" }} >
               <Winner />
             </div>
             )}

@@ -25,7 +25,7 @@ const DragonTigerOneDayResultComponent: any = ({ data }: any) => {
             }
           >
             {data?.result?.win === "1" && (
-              <div className="casino-winner-icon mb-5 me-5">
+              <div className="casino-winner-icon">
                 <Winner />
               </div>
             )}
