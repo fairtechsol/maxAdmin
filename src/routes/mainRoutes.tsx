@@ -119,7 +119,7 @@ const MainRoutes = {
       element: <Game />,
     },
     {
-      path: "other_match_detail/:id/:marketId",
+      path: "other_match_detail/:gameType/:id/:marketId",
       element: <OtherGamesDetail />,
     },
     {

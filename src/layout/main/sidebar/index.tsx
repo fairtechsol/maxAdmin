@@ -71,6 +71,7 @@ const Sidebar = (props: any) => {
               menuItemList={menuItemList}
               setMenuItemList={setMenuItemList}
               selectedMatchIndex={selectedMatchIndex}
+              selectedMatch={selectedMatch}
             />
           </Accordion>
         ))}

@@ -119,7 +119,7 @@ const OtherUserBets = ({ matchId }: any) => {
                               >
                                 <div className="position-relative lh-1 bet-table-right d-flex  justify-content-between w-100">
                                   <span className="f700">{bet?.marketType} </span>
-                                  <span className="text-end">
+                                  <span className="text-end pe-2">
                                     {moment(bet?.createdAt).format(
                                       "DD-MM-YYYY hh:mm:ss"
                                     )}{" "}
@@ -185,12 +185,7 @@ const OtherUserBets = ({ matchId }: any) => {
 
                               <DeleteBetOverlay title={bet?.deleteReason} />
                             </tr>
-                            <tr>
-                              <td
-                                colSpan={4}
-                                style={{ height: "3px", padding: "0px" }}
-                              ></td>
-                            </tr>
+                            <div style={{ height: "4px" }}></div>
                           </Fragment>
                         );
                       })}

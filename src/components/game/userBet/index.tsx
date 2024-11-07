@@ -47,7 +47,7 @@ const UserBets = ({ matchId }: any) => {
           </Col>
       
             <Col sm={12}>
-            <div className="your-container table-responsive">
+            <div className="casino-container table-responsive">
               <Table table-responsive>
                 <thead>
                   <tr className="lh-1">
@@ -64,11 +64,12 @@ const UserBets = ({ matchId }: any) => {
                     return (
                       <Fragment key={index}>
                         <tr
-                          className={
+                           className={`position-relative lh-1 bet-table-right border-none ${
                             bet?.betType === "NO" || bet?.betType === "LAY"
-                              ? "title-12 bor-red1 position-relative lh-1 bet-table-right border-none"
-                              : "title-12 bor-blue3 position-relative lh-1 bet-table-right border-none"
-                          }
+                              ? "bor-red1"
+                              : "bor-blue3"
+                          }`
+                         }
                         >
                           <td
                             className={
@@ -130,12 +131,7 @@ const UserBets = ({ matchId }: any) => {
                             {bet?.eventType}
                           </td>
                         </tr>
-                        <tr>
-                          <td
-                            colSpan={4}
-                            style={{ height: "3px", padding: "0px" }}
-                          ></td>
-                        </tr>
+                        <div className="bg-white" style={{ height: "4px" }}></div>
                       </Fragment>
                     );
                   })}

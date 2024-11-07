@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
   getCompetitionMatches,
-  setBreadCrumb
+  setBreadCrumb,
 } from "../../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../../store/store";
 
@@ -14,6 +14,7 @@ interface Props {
   menuItemList: any;
   selectedMatchIndex: any;
   onClickMenuItem: any;
+  selectedMatch: string;
 }
 
 const MenuItemChild = (props: any) => {
@@ -38,13 +39,14 @@ const MenuCollapse = (props: any) => {
     setMenuItemList,
     selectedMatchIndex,
     onClickMenuItem,
+    selectedMatch,
   } = props;
 
   const [selectedDate, setSelectedDate] = useState("");
 
   const dispatch: AppDispatch = useDispatch();
 
-  const {  competitionMatches } = useSelector(
+  const { competitionMatches } = useSelector(
     (state: RootState) => state.match.sidebarList
   );
   // useEffect(() => {
@@ -75,25 +77,28 @@ const MenuCollapse = (props: any) => {
       if (selectedDate !== "") {
         const tempList = [...menuItemList];
         const selectedMatchChildren = tempList[selectedMatchIndex].children;
-       
-        const dateIndex = tempList[selectedMatchIndex].children.findIndex((item: any) => item?.id === selectedDate);
-        selectedMatchChildren[dateIndex].children =
-          competitionMatches?.map((item: any) => ({
+
+        const dateIndex = tempList[selectedMatchIndex].children.findIndex(
+          (item: any) => item?.id === selectedDate
+        );
+        selectedMatchChildren[dateIndex].children = competitionMatches?.map(
+          (item: any) => ({
             name: item?.title,
             id: item?.id,
             type: "collapse",
-            matchBetting: [...(item?.matchBetting || []),...(item?.tournamentBetting || [])],
-          }));
+            eventType: selectedMatch,
+            matchBetting: [
+              ...(item?.matchBetting || []),
+              ...(item?.tournamentBetting || []),
+            ],
+          })
+        );
         setMenuItemList(tempList);
       }
     } catch (error) {
       console.log(error);
     }
-  }, [
-    competitionMatches,
-    selectedDate,
-    selectedMatchIndex,
-  ]);
+  }, [competitionMatches, selectedDate, selectedMatchIndex]);
 
   return (
     <>
@@ -109,7 +114,12 @@ const MenuCollapse = (props: any) => {
                   onSelect={(e: any) => {
                     if (e == 0) {
                       setSelectedDate(sideBarChild?.id);
-                      dispatch(getCompetitionMatches({id: menuItemList?.[selectedMatchIndex]?.id,date:sideBarChild?.id}));
+                      dispatch(
+                        getCompetitionMatches({
+                          id: menuItemList?.[selectedMatchIndex]?.id,
+                          date: sideBarChild?.id,
+                        })
+                      );
                     }
                   }}
                   key={sideBarChild?.id}
@@ -121,29 +131,24 @@ const MenuCollapse = (props: any) => {
                       {sideBarChild?.children?.map(
                         (menuItemChild: any, indexes: number) => (
                           <Accordion
-                          key={menuItemChild?.id}
-                          defaultActiveKey={[]}
-                        >
-                          <Accordion.Item eventKey="0">
-                            <Accordion.Header>
-                              {menuItemChild?.name}
-                            </Accordion.Header>
-                            {menuItemChild.matchBetting?.map(
-                              (item: any) => {
+                            key={menuItemChild?.id}
+                            defaultActiveKey={[]}
+                          >
+                            <Accordion.Item eventKey="0">
+                              <Accordion.Header>
+                                {menuItemChild?.name}
+                              </Accordion.Header>
+                              {menuItemChild.matchBetting?.map((item: any) => {
                                 return (
                                   <Accordion.Body
                                     key={item?.id}
                                     onClick={() => {
                                       onClickMenuItem();
-                                      if (
-                                        data?.id === "cricket"
-                                      ) {
+                                      if (data?.id === "cricket") {
                                         dispatch(
                                           setBreadCrumb({
-                                            competition:
-                                              data?.id,
-                                            matchName:
-                                            menuItemChild?.name,
+                                            competition: data?.id,
+                                            matchName: menuItemChild?.name,
                                             type: item?.name,
                                             date: selectedDate,
                                           })
@@ -159,13 +164,11 @@ const MenuCollapse = (props: any) => {
                                         <MenuItemChild
                                           data={{
                                             path:
-                                              data?.id ===
-                                              "cricket"
-                                                ? item?.name ===
-                                                  "tied_match"
+                                              data?.id === "cricket"
+                                                ? item?.name === "tied_match"
                                                   ? `/admin/match_details/${menuItemChild?.id}`
                                                   : `/admin/match_detail/${menuItemChild?.id}`
-                                                : `/admin/other_match_detail/${menuItemChild?.id}/${item?.id}`,
+                                                : `/admin/other_match_detail/${menuItemChild?.eventType}/${menuItemChild?.id}/${item?.id}`,
                                             name: item?.name,
                                           }}
                                         />
@@ -173,10 +176,9 @@ const MenuCollapse = (props: any) => {
                                     </Accordion>
                                   </Accordion.Body>
                                 );
-                              }
-                            )}
-                          </Accordion.Item>
-                        </Accordion>
+                              })}
+                            </Accordion.Item>
+                          </Accordion>
                         )
                       )}
                     </Accordion.Body>
@@ -197,8 +199,8 @@ export const MenuItem: React.FC<Props> = ({
   menuItemList,
   selectedMatchIndex,
   onClickMenuItem,
+  selectedMatch,
 }) => {
-  
   return (
     <>
       {item?.type === "item" ? (
@@ -210,6 +212,7 @@ export const MenuItem: React.FC<Props> = ({
           menuItemList={menuItemList}
           selectedMatchIndex={selectedMatchIndex}
           onClickMenuItem={onClickMenuItem}
+          selectedMatch={selectedMatch}
         />
       )}
     </>
