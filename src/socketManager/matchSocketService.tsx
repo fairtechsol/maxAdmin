@@ -59,7 +59,7 @@ export const matchSocketService = {
     socket?.on("updateDeleteReason", callback);
   },
   sessionResultUnDeclareOff: () => {
-    socket?.off("sessionResultUnDeclareOff");
+    socket?.off("sessionResultUnDeclare");
   },
   sessionResultOff: () => {
     socket?.off("sessionResult");
