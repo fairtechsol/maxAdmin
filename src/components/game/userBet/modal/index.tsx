@@ -8,12 +8,17 @@ import moment from "moment-timezone";
 import TooltipCustom from "../../../reports/modals/accountStatement/tooltip";
 import DeleteBetOverlay from "../../../commonComponent/deleteBetRow";
 
-function UserBetModalTable({list}:any) {
+function UserBetModalTable({
+  selectedCheckedBet,
+  setSelectedCheckedBet,
+  list,
+}: any) {
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   // const { morePlacedBets } = useSelector(
   //   (state: RootState) => state.match.placeBets
   // );
+
   useEffect(() => {}, [tableConfig]);
   const columns: Column[] = [
     // { id: "sr", label: "S. NO" },
@@ -23,9 +28,10 @@ function UserBetModalTable({list}:any) {
     { id: "amount", label: "Amount " },
     // { id: "userRate", label: "UserRate " },
     // { id: "placeDate", label: "PlaceDate " },
-    { id: "matchDate", label: "MatchDate " },
+    { id: "matchDate", label: "Date " },
     { id: "ip", label: "IP " },
     { id: "browserDetail", label: "BrowserDetail " },
+    { id: "action", label: "Action " },
   ];
   return (
     <div className="activeUsers-modal">
@@ -46,7 +52,7 @@ function UserBetModalTable({list}:any) {
           </tr>
         )}
         {list?.length > 0 &&
-          list?.map((item: any, index: number) => {
+          list?.map((item: any) => {
             const {
               id,
               user,
@@ -156,6 +162,35 @@ function UserBetModalTable({list}:any) {
                       Detail
                     </a>
                   </TooltipCustom>
+                </td>
+                <td
+                  className={`${
+                    betType === "NO" || betType === "LAY"
+                      ? "bg-red1"
+                      : "bg-blue1"
+                  }`}
+                >
+                  <input
+                    type="checkbox"
+                    checked={selectedCheckedBet.includes(item)}
+                    onClick={() => {
+                      if (
+                        selectedCheckedBet.length > 0 &&
+                        selectedCheckedBet?.includes(item)
+                      ) {
+                        setSelectedCheckedBet(
+                          selectedCheckedBet.filter(
+                            (items: any) => items?.id !== item?.id
+                          )
+                        );
+                      } else
+                        setSelectedCheckedBet([...selectedCheckedBet, item]);
+                    }}
+                    style={{
+                      color: "black",
+                      backgroundColor: "black",
+                    }}
+                  />
                 </td>
                 <DeleteBetOverlay title={deleteReason} />
               </tr>

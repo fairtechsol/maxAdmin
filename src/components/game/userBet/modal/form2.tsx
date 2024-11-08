@@ -18,6 +18,8 @@ const UserBetModalForm2 = ({ customClass, matchId, morePlacedBets }: any) => {
   const [filteredItems, setFilteredItems] = useState([]);
   const [betType, setBetType] = useState("all");
   const [matchBetType, setMatchBetType] = useState("matched");
+  const [selectedCheckedBet, setSelectedCheckedBet] = useState<any>([]);
+
   const [inputFields, setInputFields] = useState({
     minAmount: "",
     maxAmount: "",
@@ -91,6 +93,7 @@ const UserBetModalForm2 = ({ customClass, matchId, morePlacedBets }: any) => {
     };
 
     filterBets();
+    setSelectedCheckedBet([]);
   }, [matchBetType, betType, morePlacedBets.length]);
 
   useEffect(() => {
@@ -324,10 +327,12 @@ const UserBetModalForm2 = ({ customClass, matchId, morePlacedBets }: any) => {
                   <span
                     style={{
                       color: "#128412",
-                      marginRight: "0.5rem"
+                      marginRight: "0.5rem",
                     }}
                   >
-                    {filteredItems?.length}
+                    {selectedCheckedBet?.length > 0
+                      ? selectedCheckedBet.length
+                      : filteredItems?.length}
                   </span>
                   Total Amount:{" "}
                   <span
@@ -336,7 +341,10 @@ const UserBetModalForm2 = ({ customClass, matchId, morePlacedBets }: any) => {
                     }}
                   >
                     {parseFloat(
-                      filteredItems?.reduce((acc: any, match: any) => {
+                      (selectedCheckedBet?.length > 0
+                        ? selectedCheckedBet
+                        : filteredItems
+                      )?.reduce((acc: any, match: any) => {
                         return acc + +match?.amount;
                       }, 0)
                     ).toFixed(2) || "0.00"}
@@ -346,7 +354,11 @@ const UserBetModalForm2 = ({ customClass, matchId, morePlacedBets }: any) => {
             </div>
           </div>
         </div>
-        <UserBetModalTable list={filteredItems} />
+        <UserBetModalTable
+          selectedCheckedBet={selectedCheckedBet}
+          setSelectedCheckedBet={setSelectedCheckedBet}
+          list={filteredItems}
+        />
       </div>
     </form>
   );
