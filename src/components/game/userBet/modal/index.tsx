@@ -15,9 +15,6 @@ function UserBetModalTable({
 }: any) {
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
-  // const { morePlacedBets } = useSelector(
-  //   (state: RootState) => state.match.placeBets
-  // );
 
   useEffect(() => {}, [tableConfig]);
   const columns: Column[] = [
@@ -33,6 +30,17 @@ function UserBetModalTable({
     { id: "browserDetail", label: "BrowserDetail " },
     { id: "action", label: "Action " },
   ];
+
+  function handleCheckboxToggle(item: any) {
+    setSelectedCheckedBet((prevSelected: any) =>
+      prevSelected.includes(item)
+        ? prevSelected.filter(
+            (selectedItem: any) => selectedItem?.id !== item?.id
+          )
+        : [...prevSelected, item]
+    );
+  }
+
   return (
     <div className="activeUsers-modal">
       <CustomTable
@@ -168,28 +176,15 @@ function UserBetModalTable({
                     betType === "NO" || betType === "LAY"
                       ? "bg-red1"
                       : "bg-blue1"
-                  }`}
+                  } text-end`}
                 >
                   <input
                     type="checkbox"
-                    checked={selectedCheckedBet.includes(item)}
-                    onClick={() => {
-                      if (
-                        selectedCheckedBet.length > 0 &&
-                        selectedCheckedBet?.includes(item)
-                      ) {
-                        setSelectedCheckedBet(
-                          selectedCheckedBet.filter(
-                            (items: any) => items?.id !== item?.id
-                          )
-                        );
-                      } else
-                        setSelectedCheckedBet([...selectedCheckedBet, item]);
-                    }}
-                    style={{
-                      color: "black",
-                      backgroundColor: "black",
-                    }}
+                    checked={selectedCheckedBet?.includes(item)}
+                    onClick={() => handleCheckboxToggle(item)}
+                    className={`customCheckbox ${
+                      selectedCheckedBet?.includes(item) ? "checkbox-bg" : ""
+                    }`}
                   />
                 </td>
                 <DeleteBetOverlay title={deleteReason} />
