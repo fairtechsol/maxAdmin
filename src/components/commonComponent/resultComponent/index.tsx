@@ -37,6 +37,7 @@ import CardJResultComponent from "../../cardGames/games/3CardJ/resultModalCompon
 import CasinoMeterResultComponent from "../../cardGames/games/casinoMeter/resultModalComponent";
 import QueenResultComponent from "../../cardGames/games/casinoQueen/resultModalComponent";
 import moment from "moment-timezone";
+import BallByBallResultComponent from "../../cardGames/games/ballbyball/desktop/resultModalComponent";
 
 interface ResultComponentProps {
   data: any;
@@ -137,6 +138,8 @@ export const ResultComponent: React.FC<ResultComponentProps> = ({
         <WorliResultComponent data={data} />
       ) : type === cardGamesType?.baccarat ? (
         <Bacarrat1ResultComponent data={data} />
+      ) : type === cardGamesType?.ballbyball ? (
+        <BallByBallResultComponent data={data} />
       ) : type === cardGamesType?.baccarat2 ? (
         <Bacarrat2ResultComponent data={data} />
       ) : type === cardGamesType?.cardj ? (
