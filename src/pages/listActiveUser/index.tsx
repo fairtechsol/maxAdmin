@@ -675,7 +675,7 @@ const ListActiveInactiveUser: React.FC = () => {
                             </td>
                             <td>0</td>
                             <td>{roleName}</td>
-                            <td className="text-end">0</td>
+                            {/* <td className="text-end">0</td> */}
                             <td>
                               <div className="d-flex gap-1 border-right-0 border-left-0">
                                 {type ? (
