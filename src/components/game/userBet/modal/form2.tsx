@@ -311,9 +311,37 @@ const UserBetModalForm2 = ({ customClass, matchId, morePlacedBets }: any) => {
                   <span>Lay</span>
                 </div>
               </div>
-              <div className="d-flex flex-row justify-content-around align-items-center w-20">
-                {/* <span>Total SODA: 1</span>
-                <span>Total Amount : 100.00</span> */}
+              <div className="d-flex align-items-center w-20">
+                <h5
+                  style={{
+                    color: "#1e1e1e",
+                    fontSize: "14px",
+                    fontWeight: "500",
+                    lineHeight: "1.2",
+                  }}
+                >
+                  Total Soda:{" "}
+                  <span
+                    style={{
+                      color: "#128412",
+                      marginRight: "0.5rem"
+                    }}
+                  >
+                    {filteredItems?.length}
+                  </span>
+                  Total Amount:{" "}
+                  <span
+                    style={{
+                      color: "#128412",
+                    }}
+                  >
+                    {parseFloat(
+                      filteredItems?.reduce((acc: any, match: any) => {
+                        return acc + +match?.amount;
+                      }, 0)
+                    ).toFixed(2) || "0.00"}
+                  </span>
+                </h5>
               </div>
             </div>
           </div>
