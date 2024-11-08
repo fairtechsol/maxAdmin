@@ -704,93 +704,68 @@ const Games = () => {
                     }}
                     className={`${isMobile ? "flex-column" : ""}`}
                   >
-                    {(matchDetails?.apiSession?.session?.section?.length > 0 ||
-                      manualEntries?.length > 0) && (
-                      <div style={{ width: isMobile ? "100%" : "49.5%" }}>
-                        <Col md={12}>
-                          <SessionNormal
-                            title={"Normal"}
-                            mtype={"session"}
-                            data={matchDetails?.apiSession?.session}
-                            detail={matchDetails}
-                            manual={manualEntries ? manualEntries : []}
-                          />
-                        </Col>
-                      </div>
-                    )}
-                    {matchDetails?.apiSession?.overByover?.section?.length >
-                      0 && (
-                      <div style={{ width: isMobile ? "100%" : "49.5%" }}>
-                        <Col md={12}>
-                          <SessionNormal
-                            title={"overByover"}
-                            mtype={"overByover"}
-                            data={matchDetails?.apiSession?.overByover}
-                            detail={matchDetails}
-                          />
-                        </Col>
-                      </div>
-                    )}
-                    {matchDetails?.apiSession?.ballByBall?.section?.length >
-                      0 && (
-                      <div style={{ width: isMobile ? "100%" : "49.5%" }}>
-                        <Col md={12}>
-                          <SessionNormal
-                            title={"Ballbyball"}
-                            mtype={"ballByBall"}
-                            data={matchDetails?.apiSession?.ballByBall}
-                            detail={matchDetails}
-                          />
-                        </Col>
-                      </div>
-                    )}
-                    {matchDetails?.apiSession?.fancy1?.section?.length > 0 && (
-                      <div style={{ width: isMobile ? "100%" : "49.5%" }}>
-                        <Col md={12}>
-                          <SessionFancy
-                            title={"fancy1"}
-                            data={matchDetails?.apiSession?.fancy1}
-                            detail={matchDetails}
-                            // data={matchDetails?.matchOdd}
-                          />
-                        </Col>
-                      </div>
-                    )}{" "}
-                    {matchDetails?.apiSession?.khado?.section?.length > 0 && (
-                      <div style={{ width: isMobile ? "100%" : "49.5%" }}>
-                        <Col md={12}>
-                          <SessionKhado
-                            title={"khado"}
-                            data={matchDetails?.apiSession?.khado}
-                            detail={matchDetails}
-                          />
-                        </Col>
-                      </div>
-                    )}
-                    {matchDetails?.apiSession?.meter?.section?.length > 0 && (
-                      <div style={{ width: isMobile ? "100%" : "49.5%" }}>
-                        <Col md={12}>
-                          <SessionNormal
-                            title={"meter"}
-                            mtype={"meter"}
-                            data={matchDetails?.apiSession?.meter}
-                            detail={matchDetails}
-                          />
-                        </Col>
-                      </div>
-                    )}
-                    {matchDetails?.apiSession?.oddEven?.section?.length > 0 && (
-                      <div style={{ width: isMobile ? "100%" : "49.5%" }}>
-                        <Col md={12}>
-                          <SessionOddEven
-                            title={"oddeven"}
-                            // type={"fancy"}
-                            data={matchDetails?.apiSession?.oddEven}
-                            detail={matchDetails}
-                            // data={matchDetails?.matchOdd}
-                          />
-                        </Col>
-                      </div>
+                    {[
+                      {
+                        type: "session",
+                        title: "Normal",
+                        data: matchDetails?.apiSession?.session,
+                        component: SessionNormal,
+                      },
+                      {
+                        type: "overByover",
+                        title: "overByover",
+                        data: matchDetails?.apiSession?.overByover,
+                        component: SessionNormal,
+                      },
+                      {
+                        type: "ballByBall",
+                        title: "Ballbyball",
+                        data: matchDetails?.apiSession?.ballByBall,
+                        component: SessionNormal,
+                      },
+                      {
+                        title: "fancy1",
+                        data: matchDetails?.apiSession?.fancy1,
+                        component: SessionFancy,
+                      },
+                      {
+                        title: "khado",
+                        data: matchDetails?.apiSession?.khado,
+                        component: SessionKhado,
+                      },
+                      {
+                        type: "meter",
+                        title: "meter",
+                        data: matchDetails?.apiSession?.meter,
+                        component: SessionNormal,
+                      },
+                      {
+                        title: "oddeven",
+                        data: matchDetails?.apiSession?.oddEven,
+                        component: SessionOddEven,
+                      },
+                    ].map(
+                      (session, index) =>
+                        session.data?.section?.length > 0 && (
+                          <div
+                            key={index}
+                            style={{ width: isMobile ? "100%" : "49.5%" }}
+                          >
+                            <Col md={12}>
+                              <session.component
+                                title={session.title}
+                                mtype={session.type}
+                                data={session.data}
+                                detail={matchDetails}
+                                manual={
+                                  session.type === "session" && manualEntries
+                                    ? manualEntries
+                                    : []
+                                }
+                              />
+                            </Col>
+                          </div>
+                        )
                     )}
                   </div>
 
@@ -931,7 +906,11 @@ const Games = () => {
                 <div className="d-flex w-100 flex-column">
                   <div
                     className="w-100 d-flex justify-content-start title-15 text-white align-items-center f500 ps-2"
-                    style={{ height: "42px", backgroundColor: "#ffc742b3",cursor:"pointer" }}
+                    style={{
+                      height: "42px",
+                      backgroundColor: "#ffc742b3",
+                      cursor: "pointer",
+                    }}
                     onClick={() => setShowScore(!showScore)}
                   >
                     Score Card

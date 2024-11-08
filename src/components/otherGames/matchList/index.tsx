@@ -7,23 +7,46 @@ const NavComponent = ({ matchDetail, setMarketToShow, marketToShow }: any) => {
     const formattedArray = [];
 
     for (const marketType in matchDetail) {
-      const marketValue: any = matchDetail[marketType];
-      if (typeof marketValue === "object" && marketValue !== null) {
-        if (Array.isArray(marketValue)) {
-          formattedArray.push(
-            ...marketValue.map((market: any) => ({
-              type: market?.type,
-              id: market.id,
-              name: market.name,
-            }))
-          );
-        } else {
-          if (marketValue?.id) {
+      if (marketType === "apiSession") {
+        const apiSessionData = matchDetail[marketType];
+        for (const key in apiSessionData) {
+          const session = apiSessionData[key];
+          if (
+            session &&
+            session.mname &&
+            session.gtype &&
+            session.mid &&
+            session.section
+          ) {
             formattedArray.push({
-              type: marketValue?.type,
-              id: marketValue?.id,
-              name: marketValue?.name,
+              name: key,
+              key: key,
+              type: session.gtype,
+              id: session.mid,
+              dataType: "session",
+              data: session,
             });
+          }
+        }
+      } else {
+        const marketValue: any = matchDetail[marketType];
+        if (typeof marketValue === "object" && marketValue !== null) {
+          if (Array.isArray(marketValue)) {
+            formattedArray.push(
+              ...marketValue.map((market: any) => ({
+                type: market?.type,
+                id: market.id,
+                name: market.name,
+              }))
+            );
+          } else {
+            if (marketValue?.id) {
+              formattedArray.push({
+                type: marketValue?.type,
+                id: marketValue?.id,
+                name: marketValue?.name,
+              });
+            }
           }
         }
       }
@@ -68,10 +91,16 @@ const NavComponent = ({ matchDetail, setMarketToShow, marketToShow }: any) => {
             ?.map((item: any) => (
               <li key={item.id} className="nav-items">
                 <span
-                  onClick={() => setMarketToShow(item?.id)}
+                  onClick={() => {
+                    if (item?.dataType) {
+                      setMarketToShow(item?.key);
+                    } else setMarketToShow(item?.id);
+                  }}
                   // to={`/admin/other_match_detail/${matchDetail?.id}/${item?.id}`}
                   className={`market-tab-link ${
-                    item?.id === marketToShow ? "active" : ""
+                    (item?.dataType ? item?.key : item?.id) === marketToShow
+                      ? "active"
+                      : ""
                   }`}
                 >
                   {item.name}

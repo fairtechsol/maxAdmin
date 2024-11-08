@@ -18,6 +18,11 @@ import BetTable from "../../components/otherGames/betTable";
 import LiveStreamComponent from "../../components/commonComponent/liveStreamComponent";
 import { liveStreamUrl } from "../../utils/Constants";
 import CustomBreadcrumb from "../../components/commonComponent/breadcrumb";
+import isMobile from "../../utils/screenDimension";
+import SessionNormal from "../../components/game/sessionNormal";
+import SessionFancy from "../../components/game/sessionFancy";
+import SessionKhado from "../../components/game/sessionKhado";
+import SessionOddEven from "../../components/game/sessionOddEven";
 
 const OtherGamesDetail = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -239,7 +244,9 @@ const OtherGamesDetail = () => {
   }, [id]);
 
   useEffect(() => {
-    setMarketToShow(marketId);
+    if (marketId) {
+      setMarketToShow(marketId);
+    }
   }, [marketId]);
 
   return (
@@ -255,7 +262,9 @@ const OtherGamesDetail = () => {
         <div className="gamePage-table">
           <Row className="no-gutters">
             <Col md={8}>
-              {["football", "tennis"]?.includes(matchDetails?.matchType) && (
+              {["football", "tennis", "politics"]?.includes(
+                matchDetails?.matchType
+              ) && (
                 <CustomBreadcrumb
                   items={[
                     { name: matchDetails?.title || breadCrumb?.matchName },
@@ -263,6 +272,7 @@ const OtherGamesDetail = () => {
                 />
               )}
               {updatedMarket
+                ?.filter((item: any) => !item?.dataType)
                 ?.filter((item: any) => item?.id === marketToShow)
                 ?.map((item: any) => (
                   <Col md={12} key={item?.id}>
@@ -283,6 +293,83 @@ const OtherGamesDetail = () => {
                     />
                   </Col>
                 ))}
+
+              <div
+                style={{
+                  display: "flex",
+                  width: "100%",
+                  flexWrap: isMobile ? "nowrap" : "wrap",
+                  gap: "1%",
+                }}
+                className={`${isMobile ? "flex-column" : ""}`}
+              >
+                {[
+                  {
+                    type: "session",
+                    title: "Normal",
+                    data: matchDetails?.apiSession?.session,
+                    component: SessionNormal,
+                  },
+                  {
+                    type: "overByover",
+                    title: "overByover",
+                    data: matchDetails?.apiSession?.overByover,
+                    component: SessionNormal,
+                  },
+                  {
+                    type: "ballByBall",
+                    title: "Ballbyball",
+                    data: matchDetails?.apiSession?.ballByBall,
+                    component: SessionNormal,
+                  },
+                  {
+                    type: "fancy1",
+                    title: "fancy1",
+                    data: matchDetails?.apiSession?.fancy1,
+                    component: SessionFancy,
+                  },
+                  {
+                    type: "khado",
+                    title: "khado",
+                    data: matchDetails?.apiSession?.khado,
+                    component: SessionKhado,
+                  },
+                  {
+                    type: "meter",
+                    title: "meter",
+                    data: matchDetails?.apiSession?.meter,
+                    component: SessionNormal,
+                  },
+                  {
+                    type: "oddeven",
+                    title: "oddeven",
+                    data: matchDetails?.apiSession?.oddEven,
+                    component: SessionOddEven,
+                  },
+                ]
+                  ?.filter(
+                    (item: any) =>
+                      item?.type?.toLowerCase() === marketToShow.toLowerCase()
+                  )
+                  .map(
+                    (session, index) =>
+                      session.data?.section?.length > 0 && (
+                        <div
+                          key={index}
+                          style={{ width: isMobile ? "100%" : "49.5%" }}
+                        >
+                          <Col md={12}>
+                            <session.component
+                              title={session.title}
+                              mtype={session.type}
+                              data={session.data}
+                              detail={matchDetails}
+                            />
+                          </Col>
+                        </div>
+                      )
+                  )}
+              </div>
             </Col>
             <Col md={4}>
               {matchDetails?.eventId && (

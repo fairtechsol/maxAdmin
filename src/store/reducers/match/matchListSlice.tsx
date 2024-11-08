@@ -37,7 +37,7 @@ const matchListSlice = createSlice({
         // state.matchDetails = action.payload;
         state.matchDetails = {
           ...state.matchDetails,
-          isBookmaker: action.payload.isBookmaker,
+          isBookmaker: action.payload?.isBookmaker,
           marketId: action.payload?.marketId,
           rateThan100: action.payload?.rateThan100,
           title: action.payload?.title,
@@ -77,7 +77,7 @@ const matchListSlice = createSlice({
         // state.matchDetails = action.payload;
         state.matchDetails = {
           ...state.matchDetails,
-          isBookmaker: action.payload.isBookmaker,
+          isBookmaker: action.payload?.isBookmaker,
           marketId: action.payload?.marketId,
           rateThan100: action.payload?.rateThan100,
           title: action.payload?.title,
