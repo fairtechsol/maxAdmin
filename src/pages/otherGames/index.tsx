@@ -230,11 +230,13 @@ const OtherGamesDetail = () => {
           "visibilitychange",
           handleVisibilityChange
         );
+        socketService.match.leaveMatchRoom(id);
+        socketService.match.getMatchRatesOff(id);
       };
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     setMarketToShow(marketId);
