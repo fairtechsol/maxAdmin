@@ -119,10 +119,12 @@ const OtherUserBets = ({ matchId }: any) => {
                               >
                                 <div className="position-relative lh-1 bet-table-right d-flex  justify-content-between w-100">
                                   <span className="f700">{bet?.marketType} </span>
-                                  <span className="text-end pe-2">
-                                    {moment(bet?.createdAt).format(
-                                      "DD-MM-YYYY hh:mm:ss"
-                                    )}{" "}
+                                  <span className="text-end">
+                                  {moment(bet?.createdAt).format(
+                                      "DD-MM-YYYY"
+                                    )}{"\u00A0"}{moment(bet?.createdAt).format(
+                                      "hh:mm:ss"
+                                    )}
                                   </span>
                                 </div>
                               </td>
