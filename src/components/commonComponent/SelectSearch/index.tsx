@@ -22,7 +22,8 @@ const SelectSearch = (props: any) => {
     errors,
     onInputChange,
     isOptionDisabled,
-    inputValue
+    inputValue,
+    onFocus
   } = props;
 
   // const customStyles = {
@@ -89,6 +90,7 @@ const SelectSearch = (props: any) => {
           isMulti={isMultiOption}
           isSearchable={isMultiOption === undefined ? false : isSearchable}
           isOptionDisabled={isOptionDisabled}
+          onFocus={onFocus}
         />
         <CustomErrorMessage touched={touched} errors={errors} />
       </Form.Group>
