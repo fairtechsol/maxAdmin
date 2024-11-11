@@ -269,6 +269,7 @@ const OtherGamesDetail = () => {
                   items={[
                     { name: matchDetails?.title || breadCrumb?.matchName },
                   ]}
+                  matchType={matchDetails?.matchType}
                 />
               )}
               {updatedMarket
@@ -372,13 +373,14 @@ const OtherGamesDetail = () => {
               </div>
             </Col>
             <Col md={4}>
-              {matchDetails?.eventId && (
-                <LiveStreamComponent
-                  url={`${liveStreamUrl}${matchDetails?.eventId}/${
-                    matchDetails?.matchType === "football" ? 1 : 2
-                  }`}
-                />
-              )}
+              {matchDetails?.eventId &&
+                matchDetails?.matchType !== "politics" && (
+                  <LiveStreamComponent
+                    url={`${liveStreamUrl}${matchDetails?.eventId}/${
+                      matchDetails?.matchType === "football" ? 1 : 2
+                    }`}
+                  />
+                )}
               <OtherUserBets matchId={id} />
             </Col>
           </Row>
