@@ -904,6 +904,8 @@ export const gameConstantsAccountStatement = [
   { value: "all", label: "All" },
   { value: "cricket", label: "Cricket" },
   { value: "football", label: "Football" },
+  { value: "tennis", label: "Tennis" },
+  { value: "politics", label: "Politics" },
   { value: "horseRacing", label: "Horse Racing" },
   { value: "greyHound", label: "Greyhound Racing" },
 ];
