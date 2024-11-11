@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
 import {
   getPlacedBets,
+  matchDetailAction,
   otherMatchDetailAction,
   updateMatchRates,
   updatePlacedbetsDeleteReason,
@@ -52,7 +53,13 @@ const OtherGamesDetail = () => {
   const handleDeleteBet = (event: any) => {
     try {
       if (event?.matchId === id) {
-        dispatch(otherMatchDetailAction({ matchId: id, matchType: gameType }));
+        if (gameType === "politics") {
+          dispatch(matchDetailAction(id));
+        } else {
+          dispatch(
+            otherMatchDetailAction({ matchId: id, matchType: gameType })
+          );
+        }
         dispatch(getPlacedBets(id));
       }
     } catch (e) {
@@ -63,7 +70,13 @@ const OtherGamesDetail = () => {
   const handleSessionBetPlaced = (event: any) => {
     try {
       if (event?.jobData?.placedBet?.matchId === id) {
-        dispatch(otherMatchDetailAction({ matchId: id, matchType: gameType }));
+        if (gameType === "politics") {
+          dispatch(matchDetailAction(id));
+        } else {
+          dispatch(
+            otherMatchDetailAction({ matchId: id, matchType: gameType })
+          );
+        }
         dispatch(getPlacedBets(id));
       }
     } catch (e) {
@@ -73,7 +86,13 @@ const OtherGamesDetail = () => {
   const handleMatchBetPlaced = (event: any) => {
     try {
       if (event?.jobData?.matchId === id) {
-        dispatch(otherMatchDetailAction({ matchId: id, matchType: gameType }));
+        if (gameType === "politics") {
+          dispatch(matchDetailAction(id));
+        } else {
+          dispatch(
+            otherMatchDetailAction({ matchId: id, matchType: gameType })
+          );
+        }
         dispatch(getPlacedBets(id));
       }
     } catch (e) {
@@ -145,7 +164,13 @@ const OtherGamesDetail = () => {
   useEffect(() => {
     try {
       if (id) {
-        dispatch(otherMatchDetailAction({ matchId: id, matchType: gameType }));
+        if (gameType === "politics") {
+          dispatch(matchDetailAction(id));
+        } else {
+          dispatch(
+            otherMatchDetailAction({ matchId: id, matchType: gameType })
+          );
+        }
         dispatch(getPlacedBets(id));
       }
     } catch (e) {

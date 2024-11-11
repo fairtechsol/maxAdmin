@@ -94,7 +94,7 @@ const UserBetModalForm2 = ({ customClass, matchId, morePlacedBets }: any) => {
 
     filterBets();
     setSelectedCheckedBet([]);
-  }, [matchBetType, betType, morePlacedBets.length]);
+  }, [matchBetType, betType, morePlacedBets?.length]);
 
   useEffect(() => {
     try {
