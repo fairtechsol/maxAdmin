@@ -60,9 +60,9 @@ const NavComponent = ({ matchDetail, setMarketToShow, marketToShow }: any) => {
   const handleSort = (a: any, b: any) => {
     try {
       const extractParts = (type: any) => {
-        const match = type.match(/^([a-zA-Z]+)(\d*\.\d+|\d+)?$/);
-        const textPart = match ? match[1] : type;
-        const numberPart = match && match[2] ? parseFloat(match[2]) : null;
+        const match = type?.match(/^([a-zA-Z]+)(\d*\.\d+|\d+)?$/);
+        const textPart = match ? match?.[1] : type;
+        const numberPart = match && match?.[2] ? parseFloat(match?.[2]) : null;
         return { textPart, numberPart };
       };
 
@@ -88,6 +88,7 @@ const NavComponent = ({ matchDetail, setMarketToShow, marketToShow }: any) => {
           {navItems
             ?.slice()
             ?.sort(handleSort)
+            ?.filter((item: any) => item?.id)
             ?.map((item: any) => (
               <li key={item.id} className="nav-items">
                 <span
