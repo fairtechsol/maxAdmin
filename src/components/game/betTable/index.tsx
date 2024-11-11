@@ -55,6 +55,7 @@ const BetTable = ({
               },
               { name: breadCrumb?.date || matchDetails?.startAt },
             ]}
+            matchType={matchDetails?.matchType}
           />
           <BetTableHeader type={""} customClass="" title={title} />
         </>
