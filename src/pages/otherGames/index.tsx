@@ -382,7 +382,7 @@ const OtherGamesDetail = () => {
                       session.data?.section?.length > 0 && (
                         <div
                           key={index}
-                          style={{ width: isMobile ? "100%" : "49.5%" }}
+                          style={{ width:  "100%" }}
                         >
                           <Col md={12}>
                             <session.component
