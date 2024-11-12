@@ -2,7 +2,7 @@ import { debounce } from "lodash";
 import React, { memo, useEffect, useMemo, useState } from "react";
 import { Form, Nav, NavDropdown, Navbar } from "react-bootstrap";
 import { FaSearchPlus } from "react-icons/fa";
-import { NavLink, useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import LogoSection from "../../../components/commonComponent/logoSection";
 import Select, { components } from "react-select";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,6 +21,7 @@ interface ItemProps {
 }
 
 const TopbarDropdown = ({ name, options }: ItemProps) => {
+  const navigate = useNavigate();
   const [show, setShow] = useState(false);
   let location = useLocation();
   const handleMouseEnter = () => {
@@ -35,6 +36,12 @@ const TopbarDropdown = ({ name, options }: ItemProps) => {
   useEffect(() => {
     handleMouseLeave();
   }, [location.pathname]);
+
+  const handleItemClick = (link: string) => {
+    navigate(link);
+    setShow(false);
+  };
+
   return (
     <NavDropdown
       onMouseEnter={handleMouseEnter}
@@ -46,8 +53,12 @@ const TopbarDropdown = ({ name, options }: ItemProps) => {
       onClick={handleMouseClick}
     >
       {options?.map((option, index) => (
-        <NavDropdown.Item key={index}>
-          <NavLink to={option.link}>{option.name}</NavLink>
+        <NavDropdown.Item
+          key={index}
+          onClick={() => handleItemClick(option.link)}
+          style={{ cursor: "pointer" }}
+        >
+          {option.name}
         </NavDropdown.Item>
       ))}
     </NavDropdown>
