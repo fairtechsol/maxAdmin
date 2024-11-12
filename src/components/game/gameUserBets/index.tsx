@@ -137,7 +137,13 @@ const GameUserBets = ({ matchId }: any) => {
                                 className="text-start text-black"
                                 style={{ width: "45%" }}
                               >
-                                {bet?.teamName}
+                                {["horseRacing", "greyHound"].includes(
+                                  bet?.eventType
+                                )
+                                  ? bet?.teamName?.split(".")?.[1]?.trim()
+                                    ? bet?.teamName?.split(".")?.[1]?.trim()
+                                    : bet?.teamName
+                                  : bet?.teamName ?? bet?.bettingName}
                               </div>
                               <div
                                 className="text-start text-black"
