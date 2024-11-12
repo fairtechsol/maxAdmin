@@ -18,6 +18,8 @@ const UserBetModalForm2 = ({ customClass, matchId, morePlacedBets }: any) => {
   const [filteredItems, setFilteredItems] = useState([]);
   const [betType, setBetType] = useState("all");
   const [matchBetType, setMatchBetType] = useState("matched");
+  const [selectedCheckedBet, setSelectedCheckedBet] = useState<any>([]);
+
   const [inputFields, setInputFields] = useState({
     minAmount: "",
     maxAmount: "",
@@ -91,7 +93,8 @@ const UserBetModalForm2 = ({ customClass, matchId, morePlacedBets }: any) => {
     };
 
     filterBets();
-  }, [matchBetType, betType, morePlacedBets.length]);
+    setSelectedCheckedBet([]);
+  }, [matchBetType, betType, morePlacedBets?.length]);
 
   useEffect(() => {
     try {
@@ -311,14 +314,51 @@ const UserBetModalForm2 = ({ customClass, matchId, morePlacedBets }: any) => {
                   <span>Lay</span>
                 </div>
               </div>
-              <div className="d-flex flex-row justify-content-around align-items-center w-20">
-                {/* <span>Total SODA: 1</span>
-                <span>Total Amount : 100.00</span> */}
+              <div className="d-flex align-items-center w-20">
+                <h5
+                  style={{
+                    color: "#1e1e1e",
+                    fontSize: "14px",
+                    fontWeight: "500",
+                    lineHeight: "1.2",
+                  }}
+                >
+                  Total Soda:{" "}
+                  <span
+                    style={{
+                      color: "#128412",
+                      marginRight: "0.5rem",
+                    }}
+                  >
+                    {selectedCheckedBet?.length > 0
+                      ? selectedCheckedBet?.length ?? 0
+                      : filteredItems?.length ?? 0}
+                  </span>
+                  Total Amount:{" "}
+                  <span
+                    style={{
+                      color: "#128412",
+                    }}
+                  >
+                    {parseFloat(
+                      (selectedCheckedBet?.length > 0
+                        ? selectedCheckedBet ?? []
+                        : filteredItems ?? []
+                      )?.reduce((acc: any, match: any) => {
+                        return acc + +match?.amount;
+                      }, 0)
+                    ).toFixed(2) || "0.00"}
+                  </span>
+                </h5>
               </div>
             </div>
           </div>
         </div>
-        <UserBetModalTable list={filteredItems} />
+        <UserBetModalTable
+          selectedCheckedBet={selectedCheckedBet}
+          setSelectedCheckedBet={setSelectedCheckedBet}
+          list={filteredItems}
+        />
       </div>
     </form>
   );

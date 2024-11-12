@@ -27,6 +27,20 @@ const profitLossObj: Record<number, string> = {
   21: "v",
 };
 
+function getFirstBetId(betType: any) {
+  if (Array.isArray(betType?.match) && betType.match.length > 0) {
+    return betType.match[0]?.betId;
+  }
+  return undefined;
+}
+
+// Function to get the first available key name in betType (like session)
+function getFirstAvailableKey(betType: any) {
+  return Object.keys(betType).find(
+    (key) => Array.isArray(betType[key]) && betType[key].length > 0
+  );
+}
+
 const MarketAnalysisComp = ({ match }: any) => {
   return (
     <div className="market-analysis-container">
@@ -37,6 +51,13 @@ const MarketAnalysisComp = ({ match }: any) => {
               href={
                 match?.eventType === "cricket"
                   ? `/admin/match_details/${match?.matchId}`
+                  : match?.eventType === "politics"
+                  ? `/admin/other_match_detail/${match?.eventType}/${
+                      match?.matchId
+                    }/${
+                      getFirstBetId(match?.betType) ||
+                      getFirstAvailableKey(match?.betType)
+                    }`
                   : `/admin/other_match_detail/${match?.eventType}/${match?.matchId}/${match?.betType?.match?.[0]?.betId}`
               }
             >

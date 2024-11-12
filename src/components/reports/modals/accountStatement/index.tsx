@@ -187,42 +187,42 @@ const AccountStatementModal = ({ item }: any) => {
                     <tr key={index}>
                       <td
                         className={`${
-                          betType === "BACK" ? "bg-blue3" : "bg-red1"
+                          betType === "BACK" || betType === "YES" ? "bg-blue3" : "bg-red1"
                         }`}
                       >
                         {user?.createBy?.userName}
                       </td>
                       <td
                         className={`${
-                          betType === "BACK" ? "bg-blue3" : "bg-red1"
+                          betType === "BACK" || betType === "YES"  ? "bg-blue3" : "bg-red1"
                         }`}
                       >
                         {user?.userName}
                       </td>
                       <td
                         className={`${
-                          betType === "BACK" ? "bg-blue3" : "bg-red1"
+                          betType === "BACK" || betType === "YES"  ? "bg-blue3" : "bg-red1"
                         }`}
                       >
                         {teamName}
                       </td>
                       <td
                         className={`${
-                          betType === "BACK" ? "bg-blue3" : "bg-red1"
+                          betType === "BACK" || betType === "YES"  ? "bg-blue3" : "bg-red1"
                         }`}
                       >
                         {odds}
                       </td>
                       <td
                         className={`${
-                          betType === "BACK" ? "bg-blue3" : "bg-red1"
+                          betType === "BACK"  || betType === "YES" ? "bg-blue3" : "bg-red1"
                         }`}
                       >
                         {amount}
                       </td>
                       <td
                         className={`${
-                          betType === "BACK" ? "bg-blue3" : "bg-red1"
+                          betType === "BACK" || betType === "YES"  ? "bg-blue3" : "bg-red1"
                         }`}
                         style={{
                           color:
@@ -241,14 +241,14 @@ const AccountStatementModal = ({ item }: any) => {
                       </td>
                       <td
                         className={`${
-                          betType === "BACK" ? "bg-blue3" : "bg-red1"
+                          betType === "BACK" || betType === "YES"  ? "bg-blue3" : "bg-red1"
                         }`}
                       >
                         {moment(createdAt).format("YYYY-MM-DD hh:mm:ss")}
                       </td>
                       <td
                         className={`${
-                          betType === "BACK" ? "bg-blue3" : "bg-red1"
+                          betType === "BACK" || betType === "YES"  ? "bg-blue3" : "bg-red1"
                         }`}
                       >
                         {match
@@ -261,14 +261,14 @@ const AccountStatementModal = ({ item }: any) => {
                       </td>
                       <td
                         className={`${
-                          betType === "BACK" ? "bg-blue3" : "bg-red1"
+                          betType === "BACK" || betType === "YES"  ? "bg-blue3" : "bg-red1"
                         }`}
                       >
                         {ipAddress}
                       </td>
                       <td
                         className={`${
-                          betType === "BACK" ? "bg-blue3" : "bg-red1"
+                          betType === "BACK" || betType === "YES"  ? "bg-blue3" : "bg-red1"
                         }`}
                       >
                         <TooltipCustom title={browserDetail}>

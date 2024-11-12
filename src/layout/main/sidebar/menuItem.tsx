@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Accordion } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   getCompetitionMatches,
   setBreadCrumb,
@@ -41,6 +41,8 @@ const MenuCollapse = (props: any) => {
     onClickMenuItem,
     selectedMatch,
   } = props;
+
+  const navigate = useNavigate();
 
   const [selectedDate, setSelectedDate] = useState("");
 
@@ -135,7 +137,19 @@ const MenuCollapse = (props: any) => {
                             defaultActiveKey={[]}
                           >
                             <Accordion.Item eventKey="0">
-                              <Accordion.Header>
+                              <Accordion.Header
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  if (
+                                    menuItemChild.matchBetting?.length === 0 &&
+                                    data?.id === "politics"
+                                  ) {
+                                    navigate(
+                                      `/admin/other_match_detail/${menuItemChild?.eventType}/${menuItemChild?.id}/session`
+                                    );
+                                  }
+                                }}
+                              >
                                 {menuItemChild?.name}
                               </Accordion.Header>
                               {menuItemChild.matchBetting?.map((item: any) => {

@@ -28,7 +28,7 @@ const MarketAnalysis = () => {
   }, []);
 
   return (
-    <div className="px-3">
+    <div className="px-3 lh-1">
       <div className="d-flex justify-content-between">
         <h3 className="fw-normal title-22">
           Market Analysis{" "}
