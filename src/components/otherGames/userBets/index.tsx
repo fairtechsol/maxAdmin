@@ -134,17 +134,19 @@ const OtherUserBets = ({ matchId }: any) => {
                                 className="text-start text-black"
                                 style={{ width: "25%" }}
                               >
-                                {" "}
                                 {bet?.user?.userName}
                               </div>
                               <div
                                 className="text-start text-black"
                                 style={{ width: "45%" }}
                               >
-                                {" "}
-                                {bet?.marketBetType === "SESSION"
-                                  ? bet?.eventName
-                                  : bet?.teamName}
+                                {["horseRacing", "greyHound"].includes(
+                                  bet?.eventType
+                                )
+                                  ? bet?.teamName?.split(".")?.[1]?.trim()
+                                    ? bet?.teamName?.split(".")?.[1]?.trim()
+                                    : bet?.teamName
+                                  : bet?.teamName ?? bet?.bettingName}
                               </div>
                               <div
                                 className="text-start text-black"

@@ -5,7 +5,7 @@ import "./style.scss";
 
 const SessionNormal = ({ title, data, detail, manual }: any) => {
   const [marketArr, setMarketArr] = useState(data?.section || []);
-  
+
   useEffect(() => {
     const newMarketArr = [...(data?.section || []), ...(manual || [])];
     setMarketArr(newMarketArr);
@@ -34,7 +34,6 @@ const SessionNormal = ({ title, data, detail, manual }: any) => {
       return true;
     }
   };
- 
 
   return (
     <>
@@ -73,190 +72,193 @@ const SessionNormal = ({ title, data, detail, manual }: any) => {
             {marketArr?.map((item: any, index: any) => {
               return (
                 <div className="w-100 d-flex flex-column">
-                <div className="sessionRateContainer" key={index}>
-                  <div
-                    className="sessionRateName runnerWidthNormal"
-                    style={{ overflow: "hidden" }}
-                  >
-                    <span
-                      className="teamFont"
-                      style={{ fontWeight: "400", lineHeight: 1 }}
-                     
+                  <div className="sessionRateContainer" key={index}>
+                    <div
+                      className="sessionRateName runnerWidthNormal"
+                      style={{ overflow: "hidden" }}
                     >
-                      {item?.RunnerName || item?.name}
-                    </span>{" "}
-                    <span
-                      className={`${
-                        calculateMaxLoss(
-                          detail?.profitLossDataSession,
-                          item?.id
-                        ) < 0
-                          ? "color-red"
-                          : "color-red"
-                      }  title-14 fbold`}
-                    >
-                      {calculateMaxLoss(
-                        detail?.profitLossDataSession,
-                        item?.id
-                      ) !== 0
-                        ? `-${calculateMaxLoss(
+                      <span
+                        className="teamFont"
+                        style={{ fontWeight: "400", lineHeight: 1 }}
+                      >
+                        {item?.RunnerName || item?.name}
+                      </span>{" "}
+                      <span
+                        className={`${
+                          calculateMaxLoss(
                             detail?.profitLossDataSession,
                             item?.id
-                          )}`
-                        : ""}
-                    </span>
-                  </div>
-                  <div
-                    className="sessionRateBoxContainer rateBoxWidthNormal"
-                    // style={{
-                    //   width: isLap ? "180px" : !isMobile ? "240px" : "",
-                    // }}
-                  >
-                    {handleStatus(
-                      item?.activeStatus,
-                      item?.GameStatus,
-                      item?.status
-                    ) && (
-                      <div className="suspended-overlayRates">
-                        <span className={`suspendTextCmmn`}>
-                          {(item?.GameStatus || item?.status)?.toUpperCase() ??
-                            "SUSPENDED"}
-                        </span>
-                      </div>
-                    )}
-                    <div
-                      style={{
-                        width: "100%",
-                        display: "flex",
-                        flexDirection: "column",
-                        // borderRight: "1px solid #c7c8ca",
-                      }}
-                    >
-                      <div
-                        className={`sessionRateBox rateFont lay1Background`}
-                        style={{ cursor: "pointer" }}
-                       
+                          ) < 0
+                            ? "color-red"
+                            : "color-red"
+                        }  title-14 fbold`}
                       >
-                        <span className={`rateFont`}>
-                          {handlePrice(
-                            item?.ex?.availableToLay?.[0]?.price || item?.noRate
-                          ) ?? "-"}
-                        </span>
-                        <span className={`f-size12 sessionRate2Box`}>
-                          {handleSize(item?.ex?.availableToLay?.[0]?.size) ||
-                            item?.noPercent}
-                        </span>
-                      </div>
-                      {item?.ex?.availableToLay?.length > 1 && (
+                        {calculateMaxLoss(
+                          detail?.profitLossDataSession,
+                          item?.id
+                        ) !== 0
+                          ? `-${calculateMaxLoss(
+                              detail?.profitLossDataSession,
+                              item?.id
+                            )}`
+                          : ""}
+                      </span>
+                    </div>
+                    <div
+                      className="sessionRateBoxContainer rateBoxWidthNormal"
+                      // style={{
+                      //   width: isLap ? "180px" : !isMobile ? "240px" : "",
+                      // }}
+                    >
+                      {handleStatus(
+                        item?.activeStatus,
+                        item?.GameStatus,
+                        item?.status
+                      ) && (
+                        <div className="suspended-overlayRates">
+                          <span className={`suspendTextCmmn`}>
+                            {(
+                              item?.GameStatus || item?.status
+                            )?.toUpperCase() ?? "SUSPENDED"}
+                          </span>
+                        </div>
+                      )}
+                      <div
+                        style={{
+                          width: "100%",
+                          display: "flex",
+                          flexDirection: "column",
+                          // borderRight: "1px solid #c7c8ca",
+                        }}
+                      >
                         <div
                           className={`sessionRateBox rateFont lay1Background`}
                           style={{ cursor: "pointer" }}
-                         
                         >
                           <span className={`rateFont`}>
                             {handlePrice(
-                              item?.ex?.availableToLay?.[1]?.price
+                              item?.ex?.availableToLay?.[0]?.price ||
+                                item?.noRate
                             ) ?? "-"}
                           </span>
                           <span className={`f-size12 sessionRate2Box`}>
-                            {handleSize(item?.ex?.availableToLay?.[1]?.size)}
+                            {handleSize(item?.ex?.availableToLay?.[0]?.size) ||
+                              item?.noPercent}
                           </span>
                         </div>
-                      )}
-                      {item?.ex?.availableToLay?.length > 2 && (
-                        <div
-                          className={`sessionRateBox lay1Background`}
-                          style={{ cursor: "pointer" }}
-                         
-                        >
-                          <span className={`rateFont`}>
-                            {handlePrice(
-                              item?.ex?.availableToLay?.[2]?.price
-                            ) ?? "-"}
-                          </span>
-                          <span className={`f-size12 sessionRate2Box`}>
-                            {handleSize(item?.ex?.availableToLay?.[2]?.size)}
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                    <div
-                      style={{
-                        width: "100%",
-                        display: "flex",
-                        flexDirection: "column",
-                      }}
-                    >
+                        {item?.ex?.availableToLay?.length > 1 && (
+                          <div
+                            className={`sessionRateBox rateFont lay1Background`}
+                            style={{ cursor: "pointer" }}
+                          >
+                            <span className={`rateFont`}>
+                              {handlePrice(
+                                item?.ex?.availableToLay?.[1]?.price
+                              ) ?? "-"}
+                            </span>
+                            <span className={`f-size12 sessionRate2Box`}>
+                              {handleSize(item?.ex?.availableToLay?.[1]?.size)}
+                            </span>
+                          </div>
+                        )}
+                        {item?.ex?.availableToLay?.length > 2 && (
+                          <div
+                            className={`sessionRateBox lay1Background`}
+                            style={{ cursor: "pointer" }}
+                          >
+                            <span className={`rateFont`}>
+                              {handlePrice(
+                                item?.ex?.availableToLay?.[2]?.price
+                              ) ?? "-"}
+                            </span>
+                            <span className={`f-size12 sessionRate2Box`}>
+                              {handleSize(item?.ex?.availableToLay?.[2]?.size)}
+                            </span>
+                          </div>
+                        )}
+                      </div>
                       <div
-                        className="sessionRateBox back1Background"
-                        style={{ cursor: "pointer" }}
-                       
+                        style={{
+                          width: "100%",
+                          display: "flex",
+                          flexDirection: "column",
+                        }}
                       >
-                        <span className={`rateFont`}>
-                          {handlePrice(
-                            item?.ex?.availableToBack?.[0]?.price ||
-                              item?.yesRate
-                          ) ?? "-"}
+                        <div
+                          className="sessionRateBox back1Background"
+                          style={{ cursor: "pointer" }}
+                        >
+                          <span className={`rateFont`}>
+                            {handlePrice(
+                              item?.ex?.availableToBack?.[0]?.price ||
+                                item?.yesRate
+                            ) ?? "-"}
+                          </span>
+                          <span className={`f-size12 sessionRate2Box`}>
+                            {handleSize(item?.ex?.availableToBack?.[0]?.size) ||
+                              item?.yesPercent}
+                          </span>
+                        </div>
+                        {item?.ex?.availableToBack?.length > 1 && (
+                          <div
+                            className="sessionRateBox back1Background"
+                            style={{ cursor: "pointer" }}
+                          >
+                            <span className={`rateFont`}>
+                              {handlePrice(
+                                item?.ex?.availableToBack?.[1]?.price
+                              ) ?? "-"}
+                            </span>
+                            <span className={`f-size12 sessionRate2Box`}>
+                              {handleSize(item?.ex?.availableToBack?.[1]?.size)}
+                            </span>
+                          </div>
+                        )}
+                        {item?.ex?.availableToBack?.length > 2 && (
+                          <div
+                            className="sessionRateBox back1Background"
+                            style={{ cursor: "pointer" }}
+                          >
+                            <span className={`rateFont`}>
+                              {handlePrice(
+                                item?.ex?.availableToBack?.[2]?.price
+                              ) ?? "-"}
+                            </span>
+                            <span className={`f-size12 sessionRate2Box`}>
+                              {handleSize(item?.ex?.availableToBack?.[2]?.size)}
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                      <div className="sessionMinBoxContainer">
+                        <span className={`sessionMinBox sessionMinMaxFont`}>
+                          Min:{formatNumber(item?.min || item?.minBet)}
                         </span>
-                        <span className={`f-size12 sessionRate2Box`}>
-                          {handleSize(item?.ex?.availableToBack?.[0]?.size) ||
-                            item?.yesPercent}
+                        <span className={`sessionMinBox sessionMinMaxFont`}>
+                          Max:{formatNumber(item?.max || item?.maxBet)}
                         </span>
                       </div>
-                      {item?.ex?.availableToBack?.length > 1 && (
-                        <div
-                          className="sessionRateBox back1Background"
-                          style={{ cursor: "pointer" }}
-                         
-                        >
-                          <span className={`rateFont`}>
-                            {handlePrice(
-                              item?.ex?.availableToBack?.[1]?.price
-                            ) ?? "-"}
-                          </span>
-                          <span className={`f-size12 sessionRate2Box`}>
-                            {handleSize(item?.ex?.availableToBack?.[1]?.size)}
-                          </span>
-                        </div>
-                      )}
-                      {item?.ex?.availableToBack?.length > 2 && (
-                        <div
-                          className="sessionRateBox back1Background"
-                          style={{ cursor: "pointer" }}
-                        >
-                          <span className={`rateFont`}>
-                            {handlePrice(
-                              item?.ex?.availableToBack?.[2]?.price
-                            ) ?? "-"}
-                          </span>
-                          <span className={`f-size12 sessionRate2Box`}>
-                            {handleSize(item?.ex?.availableToBack?.[2]?.size)}
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                    <div className="sessionMinBoxContainer">
-                      <span className={`sessionMinBox sessionMinMaxFont`}>
-                        Min:{formatNumber(item?.min || item?.minBet)}
-                      </span>
-                      <span className={`sessionMinBox sessionMinMaxFont`}>
-                        Max:{formatNumber(item?.max || item?.maxBet)}
-                      </span>
                     </div>
                   </div>
-                </div>
-                {item?.rem && (<div className="w-100 text-start" style={{fontSize:"11px",color:"#097c93",backgroundColor:"#f2f2f2",borderBottom:"1px solid #c7c8ca"}}>{item?.rem}
-                </div>)}
+                  {item?.rem && (
+                    <div
+                      className="w-100 text-start"
+                      style={{
+                        fontSize: "11px",
+                        color: "#097c93",
+                        backgroundColor: "#f2f2f2",
+                        borderBottom: "1px solid #c7c8ca",
+                      }}
+                    >
+                      {item?.rem}
+                    </div>
+                  )}
                 </div>
               );
             })}
           </div>
-
-        
         </div>
       </div>
-
-    
     </>
   );
 };
