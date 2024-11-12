@@ -331,8 +331,8 @@ const UserBetModalForm2 = ({ customClass, matchId, morePlacedBets }: any) => {
                     }}
                   >
                     {selectedCheckedBet?.length > 0
-                      ? selectedCheckedBet.length
-                      : filteredItems?.length}
+                      ? selectedCheckedBet?.length ?? 0
+                      : filteredItems?.length ?? 0}
                   </span>
                   Total Amount:{" "}
                   <span
@@ -342,8 +342,8 @@ const UserBetModalForm2 = ({ customClass, matchId, morePlacedBets }: any) => {
                   >
                     {parseFloat(
                       (selectedCheckedBet?.length > 0
-                        ? selectedCheckedBet
-                        : filteredItems
+                        ? selectedCheckedBet ?? []
+                        : filteredItems ?? []
                       )?.reduce((acc: any, match: any) => {
                         return acc + +match?.amount;
                       }, 0)
