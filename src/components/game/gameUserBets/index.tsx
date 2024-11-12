@@ -131,17 +131,13 @@ const GameUserBets = ({ matchId }: any) => {
                                 className="text-start text-black"
                                 style={{ width: "25%" }}
                               >
-                                {" "}
                                 {bet?.user?.userName}
                               </div>
                               <div
                                 className="text-start text-black"
                                 style={{ width: "45%" }}
                               >
-                                {" "}
-                                {bet?.marketBetType === "SESSION"
-                                  ? bet?.eventName
-                                  : bet?.teamName}
+                                {bet?.teamName}
                               </div>
                               <div
                                 className="text-start text-black"
