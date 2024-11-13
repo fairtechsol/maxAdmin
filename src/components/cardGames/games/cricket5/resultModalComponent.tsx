@@ -32,10 +32,7 @@ const Cricket5ResultComponent: React.FC<Props> = ({ data }: any) => {
       </div>
       {data?.bets?.count > 0 && (
         <div className="w-100 m-2">
-          <ResultBetList
-            bets={data?.bets?.rows ?? 12}
-            total={data?.bets?.count}
-          />
+          <ResultBetList bets={data?.bets?.rows} total={data?.bets?.count} />
         </div>
       )}
     </Container>
