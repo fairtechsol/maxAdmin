@@ -102,7 +102,7 @@ const AccountStatement = () => {
   );
 
   const aaccountTypeOptions: Option[] = [
-    { value: "all", label: "All" },
+    // { value: "all", label: "All" },
     { value: "balanceReport", label: "Deposite/Withdraw Report" },
     { value: "gameReport", label: "Sport Report" },
     { value: "casino", label: "Casino Reports" },
@@ -110,35 +110,27 @@ const AccountStatement = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 1199);
   const handleAccountTypeChange = (selectedOption: any) => {
     setSelectedOption1(selectedOption);
-    if (
-      selectedOption &&
-      (selectedOption as Option).value === "balanceReport"
-    ) {
+    if (selectedOption && selectedOption === "balanceReport") {
       setGameNameOptions([
-        { value: "all", label: "All" },
+        // { value: "all", label: "All" },
         { value: "upper", label: "Upper" },
         { value: "down", label: "Down" },
       ]);
-    } else if (
-      selectedOption &&
-      (selectedOption as Option).value === "gameReport"
-    ) {
+    } else if (selectedOption && selectedOption === "gameReport") {
       setGameNameOptions(gameConstantsAccountStatement);
-    } else if (
-      selectedOption &&
-      (selectedOption as Option).value === "casino"
-    ) {
+    } else if (selectedOption && selectedOption === "casino") {
       setGameNameOptions(card2ConstantsAccountStatement);
-    } else if (selectedOption && (selectedOption as Option).value === "all") {
-      setGameNameOptions([{ value: "all", label: "All" }]);
+    } else if (selectedOption && selectedOption === "all") {
+      setGameNameOptions([]);
     } else {
       setGameNameOptions([]);
     }
     setGameNameValues(null);
   };
 
-  const handleGameNameChange = (selectedOption: any) => {
-    setGameNameValues(selectedOption);
+  const handleGameNameChange = (event: any) => {
+    const selectedValue = event.target.value;
+    setGameNameValues(selectedValue);
   };
 
   const debouncedInputValue = useMemo(() => {
@@ -153,16 +145,6 @@ const AccountStatement = () => {
   }, []);
   // const searchClientName = debounce(async (value: any) => {
   //   try {
-  //     dispatch(
-  //       searchList({
-  //         userName: value,
-  //         createdBy: userDetail?.id,
-  //       })
-  //     );
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // }, 500);
 
   const handleSubmit = (e: any) => {
     try {
@@ -180,25 +162,22 @@ const AccountStatement = () => {
       } else if (dateTo) {
         filter += `&createdAt=lte${moment(dateTo)?.format("YYYY-MM-DD")}`;
       }
-      if (aaccountTypeValues && aaccountTypeValues?.value === "gameReport") {
+      if (aaccountTypeValues && aaccountTypeValues === "gameReport") {
         filter += `&statementType=game&betId=notNull`;
-      } else if (
-        aaccountTypeValues &&
-        aaccountTypeValues?.value === "balanceReport"
-      ) {
+      } else if (aaccountTypeValues && aaccountTypeValues === "balanceReport") {
         filter += `&statementType=addWithdraw`;
-      } else if (aaccountTypeValues && aaccountTypeValues?.value === "casino") {
+      } else if (aaccountTypeValues && aaccountTypeValues === "casino") {
         filter += `&statementType=game&betId=isNull`;
       }
-      if (gameNameValues && aaccountTypeValues?.value === "balanceReport") {
-        filter += `&gameName=${gameNameValues?.value}`;
+      if (gameNameValues && aaccountTypeValues === "balanceReport") {
+        filter += `&gameName=${gameNameValues}`;
       }
       if (
-        gameNameValues?.value &&
-        aaccountTypeValues?.value !== "balanceReport" &&
-        gameNameValues?.value !== "all"
+        gameNameValues &&
+        aaccountTypeValues !== "balanceReport" &&
+        gameNameValues !== "all"
       ) {
-        filter += `&description=like%${gameNameValues?.value}/%`;
+        filter += `&description=like%${gameNameValues}/%`;
       }
       setCurrentPage(1);
       dispatch(
@@ -237,25 +216,22 @@ const AccountStatement = () => {
       } else if (dateTo) {
         filter += `&createdAt=lte${moment(dateTo)?.format("YYYY-MM-DD")}`;
       }
-      if (aaccountTypeValues && aaccountTypeValues?.value === "gameReport") {
+      if (aaccountTypeValues && aaccountTypeValues === "gameReport") {
         filter += `&statementType=game&betId=notNull`;
-      } else if (
-        aaccountTypeValues &&
-        aaccountTypeValues?.value === "balanceReport"
-      ) {
+      } else if (aaccountTypeValues && aaccountTypeValues === "balanceReport") {
         filter += `&statementType=addWithdraw`;
-      } else if (aaccountTypeValues && aaccountTypeValues?.value === "casino") {
+      } else if (aaccountTypeValues && aaccountTypeValues === "casino") {
         filter += `&statementType=game&betId=isNull`;
       }
-      if (gameNameValues && aaccountTypeValues?.value === "balanceReport") {
-        filter += `&gameName=${gameNameValues?.value}`;
+      if (gameNameValues && aaccountTypeValues === "balanceReport") {
+        filter += `&gameName=${gameNameValues}`;
       }
       if (
-        gameNameValues?.value &&
-        aaccountTypeValues?.value !== "balanceReport" &&
-        gameNameValues?.value !== "all"
+        gameNameValues &&
+        aaccountTypeValues !== "balanceReport" &&
+        gameNameValues !== "all"
       ) {
-        filter += `&description=like%${gameNameValues?.value}/%`;
+        filter += `&description=like%${gameNameValues}/%`;
       }
       dispatch(
         handleExport({
@@ -290,25 +266,22 @@ const AccountStatement = () => {
       } else if (dateTo) {
         filter += `&createdAt=lte${moment(dateTo)?.format("YYYY-MM-DD")}`;
       }
-      if (aaccountTypeValues && aaccountTypeValues?.value === "gameReport") {
+      if (aaccountTypeValues && aaccountTypeValues === "gameReport") {
         filter += `&statementType=game&betId=notNull`;
-      } else if (
-        aaccountTypeValues &&
-        aaccountTypeValues?.value === "balanceReport"
-      ) {
+      } else if (aaccountTypeValues && aaccountTypeValues === "balanceReport") {
         filter += `&statementType=addWithdraw`;
-      } else if (aaccountTypeValues && aaccountTypeValues?.value === "casino") {
+      } else if (aaccountTypeValues && aaccountTypeValues === "casino") {
         filter += `&statementType=game&betId=isNull`;
       }
-      if (gameNameValues && aaccountTypeValues?.value === "balanceReport") {
-        filter += `&gameName=${gameNameValues?.value}`;
+      if (gameNameValues && aaccountTypeValues === "balanceReport") {
+        filter += `&gameName=${gameNameValues}`;
       }
       if (
-        gameNameValues?.value &&
-        aaccountTypeValues?.value !== "balanceReport" &&
-        gameNameValues?.value !== "all"
+        gameNameValues &&
+        aaccountTypeValues !== "balanceReport" &&
+        gameNameValues !== "all"
       ) {
-        filter += `&description=like%${gameNameValues?.value}/%`;
+        filter += `&description=like%${gameNameValues}/%`;
       }
 
       if (firstTime) {
@@ -397,7 +370,24 @@ const AccountStatement = () => {
       <Form onSubmit={handleSubmit}>
         <Row>
           <Col md={isMobile ? 12 : 2}>
-            <SelectSearch
+            <Form.Group controlId="accountTypeSelect">
+              <Form.Label>Account Type</Form.Label>
+              <Form.Select
+                value={aaccountTypeValues}
+                onChange={(event) =>
+                  handleAccountTypeChange(event.target.value)
+                }
+                aria-label="Account Type Select"
+              >
+                <option value="All">All</option>
+                {aaccountTypeOptions.map((option, index) => (
+                  <option key={index} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </Form.Select>
+            </Form.Group>
+            {/* <SelectSearch
               defaultValue="All"
               // options={options}
               placeholder="All"
@@ -405,33 +395,55 @@ const AccountStatement = () => {
               value={aaccountTypeValues}
               onChange={handleAccountTypeChange}
               options={aaccountTypeOptions}
-            />
+            /> */}
           </Col>
           <Col md={isMobile ? 12 : 2}>
-            <SelectSearch
+            <Form.Group controlId="gameNameSelect">
+              <Form.Label>
+                {aaccountTypeValues === "gameReport"
+                  ? "Sports List"
+                  : aaccountTypeValues === "casino"
+                  ? "Casino List"
+                  : "Game Name"}
+              </Form.Label>
+              <Form.Select
+                value={gameNameValues}
+                onChange={handleGameNameChange}
+                aria-label="Game Name Select"
+              >
+                <option value="all">All</option>
+                {gameNameOptions.map((option, index) => (
+                  <option key={index} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </Form.Select>
+            </Form.Group>
+            {/* <SelectSearch
               defaultValue="All"
               label={
-                aaccountTypeValues?.value === "gameReport"
+                aaccountTypeValues === "gameReport"
                   ? "Sports List"
-                  : aaccountTypeValues?.value === "casino"
+                  : aaccountTypeValues === "casino"
                   ? "Casino List"
                   : "Game Name"
               }
               // options={options}
               placeholder={"All"}
               value={gameNameValues}
+              isSearchable={true}
               onChange={handleGameNameChange}
               options={gameNameOptions}
-            />
+            /> */}
           </Col>
           <Col md={isMobile ? 12 : 2}>
             <SelectSearch
               label={"Search By Client Name"}
               inputValue={inputValue}
               options={userOptions}
-              value={tempUser?selectedUserValue:selectedUser}
-              onBlur={()=>setTempUser(false)}
-              onFocus={()=>setTempUser(true)}
+              value={tempUser ? selectedUserValue : selectedUser}
+              onBlur={() => setTempUser(false)}
+              onFocus={() => setTempUser(true)}
               onChange={(value: any) => {
                 setTempUser(false);
                 if (value?.length > 1) {

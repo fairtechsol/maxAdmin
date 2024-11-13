@@ -110,8 +110,12 @@ const matchListSlice = createSlice({
         const {
           apiSession,
           apiTiedMatch,
+          apiTiedMatch2,
+          other,
           bookmaker,
+          bookmaker2,
           marketCompleteMatch,
+          marketCompleteMatch1,
           matchOdd,
           // sessionBettings,
           manualTideMatch,
@@ -119,9 +123,9 @@ const matchListSlice = createSlice({
           firstHalfGoal,
           halfTime,
           overUnder,
+          // setWinner,
           completeManual,
           tournament,
-          other,
         } = action.payload;
 
         state.loading = false;
@@ -145,9 +149,12 @@ const matchListSlice = createSlice({
           // apiSessionActive: apiSession?.length >= 0 ? true : false,
           apiSession: apiSession,
           apiTideMatch: apiTiedMatch,
+          apiTideMatch2: apiTiedMatch2,
           bookmaker: bookmaker,
+          bookmaker2,
           manualTiedMatch: manualTideMatch,
           marketCompleteMatch: marketCompleteMatch,
+          marketCompleteMatch1,
           matchOdd: matchOdd,
           quickBookmaker: quickbookmaker,
           firstHalfGoal,

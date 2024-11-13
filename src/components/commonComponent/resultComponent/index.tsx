@@ -50,7 +50,6 @@ export const ResultComponent: React.FC<ResultComponentProps> = ({
   setfalse,
   type,
 }) => {
-
   const [date, setDate] = useState<any>();
 
   useEffect(() => {
@@ -61,24 +60,34 @@ export const ResultComponent: React.FC<ResultComponentProps> = ({
   return (
     <div style={{ padding: 0 }}>
       <div className="resultModalHeader">
-        <span style={{ fontSize: "20px"}}>
+        <span style={{ fontSize: "20px" }}>
           {cardGamesTypeNames[type]} RESULT
         </span>
         {/* <RxCross2 size={25} onClick={() => setfalse(false)} /> */}
         {/* <CloseButton onClick={() => setfalse(false)}   className="close text-white" /> */}
         {/* <Button  >×</Button> */}
-        <span className="close" onClick={() => setfalse(false)}  >×</span>
+        <span className="close" onClick={() => setfalse(false)}>
+          ×
+        </span>
       </div>
       <div
         className="resultModalSubHead"
         style={{ fontSize: isMobile ? "0.8rem" : "1.1rem" }}
       >
         <div>
-          <span className="px-1" style={{ fontWeight: "bold" }}>Round Id:</span>
-          <span>{type==="cricketv3"||type==="ballbyball"? data?.result?.mid:handleRoundId(data?.result?.mid)}</span>
+          <span className="px-1" style={{ fontWeight: "bold" }}>
+            Round Id:
+          </span>
+          <span>
+            {type === "cricketv3" || type === "ballbyball"
+              ? data?.result?.mid
+              : handleRoundId(data?.result?.mid)}
+          </span>
         </div>
         <div>
-          <span className="px-1" style={{ fontWeight: "bold" }}>Match Time:</span>
+          <span className="px-1" style={{ fontWeight: "bold" }}>
+            Match Time:
+          </span>
           <span>
             {data?.createdAt
               ? moment(data?.createdAt).format("DD/MM/YYYY hh:mm:ss A")

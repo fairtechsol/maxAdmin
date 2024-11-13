@@ -1,9 +1,9 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import "./style.scss";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
-import Winner from "../../../commonComponent/trophyWinner";
 import ResultBetList from "../../../commonComponent/resultBetList";
+import Winner from "../../../commonComponent/trophyWinner";
+import "./style.scss";
 interface Props {
   data: {
     C1: string;
@@ -36,8 +36,8 @@ const TeenTestResultComponent: React.FC<Props> = ({ data }: any) => {
           >
             {data?.result?.win === "11" && (
               <div className="casino-winner-icon ">
-              <Winner />
-            </div>
+                <Winner />
+              </div>
             )}
             <div
               style={{
@@ -82,8 +82,8 @@ const TeenTestResultComponent: React.FC<Props> = ({ data }: any) => {
           >
             {data?.result?.win === "21" && (
               <div className="casino-winner-icon ">
-              <Winner />
-            </div>
+                <Winner />
+              </div>
             )}
             <div
               style={{
@@ -123,9 +123,9 @@ const TeenTestResultComponent: React.FC<Props> = ({ data }: any) => {
             }
           >
             {data?.result?.win === "31" && (
-             <div className="casino-winner-icon ">
-             <Winner />
-           </div>
+              <div className="casino-winner-icon ">
+                <Winner />
+              </div>
             )}
             <div
               style={{
@@ -159,10 +159,7 @@ const TeenTestResultComponent: React.FC<Props> = ({ data }: any) => {
       </div>
       {data?.bets?.count > 0 && (
         <div className="w-100 m-2">
-          <ResultBetList
-            bets={data?.bets?.rows ?? 12}
-            total={data?.bets?.count}
-          />
+          <ResultBetList bets={data?.bets?.rows} total={data?.bets?.count} />
         </div>
       )}
     </Container>
