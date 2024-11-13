@@ -103,6 +103,9 @@ const NavComponent = ({ matchDetail, setMarketToShow, marketToShow }: any) => {
                       ? "active"
                       : ""
                   }`}
+                  style={{
+                    cursor: "pointer",
+                  }}
                 >
                   {item.name}
                 </span>
