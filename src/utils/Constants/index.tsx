@@ -257,12 +257,15 @@ export const sessionBettingType = {
 export const matchBettingType = {
   matchOdd: "matchOdd",
   bookmaker: "bookmaker",
+  bookmaker2: "bookmaker2",
   quickbookmaker1: "quickbookmaker1",
   quickbookmaker2: "quickbookmaker2",
   quickbookmaker3: "quickbookmaker3",
   tiedMatch1: "tiedMatch1",
   tiedMatch2: "tiedMatch2",
+  tiedMatch3: "tiedMatch3",
   completeMatch: "completeMatch",
+  completeMatch1: "completeMatch1",
   completeManual: "completeManual",
   ...Array.from({ length: 20 }, (_, index) => index).reduce(
     (prev: any, curr) => {
