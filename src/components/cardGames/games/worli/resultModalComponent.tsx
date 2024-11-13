@@ -1,10 +1,10 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "./style.scss";
+import "slick-carousel/slick/slick.css";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
 import ResultBetList from "../../../commonComponent/resultBetList";
+import "./style.scss";
 interface Props {
   data: {
     C1: string;
@@ -55,8 +55,8 @@ const WorliResultComponent: React.FC<Props> = ({ data }: any) => {
                   flexWrap: "wrap",
                   justifyContent: "space-around",
                   alignItems: "center",
-                  borderBottom:"1px solid rgba(0, 0, 0, .1)",
-                  paddingBottom:"1rem"
+                  borderBottom: "1px solid rgba(0, 0, 0, .1)",
+                  paddingBottom: "1rem",
                 }}
               >
                 {elementsAndar?.map((item: any, index: any) => {
@@ -66,13 +66,13 @@ const WorliResultComponent: React.FC<Props> = ({ data }: any) => {
 
               <div style={{ width: "30%" }}>
                 <div className="casino-result-desc">
-                  <div style={{display:"flex"}}>
+                  <div style={{ display: "flex" }}>
                     <span style={{ opacity: "0.6", display: "flex" }}>
                       Pana:
                     </span>
                     {sortString}
                   </div>
-                  <div style={{display:"flex"}}>
+                  <div style={{ display: "flex" }}>
                     <span style={{ opacity: "0.6", display: "flex" }}>
                       Ocada:
                     </span>
@@ -86,10 +86,7 @@ const WorliResultComponent: React.FC<Props> = ({ data }: any) => {
       </div>
       {data?.bets?.count > 0 && (
         <div className="w-100 m-2">
-          <ResultBetList
-            bets={data?.bets?.rows ?? 12}
-            total={data?.bets?.count}
-          />
+          <ResultBetList bets={data?.bets?.rows} total={data?.bets?.count} />
         </div>
       )}
     </Container>
