@@ -277,7 +277,7 @@ const OtherGamesDetail = () => {
   return (
     <div className="gamePage">
       <Container fluid>
-        <GameHeader />
+       
         <NavComponent
           matchDetail={matchDetails}
           setMarketToShow={setMarketToShow}
@@ -398,6 +398,7 @@ const OtherGamesDetail = () => {
               </div>
             </Col>
             <Col md={4}>
+            <GameHeader />
               {matchDetails?.eventId &&
                 matchDetails?.matchType !== "politics" && (
                   <LiveStreamComponent
