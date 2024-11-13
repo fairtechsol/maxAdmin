@@ -1,11 +1,11 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "./style.scss";
+import "slick-carousel/slick/slick.css";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
-import Winner from "../../../commonComponent/trophyWinner";
 import ResultBetList from "../../../commonComponent/resultBetList";
+import Winner from "../../../commonComponent/trophyWinner";
+import "./style.scss";
 interface Props {
   data: {
     C1: string;
@@ -23,9 +23,9 @@ const Bacarrat2ResultComponent: React.FC<Props> = ({ data }: any) => {
           <span className="title-18 f500 mb-2">Player</span>
           <div className="bacarrate-player-card">
             {data?.result?.win === "1" && (
-             <div className="casino-winner-icon  position-relative text-start">
-             <Winner />
-           </div>
+              <div className="casino-winner-icon  position-relative text-start">
+                <Winner />
+              </div>
             )}
             {elements?.[4] != "1" && (
               <div style={{ transform: "rotate(270deg)" }}>
@@ -55,18 +55,15 @@ const Bacarrat2ResultComponent: React.FC<Props> = ({ data }: any) => {
             )}
             {data?.result?.win === "2" && (
               <div className="casino-winner-icon">
-              <Winner />
-            </div>
+                <Winner />
+              </div>
             )}
           </div>
         </div>
       </div>
       {data?.bets?.count > 0 && (
         <div className="w-100 m-2">
-          <ResultBetList
-            bets={data?.bets?.rows ?? 12}
-            total={data?.bets?.count}
-          />
+          <ResultBetList bets={data?.bets?.rows} total={data?.bets?.count} />
         </div>
       )}
     </Container>

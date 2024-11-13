@@ -268,7 +268,6 @@ const Topbar = (props: any) => {
                     name: "Ball By Ball",
                     link: "/admin/casinoDetail/ballbyball",
                   },
-                  { name: "Binary", link: "#1" },
                   {
                     name: "Race 20-20",
                     link: "/admin/casinoDetail/race20",
@@ -292,10 +291,6 @@ const Topbar = (props: any) => {
                   {
                     name: "Live TeenPatti",
                     link: "/admin/casino/teenPatti",
-                  },
-                  {
-                    name: "TeenPatti 2.0",
-                    link: "#9",
                   },
                   { name: "Live Poker", link: "/admin/casino/poker" },
                   { name: "Andar Bahar", link: "/admin/casino/abj" },

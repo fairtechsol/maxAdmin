@@ -79,7 +79,7 @@ const CurrentBets = () => {
     setBetList(ReportBetList);
   }, [ReportBetList]);
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-// console.log('betList',betList);
+  // console.log('betList',betList);
 
   useEffect(() => {
     dispatch(
@@ -97,48 +97,54 @@ const CurrentBets = () => {
 
   const handleType = (type: any) => {
     setSelectType(type);
-     const filteredBets = ReportBetList?.rows?.filter((bet:any) => bet.result === type.value);
-     setBetList({
-    ...ReportBetList,
-    rows: filteredBets,
-    count: filteredBets.length, 
-  });
+    const filteredBets = ReportBetList?.rows?.filter(
+      (bet: any) => bet.result === type.value
+    );
+    setBetList({
+      ...ReportBetList,
+      rows: filteredBets,
+      count: filteredBets.length,
+    });
   };
 
   const handleType2 = (type: any) => {
     setSelectType2(type);
-    if(type.value==="ALL"){
+    if (type.value === "ALL") {
       setBetList(ReportBetList);
-    }else{
-      const filteredBets = ReportBetList?.rows?.filter((bet:any) => bet.betType === type.value);
+    } else {
+      const filteredBets = ReportBetList?.rows?.filter(
+        (bet: any) => bet.betType === type.value
+      );
       setBetList({
-      ...ReportBetList,
-      rows: filteredBets,
-      count: filteredBets.length, 
-    });
+        ...ReportBetList,
+        rows: filteredBets,
+        count: filteredBets.length,
+      });
     }
   };
 
-  const handleLoad = (e?: any) => {
-    if (e) {
+  const handleLoad = (e: any) => {
+    try {
       e.preventDefault();
-    }
-    if (selectType?.value === "PENDING" || selectType?.value === "DELETED") {
-      dispatch(
-        betReportAccountList({
-          status: selectType?.value,
-          page: 1,
-          limit: rowPerPage,
-          searchBy: "user.userName",
-          keyword: keyword || "",
-          marketBetType: tab,
-          // betType: "BACK",
-        })
-      );
-      setCurrentPage(1);
-    } else if (selectType?.value === "UNMATCHED") {
-      dispatch(betReportAccountListReset());
-      setCurrentPage(1);
+      if (selectType?.value === "PENDING" || selectType?.value === "DELETED") {
+        dispatch(
+          betReportAccountList({
+            status: selectType?.value,
+            page: 1,
+            limit: rowPerPage,
+            searchBy: "user.userName",
+            keyword: keyword || "",
+            marketBetType: tab,
+            // betType: "BACK",
+          })
+        );
+        setCurrentPage(1);
+      } else if (selectType?.value === "UNMATCHED") {
+        dispatch(betReportAccountListReset());
+        setCurrentPage(1);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -164,12 +170,12 @@ const CurrentBets = () => {
   };
 
   const handleSelect = (k: any) => {
+    dispatch(betReportAccountListReset());
     if (k === "tab1") {
       setTab("neCARD");
     } else if (k === "tab2") {
       setTab("eqCARD");
     }
-    console.log("Selected Tab Value:", tab);
   };
 
   return (
@@ -179,7 +185,12 @@ const CurrentBets = () => {
       <Tabs defaultActiveKey="tab1" id="betReportTabs" onSelect={handleSelect}>
         {/* Tab 1 */}
         <Tab eventKey="tab1" title="Sports">
-          <Form onSubmit={(e) => handleLoad(e)} className="mt-1">
+          <Form
+            onSubmit={(e) => {
+              handleLoad(e);
+            }}
+            className="mt-1"
+          >
             <Row className="d-flex align-items-center">
               <Col md={3}>
                 <SelectSearch2
@@ -226,11 +237,7 @@ const CurrentBets = () => {
             isPagination={true}
             // isSort={true}
             isSearch={true}
-            itemCount={
-              betList && betList?.count > 0
-                ? betList?.count
-                : 1
-            }
+            itemCount={betList && betList?.count > 0 ? betList?.count : 1}
             setTableConfig={setTableConfig}
             enablePdfExcel={false}
             tableConfig={tableConfig}
@@ -321,11 +328,7 @@ const CurrentBets = () => {
             isPagination={true}
             isSort={true}
             isSearch={true}
-            itemCount={
-              betList && betList?.count > 0
-                ? betList?.count
-                : 1
-            }
+            itemCount={betList && betList?.count > 0 ? betList?.count : 1}
             setTableConfig={setTableConfig}
             enablePdfExcel={false}
             tableConfig={tableConfig}

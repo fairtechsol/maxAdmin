@@ -277,7 +277,6 @@ const OtherGamesDetail = () => {
   return (
     <div className="gamePage">
       <Container fluid>
-        <GameHeader />
         <NavComponent
           matchDetail={matchDetails}
           setMarketToShow={setMarketToShow}
@@ -380,10 +379,7 @@ const OtherGamesDetail = () => {
                   .map(
                     (session, index) =>
                       session.data?.section?.length > 0 && (
-                        <div
-                          key={index}
-                          style={{ width:  "100%" }}
-                        >
+                        <div key={index} style={{ width: "100%" }}>
                           <Col md={12}>
                             <session.component
                               title={session.title}
@@ -398,13 +394,15 @@ const OtherGamesDetail = () => {
               </div>
             </Col>
             <Col md={4}>
-              {matchDetails?.eventId && (
-                <LiveStreamComponent
-                  url={`${liveStreamUrl}${matchDetails?.eventId}&sportid=${
-                    matchDetails?.matchType === "football" ? 1 : 2
-                  }`}
-                />
-              )}
+              <GameHeader />
+              {matchDetails?.eventId &&
+                matchDetails?.matchType !== "politics" && (
+                  <LiveStreamComponent
+                    url={`${liveStreamUrl}${matchDetails?.eventId}&sportid=${
+                      matchDetails?.matchType === "football" ? 1 : 2
+                    }`}
+                  />
+                )}
               <OtherUserBets matchId={id} />
             </Col>
           </Row>
