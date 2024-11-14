@@ -103,7 +103,11 @@ const ResultBetList = ({ bets, total }: any) => {
                 (acc: number, bet: any) => {
                   return (
                     acc +
-                    (bet?.result === "LOSS" ? -bet?.lossAmount : bet?.winAmount)
+                    (bet?.result === "LOSS"
+                      ? -bet?.lossAmount
+                      : bet?.result === "WIN"
+                      ? bet?.winAmount
+                      : 0)
                   );
                 },
                 0
@@ -117,7 +121,11 @@ const ResultBetList = ({ bets, total }: any) => {
                 (acc: number, bet: any) => {
                   return (
                     acc +
-                    (bet?.result === "LOSS" ? -bet?.lossAmount : bet?.winAmount)
+                    (bet?.result === "LOSS"
+                      ? -bet?.lossAmount
+                      : bet?.result === "WIN"
+                      ? bet?.winAmount
+                      : 0)
                   );
                 },
                 0
@@ -208,10 +216,15 @@ const ResultBetList = ({ bets, total }: any) => {
                     }
                     style={{
                       borderRight: "1px solid #aaa",
-                      color: result === "LOSS" ? "red" : "green",
+                      color:
+                        result === "LOSS"
+                          ? "red"
+                          : result === "WIN"
+                          ? "green"
+                          : "#000",
                     }}
                   >
-                    {result === "LOSS" ? -lossAmount : winAmount}
+                    {result === "LOSS" ? -lossAmount : result === "WIN" ? winAmount : 0}
                   </td>
                   <td
                     className={
