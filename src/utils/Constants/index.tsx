@@ -261,6 +261,7 @@ export const matchBettingType = {
   quickbookmaker1: "quickbookmaker1",
   quickbookmaker2: "quickbookmaker2",
   quickbookmaker3: "quickbookmaker3",
+  other: "other",
   tiedMatch1: "tiedMatch1",
   tiedMatch2: "tiedMatch2",
   tiedMatch3: "tiedMatch3",
