@@ -19,7 +19,7 @@ const NavComponent = ({ matchDetail, setMarketToShow, marketToShow }: any) => {
             session.section
           ) {
             formattedArray.push({
-              name: key,
+              name: session.mname,
               key: key,
               type: session.gtype,
               id: session.mid,
