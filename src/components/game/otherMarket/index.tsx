@@ -10,10 +10,10 @@ const OtherMarket = ({ title, box, data, detail }:any) => {
   const profitLossTeamA =
     data?.type === "tiedMatch3"
       ? detail?.profitLossDataMatch?.[
-          profitLossDataForMatchConstants[data?.type]?.A + "_" + detail?.id
+          profitLossDataForMatchConstants?.[data?.type]?.A + "_" + detail?.id
         ]
       : detail?.profitLossDataMatch?.[
-          profitLossDataForMatchConstants[data?.type]?.A +
+          profitLossDataForMatchConstants?.[data?.type]?.A +
             "_" +
             data?.id +
             "_" +
@@ -22,10 +22,10 @@ const OtherMarket = ({ title, box, data, detail }:any) => {
   const profitLossTeamB =
     data?.type === "tiedMatch3"
       ? detail?.profitLossDataMatch?.[
-          profitLossDataForMatchConstants[data?.type]?.B + "_" + detail?.id
+          profitLossDataForMatchConstants?.[data?.type]?.B + "_" + detail?.id
         ]
       : detail?.profitLossDataMatch?.[
-          profitLossDataForMatchConstants[data?.type]?.B +
+          profitLossDataForMatchConstants?.[data?.type]?.B +
             "_" +
             data?.id +
             "_" +
@@ -35,7 +35,7 @@ const OtherMarket = ({ title, box, data, detail }:any) => {
     data?.type === "tiedMatch3"
       ? ""
       : detail?.profitLossDataMatch?.[
-          profitLossDataForMatchConstants[data?.type]?.C +
+          profitLossDataForMatchConstants?.[data?.type]?.C +
             "_" +
             data?.id +
             "_" +
