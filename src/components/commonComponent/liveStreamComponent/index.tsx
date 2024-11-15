@@ -1,20 +1,19 @@
 import { Col, Container, Ratio, Row } from "react-bootstrap";
 import RightPanelContainer from "./RightPanelContainer";
 import { useState } from "react";
-import { ApiConstants } from "../../../utils/Constants";
 
-const LiveStreamComponent = ({ channelId }: any) => {
+const LiveStreamComponent = ({ url }: any) => {
   const [showVideo, setShowVideo] = useState<boolean>(false);
   return (
     <>
       <RightPanelContainer title={"Live Stream"} setShowVideo={setShowVideo}>
         {showVideo && (
-          <Container>
+          <Container className="p-0">
             <Row className="justify-content-md-center">
               <Col md={12}>
                 <Ratio aspectRatio="16x9">
                   <iframe
-                    src={`${ApiConstants.LIVESTREAM.GET_VIDEO}?chid=${channelId}`}
+                    src={url}
                     title="Live Stream"
                     referrerPolicy={"strict-origin-when-cross-origin"}
                   ></iframe>

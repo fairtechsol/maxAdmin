@@ -24,10 +24,20 @@ const initialValues: any = {
   transactionPassword: "",
 };
 
-const Withdraw = ({ userData, setShow }: any) => {
+const Withdraw = ({
+  userData,
+  setShow,
+  userId,
+  page,
+  limit,
+  userName,
+  sort,
+  order,
+  activeTab,
+}: any) => {
   const dispatch: AppDispatch = useDispatch();
 
-  const { modalSuccess,loading } = useSelector(
+  const { modalSuccess, loading } = useSelector(
     (state: RootState) => state.user.userList
   );
   const { userDetail } = useSelector((state: RootState) => state.user.profile);
@@ -83,7 +93,15 @@ const Withdraw = ({ userData, setShow }: any) => {
   useEffect(() => {
     if (modalSuccess) {
       setShow(false);
-      dispatch(getUsers());
+      dispatch(getUsers({
+        userId: userId,
+        page: page,
+        limit: limit,
+        userName: userName,
+        sort: sort,
+        order: order,
+        activeTab: activeTab,
+      }));
       dispatch(getUsersProfile());
       dispatch(accountListModalReset());
     }
@@ -91,7 +109,7 @@ const Withdraw = ({ userData, setShow }: any) => {
 
   return (
     <>
-       {loading ? <Loader /> : null}
+      {loading ? <Loader /> : null}
       <form onSubmit={handleSubmit}>
         <Stack className="listClientModals" gap={0}>
           <div className="input-container w-100">
@@ -194,6 +212,7 @@ const Withdraw = ({ userData, setShow }: any) => {
                   as="textarea"
                   rows={4}
                   customstyle="input-box"
+                  textAlign="left"
                 />
               </Col>
             </Row>
@@ -213,6 +232,7 @@ const Withdraw = ({ userData, setShow }: any) => {
                   onChange={handleChange}
                   type="password"
                   customstyle="input-box"
+                  textAlign="left"
                 />
               </Col>
             </Row>

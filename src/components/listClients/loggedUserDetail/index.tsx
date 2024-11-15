@@ -1,9 +1,10 @@
-import { Accordion, Col, Row } from "react-bootstrap";
+import { Accordion, Col } from "react-bootstrap";
 import { FaRegArrowAltCircleUp } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../store/store";
 import "./style.scss";
 import { userBalance } from "../../../store/actions/user/userActions";
+import { formatToINR } from "../../../helpers";
 
 const LoggedUserDetail = () => {
   const { userBalanceList } = useSelector(
@@ -22,90 +23,117 @@ const LoggedUserDetail = () => {
       <Accordion onSelect={handleAccordionSelect}>
         <Accordion.Item eventKey="0">
           <Accordion.Header>
-            <FaRegArrowAltCircleUp style={{ fontSize: "20px" }} />
+            <FaRegArrowAltCircleUp
+              style={{ fontSize: "20px", color: "#fff" }}
+            />
           </Accordion.Header>
           <Accordion.Body>
-            <Row>
+            <div className="text-white d-flex column justify-content-between">
               <Col lg={4}>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
-                  <div className="col-md-8 title-14">
+                  <div className="col-md-6 title-14">
                     Upper Level Credit Reference:
                   </div>
-                  <div className="col-md-4 title-14">
-                    {parseFloat(userBalanceList?.userCreditReference || 0).toFixed(2)}
+                  <div className="col-md-6 title-14">
+                    {formatToINR(
+                      parseFloat(userBalanceList?.userCreditReference).toFixed(
+                        2
+                      ) || 0
+                    )}
                   </div>
                 </div>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
-                  <div className="col-md-8 title-14">Total Master Balance</div>
-                  <div className="col-md-4 title-14">
-                    {parseFloat(userBalanceList?.totalMasterBalance || 0).toFixed(2)}
+                  <div className="col-md-6 title-14">Total Master Balance</div>
+                  <div className="col-md-6 title-14">
+                    {formatToINR(
+                      parseFloat(userBalanceList?.totalMasterBalance).toFixed(
+                        2
+                      ) || 0
+                    )}
                   </div>
                 </div>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
-                  <div className="col-md-8 title-14">Available Balance:</div>
-                  <div className="col-md-4 title-14">
-                    {parseFloat(userBalanceList?.availableBalance || 0).toFixed(2)}
+                  <div className="col-md-6 title-14">Available Balance:</div>
+                  <div className="col-md-6 title-14">
+                    {formatToINR(
+                      parseFloat(userBalanceList?.availableBalance).toFixed(
+                        2
+                      ) || 0
+                    )}
                   </div>
                 </div>
               </Col>
               <Col lg={4}>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
-                  <div className="col-md-8 title-14">
+                  <div className="col-md-6 title-14">
                     Down level Occupy Balance:
                   </div>
-                  <div className="col-md-4 title-14">
-                    {parseFloat(userBalanceList?.downLevelOccupyBalance || 0).toFixed(2)}
-                    {/* (
-                    {parseFloat(userBalanceList?.totalProfitLossDownlevel || 0}) */}
+                  <div className="col-md-6 title-14">
+                    {formatToINR(
+                      parseFloat(
+                        userBalanceList?.downLevelOccupyBalance
+                      ).toFixed(2) || 0
+                    )}
                   </div>
                 </div>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
-                  <div className="col-md-8 title-14">Upper Level:</div>
-                  <div className="col-md-4 title-14">
-                    {parseFloat(
-                      userBalanceList?.upperLevelBalance || 0
-                    ).toFixed(2)}
-                    {/* (
-                    {parseFloat(userBalanceList?.upperLevelProfitLossPercent || 0}%)(
-                    {parseFloat(userBalanceList?.totalProfitLossUpperlevel || 0}) */}
+                  <div className="col-md-6 title-14">Upper Level:</div>
+                  <div className="col-md-6 title-14">
+                    {formatToINR(
+                      parseFloat(userBalanceList?.upperLevelBalance).toFixed(
+                        2
+                      ) || 0
+                    )}
                   </div>
                 </div>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
-                  <div className="col-md-8 title-14">
+                  <div className="col-md-6 title-14">
                     Available Balance With Profit/Loss:
                   </div>
-                  <div className="col-md-4 title-14">
-                    {parseFloat(
-                      userBalanceList?.availableBalanceWithProfitLoss || 0
-                    ).toFixed(2)}
+                  <div className="col-md-6 title-14">
+                    {formatToINR(
+                      parseFloat(
+                        userBalanceList?.availableBalanceWithProfitLoss
+                      ).toFixed(2) || 0
+                    )}
                   </div>
                 </div>
               </Col>
               <Col lg={4}>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
-                  <div className="col-md-8 title-14">
+                  <div className="col-md-6 title-14">
                     Down Level Credit Reference:
                   </div>
-                  <div className="col-md-4 title-14">
-                    {parseFloat(userBalanceList?.downLevelCreditReference || 0).toFixed(2)}
+                  <div className="col-md-6 title-14">
+                    {formatToINR(
+                      parseFloat(
+                        userBalanceList?.downLevelCreditReference
+                      ).toFixed(2) || 0
+                    )}
                   </div>
                 </div>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
-                  <div className="col-md-8 title-14">
+                  <div className="col-md-6 title-14">
                     Down Level Profit/Loss :
                   </div>
-                  <div className="col-md-4 title-14">
-                    {parseFloat(userBalanceList?.downLevelProfitLoss || 0).toFixed(2)}
+                  <div className="col-md-6 title-14">
+                    {formatToINR(
+                      parseFloat(userBalanceList?.downLevelProfitLoss).toFixed(
+                        2
+                      ) || 0
+                    )}
                   </div>
                 </div>
                 <div className="LoggedUserDetail-card mb-2 row justify-content-between">
-                  <div className="col-md-8 title-14">My Profit/Loss:</div>
-                  <div className="col-md-4 title-14">
-                    {parseFloat(userBalanceList?.profitLoss || 0).toFixed(2)}
+                  <div className="col-md-6 title-14">My Profit/Loss:</div>
+                  <div className="col-md-6 title-14">
+                    {formatToINR(
+                      parseFloat(userBalanceList?.profitLoss).toFixed(2) || 0
+                    )}
                   </div>
                 </div>
               </Col>
-            </Row>
+            </div>
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>

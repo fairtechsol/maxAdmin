@@ -168,11 +168,18 @@ const AddAccount = () => {
       if (remainingDownline < 0) {
         return;
       }
+      if (formik?.values.accountType.value === "user"){
+        formik.setValues({
+          ...formik.values,
+          ourPartnership: newValue,
+          downlinePartnership: 0,
+        });
+      }else{
       formik.setValues({
         ...formik.values,
         ourPartnership: remainingDownline,
         downlinePartnership: newValue,
-      });
+      });}
     } catch (e: any) {
       console.log(e);
     }
@@ -269,11 +276,11 @@ const AddAccount = () => {
       formik.setValues({
         ...formik.values,
         minBet: "100",
-        maxBet: "1000",
+        maxBet: "5000000",
         delay: "5",
         uplinePartnership: res,
-        downlinePartnership: 100 - res,
-        ourPartnership: 0,
+        downlinePartnership: 0,
+        ourPartnership: 100 - res,
       });
       setDown(100 - res);
     }
@@ -331,7 +338,7 @@ const AddAccount = () => {
             <Row>
               <Col md={6}>
                 <h6
-                  className="mb-3 bg-warning title-18 fw-bold"
+                  className="mb-3 bg-warning title-18 fw-bold text-white"
                   style={addAccountHedingStyle}
                 >
                   Personal Details
@@ -343,7 +350,7 @@ const AddAccount = () => {
                       title={"Client Name*:"}
                       name={"clientName"}
                       onBlur={formik.handleBlur}
-                      placeholder={"Client Name:"}
+                      placeholder={"Client Name"}
                       type={"text"}
                       customstyle={"mb-3"}
                       value={formik.values.clientName}
@@ -418,7 +425,7 @@ const AddAccount = () => {
               </Col>
               <Col md={6}>
                 <h6
-                  className="mb-3 bg-warning title-18 fw-bold "
+                  className="mb-3 bg-warning title-18 fw-bold text-white "
                   style={addAccountHedingStyle}
                 >
                   Account Details
@@ -479,7 +486,7 @@ const AddAccount = () => {
             <Row>
               <Col md={12}>
                 <h6
-                  className="mb-3 bg-warning title-18 fw-bold "
+                  className="mb-3 bg-warning title-18 fw-bold text-white"
                   style={addAccountHedingStyle}
                 >
                   Commission Settings
@@ -527,7 +534,7 @@ const AddAccount = () => {
             <Row>
               <Col md={12}>
                 <h6
-                  className="mb-3 bg-warning title-18 fw-bold "
+                  className="mb-3 bg-warning title-18 fw-bold text-white"
                   style={addAccountHedingStyle}
                 >
                   Partnership

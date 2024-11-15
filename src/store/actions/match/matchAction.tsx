@@ -44,7 +44,11 @@ export const betReportAccountList = createAsyncThunk<any, any>(
           requestData.page || 1
         }&limit=${requestData.limit || 15}&searchBy=${
           requestData.searchBy ?? ""
-        }&keyword=${requestData.keyword ?? ""}&isCurrentBets=${true}`
+        }&keyword=${
+          requestData.keyword ?? ""
+        }&isCurrentBets=${true}&marketBetType=${
+          requestData.marketBetType ?? ""
+        }${requestData.betType ? "&betType=eq" + requestData.betType : ""}`
       );
       if (resp?.data) {
         return resp?.data;
@@ -261,6 +265,7 @@ export const getMorePlacedBets = createAsyncThunk<any, any>(
         }`
       );
       if (resp) {
+        // console.log('resp',resp);
         return resp?.data?.rows;
       }
     } catch (error: any) {
@@ -373,6 +378,21 @@ export const getCardReport = createAsyncThunk<any, any>(
   }
 );
 
+export const getMarketAnalysis = createAsyncThunk<any, any>(
+  "/marketAnalysis",
+  async (_, thunkApi) => {
+    try {
+      const resp = await service.get(ApiConstants.MATCH.MARKETANALYSIS);
+      if (resp) {
+        return resp?.data;
+      }
+    } catch (error: any) {
+      const err = error as AxiosError;
+      return thunkApi.rejectWithValue(err.response?.status);
+    }
+  }
+);
+
 export const updateMatchRates = createAsyncThunk<any, any>(
   "/match/rates",
   async (matchDetails) => {
@@ -387,6 +407,12 @@ export const updateBetsPlaced: any = createAsyncThunk<any, any>(
   }
 );
 
+export const updateBalance = createAsyncThunk<any, any>(
+  "/user/balance",
+  async (balance) => {
+    return balance;
+  }
+);
 export const updatePlacedbetsDeleteReason = createAsyncThunk<any, any>(
   "/updatePlacedbetsDeleteReason/bets",
   async (data) => {
@@ -402,3 +428,4 @@ export const betReportAccountListReset = createAction(
   "betReportAccountList/reset"
 );
 export const resetGameReportList = createAction("gameReportList/reset");
+export const getMorePlacedBetsReset = createAction("getMorePlacedBets/reset");

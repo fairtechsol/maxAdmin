@@ -33,6 +33,8 @@ interface CustomTableProps extends React.HTMLAttributes<HTMLDivElement> {
   tableConfig?: any;
   currentPage: any;
   setCurrentPage: any;
+  showHeaderEntries?: boolean;
+  value?: number;
 }
 
 const CustomTable: React.FC<CustomTableProps> = ({
@@ -53,6 +55,8 @@ const CustomTable: React.FC<CustomTableProps> = ({
   tableConfig,
   currentPage,
   setCurrentPage,
+  showHeaderEntries,
+  value,
   ...props
 }) => {
   // State for sorting configuration and current page
@@ -61,7 +65,7 @@ const CustomTable: React.FC<CustomTableProps> = ({
     key: null,
   });
 
-  const [rowPerPage, setRowPerPage] = useState(10);
+  const [rowPerPage, setRowPerPage] = useState<any>(25);
 
   // Handle column click to change the sorting configuration
   const handleSort = (key: string | number) => {
@@ -105,11 +109,18 @@ const CustomTable: React.FC<CustomTableProps> = ({
     });
     // alert(tHeadTheme);
   }, [currentPage, sortConfig, rowPerPage]);
+
+  useEffect(() => {
+    if (value) {
+      setRowPerPage(value);
+    }
+  }, [value]);
   return (
     <div className={`${customClass ?? ""} customTable`}>
       <TableHeader
         enablePdfExcel={enablePdfExcel}
         isPagination={isPagination}
+        showHeaderEntries={showHeaderEntries}
         isSearch={isSearch}
         setTableConfig={setTableConfig}
         rowPerPage={rowPerPage}

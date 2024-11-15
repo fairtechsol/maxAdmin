@@ -134,7 +134,7 @@ const Superover = () => {
         intervalTime = 600000;
       }
       const interval = setInterval(() => {
-        getScoreBoard(Id[1]);
+        getScoreBoard(Id[Id?.length-1]);
       }, intervalTime);
 
       return () => clearInterval(interval);

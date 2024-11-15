@@ -29,22 +29,11 @@ const SuperOverComponent = () => {
     <div>
       <Row>
         <Col md={8}>
-          <div style={{ width: "100%", height: "400px" }}>
+          <div style={{ width: "100%" }}>
             <div className="horseRacingTabHeader">
               <div>
                 <span style={{ fontSize: "16px", fontWeight: "600" }}>
-                  {dragonTigerDetail?.name}
-                </span>
-                <span
-                  style={{
-                    fontSize: "14px",
-                    textDecoration: "underline",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => setShow(true)}
-                >
-                  {" "}
-                  RULES
+                ENG Vs RSA {dragonTigerDetail?.name}
                 </span>
               </div>
               <span>
@@ -54,26 +43,23 @@ const SuperOverComponent = () => {
               </span>
             </div>
             <div>
-              {scoreBoardData?.data && (
-                <ScoreBoard data={scoreBoardData?.data} />
+              {scoreBoardData && (
+                <ScoreBoard data={scoreBoardData} />
               )}
             </div>
             <div
-              style={{ width: "100%", height: "92%", backgroundColor: "#000" }}
+              style={{ width: "100%", backgroundColor: "#000" }}
             >
               <VideoFrame
-                time={dragonTigerDetail?.videoInfo?.autotime}
+              data={dragonTigerDetail}
+                time={JSON.stringify(dragonTigerDetail?.videoInfo?.autotime)}
                 result={<Dragon20Result data={dragonTigerDetail?.videoInfo} />}
                 id={`${cardUrl}${cardGamesId.superover}`}
               />
             </div>
           </div>
           <div>
-            <div
-              className="d-sm-flex flex-row justify-content-around align-items-center"
-              style={{ width: "100%", marginTop: "7rem", gap: "10px" }}
-            >
-              <div className="w-100">
+              <div className="w-100 mt-2">
                 <Bookmaker
                   title={"Bookmaker"}
                   min={dragonTigerDetail?.videoInfo?.min}
@@ -81,7 +67,6 @@ const SuperOverComponent = () => {
                   matchOddsData={dragonTigerDetail?.bookmaker}
                   data={dragonTigerDetail}
                 />
-              </div>
             </div>
 
             <div style={{ width: "100%", marginTop: "5px" }}>
@@ -103,7 +88,7 @@ const SuperOverComponent = () => {
               </Col>
               <Col>
                 <div className="sidebar-box place-bet-container super-over-rule">
-                  <div className="marketHeader">
+                  <div className="marketHeader text-white f700">
                     ENGLAND vs RSA Inning's Card Rules
                   </div>
                   <div className="table-responsive">

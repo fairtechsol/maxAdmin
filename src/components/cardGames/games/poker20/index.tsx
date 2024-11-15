@@ -25,28 +25,18 @@ const Poker20Component = () => {
   useEffect(() => {
     setVideoFrameId(`${cardUrl}${cardGamesId?.poker20}`);
   }, []);
-
+  const evenIndexArray = dragonTigerDetail?.odds?.filter((_:any, index:any) => index % 2 === 0); // Elements at even indices
+  const oddIndexArray = dragonTigerDetail?.odds?.filter((_:any, index:any) => index % 2 !== 0);
   return (
     <>
       <Row>
         <Col md={8}>
-          <div style={{ height: "400px", margin: "5px" }}>
+          <div>
             <div className="horseRacingTabHeader">
               <div>
                 <span style={{ fontSize: "16px", fontWeight: "600" }}>
                   {dragonTigerDetail?.name}
                 </span>
-                <a
-                  style={{
-                    fontSize: "14px",
-                    textDecoration: "underline",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => setShow(true)}
-                >
-                  {" "}
-                  RULES
-                </a>
               </div>
               <span>
                 {dragonTigerDetail?.videoInfo
@@ -59,27 +49,26 @@ const Poker20Component = () => {
               </span>
             </div>
             <div
-              style={{ width: "100%", height: "90%", backgroundColor: "#000" }}
+              style={{ width: "100%", backgroundColor: "#000" }}
             >
               <VideoFrame
                 time={dragonTigerDetail?.videoInfo?.autotime}
                 result={<Poker20Result data={dragonTigerDetail?.videoInfo} />}
                 id={videoFrameId}
+                data={dragonTigerDetail}
               />
             </div>
           </div>
-          <div style={{ height: "350px" }}>
-            <div className="d-flex px-2 mt-5">
+          <div>
+            <div className="d-flex py-2">
               <DynamicTable
-                odds={dragonTigerDetail?.odds}
+                odds={evenIndexArray}
                 data={dragonTigerDetail}
-                playerNum={[0, 10]}
               />
-              <div style={{ width: "10px" }}></div>
+              <div style={{ width: "4px", backgroundColor: "grey" }}></div>
               <DynamicTable
-                odds={dragonTigerDetail?.odds}
+                odds={oddIndexArray}
                 data={dragonTigerDetail}
-                playerNum={[10, 18]}
               />
             </div>
             <div className="mt-2">

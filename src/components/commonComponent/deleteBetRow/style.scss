@@ -11,8 +11,6 @@
   cursor: not-allowed;
   align-items: flex-end;
   display: flex;
-  display: -ms-flex;
-  display: -webkit-flex;
   justify-content: flex-end;
   z-index: 222;
 }
@@ -22,9 +20,8 @@
   z-index: 223;
   font-size: 10px;
   font-weight: 700;
-  margin-bottom: -7px !important;
+  margin-bottom: 0px !important;
   align-items: flex-end;
-
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

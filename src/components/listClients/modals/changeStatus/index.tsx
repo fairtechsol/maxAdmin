@@ -21,7 +21,17 @@ const initialValues: any = {
   transactionPassword: "",
 };
 
-const ChangeStatus = ({ setShow, userData }: any) => {
+const ChangeStatus = ({
+  setShow,
+  userData,
+  userId,
+  page,
+  limit,
+  userName,
+  sort,
+  order,
+  activeTab,
+}: any) => {
   // const [userChecked, setUserChecked] = useState(false);
   const defaultLockUnlockObj = {
     allBlocked: userData?.userBlock,
@@ -54,7 +64,17 @@ const ChangeStatus = ({ setShow, userData }: any) => {
   useEffect(() => {
     if (modalSuccess) {
       setShow(false);
-      dispatch(getUsers());
+      dispatch(
+        getUsers({
+          userId: userId,
+          page: page,
+          limit: limit,
+          userName: userName,
+          sort: sort,
+          order: order,
+          activeTab: activeTab,
+        })
+      );
       dispatch(getUsersProfile());
       dispatch(accountListModalReset());
     }
@@ -69,14 +89,15 @@ const ChangeStatus = ({ setShow, userData }: any) => {
             <Row>
               <Col sm={12}>
                 <div className="d-flex align-items-center justify-content-between">
-                  <h3 className="text-secondary title-20 fw-normal">
+                  <h3 className="text-secondary title-14 fw-normal">
                     {userData?.userName}
                   </h3>
                   <h3
-                    className={`${!lockUnlockObj?.allBlocked ? "text-green" : "text-red"
-                      } title-14`}
+                    className={`${
+                      !lockUnlockObj?.allBlocked ? "text-green" : "text-red"
+                    } title-14`}
                   >
-                    {!lockUnlockObj?.allBlocked ? "Active" : "InActive"}
+                    {/* {!lockUnlockObj?.allBlocked ? "Active" : "InActive"} */}
                   </h3>
                 </div>
                 <div className="row">
@@ -107,6 +128,7 @@ const ChangeStatus = ({ setShow, userData }: any) => {
                             OFF
                           </span>
                         }
+                        onColor="#0088cc"
                         checkedIcon={
                           <span
                             style={{
@@ -141,6 +163,7 @@ const ChangeStatus = ({ setShow, userData }: any) => {
                           });
                         }}
                         checked={!lockUnlockObj?.betBlocked}
+                        onColor="#0088cc"
                         uncheckedIcon={
                           <span
                             style={{
@@ -193,6 +216,7 @@ const ChangeStatus = ({ setShow, userData }: any) => {
                   customstyle="input-box"
                   value={values.transactionPassword}
                   onChange={handleChange}
+                  textAlign="left"
                 />
               </Col>
             </Row>

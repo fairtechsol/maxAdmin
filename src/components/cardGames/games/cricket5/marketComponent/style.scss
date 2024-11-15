@@ -4,8 +4,16 @@
   justify-content: space-between;
   align-items: flex-start;
   align-content: flex-start;
+  background-color: #ececec;
 }
-
+.marketHeader5 {
+  width: 100%;
+  background-color: #ffc742d9;
+  display: flex;
+  justify-content: start;
+  // align-items: center;
+  padding: 5px;
+}
 .five-cricket .market-2 {
   min-width: calc(50% - 8px);
 }

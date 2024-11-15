@@ -49,17 +49,6 @@ const Baccarat2Component = () => {
                   <span style={{ fontSize: "16px", fontWeight: "600" }}>
                     {dragonTigerDetail?.name}
                   </span>
-                  <a
-                    style={{
-                      fontSize: "14px",
-                      textDecoration: "underline",
-                      cursor: "pointer",
-                    }}
-                    onClick={() => setShow(true)}
-                  >
-                    {" "}
-                    RULES
-                  </a>
                 </div>
                 <span>
                   {dragonTigerDetail?.videoInfo
@@ -80,6 +69,7 @@ const Baccarat2Component = () => {
                 }}
               >
                 <VideoFrame
+                data={dragonTigerDetail}
                   time={dragonTigerDetail?.videoInfo?.autotime}
                   //   result={<Abj2Result data={dragonTigerDetail?.videoInfo} />}
                   id={videoFrameId}

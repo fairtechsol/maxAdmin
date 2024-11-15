@@ -1,22 +1,25 @@
 import { Table } from "react-bootstrap";
+import { teamStatus } from "../../../../utils/Constants";
+import isMobile from "../../../../utils/screenDimension";
 import BackLayBox from "../../../backLayBox";
 import BetStatusOverlay from "../../../commonComponent/betStatusOverlay";
 import "../../style.scss";
-import { teamStatus } from "../../../../utils/Constants";
-import isMobile from "../../../../utils/screenDimension";
 
 interface BookmakerTableProps {
   minMax?: any;
   data: any;
   backLayCount?: number;
   matchDetails: any;
+  teamYesNo?: boolean;
 }
 function BookmakerTable({
   minMax,
   data,
   backLayCount = 6,
   matchDetails,
+  teamYesNo,
 }: BookmakerTableProps) {
+  // console.log(data);
   return (
     <div
       className={`gameTable table-responsive sessionFancyTable borderTable border `}
@@ -61,7 +64,7 @@ function BookmakerTable({
                         isMobile ? "f900" : "f600"
                       }`}
                     >
-                      {data?.type === "tiedMatch2"
+                      {data?.type === "tiedMatch2" || teamYesNo
                         ? i === 0
                           ? "Yes"
                           : "No"
@@ -88,8 +91,12 @@ function BookmakerTable({
                 </td>
                 <td colSpan={backLayCount === 2 ? 2 : 6} className={""}>
                   <BetStatusOverlay
-                    title={data?.[`statusTeam${item}`]}
-                    active={data?.[`statusTeam${item}`] !== teamStatus.active}
+                    title={data?.runners?.[i]?.status.toLowerCase()}
+                    active={
+                      data?.runners?.[i]?.status
+                        .toLowerCase()
+                        ?.toLowerCase() !== teamStatus.active?.toLowerCase()
+                    }
                   >
                     {new Array(backLayCount === 2 ? 1 : 3)
                       .fill(0)
@@ -99,9 +106,19 @@ function BookmakerTable({
                           key={index}
                           // customClass={`bookmaker-bet-place W-100`}
                           bgColor={`blue${index + 1}`}
-                          rate={data[`backTeam${item}`] - 2 + index}
+                          rate={
+                            data?.runners?.[i]?.ex?.availableToBack?.[index]
+                              ?.price
+                          }
+                          percent={
+                            data?.runners?.[i]?.ex?.availableToBack?.[index]
+                              ?.size
+                          }
                           active={
-                            data?.[`statusTeam${item}`] !== teamStatus.active
+                            data?.runners?.[i]?.status
+                              .toLowerCase()
+                              ?.toLowerCase() !==
+                            teamStatus.active?.toLowerCase()
                           }
                         />
                       ))}
@@ -114,9 +131,19 @@ function BookmakerTable({
                           //     customClass={`bookmaker-bet-place  ""
                           // `}
                           bgColor={`red${index + 1}`}
-                          rate={data[`layTeam${item}`] + index}
+                          rate={
+                            data?.runners?.[i]?.ex?.availableToLay?.[index]
+                              ?.price
+                          }
+                          percent={
+                            data?.runners?.[i]?.ex?.availableToLay?.[index]
+                              ?.size
+                          }
                           active={
-                            data?.[`statusTeam${item}`] !== teamStatus.active
+                            data?.runners?.[i]?.status
+                              .toLowerCase()
+                              ?.toLowerCase() !==
+                            teamStatus.active?.toLowerCase()
                           }
                         />
                       ))}

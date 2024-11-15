@@ -1,6 +1,7 @@
-import React from "react";
-import { Container } from "react-bootstrap";
-import { RxCross2 } from "react-icons/rx";
+import React, { useEffect, useState } from "react";
+// import {  Container } from "react-bootstrap";
+// import CloseButton from 'react-bootstrap/CloseButton';
+// import { RxCross2 } from "react-icons/rx";
 // import moment from "moment";
 import isMobile from "../../../utils/screenDimension";
 import { handleRoundId } from "../../../helpers";
@@ -33,6 +34,10 @@ import WorliResultComponent from "../../cardGames/games/worli/resultModalCompone
 import Bacarrat1ResultComponent from "../../cardGames/games/baccarat1/resultModalComponent";
 import Bacarrat2ResultComponent from "../../cardGames/games/baccarat2/resultModalComponent";
 import CardJResultComponent from "../../cardGames/games/3CardJ/resultModalComponent";
+import CasinoMeterResultComponent from "../../cardGames/games/casinoMeter/resultModalComponent";
+import QueenResultComponent from "../../cardGames/games/casinoQueen/resultModalComponent";
+import moment from "moment-timezone";
+import BallByBallResultComponent from "../../cardGames/games/ballbyball/desktop/resultModalComponent";
 
 interface ResultComponentProps {
   data: any;
@@ -45,21 +50,49 @@ export const ResultComponent: React.FC<ResultComponentProps> = ({
   setfalse,
   type,
 }) => {
+  const [date, setDate] = useState<any>();
+
+  useEffect(() => {
+    if (!date) {
+      setDate(Date.now());
+    }
+  }, []);
   return (
-    <Container style={{ padding: 0 }}>
-      <div className="resultModalHeader d-flex justify-content-between">
-        <span style={{ fontSize: "20px", fontWeight: "bold" }}>
+    <div style={{ padding: 0 }}>
+      <div className="resultModalHeader">
+        <span style={{ fontSize: "20px" }}>
           {cardGamesTypeNames[type]} RESULT
         </span>
-        <RxCross2 size={25} onClick={() => setfalse(false)} />
+        {/* <RxCross2 size={25} onClick={() => setfalse(false)} /> */}
+        {/* <CloseButton onClick={() => setfalse(false)}   className="close text-white" /> */}
+        {/* <Button  >×</Button> */}
+        <span className="close" onClick={() => setfalse(false)}>
+          ×
+        </span>
       </div>
       <div
         className="resultModalSubHead"
         style={{ fontSize: isMobile ? "0.8rem" : "1.1rem" }}
       >
         <div>
-          <span style={{ fontWeight: "bold" }}>Round Id:</span>
-          <span>{handleRoundId(data?.result?.mid)}</span>
+          <span className="px-1" style={{ fontWeight: "bold" }}>
+            Round Id:
+          </span>
+          <span>
+            {type === "cricketv3" || type === "ballbyball"
+              ? data?.result?.mid
+              : handleRoundId(data?.result?.mid)}
+          </span>
+        </div>
+        <div>
+          <span className="px-1" style={{ fontWeight: "bold" }}>
+            Match Time:
+          </span>
+          <span>
+            {data?.createdAt
+              ? moment(data?.createdAt).format("DD/MM/YYYY hh:mm:ss A")
+              : moment(date).format("DD/MM/YYYY hh:mm:ss A")}
+          </span>
         </div>
       </div>
       {type === cardGamesType?.dragonTiger20 ? (
@@ -114,13 +147,19 @@ export const ResultComponent: React.FC<ResultComponentProps> = ({
         <WorliResultComponent data={data} />
       ) : type === cardGamesType?.baccarat ? (
         <Bacarrat1ResultComponent data={data} />
+      ) : type === cardGamesType?.ballbyball ? (
+        <BallByBallResultComponent data={data} />
       ) : type === cardGamesType?.baccarat2 ? (
         <Bacarrat2ResultComponent data={data} />
       ) : type === cardGamesType?.cardj ? (
         <CardJResultComponent data={data} />
+      ) : type === cardGamesType?.cmeter ? (
+        <CasinoMeterResultComponent data={data} />
+      ) : type === cardGamesType?.queen ? (
+        <QueenResultComponent data={data} />
       ) : (
         <></>
       )}
-    </Container>
+    </div>
   );
 };

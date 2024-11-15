@@ -1,9 +1,10 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
+import ResultBetList from "../../../commonComponent/resultBetList";
 import "./style.scss";
 interface Props {
   data: {
@@ -166,6 +167,11 @@ const Abj1ResultComponent: React.FC<Props> = ({ data }: any) => {
           </div>
         </div>
       </div>
+      {data?.bets?.count > 0 && (
+        <div className="w-100 m-2">
+          <ResultBetList bets={data?.bets?.rows} total={data?.bets?.count} />
+        </div>
+      )}
     </Container>
   );
 };

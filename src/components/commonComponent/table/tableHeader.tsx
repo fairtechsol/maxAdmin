@@ -14,6 +14,7 @@ interface TableHeaderProps {
   setRowPerPage: any;
   handleReportExport?: any;
   tableConfig: any;
+  showHeaderEntries?: boolean;
 }
 
 const TableHeader: React.FC<TableHeaderProps> = ({
@@ -25,6 +26,7 @@ const TableHeader: React.FC<TableHeaderProps> = ({
   setRowPerPage,
   handleReportExport,
   tableConfig,
+  showHeaderEntries,
 }) => {
   // const [keyword, setKeyword] = useState("");
 
@@ -37,31 +39,34 @@ const TableHeader: React.FC<TableHeaderProps> = ({
 
   return (
     <div className="d-flex justify-content-between align-items-center">
-      {enablePdfExcel && (
-        <div className="d-flex gap-1 mb-2">
-          <CustomButton
-            onClick={() => {
-              handleReportExport("pdf");
-            }}
-            className="pdfExcel-btns d-flex gap-1 align-items-center pdf border-0 "
-          >
-            <FaRegFilePdf />
-            PDF
-          </CustomButton>
-          <CustomButton
-            onClick={() => {
-              handleReportExport("excel");
-            }}
-            className="pdfExcel-btns d-flex gap-1 align-items-center excel border-0 "
-          >
-            <FaRegFileExcel />
-            Excel
-          </CustomButton>
-        </div>
-      )}
-      {isPagination && (
-        <RowPerPage value={rowPerPage} onChange={setRowPerPage} />
-      )}
+      <div className="d-flex flex-column">
+        {isPagination && !showHeaderEntries && (
+          <RowPerPage value={rowPerPage} onChange={setRowPerPage} />
+        )}
+        {enablePdfExcel && (
+          <div className="d-flex gap-1 mb-2">
+            <CustomButton
+              onClick={() => {
+                handleReportExport("pdf");
+              }}
+              className="pdfExcel-btns d-flex gap-1 align-items-center pdf border-0 "
+            >
+              <FaRegFilePdf />
+              PDF
+            </CustomButton>
+            <CustomButton
+              onClick={() => {
+                handleReportExport("excel");
+              }}
+              className="pdfExcel-btns d-flex gap-1 align-items-center excel border-0 "
+            >
+              <FaRegFileExcel />
+              Excel
+            </CustomButton>
+          </div>
+        )}
+      </div>
+
       {isSearch && (
         <>
           <SearchBox value={tableConfig?.keyword} onSearch={handleSearch} />

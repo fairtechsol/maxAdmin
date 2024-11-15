@@ -17,7 +17,7 @@ import { luckyrules } from "../../../../assets";
 import UserBets from "../../../game/userBet";
 import TiePairBox from "./TiePairBox";
 import Lucky7BResult from "./lucky7Card";
-import OddEven from "./OddEvenBox";
+// import OddEven from "./OddEvenBox";
 import CardBox from "./CardsBox";
 
 const Lucky7BComponent = () => {
@@ -29,19 +29,12 @@ const Lucky7BComponent = () => {
       <Row>
         <Col md={8}>
           <div className="horseRacingTab">
-            <div style={{ width: "100%", height: "400px", margin: "5px" }}>
+            <div style={{ width: "100%" }}>
               <div className="horseRacingTabHeader">
                 <div>
                   <span style={{ fontSize: "16px", fontWeight: "600" }}>
                     {dragonTigerDetail?.name}
                   </span>
-                  <a
-                    style={{ fontSize: "14px", textDecoration: "underline" }}
-                    onClick={() => setShow(true)}
-                  >
-                    {" "}
-                    RULES
-                  </a>
                 </div>
                 <span>
                   {dragonTigerDetail?.videoInfo
@@ -54,47 +47,27 @@ const Lucky7BComponent = () => {
               <div
                 style={{
                   width: "100%",
-                  height: "92%",
                   backgroundColor: "#000",
                 }}
               >
                 <VideoFrame
+                  data={dragonTigerDetail}
                   time={dragonTigerDetail?.videoInfo?.autotime}
                   result={<Lucky7BResult data={dragonTigerDetail?.videoInfo} />}
                   id={`${cardUrl}${cardGamesId.lucky7B}`}
                 />
               </div>
             </div>
-            <div style={{ height: "550px" }}>
-              <div style={{ width: "100%", margin: "5% 5px" }}>
-                <TiePairBox
+            <div>
+              <div style={{ width: "100%" }}>
+              <TiePairBox
                   lowHigh={dragonTigerDetail?.lowHigh}
-                  data={dragonTigerDetail}
-                />
-              </div>
-              <div
-                style={{
-                  width: "100%",
-                  margin: "5px",
-                  display: "flex",
-                  flexDirection: "row",
-                  gap: "8px",
-                }}
-              >
-                <OddEven
-                  name={"DRAGON"}
                   odds={dragonTigerDetail?.redBlack}
-                  data={dragonTigerDetail}
-                  card={true}
-                />
-
-                <OddEven
-                  name={"TIGER"}
-                  odds={dragonTigerDetail?.luckOdds}
-                  card={false}
+                  cards={dragonTigerDetail?.luckOdds}
                   data={dragonTigerDetail}
                 />
               </div>
+             
               <div
                 style={{
                   width: "100%",

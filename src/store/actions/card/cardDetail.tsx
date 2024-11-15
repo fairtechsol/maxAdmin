@@ -1,6 +1,6 @@
 import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
-import service from "../../../service";
 import axios, { AxiosError } from "axios";
+import service from "../../../service";
 import { ApiConstants, Constants } from "../../../utils/Constants";
 
 export const getDragonTigerDetailHorseRacing = createAsyncThunk<any, any>(
@@ -36,8 +36,8 @@ export const resultDragonTiger = createAsyncThunk<any, any>(
     }
   }
 );
-// export const updateTeamRatesForHorseRacingOnDelete = createAsyncThunk<any, any>(
-//   "horseRacing/teamRatesUpdateOnDelete",
+// export const updateprofitLossDataMatchForHorseRacingOnDelete = createAsyncThunk<any, any>(
+//   "horseRacing/profitLossDataMatchUpdateOnDelete",
 //   async (data) => {
 //     return data;
 //   }
@@ -146,12 +146,16 @@ export const casinoScoreboardMatchRates = createAsyncThunk<any, any>(
           "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
         },
       };
+      // const resp = await axios.get(
+      //   `${Constants.thirdPartyCard}${ApiConstants.SCOREBOARD.match}/${requestData?.id}?gameName=${requestData?.type}`,
+      //   config
+      // );
       const resp = await axios.get(
-        `${Constants.thirdPartyCard}${ApiConstants.SCOREBOARD.match}/${requestData?.id}?gameName=${requestData?.type}`,
+        `${Constants.thirdPartyLive}/cricketScore?eventId=${requestData?.id}`,
         config
       );
       if (resp?.data) {
-        return resp?.data?.data?.data;
+        return resp?.data?.data;
       }
     } catch (error) {
       const err = error as AxiosError;
@@ -274,5 +278,24 @@ export const update3CardJRates = createAsyncThunk<any, any>(
   }
 );
 
+export const updateQueenRates = createAsyncThunk<any, any>(
+  "queen/matchRatesUpdate",
+  async (data) => {
+    return data;
+  }
+);
+export const casinoMeterPattiMatchRates = createAsyncThunk<any, any>(
+  "casinometer/matchRatesUpdate",
+  async (data) => {
+    return data;
+  }
+);
+
+export const ballbyballMatchRates = createAsyncThunk<any, any>(
+  "ballbyballMatchRates/matchRatesUpdate",
+  async (data) => {
+    return data;
+  }
+);
 export const resetScoreBoard = createAction("scoreboard/reset");
 export const resetCardDetail = createAction("cardDetail/reset");

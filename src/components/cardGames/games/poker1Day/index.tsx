@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
-import { Col, Container, Row,Table } from "react-bootstrap";
+import { Col, Container, Row, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import "./style.scss";
 import { RootState } from "../../../../store/store";
@@ -17,7 +17,7 @@ import { p6rules } from "../../../../assets";
 import Poker1DayResult from "./poker1DayCard";
 import DynamicTable from "./betTable";
 import CardResultBox from "../../../commonComponent/cardResultBox";
-import PairBox from "./pairBox";
+// import PairBox from "./pairBox";
 
 const Poker1DayComponent = () => {
   const [show, setShow] = useState(false);
@@ -53,22 +53,11 @@ const Poker1DayComponent = () => {
       <Row>
         <Col md={8}>
           <div style={{ margin: "5px" }}>
-            <div style={{ height: "400px", marginBottom: ".30px" }}>
+            <div>
               <div className="horseRacingTabHeader">
                 <div>
                   <span style={{ fontSize: "16px", fontWeight: "600" }}>
                     Poker 1 Day
-                  </span>
-                  <span
-                    style={{
-                      fontSize: "14px",
-                      textDecoration: "underline",
-                      cursor: "pointer",
-                    }}
-                    onClick={() => setShow(true)}
-                  >
-                    {" "}
-                    RULES
                   </span>
                 </div>
                 <span>
@@ -84,11 +73,11 @@ const Poker1DayComponent = () => {
               <div
                 style={{
                   width: "100%",
-                  height: "90%",
                   backgroundColor: "#000",
                 }}
               >
                 <VideoFrame
+                  data={dragonTigerDetail}
                   time={dragonTigerDetail?.videoInfo?.autotime}
                   result={
                     <Poker1DayResult data={dragonTigerDetail?.videoInfo} />
@@ -98,22 +87,22 @@ const Poker1DayComponent = () => {
               </div>
             </div>
             <div>
-              <div className="poker-table-container ">
-                <div style={{ width: "40%" }}>
+              <div>
+                <div>
                   <DynamicTable
                     odds={dragonTigerDetail?.oddsData}
                     data={dragonTigerDetail}
                     playerNum={[8, 9]}
                   />
                 </div>
-                <div style={{ width: "60%" }}>
+                {/* <div style={{ width: "60%" }}>
                   <PairBox
                     odds={dragonTigerDetail?.playersBonusPair}
                     data={dragonTigerDetail}
                   />
-                </div>
+                </div> */}
               </div>
-              <div style={{ width: "100%", marginTop: "10px" }}>
+              <div style={{ width: "100%" }}>
                 <CardResultBox
                   data={dragonTigerDetail}
                   name={["A", "B", "T"]}
@@ -134,10 +123,18 @@ const Poker1DayComponent = () => {
                 className="no-scrollbar"
                 style={{ height: "400px", overflow: "auto" }}
               >
-                 <div className="casino-title mt-2" style={{ position: "relative",textAlign:"center",fontSize:"16px",fontWeight:"600" }}>
+                <div
+                  className="casino-title mt-2"
+                  style={{
+                    position: "relative",
+                    textAlign: "center",
+                    fontSize: "16px",
+                    fontWeight: "600",
+                  }}
+                >
                   <span>Rules</span>
                 </div>
-                <div className="table-responsive rules-table">
+                <div className="table-responsive rules-table lh-1">
                   <Table bordered>
                     <thead>
                       <tr>

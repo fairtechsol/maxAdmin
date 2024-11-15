@@ -1,8 +1,9 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import { FaTrophy } from "react-icons/fa";
-import "./style.scss";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
+import ResultBetList from "../../../commonComponent/resultBetList";
+import Winner from "../../../commonComponent/trophyWinner";
+import "./style.scss";
 interface Props {
   data: {
     C1: string;
@@ -21,13 +22,13 @@ const Card32BResultComponent: React.FC<Props> = ({ data }: any) => {
   }
   return (
     <Container style={{ display: "flex", flexDirection: "column" }}>
-      <div className="card32resultModal">
+      <div className="card32resultModal mb-5">
         <div className="card32resultCardContainer mb-3">
           <span style={{ fontSize: "20px" }}>Player 8</span>
           <div className="d-sm-flex flex-row justify-content-center align-items-center">
             {data?.result?.win === "1" && (
-              <div className="casino-winner-icon">
-                <FaTrophy size={30} color="#169733" />
+              <div className="casino-winner-icon ">
+                <Winner />
               </div>
             )}
             {result?.[0]?.map((item: any) => {
@@ -51,8 +52,8 @@ const Card32BResultComponent: React.FC<Props> = ({ data }: any) => {
           <span style={{ fontSize: "20px" }}>Player 9</span>
           <div className="d-sm-flex flex-row justify-content-center align-items-center">
             {data?.result?.win === "2" && (
-              <div className="casino-winner-icon">
-                <FaTrophy size={30} color="#169733" />
+              <div className="casino-winner-icon ">
+                <Winner />
               </div>
             )}
             {result?.[1]?.map((item: any) => {
@@ -76,8 +77,8 @@ const Card32BResultComponent: React.FC<Props> = ({ data }: any) => {
           <span style={{ fontSize: "20px" }}>Player 10</span>
           <div className="d-sm-flex flex-row justify-content-center align-items-center">
             {data?.result?.win === "3" && (
-              <div className="casino-winner-icon">
-                <FaTrophy size={30} color="#169733" />
+              <div className="casino-winner-icon ">
+                <Winner />
               </div>
             )}
             {result?.[2]?.map((item: any) => {
@@ -101,8 +102,8 @@ const Card32BResultComponent: React.FC<Props> = ({ data }: any) => {
           <span style={{ fontSize: "20px" }}>Player 11</span>
           <div className="d-sm-flex flex-row justify-content-center align-items-center">
             {data?.result?.win === "4" && (
-              <div className="casino-winner-icon">
-                <FaTrophy size={30} color="#169733" />
+              <div className="casino-winner-icon ">
+                <Winner />
               </div>
             )}
             {result?.[3]?.map((item: any) => {
@@ -123,6 +124,11 @@ const Card32BResultComponent: React.FC<Props> = ({ data }: any) => {
           </div>
         </div>
       </div>
+      {data?.bets?.count > 0 && (
+        <div className="w-100 m-2">
+          <ResultBetList bets={data?.bets?.rows} total={data?.bets?.count} />
+        </div>
+      )}
     </Container>
   );
 };

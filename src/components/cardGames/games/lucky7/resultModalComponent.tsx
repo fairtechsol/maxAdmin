@@ -1,6 +1,7 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
+import ResultBetList from "../../../commonComponent/resultBetList";
 import "./style.scss";
 interface Props {
   data: {
@@ -56,6 +57,11 @@ const Lucky7ResultComponent: React.FC<Props> = ({ data }: any) => {
           </div>
         </div>
       </div>
+      {data?.bets?.count > 0 && (
+        <div className="w-100 m-2">
+          <ResultBetList bets={data?.bets?.rows} total={data?.bets?.count} />
+        </div>
+      )}
     </Container>
   );
 };

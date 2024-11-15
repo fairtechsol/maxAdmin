@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
 import {
   getPlacedBets,
+  matchDetailAction,
   otherMatchDetailAction,
   updateMatchRates,
   updatePlacedbetsDeleteReason,
@@ -16,15 +17,24 @@ import NavComponent from "../../components/otherGames/matchList";
 import OtherUserBets from "../../components/otherGames/userBets";
 import BetTable from "../../components/otherGames/betTable";
 import LiveStreamComponent from "../../components/commonComponent/liveStreamComponent";
-import { getChannelId } from "../../helpers";
+import { liveStreamUrl } from "../../utils/Constants";
+import CustomBreadcrumb from "../../components/commonComponent/breadcrumb";
+import isMobile from "../../utils/screenDimension";
+import SessionNormal from "../../components/game/sessionNormal";
+import SessionFancy from "../../components/game/sessionFancy";
+import SessionKhado from "../../components/game/sessionKhado";
+import SessionOddEven from "../../components/game/sessionOddEven";
 
 const OtherGamesDetail = () => {
   const dispatch: AppDispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
-  const [channelId, setChannelId] = useState<string>("");
+  const [marketToShow, setMarketToShow] = useState<any>("");
+  const { breadCrumb } = useSelector(
+    (state: RootState) => state.match.sidebarList
+  );
 
-  const { id, marketId } = useParams();
+  const { gameType, id, marketId } = useParams();
 
   const { matchDetails, success } = useSelector(
     (state: RootState) => state.match.matchListSlice
@@ -43,9 +53,13 @@ const OtherGamesDetail = () => {
   const handleDeleteBet = (event: any) => {
     try {
       if (event?.matchId === id) {
-        dispatch(
-          otherMatchDetailAction({ matchId: id, matchType: "football" })
-        );
+        if (gameType === "politics") {
+          dispatch(matchDetailAction(id));
+        } else {
+          dispatch(
+            otherMatchDetailAction({ matchId: id, matchType: gameType })
+          );
+        }
         dispatch(getPlacedBets(id));
       }
     } catch (e) {
@@ -56,9 +70,13 @@ const OtherGamesDetail = () => {
   const handleSessionBetPlaced = (event: any) => {
     try {
       if (event?.jobData?.placedBet?.matchId === id) {
-        dispatch(
-          otherMatchDetailAction({ matchId: id, matchType: "football" })
-        );
+        if (gameType === "politics") {
+          dispatch(matchDetailAction(id));
+        } else {
+          dispatch(
+            otherMatchDetailAction({ matchId: id, matchType: gameType })
+          );
+        }
         dispatch(getPlacedBets(id));
       }
     } catch (e) {
@@ -68,9 +86,13 @@ const OtherGamesDetail = () => {
   const handleMatchBetPlaced = (event: any) => {
     try {
       if (event?.jobData?.matchId === id) {
-        dispatch(
-          otherMatchDetailAction({ matchId: id, matchType: "football" })
-        );
+        if (gameType === "politics") {
+          dispatch(matchDetailAction(id));
+        } else {
+          dispatch(
+            otherMatchDetailAction({ matchId: id, matchType: gameType })
+          );
+        }
         dispatch(getPlacedBets(id));
       }
     } catch (e) {
@@ -79,9 +101,9 @@ const OtherGamesDetail = () => {
   };
   const handleMatchResultDeclarted = (event: any) => {
     try {
-      if (event?.matchId === id) {
+      if (event?.matchId === id && event?.isMatchDeclare) {
         navigate("/admin/market-analysis");
-      }
+      } else dispatch(getPlacedBets(id));
     } catch (e) {
       console.log(e);
     }
@@ -90,7 +112,7 @@ const OtherGamesDetail = () => {
     try {
       if (event?.matchId === id) {
         // dispatch(removeRunAmount(event));
-        dispatch(getPlacedBets(`eq${id}`));
+        dispatch(getPlacedBets(id));
         // dispatch(amountupdate(event));
       }
     } catch (error) {
@@ -101,7 +123,7 @@ const OtherGamesDetail = () => {
     try {
       if (event?.matchId === id) {
         // dispatch(updateMaxLossForBetOnUndeclare(event));
-        dispatch(getPlacedBets(`eq${id}`));
+        dispatch(getPlacedBets(id));
       }
     } catch (error) {
       console.log(error);
@@ -115,7 +137,7 @@ const OtherGamesDetail = () => {
     for (const marketType in matchDetail) {
       const marketValue: any = matchDetail[marketType];
       if (typeof marketValue === "object" && marketValue !== null) {
-        if (Array.isArray(marketValue) && marketType !== "quickBookmaker") {
+        if (Array.isArray(marketValue)) {
           formattedArray.push(...marketValue.map((market: any) => market));
         } else {
           if (marketValue?.id) {
@@ -142,9 +164,13 @@ const OtherGamesDetail = () => {
   useEffect(() => {
     try {
       if (id) {
-        dispatch(
-          otherMatchDetailAction({ matchId: id, matchType: "football" })
-        );
+        if (gameType === "politics") {
+          dispatch(matchDetailAction(id));
+        } else {
+          dispatch(
+            otherMatchDetailAction({ matchId: id, matchType: gameType })
+          );
+        }
         dispatch(getPlacedBets(id));
       }
     } catch (e) {
@@ -184,7 +210,7 @@ const OtherGamesDetail = () => {
     } catch (e) {
       console.log(e);
     }
-  }, [location?.pathname, success, socket]);
+  }, [location?.pathname, success, socket, id]);
 
   useEffect(() => {
     try {
@@ -215,10 +241,12 @@ const OtherGamesDetail = () => {
       const handleVisibilityChange = () => {
         if (document.visibilityState === "visible") {
           if (id) {
-            dispatch(
-              otherMatchDetailAction({ matchId: id, matchType: "football" })
-            );
+            // dispatch(
+            //   otherMatchDetailAction({ matchId: id, matchType: "football" })
+            // );
             dispatch(getPlacedBets(id));
+            socketService.match.joinMatchRoom(id, "superAdmin");
+            socketService.match.getMatchRates(id, updateMatchDetailToRedux);
           }
         } else if (document.visibilityState === "hidden") {
           socketService.match.leaveMatchRoom(id);
@@ -232,60 +260,153 @@ const OtherGamesDetail = () => {
           "visibilitychange",
           handleVisibilityChange
         );
+        socketService.match.leaveMatchRoom(id);
+        socketService.match.getMatchRatesOff(id);
       };
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [id]);
 
   useEffect(() => {
-    try {
-      if (matchDetails?.eventId) {
-        const callApiForLiveStream = async () => {
-          let result = await getChannelId(matchDetails?.eventId);
-          if (result) {
-            setChannelId(result?.channelNo);
-          }
-        };
-        callApiForLiveStream();
-      }
-    } catch (error) {
-      console.log(error);
+    if (marketId) {
+      setMarketToShow(marketId);
     }
-  }, [matchDetails?.id]);
+  }, [marketId]);
 
   return (
     <div className="gamePage">
       <Container fluid>
-        <GameHeader />
-        <NavComponent matchDetail={matchDetails} />
+       
+        <NavComponent
+          matchDetail={matchDetails}
+          setMarketToShow={setMarketToShow}
+          marketToShow={marketToShow}
+        />
         {/* table start here */}
         <div className="gamePage-table">
           <Row className="no-gutters">
             <Col md={8}>
+              {["football", "tennis", "politics"]?.includes(
+                matchDetails?.matchType
+              ) && (
+                <CustomBreadcrumb
+                  items={[
+                    { name: matchDetails?.title || breadCrumb?.matchName },
+                  ]}
+                  matchType={matchDetails?.matchType}
+                />
+              )}
               {updatedMarket
-                ?.filter((item: any) => item?.id === marketId)
+                ?.filter((item: any) => !item?.dataType)
+                ?.filter((item: any) => item?.id === marketToShow)
                 ?.map((item: any) => (
                   <Col md={12} key={item?.id}>
                     <BetTable
                       title={item?.name}
                       type={
-                        item.type.includes("overUnder") ||
-                        item.type.includes("firstHalfGoal")
-                          ? MatchType.UNDER_OVER
-                          : item.type.includes("setWinner")
-                          ? MatchType.SET_WINNER
+                        ["other", "tournament"]?.includes(item.type)
+                          ? MatchType.OTHER
+                          : [
+                              "quickbookmaker1",
+                              "quickbookmaker2",
+                              "quickbookmaker3",
+                            ]?.includes(item.type)
+                          ? MatchType.BOOKMAKER
                           : MatchType.MATCH_ODDS
                       }
                       data={item}
                     />
                   </Col>
                 ))}
+
+              <div
+                style={{
+                  display: "flex",
+                  width: "100%",
+                  flexWrap: isMobile ? "nowrap" : "wrap",
+                  gap: "1%",
+                }}
+                className={`${isMobile ? "flex-column" : ""}`}
+              >
+                {[
+                  {
+                    type: "session",
+                    title: "Normal",
+                    data: matchDetails?.apiSession?.session,
+                    component: SessionNormal,
+                  },
+                  {
+                    type: "overByover",
+                    title: "overByover",
+                    data: matchDetails?.apiSession?.overByover,
+                    component: SessionNormal,
+                  },
+                  {
+                    type: "ballByBall",
+                    title: "Ballbyball",
+                    data: matchDetails?.apiSession?.ballByBall,
+                    component: SessionNormal,
+                  },
+                  {
+                    type: "fancy1",
+                    title: "fancy1",
+                    data: matchDetails?.apiSession?.fancy1,
+                    component: SessionFancy,
+                  },
+                  {
+                    type: "khado",
+                    title: "khado",
+                    data: matchDetails?.apiSession?.khado,
+                    component: SessionKhado,
+                  },
+                  {
+                    type: "meter",
+                    title: "meter",
+                    data: matchDetails?.apiSession?.meter,
+                    component: SessionNormal,
+                  },
+                  {
+                    type: "oddeven",
+                    title: "oddeven",
+                    data: matchDetails?.apiSession?.oddEven,
+                    component: SessionOddEven,
+                  },
+                ]
+                  ?.filter(
+                    (item: any) =>
+                      item?.type?.toLowerCase() === marketToShow.toLowerCase()
+                  )
+                  .map(
+                    (session, index) =>
+                      session.data?.section?.length > 0 && (
+                        <div
+                          key={index}
+                          style={{ width:  "100%" }}
+                        >
+                          <Col md={12}>
+                            <session.component
+                              title={session.title}
+                              mtype={session.type}
+                              data={session.data}
+                              detail={matchDetails}
+                            />
+                          </Col>
+                        </div>
+                      )
+                  )}
+              </div>
             </Col>
             <Col md={4}>
-              {channelId !== "0" && channelId !== "" && (
-                <LiveStreamComponent channelId={channelId} />
-              )}
+            <GameHeader />
+              {matchDetails?.eventId &&
+                matchDetails?.matchType !== "politics" && (
+                  <LiveStreamComponent
+                    url={`${liveStreamUrl}${matchDetails?.eventId}/${
+                      matchDetails?.matchType === "football" ? 1 : 2
+                    }`}
+                  />
+                )}
               <OtherUserBets matchId={id} />
             </Col>
           </Row>

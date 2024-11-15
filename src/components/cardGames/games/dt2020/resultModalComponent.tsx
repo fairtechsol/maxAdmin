@@ -1,7 +1,8 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import { FaTrophy } from "react-icons/fa";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
+import ResultBetList from "../../../commonComponent/resultBetList";
+import Winner from "../../../commonComponent/trophyWinner";
 import "./style.scss";
 interface Props {
   data: {
@@ -30,8 +31,8 @@ const Dragon20ResultComponent: React.FC<Props> = ({ data }: any) => {
             }
           >
             {data?.result?.win === "1" && (
-              <div className="casino-winner-icon">
-                <FaTrophy size={30} color="#169733" />
+              <div className="casino-winner-icon ">
+                <Winner />
               </div>
             )}
             <div
@@ -52,11 +53,6 @@ const Dragon20ResultComponent: React.FC<Props> = ({ data }: any) => {
               "d-sm-flex flex-row justify-content-center align-items-center"
             }
           >
-            {data?.result?.win === "2" && (
-              <div className="casino-winner-icon">
-                <FaTrophy size={30} color="#169733" />
-              </div>
-            )}
             <div
               style={{
                 border: "1px solid #fdef34",
@@ -66,6 +62,11 @@ const Dragon20ResultComponent: React.FC<Props> = ({ data }: any) => {
             >
               <HandleCards card={resultCards?.[1]} />
             </div>
+            {data?.result?.win === "2" && (
+              <div className="casino-winner-icon">
+                <Winner />
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -105,6 +106,11 @@ const Dragon20ResultComponent: React.FC<Props> = ({ data }: any) => {
           </div>
         </div>
       </div>
+      {data?.bets?.count > 0 && (
+        <div className="w-100 m-2">
+          <ResultBetList bets={data?.bets?.rows} total={data?.bets?.count} />
+        </div>
+      )}
     </Container>
   );
 };

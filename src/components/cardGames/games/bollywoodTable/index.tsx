@@ -35,23 +35,12 @@ const BollywoodTableComponent = () => {
       <Row>
         <Col md={8}>
           <div className="horseRacingTab">
-            <div style={{ width: "100%", margin: "5px" }}>
+            <div style={{ width: "100%"}}>
               <div className="horseRacingTabHeader">
                 <div>
                   <span style={{ fontSize: "16px", fontWeight: "600" }}>
                     {dragonTigerDetail?.name}
                   </span>
-                  <a
-                    style={{
-                      fontSize: "14px",
-                      textDecoration: "underline",
-                      cursor: "pointer",
-                    }}
-                    onClick={() => setShow(true)}
-                  >
-                    {" "}
-                    RULES
-                  </a>
                 </div>
                 <span>
                   {dragonTigerDetail?.videoInfo
@@ -74,11 +63,12 @@ const BollywoodTableComponent = () => {
                     <BollywoodTableCard data={dragonTigerDetail?.videoInfo} />
                   }
                   id={videoFrameId}
+                  data={dragonTigerDetail}
                 />
               </div>
             </div>
             <div>
-              <div style={{ width: "100%", margin: "5% 5px" }}>
+              <div style={{ width: "100%" }}>
                 <TiePairBox
                   lowHigh={dragonTigerDetail?.players}
                   data={dragonTigerDetail}

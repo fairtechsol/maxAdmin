@@ -1,9 +1,9 @@
 import { Table } from "react-bootstrap";
-import "../../style.scss";
-import BetStatusOverlay from "../../../commonComponent/betStatusOverlay";
-import BackLayBox from "../../../backLayBox";
 import { teamStatus } from "../../../../utils/Constants";
 import isMobile from "../../../../utils/screenDimension";
+import BackLayBox from "../../../backLayBox";
+import BetStatusOverlay from "../../../commonComponent/betStatusOverlay";
+import "../../style.scss";
 
 interface MatchOddsProps {
   title: string;
@@ -129,10 +129,10 @@ function MatchOdds({
                   </td>
                   <td colSpan={backLayCount === 2 ? 2 : 6}>
                     <BetStatusOverlay
-                      title={data?.runners?.[indexes]?.status.toLowerCase()}
+                      title={data?.runners?.[indexes]?.status?.toLowerCase()}
                       active={
                         data?.runners?.[indexes]?.status
-                          .toLowerCase()
+                          ?.toLowerCase()
                           ?.toLowerCase() !== teamStatus.active?.toLowerCase()
                       }
                     >
@@ -146,17 +146,17 @@ function MatchOdds({
                             bgColor={`blue${index + 1}`}
                             rate={
                               data?.runners?.[indexes]?.ex?.availableToBack?.[
-                                2 - index
+                                index
                               ]?.price
                             }
                             percent={
                               data?.runners?.[indexes]?.ex?.availableToBack?.[
-                                2 - index
+                                index
                               ]?.size
                             }
                             active={
                               data?.runners?.[indexes]?.status
-                                .toLowerCase()
+                                ?.toLowerCase()
                                 ?.toLowerCase() !==
                               teamStatus.active?.toLowerCase()
                             }
@@ -182,7 +182,7 @@ function MatchOdds({
                             }
                             active={
                               data?.runners?.[indexes]?.status
-                                .toLowerCase()
+                                ?.toLowerCase()
                                 ?.toLowerCase() !==
                               teamStatus.active?.toLowerCase()
                             }

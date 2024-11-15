@@ -1,6 +1,7 @@
+import { useState } from "react";
+import { formatNumber } from "../../../../../helpers";
+
 const WinBox = ({ odds, data }: any) => {
-  const min = odds?.[0]?.min;
-  const max = odds?.[0]?.max;
   const handleLock = (item: any) => {
     if (item?.gstatus != "ACTIVE" || item?.b1 === "0.00") {
       return true;
@@ -8,9 +9,19 @@ const WinBox = ({ odds, data }: any) => {
       return false;
     }
   };
+  const [openDivIds, setOpenDivIds] = useState<string[]>([]);
+
+  const toggleDiv = (id: string) => {
+    if (openDivIds.includes(id)) {
+      setOpenDivIds(openDivIds.filter((openId) => openId !== id));
+    } else {
+      setOpenDivIds([...openDivIds, id]);
+    }
+  };
+
   return (
     <>
-      <div className="winContainer">
+      <div className="winContainer title-14">
         <div className="subwinContainer">
           {odds?.map((item: any, index: number) => {
             return (
@@ -18,6 +29,21 @@ const WinBox = ({ odds, data }: any) => {
                 <div className="win-mainRateBox" key={index}>
                   <div>
                     <span className="f600">{item?.nat}</span>
+                    <span
+                      onClick={() => toggleDiv(`demo${index}`)}
+                      className="range-icon d-inline-block ms-1"
+                    >
+                      <i className="fas fa-info-circle float-right"></i>{" "}
+                      <div
+                        id={`demo${index}`}
+                        className={`icon-range-dt1day collapse ${
+                          openDivIds.includes(`demo${index}`) ? "show" : ""
+                        }`}
+                      >
+                        R:<span>{parseFloat(odds?.[0]?.min)}</span>-
+                        <span>{formatNumber(odds?.[0]?.max)}</span>
+                      </div>
+                    </span>
                   </div>
                   <div
                     className={`win-rateBox back-BackGround cursor-pointer flex-column ${
@@ -27,7 +53,7 @@ const WinBox = ({ odds, data }: any) => {
                     <span className="rate-box">{item?.b1}</span>{" "}
                   </div>
                   <span
-                    className={`casino-volume mt-0 f600 ${
+                    className={`casino-volume color-red mt-0 f600 ${
                       data?.profitLoss
                         ? data?.profitLoss[
                             `${data?.videoInfo?.mid}_${item?.sid}_card`
@@ -59,12 +85,6 @@ const WinBox = ({ odds, data }: any) => {
               </>
             );
           })}
-        </div>
-        <div style={{ width: "100%", textAlign: "end", padding: "5px" }}>
-          <span style={{ fontWeight: "bolder" }}>Min:</span>
-          <span>{min}</span>
-          <span style={{ fontWeight: "bolder", marginLeft: "10px" }}>Max:</span>
-          <span>{max}</span>
         </div>
       </div>
     </>

@@ -1,7 +1,8 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import { FaTrophy } from "react-icons/fa";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
+import ResultBetList from "../../../commonComponent/resultBetList";
+import Winner from "../../../commonComponent/trophyWinner";
 interface Props {
   data: {
     C1: string;
@@ -16,14 +17,14 @@ const Poker1DayResultComponent: React.FC<Props> = ({ data }: any) => {
     <Container
       style={{
         display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
+        flexDirection: "row",
         alignItems: "center",
+        padding: "20px",
       }}
     >
       <div
         style={{
-          width: "80%",
+          width: "30%",
           display: "flex",
           flexDirection: "row",
           justifyContent: "space-between",
@@ -38,16 +39,16 @@ const Poker1DayResultComponent: React.FC<Props> = ({ data }: any) => {
             alignItems: "center",
           }}
         >
-          {data?.result?.win === "11" && (
-            <div className="casino-winner-icon mt-3 p-2">
-              <FaTrophy size={40} color="#169733" />
-            </div>
-          )}
           <div style={{ display: "flex", flexDirection: "column" }}>
             <span className="title-18 f500">Player A</span>
             <div style={{ display: "flex", flexDirection: "row", gap: "5px" }}>
               <HandleCards card={resultCards?.[0]} />
               <HandleCards card={resultCards?.[1]} />
+              {data?.result?.win === "11" && (
+                <div className="casino-winner-icon mb-3">
+                  <Winner />
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -62,6 +63,7 @@ const Poker1DayResultComponent: React.FC<Props> = ({ data }: any) => {
             <span className="title-18 f500">Tie</span>
           </div>
         )}
+        <div className="casino-result-content-diveder"></div>
         <div
           style={{
             display: "flex",
@@ -75,13 +77,13 @@ const Poker1DayResultComponent: React.FC<Props> = ({ data }: any) => {
             <div style={{ display: "flex", flexDirection: "row", gap: "5px" }}>
               <HandleCards card={resultCards?.[2]} />
               <HandleCards card={resultCards?.[3]} />
+              {data?.result?.win === "21" && (
+                <div className="casino-winner-icon mb-3">
+                  <Winner />
+                </div>
+              )}
             </div>
           </div>
-          {data?.result?.win === "21" && (
-            <div className="casino-winner-icon mt-3 p-2">
-              <FaTrophy size={40} color="#169733" />
-            </div>
-          )}
         </div>
       </div>
       <div
@@ -89,15 +91,18 @@ const Poker1DayResultComponent: React.FC<Props> = ({ data }: any) => {
           display: "flex",
           flexDirection: "row",
           justifyContent: "center",
-          alignItems: "center",
+          alignItems: "end",
+          right: "0px",
+          position: "absolute",
+          padding: "20px",
         }}
       >
-        <div style={{ display: "flex", flexWrap: "wrap" }}>
-          <span className="title-18 f500 mb-4">Board</span>
+        <div style={{ display: "flex" }}>
+          <span className="title-18 f500 mb-4 ">Board</span>
           {lastCards?.map((item: any, index: number) => {
             return (
               <div
-                style={{ display: "flex", flexWrap: "wrap", gap: "5px" }}
+                style={{ display: "flex", flexDirection: "row", gap: "5px" }}
                 key={index}
               >
                 <HandleCards card={item} />
@@ -106,6 +111,11 @@ const Poker1DayResultComponent: React.FC<Props> = ({ data }: any) => {
           })}
         </div>
       </div>
+      {data?.bets?.count > 0 && (
+        <div className="w-100 m-2">
+          <ResultBetList bets={data?.bets?.rows} total={data?.bets?.count} />
+        </div>
+      )}
     </Container>
   );
 };

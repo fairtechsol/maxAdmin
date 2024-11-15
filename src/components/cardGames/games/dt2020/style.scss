@@ -60,13 +60,7 @@
   color: #000;
   margin-left: 10px;
 }
-.casino-winner-icon {
-  // font-size: 26px;
-  box-shadow: 0 0 0 #ffc742;
-  animation: winnerbox 1.5s infinite;
-  border-radius: 50%;
-  color: #169733;
-}
+
 // .match-list-tabs {
 //   border-right: 1px solid $secondary !important;
 //   border-radius: 0px !important;
@@ -183,7 +177,7 @@
   width: 100%;
   display: flex;
   flex-direction: row;
-  gap: 3%;
+  // gap: 3%;
 }
 .commonButtonBoxContainer {
   display: flex;
@@ -192,52 +186,10 @@
   align-items: center;
   gap: 3px;
 }
-.tiePairbtn-theme {
-  color: #fff !important;
-  background-image: linear-gradient(to right, #004a25, #ffc742) !important;
-  width: 100% !important;
-  border-radius: 4px !important;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-    0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2) !important;
-  border: 0 !important;
-  padding: 2px 8px !important;
-  cursor: pointer !important;
-  font-size: 16px !important;
-  font-weight: 600;
-  position: relative;
-  text-align: center;
-}
-.tiePairbtn-theme.suspended:after {
-  border-radius: 4px;
-}
-.suspended {
-  position: relative;
-}
-.suspended:after {
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.6);
-  color: #ffffff;
-  text-transform: uppercase;
-  font-family: "Font Awesome 5 Free";
-  content: "\f023";
-  font-weight: 900;
-  font-size: 18px;
-  top: 0;
-}
-.oddEvenContainer {
-  width: 50%;
-  background-color: #eee;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-}
+
+
+
+
 .cardContainer {
   width: 50%;
   background-color: #eee;
@@ -246,15 +198,7 @@
   flex-direction: column;
   justify-content: space-around;
 }
-.commonCardImgContainer {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 5px;
-  margin-top: 5px;
-}
+
 .horseRacingTabHeader {
   width: 100%;
   height: 10%;
@@ -263,10 +207,138 @@
   justify-content: space-between;
   padding: 6px 8px;
 }
+.dt20tie{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+.dt20pair{
+  width: 100%;
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  background-color: #434343;
+  justify-content: space-between;
+  align-items: center;
+  // padding: 0px 5px;
+  color: #fff;
+  border: 2px solid #0041a2;
+}
+.dt20dummy{
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  background-color: #03b37f;
+  color: #fff;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 10;
+}
+.dt20dummy2{
+  width: 50%;
+  // padding: 6px;
+  padding-right: 6px;
+  border: 2px solid var(--text-red);
+  background-color: #fc42422e;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 60px;
+  padding-right: 60px;
+  position: relative;
+  border: 2px solid #fc4242;
+}
+.dt20dummy3{
+  width: 50%;
+  // padding: 6px;
+  // padding-left: 6px;
+  border: 2px solid var(--text-fancy);
+  background-color:#fdcf132e;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 60px;
+  // padding-left: 60px;
+  position: relative;
+  border: 2px solid #fdcf13;
+}
 // .horseRacingTab .nav-link{
 //   margin: 0 !important;
 // }
 
+.icon-range-dt20 {
+  position: absolute;
+  // top: 100%;
+  background-color: #16191c;
+  padding: 4px;
+  width: 70px;
+  word-wrap: break-word;
+  font-size: 12px;
+  z-index: 10;
+  right: 0;
+  transition: 0.1s;
+  text-transform: capitalize;
+  color: #aaafb5;
+  z-index: 150;
+}
+
+.dt20bLock{
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background-color: #ffffffb8;
+  background-image: url(../../../../assets/baccarat/lock.svg);
+  background-size: 15px 15px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.dt20bLock2{
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background-color: #ffffffb8;
+  background-image: url(../../../../assets/baccarat/lock.svg);
+  background-size: 15px 15px;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 50%;
+}
+.dt20oddEvenContainer{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.g-back{
+  background-color: #dddddd;
+}
+.dt20OEbox{
+  width: 20%;
+  height: 45px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+  border: 2px solid #72bbef;
+  background-color: #fff;
+  position: relative;
+}
 @media (max-width: 768px) {
   .tabs-navs .nav-link {
     flex: 1 0 10%;

@@ -1,0 +1,84 @@
+.market-analysis-container {
+  margin-bottom: 10px;
+  margin-top: 10px;
+  box-shadow: 0 0 5px;
+}
+
+.market-analysis-title {
+  color: #fff;
+  background-color: #ffc742;
+  display: flex;
+  justify-content: space-between;
+  padding: 6px;
+  font-size: 16px;
+}
+
+.market-analysis-content {
+  padding: 10px 10px 0 10px;
+}
+
+.market-analysis-title a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.row.row5 {
+  margin-left: -5px;
+  margin-right: -5px;
+}
+
+.market-analysis-content-detail {
+  // max-height: 250px;
+  overflow: auto;
+  margin-bottom: 10px;
+}
+.simplebar-wrapper {
+  overflow: hidden;
+  width: inherit;
+  height: inherit;
+  max-width: inherit;
+  max-height: inherit;
+  line-height: 6px;
+  .table th {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+}
+
+.market-analysis-container .table {
+  background-color: transparent;
+  margin-bottom: 10px;
+}
+
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  color: #495057;
+}
+
+.market-analysis-container .table thead {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+  color: #fff;
+}
+
+.market-analysis-container .table th {
+  border: 1px solid #dee2e6;
+}
+
+.market-analysis-container .table td {
+  border: 0;
+}
+
+.table td {
+  font-size: 14px;
+  color: #1e1e1e;
+  vertical-align: middle;
+}
+.market-analysis-container .table thead th {
+  font-weight: bold;
+  font-size: 14px;
+  padding: 0.75rem;
+  color: #460bf3;
+  text-decoration: underline;
+  text-transform: uppercase;
+  vertical-align: bottom;
+}

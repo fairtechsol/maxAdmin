@@ -21,8 +21,10 @@ import {
 import { AppDispatch, RootState } from "../../../store/store";
 import {
   ApiConstants,
-  cardConstantsAccountStatement,
+  card2ConstantsAccountStatement,
+  gameConstantsAccountStatement,
 } from "../../../utils/Constants";
+// import isMobile from "../../../utils/screenDimension";
 
 interface Column {
   id: string;
@@ -35,7 +37,7 @@ const columns: Column[] = [
   { id: "credit", label: "Credit" },
   { id: "debit", label: "Debit" },
   { id: "closing", label: "Closing" },
-  { id: "description", label: "Remarks" },
+  { id: "description", label: "Description" },
   { id: "fromto", label: "Fromto" },
 ];
 
@@ -54,11 +56,13 @@ let sortConstant: any = {
 
 const AccountStatement = () => {
   const dispatch: AppDispatch = useDispatch();
-
+  const [excel, setExcel] = useState(false);
   const [dateFrom, setDateFrom] = useState<any>();
   const [dateTo, setDateTo] = useState<any>();
   const [firstTime, setFirstTime] = useState(false);
   const [selectedUser, setSelectedUser] = useState<any>(null);
+  const [selectedUserValue] = useState<any>("null");
+  const [tempUser, setTempUser] = useState<any>(false);
   const [userOptions, setUserOptions] = useState([]);
   const [keyword, setKeyword] = useState<any>("");
   const [page, setPage] = useState<any>(1);
@@ -98,37 +102,35 @@ const AccountStatement = () => {
   );
 
   const aaccountTypeOptions: Option[] = [
-    { value: "all", label: "All" },
-    { value: "balanceReport", label: "Balance Report" },
-    { value: "gameReport", label: "Game Report" },
+    // { value: "all", label: "All" },
+    { value: "balanceReport", label: "Deposite/Withdraw Report" },
+    { value: "gameReport", label: "Sport Report" },
+    { value: "casino", label: "Casino Reports" },
   ];
-
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 1199);
   const handleAccountTypeChange = (selectedOption: any) => {
     setSelectedOption1(selectedOption);
-    if (
-      selectedOption &&
-      (selectedOption as Option).value === "balanceReport"
-    ) {
+    if (selectedOption && selectedOption === "balanceReport") {
       setGameNameOptions([
-        { value: "all", label: "All" },
+        // { value: "all", label: "All" },
         { value: "upper", label: "Upper" },
         { value: "down", label: "Down" },
       ]);
-    } else if (
-      selectedOption &&
-      (selectedOption as Option).value === "gameReport"
-    ) {
-      setGameNameOptions(cardConstantsAccountStatement);
-    } else if (selectedOption && (selectedOption as Option).value === "all") {
-      setGameNameOptions([{ value: "all", label: "All" }]);
+    } else if (selectedOption && selectedOption === "gameReport") {
+      setGameNameOptions(gameConstantsAccountStatement);
+    } else if (selectedOption && selectedOption === "casino") {
+      setGameNameOptions(card2ConstantsAccountStatement);
+    } else if (selectedOption && selectedOption === "all") {
+      setGameNameOptions([]);
     } else {
       setGameNameOptions([]);
     }
     setGameNameValues(null);
   };
 
-  const handleGameNameChange = (selectedOption: any) => {
-    setGameNameValues(selectedOption);
+  const handleGameNameChange = (event: any) => {
+    const selectedValue = event.target.value;
+    setGameNameValues(selectedValue);
   };
 
   const debouncedInputValue = useMemo(() => {
@@ -143,20 +145,11 @@ const AccountStatement = () => {
   }, []);
   // const searchClientName = debounce(async (value: any) => {
   //   try {
-  //     dispatch(
-  //       searchList({
-  //         userName: value,
-  //         createdBy: userDetail?.id,
-  //       })
-  //     );
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // }, 500);
 
   const handleSubmit = (e: any) => {
     try {
       e.preventDefault();
+      setExcel(true);
       let filter = "";
       if (dateFrom && dateTo) {
         filter += `&createdAt=between${moment(new Date(dateFrom))?.format(
@@ -169,39 +162,27 @@ const AccountStatement = () => {
       } else if (dateTo) {
         filter += `&createdAt=lte${moment(dateTo)?.format("YYYY-MM-DD")}`;
       }
-      // if (selectedUser && selectedUser?.length > 0) {
-      //   filter += `&user.userName=${selectedUser[0]?.label}`;
-      // }
-      if (aaccountTypeValues && aaccountTypeValues?.value === "gameReport") {
-        filter += `&transType=inArr${JSON.stringify([
-          "win",
-          "loss",
-          // "bet",
-        ])}`;
-      } else if (
-        aaccountTypeValues &&
-        aaccountTypeValues?.value === "balanceReport"
+      if (aaccountTypeValues && aaccountTypeValues === "gameReport") {
+        filter += `&statementType=game&betId=notNull`;
+      } else if (aaccountTypeValues && aaccountTypeValues === "balanceReport") {
+        filter += `&statementType=addWithdraw`;
+      } else if (aaccountTypeValues && aaccountTypeValues === "casino") {
+        filter += `&statementType=game&betId=isNull`;
+      }
+      if (gameNameValues && aaccountTypeValues === "balanceReport") {
+        filter += `&gameName=${gameNameValues}`;
+      }
+      if (
+        gameNameValues &&
+        aaccountTypeValues !== "balanceReport" &&
+        gameNameValues !== "all"
       ) {
-        filter += `&transType=inArr${JSON.stringify([
-          "add",
-          "withDraw",
-          "creditReference",
-        ])}`;
-      }
-      if (gameNameValues && aaccountTypeValues?.value === "balanceReport") {
-        filter += `&gameName=${gameNameValues?.value}`;
-      }
-      if (gameNameValues && aaccountTypeValues?.value === "gameReport") {
-        if (gameNameValues?.value !== "all") {
-          filter += `&description=like%${gameNameValues?.value}/%`;
-        }
+        filter += `&description=like%${gameNameValues}/%`;
       }
       setCurrentPage(1);
       dispatch(
         getReportAccountList({
-          id: selectedUser
-            ? selectedUser[0]?.value
-            : localStorage.getItem("key"),
+          id: selectedUser ? selectedUser?.value : localStorage.getItem("key"),
           page: 1,
           limit: tableConfig?.rowPerPage,
           searchBy: "description",
@@ -235,32 +216,22 @@ const AccountStatement = () => {
       } else if (dateTo) {
         filter += `&createdAt=lte${moment(dateTo)?.format("YYYY-MM-DD")}`;
       }
-      // if (selectedUser && selectedUser?.length > 0) {
-      //   filter += `&user.userName=${selectedUser[0]?.label}`;
-      // }
-      if (aaccountTypeValues && aaccountTypeValues?.value === "gameReport") {
-        filter += `&transType=inArr${JSON.stringify([
-          "win",
-          "loss",
-          // "bet",
-        ])}`;
-      } else if (
-        aaccountTypeValues &&
-        aaccountTypeValues?.value === "balanceReport"
+      if (aaccountTypeValues && aaccountTypeValues === "gameReport") {
+        filter += `&statementType=game&betId=notNull`;
+      } else if (aaccountTypeValues && aaccountTypeValues === "balanceReport") {
+        filter += `&statementType=addWithdraw`;
+      } else if (aaccountTypeValues && aaccountTypeValues === "casino") {
+        filter += `&statementType=game&betId=isNull`;
+      }
+      if (gameNameValues && aaccountTypeValues === "balanceReport") {
+        filter += `&gameName=${gameNameValues}`;
+      }
+      if (
+        gameNameValues &&
+        aaccountTypeValues !== "balanceReport" &&
+        gameNameValues !== "all"
       ) {
-        filter += `&transType=inArr${JSON.stringify([
-          "add",
-          "withDraw",
-          "creditReference",
-        ])}`;
-      }
-      if (gameNameValues && aaccountTypeValues?.value === "balanceReport") {
-        filter += `&gameName=${gameNameValues?.value}`;
-      }
-      if (gameNameValues && aaccountTypeValues?.value === "gameReport") {
-        if (gameNameValues?.value !== "all") {
-          filter += `&description=like%${gameNameValues?.value}/%`;
-        }
+        filter += `&description=like%${gameNameValues}/%`;
       }
       dispatch(
         handleExport({
@@ -295,30 +266,22 @@ const AccountStatement = () => {
       } else if (dateTo) {
         filter += `&createdAt=lte${moment(dateTo)?.format("YYYY-MM-DD")}`;
       }
-      // if (selectedUser && selectedUser?.length > 0) {
-      //   filter += `&user.userName=${selectedUser[0]?.label}`;
-      // }
-      if (aaccountTypeValues && aaccountTypeValues?.value === "gameReport") {
-        filter += `&transType=inArr${JSON.stringify([
-          "win",
-          "loss",
-          // "bet",
-        ])}`;
-      } else if (
-        aaccountTypeValues &&
-        aaccountTypeValues?.value === "balanceReport"
+      if (aaccountTypeValues && aaccountTypeValues === "gameReport") {
+        filter += `&statementType=game&betId=notNull`;
+      } else if (aaccountTypeValues && aaccountTypeValues === "balanceReport") {
+        filter += `&statementType=addWithdraw`;
+      } else if (aaccountTypeValues && aaccountTypeValues === "casino") {
+        filter += `&statementType=game&betId=isNull`;
+      }
+      if (gameNameValues && aaccountTypeValues === "balanceReport") {
+        filter += `&gameName=${gameNameValues}`;
+      }
+      if (
+        gameNameValues &&
+        aaccountTypeValues !== "balanceReport" &&
+        gameNameValues !== "all"
       ) {
-        filter += `&transType=inArr${JSON.stringify([
-          "add",
-          "withDraw",
-          "creditReference",
-        ])}`;
-      }
-      if (gameNameValues && aaccountTypeValues?.value === "balanceReport") {
-        filter += `&gameName=${gameNameValues?.value}`;
-      }
-      if (gameNameValues && aaccountTypeValues?.value === "gameReport") {
-        filter += `&description=like%${gameNameValues?.value}/%`;
+        filter += `&description=like%${gameNameValues}/%`;
       }
 
       if (firstTime) {
@@ -326,6 +289,8 @@ const AccountStatement = () => {
           getReportAccountList({
             id: selectedUser
               ? selectedUser[0]?.value
+                ? selectedUser[0]?.value
+                : selectedUser?.value
               : localStorage.getItem("key"),
             page: tableConfig?.page,
             limit: tableConfig?.rowPerPage,
@@ -375,13 +340,54 @@ const AccountStatement = () => {
     }
   }, [searchListData]);
 
+  useEffect(() => {
+    const currentDate = new Date();
+    const formattedCurrentDate = currentDate.toISOString().split("T")[0]; // Format as YYYY-MM-DD
+
+    const pastDate = new Date();
+    pastDate.setDate(pastDate.getDate() - 7);
+    const formattedPastDate = pastDate.toISOString().split("T")[0]; // Format as YYYY-MM-DD
+
+    setDateFrom(formattedPastDate);
+    setDateTo(formattedCurrentDate);
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 1199);
+    };
+    // Add event listener to update isMobile on window resize
+    window.addEventListener("resize", handleResize);
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <div className="p-2 pt-0">
       <h5 className="title-22 fw-normal">Account Statement</h5>
       <Form onSubmit={handleSubmit}>
         <Row>
-          <Col md={2}>
-            <SelectSearch
+          <Col md={isMobile ? 12 : 2}>
+            <Form.Group controlId="accountTypeSelect">
+              <Form.Label>Account Type</Form.Label>
+              <Form.Select
+                value={aaccountTypeValues}
+                onChange={(event) =>
+                  handleAccountTypeChange(event.target.value)
+                }
+                aria-label="Account Type Select"
+              >
+                <option value="All">All</option>
+                {aaccountTypeOptions.map((option, index) => (
+                  <option key={index} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </Form.Select>
+            </Form.Group>
+            {/* <SelectSearch
               defaultValue="All"
               // options={options}
               placeholder="All"
@@ -389,26 +395,57 @@ const AccountStatement = () => {
               value={aaccountTypeValues}
               onChange={handleAccountTypeChange}
               options={aaccountTypeOptions}
-            />
+            /> */}
           </Col>
-          <Col md={2}>
-            <SelectSearch
+          <Col md={isMobile ? 12 : 2}>
+            <Form.Group controlId="gameNameSelect">
+              <Form.Label>
+                {aaccountTypeValues === "gameReport"
+                  ? "Sports List"
+                  : aaccountTypeValues === "casino"
+                  ? "Casino List"
+                  : "Game Name"}
+              </Form.Label>
+              <Form.Select
+                value={gameNameValues}
+                onChange={handleGameNameChange}
+                aria-label="Game Name Select"
+              >
+                <option value="all">All</option>
+                {gameNameOptions.map((option, index) => (
+                  <option key={index} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </Form.Select>
+            </Form.Group>
+            {/* <SelectSearch
               defaultValue="All"
-              label={"Game Name"}
+              label={
+                aaccountTypeValues === "gameReport"
+                  ? "Sports List"
+                  : aaccountTypeValues === "casino"
+                  ? "Casino List"
+                  : "Game Name"
+              }
               // options={options}
               placeholder={"All"}
               value={gameNameValues}
+              isSearchable={true}
               onChange={handleGameNameChange}
               options={gameNameOptions}
-            />
+            /> */}
           </Col>
-          <Col md={2}>
+          <Col md={isMobile ? 12 : 2}>
             <SelectSearch
               label={"Search By Client Name"}
               inputValue={inputValue}
               options={userOptions}
-              value={selectedUser}
+              value={tempUser ? selectedUserValue : selectedUser}
+              onBlur={() => setTempUser(false)}
+              onFocus={() => setTempUser(true)}
               onChange={(value: any) => {
+                setTempUser(false);
                 if (value?.length > 1) {
                   let newValue = value[1];
                   setSelectedUser([newValue]);
@@ -419,7 +456,7 @@ const AccountStatement = () => {
                 }
               }}
               placeholder={"Please enter 3 or more characters"}
-              isMultiOption={true}
+              isMultiOption={false}
               isSearchable={true}
               onInputChange={(value: any) => {
                 setInputValue(value);
@@ -427,7 +464,7 @@ const AccountStatement = () => {
               }}
             />
           </Col>
-          <Col md={2}>
+          <Col md={isMobile ? 12 : 2}>
             <CustomInput
               title={"From"}
               placeholder={""}
@@ -437,9 +474,10 @@ const AccountStatement = () => {
               }}
               type="date"
               bgColor="lightGray"
+              value={dateFrom}
             />
           </Col>
-          <Col md={2}>
+          <Col md={isMobile ? 12 : 2}>
             <CustomInput
               title={"To"}
               placeholder={""}
@@ -447,20 +485,21 @@ const AccountStatement = () => {
               customstyle={"mb-3"}
               type="date"
               bgColor="lightGray"
+              value={dateTo}
             />
           </Col>
-          <Col md={2}>
-            <Form.Label className="invisible d-block">dasd</Form.Label>
-            <CustomButton
-              type={"submit"}
-              onClick={() => {
-                setFirstTime(true);
-              }}
-            >
-              Load
-            </CustomButton>
-          </Col>
         </Row>
+        <Col md={2}>
+          <Form.Label className="invisible d-block">dasd</Form.Label>
+          <CustomButton
+            type={"submit"}
+            onClick={() => {
+              setFirstTime(true);
+            }}
+          >
+            Load
+          </CustomButton>
+        </Col>
       </Form>
       <CustomTable
         striped
@@ -475,7 +514,7 @@ const AccountStatement = () => {
             : 0
         }
         setTableConfig={setTableConfig}
-        enablePdfExcel={true}
+        enablePdfExcel={excel}
         handleReportExport={handleReportExport}
         tableConfig={tableConfig}
         currentPage={currentPage}

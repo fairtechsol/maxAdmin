@@ -1,8 +1,7 @@
-import { useState } from "react";
+
 import { Col, Container, Row, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import "./style.scss";
-import RulesModal from "../../../commonComponent/rulesModal";
 import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
 import {
   cardData,
@@ -15,11 +14,9 @@ import Crick5Result from "./cric5Card";
 import MarketComponent from "./marketComponent";
 import CardResultBox from "../../../commonComponent/cardResultBox";
 import UserBets from "../../../game/userBet";
-import { crick5rules } from "../../../../assets";
 import ScoreBoard from "../../../commonComponent/scoreBoard";
 
 const Cricket5Component = () => {
-  const [show, setShow] = useState(false);
 
   const { dragonTigerDetail, scoreBoardData } = useSelector(
     (state: RootState) => state.card
@@ -29,23 +26,12 @@ const Cricket5Component = () => {
     <>
       <Row>
         <Col md={8} className="five-cricket">
-          <div style={{ width: "100%", height: "400px", margin: "5px" }}>
+          <div style={{ width: "100%"}}>
             <div className="horseRacingTabHeader">
               <div>
                 <span style={{ fontSize: "16px", fontWeight: "600" }}>
                   {dragonTigerDetail?.name}
                 </span>
-                <a
-                  style={{
-                    fontSize: "14px",
-                    textDecoration: "underline",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => setShow(true)}
-                >
-                  {" "}
-                  RULES
-                </a>
               </div>
               <span>
                 {dragonTigerDetail?.videoInfo
@@ -54,29 +40,28 @@ const Cricket5Component = () => {
               </span>
             </div>
             <div>
-              {scoreBoardData?.data && (
-                <ScoreBoard data={scoreBoardData?.data} />
+              {scoreBoardData && (
+                <ScoreBoard data={scoreBoardData} />
               )}
             </div>
             <div
-              style={{ width: "100%", height: "90%", backgroundColor: "#000" }}
+              style={{ width: "100%", backgroundColor: "#000" }}
             >
               <VideoFrame
+                data={dragonTigerDetail}
                 time={dragonTigerDetail?.videoInfo?.autotime}
                 result={<Crick5Result data={dragonTigerDetail?.videoInfo} />}
                 id={`${cardUrl}${cardGamesId?.cricketv3}`}
               />
             </div>
           </div>
-          <div style={{ height: "350px" }}>
-            <div style={{ marginTop: "7rem" }}>
+          <div>
               <MarketComponent
                 odds={dragonTigerDetail?.odds}
                 min={dragonTigerDetail?.videoInfo?.min}
                 max={dragonTigerDetail?.videoInfo?.max}
                 data={dragonTigerDetail}
               />
-            </div>
             <div className="mt-2">
               <CardResultBox
                 data={dragonTigerDetail}
@@ -94,9 +79,9 @@ const Cricket5Component = () => {
               </Col>
               <Col>
                 <div className="casino-title" style={{ position: "relative" }}>
-                  <span>Rules</span>
+                  {/* <span>Rules</span> */}
                 </div>
-                <div className="table-responsive rules-table d-flex">
+                <div className="table-responsive rules-table d-flex lh-1">
                   {cardData?.map((teamData, index) => (
                     <Table bordered key={index} className="mb-4">
                       <thead>
@@ -143,7 +128,6 @@ const Cricket5Component = () => {
                     </Table>
                   ))}
                 </div>
-                <RulesModal show={show} setShow={setShow} rule={crick5rules} />
               </Col>
             </Row>
           </Container>

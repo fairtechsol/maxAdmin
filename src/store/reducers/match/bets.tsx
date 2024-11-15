@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   getMatchLockAllChild,
   getMorePlacedBets,
+  getMorePlacedBetsReset,
   getPlacedBets,
   getRunAmount,
   getUserDetailsForParent,
@@ -72,6 +73,9 @@ const placedBetsSlice = createSlice({
       .addCase(getMorePlacedBets.rejected, (state, action) => {
         state.loading = false;
         state.error = action?.error?.message;
+      })
+      .addCase(getMorePlacedBetsReset, (state) => {
+        state.morePlacedBets = [];
       })
       .addCase(getRunAmount.pending, (state) => {
         state.loading = true;
@@ -151,12 +155,17 @@ const placedBetsSlice = createSlice({
         state.error = action?.error?.message;
       })
       .addCase(updateBetsPlaced.fulfilled, (state, action) => {
-        const { newBet, userName } = action.payload;
+        const {newBet,userName} = action.payload;
+        // const {userName,betId} = action.payload?.newBet;
+        // const betId = action.payload?.betId;
 
         const isBetAlreadyPlaced = state.placedBets?.some(
           (item: any) => item?.id === newBet?.betId
         );
         if (!isBetAlreadyPlaced) {
+          // state.placedBets = [action.payload, ...state.placedBets];
+          // const betEntry = {...action.payload,user:{userName}};
+          // console.log(betEntry,'first');
           state.placedBets = [
             { ...newBet, user: { userName } },
             ...state.placedBets,

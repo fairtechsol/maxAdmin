@@ -1,7 +1,8 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import { FaTrophy } from "react-icons/fa";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
+import ResultBetList from "../../../commonComponent/resultBetList";
+import Winner from "../../../commonComponent/trophyWinner";
 import "./style.scss";
 interface Props {
   data: {
@@ -69,11 +70,8 @@ const Teen1DResultComponent: React.FC<Props> = ({ data }: any) => {
               <HandleCards card={playerA?.[2]} />
             </div>
             {data?.result?.win === "1" && (
-              <div
-                className="casino-winner-icon ml-5"
-                style={{ marginLeft: "5px" }}
-              >
-                <FaTrophy size={30} color="#169733" />
+              <div className="casino-winner-icon ms-1">
+                <Winner />
               </div>
             )}
           </div>
@@ -114,16 +112,18 @@ const Teen1DResultComponent: React.FC<Props> = ({ data }: any) => {
               <HandleCards card={playerB?.[2]} />
             </div>
             {data?.result?.win === "2" && (
-              <div
-                className="casino-winner-icon ml-2 ml-md-5"
-                style={{ marginLeft: "5px" }}
-              >
-                <FaTrophy size={30} color="#169733" />
+              <div className="casino-winner-icon ms-1">
+                <Winner />
               </div>
             )}
           </div>
         </div>
       </div>
+      {data?.bets?.count > 0 && (
+        <div className="w-100 m-2">
+          <ResultBetList bets={data?.bets?.rows} total={data?.bets?.count} />
+        </div>
+      )}
     </Container>
   );
 };

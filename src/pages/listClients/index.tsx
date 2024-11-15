@@ -38,7 +38,7 @@ const ListClent: React.FC = () => {
   const [tableConfig, setTableConfig] = useState<TableConfig | null>({
     page: 1,
     sort: { direction: "ASC", key: null },
-    rowPerPage: 10,
+    rowPerPage: 25,
     keyword: "",
   });
   const [eventDetails, setEventDetails] = useState({
@@ -102,6 +102,7 @@ const ListClent: React.FC = () => {
           sort: "user.createdAt",
           order: "DESC",
           name: "Users List",
+          activeTab: "active",
         })
       );
     }
@@ -112,15 +113,16 @@ const ListClent: React.FC = () => {
       dispatch(
         getUsers({
           userId: id,
-          // page: tableConfig?.page || 1,
-          // limit: tableConfig?.rowPerPage,
+          page: tableConfig?.page || 1,
+          limit: tableConfig?.rowPerPage,
           userName: keyWord,
           sort: "user.createdAt",
           order: "DESC",
+          activeTab: "active",
         })
       );
     }
-  }, [keyWord, id]);
+  }, [keyWord, id, tableConfig?.rowPerPage, tableConfig?.page]);
 
   useEffect(() => {
     dispatch(getTotalBalance());
@@ -160,7 +162,7 @@ const ListClent: React.FC = () => {
               setTableConfig={setTableConfig}
               enablePdfExcel={true}
               isSearch={true}
-              isPagination={false}
+              isPagination={true}
               handleReportExport={handleReportExport}
               tableConfig={tableConfig}
               // isSort={true}

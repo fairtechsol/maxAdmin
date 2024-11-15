@@ -20,7 +20,17 @@ const initialValues: any = {
   transactionPassword: "",
 };
 
-const Credit = ({ userData, setShow }: any) => {
+const Credit = ({
+  userData,
+  setShow,
+  userId,
+  page,
+  limit,
+  userName,
+  sort,
+  order,
+  activeTab,
+}: any) => {
   const dispatch: AppDispatch = useDispatch();
 
   const { modalSuccess, loading } = useSelector(
@@ -53,7 +63,17 @@ const Credit = ({ userData, setShow }: any) => {
   useEffect(() => {
     if (modalSuccess) {
       setShow(false);
-      dispatch(getUsers());
+      dispatch(
+        getUsers({
+          userId: userId,
+          page: page,
+          limit: limit,
+          userName: userName,
+          sort: sort,
+          order: order,
+          activeTab: activeTab,
+        })
+      );
       dispatch(getUsersProfile());
       dispatch(accountListModalReset());
     }
@@ -79,7 +99,7 @@ const Credit = ({ userData, setShow }: any) => {
                   customstyle="input-box"
                   bgColor="gray"
                   disabled={true}
-                // id="oldCreditInput"
+                  // id="oldCreditInput"
                 />
               </Col>
             </Row>
@@ -119,7 +139,8 @@ const Credit = ({ userData, setShow }: any) => {
                   onChange={handleChange}
                   type="password"
                   customstyle="input-box"
-                // id="transactionPasswordInput"
+                  textAlign="left"
+                  // id="transactionPasswordInput"
                 />
               </Col>
             </Row>

@@ -3,7 +3,7 @@ import OddButtonBox from "../OddButtonBox";
 const OddEven = ({ card, odds, data }: any) => {
   return (
     <>
-      <div className="oddEvenContainer">
+      <div className="oddEvenContainer-ab2">
         {card ? (
           <>
             {" "}

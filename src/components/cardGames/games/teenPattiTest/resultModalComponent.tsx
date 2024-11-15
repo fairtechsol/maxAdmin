@@ -1,8 +1,9 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import { FaTrophy } from "react-icons/fa";
-import "./style.scss";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
+import ResultBetList from "../../../commonComponent/resultBetList";
+import Winner from "../../../commonComponent/trophyWinner";
+import "./style.scss";
 interface Props {
   data: {
     C1: string;
@@ -23,7 +24,7 @@ const TeenTestResultComponent: React.FC<Props> = ({ data }: any) => {
   return (
     <Container style={{ display: "flex", flexDirection: "column" }}>
       <div
-        className="flex-row justify-content-around"
+        className="flex-row justify-content-around mb-5"
         style={{ display: "flex" }}
       >
         <div className="teen20resultCardContainer mb-3">
@@ -34,8 +35,8 @@ const TeenTestResultComponent: React.FC<Props> = ({ data }: any) => {
             }
           >
             {data?.result?.win === "11" && (
-              <div className="casino-winner-icon">
-                <FaTrophy size={30} color="#169733" />
+              <div className="casino-winner-icon ">
+                <Winner />
               </div>
             )}
             <div
@@ -80,8 +81,8 @@ const TeenTestResultComponent: React.FC<Props> = ({ data }: any) => {
             }
           >
             {data?.result?.win === "21" && (
-              <div className="casino-winner-icon" style={{ marginLeft: "9px" }}>
-                <FaTrophy size={30} color="#169733" />
+              <div className="casino-winner-icon ">
+                <Winner />
               </div>
             )}
             <div
@@ -122,8 +123,8 @@ const TeenTestResultComponent: React.FC<Props> = ({ data }: any) => {
             }
           >
             {data?.result?.win === "31" && (
-              <div className="casino-winner-icon" style={{ marginLeft: "9px" }}>
-                <FaTrophy size={30} color="#169733" />
+              <div className="casino-winner-icon ">
+                <Winner />
               </div>
             )}
             <div
@@ -156,6 +157,11 @@ const TeenTestResultComponent: React.FC<Props> = ({ data }: any) => {
           </div>
         </div>
       </div>
+      {data?.bets?.count > 0 && (
+        <div className="w-100 m-2">
+          <ResultBetList bets={data?.bets?.rows} total={data?.bets?.count} />
+        </div>
+      )}
     </Container>
   );
 };

@@ -1,6 +1,7 @@
 import { Container } from "react-bootstrap";
-import { FaTrophy } from "react-icons/fa";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
+import ResultBetList from "../../../commonComponent/resultBetList";
+import Winner from "../../../commonComponent/trophyWinner";
 import "./style.scss";
 
 const DragonTigerOneDayResultComponent: any = ({ data }: any) => {
@@ -13,90 +14,107 @@ const DragonTigerOneDayResultComponent: any = ({ data }: any) => {
   const tigerCard = tigerData?.[2];
 
   return (
-    <Container style={{ display: "flex", flexDirection: "column" }}>
-      <div className="dt20resultModal">
-        <div className="dt20resultCardContainer">
-          <span className="fs-5">Dragon</span>
-          <div
-            className={
-              "d-sm-flex flex-row justify-content-center align-items-center"
-            }
-          >
-            {data?.result?.win === "1" && (
-              <div className="casino-winner-icon">
-                <FaTrophy size={30} color="#169733" />
-              </div>
-            )}
+    <Container
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        paddingBottom: "20px",
+      }}
+    >
+      <div style={{ display: "flex" }}>
+        <div className="dt20resultModal">
+          <div className="dt20resultCardContainer">
+            <span className="fs-5">Dragon</span>
             <div
-              style={{
-                border: "1px solid #fdef34",
-                borderRadius: "1px",
-                marginLeft: "5px",
-              }}
+              className={
+                "d-sm-flex flex-row justify-content-center align-items-center"
+              }
             >
-              <HandleCards card={resultCards?.[0]} />
+              {data?.result?.win === "1" && (
+                <div className="casino-winner-icon">
+                  <Winner />
+                </div>
+              )}
+              <div
+                style={{
+                  border: "1px solid #fdef34",
+                  borderRadius: "1px",
+                  marginLeft: "5px",
+                }}
+              >
+                <HandleCards card={resultCards?.[0]} />
+              </div>
+            </div>
+          </div>
+          <div
+            className="dt20resultCardContainer"
+            style={{ borderLeft: "2px solid #dddddd" }}
+          >
+            <span className="fs-5">Tiger</span>
+            <div
+              className={
+                "d-sm-flex flex-row justify-content-center align-items-center"
+              }
+            >
+              <div
+                style={{
+                  border: "1px solid #fdef34",
+                  borderRadius: "1px",
+                  marginLeft: "5px",
+                }}
+              >
+                <HandleCards card={resultCards?.[1]} />
+              </div>
+              {data?.result?.win === "2" && (
+                <div className="casino-winner-icon mb-5 ms-2">
+                  <Winner />
+                </div>
+              )}
             </div>
           </div>
         </div>
-        <div className="dt20resultCardContainer">
-          <span className="fs-5">Tiger</span>
+
+        <div className="w-100 d-sm-flex justify-content-center align-items-center mt-2">
           <div
             className={
-              "d-sm-flex flex-row justify-content-center align-items-center"
+              "w-90 d-sm-flex flex-sm-column justify-content-center align-items-center p-2 mb-2"
             }
+            style={{ boxShadow: "0 0 4px -1px" }}
           >
-            {data?.result?.win === "2" && (
-              <div className="casino-winner-icon">
-                <FaTrophy size={30} color="#169733" />
-              </div>
-            )}
-            <div
-              style={{
-                border: "1px solid #fdef34",
-                borderRadius: "1px",
-                marginLeft: "5px",
-              }}
-            >
-              <HandleCards card={resultCards?.[1]} />
+            <div className="d-sm-flex flex-sm-row">
+              <span className="dt20CommonTextd">Winner</span>
+              <span className="dt20CommonText-2d">{resultData?.[0]}</span>
+            </div>
+            <div className="d-sm-flex flex-sm-row">
+              <span className="dt20CommonTextd">Pair</span>
+              <span className="dt20CommonText-2d">{resultData?.[1]}</span>
+            </div>
+            <div className="d-sm-flex flex-sm-row">
+              <span className="dt20CommonTextd">Odd/Even</span>
+              <span className="dt20CommonText-2d">
+                D : {dragonData?.[1]} | T : {tigerData?.[1]}
+              </span>
+            </div>
+            <div className="d-sm-flex flex-sm-row">
+              <span className="dt20CommonTextd">Color</span>
+              <span className="dt20CommonText-2d">
+                D : {dragonData?.[0]} | T : {tigerData?.[0]}
+              </span>
+            </div>
+            <div className="d-sm-flex flex-sm-row">
+              <span className="dt20CommonTextd">Card</span>
+              <span className="dt20CommonText-2d">
+                D : {dragonCard} | T : {tigerCard}
+              </span>
             </div>
           </div>
         </div>
       </div>
-      <div className="w-100 d-sm-flex justify-content-center align-items-center mt-2">
-        <div
-          className={
-            "w-50 d-sm-flex flex-sm-column justify-content-center align-items-center p-4 mb-2"
-          }
-          style={{ boxShadow: "0 0 4px -1px" }}
-        >
-          <div className="d-sm-flex flex-sm-row">
-            <span className="dt20CommonText">Winner</span>
-            <span className="dt20CommonText-2">{resultData?.[0]}</span>
-          </div>
-          <div className="d-sm-flex flex-sm-row">
-            <span className="dt20CommonText">Pair</span>
-            <span className="dt20CommonText-2">{resultData?.[1]}</span>
-          </div>
-          <div className="d-sm-flex flex-sm-row">
-            <span className="dt20CommonText">Odd/Even</span>
-            <span className="dt20CommonText-2">
-              D : {dragonData?.[1]} | T : {tigerData?.[1]}
-            </span>
-          </div>
-          <div className="d-sm-flex flex-sm-row">
-            <span className="dt20CommonText">Color</span>
-            <span className="dt20CommonText-2">
-              D : {dragonData?.[0]} | T : {tigerData?.[0]}
-            </span>
-          </div>
-          <div className="d-sm-flex flex-sm-row">
-            <span className="dt20CommonText">Card</span>
-            <span className="dt20CommonText-2">
-              D : {dragonCard} | T : {tigerCard}
-            </span>
-          </div>
+      {data?.bets?.count > 0 && (
+        <div className="w-100 m-2">
+          <ResultBetList bets={data?.bets?.rows} total={data?.bets?.count} />
         </div>
-      </div>
+      )}
     </Container>
   );
 };

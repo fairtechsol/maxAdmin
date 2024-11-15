@@ -1,3 +1,4 @@
+import { formatNumber } from "../../../../../helpers";
 import PlayerButton from "../PlayerButton";
 
 const TiePairBox = ({ lowHigh, data }: any) => {
@@ -66,11 +67,9 @@ const TiePairBox = ({ lowHigh, data }: any) => {
           data={lowHigh?.[2]}
         />
       </div>
-      <div style={{ textAlign: "end", width: "100%" }}>
-        <span style={{ fontWeight: "bolder" }}>Min:</span>
-        <span>{min}</span>
-        <span style={{ fontWeight: "bolder", marginLeft: "10px" }}>Max:</span>
-        <span>{max}</span>
+      <div className="title-12" style={{ textAlign: "end", width: "100%" }}>
+        <span>R:</span>
+        <span>{min}</span>-<span>{formatNumber(max)}</span>
       </div>
     </div>
   );

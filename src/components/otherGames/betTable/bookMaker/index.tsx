@@ -66,7 +66,7 @@ function BookmakerTable({
                       <span
                         className={`title-14 ${
                           matchDetails?.profitLossDataMatch?.[
-                            `team${item}Rate`
+                            `team${item}Rate_${matchDetails?.id}`
                           ] < 0
                             ? "color-red"
                             : "color-green"
@@ -74,7 +74,7 @@ function BookmakerTable({
                       >
                         {parseFloat(
                           matchDetails?.profitLossDataMatch?.[
-                            `team${item}Rate`
+                            `team${item}Rate_${matchDetails?.id}`
                           ] ?? 0
                         ).toFixed(2)}
                       </span>
@@ -93,8 +93,15 @@ function BookmakerTable({
                           style={{ width: "60px" }}
                           key={index}
                           // customClass={`bookmaker-bet-place W-100`}
+                          customClass="match-odd-bet-place-box"
                           bgColor={`blue${index + 1}`}
-                          rate={data[`backTeam${item}`] - 2 + index}
+                          rate={
+                            (index === 2
+                              ? data[`backTeam${item}`]
+                              : Math.floor(data[`backTeam${item}`])) -
+                            2 +
+                            index
+                          }
                           active={
                             data?.[`statusTeam${item}`] !== teamStatus.active
                           }
@@ -108,8 +115,13 @@ function BookmakerTable({
                           key={index}
                           //     customClass={`bookmaker-bet-place  ""
                           // `}
+                          customClass="match-odd-bet-place-box"
                           bgColor={`red${index + 1}`}
-                          rate={data[`layTeam${item}`] + index}
+                          rate={
+                            (index === 0
+                              ? data[`layTeam${item}`]
+                              : Math.floor(data[`layTeam${item}`])) + index
+                          }
                           active={
                             data?.[`statusTeam${item}`] !== teamStatus.active
                           }

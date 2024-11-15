@@ -1,7 +1,8 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import { FaTrophy } from "react-icons/fa";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
+import ResultBetList from "../../../commonComponent/resultBetList";
+import Winner from "../../../commonComponent/trophyWinner";
 import "./style.scss";
 interface Props {
   data: {
@@ -16,76 +17,72 @@ const DragonTigerLionResultComponent: React.FC<Props> = ({ data }: any) => {
   return (
     <Container style={{ display: "flex", flexDirection: "column" }}>
       <div className="dt20resultModal mb-3">
-        <div className="dt20resultCardContainer">
+        <div className="d-flex row">
           <span className="fs-5">Dragon</span>
-          <div
-            className={
-              "d-sm-flex flex-row justify-content-center align-items-center"
-            }
-          >
-            {data?.result?.win === "1" && (
-              <div className="casino-winner-icon">
-                <FaTrophy size={30} color="#169733" />
-              </div>
-            )}
+          <div className={"d-sm-flex flex-row"}>
             <div
               style={{
-                border: "1px solid #fdef34",
                 borderRadius: "1px",
                 marginLeft: "5px",
+                display: "flex",
+                gap: 10,
               }}
             >
               <HandleCards card={resultCards?.[0]} />
+              {data?.result?.win === "1" && (
+                <div className="casino-winner-icon">
+                  <Winner />
+                </div>
+              )}
             </div>
           </div>
         </div>
-        <div className="dt20resultCardContainer">
+        <div className="d-flex row ">
           <span className="fs-5">Tiger</span>
-          <div
-            className={
-              "d-sm-flex flex-row justify-content-center align-items-center"
-            }
-          >
-            {data?.result?.win === "21" && (
-              <div className="casino-winner-icon">
-                <FaTrophy size={30} color="#169733" />
-              </div>
-            )}
+          <div className={"d-sm-flex flex-row position-relative"}>
             <div
               style={{
-                border: "1px solid #fdef34",
+                display: "flex",
+                gap: 10,
                 borderRadius: "1px",
                 marginLeft: "5px",
               }}
             >
               <HandleCards card={resultCards?.[1]} />
+              {data?.result?.win === "21" && (
+                <div className="casino-winner-icon">
+                  <Winner />
+                </div>
+              )}
             </div>
           </div>
         </div>
-        <div className="dt20resultCardContainer">
+        <div className="d-flex row ">
           <span className="fs-5">Lion</span>
-          <div
-            className={
-              "d-sm-flex flex-row justify-content-center align-items-center"
-            }
-          >
-            {data?.result?.win === "41" && (
-              <div className="casino-winner-icon">
-                <FaTrophy size={30} color="#169733" />
-              </div>
-            )}
+          <div className={"d-sm-flex flex-row position-relative"}>
             <div
               style={{
-                border: "1px solid #fdef34",
+                display: "flex",
+                gap: 10,
                 borderRadius: "1px",
                 marginLeft: "5px",
               }}
             >
               <HandleCards card={resultCards?.[2]} />
+              {data?.result?.win === "41" && (
+                <div className="casino-winner-icon">
+                  <Winner />
+                </div>
+              )}
             </div>
           </div>
         </div>
       </div>
+      {data?.bets?.count > 0 && (
+        <div className="w-100 m-2">
+          <ResultBetList bets={data?.bets?.rows} total={data?.bets?.count} />
+        </div>
+      )}
     </Container>
   );
 };

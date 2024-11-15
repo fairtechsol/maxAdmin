@@ -165,29 +165,8 @@
   line-height: 1.2;
   cursor: pointer;
 }
-.tiePairbtn-theme {
-  color: #fff !important;
-  background-image: linear-gradient(to right, #004a25, #ffc742) !important;
-  width: 100% !important;
-  border-radius: 4px !important;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-    0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2) !important;
-  border: 0 !important;
-  padding: 2px 8px !important;
-  cursor: pointer !important;
-  font-size: 16px !important;
-  font-weight: 600;
-  position: relative;
-  text-align: center;
-}
-.oddEvenContainer {
-  width: 50%;
-  background-color: #eee;
-  padding-top: 5px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-}
+
+
 .cardContainer {
   width: 100%;
   background-color: #eee;
@@ -196,24 +175,14 @@
   flex-direction: column;
   justify-content: space-around;
 }
-.abjcardContainer {
-  width: 100%;
-  // background-color: #eee;
-  // padding: 10px;
+.abjcardContainer-abj {
+  width: 49%;
   display: flex;
-  flex-direction: row;
-  // justify-content: space-around;
-}
-.commonCardImgContainer {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  padding: 10px;
   justify-content: center;
-  gap: 5px;
-  cursor: pointer;
-  // margin-top: 5px;
+  flex-wrap: wrap;
 }
+
 
 .commonButtonBoxContainerOdd {
   width: 50%;
@@ -246,24 +215,7 @@
 .align-center {
   align-items: center;
 }
-.suspended:after {
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.6);
-  color: #ffffff;
-  text-transform: uppercase;
-  font-family: "Font Awesome 5 Free";
-  content: "\f023";
-  font-weight: 900;
-  font-size: 18px;
-  top: 0;
-  z-index: 10;
-}
+
 .abjresultModal{
   display: flex;
   flex-direction: row;
@@ -283,22 +235,13 @@
   justify-content: space-around;
   align-items: center;
 }
-.casino-winner-icon{
-  // font-size: 26px;
-  box-shadow: 0 0 0 #FFC742;
-  animation: winnerbox 1.5s infinite;;
-  border-radius: 50%;
-  color: #169733;
-}
-// .horseRacingTab .nav-link{
-//   margin: 0 !important;
-// }
+
 
 .ticker-container {
   width: 100%;
   overflow: hidden;
   background: #f7f7f7;
-  border: 1px solid #ddd;
+  // border: 1px solid #ddd;
 }
 
 .ticker-wrap {

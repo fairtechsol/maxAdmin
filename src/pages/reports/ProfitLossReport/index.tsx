@@ -45,11 +45,10 @@ const ProfitLossReport = () => {
   });
   const [profitLossModalShow, setProfitLossModalShow] = useState(false);
   const [selectedUser, setSelectedUser] = useState<any>([]);
-  const [fromDate, setFromDate] = useState<any>();
-  const [toDate, setToDate] = useState<any>();
   const [userOptions, setUserOptions] = useState([]);
   const [inputValue, setInputValue] = useState("");
-
+  const [dateFrom, setDateFrom] = useState<any>();
+  const [dateTo, setDateTo] = useState<any>();
   const { userDetail } = useSelector((state: RootState) => state.user.profile);
   const { searchListData } = useSelector(
     (state: RootState) => state.user.userList
@@ -58,18 +57,19 @@ const ProfitLossReport = () => {
     (state: RootState) => state.match.reportList
   );
 
-  // const searchClientName = debounce(async (value: any) => {
-  //   try {
-  //     dispatch(
-  //       searchList({
-  //         userName: value,
-  //         createdBy: userDetail?.id,
-  //       })
-  //     );
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // }, 500);
+  useEffect(() => {
+  
+    const currentDate = new Date();
+    const formattedCurrentDate = currentDate.toISOString().split("T")[0];
+
+    const pastDate = new Date();
+    pastDate.setDate(pastDate.getDate() - 7);
+    const formattedPastDate = pastDate.toISOString().split("T")[0];
+
+
+    setDateFrom(formattedPastDate);
+    setDateTo(formattedCurrentDate);
+  }, []);
 
   const debouncedInputValue = useMemo(() => {
     return debounce((value) => {
@@ -84,10 +84,10 @@ const ProfitLossReport = () => {
 
   useEffect(() => {
     let payload: any = {
-      startDate: fromDate ? fromDate : "",
-      endDate: toDate
+      startDate: dateFrom ? dateFrom : "",
+      endDate: dateTo
         ? moment(
-            new Date(toDate).setDate(new Date(toDate).getDate() + 1)
+            new Date(dateTo).setDate(new Date(dateTo).getDate() + 1)
           ).format("YYYY-MM-DD")
         : "",
       page: tableConfig?.page,
@@ -121,10 +121,10 @@ const ProfitLossReport = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
     let payload: any = {
-      startDate: fromDate ? fromDate : "",
-      endDate: toDate
+      startDate: dateFrom ? dateFrom : "",
+      endDate: dateTo
         ? moment(
-            new Date(toDate).setDate(new Date(toDate).getDate() + 1)
+            new Date(dateTo).setDate(new Date(dateTo).getDate() + 1)
           ).format("YYYY-MM-DD")
         : "",
       page: 1,
@@ -184,8 +184,8 @@ const ProfitLossReport = () => {
             <CustomInput
               title={"From"}
               placeholder={""}
-              value={fromDate}
-              onChange={(e: any) => setFromDate(e.target.value)}
+              value={dateFrom}
+              onChange={(e: any) => setDateFrom(e.target.value)}
               // customstyle={"mb-3"}
               type="date"
             />
@@ -194,9 +194,9 @@ const ProfitLossReport = () => {
             <CustomInput
               title={"To"}
               placeholder={""}
-              value={toDate}
+              value={dateTo}
               // customstyle={"mb-3"}
-              onChange={(e: any) => setToDate(e.target.value)}
+              onChange={(e: any) => setDateTo(e.target.value)}
               type="date"
             />
           </Col>

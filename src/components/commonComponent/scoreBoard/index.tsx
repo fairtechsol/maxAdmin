@@ -4,7 +4,7 @@ import "./style.scss";
 import isMobile from "../../../utils/screenDimension";
 
 const ScoreBoard = ({ data }: any) => {
-  console.log(data);
+  // console.log(data);
   return (
     <Container className="scorecard mb-1">
       <Row>

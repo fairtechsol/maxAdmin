@@ -33,12 +33,12 @@ function BackLayBox({
       } bg-${bgColor}`}
       style={{ ...inlineStyle }}
     >
-      <BetStatusOverlay active={parseInt(rate || 0) <= 0 && !active}>
+      <BetStatusOverlay >
         <div
           className={`backLayBox text-center d-flex flex-column cursor-pointer`}
         >
           <h5 className="backLay-rate f600 title-16 m-0">
-            {parseInt(rate || 0) <= 0 || active ? "-" : rate}{" "}
+            {parseInt(rate || 0) <= 0 || active ? "-" : rate}
           </h5>
           {percent && (
             <span className="backLay-percent title-10">{percent}</span>

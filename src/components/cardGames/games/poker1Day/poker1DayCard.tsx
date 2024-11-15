@@ -6,7 +6,7 @@ const Poker1DayResult: any = ({ data }: any) => {
   return (
     data?.mid != "0" && (
       <Container>
-        <Row>
+        {/* <Row>
           <Col>
             <span
               style={{
@@ -35,7 +35,7 @@ const Poker1DayResult: any = ({ data }: any) => {
               <HandleCards card={data?.C4} />
             </div>
           </Col>
-        </Row>
+        </Row> */}
         <Row>
           <Col>
             <span

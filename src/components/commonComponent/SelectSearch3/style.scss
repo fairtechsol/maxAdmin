@@ -1,0 +1,91 @@
+/* Hide the default radio button */
+.custom-control-input {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+}
+
+/* Custom circle for the radio button */
+.custom-control-label::before {
+  content: "";
+  display: inline-block;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px; /* Space between radio and label */
+  border-radius: 50%;
+  border: 2px solid #007bff; /* Blue border */
+  background-color: transparent;
+  transition: background-color 0.2s ease;
+  top: 2px; /* Aligns the circle properly with text */
+}
+
+/* This ensures a blue dot appears inside the radio button when checked */
+.custom-control-input:checked ~ .custom-control-label::before {
+  background-color: #007bff; /* Blue dot */
+  border-color: #007bff;
+  box-shadow: inset 0 0 0 6px white; /* Create inner white space for the dot */
+}
+
+/* Optional: styling the label for better alignment */
+.custom-control-label {
+  position: relative;
+  cursor: pointer;
+  padding-left: 30px; /* Spacing for the radio button */
+}
+
+.custom-radio-group2 {
+  display: flex;
+}
+
+.custom-radio2 {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-bottom: 10px;
+  font-size: 14px;
+  position: relative;
+  padding-left: 20px;
+  margin-left: 15px;
+}
+
+.custom-radio2 input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.custom-radio2 .custom-radio-checkmark2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 14px;
+  width: 14px;
+  background-color: #fff;
+  border-radius: 50%;
+  border: 1px solid #310b97;
+  transition: background-color 0.2s ease;
+}
+
+.custom-radio2 input[type="radio"]:checked ~ .custom-radio-checkmark2 {
+  background-color: #fff;
+}
+
+.custom-radio2 .custom-radio-checkmark2::after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.custom-radio2 input[type="radio"]:checked ~ .custom-radio-checkmark2::after {
+  display: block;
+}
+
+.custom-radio2 .custom-radio-checkmark2::after {
+  top: 0.2rem;
+  left: 0.2rem;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgb(19, 2, 82);
+}

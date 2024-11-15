@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  casinoMeterPattiMatchRates,
   casinoScoreboardMatchRates,
   casinoWarMatchRates,
   getDragonTigerDetailHorseRacing,
@@ -13,6 +14,7 @@ import {
   updateAmarAkbarAnthonyCardMatchRates,
   updateBaccarat1Rates,
   updateBaccarat2Rates,
+  ballbyballMatchRates,
   updateBollywoodTableCardMatchRates,
   updateCard32BMatchRates,
   updateCard32MatchRates,
@@ -31,6 +33,7 @@ import {
   updateDragonTigerOneDayRates,
   updateLiveGameResultTop10,
   updateProfitLossCards,
+  updateQueenRates,
   updateTeenPatti1DMatchRates,
   updateTeenPattiMatchRates,
   updateTeenPattiOpenMatchRates,
@@ -177,7 +180,7 @@ const cardDetail = createSlice({
         state.dragonTigerDetail = {
           ...state.dragonTigerDetail,
           profitLoss: {
-            ...state.dragonTigerDetail.profitLoss,
+            ...state.dragonTigerDetail?.profitLoss,
             ...action.payload,
           },
         };
@@ -665,6 +668,46 @@ const cardDetail = createSlice({
             // cardInfo,
             yes,
             no,
+          };
+        }
+      })
+      .addCase(ballbyballMatchRates.fulfilled, (state, action) => {
+        if (action.payload) {
+          const { t1 } = action.payload;
+          const videoInfo = { ...t1 };
+          const runs = t1?.sub;
+          state.dragonTigerDetail = {
+            ...state.dragonTigerDetail,
+            videoInfo,
+            runs,
+          };
+        }
+      })
+      .addCase(updateQueenRates.fulfilled, (state, action) => {
+        if (action.payload) {
+          const { t1, t2 } = action.payload;
+          state.loading = false;
+          const videoInfo = { ...t1[0] };
+          const cards = t2.slice(0, 4);
+          state.dragonTigerDetail = {
+            ...state.dragonTigerDetail,
+            videoInfo,
+            cards,
+          };
+        }
+      })
+      .addCase(casinoMeterPattiMatchRates.fulfilled, (state, action) => {
+        if (action.payload) {
+          state.loading = false;
+          const { t1, t2 } = action.payload;
+          const videoInfo = { ...t1[0] };
+          const low = { ...t2[0] };
+          const high = { ...t2[1] };
+          state.dragonTigerDetail = {
+            ...state.dragonTigerDetail,
+            videoInfo,
+            low,
+            high,
           };
         }
       })

@@ -1,10 +1,11 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { FaTrophy } from "react-icons/fa";
+import "slick-carousel/slick/slick.css";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
+import ResultBetList from "../../../commonComponent/resultBetList";
+import Winner from "../../../commonComponent/trophyWinner";
 import "./style.scss";
 interface Props {
   data: {
@@ -97,7 +98,7 @@ const AbjResultComponent: React.FC<Props> = ({ data }: any) => {
               <div style={{ width: "70%", marginRight: "5px" }}>
                 {data?.result?.win === "1" && (
                   <div className="casino-winner-icon">
-                    <FaTrophy size={26} color="#169733" />
+                    <Winner />
                   </div>
                 )}
               </div>
@@ -120,7 +121,7 @@ const AbjResultComponent: React.FC<Props> = ({ data }: any) => {
               <div style={{ width: "70%", marginRight: "5px" }}>
                 {data?.result?.win === "2" && (
                   <div className="casino-winner-icon">
-                    <FaTrophy size={26} color="#169733" />
+                    <Winner />
                   </div>
                 )}
               </div>
@@ -215,6 +216,11 @@ const AbjResultComponent: React.FC<Props> = ({ data }: any) => {
           </div>
         </div>
       </div>
+      {data?.bets?.count > 0 && (
+        <div className="w-100 m-2">
+          <ResultBetList bets={data?.bets?.rows} total={data?.bets?.count} />
+        </div>
+      )}
     </Container>
   );
 };

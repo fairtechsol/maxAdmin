@@ -12,6 +12,8 @@ import moment from "moment-timezone";
 import { ResultComponent } from "../../../components/commonComponent/resultComponent";
 import { resultDragonTiger } from "../../../store/actions/card/cardDetail";
 import { cardGamesCasinoResult } from "../../../utils/Constants";
+import { FaTimes } from "react-icons/fa";
+import SearchBox from "../../../components/commonComponent/table/tableUtils/search";
 
 interface Column {
   id: string;
@@ -20,7 +22,7 @@ interface Column {
 
 // Example usage
 const columns: Column[] = [
-  { id: "roundId", label: "Round Id" },
+  { id: "roundId", label: "Market Id" },
   { id: "winner", label: "Winner" },
 ];
 
@@ -30,9 +32,11 @@ const CasinoResultReport = () => {
   const [casinoModalShow, setCasinoModalShow] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
-  const [date, setDate] = useState<any>(
-    moment(new Date()).format("YYYY-MM-DD")
-  );
+  // const [date, setDate] = useState<any>(
+  //   moment(new Date()).format("YYYY-MM-DD")
+  // );
+  const [date, setDate] = useState<any>(new Date().toISOString().split('T')[0]);
+
   const [type, setType] = useState<any>(null);
 
   const [typeFromState, setTypeFromState] = useState<any>(null);
@@ -123,23 +127,54 @@ const CasinoResultReport = () => {
     }
   }, [tableConfig, typeFromState]);
 
+  const [cross, setCross] = useState("");
+
+  const clearDate = () => {
+    setCross(""); // Clear the selected date
+  };
+  const handleSearch = (keyword: string) => {
+    setTableConfig((prev: any) => {
+      return { ...prev, keyword: keyword };
+    });
+  };
   return (
     <div className="p-2 pt-0">
       <h5 className="title-22 fw-normal">Casino Result Report</h5>
       <Form onSubmit={handleSubmit}>
         <Row>
           <Col md={2}>
-            <CustomInput
-              placeholder={""}
-              customstyle={"mb-3"}
-              type="date"
-              onChange={(e: any) => {
-                setDate(moment(e.target.value).format("YYYY-MM-DD"));
-              }}
-              value={date}
-            />
+            <div className="position-relative">
+              <CustomInput
+                placeholder={""}
+                // customstyle={"mb-3"}
+                type="date"
+                onChange={(e: any) => {
+                  setDate(moment(e.target.value).format("YYYY-MM-DD"));
+                  setCross("");
+                }}
+                value={date}
+                onClick={()=>setCross("cross")}
+              />
+
+              {cross && (
+                <button
+                  type="button"
+                  onClick={clearDate}
+                  className="btn btn-link position-absolute"
+                  style={{
+                    top: "46%",
+                    right: "2px",
+                    transform: "translateY(-50%)",
+                    background:"#fff",
+                    height:"30px"
+                  }}
+                >
+                  <FaTimes />
+                </button>
+              )}
+            </div>
           </Col>
-          <Col md={2}>
+          <Col className="lh-lg px-0" md={2}>
             <SelectSearch
               defaultValue="slotGame"
               options={cardGamesCasinoResult}
@@ -161,6 +196,17 @@ const CasinoResultReport = () => {
             <Button type="submit">Submit</Button>
           </Col>
         </Row>
+        <Row>
+          <div className="w-75"></div>
+          <div className="w-25">
+          {tableConfig?.keyword !== undefined ? (
+  <SearchBox value={tableConfig.keyword} onSearch={handleSearch} load={false}/>
+) : (
+  <SearchBox value="" onSearch={handleSearch}  load={false}/>
+)}
+          </div>
+       
+        </Row>
       </Form>
       <CustomTable
         customClass="commonTable reportTable"
@@ -168,7 +214,7 @@ const CasinoResultReport = () => {
         columns={columns}
         isPagination={true}
         isSort={false}
-        isSearch={true}
+        // isSearch={true}
         itemCount={casinoResultReport ? casinoResultReport?.count : 0}
         setTableConfig={setTableConfig}
         enablePdfExcel={false}

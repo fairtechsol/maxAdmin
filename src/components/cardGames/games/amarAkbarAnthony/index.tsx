@@ -11,7 +11,7 @@ import {
 } from "../../../../utils/Constants";
 import UserBets from "../../../game/userBet";
 import RulesModal from "../../../commonComponent/rulesModal";
-import { luckyrules } from "../../../../assets";
+import { aaarules } from "../../../../assets";
 import CardResultBox from "../../../commonComponent/cardResultBox";
 import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
 import { handleRoundId } from "../../../../helpers";
@@ -41,17 +41,6 @@ const AmarAkbarAnthonyComponent = () => {
                   <span style={{ fontSize: "16px", fontWeight: "600" }}>
                     {dragonTigerDetail?.name}
                   </span>
-                  <a
-                    style={{
-                      fontSize: "14px",
-                      textDecoration: "underline",
-                      cursor: "pointer",
-                    }}
-                    onClick={() => setShow(true)}
-                  >
-                    {" "}
-                    RULES
-                  </a>
                 </div>
                 <span>
                   {dragonTigerDetail?.videoInfo
@@ -74,11 +63,12 @@ const AmarAkbarAnthonyComponent = () => {
                     <AmarAkbarAnthonyCard data={dragonTigerDetail?.videoInfo} />
                   }
                   id={videoFrameId}
+                  data={dragonTigerDetail}
                 />
               </div>
             </div>
             <div>
-              <div style={{ width: "100%", margin: "5% 5px" }}>
+              <div style={{ width: "100%", margin: "5px" }}>
                 <TiePairBox
                   lowHigh={dragonTigerDetail?.players}
                   data={dragonTigerDetail}
@@ -137,10 +127,11 @@ const AmarAkbarAnthonyComponent = () => {
                 />
               </div>
             </div>
-            <RulesModal show={show} setShow={setShow} rule={luckyrules} />
+
+            <RulesModal show={show} setShow={setShow} rule={aaarules} />
           </div>
         </Col>
-        <Col md={4}>
+        <Col className="p-0" md={4}>
           <Container className="p-0" fluid ref={placeBetRef}>
             <Row>
               <Col md={12}>

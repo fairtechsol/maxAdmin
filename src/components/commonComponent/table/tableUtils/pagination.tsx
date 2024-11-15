@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Pagination } from "react-bootstrap";
 // import CustomButton from "../../button";
 /*** */
+import { MdOutlineKeyboardDoubleArrowLeft,MdOutlineKeyboardArrowRight, MdOutlineKeyboardDoubleArrowRight, MdOutlineKeyboardArrowLeft } from "react-icons/md";
 
 interface PaginationComponentProps {
   currentPage: number;
@@ -20,7 +21,7 @@ const PaginationComponent: React.FC<PaginationComponentProps> = ({
 }) => {
   // const isSmallScreen = window.innerWidth <= 768;
 
-  const [pageComp, setPageComp] = useState([]);
+  // const [pageComp, setPageComp] = useState([]);
 
   useEffect(() => {
     let isPageNumberOutOfRange: Boolean;
@@ -43,7 +44,7 @@ const PaginationComponent: React.FC<PaginationComponentProps> = ({
             onClick={() => onPageChange(pageNumber)}
             active={pageNumber === currentPage}
           >
-            {pageNumber}
+           <span className="text-black">{pageNumber}</span> 
           </Pagination.Item>
         );
       }
@@ -55,41 +56,48 @@ const PaginationComponent: React.FC<PaginationComponentProps> = ({
 
       return null;
     });
-
-    setPageComp(pageNumbers);
+console.warn('first',pageNumbers);
+    // setPageComp(pageNumbers);
   }, [totalPages, currentPage]);
 
   return (
     <Pagination>
-      <div className="paginationContainer title-14">
+      <div className="paginationContainer title-14 mt-4" >
         <Pagination.First
           disabled={currentPage <= 1 ? true : false}
           onClick={() => onPageChange(1)}
+          linkStyle={{border:"0px"}}
         >
-          First
+          <MdOutlineKeyboardDoubleArrowLeft />
         </Pagination.First>
         <Pagination.Prev
           disabled={currentPage <= 1 ? true : false}
           onClick={() => onPageChange(currentPage - 1)}
           className="paginationBtn"
+          linkStyle={{border:"0px"}}
         >
-          Previous
+          <MdOutlineKeyboardArrowLeft />
           {/* </CustomButton> */}
         </Pagination.Prev>
-        {pageComp?.map((item) => item)}
+        {/* {pageComp?.map((item) => item)} */}
+        <Pagination.Item  linkStyle={{backgroundColor:"#004a25",color:"#fff"}}>
+           <span className="text-white">{currentPage}</span> 
+          </Pagination.Item>
         <Pagination.Next
           disabled={totalPages === 0 ? true : currentPage === totalPages}
           onClick={() => onPageChange(currentPage + 1)}
+          linkStyle={{border:"0px"}}
           // className="paginationBtn"
         >
-          Next
+          <MdOutlineKeyboardArrowRight />
           {/* </CustomButton> */}
         </Pagination.Next>
         <Pagination.Last
           disabled={totalPages === 0 ? true : currentPage === totalPages}
           onClick={() => onPageChange(totalPages)}
+          linkStyle={{border:"0px"}}
         >
-          Last
+          <MdOutlineKeyboardDoubleArrowRight />
         </Pagination.Last>
       </div>
     </Pagination>

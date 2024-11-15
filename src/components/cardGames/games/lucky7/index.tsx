@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import VideoFrame from "../../../../components/commonComponent/videoFrame/VideoFrame";
 import TiePairBox from "../../../../components/cardGames/games/lucky7/TiePairBox";
-import OddEven from "../../../../components/cardGames/games/lucky7/OddEvenBox";
+// import OddEven from "../../../../components/cardGames/games/lucky7/OddEvenBox";
 import CardResultBox from "../../../../components/commonComponent/cardResultBox";
 import RulesModal from "../../../../components/commonComponent/rulesModal";
 import { handleRoundId } from "../../../../helpers";
@@ -29,19 +29,12 @@ const Lucky7Component = () => {
       <Row>
         <Col md={8}>
           <div className="horseRacingTab">
-            <div style={{ width: "100%", height: "400px", margin: "5px" }}>
+            <div style={{ width: "100%"}}>
               <div className="horseRacingTabHeader">
                 <div>
                   <span style={{ fontSize: "16px", fontWeight: "600" }}>
                     {dragonTigerDetail?.name}
                   </span>
-                  <a
-                    style={{ fontSize: "14px", textDecoration: "underline" }}
-                    onClick={() => setShow(true)}
-                  >
-                    {" "}
-                    RULES
-                  </a>
                 </div>
                 <span>
                   {dragonTigerDetail?.videoInfo
@@ -54,47 +47,27 @@ const Lucky7Component = () => {
               <div
                 style={{
                   width: "100%",
-                  height: "92%",
                   backgroundColor: "#000",
                 }}
               >
                 <VideoFrame
+                  data={dragonTigerDetail}
                   time={dragonTigerDetail?.videoInfo?.autotime}
                   result={<Lucky7Result data={dragonTigerDetail?.videoInfo} />}
                   id={`${cardUrl}${cardGamesId.lucky7}`}
                 />
               </div>
             </div>
-            <div style={{ height: "550px" }}>
-              <div style={{ width: "100%", margin: "5% 5px" }}>
+            <div>
+              <div style={{ width: "100%"}}>
                 <TiePairBox
                   lowHigh={dragonTigerDetail?.lowHigh}
-                  data={dragonTigerDetail}
-                />
-              </div>
-              <div
-                style={{
-                  width: "100%",
-                  margin: "5px",
-                  display: "flex",
-                  flexDirection: "row",
-                  gap: "8px",
-                }}
-              >
-                <OddEven
-                  name={"DRAGON"}
                   odds={dragonTigerDetail?.redBlack}
-                  data={dragonTigerDetail}
-                  card={true}
-                />
-
-                <OddEven
-                  name={"TIGER"}
-                  odds={dragonTigerDetail?.luckOdds}
-                  card={false}
+                  cards={dragonTigerDetail?.luckOdds}
                   data={dragonTigerDetail}
                 />
               </div>
+             
               <div
                 style={{
                   width: "100%",

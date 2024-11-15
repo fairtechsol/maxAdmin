@@ -2,10 +2,7 @@ import { Table } from "react-bootstrap";
 import "../../style.scss";
 import BetStatusOverlay from "../../../commonComponent/betStatusOverlay";
 import BackLayBox from "../../../backLayBox";
-import {
-  profitLossDataForMatchConstants,
-  teamStatus,
-} from "../../../../utils/Constants";
+import { profitLossDataForMatchConstants } from "../../../../utils/Constants";
 import isMobile from "../../../../utils/screenDimension";
 
 interface MatchOddsProps {
@@ -22,6 +19,14 @@ function MatchOdds({
   matchDetails,
   backLayCount,
 }: MatchOddsProps) {
+  let teamsToMap: any;
+
+  if (matchDetails?.teamC) {
+    teamsToMap = ["A", "B", "C"];
+  } else {
+    teamsToMap = ["A", "B"];
+  }
+
   return (
     <div
       className={`gameTable table-responsive sessionFancyTable borderTable border `}
@@ -58,9 +63,9 @@ function MatchOdds({
           </tr>
         </thead>
         <tbody>
-          {["A", "B", "C"]
-            ?.filter((item) => matchDetails?.[`team${item}`] !== null)
-            ?.map((matchs, indexes) => {
+          {teamsToMap
+            ?.filter((item: any) => matchDetails?.[`team${item}`] !== null)
+            ?.map((matchs: any, indexes: any) => {
               return (
                 <tr key={indexes}>
                   <td>
@@ -82,34 +87,40 @@ function MatchOdds({
                             indexes === 0 ? (
                               <span
                                 className={
-                                  matchDetails?.profitLossDataMatch
-                                    ?.yesRateTie < 0
-                                    ? "color-red"
-                                    : "color-green"
-                                }
-                              >
-                                {parseFloat(
-                                  matchDetails?.profitLossDataMatch
-                                    ?.yesRateTie ?? 0
-                                ).toFixed(2)}
-                              </span>
-                            ) : (
-                              <span
-                                className={
-                                  matchDetails?.profitLossDataMatch[
-                                    profitLossDataForMatchConstants[
-                                      data?.type
-                                    ]?.[matchs]
+                                  matchDetails?.profitLossDataMatch?.[
+                                    `yesRateTie_${matchDetails?.id}`
                                   ] < 0
                                     ? "color-red"
                                     : "color-green"
                                 }
                               >
                                 {parseFloat(
-                                  matchDetails?.profitLossDataMatch[
-                                    profitLossDataForMatchConstants[
-                                      data?.type
-                                    ]?.[matchs]
+                                  matchDetails?.profitLossDataMatch?.[
+                                    `yesRateTie_${matchDetails?.id}`
+                                  ] ?? 0
+                                ).toFixed(2)}
+                              </span>
+                            ) : (
+                              <span
+                                className={
+                                  matchDetails?.profitLossDataMatch?.[
+                                    `${
+                                      profitLossDataForMatchConstants[
+                                        data?.type
+                                      ]?.[matchs]
+                                    }_${matchDetails?.id}`
+                                  ] < 0
+                                    ? "color-red"
+                                    : "color-green"
+                                }
+                              >
+                                {parseFloat(
+                                  matchDetails?.profitLossDataMatch?.[
+                                    `${
+                                      profitLossDataForMatchConstants[
+                                        data?.type
+                                      ]?.[matchs]
+                                    }_${matchDetails?.id}`
                                   ] ?? 0
                                 ).toFixed(2)}
                               </span>
@@ -117,20 +128,24 @@ function MatchOdds({
                           ) : (
                             <span
                               className={
-                                matchDetails?.profitLossDataMatch[
-                                  profitLossDataForMatchConstants[data?.type]?.[
-                                    matchs
-                                  ]
+                                matchDetails?.profitLossDataMatch?.[
+                                  `${
+                                    profitLossDataForMatchConstants[
+                                      data?.type
+                                    ]?.[matchs]
+                                  }_${matchDetails?.id}`
                                 ] < 0
                                   ? "color-red"
                                   : "color-green"
                               }
                             >
                               {parseFloat(
-                                matchDetails?.profitLossDataMatch[
-                                  profitLossDataForMatchConstants[data?.type]?.[
-                                    matchs
-                                  ]
+                                matchDetails?.profitLossDataMatch?.[
+                                  `${
+                                    profitLossDataForMatchConstants[
+                                      data?.type
+                                    ]?.[matchs]
+                                  }_${matchDetails?.id}`
                                 ] ?? 0
                               ).toFixed(2)}
                             </span>
@@ -142,36 +157,42 @@ function MatchOdds({
                   </td>
                   <td colSpan={backLayCount === 2 ? 2 : 6}>
                     <BetStatusOverlay
-                      title={data?.runners?.[indexes]?.status.toLowerCase()}
+                      title={data?.runners?.[indexes]?.status?.toLowerCase()}
                       active={
-                        data?.runners?.[indexes]?.status
-                          .toLowerCase()
-                          ?.toLowerCase() !== teamStatus.active?.toLowerCase()
+                        !["ACTIVE", "", undefined, null, "OPEN"].includes(
+                          data?.runners?.[indexes]?.status
+                        )
                       }
                     >
                       {new Array(backLayCount === 2 ? 1 : 3)
                         .fill(0)
                         ?.map((_: any, index: number) => (
                           <BackLayBox
-                            // style={{ width: "84px" }}
                             key={index}
                             customClass="match-odd-bet-place-box"
                             bgColor={`blue${index + 1}`}
                             rate={
                               data?.runners?.[indexes]?.ex?.availableToBack?.[
-                                2 - index
+                                index -
+                                  (data?.runners?.[indexes]?.ex?.availableToBack
+                                    ?.length > 1
+                                    ? 0
+                                    : 2)
                               ]?.price
                             }
                             percent={
                               data?.runners?.[indexes]?.ex?.availableToBack?.[
-                                2 - index
+                                index -
+                                  (data?.runners?.[indexes]?.ex?.availableToBack
+                                    ?.length > 1
+                                    ? 0
+                                    : 2)
                               ]?.size
                             }
                             active={
-                              data?.runners?.[indexes]?.status
-                                .toLowerCase()
-                                ?.toLowerCase() !==
-                              teamStatus.active?.toLowerCase()
+                              !["ACTIVE", "", undefined, null, "OPEN"].includes(
+                                data?.runners?.[indexes]?.status
+                              )
                             }
                           />
                         ))}
@@ -179,7 +200,6 @@ function MatchOdds({
                         .fill(0)
                         ?.map((_: any, index: number) => (
                           <BackLayBox
-                            // style={{ width: "84px" }}
                             key={index}
                             customClass="match-odd-bet-place-box"
                             bgColor={`red${index + 1}`}
@@ -194,17 +214,14 @@ function MatchOdds({
                               ]?.size
                             }
                             active={
-                              data?.runners?.[indexes]?.status
-                                .toLowerCase()
-                                ?.toLowerCase() !==
-                              teamStatus.active?.toLowerCase()
+                              !["ACTIVE", "", undefined, null, "OPEN"].includes(
+                                data?.runners?.[indexes]?.status
+                              )
                             }
                           />
                         ))}
                     </BetStatusOverlay>
                   </td>
-
-                  <td></td>
                 </tr>
               );
             })}

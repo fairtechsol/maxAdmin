@@ -25,9 +25,6 @@ interface Column {
 
 // Example usage
 const columns: Column[] = [
-  { id: "SrNo", label: "Sr No" },
-  { id: "name", label: "Name" },
-  { id: "Amount", label: "Amount" },
   { id: "srNo", label: "Sr No", type: "index" },
   { id: "user.userName", label: "Name" },
   { id: "amount", label: "Amount" },
@@ -47,8 +44,14 @@ const GameReport = () => {
   const dispatch: AppDispatch = useDispatch();
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [dateFrom, setDateFrom] = useState<any>();
-  const [dateTo, setDateTo] = useState<any>();
+  const [dateFrom, setDateFrom] = useState<any>(
+    new Date(new Date().setDate(new Date().getDate() - 7))
+      .toISOString()
+      .split("T")[0]
+  );
+  const [dateTo, setDateTo] = useState<any>(
+    new Date().toISOString().split("T")[0]
+  );
 
   useEffect(() => {}, [tableConfig]);
 
@@ -94,7 +97,13 @@ const GameReport = () => {
       );
     }
   };
+  // const getTodayDate = () => new Date().toISOString().split('T')[0];
 
+  // const getMaxToDate = (fromDate: string) => {
+  //   const from = new Date(fromDate);
+  //   from.setDate(from.getDate() + 7);
+  //   return from.toISOString().split('T')[0];
+  // };
   return (
     <div className="p-2 pt-0">
       <h5 className="title-22 fw-normal">Game Report</h5>
@@ -109,6 +118,8 @@ const GameReport = () => {
                 setDateFrom(e.target.value);
               }}
               type="date"
+              value={dateFrom}
+              max={new Date().toISOString().split("T")[0]}
             />
           </Col>
           <Col md={2}>
@@ -118,6 +129,9 @@ const GameReport = () => {
               customstyle={"mb-3"}
               onChange={(e: any) => setDateTo(e.target.value)}
               type="date"
+              value={dateTo}
+              // min={dateFrom || getTodayDate()}
+              max={new Date().toISOString().split("T")[0]}
             />
           </Col>
           <Col md={2}>
@@ -181,7 +195,7 @@ const GameReport = () => {
               ))}
             </tr>
           ))}
-        {gameReportList?.count > 0 && (
+        {/* {gameReportList?.count > 0 && (
           <tr>
             <td></td>
             <td>General Total</td>
@@ -196,7 +210,7 @@ const GameReport = () => {
                 : 0}
             </td>
           </tr>
-        )}
+        )} */}
       </CustomTable>
     </div>
   );

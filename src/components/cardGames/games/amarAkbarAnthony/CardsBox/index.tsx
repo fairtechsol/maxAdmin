@@ -1,3 +1,4 @@
+import { formatNumber } from "../../../../../helpers";
 import CommonCardImg from "../CommonCardImg";
 import "../style.scss";
 
@@ -17,11 +18,10 @@ const CardBox = ({ cardData, data }: any) => {
         <div>
           <CommonCardImg cardData={cardData} data={data} />
         </div>
-        <div style={{ textAlign: "end" }}>
-          <span style={{ fontWeight: "bolder" }}>Min:</span>
-          <span>{min}</span>
-          <span style={{ fontWeight: "bolder", marginLeft: "10px" }}>Max:</span>
-          <span>{max}</span>
+        <div className="title-12" style={{ textAlign: "end" }}>
+          <span>R:</span>
+          <span>{min}</span>-
+          <span>{formatNumber(max)}</span>
         </div>
       </div>
     </>

@@ -1,9 +1,9 @@
 import { Table } from "react-bootstrap";
-import isMobile from "../../../../utils/screenDimension";
 import {
   profitLossDataForMatchConstants,
   teamStatus,
 } from "../../../../utils/Constants";
+import isMobile from "../../../../utils/screenDimension";
 import BackLayBox from "../../../backLayBox";
 import BetStatusOverlay from "../../../commonComponent/betStatusOverlay";
 
@@ -83,12 +83,12 @@ function OverUnderMarket({
                         <span
                           className={`title-14  ${
                             indexes === 0
-                              ? matchDetails?.profitLossDataMatch[
+                              ? matchDetails?.profitLossDataMatch?.[
                                   profitLossDataForMatchConstants[data?.type]?.A
                                 ] < 0
                                 ? "color-red"
                                 : "color-green"
-                              : matchDetails?.profitLossDataMatch[
+                              : matchDetails?.profitLossDataMatch?.[
                                   profitLossDataForMatchConstants[data?.type]?.B
                                 ] < 0
                               ? "color-red"
@@ -97,23 +97,25 @@ function OverUnderMarket({
                         >
                           {indexes === 0
                             ? parseFloat(
-                                matchDetails?.profitLossDataMatch[
+                                matchDetails?.profitLossDataMatch?.[
                                   profitLossDataForMatchConstants[data?.type]?.A
                                 ] ?? 0
                               ).toFixed(2)
-                            : parseFloat(matchDetails?.profitLossDataMatch[
-                                profitLossDataForMatchConstants[data?.type]?.B
-                              ] ?? 0).toFixed(2)}
+                            : parseFloat(
+                                matchDetails?.profitLossDataMatch?.[
+                                  profitLossDataForMatchConstants[data?.type]?.B
+                                ] ?? 0
+                              ).toFixed(2)}
                         </span>
                       </div>
                     </div>
                   </td>
                   <td colSpan={backLayCount === 2 ? 2 : 6}>
                     <BetStatusOverlay
-                      title={data?.runners?.[indexes]?.status.toLowerCase()}
+                      title={data?.runners?.[indexes]?.status?.toLowerCase()}
                       active={
                         data?.activeStatus === "live" &&
-                        data?.runners?.[indexes]?.status.toLowerCase() ===
+                        data?.runners?.[indexes]?.status?.toLowerCase() ===
                           "active"
                           ? false
                           : true
@@ -138,7 +140,7 @@ function OverUnderMarket({
                             }
                             active={
                               data?.runners?.[indexes]?.status
-                                .toLowerCase()
+                                ?.toLowerCase()
                                 ?.toLowerCase() !==
                               teamStatus.active?.toLowerCase()
                             }
@@ -163,7 +165,7 @@ function OverUnderMarket({
                             }
                             active={
                               data?.runners?.[indexes]?.status
-                                .toLowerCase()
+                                ?.toLowerCase()
                                 ?.toLowerCase() !==
                               teamStatus.active?.toLowerCase()
                             }
