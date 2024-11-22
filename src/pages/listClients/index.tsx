@@ -102,7 +102,6 @@ const ListClent: React.FC = () => {
           sort: "user.createdAt",
           order: "DESC",
           name: "Users List",
-          activeTab: "active",
         })
       );
     }
@@ -118,7 +117,6 @@ const ListClent: React.FC = () => {
           userName: keyWord,
           sort: "user.createdAt",
           order: "DESC",
-          activeTab: "active",
         })
       );
     }
@@ -302,6 +300,8 @@ const ListClent: React.FC = () => {
               });
             }}
             id={eventDetails.eventId}
+            sort="user.createdAt"
+            order="DESC"
           />
         )}
       </Container>
