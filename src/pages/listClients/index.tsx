@@ -117,6 +117,7 @@ const ListClent: React.FC = () => {
           userName: keyWord,
           sort: "user.createdAt",
           order: "DESC",
+          activeTab: "active",
         })
       );
     }
