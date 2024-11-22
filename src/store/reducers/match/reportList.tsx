@@ -8,6 +8,8 @@ import {
   getBetAccountStatementModal,
   getCardReport,
   resetGameReportList,
+  getCasinoReport,
+  getCasinoReportGameList,
 } from "../../actions/match/matchAction";
 
 interface InitialState {
@@ -16,6 +18,8 @@ interface InitialState {
   gameReportList: any;
   gameGeneralList: any;
   casinoResultReport: any;
+  casinoReport: any;
+  casinoReportGameList: any;
   profitLossReport: any;
   betAccountStatementModal: any;
   loading: boolean;
@@ -29,6 +33,8 @@ const initialState: InitialState = {
   gameReportList: [],
   gameGeneralList: [],
   casinoResultReport: null,
+  casinoReport: [],
+  casinoReportGameList: [],
   betAccountStatementModal: null,
   profitLossReport: null,
   loading: false,
@@ -139,6 +145,35 @@ const reportListSlice = createSlice({
         // state.success = false;
         state.error = action?.error?.message;
       })
+      .addCase(getCasinoReport.pending, (state) => {
+        state.loading = true;
+        state.success = false;
+        state.error = null;
+      })
+      .addCase(getCasinoReport.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        state.casinoReport = action.payload;
+      })
+      .addCase(getCasinoReport.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action?.error?.message;
+      })
+      .addCase(getCasinoReportGameList.pending, (state) => {
+        state.loading = true;
+        state.success = false;
+        state.error = null;
+      })
+      .addCase(getCasinoReportGameList.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        state.casinoReportGameList = action.payload;
+      })
+      .addCase(getCasinoReportGameList.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action?.error?.message;
+      })
+
       .addCase(resetGameReportList, (state) => {
         state.gameReportList = [];
       });
