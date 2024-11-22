@@ -127,7 +127,15 @@ const DynamicTable = ({ odds, data }: any) => {
                       : "color-green"
                     : "color-red"
                 } f700 title-16`}
-                style={{ position: "absolute", bottom: "-20px", right: "60px" }}
+                style={{
+                  position:
+                    odds?.[0]?.gstatus === "SUSPENDED" ||
+                    odds?.[0]?.gstatus === "CLOSED"
+                      ? "absolute"
+                      : "relative",
+                  bottom: "-20px",
+                  right: "60px",
+                }}
               >
                 {data?.profitLoss?.[
                   `${data?.playersBonusPair?.[0]?.mid}_${data?.playersBonusPair?.[0]?.sid}_card`
@@ -163,7 +171,11 @@ const DynamicTable = ({ odds, data }: any) => {
                       : "color-green"
                     : "coor-red"
                 } f700 title-16`}
-                style={{ position: "absolute", bottom: "-20px", right: "60px" }}
+                style={{  position:
+                  odds?.[1]?.gstatus === "SUSPENDED" ||
+                  odds?.[1]?.gstatus === "CLOSED"
+                    ? "absolute"
+                    : "relative", bottom: "-20px", right: "60px" }}
               >
                 {data?.profitLoss?.[
                   `${data?.playersBonusPair?.[1]?.mid}_${data?.playersBonusPair?.[1]?.sid}_card`
@@ -317,7 +329,11 @@ const DynamicTable = ({ odds, data }: any) => {
                       : "color-green"
                     : "color-red"
                 } f700 title-16`}
-                style={{ position: "absolute", bottom: "-20px", right: "60px" }}
+                style={{  position:
+                  odds?.[1]?.gstatus === "SUSPENDED" ||
+                  odds?.[1]?.gstatus === "CLOSED"
+                    ? "absolute"
+                    : "relative", bottom: "-20px", right: "60px" }}
               >
                 {data?.profitLoss?.[
                   `${data?.playersBonusPair?.[2]?.mid}_${data?.playersBonusPair?.[2]?.sid}_card`
@@ -354,7 +370,11 @@ const DynamicTable = ({ odds, data }: any) => {
                       : "color-green"
                     : "color-red"
                 } f700 title-16`}
-                style={{ position: "absolute", bottom: "-20px", right: "60px" }}
+                style={{  position:
+                  odds?.[1]?.gstatus === "SUSPENDED" ||
+                  odds?.[1]?.gstatus === "CLOSED"
+                    ? "absolute"
+                    : "relative", bottom: "-20px", right: "60px" }}
               >
                 {data?.profitLoss?.[
                   `${data?.playersBonusPair?.[3]?.mid}_${data?.playersBonusPair?.[3]?.sid}_card`
