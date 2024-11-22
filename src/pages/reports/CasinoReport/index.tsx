@@ -23,7 +23,7 @@ const columns: Column[] = [
   { id: "type", label: "Type" },
   { id: "amount", label: "Amount" },
   { id: "total", label: "Total" },
-  { id: "date", label: "Date" },
+  { id: "createdAt", label: "Date" },
   { id: "roundId", label: "Rond Id" },
   { id: "transactionId", label: "Transaction Id" },
 ];
@@ -44,6 +44,7 @@ const CasinoReport = () => {
   const [userOptions, setUserOptions] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [tempUser, setTempUser] = useState<any>(false);
+  const [updatedReports, setUpdateReports] = useState([]);
 
   const { searchListData } = useSelector(
     (state: RootState) => state.user.userList
@@ -116,6 +117,17 @@ const CasinoReport = () => {
   useEffect(() => {
     dispatch(getCasinoReportGameList());
   }, []);
+
+  useEffect(() => {
+    if (casinoReport?.bets) {
+      let runningTotal = 0;
+      const dataWithTotal = casinoReport.bets.map((item: any) => {
+        runningTotal += parseFloat(item?.amount || 0);
+        return { ...item, total: runningTotal };
+      });
+      setUpdateReports(dataWithTotal);
+    }
+  }, [casinoReport]);
 
   return (
     <div className="p-2 pt-0">
@@ -221,14 +233,34 @@ const CasinoReport = () => {
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
         >
-          {(casinoReport?.count || 0) === 0 && (
-            <tr>No data available in table </tr>
-          )}
-          {(casinoReport?.count || 0) > 0 &&
-            (casinoReport?.bets || [])?.map((item: any, index: number) => (
+          {updatedReports?.length === 0 && <tr>No data available in table </tr>}
+          {updatedReports?.length > 0 &&
+            updatedReports?.map((item: any, index: number) => (
               <tr key={index}>
                 {columns.map((column) => (
-                  <td key={column.id}>{item[column.id]}</td>
+                  <td key={column.id}>
+                    <span
+                      className={`${
+                        column.id === "total"
+                          ? item["total"] >= 0
+                            ? "color-green"
+                            : "color-red"
+                          : ""
+                      }`}
+                    >
+                      {column.id === "createdAt"
+                        ? moment(item[column.id]).format("DD/MM/YYYY hh:mm:ss ")
+                        : column.id === "amount"
+                        ? Math.abs(item[column.id]).toFixed(2)
+                        : column.id === "type"
+                        ? item["amount"] > 0
+                          ? "CREDIT"
+                          : "DEBIT"
+                        : column.id === "total"
+                        ? parseFloat(item[column.id]).toFixed(2)
+                        : item[column.id]}
+                    </span>
+                  </td>
                 ))}
               </tr>
             ))}
