@@ -303,6 +303,7 @@ const ListClent: React.FC = () => {
             id={eventDetails.eventId}
             sort="user.createdAt"
             order="DESC"
+            activeTab="active"
           />
         )}
       </Container>
