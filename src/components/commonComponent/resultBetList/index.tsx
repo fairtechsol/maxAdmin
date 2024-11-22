@@ -14,12 +14,25 @@ const columns: Column[] = [
   { id: "browserDetail", label: "BrowserDetail " },
   { id: "action", label: "Action " },
 ];
+
 const ResultBetList = ({ bets, total }: any) => {
   const [selected, setSelected] = useState("all");
   const [list, setList] = useState(bets);
+  const [selectedItems, setSelectedItems] = useState<any>([]);
+
+  const handleCheckBox = (item: any) => {
+    setSelectedItems((prevSelectedItems: any) => {
+      if (prevSelectedItems.includes(item)) {
+        return prevSelectedItems.filter((i: any) => i?.id !== item?.id);
+      } else {
+        return [...prevSelectedItems, item];
+      }
+    });
+  };
 
   const handleRadioChange = (type: any) => {
     setSelected(type);
+    setSelectedItems([]);
     if (type === "back") {
       const filtered = bets.filter(
         (item: any) => item?.betType === "BACK" || item?.betType === "back"
@@ -75,12 +88,50 @@ const ResultBetList = ({ bets, total }: any) => {
       <div
         className={"title-16 d-flex flex-row justify-content-end  float-end"}
       >
-        <span className="px-2">Total Bets: {total}</span>
+        <span className="px-2">
+          {" "}
+          Total Bets:{" "}
+          {selectedItems?.length > 0
+            ? selectedItems?.length ?? 0
+            : list?.length ?? 0}
+        </span>
         <span>
           Total Amount:{" "}
-          {list?.reduce((acc: number, bet: any) => {
-            return acc + bet?.amount;
-          }, 0)}
+          <span
+            className={
+              (selectedItems?.length > 0 ? selectedItems : list)?.reduce(
+                (acc: number, bet: any) => {
+                  return (
+                    acc +
+                    (bet?.result === "LOSS"
+                      ? -bet?.lossAmount
+                      : bet?.result === "WIN"
+                      ? bet?.winAmount
+                      : 0)
+                  );
+                },
+                0
+              ) < 0
+                ? "color-red"
+                : "color-green"
+            }
+          >
+            {parseFloat(
+              (selectedItems?.length > 0 ? selectedItems : list)?.reduce(
+                (acc: number, bet: any) => {
+                  return (
+                    acc +
+                    (bet?.result === "LOSS"
+                      ? -bet?.lossAmount
+                      : bet?.result === "WIN"
+                      ? bet?.winAmount
+                      : 0)
+                  );
+                },
+                0
+              )
+            ).toFixed(2) ?? "0.00"}
+          </span>
         </span>
       </div>
 
@@ -165,10 +216,15 @@ const ResultBetList = ({ bets, total }: any) => {
                     }
                     style={{
                       borderRight: "1px solid #aaa",
-                      color: result === "LOSS" ? "red" : "green",
+                      color:
+                        result === "LOSS"
+                          ? "red"
+                          : result === "WIN"
+                          ? "green"
+                          : "#000",
                     }}
                   >
-                    {result === "LOSS" ? -lossAmount : winAmount}
+                    {result === "LOSS" ? -lossAmount : result === "WIN" ? winAmount : 0}
                   </td>
                   <td
                     className={
@@ -211,7 +267,11 @@ const ResultBetList = ({ bets, total }: any) => {
                         : "bg-blue3"
                     }
                   >
-                    <input type="checkbox" />
+                    <input
+                      type="checkbox"
+                      onClick={() => handleCheckBox(item)}
+                      checked={selectedItems.includes(item)}
+                    />
                   </td>
                   <DeleteBetOverlay title={deleteReason} />
                 </tr>

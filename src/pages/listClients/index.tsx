@@ -102,6 +102,7 @@ const ListClent: React.FC = () => {
           sort: "user.createdAt",
           order: "DESC",
           name: "Users List",
+          activeTab: "active",
         })
       );
     }
@@ -117,10 +118,11 @@ const ListClent: React.FC = () => {
           userName: keyWord,
           sort: "user.createdAt",
           order: "DESC",
+          activeTab: "active",
         })
       );
     }
-  }, [keyWord, id,tableConfig?.rowPerPage,tableConfig?.page]);
+  }, [keyWord, id, tableConfig?.rowPerPage, tableConfig?.page]);
 
   useEffect(() => {
     dispatch(getTotalBalance());

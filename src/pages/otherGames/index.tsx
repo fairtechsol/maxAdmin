@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
 import {
   getPlacedBets,
+  matchDetailAction,
   otherMatchDetailAction,
   updateMatchRates,
   updatePlacedbetsDeleteReason,
@@ -52,7 +53,13 @@ const OtherGamesDetail = () => {
   const handleDeleteBet = (event: any) => {
     try {
       if (event?.matchId === id) {
-        dispatch(otherMatchDetailAction({ matchId: id, matchType: gameType }));
+        if (gameType === "politics") {
+          dispatch(matchDetailAction(id));
+        } else {
+          dispatch(
+            otherMatchDetailAction({ matchId: id, matchType: gameType })
+          );
+        }
         dispatch(getPlacedBets(id));
       }
     } catch (e) {
@@ -63,7 +70,13 @@ const OtherGamesDetail = () => {
   const handleSessionBetPlaced = (event: any) => {
     try {
       if (event?.jobData?.placedBet?.matchId === id) {
-        dispatch(otherMatchDetailAction({ matchId: id, matchType: gameType }));
+        if (gameType === "politics") {
+          dispatch(matchDetailAction(id));
+        } else {
+          dispatch(
+            otherMatchDetailAction({ matchId: id, matchType: gameType })
+          );
+        }
         dispatch(getPlacedBets(id));
       }
     } catch (e) {
@@ -73,7 +86,13 @@ const OtherGamesDetail = () => {
   const handleMatchBetPlaced = (event: any) => {
     try {
       if (event?.jobData?.matchId === id) {
-        dispatch(otherMatchDetailAction({ matchId: id, matchType: gameType }));
+        if (gameType === "politics") {
+          dispatch(matchDetailAction(id));
+        } else {
+          dispatch(
+            otherMatchDetailAction({ matchId: id, matchType: gameType })
+          );
+        }
         dispatch(getPlacedBets(id));
       }
     } catch (e) {
@@ -145,7 +164,13 @@ const OtherGamesDetail = () => {
   useEffect(() => {
     try {
       if (id) {
-        dispatch(otherMatchDetailAction({ matchId: id, matchType: gameType }));
+        if (gameType === "politics") {
+          dispatch(matchDetailAction(id));
+        } else {
+          dispatch(
+            otherMatchDetailAction({ matchId: id, matchType: gameType })
+          );
+        }
         dispatch(getPlacedBets(id));
       }
     } catch (e) {
@@ -252,7 +277,7 @@ const OtherGamesDetail = () => {
   return (
     <div className="gamePage">
       <Container fluid>
-        <GameHeader />
+       
         <NavComponent
           matchDetail={matchDetails}
           setMarketToShow={setMarketToShow}
@@ -269,6 +294,7 @@ const OtherGamesDetail = () => {
                   items={[
                     { name: matchDetails?.title || breadCrumb?.matchName },
                   ]}
+                  matchType={matchDetails?.matchType}
                 />
               )}
               {updatedMarket
@@ -356,7 +382,7 @@ const OtherGamesDetail = () => {
                       session.data?.section?.length > 0 && (
                         <div
                           key={index}
-                          style={{ width: isMobile ? "100%" : "49.5%" }}
+                          style={{ width:  "100%" }}
                         >
                           <Col md={12}>
                             <session.component
@@ -372,13 +398,15 @@ const OtherGamesDetail = () => {
               </div>
             </Col>
             <Col md={4}>
-              {matchDetails?.eventId && (
-                <LiveStreamComponent
-                  url={`${liveStreamUrl}${matchDetails?.eventId}/${
-                    matchDetails?.matchType === "football" ? 1 : 2
-                  }`}
-                />
-              )}
+            <GameHeader />
+              {matchDetails?.eventId &&
+                matchDetails?.matchType !== "politics" && (
+                  <LiveStreamComponent
+                    url={`${liveStreamUrl}${matchDetails?.eventId}/${
+                      matchDetails?.matchType === "football" ? 1 : 2
+                    }`}
+                  />
+                )}
               <OtherUserBets matchId={id} />
             </Col>
           </Row>

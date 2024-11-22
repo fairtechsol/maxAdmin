@@ -1,9 +1,9 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
-import "./style.scss";
-import Winner from "../../../commonComponent/trophyWinner";
 import ResultBetList from "../../../commonComponent/resultBetList";
+import Winner from "../../../commonComponent/trophyWinner";
+import "./style.scss";
 interface Props {
   data: {
     C1: string;
@@ -25,7 +25,7 @@ const DragonTigerLionResultComponent: React.FC<Props> = ({ data }: any) => {
                 borderRadius: "1px",
                 marginLeft: "5px",
                 display: "flex",
-                gap: 10
+                gap: 10,
               }}
             >
               <HandleCards card={resultCards?.[0]} />
@@ -40,7 +40,6 @@ const DragonTigerLionResultComponent: React.FC<Props> = ({ data }: any) => {
         <div className="d-flex row ">
           <span className="fs-5">Tiger</span>
           <div className={"d-sm-flex flex-row position-relative"}>
-           
             <div
               style={{
                 display: "flex",
@@ -51,17 +50,16 @@ const DragonTigerLionResultComponent: React.FC<Props> = ({ data }: any) => {
             >
               <HandleCards card={resultCards?.[1]} />
               {data?.result?.win === "21" && (
-              <div className="casino-winner-icon">
-                <Winner />
-              </div>
-            )}
+                <div className="casino-winner-icon">
+                  <Winner />
+                </div>
+              )}
             </div>
           </div>
         </div>
         <div className="d-flex row ">
           <span className="fs-5">Lion</span>
           <div className={"d-sm-flex flex-row position-relative"}>
-           
             <div
               style={{
                 display: "flex",
@@ -72,20 +70,17 @@ const DragonTigerLionResultComponent: React.FC<Props> = ({ data }: any) => {
             >
               <HandleCards card={resultCards?.[2]} />
               {data?.result?.win === "41" && (
-              <div className="casino-winner-icon">
-                <Winner />
-              </div>
-            )}
+                <div className="casino-winner-icon">
+                  <Winner />
+                </div>
+              )}
             </div>
           </div>
         </div>
       </div>
       {data?.bets?.count > 0 && (
         <div className="w-100 m-2">
-          <ResultBetList
-            bets={data?.bets?.rows ?? 12}
-            total={data?.bets?.count}
-          />
+          <ResultBetList bets={data?.bets?.rows} total={data?.bets?.count} />
         </div>
       )}
     </Container>

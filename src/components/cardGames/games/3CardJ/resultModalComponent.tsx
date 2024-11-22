@@ -1,10 +1,10 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "./style.scss";
+import "slick-carousel/slick/slick.css";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
 import ResultBetList from "../../../commonComponent/resultBetList";
+import "./style.scss";
 interface Props {
   data: {
     C1: string;
@@ -47,7 +47,7 @@ const CardJResultComponent: React.FC<Props> = ({ data }: any) => {
                     justifyContent: "center",
                     alignItems: "center",
                     borderBottom: "1px solid rgba(0, 0, 0, .1)",
-                    paddingBottom:"15px"
+                    paddingBottom: "15px",
                   }}
                 >
                   {elementsAndar?.map((item: any, index: any) => (
@@ -61,7 +61,7 @@ const CardJResultComponent: React.FC<Props> = ({ data }: any) => {
                     flexWrap: "wrap",
                     flexDirection: "row",
                     justifyContent: "start",
-                    
+
                     padding: "6px",
                     boxShadow: "0 0 4px -1px rgba(0, 0, 0, 0.5)",
                     marginTop: "0px",
@@ -83,10 +83,7 @@ const CardJResultComponent: React.FC<Props> = ({ data }: any) => {
       </div>
       {data?.bets?.count > 0 && (
         <div className="w-100 m-2">
-          <ResultBetList
-            bets={data?.bets?.rows ?? 12}
-            total={data?.bets?.count}
-          />
+          <ResultBetList bets={data?.bets?.rows} total={data?.bets?.count} />
         </div>
       )}
     </Container>

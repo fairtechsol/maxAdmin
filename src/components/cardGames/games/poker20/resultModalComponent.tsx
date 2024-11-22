@@ -1,9 +1,9 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import "./style.scss";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
-import Winner from "../../../commonComponent/trophyWinner";
 import ResultBetList from "../../../commonComponent/resultBetList";
+import Winner from "../../../commonComponent/trophyWinner";
+import "./style.scss";
 interface Props {
   data: {
     C1: string;
@@ -132,10 +132,7 @@ const Poker20ResultComponent: React.FC<Props> = ({ data }: any) => {
 
       {data?.bets?.count > 0 && (
         <div className="w-100 m-2">
-          <ResultBetList
-            bets={data?.bets?.rows ?? 12}
-            total={data?.bets?.count}
-          />
+          <ResultBetList bets={data?.bets?.rows} total={data?.bets?.count} />
         </div>
       )}
     </Container>

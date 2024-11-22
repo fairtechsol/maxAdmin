@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../../store/store";
 // import { searchList } from "../../../../store/actions/user/userActions";
 import {  getMorePlacedBetsReset } from "../../../../store/actions/match/matchAction";
-import UserBetModalTable from ".";
+import UserBetModalTableCasino from "./userbetModal";
 
 const UserBetModalForm = (props: any) => {
   const dispatch: AppDispatch = useDispatch();
@@ -49,7 +49,7 @@ const UserBetModalForm = (props: any) => {
         style={{ border: "1px solid #b6b4b4" }}
       >
        
-        <UserBetModalTable list={filteredItems} />
+        <UserBetModalTableCasino list={filteredItems} />
       </div>
     </form>
   );
