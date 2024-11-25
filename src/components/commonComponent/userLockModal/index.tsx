@@ -54,11 +54,7 @@ const UserLockModal = ({
               : userDetail?.userBlock,
           transactionPassword: +transactionPassword,
         };
-        dispatch(
-          setLockUnlockUser({
-            payload: payload,
-          })
-        );
+        dispatch(setLockUnlockUser(payload));
       } else {
         toast.error("Transaction Code is Required");
       }
