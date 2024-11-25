@@ -5,13 +5,14 @@ import { useLocation, useNavigate } from "react-router-dom";
 import LogoSection from "../../../components/commonComponent/logoSection";
 import Select, { components } from "react-select";
 import { useDispatch, useSelector } from "react-redux";
-import CustomModal from "../../../components/commonComponent/modal";
 import MainHeader from "../../../components/mainHeader";
 import { logout } from "../../../store/actions/auth/authActions";
 import { AppDispatch, RootState } from "../../../store/store";
 import { debounce } from "lodash";
 import { searchList } from "../../../store/actions/user/userActions";
 import "./style.scss";
+import CustomModal from "../../../components/commonComponent/modal";
+import UserLockModal from "../../../components/commonComponent/userLockModal";
 // import isMobile from "../../../utils/screenDimension";
 // import styled from '@emotion/styled';
 
@@ -70,7 +71,7 @@ const Topbar = (props: any) => {
   const [SearchModal, setSearchModal] = useState(false);
   const [searchValue, setSearchValue] = useState<any>(null);
   const { userDetail } = useSelector((state: RootState) => state.user.profile);
-
+  const [showModal, setShowModal] = useState(false);
   const { searchListData, success, childUsersData } = useSelector(
     (state: RootState) => state.user.userList
   );
@@ -227,6 +228,12 @@ const Topbar = (props: any) => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  const handleBlockUserClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    setShowModal(true);
+  };
+
   return (
     <>
       <Navbar expand="lg" className="bg-primary p-0 px-0" data-bs-theme="light">
@@ -324,6 +331,14 @@ const Topbar = (props: any) => {
                   },
                 ]}
               />
+              <Nav.Link
+                className="navbar-mainLink"
+                href="/admin/market-analysis"
+                onClick={handleBlockUserClick}
+              >
+                Lock/Unlock
+              </Nav.Link>
+              <UserLockModal show={showModal} setShowModal={setShowModal} />
             </Nav>
           </Navbar>
           <div className="user-dropdown-container">
