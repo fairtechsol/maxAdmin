@@ -8,6 +8,7 @@ import {
   updateBetsPlaced,
 } from "../../../../store/actions/match/matchAction";
 import {
+  getCardDetailInitial,
   getDragonTigerDetailHorseRacing,
   resetCardDetail,
   updateBalanceOnBetPlaceCards,
@@ -71,6 +72,7 @@ const CasinoQueen = () => {
 
   useEffect(() => {
     try {
+      dispatch(getCardDetailInitial(cardGamesType.queen));
       dispatch(getDragonTigerDetailHorseRacing(cardGamesType.queen));
       return () => {
         socketService.card.leaveMatchRoom(cardGamesType.queen);
@@ -87,6 +89,7 @@ const CasinoQueen = () => {
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.visibilityState === "visible") {
+        dispatch(getCardDetailInitial(cardGamesType.queen));
         dispatch(getDragonTigerDetailHorseRacing(cardGamesType.queen));
       } else if (document.visibilityState === "hidden") {
         dispatch(resetCardDetail());

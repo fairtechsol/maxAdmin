@@ -4,6 +4,7 @@ import CricketMatch20Component from "../../../../components/cardGames/games/cric
 import Loader from "../../../../components/commonComponent/loader";
 import { socket, socketService } from "../../../../socketManager";
 import {
+  getCardDetailInitial,
   getDragonTigerDetailHorseRacing,
   resetCardDetail,
   updateBalanceOnBetPlaceCards,
@@ -74,6 +75,7 @@ const CricketMatch20 = () => {
 
   useEffect(() => {
     try {
+      dispatch(getCardDetailInitial(cardGamesType.cmatch20));
       dispatch(getDragonTigerDetailHorseRacing(cardGamesType.cmatch20));
       return () => {
         socketService.card.leaveMatchRoom(cardGamesType.cmatch20);

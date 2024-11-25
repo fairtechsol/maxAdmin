@@ -20,6 +20,23 @@ export const getDragonTigerDetailHorseRacing = createAsyncThunk<any, any>(
   }
 );
 
+export const getCardDetailInitial = createAsyncThunk<any, any>(
+  "card/cardDetailInitial",
+  async (requestData, thunkApi) => {
+    try {
+      const resp = await service.get(
+        `${ApiConstants.CARDS.MATCH.GET_CARD_DETAIL_INITIAL}/${requestData}`
+      );
+      if (resp?.data) {
+        return resp?.data;
+      }
+    } catch (error) {
+      const err = error as AxiosError;
+      return thunkApi.rejectWithValue(err.response?.status);
+    }
+  }
+);
+
 export const resultDragonTiger = createAsyncThunk<any, any>(
   "result/placeBetDragonTiger",
   async (requestData, thunkApi) => {

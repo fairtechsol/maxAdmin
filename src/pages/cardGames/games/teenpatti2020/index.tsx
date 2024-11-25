@@ -4,6 +4,7 @@ import TeentPatti2020Component from "../../../../components/cardGames/games/teen
 import Loader from "../../../../components/commonComponent/loader";
 import { socket, socketService } from "../../../../socketManager";
 import {
+  getCardDetailInitial,
   getDragonTigerDetailHorseRacing,
   resetCardDetail,
   updateBalanceOnBetPlaceCards,
@@ -94,6 +95,7 @@ const TeenPatti2020 = () => {
   }, [dragonTigerDetail?.id]);
 
   useEffect(() => {
+    dispatch(getCardDetailInitial(cardGamesType.teen20));
     dispatch(getDragonTigerDetailHorseRacing(cardGamesType.teen20));
     return () => {
       dispatch(resetCardDetail());

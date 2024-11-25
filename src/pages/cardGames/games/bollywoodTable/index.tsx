@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import BollywoodTableComponent from "../../../../components/cardGames/games/bollywoodTable";
 import { socket, socketService } from "../../../../socketManager";
 import {
+  getCardDetailInitial,
   getDragonTigerDetailHorseRacing,
   resetCardDetail,
   updateBalanceOnBetPlaceCards,
@@ -71,6 +72,7 @@ const BollywoodTable = () => {
 
   useEffect(() => {
     try {
+      dispatch(getCardDetailInitial(cardGamesType.btable));
       dispatch(getDragonTigerDetailHorseRacing(cardGamesType.btable));
       return () => {
         socketService.card.leaveMatchRoom(cardGamesType.btable);

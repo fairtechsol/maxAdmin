@@ -4,6 +4,7 @@ import Abj2Component from "../../../../components/cardGames/games/abj2";
 import Loader from "../../../../components/commonComponent/loader";
 import { socket, socketService } from "../../../../socketManager";
 import {
+  getCardDetailInitial,
   getDragonTigerDetailHorseRacing,
   resetCardDetail,
   updateBalanceOnBetPlaceCards,
@@ -95,6 +96,7 @@ const Abj2 = () => {
   }, [dragonTigerDetail?.id]);
 
   useEffect(() => {
+    dispatch(getCardDetailInitial(cardGamesType.andarBahar2));
     dispatch(getDragonTigerDetailHorseRacing(cardGamesType.andarBahar2));
     return () => {
       dispatch(resetCardDetail());

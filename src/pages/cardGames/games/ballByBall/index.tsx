@@ -6,6 +6,7 @@ import {
 } from "../../../../store/actions/match/matchAction";
 import {
   ballbyballMatchRates,
+  getCardDetailInitial,
   getDragonTigerDetailHorseRacing,
   resetCardDetail,
   updateBalanceOnBetPlaceCards,
@@ -75,6 +76,7 @@ const BallByBall = () => {
 
   useEffect(() => {
     try {
+      dispatch(getCardDetailInitial(cardGamesType.ballbyball));
       dispatch(getDragonTigerDetailHorseRacing(cardGamesType.ballbyball));
       return () => {
         socketService.card.leaveMatchRoom(cardGamesType.ballbyball);
