@@ -182,7 +182,7 @@ const VideoFrame = ({ result, time, id, profitLoss, data }: any) => {
                   width: isMobile ? "150px" : "",
                 }}
               >
-                <FlipClock value={time?.length === 1 ? "0" + time : time} />
+                <FlipClock value={(""+time)?.length === 1 ? "0" + time : time} />
               </div>
             )}
           </div>
