@@ -2,11 +2,10 @@ import React, { useEffect, useState } from "react";
 import CustomModal from "../modal";
 import { AppDispatch, RootState } from "../../../store/store";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getSearchClientList,
-  setLockUnlockUser,
-} from "../../../store/actions/user/userActions";
+import { getSearchClientList } from "../../../store/actions/user/userActions";
 import { toast } from "react-toastify";
+import service from "../../../service";
+import { ApiConstants } from "../../../utils/Constants";
 
 const UserLockModal = ({
   show,
@@ -34,16 +33,9 @@ const UserLockModal = ({
     );
   };
 
-  const handleToggle = (userDetail: any, field: any) => {
+  const handleToggle = async (userDetail: any, field: any) => {
     try {
       if (transactionPassword) {
-        setUsers((prevUsers: any) =>
-          prevUsers.map((user: any) =>
-            user.id === userDetail?.id
-              ? { ...user, [field]: !user[field] }
-              : user
-          )
-        );
         const payload = {
           userId: userDetail?.id,
           betBlock:
@@ -54,7 +46,19 @@ const UserLockModal = ({
               : userDetail?.userBlock,
           transactionPassword: transactionPassword,
         };
-        dispatch(setLockUnlockUser(payload));
+        const resp: any = await service.post(
+          ApiConstants.USER.LOCKUNLOCK,
+          payload
+        );
+        if (resp?.status === "success") {
+          setUsers((prevUsers: any) =>
+            prevUsers.map((user: any) =>
+              user.id === userDetail?.id
+                ? { ...user, [field]: !user[field] }
+                : user
+            )
+          );
+        }
       } else {
         toast.error("Transaction Code is Required");
       }
@@ -67,37 +71,40 @@ const UserLockModal = ({
     setUsers(searchUserList?.users || []);
   }, [searchUserList]);
 
-  console.log(transactionPassword, "abc");
-
   return (
     <CustomModal
-      //   customClass="modalFull-90 w-50"
       headerStyle="bg-secondary py-2"
       title="User Detail"
       show={show}
       setShow={() => setShowModal(false)}
     >
       <div>
-        <div className="d-flex align-items-center mb-3">
-          <input
-            type="text"
-            placeholder="Search user"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="form-control me-2"
-            style={{ width: "300px" }}
-          />
-          <button onClick={handleSearch} className="btn btn-primary">
-            Load
-          </button>
-          <input
-            type="number"
-            placeholder="Transaction Code"
-            value={transactionPassword}
-            onChange={(e) => setTransactionPassword(e.target.value)}
-            className="form-control me-2"
-            style={{ width: "200px" }}
-          />
+        <div className="d-flex align-items-center mb-3 row  gap-2">
+          <div className="d-flex">
+            <input
+              type="text"
+              placeholder="Search user"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="form-control me-2 mb-2"
+              style={{ width: "100%" }}
+            />
+            <span className="">
+              <button onClick={handleSearch} className="btn btn-primary ">
+                Load
+              </button>
+            </span>
+          </div>
+          <div>
+            {" "}
+            <input
+              placeholder="Transaction Code"
+              value={transactionPassword}
+              onChange={(e) => setTransactionPassword(e.target.value)}
+              className="form-control me-2"
+              style={{ width: "200px" }}
+            />
+          </div>
         </div>
         <table className="table table-bordered">
           <thead>
