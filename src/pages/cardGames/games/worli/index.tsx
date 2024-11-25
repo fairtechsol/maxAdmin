@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import WorliComponent from "../../../../components/cardGames/games/worli";
 import { socket, socketService } from "../../../../socketManager";
 import {
+  getCardDetailInitial,
   getDragonTigerDetailHorseRacing,
   resetCardDetail,
   updateBalanceOnBetPlaceCards,
@@ -71,6 +72,7 @@ const Worli = () => {
 
   useEffect(() => {
     try {
+      dispatch(getCardDetailInitial(cardGamesType.worli));
       dispatch(getDragonTigerDetailHorseRacing(cardGamesType.worli));
       return () => {
         socketService.card.leaveMatchRoom(cardGamesType.worli);

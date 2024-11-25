@@ -12,12 +12,15 @@ import {
   getAlreadyUserExist,
   getUserHeaderDetail,
   userModalReset,
+  getSearchClientList,
+  resetSearchUserList,
 } from "../../actions/user/userActions";
 
 interface InitialState {
   userList: any;
   searchListData: any;
   userBalanceList: any;
+  searchUserList: any;
   childUsersData: any;
   success: boolean;
   modalSuccess: boolean;
@@ -33,6 +36,7 @@ const initialState: InitialState = {
   userList: null,
   searchListData: null,
   userBalanceList: null,
+  searchUserList: [],
   childUsersData: null,
   success: false,
   modalSuccess: false,
@@ -192,6 +196,21 @@ export const userList = createSlice({
       })
       .addCase(userModalReset, (state) => {
         state.childUsersData = null;
+      })
+      .addCase(getSearchClientList.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getSearchClientList.fulfilled, (state, action) => {
+        state.loading = false;
+        state.searchUserList = action?.payload;
+      })
+      .addCase(getSearchClientList.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action?.error?.message;
+      })
+      .addCase(resetSearchUserList, (state) => {
+        state.searchUserList = [];
       });
   },
 });

@@ -38,6 +38,7 @@ import {
   updateTeenPattiMatchRates,
   updateTeenPattiOpenMatchRates,
   updateTeenPattiTestMatchRates,
+  getCardDetailInitial,
 } from "../../actions/card/cardDetail";
 import _ from "lodash";
 
@@ -80,10 +81,30 @@ const cardDetail = createSlice({
       })
       .addCase(getDragonTigerDetailHorseRacing.fulfilled, (state, action) => {
         state.success = true;
-        state.dragonTigerDetail = action.payload;
+        state.dragonTigerDetail = {
+          ...state.dragonTigerDetail,
+          ...action.payload,
+        };
         state.liveGameResultTop10 = action.payload.topTenResult;
       })
       .addCase(getDragonTigerDetailHorseRacing.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action?.error?.message;
+      })
+      .addCase(getCardDetailInitial.pending, (state) => {
+        state.loading = true;
+        state.success = false;
+        state.error = null;
+      })
+      .addCase(getCardDetailInitial.fulfilled, (state, action) => {
+        state.success = true;
+        state.dragonTigerDetail = {
+          ...state.dragonTigerDetail,
+          ...action.payload,
+        };
+        state.liveGameResultTop10 = action.payload.topTenResult;
+      })
+      .addCase(getCardDetailInitial.rejected, (state, action) => {
         state.loading = false;
         state.error = action?.error?.message;
       })

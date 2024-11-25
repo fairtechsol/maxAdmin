@@ -252,6 +252,34 @@ const AccountStatement = () => {
     }
   };
 
+  const handleClickToOpenBetModal = (item: any, user: any) => {
+    const match = item?.description.match(/Rno\. (\d+\.\d+)/);
+    if (item?.betId) {
+      setAccountStatementModalShow((prev) => !prev);
+      setItemForModal(item);
+      dispatch(
+        getBetAccountStatementModal({
+          id: user?.id,
+          betId: item?.betId,
+          status: null,
+          sort: "betPlaced.createdAt:DESC",
+        })
+      );
+    } else if (match && match[1]) {
+      setAccountStatementModalShow((prev) => !prev);
+      setItemForModal(item);
+      dispatch(
+        getBetAccountStatementModal({
+          id: user?.id,
+          isCard: true,
+          runnerId: match[1],
+          result: `inArr${JSON.stringify(["WIN", "LOSS", "TIE"])}`,
+          sort: "betPlaced.createdAt:DESC",
+        })
+      );
+    }
+  };
+
   useEffect(() => {
     try {
       let filter = "";
@@ -535,10 +563,26 @@ const AccountStatement = () => {
               <td key={column.id}>{item[column.id]}</td>
             ))} */}
               <td>{moment(createdAt).format("YYYY-MM-DD")} </td>
-              <td className={`${amount > 0 ? "color-green" : ""}`}>
+              <td
+                className={`cursor-pointer ${amount > 0 ? "color-green" : ""}`}
+                style={{
+                  cursor: "pointer",
+                }}
+                onClick={() => {
+                  handleClickToOpenBetModal(item, user);
+                }}
+              >
                 {amount > 0 ? amount : 0}
               </td>
-              <td className={`${amount < 0 ? "color-red" : ""}`}>
+              <td
+                className={`${amount < 0 ? "color-red" : ""}`}
+                style={{
+                  cursor: "pointer",
+                }}
+                onClick={() => {
+                  handleClickToOpenBetModal(item, user);
+                }}
+              >
                 {amount < 0 ? amount : 0}
               </td>
               <td
@@ -553,35 +597,7 @@ const AccountStatement = () => {
                   className="actionBtn"
                   variant="dark"
                   onClick={() => {
-                    const match = item?.description.match(/Rno\. (\d+\.\d+)/);
-                    if (item?.betId) {
-                      setAccountStatementModalShow((prev) => !prev);
-                      setItemForModal(item);
-                      dispatch(
-                        getBetAccountStatementModal({
-                          id: user?.id,
-                          betId: item?.betId,
-                          status: null,
-                          sort: "betPlaced.createdAt:DESC",
-                        })
-                      );
-                    } else if (match && match[1]) {
-                      setAccountStatementModalShow((prev) => !prev);
-                      setItemForModal(item);
-                      dispatch(
-                        getBetAccountStatementModal({
-                          id: user?.id,
-                          isCard: true,
-                          runnerId: match[1],
-                          result: `inArr${JSON.stringify([
-                            "WIN",
-                            "LOSS",
-                            "TIE",
-                          ])}`,
-                          sort: "betPlaced.createdAt:DESC",
-                        })
-                      );
-                    }
+                    handleClickToOpenBetModal(item, user);
                   }}
                 >
                   {description}

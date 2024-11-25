@@ -4,6 +4,7 @@ import Lucky7BComponent from "../../../../components/cardGames/games/lucky7B";
 import Loader from "../../../../components/commonComponent/loader";
 import { socket, socketService } from "../../../../socketManager";
 import {
+  getCardDetailInitial,
   getDragonTigerDetailHorseRacing,
   resetCardDetail,
   update7BCardMatchRates,
@@ -98,6 +99,7 @@ const Lucky7B = () => {
   }, [dragonTigerDetail?.id]);
 
   useEffect(() => {
+    dispatch(getCardDetailInitial(cardGamesType.lucky7B));
     dispatch(getDragonTigerDetailHorseRacing(cardGamesType.lucky7B));
     return () => {
       dispatch(resetCardDetail());

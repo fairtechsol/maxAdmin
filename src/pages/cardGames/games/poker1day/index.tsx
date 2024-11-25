@@ -4,6 +4,7 @@ import Poker1DayComponent from "../../../../components/cardGames/games/poker1Day
 import Loader from "../../../../components/commonComponent/loader";
 import { socket, socketService } from "../../../../socketManager";
 import {
+  getCardDetailInitial,
   getDragonTigerDetailHorseRacing,
   resetCardDetail,
   updateBalanceOnBetPlaceCards,
@@ -88,6 +89,7 @@ const Poker1day = () => {
 
   useEffect(() => {
     try {
+      dispatch(getCardDetailInitial(cardGamesType.poker1Day));
       dispatch(getDragonTigerDetailHorseRacing(cardGamesType.poker1Day));
     } catch (e) {
       console.error(e);

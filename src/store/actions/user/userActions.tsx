@@ -22,7 +22,8 @@ interface GetUsers {
 }
 interface SearchUsers {
   userName?: string;
-  createdBy: string;
+  createdBy?: string;
+  isUser?: boolean;
 }
 
 interface RequestData {
@@ -294,6 +295,25 @@ export const setLockUnlockUser = createAsyncThunk<any, any>(
   }
 );
 
+export const getSearchClientList = createAsyncThunk<
+  any,
+  SearchUsers | undefined
+>("user/clientList", async (requestData, thunkApi) => {
+  try {
+    const resp = await service.get(
+      `${ApiConstants.USER.SEARCH_LIST}?userName=${
+        requestData?.userName
+      }${requestData?.isUser ? "&isUser=true" : ""}`
+    );
+    if (resp) {
+      return resp?.data;
+    }
+  } catch (error: any) {
+    const err = error as AxiosError;
+    throw thunkApi.rejectWithValue(err.response?.status);
+  }
+});
+
 export const changePassword = createAsyncThunk<any, ChangePassword>(
   "user/changePassword",
   async (requestData, thunkApi) => {
@@ -404,3 +424,4 @@ export const changePasswordReset = createAction("changePasswordReset/reset");
 export const profileReset = createAction("profile/reset");
 export const accountListModalReset = createAction("accountListModal/reset");
 export const userModalReset = createAction("userModalReset/reset");
+export const resetSearchUserList = createAction("searchUserList/reset");
