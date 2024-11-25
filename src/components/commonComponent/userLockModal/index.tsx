@@ -52,7 +52,7 @@ const UserLockModal = ({
             field === "userBlock"
               ? !userDetail?.userBlock
               : userDetail?.userBlock,
-          transactionPassword: +transactionPassword,
+          transactionPassword: transactionPassword,
         };
         dispatch(setLockUnlockUser(payload));
       } else {
@@ -91,6 +91,7 @@ const UserLockModal = ({
             Load
           </button>
           <input
+            type="number"
             placeholder="Transaction Code"
             value={transactionPassword}
             onChange={(e) => setTransactionPassword(e.target.value)}
@@ -113,15 +114,15 @@ const UserLockModal = ({
                 <td>
                   <input
                     type="checkbox"
-                    checked={user.userLock}
-                    onChange={() => handleToggle(user, "userLock")}
+                    checked={user.userBlock}
+                    onChange={() => handleToggle(user, "userBlock")}
                   />
                 </td>
                 <td>
                   <input
                     type="checkbox"
-                    checked={user.betLock}
-                    onChange={() => handleToggle(user, "betLock")}
+                    checked={user.betBlock}
+                    onChange={() => handleToggle(user, "betBlock")}
                   />
                 </td>
               </tr>

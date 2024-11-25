@@ -331,14 +331,18 @@ const Topbar = (props: any) => {
                   },
                 ]}
               />
-              <Nav.Link
-                className="navbar-mainLink"
-                href="/admin/market-analysis"
-                onClick={handleBlockUserClick}
-              >
-                Lock/Unlock
-              </Nav.Link>
-              <UserLockModal show={showModal} setShowModal={setShowModal} />
+              {userDetail?.roleName === "superAdmin" && (
+                <>
+                  <Nav.Link
+                    className="navbar-mainLink"
+                    href="/admin/market-analysis"
+                    onClick={handleBlockUserClick}
+                  >
+                    Lock/Unlock
+                  </Nav.Link>
+                  <UserLockModal show={showModal} setShowModal={setShowModal} />
+                </>
+              )}
             </Nav>
           </Navbar>
           <div className="user-dropdown-container">
