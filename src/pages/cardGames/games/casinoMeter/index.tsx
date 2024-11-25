@@ -8,6 +8,7 @@ import {
 } from "../../../../store/actions/match/matchAction";
 import {
   casinoMeterPattiMatchRates,
+  getCardDetailInitial,
   getDragonTigerDetailHorseRacing,
   resetCardDetail,
   updateBalanceOnBetPlaceCards,
@@ -74,6 +75,7 @@ const CasinoMeter = () => {
 
   useEffect(() => {
     try {
+      dispatch(getCardDetailInitial(cardGamesType.cmeter));
       dispatch(getDragonTigerDetailHorseRacing(cardGamesType.cmeter));
       return () => {
         socketService.card.leaveMatchRoom(cardGamesType.cmeter);
@@ -91,6 +93,7 @@ const CasinoMeter = () => {
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.visibilityState === "visible") {
+        dispatch(getCardDetailInitial(cardGamesType.cmeter));
         dispatch(getDragonTigerDetailHorseRacing(cardGamesType.cmeter));
       } else if (document.visibilityState === "hidden") {
         dispatch(resetCardDetail());
