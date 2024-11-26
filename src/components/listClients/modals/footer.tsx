@@ -2,7 +2,7 @@ import { FaUndo } from "react-icons/fa";
 import { IoMdExit } from "react-icons/io";
 import CustomButton from "../../commonComponent/button";
 
-const ModalFooter = ({ clickHandler }: any) => {
+const ModalFooter = ({ clickHandler, disabled }: any) => {
   return (
     <div className="d-flex gap-2">
       <CustomButton
@@ -13,7 +13,11 @@ const ModalFooter = ({ clickHandler }: any) => {
         <FaUndo />
         Back
       </CustomButton>
-      <CustomButton className="d-flex gap-2 align-items-center" type="submit">
+      <CustomButton
+        className="d-flex gap-2 align-items-center"
+        type="submit"
+        disabled={disabled}
+      >
         Submit
         <IoMdExit />
       </CustomButton>
