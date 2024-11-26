@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import CustomModal from "../modal";
 import { AppDispatch, RootState } from "../../../store/store";
 import { useDispatch, useSelector } from "react-redux";
-import { getSearchClientList } from "../../../store/actions/user/userActions";
+import { getSearchClientList, resetSearchUserList } from "../../../store/actions/user/userActions";
 import { toast } from "react-toastify";
 import service from "../../../service";
 import { ApiConstants } from "../../../utils/Constants";
@@ -70,6 +70,14 @@ const UserLockModal = ({
   useEffect(() => {
     setUsers(searchUserList?.users || []);
   }, [searchUserList]);
+
+  useEffect(() => {
+    if (!show) {
+      setSearchQuery("");
+      setTransactionPassword("");
+      dispatch(resetSearchUserList());
+    }
+  }, [show]);
 
   return (
     <CustomModal
