@@ -159,6 +159,7 @@ const ExposureLimit = ({
             clickHandler={() => {
               setShow(false);
             }}
+            disabled={loading}
           />
         </Modal.Footer>
       </form>

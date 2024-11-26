@@ -150,7 +150,8 @@ const Credit = ({
           <ModalFooter
             clickHandler={() => {
               setShow(false);
-            }}
+            }} 
+            disabled={loading}
           />
         </Modal.Footer>
       </form>

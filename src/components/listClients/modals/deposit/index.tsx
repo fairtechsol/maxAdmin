@@ -289,6 +289,7 @@ const Deposit = ({
             clickHandler={() => {
               setShow(false);
             }}
+            disabled={loading}
           />
         </Modal.Footer>
       </form>

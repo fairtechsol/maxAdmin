@@ -227,6 +227,7 @@ const ChangeStatus = ({
             clickHandler={() => {
               setShow(false);
             }}
+            disabled={loading}
           />
         </Modal.Footer>
       </form>

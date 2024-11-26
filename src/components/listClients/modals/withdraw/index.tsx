@@ -93,15 +93,17 @@ const Withdraw = ({
   useEffect(() => {
     if (modalSuccess) {
       setShow(false);
-      dispatch(getUsers({
-        userId: userId,
-        page: page,
-        limit: limit,
-        userName: userName,
-        sort: sort,
-        order: order,
-        activeTab: activeTab,
-      }));
+      dispatch(
+        getUsers({
+          userId: userId,
+          page: page,
+          limit: limit,
+          userName: userName,
+          sort: sort,
+          order: order,
+          activeTab: activeTab,
+        })
+      );
       dispatch(getUsersProfile());
       dispatch(accountListModalReset());
     }
@@ -243,6 +245,7 @@ const Withdraw = ({
             clickHandler={() => {
               setShow(false);
             }}
+            disabled={loading}
           />
         </Modal.Footer>
       </form>

@@ -118,6 +118,7 @@ const Password = ({ userData, setShow }: any) => {
             clickHandler={() => {
               setShow(false);
             }}
+            disabled={loading}
           />
         </Modal.Footer>
       </form>
