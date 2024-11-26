@@ -445,9 +445,7 @@ const ListActiveInactiveUser: React.FC = () => {
                               </Form>
                             </td>
                             <td className="text-end">
-                              {roleName === "user"
-                                ? formatToINR(exposureLimit)
-                                : "NA"}
+                              {formatToINR(exposureLimit)}
                             </td>
                             <td>0</td>
                             <td>{roleName}</td>
