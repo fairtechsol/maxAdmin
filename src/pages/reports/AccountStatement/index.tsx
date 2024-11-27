@@ -102,23 +102,35 @@ const AccountStatement = () => {
   );
 
   const aaccountTypeOptions: Option[] = [
-    // { value: "all", label: "All" },
-    { value: "balanceReport", label: "Deposite/Withdraw Report" },
-    { value: "gameReport", label: "Sport Report" },
-    { value: "casino", label: "Casino Reports" },
+    {
+      value: "0",
+      label: "Deposit/Withdraw Reports",
+    },
+    {
+      value: "1",
+      label: "Sport Report",
+    },
+    {
+      value: "2",
+      label: "Casino Reports",
+    },
+    {
+      value: "3",
+      label: "Third-Party Casino Reports",
+    },
   ];
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 1199);
   const handleAccountTypeChange = (selectedOption: any) => {
     setSelectedOption1(selectedOption);
-    if (selectedOption && selectedOption === "balanceReport") {
+    if (selectedOption && selectedOption === "0") {
       setGameNameOptions([
         // { value: "all", label: "All" },
         { value: "upper", label: "Upper" },
         { value: "down", label: "Down" },
       ]);
-    } else if (selectedOption && selectedOption === "gameReport") {
+    } else if (selectedOption && selectedOption === "1") {
       setGameNameOptions(gameConstantsAccountStatement);
-    } else if (selectedOption && selectedOption === "casino") {
+    } else if (selectedOption && selectedOption === "2") {
       setGameNameOptions(card2ConstantsAccountStatement);
     } else if (selectedOption && selectedOption === "all") {
       setGameNameOptions([]);
@@ -143,8 +155,6 @@ const AccountStatement = () => {
       );
     }, 500);
   }, []);
-  // const searchClientName = debounce(async (value: any) => {
-  //   try {
 
   const handleSubmit = (e: any) => {
     try {
@@ -162,22 +172,19 @@ const AccountStatement = () => {
       } else if (dateTo) {
         filter += `&createdAt=lte${moment(dateTo)?.format("YYYY-MM-DD")}`;
       }
-      if (aaccountTypeValues && aaccountTypeValues === "gameReport") {
-        filter += `&statementType=game&betId=notNull`;
-      } else if (aaccountTypeValues && aaccountTypeValues === "balanceReport") {
-        filter += `&statementType=addWithdraw`;
-      } else if (aaccountTypeValues && aaccountTypeValues === "casino") {
-        filter += `&statementType=game&betId=isNull`;
-      }
-      if (gameNameValues && aaccountTypeValues === "balanceReport") {
+
+      if (gameNameValues && aaccountTypeValues === "0") {
         filter += `&gameName=${gameNameValues}`;
       }
       if (
         gameNameValues &&
-        aaccountTypeValues !== "balanceReport" &&
+        aaccountTypeValues !== "0" &&
         gameNameValues !== "all"
       ) {
         filter += `&description=like%${gameNameValues}/%`;
+      }
+      if (aaccountTypeValues) {
+        filter += `&transaction.type=${aaccountTypeValues}`;
       }
       setCurrentPage(1);
       dispatch(
@@ -216,22 +223,19 @@ const AccountStatement = () => {
       } else if (dateTo) {
         filter += `&createdAt=lte${moment(dateTo)?.format("YYYY-MM-DD")}`;
       }
-      if (aaccountTypeValues && aaccountTypeValues === "gameReport") {
-        filter += `&statementType=game&betId=notNull`;
-      } else if (aaccountTypeValues && aaccountTypeValues === "balanceReport") {
-        filter += `&statementType=addWithdraw`;
-      } else if (aaccountTypeValues && aaccountTypeValues === "casino") {
-        filter += `&statementType=game&betId=isNull`;
-      }
-      if (gameNameValues && aaccountTypeValues === "balanceReport") {
+
+      if (gameNameValues && aaccountTypeValues === "0") {
         filter += `&gameName=${gameNameValues}`;
       }
       if (
         gameNameValues &&
-        aaccountTypeValues !== "balanceReport" &&
+        aaccountTypeValues !== "0" &&
         gameNameValues !== "all"
       ) {
         filter += `&description=like%${gameNameValues}/%`;
+      }
+      if (aaccountTypeValues) {
+        filter += `&transaction.type=${aaccountTypeValues}`;
       }
       dispatch(
         handleExport({
@@ -294,24 +298,20 @@ const AccountStatement = () => {
       } else if (dateTo) {
         filter += `&createdAt=lte${moment(dateTo)?.format("YYYY-MM-DD")}`;
       }
-      if (aaccountTypeValues && aaccountTypeValues === "gameReport") {
-        filter += `&statementType=game&betId=notNull`;
-      } else if (aaccountTypeValues && aaccountTypeValues === "balanceReport") {
-        filter += `&statementType=addWithdraw`;
-      } else if (aaccountTypeValues && aaccountTypeValues === "casino") {
-        filter += `&statementType=game&betId=isNull`;
-      }
-      if (gameNameValues && aaccountTypeValues === "balanceReport") {
+
+      if (gameNameValues && aaccountTypeValues === "0") {
         filter += `&gameName=${gameNameValues}`;
       }
       if (
         gameNameValues &&
-        aaccountTypeValues !== "balanceReport" &&
+        aaccountTypeValues !== "0" &&
         gameNameValues !== "all"
       ) {
         filter += `&description=like%${gameNameValues}/%`;
       }
-
+      if (aaccountTypeValues) {
+        filter += `&transaction.type=${aaccountTypeValues}`;
+      }
       if (firstTime) {
         dispatch(
           getReportAccountList({
@@ -425,45 +425,31 @@ const AccountStatement = () => {
               options={aaccountTypeOptions}
             /> */}
           </Col>
-          <Col md={isMobile ? 12 : 2}>
-            <Form.Group controlId="gameNameSelect">
-              <Form.Label>
-                {aaccountTypeValues === "gameReport"
-                  ? "Sports List"
-                  : aaccountTypeValues === "casino"
-                  ? "Casino List"
-                  : "Game Name"}
-              </Form.Label>
-              <Form.Select
-                value={gameNameValues}
-                onChange={handleGameNameChange}
-                aria-label="Game Name Select"
-              >
-                <option value="all">All</option>
-                {gameNameOptions.map((option, index) => (
-                  <option key={index} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </Form.Select>
-            </Form.Group>
-            {/* <SelectSearch
-              defaultValue="All"
-              label={
-                aaccountTypeValues === "gameReport"
-                  ? "Sports List"
-                  : aaccountTypeValues === "casino"
-                  ? "Casino List"
-                  : "Game Name"
-              }
-              // options={options}
-              placeholder={"All"}
-              value={gameNameValues}
-              isSearchable={true}
-              onChange={handleGameNameChange}
-              options={gameNameOptions}
-            /> */}
-          </Col>
+          {aaccountTypeValues !== "3" && (
+            <Col md={isMobile ? 12 : 2}>
+              <Form.Group controlId="gameNameSelect">
+                <Form.Label>
+                  {aaccountTypeValues === "1"
+                    ? "Sports List"
+                    : aaccountTypeValues === "2"
+                    ? "Casino List"
+                    : "Game Name"}
+                </Form.Label>
+                <Form.Select
+                  value={gameNameValues}
+                  onChange={handleGameNameChange}
+                  aria-label="Game Name Select"
+                >
+                  <option value="all">All</option>
+                  {gameNameOptions.map((option, index) => (
+                    <option key={index} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </Form.Select>
+              </Form.Group>
+            </Col>
+          )}
           <Col md={isMobile ? 12 : 2}>
             <SelectSearch
               label={"Search By Client Name"}

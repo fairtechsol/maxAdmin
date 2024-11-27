@@ -73,7 +73,7 @@ const CasinoReport = () => {
     }
     if (casinoTypeValues === "settledBets") {
       if (date) {
-        filter += `&createdAt=eq${moment(date)?.format("YYYY-MM-DD")}`;
+        filter += `&DATE(virtualCasinoBetPlaced.createdAt)=${moment(date)?.format("YYYY-MM-DD")}`;
       }
       filter += `&settled=eqtrue`;
     }
