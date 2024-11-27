@@ -79,6 +79,12 @@ const UserLockModal = ({
     }
   }, [show]);
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      handleSearch();
+    }
+  };
+
   return (
     <CustomModal
       headerStyle="bg-secondary py-2"
@@ -92,6 +98,7 @@ const UserLockModal = ({
             <input
               type="text"
               placeholder="Search user"
+              onKeyDown={handleKeyDown}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="form-control me-2 mb-2"
