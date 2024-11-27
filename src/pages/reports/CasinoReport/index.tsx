@@ -24,7 +24,7 @@ const columns: Column[] = [
   { id: "amount", label: "Amount" },
   { id: "total", label: "Total" },
   { id: "createdAt", label: "Date" },
-  { id: "roundId", label: "Rond Id" },
+  { id: "roundId", label: "Round Id" },
   { id: "transactionId", label: "Transaction Id" },
 ];
 
