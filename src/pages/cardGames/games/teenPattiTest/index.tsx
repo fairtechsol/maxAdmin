@@ -4,6 +4,7 @@ import TeentPattiComponent from "../../../../components/cardGames/games/teenPatt
 import Loader from "../../../../components/commonComponent/loader";
 import { socket, socketService } from "../../../../socketManager";
 import {
+  getCardDetailInitial,
   getDragonTigerDetailHorseRacing,
   resetCardDetail,
   updateBalanceOnBetPlaceCards,
@@ -74,6 +75,7 @@ const TeenPattiTest = () => {
 
   useEffect(() => {
     try {
+      dispatch(getCardDetailInitial(cardGamesType.teenTest));
       dispatch(getDragonTigerDetailHorseRacing(cardGamesType.teenTest));
       return () => {
         socketService.card.leaveMatchRoom(cardGamesType.teenTest);

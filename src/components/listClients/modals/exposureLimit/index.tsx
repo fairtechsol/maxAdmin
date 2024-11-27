@@ -44,10 +44,10 @@ const ExposureLimit = ({
 
     validationSchema: widthdrawAmountValidations,
     onSubmit: (values: any) => {
-      if (userData?.roleName !== "user") {
-        alert("This function work only on User Account.");
-        return;
-      }
+      // if (userData?.roleName !== "user") {
+      //   alert("This function work only on User Account.");
+      //   return;
+      // }
       try {
         let payload = {
           userId: userData?.id,
@@ -77,15 +77,17 @@ const ExposureLimit = ({
   useEffect(() => {
     if (modalSuccess) {
       setShow(false);
-      dispatch(getUsers({
-        userId: userId,
-        page: page,
-        limit: limit,
-        userName: userName,
-        sort: sort,
-        order: order,
-        activeTab: activeTab,
-      }));
+      dispatch(
+        getUsers({
+          userId: userId,
+          page: page,
+          limit: limit,
+          userName: userName,
+          sort: sort,
+          order: order,
+          activeTab: activeTab,
+        })
+      );
       dispatch(getUsersProfile());
       dispatch(accountListModalReset());
     }
@@ -159,6 +161,7 @@ const ExposureLimit = ({
             clickHandler={() => {
               setShow(false);
             }}
+            disabled={loading}
           />
         </Modal.Footer>
       </form>

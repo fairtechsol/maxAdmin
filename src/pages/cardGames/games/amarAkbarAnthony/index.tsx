@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import AmarAkbarAnthonyComponent from "../../../../components/cardGames/games/amarAkbarAnthony";
 import { socket, socketService } from "../../../../socketManager";
 import {
+  getCardDetailInitial,
   getDragonTigerDetailHorseRacing,
   resetCardDetail,
   updateAmarAkbarAnthonyCardMatchRates,
@@ -71,6 +72,7 @@ const AmarAkbarAnthony = () => {
 
   useEffect(() => {
     try {
+      dispatch(getCardDetailInitial(cardGamesType.amarAkbarAnthony));
       dispatch(getDragonTigerDetailHorseRacing(cardGamesType.amarAkbarAnthony));
       return () => {
         socketService.card.leaveMatchRoom(cardGamesType.amarAkbarAnthony);

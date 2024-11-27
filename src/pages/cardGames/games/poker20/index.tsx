@@ -4,6 +4,7 @@ import Poker20Component from "../../../../components/cardGames/games/poker20";
 import Loader from "../../../../components/commonComponent/loader";
 import { socket, socketService } from "../../../../socketManager";
 import {
+  getCardDetailInitial,
   getDragonTigerDetailHorseRacing,
   resetCardDetail,
   updateBalanceOnBetPlaceCards,
@@ -89,6 +90,7 @@ const Poker20 = () => {
 
   useEffect(() => {
     try {
+      dispatch(getCardDetailInitial(cardGamesType.poker20));
       dispatch(getDragonTigerDetailHorseRacing(cardGamesType.poker20));
     } catch (e) {
       console.error(e);

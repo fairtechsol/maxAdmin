@@ -8,6 +8,7 @@ import {
 } from "../../../../store/actions/match/matchAction";
 import { cardGamesType } from "../../../../utils/Constants";
 import {
+  getCardDetailInitial,
   getDragonTigerDetailHorseRacing,
   resetCardDetail,
   update3CardJRates,
@@ -88,6 +89,7 @@ const CardJ = () => {
 
   useEffect(() => {
     try {
+      dispatch(getCardDetailInitial(cardGamesType.cardj));
       dispatch(getDragonTigerDetailHorseRacing(cardGamesType.cardj));
       return () => {
         socketService.card.leaveMatchRoom(cardGamesType.cardj);
@@ -105,6 +107,7 @@ const CardJ = () => {
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.visibilityState === "visible") {
+        dispatch(getCardDetailInitial(cardGamesType.cardj));
         dispatch(getDragonTigerDetailHorseRacing(cardGamesType.cardj));
       } else if (document.visibilityState === "hidden") {
         dispatch(resetCardDetail());

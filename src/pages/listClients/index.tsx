@@ -102,7 +102,6 @@ const ListClent: React.FC = () => {
           sort: "user.createdAt",
           order: "DESC",
           name: "Users List",
-          activeTab: "active",
         })
       );
     }
@@ -239,9 +238,7 @@ const ListClent: React.FC = () => {
                           />
                         </Form>
                       </td>
-                      <td className="text-end">
-                        {roleName === "user" ? exposureLimit : "0"}
-                      </td>
+                      <td className="text-end">{exposureLimit}</td>
                       <td>{defaultPer || 0}</td>
                       <td>{roleName}</td>
                       <td className="text-end">{casinoTotal || "0.00"}</td>
@@ -302,6 +299,9 @@ const ListClent: React.FC = () => {
               });
             }}
             id={eventDetails.eventId}
+            sort="user.createdAt"
+            order="DESC"
+            activeTab="active"
           />
         )}
       </Container>

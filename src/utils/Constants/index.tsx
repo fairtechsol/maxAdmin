@@ -121,7 +121,9 @@ export const ApiConstants = {
     GENRALREPORT: "user/generalReport",
     PROFIT_LOSS: "/bet/profitLoss",
     BET_ACCOUNTSTATEMENT: "/bet/accountStatement",
-    CARD_REPORT: "/card/result/",
+    CARD_RESULT_REPORT: "/card/result/",
+    CASINO_REPORT: "/mac88/bets",
+    CASINO_REPORT_PROVIDERS: "/mac88/providers",
   },
   MATCH: {
     MATCHLIST: "/match/list",
@@ -140,6 +142,7 @@ export const ApiConstants = {
   CARDS: {
     MATCH: {
       GET_CARD_DETAIL: "/match/card",
+      GET_CARD_DETAIL_INITIAL: "/match/initial/card",
       PLACE_BET: "/bet/cardBetting",
       RESULT: "/card/result/detail",
     },

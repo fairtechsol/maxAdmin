@@ -4,6 +4,7 @@ import Race20Component from "../../../../components/cardGames/games/race20";
 import Loader from "../../../../components/commonComponent/loader";
 import { socket, socketService } from "../../../../socketManager";
 import {
+  getCardDetailInitial,
   getDragonTigerDetailHorseRacing,
   resetCardDetail,
   updateBalanceOnBetPlaceCards,
@@ -100,6 +101,7 @@ const Race20 = () => {
   }, [dragonTigerDetail?.id]);
 
   useEffect(() => {
+    dispatch(getCardDetailInitial(cardGamesType.race20));
     dispatch(getDragonTigerDetailHorseRacing(cardGamesType.race20));
     return () => {
       dispatch(resetCardDetail());

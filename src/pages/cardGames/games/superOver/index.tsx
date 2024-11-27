@@ -5,6 +5,7 @@ import Loader from "../../../../components/commonComponent/loader";
 import { socket, socketService } from "../../../../socketManager";
 import {
   casinoScoreboardMatchRates,
+  getCardDetailInitial,
   getDragonTigerDetailHorseRacing,
   resetCardDetail,
   resetScoreBoard,
@@ -103,6 +104,7 @@ const Superover = () => {
   }, [dragonTigerDetail?.id]);
 
   useEffect(() => {
+    dispatch(getCardDetailInitial(cardGamesType.superover));
     dispatch(getDragonTigerDetailHorseRacing(cardGamesType.superover));
     return () => {
       dispatch(resetCardDetail());

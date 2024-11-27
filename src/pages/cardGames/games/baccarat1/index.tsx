@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import BaccaratComponent from "../../../../components/cardGames/games/baccarat1";
 import { socket, socketService } from "../../../../socketManager";
 import {
+  getCardDetailInitial,
   getDragonTigerDetailHorseRacing,
   graphData,
   resetCardDetail,
@@ -72,6 +73,7 @@ const Bacarrat1 = () => {
 
   useEffect(() => {
     try {
+      dispatch(getCardDetailInitial(cardGamesType.baccarat));
       dispatch(getDragonTigerDetailHorseRacing(cardGamesType.baccarat));
       return () => {
         socketService.card.leaveMatchRoom(cardGamesType.baccarat);
@@ -88,6 +90,7 @@ const Bacarrat1 = () => {
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.visibilityState === "visible") {
+        dispatch(getCardDetailInitial(cardGamesType.baccarat));
         dispatch(getDragonTigerDetailHorseRacing(cardGamesType.baccarat));
       } else if (document.visibilityState === "hidden") {
         dispatch(resetCardDetail());

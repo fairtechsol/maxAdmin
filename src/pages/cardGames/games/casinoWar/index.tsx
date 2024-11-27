@@ -5,6 +5,7 @@ import Loader from "../../../../components/commonComponent/loader";
 import { socket, socketService } from "../../../../socketManager";
 import {
   casinoWarMatchRates,
+  getCardDetailInitial,
   getDragonTigerDetailHorseRacing,
   resetCardDetail,
   updateBalanceOnBetPlaceCards,
@@ -98,6 +99,7 @@ const CasinoWar = () => {
   }, [dragonTigerDetail?.id]);
 
   useEffect(() => {
+    dispatch(getCardDetailInitial(cardGamesType.casinoWar));
     dispatch(getDragonTigerDetailHorseRacing(cardGamesType.casinoWar));
     return () => {
       dispatch(resetCardDetail());

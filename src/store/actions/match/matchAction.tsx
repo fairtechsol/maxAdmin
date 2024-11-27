@@ -104,6 +104,45 @@ export const getReportAccountList = createAsyncThunk<any, any>(
     }
   }
 );
+export const getCasinoReport = createAsyncThunk<any, any>(
+  "casino/report",
+  async ({ id, page, limit, searchBy, keyword, filter, sort }, thunkApi) => {
+    try {
+      const resp = await service.get(
+        `${ApiConstants.REPORT.CASINO_REPORT}/${id}?page=${page || 1}&limit=${
+          limit || 15
+        }&searchBy=${searchBy}&keyword=${keyword}${filter ? filter : ""}&sort=${
+          sort ? sort : ""
+        }`
+      );
+      if (resp?.data) {
+        return resp?.data;
+      }
+    } catch (error) {
+      const err = error as AxiosError;
+      return thunkApi.rejectWithValue(err.response?.status);
+    }
+  }
+);
+export const getCasinoReportGameList = createAsyncThunk<any>(
+  "casino/report/gameList",
+  async (_, thunkApi) => {
+    try {
+      const resp = await service.get(
+        ApiConstants.REPORT.CASINO_REPORT_PROVIDERS
+      );
+      if (resp?.data) {
+        return resp?.data?.map((item: any) => ({
+          label: item,
+          value: item,
+        }));
+      }
+    } catch (error) {
+      const err = error as AxiosError;
+      return thunkApi.rejectWithValue(err.response?.status);
+    }
+  }
+);
 export const getBetAccountStatementModal = createAsyncThunk<any, any>(
   "transaction/BetAccountStatementModal",
   async ({ id, sort, betId, status, runnerId, result, isCard }, thunkApi) => {
@@ -362,9 +401,9 @@ export const getCardReport = createAsyncThunk<any, any>(
   async ({ type, page, limit, searchBy, keyword, filter }) => {
     try {
       const resp = await service.get(
-        `${ApiConstants.REPORT.CARD_REPORT}${type}?page=${page || 1}&limit=${
-          limit || 15
-        }&searchBy=${searchBy}&keyword=${
+        `${ApiConstants.REPORT.CARD_RESULT_REPORT}${type}?page=${
+          page || 1
+        }&limit=${limit || 15}&searchBy=${searchBy}&keyword=${
           keyword || ""
         }&sort=cardResult.createdAt:DESC${filter}`
       );

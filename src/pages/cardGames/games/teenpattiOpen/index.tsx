@@ -4,6 +4,7 @@ import TeenPattiOpenComponent from "../../../../components/cardGames/games/teenp
 import Loader from "../../../../components/commonComponent/loader";
 import { socket, socketService } from "../../../../socketManager";
 import {
+  getCardDetailInitial,
   getDragonTigerDetailHorseRacing,
   resetCardDetail,
   updateBalanceOnBetPlaceCards,
@@ -98,6 +99,7 @@ const TeenPattiOpen = () => {
   }, [dragonTigerDetail?.id]);
 
   useEffect(() => {
+    dispatch(getCardDetailInitial(cardGamesType.teenOpen));
     dispatch(getDragonTigerDetailHorseRacing(cardGamesType.teenOpen));
     return () => {
       dispatch(resetCardDetail());
