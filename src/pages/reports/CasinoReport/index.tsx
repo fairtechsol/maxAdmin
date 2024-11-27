@@ -73,7 +73,9 @@ const CasinoReport = () => {
     }
     if (casinoTypeValues === "settledBets") {
       if (date) {
-        filter += `&DATE(virtualCasinoBetPlaced.createdAt)=${moment(date)?.format("YYYY-MM-DD")}`;
+        filter += `&DATE(virtualCasinoBetPlaced.createdAt)=${moment(
+          date
+        )?.format("YYYY-MM-DD")}`;
       }
       filter += `&settled=eqtrue`;
     }
@@ -85,7 +87,8 @@ const CasinoReport = () => {
         id: selectedUser ? selectedUser?.value : localStorage.getItem("key"),
         page: 1,
         limit: tableConfig?.rowPerPage,
-        searchBy: "gameName,providerName,gameId",
+        searchBy:
+          "virtualCasinoBetPlaced.gameName,virtualCasinoBetPlaced.providerName,virtualCasinoBetPlaced.gameId",
         keyword: tableConfig?.keyword ?? "",
         sort: "virtualCasinoBetPlaced.createdAt:DESC",
         filter: filter,
