@@ -66,34 +66,38 @@ const CasinoReport = () => {
   useEffect(() => {}, [tableConfig]);
 
   const handleSubmit = (e: any) => {
-    e.preventDefault();
-    let filter: string = "";
-    if (gameTypeValues && gameTypeValues !== "select") {
-      filter += `&providerName=eq${gameTypeValues}`;
-    }
-    if (casinoTypeValues === "settledBets") {
-      if (date) {
-        filter += `&DATE(virtualCasinoBetPlaced.createdAt)=${moment(
-          date
-        )?.format("YYYY-MM-DD")}`;
+    try {
+      e.preventDefault();
+      let filter: string = "";
+      if (gameTypeValues && gameTypeValues !== "select") {
+        filter += `&providerName=eq${gameTypeValues}`;
       }
-      filter += `&settled=eqtrue`;
+      if (casinoTypeValues === "settledBets") {
+        if (date) {
+          filter += `&DATE(virtualCasinoBetPlaced.createdAt)=${moment(
+            date
+          )?.format("YYYY-MM-DD")}`;
+        }
+        filter += `&settled=eqtrue`;
+      }
+      if (casinoTypeValues === "unsettledBets") {
+        filter += `&settled=eqfalse`;
+      }
+      dispatch(
+        getCasinoReport({
+          id: selectedUser ? selectedUser?.value : localStorage.getItem("key"),
+          page: 1,
+          limit: tableConfig?.rowPerPage,
+          searchBy:
+            "virtualCasinoBetPlaced.gameName,virtualCasinoBetPlaced.providerName,virtualCasinoBetPlaced.gameId",
+          keyword: tableConfig?.keyword ?? "",
+          sort: "virtualCasinoBetPlaced.createdAt:DESC",
+          filter: filter,
+        })
+      );
+    } catch (error) {
+      console.log(error);
     }
-    if (casinoTypeValues === "unsettledBets") {
-      filter += `&settled=eqfalse`;
-    }
-    dispatch(
-      getCasinoReport({
-        id: selectedUser ? selectedUser?.value : localStorage.getItem("key"),
-        page: 1,
-        limit: tableConfig?.rowPerPage,
-        searchBy:
-          "virtualCasinoBetPlaced.gameName,virtualCasinoBetPlaced.providerName,virtualCasinoBetPlaced.gameId",
-        keyword: tableConfig?.keyword ?? "",
-        sort: "virtualCasinoBetPlaced.createdAt:DESC",
-        filter: filter,
-      })
-    );
   };
 
   const debouncedInputValue = useMemo(() => {
@@ -131,6 +135,40 @@ const CasinoReport = () => {
       setUpdateReports(dataWithTotal);
     }
   }, [casinoReport]);
+
+  useEffect(() => {
+    try {
+      let filter: string = "";
+      if (gameTypeValues && gameTypeValues !== "select") {
+        filter += `&providerName=eq${gameTypeValues}`;
+      }
+      if (casinoTypeValues === "settledBets") {
+        if (date) {
+          filter += `&DATE(virtualCasinoBetPlaced.createdAt)=${moment(
+            date
+          )?.format("YYYY-MM-DD")}`;
+        }
+        filter += `&settled=eqtrue`;
+      }
+      if (casinoTypeValues === "unsettledBets") {
+        filter += `&settled=eqfalse`;
+      }
+      dispatch(
+        getCasinoReport({
+          id: selectedUser ? selectedUser?.value : localStorage.getItem("key"),
+          page: tableConfig?.page,
+          limit: tableConfig?.rowPerPage,
+          searchBy:
+            "virtualCasinoBetPlaced.gameName,virtualCasinoBetPlaced.providerName,virtualCasinoBetPlaced.gameId",
+          keyword: tableConfig?.keyword ?? "",
+          sort: "virtualCasinoBetPlaced.createdAt:DESC",
+          filter: filter,
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }, [tableConfig]);
 
   return (
     <div className="p-2 pt-0">
