@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { calculateMaxLoss, formatNumber, handleSize } from "../../../helpers";
 import isMobile from "../../../utils/screenDimension";
 import "./style.scss";
+import MarketTableHeader from "../../commonComponent/MarketWiseHeader";
 
 const SessionNormal = ({ title, data, detail, manual }: any) => {
   const [marketArr, setMarketArr] = useState(data?.section || []);
@@ -41,9 +42,7 @@ const SessionNormal = ({ title, data, detail, manual }: any) => {
         className="sessionNormalContainer"
         style={{ marginTop: isMobile ? "" : "10px" }}
       >
-        <div className="sessionNormalTitle">
-          <span className="sessionNormalTitleTxt f-size15">{title}</span>
-        </div>
+         <MarketTableHeader title={title} type={"matchOdds"} data={data} />
         <div
           style={{
             width: "100%",
