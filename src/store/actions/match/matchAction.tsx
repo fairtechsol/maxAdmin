@@ -331,6 +331,25 @@ export const updateUserMatchLock = createAsyncThunk<any, any>(
     }
   }
 );
+
+export const updateUserMarketLock = createAsyncThunk<any, any>(
+  "/userMarketLock",
+  async (requestData, thunkApi) => {
+    try {
+      const resp = await service.post(
+        `${ApiConstants.USER.USER_MARKET_LOCK}`,
+        requestData
+      );
+      if (resp) {
+        return resp?.data;
+      }
+    } catch (error: any) {
+      const err = error as AxiosError;
+      return thunkApi.rejectWithValue(err.response?.status);
+    }
+  }
+);
+
 export const getMatchLockAllChild = createAsyncThunk<any, any>(
   "/matchLockAllChild",
   async (id, thunkApi) => {

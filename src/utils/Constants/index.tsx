@@ -105,6 +105,7 @@ export const ApiConstants = {
     CREDITREFERRENCE: "/user/update/creditreferrence",
     EXPOSURELIMIT: "/user/update/exposurelimit",
     USER_MATCH_LOCK: "/user/userMatchLock",
+    USER_MARKET_LOCK: "/user/userMarketLock",
     USER_MATCH_LOCK_ALL_CHILD: "/user/getMatchLockAllChild",
     USER_DETAIL_FOR_PARENT: "/user/getUserDetailsForParent",
     USER_CHECK_CHILD_DEACTIVATE: "/user/checkChildDeactivate",
