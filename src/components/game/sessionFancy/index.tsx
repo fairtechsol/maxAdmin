@@ -2,6 +2,7 @@
 import { calculateMaxLoss, formatNumber, handleSize } from "../../../helpers";
 import "./style.scss";
 import isMobile from "../../../utils/screenDimension";
+import MarketTableHeader from "../../commonComponent/MarketWiseHeader";
 
 const SessionFancy = ({ title, data, detail }:any) => {
  
@@ -19,9 +20,7 @@ const SessionFancy = ({ title, data, detail }:any) => {
         className="sessionNormalContainer"
         style={{ marginTop: isMobile ? "" : "10px" }}
       >
-        <div className="sessionNormalTitle">
-          <span className="sessionNormalTitleTxt f-size15">{title}</span>
-        </div>
+         <MarketTableHeader title={title} type={"matchOdds"} data={data} />
         <div
           style={{
             width: "100%",
