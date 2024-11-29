@@ -3,6 +3,7 @@ import "./style.scss";
 import { MatchType } from "../../../utils/enum";
 import CustomModal from "../modal";
 import LockUser from "../../../components/game/gameHeader/userMarketLock/index";
+import UserBookModal from "../../game/gameHeader/modals/userBookModal";
 interface props {
   bgColor?: string;
   title: string;
@@ -30,11 +31,19 @@ function MarketTableHeader({
 
   const [showModal, setShowModal] = useState(false); // State to control modal visibility
   const [showChildren, setShowChildren] = useState<React.ReactNode>(null);
+  const [modalTitle, setModalTitle] = useState<string>("");
   const handleButtonClick = () => {
+    setModalTitle("Bet Lock"); 
     setShowModal(true); // Show the modal on button click
-    setShowChildren(<LockUser data={data} type="match" />); // Show ActiveUser content in modal
-    console.log("Bet Lock clicked");
+    setShowChildren(<LockUser data={data} type="match" />); 
   };
+
+  const handleUserBookClick = () => {
+    setModalTitle("User Book");
+    setShowChildren(<UserBookModal data={data} />); 
+    setShowModal(true); 
+  };
+
   return (
     <>
       <div
@@ -53,7 +62,7 @@ function MarketTableHeader({
             </button>
             <button
               className="btn btn-back"
-              onClick={() => console.log("User Book clicked")}
+              onClick={handleUserBookClick}
             >
               User Book
             </button>
@@ -66,7 +75,7 @@ function MarketTableHeader({
           </div>
         )}
 
-        <CustomModal show={showModal} setShow={setShowModal} title="Bet Lock">
+        <CustomModal show={showModal} setShow={setShowModal} title={modalTitle}>
           {showChildren}
         </CustomModal>
       </div>
