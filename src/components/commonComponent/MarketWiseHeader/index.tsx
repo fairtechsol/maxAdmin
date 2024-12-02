@@ -36,6 +36,7 @@ function MarketTableHeader({
 
   const [showModal1, setShowModal1] = useState(false);
   // const [showModal2, setShowModal2] = useState(false);
+  const [transactionPass, setTransactionPass] = useState<any>();
   const [allLock, setAllLock] = useState();
   const [updatedMatchLockAllChild, setUpdatedMatchLockAllChild] = useState<
     any[]
@@ -69,22 +70,21 @@ function MarketTableHeader({
   const handleClose1 = () => {
     setShowModal1(false);
   };
-const handleLock = (e:any, type:string) => {
-  // if(e.target.checked){
+const handleLock = (e:any, type:string,lock:boolean) => {
     let payload = {
       userId: type==="all" ? null : type,
       matchId:  detail.id,
       betId: data.id,
       blockType: type === "cricketCasino" ? 2 : type === "session" ? 1 : 0,
-      isLock: true,
+      isLock: lock,
       sessionType: sessionType,
       operationToAll: type==="all" ? true : false,
+      transactionPassword:transactionPass
     };
     dispatch(
       updateUserMarketLock(payload)
     );
-    console.log(payload, "shbad", data);
-  // }
+    dispatch(getMarketLockAllChild({matchId:detail?.id,betId:data?.id}));
 };
   return (
     <>
@@ -133,6 +133,8 @@ const handleLock = (e:any, type:string) => {
                   type="text"
                   placeholder="Transaction Code"
                   className="form-control w-auto"
+                  value={transactionPass}
+                  onChange={(e)=>setTransactionPass(e.target.value)}
                 />
               </div>
               <div className="w-100 d-flex flex-row">
@@ -142,7 +144,7 @@ const handleLock = (e:any, type:string) => {
                     type="checkbox"
                     id={`custom-checkbox`}
                     checked={allLock}
-                    onChange={(e) => handleLock(e.target.checked, "all")}
+                    onChange={(e) => handleLock(e.target.checked, "all",!allLock)}
                   />
                   <label
                     className="custom-control-label"
@@ -162,9 +164,9 @@ const handleLock = (e:any, type:string) => {
                         <input
                           className="custom-control-input d-none"
                           type="checkbox"
-                          id={`custom-checkbox-${id}`}
+                          id={`custom-checkbox-${index}`}
                           checked={isLock}
-                          onChange={(e) => handleLock(e.target.checked, id)}
+                          onChange={(e) => handleLock(e.target.checked, id,!isLock)}
                         />
                         <label
                           className="custom-control-label"
