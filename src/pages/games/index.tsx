@@ -14,7 +14,6 @@ import {
 import service from "../../service";
 import { socket, socketService } from "../../socketManager";
 import {
-  getMatchLockAllChild,
   getPlacedBets,
   matchDetailAction,
   updateBalance,
@@ -167,9 +166,7 @@ const Games = () => {
       console.log(e);
     }
   }, [id]);
-  useEffect(() => {
-    dispatch(getMatchLockAllChild(id));
-  }, []);
+ 
 
   useEffect(() => {
     try {

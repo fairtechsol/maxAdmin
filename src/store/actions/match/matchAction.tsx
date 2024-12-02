@@ -366,6 +366,22 @@ export const getMatchLockAllChild = createAsyncThunk<any, any>(
     }
   }
 );
+export const getMarketLockAllChild = createAsyncThunk<any, any>(
+  "/marketLockAllChild",
+  async (requestData, thunkApi) => {
+    try {
+      const resp = await service.get(
+        `${ApiConstants.USER.USER_MARKET_LOCK_ALL_CHILD}?matchId=${requestData?.matchId}&betId=${requestData?.betId}`
+      );
+      if (resp) {
+        return resp?.data;
+      }
+    } catch (error: any) {
+      const err = error as AxiosError;
+      return thunkApi.rejectWithValue(err.response?.status);
+    }
+  }
+);
 export const getUserDetailsForParent = createAsyncThunk<any, any>(
   "/userDetails_ForParent",
   async (id, thunkApi) => {
