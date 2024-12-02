@@ -1,6 +1,7 @@
 
 import { calculateMaxLoss, formatNumber, handleSize } from "../../../helpers";
 import isMobile from "../../../utils/screenDimension";
+import MarketTableHeader from "../../commonComponent/MarketWiseHeader";
 import "./style.scss";
 
 const SessionOddEven = ({ title, data, detail }:any) => {
@@ -18,9 +19,8 @@ const SessionOddEven = ({ title, data, detail }:any) => {
         className="sessionNormalContainer"
         style={{ marginTop: isMobile ? "" : "10px" }}
       >
-        <div className="sessionNormalTitle">
-          <span className="sessionNormalTitleTxt f-size15">{title}</span>
-        </div>
+        
+        <MarketTableHeader title={title} type={"oddEven"} data={data} detail={detail}/>
         <div
           style={{
             width: "100%",

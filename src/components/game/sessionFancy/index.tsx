@@ -20,7 +20,7 @@ const SessionFancy = ({ title, data, detail }:any) => {
         className="sessionNormalContainer"
         style={{ marginTop: isMobile ? "" : "10px" }}
       >
-         <MarketTableHeader title={title} type={"matchOdds"} data={data} />
+        <MarketTableHeader title={title} type={"fancy1"} data={data} detail={detail}/>
         <div
           style={{
             width: "100%",

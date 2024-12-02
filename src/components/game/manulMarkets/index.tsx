@@ -33,7 +33,7 @@ const ManualMarket = ({ title, data, detail, teamARates, teamBRates }: any) => {
         className="manualContainer"
         style={{ marginTop: isMobile ? "" : "10px" }}
       >
-        <MarketTableHeader title={title} type={"matchOdds"} data={data} />
+        <MarketTableHeader title={title} type={"matchOdds"} data={data} detail={detail}/>
 
         <div className="manualBackLayTab">
           <div className="manualMinMaxBox">
