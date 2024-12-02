@@ -4,7 +4,7 @@ import { MatchType } from "../../../utils/enum";
 import { Modal } from "react-bootstrap";
 import { AppDispatch, RootState } from "../../../store/store";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUserMarketLock } from "../../../store/actions/match/matchAction";
+import { getMarketLockAllChild, updateUserMarketLock } from "../../../store/actions/match/matchAction";
 interface props {
   bgColor?: string;
   title: string;
@@ -15,6 +15,7 @@ interface props {
   type: string;
   data?: any;
   sessionType?: string;
+  detail?:any;
 }
 
 function MarketTableHeader({
@@ -27,6 +28,7 @@ function MarketTableHeader({
   type,
   data,
   sessionType,
+  detail,
 }: props) {
   const inlineStyle: React.CSSProperties = {
     ...style,
@@ -34,42 +36,44 @@ function MarketTableHeader({
 
   const [showModal1, setShowModal1] = useState(false);
   // const [showModal2, setShowModal2] = useState(false);
+  const [allLock, setAllLock] = useState();
   const [updatedMatchLockAllChild, setUpdatedMatchLockAllChild] = useState<
     any[]
   >([]);
   
   const dispatch: AppDispatch = useDispatch();
-  const { matchLockAllChild } = useSelector(
+  const { marketLockAllChild } = useSelector(
     (state: RootState) => state.match.placeBets
   );
 
   useEffect(() => {
-    if (matchLockAllChild) {
+    if (marketLockAllChild) {
+      setAllLock(marketLockAllChild.every((item:any) => item.isLock === true));
       setUpdatedMatchLockAllChild(
-        matchLockAllChild.map((item: any) => ({
+        marketLockAllChild.map((item: any) => ({
           ...item,
           isChecked: false,
         }))
       );
     }
-  }, [matchLockAllChild]);
+  }, [marketLockAllChild]);
 
   const handleButtonClick = () => {
+    dispatch(getMarketLockAllChild({matchId:detail?.id,betId:data?.id}));
     setShowModal1(true);
   };
 
   const handleUserBookClick = () => {
     // setShowModal2(true);
   };
-
   const handleClose1 = () => {
     setShowModal1(false);
   };
 const handleLock = (e:any, type:string) => {
-  if(e.target.checked){
+  // if(e.target.checked){
     let payload = {
-      userId: type==="all" ? "" : type,
-      matchId:  data.matchId,
+      userId: type==="all" ? null : type,
+      matchId:  detail.id,
       betId: data.id,
       blockType: type === "cricketCasino" ? 2 : type === "session" ? 1 : 0,
       isLock: true,
@@ -80,9 +84,8 @@ const handleLock = (e:any, type:string) => {
       updateUserMarketLock(payload)
     );
     console.log(payload, "shbad", data);
-  }
+  // }
 };
-console.log("shbad", data);
   return (
     <>
       <div
@@ -138,7 +141,7 @@ console.log("shbad", data);
                     className="custom-control-input d-none"
                     type="checkbox"
                     id={`custom-checkbox`}
-                    // checked={userLock}
+                    checked={allLock}
                     onChange={(e) => handleLock(e.target.checked, "all")}
                   />
                   <label
@@ -152,7 +155,7 @@ console.log("shbad", data);
               </div>
               {updatedMatchLockAllChild?.length > 0 &&
                 updatedMatchLockAllChild.map((item: any, index: number) => {
-                  const { userName, id, isChecked } = item;
+                  const { userName, id, isLock } = item;
                   return (
                     <div className="w-100 d-flex flex-row">
                       <div className="custom-control w-25 d-flex justify-content-start align-items-start border-top border-bottom">
@@ -160,7 +163,7 @@ console.log("shbad", data);
                           className="custom-control-input d-none"
                           type="checkbox"
                           id={`custom-checkbox-${id}`}
-                          checked={isChecked}
+                          checked={isLock}
                           onChange={(e) => handleLock(e.target.checked, id)}
                         />
                         <label

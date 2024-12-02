@@ -40,7 +40,7 @@ const MarketBox = ({
   return (
     <>
       <div className="bookmakerContainer">
-     <MarketTableHeader title={title} type={"matchOdds"} data={data} />
+     <MarketTableHeader title={title} type={"matchOdds"} data={data} detail={detail}/>
 
         <div className="bookmakerBackLayTab">
           <div className="bookmakerMinMaxBox">
