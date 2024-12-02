@@ -355,7 +355,7 @@ export const getMatchLockAllChild = createAsyncThunk<any, any>(
   async (id, thunkApi) => {
     try {
       const resp = await service.get(
-        `${ApiConstants.USER.USER_MATCH_LOCK_ALL_CHILD}?matchId=${id}`
+        `${ApiConstants.USER.USER_MARKET_LOCK_ALL_CHILD}?matchId=${id}`
       );
       if (resp) {
         return resp?.data;
