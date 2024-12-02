@@ -101,7 +101,7 @@ const LockUser = (props: any) => {
 
   return (
     <div>
-      <div className="d-flex justify-content-end mb-3">
+      <div className="d-flex justify-content-end mb-3 w-100">
         <input
           type="text"
           placeholder="Transaction Code"

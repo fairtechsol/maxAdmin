@@ -12,10 +12,9 @@ const UserBookModal = ({ data }: { data: any }) => {
   useEffect(() => {}, [tableConfig]);
 
   return (
-    <div>
+    <div className="userbook">
       <CustomTable
-        className=""
-        striped
+        customClass="userbook"
         columns={columns}
         itemCount={1 || 0}
         // data={rows || []}

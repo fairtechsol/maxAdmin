@@ -16,6 +16,14 @@ const UserLockMarketWise = ({
     const [userLock, setUserLock] = useState<boolean>(lock);
     const dispatch: AppDispatch = useDispatch();
     const { id } = useParams();
+  //   session: "session",
+  // overByOver: "overByover",
+  // ballByBall: "ballByBall",
+  // oddEven: "oddEven",
+  // cricketCasino: "cricketCasino",
+  // fancy1: "fancy1",
+  // khado: "khado",
+  // meter: "meter",
   
     const handleChange = () => {
       try {
@@ -24,7 +32,10 @@ const UserLockMarketWise = ({
             userId: userId,
             matchId: id,
             betId: data.id,
-            blockType: 0,
+            blockType: 0, //for session 1
+            isLock: true,
+            // sessionType: 
+            // operationToAll: 
           })
         );
   
