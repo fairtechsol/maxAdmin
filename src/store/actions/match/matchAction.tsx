@@ -371,7 +371,7 @@ export const getMarketLockAllChild = createAsyncThunk<any, any>(
   async (requestData, thunkApi) => {
     try {
       const resp = await service.get(
-        `${ApiConstants.USER.USER_MARKET_LOCK_ALL_CHILD}?matchId=${requestData?.matchId}&betId=${requestData?.betId}`
+        `${ApiConstants.USER.USER_MARKET_LOCK_ALL_CHILD}?matchId=${requestData?.matchId}${requestData?.betId?`&betId=${requestData?.betId}`:`&sessionType=${requestData?.sessionType}`}`
       );
       if (resp) {
         return resp?.data;

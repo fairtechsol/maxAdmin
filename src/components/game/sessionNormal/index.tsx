@@ -4,7 +4,7 @@ import isMobile from "../../../utils/screenDimension";
 import "./style.scss";
 import MarketTableHeader from "../../commonComponent/MarketWiseHeader";
 
-const SessionNormal = ({ title, data, detail, manual }: any) => {
+const SessionNormal = ({ title, data, detail, manual,mtype }: any) => {
   const [marketArr, setMarketArr] = useState(data?.section || []);
 
   useEffect(() => {
@@ -35,14 +35,13 @@ const SessionNormal = ({ title, data, detail, manual }: any) => {
       return true;
     }
   };
-
   return (
     <>
       <div
         className="sessionNormalContainer"
         style={{ marginTop: isMobile ? "" : "10px" }}
       >
-         <MarketTableHeader title={title} type={"matchOdds"} data={data} />
+        <MarketTableHeader title={title} type={mtype} data={data} detail={detail}/>
         <div
           style={{
             width: "100%",

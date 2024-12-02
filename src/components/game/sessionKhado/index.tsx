@@ -23,7 +23,7 @@ const SessionKhado = ({ title, data, detail }:any) => {
         {/* <div className="sessionNormalTitle">
           <span className="sessionNormalTitleTxt f-size15">{title}</span>
         </div> */}
-         <MarketTableHeader title={title} type={"matchOdds"} data={data} />
+        <MarketTableHeader title={title} type={"khado"} data={data} detail={detail}/>
         <div
           style={{
             width: "100%",

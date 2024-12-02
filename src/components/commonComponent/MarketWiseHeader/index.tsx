@@ -5,6 +5,7 @@ import { Modal } from "react-bootstrap";
 import { AppDispatch, RootState } from "../../../store/store";
 import { useDispatch, useSelector } from "react-redux";
 import { getMarketLockAllChild, updateUserMarketLock } from "../../../store/actions/match/matchAction";
+
 interface props {
   bgColor?: string;
   title: string;
@@ -60,7 +61,7 @@ function MarketTableHeader({
   }, [marketLockAllChild]);
 
   const handleButtonClick = () => {
-    dispatch(getMarketLockAllChild({matchId:detail?.id,betId:data?.id}));
+    dispatch(getMarketLockAllChild({matchId:detail?.id,betId:data?.id,sessionType:type}));
     setShowModal1(true);
   };
 
@@ -70,21 +71,24 @@ function MarketTableHeader({
   const handleClose1 = () => {
     setShowModal1(false);
   };
-const handleLock = (e:any, type:string,lock:boolean) => {
+const handleLock = (e:any, count:string,lock:boolean) => {
+ 
     let payload = {
-      userId: type==="all" ? null : type,
+      userId: count==="all" ? null : count,
       matchId:  detail.id,
       betId: data.id,
       blockType: type === "cricketCasino" ? 2 : type === "session" ? 1 : 0,
       isLock: lock,
-      sessionType: sessionType,
-      operationToAll: type==="all" ? true : false,
+      sessionType: type !=="matchOdds"?type:null,
+      operationToAll: count==="all" ? true : false,
       transactionPassword:transactionPass
     };
     dispatch(
       updateUserMarketLock(payload)
     );
-    dispatch(getMarketLockAllChild({matchId:detail?.id,betId:data?.id}));
+    setTimeout(() => {
+      dispatch(getMarketLockAllChild({matchId:detail?.id,betId:data?.id}));
+    }, 2000);
 };
   return (
     <>
@@ -137,7 +141,7 @@ const handleLock = (e:any, type:string,lock:boolean) => {
                   onChange={(e)=>setTransactionPass(e.target.value)}
                 />
               </div>
-              <div className="w-100 d-flex flex-row">
+              <div className="w-100 d-flex flex-row" style={{border:"1px solid #eee"}}>
                 <div className="custom-control w-25 d-flex justify-content-start align-items-start">
                   <input
                     className="custom-control-input d-none"
@@ -151,7 +155,7 @@ const handleLock = (e:any, type:string,lock:boolean) => {
                     htmlFor={`custom-checkbox`}
                   ></label>
                 </div>
-                <div className="w-75 d-flex justify-content-start align-items-start f-bold">
+                <div className="w-75 d-flex justify-content-start align-items-start f-bold ps-1" style={{borderLeft:"1px solid #eee"}}>
                   All Account
                 </div>
               </div>
@@ -159,8 +163,8 @@ const handleLock = (e:any, type:string,lock:boolean) => {
                 updatedMatchLockAllChild.map((item: any, index: number) => {
                   const { userName, id, isLock } = item;
                   return (
-                    <div className="w-100 d-flex flex-row">
-                      <div className="custom-control w-25 d-flex justify-content-start align-items-start border-top border-bottom">
+                    <div className="w-100 d-flex flex-row" style={{border:"1px solid #eee"}}>
+                      <div className="custom-control w-25 d-flex justify-content-start align-items-start ">
                         <input
                           className="custom-control-input d-none"
                           type="checkbox"
@@ -173,7 +177,7 @@ const handleLock = (e:any, type:string,lock:boolean) => {
                           htmlFor={`custom-checkbox-${index}`}
                         ></label>
                       </div>
-                      <div className="w-75 d-flex justify-content-start align-items-start border-top border-bottom">
+                      <div className="w-75 d-flex justify-content-start align-items-start ps-1" style={{borderLeft:"1px solid #eee"}}>
                         {userName}
                       </div>
                     </div>

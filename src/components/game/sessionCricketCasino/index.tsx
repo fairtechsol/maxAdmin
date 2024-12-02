@@ -4,6 +4,7 @@ import "./style.scss";
 import { FaLock } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { formatNumber, handleSize } from "../../../helpers";
+import MarketTableHeader from "../../commonComponent/MarketWiseHeader";
 
 const SessionCricketCasino = ({ title, data, detail }:any) => {
   const [marketArr, setMarketArr] = useState<any>(data);
@@ -39,14 +40,7 @@ const SessionCricketCasino = ({ title, data, detail }:any) => {
         className="sessionNormalContainer"
         style={{ marginTop: isMobile ? "" : "10px" }}
       >
-        <div className="sessionNormalTitle">
-          <span
-            className="sessionNormalTitleTxt"
-            style={{ fontSize: isMobile ? "13px" : "15px" }}
-          >
-            {title}
-          </span>
-        </div>
+        <MarketTableHeader title={title} type={"cricketCasino"} data={data} detail={detail}/>
         <div
           style={{
             width: "100%",
