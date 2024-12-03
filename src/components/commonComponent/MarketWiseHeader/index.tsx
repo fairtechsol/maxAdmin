@@ -4,8 +4,17 @@ import { MatchType } from "../../../utils/enum";
 import { Modal } from "react-bootstrap";
 import { AppDispatch, RootState } from "../../../store/store";
 import { useDispatch, useSelector } from "react-redux";
-import { getMarketLockAllChild, updateUserMarketLock } from "../../../store/actions/match/matchAction";
-
+import {
+  getMarketLockAllChild,
+  getMarketUserBook,
+  updateUserMarketLock,
+} from "../../../store/actions/match/matchAction";
+import { TableConfig } from "../../../models/tableInterface";
+import CustomTable from "../../../components/commonComponent/table";
+import { toast } from "react-toastify";
+// import { RxCrossCircled } from "react-icons/rx";
+// import { IoCloseCircleOutline } from "react-icons/io5";
+import { AiOutlineCloseCircle } from "react-icons/ai";
 interface props {
   bgColor?: string;
   title: string;
@@ -16,7 +25,7 @@ interface props {
   type: string;
   data?: any;
   sessionType?: string;
-  detail?:any;
+  detail?: any;
 }
 
 function MarketTableHeader({
@@ -34,23 +43,33 @@ function MarketTableHeader({
   const inlineStyle: React.CSSProperties = {
     ...style,
   };
-
+  const toastOptions: any = {
+    icon: <AiOutlineCloseCircle size={40}  color={"#f27474"} />,
+    style: { backgroundColor: "#ffc742", color: "#fff" },
+  };
   const [showModal1, setShowModal1] = useState(false);
-  // const [showModal2, setShowModal2] = useState(false);
+  const [showModal2, setShowModal2] = useState(false);
   const [transactionPass, setTransactionPass] = useState<any>();
   const [allLock, setAllLock] = useState();
   const [updatedMatchLockAllChild, setUpdatedMatchLockAllChild] = useState<
     any[]
   >([]);
-  
+  const [currentPage, setCurrentPage] = useState(1);
+  const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
+  let columns = [
+    { id: "userName", label: "User Name" },
+    { id: detail?.teamA, label: detail?.teamA },
+    { id: detail?.teamB, label: detail?.teamB },
+    ...(detail?.teamC ? [{ id: detail.teamC, label: detail.teamC }] : []),
+  ];
   const dispatch: AppDispatch = useDispatch();
-  const { marketLockAllChild } = useSelector(
+  const { marketLockAllChild, userMatchBook } = useSelector(
     (state: RootState) => state.match.placeBets
   );
-
+  useEffect(() => {}, [tableConfig]);
   useEffect(() => {
     if (marketLockAllChild) {
-      setAllLock(marketLockAllChild.every((item:any) => item.isLock === true));
+      setAllLock(marketLockAllChild.every((item: any) => item.isLock === true));
       setUpdatedMatchLockAllChild(
         marketLockAllChild.map((item: any) => ({
           ...item,
@@ -61,35 +80,48 @@ function MarketTableHeader({
   }, [marketLockAllChild]);
 
   const handleButtonClick = () => {
-    dispatch(getMarketLockAllChild({matchId:detail?.id,betId:data?.id,sessionType:type}));
+    dispatch(
+      getMarketLockAllChild({
+        matchId: detail?.id,
+        betId: data?.id,
+        sessionType: type,
+      })
+    );
     setShowModal1(true);
   };
 
   const handleUserBookClick = () => {
-    // setShowModal2(true);
+    dispatch(
+      getMarketUserBook({ id: detail?.id, type: data?.type, betId: data?.id })
+    );
+    setShowModal2(true);
   };
   const handleClose1 = () => {
     setShowModal1(false);
   };
-const handleLock = (e:any, count:string,lock:boolean) => {
- 
+  const handleClose2 = () => {
+    setShowModal2(false);
+  };
+  const handleLock = (e: any, count: string, lock: boolean) => {
+    if(transactionPass?.length===0 || transactionPass?.length===undefined){
+      toast.warn("transaction code is required!", toastOptions);
+return false;
+    }
     let payload = {
-      userId: count==="all" ? null : count,
-      matchId:  detail.id,
+      userId: count === "all" ? null : count,
+      matchId: detail.id,
       betId: data.id,
-      blockType: type === "cricketCasino" ? 2 : type === "session" ? 1 : 0,
+      blockType: type === "cricketCasino" ? 2 : type === "matchOdds" ? 0 : 1,
       isLock: lock,
-      sessionType: type !=="matchOdds"?type:null,
-      operationToAll: count==="all" ? true : false,
-      transactionPassword:transactionPass
+      sessionType: type !== "matchOdds" ? type : null,
+      operationToAll: count === "all" ? true : false,
+      transactionPassword: transactionPass,
     };
-    dispatch(
-      updateUserMarketLock(payload)
-    );
+    dispatch(updateUserMarketLock(payload));
     setTimeout(() => {
-      dispatch(getMarketLockAllChild({matchId:detail?.id,betId:data?.id}));
-    }, 2000);
-};
+      dispatch(getMarketLockAllChild({ matchId: detail?.id, betId: data?.id,sessionType: type }));
+    }, 1000);
+  };
   return (
     <>
       <div
@@ -138,24 +170,32 @@ const handleLock = (e:any, count:string,lock:boolean) => {
                   placeholder="Transaction Code"
                   className="form-control w-auto"
                   value={transactionPass}
-                  onChange={(e)=>setTransactionPass(e.target.value)}
+                  onChange={(e) => setTransactionPass(e.target.value)}
                 />
               </div>
-              <div className="w-100 d-flex flex-row" style={{border:"1px solid #eee"}}>
+              <div
+                className="w-100 d-flex flex-row"
+                style={{ border: "1px solid #eee" }}
+              >
                 <div className="custom-control w-25 d-flex justify-content-start align-items-start">
                   <input
                     className="custom-control-input d-none"
                     type="checkbox"
                     id={`custom-checkbox`}
                     checked={allLock}
-                    onChange={(e) => handleLock(e.target.checked, "all",!allLock)}
+                    onChange={(e) =>
+                      handleLock(e.target.checked, "all", !allLock)
+                    }
                   />
                   <label
                     className="custom-control-label"
                     htmlFor={`custom-checkbox`}
                   ></label>
                 </div>
-                <div className="w-75 d-flex justify-content-start align-items-start f-bold ps-1" style={{borderLeft:"1px solid #eee"}}>
+                <div
+                  className="w-75 d-flex justify-content-start align-items-start f-bold ps-1"
+                  style={{ borderLeft: "1px solid #eee" }}
+                >
                   All Account
                 </div>
               </div>
@@ -163,26 +203,75 @@ const handleLock = (e:any, count:string,lock:boolean) => {
                 updatedMatchLockAllChild.map((item: any, index: number) => {
                   const { userName, id, isLock } = item;
                   return (
-                    <div className="w-100 d-flex flex-row" style={{border:"1px solid #eee"}}>
+                    <div
+                      className="w-100 d-flex flex-row"
+                      style={{ border: "1px solid #eee" }}
+                    >
                       <div className="custom-control w-25 d-flex justify-content-start align-items-start ">
                         <input
                           className="custom-control-input d-none"
                           type="checkbox"
                           id={`custom-checkbox-${index}`}
                           checked={isLock}
-                          onChange={(e) => handleLock(e.target.checked, id,!isLock)}
+                          onChange={(e) =>
+                            handleLock(e.target.checked, id, !isLock)
+                          }
                         />
                         <label
                           className="custom-control-label"
                           htmlFor={`custom-checkbox-${index}`}
                         ></label>
                       </div>
-                      <div className="w-75 d-flex justify-content-start align-items-start ps-1" style={{borderLeft:"1px solid #eee"}}>
+                      <div
+                        className="w-75 d-flex justify-content-start align-items-start ps-1"
+                        style={{ borderLeft: "1px solid #eee" }}
+                      >
                         {userName}
                       </div>
                     </div>
                   );
                 })}
+            </div>
+          </Modal.Body>
+        </Modal>
+        <Modal
+          // {...props}
+          show={showModal2}
+          onHide={handleClose2}
+          className={`customModal ${customClass}`}
+        >
+          <Modal.Header
+            closeButton
+            // className={`${headerStyle ? headerStyle : ""}`}
+          >
+            <Modal.Title className={`${"Betlock"}`}>{"User Book"}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <div className="w-100 d-flex flex-column">
+              <div>
+                <CustomTable
+                  className=""
+                  striped
+                  columns={columns}
+                  itemCount={userMatchBook?.length || 0}
+                  // data={rows || []}
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                  setTableConfig={setTableConfig}
+                >
+                  {userMatchBook?.map((item: any, index: number) => (
+                    <tr key={index}>
+                      <td>{item?.user?.userName}</td>
+                      {item?.profitLoss &&
+                        Object.entries(item?.profitLoss)?.map(
+                          ([_, val]: any, index: number) =>
+                            val !== "0" &&
+                            val !== null && <td key={index}>{val}</td>
+                        )}
+                    </tr>
+                  ))}
+                </CustomTable>
+              </div>
             </div>
           </Modal.Body>
         </Modal>

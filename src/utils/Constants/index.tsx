@@ -134,6 +134,7 @@ export const ApiConstants = {
     OTHERMATCHDETAILS: "/match/other/",
     CURRENTBET: "/bet",
     MARKETANALYSIS: "/match/marketAnalysis",
+    MARKETWISE_USERBOOK: "/match/marketWise/userBook/",
   },
   BET: {
     PLACEBETSESSION: "bet/session",

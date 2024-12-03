@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   getMarketLockAllChild,
+  getMarketUserBook,
   getMatchLockAllChild,
   getMorePlacedBets,
   getMorePlacedBetsReset,
@@ -28,6 +29,7 @@ interface InitialState {
   statusSuccess: boolean;
   error: any;
   childStatus: any;
+  userMatchBook:any;
 }
 
 const initialState: InitialState = {
@@ -43,6 +45,7 @@ const initialState: InitialState = {
   statusSuccess: false,
   error: null,
   childStatus: {},
+  userMatchBook:[],
 };
 
 const placedBetsSlice = createSlice({
@@ -134,6 +137,20 @@ const placedBetsSlice = createSlice({
         state.marketLockAllChild = action.payload;
       })
       .addCase(getMarketLockAllChild.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action?.error?.message;
+      })
+      .addCase(getMarketUserBook.pending, (state) => {
+        state.loading = true;
+        state.success = false;
+        state.error = null;
+      })
+      .addCase(getMarketUserBook.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        state.userMatchBook = action.payload;
+      })
+      .addCase(getMarketUserBook.rejected, (state, action) => {
         state.loading = false;
         state.error = action?.error?.message;
       })

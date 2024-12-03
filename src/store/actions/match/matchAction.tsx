@@ -398,7 +398,22 @@ export const getUserDetailsForParent = createAsyncThunk<any, any>(
     }
   }
 );
-
+export const getMarketUserBook = createAsyncThunk<any, any>(
+  "/marketUserBook",
+  async ({ id, type, betId }, thunkApi) => {
+    try {
+      const resp = await service.get(
+        `${ApiConstants.MATCH.MARKETWISE_USERBOOK}${id}?type=${type}&betId=${betId}`
+      );
+      if (resp) {
+        return resp?.data;
+      }
+    } catch (error: any) {
+      const err = error as AxiosError;
+      return thunkApi.rejectWithValue(err.response?.status);
+    }
+  }
+);
 export const getUserDetailsOfLock = createAsyncThunk<any, any>(
   "/userDetails_ForLock",
   async (id, thunkApi) => {
