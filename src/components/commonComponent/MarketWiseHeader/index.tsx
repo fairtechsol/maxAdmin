@@ -45,7 +45,7 @@ function MarketTableHeader({
     ...style,
   };
   const toastOptions: any = {
-    icon: <AiOutlineCloseCircle size={40}  color={"#f27474"} />,
+    icon: <AiOutlineCloseCircle size={40} color={"#f27474"} />,
     style: { backgroundColor: "#ffc742", color: "#fff" },
   };
   const [showModal1, setShowModal1] = useState(false);
@@ -57,6 +57,7 @@ function MarketTableHeader({
   >([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
+  const [selected, setSelected] = useState<any>(null);
   let columns = [
     { id: "userName", label: "User Name" },
     { id: detail?.teamA, label: detail?.teamA },
@@ -64,7 +65,7 @@ function MarketTableHeader({
     ...(detail?.teamC ? [{ id: detail.teamC, label: detail.teamC }] : []),
   ];
   const dispatch: AppDispatch = useDispatch();
-  const { marketLockAllChild, userMatchBook } = useSelector(
+  const { marketLockAllChild, userMatchBook,userMatchLockSuccess } = useSelector(
     (state: RootState) => state.match.placeBets
   );
   useEffect(() => {}, [tableConfig]);
@@ -90,7 +91,20 @@ function MarketTableHeader({
     );
     setShowModal1(true);
   };
-
+useEffect(() => {
+ if(userMatchLockSuccess){
+  setUpdatedMatchLockAllChild((prevUserData:any) => {
+    if (selected?.count === "all") {
+      setAllLock(selected?.lock);
+      return prevUserData.map((user:any) => ({ ...user, isLock: selected?.lock }));
+    } else {
+      return prevUserData.map((user:any) =>
+        user?.id === selected?.count ? { ...user, isLock: selected?.lock } : user
+      );
+    }
+  });
+ }
+}, [userMatchLockSuccess]);
   const handleUserBookClick = () => {
     dispatch(
       getMarketUserBook({ id: detail?.id, type: data?.type, betId: data?.id })
@@ -106,10 +120,14 @@ function MarketTableHeader({
     setShowModal2(false);
   };
   const handleLock = (e: any, count: string, lock: boolean) => {
-    if(transactionPass?.length===0 || transactionPass?.length===undefined){
+    if (
+      transactionPass?.length === 0 ||
+      transactionPass?.length === undefined
+    ) {
       toast.warn("transaction code is required!", toastOptions);
-return false;
+      return false;
     }
+    setSelected({ count, lock });
     let payload = {
       userId: count === "all" ? null : count,
       matchId: detail.id,
@@ -121,9 +139,15 @@ return false;
       transactionPassword: transactionPass,
     };
     dispatch(updateUserMarketLock(payload));
-    setTimeout(() => {
-      dispatch(getMarketLockAllChild({ matchId: detail?.id, betId: data?.id,sessionType: type }));
-    }, 1000);
+    // setTimeout(() => {
+    //   dispatch(
+    //     getMarketLockAllChild({
+    //       matchId: detail?.id,
+    //       betId: data?.id,
+    //       sessionType: type,
+    //     })
+    //   );
+    // }, 1000);
   };
   return (
     <>
