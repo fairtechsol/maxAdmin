@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   getMarketLockAllChild,
+  getMarketLockChildReset,
   getMarketUserBook,
   getMatchLockAllChild,
   getMorePlacedBets,
@@ -13,6 +14,7 @@ import {
   successResetForLockUnlock,
   updateBetsPlaced,
   updatePlacedbetsDeleteReason,
+  updateUserMarketLock,
   updateUserMatchLock,
 } from "../../actions/match/matchAction";
 
@@ -30,6 +32,7 @@ interface InitialState {
   error: any;
   childStatus: any;
   userMatchBook:any;
+  userMatchLockSuccess:boolean;
 }
 
 const initialState: InitialState = {
@@ -46,6 +49,7 @@ const initialState: InitialState = {
   error: null,
   childStatus: {},
   userMatchBook:[],
+  userMatchLockSuccess:false
 };
 
 const placedBetsSlice = createSlice({
@@ -82,6 +86,9 @@ const placedBetsSlice = createSlice({
       })
       .addCase(getMorePlacedBetsReset, (state) => {
         state.morePlacedBets = [];
+      })
+      .addCase(getMarketLockChildReset, (state) => {
+        state.marketLockAllChild = [];
       })
       .addCase(getRunAmount.pending, (state) => {
         state.loading = true;
@@ -187,6 +194,15 @@ const placedBetsSlice = createSlice({
       .addCase(getUserDetailsOfLock.rejected, (state, action) => {
         state.loading = false;
         state.error = action?.error?.message;
+      })
+      .addCase(updateUserMarketLock.pending, (state) => {
+        state.userMatchLockSuccess = false;
+      })
+      .addCase(updateUserMarketLock.fulfilled, (state, action) => {
+        state.userMatchLockSuccess = true;
+      })
+      .addCase(updateUserMarketLock.rejected, (state, action) => {
+        state.userMatchLockSuccess = false;
       })
       .addCase(updateBetsPlaced.fulfilled, (state, action) => {
         const {newBet,userName} = action.payload;
