@@ -93,6 +93,7 @@ function MarketTableHeader({
     );
     setShowModal1(true);
   };
+
 useEffect(() => {
  if(userMatchLockSuccess){
   setUpdatedMatchLockAllChild((prevUserData:any) => {
@@ -197,7 +198,7 @@ useEffect(() => {
           // {...props}
           show={showModal1}
           onHide={handleClose1}
-          className={`customModal ${customClass}`}
+          className={`customModal ${customClass} `}
         >
           <Modal.Header
             closeButton
@@ -266,7 +267,7 @@ useEffect(() => {
                         ></label>
                       </div>
                       <div
-                        className="w-75 d-flex justify-content-start align-items-start ps-1"
+                        className="w-75 d-flex"
                         style={{ borderLeft: "1px solid #eee" }}
                       >
                         {userName}
@@ -281,7 +282,7 @@ useEffect(() => {
           // {...props}
           show={showModal2}
           onHide={handleClose2}
-          className={`customModal ${customClass}`}
+          className={`customModal ${customClass} custom-modal-width`}
         >
           <Modal.Header
             closeButton
