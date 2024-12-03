@@ -59,6 +59,7 @@ function MarketTableHeader({
   >([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
+  const [chekbox, setChekbox] = useState(false);
   const [selected, setSelected] = useState<any>(null);
   let columns = [
     { id: "userName", label: "User Name" },
@@ -95,6 +96,7 @@ function MarketTableHeader({
   };
 useEffect(() => {
  if(userMatchLockSuccess){
+  setChekbox(false);
   setUpdatedMatchLockAllChild((prevUserData:any) => {
     if (selected?.count === "all") {
       setAllLock(selected?.lock);
@@ -107,6 +109,8 @@ useEffect(() => {
   });
  }
 }, [userMatchLockSuccess]);
+
+
   const handleUserBookClick = () => {
     if(set1.some(item => data?.type.includes(item))){
       dispatch(
@@ -164,6 +168,7 @@ useEffect(() => {
       toast.warn("transaction code is required!", toastOptions);
       return false;
     }
+    setChekbox(true);
     setSelected({ count, lock });
     let payload = {
       userId: count === "all" ? null : count,
@@ -247,6 +252,7 @@ useEffect(() => {
                     type="checkbox"
                     id={`custom-checkbox`}
                     checked={allLock}
+                    disabled={chekbox}
                     onChange={(e) =>
                       handleLock(e.target.checked, "all", !allLock)
                     }
@@ -277,6 +283,7 @@ useEffect(() => {
                           type="checkbox"
                           id={`custom-checkbox-${index}`}
                           checked={isLock}
+                          disabled={chekbox}
                           onChange={(e) =>
                             handleLock(e.target.checked, id, !isLock)
                           }
