@@ -98,3 +98,7 @@
     background-color: #000; /* Background color for checked state */
     border: 1px solid #000;
   }
+
+  .custom-modal-width .modal-dialog {
+    max-width: 90% !important;
+  }
