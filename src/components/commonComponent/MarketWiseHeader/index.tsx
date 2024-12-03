@@ -28,7 +28,9 @@ interface props {
   sessionType?: string;
   detail?: any;
 }
-
+const set1=["matchOdd","bookmaker","bookmaker2","quickbookmaker1","quickbookmaker2","quickbookmaker3"];
+const set2=["tiedMatch1","tiedMatch2","tiedMatch3"];
+const set3=["completeMatch","completeMatch1","completeManual"];
 function MarketTableHeader({
   title,
   bgColor,
@@ -106,9 +108,23 @@ useEffect(() => {
  }
 }, [userMatchLockSuccess]);
   const handleUserBookClick = () => {
-    dispatch(
-      getMarketUserBook({ id: detail?.id, type: data?.type, betId: data?.id })
-    );
+    if(set1.some(item => data?.type.includes(item))){
+      dispatch(
+        getMarketUserBook({ id: detail?.id, type: "quickbookmaker1", betId: detail?.quickBookmaker?.[0]?.id })
+      );
+    }else if(set2.some(item => data?.type.includes(item))){
+      dispatch(
+        getMarketUserBook({ id: detail?.id, type: "tiedMatch2", betId: detail?.manualTiedMatch?.id })
+      );
+    }else if(set3.some(item => data?.type.includes(item))){
+      dispatch(
+        getMarketUserBook({ id: detail?.id, type: "completeManual", betId: detail?.manualCompleteMatch?.id })
+      );
+    }else{
+      dispatch(
+        getMarketUserBook({ id: detail?.id, type: data?.type, betId: data?.id })
+      );
+    }
     setShowModal2(true);
   };
   const handleClose1 = () => {
