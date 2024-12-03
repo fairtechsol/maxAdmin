@@ -110,15 +110,36 @@ useEffect(() => {
   const handleUserBookClick = () => {
     if(set1.some(item => data?.type.includes(item))){
       dispatch(
-        getMarketUserBook({ id: detail?.id, type: "quickbookmaker1", betId: detail?.quickBookmaker?.[0]?.id })
+        getMarketUserBook({ id: detail?.id, type: "quickbookmaker1", betId: [
+          detail?.quickBookmaker?.[0]?.id,
+          detail?.matchOdd?.id ?? "",
+          detail?.bookmaker?.id ?? "",
+          detail?.bookmaker2?.id ?? "",
+          detail?.quickBookmaker?.[1]?.id ?? "",
+          detail?.quickBookmaker?.[2]?.id ?? ""
+        ].filter((id) => id) 
+          .map((id) => id?.trim?.()) 
+          .join(",") })
       );
     }else if(set2.some(item => data?.type.includes(item))){
       dispatch(
-        getMarketUserBook({ id: detail?.id, type: "tiedMatch2", betId: detail?.manualTiedMatch?.id })
+        getMarketUserBook({ id: detail?.id, type: "tiedMatch2", betId:[
+          detail?.manualTiedMatch?.id ?? "",
+          detail?.apiTideMatch2?.id ?? "",
+          detail?.apiTideMatch?.id ?? ""
+        ].filter((id) => id) 
+          .map((id) => id?.trim?.()) 
+          .join(",") })
       );
     }else if(set3.some(item => data?.type.includes(item))){
       dispatch(
-        getMarketUserBook({ id: detail?.id, type: "completeManual", betId: detail?.manualCompleteMatch?.id })
+        getMarketUserBook({ id: detail?.id, type: "completeManual", betId: [
+          detail?.manualCompleteMatch?.id ?? "",
+          detail?.marketCompleteMatch1?.id ?? "",
+          detail?.marketCompleteMatch?.id ?? ""
+        ].filter((id) => id) 
+          .map((id) => id?.trim?.()) 
+          .join(",") })
       );
     }else{
       dispatch(
