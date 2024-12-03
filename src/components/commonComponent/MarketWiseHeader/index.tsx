@@ -6,6 +6,7 @@ import { AppDispatch, RootState } from "../../../store/store";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getMarketLockAllChild,
+  getMarketLockChildReset,
   getMarketUserBook,
   updateUserMarketLock,
 } from "../../../store/actions/match/matchAction";
@@ -98,6 +99,8 @@ function MarketTableHeader({
   };
   const handleClose1 = () => {
     setShowModal1(false);
+    dispatch(getMarketLockChildReset());
+    setTransactionPass("");
   };
   const handleClose2 = () => {
     setShowModal2(false);

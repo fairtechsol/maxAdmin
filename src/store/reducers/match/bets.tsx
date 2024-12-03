@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   getMarketLockAllChild,
+  getMarketLockChildReset,
   getMarketUserBook,
   getMatchLockAllChild,
   getMorePlacedBets,
@@ -82,6 +83,9 @@ const placedBetsSlice = createSlice({
       })
       .addCase(getMorePlacedBetsReset, (state) => {
         state.morePlacedBets = [];
+      })
+      .addCase(getMarketLockChildReset, (state) => {
+        state.marketLockAllChild = [];
       })
       .addCase(getRunAmount.pending, (state) => {
         state.loading = true;
