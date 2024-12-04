@@ -335,7 +335,6 @@ const Topbar = (props: any) => {
                 <>
                   <Nav.Link
                     className="navbar-mainLink"
-                    href="/admin/market-analysis"
                     onClick={handleBlockUserClick}
                   >
                     Lock/Unlock

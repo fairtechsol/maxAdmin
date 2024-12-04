@@ -1,5 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  getMarketLockAllChild,
+  getMarketLockChildReset,
+  getMarketUserBook,
   getMatchLockAllChild,
   getMorePlacedBets,
   getMorePlacedBetsReset,
@@ -11,6 +14,7 @@ import {
   successResetForLockUnlock,
   updateBetsPlaced,
   updatePlacedbetsDeleteReason,
+  updateUserMarketLock,
   updateUserMatchLock,
 } from "../../actions/match/matchAction";
 
@@ -20,12 +24,16 @@ interface InitialState {
   runAmount: any;
   userMatchLock: any;
   matchLockAllChild: any;
+  marketLockAllChild: any;
   userDetailsForParent: any;
   loading: boolean;
   success: boolean;
   statusSuccess: boolean;
   error: any;
   childStatus: any;
+  userMatchBook:any;
+  userMatchLockSuccess:boolean;
+  userMatchLockError:boolean;
 }
 
 const initialState: InitialState = {
@@ -34,12 +42,16 @@ const initialState: InitialState = {
   runAmount: [],
   userMatchLock: [],
   matchLockAllChild: [],
+  marketLockAllChild:[],
   userDetailsForParent: [],
   loading: false,
   success: false,
   statusSuccess: false,
   error: null,
   childStatus: {},
+  userMatchBook:[],
+  userMatchLockSuccess:false,
+  userMatchLockError:false
 };
 
 const placedBetsSlice = createSlice({
@@ -76,6 +88,9 @@ const placedBetsSlice = createSlice({
       })
       .addCase(getMorePlacedBetsReset, (state) => {
         state.morePlacedBets = [];
+      })
+      .addCase(getMarketLockChildReset, (state) => {
+        state.marketLockAllChild = [];
       })
       .addCase(getRunAmount.pending, (state) => {
         state.loading = true;
@@ -120,6 +135,34 @@ const placedBetsSlice = createSlice({
         state.loading = false;
         state.error = action?.error?.message;
       })
+      .addCase(getMarketLockAllChild.pending, (state) => {
+        state.loading = true;
+        state.success = false;
+        state.error = null;
+      })
+      .addCase(getMarketLockAllChild.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        state.marketLockAllChild = action.payload;
+      })
+      .addCase(getMarketLockAllChild.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action?.error?.message;
+      })
+      .addCase(getMarketUserBook.pending, (state) => {
+        state.loading = true;
+        state.success = false;
+        state.error = null;
+      })
+      .addCase(getMarketUserBook.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        state.userMatchBook = action.payload;
+      })
+      .addCase(getMarketUserBook.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action?.error?.message;
+      })
       .addCase(getUserDetailsForParent.pending, (state) => {
         state.loading = true;
         state.success = false;
@@ -153,6 +196,17 @@ const placedBetsSlice = createSlice({
       .addCase(getUserDetailsOfLock.rejected, (state, action) => {
         state.loading = false;
         state.error = action?.error?.message;
+      })
+      .addCase(updateUserMarketLock.pending, (state) => {
+        state.userMatchLockError = false;
+        state.userMatchLockSuccess = false;
+      })
+      .addCase(updateUserMarketLock.fulfilled, (state, action) => {
+        state.userMatchLockSuccess = true;
+      })
+      .addCase(updateUserMarketLock.rejected, (state, action) => {
+        state.userMatchLockError = true;
+        state.userMatchLockSuccess = false;
       })
       .addCase(updateBetsPlaced.fulfilled, (state, action) => {
         const {newBet,userName} = action.payload;

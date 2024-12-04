@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import GameHeader from "../../components/game/gameHeader";
+// import GameHeader from "../../components/game/gameHeader";
 import { MatchType } from "../../utils/enum";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
@@ -394,7 +394,7 @@ const OtherGamesDetail = () => {
               </div>
             </Col>
             <Col md={4}>
-              <GameHeader />
+            {/* <GameHeader /> */}
               {matchDetails?.eventId &&
                 matchDetails?.matchType !== "politics" && (
                   <LiveStreamComponent

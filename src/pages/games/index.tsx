@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import LiveStreamComponent from "../../components/commonComponent/liveStreamComponent";
 import BetTable from "../../components/game/betTable";
-import GameHeader from "../../components/game/gameHeader";
+// import GameHeader from "../../components/game/gameHeader";
 //import ScoreCard from "../../components/game/scoreCard";
 import {
   Constants,
@@ -166,6 +166,7 @@ const Games = () => {
       console.log(e);
     }
   }, [id]);
+ 
 
   useEffect(() => {
     try {
@@ -895,7 +896,7 @@ const Games = () => {
               )}
             </Col>
             <Col md={4} className="text-white">
-              <GameHeader />
+              {/* <GameHeader /> */}
               {matchDetails?.eventId && (
                 <LiveStreamComponent
                   url={`${liveStreamUrlCricket}${matchDetails?.eventId}`}

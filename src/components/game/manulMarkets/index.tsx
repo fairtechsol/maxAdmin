@@ -3,6 +3,7 @@ import { formatNumber } from "../../../helpers";
 // import { AppDispatch, RootState } from "../../../store/store";
 import { profitLossDataForMatchConstants } from "../../../utils/Constants";
 import isMobile from "../../../utils/screenDimension";
+import MarketTableHeader from "../../commonComponent/MarketWiseHeader";
 import "./style.scss";
 
 const ManualMarket = ({ title, data, detail, teamARates, teamBRates }: any) => {
@@ -32,13 +33,7 @@ const ManualMarket = ({ title, data, detail, teamARates, teamBRates }: any) => {
         className="manualContainer"
         style={{ marginTop: isMobile ? "" : "10px" }}
       >
-        <div className="manualTitle">
-          <span
-            className={`manualTitleTxt ${isMobile ? "f-size13" : "f-size15"}`}
-          >
-            {title}
-          </span>
-        </div>
+        <MarketTableHeader title={title} type={"matchOdds"} data={data} detail={detail}/>
 
         <div className="manualBackLayTab">
           <div className="manualMinMaxBox">

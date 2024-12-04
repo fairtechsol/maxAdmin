@@ -331,12 +331,47 @@ export const updateUserMatchLock = createAsyncThunk<any, any>(
     }
   }
 );
+
+export const updateUserMarketLock = createAsyncThunk<any, any>(
+  "/userMarketLock",
+  async (requestData, thunkApi) => {
+    try {
+      const resp = await service.post(
+        `${ApiConstants.USER.USER_MARKET_LOCK}`,
+        requestData
+      );
+      if (resp) {
+        return resp?.data;
+      }
+    } catch (error: any) {
+      const err = error as AxiosError;
+      return thunkApi.rejectWithValue(err.response?.status);
+    }
+  }
+);
+
 export const getMatchLockAllChild = createAsyncThunk<any, any>(
   "/matchLockAllChild",
   async (id, thunkApi) => {
     try {
       const resp = await service.get(
-        `${ApiConstants.USER.USER_MATCH_LOCK_ALL_CHILD}?matchId=${id}`
+        `${ApiConstants.USER.USER_MARKET_LOCK_ALL_CHILD}?matchId=${id}`
+      );
+      if (resp) {
+        return resp?.data;
+      }
+    } catch (error: any) {
+      const err = error as AxiosError;
+      return thunkApi.rejectWithValue(err.response?.status);
+    }
+  }
+);
+export const getMarketLockAllChild = createAsyncThunk<any, any>(
+  "/marketLockAllChild",
+  async (requestData, thunkApi) => {
+    try {
+      const resp = await service.get(
+        `${ApiConstants.USER.USER_MARKET_LOCK_ALL_CHILD}?matchId=${requestData?.matchId}${requestData?.betId?`&betId=${requestData?.betId}`:`&sessionType=${requestData?.sessionType}`}`
       );
       if (resp) {
         return resp?.data;
@@ -363,7 +398,22 @@ export const getUserDetailsForParent = createAsyncThunk<any, any>(
     }
   }
 );
-
+export const getMarketUserBook = createAsyncThunk<any, any>(
+  "/marketUserBook",
+  async ({ id, type, betId }, thunkApi) => {
+    try {
+      const resp = await service.get(
+        `${ApiConstants.MATCH.MARKETWISE_USERBOOK}${id}?type=${type}&betId=${betId}`
+      );
+      if (resp) {
+        return resp?.data;
+      }
+    } catch (error: any) {
+      const err = error as AxiosError;
+      return thunkApi.rejectWithValue(err.response?.status);
+    }
+  }
+);
 export const getUserDetailsOfLock = createAsyncThunk<any, any>(
   "/userDetails_ForLock",
   async (id, thunkApi) => {
@@ -468,3 +518,4 @@ export const betReportAccountListReset = createAction(
 );
 export const resetGameReportList = createAction("gameReportList/reset");
 export const getMorePlacedBetsReset = createAction("getMorePlacedBets/reset");
+export const getMarketLockChildReset = createAction("getMarketLockChild/reset");

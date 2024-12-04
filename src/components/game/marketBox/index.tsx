@@ -7,6 +7,7 @@ import "./style.scss";
 import { profitLossDataForMatchConstants } from "../../../utils/Constants";
 import { dummyArray, formatNumber } from "../../../helpers";
 import BetBox from "../betBox";
+import MarketTableHeader from "../../commonComponent/MarketWiseHeader";
 // import { useSelector } from "react-redux";
 
 const MarketBox = ({
@@ -36,19 +37,10 @@ const MarketBox = ({
       return formattedRatio;
     }
   })();
-
   return (
     <>
       <div className="bookmakerContainer">
-        <div className="bookmakerTitle">
-          <span
-            className={`bookmakerTitleTxt ${
-              isMobile ? "f-size13" : "f-size15"
-            }`}
-          >
-            {title}
-          </span>
-        </div>
+     <MarketTableHeader title={title} type={"matchOdds"} data={data} detail={detail}/>
 
         <div className="bookmakerBackLayTab">
           <div className="bookmakerMinMaxBox">

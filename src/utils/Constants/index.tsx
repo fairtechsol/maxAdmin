@@ -105,7 +105,9 @@ export const ApiConstants = {
     CREDITREFERRENCE: "/user/update/creditreferrence",
     EXPOSURELIMIT: "/user/update/exposurelimit",
     USER_MATCH_LOCK: "/user/userMatchLock",
+    USER_MARKET_LOCK: "/user/userMarketLock",
     USER_MATCH_LOCK_ALL_CHILD: "/user/getMatchLockAllChild",
+    USER_MARKET_LOCK_ALL_CHILD: "/user/getMarketLockAllChild",
     USER_DETAIL_FOR_PARENT: "/user/getUserDetailsForParent",
     USER_CHECK_CHILD_DEACTIVATE: "/user/checkChildDeactivate",
     TOTAL_BALANCE: "user/child/totalBalance",
@@ -132,6 +134,7 @@ export const ApiConstants = {
     OTHERMATCHDETAILS: "/match/other/",
     CURRENTBET: "/bet",
     MARKETANALYSIS: "/match/marketAnalysis",
+    MARKETWISE_USERBOOK: "/match/marketWise/userBook/",
   },
   BET: {
     PLACEBETSESSION: "bet/session",

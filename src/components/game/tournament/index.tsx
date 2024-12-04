@@ -2,6 +2,7 @@ import { dummyArray, formatNumber } from "../../../helpers";
 import BetBox from "../betBox";
 import isMobile from "../../../utils/screenDimension";
 import "./style.scss";
+import MarketTableHeader from "../../commonComponent/MarketWiseHeader";
 
 const Tournament = ({ title, box, data, detail }: any) => {
   const key = `${data.id}_profitLoss_${detail.id}`;
@@ -14,15 +15,7 @@ const Tournament = ({ title, box, data, detail }: any) => {
     <>
       <div className="tournamentContainer">
         {detail?.matchType === "cricket" && (
-          <div className="tournamentTitle">
-            <span
-              className={`tournamentTitleTxt ${
-                isMobile ? "f-size13" : "f-size15"
-              }`}
-            >
-              {title}
-            </span>
-          </div>
+          <MarketTableHeader title={title} type={"matchOdds"} data={data} detail={detail}/>
         )}
 
         <div className="tournamentBackLayTab">
