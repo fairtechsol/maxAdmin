@@ -33,6 +33,7 @@ interface InitialState {
   childStatus: any;
   userMatchBook:any;
   userMatchLockSuccess:boolean;
+  userMatchLockError:boolean;
 }
 
 const initialState: InitialState = {
@@ -49,7 +50,8 @@ const initialState: InitialState = {
   error: null,
   childStatus: {},
   userMatchBook:[],
-  userMatchLockSuccess:false
+  userMatchLockSuccess:false,
+  userMatchLockError:false
 };
 
 const placedBetsSlice = createSlice({
@@ -196,12 +198,14 @@ const placedBetsSlice = createSlice({
         state.error = action?.error?.message;
       })
       .addCase(updateUserMarketLock.pending, (state) => {
+        state.userMatchLockError = false;
         state.userMatchLockSuccess = false;
       })
       .addCase(updateUserMarketLock.fulfilled, (state, action) => {
         state.userMatchLockSuccess = true;
       })
       .addCase(updateUserMarketLock.rejected, (state, action) => {
+        state.userMatchLockError = true;
         state.userMatchLockSuccess = false;
       })
       .addCase(updateBetsPlaced.fulfilled, (state, action) => {
