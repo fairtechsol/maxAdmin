@@ -68,7 +68,7 @@ function MarketTableHeader({
     ...(detail?.teamC ? [{ id: detail.teamC, label: detail.teamC }] : []),
   ];
   const dispatch: AppDispatch = useDispatch();
-  const { marketLockAllChild, userMatchBook,userMatchLockSuccess } = useSelector(
+  const { marketLockAllChild, userMatchBook,userMatchLockSuccess,userMatchLockError } = useSelector(
     (state: RootState) => state.match.placeBets
   );
   useEffect(() => {}, [tableConfig]);
@@ -109,7 +109,7 @@ useEffect(() => {
     }
   });
  }
-}, [userMatchLockSuccess]);
+}, [userMatchLockSuccess,userMatchLockError]);
 
 
   const handleUserBookClick = () => {
@@ -161,7 +161,7 @@ useEffect(() => {
   const handleClose2 = () => {
     setShowModal2(false);
   };
-  const handleLock = (e: any, count: string, lock: boolean) => {
+  const handleLock = (count: string, lock: boolean) => {
     if (
       transactionPass?.length === 0 ||
       transactionPass?.length === undefined
@@ -255,7 +255,7 @@ useEffect(() => {
                     checked={allLock}
                     disabled={chekbox}
                     onChange={(e) =>
-                      handleLock(e.target.checked, "all", !allLock)
+                      handleLock("all", !allLock)
                     }
                   />
                   <label
@@ -286,7 +286,7 @@ useEffect(() => {
                           checked={isLock}
                           disabled={chekbox}
                           onChange={(e) =>
-                            handleLock(e.target.checked, id, !isLock)
+                            handleLock(id, !isLock)
                           }
                         />
                         <label
