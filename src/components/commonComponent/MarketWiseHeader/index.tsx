@@ -96,8 +96,8 @@ function MarketTableHeader({
   };
 
 useEffect(() => {
- if(userMatchLockSuccess){
   setChekbox(false);
+ if(userMatchLockSuccess){
   setUpdatedMatchLockAllChild((prevUserData:any) => {
     if (selected?.count === "all") {
       setAllLock(selected?.lock);
