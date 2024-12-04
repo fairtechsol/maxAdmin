@@ -3,6 +3,7 @@ import "./style.scss";
 import { profitLossDataForMatchConstants } from "../../../utils/Constants";
 import { dummyArray, formatNumber } from "../../../helpers";
 import BetBox from "../betBox";
+import MarketTableHeader from "../../commonComponent/MarketWiseHeader";
 
 const OtherMarket = ({ title, box, data, detail }:any) => {
   
@@ -45,15 +46,7 @@ const OtherMarket = ({ title, box, data, detail }:any) => {
   return (
     <>
       <div className="otherMarketContainer">
-        <div className="otherMarketTitle">
-          <span
-            className={`otherMarketTitleTxt ${
-              isMobile ? "f-size13" : "f-size15"
-            }`}
-          >
-            {title}
-          </span>
-        </div>
+      <MarketTableHeader title={title} type={"matchOdds"} data={data} detail={detail}/>
 
         <div className="otherMarketBackLayTab">
           <div className="otherMarketMinMaxBox">
