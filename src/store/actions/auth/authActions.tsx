@@ -58,4 +58,20 @@ export const logout = createAsyncThunk<any>("auth/logout", async () => {
   }
 });
 
+
+export const generateAuthToken = createAsyncThunk<any>(
+  "generateAuthToken",
+  async (_, thunkApi) => {
+    try {
+      const resp = await service.get(
+        ApiConstants.AUTHENTICATOR.generateAuthToken
+      );
+      return resp.data;
+    } catch (error) {
+      const err = error as AxiosError;
+      return thunkApi.rejectWithValue(err.response?.status);
+    }
+  }
+);
+
 export const authReset = createAction("auth/reset");

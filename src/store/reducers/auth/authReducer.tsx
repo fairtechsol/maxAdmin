@@ -2,6 +2,7 @@ import { createReducer } from "@reduxjs/toolkit";
 import {
   authReset,
   checkOldPassword,
+  generateAuthToken,
   login,
 } from "../../actions/auth/authActions";
 
@@ -12,6 +13,7 @@ const initialState: any = {
   userRole: "",
   oldPasswordMatched: false,
   loginData: null,
+  authToken: "",
 };
 
 export const authReducer = createReducer(initialState, (builder) => {
@@ -44,5 +46,15 @@ export const authReducer = createReducer(initialState, (builder) => {
       // Reset the state to initial state
       state.success = false;
       state.forceChangePassword = false;
+    })
+    .addCase(generateAuthToken.pending, (state) => {
+      state.loading = true;
+    })
+    .addCase(generateAuthToken.fulfilled, (state, action) => {
+      state.loading = false;
+      state.authToken = action.payload;
+    })
+    .addCase(generateAuthToken.rejected, (state) => {
+      state.loading = false;
     });
 });
