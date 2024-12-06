@@ -1,9 +1,27 @@
 import { Button, Card, Tab, Tabs } from "react-bootstrap";
-
-import "./style.scss";
+import { useEffect, useState } from "react";
 import { FaAndroid } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { generateAuthToken } from "../../store/actions/auth/authActions";
+import { AppDispatch, RootState } from "../../store/store";
+import "./style.scss";
 
 const SecureAuth = () => {
+  const dispatch: AppDispatch = useDispatch();
+  const [key, setKey] = useState<string>("mobile-app");
+  const { authToken } = useSelector((state: RootState) => state.auth);
+
+  const handleSelect = (k: any) => {
+    if (k === "mobile-app") {
+      dispatch(generateAuthToken());
+    }
+    setKey(k);
+  };
+
+  useEffect(() => {
+    dispatch(generateAuthToken());
+  }, []);
+
   return (
     <>
       <div data-v-61537a09="" className="security-auth">
@@ -28,7 +46,11 @@ const SecureAuth = () => {
           </div>
 
           <div className="casino-report-tabs mt-2">
-            <Tabs defaultActiveKey="mobile-app" className="mb-3 text-center ">
+            <Tabs
+              activeKey={key}
+              onSelect={handleSelect}
+              className="mb-3 text-center"
+            >
               <Tab eventKey="mobile-app" title="Enable Using Mobile App">
                 <div className="text-center">
                   <div className="mt-3">
@@ -36,7 +58,7 @@ const SecureAuth = () => {
                     Verification App'.
                   </div>
                   <div className="mt-3">
-                    <div className="verify-code">233558</div>
+                    <div className="verify-code">{authToken}</div>
                   </div>
                   <div className="mt-3 lh-1">
                     <b>
