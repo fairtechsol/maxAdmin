@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 // import { GiHamburgerMenu } from 'react-icons/gi';
 import { useDispatch, useSelector } from "react-redux";
 import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
+import Loader from "../../components/commonComponent/loader";
 import LoggedUserDetail from "../../components/listClients/loggedUserDetail";
+import { socketService } from "../../socketManager";
 import {
   getUsersProfile,
   updateUserBalance,
@@ -11,8 +13,6 @@ import { AppDispatch, RootState } from "../../store/store";
 import "../layout.scss";
 import Topbar from "./header";
 import Sidebar from "./sidebar";
-import { socketService } from "../../socketManager";
-import Loader from "../../components/commonComponent/loader";
 
 function MainLayout({ eventKey }: any) {
   let location = useLocation();
@@ -41,10 +41,16 @@ function MainLayout({ eventKey }: any) {
   }, [dispatch]);
 
   useEffect(() => {
-    if(toggle){
+    if (toggle) {
       setToggle((prev) => !prev);
     }
   }, [location.pathname]);
+
+  useEffect(() => {
+    if (localStorage.getItem("isAuthenticator") === "false") {
+      localStorage.clear();
+    }
+  }, [navigate]);
 
   useEffect(() => {
     if (localStorage.getItem("jwtMaxAdmin")) {
