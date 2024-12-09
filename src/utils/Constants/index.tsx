@@ -159,6 +159,10 @@ export const ApiConstants = {
   },
   AUTHENTICATOR: {
     generateAuthToken: "/auth/generateAuthToken",
+    verifyAuthToken: "/auth/verifyAuthToken",
+    getAuthenticator: "/auth/getAuthenticator",
+    resendToken: "/auth/resend/token",
+    removeAuthenticator: "/auth/removeAuthenticator",
   },
 };
 

@@ -2,25 +2,71 @@ import { Button, Card, Tab, Tabs } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { FaAndroid } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { generateAuthToken } from "../../store/actions/auth/authActions";
+import {
+  generateAuthToken,
+  getAuthenticator,
+  removeAuthenticator,
+  resendTokenToDisable,
+} from "../../store/actions/auth/authActions";
 import { AppDispatch, RootState } from "../../store/store";
 import "./style.scss";
+import OTPInput from "react-otp-input";
 
 const SecureAuth = () => {
   const dispatch: AppDispatch = useDispatch();
-  const [key, setKey] = useState<string>("mobile-app");
-  const { authToken } = useSelector((state: RootState) => state.auth);
+  const [selectedValue, setSelectedValue] = useState("");
+  const [otp, setOtp] = useState("");
+  const [showOtp, setShowOtp] = useState(false);
+  const [password, setPassword] = useState("");
+  const [showDetails, setShowDetails] = useState(false);
+  const { authToken, authenticatedData } = useSelector(
+    (state: RootState) => state.auth
+  );
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    dispatch(
+      generateAuthToken({
+        type: 1,
+        password: password,
+      })
+    );
+  };
+
+  const handleInputChange = (e: any) => {
+    const value = e.target.value;
+    setPassword(value);
+  };
+
+  const handleOtpChange = (otpValue: any) => {
+    setOtp(otpValue);
+  };
 
   const handleSelect = (k: any) => {
-    if (k === "mobile-app") {
-      dispatch(generateAuthToken());
+    if (k === "1") {
+      dispatch(
+        generateAuthToken({
+          type: 2,
+        })
+      );
     }
-    setKey(k);
+    setSelectedValue(k);
+    setShowDetails(false);
   };
 
   useEffect(() => {
-    dispatch(generateAuthToken());
+    dispatch(getAuthenticator());
   }, []);
+
+  useEffect(() => {
+    if (otp.length === 6) {
+      dispatch(
+        removeAuthenticator({
+          authToken: otp,
+        })
+      );
+    }
+  }, [otp]);
 
   return (
     <>
@@ -38,65 +84,155 @@ const SecureAuth = () => {
         <Card.Body>
           <div className="text-center">
             <b>Secure Auth Verification Status:</b>{" "}
-            <span className="badge-danger badge">Disabled</span>
-          </div>
-
-          <div className="mt-1 text-center">
-            Please select below option to enable secure auth verification
-          </div>
-
-          <div className="casino-report-tabs mt-2">
-            <Tabs
-              activeKey={key}
-              onSelect={handleSelect}
-              className="mb-3 text-center"
+            <span
+              className={`${
+                authenticatedData ? "badge-success" : "badge-danger"
+              } badge pointer`}
+              onClick={() => {
+                if (authenticatedData?.type === 1) {
+                  dispatch(resendTokenToDisable());
+                }
+                if (authenticatedData) {
+                  setShowOtp(true);
+                }
+              }}
             >
-              <Tab eventKey="mobile-app" title="Enable Using Mobile App">
-                <div className="text-center">
-                  <div className="mt-3">
-                    Please enter below auth code in your 'Secure Auth
-                    Verification App'.
-                  </div>
-                  <div className="mt-3">
-                    <div className="verify-code">{authToken}</div>
-                  </div>
-                  <div className="mt-3 lh-1">
-                    <b>
-                      If you haven't downloaded, <br />
-                      please download 'Secure Auth Verification App' from the
-                      link below.
-                    </b>
-                  </div>
-                  <div className="mt-2">
-                    Using this app, you will receive an auth code during login
-                    authentication.
-                  </div>
-                  <div className="mt-3">
-                    <a href="#">
-                      <Button variant="primary">
-                        <FaAndroid /> Download on Android
-                      </Button>
-                    </a>
-                  </div>
-                </div>
-              </Tab>
-              <Tab eventKey="telegram" title="Enable Using Telegram">
-                <div className="text-center">
-                  <b>Please enter your login password to continue</b>{" "}
-                  <div className="form-group-s mt-3 secure-password">
-                    <input
-                      type="password"
-                      placeholder="Enter your login password"
-                      className="form-control-s"
-                    />{" "}
-                    <button className="btn btn-primary ms-2 vt">
-                      Get Connection ID
-                    </button>
-                  </div>{" "}
-                </div>
-              </Tab>
-            </Tabs>
+              {authenticatedData ? "Enabled" : "Disabled"}
+            </span>
           </div>
+          {showOtp && (
+            <div
+              className="p-4 d-flex flex-column"
+              style={{ backgroundColor: "#fff" }}
+            >
+              <span
+                className="text-center"
+                style={{ fontSize: "22px", color: "#004a25" }}
+              >
+                Security Code Verification
+              </span>
+              <span className="title-16 text-center">
+                Enter the 6-digit code to disbale Secure Auth
+              </span>
+              <form onSubmit={handleSubmit}>
+                <OTPInput
+                  value={otp}
+                  onChange={handleOtpChange}
+                  numInputs={6}
+                  shouldAutoFocus
+                  inputStyle={{
+                    width: "60px",
+                    height: "60px",
+                    margin: "0 0.5rem",
+                    fontSize: "1.5rem",
+                    textAlign: "center",
+                    border: "1px solid #ccc",
+                    borderRadius: "4px",
+                  }}
+                  containerStyle={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginTop: "1rem",
+                  }}
+                  renderInput={(props: any) => <input {...props} />}
+                />
+              </form>
+            </div>
+          )}
+          {!authenticatedData && (
+            <>
+              <div className="mt-1 text-center">
+                Please select below option to enable secure auth verification
+              </div>
+              <div className="casino-report-tabs mt-2">
+                <Tabs
+                  activeKey={selectedValue}
+                  onSelect={handleSelect}
+                  className="mb-3 text-center"
+                >
+                  <Tab eventKey="1" title="Enable Using Mobile App">
+                    <div className="text-center">
+                      <div className="mt-3">
+                        Please enter below auth code in your 'Secure Auth
+                        Verification App'.
+                      </div>
+                      <div className="mt-3">
+                        <div className="verify-code">{authToken}</div>
+                      </div>
+                      <div className="mt-3 lh-1">
+                        <b>
+                          If you haven't downloaded, <br />
+                          please download 'Secure Auth Verification App' from
+                          the link below.
+                        </b>
+                      </div>
+                      <div className="mt-2">
+                        Using this app, you will receive an auth code during
+                        login authentication.
+                      </div>
+                      <div className="mt-3">
+                        <a href="#">
+                          <Button variant="primary">
+                            <FaAndroid /> Download on Android
+                          </Button>
+                        </a>
+                      </div>
+                    </div>
+                  </Tab>
+                  <Tab eventKey="2" title="Enable Using Telegram">
+                    <div className="text-center">
+                      <b>Please enter your login password to continue</b>{" "}
+                      <div className="form-group-s mt-3 secure-password">
+                        <input
+                          type="password"
+                          placeholder="Enter your login password"
+                          className="form-control-s"
+                          value={password}
+                          onChange={handleInputChange}
+                          required
+                        />
+                        <button
+                          className="btn btn-primary ms-2 vt"
+                          onClick={(e: any) => {
+                            handleSubmit(e);
+                            setShowDetails(true);
+                          }}
+                        >
+                          Get Connection ID
+                        </button>
+                      </div>{" "}
+                    </div>
+                    {showDetails && (
+                      <div className="mt-3 follow-instruction text-center">
+                        <h4 className="title-20 fbold mb-3">
+                          Please follow below instructions for the telegram
+                          2-step verification
+                        </h4>
+                        <p className="title-16">
+                          Find{" "}
+                          <a target="_blank" href="">
+                            @two_factor_gauth_bot
+                          </a>{" "}
+                          in your telegram and type<kbd>/start</kbd> command.
+                          Bot will respond you.
+                        </p>
+                        <p className="title-16">
+                          After this type <kbd>/connect {authToken}</kbd> and
+                          send it to BOT.
+                        </p>
+                        <p className="title-16">
+                          Now your telegram account will be linked with your
+                          website account and 2-Step verification will be
+                          enabled.
+                        </p>
+                      </div>
+                    )}
+                  </Tab>
+                </Tabs>
+              </div>
+            </>
+          )}
         </Card.Body>
       </Card>
     </>

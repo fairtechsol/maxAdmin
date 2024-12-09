@@ -3,17 +3,21 @@ import {
   authReset,
   checkOldPassword,
   generateAuthToken,
+  getAuthenticator,
   login,
+  verifyAuthToken,
 } from "../../actions/auth/authActions";
 
 const initialState: any = {
   success: false,
   loading: false,
+  isAuthenticator: false,
   forceChangePassword: false,
   userRole: "",
   oldPasswordMatched: false,
   loginData: null,
   authToken: "",
+  authenticatedData: null,
 };
 
 export const authReducer = createReducer(initialState, (builder) => {
@@ -27,6 +31,7 @@ export const authReducer = createReducer(initialState, (builder) => {
       state.userRole = action.payload.roleName;
       state.forceChangePassword = action?.payload?.forceChangePassword;
       state.loginData = action.payload;
+      state.isAuthenticator = action?.payload?.isAuthenticator;
     })
     .addCase(login.rejected, (state, action) => {
       state.loading = false;
@@ -55,6 +60,25 @@ export const authReducer = createReducer(initialState, (builder) => {
       state.authToken = action.payload;
     })
     .addCase(generateAuthToken.rejected, (state) => {
+      state.loading = false;
+    })
+    .addCase(verifyAuthToken.pending, (state) => {
+      state.loading = true;
+    })
+    .addCase(verifyAuthToken.fulfilled, (state, action) => {
+      state.loading = false;
+    })
+    .addCase(verifyAuthToken.rejected, (state) => {
+      state.loading = false;
+    })
+    .addCase(getAuthenticator.pending, (state) => {
+      state.loading = true;
+    })
+    .addCase(getAuthenticator.fulfilled, (state, action) => {
+      state.loading = false;
+      state.authenticatedData = action.payload;
+    })
+    .addCase(getAuthenticator.rejected, (state) => {
       state.loading = false;
     });
 });

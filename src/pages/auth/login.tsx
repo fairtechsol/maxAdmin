@@ -4,12 +4,12 @@ import { Form } from "react-bootstrap";
 import { MdOutlineLogin } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { MaxBet07Logo } from "../../assets";
 import CustomButton from "../../components/commonComponent/button";
 import { authReset, login } from "../../store/actions/auth/authActions";
 import { AppDispatch, RootState } from "../../store/store";
 import { loginValidationSchema } from "../../utils/fieldValidations/login";
 import "./style.scss";
-import { MaxBet07Logo } from "../../assets";
 
 const initialValues: any = {
   userName: "",
@@ -21,7 +21,9 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
 
-  const { loading } = useSelector((state: RootState) => state.auth);
+  const { loading, isAuthenticator } = useSelector(
+    (state: RootState) => state.auth
+  );
 
   const formik = useFormik({
     initialValues: initialValues,
@@ -50,6 +52,9 @@ const Login = () => {
           JSON.stringify(forceChangePassword)
         );
         navigate("/admin/change-password");
+      } else if (isAuthenticator) {
+        navigate("/admin/verify");
+        localStorage.setItem("isAuthenticator", "false");
       } else {
         if (loginData?.isBetExist) {
           navigate("/admin/market-analysis");
