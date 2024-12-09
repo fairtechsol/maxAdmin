@@ -9,14 +9,14 @@ const OtherRoutes = {
   path: "/admin",
   element: <OtherLayout />,
   children: [
-    { index: true, element: <Navigate to={"/login"} replace /> },
+    { index: true, element: <Navigate to={"/admin/login"} replace /> },
     {
       path: "verify",
       element: <SecurityAuth />,
     },
     {
       path: "*",
-      element: <Navigate to={"/login"} replace />,
+      element: <Navigate to={"/admin/login"} replace />,
     },
   ],
 };
