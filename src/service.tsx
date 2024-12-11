@@ -1,13 +1,13 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 import { serviceUrl } from "./utils/Constants";
-import {
-  decryptAESKeyWithRSA,
-  decryptWithAES,
-  encryptAESKeyWithRSA,
-  encryptWithAES,
-  generateRandomBytes,
-} from "./utils/encryptDecrypt";
+// import {
+//   decryptAESKeyWithRSA,
+//   decryptWithAES,
+//   encryptAESKeyWithRSA,
+//   encryptWithAES,
+//   generateRandomBytes,
+// } from "./utils/encryptDecrypt";
 
 const toastOptions = {
   autoClose: 1500,
@@ -16,7 +16,7 @@ const toastOptions = {
   pauseOnHover: true,
 };
 
-const aesKey = generateRandomBytes(32);
+// const aesKey = generateRandomBytes(32);
 
 const service = axios.create({
   baseURL: serviceUrl,
