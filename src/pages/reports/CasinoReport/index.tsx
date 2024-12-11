@@ -91,7 +91,7 @@ const CasinoReport = () => {
           searchBy:
             "virtualCasinoBetPlaced.gameName,virtualCasinoBetPlaced.providerName,virtualCasinoBetPlaced.gameId",
           keyword: tableConfig?.keyword ?? "",
-          sort: "virtualCasinoBetPlaced.createdAt:DESC",
+          sort: "virtualCasinoBetPlaced.createdAt:ASC",
           filter: filter,
         })
       );
@@ -161,7 +161,7 @@ const CasinoReport = () => {
           searchBy:
             "virtualCasinoBetPlaced.gameName,virtualCasinoBetPlaced.providerName,virtualCasinoBetPlaced.gameId",
           keyword: tableConfig?.keyword ?? "",
-          sort: "virtualCasinoBetPlaced.createdAt:DESC",
+          sort: "virtualCasinoBetPlaced.createdAt:ASC",
           filter: filter,
         })
       );
