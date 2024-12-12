@@ -11,6 +11,7 @@ import {
 import { AppDispatch, RootState } from "../../store/store";
 import "./style.scss";
 import OTPInput from "react-otp-input";
+import { serviceUrl } from "../../utils/Constants";
 
 const SecureAuth = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -172,7 +173,10 @@ const SecureAuth = () => {
                         login authentication.
                       </div>
                       <div className="mt-3">
-                        <a href="#">
+                        <a
+                          href={`${serviceUrl}/SecureAuthApp.apk`}
+                          target="_blank"
+                        >
                           <Button variant="primary">
                             <FaAndroid /> Download on Android
                           </Button>
