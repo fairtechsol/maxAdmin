@@ -58,4 +58,95 @@ export const logout = createAsyncThunk<any>("auth/logout", async () => {
   }
 });
 
+export const generateAuthToken = createAsyncThunk<any, any>(
+  "generateAuthToken",
+  async (requestData, thunkApi) => {
+    try {
+      const resp = await service.post(
+        ApiConstants.AUTHENTICATOR.generateAuthToken,
+        requestData
+      );
+      return resp.data;
+    } catch (error) {
+      const err = error as AxiosError;
+      return thunkApi.rejectWithValue(err.response?.status);
+    }
+  }
+);
+
+export const verifyAuthToken = createAsyncThunk<any, any>(
+  "verifyAuthToken",
+  async (requestData, thunkApi) => {
+    try {
+      const resp: any = await service.post(
+        ApiConstants.AUTHENTICATOR.verifyAuthToken,
+        { authToken: requestData.authToken }
+      );
+      if (resp?.statusCode === 200) {
+        localStorage.setItem("isAuthenticator", "true");
+        if (requestData?.loginData?.isBetExist) {
+          window.location.replace("/admin/market-analysis");
+        } else {
+          window.location.replace(
+            `/admin/active-inactive-user-list/${localStorage.getItem("uid")}`
+          );
+        }
+        return resp.data;
+      }
+    } catch (error) {
+      const err = error as AxiosError;
+      return thunkApi.rejectWithValue(err.response?.status);
+    }
+  }
+);
+export const getAuthenticator = createAsyncThunk<any>(
+  "getAuthenticator",
+  async (_, thunkApi) => {
+    try {
+      const resp: any = await service.get(
+        ApiConstants.AUTHENTICATOR.getAuthenticator
+      );
+      if (resp) {
+        return resp.data;
+      }
+    } catch (error) {
+      const err = error as AxiosError;
+      return thunkApi.rejectWithValue(err.response?.status);
+    }
+  }
+);
+export const resendTokenToDisable = createAsyncThunk<any>(
+  "resendTokenToDisable",
+  async (_, thunkApi) => {
+    try {
+      const resp: any = await service.post(
+        ApiConstants.AUTHENTICATOR.resendToken
+      );
+      if (resp) {
+        return resp.data;
+      }
+    } catch (error) {
+      const err = error as AxiosError;
+      return thunkApi.rejectWithValue(err.response?.status);
+    }
+  }
+);
+export const removeAuthenticator = createAsyncThunk<any, any>(
+  "removeAuthenticator",
+  async (requestData, thunkApi) => {
+    try {
+      const resp: any = await service.post(
+        ApiConstants.AUTHENTICATOR.removeAuthenticator,
+        requestData
+      );
+      if (resp) {
+        return resp.data;
+      }
+    } catch (error) {
+      const err = error as AxiosError;
+      return thunkApi.rejectWithValue(err.response?.status);
+    }
+  }
+);
+
 export const authReset = createAction("auth/reset");
