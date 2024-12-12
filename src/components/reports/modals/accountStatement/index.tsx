@@ -8,6 +8,7 @@ import { AppDispatch, RootState } from "../../../../store/store";
 import CustomTable from "../../../commonComponent/table";
 import "../style.scss";
 import TooltipCustom from "./tooltip";
+import DeleteBetOverlay from "../../../commonComponent/deleteBetRow";
 
 const AccountStatementModal = ({ item }: any) => {
   const { betAccountStatementModal } = useSelector(
@@ -182,47 +183,60 @@ const AccountStatementModal = ({ item }: any) => {
                     match,
                     ipAddress,
                     browserDetail,
+                    deleteReason,
                   } = item;
                   return (
-                    <tr key={index}>
+                    <tr key={index} className="position-relative">
                       <td
                         className={`${
-                          betType === "BACK" || betType === "YES" ? "bg-blue3" : "bg-red1"
+                          betType === "BACK" || betType === "YES"
+                            ? "bg-blue3"
+                            : "bg-red1"
                         }`}
                       >
                         {user?.createBy?.userName}
                       </td>
                       <td
                         className={`${
-                          betType === "BACK" || betType === "YES"  ? "bg-blue3" : "bg-red1"
+                          betType === "BACK" || betType === "YES"
+                            ? "bg-blue3"
+                            : "bg-red1"
                         }`}
                       >
                         {user?.userName}
                       </td>
                       <td
                         className={`${
-                          betType === "BACK" || betType === "YES"  ? "bg-blue3" : "bg-red1"
+                          betType === "BACK" || betType === "YES"
+                            ? "bg-blue3"
+                            : "bg-red1"
                         }`}
                       >
                         {teamName}
                       </td>
                       <td
                         className={`${
-                          betType === "BACK" || betType === "YES"  ? "bg-blue3" : "bg-red1"
+                          betType === "BACK" || betType === "YES"
+                            ? "bg-blue3"
+                            : "bg-red1"
                         }`}
                       >
                         {odds}
                       </td>
                       <td
                         className={`${
-                          betType === "BACK"  || betType === "YES" ? "bg-blue3" : "bg-red1"
+                          betType === "BACK" || betType === "YES"
+                            ? "bg-blue3"
+                            : "bg-red1"
                         }`}
                       >
                         {amount}
                       </td>
                       <td
                         className={`${
-                          betType === "BACK" || betType === "YES"  ? "bg-blue3" : "bg-red1"
+                          betType === "BACK" || betType === "YES"
+                            ? "bg-blue3"
+                            : "bg-red1"
                         }`}
                         style={{
                           color:
@@ -241,14 +255,18 @@ const AccountStatementModal = ({ item }: any) => {
                       </td>
                       <td
                         className={`${
-                          betType === "BACK" || betType === "YES"  ? "bg-blue3" : "bg-red1"
+                          betType === "BACK" || betType === "YES"
+                            ? "bg-blue3"
+                            : "bg-red1"
                         }`}
                       >
                         {moment(createdAt).format("YYYY-MM-DD hh:mm:ss")}
                       </td>
                       <td
                         className={`${
-                          betType === "BACK" || betType === "YES"  ? "bg-blue3" : "bg-red1"
+                          betType === "BACK" || betType === "YES"
+                            ? "bg-blue3"
+                            : "bg-red1"
                         }`}
                       >
                         {match
@@ -261,14 +279,18 @@ const AccountStatementModal = ({ item }: any) => {
                       </td>
                       <td
                         className={`${
-                          betType === "BACK" || betType === "YES"  ? "bg-blue3" : "bg-red1"
+                          betType === "BACK" || betType === "YES"
+                            ? "bg-blue3"
+                            : "bg-red1"
                         }`}
                       >
                         {ipAddress}
                       </td>
                       <td
                         className={`${
-                          betType === "BACK" || betType === "YES"  ? "bg-blue3" : "bg-red1"
+                          betType === "BACK" || betType === "YES"
+                            ? "bg-blue3"
+                            : "bg-red1"
                         }`}
                       >
                         <TooltipCustom title={browserDetail}>
@@ -277,6 +299,7 @@ const AccountStatementModal = ({ item }: any) => {
                           </a>
                         </TooltipCustom>
                       </td>
+                      <DeleteBetOverlay title={deleteReason} />
                     </tr>
                   );
                 }
