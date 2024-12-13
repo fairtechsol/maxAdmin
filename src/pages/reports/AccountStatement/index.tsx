@@ -183,7 +183,7 @@ const AccountStatement = () => {
       ) {
         filter += `&description=like%${gameNameValues}/%`;
       }
-      if (aaccountTypeValues) {
+      if (aaccountTypeValues && aaccountTypeValues !== "All") {
         filter += `&transaction.type=${aaccountTypeValues}`;
       }
       setCurrentPage(1);
@@ -234,7 +234,7 @@ const AccountStatement = () => {
       ) {
         filter += `&description=like%${gameNameValues}/%`;
       }
-      if (aaccountTypeValues) {
+      if (aaccountTypeValues && aaccountTypeValues !== "All") {
         filter += `&transaction.type=${aaccountTypeValues}`;
       }
       dispatch(
@@ -309,7 +309,7 @@ const AccountStatement = () => {
       ) {
         filter += `&description=like%${gameNameValues}/%`;
       }
-      if (aaccountTypeValues) {
+      if (aaccountTypeValues && aaccountTypeValues !== "All") {
         filter += `&transaction.type=${aaccountTypeValues}`;
       }
       if (firstTime) {
