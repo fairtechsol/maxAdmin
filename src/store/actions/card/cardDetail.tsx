@@ -2,6 +2,7 @@ import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios, { AxiosError } from "axios";
 import service from "../../../service";
 import { ApiConstants, Constants } from "../../../utils/Constants";
+import moment from "moment-timezone";
 
 export const getDragonTigerDetailHorseRacing = createAsyncThunk<any, any>(
   "horseRacing/matchDetail",
@@ -43,6 +44,32 @@ export const resultDragonTiger = createAsyncThunk<any, any>(
     try {
       const resp = await service.get(
         `${ApiConstants.CARDS.MATCH.RESULT}/${requestData}`
+      );
+      if (resp?.data) {
+        return resp?.data;
+      }
+    } catch (error) {
+      const err = error as AxiosError;
+      return thunkApi.rejectWithValue(err.response?.status);
+    }
+  }
+);
+export const transactionProviderBets = createAsyncThunk<any, any>(
+  "result/transactionProviderBets",
+  async (requestData, thunkApi) => {
+    try {
+      const resp = await service.get(
+        `${ApiConstants.REPORT.CASINO_REPORT}/${
+          requestData?.id
+        }?sort=virtualCasinoBetPlaced.createdAt:ASC&providerName=eq${
+          requestData?.name
+        }&createdAt=between${moment(new Date(requestData?.date))?.format(
+          "YYYY-MM-DD"
+        )}|${moment(
+          new Date(requestData?.date).setDate(
+            new Date(requestData?.date).getDate() + 1
+          )
+        )?.format("YYYY-MM-DD")}`
       );
       if (resp?.data) {
         return resp?.data;
@@ -173,6 +200,21 @@ export const casinoScoreboardMatchRates = createAsyncThunk<any, any>(
       );
       if (resp?.data) {
         return resp?.data?.data;
+      }
+    } catch (error) {
+      const err = error as AxiosError;
+      return thunkApi.rejectWithValue(err.response?.status);
+    }
+  }
+);
+
+export const transactionProviderName = createAsyncThunk<any, any>(
+  "result/transactionProviderName",
+  async (_, thunkApi) => {
+    try {
+      const resp = await service.get(`${ApiConstants.REPORT.CASINO_REPORT_PROVIDERS}`);
+      if (resp?.data) {
+        return resp?.data;
       }
     } catch (error) {
       const err = error as AxiosError;
@@ -316,3 +358,4 @@ export const ballbyballMatchRates = createAsyncThunk<any, any>(
 );
 export const resetScoreBoard = createAction("scoreboard/reset");
 export const resetCardDetail = createAction("cardDetail/reset");
+export const transactionProviderBetsReset = createAction("transactionProviderBetsReset/reset");

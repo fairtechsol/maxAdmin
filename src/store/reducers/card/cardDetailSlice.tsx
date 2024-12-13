@@ -39,6 +39,9 @@ import {
   updateTeenPattiOpenMatchRates,
   updateTeenPattiTestMatchRates,
   getCardDetailInitial,
+  transactionProviderBets,
+  transactionProviderBetsReset,
+  transactionProviderName,
 } from "../../actions/card/cardDetail";
 import _ from "lodash";
 
@@ -53,6 +56,8 @@ interface InitialState {
   cards32Detail: any;
   resultData: any;
   scoreBoardData: any;
+  liveCasinoProvider: any;
+  liveCasinoProviderBets: any;
 }
 
 const initialState: InitialState = {
@@ -66,6 +71,8 @@ const initialState: InitialState = {
   cards32Detail: [],
   resultData: null,
   scoreBoardData: null,
+  liveCasinoProvider: [], 
+  liveCasinoProviderBets: [],
 };
 
 const cardDetail = createSlice({
@@ -740,6 +747,36 @@ const cardDetail = createSlice({
       })
       .addCase(resetScoreBoard, (state) => {
         state.scoreBoardData = null;
+      })
+      .addCase(transactionProviderBets.pending, (state) => {
+        // state.loading = true;
+        state.error = null;
+        // state.scoreBoardData = null;
+      })
+      .addCase(transactionProviderBets.fulfilled, (state, action) => {
+        state.liveCasinoProviderBets = action.payload;
+      })
+      .addCase(transactionProviderBets.rejected, (state, action) => {
+        // state.loading = false;
+        state.error = action?.error?.message;
+      })
+      .addCase(transactionProviderBetsReset, (state) => {
+        state.liveCasinoProviderBets = [];
+      })
+      .addCase(transactionProviderName.pending, (state) => {
+        // state.loading = true;
+        state.error = null;
+        // state.scoreBoardData = null;
+      })
+      .addCase(transactionProviderName.fulfilled, (state, action) => {
+        state.liveCasinoProvider = action.payload.map((provider: any) => ({
+          label: provider,
+          value: provider,
+        }));
+      })
+      .addCase(transactionProviderName.rejected, (state, action) => {
+        // state.loading = false;
+        state.error = action?.error?.message;
       });
   },
 });
