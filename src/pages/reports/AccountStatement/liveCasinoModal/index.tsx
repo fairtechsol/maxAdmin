@@ -57,7 +57,7 @@ const LiveCasinoModal = ({
       </Modal.Header>
       <Modal.Body className={`${isMobile ? "p-0 title-12" : "title-14"}`}>
         <div className={`w-100 d-flex flex-column ${isMobile ? "mt-2" : ""}`}>
-          <div className={`w-100 d-flex flex-row justify-content-start gap-2`}>/
+          <div className={`w-100 d-flex flex-row justify-content-start gap-2`}>
             <Col md={1} xs={3}>
               <SelectSearch
                 options={liveCasinoProvider}

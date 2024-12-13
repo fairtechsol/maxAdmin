@@ -418,12 +418,11 @@ setItemForModal(item);
     }
   }, [liveCasinoProviderBets]);
 
-  useEffect(() => {
-    dispatch(transactionProviderBetsReset());
-  }, [liveCasinoModal]);
 
   const handleCloseLiveCasinoModal = () => {
     setLiveCasinoModal(false);
+    dispatch(transactionProviderBetsReset());
+    setUpdateReports([]);
   };
   return (
     <div className="p-2 pt-0">
