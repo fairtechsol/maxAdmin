@@ -24,6 +24,8 @@ import {
   card2ConstantsAccountStatement,
   gameConstantsAccountStatement,
 } from "../../../utils/Constants";
+import LiveCasinoModal from "./liveCasinoModal";
+import { transactionProviderBetsReset, transactionProviderName } from "../../../store/actions/card/cardDetail";
 // import isMobile from "../../../utils/screenDimension";
 
 interface Column {
@@ -72,6 +74,7 @@ const AccountStatement = () => {
     direction: "ASC",
     key: null,
   });
+  const [liveCasinoModal, setLiveCasinoModal] = useState(false);
   const [AccountStatementModalShow, setAccountStatementModalShow] =
     useState(false);
   const [itemForModal, setItemForModal] = useState(null);
@@ -82,16 +85,19 @@ const AccountStatement = () => {
     rowPerPage: 10,
     keyword: "",
   });
-  const [aaccountTypeValues, setSelectedOption1] = useState<any>(null);
+  const [aaccountTypeValues, setAccountTypeValues] = useState<any>(null);
 
   const [gameNameOptions, setGameNameOptions] = useState<Option[]>([]);
   const [gameNameValues, setGameNameValues] = useState<any>(null);
   const [inputValue, setInputValue] = useState("");
+  const [updatedReport, setUpdateReports] = useState<any>([]);
 
   const { ReportAccountList } = useSelector(
     (state: RootState) => state.match.reportList
   );
-
+  const { liveCasinoProviderBets,liveCasinoProvider } = useSelector(
+    (state: RootState) => state.card
+  );
   const { searchListData } = useSelector(
     (state: RootState) => state.user.userList
   );
@@ -121,7 +127,7 @@ const AccountStatement = () => {
   ];
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 1199);
   const handleAccountTypeChange = (selectedOption: any) => {
-    setSelectedOption1(selectedOption);
+    setAccountTypeValues(selectedOption);
     if (selectedOption && selectedOption === "0") {
       setGameNameOptions([
         // { value: "all", label: "All" },
@@ -183,7 +189,7 @@ const AccountStatement = () => {
       ) {
         filter += `&description=like%${gameNameValues}/%`;
       }
-      if (aaccountTypeValues) {
+      if (aaccountTypeValues && aaccountTypeValues !== "All") {
         filter += `&transaction.type=${aaccountTypeValues}`;
       }
       setCurrentPage(1);
@@ -234,7 +240,7 @@ const AccountStatement = () => {
       ) {
         filter += `&description=like%${gameNameValues}/%`;
       }
-      if (aaccountTypeValues) {
+      if (aaccountTypeValues && aaccountTypeValues !== "All") {
         filter += `&transaction.type=${aaccountTypeValues}`;
       }
       dispatch(
@@ -309,7 +315,7 @@ const AccountStatement = () => {
       ) {
         filter += `&description=like%${gameNameValues}/%`;
       }
-      if (aaccountTypeValues) {
+      if (aaccountTypeValues && aaccountTypeValues !== "All") {
         filter += `&transaction.type=${aaccountTypeValues}`;
       }
       if (firstTime) {
@@ -369,6 +375,10 @@ const AccountStatement = () => {
   }, [searchListData]);
 
   useEffect(() => {
+    dispatch(transactionProviderName(""));
+  }, []);
+
+  useEffect(() => {
     const currentDate = new Date();
     const formattedCurrentDate = currentDate.toISOString().split("T")[0]; // Format as YYYY-MM-DD
 
@@ -392,6 +402,28 @@ const AccountStatement = () => {
     };
   }, []);
 
+  const handleLiveCasinoModalOpen=(item:any,user:any)=>{
+setLiveCasinoModal(true);
+setItemForModal(item);
+  };
+
+  useEffect(() => {
+    if (liveCasinoProviderBets?.bets) {
+      let runningTotal = 0;
+      const dataWithTotal = liveCasinoProviderBets.bets.map((item: any) => {
+        runningTotal += parseFloat(item?.amount || 0);
+        return { ...item, total: runningTotal };
+      });
+      setUpdateReports(dataWithTotal);
+    }
+  }, [liveCasinoProviderBets]);
+
+
+  const handleCloseLiveCasinoModal = () => {
+    setLiveCasinoModal(false);
+    dispatch(transactionProviderBetsReset());
+    setUpdateReports([]);
+  };
   return (
     <div className="p-2 pt-0">
       <h5 className="title-22 fw-normal">Account Statement</h5>
@@ -583,7 +615,7 @@ const AccountStatement = () => {
                   className="actionBtn"
                   variant="dark"
                   onClick={() => {
-                    handleClickToOpenBetModal(item, user);
+                    aaccountTypeValues==="3"? handleLiveCasinoModalOpen(item,user):handleClickToOpenBetModal(item, user);
                   }}
                 >
                   {description}
@@ -620,6 +652,13 @@ const AccountStatement = () => {
       >
         <AccountStatementModal item={itemForModal} />
       </CustomModal>
+      <LiveCasinoModal
+        liveCasinoModal={liveCasinoModal}
+        selected={itemForModal}
+        handleCloseLiveCasinoModal={handleCloseLiveCasinoModal}
+        liveCasinoProvider={liveCasinoProvider}
+        updatedReport={updatedReport}
+      />
     </div>
   );
 };
