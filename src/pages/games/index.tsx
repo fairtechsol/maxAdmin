@@ -166,7 +166,6 @@ const Games = () => {
       console.log(e);
     }
   }, [id]);
- 
 
   useEffect(() => {
     try {
