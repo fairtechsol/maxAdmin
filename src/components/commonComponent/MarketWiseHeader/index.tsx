@@ -77,8 +77,8 @@ function MarketTableHeader({
   let columns = [
     { id: "userName", label: "User Name" },
     //{ id: detail?.teamA, label: detail?.teamA },
-    { id: detail?.teamB, label: detail?.teamB },
-    ...(detail?.teamC ? [{ id: detail.teamC, label: detail.teamC }] : []),
+    //{ id: detail?.teamB, label: detail?.teamB },
+    //...(detail?.teamC ? [{ id: detail.teamC, label: detail.teamC }] : []),
     ...(mappedNats ? mappedNats : []),
   ];
 
@@ -230,7 +230,7 @@ function MarketTableHeader({
     // }, 1000);
   };
 
-  
+  console.log("data",detail);
  
   return (
     <>
