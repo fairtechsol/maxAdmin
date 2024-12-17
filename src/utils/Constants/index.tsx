@@ -188,7 +188,7 @@ export const Constants = {
 };
 
 export const cardUrl =
-  process.env.NODE_ENV !== "production"
+  process.env.NODE_ENV === "production"
     ? "https://maxbet07.com/videoPage/"
     : "https://maxbet07.com/videoPage/";
 
@@ -200,25 +200,25 @@ export const scoreBoardUrlMain = "https://maxbet07.com/scoreBoardPage/";
 // use below baseUrl for live build
 
 export const serviceUrl =
-  process.env.NODE_ENV !== "production"
+  process.env.NODE_ENV === "production"
     ? Constants.apiBasePath
     : Constants.localPath;
 
 export const baseUrls = {
   socket:
-    process.env.NODE_ENV !== "production"
+    process.env.NODE_ENV === "production"
       ? `${Constants.apiBasePath}`
       : `${Constants.localPath}`,
   thirdParty:
-    process.env.NODE_ENV !== "production"
+    process.env.NODE_ENV === "production"
       ? `${Constants.thirdParty}`
       : `${Constants.localPathThird}`,
   expertSocket:
-    process.env.NODE_ENV !== "production"
+    process.env.NODE_ENV === "production"
       ? `${Constants.expertPath}`
       : `${Constants.localPathExpert}`,
   cardSocket:
-    process.env.NODE_ENV !== "production"
+    process.env.NODE_ENV === "production"
       ? Constants.thirdPartyCard
       : Constants.localThirdCard,
 };
