@@ -73,16 +73,15 @@ function MarketTableHeader({
     id: runner.nat.toLowerCase().replace(/\s+/g, ""),
     label: runner.nat,
   }));
-  
-  
+
   let columns = [
     { id: "userName", label: "User Name" },
-    
-    { id: detail?.teamA, label: detail?.teamA },
+    //{ id: detail?.teamA, label: detail?.teamA },
     { id: detail?.teamB, label: detail?.teamB },
     ...(detail?.teamC ? [{ id: detail.teamC, label: detail.teamC }] : []),
-    ...mappedNats,
+    ...(mappedNats ? mappedNats : []),
   ];
+
   const dispatch: AppDispatch = useDispatch();
   const {
     marketLockAllChild,
@@ -231,8 +230,8 @@ function MarketTableHeader({
     // }, 1000);
   };
 
-  console.log("data", userMatchBook);
-
+  
+ 
   return (
     <>
       <div
@@ -369,7 +368,7 @@ function MarketTableHeader({
                   setTableConfig={setTableConfig}
                 >
                   {userMatchBook?.map((item: any, index: number) => (
-                    <tr key={index} >
+                    <tr key={index}>
                       <td>{item?.user?.userName}</td>
                       {item?.profitLoss &&
                         Object.entries(item?.profitLoss)?.map(
