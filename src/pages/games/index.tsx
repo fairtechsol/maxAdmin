@@ -437,6 +437,7 @@ const Games = () => {
                         </Col>
                       );
                     })}
+
                   {matchDetails?.tournament
                     ?.filter(
                       (item: any) =>
@@ -460,6 +461,7 @@ const Games = () => {
                         </Col>
                       );
                     })}
+                    
                   {matchDetails?.bookmaker2?.activeStatus === "live" &&
                     matchDetails?.bookmaker2?.isActive && (
                       <Col md={12}>

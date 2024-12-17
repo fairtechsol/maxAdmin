@@ -28,9 +28,16 @@ interface props {
   sessionType?: string;
   detail?: any;
 }
-const set1=["matchOdd","bookmaker","bookmaker2","quickbookmaker1","quickbookmaker2","quickbookmaker3"];
-const set2=["tiedMatch1","tiedMatch2","tiedMatch3"];
-const set3=["completeMatch","completeMatch1","completeManual"];
+const set1 = [
+  "matchOdd",
+  "bookmaker",
+  "bookmaker2",
+  "quickbookmaker1",
+  "quickbookmaker2",
+  "quickbookmaker3",
+];
+const set2 = ["tiedMatch1", "tiedMatch2", "tiedMatch3"];
+const set3 = ["completeMatch", "completeMatch1", "completeManual"];
 function MarketTableHeader({
   title,
   bgColor,
@@ -61,16 +68,28 @@ function MarketTableHeader({
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
   const [chekbox, setChekbox] = useState(false);
   const [selected, setSelected] = useState<any>(null);
+
+  const mappedNats = data?.runners?.map((runner: any) => ({
+    id: runner.nat.toLowerCase().replace(/\s+/g, ""),
+    label: runner.nat,
+  }));
+
   let columns = [
     { id: "userName", label: "User Name" },
-    { id: detail?.teamA, label: detail?.teamA },
-    { id: detail?.teamB, label: detail?.teamB },
+    //{ id: detail?.teamA, label: detail?.teamA },
+    ...(mappedNats?[]:[{ id: detail?.teamA, label: detail?.teamA }]),
+    ...(mappedNats?[]:[{ id: detail?.teamB, label: detail?.teamB }]),
     ...(detail?.teamC ? [{ id: detail.teamC, label: detail.teamC }] : []),
+    ...(mappedNats ? mappedNats : []),
   ];
+
   const dispatch: AppDispatch = useDispatch();
-  const { marketLockAllChild, userMatchBook,userMatchLockSuccess,userMatchLockError } = useSelector(
-    (state: RootState) => state.match.placeBets
-  );
+  const {
+    marketLockAllChild,
+    userMatchBook,
+    userMatchLockSuccess,
+    userMatchLockError,
+  } = useSelector((state: RootState) => state.match.placeBets);
   useEffect(() => {}, [tableConfig]);
   useEffect(() => {
     if (marketLockAllChild) {
@@ -95,58 +114,77 @@ function MarketTableHeader({
     setShowModal1(true);
   };
 
-useEffect(() => {
-  setChekbox(false);
- if(userMatchLockSuccess){
-  setUpdatedMatchLockAllChild((prevUserData:any) => {
-    if (selected?.count === "all") {
-      setAllLock(selected?.lock);
-      return prevUserData.map((user:any) => ({ ...user, isLock: selected?.lock }));
-    } else {
-      return prevUserData.map((user:any) =>
-        user?.id === selected?.count ? { ...user, isLock: selected?.lock } : user
-      );
+  useEffect(() => {
+    setChekbox(false);
+    if (userMatchLockSuccess) {
+      setUpdatedMatchLockAllChild((prevUserData: any) => {
+        if (selected?.count === "all") {
+          setAllLock(selected?.lock);
+          return prevUserData.map((user: any) => ({
+            ...user,
+            isLock: selected?.lock,
+          }));
+        } else {
+          return prevUserData.map((user: any) =>
+            user?.id === selected?.count
+              ? { ...user, isLock: selected?.lock }
+              : user
+          );
+        }
+      });
     }
-  });
- }
-}, [userMatchLockSuccess,userMatchLockError]);
-
+  }, [userMatchLockSuccess, userMatchLockError]);
 
   const handleUserBookClick = () => {
-    if(set1.some(item => data?.type.includes(item))){
+    if (set1.some((item) => data?.type.includes(item))) {
       dispatch(
-        getMarketUserBook({ id: detail?.id, type: "quickbookmaker1", betId: [
-          detail?.quickBookmaker?.[0]?.id,
-          detail?.matchOdd?.id ?? "",
-          detail?.bookmaker?.id ?? "",
-          detail?.bookmaker2?.id ?? "",
-          detail?.quickBookmaker?.[1]?.id ?? "",
-          detail?.quickBookmaker?.[2]?.id ?? ""
-        ].filter((id) => id) 
-          .map((id) => id?.trim?.()) 
-          .join(",") })
+        getMarketUserBook({
+          id: detail?.id,
+          type: "quickbookmaker1",
+          betId: [
+            detail?.quickBookmaker?.[0]?.id,
+            detail?.matchOdd?.id ?? "",
+            detail?.bookmaker?.id ?? "",
+            detail?.bookmaker2?.id ?? "",
+            detail?.quickBookmaker?.[1]?.id ?? "",
+            detail?.quickBookmaker?.[2]?.id ?? "",
+          ]
+            .filter((id) => id)
+            .map((id) => id?.trim?.())
+            .join(","),
+        })
       );
-    }else if(set2.some(item => data?.type.includes(item))){
+    } else if (set2.some((item) => data?.type.includes(item))) {
       dispatch(
-        getMarketUserBook({ id: detail?.id, type: "tiedMatch2", betId:[
-          detail?.manualTiedMatch?.id ?? "",
-          detail?.apiTideMatch2?.id ?? "",
-          detail?.apiTideMatch?.id ?? ""
-        ].filter((id) => id) 
-          .map((id) => id?.trim?.()) 
-          .join(",") })
+        getMarketUserBook({
+          id: detail?.id,
+          type: "tiedMatch2",
+          betId: [
+            detail?.manualTiedMatch?.id ?? "",
+            detail?.apiTideMatch2?.id ?? "",
+            detail?.apiTideMatch?.id ?? "",
+          ]
+            .filter((id) => id)
+            .map((id) => id?.trim?.())
+            .join(","),
+        })
       );
-    }else if(set3.some(item => data?.type.includes(item))){
+    } else if (set3.some((item) => data?.type.includes(item))) {
       dispatch(
-        getMarketUserBook({ id: detail?.id, type: "completeManual", betId: [
-          detail?.manualCompleteMatch?.id ?? "",
-          detail?.marketCompleteMatch1?.id ?? "",
-          detail?.marketCompleteMatch?.id ?? ""
-        ].filter((id) => id) 
-          .map((id) => id?.trim?.()) 
-          .join(",") })
+        getMarketUserBook({
+          id: detail?.id,
+          type: "completeManual",
+          betId: [
+            detail?.manualCompleteMatch?.id ?? "",
+            detail?.marketCompleteMatch1?.id ?? "",
+            detail?.marketCompleteMatch?.id ?? "",
+          ]
+            .filter((id) => id)
+            .map((id) => id?.trim?.())
+            .join(","),
+        })
       );
-    }else{
+    } else {
       dispatch(
         getMarketUserBook({ id: detail?.id, type: data?.type, betId: data?.id })
       );
@@ -192,6 +230,10 @@ useEffect(() => {
     //   );
     // }, 1000);
   };
+
+  console.log("data", userMatchBook);
+
+ 
   return (
     <>
       <div
@@ -254,9 +296,7 @@ useEffect(() => {
                     id={`custom-checkbox`}
                     checked={allLock}
                     disabled={chekbox}
-                    onChange={(e) =>
-                      handleLock("all", !allLock)
-                    }
+                    onChange={(e) => handleLock("all", !allLock)}
                   />
                   <label
                     className="custom-control-label"
@@ -285,9 +325,7 @@ useEffect(() => {
                           id={`custom-checkbox-${index}`}
                           checked={isLock}
                           disabled={chekbox}
-                          onChange={(e) =>
-                            handleLock(id, !isLock)
-                          }
+                          onChange={(e) => handleLock(id, !isLock)}
                         />
                         <label
                           className="custom-control-label"
