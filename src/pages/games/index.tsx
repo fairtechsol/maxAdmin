@@ -8,7 +8,7 @@ import BetTable from "../../components/game/betTable";
 //import ScoreCard from "../../components/game/scoreCard";
 import {
   Constants,
-  liveStreamUrlCricket,
+  liveStreamUrl,
   profitLossDataForMatchConstants,
 } from "../../utils/Constants";
 import service from "../../service";
@@ -166,7 +166,6 @@ const Games = () => {
       console.log(e);
     }
   }, [id]);
- 
 
   useEffect(() => {
     try {
@@ -901,7 +900,7 @@ const Games = () => {
               {/* <GameHeader /> */}
               {matchDetails?.eventId && (
                 <LiveStreamComponent
-                  url={`${liveStreamUrlCricket}${matchDetails?.eventId}`}
+                  url={`${liveStreamUrl}${matchDetails?.eventId}/4`}
                 />
               )}
               <div className="my-2">
