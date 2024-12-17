@@ -84,6 +84,7 @@ export const verifyAuthToken = createAsyncThunk<any, any>(
       );
       if (resp?.statusCode === 200) {
         localStorage.setItem("isAuthenticator", "true");
+        localStorage.setItem("jwtMaxAdmin", resp?.data);
         if (requestData?.loginData?.isBetExist) {
           window.location.replace("/admin/market-analysis");
         } else {
