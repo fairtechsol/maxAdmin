@@ -18,6 +18,8 @@ import { AppDispatch, RootState } from "../../store/store";
 import { ApiConstants } from "../../utils/Constants";
 import { formatToINR } from "../../helpers";
 import SearchBox from "../../components/commonComponent/table/tableUtils/search";
+import CustomModal from "../../components/commonComponent/modal";
+import EventWiseExposureModal from "../../components/listClients/eventWiseExposureModal";
 // Example usage
 const columns: Column[] = [
   { id: "user.userName", label: "User Name", colSpan: 2 },
@@ -54,6 +56,12 @@ const ListActiveInactiveUser: React.FC = () => {
   });
   const [value, setValue] = useState<any>(25);
   const [keyword, setKeyWord] = useState<any>("");
+  const [showUserWiseExposureModal, setShowUserWiseExposureModal] =
+    useState(false);
+  const [userWiseExposureName, setUserWiseExposureName] = useState({
+    name: "",
+    id: "",
+  });
   const [sort, setSort] = useState<any>({
     direction: "ASC",
     key: null,
@@ -418,7 +426,19 @@ const ListActiveInactiveUser: React.FC = () => {
                             <td className="text-end">
                               {formatToINR(userBal?.profitLoss)}
                             </td>
-                            <td className="text-end">
+                            <td
+                              className="text-end"
+                              style={{
+                                cursor: "pointer",
+                              }}
+                              onClick={() => {
+                                setShowUserWiseExposureModal(true);
+                                setUserWiseExposureName({
+                                  name: userName,
+                                  id: id,
+                                });
+                              }}
+                            >
                               {formatToINR(userBal?.exposure)}
                             </td>
                             <td className="text-end">
@@ -782,6 +802,20 @@ const ListActiveInactiveUser: React.FC = () => {
           />
         )}
       </Container>
+      <CustomModal
+        customClass="modalFull-90 "
+        title={[
+          <>
+            <span className="f400">
+              {userWiseExposureName?.name} EventWise Expoure
+            </span>
+          </>,
+        ]}
+        show={showUserWiseExposureModal}
+        setShow={setShowUserWiseExposureModal}
+      >
+        <EventWiseExposureModal userWiseExposureName={userWiseExposureName} />
+      </CustomModal>
     </>
   );
 };
