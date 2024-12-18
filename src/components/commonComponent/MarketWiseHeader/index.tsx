@@ -77,9 +77,13 @@ function MarketTableHeader({
   let columns = [
     { id: "userName", label: "User Name" },
     //{ id: detail?.teamA, label: detail?.teamA },
-    ...(mappedNats?[]:[{ id: detail?.teamA, label: detail?.teamA }]),
-    ...(mappedNats?[]:[{ id: detail?.teamB, label: detail?.teamB }]),
-    ...(detail?.teamC ? [{ id: detail.teamC, label: detail.teamC }] : []),
+    ...(mappedNats ? [] : [{ id: detail?.teamA, label: detail?.teamA }]),
+    ...(mappedNats ? [] : [{ id: detail?.teamB, label: detail?.teamB }]),
+    ...(mappedNats
+      ? []
+      : detail?.teamC
+      ? [{ id: detail.teamC, label: detail.teamC }]
+      : []),
     ...(mappedNats ? mappedNats : []),
   ];
 
@@ -231,9 +235,6 @@ function MarketTableHeader({
     // }, 1000);
   };
 
-  console.log("data", userMatchBook);
-
- 
   return (
     <>
       <div

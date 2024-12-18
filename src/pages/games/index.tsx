@@ -8,7 +8,7 @@ import BetTable from "../../components/game/betTable";
 //import ScoreCard from "../../components/game/scoreCard";
 import {
   Constants,
-  liveStreamUrl,
+  liveStreamUrlCricket,
   profitLossDataForMatchConstants,
 } from "../../utils/Constants";
 import service from "../../service";
@@ -461,7 +461,7 @@ const Games = () => {
                         </Col>
                       );
                     })}
-                    
+
                   {matchDetails?.bookmaker2?.activeStatus === "live" &&
                     matchDetails?.bookmaker2?.isActive && (
                       <Col md={12}>
@@ -900,7 +900,7 @@ const Games = () => {
               {/* <GameHeader /> */}
               {matchDetails?.eventId && (
                 <LiveStreamComponent
-                  url={`${liveStreamUrl}${matchDetails?.eventId}/4`}
+                  url={`${liveStreamUrlCricket}${matchDetails?.eventId}`}
                 />
               )}
               <div className="my-2">
