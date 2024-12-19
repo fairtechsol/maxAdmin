@@ -25,7 +25,10 @@ import {
   gameConstantsAccountStatement,
 } from "../../../utils/Constants";
 import LiveCasinoModal from "./liveCasinoModal";
-import { transactionProviderBetsReset, transactionProviderName } from "../../../store/actions/card/cardDetail";
+import {
+  transactionProviderBetsReset,
+  transactionProviderName,
+} from "../../../store/actions/card/cardDetail";
 // import isMobile from "../../../utils/screenDimension";
 
 interface Column {
@@ -95,7 +98,7 @@ const AccountStatement = () => {
   const { ReportAccountList } = useSelector(
     (state: RootState) => state.match.reportList
   );
-  const { liveCasinoProviderBets,liveCasinoProvider } = useSelector(
+  const { liveCasinoProviderBets, liveCasinoProvider } = useSelector(
     (state: RootState) => state.card
   );
   const { searchListData } = useSelector(
@@ -161,6 +164,10 @@ const AccountStatement = () => {
       );
     }, 500);
   }, []);
+
+  useEffect(() => {
+    debouncedInputValue(inputValue);
+  }, [inputValue]);
 
   const handleSubmit = (e: any) => {
     try {
@@ -402,9 +409,9 @@ const AccountStatement = () => {
     };
   }, []);
 
-  const handleLiveCasinoModalOpen=(item:any,user:any)=>{
-setLiveCasinoModal(true);
-setItemForModal(item);
+  const handleLiveCasinoModalOpen = (item: any, user: any) => {
+    setLiveCasinoModal(true);
+    setItemForModal(item);
   };
 
   useEffect(() => {
@@ -417,7 +424,6 @@ setItemForModal(item);
       setUpdateReports(dataWithTotal);
     }
   }, [liveCasinoProviderBets]);
-
 
   const handleCloseLiveCasinoModal = () => {
     setLiveCasinoModal(false);
@@ -506,7 +512,7 @@ setItemForModal(item);
               isSearchable={true}
               onInputChange={(value: any) => {
                 setInputValue(value);
-                debouncedInputValue(value);
+                //debouncedInputValue(value);
               }}
             />
           </Col>
@@ -615,7 +621,9 @@ setItemForModal(item);
                   className="actionBtn"
                   variant="dark"
                   onClick={() => {
-                    aaccountTypeValues==="3"? handleLiveCasinoModalOpen(item,user):handleClickToOpenBetModal(item, user);
+                    aaccountTypeValues === "3"
+                      ? handleLiveCasinoModalOpen(item, user)
+                      : handleClickToOpenBetModal(item, user);
                   }}
                 >
                   {description}
