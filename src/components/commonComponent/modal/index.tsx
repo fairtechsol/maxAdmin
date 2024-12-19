@@ -15,7 +15,7 @@ function CustomModal({
   ...props
 }: any) {
   const dispatch = useDispatch();
-  const handleClose =() => {
+  const handleClose = () => {
     setShow(false);
     dispatch(userModalReset());
   };

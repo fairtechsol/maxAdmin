@@ -111,6 +111,7 @@ export const ApiConstants = {
     USER_DETAIL_FOR_PARENT: "/user/getUserDetailsForParent",
     USER_CHECK_CHILD_DEACTIVATE: "/user/checkChildDeactivate",
     TOTAL_BALANCE: "user/child/totalBalance",
+    USER_WISE_EVENTWISE_EXPOSURE: "/match/eventWise/exposure",
   },
   EXPERT: {
     COMPETITIONLIST: "/expert/match/competitionList/",

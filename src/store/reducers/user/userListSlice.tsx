@@ -14,6 +14,8 @@ import {
   userModalReset,
   getSearchClientList,
   resetSearchUserList,
+  getUserWiseExposure,
+  resetUserWiseExposureList,
 } from "../../actions/user/userActions";
 
 interface InitialState {
@@ -30,6 +32,7 @@ interface InitialState {
   transactionPassword: any;
   userAlreadyExist: boolean;
   attemptsLeft: number | string;
+  userWiseExposureList: any;
 }
 
 const initialState: InitialState = {
@@ -46,6 +49,7 @@ const initialState: InitialState = {
   transactionPassword: "",
   userAlreadyExist: false,
   attemptsLeft: 0,
+  userWiseExposureList: {},
 };
 
 export const userList = createSlice({
@@ -208,6 +212,21 @@ export const userList = createSlice({
       .addCase(getSearchClientList.rejected, (state, action) => {
         state.loading = false;
         state.error = action?.error?.message;
+      })
+      .addCase(getUserWiseExposure.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getUserWiseExposure.fulfilled, (state, action) => {
+        state.loading = false;
+        state.userWiseExposureList = action?.payload;
+      })
+      .addCase(getUserWiseExposure.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action?.error?.message;
+      })
+      .addCase(resetUserWiseExposureList, (state) => {
+        state.userWiseExposureList = {};
       })
       .addCase(resetSearchUserList, (state) => {
         state.searchUserList = [];
