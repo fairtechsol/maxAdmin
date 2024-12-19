@@ -193,7 +193,8 @@ export const cardUrl =
     ? "https://jmdapi.com/tablevideo/?id="
     : "https://jmdapi.com/tablevideo/?id=";
 
-export const liveStreamUrlCricket = "https://mis3.sqmr.xyz/rtv.php?eventId=";
+export const liveStreamUrlCricket =
+  "https://dpmatka.in/dd.php?sportId=4&eventId=";
 export const liveStreamUrl = "https://dpmatka.in/anm.php?type=video&eventId=";
 export const scoreBoardUrlMain =
   "https://dpmatka.in/anm.php?type=scorecard&eventId=";
