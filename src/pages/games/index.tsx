@@ -9,7 +9,6 @@ import BetTable from "../../components/game/betTable";
 import {
   Constants,
   liveStreamUrl,
-  liveStreamUrlCricket,
   profitLossDataForMatchConstants,
 } from "../../utils/Constants";
 import service from "../../service";
