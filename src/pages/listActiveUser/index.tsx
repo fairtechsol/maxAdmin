@@ -582,34 +582,54 @@ const ListActiveInactiveUser: React.FC = () => {
                           >
                             {index === 1 &&
                               userList &&
-                              (localUserList?.reduce((acc: any, match: any) => {
-                                return acc + +match?.creditRefrence;
-                              }, 0) ||
-                                0)}
+                              formatToINR(
+                                localUserList?.reduce(
+                                  (acc: any, match: any) => {
+                                    return acc + +match?.creditRefrence;
+                                  },
+                                  0
+                                ) || 0
+                              )}
                             {index === 2 &&
                               userList &&
-                              (localUserList?.reduce((acc: any, match: any) => {
-                                return acc + +match?.balance;
-                              }, 0) ||
-                                0)}
+                              formatToINR(
+                                localUserList?.reduce(
+                                  (acc: any, match: any) => {
+                                    return acc + +match?.balance;
+                                  },
+                                  0
+                                ) || 0
+                              )}
                             {index === 3 &&
                               userList &&
-                              (localUserList?.reduce((acc: any, match: any) => {
-                                return acc + +match?.userBal?.profitLoss;
-                              }, 0) ||
-                                0)}
+                              formatToINR(
+                                localUserList?.reduce(
+                                  (acc: any, match: any) => {
+                                    return acc + +match?.userBal?.profitLoss;
+                                  },
+                                  0
+                                ) || 0
+                              )}
                             {index === 4 &&
                               userList &&
-                              (localUserList?.reduce((acc: any, match: any) => {
-                                return acc + +match?.userBal?.exposure;
-                              }, 0) ||
-                                0)}
+                              formatToINR(
+                                localUserList?.reduce(
+                                  (acc: any, match: any) => {
+                                    return acc + +match?.userBal?.exposure;
+                                  },
+                                  0
+                                ) || 0
+                              )}
                             {index === 5 &&
                               userList &&
-                              (localUserList?.reduce((acc: any, match: any) => {
-                                return acc + +match?.availableBalance;
-                              }, 0) ||
-                                0)}
+                              formatToINR(
+                                localUserList?.reduce(
+                                  (acc: any, match: any) => {
+                                    return acc + +match?.availableBalance;
+                                  },
+                                  0
+                                ) || 0
+                              )}
                           </td>
                         );
                       })}
