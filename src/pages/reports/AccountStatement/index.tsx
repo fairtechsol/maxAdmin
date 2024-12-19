@@ -166,8 +166,10 @@ const AccountStatement = () => {
   }, []);
 
   useEffect(() => {
-    debouncedInputValue(inputValue);
-  }, [inputValue]);
+    if (inputValue != "" ) {
+      debouncedInputValue(inputValue);
+    }
+  }, [inputValue,selectedUser]);
 
   const handleSubmit = (e: any) => {
     try {
