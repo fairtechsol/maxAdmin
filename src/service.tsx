@@ -107,7 +107,7 @@ service.interceptors.response.use(
   (error: any) => {
     if (axios.isCancel(error)) {
       console.log("Request canceled:", error.message);
-      return;
+      // return;
     }
     let { status, data } = error.response || {};
     // const aesKey = decryptAESKeyWithRSA(data?.encryptedKey);
