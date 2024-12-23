@@ -114,80 +114,108 @@ const ListActiveInactiveUser: React.FC = () => {
 
   const { userList } = useSelector((state: RootState) => state.user.userList);
   const [localUserList, setLocalUserList] = useState([]);
-  // const { totalBalance } = useSelector(
-  //   (state: RootState) => state.user.profile
-  // );
+  const { totalBalance } = useSelector(
+    (state: RootState) => state.user.profile
+  );
 
   const sortData = (key: string) => {
-    let array = [...localUserList];
-
-    if (array[0][key] > array[array?.length - 1][key]) {
-      array.sort((a: any, b: any) => a[key] - b[key]);
-    } else {
-      array.sort((a: any, b: any) => b[key] - a[key]);
+    try {
+      let array = [...localUserList];
+      if (array[0][key] > array[array?.length - 1][key]) {
+        array.sort((a: any, b: any) => a[key] - b[key]);
+      } else {
+        array.sort((a: any, b: any) => b[key] - a[key]);
+      }
+      setLocalUserList(array);
+    } catch (error) {
+      console.log(error);
     }
-
-    setLocalUserList(array);
   };
   const handleSearch = (keyword: string) => {
-    setTableConfig((prev: any) => {
-      return { ...prev, keyword: keyword };
-    });
+    try {
+      setTableConfig((prev: any) => {
+        return { ...prev, keyword: keyword };
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleReportExport = (type: string) => {
-    if (id) {
-      dispatch(
-        handleExport({
-          endpoint: ApiConstants.USER.LIST,
-          type: type,
-          userId: id,
-          userName: keyword || "",
-          sort: sort?.key || "",
-          order: sort?.direction || "DESC",
-          name: "Users List",
-          searchBy: "user.userName",
-          activeTab: activeTab,
-        })
-      );
+    try {
+      if (id) {
+        dispatch(
+          handleExport({
+            endpoint: ApiConstants.USER.LIST,
+            type: type,
+            userId: id,
+            userName: keyword || "",
+            sort: sort?.key || "",
+            order: sort?.direction || "DESC",
+            name: "Users List",
+            searchBy: "user.userName",
+            activeTab: activeTab,
+          })
+        );
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
   useEffect(() => {
-    if (id) {
-      dispatch(
-        getUsers({
-          userId: id,
-          page: tableConfig?.page || 1,
-          limit: value,
-          userName: keyword || "",
-          sort: tableConfig?.key || "",
-          order: tableConfig?.direction || "DESC",
-          activeTab: activeTab,
-        })
-      );
+    try {
+      if (id) {
+        dispatch(
+          getUsers({
+            userId: id,
+            page: tableConfig?.page || 1,
+            limit: value,
+            userName: keyword || "",
+            sort: tableConfig?.key || "",
+            order: tableConfig?.direction || "DESC",
+            activeTab: activeTab,
+          })
+        );
+      }
+    } catch (error) {
+      console.log(error);
     }
   }, [id, tableConfig, value, keyword, activeTab]);
 
   useEffect(() => {
-    if (keyword !== tableConfig?.keyword) {
-      setKeyWord(tableConfig?.keyword);
-    }
-    if (
-      sort.direction !== tableConfig?.sort?.direction ||
-      sort.key !== tableConfig?.sort?.key
-    ) {
-      setSort(tableConfig?.sort);
+    try {
+      if (keyword !== tableConfig?.keyword) {
+        setKeyWord(tableConfig?.keyword);
+      }
+      if (
+        sort.direction !== tableConfig?.sort?.direction ||
+        sort.key !== tableConfig?.sort?.key
+      ) {
+        setSort(tableConfig?.sort);
+      }
+    } catch (error) {
+      console.log(error);
     }
   }, [tableConfig]);
 
   useEffect(() => {
-    dispatch(getTotalBalance());
-  }, []);
+    try {
+      if (activeTab === "active") {
+        dispatch(getTotalBalance());
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, [activeTab]);
 
   useEffect(() => {
-    if (userList?.list) {
-      setLocalUserList(userList?.list);
+    try {
+      if (userList?.list) {
+        setLocalUserList(userList?.list);
+      }
+    } catch (error) {
+      console.log(error);
     }
   }, [userList]);
 
@@ -308,22 +336,22 @@ const ListActiveInactiveUser: React.FC = () => {
                                 : {}),
                             }}
                           >
-                            {/* {index === 1 &&
+                            {index === 1 &&
                               totalBalance &&
-                              totalBalance?.totalCreditReference}
+                              formatToINR(totalBalance?.totalCreditReference)}
                             {index === 2 &&
                               totalBalance &&
-                              totalBalance?.currBalance}
+                              formatToINR(totalBalance?.currBalance)}
                             {index === 3 &&
                               totalBalance &&
-                              totalBalance?.profitsum}
+                              formatToINR(totalBalance?.profitsum)}
                             {index === 4 &&
                               totalBalance &&
-                              totalBalance?.totalExposure}
+                              formatToINR(totalBalance?.totalExposure)}
                             {index === 5 &&
                               totalBalance &&
-                              totalBalance?.availableBalance} */}
-                            {index === 1 &&
+                              formatToINR(totalBalance?.availableBalance)}
+                            {/* {index === 1 &&
                               userList &&
                               formatToINR(
                                 localUserList?.reduce(
@@ -372,7 +400,7 @@ const ListActiveInactiveUser: React.FC = () => {
                                   },
                                   0
                                 ) || 0
-                              )}
+                              )} */}
                           </td>
                         );
                       })}
