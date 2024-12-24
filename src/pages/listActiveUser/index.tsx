@@ -710,7 +710,19 @@ const ListActiveInactiveUser: React.FC = () => {
                             <td className="text-end">
                               {formatToINR(userBal?.profitLoss)}
                             </td>
-                            <td className="text-end">
+                            <td
+                              className="text-end"
+                              style={{
+                                cursor: "pointer",
+                              }}
+                              onClick={() => {
+                                setShowUserWiseExposureModal(true);
+                                setUserWiseExposureName({
+                                  name: userName,
+                                  id: id,
+                                });
+                              }}
+                            >
                               {formatToINR(userBal?.exposure)}
                             </td>
                             <td className="text-end">
