@@ -117,7 +117,6 @@ const ListActiveInactiveUser: React.FC = () => {
   const { totalBalance } = useSelector(
     (state: RootState) => state.user.profile
   );
-
   const sortData = (key: string) => {
     try {
       let array = [...localUserList];
@@ -202,7 +201,21 @@ const ListActiveInactiveUser: React.FC = () => {
   useEffect(() => {
     try {
       if (activeTab === "active") {
-        dispatch(getTotalBalance());
+        let filter = "&userBlock=eqfalse&betBlock=eqfalse";
+        dispatch(
+          getTotalBalance({
+            userId: id,
+            filter,
+          })
+        );
+      } else {
+        let filter = "&orVal=user.betBlock=true|or|userBlock=eqtrue";
+        dispatch(
+          getTotalBalance({
+            userId: id,
+            filter,
+          })
+        );
       }
     } catch (error) {
       console.log(error);
