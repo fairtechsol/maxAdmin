@@ -34,6 +34,7 @@ interface RequestData {
   userId?: string;
   roleName?: string;
   domain?: string;
+  filter?: string;
 }
 
 export const getUsers = createAsyncThunk<any, GetUsers | undefined>(
@@ -69,7 +70,9 @@ export const getTotalBalance = createAsyncThunk<any, RequestData | undefined>(
       const resp = await service.get(
         `${ApiConstants.USER.TOTAL_BALANCE}?userId=${
           requestData?.userId ? requestData?.userId : ""
-        }&roleName=${requestData?.roleName ? requestData?.roleName : ""}`
+        }&roleName=${requestData?.roleName ? requestData?.roleName : ""}${
+          requestData?.filter ? requestData?.filter : ""
+        }`
       );
       if (resp) {
         return resp?.data;
