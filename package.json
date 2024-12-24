@@ -1,6 +1,6 @@
 {
   "name": "fairgame-new",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "homepage": "/admin",
   "private": true,
   "dependencies": {
