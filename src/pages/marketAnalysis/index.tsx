@@ -5,10 +5,12 @@ import { useEffect, useState } from "react";
 import { getMarketAnalysis } from "../../store/actions/match/matchAction";
 import { FaSync } from "react-icons/fa";
 import "./style.scss";
+import { useLocation } from "react-router-dom";
+import { ApiConstants } from "../../utils/Constants";
 
 const MarketAnalysis = () => {
   const dispatch: AppDispatch = useDispatch();
-
+  const { state } = useLocation();
   const { marketAnalysisDetail, loading } = useSelector(
     (state: RootState) => state.match.marketAnalysis
   );
@@ -24,8 +26,19 @@ const MarketAnalysis = () => {
   };
 
   useEffect(() => {
-    dispatch(getMarketAnalysis({}));
-  }, []);
+    try {
+      if (state?.userId) {
+        dispatch(
+          getMarketAnalysis({
+            url: `${ApiConstants.MATCH.MARKETANALYSIS}?userId=${state?.userId}&matchId=${state?.matchId}`,
+          })
+        );
+      } else
+        dispatch(getMarketAnalysis({ url: ApiConstants.MATCH.MARKETANALYSIS }));
+    } catch (error) {
+      console.log(error);
+    }
+  }, [state]);
 
   return (
     <div className="px-3 lh-1">
@@ -33,7 +46,15 @@ const MarketAnalysis = () => {
         <h3 className="fw-normal title-22">
           Market Analysis{" "}
           <FaSync
-            onClick={() => dispatch(getMarketAnalysis({}))}
+            onClick={() =>
+              dispatch(
+                getMarketAnalysis({
+                  url: state?.userId
+                    ? `${ApiConstants.MATCH.MARKETANALYSIS}?userId=${state?.userId}&matchId=${state?.matchId}`
+                    : ApiConstants.MATCH.MARKETANALYSIS,
+                })
+              )
+            }
             size={15}
             cursor={"pointer"}
             className={loading ? "rotate" : ""}

@@ -371,7 +371,13 @@ export const getMarketLockAllChild = createAsyncThunk<any, any>(
   async (requestData, thunkApi) => {
     try {
       const resp = await service.get(
-        `${ApiConstants.USER.USER_MARKET_LOCK_ALL_CHILD}?matchId=${requestData?.matchId}${requestData?.betId?`&betId=${requestData?.betId}`:`&sessionType=${requestData?.sessionType}`}`
+        `${ApiConstants.USER.USER_MARKET_LOCK_ALL_CHILD}?matchId=${
+          requestData?.matchId
+        }${
+          requestData?.betId
+            ? `&betId=${requestData?.betId}`
+            : `&sessionType=${requestData?.sessionType}`
+        }`
       );
       if (resp) {
         return resp?.data;
@@ -469,9 +475,9 @@ export const getCardReport = createAsyncThunk<any, any>(
 
 export const getMarketAnalysis = createAsyncThunk<any, any>(
   "/marketAnalysis",
-  async (_, thunkApi) => {
+  async ({ url }, thunkApi) => {
     try {
-      const resp = await service.get(ApiConstants.MATCH.MARKETANALYSIS);
+      const resp = await service.get(url);
       if (resp) {
         return resp?.data;
       }

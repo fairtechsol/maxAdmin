@@ -7,6 +7,7 @@ import {
   getUserWiseExposure,
   resetUserWiseExposureList,
 } from "../../../store/actions/user/userActions";
+import { formatToINR } from "../../../helpers";
 
 interface Column {
   id: string;
@@ -18,7 +19,11 @@ const columns: Column[] = [
   { id: "exposure", label: "Exposure" },
 ];
 
-const EventWiseExposureModal = ({ userWiseExposureName }: any) => {
+const EventWiseExposureModal = ({
+  userWiseExposureName,
+  setShowUserWiseMatchListModal,
+  setDataForMatchList,
+}: any) => {
   const dispatch: AppDispatch = useDispatch();
   const { userWiseExposureList } = useSelector(
     (state: RootState) => state.user.userList
@@ -51,9 +56,19 @@ const EventWiseExposureModal = ({ userWiseExposureName }: any) => {
         setCurrentPage={setCurrentPage}
       >
         {Object.entries(userWiseExposureList).map(([key, value]: any) => (
-          <tr key={key}>
+          <tr
+            key={key}
+            onClick={() => {
+
+              if (value?.match) {
+                setShowUserWiseMatchListModal(true);
+                setDataForMatchList(value?.match);
+              }
+            }}
+            style={{ cursor: "pointer" }}
+          >
             <td>{key}</td>
-            <td>{value}</td>
+            <td>{formatToINR(value?.exposure) || 0}</td>
           </tr>
         ))}
       </CustomTable>
