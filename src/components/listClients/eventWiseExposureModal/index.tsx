@@ -59,10 +59,9 @@ const EventWiseExposureModal = ({
           <tr
             key={key}
             onClick={() => {
-
               if (value?.match) {
                 setShowUserWiseMatchListModal(true);
-                setDataForMatchList(value?.match);
+                setDataForMatchList({ eventType: key, value: value?.match });
               }
             }}
             style={{ cursor: "pointer" }}

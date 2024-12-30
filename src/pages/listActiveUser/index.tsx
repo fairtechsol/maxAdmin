@@ -65,6 +65,7 @@ const ListActiveInactiveUser: React.FC = () => {
   const [userWiseExposureName, setUserWiseExposureName] = useState({
     name: "",
     id: "",
+    roleName: "",
   });
   const [sort, setSort] = useState<any>({
     direction: "ASC",
@@ -481,6 +482,7 @@ const ListActiveInactiveUser: React.FC = () => {
                                 setUserWiseExposureName({
                                   name: userName,
                                   id: id,
+                                  roleName: roleName,
                                 });
                               }}
                             >
@@ -897,7 +899,10 @@ const ListActiveInactiveUser: React.FC = () => {
         show={showUserWiseMatchListModal}
         setShow={setShowUserWiseMatchListModal}
       >
-        <EventWiseMatchListModal userWiseExposureName={userWiseExposureName} data={dataForMatchList}/>
+        <EventWiseMatchListModal
+          userWiseExposureName={userWiseExposureName}
+          data={dataForMatchList}
+        />
       </CustomModal>
     </>
   );

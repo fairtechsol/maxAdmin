@@ -18,9 +18,11 @@ import {
 } from "../../../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../../../store/store";
 import { cardGamesType } from "../../../../utils/Constants";
+import { useLocation } from "react-router-dom";
 
 const Race20 = () => {
   const dispatch: AppDispatch = useDispatch();
+  const { state } = useLocation();
   const { loading, dragonTigerDetail } = useSelector(
     (state: RootState) => state.card
   );
@@ -101,12 +103,25 @@ const Race20 = () => {
   }, [dragonTigerDetail?.id]);
 
   useEffect(() => {
-    dispatch(getCardDetailInitial(cardGamesType.race20));
-    dispatch(getDragonTigerDetailHorseRacing(cardGamesType.race20));
+    if (state?.userId) {
+      dispatch(
+        getCardDetailInitial(
+          `${cardGamesType.race20}?userId=${state?.userId}&roleName=${state?.roleName}`
+        )
+      );
+      dispatch(
+        getDragonTigerDetailHorseRacing(
+          `${cardGamesType.race20}?userId=${state?.userId}&roleName=${state?.roleName}`
+        )
+      );
+    } else {
+      dispatch(getCardDetailInitial(cardGamesType.race20));
+      dispatch(getDragonTigerDetailHorseRacing(cardGamesType.race20));
+    }
     return () => {
       dispatch(resetCardDetail());
     };
-  }, []);
+  }, [state]);
 
   return loading ? <Loader /> : <Race20Component />;
 };
