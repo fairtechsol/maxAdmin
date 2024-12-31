@@ -18,9 +18,12 @@ import {
 } from "../../../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../../../store/store";
 import { cardGamesType } from "../../../../utils/Constants";
+import { useLocation } from "react-router-dom";
+import { getUsersProfile } from "../../../../store/actions/user/userActions";
 
 const DragonTiger2020 = () => {
   const dispatch: AppDispatch = useDispatch();
+  const { state } = useLocation();
   const { loading, dragonTigerDetail } = useSelector(
     (state: RootState) => state.card
   );
@@ -49,7 +52,9 @@ const DragonTiger2020 = () => {
       dispatch(getPlacedBets(dragonTigerDetail?.id));
     }
   };
-
+  const handleMatchResult = () => {
+    dispatch(getUsersProfile());
+  };
   useEffect(() => {
     try {
       if (dragonTigerDetail?.id) {
@@ -76,14 +81,16 @@ const DragonTiger2020 = () => {
           cardGamesType.dragonTiger20,
           handleLiveGameResultTop10
         );
-        socketService.card.userCardBetPlaced(handleBetPlacedOnDT20);
-        socketService.card.cardResult(handleCardResult);
-        socketService.card.matchResultDeclareAllUser(handleCardResult);
+        if (!state?.userId) {
+          socketService.card.userCardBetPlaced(handleBetPlacedOnDT20);
+          socketService.card.cardResult(handleCardResult);
+          socketService.card.matchResultDeclareAllUser(handleCardResult);
+        }
       }
     } catch (error) {
       console.log(error);
     }
-  }, [socket, dragonTigerDetail?.id]);
+  }, [socket, dragonTigerDetail?.id, state]);
 
   useEffect(() => {
     try {
@@ -91,23 +98,42 @@ const DragonTiger2020 = () => {
         return () => {
           socketService.card.leaveMatchRoom(cardGamesType.dragonTiger20);
           socketService.card.getCardRatesOff(cardGamesType.dragonTiger20);
-          socketService.card.userCardBetPlacedOff();
-          socketService.card.cardResultOff();
-          socketService.card.matchResultDeclareAllUserOff();
+          socketService.card.getLiveGameResultTop10Off(
+            cardGamesType.dragonTiger20
+          );
+          if (!state?.userId) {
+            socketService.card.userCardBetPlacedOff();
+            socketService.card.cardResultOff();
+            socketService.card.matchResultDeclareAllUserOff();
+          }
         };
       }
     } catch (e) {
       console.log(e);
     }
-  }, [dragonTigerDetail?.id]);
+  }, [dragonTigerDetail?.id, state]);
 
   useEffect(() => {
-    dispatch(getCardDetailInitial(cardGamesType.dragonTiger20));
-    dispatch(getDragonTigerDetailHorseRacing(cardGamesType.dragonTiger20));
+    if (state?.userId) {
+      dispatch(
+        getCardDetailInitial(
+          `${cardGamesType.dragonTiger20}?userId=${state?.userId}&roleName=${state?.roleName}`
+        )
+      );
+      dispatch(
+        getDragonTigerDetailHorseRacing(
+          `${cardGamesType.dragonTiger20}?userId=${state?.userId}&roleName=${state?.roleName}`
+        )
+      );
+    } else {
+      dispatch(getCardDetailInitial(cardGamesType.dragonTiger20));
+      dispatch(getDragonTigerDetailHorseRacing(cardGamesType.dragonTiger20));
+    }
     return () => {
+      socketService.card.cardResult(handleMatchResult);
       dispatch(resetCardDetail());
     };
-  }, []);
+  }, [state]);
 
   return loading ? <Loader /> : <DragonTiger2020Component />;
 };

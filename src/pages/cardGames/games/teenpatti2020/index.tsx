@@ -19,6 +19,7 @@ import {
 import { AppDispatch, RootState } from "../../../../store/store";
 import { cardGamesType } from "../../../../utils/Constants";
 import { useLocation } from "react-router-dom";
+import { getUsersProfile } from "../../../../store/actions/user/userActions";
 
 const TeenPatti2020 = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -50,7 +51,9 @@ const TeenPatti2020 = () => {
       dispatch(getPlacedBets(dragonTigerDetail?.id));
     }
   };
-
+  const handleMatchResult = () => {
+    dispatch(getUsersProfile());
+  };
   useEffect(() => {
     try {
       if (dragonTigerDetail?.id) {
@@ -86,19 +89,20 @@ const TeenPatti2020 = () => {
     } catch (error) {
       console.log(error);
     }
-  }, [socket, dragonTigerDetail?.id, state?.userId]);
+  }, [socket, dragonTigerDetail?.id, state]);
 
   useEffect(() => {
     return () => {
       socketService.card.leaveMatchRoom(cardGamesType.teen20);
       socketService.card.getCardRatesOff(cardGamesType.teen20);
+      socketService.card.getLiveGameResultTop10Off(cardGamesType.teen20);
       if (!state?.userId) {
         socketService.card.userCardBetPlacedOff();
         socketService.card.cardResultOff();
         socketService.card.matchResultDeclareAllUserOff();
       }
     };
-  }, [dragonTigerDetail?.id]);
+  }, [dragonTigerDetail?.id, state]);
 
   useEffect(() => {
     if (state?.userId) {
@@ -117,6 +121,7 @@ const TeenPatti2020 = () => {
       dispatch(getDragonTigerDetailHorseRacing(cardGamesType.teen20));
     }
     return () => {
+      socketService.card.cardResult(handleMatchResult);
       dispatch(resetCardDetail());
     };
   }, [state]);

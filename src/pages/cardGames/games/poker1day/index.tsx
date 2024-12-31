@@ -18,9 +18,12 @@ import {
 } from "../../../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../../../store/store";
 import { cardGamesType } from "../../../../utils/Constants";
+import { useLocation } from "react-router-dom";
+import { getUsersProfile } from "../../../../store/actions/user/userActions";
 
 const Poker1day = () => {
   const dispatch: AppDispatch = useDispatch();
+  const { state } = useLocation();
   const { loading, dragonTigerDetail } = useSelector(
     (state: RootState) => state.card
   );
@@ -48,6 +51,9 @@ const Poker1day = () => {
       dispatch(getPlacedBets(dragonTigerDetail?.id));
     }
   };
+  const handleMatchResult = () => {
+    dispatch(getUsersProfile());
+  };
   useEffect(() => {
     try {
       if (socket && dragonTigerDetail?.id) {
@@ -60,45 +66,64 @@ const Poker1day = () => {
           cardGamesType.poker1Day,
           setMatchRatesInRedux
         );
-        socketService.card.userCardBetPlaced(handleBetPlacedOnDT20);
         socketService.card.getLiveGameResultTop10(
           cardGamesType.poker1Day,
           handleLiveGameResultTop10
         );
-        socketService.card.cardResult(handleCardResult);
-        socketService.card.matchResultDeclareAllUser(handleCardResult);
+        if (!state?.userId) {
+          socketService.card.userCardBetPlaced(handleBetPlacedOnDT20);
+          socketService.card.cardResult(handleCardResult);
+          socketService.card.matchResultDeclareAllUser(handleCardResult);
+        }
       }
     } catch (error) {
       console.log(error);
     }
-  }, [socket, dragonTigerDetail?.id]);
+  }, [socket, dragonTigerDetail?.id, state]);
 
   useEffect(() => {
     return () => {
       try {
         socketService.card.leaveMatchRoom(cardGamesType.poker1Day);
         socketService.card.getCardRatesOff(cardGamesType.poker1Day);
-        socketService.card.userCardBetPlacedOff();
-        socketService.card.cardResultOff();
-        socketService.card.matchResultDeclareAllUserOff();
+        socketService.card.getLiveGameResultTop10Off(cardGamesType.poker1Day);
+        if (!state?.userId) {
+          socketService.card.userCardBetPlacedOff();
+          socketService.card.cardResultOff();
+          socketService.card.matchResultDeclareAllUserOff();
+        }
       } catch (e) {
         console.log(e);
       }
     };
-  }, []);
+  }, [state]);
 
   useEffect(() => {
     try {
-      dispatch(getCardDetailInitial(cardGamesType.poker1Day));
-      dispatch(getDragonTigerDetailHorseRacing(cardGamesType.poker1Day));
+      if (state?.userId) {
+        dispatch(
+          getCardDetailInitial(
+            `${cardGamesType.poker1Day}?userId=${state?.userId}&roleName=${state?.roleName}`
+          )
+        );
+        dispatch(
+          getDragonTigerDetailHorseRacing(
+            `${cardGamesType.poker1Day}?userId=${state?.userId}&roleName=${state?.roleName}`
+          )
+        );
+      } else {
+        dispatch(getCardDetailInitial(cardGamesType.poker1Day));
+        dispatch(getDragonTigerDetailHorseRacing(cardGamesType.poker1Day));
+      }
     } catch (e) {
       console.error(e);
     }
-  }, []);
+  }, [state]);
 
   useEffect(() => {
     return () => {
       try {
+        socketService.card.cardResult(handleMatchResult);
         dispatch(resetCardDetail());
       } catch (error) {
         console.log(error);

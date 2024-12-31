@@ -18,9 +18,12 @@ import {
 } from "../../../../store/actions/card/cardDetail";
 import { socket, socketService } from "../../../../socketManager";
 import CasinoQueenComponent from "../../../../components/cardGames/games/casinoQueen";
+import { useLocation } from "react-router-dom";
+import { getUsersProfile } from "../../../../store/actions/user/userActions";
 
 const CasinoQueen = () => {
   const dispatch: AppDispatch = useDispatch();
+  const { state } = useLocation();
   const { dragonTigerDetail } = useSelector((state: RootState) => state.card);
   const setMatchRatesInRedux = (event: any) => {
     try {
@@ -46,6 +49,10 @@ const CasinoQueen = () => {
     }
   };
 
+  const handleMatchResult = () => {
+    dispatch(getUsersProfile());
+  };
+
   useEffect(() => {
     try {
       if (socket && dragonTigerDetail?.id) {
@@ -58,39 +65,71 @@ const CasinoQueen = () => {
           cardGamesType.queen,
           setMatchRatesInRedux
         );
-        socketService.card.userCardBetPlaced(handleBetPlacedOnDT20);
         socketService.card.getLiveGameResultTop10(
           cardGamesType.queen,
           handleLiveGameResultTop10
         );
-        socketService.card.cardResult(handleCardResult);
+        if (!state?.userId) {
+          socketService.card.userCardBetPlaced(handleBetPlacedOnDT20);
+          socketService.card.cardResult(handleCardResult);
+        }
       }
     } catch (error) {
       console.log(error);
     }
-  }, [socket, dragonTigerDetail?.id]);
+  }, [socket, dragonTigerDetail?.id, state]);
 
   useEffect(() => {
     try {
-      dispatch(getCardDetailInitial(cardGamesType.queen));
-      dispatch(getDragonTigerDetailHorseRacing(cardGamesType.queen));
+      if (state?.userId) {
+        dispatch(
+          getCardDetailInitial(
+            `${cardGamesType.queen}?userId=${state?.userId}&roleName=${state?.roleName}`
+          )
+        );
+        dispatch(
+          getDragonTigerDetailHorseRacing(
+            `${cardGamesType.queen}?userId=${state?.userId}&roleName=${state?.roleName}`
+          )
+        );
+      } else {
+        dispatch(getCardDetailInitial(cardGamesType.queen));
+        dispatch(getDragonTigerDetailHorseRacing(cardGamesType.queen));
+      }
       return () => {
         socketService.card.leaveMatchRoom(cardGamesType.queen);
         socketService.card.getCardRatesOff(cardGamesType.queen);
-        socketService.card.userCardBetPlacedOff();
-        socketService.card.cardResultOff();
+        socketService.card.getLiveGameResultTop10Off(cardGamesType.queen);
+        if (!state?.userId) {
+          socketService.card.userCardBetPlacedOff();
+          socketService.card.cardResultOff();
+        }
+        socketService.card.cardResult(handleMatchResult);
         dispatch(resetCardDetail());
       };
     } catch (e) {
       console.log(e);
     }
-  }, []);
+  }, [state]);
 
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.visibilityState === "visible") {
-        dispatch(getCardDetailInitial(cardGamesType.queen));
-        dispatch(getDragonTigerDetailHorseRacing(cardGamesType.queen));
+        if (state?.userId) {
+          dispatch(
+            getCardDetailInitial(
+              `${cardGamesType.queen}?userId=${state?.userId}&roleName=${state?.roleName}`
+            )
+          );
+          dispatch(
+            getDragonTigerDetailHorseRacing(
+              `${cardGamesType.queen}?userId=${state?.userId}&roleName=${state?.roleName}`
+            )
+          );
+        } else {
+          dispatch(getCardDetailInitial(cardGamesType.queen));
+          dispatch(getDragonTigerDetailHorseRacing(cardGamesType.queen));
+        }
       } else if (document.visibilityState === "hidden") {
         dispatch(resetCardDetail());
         socketService.card.leaveMatchRoom(cardGamesType.queen);
@@ -102,7 +141,7 @@ const CasinoQueen = () => {
     return () => {
       document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
-  }, []);
+  }, [state]);
 
   return <CasinoQueenComponent />;
 };

@@ -18,9 +18,11 @@ import {
 import { getUsersProfile } from "../../../../store/actions/user/userActions";
 import { socket, socketService } from "../../../../socketManager";
 import CasinoMeterComponent from "../../../../components/cardGames/games/casinoMeter";
+import { useLocation } from "react-router-dom";
 
 const CasinoMeter = () => {
   const dispatch: AppDispatch = useDispatch();
+  const { state } = useLocation();
   const { dragonTigerDetail } = useSelector((state: RootState) => state.card);
 
   const setMatchRatesInRedux = (event: any) => {
@@ -61,40 +63,71 @@ const CasinoMeter = () => {
           cardGamesType.cmeter,
           setMatchRatesInRedux
         );
-        socketService.card.userCardBetPlaced(handleBetPlacedOnDT20);
         socketService.card.getLiveGameResultTop10(
           cardGamesType.cmeter,
           handleLiveGameResultTop10
         );
-        socketService.card.cardResult(handleCardResult);
+        if (!state?.userId) {
+          socketService.card.userCardBetPlaced(handleBetPlacedOnDT20);
+          socketService.card.cardResult(handleCardResult);
+        }
       }
     } catch (error) {
       console.log(error);
     }
-  }, [socket, dragonTigerDetail?.id]);
+  }, [socket, dragonTigerDetail?.id, state]);
 
   useEffect(() => {
     try {
-      dispatch(getCardDetailInitial(cardGamesType.cmeter));
-      dispatch(getDragonTigerDetailHorseRacing(cardGamesType.cmeter));
+      if (state?.userId) {
+        dispatch(
+          getCardDetailInitial(
+            `${cardGamesType.cmeter}?userId=${state?.userId}&roleName=${state?.roleName}`
+          )
+        );
+        dispatch(
+          getDragonTigerDetailHorseRacing(
+            `${cardGamesType.cmeter}?userId=${state?.userId}&roleName=${state?.roleName}`
+          )
+        );
+      } else {
+        dispatch(getCardDetailInitial(cardGamesType.cmeter));
+        dispatch(getDragonTigerDetailHorseRacing(cardGamesType.cmeter));
+      }
       return () => {
         socketService.card.leaveMatchRoom(cardGamesType.cmeter);
         socketService.card.getCardRatesOff(cardGamesType.cmeter);
-        socketService.card.userCardBetPlacedOff();
-        socketService.card.cardResultOff();
-        dispatch(resetCardDetail());
+        socketService.card.getLiveGameResultTop10Off(cardGamesType.cmeter);
+        if (!state?.userId) {
+          socketService.card.userCardBetPlacedOff();
+          socketService.card.cardResultOff();
+        }
         socketService.card.cardResult(handleMatchResult);
+        dispatch(resetCardDetail());
       };
     } catch (e) {
       console.log(e);
     }
-  }, []);
+  }, [state]);
 
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.visibilityState === "visible") {
-        dispatch(getCardDetailInitial(cardGamesType.cmeter));
-        dispatch(getDragonTigerDetailHorseRacing(cardGamesType.cmeter));
+        if (state?.userId) {
+          dispatch(
+            getCardDetailInitial(
+              `${cardGamesType.cmeter}?userId=${state?.userId}&roleName=${state?.roleName}`
+            )
+          );
+          dispatch(
+            getDragonTigerDetailHorseRacing(
+              `${cardGamesType.cmeter}?userId=${state?.userId}&roleName=${state?.roleName}`
+            )
+          );
+        } else {
+          dispatch(getCardDetailInitial(cardGamesType.cmeter));
+          dispatch(getDragonTigerDetailHorseRacing(cardGamesType.cmeter));
+        }
       } else if (document.visibilityState === "hidden") {
         dispatch(resetCardDetail());
         socketService.card.leaveMatchRoom(cardGamesType.cmeter);
@@ -106,7 +139,7 @@ const CasinoMeter = () => {
     return () => {
       document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
-  }, []);
+  }, [state]);
 
   return <CasinoMeterComponent />;
 };
