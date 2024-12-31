@@ -30,24 +30,33 @@ const EventWiseMatchListModal = ({ userWiseExposureName, data }: any) => {
         customClass="commonTable reportTable"
         striped
         columns={columns}
-        itemCount={Object.keys(data).length}
+        itemCount={Object.keys(data?.value).length}
         setTableConfig={setTableConfig}
         tableConfig={tableConfig}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
       >
-        {Object.entries(data).map(([key, value]: any) => (
+        {Object.entries(data?.value).map(([key, value]: any) => (
           <tr
             style={{ cursor: "pointer" }}
             key={key}
             onClick={() => {
-              navigate(`/admin/market-analysis`, {
-                state: {
-                  submit: true,
-                  matchId: key,
-                  userId: userWiseExposureName?.id,
-                },
-              });
+              if (data?.eventType === "card") {
+                navigate(`/admin/casinoDetail/${value?.type}`, {
+                  state: {
+                    userId: userWiseExposureName?.id,
+                    roleName: userWiseExposureName?.roleName,
+                  },
+                });
+              } else {
+                navigate(`/admin/market-analysis`, {
+                  state: {
+                    submit: true,
+                    matchId: key,
+                    userId: userWiseExposureName?.id,
+                  },
+                });
+              }
             }}
           >
             <td>{value?.name}</td>
