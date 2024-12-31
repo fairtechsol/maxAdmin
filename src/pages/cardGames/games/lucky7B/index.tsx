@@ -18,9 +18,12 @@ import {
 } from "../../../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../../../store/store";
 import { cardGamesType } from "../../../../utils/Constants";
+import { useLocation } from "react-router-dom";
+import { getUsersProfile } from "../../../../store/actions/user/userActions";
 
 const Lucky7B = () => {
   const dispatch: AppDispatch = useDispatch();
+  const { state } = useLocation();
   const { loading, dragonTigerDetail } = useSelector(
     (state: RootState) => state.card
   );
@@ -48,7 +51,9 @@ const Lucky7B = () => {
       dispatch(getPlacedBets(dragonTigerDetail?.id));
     }
   };
-
+  const handleMatchResult = () => {
+    dispatch(getUsersProfile());
+  };
   useEffect(() => {
     try {
       if (dragonTigerDetail?.id) {
@@ -71,40 +76,59 @@ const Lucky7B = () => {
           cardGamesType.lucky7B,
           setMatchRatesInRedux
         );
-        socketService.card.userCardBetPlaced(handleBetPlacedOnDT20);
         socketService.card.getLiveGameResultTop10(
           cardGamesType.lucky7B,
           handleLiveGameResultTop10
         );
-        socketService.card.cardResult(handleCardResult);
-        socketService.card.matchResultDeclareAllUser(handleCardResult);
+        if (!state?.userId) {
+          socketService.card.userCardBetPlaced(handleBetPlacedOnDT20);
+          socketService.card.cardResult(handleCardResult);
+          socketService.card.matchResultDeclareAllUser(handleCardResult);
+        }
       }
     } catch (error) {
       console.log(error);
     }
-  }, [socket, dragonTigerDetail?.id]);
+  }, [socket, dragonTigerDetail?.id, state]);
 
   useEffect(() => {
     return () => {
       try {
         socketService.card.leaveMatchRoom(cardGamesType.lucky7B);
         socketService.card.getCardRatesOff(cardGamesType.lucky7B);
-        socketService.card.userCardBetPlacedOff();
-        socketService.card.cardResultOff();
-        socketService.card.matchResultDeclareAllUserOff();
+        socketService.card.getLiveGameResultTop10Off(cardGamesType.lucky7B);
+        if (!state?.userId) {
+          socketService.card.userCardBetPlacedOff();
+          socketService.card.cardResultOff();
+          socketService.card.matchResultDeclareAllUserOff();
+        }
       } catch (e) {
         console.log(e);
       }
     };
-  }, [dragonTigerDetail?.id]);
+  }, [dragonTigerDetail?.id, state]);
 
   useEffect(() => {
-    dispatch(getCardDetailInitial(cardGamesType.lucky7B));
-    dispatch(getDragonTigerDetailHorseRacing(cardGamesType.lucky7B));
+    if (state?.userId) {
+      dispatch(
+        getCardDetailInitial(
+          `${cardGamesType.lucky7B}?userId=${state?.userId}&roleName=${state?.roleName}`
+        )
+      );
+      dispatch(
+        getDragonTigerDetailHorseRacing(
+          `${cardGamesType.lucky7B}?userId=${state?.userId}&roleName=${state?.roleName}`
+        )
+      );
+    } else {
+      dispatch(getCardDetailInitial(cardGamesType.lucky7B));
+      dispatch(getDragonTigerDetailHorseRacing(cardGamesType.lucky7B));
+    }
     return () => {
+      socketService.card.cardResult(handleMatchResult);
       dispatch(resetCardDetail());
     };
-  }, []);
+  }, [state]);
 
   return loading ? <Loader /> : <Lucky7BComponent />;
 };

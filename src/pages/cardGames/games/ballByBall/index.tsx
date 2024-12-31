@@ -19,9 +19,11 @@ import { cardGamesType } from "../../../../utils/Constants";
 import BallbyballComponentList from "../../../../components/cardGames/games/ballbyball";
 import { AppDispatch, RootState } from "../../../../store/store";
 import { socket, socketService } from "../../../../socketManager";
+import { useLocation } from "react-router-dom";
 
 const BallByBall = () => {
   const dispatch: AppDispatch = useDispatch();
+  const { state } = useLocation();
   const { dragonTigerDetail } = useSelector((state: RootState) => state.card);
 
   const setMatchRatesInRedux = (event: any) => {
@@ -62,34 +64,52 @@ const BallByBall = () => {
           cardGamesType.ballbyball,
           setMatchRatesInRedux
         );
-        socketService.card.userCardBetPlaced(handleBetPlacedOnDT20);
         socketService.card.getLiveGameResultTop10(
           cardGamesType.ballbyball,
           handleLiveGameResultTop10
         );
-        socketService.card.cardResult(handleCardResult);
+        if (!state?.userId) {
+          socketService.card.userCardBetPlaced(handleBetPlacedOnDT20);
+          socketService.card.cardResult(handleCardResult);
+        }
       }
     } catch (error) {
       console.log(error);
     }
-  }, [socket, dragonTigerDetail?.id]);
+  }, [socket, dragonTigerDetail?.id, state]);
 
   useEffect(() => {
     try {
-      dispatch(getCardDetailInitial(cardGamesType.ballbyball));
-      dispatch(getDragonTigerDetailHorseRacing(cardGamesType.ballbyball));
+      if (state?.userId) {
+        dispatch(
+          getCardDetailInitial(
+            `${cardGamesType.ballbyball}?userId=${state?.userId}&roleName=${state?.roleName}`
+          )
+        );
+        dispatch(
+          getDragonTigerDetailHorseRacing(
+            `${cardGamesType.ballbyball}?userId=${state?.userId}&roleName=${state?.roleName}`
+          )
+        );
+      } else {
+        dispatch(getCardDetailInitial(cardGamesType.ballbyball));
+        dispatch(getDragonTigerDetailHorseRacing(cardGamesType.ballbyball));
+      }
       return () => {
         socketService.card.leaveMatchRoom(cardGamesType.ballbyball);
         socketService.card.getCardRatesOff(cardGamesType.ballbyball);
-        socketService.card.userCardBetPlacedOff();
-        socketService.card.cardResultOff();
-        dispatch(resetCardDetail());
+        socketService.card.getLiveGameResultTop10Off(cardGamesType.ballbyball);
+        if (!state?.userId) {
+          socketService.card.userCardBetPlacedOff();
+          socketService.card.cardResultOff();
+        }
         socketService.card.cardResult(handleMatchResult);
+        dispatch(resetCardDetail());
       };
     } catch (e) {
       console.log(e);
     }
-  }, []);
+  }, [state]);
 
   return <BallbyballComponentList />;
 };

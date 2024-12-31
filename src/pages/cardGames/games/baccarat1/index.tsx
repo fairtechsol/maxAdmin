@@ -18,9 +18,12 @@ import {
 } from "../../../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../../../store/store";
 import { cardGamesType } from "../../../../utils/Constants";
+import { useLocation } from "react-router-dom";
+import { getUsersProfile } from "../../../../store/actions/user/userActions";
 
 const Bacarrat1 = () => {
   const dispatch: AppDispatch = useDispatch();
+  const { state } = useLocation();
   const { dragonTigerDetail } = useSelector((state: RootState) => state.card);
   const setMatchRatesInRedux = (event: any) => {
     try {
@@ -37,14 +40,20 @@ const Bacarrat1 = () => {
       dispatch(updateProfitLossCards(event?.userRedisObj));
     }
   };
+
   const handleLiveGameResultTop10 = (event: any) => {
     dispatch(updateLiveGameResultTop10(event?.data));
     dispatch(graphData(event?.graphdata));
   };
+
   const handleCardResult = (event: any) => {
     if (event?.matchId === dragonTigerDetail?.id) {
       dispatch(getPlacedBets(dragonTigerDetail?.id));
     }
+  };
+
+  const handleMatchResult = () => {
+    dispatch(getUsersProfile());
   };
 
   useEffect(() => {
@@ -59,43 +68,76 @@ const Bacarrat1 = () => {
           cardGamesType.baccarat,
           setMatchRatesInRedux
         );
-        socketService.card.userCardBetPlaced(handleBetPlacedOnDT20);
         socketService.card.getLiveGameResultTop10(
           cardGamesType.baccarat,
           handleLiveGameResultTop10
         );
-        socketService.card.cardResult(handleCardResult);
+        if (!state?.userId) {
+          socketService.card.userCardBetPlaced(handleBetPlacedOnDT20);
+          socketService.card.cardResult(handleCardResult);
+        }
       }
     } catch (error) {
       console.log(error);
     }
-  }, [socket, dragonTigerDetail?.id]);
+  }, [socket, dragonTigerDetail?.id, state]);
 
   useEffect(() => {
     try {
-      dispatch(getCardDetailInitial(cardGamesType.baccarat));
-      dispatch(getDragonTigerDetailHorseRacing(cardGamesType.baccarat));
+      if (state?.userId) {
+        dispatch(
+          getCardDetailInitial(
+            `${cardGamesType.baccarat}?userId=${state?.userId}&roleName=${state?.roleName}`
+          )
+        );
+        dispatch(
+          getDragonTigerDetailHorseRacing(
+            `${cardGamesType.baccarat}?userId=${state?.userId}&roleName=${state?.roleName}`
+          )
+        );
+      } else {
+        dispatch(getCardDetailInitial(cardGamesType.baccarat));
+        dispatch(getDragonTigerDetailHorseRacing(cardGamesType.baccarat));
+      }
       return () => {
         socketService.card.leaveMatchRoom(cardGamesType.baccarat);
         socketService.card.getCardRatesOff(cardGamesType.baccarat);
-        socketService.card.userCardBetPlacedOff();
-        socketService.card.cardResultOff();
+        socketService.card.getLiveGameResultTop10Off(cardGamesType.baccarat);
+        if (!state?.userId) {
+          socketService.card.userCardBetPlacedOff();
+          socketService.card.cardResultOff();
+        }
+        socketService.card.cardResult(handleMatchResult);
         dispatch(resetCardDetail());
       };
     } catch (e) {
       console.log(e);
     }
-  }, []);
+  }, [state]);
 
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.visibilityState === "visible") {
-        dispatch(getCardDetailInitial(cardGamesType.baccarat));
-        dispatch(getDragonTigerDetailHorseRacing(cardGamesType.baccarat));
+        if (state?.userId) {
+          dispatch(
+            getCardDetailInitial(
+              `${cardGamesType.baccarat}?userId=${state?.userId}&roleName=${state?.roleName}`
+            )
+          );
+          dispatch(
+            getDragonTigerDetailHorseRacing(
+              `${cardGamesType.baccarat}?userId=${state?.userId}&roleName=${state?.roleName}`
+            )
+          );
+        } else {
+          dispatch(getCardDetailInitial(cardGamesType.baccarat));
+          dispatch(getDragonTigerDetailHorseRacing(cardGamesType.baccarat));
+        }
       } else if (document.visibilityState === "hidden") {
         dispatch(resetCardDetail());
         socketService.card.leaveMatchRoom(cardGamesType.baccarat);
         socketService.card.getCardRatesOff(cardGamesType.baccarat);
+        socketService.card.getLiveGameResultTop10Off(cardGamesType.baccarat);
       }
     };
 
@@ -103,7 +145,7 @@ const Bacarrat1 = () => {
     return () => {
       document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
-  }, []);
+  }, [state]);
 
   return <BaccaratComponent />;
 };

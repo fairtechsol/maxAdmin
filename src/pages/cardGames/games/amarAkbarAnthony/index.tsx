@@ -17,9 +17,12 @@ import {
 } from "../../../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../../../store/store";
 import { cardGamesType } from "../../../../utils/Constants";
+import { useLocation } from "react-router-dom";
+import { getUsersProfile } from "../../../../store/actions/user/userActions";
 
 const AmarAkbarAnthony = () => {
   const dispatch: AppDispatch = useDispatch();
+  const { state } = useLocation();
   const { dragonTigerDetail } = useSelector((state: RootState) => state.card);
 
   const setMatchRatesInRedux = (event: any) => {
@@ -45,6 +48,9 @@ const AmarAkbarAnthony = () => {
       dispatch(getPlacedBets(dragonTigerDetail?.id));
     }
   };
+  const handleMatchResult = () => {
+    dispatch(getUsersProfile());
+  };
 
   useEffect(() => {
     try {
@@ -58,33 +64,56 @@ const AmarAkbarAnthony = () => {
           cardGamesType.amarAkbarAnthony,
           setMatchRatesInRedux
         );
-        socketService.card.userCardBetPlaced(handleBetPlacedOnDT20);
         socketService.card.getLiveGameResultTop10(
           cardGamesType.amarAkbarAnthony,
           handleLiveGameResultTop10
         );
-        socketService.card.cardResult(handleCardResult);
+        if (!state?.userId) {
+          socketService.card.userCardBetPlaced(handleBetPlacedOnDT20);
+          socketService.card.cardResult(handleCardResult);
+        }
       }
     } catch (error) {
       console.log(error);
     }
-  }, [socket, dragonTigerDetail?.id]);
+  }, [socket, dragonTigerDetail?.id, state]);
 
   useEffect(() => {
     try {
-      dispatch(getCardDetailInitial(cardGamesType.amarAkbarAnthony));
-      dispatch(getDragonTigerDetailHorseRacing(cardGamesType.amarAkbarAnthony));
+      if (state?.userId) {
+        dispatch(
+          getCardDetailInitial(
+            `${cardGamesType.amarAkbarAnthony}?userId=${state?.userId}&roleName=${state?.roleName}`
+          )
+        );
+        dispatch(
+          getDragonTigerDetailHorseRacing(
+            `${cardGamesType.amarAkbarAnthony}?userId=${state?.userId}&roleName=${state?.roleName}`
+          )
+        );
+      } else {
+        dispatch(getCardDetailInitial(cardGamesType.amarAkbarAnthony));
+        dispatch(
+          getDragonTigerDetailHorseRacing(cardGamesType.amarAkbarAnthony)
+        );
+      }
       return () => {
         socketService.card.leaveMatchRoom(cardGamesType.amarAkbarAnthony);
         socketService.card.getCardRatesOff(cardGamesType.amarAkbarAnthony);
-        socketService.card.userCardBetPlacedOff();
-        socketService.card.cardResultOff();
+        if (!state?.userId) {
+          socketService.card.userCardBetPlacedOff();
+          socketService.card.getLiveGameResultTop10Off(
+            cardGamesType.amarAkbarAnthony
+          );
+          socketService.card.cardResultOff();
+        }
+        socketService.card.cardResult(handleMatchResult);
         dispatch(resetCardDetail());
       };
     } catch (e) {
       console.log(e);
     }
-  }, []);
+  }, [state]);
 
   return <AmarAkbarAnthonyComponent />;
 };

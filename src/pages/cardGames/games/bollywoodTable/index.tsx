@@ -17,9 +17,12 @@ import {
 } from "../../../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../../../store/store";
 import { cardGamesType } from "../../../../utils/Constants";
+import { useLocation } from "react-router-dom";
+import { getUsersProfile } from "../../../../store/actions/user/userActions";
 
 const BollywoodTable = () => {
   const dispatch: AppDispatch = useDispatch();
+  const { state } = useLocation();
   const { dragonTigerDetail } = useSelector((state: RootState) => state.card);
 
   const setMatchRatesInRedux = (event: any) => {
@@ -46,6 +49,10 @@ const BollywoodTable = () => {
     }
   };
 
+  const handleMatchResult = () => {
+    dispatch(getUsersProfile());
+  };
+
   useEffect(() => {
     try {
       if (socket && dragonTigerDetail?.id) {
@@ -58,33 +65,53 @@ const BollywoodTable = () => {
           cardGamesType.btable,
           setMatchRatesInRedux
         );
-        socketService.card.userCardBetPlaced(handleBetPlacedOnDT20);
         socketService.card.getLiveGameResultTop10(
           cardGamesType.btable,
           handleLiveGameResultTop10
         );
-        socketService.card.cardResult(handleCardResult);
+        if (!state?.userId) {
+          socketService.card.userCardBetPlaced(handleBetPlacedOnDT20);
+
+          socketService.card.cardResult(handleCardResult);
+        }
       }
     } catch (error) {
       console.log(error);
     }
-  }, [socket, dragonTigerDetail?.id]);
+  }, [socket, dragonTigerDetail?.id, state]);
 
   useEffect(() => {
     try {
-      dispatch(getCardDetailInitial(cardGamesType.btable));
-      dispatch(getDragonTigerDetailHorseRacing(cardGamesType.btable));
+      if (state?.userId) {
+        dispatch(
+          getCardDetailInitial(
+            `${cardGamesType.btable}?userId=${state?.userId}&roleName=${state?.roleName}`
+          )
+        );
+        dispatch(
+          getDragonTigerDetailHorseRacing(
+            `${cardGamesType.btable}?userId=${state?.userId}&roleName=${state?.roleName}`
+          )
+        );
+      } else {
+        dispatch(getCardDetailInitial(cardGamesType.btable));
+        dispatch(getDragonTigerDetailHorseRacing(cardGamesType.btable));
+      }
       return () => {
         socketService.card.leaveMatchRoom(cardGamesType.btable);
         socketService.card.getCardRatesOff(cardGamesType.btable);
-        socketService.card.userCardBetPlacedOff();
-        socketService.card.cardResultOff();
+        socketService.card.getLiveGameResultTop10Off(cardGamesType.btable);
+        if (!state?.userId) {
+          socketService.card.userCardBetPlacedOff();
+          socketService.card.cardResultOff();
+        }
+        socketService.card.cardResult(handleMatchResult);
         dispatch(resetCardDetail());
       };
     } catch (e) {
       console.log(e);
     }
-  }, []);
+  }, [state]);
 
   return <BollywoodTableComponent />;
 };

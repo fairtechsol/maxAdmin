@@ -33,8 +33,9 @@ const MarketAnalysis = () => {
             url: `${ApiConstants.MATCH.MARKETANALYSIS}?userId=${state?.userId}&matchId=${state?.matchId}`,
           })
         );
-      } else
+      } else {
         dispatch(getMarketAnalysis({ url: ApiConstants.MATCH.MARKETANALYSIS }));
+      }
     } catch (error) {
       console.log(error);
     }
