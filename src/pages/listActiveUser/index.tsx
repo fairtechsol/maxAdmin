@@ -4,9 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "../../assets/common.scss";
 import CustomButton from "../../components/commonComponent/button";
+import CustomModal from "../../components/commonComponent/modal";
 import CustomTable from "../../components/commonComponent/table";
+import SearchBox from "../../components/commonComponent/table/tableUtils/search";
+import EventWiseExposureModal from "../../components/listClients/eventWiseExposureModal";
+import EventWiseMatchListModal from "../../components/listClients/eventWiseMatchListModal";
 import ListClientModals from "../../components/listClients/modals";
 import "../../components/listClients/style.scss";
+import { formatToINR } from "../../helpers";
 import { Column } from "../../models/tableInterface";
 import {
   dropdownSummary,
@@ -16,11 +21,6 @@ import {
 } from "../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../store/store";
 import { ApiConstants } from "../../utils/Constants";
-import { formatToINR } from "../../helpers";
-import SearchBox from "../../components/commonComponent/table/tableUtils/search";
-import CustomModal from "../../components/commonComponent/modal";
-import EventWiseExposureModal from "../../components/listClients/eventWiseExposureModal";
-import EventWiseMatchListModal from "../../components/listClients/eventWiseMatchListModal";
 // Example usage
 const columns: Column[] = [
   { id: "user.userName", label: "User Name", colSpan: 2 },
@@ -729,7 +729,20 @@ const ListActiveInactiveUser: React.FC = () => {
                             <td className="text-end">
                               {formatToINR(userBal?.profitLoss)}
                             </td>
-                            <td className="text-end">
+                            <td
+                              className="text-end"
+                              style={{
+                                cursor: "pointer",
+                              }}
+                              onClick={() => {
+                                setShowUserWiseExposureModal(true);
+                                setUserWiseExposureName({
+                                  name: userName,
+                                  id: id,
+                                  roleName: roleName,
+                                });
+                              }}
+                            >
                               {formatToINR(userBal?.exposure)}
                             </td>
                             <td className="text-end">
