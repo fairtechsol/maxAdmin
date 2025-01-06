@@ -20,9 +20,12 @@ import {
 } from "../../../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../../../store/store";
 import { cardGamesType } from "../../../../utils/Constants";
+import { useLocation } from "react-router-dom";
+import { getUsersProfile } from "../../../../store/actions/user/userActions";
 
 const Superover = () => {
   const dispatch: AppDispatch = useDispatch();
+  const { state } = useLocation();
   const [errorCount, setErrorCount] = useState<number>(0);
   const { loading, dragonTigerDetail } = useSelector(
     (state: RootState) => state.card
@@ -51,7 +54,9 @@ const Superover = () => {
       dispatch(getPlacedBets(dragonTigerDetail?.id));
     }
   };
-
+  const handleMatchResult = () => {
+    dispatch(getUsersProfile());
+  };
   useEffect(() => {
     try {
       if (dragonTigerDetail?.id) {
@@ -77,14 +82,16 @@ const Superover = () => {
           cardGamesType.superover,
           handleLiveGameResultTop10
         );
-        socketService.card.userCardBetPlaced(handleBetPlacedOnDT20);
-        socketService.card.cardResult(handleCardResult);
-        socketService.card.matchResultDeclareAllUser(handleCardResult);
+        if (!state?.userId) {
+          socketService.card.userCardBetPlaced(handleBetPlacedOnDT20);
+          socketService.card.cardResult(handleCardResult);
+          socketService.card.matchResultDeclareAllUser(handleCardResult);
+        }
       }
     } catch (error) {
       console.log(error);
     }
-  }, [socket, dragonTigerDetail?.id]);
+  }, [socket, dragonTigerDetail?.id, state]);
 
   useEffect(() => {
     try {
@@ -92,21 +99,38 @@ const Superover = () => {
         return () => {
           socketService.card.leaveMatchRoom(cardGamesType.superover);
           socketService.card.getCardRatesOff(cardGamesType.superover);
-          socketService.card.userCardBetPlacedOff();
-          socketService.card.cardResultOff();
-          socketService.card.matchResultDeclareAllUserOff();
+          socketService.card.getLiveGameResultTop10Off(cardGamesType.superover);
+          if (!state?.userId) {
+            socketService.card.userCardBetPlacedOff();
+            socketService.card.cardResultOff();
+            socketService.card.matchResultDeclareAllUserOff();
+          }
           dispatch(resetScoreBoard());
         };
       }
     } catch (e) {
       console.log(e);
     }
-  }, [dragonTigerDetail?.id]);
+  }, [dragonTigerDetail?.id, state]);
 
   useEffect(() => {
-    dispatch(getCardDetailInitial(cardGamesType.superover));
-    dispatch(getDragonTigerDetailHorseRacing(cardGamesType.superover));
+    if (state?.userId) {
+      dispatch(
+        getCardDetailInitial(
+          `${cardGamesType.superover}?userId=${state?.userId}&roleName=${state?.roleName}`
+        )
+      );
+      dispatch(
+        getDragonTigerDetailHorseRacing(
+          `${cardGamesType.superover}?userId=${state?.userId}&roleName=${state?.roleName}`
+        )
+      );
+    } else {
+      dispatch(getCardDetailInitial(cardGamesType.superover));
+      dispatch(getDragonTigerDetailHorseRacing(cardGamesType.superover));
+    }
     return () => {
+      socketService.card.cardResult(handleMatchResult);
       dispatch(resetCardDetail());
     };
   }, []);
@@ -136,7 +160,7 @@ const Superover = () => {
         intervalTime = 600000;
       }
       const interval = setInterval(() => {
-        getScoreBoard(Id[Id?.length-1]);
+        getScoreBoard(Id[Id?.length - 1]);
       }, intervalTime);
 
       return () => clearInterval(interval);

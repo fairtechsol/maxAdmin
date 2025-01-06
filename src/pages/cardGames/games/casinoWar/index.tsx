@@ -18,9 +18,12 @@ import {
 } from "../../../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../../../store/store";
 import { cardGamesType } from "../../../../utils/Constants";
+import { useLocation } from "react-router-dom";
+import { getUsersProfile } from "../../../../store/actions/user/userActions";
 
 const CasinoWar = () => {
   const dispatch: AppDispatch = useDispatch();
+  const { state } = useLocation();
   const { loading, dragonTigerDetail } = useSelector(
     (state: RootState) => state.card
   );
@@ -49,6 +52,10 @@ const CasinoWar = () => {
     }
   };
 
+  const handleMatchResult = () => {
+    dispatch(getUsersProfile());
+  };
+
   useEffect(() => {
     try {
       if (dragonTigerDetail?.id) {
@@ -70,41 +77,59 @@ const CasinoWar = () => {
           cardGamesType.casinoWar,
           setMatchRatesInRedux
         );
-        socketService.card.userCardBetPlaced(handleBetPlacedOnDT20);
         socketService.card.getLiveGameResultTop10(
           cardGamesType.casinoWar,
           handleLiveGameResultTop10
         );
-        socketService.card.cardResult(handleCardResult);
-        socketService.card.matchResultDeclareAllUser(handleCardResult);
+        if (!state?.userId) {
+          socketService.card.userCardBetPlaced(handleBetPlacedOnDT20);
+          socketService.card.cardResult(handleCardResult);
+          socketService.card.matchResultDeclareAllUser(handleCardResult);
+        }
       }
     } catch (error) {
       console.log(error);
     }
-  }, [socket, dragonTigerDetail?.id]);
+  }, [socket, dragonTigerDetail?.id, state]);
 
   useEffect(() => {
     return () => {
       try {
         socketService.card.leaveMatchRoom(cardGamesType.casinoWar);
         socketService.card.getCardRatesOff(cardGamesType.casinoWar);
-        socketService.card.userCardBetPlacedOff();
-        socketService.card.cardResultOff();
-        socketService.card.matchResultDeclareAllUserOff();
-        socketService.card.matchResultDeclareAllUserOff();
+        socketService.card.getLiveGameResultTop10Off(cardGamesType.queen);
+        if (!state?.userId) {
+          socketService.card.userCardBetPlacedOff();
+          socketService.card.cardResultOff();
+          socketService.card.matchResultDeclareAllUserOff();
+        }
+        socketService.card.cardResult(handleMatchResult);
       } catch (e) {
         console.log(e);
       }
     };
-  }, [dragonTigerDetail?.id]);
+  }, [dragonTigerDetail?.id, state]);
 
   useEffect(() => {
-    dispatch(getCardDetailInitial(cardGamesType.casinoWar));
-    dispatch(getDragonTigerDetailHorseRacing(cardGamesType.casinoWar));
+    if (state?.userId) {
+      dispatch(
+        getCardDetailInitial(
+          `${cardGamesType.casinoWar}?userId=${state?.userId}&roleName=${state?.roleName}`
+        )
+      );
+      dispatch(
+        getDragonTigerDetailHorseRacing(
+          `${cardGamesType.casinoWar}?userId=${state?.userId}&roleName=${state?.roleName}`
+        )
+      );
+    } else {
+      dispatch(getCardDetailInitial(cardGamesType.casinoWar));
+      dispatch(getDragonTigerDetailHorseRacing(cardGamesType.casinoWar));
+    }
     return () => {
       dispatch(resetCardDetail());
     };
-  }, []);
+  }, [state]);
 
   return loading ? <Loader /> : <CasinoWarComponent />;
 };

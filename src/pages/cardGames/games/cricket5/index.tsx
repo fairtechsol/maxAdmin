@@ -20,9 +20,12 @@ import {
 } from "../../../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../../../store/store";
 import { cardGamesType } from "../../../../utils/Constants";
+import { getUsersProfile } from "../../../../store/actions/user/userActions";
+import { useLocation } from "react-router-dom";
 
 const Cricket5 = () => {
   const dispatch: AppDispatch = useDispatch();
+  const { state } = useLocation();
   const [errorCount, setErrorCount] = useState<number>(0);
   const { loading, dragonTigerDetail } = useSelector(
     (state: RootState) => state.card
@@ -52,6 +55,10 @@ const Cricket5 = () => {
     }
   };
 
+  const handleMatchResult = () => {
+    dispatch(getUsersProfile());
+  };
+
   useEffect(() => {
     try {
       if (dragonTigerDetail?.id) {
@@ -73,41 +80,60 @@ const Cricket5 = () => {
           cardGamesType.cricketv3,
           setMatchRatesInRedux
         );
-        socketService.card.userCardBetPlaced(handleBetPlacedOnDT20);
         socketService.card.getLiveGameResultTop10(
           cardGamesType.cricketv3,
           handleLiveGameResultTop10
         );
-        socketService.card.cardResult(handleCardResult);
-        socketService.card.matchResultDeclareAllUser(handleCardResult);
+        if (!state?.userId) {
+          socketService.card.userCardBetPlaced(handleBetPlacedOnDT20);
+          socketService.card.cardResult(handleCardResult);
+          socketService.card.matchResultDeclareAllUser(handleCardResult);
+        }
       }
     } catch (error) {
       console.log(error);
     }
-  }, [socket, dragonTigerDetail?.id]);
+  }, [socket, dragonTigerDetail?.id, state]);
 
   useEffect(() => {
     return () => {
       try {
         socketService.card.leaveMatchRoom(cardGamesType.cricketv3);
         socketService.card.getCardRatesOff(cardGamesType.cricketv3);
-        socketService.card.userCardBetPlacedOff();
-        socketService.card.cardResultOff();
-        socketService.card.matchResultDeclareAllUserOff();
+        socketService.card.getLiveGameResultTop10Off(cardGamesType.cricketv3);
+        if (!state?.userId) {
+          socketService.card.userCardBetPlacedOff();
+          socketService.card.cardResultOff();
+          socketService.card.matchResultDeclareAllUserOff();
+        }
+        socketService.card.cardResult(handleMatchResult);
         dispatch(resetScoreBoard());
       } catch (e) {
         console.log(e);
       }
     };
-  }, [dragonTigerDetail?.id]);
+  }, [dragonTigerDetail?.id, state]);
 
   useEffect(() => {
-    dispatch(getCardDetailInitial(cardGamesType.cricketv3));
-    dispatch(getDragonTigerDetailHorseRacing(cardGamesType.cricketv3));
+    if (state?.userId) {
+      dispatch(
+        getCardDetailInitial(
+          `${cardGamesType.cricketv3}?userId=${state?.userId}&roleName=${state?.roleName}`
+        )
+      );
+      dispatch(
+        getDragonTigerDetailHorseRacing(
+          `${cardGamesType.cricketv3}?userId=${state?.userId}&roleName=${state?.roleName}`
+        )
+      );
+    } else {
+      dispatch(getCardDetailInitial(cardGamesType.cricketv3));
+      dispatch(getDragonTigerDetailHorseRacing(cardGamesType.cricketv3));
+    }
     return () => {
       dispatch(resetCardDetail());
     };
-  }, []);
+  }, [state]);
 
   const getScoreBoard = async (marketId: string) => {
     try {
@@ -134,7 +160,7 @@ const Cricket5 = () => {
         intervalTime = 600000;
       }
       const interval = setInterval(() => {
-        getScoreBoard(Id[Id?.length-1]);
+        getScoreBoard(Id[Id?.length - 1]);
       }, intervalTime);
 
       return () => clearInterval(interval);

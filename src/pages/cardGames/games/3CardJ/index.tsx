@@ -19,9 +19,11 @@ import {
 import { socket, socketService } from "../../../../socketManager";
 import { getUsersProfile } from "../../../../store/actions/user/userActions";
 import CardJComponent from "../../../../components/cardGames/games/3CardJ";
+import { useLocation } from "react-router-dom";
 
 const CardJ = () => {
   const dispatch: AppDispatch = useDispatch();
+  const { state } = useLocation();
   const { dragonTigerDetail } = useSelector((state: RootState) => state.card);
 
   const setMatchRatesInRedux = (event: any) => {
@@ -75,40 +77,71 @@ const CardJ = () => {
           cardGamesType.cardj,
           setMatchRatesInRedux
         );
-        socketService.card.userCardBetPlaced(handleBetPlacedOn3CardJ);
         socketService.card.getLiveGameResultTop10(
           cardGamesType.cardj,
           handleLiveGameResultTop10
         );
-        socketService.card.cardResult(handleCardResult);
+        if (!state?.userId) {
+          socketService.card.userCardBetPlaced(handleBetPlacedOn3CardJ);
+          socketService.card.cardResult(handleCardResult);
+        }
       }
     } catch (error) {
       console.log(error);
     }
-  }, [socket, dragonTigerDetail?.id]);
+  }, [socket, dragonTigerDetail?.id, state]);
 
   useEffect(() => {
     try {
-      dispatch(getCardDetailInitial(cardGamesType.cardj));
-      dispatch(getDragonTigerDetailHorseRacing(cardGamesType.cardj));
+      if (state?.userId) {
+        dispatch(
+          getCardDetailInitial(
+            `${cardGamesType.cardj}?userId=${state?.userId}&roleName=${state?.roleName}`
+          )
+        );
+        dispatch(
+          getDragonTigerDetailHorseRacing(
+            `${cardGamesType.cardj}?userId=${state?.userId}&roleName=${state?.roleName}`
+          )
+        );
+      } else {
+        dispatch(getCardDetailInitial(cardGamesType.cardj));
+        dispatch(getDragonTigerDetailHorseRacing(cardGamesType.cardj));
+      }
       return () => {
         socketService.card.leaveMatchRoom(cardGamesType.cardj);
         socketService.card.getCardRatesOff(cardGamesType.cardj);
-        socketService.card.userCardBetPlacedOff();
-        socketService.card.cardResultOff();
-        dispatch(resetCardDetail());
+        socketService.card.getLiveGameResultTop10Off(cardGamesType.cardj);
+        if (!state?.userId) {
+          socketService.card.userCardBetPlacedOff();
+          socketService.card.cardResultOff();
+        }
         socketService.card.cardResult(handleMatchResult);
+        dispatch(resetCardDetail());
       };
     } catch (e) {
       console.log(e);
     }
-  }, []);
+  }, [state]);
 
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.visibilityState === "visible") {
-        dispatch(getCardDetailInitial(cardGamesType.cardj));
-        dispatch(getDragonTigerDetailHorseRacing(cardGamesType.cardj));
+        if (state?.userId) {
+          dispatch(
+            getCardDetailInitial(
+              `${cardGamesType.cardj}?userId=${state?.userId}&roleName=${state?.roleName}`
+            )
+          );
+          dispatch(
+            getDragonTigerDetailHorseRacing(
+              `${cardGamesType.cardj}?userId=${state?.userId}&roleName=${state?.roleName}`
+            )
+          );
+        } else {
+          dispatch(getCardDetailInitial(cardGamesType.cardj));
+          dispatch(getDragonTigerDetailHorseRacing(cardGamesType.cardj));
+        }
       } else if (document.visibilityState === "hidden") {
         dispatch(resetCardDetail());
         socketService.card.leaveMatchRoom(cardGamesType.cardj);
@@ -120,7 +153,7 @@ const CardJ = () => {
     return () => {
       document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
-  }, []);
+  }, [state]);
 
   return <CardJComponent />;
 };

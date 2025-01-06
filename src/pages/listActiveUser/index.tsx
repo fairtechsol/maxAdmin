@@ -20,6 +20,7 @@ import { formatToINR } from "../../helpers";
 import SearchBox from "../../components/commonComponent/table/tableUtils/search";
 import CustomModal from "../../components/commonComponent/modal";
 import EventWiseExposureModal from "../../components/listClients/eventWiseExposureModal";
+import EventWiseMatchListModal from "../../components/listClients/eventWiseMatchListModal";
 // Example usage
 const columns: Column[] = [
   { id: "user.userName", label: "User Name", colSpan: 2 },
@@ -56,11 +57,15 @@ const ListActiveInactiveUser: React.FC = () => {
   });
   const [value, setValue] = useState<any>(25);
   const [keyword, setKeyWord] = useState<any>("");
+  const [dataForMatchList, setDataForMatchList] = useState<any>({});
   const [showUserWiseExposureModal, setShowUserWiseExposureModal] =
+    useState(false);
+  const [showUserWiseMatchListModal, setShowUserWiseMatchListModal] =
     useState(false);
   const [userWiseExposureName, setUserWiseExposureName] = useState({
     name: "",
     id: "",
+    roleName: "",
   });
   const [sort, setSort] = useState<any>({
     direction: "ASC",
@@ -477,6 +482,7 @@ const ListActiveInactiveUser: React.FC = () => {
                                 setUserWiseExposureName({
                                   name: userName,
                                   id: id,
+                                  roleName: roleName,
                                 });
                               }}
                             >
@@ -887,7 +893,28 @@ const ListActiveInactiveUser: React.FC = () => {
         show={showUserWiseExposureModal}
         setShow={setShowUserWiseExposureModal}
       >
-        <EventWiseExposureModal userWiseExposureName={userWiseExposureName} />
+        <EventWiseExposureModal
+          userWiseExposureName={userWiseExposureName}
+          setDataForMatchList={setDataForMatchList}
+          setShowUserWiseMatchListModal={setShowUserWiseMatchListModal}
+        />
+      </CustomModal>
+      <CustomModal
+        customClass="modalFull-90 "
+        title={[
+          <>
+            <span className="f400">
+              {userWiseExposureName?.name} Match Wise Exposure
+            </span>
+          </>,
+        ]}
+        show={showUserWiseMatchListModal}
+        setShow={setShowUserWiseMatchListModal}
+      >
+        <EventWiseMatchListModal
+          userWiseExposureName={userWiseExposureName}
+          data={dataForMatchList}
+        />
       </CustomModal>
     </>
   );
