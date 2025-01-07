@@ -187,23 +187,24 @@ const Games = () => {
         socketService.match.sessionResultUnDeclareOff();
         socketService.match.updateDeleteReasonOff();
 
+        socketService.match.joinMatchRoom(id, "superAdmin");
+        socketService.match.getMatchRates(id, updateMatchDetailToRedux);
+
         if (!state.userId) {
           socketService.match.matchDeleteBet(handleDeleteBet);
           socketService.match.sessionDeleteBet(handleDeleteBet);
           socketService.match.userSessionBetPlaced(handleSessionBetPlaced);
           socketService.match.userMatchBetPlaced(handleMatchBetPlaced);
+          socketService.match.matchResultDeclared(handleMatchResultDeclarted);
+          socketService.match.declaredMatchResultAllUser(
+            handleMatchResultDeclarted
+          );
+          socketService.match.sessionResult(handleSessionResultDeclare);
+          socketService.match.sessionResultUnDeclare(
+            handleSessionResultUnDeclare
+          );
+          socketService.match.updateDeleteReason(handleDeleteReasonUpdate);
         }
-        socketService.match.joinMatchRoom(id, "superAdmin");
-        socketService.match.getMatchRates(id, updateMatchDetailToRedux);
-        socketService.match.matchResultDeclared(handleMatchResultDeclarted);
-        socketService.match.declaredMatchResultAllUser(
-          handleMatchResultDeclarted
-        );
-        socketService.match.sessionResult(handleSessionResultDeclare);
-        socketService.match.sessionResultUnDeclare(
-          handleSessionResultUnDeclare
-        );
-        socketService.match.updateDeleteReason(handleDeleteReasonUpdate);
       }
     } catch (e) {
       console.log(e);
