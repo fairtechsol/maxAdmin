@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 import WorliComponent from "../../../../components/cardGames/games/worli";
 import { socket, socketService } from "../../../../socketManager";
 import {
@@ -15,10 +16,9 @@ import {
   getPlacedBets,
   updateBetsPlaced,
 } from "../../../../store/actions/match/matchAction";
+import { getUsersProfile } from "../../../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../../../store/store";
 import { cardGamesType } from "../../../../utils/Constants";
-import { useLocation } from "react-router-dom";
-import { getUsersProfile } from "../../../../store/actions/user/userActions";
 
 const Worli = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -45,7 +45,7 @@ const Worli = () => {
   };
   const handleCardResult = (event: any) => {
     if (event?.matchId === dragonTigerDetail?.id) {
-      dispatch(getPlacedBets(dragonTigerDetail?.id));
+      dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
     }
   };
   const handleMatchResult = () => {
@@ -54,7 +54,7 @@ const Worli = () => {
   useEffect(() => {
     try {
       if (socket && dragonTigerDetail?.id) {
-        dispatch(getPlacedBets(dragonTigerDetail?.id));
+        dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
         socketService.card.getCardRatesOff(cardGamesType.worli);
         socketService.card.userCardBetPlacedOff();
         socketService.card.cardResultOff();

@@ -1,15 +1,17 @@
-
-import isMobile from "../../../utils/screenDimension";
-import "./style.scss";
-import { FaLock } from "react-icons/fa";
 import { useEffect, useState } from "react";
+import { FaLock } from "react-icons/fa";
 import { formatNumber, handleSize } from "../../../helpers";
+import isMobile from "../../../utils/screenDimension";
 import MarketTableHeader from "../../commonComponent/MarketWiseHeader";
+import "./style.scss";
 
-const SessionCricketCasino = ({ title, data, detail }:any) => {
+const SessionCricketCasino = ({
+  title,
+  data,
+  detail,
+  marketAnalysisDetail,
+}: any) => {
   const [marketArr, setMarketArr] = useState<any>(data);
- 
-
   useEffect(() => {
     if (!data?.section || !Array.isArray(data.section)) {
       const defaultArray = Array.from(
@@ -40,7 +42,12 @@ const SessionCricketCasino = ({ title, data, detail }:any) => {
         className="sessionNormalContainer"
         style={{ marginTop: isMobile ? "" : "10px" }}
       >
-        <MarketTableHeader title={title} type={"cricketCasino"} data={data} detail={detail}/>
+        <MarketTableHeader
+          title={title}
+          type={"cricketCasino"}
+          data={data}
+          detail={detail}
+        />
         <div
           style={{
             width: "100%",
@@ -57,7 +64,10 @@ const SessionCricketCasino = ({ title, data, detail }:any) => {
               style={{ borderBottom: "1px solid #c7c8ca" }}
             >
               <div style={{ backgroundColor: "#f2f2f2", flexGrow: 1 }}>
-                <span className={`sessionMinBox sessionMinMaxFont`} style={{ marginLeft: "1%" }}>
+                <span
+                  className={`sessionMinBox sessionMinMaxFont`}
+                  style={{ marginLeft: "1%" }}
+                >
                   Min:{formatNumber(marketArr?.min)} Max:
                   {formatNumber(marketArr?.max)}
                 </span>
@@ -70,18 +80,28 @@ const SessionCricketCasino = ({ title, data, detail }:any) => {
               </div>
             </div>
             {marketArr?.section?.map((item: any, index: any) => {
+              console.log(
+                marketAnalysisDetail?.[0]?.betType?.session?.find(
+                  (items: any) => items.betId == data?.id
+                )
+              );
               return (
                 <div className="sessionRateContainer" key={index}>
                   <div className="sessionRateName" style={{ flexGrow: 1 }}>
-                    <span
-                      className="teamFont"
-                      style={{ fontWeight: "400" }}
-                    >
+                    <span className="teamFont" style={{ fontWeight: "400" }}>
                       {index} Number
                     </span>
                     <span
                       className={`${
-                        detail?.profitLossDataSession
+                        marketAnalysisDetail?.length
+                          ? (parseFloat(
+                              marketAnalysisDetail?.[0]?.betType?.session?.find(
+                                (items: any) => items.betId == data?.id
+                              )?.profitLoss?.betPlaced[index]
+                            ) ?? 0) > 0
+                            ? "color-green"
+                            : "color-red"
+                          : detail?.profitLossDataSession
                           ? detail?.profitLossDataSession?.filter(
                               (a: any) => a?.betId === data?.id
                             )
@@ -97,23 +117,25 @@ const SessionCricketCasino = ({ title, data, detail }:any) => {
                             : 0
                           : 0
                       }`}
-                      
                     >
-                      
-                      {detail?.profitLossDataSession
+                      {marketAnalysisDetail?.length
+                        ? marketAnalysisDetail?.[0]?.betType?.session?.find(
+                            (items: any) => items.betId == data?.id
+                          )?.profitLoss?.betPlaced[index] ?? 0
+                        : detail?.profitLossDataSession
                         ? detail?.profitLossDataSession?.filter(
                             (a: any) => a?.betId === data?.id
                           )
                           ? detail?.profitLossDataSession?.filter(
                               (a: any) => a?.betId === data?.id
-                            )[0]?.profitLoss?.[index] 
-                          : ''
-                        : ''}
+                            )[0]?.profitLoss?.[index]
+                          : ""
+                        : ""}
                     </span>
                   </div>
                   <div
                     className="sessionCCRateBoxContainer"
-                    style={{ width:!isMobile ? "81px" : "" }}
+                    style={{ width: !isMobile ? "81px" : "" }}
                   >
                     {item?.gstatus !== "" && (
                       <div className="suspended-overlayRates">
@@ -130,12 +152,9 @@ const SessionCricketCasino = ({ title, data, detail }:any) => {
                     >
                       <div
                         className={`sessionRateBox back1Background`}
-                        style={{ height:"45px" }}
-                        
+                        style={{ height: "45px" }}
                       >
-                        <span
-                          className={`rateFont`}
-                        >
+                        <span className={`rateFont`}>
                           {handlePrice(item?.odds?.[0]?.odds) ?? "-"}
                         </span>
                         <span

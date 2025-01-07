@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 import Baccarat2Component from "../../../../components/cardGames/games/baccarat2";
 import { socket, socketService } from "../../../../socketManager";
 import {
@@ -16,10 +17,9 @@ import {
   getPlacedBets,
   updateBetsPlaced,
 } from "../../../../store/actions/match/matchAction";
+import { getUsersProfile } from "../../../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../../../store/store";
 import { cardGamesType } from "../../../../utils/Constants";
-import { useLocation } from "react-router-dom";
-import { getUsersProfile } from "../../../../store/actions/user/userActions";
 
 const Bacarrat2 = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -48,7 +48,7 @@ const Bacarrat2 = () => {
 
   const handleCardResult = (event: any) => {
     if (event?.matchId === dragonTigerDetail?.id) {
-      dispatch(getPlacedBets(dragonTigerDetail?.id));
+      dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
     }
   };
 
@@ -59,7 +59,7 @@ const Bacarrat2 = () => {
   useEffect(() => {
     try {
       if (socket && dragonTigerDetail?.id) {
-        dispatch(getPlacedBets(dragonTigerDetail?.id));
+        dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
         socketService.card.getCardRatesOff(cardGamesType.baccarat2);
         socketService.card.userCardBetPlacedOff();
         socketService.card.cardResultOff();

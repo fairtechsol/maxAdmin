@@ -1,12 +1,27 @@
 // import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { formatNumber } from "../../../helpers";
 // import { AppDispatch, RootState } from "../../../store/store";
+import { RootState } from "../../../store/store";
 import { profitLossDataForMatchConstants } from "../../../utils/Constants";
 import isMobile from "../../../utils/screenDimension";
 import MarketTableHeader from "../../commonComponent/MarketWiseHeader";
 import "./style.scss";
 
-const ManualMarket = ({ title, data, detail, teamARates, teamBRates }: any) => {
+const ManualMarket = ({
+  title,
+  data,
+  detail,
+  teamARates,
+  teamBRates,
+  profitLossTeamA,
+  profitLossTeamB,
+  profitLossTeamC,
+}: any) => {
+  const { marketAnalysisDetail } = useSelector(
+    (state: RootState) => state.match.marketAnalysis
+  );
+
   const bookRatioB: any = (() => {
     if (teamARates === 0) {
       return 0;
@@ -26,14 +41,18 @@ const ManualMarket = ({ title, data, detail, teamARates, teamBRates }: any) => {
       return formattedRatio;
     }
   })();
-
   return (
     <>
       <div
         className="manualContainer"
         style={{ marginTop: isMobile ? "" : "10px" }}
       >
-        <MarketTableHeader title={title} type={"matchOdds"} data={data} detail={detail}/>
+        <MarketTableHeader
+          title={title}
+          type={"matchOdds"}
+          data={data}
+          detail={detail}
+        />
 
         <div className="manualBackLayTab">
           <div className="manualMinMaxBox">
@@ -94,21 +113,27 @@ const ManualMarket = ({ title, data, detail, teamARates, teamBRates }: any) => {
               <span
                 className={`${
                   parseFloat(
-                    detail?.profitLossDataMatch?.[
-                      profitLossDataForMatchConstants[data?.type]?.A +
-                        "_" +
-                        detail?.id
-                    ]
+                    marketAnalysisDetail?.length
+                      ? profitLossTeamA
+                      : detail?.profitLossDataMatch?.[
+                          profitLossDataForMatchConstants[data?.type]?.A +
+                            "_" +
+                            detail?.id
+                        ]
                   ) > 0
                     ? "color-green"
                     : "color-red"
                 } ${isMobile ? "fbold title-12" : "fbold title-14"}`}
               >
-                {detail?.profitLossDataMatch?.[
-                  profitLossDataForMatchConstants[data?.type]?.A +
-                    "_" +
-                    detail?.id
-                ]
+                {marketAnalysisDetail?.length
+                  ? profitLossTeamA == 0
+                    ? ""
+                    : parseFloat(profitLossTeamA).toFixed(2)
+                  : detail?.profitLossDataMatch?.[
+                      profitLossDataForMatchConstants[data?.type]?.A +
+                        "_" +
+                        detail?.id
+                    ]
                   ? detail?.profitLossDataMatch?.[
                       profitLossDataForMatchConstants[data?.type]?.A +
                         "_" +
@@ -230,21 +255,27 @@ const ManualMarket = ({ title, data, detail, teamARates, teamBRates }: any) => {
               <span
                 className={`${
                   parseFloat(
-                    detail?.profitLossDataMatch?.[
-                      profitLossDataForMatchConstants[data?.type]?.B +
-                        "_" +
-                        detail?.id
-                    ]
+                    marketAnalysisDetail?.length
+                      ? profitLossTeamB
+                      : detail?.profitLossDataMatch?.[
+                          profitLossDataForMatchConstants[data?.type]?.B +
+                            "_" +
+                            detail?.id
+                        ]
                   ) > 0
                     ? "color-green"
                     : "color-red"
                 } ${isMobile ? "fbold title-12" : "fbold title-14"}`}
               >
-                {detail?.profitLossDataMatch?.[
-                  profitLossDataForMatchConstants[data?.type]?.B +
-                    "_" +
-                    detail?.id
-                ]
+                {marketAnalysisDetail?.length
+                  ? profitLossTeamB == 0
+                    ? ""
+                    : parseFloat(profitLossTeamB).toFixed(2)
+                  : detail?.profitLossDataMatch?.[
+                      profitLossDataForMatchConstants[data?.type]?.B +
+                        "_" +
+                        detail?.id
+                    ]
                   ? detail?.profitLossDataMatch?.[
                       profitLossDataForMatchConstants[data?.type]?.B +
                         "_" +
@@ -364,21 +395,28 @@ const ManualMarket = ({ title, data, detail, teamARates, teamBRates }: any) => {
                 <span
                   className={`${
                     parseFloat(
-                      detail?.profitLossDataMatch?.[
-                        profitLossDataForMatchConstants[data?.type]?.C +
-                          "_" +
-                          detail?.id
-                      ]
-                    ) > 0
+                      marketAnalysisDetail?.length
+                      ? profitLossTeamC
+                      : 
+                          detail?.profitLossDataMatch?.[
+                            profitLossDataForMatchConstants[data?.type]?.C +
+                              "_" +
+                              detail?.id
+                          ]
+                        ) > 0
                       ? "color-green"
                       : "color-red"
                   } ${isMobile ? "fbold title-12" : "fbold title-14"}`}
                 >
-                  {detail?.profitLossDataMatch?.[
-                    profitLossDataForMatchConstants[data?.type]?.C +
-                      "_" +
-                      detail?.id
-                  ]
+                  {marketAnalysisDetail?.length
+                    ? profitLossTeamC == 0
+                      ? ""
+                      : parseFloat(profitLossTeamC).toFixed(2)
+                    : detail?.profitLossDataMatch?.[
+                        profitLossDataForMatchConstants[data?.type]?.C +
+                          "_" +
+                          detail?.id
+                      ]
                     ? detail?.profitLossDataMatch?.[
                         profitLossDataForMatchConstants[data?.type]?.C +
                           "_" +

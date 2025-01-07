@@ -1,11 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../../../store/store";
-import { cardGamesType } from "../../../../utils/Constants";
-import {
-  getPlacedBets,
-  updateBetsPlaced,
-} from "../../../../store/actions/match/matchAction";
+import { useLocation } from "react-router-dom";
+import CasinoMeterComponent from "../../../../components/cardGames/games/casinoMeter";
+import { socket, socketService } from "../../../../socketManager";
 import {
   casinoMeterPattiMatchRates,
   getCardDetailInitial,
@@ -15,10 +12,13 @@ import {
   updateLiveGameResultTop10,
   updateProfitLossCards,
 } from "../../../../store/actions/card/cardDetail";
+import {
+  getPlacedBets,
+  updateBetsPlaced,
+} from "../../../../store/actions/match/matchAction";
 import { getUsersProfile } from "../../../../store/actions/user/userActions";
-import { socket, socketService } from "../../../../socketManager";
-import CasinoMeterComponent from "../../../../components/cardGames/games/casinoMeter";
-import { useLocation } from "react-router-dom";
+import { AppDispatch, RootState } from "../../../../store/store";
+import { cardGamesType } from "../../../../utils/Constants";
 
 const CasinoMeter = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -45,7 +45,7 @@ const CasinoMeter = () => {
   };
   const handleCardResult = (event: any) => {
     if (event?.matchId === dragonTigerDetail?.id) {
-      dispatch(getPlacedBets(dragonTigerDetail?.id));
+      dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
     }
   };
   const handleMatchResult = () => {
@@ -54,7 +54,7 @@ const CasinoMeter = () => {
   useEffect(() => {
     try {
       if (socket && dragonTigerDetail?.id) {
-        dispatch(getPlacedBets(dragonTigerDetail?.id));
+        dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
         socketService.card.getCardRatesOff(cardGamesType.cmeter);
         socketService.card.userCardBetPlacedOff();
         socketService.card.cardResultOff();

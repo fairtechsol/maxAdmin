@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import CustomTable from "../../commonComponent/table";
-import { TableConfig } from "../../../models/tableInterface";
-import { formatToINR } from "../../../helpers";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { formatToINR } from "../../../helpers";
+import { TableConfig } from "../../../models/tableInterface";
+import CustomTable from "../../commonComponent/table";
 
 interface Column {
   id: string;
@@ -48,14 +48,24 @@ const EventWiseMatchListModal = ({ userWiseExposureName, data }: any) => {
                     roleName: userWiseExposureName?.roleName,
                   },
                 });
-              } else {
-                navigate(`/admin/market-analysis`, {
+              } else if(data?.eventType === "cricket") {
+                navigate(`/admin/match_details/${key}`, {
                   state: {
                     submit: true,
                     matchId: key,
                     userId: userWiseExposureName?.id,
                   },
                 });
+              }
+              else{
+                navigate(`/admin/other_match_detail/${data?.eventType}/${key}/44c1a5c9-e1ee-4706-8359-c692f25bdb1f`, {
+                  state: {
+                    submit: true,
+                    matchId: key,
+                    userId: userWiseExposureName?.id,
+                  },
+                });
+                
               }
             }}
           >

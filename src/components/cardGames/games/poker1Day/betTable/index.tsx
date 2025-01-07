@@ -1,7 +1,7 @@
 import { useState } from "react";
+import { formatNumber } from "../../../../../helpers";
 import { HandleCards } from "../../../../commonComponent/cardsComponent";
 import "./style.scss";
-import { formatNumber } from "../../../../../helpers";
 const DynamicTable = ({ odds, data }: any) => {
   // let player1Key = `playera`;
   // let player2Key = `playerb`;
@@ -14,7 +14,6 @@ const DynamicTable = ({ odds, data }: any) => {
       setOpenDivIds([...openDivIds, id]);
     }
   };
-  console.log(data, "data");
   return (
     <div className="d-flex justify-content-sm-between casino-detail-poker20">
       {/* Player A */}

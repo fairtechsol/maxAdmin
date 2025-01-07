@@ -249,7 +249,7 @@ export const matchDetailAction = createAsyncThunk<any, any>(
       if (resp) {
         return resp?.data;
       }
-    } catch (error: any) {
+    } catch (error) {
       const err = error as AxiosError;
       return thunkApi.rejectWithValue(err.response?.status);
     }
@@ -265,7 +265,7 @@ export const otherMatchDetailAction = createAsyncThunk<any, any>(
       if (resp) {
         return resp?.data;
       }
-    } catch (error: any) {
+    } catch (error) {
       const err = error as AxiosError;
       return thunkApi.rejectWithValue(err.response?.status);
     }
@@ -274,18 +274,18 @@ export const otherMatchDetailAction = createAsyncThunk<any, any>(
 
 export const getPlacedBets = createAsyncThunk<any, any>(
   "/bet",
-  async (id, thunkApi) => {
+  async ({ userId, id }, thunkApi) => {
     try {
       const resp = await service.get(
         `${ApiConstants.BET.GETPLACEDBETS}?result=inArr${JSON.stringify([
           "PENDING",
           "UNDECLARE",
-        ])}&betPlaced.matchId=${id}`
+        ])}&betPlaced.matchId=${id}${userId ? `&userId=${userId}` : ""}`
       );
       if (resp) {
         return resp?.data?.rows;
       }
-    } catch (error: any) {
+    } catch (error) {
       const err = error as AxiosError;
       return thunkApi.rejectWithValue(err.response?.status);
     }
@@ -307,7 +307,7 @@ export const getMorePlacedBets = createAsyncThunk<any, any>(
         // console.log('resp',resp);
         return resp?.data?.rows;
       }
-    } catch (error: any) {
+    } catch (error) {
       const err = error as AxiosError;
       return thunkApi.rejectWithValue(err.response?.status);
     }
@@ -325,7 +325,7 @@ export const updateUserMatchLock = createAsyncThunk<any, any>(
       if (resp) {
         return resp?.data;
       }
-    } catch (error: any) {
+    } catch (error) {
       const err = error as AxiosError;
       return thunkApi.rejectWithValue(err.response?.status);
     }
@@ -343,7 +343,7 @@ export const updateUserMarketLock = createAsyncThunk<any, any>(
       if (resp) {
         return resp?.data;
       }
-    } catch (error: any) {
+    } catch (error) {
       const err = error as AxiosError;
       return thunkApi.rejectWithValue(err.response?.status);
     }
@@ -360,7 +360,7 @@ export const getMatchLockAllChild = createAsyncThunk<any, any>(
       if (resp) {
         return resp?.data;
       }
-    } catch (error: any) {
+    } catch (error) {
       const err = error as AxiosError;
       return thunkApi.rejectWithValue(err.response?.status);
     }
@@ -382,7 +382,7 @@ export const getMarketLockAllChild = createAsyncThunk<any, any>(
       if (resp) {
         return resp?.data;
       }
-    } catch (error: any) {
+    } catch (error) {
       const err = error as AxiosError;
       return thunkApi.rejectWithValue(err.response?.status);
     }
@@ -398,7 +398,7 @@ export const getUserDetailsForParent = createAsyncThunk<any, any>(
       if (resp) {
         return resp?.data;
       }
-    } catch (error: any) {
+    } catch (error) {
       const err = error as AxiosError;
       return thunkApi.rejectWithValue(err.response?.status);
     }
@@ -414,7 +414,7 @@ export const getMarketUserBook = createAsyncThunk<any, any>(
       if (resp) {
         return resp?.data;
       }
-    } catch (error: any) {
+    } catch (error) {
       const err = error as AxiosError;
       return thunkApi.rejectWithValue(err.response?.status);
     }
@@ -430,7 +430,7 @@ export const getUserDetailsOfLock = createAsyncThunk<any, any>(
       if (resp) {
         return resp?.data;
       }
-    } catch (error: any) {
+    } catch (error) {
       const err = error as AxiosError;
       return thunkApi.rejectWithValue(err.response?.status);
     }
@@ -445,7 +445,7 @@ export const getRunAmount = createAsyncThunk<any, any>(
       if (resp?.data !== null) {
         return JSON.parse(resp?.data?.profitLoss).betPlaced;
       }
-    } catch (error: any) {
+    } catch (error) {
       const err = error as AxiosError;
       return thunkApi.rejectWithValue(err.response?.status);
     }
@@ -466,7 +466,7 @@ export const getCardReport = createAsyncThunk<any, any>(
       if (resp) {
         return resp?.data;
       }
-    } catch (error: any) {
+    } catch (error) {
       const err = error as AxiosError;
       throw err;
     }
@@ -481,7 +481,7 @@ export const getMarketAnalysis = createAsyncThunk<any, any>(
       if (resp) {
         return resp?.data;
       }
-    } catch (error: any) {
+    } catch (error) {
       const err = error as AxiosError;
       return thunkApi.rejectWithValue(err.response?.status);
     }

@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { calculateMaxLoss, formatNumber, handleSize } from "../../../helpers";
+import { RootState } from "../../../store/store";
 import isMobile from "../../../utils/screenDimension";
-import "./style.scss";
 import MarketTableHeader from "../../commonComponent/MarketWiseHeader";
+import "./style.scss";
 
-const SessionNormal = ({ title, data, detail, manual,mtype }: any) => {
+const SessionNormal = ({ title, data, detail, manual, mtype }: any) => {
   const [marketArr, setMarketArr] = useState(data?.section || []);
-
+  const { marketAnalysisDetail } = useSelector(
+    (state: RootState) => state.match.marketAnalysis
+  );
   useEffect(() => {
     const newMarketArr = [...(data?.section || []), ...(manual || [])];
     setMarketArr(newMarketArr);
@@ -41,7 +45,12 @@ const SessionNormal = ({ title, data, detail, manual,mtype }: any) => {
         className="sessionNormalContainer"
         style={{ marginTop: isMobile ? "" : "10px" }}
       >
-        <MarketTableHeader title={title} type={mtype} data={data} detail={detail}/>
+        <MarketTableHeader
+          title={title}
+          type={mtype}
+          data={data}
+          detail={detail}
+        />
         <div
           style={{
             width: "100%",
@@ -83,22 +92,36 @@ const SessionNormal = ({ title, data, detail, manual,mtype }: any) => {
                       </span>{" "}
                       <span
                         className={`${
-                          calculateMaxLoss(
-                            detail?.profitLossDataSession,
-                            item?.id
-                          ) < 0
+                          (marketAnalysisDetail?.length
+                            ? marketAnalysisDetail?.[0]?.betType?.session?.find(
+                                (items: any) => items.betId == item?.id
+                              )?.profitLoss?.maxLoss ?? 0
+                            : calculateMaxLoss(
+                                detail?.profitLossDataSession,
+                                item?.id
+                              )) < 0
                             ? "color-red"
                             : "color-red"
                         }  title-14 fbold`}
                       >
-                        {calculateMaxLoss(
-                          detail?.profitLossDataSession,
-                          item?.id
-                        ) !== 0
-                          ? `-${calculateMaxLoss(
+                        {(marketAnalysisDetail?.length
+                          ? marketAnalysisDetail?.[0]?.betType?.session?.find(
+                              (items: any) => items.betId == item?.id
+                            )?.profitLoss?.maxLoss ?? 0
+                          : calculateMaxLoss(
                               detail?.profitLossDataSession,
                               item?.id
-                            )}`
+                            )) !== 0
+                          ? `-${
+                              marketAnalysisDetail?.length
+                                ? marketAnalysisDetail?.[0]?.betType?.session?.find(
+                                    (items: any) => items.betId == item?.id
+                                  )?.profitLoss?.maxLoss ?? 0
+                                : calculateMaxLoss(
+                                    detail?.profitLossDataSession,
+                                    item?.id
+                                  )
+                            }`
                           : ""}
                       </span>
                     </div>

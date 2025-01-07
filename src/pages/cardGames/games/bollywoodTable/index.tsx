@@ -1,24 +1,24 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 import BollywoodTableComponent from "../../../../components/cardGames/games/bollywoodTable";
 import { socket, socketService } from "../../../../socketManager";
 import {
-  getCardDetailInitial,
-  getDragonTigerDetailHorseRacing,
-  resetCardDetail,
-  updateBalanceOnBetPlaceCards,
-  updateBollywoodTableCardMatchRates,
-  updateLiveGameResultTop10,
-  updateProfitLossCards,
+    getCardDetailInitial,
+    getDragonTigerDetailHorseRacing,
+    resetCardDetail,
+    updateBalanceOnBetPlaceCards,
+    updateBollywoodTableCardMatchRates,
+    updateLiveGameResultTop10,
+    updateProfitLossCards,
 } from "../../../../store/actions/card/cardDetail";
 import {
-  getPlacedBets,
-  updateBetsPlaced,
+    getPlacedBets,
+    updateBetsPlaced,
 } from "../../../../store/actions/match/matchAction";
+import { getUsersProfile } from "../../../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../../../store/store";
 import { cardGamesType } from "../../../../utils/Constants";
-import { useLocation } from "react-router-dom";
-import { getUsersProfile } from "../../../../store/actions/user/userActions";
 
 const BollywoodTable = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -45,7 +45,7 @@ const BollywoodTable = () => {
   };
   const handleCardResult = (event: any) => {
     if (event?.matchId === dragonTigerDetail?.id) {
-      dispatch(getPlacedBets(dragonTigerDetail?.id));
+      dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
     }
   };
 
@@ -56,7 +56,7 @@ const BollywoodTable = () => {
   useEffect(() => {
     try {
       if (socket && dragonTigerDetail?.id) {
-        dispatch(getPlacedBets(dragonTigerDetail?.id));
+        dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
         socketService.card.getCardRatesOff(cardGamesType.btable);
         socketService.card.userCardBetPlacedOff();
         socketService.card.cardResultOff();

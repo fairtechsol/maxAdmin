@@ -1,33 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 // import GameHeader from "../../components/game/gameHeader";
-import { MatchType } from "../../utils/enum";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../store/store";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import CustomBreadcrumb from "../../components/commonComponent/breadcrumb";
+import LiveStreamComponent from "../../components/commonComponent/liveStreamComponent";
+import SessionFancy from "../../components/game/sessionFancy";
+import SessionKhado from "../../components/game/sessionKhado";
+import SessionNormal from "../../components/game/sessionNormal";
+import SessionOddEven from "../../components/game/sessionOddEven";
+import BetTable from "../../components/otherGames/betTable";
+import NavComponent from "../../components/otherGames/matchList";
+import OtherUserBets from "../../components/otherGames/userBets";
+import { socket, socketService } from "../../socketManager";
 import {
+  getMarketAnalysis,
   getPlacedBets,
   matchDetailAction,
   otherMatchDetailAction,
   updateMatchRates,
   updatePlacedbetsDeleteReason,
 } from "../../store/actions/match/matchAction";
-import { useLocation, useParams, useNavigate } from "react-router-dom";
-import { socket, socketService } from "../../socketManager";
-import NavComponent from "../../components/otherGames/matchList";
-import OtherUserBets from "../../components/otherGames/userBets";
-import BetTable from "../../components/otherGames/betTable";
-import LiveStreamComponent from "../../components/commonComponent/liveStreamComponent";
-import { liveStreamUrl } from "../../utils/Constants";
-import CustomBreadcrumb from "../../components/commonComponent/breadcrumb";
+import { AppDispatch, RootState } from "../../store/store";
+import { ApiConstants, liveStreamUrl } from "../../utils/Constants";
+import { MatchType } from "../../utils/enum";
 import isMobile from "../../utils/screenDimension";
-import SessionNormal from "../../components/game/sessionNormal";
-import SessionFancy from "../../components/game/sessionFancy";
-import SessionKhado from "../../components/game/sessionKhado";
-import SessionOddEven from "../../components/game/sessionOddEven";
 
 const OtherGamesDetail = () => {
   const dispatch: AppDispatch = useDispatch();
-  const location = useLocation();
+  const { pathname, state } = useLocation();
   const navigate = useNavigate();
   const [marketToShow, setMarketToShow] = useState<any>("");
   const { breadCrumb } = useSelector(
@@ -60,7 +61,7 @@ const OtherGamesDetail = () => {
             otherMatchDetailAction({ matchId: id, matchType: gameType })
           );
         }
-        dispatch(getPlacedBets(id));
+        dispatch(getPlacedBets({ id: id, userId: state?.userId }));
       }
     } catch (e) {
       console.log(e);
@@ -77,7 +78,7 @@ const OtherGamesDetail = () => {
             otherMatchDetailAction({ matchId: id, matchType: gameType })
           );
         }
-        dispatch(getPlacedBets(id));
+        dispatch(getPlacedBets({ id: id, userId: state?.userId }));
       }
     } catch (e) {
       console.log(e);
@@ -93,7 +94,7 @@ const OtherGamesDetail = () => {
             otherMatchDetailAction({ matchId: id, matchType: gameType })
           );
         }
-        dispatch(getPlacedBets(id));
+        dispatch(getPlacedBets({ id: id, userId: state?.userId }));
       }
     } catch (e) {
       console.log(e);
@@ -103,7 +104,7 @@ const OtherGamesDetail = () => {
     try {
       if (event?.matchId === id && event?.isMatchDeclare) {
         navigate("/admin/market-analysis");
-      } else dispatch(getPlacedBets(id));
+      } else dispatch(getPlacedBets({ id: id, userId: state?.userId }));
     } catch (e) {
       console.log(e);
     }
@@ -112,7 +113,7 @@ const OtherGamesDetail = () => {
     try {
       if (event?.matchId === id) {
         // dispatch(removeRunAmount(event));
-        dispatch(getPlacedBets(id));
+        dispatch(getPlacedBets({ id: id, userId: state?.userId }));
         // dispatch(amountupdate(event));
       }
     } catch (error) {
@@ -123,7 +124,7 @@ const OtherGamesDetail = () => {
     try {
       if (event?.matchId === id) {
         // dispatch(updateMaxLossForBetOnUndeclare(event));
-        dispatch(getPlacedBets(id));
+        dispatch(getPlacedBets({ id: id, userId: state?.userId }));
       }
     } catch (error) {
       console.log(error);
@@ -171,7 +172,7 @@ const OtherGamesDetail = () => {
             otherMatchDetailAction({ matchId: id, matchType: gameType })
           );
         }
-        dispatch(getPlacedBets(id));
+        dispatch(getPlacedBets({ id: id, userId: state?.userId }));
       }
     } catch (e) {
       console.log(e);
@@ -210,7 +211,7 @@ const OtherGamesDetail = () => {
     } catch (e) {
       console.log(e);
     }
-  }, [location?.pathname, success, socket, id]);
+  }, [pathname, success, socket, id]);
 
   useEffect(() => {
     try {
@@ -244,7 +245,7 @@ const OtherGamesDetail = () => {
             // dispatch(
             //   otherMatchDetailAction({ matchId: id, matchType: "football" })
             // );
-            dispatch(getPlacedBets(id));
+            dispatch(getPlacedBets({ id: id, userId: state?.userId }));
             socketService.match.joinMatchRoom(id, "superAdmin");
             socketService.match.getMatchRates(id, updateMatchDetailToRedux);
           }
@@ -274,10 +275,23 @@ const OtherGamesDetail = () => {
     }
   }, [marketId]);
 
+  useEffect(() => {
+    try {
+      if (state?.userId) {
+        dispatch(
+          getMarketAnalysis({
+            url: `${ApiConstants.MATCH.MARKETANALYSIS}?userId=${state?.userId}&matchId=${state?.matchId}`,
+          })
+        );
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, [state]);
+
   return (
     <div className="gamePage">
       <Container fluid>
-       
         <NavComponent
           matchDetail={matchDetails}
           setMarketToShow={setMarketToShow}
@@ -380,10 +394,7 @@ const OtherGamesDetail = () => {
                   .map(
                     (session, index) =>
                       session.data?.section?.length > 0 && (
-                        <div
-                          key={index}
-                          style={{ width:  "100%" }}
-                        >
+                        <div key={index} style={{ width: "100%" }}>
                           <Col md={12}>
                             <session.component
                               title={session.title}
@@ -398,7 +409,7 @@ const OtherGamesDetail = () => {
               </div>
             </Col>
             <Col md={4}>
-            {/* <GameHeader /> */}
+              {/* <GameHeader /> */}
               {matchDetails?.eventId &&
                 matchDetails?.matchType !== "politics" && (
                   <LiveStreamComponent
