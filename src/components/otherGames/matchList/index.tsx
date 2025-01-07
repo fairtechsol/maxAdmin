@@ -1,4 +1,5 @@
 // import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 import "./style.scss";
 
 const NavComponent = ({ matchDetail, setMarketToShow, marketToShow }: any) => {
@@ -80,6 +81,15 @@ const NavComponent = ({ matchDetail, setMarketToShow, marketToShow }: any) => {
       console.log(error);
     }
   };
+  
+  useEffect(() => {
+    if (
+      navItems?.length &&
+      !navItems?.find((item: any) => item.id == marketToShow)
+    ) {
+      setMarketToShow(navItems?.[0]?.id);
+    }
+  }, [navItems]);
 
   return (
     <div className="row">
@@ -94,8 +104,8 @@ const NavComponent = ({ matchDetail, setMarketToShow, marketToShow }: any) => {
                 <span
                   onClick={() => {
                     if (item?.dataType) {
-                      setMarketToShow(item?.key);
-                    } else setMarketToShow(item?.id);
+                      setMarketToShow((prev:any)=>item?.key);
+                    } else setMarketToShow((prev:any)=>item?.id);
                   }}
                   // to={`/admin/other_match_detail/${matchDetail?.id}/${item?.id}`}
                   className={`market-tab-link ${

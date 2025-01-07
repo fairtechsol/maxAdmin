@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 import SuperoverComponent from "../../../../components/cardGames/games/superOver";
 import Loader from "../../../../components/commonComponent/loader";
 import { socket, socketService } from "../../../../socketManager";
@@ -18,10 +19,9 @@ import {
   getPlacedBets,
   updateBetsPlaced,
 } from "../../../../store/actions/match/matchAction";
+import { getUsersProfile } from "../../../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../../../store/store";
 import { cardGamesType } from "../../../../utils/Constants";
-import { useLocation } from "react-router-dom";
-import { getUsersProfile } from "../../../../store/actions/user/userActions";
 
 const Superover = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -51,7 +51,7 @@ const Superover = () => {
   };
   const handleCardResult = (event: any) => {
     if (event?.matchId === dragonTigerDetail?.id) {
-      dispatch(getPlacedBets(dragonTigerDetail?.id));
+      dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
     }
   };
   const handleMatchResult = () => {
@@ -60,7 +60,7 @@ const Superover = () => {
   useEffect(() => {
     try {
       if (dragonTigerDetail?.id) {
-        dispatch(getPlacedBets(dragonTigerDetail?.id));
+        dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
       }
     } catch (e) {
       console.error(e);

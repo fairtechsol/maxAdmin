@@ -4,10 +4,12 @@
 import isMobile from "../../../utils/screenDimension";
 import "./style.scss";
 // import { AppDispatch, RootState } from "../../../store/store";
-import { profitLossDataForMatchConstants } from "../../../utils/Constants";
+import { useSelector } from "react-redux";
 import { dummyArray, formatNumber } from "../../../helpers";
-import BetBox from "../betBox";
+import { RootState } from "../../../store/store";
+import { profitLossDataForMatchConstants } from "../../../utils/Constants";
 import MarketTableHeader from "../../commonComponent/MarketWiseHeader";
+import BetBox from "../betBox";
 // import { useSelector } from "react-redux";
 
 const MarketBox = ({
@@ -17,7 +19,14 @@ const MarketBox = ({
   detail,
   teamARates,
   teamBRates,
+  profitLossTeamA,
+  profitLossTeamB,
+  profitLossTeamC,
 }: any) => {
+  const { marketAnalysisDetail } = useSelector(
+    (state: RootState) => state.match.marketAnalysis
+  );
+
   const bookRatioB: any = (() => {
     if (teamARates === 0) {
       return 0;
@@ -40,7 +49,12 @@ const MarketBox = ({
   return (
     <>
       <div className="bookmakerContainer">
-     <MarketTableHeader title={title} type={"matchOdds"} data={data} detail={detail}/>
+        <MarketTableHeader
+          title={title}
+          type={"matchOdds"}
+          data={data}
+          detail={detail}
+        />
 
         <div className="bookmakerBackLayTab">
           <div className="bookmakerMinMaxBox">
@@ -95,21 +109,27 @@ const MarketBox = ({
               <span
                 className={`${
                   parseFloat(
-                    detail?.profitLossDataMatch?.[
-                      profitLossDataForMatchConstants[data?.type]?.A +
-                        "_" +
-                        detail?.id
-                    ]
+                    marketAnalysisDetail?.length
+                      ? profitLossTeamA
+                      : detail?.profitLossDataMatch?.[
+                          profitLossDataForMatchConstants[data?.type]?.A +
+                            "_" +
+                            detail?.id
+                        ]
                   ) > 0
                     ? "color-green"
                     : "color-red"
                 } ${isMobile ? "fbold title-12" : "fbold title-14"}`}
               >
-                {detail?.profitLossDataMatch?.[
-                  profitLossDataForMatchConstants[data?.type]?.A +
-                    "_" +
-                    detail?.id
-                ]
+                {marketAnalysisDetail?.length
+                  ? profitLossTeamA == 0
+                    ? ""
+                    : parseFloat(profitLossTeamA).toFixed(2)
+                  : detail?.profitLossDataMatch?.[
+                      profitLossDataForMatchConstants[data?.type]?.A +
+                        "_" +
+                        detail?.id
+                    ]
                   ? detail?.profitLossDataMatch?.[
                       profitLossDataForMatchConstants[data?.type]?.A +
                         "_" +
@@ -218,21 +238,27 @@ const MarketBox = ({
               <span
                 className={`${
                   parseFloat(
-                    detail?.profitLossDataMatch?.[
-                      profitLossDataForMatchConstants[data?.type]?.B +
-                        "_" +
-                        detail?.id
-                    ]
+                    marketAnalysisDetail?.length
+                      ? profitLossTeamB
+                      : detail?.profitLossDataMatch?.[
+                          profitLossDataForMatchConstants[data?.type]?.B +
+                            "_" +
+                            detail?.id
+                        ]
                   ) > 0
                     ? "color-green"
                     : "color-red"
                 } ${isMobile ? "fbold title-12" : "fbold title-14"}`}
               >
-                {detail?.profitLossDataMatch?.[
-                  profitLossDataForMatchConstants[data?.type]?.B +
-                    "_" +
-                    detail?.id
-                ]
+                {marketAnalysisDetail?.length
+                  ? profitLossTeamB == 0
+                    ? ""
+                    : parseFloat(profitLossTeamB).toFixed(2)
+                  : detail?.profitLossDataMatch?.[
+                      profitLossDataForMatchConstants[data?.type]?.B +
+                        "_" +
+                        detail?.id
+                    ]
                   ? detail?.profitLossDataMatch?.[
                       profitLossDataForMatchConstants[data?.type]?.B +
                         "_" +
@@ -342,21 +368,27 @@ const MarketBox = ({
                 <span
                   className={`${
                     parseFloat(
-                      detail?.profitLossDataMatch?.[
-                        profitLossDataForMatchConstants[data?.type]?.C +
-                          "_" +
-                          detail?.id
-                      ]
+                      marketAnalysisDetail?.length
+                        ? profitLossTeamC
+                        : detail?.profitLossDataMatch?.[
+                            profitLossDataForMatchConstants[data?.type]?.C +
+                              "_" +
+                              detail?.id
+                          ]
                     ) > 0
                       ? "color-green"
                       : "color-red"
                   } ${isMobile ? "fbold title-12" : "fbold title-14"}`}
                 >
-                  {detail?.profitLossDataMatch?.[
-                    profitLossDataForMatchConstants[data?.type]?.C +
-                      "_" +
-                      detail?.id
-                  ]
+                  {marketAnalysisDetail?.length
+                    ? profitLossTeamC == 0
+                      ? ""
+                      : parseFloat(profitLossTeamC).toFixed(2)
+                    : detail?.profitLossDataMatch?.[
+                        profitLossDataForMatchConstants[data?.type]?.C +
+                          "_" +
+                          detail?.id
+                      ]
                     ? detail?.profitLossDataMatch?.[
                         profitLossDataForMatchConstants[data?.type]?.C +
                           "_" +

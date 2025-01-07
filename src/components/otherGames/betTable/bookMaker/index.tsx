@@ -1,8 +1,10 @@
 import { Table } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../store/store";
+import { matchBettingType, teamStatus } from "../../../../utils/Constants";
 import BackLayBox from "../../../backLayBox";
 import BetStatusOverlay from "../../../commonComponent/betStatusOverlay";
 import "../../style.scss";
-import { teamStatus } from "../../../../utils/Constants";
 
 interface BookmakerTableProps {
   minMax?: any;
@@ -16,6 +18,10 @@ function BookmakerTable({
   backLayCount = 6,
   matchDetails,
 }: BookmakerTableProps) {
+  const { marketAnalysisDetail } = useSelector(
+    (state: RootState) => state.match.marketAnalysis
+  );
+
   return (
     <div
       className={`gameTable table-responsive sessionFancyTable borderTable border `}
@@ -65,17 +71,41 @@ function BookmakerTable({
                     <div className="d-flex align-items-center justify-content-between w-100">
                       <span
                         className={`title-14 ${
-                          matchDetails?.profitLossDataMatch?.[
-                            `team${item}Rate_${matchDetails?.id}`
-                          ] < 0
+                          (marketAnalysisDetail?.length
+                            ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                (items: any) =>
+                                  [
+                                    matchBettingType.matchOdd,
+                                    matchBettingType.bookmaker,
+                                    matchBettingType.bookmaker2,
+                                    matchBettingType.quickbookmaker1,
+                                    matchBettingType.quickbookmaker2,
+                                    matchBettingType.quickbookmaker3,
+                                  ].includes(items.marketType)
+                              )?.profitLoss?.[item.toLowerCase()] ?? 0
+                            : matchDetails?.profitLossDataMatch?.[
+                                `team${item}Rate_${matchDetails?.id}`
+                              ]) < 0
                             ? "color-red"
                             : "color-green"
                         }`}
                       >
                         {parseFloat(
-                          matchDetails?.profitLossDataMatch?.[
-                            `team${item}Rate_${matchDetails?.id}`
-                          ] ?? 0
+                          marketAnalysisDetail?.length
+                            ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                (items: any) =>
+                                  [
+                                    matchBettingType.matchOdd,
+                                    matchBettingType.bookmaker,
+                                    matchBettingType.bookmaker2,
+                                    matchBettingType.quickbookmaker1,
+                                    matchBettingType.quickbookmaker2,
+                                    matchBettingType.quickbookmaker3,
+                                  ].includes(items.marketType)
+                              )?.profitLoss?.[item.toLowerCase()] ?? 0
+                            : matchDetails?.profitLossDataMatch?.[
+                                `team${item}Rate_${matchDetails?.id}`
+                              ] ?? 0
                         ).toFixed(2)}
                       </span>
                     </div>

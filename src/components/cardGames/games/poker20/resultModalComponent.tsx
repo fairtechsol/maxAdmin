@@ -15,7 +15,6 @@ const Poker20ResultComponent: React.FC<Props> = ({ data }: any) => {
   const resultCards = data?.result?.cards?.split(",");
   const lastCards = resultCards?.slice(4, 9);
 
-  console.log("res", data);
   return (
     <Container
       style={{

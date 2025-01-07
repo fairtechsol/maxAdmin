@@ -1,10 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getPlacedBets,
-  updateBetsPlaced,
-} from "../../../../store/actions/match/matchAction";
-import {
   ballbyballMatchRates,
   getCardDetailInitial,
   getDragonTigerDetailHorseRacing,
@@ -13,13 +9,17 @@ import {
   updateLiveGameResultTop10,
   updateProfitLossCards,
 } from "../../../../store/actions/card/cardDetail";
+import {
+  getPlacedBets,
+  updateBetsPlaced,
+} from "../../../../store/actions/match/matchAction";
 
 import { cardGamesType } from "../../../../utils/Constants";
 
-import BallbyballComponentList from "../../../../components/cardGames/games/ballbyball";
-import { AppDispatch, RootState } from "../../../../store/store";
-import { socket, socketService } from "../../../../socketManager";
 import { useLocation } from "react-router-dom";
+import BallbyballComponentList from "../../../../components/cardGames/games/ballbyball";
+import { socket, socketService } from "../../../../socketManager";
+import { AppDispatch, RootState } from "../../../../store/store";
 
 const BallByBall = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -46,16 +46,16 @@ const BallByBall = () => {
   };
   const handleCardResult = (event: any) => {
     if (event?.matchId === dragonTigerDetail?.id) {
-      dispatch(getPlacedBets(dragonTigerDetail?.id));
+      dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
     }
   };
   const handleMatchResult = () => {
-    dispatch(getPlacedBets(dragonTigerDetail?.id));
+    dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
   };
   useEffect(() => {
     try {
       if (socket && dragonTigerDetail?.id) {
-        dispatch(getPlacedBets(dragonTigerDetail?.id));
+        dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
         socketService.card.getCardRatesOff(cardGamesType.ballbyball);
         socketService.card.userCardBetPlacedOff();
         socketService.card.cardResultOff();

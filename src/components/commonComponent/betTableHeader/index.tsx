@@ -1,8 +1,8 @@
 import React, { ReactNode, useState } from "react";
-import "./style.scss";
 import { MatchType } from "../../../utils/enum";
-import CustomModal from "../modal";
 import ActiveUsers from "../../game/gameHeader/modals/activeUsers";
+import CustomModal from "../modal";
+import "./style.scss";
 interface props {
   bgColor?: string;
   title: string;
@@ -31,7 +31,6 @@ function BetTableHeader({
   const handleButtonClick = () => {
     setShowModal(true); // Show the modal on button click
     setShowChildren(<ActiveUsers type="match" />); // Show ActiveUser content in modal
-    console.log("Bet Lock clicked");
   };
   return (
     <>

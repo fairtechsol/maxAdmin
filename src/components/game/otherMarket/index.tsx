@@ -1,52 +1,70 @@
-import isMobile from "../../../utils/screenDimension";
-import "./style.scss";
-import { profitLossDataForMatchConstants } from "../../../utils/Constants";
+import { useSelector } from "react-redux";
 import { dummyArray, formatNumber } from "../../../helpers";
-import BetBox from "../betBox";
+import { RootState } from "../../../store/store";
+import { profitLossDataForMatchConstants } from "../../../utils/Constants";
+import isMobile from "../../../utils/screenDimension";
 import MarketTableHeader from "../../commonComponent/MarketWiseHeader";
+import BetBox from "../betBox";
+import "./style.scss";
 
-const OtherMarket = ({ title, box, data, detail }:any) => {
-  
+const OtherMarket = ({ title, box, data, detail }: any) => {
+  const { marketAnalysisDetail } = useSelector(
+    (state: RootState) => state.match.marketAnalysis
+  );
 
-  const profitLossTeamA =
-    data?.type === "tiedMatch3"
-      ? detail?.profitLossDataMatch?.[
-          profitLossDataForMatchConstants?.[data?.type]?.A + "_" + detail?.id
-        ]
-      : detail?.profitLossDataMatch?.[
-          profitLossDataForMatchConstants?.[data?.type]?.A +
-            "_" +
-            data?.id +
-            "_" +
-            detail?.id
-        ];
-  const profitLossTeamB =
-    data?.type === "tiedMatch3"
-      ? detail?.profitLossDataMatch?.[
-          profitLossDataForMatchConstants?.[data?.type]?.B + "_" + detail?.id
-        ]
-      : detail?.profitLossDataMatch?.[
-          profitLossDataForMatchConstants?.[data?.type]?.B +
-            "_" +
-            data?.id +
-            "_" +
-            detail?.id
-        ];
-  const profitLossTeamC =
-    data?.type === "tiedMatch3"
-      ? ""
-      : detail?.profitLossDataMatch?.[
-          profitLossDataForMatchConstants?.[data?.type]?.C +
-            "_" +
-            data?.id +
-            "_" +
-            detail?.id
-        ];
+  const profitLossTeamA = marketAnalysisDetail?.length
+    ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+        (item: any) => item.betId == data?.id
+      )?.profitLoss?.a ?? 0
+    : data?.type === "tiedMatch3"
+    ? detail?.profitLossDataMatch?.[
+        profitLossDataForMatchConstants?.[data?.type]?.A + "_" + detail?.id
+      ]
+    : detail?.profitLossDataMatch?.[
+        profitLossDataForMatchConstants?.[data?.type]?.A +
+          "_" +
+          data?.id +
+          "_" +
+          detail?.id
+      ];
+  const profitLossTeamB = marketAnalysisDetail?.length
+    ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+        (item: any) => item.betId == data?.id
+      )?.profitLoss?.b ?? 0
+    : data?.type === "tiedMatch3"
+    ? detail?.profitLossDataMatch?.[
+        profitLossDataForMatchConstants?.[data?.type]?.B + "_" + detail?.id
+      ]
+    : detail?.profitLossDataMatch?.[
+        profitLossDataForMatchConstants?.[data?.type]?.B +
+          "_" +
+          data?.id +
+          "_" +
+          detail?.id
+      ];
+  const profitLossTeamC = marketAnalysisDetail?.length
+    ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+        (item: any) => item.betId == data?.id
+      )?.profitLoss?.c ?? 0
+    : data?.type === "tiedMatch3"
+    ? ""
+    : detail?.profitLossDataMatch?.[
+        profitLossDataForMatchConstants?.[data?.type]?.C +
+          "_" +
+          data?.id +
+          "_" +
+          detail?.id
+      ];
 
   return (
     <>
       <div className="otherMarketContainer">
-      <MarketTableHeader title={title} type={"matchOdds"} data={data} detail={detail}/>
+        <MarketTableHeader
+          title={title}
+          type={"matchOdds"}
+          data={data}
+          detail={detail}
+        />
 
         <div className="otherMarketBackLayTab">
           <div className="otherMarketMinMaxBox">
@@ -97,17 +115,11 @@ const OtherMarket = ({ title, box, data, detail }:any) => {
             <div className="d-flex flex-row justify-content-between w-100">
               <span
                 className={`${
-                  parseFloat(profitLossTeamA)  >
-                  0
-                    ? "color-green"
-                    : "color-red"
+                  parseFloat(profitLossTeamA) > 0 ? "color-green" : "color-red"
                 } ${isMobile ? "fbold title-12" : "fbold title-14"}`}
               >
-                {parseFloat(profitLossTeamA)
-                  ? parseFloat(profitLossTeamA)
-                  : ""}
+                {parseFloat(profitLossTeamA) ? parseFloat(profitLossTeamA) : ""}
               </span>
-           
             </div>
           </div>
           <div
@@ -207,17 +219,11 @@ const OtherMarket = ({ title, box, data, detail }:any) => {
             <div className="d-flex flex-row justify-content-between w-100">
               <span
                 className={`${
-                  parseFloat(profitLossTeamB)  >
-                  0
-                    ? "color-green"
-                    : "color-red"
+                  parseFloat(profitLossTeamB) > 0 ? "color-green" : "color-red"
                 } ${isMobile ? "fbold title-12" : "fbold title-14"}`}
               >
-                {parseFloat(profitLossTeamB)
-                  ? parseFloat(profitLossTeamB)
-                  : ""}
+                {parseFloat(profitLossTeamB) ? parseFloat(profitLossTeamB) : ""}
               </span>
-             
             </div>
           </div>
           <div
@@ -316,17 +322,15 @@ const OtherMarket = ({ title, box, data, detail }:any) => {
               <div className="d-flex flex-row justify-content-between w-100">
                 <span
                   className={`${
-                    parseFloat(profitLossTeamC)  >
-                    0
+                    parseFloat(profitLossTeamC) > 0
                       ? "color-green"
                       : "color-red"
                   } ${isMobile ? "fbold title-12" : "fbold title-14"}`}
                 >
-                  {parseFloat(profitLossTeamC) 
-                    ? parseFloat(profitLossTeamC) 
+                  {parseFloat(profitLossTeamC)
+                    ? parseFloat(profitLossTeamC)
                     : 0}
                 </span>
-               
               </div>
             </div>
             <div

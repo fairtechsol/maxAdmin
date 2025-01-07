@@ -1,12 +1,8 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../../../store/store";
-import {
-  getPlacedBets,
-  updateBetsPlaced,
-} from "../../../../store/actions/match/matchAction";
-import { cardGamesType } from "../../../../utils/Constants";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
+import CardJComponent from "../../../../components/cardGames/games/3CardJ";
+import { socket, socketService } from "../../../../socketManager";
 import {
   getCardDetailInitial,
   getDragonTigerDetailHorseRacing,
@@ -16,10 +12,13 @@ import {
   updateLiveGameResultTop10,
   updateProfitLossCards,
 } from "../../../../store/actions/card/cardDetail";
-import { socket, socketService } from "../../../../socketManager";
+import {
+  getPlacedBets,
+  updateBetsPlaced,
+} from "../../../../store/actions/match/matchAction";
 import { getUsersProfile } from "../../../../store/actions/user/userActions";
-import CardJComponent from "../../../../components/cardGames/games/3CardJ";
-import { useLocation } from "react-router-dom";
+import { AppDispatch, RootState } from "../../../../store/store";
+import { cardGamesType } from "../../../../utils/Constants";
 
 const CardJ = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -37,7 +36,7 @@ const CardJ = () => {
   useEffect(() => {
     try {
       if (dragonTigerDetail?.id) {
-        dispatch(getPlacedBets(dragonTigerDetail?.id));
+        dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
       }
     } catch (e) {
       console.error(e);
@@ -58,7 +57,7 @@ const CardJ = () => {
 
   const handleCardResult = (event: any) => {
     if (event?.matchId === dragonTigerDetail?.id) {
-      dispatch(getPlacedBets(dragonTigerDetail?.id));
+      dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
     }
   };
 

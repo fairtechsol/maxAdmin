@@ -2,29 +2,28 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import "./style.scss";
-import { RootState } from "../../../../store/store";
+import { dtrules } from "../../../../assets";
 import { handleRoundId } from "../../../../helpers";
-import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
+import { RootState } from "../../../../store/store";
 import {
   cardGamesId,
   cardGamesType,
   cardUrl,
 } from "../../../../utils/Constants";
-import { dtrules } from "../../../../assets";
-import RulesModal from "../../../commonComponent/rulesModal";
 import CardResultBox from "../../../commonComponent/cardResultBox";
+import RulesModal from "../../../commonComponent/rulesModal";
+import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
 import UserBets from "../../../game/userBet";
 import Dragon20Result from "./dragonCard";
-import TiePairBox from "./TiePairBox";
 import OddEven from "./OddEvenBox";
+import "./style.scss";
+import TiePairBox from "./TiePairBox";
 // import CardBox from "./CardsBox";
 
 const DragonTiger2020Component = () => {
   const [show, setShow] = useState(false);
   const { dragonTigerDetail } = useSelector((state: RootState) => state.card);
 
-  console.log('dt1',dragonTigerDetail);
   return (
     <div>
       <Row>

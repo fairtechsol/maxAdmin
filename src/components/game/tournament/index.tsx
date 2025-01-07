@@ -1,10 +1,15 @@
+import { useSelector } from "react-redux";
 import { dummyArray, formatNumber } from "../../../helpers";
-import BetBox from "../betBox";
+import { RootState } from "../../../store/store";
 import isMobile from "../../../utils/screenDimension";
-import "./style.scss";
 import MarketTableHeader from "../../commonComponent/MarketWiseHeader";
+import BetBox from "../betBox";
+import "./style.scss";
 
 const Tournament = ({ title, box, data, detail }: any) => {
+  const { marketAnalysisDetail } = useSelector(
+    (state: RootState) => state.match.marketAnalysis
+  );
   const key = `${data.id}_profitLoss_${detail.id}`;
 
   const profitLossJson = detail?.profitLossDataMatch?.[key];
@@ -14,7 +19,12 @@ const Tournament = ({ title, box, data, detail }: any) => {
     <>
       <div className="tournamentContainer">
         {detail?.matchType === "cricket" && (
-          <MarketTableHeader title={title} type={"matchOdds"} data={data} detail={detail}/>
+          <MarketTableHeader
+            title={title}
+            type={"matchOdds"}
+            data={data}
+            detail={detail}
+          />
         )}
 
         <div className="tournamentBackLayTab">
@@ -66,12 +76,30 @@ const Tournament = ({ title, box, data, detail }: any) => {
                   <div className="d-flex flex-row justify-content-between w-100">
                     <span
                       className={`${
-                        parseFloat(profitLossObj?.[item.id]) > 0
+                        parseFloat(
+                          marketAnalysisDetail?.length
+                            ? Object.values(
+                                marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                  (item: any) => item.betId == data?.id
+                                )?.profitLoss || {}
+                              )?.[index] ?? 0
+                            : profitLossObj?.[item.id]
+                        ) > 0
                           ? "color-green"
                           : "color-red"
                       } ${isMobile ? "fbold title-12" : "fbold title-14"}`}
                     >
-                      {profitLossObj?.[item.id] ? profitLossObj?.[item.id] : ""}
+                      {marketAnalysisDetail?.length
+                        ? (Object.values(
+                            marketAnalysisDetail?.[0]?.betType?.match?.find(
+                              (item: any) => item.betId == data?.id
+                            )?.profitLoss || {}
+                          )?.[index] ??
+                            0) ||
+                          ""
+                        : profitLossObj?.[item.id]
+                        ? profitLossObj?.[item.id]
+                        : ""}
                     </span>
                   </div>
                 </div>

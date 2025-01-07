@@ -1,12 +1,9 @@
-
 import { calculateMaxLoss, formatNumber, handleSize } from "../../../helpers";
-import "./style.scss";
 import isMobile from "../../../utils/screenDimension";
 import MarketTableHeader from "../../commonComponent/MarketWiseHeader";
+import "./style.scss";
 
-const SessionFancy = ({ title, data, detail }:any) => {
- 
- 
+const SessionFancy = ({ title, data, detail, marketAnalysisDetail }: any) => {
   const handlePrice = (rate: any) => {
     if (rate && rate != 0) {
       return rate;
@@ -14,13 +11,19 @@ const SessionFancy = ({ title, data, detail }:any) => {
       return "-";
     }
   };
+
   return (
     <>
       <div
         className="sessionNormalContainer"
         style={{ marginTop: isMobile ? "" : "10px" }}
       >
-        <MarketTableHeader title={title} type={"fancy1"} data={data} detail={detail}/>
+        <MarketTableHeader
+          title={title}
+          type={"fancy1"}
+          data={data}
+          detail={detail}
+        />
         <div
           style={{
             width: "100%",
@@ -32,7 +35,7 @@ const SessionFancy = ({ title, data, detail }:any) => {
           <div
             style={{ width: "100%", display: "flex", flexDirection: "column" }}
           >
-            <div className="sessionYesNoBoxContainer" >
+            <div className="sessionYesNoBoxContainer">
               <div
                 className="sessionYesNoBox  rateBoxWidthNormal"
                 // style={{ width: isLap ? "180px" : !isMobile ? "240px" : "" }}
@@ -49,32 +52,48 @@ const SessionFancy = ({ title, data, detail }:any) => {
             {data?.section?.map((item: any, index: any) => {
               return (
                 <div className="sessionRateContainer" key={index}>
-                  <div className="sessionRateName runnerWidthNormal"
-                      style={{ overflow: "hidden" }}>
+                  <div
+                    className="sessionRateName runnerWidthNormal"
+                    style={{ overflow: "hidden" }}
+                  >
                     <span
                       className="teamFont"
-                      style={{ fontWeight:"400", lineHeight: 1 }}
+                      style={{ fontWeight: "400", lineHeight: 1 }}
                     >
                       {item?.RunnerName}
                     </span>{" "}
                     <span
                       className={`${
-                        calculateMaxLoss(
-                          detail?.profitLossDataSession,
-                          item?.id
-                        ) < 0
+                        (marketAnalysisDetail?.length
+                          ? marketAnalysisDetail?.[0]?.betType?.session?.find(
+                              (items: any) => items.betId == item?.id
+                            )?.profitLoss?.maxLoss ?? 0
+                          : calculateMaxLoss(
+                              detail?.profitLossDataSession,
+                              item?.id
+                            )) < 0
                           ? "color-red"
                           : "color-red"
                       } title-14 fbold`}
                     >
-                      {calculateMaxLoss(
-                        detail?.profitLossDataSession,
-                        item?.id
-                      ) !== 0
-                        ? `-${calculateMaxLoss(
+                      {(marketAnalysisDetail?.length
+                        ? marketAnalysisDetail?.[0]?.betType?.session?.find(
+                            (items: any) => items.betId == item?.id
+                          )?.profitLoss?.maxLoss ?? 0
+                        : calculateMaxLoss(
                             detail?.profitLossDataSession,
                             item?.id
-                          )}`
+                          )) !== 0
+                        ? `-${
+                            marketAnalysisDetail?.length
+                              ? marketAnalysisDetail?.[0]?.betType?.session?.find(
+                                  (items: any) => items.betId == item?.id
+                                )?.profitLoss?.maxLoss ?? 0
+                              : calculateMaxLoss(
+                                  detail?.profitLossDataSession,
+                                  item?.id
+                                )
+                          }`
                         : ""}
                     </span>
                   </div>
@@ -87,9 +106,7 @@ const SessionFancy = ({ title, data, detail }:any) => {
                     {(item?.activeStatus != "live" ||
                       item?.GameStatus != "") && (
                       <div className="suspended-overlayRates">
-                        <span
-                          className={`suspendTextCmmn`}
-                        >
+                        <span className={`suspendTextCmmn`}>
                           {item?.GameStatus ?? "SUSPENDED"}
                         </span>
                       </div>
@@ -97,28 +114,20 @@ const SessionFancy = ({ title, data, detail }:any) => {
                     <div
                       className={`sessionRateBox rateFont back1Background`}
                       style={{ cursor: "pointer" }}
-                     
                     >
-                      <span
-                        className={`rateFont`}
-                      >
+                      <span className={`rateFont`}>
                         {handlePrice(item?.ex?.availableToBack?.[0]?.price) ??
                           "-"}
                       </span>
-                      <span
-                        className={`f-size12 sessionRate2Box`}
-                      >
+                      <span className={`f-size12 sessionRate2Box`}>
                         {handleSize(item?.ex?.availableToBack?.[0]?.size)}
                       </span>
                     </div>
                     <div
                       className="sessionRateBox rateFont lay1Background"
                       style={{ cursor: "pointer" }}
-                      
                     >
-                      <span
-                        className={`rateFont`}
-                      >
+                      <span className={`rateFont`}>
                         {handlePrice(item?.ex?.availableToLay?.[0]?.price) ??
                           "-"}
                       </span>
@@ -143,7 +152,6 @@ const SessionFancy = ({ title, data, detail }:any) => {
               );
             })}
           </div>
-
         </div>
       </div>
     </>

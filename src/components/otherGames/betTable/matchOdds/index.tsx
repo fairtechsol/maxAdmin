@@ -1,9 +1,14 @@
 import { Table } from "react-bootstrap";
-import "../../style.scss";
-import BetStatusOverlay from "../../../commonComponent/betStatusOverlay";
-import BackLayBox from "../../../backLayBox";
-import { profitLossDataForMatchConstants } from "../../../../utils/Constants";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../store/store";
+import {
+  matchBettingType,
+  profitLossDataForMatchConstants,
+} from "../../../../utils/Constants";
 import isMobile from "../../../../utils/screenDimension";
+import BackLayBox from "../../../backLayBox";
+import BetStatusOverlay from "../../../commonComponent/betStatusOverlay";
+import "../../style.scss";
 
 interface MatchOddsProps {
   title: string;
@@ -21,6 +26,9 @@ function MatchOdds({
 }: MatchOddsProps) {
   let teamsToMap: any;
 
+  const { marketAnalysisDetail } = useSelector(
+    (state: RootState) => state.match.marketAnalysis
+  );
   if (matchDetails?.teamC) {
     teamsToMap = ["A", "B", "C"];
   } else {
@@ -87,66 +95,126 @@ function MatchOdds({
                             indexes === 0 ? (
                               <span
                                 className={
-                                  matchDetails?.profitLossDataMatch?.[
-                                    `yesRateTie_${matchDetails?.id}`
-                                  ] < 0
+                                  (marketAnalysisDetail?.length
+                                    ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                        (items: any) =>
+                                          [
+                                            matchBettingType.tiedMatch1,
+                                            matchBettingType.tiedMatch2,
+                                            matchBettingType.tiedMatch3,
+                                          ].includes(items.marketType)
+                                      )?.profitLoss?.[matchs.toLowerCase()] ?? 0
+                                    : matchDetails?.profitLossDataMatch?.[
+                                        `yesRateTie_${matchDetails?.id}`
+                                      ]) < 0
                                     ? "color-red"
                                     : "color-green"
                                 }
                               >
                                 {parseFloat(
-                                  matchDetails?.profitLossDataMatch?.[
-                                    `yesRateTie_${matchDetails?.id}`
-                                  ] ?? 0
+                                  marketAnalysisDetail?.length
+                                    ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                        (items: any) =>
+                                          [
+                                            matchBettingType.tiedMatch1,
+                                            matchBettingType.tiedMatch2,
+                                            matchBettingType.tiedMatch3,
+                                          ].includes(items.marketType)
+                                      )?.profitLoss?.[matchs.toLowerCase()] ?? 0
+                                    : matchDetails?.profitLossDataMatch?.[
+                                        `yesRateTie_${matchDetails?.id}`
+                                      ] ?? 0
                                 ).toFixed(2)}
                               </span>
                             ) : (
                               <span
                                 className={
-                                  matchDetails?.profitLossDataMatch?.[
-                                    `${
-                                      profitLossDataForMatchConstants[
-                                        data?.type
-                                      ]?.[matchs]
-                                    }_${matchDetails?.id}`
-                                  ] < 0
+                                  (marketAnalysisDetail?.length
+                                    ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                        (items: any) =>
+                                          [
+                                            matchBettingType.tiedMatch1,
+                                            matchBettingType.tiedMatch2,
+                                            matchBettingType.tiedMatch3,
+                                          ].includes(items.marketType)
+                                      )?.profitLoss?.[matchs.toLowerCase()] ?? 0
+                                    : matchDetails?.profitLossDataMatch?.[
+                                        `${
+                                          profitLossDataForMatchConstants[
+                                            data?.type
+                                          ]?.[matchs]
+                                        }_${matchDetails?.id}`
+                                      ]) < 0
                                     ? "color-red"
                                     : "color-green"
                                 }
                               >
                                 {parseFloat(
-                                  matchDetails?.profitLossDataMatch?.[
-                                    `${
-                                      profitLossDataForMatchConstants[
-                                        data?.type
-                                      ]?.[matchs]
-                                    }_${matchDetails?.id}`
-                                  ] ?? 0
+                                  marketAnalysisDetail?.length
+                                    ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                        (items: any) =>
+                                          [
+                                            matchBettingType.tiedMatch1,
+                                            matchBettingType.tiedMatch2,
+                                            matchBettingType.tiedMatch3,
+                                          ].includes(items.marketType)
+                                      )?.profitLoss?.[matchs.toLowerCase()] ?? 0
+                                    : matchDetails?.profitLossDataMatch?.[
+                                        `${
+                                          profitLossDataForMatchConstants[
+                                            data?.type
+                                          ]?.[matchs]
+                                        }_${matchDetails?.id}`
+                                      ] ?? 0
                                 ).toFixed(2)}
                               </span>
                             )
                           ) : (
                             <span
                               className={
-                                matchDetails?.profitLossDataMatch?.[
-                                  `${
-                                    profitLossDataForMatchConstants[
-                                      data?.type
-                                    ]?.[matchs]
-                                  }_${matchDetails?.id}`
-                                ] < 0
+                                (marketAnalysisDetail?.length
+                                  ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                      (items: any) =>
+                                        [
+                                          matchBettingType.matchOdd,
+                                          matchBettingType.bookmaker,
+                                          matchBettingType.bookmaker2,
+                                          matchBettingType.quickbookmaker1,
+                                          matchBettingType.quickbookmaker2,
+                                          matchBettingType.quickbookmaker3,
+                                        ].includes(items.marketType)
+                                    )?.profitLoss?.[matchs.toLowerCase()] ?? 0
+                                  : matchDetails?.profitLossDataMatch?.[
+                                      `${
+                                        profitLossDataForMatchConstants[
+                                          data?.type
+                                        ]?.[matchs]
+                                      }_${matchDetails?.id}`
+                                    ]) < 0
                                   ? "color-red"
                                   : "color-green"
                               }
                             >
                               {parseFloat(
-                                matchDetails?.profitLossDataMatch?.[
-                                  `${
-                                    profitLossDataForMatchConstants[
-                                      data?.type
-                                    ]?.[matchs]
-                                  }_${matchDetails?.id}`
-                                ] ?? 0
+                                marketAnalysisDetail?.length
+                                  ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                      (items: any) =>
+                                        [
+                                          matchBettingType.matchOdd,
+                                          matchBettingType.bookmaker,
+                                          matchBettingType.bookmaker2,
+                                          matchBettingType.quickbookmaker1,
+                                          matchBettingType.quickbookmaker2,
+                                          matchBettingType.quickbookmaker3,
+                                        ].includes(items.marketType)
+                                    )?.profitLoss?.[matchs.toLowerCase()] ?? 0
+                                  : matchDetails?.profitLossDataMatch?.[
+                                      `${
+                                        profitLossDataForMatchConstants[
+                                          data?.type
+                                        ]?.[matchs]
+                                      }_${matchDetails?.id}`
+                                    ] ?? 0
                               ).toFixed(2)}
                             </span>
                           )}

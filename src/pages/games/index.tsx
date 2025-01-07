@@ -6,14 +6,11 @@ import LiveStreamComponent from "../../components/commonComponent/liveStreamComp
 import BetTable from "../../components/game/betTable";
 // import GameHeader from "../../components/game/gameHeader";
 //import ScoreCard from "../../components/game/scoreCard";
-import {
-  Constants,
-  liveStreamUrlCricket,
-  profitLossDataForMatchConstants,
-} from "../../utils/Constants";
+import GameUserBets from "../../components/game/gameUserBets";
 import service from "../../service";
 import { socket, socketService } from "../../socketManager";
 import {
+  getMarketAnalysis,
   getPlacedBets,
   matchDetailAction,
   updateBalance,
@@ -22,25 +19,31 @@ import {
   updatePlacedbetsDeleteReason,
 } from "../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../store/store";
+import {
+  ApiConstants,
+  Constants,
+  liveStreamUrlCricket,
+  matchBettingType,
+  profitLossDataForMatchConstants,
+} from "../../utils/Constants";
 import { MatchType } from "../../utils/enum";
-import GameUserBets from "../../components/game/gameUserBets";
 //import { customSortBySessionMarketName } from "../../helpers";
 //import Iframe from "../../components/iframe/back";
-import Iframe from "../../components/iframe/iframe";
-import MarketBox from "../../components/game/marketBox";
-import ManualMarket from "../../components/game/manulMarkets";
-import SessionCricketCasino from "../../components/game/sessionCricketCasino";
-import SessionOddEven from "../../components/game/sessionOddEven";
-import SessionNormal from "../../components/game/sessionNormal";
-import SessionKhado from "../../components/game/sessionKhado";
-import SessionFancy from "../../components/game/sessionFancy";
 import moment from "moment-timezone";
-import Tournament from "../../components/game/tournament";
+import ManualMarket from "../../components/game/manulMarkets";
+import MarketBox from "../../components/game/marketBox";
 import OtherMarket from "../../components/game/otherMarket";
+import SessionCricketCasino from "../../components/game/sessionCricketCasino";
+import SessionFancy from "../../components/game/sessionFancy";
+import SessionKhado from "../../components/game/sessionKhado";
+import SessionNormal from "../../components/game/sessionNormal";
+import SessionOddEven from "../../components/game/sessionOddEven";
+import Tournament from "../../components/game/tournament";
+import Iframe from "../../components/iframe/iframe";
 
 const Games = () => {
   const dispatch: AppDispatch = useDispatch();
-  const location = useLocation();
+  const { state, pathname } = useLocation();
   const navigate = useNavigate();
 
   const { id } = useParams();
@@ -52,6 +55,9 @@ const Games = () => {
     (state: RootState) => state.match.sidebarList
   );
 
+  const { marketAnalysisDetail } = useSelector(
+    (state: RootState) => state.match.marketAnalysis
+  );
   // const { matchDetails, marketId, loading } = useSelector(
   //   (state: RootState) => state.match.matchList
   // );
@@ -86,7 +92,7 @@ const Games = () => {
     try {
       if (event?.matchId === id) {
         dispatch(matchDetailAction(id));
-        dispatch(getPlacedBets(id));
+        dispatch(getPlacedBets({ id: id, userId: state?.userId }));
       }
     } catch (e) {
       console.log(e);
@@ -97,7 +103,7 @@ const Games = () => {
     try {
       if (event?.jobData?.placedBet?.matchId === id) {
         dispatch(matchDetailAction(id));
-        dispatch(getPlacedBets(id));
+        dispatch(getPlacedBets({ id: id, userId: state?.userId }));
       }
     } catch (e) {
       console.log(e);
@@ -107,7 +113,7 @@ const Games = () => {
     try {
       if (event?.jobData?.matchId === id) {
         // dispatch(matchDetailAction(id));
-        // dispatch(getPlacedBets(id));
+        // dispatch(getPlacedBets({ id: id, userId: state?.userId }));
         dispatch(updateBetsPlaced(event?.jobData));
         dispatch(updateBalance(event));
       }
@@ -128,7 +134,7 @@ const Games = () => {
     try {
       if (event?.matchId === id) {
         // dispatch(removeRunAmount(event));
-        dispatch(getPlacedBets(id));
+        dispatch(getPlacedBets({ id: id, userId: state?.userId }));
         // dispatch(amountupdate(event));
       }
     } catch (error) {
@@ -139,7 +145,7 @@ const Games = () => {
     try {
       if (event?.matchId === id) {
         // dispatch(updateMaxLossForBetOnUndeclare(event));
-        dispatch(getPlacedBets(id));
+        dispatch(getPlacedBets({ id: id, userId: state?.userId }));
       }
     } catch (error) {
       console.log(error);
@@ -160,7 +166,7 @@ const Games = () => {
     try {
       if (id) {
         dispatch(matchDetailAction(id));
-        dispatch(getPlacedBets(id));
+        dispatch(getPlacedBets({ id: id, userId: state?.userId }));
       }
     } catch (e) {
       console.log(e);
@@ -180,26 +186,30 @@ const Games = () => {
         socketService.match.sessionResultOff();
         socketService.match.sessionResultUnDeclareOff();
         socketService.match.updateDeleteReasonOff();
+
         socketService.match.joinMatchRoom(id, "superAdmin");
         socketService.match.getMatchRates(id, updateMatchDetailToRedux);
-        socketService.match.matchDeleteBet(handleDeleteBet);
-        socketService.match.sessionDeleteBet(handleDeleteBet);
-        socketService.match.userSessionBetPlaced(handleSessionBetPlaced);
-        socketService.match.userMatchBetPlaced(handleMatchBetPlaced);
-        socketService.match.matchResultDeclared(handleMatchResultDeclarted);
-        socketService.match.declaredMatchResultAllUser(
-          handleMatchResultDeclarted
-        );
-        socketService.match.sessionResult(handleSessionResultDeclare);
-        socketService.match.sessionResultUnDeclare(
-          handleSessionResultUnDeclare
-        );
-        socketService.match.updateDeleteReason(handleDeleteReasonUpdate);
+
+        if (!state.userId) {
+          socketService.match.matchDeleteBet(handleDeleteBet);
+          socketService.match.sessionDeleteBet(handleDeleteBet);
+          socketService.match.userSessionBetPlaced(handleSessionBetPlaced);
+          socketService.match.userMatchBetPlaced(handleMatchBetPlaced);
+          socketService.match.matchResultDeclared(handleMatchResultDeclarted);
+          socketService.match.declaredMatchResultAllUser(
+            handleMatchResultDeclarted
+          );
+          socketService.match.sessionResult(handleSessionResultDeclare);
+          socketService.match.sessionResultUnDeclare(
+            handleSessionResultUnDeclare
+          );
+          socketService.match.updateDeleteReason(handleDeleteReasonUpdate);
+        }
       }
     } catch (e) {
       console.log(e);
     }
-  }, [location?.pathname, success, socket, id]);
+  }, [pathname, success, socket, id]);
 
   useEffect(() => {
     try {
@@ -231,7 +241,7 @@ const Games = () => {
         if (document.visibilityState === "visible") {
           if (id) {
             // dispatch(matchDetailAction(id));
-            dispatch(getPlacedBets(id));
+            dispatch(getPlacedBets({ id: id, userId: state?.userId }));
             socketService.match.joinMatchRoom(id, "superAdmin");
             socketService.match.getMatchRates(id, updateMatchDetailToRedux);
           }
@@ -267,8 +277,7 @@ const Games = () => {
         setLiveScoreBoardData(response?.data);
         setErrorCount(0);
       }
-    } catch (e: any) {
-      console.log("Error:", e?.message);
+    } catch (e) {
       setLiveScoreBoardData(null);
       setErrorCount((prevCount: number) => prevCount + 1);
     }
@@ -306,6 +315,21 @@ const Games = () => {
   const manualEntries = matchDetails?.manualSessionActive
     ? normalizedData?.filter((item: any) => item?.isManual)
     : [];
+
+  useEffect(() => {
+    try {
+      if (state?.userId) {
+        dispatch(
+          getMarketAnalysis({
+            url: `${ApiConstants.MATCH.MARKETANALYSIS}?userId=${state?.userId}&matchId=${state?.matchId}`,
+          })
+        );
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, [state]);
+
   return (
     <div className="gamePage">
       <Container fluid>
@@ -359,6 +383,18 @@ const Games = () => {
                           teamARates={
                             matchDetails?.teamC
                               ? 0
+                              : marketAnalysisDetail?.length
+                              ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                  (item: any) =>
+                                    [
+                                      matchBettingType.matchOdd,
+                                      matchBettingType.bookmaker,
+                                      matchBettingType.bookmaker2,
+                                      matchBettingType.quickbookmaker1,
+                                      matchBettingType.quickbookmaker2,
+                                      matchBettingType.quickbookmaker3,
+                                    ].includes(item.marketType)
+                                )?.profitLoss?.a ?? 0
                               : matchDetails?.profitLossDataMatch?.[
                                   profitLossDataForMatchConstants?.[
                                     matchDetails?.matchOdd?.type
@@ -370,6 +406,18 @@ const Games = () => {
                           teamBRates={
                             matchDetails?.teamC
                               ? 0
+                              : marketAnalysisDetail?.length
+                              ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                  (item: any) =>
+                                    [
+                                      matchBettingType.matchOdd,
+                                      matchBettingType.bookmaker,
+                                      matchBettingType.bookmaker2,
+                                      matchBettingType.quickbookmaker1,
+                                      matchBettingType.quickbookmaker2,
+                                      matchBettingType.quickbookmaker3,
+                                    ].includes(item.marketType)
+                                )?.profitLoss?.b ?? 0
                               : matchDetails?.profitLossDataMatch?.[
                                   profitLossDataForMatchConstants?.[
                                     matchDetails?.matchOdd?.type
@@ -377,6 +425,51 @@ const Games = () => {
                                     "_" +
                                     matchDetails?.id
                                 ] ?? 0
+                          }
+                          profitLossTeamA={
+                            marketAnalysisDetail?.length
+                              ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                  (item: any) =>
+                                    [
+                                      matchBettingType.matchOdd,
+                                      matchBettingType.bookmaker,
+                                      matchBettingType.bookmaker2,
+                                      matchBettingType.quickbookmaker1,
+                                      matchBettingType.quickbookmaker2,
+                                      matchBettingType.quickbookmaker3,
+                                    ].includes(item.marketType)
+                                )?.profitLoss?.a ?? 0
+                              : null
+                          }
+                          profitLossTeamB={
+                            marketAnalysisDetail?.length
+                              ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                  (item: any) =>
+                                    [
+                                      matchBettingType.matchOdd,
+                                      matchBettingType.bookmaker,
+                                      matchBettingType.bookmaker2,
+                                      matchBettingType.quickbookmaker1,
+                                      matchBettingType.quickbookmaker2,
+                                      matchBettingType.quickbookmaker3,
+                                    ].includes(item.marketType)
+                                )?.profitLoss?.b ?? 0
+                              : null
+                          }
+                          profitLossTeamC={
+                            marketAnalysisDetail?.length
+                              ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                  (item: any) =>
+                                    [
+                                      matchBettingType.matchOdd,
+                                      matchBettingType.bookmaker,
+                                      matchBettingType.bookmaker2,
+                                      matchBettingType.quickbookmaker1,
+                                      matchBettingType.quickbookmaker2,
+                                      matchBettingType.quickbookmaker3,
+                                    ].includes(item.marketType)
+                                )?.profitLoss?.c ?? 0
+                              : null
                           }
                         />
                       </Col>
@@ -398,6 +491,18 @@ const Games = () => {
                           teamARates={
                             matchDetails?.teamC
                               ? 0
+                              : marketAnalysisDetail?.length
+                              ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                  (item: any) =>
+                                    [
+                                      matchBettingType.matchOdd,
+                                      matchBettingType.bookmaker,
+                                      matchBettingType.bookmaker2,
+                                      matchBettingType.quickbookmaker1,
+                                      matchBettingType.quickbookmaker2,
+                                      matchBettingType.quickbookmaker3,
+                                    ].includes(item.marketType)
+                                )?.profitLoss?.a ?? 0
                               : matchDetails?.profitLossDataMatch?.[
                                   profitLossDataForMatchConstants?.[
                                     matchDetails?.bookmaker?.type
@@ -409,6 +514,18 @@ const Games = () => {
                           teamBRates={
                             matchDetails?.teamC
                               ? 0
+                              : marketAnalysisDetail?.length
+                              ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                  (item: any) =>
+                                    [
+                                      matchBettingType.matchOdd,
+                                      matchBettingType.bookmaker,
+                                      matchBettingType.bookmaker2,
+                                      matchBettingType.quickbookmaker1,
+                                      matchBettingType.quickbookmaker2,
+                                      matchBettingType.quickbookmaker3,
+                                    ].includes(item.marketType)
+                                )?.profitLoss?.b ?? 0
                               : matchDetails?.profitLossDataMatch?.[
                                   profitLossDataForMatchConstants?.[
                                     matchDetails?.bookmaker?.type
@@ -416,6 +533,51 @@ const Games = () => {
                                     "_" +
                                     matchDetails?.id
                                 ] ?? 0
+                          }
+                          profitLossTeamA={
+                            marketAnalysisDetail?.length
+                              ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                  (item: any) =>
+                                    [
+                                      matchBettingType.matchOdd,
+                                      matchBettingType.bookmaker,
+                                      matchBettingType.bookmaker2,
+                                      matchBettingType.quickbookmaker1,
+                                      matchBettingType.quickbookmaker2,
+                                      matchBettingType.quickbookmaker3,
+                                    ].includes(item.marketType)
+                                )?.profitLoss?.a ?? 0
+                              : null
+                          }
+                          profitLossTeamB={
+                            marketAnalysisDetail?.length
+                              ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                  (item: any) =>
+                                    [
+                                      matchBettingType.matchOdd,
+                                      matchBettingType.bookmaker,
+                                      matchBettingType.bookmaker2,
+                                      matchBettingType.quickbookmaker1,
+                                      matchBettingType.quickbookmaker2,
+                                      matchBettingType.quickbookmaker3,
+                                    ].includes(item.marketType)
+                                )?.profitLoss?.b ?? 0
+                              : null
+                          }
+                          profitLossTeamC={
+                            marketAnalysisDetail?.length
+                              ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                  (item: any) =>
+                                    [
+                                      matchBettingType.matchOdd,
+                                      matchBettingType.bookmaker,
+                                      matchBettingType.bookmaker2,
+                                      matchBettingType.quickbookmaker1,
+                                      matchBettingType.quickbookmaker2,
+                                      matchBettingType.quickbookmaker3,
+                                    ].includes(item.marketType)
+                                )?.profitLoss?.c ?? 0
+                              : null
                           }
                         />
                       </Col>
@@ -486,6 +648,18 @@ const Games = () => {
                           teamARates={
                             matchDetails?.teamC
                               ? 0
+                              : marketAnalysisDetail?.length
+                              ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                  (item: any) =>
+                                    [
+                                      matchBettingType.matchOdd,
+                                      matchBettingType.bookmaker,
+                                      matchBettingType.bookmaker2,
+                                      matchBettingType.quickbookmaker1,
+                                      matchBettingType.quickbookmaker2,
+                                      matchBettingType.quickbookmaker3,
+                                    ].includes(item.marketType)
+                                )?.profitLoss?.a ?? 0
                               : matchDetails?.profitLossDataMatch?.[
                                   profitLossDataForMatchConstants?.[
                                     matchDetails?.bookmaker2?.type
@@ -497,6 +671,18 @@ const Games = () => {
                           teamBRates={
                             matchDetails?.teamC
                               ? 0
+                              : marketAnalysisDetail?.length
+                              ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                  (item: any) =>
+                                    [
+                                      matchBettingType.matchOdd,
+                                      matchBettingType.bookmaker,
+                                      matchBettingType.bookmaker2,
+                                      matchBettingType.quickbookmaker1,
+                                      matchBettingType.quickbookmaker2,
+                                      matchBettingType.quickbookmaker3,
+                                    ].includes(item.marketType)
+                                )?.profitLoss?.b ?? 0
                               : matchDetails?.profitLossDataMatch?.[
                                   profitLossDataForMatchConstants?.[
                                     matchDetails?.bookmaker2?.type
@@ -504,6 +690,51 @@ const Games = () => {
                                     "_" +
                                     matchDetails?.id
                                 ] ?? 0
+                          }
+                          profitLossTeamA={
+                            marketAnalysisDetail?.length
+                              ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                  (item: any) =>
+                                    [
+                                      matchBettingType.matchOdd,
+                                      matchBettingType.bookmaker,
+                                      matchBettingType.bookmaker2,
+                                      matchBettingType.quickbookmaker1,
+                                      matchBettingType.quickbookmaker2,
+                                      matchBettingType.quickbookmaker3,
+                                    ].includes(item.marketType)
+                                )?.profitLoss?.a ?? 0
+                              : null
+                          }
+                          profitLossTeamB={
+                            marketAnalysisDetail?.length
+                              ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                  (item: any) =>
+                                    [
+                                      matchBettingType.matchOdd,
+                                      matchBettingType.bookmaker,
+                                      matchBettingType.bookmaker2,
+                                      matchBettingType.quickbookmaker1,
+                                      matchBettingType.quickbookmaker2,
+                                      matchBettingType.quickbookmaker3,
+                                    ].includes(item.marketType)
+                                )?.profitLoss?.b ?? 0
+                              : null
+                          }
+                          profitLossTeamC={
+                            marketAnalysisDetail?.length
+                              ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                  (item: any) =>
+                                    [
+                                      matchBettingType.matchOdd,
+                                      matchBettingType.bookmaker,
+                                      matchBettingType.bookmaker2,
+                                      matchBettingType.quickbookmaker1,
+                                      matchBettingType.quickbookmaker2,
+                                      matchBettingType.quickbookmaker3,
+                                    ].includes(item.marketType)
+                                )?.profitLoss?.c ?? 0
+                              : null
                           }
                         />
                       </Col>
@@ -524,6 +755,18 @@ const Games = () => {
                             teamARates={
                               matchDetails?.teamC
                                 ? 0
+                                : marketAnalysisDetail?.length
+                                ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                    (item: any) =>
+                                      [
+                                        matchBettingType.matchOdd,
+                                        matchBettingType.bookmaker,
+                                        matchBettingType.bookmaker2,
+                                        matchBettingType.quickbookmaker1,
+                                        matchBettingType.quickbookmaker2,
+                                        matchBettingType.quickbookmaker3,
+                                      ].includes(item.marketType)
+                                  )?.profitLoss?.a ?? 0
                                 : matchDetails?.profitLossDataMatch?.[
                                     profitLossDataForMatchConstants?.[
                                       item?.type
@@ -535,6 +778,18 @@ const Games = () => {
                             teamBRates={
                               matchDetails?.teamC
                                 ? 0
+                                : marketAnalysisDetail?.length
+                                ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                    (item: any) =>
+                                      [
+                                        matchBettingType.matchOdd,
+                                        matchBettingType.bookmaker,
+                                        matchBettingType.bookmaker2,
+                                        matchBettingType.quickbookmaker1,
+                                        matchBettingType.quickbookmaker2,
+                                        matchBettingType.quickbookmaker3,
+                                      ].includes(item.marketType)
+                                  )?.profitLoss?.b ?? 0
                                 : matchDetails?.profitLossDataMatch?.[
                                     profitLossDataForMatchConstants?.[
                                       item?.type
@@ -542,6 +797,51 @@ const Games = () => {
                                       "_" +
                                       matchDetails?.id
                                   ] ?? 0
+                            }
+                            profitLossTeamA={
+                              marketAnalysisDetail?.length
+                                ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                    (item: any) =>
+                                      [
+                                        matchBettingType.matchOdd,
+                                        matchBettingType.bookmaker,
+                                        matchBettingType.bookmaker2,
+                                        matchBettingType.quickbookmaker1,
+                                        matchBettingType.quickbookmaker2,
+                                        matchBettingType.quickbookmaker3,
+                                      ].includes(item.marketType)
+                                  )?.profitLoss?.a ?? 0
+                                : null
+                            }
+                            profitLossTeamB={
+                              marketAnalysisDetail?.length
+                                ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                    (item: any) =>
+                                      [
+                                        matchBettingType.matchOdd,
+                                        matchBettingType.bookmaker,
+                                        matchBettingType.bookmaker2,
+                                        matchBettingType.quickbookmaker1,
+                                        matchBettingType.quickbookmaker2,
+                                        matchBettingType.quickbookmaker3,
+                                      ].includes(item.marketType)
+                                  )?.profitLoss?.b ?? 0
+                                : null
+                            }
+                            profitLossTeamC={
+                              marketAnalysisDetail?.length
+                                ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                    (item: any) =>
+                                      [
+                                        matchBettingType.matchOdd,
+                                        matchBettingType.bookmaker,
+                                        matchBettingType.bookmaker2,
+                                        matchBettingType.quickbookmaker1,
+                                        matchBettingType.quickbookmaker2,
+                                        matchBettingType.quickbookmaker3,
+                                      ].includes(item.marketType)
+                                  )?.profitLoss?.c ?? 0
+                                : null
                             }
                           />
                         </Col>
@@ -564,6 +864,15 @@ const Games = () => {
                           teamARates={
                             matchDetails?.teamC
                               ? 0
+                              : marketAnalysisDetail?.length
+                              ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                  (item: any) =>
+                                    [
+                                      matchBettingType.tiedMatch1,
+                                      matchBettingType.tiedMatch2,
+                                      matchBettingType.tiedMatch3,
+                                    ].includes(item.marketType)
+                                )?.profitLoss?.a ?? 0
                               : matchDetails?.profitLossDataMatch?.[
                                   profitLossDataForMatchConstants?.[
                                     matchDetails?.apiTideMatch2?.type
@@ -575,6 +884,15 @@ const Games = () => {
                           teamBRates={
                             matchDetails?.teamC
                               ? 0
+                              : marketAnalysisDetail?.length
+                              ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                  (item: any) =>
+                                    [
+                                      matchBettingType.tiedMatch1,
+                                      matchBettingType.tiedMatch2,
+                                      matchBettingType.tiedMatch3,
+                                    ].includes(item.marketType)
+                                )?.profitLoss?.b ?? 0
                               : matchDetails?.profitLossDataMatch?.[
                                   profitLossDataForMatchConstants?.[
                                     matchDetails?.apiTideMatch2?.type
@@ -582,6 +900,42 @@ const Games = () => {
                                     "_" +
                                     matchDetails?.id
                                 ] ?? 0
+                          }
+                          profitLossTeamA={
+                            marketAnalysisDetail?.length
+                              ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                  (item: any) =>
+                                    [
+                                      matchBettingType.tiedMatch1,
+                                      matchBettingType.tiedMatch2,
+                                      matchBettingType.tiedMatch3,
+                                    ].includes(item.marketType)
+                                )?.profitLoss?.a ?? 0
+                              : null
+                          }
+                          profitLossTeamB={
+                            marketAnalysisDetail?.length
+                              ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                  (item: any) =>
+                                    [
+                                      matchBettingType.tiedMatch1,
+                                      matchBettingType.tiedMatch2,
+                                      matchBettingType.tiedMatch3,
+                                    ].includes(item.marketType)
+                                )?.profitLoss?.b ?? 0
+                              : null
+                          }
+                          profitLossTeamC={
+                            marketAnalysisDetail?.length
+                              ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                  (item: any) =>
+                                    [
+                                      matchBettingType.tiedMatch1,
+                                      matchBettingType.tiedMatch2,
+                                      matchBettingType.tiedMatch3,
+                                    ].includes(item.marketType)
+                                )?.profitLoss?.c ?? 0
+                              : null
                           }
                         />
                       </Col>
@@ -605,6 +959,15 @@ const Games = () => {
                         teamARates={
                           matchDetails?.teamC
                             ? 0
+                            : marketAnalysisDetail?.length
+                            ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                (item: any) =>
+                                  [
+                                    matchBettingType.tiedMatch1,
+                                    matchBettingType.tiedMatch2,
+                                    matchBettingType.tiedMatch3,
+                                  ].includes(item.marketType)
+                              )?.profitLoss?.a ?? 0
                             : matchDetails?.profitLossDataMatch?.[
                                 profitLossDataForMatchConstants?.[
                                   matchDetails?.manualTideMatch?.type ||
@@ -617,6 +980,15 @@ const Games = () => {
                         teamBRates={
                           matchDetails?.teamC
                             ? 0
+                            : marketAnalysisDetail?.length
+                            ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                (item: any) =>
+                                  [
+                                    matchBettingType.tiedMatch1,
+                                    matchBettingType.tiedMatch2,
+                                    matchBettingType.tiedMatch3,
+                                  ].includes(item.marketType)
+                              )?.profitLoss?.b ?? 0
                             : matchDetails?.profitLossDataMatch?.[
                                 profitLossDataForMatchConstants?.[
                                   matchDetails?.manualTideMatch?.type ||
@@ -625,6 +997,42 @@ const Games = () => {
                                   "_" +
                                   matchDetails?.id
                               ] ?? 0
+                        }
+                        profitLossTeamA={
+                          marketAnalysisDetail?.length
+                            ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                (item: any) =>
+                                  [
+                                    matchBettingType.tiedMatch1,
+                                    matchBettingType.tiedMatch2,
+                                    matchBettingType.tiedMatch3,
+                                  ].includes(item.marketType)
+                              )?.profitLoss?.a ?? 0
+                            : null
+                        }
+                        profitLossTeamB={
+                          marketAnalysisDetail?.length
+                            ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                (item: any) =>
+                                  [
+                                    matchBettingType.tiedMatch1,
+                                    matchBettingType.tiedMatch2,
+                                    matchBettingType.tiedMatch3,
+                                  ].includes(item.marketType)
+                              )?.profitLoss?.b ?? 0
+                            : null
+                        }
+                        profitLossTeamC={
+                          marketAnalysisDetail?.length
+                            ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                (item: any) =>
+                                  [
+                                    matchBettingType.tiedMatch1,
+                                    matchBettingType.tiedMatch2,
+                                    matchBettingType.tiedMatch3,
+                                  ].includes(item.marketType)
+                              )?.profitLoss?.c ?? 0
+                            : null
                         }
                       />
                     </Col>
@@ -647,6 +1055,15 @@ const Games = () => {
                           teamARates={
                             matchDetails?.teamC
                               ? 0
+                              : marketAnalysisDetail?.length
+                              ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                  (item: any) =>
+                                    [
+                                      matchBettingType.completeMatch,
+                                      matchBettingType.completeMatch1,
+                                      matchBettingType.completeManual,
+                                    ].includes(item.marketType)
+                                )?.profitLoss?.a ?? 0
                               : matchDetails?.profitLossDataMatch?.[
                                   profitLossDataForMatchConstants?.[
                                     matchDetails?.marketCompleteMatch1?.type
@@ -658,6 +1075,15 @@ const Games = () => {
                           teamBRates={
                             matchDetails?.teamC
                               ? 0
+                              : marketAnalysisDetail?.length
+                              ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                  (item: any) =>
+                                    [
+                                      matchBettingType.completeMatch,
+                                      matchBettingType.completeMatch1,
+                                      matchBettingType.completeManual,
+                                    ].includes(item.marketType)
+                                )?.profitLoss?.b ?? 0
                               : matchDetails?.profitLossDataMatch?.[
                                   profitLossDataForMatchConstants?.[
                                     matchDetails?.marketCompleteMatch1?.type
@@ -665,6 +1091,42 @@ const Games = () => {
                                     "_" +
                                     matchDetails?.id
                                 ] ?? 0
+                          }
+                          profitLossTeamA={
+                            marketAnalysisDetail?.length
+                              ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                  (item: any) =>
+                                    [
+                                      matchBettingType.completeMatch,
+                                      matchBettingType.completeMatch1,
+                                      matchBettingType.completeManual,
+                                    ].includes(item.marketType)
+                                )?.profitLoss?.a ?? 0
+                              : null
+                          }
+                          profitLossTeamB={
+                            marketAnalysisDetail?.length
+                              ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                  (item: any) =>
+                                    [
+                                      matchBettingType.completeMatch,
+                                      matchBettingType.completeMatch1,
+                                      matchBettingType.completeManual,
+                                    ].includes(item.marketType)
+                                )?.profitLoss?.b ?? 0
+                              : null
+                          }
+                          profitLossTeamC={
+                            marketAnalysisDetail?.length
+                              ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                  (item: any) =>
+                                    [
+                                      matchBettingType.completeMatch,
+                                      matchBettingType.completeMatch1,
+                                      matchBettingType.completeManual,
+                                    ].includes(item.marketType)
+                                )?.profitLoss?.c ?? 0
+                              : null
                           }
                         />
                       </Col>
@@ -681,6 +1143,15 @@ const Games = () => {
                           teamARates={
                             matchDetails?.teamC
                               ? 0
+                              : marketAnalysisDetail?.length
+                              ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                  (item: any) =>
+                                    [
+                                      matchBettingType.completeMatch,
+                                      matchBettingType.completeMatch1,
+                                      matchBettingType.completeManual,
+                                    ].includes(item.marketType)
+                                )?.profitLoss?.a ?? 0
                               : matchDetails?.profitLossDataMatch?.[
                                   profitLossDataForMatchConstants?.[
                                     matchDetails?.manualCompleteMatch?.type
@@ -692,6 +1163,15 @@ const Games = () => {
                           teamBRates={
                             matchDetails?.teamC
                               ? 0
+                              : marketAnalysisDetail?.length
+                              ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                  (item: any) =>
+                                    [
+                                      matchBettingType.completeMatch,
+                                      matchBettingType.completeMatch1,
+                                      matchBettingType.completeManual,
+                                    ].includes(item.marketType)
+                                )?.profitLoss?.b ?? 0
                               : matchDetails?.profitLossDataMatch?.[
                                   profitLossDataForMatchConstants?.[
                                     matchDetails?.manualCompleteMatch?.type
@@ -699,6 +1179,42 @@ const Games = () => {
                                     "_" +
                                     matchDetails?.id
                                 ] ?? 0
+                          }
+                          profitLossTeamA={
+                            marketAnalysisDetail?.length
+                              ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                  (item: any) =>
+                                    [
+                                      matchBettingType.completeMatch,
+                                      matchBettingType.completeMatch1,
+                                      matchBettingType.completeManual,
+                                    ].includes(item.marketType)
+                                )?.profitLoss?.a ?? 0
+                              : null
+                          }
+                          profitLossTeamB={
+                            marketAnalysisDetail?.length
+                              ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                  (item: any) =>
+                                    [
+                                      matchBettingType.completeMatch,
+                                      matchBettingType.completeMatch1,
+                                      matchBettingType.completeManual,
+                                    ].includes(item.marketType)
+                                )?.profitLoss?.b ?? 0
+                              : null
+                          }
+                          profitLossTeamC={
+                            marketAnalysisDetail?.length
+                              ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                  (item: any) =>
+                                    [
+                                      matchBettingType.completeMatch,
+                                      matchBettingType.completeMatch1,
+                                      matchBettingType.completeManual,
+                                    ].includes(item.marketType)
+                                )?.profitLoss?.c ?? 0
+                              : null
                           }
                         />
                       </Col>
@@ -771,6 +1287,7 @@ const Games = () => {
                                     ? manualEntries
                                     : []
                                 }
+                                marketAnalysisDetail={marketAnalysisDetail}
                               />
                             </Col>
                           </div>
@@ -813,6 +1330,7 @@ const Games = () => {
                                     title={item?.RunnerName}
                                     data={item}
                                     detail={matchDetails}
+                                    marketAnalysisDetail={marketAnalysisDetail}
                                   />
                                 </Col>
                               )}
@@ -839,6 +1357,15 @@ const Games = () => {
                           teamARates={
                             matchDetails?.teamC
                               ? 0
+                              : marketAnalysisDetail?.length
+                              ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                  (item: any) =>
+                                    [
+                                      matchBettingType.tiedMatch1,
+                                      matchBettingType.tiedMatch2,
+                                      matchBettingType.tiedMatch3,
+                                    ].includes(item.marketType)
+                                )?.profitLoss?.a ?? 0
                               : matchDetails?.profitLossDataMatch?.[
                                   profitLossDataForMatchConstants?.[
                                     matchDetails?.apiTideMatch?.type
@@ -850,6 +1377,15 @@ const Games = () => {
                           teamBRates={
                             matchDetails?.teamC
                               ? 0
+                              : marketAnalysisDetail?.length
+                              ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                  (item: any) =>
+                                    [
+                                      matchBettingType.tiedMatch1,
+                                      matchBettingType.tiedMatch2,
+                                      matchBettingType.tiedMatch3,
+                                    ].includes(item.marketType)
+                                )?.profitLoss?.b ?? 0
                               : matchDetails?.profitLossDataMatch?.[
                                   profitLossDataForMatchConstants?.[
                                     matchDetails?.apiTideMatch?.type
@@ -857,6 +1393,42 @@ const Games = () => {
                                     "_" +
                                     matchDetails?.id
                                 ] ?? 0
+                          }
+                          profitLossTeamA={
+                            marketAnalysisDetail?.length
+                              ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                  (item: any) =>
+                                    [
+                                      matchBettingType.tiedMatch1,
+                                      matchBettingType.tiedMatch2,
+                                      matchBettingType.tiedMatch3,
+                                    ].includes(item.marketType)
+                                )?.profitLoss?.a ?? 0
+                              : null
+                          }
+                          profitLossTeamB={
+                            marketAnalysisDetail?.length
+                              ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                  (item: any) =>
+                                    [
+                                      matchBettingType.tiedMatch1,
+                                      matchBettingType.tiedMatch2,
+                                      matchBettingType.tiedMatch3,
+                                    ].includes(item.marketType)
+                                )?.profitLoss?.b ?? 0
+                              : null
+                          }
+                          profitLossTeamC={
+                            marketAnalysisDetail?.length
+                              ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                  (item: any) =>
+                                    [
+                                      matchBettingType.tiedMatch1,
+                                      matchBettingType.tiedMatch2,
+                                      matchBettingType.tiedMatch3,
+                                    ].includes(item.marketType)
+                                )?.profitLoss?.c ?? 0
+                              : null
                           }
                         />
                       </Col>
@@ -878,6 +1450,15 @@ const Games = () => {
                           teamARates={
                             matchDetails?.teamC
                               ? 0
+                              : marketAnalysisDetail?.length
+                              ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                  (item: any) =>
+                                    [
+                                      matchBettingType.completeMatch,
+                                      matchBettingType.completeMatch1,
+                                      matchBettingType.completeManual,
+                                    ].includes(item.marketType)
+                                )?.profitLoss?.a ?? 0
                               : matchDetails?.profitLossDataMatch?.[
                                   profitLossDataForMatchConstants?.[
                                     matchDetails?.marketCompleteMatch?.type
@@ -889,6 +1470,15 @@ const Games = () => {
                           teamBRates={
                             matchDetails?.teamC
                               ? 0
+                              : marketAnalysisDetail?.length
+                              ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                  (item: any) =>
+                                    [
+                                      matchBettingType.completeMatch,
+                                      matchBettingType.completeMatch1,
+                                      matchBettingType.completeManual,
+                                    ].includes(item.marketType)
+                                )?.profitLoss?.b ?? 0
                               : matchDetails?.profitLossDataMatch?.[
                                   profitLossDataForMatchConstants?.[
                                     matchDetails?.marketCompleteMatch?.type
@@ -896,6 +1486,42 @@ const Games = () => {
                                     "_" +
                                     matchDetails?.id
                                 ] ?? 0
+                          }
+                          profitLossTeamA={
+                            marketAnalysisDetail?.length
+                              ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                  (item: any) =>
+                                    [
+                                      matchBettingType.completeMatch,
+                                      matchBettingType.completeMatch1,
+                                      matchBettingType.completeManual,
+                                    ].includes(item.marketType)
+                                )?.profitLoss?.a ?? 0
+                              : null
+                          }
+                          profitLossTeamB={
+                            marketAnalysisDetail?.length
+                              ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                  (item: any) =>
+                                    [
+                                      matchBettingType.completeMatch,
+                                      matchBettingType.completeMatch1,
+                                      matchBettingType.completeManual,
+                                    ].includes(item.marketType)
+                                )?.profitLoss?.b ?? 0
+                              : null
+                          }
+                          profitLossTeamC={
+                            marketAnalysisDetail?.length
+                              ? marketAnalysisDetail?.[0]?.betType?.match?.find(
+                                  (item: any) =>
+                                    [
+                                      matchBettingType.completeMatch,
+                                      matchBettingType.completeMatch1,
+                                      matchBettingType.completeManual,
+                                    ].includes(item.marketType)
+                                )?.profitLoss?.c ?? 0
+                              : null
                           }
                         />
                       </Col>
