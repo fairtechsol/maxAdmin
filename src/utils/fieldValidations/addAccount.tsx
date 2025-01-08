@@ -3,10 +3,10 @@ import * as Yup from "yup";
 export const addAccountValidationSchema: any = (item: any) => {
   return Yup.object({
     clientName: Yup.string()
-      .required("Client Name is required")
+      .required("The Client ID field is required")
       .test({
         name: "clientName",
-        message: "Client Name already exists",
+        message: "Client Id already exists",
         test: async function (value: any) {
           if (value) {
             try {

@@ -1,18 +1,18 @@
+import { debounce } from "lodash";
 import React, { memo, useEffect, useMemo, useState } from "react";
 import { Form, Nav, NavDropdown, Navbar } from "react-bootstrap";
 import { FaSearchPlus } from "react-icons/fa";
-import { useLocation, useNavigate } from "react-router-dom";
-import LogoSection from "../../../components/commonComponent/logoSection";
-import Select, { components } from "react-select";
 import { useDispatch, useSelector } from "react-redux";
-import MainHeader from "../../../components/mainHeader";
-import { logout } from "../../../store/actions/auth/authActions";
-import { AppDispatch, RootState } from "../../../store/store";
-import { debounce } from "lodash";
-import { searchList } from "../../../store/actions/user/userActions";
-import "./style.scss";
+import { useLocation, useNavigate } from "react-router-dom";
+import Select, { components } from "react-select";
+import LogoSection from "../../../components/commonComponent/logoSection";
 import CustomModal from "../../../components/commonComponent/modal";
 import UserLockModal from "../../../components/commonComponent/userLockModal";
+import MainHeader from "../../../components/mainHeader";
+import { logout } from "../../../store/actions/auth/authActions";
+import { searchList } from "../../../store/actions/user/userActions";
+import { AppDispatch, RootState } from "../../../store/store";
+import "./style.scss";
 // import isMobile from "../../../utils/screenDimension";
 // import styled from '@emotion/styled';
 
@@ -342,6 +342,12 @@ const Topbar = (props: any) => {
                   <UserLockModal show={showModal} setShowModal={setShowModal} />
                 </>
               )}
+              <Nav.Link
+                className="navbar-mainLink"
+                href="/admin/multiLogin"
+              >
+                Multi Login
+              </Nav.Link>
             </Nav>
           </Navbar>
           <div className="user-dropdown-container">
