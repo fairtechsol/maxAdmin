@@ -41,6 +41,9 @@ const EventWiseMatchListModal = ({ userWiseExposureName, data }: any) => {
             style={{ cursor: "pointer" }}
             key={key}
             onClick={() => {
+              if (data?.eventType === "virtual") {
+                return;
+              }
               if (data?.eventType === "card") {
                 navigate(`/admin/casinoDetail/${value?.type}`, {
                   state: {
@@ -48,7 +51,7 @@ const EventWiseMatchListModal = ({ userWiseExposureName, data }: any) => {
                     roleName: userWiseExposureName?.roleName,
                   },
                 });
-              } else if(data?.eventType === "cricket") {
+              } else if (data?.eventType === "cricket") {
                 navigate(`/admin/match_details/${key}`, {
                   state: {
                     submit: true,
@@ -56,20 +59,24 @@ const EventWiseMatchListModal = ({ userWiseExposureName, data }: any) => {
                     userId: userWiseExposureName?.id,
                   },
                 });
-              }
-              else{
-                navigate(`/admin/other_match_detail/${data?.eventType}/${key}/44c1a5c9-e1ee-4706-8359-c692f25bdb1f`, {
-                  state: {
-                    submit: true,
-                    matchId: key,
-                    userId: userWiseExposureName?.id,
-                  },
-                });
-                
+              } else {
+                navigate(
+                  `/admin/other_match_detail/${data?.eventType}/${key}/44c1a5c9-e1ee-4706-8359-c692f25bdb1f`,
+                  {
+                    state: {
+                      submit: true,
+                      matchId: key,
+                      userId: userWiseExposureName?.id,
+                    },
+                  }
+                );
               }
             }}
           >
-            <td>{value?.name}</td>
+            <td>
+              {value?.name}
+              {value?.type ? ` (${value?.type})` : ""}
+            </td>
             <td>{formatToINR(value?.exposure) || 0}</td>
           </tr>
         ))}
