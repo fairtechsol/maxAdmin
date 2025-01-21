@@ -115,7 +115,7 @@ const ListClent: React.FC = () => {
           page: tableConfig?.page || 1,
           limit: tableConfig?.rowPerPage,
           userName: keyWord,
-          sort: "user.createdAt",
+          sort: "",
           order: "DESC",
           activeTab: "active",
         })
@@ -299,7 +299,7 @@ const ListClent: React.FC = () => {
               });
             }}
             id={eventDetails.eventId}
-            sort="user.createdAt"
+            sort=""
             order="DESC"
             activeTab="active"
           />
