@@ -525,3 +525,4 @@ export const betReportAccountListReset = createAction(
 export const resetGameReportList = createAction("gameReportList/reset");
 export const getMorePlacedBetsReset = createAction("getMorePlacedBets/reset");
 export const getMarketLockChildReset = createAction("getMarketLockChild/reset");
+export const resetMarketAnalysys = createAction("marketAnalysis/reset");

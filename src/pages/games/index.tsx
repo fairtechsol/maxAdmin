@@ -13,6 +13,7 @@ import {
   getMarketAnalysis,
   getPlacedBets,
   matchDetailAction,
+  resetMarketAnalysys,
   updateBalance,
   updateBetsPlaced,
   updateMatchRates,
@@ -329,6 +330,12 @@ const Games = () => {
       console.log(error);
     }
   }, [state]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetMarketAnalysys());
+    };
+  }, []);
 
   return (
     <div className="gamePage">
