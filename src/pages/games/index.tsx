@@ -124,9 +124,9 @@ const Games = () => {
   };
   const handleMatchResultDeclarted = (event: any) => {
     try {
-      if (event?.matchId === id) {
+      if (event?.matchId === id && event.isMatchDeclare) {
         navigate("/admin/market-analysis");
-      }
+      } else dispatch(getPlacedBets({ id: id, userId: state?.userId }));
     } catch (e) {
       console.log(e);
     }
