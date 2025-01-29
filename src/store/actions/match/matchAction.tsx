@@ -501,6 +501,26 @@ export const updateBetsPlaced: any = createAsyncThunk<any, any>(
     return placedBets;
   }
 );
+export const getRunAmountMeter = createAsyncThunk<any, any>(
+  "/runAmountMeter",
+  async (id, thunkApi) => {
+    try {
+      const resp = await service.get(`${ApiConstants.BET.RUN_AMOUNT}/${id}`);
+      if (resp?.data?.profitLoss) {
+        let data = {
+          id: id,
+          arr: JSON.parse(resp?.data?.profitLoss[0])
+            ? JSON.parse(resp?.data?.profitLoss).betPlaced
+            : [],
+        };
+        return data;
+      }
+    } catch (error: any) {
+      const err = error as AxiosError;
+      return thunkApi.rejectWithValue(err.response?.status);
+    }
+  }
+);
 
 export const updateBalance = createAsyncThunk<any, any>(
   "/user/balance",

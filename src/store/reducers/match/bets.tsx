@@ -8,6 +8,7 @@ import {
   getMorePlacedBetsReset,
   getPlacedBets,
   getRunAmount,
+  getRunAmountMeter,
   getUserDetailsForParent,
   getUserDetailsOfLock,
   resetRunAmount,
@@ -103,6 +104,24 @@ const placedBetsSlice = createSlice({
         state.runAmount = action.payload;
       })
       .addCase(getRunAmount.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action?.error?.message;
+      })
+      .addCase(getRunAmountMeter.pending, (state) => {
+        state.loading = true;
+        state.success = false;
+        state.error = null;
+        state.runAmount = [];
+      })
+      .addCase(getRunAmountMeter.fulfilled, (state, action) => {
+        const { arr } = action.payload;
+        const modifiedBets = arr;
+        state.loading = false;
+        state.success = true;
+        let data = modifiedBets;
+        state.runAmount = data;
+      })
+      .addCase(getRunAmountMeter.rejected, (state, action) => {
         state.loading = false;
         state.error = action?.error?.message;
       })

@@ -1,9 +1,26 @@
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { calculateMaxLoss, formatNumber, handleSize } from "../../../helpers";
+import {
+  getRunAmount,
+  getRunAmountMeter,
+  resetRunAmount,
+} from "../../../store/actions/match/matchAction";
+import { AppDispatch, RootState } from "../../../store/store";
+import { sessionBettingType } from "../../../utils/Constants";
 import isMobile from "../../../utils/screenDimension";
 import MarketTableHeader from "../../commonComponent/MarketWiseHeader";
+import CustomModal from "../../commonComponent/modal";
+import TableRunner from "../betTable/sessionMarket/tableRunner";
 import "./style.scss";
 
-const SessionKhado = ({ title, data, detail, marketAnalysisDetail }: any) => {
+const SessionKhado = ({
+  title,
+  data,
+  detail,
+  mtype,
+  marketAnalysisDetail,
+}: any) => {
   const handlePrice = (rate: any) => {
     if (rate && rate != 0) {
       return rate;
@@ -11,6 +28,12 @@ const SessionKhado = ({ title, data, detail, marketAnalysisDetail }: any) => {
       return "-";
     }
   };
+  const [runnerModalShow, setRunnerModalShow] = useState(false);
+
+  const { runAmount } = useSelector(
+    (state: RootState) => state.match.placeBets
+  );
+  const dispatch: AppDispatch = useDispatch();
 
   return (
     <>
@@ -60,6 +83,34 @@ const SessionKhado = ({ title, data, detail, marketAnalysisDetail }: any) => {
                     <span
                       className="teamFont"
                       style={{ fontWeight: "400", lineHeight: 1 }}
+                      onClick={() => {
+                        // console.log("first", item);
+                        if (item.activeStatus === "save") {
+                          return true;
+                        } else if (
+                          calculateMaxLoss(
+                            detail?.profitLossDataSession,
+                            item?.id
+                          ) === 0
+                        ) {
+                          return;
+                        } else {
+                          if (
+                            ![
+                              sessionBettingType.fancy1,
+                              sessionBettingType.oddEven,
+                            ].includes(mtype)
+                          ) {
+                            dispatch(resetRunAmount());
+                            setRunnerModalShow((prev) => !prev);
+                            if (title === "meter") {
+                              dispatch(getRunAmountMeter(item?.id));
+                            } else {
+                              dispatch(getRunAmount(item?.id));
+                            }
+                          }
+                        }
+                      }}
                     >
                       {item?.RunnerName}-{item?.ex?.availableToLay?.[0]?.price}
                     </span>{" "}
@@ -140,6 +191,9 @@ const SessionKhado = ({ title, data, detail, marketAnalysisDetail }: any) => {
           </div>
         </div>
       </div>
+      <CustomModal show={runnerModalShow} setShow={setRunnerModalShow}>
+        <TableRunner runAmount={runAmount} />
+      </CustomModal>
     </>
   );
 };
