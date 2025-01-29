@@ -16,7 +16,7 @@ jobs:
       with:
         node-version: 18
     - name: Install Frontend Dependencies
-      run: npm install --legacy-peer-deps --force
+      run: npm ci --force --cache .npm --prefer-offline
     - name: Build React App
       run: npm run build
     - name: Clean target directory
