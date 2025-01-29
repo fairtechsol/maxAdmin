@@ -9,10 +9,10 @@ import {
   getUsersProfile,
 } from "../../../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../../../store/store";
-import CustomInput from "../../../commonComponent/input";
-import ModalFooter from "../footer";
 import { widthdrawAmountValidations } from "../../../../utils/fieldValidations/addAccount";
+import CustomInput from "../../../commonComponent/input";
 import Loader from "../../../commonComponent/loader";
+import ModalFooter from "../footer";
 
 const initialValues: any = {
   initialBalance: "",
@@ -195,6 +195,7 @@ const Withdraw = ({
                   customstyle="input-box"
                   type="number"
                   min={0}
+                  step="any"
                 />
               </Col>
             </Row>

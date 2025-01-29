@@ -173,7 +173,7 @@ const Games = () => {
       console.log(e);
     }
   }, [id]);
-
+console.log(state);
   useEffect(() => {
     try {
       if (success && socket) {
@@ -191,7 +191,7 @@ const Games = () => {
         socketService.match.joinMatchRoom(id, "superAdmin");
         socketService.match.getMatchRates(id, updateMatchDetailToRedux);
 
-        if (!state.userId) {
+        if (!state?.userId) {
           socketService.match.matchDeleteBet(handleDeleteBet);
           socketService.match.sessionDeleteBet(handleDeleteBet);
           socketService.match.userSessionBetPlaced(handleSessionBetPlaced);
