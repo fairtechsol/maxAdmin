@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { convertData, updateSessionBettingsItem } from "../../../utils/helper";
 import {
   matchDetailAction,
   otherMatchDetailAction,
@@ -60,6 +59,7 @@ const matchListSlice = createSlice({
           profitLossDataSession: action.payload?.profitLossDataSession,
           profitLossDataMatch: action.payload?.profitLossDataMatch,
           stopAt: action.payload?.stopAt ?? null,
+          sessionBettings: action.payload?.sessionBettings ?? [],
         };
       })
       .addCase(matchDetailAction.rejected, (state, action) => {
@@ -100,6 +100,7 @@ const matchListSlice = createSlice({
           profitLossDataSession: action.payload?.profitLossDataSession,
           profitLossDataMatch: action.payload?.profitLossDataMatch,
           stopAt: action.payload?.stopAt ?? null,
+          sessionBettings: action.payload?.sessionBettings ?? [],
         };
       })
       .addCase(otherMatchDetailAction.rejected, (state, action) => {
@@ -117,7 +118,7 @@ const matchListSlice = createSlice({
           marketCompleteMatch,
           marketCompleteMatch1,
           matchOdd,
-          // sessionBettings,
+          sessionBettings,
           manualTideMatch,
           quickbookmaker,
           firstHalfGoal,
@@ -129,20 +130,18 @@ const matchListSlice = createSlice({
         } = action.payload;
 
         state.loading = false;
+        // let parsedSessionBettings = sessionBettings?.map(
+        //   (item: any) => {
+        //     let parsedItem = JSON.parse(item);
+        //     return parsedItem;
+        //   }
+        // );
+        // let updatedFormat = convertData(parsedSessionBettings);
 
-        let parsedSessionBettings = state?.matchDetails?.sessionBettings?.map(
-          (item: any) => {
-            let parsedItem = JSON.parse(item);
-            return parsedItem;
-          }
-        );
-        let updatedFormat = convertData(parsedSessionBettings);
-
-        let updatedSessionBettings = updateSessionBettingsItem(
-          updatedFormat,
-          apiSession
-        );
-
+        // let updatedSessionBettings = updateSessionBettingsItem(
+        //   updatedFormat,
+        //   apiSession
+        // );
         state.matchDetails = {
           ...state.matchDetails,
           // manualSessionActive: sessionBettings?.length >= 0 ? true : false,
@@ -161,7 +160,7 @@ const matchListSlice = createSlice({
           halfTime,
           overUnder,
           manualCompleteMatch: completeManual,
-          updatedSessionBettings: updatedSessionBettings,
+          sessionBettings: sessionBettings,
           tournament,
           other,
         };
@@ -183,8 +182,9 @@ const matchListSlice = createSlice({
             ...state.matchDetails,
             profitLossDataMatch: {
               ...state.matchDetails.profitLossDataMatch,
-              [jobData?.betId + "_profitLoss_" + jobData?.matchId]:
-                JSON.stringify(jobData?.newTeamRateData),
+              [jobData?.betId +
+              "_profitLoss_" +
+              jobData?.matchId]: JSON.stringify(jobData?.newTeamRateData),
             },
           };
         } else {
@@ -192,12 +192,15 @@ const matchListSlice = createSlice({
             ...state.matchDetails,
             profitLossDataMatch: {
               ...state.matchDetails.profitLossDataMatch,
-              [jobData?.teamArateRedisKey]:
-                userRedisObj[jobData?.teamArateRedisKey],
-              [jobData?.teamBrateRedisKey]:
-                userRedisObj[jobData?.teamBrateRedisKey],
-              [jobData?.teamCrateRedisKey]:
-                userRedisObj[jobData?.teamCrateRedisKey],
+              [jobData?.teamArateRedisKey]: userRedisObj[
+                jobData?.teamArateRedisKey
+              ],
+              [jobData?.teamBrateRedisKey]: userRedisObj[
+                jobData?.teamBrateRedisKey
+              ],
+              [jobData?.teamCrateRedisKey]: userRedisObj[
+                jobData?.teamCrateRedisKey
+              ],
             },
           };
         }

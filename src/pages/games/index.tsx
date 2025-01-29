@@ -316,7 +316,7 @@ console.log(state);
   const manualEntries = matchDetails?.manualSessionActive
     ? normalizedData?.filter((item: any) => item?.isManual)
     : [];
-
+console.log(matchDetails);
   useEffect(() => {
     try {
       if (state?.userId) {
