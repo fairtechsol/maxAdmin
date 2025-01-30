@@ -173,7 +173,7 @@ const Games = () => {
       console.log(e);
     }
   }, [id]);
-console.log(state);
+  console.log(state);
   useEffect(() => {
     try {
       if (success && socket) {
@@ -316,7 +316,7 @@ console.log(state);
   const manualEntries = matchDetails?.manualSessionActive
     ? normalizedData?.filter((item: any) => item?.isManual)
     : [];
-console.log(matchDetails);
+  console.log(matchDetails);
   useEffect(() => {
     try {
       if (state?.userId) {
@@ -1276,29 +1276,31 @@ console.log(matchDetails);
                         data: matchDetails?.apiSession?.oddEven,
                         component: SessionOddEven,
                       },
-                    ].map(
-                      (session, index) =>
-                        session.data?.section?.length > 0 && (
-                          <div
-                            key={index}
-                            style={{ width: isMobile ? "100%" : "49.5%" }}
-                          >
-                            <Col md={12}>
-                              <session.component
-                                title={session.title}
-                                mtype={session.type}
-                                data={session.data}
-                                detail={matchDetails}
-                                manual={
-                                  session.type === "session" && manualEntries
-                                    ? manualEntries
-                                    : []
-                                }
-                                marketAnalysisDetail={marketAnalysisDetail}
-                              />
-                            </Col>
-                          </div>
-                        )
+                    ].map((session, index) =>
+                      session.data?.section?.length > 0 ||
+                      (session.type === "session" && manualEntries?.length) ? (
+                        <div
+                          key={index}
+                          style={{ width: isMobile ? "100%" : "49.5%" }}
+                        >
+                          <Col md={12}>
+                            <session.component
+                              title={session.title}
+                              mtype={session.type}
+                              data={session.data}
+                              detail={matchDetails}
+                              manual={
+                                session.type === "session" && manualEntries
+                                  ? manualEntries
+                                  : []
+                              }
+                              marketAnalysisDetail={marketAnalysisDetail}
+                            />
+                          </Col>
+                        </div>
+                      ) : (
+                        ""
+                      )
                     )}
                   </div>
 

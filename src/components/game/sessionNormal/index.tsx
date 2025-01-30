@@ -17,7 +17,6 @@ import "./style.scss";
 const SessionNormal = ({ title, data, detail, manual, mtype }: any) => {
   const [marketArr, setMarketArr] = useState(data?.section || []);
   const [runnerModalShow, setRunnerModalShow] = useState(false);
-  console.log(manual);
   const { marketAnalysisDetail } = useSelector(
     (state: RootState) => state.match.marketAnalysis
   );
