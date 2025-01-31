@@ -105,9 +105,9 @@ const CasinoQueen = Loadable(
 const BallByBall = Loadable(
   lazy(() => import("../pages/cardGames/games/ballByBall"))
 );
-const MultiLogin = Loadable(
-  lazy(() => import("../pages/multiLogin/index"))
-);
+// const MultiLogin = Loadable(
+//   lazy(() => import("../pages/multiLogin/index"))
+// );
 const MainRoutes = {
   path: "/admin",
   element: <MainLayout />,
