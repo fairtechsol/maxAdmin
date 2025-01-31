@@ -342,12 +342,12 @@ const Topbar = (props: any) => {
                   <UserLockModal show={showModal} setShowModal={setShowModal} />
                 </>
               )}
-              <Nav.Link
+              {/* <Nav.Link
                 className="navbar-mainLink"
                 href="/admin/multiLogin"
               >
                 Multi Login
-              </Nav.Link>
+              </Nav.Link> */}
             </Nav>
           </Navbar>
           <div className="user-dropdown-container">

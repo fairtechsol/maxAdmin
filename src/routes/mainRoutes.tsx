@@ -156,10 +156,10 @@ const MainRoutes = {
       path: "Secure-auth",
       element: <SecureAuth />,
     },
-    {
-      path: "multiLogin",
-      element: <MultiLogin />,
-    },
+    // {
+    //   path: "multiLogin",
+    //   element: <MultiLogin />,
+    // },
     {
       path: "active-inactive-user-list/:id",
       element: <ListActiveInactiveUser />,
