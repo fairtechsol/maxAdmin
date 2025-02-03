@@ -1,8 +1,8 @@
 import io from "socket.io-client";
 import { Constants, baseUrls } from "../utils/Constants";
 import { authSocketService } from "./authSocket";
-import { matchSocketService } from "./matchSocketService";
 import { cardSocketService } from "./cardSocket";
+import { matchSocketService } from "./matchSocketService";
 
 export let socket: any = null;
 export let thirdParty: any = null;
@@ -17,9 +17,10 @@ export const initialiseSocket = () => {
   });
   thirdParty = io(baseUrls.thirdParty, {
     transports: [
-      process.env.NODE_ENV === "production"
-        ? `${Constants.POLLING}`
-        : `${Constants.WEBSOCKET}`,
+      // process.env.NODE_ENV === "production"
+      //   ? `${Constants.POLLING}`
+      //   :
+         `${Constants.WEBSOCKET}`,
     ],
     auth: {
       token: `${localStorage.getItem("jwtMaxAdmin")}`,
