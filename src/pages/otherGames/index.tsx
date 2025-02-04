@@ -413,7 +413,7 @@ const OtherGamesDetail = () => {
               {matchDetails?.eventId &&
                 matchDetails?.matchType !== "politics" && (
                   <LiveStreamComponent
-                    url={`${liveStreamUrl}${matchDetails?.eventId}/${
+                    url={`${liveStreamUrl}${matchDetails?.eventId}&sportid=${
                       matchDetails?.matchType === "football" ? 1 : 2
                     }`}
                   />
