@@ -316,8 +316,8 @@ const Games = () => {
   const manualEntries = matchDetails?.manualSessionActive
     ? normalizedData?.filter((item: any) => item?.isManual)
     : [];
-  console.log(matchDetails);
-  useEffect(() => {
+
+    useEffect(() => {
     try {
       if (state?.userId) {
         dispatch(
