@@ -61,6 +61,26 @@ const Tournament = ({ title, box, data, detail }: any) => {
             {box === 6 && <div className="tournamentEmptyBox"></div>}
           </div>
         </div>
+
+        {!["ACTIVE", "OPEN", ""].includes(data?.status) &&
+          data?.gtype == "match" && (
+            <div
+              className={`outer-suspended-overlayRatestournament ${
+                box === 6 ? "rateBoxWidth" : "rateBoxWidth2"
+              }`}
+              style={{
+                height: `${data?.runners?.length * 45}px`,
+                bottom: data?.rem ? "20px" : "0px",
+              }}
+            >
+              <span
+                className={`suspendTextCmmn`}
+                style={{ textTransform: "uppercase" }}
+              >
+                {data?.status}
+              </span>
+            </div>
+          )}
         {data?.runners?.length > 0 &&
           data?.runners?.map((item: any, index: any) => {
             return (
@@ -110,7 +130,10 @@ const Tournament = ({ title, box, data, detail }: any) => {
                       : "tournament2RateBox rateBoxWidth2"
                   }
                 >
-                  {item?.status !== "ACTIVE" &&
+                  {!["ACTIVE", "OPEN", ""].includes(data?.status) &&
+                  data?.gtype == "match"
+                    ? ""
+                    :item?.status !== "ACTIVE" &&
                     item?.status !== "OPEN" &&
                     item?.status !== "" && (
                       <div className="suspended-overlayRatestournament">
