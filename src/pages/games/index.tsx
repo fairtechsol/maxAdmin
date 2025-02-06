@@ -593,7 +593,7 @@ const Games = () => {
                   {matchDetails?.other
                     ?.filter(
                       (item: any) =>
-                        item?.isActive && item?.activeStatus === "live"
+                        item?.activeStatus === "live"
                     )
                     ?.map((item: any, index: number) => {
                       return (
@@ -617,7 +617,7 @@ const Games = () => {
                   {matchDetails?.tournament
                     ?.filter(
                       (item: any) =>
-                        item?.isActive && item?.activeStatus === "live"
+                       item?.activeStatus === "live"
                     )
                     ?.map((item: any, index: number) => {
                       return (
