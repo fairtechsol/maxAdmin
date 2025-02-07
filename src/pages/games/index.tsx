@@ -45,7 +45,7 @@ import axios from "axios";
 import { baseUrls } from "../../utils/Constants";
 
 const Games = () => {
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const intervalRef = useRef<number | null>(null);
   const dispatch: AppDispatch = useDispatch();
   const { state, pathname } = useLocation();
   const navigate = useNavigate();
