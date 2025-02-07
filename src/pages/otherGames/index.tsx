@@ -274,7 +274,7 @@ const OtherGamesDetail = () => {
 
   const fetchLiveData = useCallback(async () => {
     try {
-      const response = await axios.get(`${baseUrls.thirdParty}/getExpertRateDetails/${id}`, {
+      const response = await axios.get(`${baseUrls.thirdParty}/getUserRateDetails/${id}`, {
         // headers: {
         //   Authorization: `Bearer ${sessionStorage.getItem("jwtExpert")}`,
         // },
