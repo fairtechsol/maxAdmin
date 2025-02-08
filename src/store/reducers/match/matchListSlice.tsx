@@ -9,6 +9,7 @@ interface InitialState {
   success: boolean;
   loading: boolean;
   error: any;
+  liveScoreBoardData: any;
   matchDetails: any;
 }
 
@@ -17,6 +18,7 @@ const initialState: InitialState = {
   success: false,
   error: null,
   matchDetails: null,
+  liveScoreBoardData:null
 };
 
 const matchListSlice = createSlice({
@@ -127,7 +129,9 @@ const matchListSlice = createSlice({
           // setWinner,
           completeManual,
           tournament,
+          scoreBoard,
         } = action.payload;
+        state.liveScoreBoardData = scoreBoard?.data;
 
         state.loading = false;
         // let parsedSessionBettings = sessionBettings?.map(

@@ -7,7 +7,6 @@ import BetTable from "../../components/game/betTable";
 // import GameHeader from "../../components/game/gameHeader";
 //import ScoreCard from "../../components/game/scoreCard";
 import GameUserBets from "../../components/game/gameUserBets";
-import service from "../../service";
 import { socket, socketService } from "../../socketManager";
 import {
   getMarketAnalysis,
@@ -22,10 +21,9 @@ import {
 import { AppDispatch, RootState } from "../../store/store";
 import {
   ApiConstants,
-  Constants,
   liveStreamUrlCricket,
   matchBettingType,
-  profitLossDataForMatchConstants,
+  profitLossDataForMatchConstants
 } from "../../utils/Constants";
 import { MatchType } from "../../utils/enum";
 //import { customSortBySessionMarketName } from "../../helpers";
@@ -49,7 +47,7 @@ const Games = () => {
 
   const { id } = useParams();
 
-  const { matchDetails, success } = useSelector(
+  const { matchDetails, success,liveScoreBoardData } = useSelector(
     (state: RootState) => state.match.matchListSlice
   );
   const { breadCrumb } = useSelector(
@@ -63,9 +61,9 @@ const Games = () => {
   //   (state: RootState) => state.match.matchList
   // );
 
-  const [liveScoreBoardData, setLiveScoreBoardData] = useState(null);
+  // const [liveScoreBoardData, setLiveScoreBoardData] = useState(null);
   const [showScore, setShowScore] = useState(false);
-  const [errorCount, setErrorCount] = useState<number>(0);
+  // const [errorCount, setErrorCount] = useState<number>(0);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 1199);
 
   useEffect(() => {
@@ -264,51 +262,51 @@ const Games = () => {
     }
   }, [id]);
 
-  const getScoreBoard = async (eventId: string) => {
-    try {
-      const response: any = await service.get(
-        // `https://fairscore7.com/score/getMatchScore/${marketId}`
-        // `https://dpmatka.in/dcasino/score.php?matchId=${marketId}`
-        //`https://devscore.fairgame.club/score/getMatchScore/${marketId}`
-        `${Constants.thirdPartyLive}/cricketScore?eventId=${eventId}`
-      );
-      // {"success":false,"msg":"Not found"}
-      //console.log("response 11:", response);
-      if (response?.success !== false) {
-        setLiveScoreBoardData(response?.data);
-        setErrorCount(0);
-      }
-    } catch (e) {
-      setLiveScoreBoardData(null);
-      setErrorCount((prevCount: number) => prevCount + 1);
-    }
-  };
+  // const getScoreBoard = async (eventId: string) => {
+  //   try {
+  //     const response: any = await service.get(
+  //       // `https://fairscore7.com/score/getMatchScore/${marketId}`
+  //       // `https://dpmatka.in/dcasino/score.php?matchId=${marketId}`
+  //       //`https://devscore.fairgame.club/score/getMatchScore/${marketId}`
+  //       `${Constants.thirdPartyLive}/cricketScore?eventId=${eventId}`
+  //     );
+  //     // {"success":false,"msg":"Not found"}
+  //     //console.log("response 11:", response);
+  //     if (response?.success !== false) {
+  //       setLiveScoreBoardData(response?.data);
+  //       setErrorCount(0);
+  //     }
+  //   } catch (e) {
+  //     setLiveScoreBoardData(null);
+  //     setErrorCount((prevCount: number) => prevCount + 1);
+  //   }
+  // };
 
-  useEffect(() => {
-    try {
-      //if (matchDetails?.marketId === marketId) {
+  // useEffect(() => {
+  //   try {
+  //     //if (matchDetails?.marketId === marketId) {
 
-      if (matchDetails?.eventId) {
-        getScoreBoard(matchDetails?.eventId);
-      }
-      let intervalTime = 5000;
-      if (errorCount >= 5 && errorCount < 10) {
-        intervalTime = 60000;
-      } else if (errorCount >= 10) {
-        intervalTime = 600000;
-      }
-      const interval = setInterval(() => {
-        getScoreBoard(matchDetails?.eventId);
-      }, intervalTime);
+  //     if (matchDetails?.eventId) {
+  //       getScoreBoard(matchDetails?.eventId);
+  //     }
+  //     let intervalTime = 5000;
+  //     if (errorCount >= 5 && errorCount < 10) {
+  //       intervalTime = 60000;
+  //     } else if (errorCount >= 10) {
+  //       intervalTime = 600000;
+  //     }
+  //     const interval = setInterval(() => {
+  //       getScoreBoard(matchDetails?.eventId);
+  //     }, intervalTime);
 
-      return () => {
-        clearInterval(interval);
-        setLiveScoreBoardData(null);
-      };
-    } catch (error) {
-      console.log(error);
-    }
-  }, [matchDetails?.id, matchDetails?.eventId, errorCount]);
+  //     return () => {
+  //       clearInterval(interval);
+  //       setLiveScoreBoardData(null);
+  //     };
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }, [matchDetails?.id, matchDetails?.eventId, errorCount]);
 
   const normalizedData = matchDetails?.sessionBettings?.map((item: any) =>
     JSON.parse(item)
