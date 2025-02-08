@@ -301,7 +301,7 @@ const OtherGamesDetail = () => {
         <div className="gamePage-table">
           <Row className="no-gutters">
             <Col md={8}>
-              {["football", "tennis", "politics"]?.includes(
+              {["football", "tennis"]?.includes(
                 matchDetails?.matchType
               ) && (
                 <CustomBreadcrumb
@@ -413,7 +413,7 @@ const OtherGamesDetail = () => {
               {matchDetails?.eventId &&
                 matchDetails?.matchType !== "politics" && (
                   <LiveStreamComponent
-                    url={`${liveStreamUrl}${matchDetails?.eventId}/${
+                    url={`${liveStreamUrl}${matchDetails?.eventId}&sportid=${
                       matchDetails?.matchType === "football" ? 1 : 2
                     }`}
                   />

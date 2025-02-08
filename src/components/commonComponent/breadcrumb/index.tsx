@@ -1,10 +1,10 @@
+import moment from "moment-timezone";
 import React, { useState } from "react";
 import { Breadcrumb } from "react-bootstrap";
-import "./style.scss";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
-import moment from "moment-timezone";
 import { scoreBoardUrlMain } from "../../../utils/Constants";
+import "./style.scss";
 interface ItemObj {
   name: string;
 }
@@ -67,7 +67,7 @@ function CustomBreadcrumb({ items, style, matchType }: Props) {
               left: 0,
               top: 0,
             }}
-            src={`${scoreBoardUrlMain}${matchDetails?.eventId}/${
+            src={`${scoreBoardUrlMain}${matchDetails?.eventId}&sportid=${
               matchDetails?.matchType === "football" ? "1" : "2"
             }`}
             title="Live Stream"
