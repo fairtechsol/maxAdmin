@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef , useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 // import GameHeader from "../../components/game/gameHeader";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,11 +25,8 @@ import { AppDispatch, RootState } from "../../store/store";
 import { ApiConstants, liveStreamUrl } from "../../utils/Constants";
 import { MatchType } from "../../utils/enum";
 import isMobile from "../../utils/screenDimension";
-import axios from "axios";
-import { baseUrls } from "../../utils/Constants";
 
 const OtherGamesDetail = () => {
-  const intervalRef = useRef<number | null>(null);
   const dispatch: AppDispatch = useDispatch();
   const { pathname, state } = useLocation();
   const navigate = useNavigate();
@@ -185,7 +182,7 @@ const OtherGamesDetail = () => {
   useEffect(() => {
     try {
       if (success && socket) {
-        // socketService.match.getMatchRatesOff(id);
+        socketService.match.getMatchRatesOff(id);
         socketService.match.userSessionBetPlacedOff();
         socketService.match.userMatchBetPlacedOff();
         socketService.match.matchResultDeclaredOff();
@@ -196,7 +193,7 @@ const OtherGamesDetail = () => {
         socketService.match.updateDeleteReasonOff();
         socketService.match.sessionResultUnDeclareOff();
         socketService.match.joinMatchRoom(id, "superAdmin");
-        // socketService.match.getMatchRates(id, updateMatchDetailToRedux);
+        socketService.match.getMatchRates(id, updateMatchDetailToRedux);
         socketService.match.matchDeleteBet(handleDeleteBet);
         socketService.match.sessionDeleteBet(handleDeleteBet);
         socketService.match.userSessionBetPlaced(handleSessionBetPlaced);
@@ -221,7 +218,7 @@ const OtherGamesDetail = () => {
       if (id) {
         return () => {
           socketService.match.leaveMatchRoom(id);
-          // socketService.match.getMatchRatesOff(id);
+          socketService.match.getMatchRatesOff(id);
           socketService.match.userSessionBetPlacedOff();
           socketService.match.userMatchBetPlacedOff();
           socketService.match.matchResultDeclaredOff();
@@ -250,11 +247,11 @@ const OtherGamesDetail = () => {
             // );
             dispatch(getPlacedBets({ id: id, userId: state?.userId }));
             socketService.match.joinMatchRoom(id, "superAdmin");
-            // socketService.match.getMatchRates(id, updateMatchDetailToRedux);
+            socketService.match.getMatchRates(id, updateMatchDetailToRedux);
           }
         } else if (document.visibilityState === "hidden") {
           socketService.match.leaveMatchRoom(id);
-          // socketService.match.getMatchRatesOff(id);
+          socketService.match.getMatchRatesOff(id);
         }
       };
 
@@ -265,52 +262,12 @@ const OtherGamesDetail = () => {
           handleVisibilityChange
         );
         socketService.match.leaveMatchRoom(id);
-        // socketService.match.getMatchRatesOff(id);
+        socketService.match.getMatchRatesOff(id);
       };
     } catch (error) {
       console.log(error);
     }
   }, [id]);
-
-  const fetchLiveData = useCallback(async () => {
-    try {
-      const response = await axios.get(`${baseUrls.thirdParty}/getUserRateDetails/${id}`, {
-        // headers: {
-        //   Authorization: `Bearer ${sessionStorage.getItem("jwtExpert")}`,
-        // },
-      });
-      updateMatchDetailToRedux(response.data);
-      // console.log("Live Data:", response.data);
-    } catch (error) {
-      console.error("Error fetching live data:", error);
-    }
-  }, [id]);
-
-  const handleVisibilityChange = useCallback(() => {
-    if (document.visibilityState === "visible") {
-      if (!intervalRef.current) {
-        fetchLiveData();
-        intervalRef.current = window.setInterval(fetchLiveData, 500) as unknown as number;
-      }
-    } else if (document.visibilityState === "hidden") {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-        intervalRef.current = null;
-      }
-    }
-  }, [intervalRef, fetchLiveData]);
-
-  useEffect(() => {
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-    handleVisibilityChange();
-
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
-    };
-  }, [handleVisibilityChange]);
 
   useEffect(() => {
     if (marketId) {
@@ -432,7 +389,7 @@ const OtherGamesDetail = () => {
                 ]
                   ?.filter(
                     (item: any) =>
-                      item?.type?.toLowerCase() === item?.type?.toLowerCase() === marketToShow?.toString()?.toLowerCase()
+                      item?.type?.toLowerCase() === marketToShow?.toLowerCase()
                   )
                   .map(
                     (session, index) =>
