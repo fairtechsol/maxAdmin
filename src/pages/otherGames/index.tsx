@@ -389,7 +389,7 @@ const OtherGamesDetail = () => {
                 ]
                   ?.filter(
                     (item: any) =>
-                      item?.type?.toLowerCase() === marketToShow.toLowerCase()
+                      item?.type?.toLowerCase() === item?.type?.toLowerCase() === marketToShow?.toString()?.toLowerCase()
                   )
                   .map(
                     (session, index) =>
