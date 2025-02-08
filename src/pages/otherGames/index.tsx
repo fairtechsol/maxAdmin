@@ -344,7 +344,7 @@ const OtherGamesDetail = () => {
         <div className="gamePage-table">
           <Row className="no-gutters">
             <Col md={8}>
-              {["football", "tennis", "politics"]?.includes(
+              {["football", "tennis"]?.includes(
                 matchDetails?.matchType
               ) && (
                 <CustomBreadcrumb

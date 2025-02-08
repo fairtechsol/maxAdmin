@@ -145,7 +145,7 @@ const MenuCollapse = (props: any) => {
                                     data?.id === "politics"
                                   ) {
                                     navigate(
-                                      `/admin/other_match_detail/${menuItemChild?.eventType}/${menuItemChild?.id}/session`
+                                      `/admin/match_detail/${menuItemChild?.id}`
                                     );
                                   }
                                 }}
