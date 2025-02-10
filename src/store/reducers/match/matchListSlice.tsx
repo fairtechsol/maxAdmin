@@ -184,7 +184,7 @@ const matchListSlice = createSlice({
               ...state.matchDetails.profitLossDataMatch,
               [jobData?.betId +
               "_profitLoss_" +
-              jobData?.matchId]: JSON.stringify(jobData?.newTeamRateData),
+              jobData?.matchId]: JSON.stringify(userRedisObj),
             },
           };
         } else {
