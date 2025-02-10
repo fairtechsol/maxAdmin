@@ -410,10 +410,10 @@ const OtherGamesDetail = () => {
             </Col>
             <Col md={4}>
               {/* <GameHeader /> */}
-              {matchDetails?.eventId &&
+              {matchDetails?.tournament?.[0]?.gmid &&
                 matchDetails?.matchType !== "politics" && (
                   <LiveStreamComponent
-                    url={`${liveStreamUrl}${matchDetails?.eventId}&sportid=${
+                    url={`${liveStreamUrl}${matchDetails?.tournament?.[0]?.gmid}&sportid=${
                       matchDetails?.matchType === "football" ? 1 : 2
                     }`}
                   />
