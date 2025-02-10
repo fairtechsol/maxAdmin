@@ -17,10 +17,10 @@ export const initialiseSocket = () => {
   });
   thirdParty = io(baseUrls.thirdParty, {
     transports: [
-      // process.env.NODE_ENV === "production"
-      //   ? `${Constants.POLLING}`
-      //   :
-         `${Constants.WEBSOCKET}`,`${Constants.POLLING}`
+      process.env.NODE_ENV === "production"
+        ? `${Constants.POLLING}`
+        :
+         `${Constants.WEBSOCKET}`
     ],
     auth: {
       token: `${localStorage.getItem("jwtMaxAdmin")}`,
