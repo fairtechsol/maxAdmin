@@ -10,7 +10,7 @@ const Tournament = ({ title, box, data, detail }: any) => {
   const { marketAnalysisDetail } = useSelector(
     (state: RootState) => state.match.marketAnalysis
   );
-  const key = `${data.id}_profitLoss_${detail.id}`;
+  const key = `${data.parentBetId || data.id}_profitLoss_${detail.id}`;
 
   const profitLossJson = detail?.profitLossDataMatch?.[key];
 
@@ -104,10 +104,11 @@ const Tournament = ({ title, box, data, detail }: any) => {
                           marketAnalysisDetail?.length
                             ? Object.values(
                                 marketAnalysisDetail?.[0]?.betType?.match?.find(
-                                  (item: any) => item.betId == data?.id
+                                  (item: any) =>
+                                    item.betId == (data.parentBetId || data?.id)
                                 )?.profitLoss || {}
                               )?.[index] ?? 0
-                            : profitLossObj?.[item.id]
+                            : profitLossObj?.[item.parentRunnerId || item.id]
                         ) > 0
                           ? "color-green"
                           : "color-red"
@@ -116,13 +117,14 @@ const Tournament = ({ title, box, data, detail }: any) => {
                       {marketAnalysisDetail?.length
                         ? (Object.values(
                             marketAnalysisDetail?.[0]?.betType?.match?.find(
-                              (item: any) => item.betId == data?.id
+                              (item: any) =>
+                                item.betId == (data.parentBetId || data?.id)
                             )?.profitLoss || {}
                           )?.[index] ??
                             0) ||
                           ""
-                        : profitLossObj?.[item.id]
-                        ? profitLossObj?.[item.id]
+                        : profitLossObj?.[item.parentRunnerId || item.id]
+                        ? profitLossObj?.[item.parentRunnerId || item.id]
                         : ""}
                     </span>
                   </div>
