@@ -1519,9 +1519,9 @@ const Games = () => {
             </Col>
             <Col md={4} className="text-white">
               {/* <GameHeader /> */}
-              {matchDetails?.tournament?.[0]?.gmid && (
+              {matchDetails?.gmid && (
                 <LiveStreamComponent
-                  url={`${liveStreamUrlCricket}${matchDetails?.tournament?.[0]?.gmid}`}
+                  url={`${liveStreamUrlCricket}${matchDetails?.gmid}`}
                 />
               )}
               <div className="my-2">
