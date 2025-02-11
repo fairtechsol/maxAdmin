@@ -8,7 +8,7 @@ import BetTable from "../../components/game/betTable";
 //import ScoreCard from "../../components/game/scoreCard";
 import GameUserBets from "../../components/game/gameUserBets";
 import service from "../../service";
-import { socket, socketService } from "../../socketManager";
+import { socket, socketService, matchService } from "../../socketManager";
 import {
   getMarketAnalysis,
   getPlacedBets,
@@ -67,6 +67,13 @@ const Games = () => {
   const [showScore, setShowScore] = useState(false);
   const [errorCount, setErrorCount] = useState<number>(0);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 1199);
+
+  useEffect(() => {
+    matchService.connect();
+    return () => {
+      matchService.disconnect(); 
+    };
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {

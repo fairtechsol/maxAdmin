@@ -15,6 +15,24 @@ export const initialiseSocket = () => {
       token: `${localStorage.getItem("jwtMaxAdmin")}`,
     },
   });
+  // thirdParty = io(baseUrls.thirdParty, {
+  //   transports: [
+  //     // process.env.NODE_ENV === "production"
+  //     //   ? `${Constants.POLLING}`
+  //     //   :
+  //        `${Constants.WEBSOCKET}`,`${Constants.POLLING}`
+  //   ],
+  //   auth: {
+  //     token: `${localStorage.getItem("jwtMaxAdmin")}`,
+  //   },
+  // });
+  cardSocket = io(baseUrls.cardSocket, {
+    transports: [`${Constants.POLLING}`, `${Constants.WEBSOCKET}`,
+    ],
+  });
+};
+
+export const initialiseMatchSocket = () => {
   thirdParty = io(baseUrls.thirdParty, {
     transports: [
       // process.env.NODE_ENV === "production"
@@ -26,10 +44,6 @@ export const initialiseSocket = () => {
       token: `${localStorage.getItem("jwtMaxAdmin")}`,
     },
   });
-  cardSocket = io(baseUrls.cardSocket, {
-    transports: [`${Constants.POLLING}`, `${Constants.WEBSOCKET}`,
-    ],
-  });
 };
 
 export const socketService = {
@@ -38,7 +52,7 @@ export const socketService = {
       initialiseSocket();
       // Connect to the socket server
       socket?.connect();
-      thirdParty?.connect();
+      // thirdParty?.connect();
       cardSocket?.connect();
     } catch (e) {
       console.log(e);
@@ -47,7 +61,7 @@ export const socketService = {
   disconnect: () => {
     try {
       socket?.disconnect();
-      thirdParty?.disconnect();
+      // thirdParty?.disconnect();
       cardSocket?.disconnect();
     } catch (e) {
       console.log(e);
@@ -57,4 +71,14 @@ export const socketService = {
   auth: { ...authSocketService },
   match: { ...matchSocketService },
   card: { ...cardSocketService },
+};
+
+export const matchService = {
+  connect: () => {
+    initialiseMatchSocket();
+    thirdParty?.connect();
+  },
+  disconnect: () => {
+    thirdParty?.disconnect();
+  },
 };

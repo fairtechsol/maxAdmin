@@ -12,7 +12,7 @@ import SessionOddEven from "../../components/game/sessionOddEven";
 import BetTable from "../../components/otherGames/betTable";
 import NavComponent from "../../components/otherGames/matchList";
 import OtherUserBets from "../../components/otherGames/userBets";
-import { socket, socketService } from "../../socketManager";
+import { socket, socketService, matchService, } from "../../socketManager";
 import {
   getMarketAnalysis,
   getPlacedBets,
@@ -40,6 +40,13 @@ const OtherGamesDetail = () => {
   const { matchDetails, success } = useSelector(
     (state: RootState) => state.match.matchListSlice
   );
+
+  useEffect(() => {
+    matchService.connect();
+    return () => {
+      matchService.disconnect(); 
+    };
+  }, []);
 
   const updateMatchDetailToRedux = (event: any) => {
     try {
