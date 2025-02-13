@@ -171,7 +171,7 @@ const Games = () => {
       console.log(e);
     }
   }, [id]);
-  console.log(state);
+
   useEffect(() => {
     try {
       if (success && socket) {
