@@ -69,11 +69,13 @@ const Games = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 1199);
 
   useEffect(() => {
-    matchService.connect();
+    if (id) {
+      matchService.connect([id]);
+    }
     return () => {
       matchService.disconnect(); 
     };
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -195,7 +197,7 @@ const Games = () => {
         socketService.match.sessionResultUnDeclareOff();
         socketService.match.updateDeleteReasonOff();
 
-        socketService.match.joinMatchRoom(id, "superAdmin");
+        socketService.match.joinMatchRoom(id);
         socketService.match.getMatchRates(id, updateMatchDetailToRedux);
 
         if (!state?.userId) {
@@ -223,7 +225,7 @@ const Games = () => {
     try {
       if (id) {
         return () => {
-          socketService.match.leaveMatchRoom(id);
+          // socketService.match.leaveMatchRoom(id);
           socketService.match.getMatchRatesOff(id);
           socketService.match.userSessionBetPlacedOff();
           socketService.match.userMatchBetPlacedOff();
@@ -250,11 +252,11 @@ const Games = () => {
           if (id) {
             // dispatch(matchDetailAction(id));
             dispatch(getPlacedBets({ id: id, userId: state?.userId }));
-            socketService.match.joinMatchRoom(id, "superAdmin");
+            socketService.match.joinMatchRoom(id);
             socketService.match.getMatchRates(id, updateMatchDetailToRedux);
           }
         } else if (document.visibilityState === "hidden") {
-          socketService.match.leaveMatchRoom(id);
+          // socketService.match.leaveMatchRoom(id);
           socketService.match.getMatchRatesOff(id);
         }
       };

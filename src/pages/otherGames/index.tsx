@@ -42,11 +42,13 @@ const OtherGamesDetail = () => {
   );
 
   useEffect(() => {
-    matchService.connect();
-    return () => {
-      matchService.disconnect(); 
-    };
-  }, []);
+      if(id){
+        matchService.connect([id]);
+      }
+      return () => {
+        matchService.disconnect(); 
+      };
+    }, [id]);
 
   const updateMatchDetailToRedux = (event: any) => {
     try {
@@ -199,7 +201,7 @@ const OtherGamesDetail = () => {
         socketService.match.sessionResultOff();
         socketService.match.updateDeleteReasonOff();
         socketService.match.sessionResultUnDeclareOff();
-        socketService.match.joinMatchRoom(id, "superAdmin");
+        socketService.match.joinMatchRoom(id);
         socketService.match.getMatchRates(id, updateMatchDetailToRedux);
         socketService.match.matchDeleteBet(handleDeleteBet);
         socketService.match.sessionDeleteBet(handleDeleteBet);
@@ -224,7 +226,7 @@ const OtherGamesDetail = () => {
     try {
       if (id) {
         return () => {
-          socketService.match.leaveMatchRoom(id);
+          // socketService.match.leaveMatchRoom(id);
           socketService.match.getMatchRatesOff(id);
           socketService.match.userSessionBetPlacedOff();
           socketService.match.userMatchBetPlacedOff();
@@ -253,11 +255,11 @@ const OtherGamesDetail = () => {
             //   otherMatchDetailAction({ matchId: id, matchType: "football" })
             // );
             dispatch(getPlacedBets({ id: id, userId: state?.userId }));
-            socketService.match.joinMatchRoom(id, "superAdmin");
+            socketService.match.joinMatchRoom(id);
             socketService.match.getMatchRates(id, updateMatchDetailToRedux);
           }
         } else if (document.visibilityState === "hidden") {
-          socketService.match.leaveMatchRoom(id);
+          // socketService.match.leaveMatchRoom(id);
           socketService.match.getMatchRatesOff(id);
         }
       };
@@ -268,7 +270,7 @@ const OtherGamesDetail = () => {
           "visibilitychange",
           handleVisibilityChange
         );
-        socketService.match.leaveMatchRoom(id);
+        // socketService.match.leaveMatchRoom(id);
         socketService.match.getMatchRatesOff(id);
       };
     } catch (error) {

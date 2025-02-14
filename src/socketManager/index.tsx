@@ -32,7 +32,7 @@ export const initialiseSocket = () => {
   });
 };
 
-export const initialiseMatchSocket = () => {
+export const initialiseMatchSocket = (matchId: string[]) => {
   thirdParty = io(baseUrls.thirdParty, {
     transports: [
       // process.env.NODE_ENV === "production"
@@ -42,6 +42,10 @@ export const initialiseMatchSocket = () => {
     ],
     auth: {
       token: `${localStorage.getItem("jwtMaxAdmin")}`,
+    },
+    query: {
+      matchIdArray: matchId,
+      roleName: "superAdmin"
     },
   });
 };
@@ -74,8 +78,8 @@ export const socketService = {
 };
 
 export const matchService = {
-  connect: () => {
-    initialiseMatchSocket();
+  connect: (matchId: string[]) => {
+    initialiseMatchSocket(matchId);
     thirdParty?.connect();
   },
   disconnect: () => {
