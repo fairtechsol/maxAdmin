@@ -7,7 +7,7 @@ import BetTable from "../../components/game/betTable";
 // import GameHeader from "../../components/game/gameHeader";
 //import ScoreCard from "../../components/game/scoreCard";
 import GameUserBets from "../../components/game/gameUserBets";
-import { socket, socketService } from "../../socketManager";
+import { matchService, socket, socketService } from "../../socketManager";
 import {
   getMarketAnalysis,
   getPlacedBets,
@@ -65,6 +65,15 @@ const Games = () => {
   const [showScore, setShowScore] = useState(false);
   // const [errorCount, setErrorCount] = useState<number>(0);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 1199);
+
+  useEffect(() => {
+    if (id) {
+      matchService.connect([id]);
+    }
+    return () => {
+      matchService.disconnect(); 
+    };
+  }, [id]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -186,7 +195,7 @@ const Games = () => {
         socketService.match.sessionResultUnDeclareOff();
         socketService.match.updateDeleteReasonOff();
 
-        socketService.match.joinMatchRoom(id, "superAdmin");
+        socketService.match.joinMatchRoom(id);
         socketService.match.getMatchRates(id, updateMatchDetailToRedux);
 
         if (!state?.userId) {
@@ -214,7 +223,7 @@ const Games = () => {
     try {
       if (id) {
         return () => {
-          socketService.match.leaveMatchRoom(id);
+          // socketService.match.leaveMatchRoom(id);
           socketService.match.getMatchRatesOff(id);
           socketService.match.userSessionBetPlacedOff();
           socketService.match.userMatchBetPlacedOff();
@@ -241,11 +250,11 @@ const Games = () => {
           if (id) {
             // dispatch(matchDetailAction(id));
             dispatch(getPlacedBets({ id: id, userId: state?.userId }));
-            socketService.match.joinMatchRoom(id, "superAdmin");
+            socketService.match.joinMatchRoom(id);
             socketService.match.getMatchRates(id, updateMatchDetailToRedux);
           }
         } else if (document.visibilityState === "hidden") {
-          socketService.match.leaveMatchRoom(id);
+          // socketService.match.leaveMatchRoom(id);
           socketService.match.getMatchRatesOff(id);
         }
       };
