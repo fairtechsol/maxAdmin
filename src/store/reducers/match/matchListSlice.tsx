@@ -131,8 +131,8 @@ const matchListSlice = createSlice({
           tournament,
           scoreBoard,
         } = action.payload;
+        
         state.liveScoreBoardData = scoreBoard?.data;
-
         state.loading = false;
         // let parsedSessionBettings = sessionBettings?.map(
         //   (item: any) => {
