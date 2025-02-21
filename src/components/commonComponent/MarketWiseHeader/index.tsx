@@ -48,7 +48,7 @@ function MarketTableHeader({
   children,
   type,
   data,
-  sessionType,
+  // sessionType,
   detail,
 }: props) {
   const inlineStyle: React.CSSProperties = {
@@ -239,7 +239,7 @@ function MarketTableHeader({
 
   return (
     <>
-          {loading && <Loader />}
+      {loading && <Loader />}
       <div
         className={`tableHeader text-white d-flex f600 bg-${
           bgColor ? bgColor : "secondaryLight"
@@ -350,7 +350,7 @@ function MarketTableHeader({
         </Modal>
         <Modal
           // {...props}
-          show={showModal2}
+          show={showModal2 && !loading}
           onHide={handleClose2}
           className={`customModal ${customClass} custom-modal-width`}
         >
