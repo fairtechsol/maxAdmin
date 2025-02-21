@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react";
-import CustomTable from "../../commonComponent/table";
-import { TableConfig } from "../../../models/tableInterface";
-import { AppDispatch, RootState } from "../../../store/store";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getUserWiseExposure,
-  resetUserWiseExposureList,
-} from "../../../store/actions/user/userActions";
 import { formatToINR } from "../../../helpers";
+import { TableConfig } from "../../../models/tableInterface";
+import {
+  resetUserWiseExposureList
+} from "../../../store/actions/user/userActions";
+import { AppDispatch, RootState } from "../../../store/store";
+import CustomTable from "../../commonComponent/table";
 
 interface Column {
   id: string;
@@ -20,7 +19,7 @@ const columns: Column[] = [
 ];
 
 const EventWiseExposureModal = ({
-  userWiseExposureName,
+  // userWiseExposureName,
   setShowUserWiseMatchListModal,
   setDataForMatchList,
 }: any) => {
@@ -37,7 +36,7 @@ const EventWiseExposureModal = ({
   });
 
   useEffect(() => {
-    dispatch(getUserWiseExposure(userWiseExposureName?.id));
+    // dispatch(getUserWiseExposure(userWiseExposureName?.id));
     return () => {
       dispatch(resetUserWiseExposureList());
     };

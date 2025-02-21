@@ -18,6 +18,7 @@ import {
   dropdownSummary,
   getTotalBalance,
   getUsers,
+  getUserWiseExposure,
   handleExport,
 } from "../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../store/store";
@@ -485,6 +486,7 @@ const ListActiveInactiveUser: React.FC = () => {
                                 cursor: "pointer",
                               }}
                               onClick={() => {
+                                dispatch(getUserWiseExposure(id));
                                 setShowUserWiseExposureModal(true);
                                 setUserWiseExposureName({
                                   name: userName,
