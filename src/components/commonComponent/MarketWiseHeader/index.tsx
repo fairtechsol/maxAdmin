@@ -268,7 +268,7 @@ function MarketTableHeader({
 
         <Modal
           // {...props}
-          show={showModal1}
+          show={showModal1&& !loading}
           onHide={handleClose1}
           className={`customModal ${customClass} `}
         >
