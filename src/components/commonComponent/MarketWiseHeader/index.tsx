@@ -16,6 +16,7 @@ import "./style.scss";
 // import { RxCrossCircled } from "react-icons/rx";
 // import { IoCloseCircleOutline } from "react-icons/io5";
 import { AiOutlineCloseCircle } from "react-icons/ai";
+import Loader from "../loader";
 interface props {
   bgColor?: string;
   title: string;
@@ -238,6 +239,7 @@ function MarketTableHeader({
 
   return (
     <>
+          {loading && <Loader />}
       <div
         className={`tableHeader text-white d-flex f600 bg-${
           bgColor ? bgColor : "secondaryLight"
@@ -352,7 +354,6 @@ function MarketTableHeader({
           onHide={handleClose2}
           className={`customModal ${customClass} custom-modal-width`}
         >
-          {/* {loading && <Loader />} */}
           <Modal.Header
             closeButton
             // className={`${headerStyle ? headerStyle : ""}`}
