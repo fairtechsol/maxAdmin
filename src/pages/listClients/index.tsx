@@ -38,7 +38,7 @@ const ListClent: React.FC = () => {
   const [tableConfig, setTableConfig] = useState<TableConfig | null>({
     page: 1,
     sort: { direction: "ASC", key: null },
-    rowPerPage: 25,
+    rowPerPage: 50,
     keyword: "",
   });
   const [eventDetails, setEventDetails] = useState({

@@ -58,7 +58,7 @@ const ListActiveInactiveUser: React.FC = () => {
     userData: null,
   });
 
-  const [value, setValue] = useState<any>(25);
+  const [value, setValue] = useState<any>(50);
   const [keyword, setKeyWord] = useState<any>("");
   const [dataForMatchList, setDataForMatchList] = useState<any>({});
   const [showUserWiseExposureModal, setShowUserWiseExposureModal] = useState(
@@ -261,6 +261,7 @@ const ListActiveInactiveUser: React.FC = () => {
                   setCurrentPage(1);
                   setValue(e.target.value);
                 }}
+                value={value}
               >
                 <option value={25}>25</option>
                 <option value={50}>50</option>
