@@ -25,7 +25,7 @@ const SessionNormal = ({ title, data, detail, manual, mtype }: any) => {
   );
   const dispatch: AppDispatch = useDispatch();
   useEffect(() => {
-    const newMarketArr = [...(data?.section || []), ...(manual || [])];
+    const newMarketArr = [...(manual || []), ...(data?.section || [])];
     setMarketArr(newMarketArr);
   }, [data, manual]);
 
@@ -321,9 +321,9 @@ const SessionNormal = ({ title, data, detail, manual, mtype }: any) => {
           </div>
         </div>
       </div>
-        <CustomModal show={runnerModalShow} setShow={setRunnerModalShow}>
-          <TableRunner runAmount={runAmount} />
-        </CustomModal>
+      <CustomModal show={runnerModalShow} setShow={setRunnerModalShow}>
+        <TableRunner runAmount={runAmount} />
+      </CustomModal>
     </>
   );
 };
