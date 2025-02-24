@@ -116,7 +116,7 @@ const GameUserBets = ({ matchId }: any) => {
                           >
                             <div className="w-100 d-flex flex-row justify-content-between">
                               <div className="w-50 d-flex text-black f700 title-16">
-                                {bet?.bettingName}
+                                {bet?.bettingName||bet?.marketType}
                               </div>
                               <div className="w-50 d-flex text-black text-end">
                                 <span className="w-100">
@@ -129,7 +129,7 @@ const GameUserBets = ({ matchId }: any) => {
                             <div className="w-100 d-flex flex-row">
                               <div
                                 className="text-start text-black"
-                                style={{ width: "25%" }}
+                                style={{ width: "25%",wordWrap:"break-word" }}
                               >
                                 {bet?.user?.userName}
                               </div>
