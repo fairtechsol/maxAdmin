@@ -195,10 +195,12 @@ process.env.NODE_ENV === "production"
 
 export const liveStreamUrlCricket =
   "https://dpmatka.in/dd.php?sportId=4&eventId=";
-export const liveStreamUrl = "https://dpmatka.in/anm.php?type=video&eventId=";
+export const liveStreamUrl = "https://maxbet07.com";
+export const tvUrl = "https://serviceapi.fairgame7.com";
 export const scoreBoardUrlMain =
   "https://dpmatka.in/anm.php?type=scorecard&eventId=";
 
+  
 // const oldVideoUrl = "https://video.proexch.in/route/?id="
 // use below baseUrl for live build
 

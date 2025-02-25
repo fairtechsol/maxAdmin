@@ -21,7 +21,7 @@ import {
 import { AppDispatch, RootState } from "../../store/store";
 import {
   ApiConstants,
-  liveStreamUrlCricket,
+  liveStreamUrl,
   matchBettingType,
   profitLossDataForMatchConstants
 } from "../../utils/Constants";
@@ -39,6 +39,7 @@ import SessionNormal from "../../components/game/sessionNormal";
 import SessionOddEven from "../../components/game/sessionOddEven";
 import Tournament from "../../components/game/tournament";
 import Iframe from "../../components/iframe/iframe";
+import { getTvData } from "../../utils/tvUrlGet";
 
 const Games = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -47,7 +48,7 @@ const Games = () => {
 
   const { id } = useParams();
 
-  const { matchDetails, success,liveScoreBoardData } = useSelector(
+  const { matchDetails, success, liveScoreBoardData } = useSelector(
     (state: RootState) => state.match.matchListSlice
   );
   const { breadCrumb } = useSelector(
@@ -63,6 +64,8 @@ const Games = () => {
 
   // const [liveScoreBoardData, setLiveScoreBoardData] = useState(null);
   const [showScore, setShowScore] = useState(false);
+  const [tvData, setTvData] = useState<any>(null);
+
   // const [errorCount, setErrorCount] = useState<number>(0);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 1199);
 
@@ -71,7 +74,7 @@ const Games = () => {
       matchService.connect([id]);
     }
     return () => {
-      matchService.disconnect(); 
+      matchService.disconnect();
     };
   }, [id]);
 
@@ -343,6 +346,12 @@ const Games = () => {
       dispatch(resetMarketAnalysys());
     };
   }, []);
+
+  useEffect(() => {
+    if (matchDetails?.eventId) {
+      getTvData(matchDetails?.eventId, setTvData, matchDetails?.matchType);
+    }
+  }, [matchDetails?.id]);
 
   return (
     <div className="gamePage">
@@ -1528,9 +1537,13 @@ const Games = () => {
             </Col>
             <Col md={4} className="text-white">
               {/* <GameHeader /> */}
-              {matchDetails?.gmid && (
+              {matchDetails?.eventId && tvData?.tvData?.iframeUrl && (
                 <LiveStreamComponent
-                  url={`${liveStreamUrlCricket}${matchDetails?.gmid}`}
+                  url={
+                    process.env.NODE_ENV == "production"
+                      ? tvData?.tvData?.iframeUrl
+                      : `${liveStreamUrl}${matchDetails?.eventId}/${matchDetails?.matchType}`
+                  }
                 />
               )}
               <div className="my-2">

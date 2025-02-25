@@ -12,7 +12,7 @@ import SessionOddEven from "../../components/game/sessionOddEven";
 import BetTable from "../../components/otherGames/betTable";
 import NavComponent from "../../components/otherGames/matchList";
 import OtherUserBets from "../../components/otherGames/userBets";
-import { socket, socketService, matchService, } from "../../socketManager";
+import { matchService, socket, socketService } from "../../socketManager";
 import {
   getMarketAnalysis,
   getPlacedBets,
@@ -22,15 +22,22 @@ import {
   updatePlacedbetsDeleteReason,
 } from "../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../store/store";
-import { ApiConstants, liveStreamUrl } from "../../utils/Constants";
+import {
+  ApiConstants,
+  liveStreamUrl,
+  scoreBoardUrlMain,
+} from "../../utils/Constants";
 import { MatchType } from "../../utils/enum";
 import isMobile from "../../utils/screenDimension";
+import { getTvData } from "../../utils/tvUrlGet";
 
 const OtherGamesDetail = () => {
   const dispatch: AppDispatch = useDispatch();
   const { pathname, state } = useLocation();
   const navigate = useNavigate();
   const [marketToShow, setMarketToShow] = useState<any>("");
+  const [tvData, setTvData] = useState<any>(null);
+
   const { breadCrumb } = useSelector(
     (state: RootState) => state.match.sidebarList
   );
@@ -42,13 +49,13 @@ const OtherGamesDetail = () => {
   );
 
   useEffect(() => {
-      if(id){
-        matchService.connect([id]);
-      }
-      return () => {
-        matchService.disconnect(); 
-      };
-    }, [id]);
+    if (id) {
+      matchService.connect([id]);
+    }
+    return () => {
+      matchService.disconnect();
+    };
+  }, [id]);
 
   const updateMatchDetailToRedux = (event: any) => {
     try {
@@ -298,6 +305,12 @@ const OtherGamesDetail = () => {
     }
   }, [state]);
 
+  useEffect(() => {
+    if (matchDetails?.eventId) {
+      getTvData(matchDetails?.eventId, setTvData, matchDetails?.matchType);
+    }
+  }, [matchDetails?.id]);
+
   return (
     <div className="gamePage">
       <Container fluid>
@@ -310,14 +323,17 @@ const OtherGamesDetail = () => {
         <div className="gamePage-table">
           <Row className="no-gutters">
             <Col md={8}>
-              {["football", "tennis"]?.includes(
-                matchDetails?.matchType
-              ) && (
+              {["football", "tennis"]?.includes(matchDetails?.matchType) && (
                 <CustomBreadcrumb
                   items={[
                     { name: matchDetails?.title || breadCrumb?.matchName },
                   ]}
                   matchType={matchDetails?.matchType}
+                  url={
+                    process.env.NODE_ENV == "production"
+                      ? tvData?.scoreCard?.iframeUrl
+                      : `${scoreBoardUrlMain}${matchDetails?.eventId}/${matchDetails?.matchType}`
+                  }
                 />
               )}
               {updatedMarket
@@ -420,11 +436,14 @@ const OtherGamesDetail = () => {
             <Col md={4}>
               {/* <GameHeader /> */}
               {matchDetails?.eventId &&
+                tvData?.tvData?.iframeUrl &&
                 matchDetails?.matchType !== "politics" && (
                   <LiveStreamComponent
-                    url={`${liveStreamUrl}${matchDetails?.eventId}&sportid=${
-                      matchDetails?.matchType === "football" ? 1 : 2
-                    }`}
+                    url={
+                      process.env.NODE_ENV == "production"
+                        ? tvData?.tvData?.iframeUrl
+                        : `${liveStreamUrl}${matchDetails?.eventId}/${matchDetails?.matchType}`
+                    }
                   />
                 )}
               <OtherUserBets matchId={id} />

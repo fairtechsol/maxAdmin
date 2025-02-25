@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { Breadcrumb } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
-import { scoreBoardUrlMain } from "../../../utils/Constants";
 import "./style.scss";
 interface ItemObj {
   name: string;
@@ -13,9 +12,10 @@ interface Props {
   items: Array<ItemObj>;
   style?: React.CSSProperties;
   matchType?: string;
+  url?: string;
 }
 
-function CustomBreadcrumb({ items, style, matchType }: Props) {
+function CustomBreadcrumb({ items, style, matchType, url }: Props) {
   const [showScoreBoard, setShowScoreBoard] = useState(false);
   const { matchDetails } = useSelector(
     (state: RootState) => state.match.matchListSlice
@@ -67,9 +67,7 @@ function CustomBreadcrumb({ items, style, matchType }: Props) {
               left: 0,
               top: 0,
             }}
-            src={`${scoreBoardUrlMain}${matchDetails?.eventId}&sportid=${
-              matchDetails?.matchType === "football" ? "1" : "2"
-            }`}
+            src={url}
             title="Live Stream"
             referrerPolicy="strict-origin-when-cross-origin"
           ></iframe>
