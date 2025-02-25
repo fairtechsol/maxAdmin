@@ -307,7 +307,13 @@ const OtherGamesDetail = () => {
 
   useEffect(() => {
     if (matchDetails?.eventId) {
-      getTvData(matchDetails?.eventId, setTvData, matchDetails?.matchType);
+      getTvData(
+        matchDetails?.eventId,
+        setTvData,
+        matchDetails?.matchType,
+        true,
+        true
+      );
     }
   }, [matchDetails?.id]);
 
@@ -436,7 +442,7 @@ const OtherGamesDetail = () => {
             <Col md={4}>
               {/* <GameHeader /> */}
               {matchDetails?.eventId &&
-                tvData?.tvData?.iframeUrl &&
+                
                 matchDetails?.matchType !== "politics" && (
                   <LiveStreamComponent
                     url={
@@ -444,6 +450,9 @@ const OtherGamesDetail = () => {
                         ? tvData?.tvData?.iframeUrl
                         : `${liveStreamUrl}${matchDetails?.eventId}/${matchDetails?.matchType}`
                     }
+                    eventId={matchDetails?.eventId}
+                    matchType={matchDetails?.matchType}
+                    setTvData={setTvData}
                   />
                 )}
               <OtherUserBets matchId={id} />

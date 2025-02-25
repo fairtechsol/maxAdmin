@@ -23,7 +23,7 @@ import {
   ApiConstants,
   liveStreamUrl,
   matchBettingType,
-  profitLossDataForMatchConstants
+  profitLossDataForMatchConstants,
 } from "../../utils/Constants";
 import { MatchType } from "../../utils/enum";
 //import { customSortBySessionMarketName } from "../../helpers";
@@ -349,7 +349,12 @@ const Games = () => {
 
   useEffect(() => {
     if (matchDetails?.eventId) {
-      getTvData(matchDetails?.eventId, setTvData, matchDetails?.matchType);
+      getTvData(
+        matchDetails?.eventId,
+        setTvData,
+        matchDetails?.matchType,
+        true
+      );
     }
   }, [matchDetails?.id]);
 
@@ -1537,13 +1542,16 @@ const Games = () => {
             </Col>
             <Col md={4} className="text-white">
               {/* <GameHeader /> */}
-              {matchDetails?.eventId && tvData?.tvData?.iframeUrl && (
+              {matchDetails?.eventId && (
                 <LiveStreamComponent
                   url={
                     process.env.NODE_ENV == "production"
                       ? tvData?.tvData?.iframeUrl
                       : `${liveStreamUrl}${matchDetails?.eventId}/${matchDetails?.matchType}`
                   }
+                  eventId={matchDetails?.eventId}
+                  matchType={matchDetails?.matchType}
+                  setTvData={setTvData}
                 />
               )}
               <div className="my-2">

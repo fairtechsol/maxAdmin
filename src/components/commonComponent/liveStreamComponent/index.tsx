@@ -1,12 +1,19 @@
-import { Col, Container, Ratio, Row } from "react-bootstrap";
-import RightPanelContainer from "./RightPanelContainer";
 import { useState } from "react";
+import { Col, Container, Ratio, Row } from "react-bootstrap";
+import { getTvData } from "../../../utils/tvUrlGet";
+import RightPanelContainer from "./RightPanelContainer";
 
-const LiveStreamComponent = ({ url }: any) => {
+const LiveStreamComponent = ({ url, eventId, matchType, setTvData }: any) => {
   const [showVideo, setShowVideo] = useState<boolean>(false);
   return (
     <>
-      <RightPanelContainer title={"Live Stream"} setShowVideo={setShowVideo}>
+      <RightPanelContainer
+        title={"Live Stream"}
+        setShowVideo={(e: any) => {
+          getTvData(eventId, setTvData, matchType, true);
+          setShowVideo(e);
+        }}
+      >
         {showVideo && (
           <Container className="p-0">
             <Row className="justify-content-md-center">
