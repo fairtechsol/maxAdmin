@@ -331,7 +331,7 @@ const OtherGamesDetail = () => {
                   matchType={matchDetails?.matchType}
                   url={
                     process.env.NODE_ENV == "production"
-                      ? tvData?.scoreCard?.iframeUrl
+                      ? tvData?.scoreData?.iframeUrl
                       : `${scoreBoardUrlMain}${matchDetails?.eventId}/${matchDetails?.matchType}`
                   }
                 />
