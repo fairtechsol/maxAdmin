@@ -1,5 +1,5 @@
 import service from "../service";
-import { tvUrl } from "./constants";
+import { tvUrl } from "./Constants";
 
 export const getTvData = async (
   eventId: string,
@@ -34,7 +34,6 @@ export const getTvData = async (
       });
     }
   } catch (e) {
-    console.log("Error:", e?.message);
     setTvData(null);
   }
 };
