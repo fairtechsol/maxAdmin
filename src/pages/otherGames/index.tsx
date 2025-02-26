@@ -340,6 +340,7 @@ const OtherGamesDetail = () => {
                       ? tvData?.scoreData?.iframeUrl
                       : `${scoreBoardUrlMain}${matchDetails?.eventId}/${matchDetails?.matchType}`
                   }
+                  setTvData={setTvData}
                 />
               )}
               {updatedMarket

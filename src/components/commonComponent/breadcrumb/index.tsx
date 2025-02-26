@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Breadcrumb } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
+import { getTvData } from "../../../utils/tvUrlGet";
 import "./style.scss";
 interface ItemObj {
   name: string;
@@ -13,9 +14,16 @@ interface Props {
   style?: React.CSSProperties;
   matchType?: string;
   url?: string;
+  setTvData?: any;
 }
 
-function CustomBreadcrumb({ items, style, matchType, url }: Props) {
+function CustomBreadcrumb({
+  items,
+  style,
+  matchType,
+  url,
+  setTvData,
+}: Props) {
   const [showScoreBoard, setShowScoreBoard] = useState(false);
   const { matchDetails } = useSelector(
     (state: RootState) => state.match.matchListSlice
@@ -30,6 +38,15 @@ function CustomBreadcrumb({ items, style, matchType, url }: Props) {
         style={{ ...inlineStyle }}
         onClick={() => {
           if (matchType !== "politics") {
+            if (!showScoreBoard) {
+              getTvData(
+                matchDetails?.eventId,
+                setTvData,
+                matchType,
+                false,
+                true
+              );
+            }
             setShowScoreBoard((prev: boolean) => !prev);
           }
         }}
