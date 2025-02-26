@@ -353,6 +353,7 @@ const Games = () => {
         matchDetails?.eventId,
         setTvData,
         matchDetails?.matchType,
+        true,
         true
       );
     }

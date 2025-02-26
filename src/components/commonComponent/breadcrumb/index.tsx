@@ -17,13 +17,7 @@ interface Props {
   setTvData?: any;
 }
 
-function CustomBreadcrumb({
-  items,
-  style,
-  matchType,
-  url,
-  setTvData,
-}: Props) {
+function CustomBreadcrumb({ items, style, matchType, url, setTvData }: Props) {
   const [showScoreBoard, setShowScoreBoard] = useState(false);
   const { matchDetails } = useSelector(
     (state: RootState) => state.match.matchListSlice
@@ -46,6 +40,13 @@ function CustomBreadcrumb({
                 false,
                 true
               );
+            } else {
+              setTvData((prev: any) => {
+                return {
+                  ...prev,
+                  scoreData: null,
+                };
+              });
             }
             setShowScoreBoard((prev: boolean) => !prev);
           }

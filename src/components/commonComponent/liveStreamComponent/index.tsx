@@ -13,6 +13,14 @@ const LiveStreamComponent = ({ url, eventId, matchType, setTvData }: any) => {
           if (!showVideo) {
             getTvData(eventId, setTvData, matchType, true);
           }
+          else {
+            setTvData((prev: any) => {
+              return {
+                ...prev,
+                tvData: null,
+              };
+            });
+          }
           setShowVideo(e);
         }}
       >
