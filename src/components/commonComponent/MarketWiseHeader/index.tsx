@@ -192,7 +192,11 @@ function MarketTableHeader({
       );
     } else {
       dispatch(
-        getMarketUserBook({ id: detail?.id, type: data?.type, betId: data?.id })
+        getMarketUserBook({
+          id: detail?.id,
+          type: data?.type,
+          betId: data?.parentBetId || data?.id,
+        })
       );
     }
     setShowModal2(true);
@@ -268,7 +272,7 @@ function MarketTableHeader({
 
         <Modal
           // {...props}
-          show={showModal1&& !loading}
+          show={showModal1 && !loading}
           onHide={handleClose1}
           className={`customModal ${customClass} `}
         >
