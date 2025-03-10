@@ -190,8 +190,8 @@ export const Constants = {
 
 export const cardUrl =
 process.env.NODE_ENV === "production"
-? "https://alpha-n.qnsports.live/route/rih.php?id="
-: "https://alpha-n.qnsports.live/route/rih.php?id=";
+? "https://alpha-n.qnsports.live/route/jat.php?id="
+: "https://alpha-n.qnsports.live/route/jat.php?id=";
 
 export const liveStreamUrlCricket =
   "https://dpmatka.in/dd.php?sportId=4&eventId=";
