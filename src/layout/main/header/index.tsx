@@ -268,7 +268,7 @@ const Topbar = (props: any) => {
               >
                 Market Analysis
               </Nav.Link>
-              <TopbarDropdown
+              {/* <TopbarDropdown
                 name="Live Market"
                 options={[
                   {
@@ -312,7 +312,7 @@ const Topbar = (props: any) => {
                   },
                   { name: "Cricket Casino", link: "#16" },
                 ]}
-              />
+              /> */}
               <TopbarDropdown
                 name="Reports"
                 options={[
