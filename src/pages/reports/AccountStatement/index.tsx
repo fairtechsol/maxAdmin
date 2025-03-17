@@ -166,10 +166,10 @@ const AccountStatement = () => {
   }, []);
 
   useEffect(() => {
-    if (inputValue != "" ) {
+    if (inputValue != "") {
       debouncedInputValue(inputValue);
     }
-  }, [inputValue,selectedUser]);
+  }, [inputValue, selectedUser]);
 
   const handleSubmit = (e: any) => {
     try {
@@ -582,6 +582,7 @@ const AccountStatement = () => {
             description,
             actionByUser,
             user,
+            type,
           } = item;
           return (
             <tr key={item?.id}>
@@ -623,7 +624,9 @@ const AccountStatement = () => {
                   className="actionBtn"
                   variant="dark"
                   onClick={() => {
-                    aaccountTypeValues === "3"
+                    type === 3
+                      ? handleLiveCasinoModalOpen(item, user)
+                      : aaccountTypeValues === "3"
                       ? handleLiveCasinoModalOpen(item, user)
                       : handleClickToOpenBetModal(item, user);
                   }}
