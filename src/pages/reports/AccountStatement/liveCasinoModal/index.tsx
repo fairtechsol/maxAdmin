@@ -39,7 +39,7 @@ const LiveCasinoModal = ({
 
   return (
     <Modal
-      show={true}
+      show={liveCasinoModal}
       onHide={handleCloseLiveCasinoModal}
       size="xl"
       dialogClassName={`${
