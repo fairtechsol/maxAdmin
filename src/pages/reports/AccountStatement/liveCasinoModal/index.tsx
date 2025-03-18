@@ -9,9 +9,8 @@ import { useDispatch } from "react-redux";
 // import { transactionProviderBets } from "../../../store/actions/cards/cardDetail";
 import SelectSearch from "../../../../components/commonComponent/SelectSearch";
 import CustomButton from "../../../../components/commonComponent/button";
-import { AppDispatch } from "../../../../store/store";
 import { transactionProviderBets } from "../../../../store/actions/card/cardDetail";
-
+import { AppDispatch } from "../../../../store/store";
 
 const LiveCasinoModal = ({
   selected,
@@ -40,7 +39,7 @@ const LiveCasinoModal = ({
 
   return (
     <Modal
-      show={liveCasinoModal}
+      show={true}
       onHide={handleCloseLiveCasinoModal}
       size="xl"
       dialogClassName={`${
@@ -53,12 +52,24 @@ const LiveCasinoModal = ({
         style={{ color: "#fff", backgroundColor: "#004A25" }}
       >
         <Modal.Title className="w-100">Result</Modal.Title>
-        <button style={{color:"#fff",backgroundColor: "#004A25",border:"0px",fontSize:"22px"}} onClick={handleCloseLiveCasinoModal}>x</button>
+        <button
+          style={{
+            color: "#fff",
+            backgroundColor: "#004A25",
+            border: "0px",
+            fontSize: "22px",
+          }}
+          onClick={handleCloseLiveCasinoModal}
+        >
+          x
+        </button>
       </Modal.Header>
       <Modal.Body className={`${isMobile ? "p-0 title-12" : "title-14"}`}>
         <div className={`w-100 d-flex flex-column ${isMobile ? "mt-2" : ""}`}>
-          <div className={`w-100 d-flex flex-row justify-content-start gap-2`}>
-            <Col md={1} xs={3}>
+          <div
+            className={`w-100 d-flex flex-row justify-content-start align-items-center gap-2`}
+          >
+            <Col md={4} lg={2} xs={4}>
               <SelectSearch
                 options={liveCasinoProvider}
                 onChange={setType2}
@@ -81,7 +92,7 @@ const LiveCasinoModal = ({
             </CustomButton>
           </div>
           <div
-            className={`d-flex ${isMobile ? "mt-4" : "p-2"} overflow-auto`}
+            className={`d-flex ${isMobile ? "mt-4" : "py-2"} overflow-auto`}
             style={isMobile ? { width: "100%" } : { width: "100%" }}
           >
             <div className="w-100 d-flex flex-column">
