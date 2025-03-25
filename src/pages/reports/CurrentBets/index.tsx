@@ -218,12 +218,13 @@ const CurrentBets = () => {
               <Col md={{ span: 4 }} />
               <Col md={3} className="text-end">
                 <span>
-                  {`Total Soda: ${betList?.rows?.length
-                    } Total Amount: ${parseFloat(
-                      betList?.rows?.reduce((acc: any, match: any) => {
-                        return acc + +match?.amount;
-                      }, 0) || "0.00"
-                    ).toFixed(2)}`}
+                  {`Total Soda: ${
+                    betList?.rows?.length
+                  } Total Amount: ${parseFloat(
+                    betList?.rows?.reduce((acc: any, match: any) => {
+                      return acc + +match?.amount;
+                    }, 0) || "0.00"
+                  ).toFixed(2)}`}
                 </span>
               </Col>
             </Row>
@@ -273,15 +274,15 @@ const CurrentBets = () => {
                         >
                           {column?.id === "createdAt"
                             ? moment(_.get(item, column.id))
-                              .tz(timezone)
-                              .format("YYYY-MMM-DD h:mmA [IST]")
-                            : column?.id === "startAt"
-                              ? moment(getStartAt(item))
                                 .tz(timezone)
                                 .format("YYYY-MMM-DD h:mmA [IST]")
-                              : column?.id === "bettingName"
-                                ? item.bettingName || item.eventName
-                                : _.get(item, column.id)}
+                            : column?.id === "startAt"
+                            ? moment(getStartAt(item))
+                                .tz(timezone)
+                                .format("YYYY-MMM-DD h:mmA [IST]")
+                            : column?.id === "bettingName"
+                            ? item.bettingName || item.eventName
+                            : _.get(item, column.id)}
                         </td>
                       ))}
                     </tr>
@@ -296,7 +297,7 @@ const CurrentBets = () => {
         <Tab eventKey="tab2" title="Casino">
           {/* Render the same form and table, you can customize based on tab if necessary */}
           <Form onSubmit={(e) => handleLoad(e)} className="mt-1">
-            <Row className="mb-4 d-flex align-items-center">
+            <Row className="d-flex align-items-center">
               <Col md={3}>
                 <SelectSearch2
                   defaultValue={[selectType]}
@@ -305,6 +306,10 @@ const CurrentBets = () => {
                   value={selectType}
                   onChange={handleType}
                 />
+              </Col>
+            </Row>
+            <Row className="d-flex align-items-center">
+              <Col md={3}>
                 <SelectSearch3
                   defaultValue={[selectType2]}
                   options={options2}
@@ -313,10 +318,7 @@ const CurrentBets = () => {
                   onChange={handleType2}
                 />
               </Col>
-              <Col md={2} className="d-flex align-items-center">
-                <Form.Label className="invisible d-block mt-1">
-                  Label
-                </Form.Label>
+              <Col md={2}>
                 <Button type="submit">Load</Button>
               </Col>
             </Row>
@@ -365,13 +367,13 @@ const CurrentBets = () => {
                         >
                           {column?.id === "createdAt"
                             ? moment(_.get(item, column.id))
-                              .tz(timezone)
-                              .format("YYYY-MMM-DD h:mmA [IST]")
-                            : column?.id === "startAt"
-                              ? moment(getStartAt(item))
                                 .tz(timezone)
                                 .format("YYYY-MMM-DD h:mmA [IST]")
-                              : _.get(item, column.id)}
+                            : column?.id === "startAt"
+                            ? moment(getStartAt(item))
+                                .tz(timezone)
+                                .format("YYYY-MMM-DD h:mmA [IST]")
+                            : _.get(item, column.id)}
                         </td>
                       ))}
                     </tr>
