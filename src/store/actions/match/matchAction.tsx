@@ -255,22 +255,6 @@ export const matchDetailAction = createAsyncThunk<any, any>(
     }
   }
 );
-export const otherMatchDetailAction = createAsyncThunk<any, any>(
-  "/otherMatch/details",
-  async (requestData, thunkApi) => {
-    try {
-      const resp = await service.get(
-        `${ApiConstants.MATCH.OTHERMATCHDETAILS}${requestData?.matchId}?matchType=${requestData?.matchType}`
-      );
-      if (resp) {
-        return resp?.data;
-      }
-    } catch (error) {
-      const err = error as AxiosError;
-      return thunkApi.rejectWithValue(err.response?.status);
-    }
-  }
-);
 
 export const getPlacedBets = createAsyncThunk<any, any>(
   "/bet",

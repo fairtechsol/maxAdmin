@@ -17,7 +17,6 @@ import {
   getMarketAnalysis,
   getPlacedBets,
   matchDetailAction,
-  otherMatchDetailAction,
   updateMatchRates,
   updatePlacedbetsDeleteReason,
 } from "../../store/actions/match/matchAction";
@@ -73,9 +72,7 @@ const OtherGamesDetail = () => {
         if (gameType === "politics") {
           dispatch(matchDetailAction(id));
         } else {
-          dispatch(
-            otherMatchDetailAction({ matchId: id, matchType: gameType })
-          );
+          dispatch(matchDetailAction(id));
         }
         dispatch(getPlacedBets({ id: id, userId: state?.userId }));
       }
@@ -90,9 +87,7 @@ const OtherGamesDetail = () => {
         if (gameType === "politics") {
           dispatch(matchDetailAction(id));
         } else {
-          dispatch(
-            otherMatchDetailAction({ matchId: id, matchType: gameType })
-          );
+          dispatch(matchDetailAction(id));
         }
         dispatch(getPlacedBets({ id: id, userId: state?.userId }));
       }
@@ -106,9 +101,7 @@ const OtherGamesDetail = () => {
         if (gameType === "politics") {
           dispatch(matchDetailAction(id));
         } else {
-          dispatch(
-            otherMatchDetailAction({ matchId: id, matchType: gameType })
-          );
+          dispatch(matchDetailAction(id));
         }
         dispatch(getPlacedBets({ id: id, userId: state?.userId }));
       }
@@ -184,9 +177,7 @@ const OtherGamesDetail = () => {
         if (gameType === "politics") {
           dispatch(matchDetailAction(id));
         } else {
-          dispatch(
-            otherMatchDetailAction({ matchId: id, matchType: gameType })
-          );
+          dispatch(matchDetailAction(id));
         }
         dispatch(getPlacedBets({ id: id, userId: state?.userId }));
       }
@@ -258,15 +249,11 @@ const OtherGamesDetail = () => {
       const handleVisibilityChange = () => {
         if (document.visibilityState === "visible") {
           if (id) {
-            // dispatch(
-            //   otherMatchDetailAction({ matchId: id, matchType: "football" })
-            // );
             dispatch(getPlacedBets({ id: id, userId: state?.userId }));
             socketService.match.joinMatchRoom(id);
             socketService.match.getMatchRates(id, updateMatchDetailToRedux);
           }
         } else if (document.visibilityState === "hidden") {
-          // socketService.match.leaveMatchRoom(id);
           socketService.match.getMatchRatesOff(id);
         }
       };
@@ -443,7 +430,6 @@ const OtherGamesDetail = () => {
             <Col md={4}>
               {/* <GameHeader /> */}
               {matchDetails?.eventId &&
-                
                 matchDetails?.matchType !== "politics" && (
                   <LiveStreamComponent
                     url={

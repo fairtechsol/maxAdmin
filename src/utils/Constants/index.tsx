@@ -132,7 +132,6 @@ export const ApiConstants = {
     MATCHLIST: "/match/list",
     SEARCHLIST: "/user/searchlist",
     MATCHDETAILS: "/match/",
-    OTHERMATCHDETAILS: "/match/other/",
     CURRENTBET: "/bet",
     MARKETANALYSIS: "/match/marketAnalysis",
     MARKETWISE_USERBOOK: "/match/marketWise/userBook/",
@@ -189,9 +188,9 @@ export const Constants = {
 };
 
 export const cardUrl =
-process.env.NODE_ENV === "production"
-? "https://alpha-n.qnsports.live/route/jat.php?id="
-: "https://alpha-n.qnsports.live/route/jat.php?id=";
+  process.env.NODE_ENV === "production"
+    ? "https://alpha-n.qnsports.live/route/jat.php?id="
+    : "https://alpha-n.qnsports.live/route/jat.php?id=";
 
 export const liveStreamUrlCricket =
   "https://dpmatka.in/dd.php?sportId=4&eventId=";
@@ -200,7 +199,6 @@ export const tvUrl = "https://serviceapi.fairgame7.com";
 export const scoreBoardUrlMain =
   "https://dpmatka.in/anm.php?type=scorecard&eventId=";
 
-  
 // const oldVideoUrl = "https://video.proexch.in/route/?id="
 // use below baseUrl for live build
 
