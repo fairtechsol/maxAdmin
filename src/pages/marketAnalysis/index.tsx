@@ -34,12 +34,16 @@ const MarketAnalysis = () => {
           })
         );
       } else {
-        dispatch(getMarketAnalysis({ url: ApiConstants.MATCH.MARKETANALYSIS }));
+        setTimeout(() => {
+          dispatch(
+            getMarketAnalysis({ url: ApiConstants.MATCH.MARKETANALYSIS })
+          );
+        }, 500);
       }
     } catch (error) {
       console.log(error);
     }
-  }, [state]);
+  }, [state, dispatch]);
 
   return (
     <div className="px-3 lh-1">
