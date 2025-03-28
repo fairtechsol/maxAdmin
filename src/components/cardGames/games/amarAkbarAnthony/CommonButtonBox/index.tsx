@@ -2,14 +2,7 @@ import { BiSolidHeart } from "react-icons/bi";
 import { GiSpades } from "react-icons/gi";
 import { ImClubs, ImDiamonds } from "react-icons/im";
 
-const CommonButtonBox = ({
-  value1,
-  value2,
-  value3,
-  width,
-  lock,
-  data,
-}: any) => {
+const CommonButtonBox = ({ value1, value2, value3, width, lock }: any) => {
   return (
     <div className="commonButtonBoxContainer" style={{ width: width }}>
       <div>

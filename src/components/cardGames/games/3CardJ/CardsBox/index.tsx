@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import CommonCardImg from "../CommonCardImg";
 
-const CardBox = ({ title, odds, data, cards,cardClass, remark }: any) => {
+const CardBox = ({ title, odds, data, cards, cardClass, remark }: any) => {
   const [nat, setNat] = useState("");
 
   const arCards = cards?.ar?.split(",");
@@ -26,10 +26,8 @@ const CardBox = ({ title, odds, data, cards,cardClass, remark }: any) => {
   }, [odds?.gstatus === "0"]);
 
   return (
-    <div >
-      <div
-        className={`abjcardContainer ${cardClass}`}
-      >
+    <div>
+      <div className={`abjcardContainer ${cardClass}`}>
         <div
           style={{
             width: "20%",
@@ -88,7 +86,7 @@ const CardBox = ({ title, odds, data, cards,cardClass, remark }: any) => {
           </span>
         </div>
         <div
-        className={`${handlock()} p-3`}
+          className={`${handlock()} p-3`}
           style={{
             width: "80%",
             display: "flex",
@@ -122,7 +120,9 @@ const CardBox = ({ title, odds, data, cards,cardClass, remark }: any) => {
             nat={nat}
             title={title}
           />
-          <div className="d-flex text-end" style={{ fontSize: "12px" }}>{remark}</div>
+          <div className="d-flex text-end" style={{ fontSize: "12px" }}>
+            {remark}
+          </div>
         </div>
       </div>
     </div>
