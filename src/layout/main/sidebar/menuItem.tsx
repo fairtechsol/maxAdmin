@@ -18,7 +18,6 @@ interface Props {
 }
 
 const MenuItemChild = (props: any) => {
-
   const { data } = props;
   return (
     <Link to={`${data?.path}`} className="title-12">
@@ -27,16 +26,14 @@ const MenuItemChild = (props: any) => {
   );
 };
 
-const MenuCollapse = (props: any) => {
-  const {
-    data,
-    menuItemList,
-    setMenuItemList,
-    selectedMatchIndex,
-    onClickMenuItem,
-    selectedMatch,
-  } = props;
-
+const MenuCollapse = ({
+  data,
+  menuItemList,
+  setMenuItemList,
+  selectedMatchIndex,
+  onClickMenuItem,
+  selectedMatch,
+}: any) => {
   const navigate = useNavigate();
 
   const [selectedDate, setSelectedDate] = useState("");
