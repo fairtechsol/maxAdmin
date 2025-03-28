@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-// import GameHeader from "../../components/game/gameHeader";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import CustomBreadcrumb from "../../components/commonComponent/breadcrumb";
@@ -121,9 +120,7 @@ const OtherGamesDetail = () => {
   const handleSessionResultDeclare = (event: any) => {
     try {
       if (event?.matchId === id) {
-        // dispatch(removeRunAmount(event));
         dispatch(getPlacedBets({ id: id, userId: state?.userId }));
-        // dispatch(amountupdate(event));
       }
     } catch (error) {
       console.log(error);
@@ -132,7 +129,6 @@ const OtherGamesDetail = () => {
   const handleSessionResultUnDeclare = (event: any) => {
     try {
       if (event?.matchId === id) {
-        // dispatch(updateMaxLossForBetOnUndeclare(event));
         dispatch(getPlacedBets({ id: id, userId: state?.userId }));
       }
     } catch (error) {
@@ -143,7 +139,6 @@ const OtherGamesDetail = () => {
   function formatMarkets(matchDetail: any) {
     const formattedArray = [];
 
-    // Iterate through each type of market
     for (const marketType in matchDetail) {
       const marketValue: any = matchDetail[marketType];
       if (typeof marketValue === "object" && marketValue !== null) {
@@ -224,7 +219,6 @@ const OtherGamesDetail = () => {
     try {
       if (id) {
         return () => {
-          // socketService.match.leaveMatchRoom(id);
           socketService.match.getMatchRatesOff(id);
           socketService.match.userSessionBetPlacedOff();
           socketService.match.userMatchBetPlacedOff();
@@ -235,8 +229,6 @@ const OtherGamesDetail = () => {
           socketService.match.sessionResultOff();
           socketService.match.sessionResultUnDeclareOff();
           socketService.match.updateDeleteReasonOff();
-          // dispatch(resetUserProfitLoss());
-          // dispatch(resetBetSessionProfitLossGraph());
         };
       }
     } catch (error) {
@@ -428,7 +420,6 @@ const OtherGamesDetail = () => {
               </div>
             </Col>
             <Col md={4}>
-              {/* <GameHeader /> */}
               {matchDetails?.eventId &&
                 matchDetails?.matchType !== "politics" && (
                   <LiveStreamComponent

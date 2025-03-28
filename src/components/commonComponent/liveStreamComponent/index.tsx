@@ -12,8 +12,7 @@ const LiveStreamComponent = ({ url, eventId, matchType, setTvData }: any) => {
         setShowVideo={(e: any) => {
           if (!showVideo) {
             getTvData(eventId, setTvData, matchType, true);
-          }
-          else {
+          } else {
             setTvData((prev: any) => {
               return {
                 ...prev,

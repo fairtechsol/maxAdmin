@@ -1,6 +1,6 @@
 import React from "react";
-import "./style.scss";
 import BetStatusOverlay from "../commonComponent/betStatusOverlay";
+import "./style.scss";
 
 interface props {
   bgColor?: string;
@@ -11,7 +11,6 @@ interface props {
   onClick?: any;
   style?: React.CSSProperties;
   active?: boolean;
-  // onClick?: () => void;
 }
 function YesNoBox({
   customClass,

@@ -19,7 +19,6 @@ const Poker20ResultComponent: React.FC<Props> = ({ data }: any) => {
     <Container
       style={{
         display: "flex",
-        // flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
         padding: "20px",

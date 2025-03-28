@@ -11,8 +11,8 @@ import {
 } from "../../../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../../../store/store";
 import CustomInput from "../../../commonComponent/input";
-import ModalFooter from "../footer";
 import Loader from "../../../commonComponent/loader";
+import ModalFooter from "../footer";
 
 const initialValues: any = {
   userId: "",
@@ -97,7 +97,6 @@ const ChangeStatus = ({
                       !lockUnlockObj?.allBlocked ? "text-green" : "text-red"
                     } title-14`}
                   >
-                    {/* {!lockUnlockObj?.allBlocked ? "Active" : "InActive"} */}
                   </h3>
                 </div>
                 <div className="row">

@@ -1,17 +1,17 @@
+import { debounce } from "lodash";
+import moment from "moment-timezone";
 import { useEffect, useMemo, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import SelectSearch from "../../../components/commonComponent/SelectSearch";
 import CustomTable from "../../../components/commonComponent/table";
 import { TableConfig } from "../../../models/tableInterface";
-import { AppDispatch, RootState } from "../../../store/store";
-import { useDispatch, useSelector } from "react-redux";
 import {
   getCasinoReport,
   getCasinoReportGameList,
 } from "../../../store/actions/match/matchAction";
-import moment from "moment-timezone";
-import SelectSearch from "../../../components/commonComponent/SelectSearch";
-import { debounce } from "lodash";
 import { searchList } from "../../../store/actions/user/userActions";
+import { AppDispatch, RootState } from "../../../store/store";
 
 interface Column {
   id: string;

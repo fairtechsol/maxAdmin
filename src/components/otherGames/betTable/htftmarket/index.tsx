@@ -1,5 +1,5 @@
-import { Container, Row, Col } from "react-bootstrap";
 import { CSSProperties } from "react";
+import { Col, Container, Row } from "react-bootstrap";
 import isMobile from "../../../../utils/screenDimension";
 const HTFTMarketTable = () => {
   const data = [
@@ -16,7 +16,6 @@ const HTFTMarketTable = () => {
 
   const boxStyle = {
     display: "flex",
-    // flex: "1 1 auto",
     justifyContent: "space-between",
     alignItems: "center",
     cursor: "pointer",

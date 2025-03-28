@@ -1,22 +1,22 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Col, Container, Row, Table } from "react-bootstrap";
-import RulesModal from "../../../commonComponent/rulesModal";
-import { tprules } from "../../../../assets";
-import { RootState } from "../../../../store/store";
-import { useSelector } from "react-redux";
 import { useState } from "react";
+import { Col, Container, Row, Table } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { tprules } from "../../../../assets";
 import { handleRoundId } from "../../../../helpers";
-import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
+import { RootState } from "../../../../store/store";
 import {
   cardGamesId,
   cardGamesType,
   cardUrl,
 } from "../../../../utils/Constants";
-import Teen20Result from "./teenCard";
 import CardResultBox from "../../../commonComponent/cardResultBox";
+import RulesModal from "../../../commonComponent/rulesModal";
+import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
 import UserBets from "../../../game/userBet";
-import "./style.scss";
 import Matchodd from "./matchodd";
+import "./style.scss";
+import Teen20Result from "./teenCard";
 
 const TeentPatti2020Component = () => {
   const [show, setShow] = useState(false);
@@ -29,7 +29,7 @@ const TeentPatti2020Component = () => {
     { label: "Trio (Teen)", value: "1 To 35" },
     { label: "Straight Flush (Pakki Rown)", value: "1 To 45" },
   ];
-  
+
   return (
     <div>
       <Row>
@@ -59,7 +59,7 @@ const TeentPatti2020Component = () => {
                 }}
               >
                 <VideoFrame
-                data={dragonTigerDetail}
+                  data={dragonTigerDetail}
                   time={dragonTigerDetail?.videoInfo?.autotime}
                   result={<Teen20Result data={dragonTigerDetail?.videoInfo} />}
                   id={`${cardUrl}${cardGamesId.teen20}`}
@@ -67,13 +67,18 @@ const TeentPatti2020Component = () => {
               </div>
             </div>
 
-            <div
-              className="w-100 d-flex flex-row mt-2"
-              style={{ gap: "10px" }}
-            >
-             <Matchodd data={dragonTigerDetail} odds={dragonTigerDetail?.playerA} name={"Player A"}/>
-             <div style={{width:"4px",backgroundColor:"#000"}}></div>
-             <Matchodd data={dragonTigerDetail} odds={dragonTigerDetail?.playerB} name={"Player B"}/>
+            <div className="w-100 d-flex flex-row mt-2" style={{ gap: "10px" }}>
+              <Matchodd
+                data={dragonTigerDetail}
+                odds={dragonTigerDetail?.playerA}
+                name={"Player A"}
+              />
+              <div style={{ width: "4px", backgroundColor: "#000" }}></div>
+              <Matchodd
+                data={dragonTigerDetail}
+                odds={dragonTigerDetail?.playerB}
+                name={"Player B"}
+              />
             </div>
             <div style={{ width: "100%", marginTop: "10px" }}>
               <CardResultBox
@@ -91,7 +96,14 @@ const TeentPatti2020Component = () => {
                 <UserBets matchId={dragonTigerDetail?.id} />
               </Col>
               <Col>
-                <div className="d-flex justify-content-start align-items-center mt-2" style={{ position: "relative",height:"42px",backgroundColor:"#ffc742b3" }}>
+                <div
+                  className="d-flex justify-content-start align-items-center mt-2"
+                  style={{
+                    position: "relative",
+                    height: "42px",
+                    backgroundColor: "#ffc742b3",
+                  }}
+                >
                   <span className="title-14 f-bold text-white ms-1">Rules</span>
                 </div>
                 <div className="table-responsive rules-table p-2">

@@ -1,9 +1,9 @@
-import { Row, Col } from "react-bootstrap";
-import "./style.scss";
+import { Col, Row } from "react-bootstrap";
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
+import "./style.scss";
 
 const Abj2Result: any = ({ data }: any) => {
   const elements = data?.cards?.split(",");
@@ -16,7 +16,6 @@ const Abj2Result: any = ({ data }: any) => {
     (item: any, index: number) => index % 2 !== 0 && item !== "1"
   );
 
-  // console.log(data , "dws")
   const sliderSettings = (length: any, arrow: any) => ({
     infinite: false,
     speed: 500,

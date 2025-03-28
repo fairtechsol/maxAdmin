@@ -58,13 +58,6 @@ const ListClientModals = ({
       setShow={setShow}
       title={modalTitle?.[id]?.name}
       titleStyle="fw-normal title-22"
-      // footer={
-      //   <ModalFooter
-      //     clickHandler={() => {
-      //       setShow(false);
-      //     }}
-      //   />
-      // }
     >
       <ModalComponent
         userData={userData}

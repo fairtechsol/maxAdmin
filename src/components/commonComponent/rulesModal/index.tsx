@@ -1,15 +1,17 @@
 import Modal from "react-bootstrap/Modal";
 
 const RulesModal = ({ show, setShow, rule }: any) => {
-
   const handleClose = () => setShow(false);
   return (
     <div>
-      <Modal show={show} onHide={handleClose} >
-        <Modal.Header closeButton style={{backgroundColor:"#004a25",color:"#fff"}}>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header
+          closeButton
+          style={{ backgroundColor: "#004a25", color: "#fff" }}
+        >
           <Modal.Title>Rules</Modal.Title>
         </Modal.Header>
-        <Modal.Body style={{padding:"0px"}}>
+        <Modal.Body style={{ padding: "0px" }}>
           <img src={rule} width={"100%"} height={"550px"} />
         </Modal.Body>
       </Modal>

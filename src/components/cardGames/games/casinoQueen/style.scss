@@ -20,7 +20,6 @@
 .casino-table-box-q-desktop {
   width: 100%;
   display: flex;
-  // flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-start;
   flex-direction: row;
@@ -65,23 +64,23 @@
   height: 48px;
 }
 .casino-odds-wrapper {
-  position: relative; 
+  position: relative;
   display: flex;
   width: 100%;
 }
-.queenresultModal{
+.queenresultModal {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   width: 100%;
 }
-.queenresultCardContainer{
+.queenresultCardContainer {
   width: 100%;
   display: block;
   text-align: center;
-  border-bottom: 1px solid rgba(0, 0, 0, .1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   padding-top: 1rem;
-  padding-bottom: 1rem
+  padding-bottom: 1rem;
 }
 .casino-odds-box-q {
   display: flex;
@@ -91,7 +90,6 @@
   justify-content: center;
   padding: 5px 0;
   font-weight: bold;
-  // border-left: 1px solid #c7c8ca;
   flex-direction: column-reverse;
   cursor: pointer;
   min-height: 46px;

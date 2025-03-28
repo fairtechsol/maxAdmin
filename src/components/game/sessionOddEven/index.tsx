@@ -104,12 +104,7 @@ const SessionOddEven = ({ title, data, detail, marketAnalysisDetail }: any) => {
                           : ""}
                       </span>
                     </div>
-                    <div
-                      className="sessionRateBoxContainer rateBoxWidthNormal"
-                      // style={{
-                      //   width: isLap ? "180px" : !isMobile ? "240px" : "",
-                      // }}
-                    >
+                    <div className="sessionRateBoxContainer rateBoxWidthNormal">
                       {(item?.activeStatus != "live" ||
                         item?.GameStatus != "") && (
                         <div className="suspended-overlayRates">

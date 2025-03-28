@@ -9,7 +9,6 @@ const ProfitLossModal = () => {
   const [currentPage, setCurrentPage] = useState(1);
   useEffect(() => {}, [tableConfig]);
   const columns: Column[] = [
-    // { id: "sr", label: "sr" },
     { id: "Sr", label: "	Sr.No" },
     { id: "TranDate", label: "TranDate" },
     { id: "Credit", label: "Credit" },

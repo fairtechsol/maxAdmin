@@ -1,19 +1,10 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { useSelector } from "react-redux";
-import Dragon20Result from "./dragonCard";
-import "./style.scss";
-import { ImClubs } from "react-icons/im";
-import { GiSpades } from "react-icons/gi";
 import { BiSolidHeart } from "react-icons/bi";
-import { ImDiamonds } from "react-icons/im";
-import { RootState } from "../../../../store/store";
-import {
-  cardGamesId,
-  cardGamesType,
-  cardUrl,
-} from "../../../../utils/Constants";
+import { GiSpades } from "react-icons/gi";
+import { ImClubs, ImDiamonds } from "react-icons/im";
+import { useSelector } from "react-redux";
 import {
   A,
   dtrules,
@@ -31,10 +22,18 @@ import {
   two,
 } from "../../../../assets";
 import { formatNumber, handleRoundId } from "../../../../helpers";
-import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
+import { RootState } from "../../../../store/store";
+import {
+  cardGamesId,
+  cardGamesType,
+  cardUrl,
+} from "../../../../utils/Constants";
 import CardResultBox from "../../../commonComponent/cardResultBox";
 import RulesModal from "../../../commonComponent/rulesModal";
+import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
 import UserBets from "../../../game/userBet";
+import Dragon20Result from "./dragonCard";
+import "./style.scss";
 
 const cardImg = (type: any) => {
   return <img src={type} width={25} />;
@@ -165,7 +164,6 @@ const DragonTigerDesktop = () => {
     }
   };
 
-
   useEffect(() => {
     const mergedArray = data1?.map((item1: any) => {
       const matchDragon = dragonTigerDetail?.dragonData?.find((item2: any) =>
@@ -233,7 +231,7 @@ const DragonTigerDesktop = () => {
             </div>
             <div style={{ width: "100%", backgroundColor: "#000" }}>
               <VideoFrame
-               data={dragonTigerDetail}
+                data={dragonTigerDetail}
                 time={dragonTigerDetail?.videoInfo?.autotime}
                 result={<Dragon20Result data={dragonTigerDetail?.videoInfo} />}
                 id={`${cardUrl}${cardGamesId.dragonTigerLion}`}
@@ -275,22 +273,6 @@ const DragonTigerDesktop = () => {
                   >
                     <div className="dtlTitle-dtl ">
                       {item?.title}
-                      {/* <div style={{ width: "45%", textAlign: "end" }}>
-                        <span className="minmaxi">
-                          <IoInformationCircle
-                            color="#ffc742"
-                            onClick={() => handleModalOpen(index)}
-                          />
-                          {openModalIndex === index && (
-                            <SmoothDropdownModal
-                              min={item?.dragon?.min}
-                              max={item?.dragon?.max}
-                              show={openModalIndex === index}
-                              setShow={() => setOpenModalIndex(null)}
-                            />
-                          )}
-                        </span>
-                      </div> */}
                       <div className="w-50 d-flex flex-row justify-content-end align-items-center position-relative">
                         <div
                           onClick={() => toggleDiv(`demo${index}`)}

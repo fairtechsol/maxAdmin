@@ -1,11 +1,4 @@
-const PlayerButton = ({
-  value1,
-  value2,
-  value3,
-  value4,
-  width,
-  lock,
-}: any) => {
+const PlayerButton = ({ value1, value2, value3, value4, width, lock }: any) => {
   return (
     <div className="commonButtonBoxContainer" style={{ width: width }}>
       <div>
@@ -17,20 +10,30 @@ const PlayerButton = ({
         <div
           style={{
             width: "100%",
-            // backgroundColor: "#72bbef",
             display: "flex",
             flexDirection: "row",
-            gap: "10px"
+            gap: "10px",
           }}
         >
-          <div  className={lock ? "suspended teenPatti-table-item-aaa back-BackGround" : `teenPatti-table-item-aaa back-BackGround`} style={{ width: "50%" }}>
+          <div
+            className={
+              lock
+                ? "suspended teenPatti-table-item-aaa back-BackGround"
+                : `teenPatti-table-item-aaa back-BackGround`
+            }
+            style={{ width: "50%" }}
+          >
             <span className="f18-b my-2 fw-bold">
               {parseFloat(value1).toFixed(2)}
             </span>
             <span className="f10-b">{}</span>
           </div>
           <div
-            className={lock ? "suspended teenPatti-table-item-aaa lay-BackGround" : `teenPatti-table-item-aaa lay-BackGround`}
+            className={
+              lock
+                ? "suspended teenPatti-table-item-aaa lay-BackGround"
+                : `teenPatti-table-item-aaa lay-BackGround`
+            }
             style={{ width: "50%" }}
           >
             <span className="f18-b my-2 fw-bold">

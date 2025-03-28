@@ -1,18 +1,12 @@
 import { useState } from "react";
-import { Col, Row, Tab, Table, Button } from "react-bootstrap";
-// import CustomModal from "../../commonComponent/modal";
+import { Button, Col, Row, Tab, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import CustomModal from "../../commonComponent/modal";
-// import UserBetModalForm from "../../game/userBet/modal/form";
-// import UserBetModalTable from "../../game/userBet/modal";
 import moment from "moment-timezone";
-import DeleteBetOverlay from "../../commonComponent/deleteBetRow";
 import { Nav } from "react-bootstrap";
+import DeleteBetOverlay from "../../commonComponent/deleteBetRow";
 import UserBetModalForm2 from "../../game/userBet/modal/form2";
-// import UserBetModalForm from "../../game/userBet/modal/form";
-// import UserBetModalTable from "../../game/userBet/modal";
-// import "../../otherGames/style.scss";
 const OtherUserBets = ({ matchId }: any) => {
   const [showModal, setShowModal] = useState(false);
   const { placedBets, morePlacedBets } = useSelector(
@@ -50,7 +44,6 @@ const OtherUserBets = ({ matchId }: any) => {
             <Nav
               activeKey={activeTab}
               onSelect={handleSelect}
-              // variant="pills"
               className="flex-row userBets-headerLeft-tabs"
             >
               <Nav.Item>
@@ -180,18 +173,7 @@ const OtherUserBets = ({ matchId }: any) => {
                         <th>Gametype</th>
                       </tr>
                     </thead>
-                    <tbody className="bg-primary">
-                      {/* {UsreBetsData?.map((item) => ( */}
-                      {/* <tr>
-                      <td>UAccount</td>
-                      <td>India</td>
-                      <td>35</td>
-                      <td>100</td>
-                      <td>2023-11-14 15:15:08</td>
-                      <td>Match1</td>
-                    </tr> */}
-                      {/* ))} */}
-                    </tbody>
+                    <tbody className="bg-primary"></tbody>
                   </Table>
                 </Tab.Pane>
               </Tab.Content>
@@ -210,7 +192,6 @@ const OtherUserBets = ({ matchId }: any) => {
           matchId={matchId}
           morePlacedBets={morePlacedBets}
         />
-        {/* <UserBetModalTable list={morePlacedBets} /> */}
       </CustomModal>
     </div>
   );

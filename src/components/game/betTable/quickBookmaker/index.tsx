@@ -17,7 +17,7 @@ function QuickBookmakerTable({
   data,
   backLayCount = 6,
   matchDetails,
-  teamYesNo
+  teamYesNo,
 }: QuickBookmakerTableProps) {
   return (
     <div
@@ -99,7 +99,6 @@ function QuickBookmakerTable({
                         <BackLayBox
                           style={{ width: "60px" }}
                           key={index}
-                          // customClass={`bookmaker-bet-place W-100`}
                           bgColor={`blue${index + 1}`}
                           rate={data[`backTeam${item}`] - 2 + index}
                           active={
@@ -113,8 +112,6 @@ function QuickBookmakerTable({
                         <BackLayBox
                           style={{ width: "60px" }}
                           key={index}
-                          //     customClass={`bookmaker-bet-place  ""
-                          // `}
                           bgColor={`red${index + 1}`}
                           rate={data[`layTeam${item}`] + index}
                           active={
@@ -124,7 +121,6 @@ function QuickBookmakerTable({
                       ))}
                   </BetStatusOverlay>
                 </td>
-
                 <td colSpan={2} style={{ borderLeft: 0 }}></td>
               </tr>
             ))}

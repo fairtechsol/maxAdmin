@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-//import SelectSearch from "../../../components/commonComponent/SelectSearch";
 import _ from "lodash";
 import moment from "moment-timezone";
 import { Tab, Tabs } from "react-bootstrap";
@@ -21,7 +20,6 @@ interface Column {
   label: string;
 }
 
-// Example usage
 const columns: Column[] = [
   { id: "eventType", label: "Event Type" },
   { id: "eventName", label: "Event Name" },
@@ -31,12 +29,10 @@ const columns: Column[] = [
   { id: "odds", label: "User Rate" },
   { id: "amount", label: "Amount" },
   { id: "createdAt", label: "Place Date" },
-  // { id: "startAt", label: "Match Date" }, //eventName
 ];
 
 const options = [
   { value: "PENDING", label: "Matched" },
-  // { value: "UNMATCHED", label: "UnMatched" },
   { value: "DELETED", label: "Deleted" },
 ];
 
@@ -293,9 +289,7 @@ const CurrentBets = () => {
           </CustomTable>
         </Tab>
 
-        {/* Tab 2 */}
         <Tab eventKey="tab2" title="Casino">
-          {/* Render the same form and table, you can customize based on tab if necessary */}
           <Form onSubmit={(e) => handleLoad(e)} className="mt-1">
             <Row className="d-flex align-items-center">
               <Col md={3}>

@@ -3,8 +3,6 @@ import { Navigate } from "react-router-dom";
 import MainLayout from "../layout/main";
 import Loadable from "../utils/loadable";
 
-// ==============================|| Main ROUTING ||============================== //
-
 const Game = Loadable(lazy(() => import("../pages/games")));
 const OtherGamesDetail = Loadable(lazy(() => import("../pages/otherGames")));
 const ListClients = Loadable(lazy(() => import("../pages/listClients")));
@@ -105,9 +103,7 @@ const CasinoQueen = Loadable(
 const BallByBall = Loadable(
   lazy(() => import("../pages/cardGames/games/ballByBall"))
 );
-// const MultiLogin = Loadable(
-//   lazy(() => import("../pages/multiLogin/index"))
-// );
+
 const MainRoutes = {
   path: "/admin",
   element: <MainLayout />,
@@ -156,10 +152,6 @@ const MainRoutes = {
       path: "Secure-auth",
       element: <SecureAuth />,
     },
-    // {
-    //   path: "multiLogin",
-    //   element: <MultiLogin />,
-    // },
     {
       path: "active-inactive-user-list/:id",
       element: <ListActiveInactiveUser />,
@@ -173,44 +165,44 @@ const MainRoutes = {
       element: <CardList3 />,
     },
     {
-      path: "casinoDetail/teenPatti20", //
+      path: "casinoDetail/teenPatti20",
       element: <TeenPatti2020 />,
     },
     {
-      path: "casinoDetail/lucky7-A", //
+      path: "casinoDetail/lucky7-A",
       element: <Lucky7 />,
     },
     {
-      path: "casinoDetail/32cards-A", //
+      path: "casinoDetail/32cards-A",
       element: <Card32A />,
     },
     {
-      path: "casinoDetail/abj2", //
+      path: "casinoDetail/abj2",
       element: <AndarBahar2 />,
     },
     {
       path: "casinoDetail/dt20",
-      element: <DragonTiger2020 />, //
+      element: <DragonTiger2020 />,
     },
     {
       path: "casinoDetail/dt202",
-      element: <DragonTiger20Second />, //
+      element: <DragonTiger20Second />,
     },
     {
       path: "casinoDetail/dtl20",
-      element: <DragonTigerLion />, //
+      element: <DragonTigerLion />,
     },
     {
       path: "casinoDetail/dt6",
-      element: <DragonTigerOneDay />, //
+      element: <DragonTigerOneDay />,
     },
     {
-      path: "casinoDetail/lucky7eu", //
-      element: <Lucky7B />, //
+      path: "casinoDetail/lucky7eu",
+      element: <Lucky7B />,
     },
     {
       path: "casinoDetail/teen",
-      element: <TeenPatti1D />, //
+      element: <TeenPatti1D />,
     },
     {
       path: "casinoDetail/teen8",

@@ -40,7 +40,6 @@ const Sidebar = (props: any) => {
     }
   }, [competitionDates, selectedMatch]);
 
-
   return (
     <>
       <div className="sidebarBox bg-light">

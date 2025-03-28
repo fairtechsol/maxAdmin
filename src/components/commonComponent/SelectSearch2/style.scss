@@ -1,44 +1,38 @@
-/* Hide the default radio button */
 .custom-control-input {
   position: absolute;
   opacity: 0;
   z-index: -1;
 }
 
-/* Custom circle for the radio button */
 .custom-control-label::before {
   content: "";
   display: inline-block;
   position: relative;
   width: 20px;
   height: 20px;
-  margin-right: 10px; /* Space between radio and label */
+  margin-right: 10px;
   border-radius: 50%;
-  border: 2px solid #007bff; /* Blue border */
+  border: 2px solid #007bff;
   background-color: transparent;
   transition: background-color 0.2s ease;
-  top: 2px; /* Aligns the circle properly with text */
+  top: 2px;
 }
 
-/* This ensures a blue dot appears inside the radio button when checked */
 .custom-control-input:checked ~ .custom-control-label::before {
-  background-color: #007bff; /* Blue dot */
+  background-color: #007bff;
   border-color: #007bff;
-  box-shadow: inset 0 0 0 6px white; /* Create inner white space for the dot */
+  box-shadow: inset 0 0 0 6px white;
 }
-
-/* Optional: styling the label for better alignment */
 .custom-control-label {
   position: relative;
   cursor: pointer;
-  padding-left: 30px; /* Spacing for the radio button */
+  padding-left: 30px;
 }
 
 .custom-radio-group {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
-  
 }
 
 .custom-radio {
@@ -94,4 +88,3 @@
   border-radius: 50%;
   background: rgb(19, 2, 82);
 }
-

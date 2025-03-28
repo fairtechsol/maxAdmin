@@ -3,7 +3,6 @@ import { Container } from "react-bootstrap";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
 import ResultBetList from "../../../commonComponent/resultBetList";
 import "./style.scss";
-//import Winner from "../../../commonComponent/trophyWinner";
 
 interface Props {
   data: {
@@ -19,16 +18,7 @@ interface Props {
 }
 
 const CasinoMeterResultComponent: React.FC<Props> = ({ data }) => {
-  //const resultCards = data?.result?.cards?.split(",");
-  //const playerIds = data?.result?.sid?.split(",");
-
-  // const players = resultCards?.map((card, index) => ({
-  //   card,
-  //   id: playerIds[index],
-  // }));
-
   const cards = data?.result?.cards?.split(",");
-
   const lowCards: string[] = [];
   const highCards: string[] = [];
 

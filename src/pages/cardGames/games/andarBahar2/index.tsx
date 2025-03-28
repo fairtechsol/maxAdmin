@@ -40,7 +40,9 @@ const Abj2 = () => {
   useEffect(() => {
     try {
       if (dragonTigerDetail?.id) {
-        dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
+        dispatch(
+          getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId })
+        );
       }
     } catch (e) {
       console.error(e);
@@ -59,7 +61,9 @@ const Abj2 = () => {
   };
   const handleCardResult = (event: any) => {
     if (event?.matchId === dragonTigerDetail?.id) {
-      dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
+      dispatch(
+        getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId })
+      );
     }
   };
 

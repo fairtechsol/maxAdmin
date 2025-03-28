@@ -20,8 +20,7 @@ const CardBox = ({ cardData, data }: any) => {
         </div>
         <div className="title-12" style={{ textAlign: "end" }}>
           <span>R:</span>
-          <span>{min}</span>-
-          <span>{formatNumber(max)}</span>
+          <span>{min}</span>-<span>{formatNumber(max)}</span>
         </div>
       </div>
     </>

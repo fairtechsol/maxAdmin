@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import CustomModal from "../modal";
-import { AppDispatch, RootState } from "../../../store/store";
 import { useDispatch, useSelector } from "react-redux";
-import { getSearchClientList, resetSearchUserList } from "../../../store/actions/user/userActions";
 import { toast } from "react-toastify";
 import service from "../../../service";
+import { getSearchClientList, resetSearchUserList } from "../../../store/actions/user/userActions";
+import { AppDispatch, RootState } from "../../../store/store";
 import { ApiConstants } from "../../../utils/Constants";
+import CustomModal from "../modal";
 
 const UserLockModal = ({
   show,

@@ -1,6 +1,5 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-//import { FaTrophy } from "react-icons/fa";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
 import ResultBetList from "../../../commonComponent/resultBetList";
 import "./style.scss";
@@ -25,19 +24,6 @@ const TeenOpenResultComponent: React.FC<Props> = ({ data }: any) => {
   resultCards?.forEach((card: any, index: any) => {
     players[index % 9].push(card);
   });
-
-  // const layout = [
-  //   { index: 0, label: "Player 1" },
-  //   { index: 8, label: "Dealer" },
-  //   { index: 7, label: "Player 8" },
-  //   { index: 1, label: "Player 2" },
-  //   { index: -1, label: "gap" },
-  //   { index: 6, label: "Player 7" },
-  //   { index: 2, label: "Player 3" },
-  //   { index: 3, label: "Player 4" },
-  //   { index: 4, label: "Player 5" },
-  //   { index: 5, label: "Player 6" },
-  // ];
 
   const renderRow = () => (
     <div className="d-flex justify-content-between mb-3">

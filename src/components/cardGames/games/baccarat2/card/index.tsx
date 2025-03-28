@@ -16,21 +16,17 @@ export const PlayingCard: React.FC<PlayingCardProps> = ({
     <div
       style={{
         borderRadius: "2px",
-        // border: "1px solid #fdf800",
-        // lineHeight: isMobile ?  "2" :"0.8",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
         backgroundSize: "100%",
         WebkitBackgroundSize: "cover",
-        // padding: isMobile ?  "0px" :"8px",
         background: "white",
         height: "24px",
         width: "20px",
         padding: "0px",
         zIndex: "0",
-        // border:"1px solid yellow",
       }}
     >
       {!lock ? (

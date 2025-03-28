@@ -12,7 +12,6 @@
   height: -moz-max-content;
   height: max-content;
   margin: 100px 0 0 0;
- 
 }
 
 .auth-box-form {
@@ -27,7 +26,8 @@
   font-size: 1.8rem;
 }
 
-.auth-main .auth-title:before, .auth-main .auth-title:after {
+.auth-main .auth-title:before,
+.auth-main .auth-title:after {
   content: "";
   height: 1px;
   position: absolute;
@@ -42,18 +42,18 @@
 
 .auth-main .auth-title:after {
   right: 0;
-}/*# sourceMappingURL=style.css.map */
+} /*# sourceMappingURL=style.css.map */
 
 @media (max-width: 576px) {
-    .auth-main {
-      padding: 0 15px; /* Add padding for smaller screens */
-    }
-  
-    .auth-box {
-      margin: 50px 0 0 0;
-    }
-  
-    .auth-box-form {
-      padding: 25px;
-    }
+  .auth-main {
+    padding: 0 15px; /* Add padding for smaller screens */
   }
+
+  .auth-box {
+    margin: 50px 0 0 0;
+  }
+
+  .auth-box-form {
+    padding: 25px;
+  }
+}

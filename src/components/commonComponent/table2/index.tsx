@@ -1,4 +1,3 @@
-// CustomTable.tsx
 import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { Column } from "../../../models/tableInterface";
@@ -11,7 +10,6 @@ interface SortConfig {
   key: string | null | number;
   direction: "asc" | "desc";
 }
-
 interface CustomTableProps {
   columns: Column[];
   customClass?: string;
@@ -28,7 +26,7 @@ interface CustomTableProps {
   striped?: boolean;
   paginationCount?: boolean;
   width?: any;
-  placeHolder?:any;
+  placeHolder?: any;
 }
 
 const CustomTable2: React.FC<CustomTableProps> = ({
@@ -48,7 +46,6 @@ const CustomTable2: React.FC<CustomTableProps> = ({
   placeHolder,
   ...props
 }) => {
-  // State for sorting configuration and current page
   const [sortConfig, setSortConfig] = useState<SortConfig>({
     key: null,
     direction: "asc",
@@ -56,7 +53,6 @@ const CustomTable2: React.FC<CustomTableProps> = ({
   const [currentPage, setCurrentPage] = useState(1);
   const [rowPerPage, setRowPerPage] = useState(10);
 
-  // Handle column click to change the sorting configuration
   const handleSort = (key: string | number) => {
     setSortConfig((prevSortConfig) => ({
       key,
@@ -67,10 +63,8 @@ const CustomTable2: React.FC<CustomTableProps> = ({
     }));
   };
 
-  // Handle pagination item click to set the current page
   const onPageChange = (pageNumber: number) => setCurrentPage(pageNumber);
 
-  //   for api fetching when sort or page change
   useEffect(() => {
     setTableConfig((prev: any) => {
       return {
@@ -80,7 +74,6 @@ const CustomTable2: React.FC<CustomTableProps> = ({
         rowPerPage: rowPerPage,
       };
     });
-    // alert(tHeadTheme);
   }, [currentPage, sortConfig, rowPerPage]);
 
   useEffect(() => {
@@ -104,22 +97,20 @@ const CustomTable2: React.FC<CustomTableProps> = ({
         paginationCount={paginationCount}
         placeHolder={placeHolder}
       />
-      {/* Table for displaying data */}
-      <div className="w-100" >
+      <div className="w-100">
         <Table {...props} responsive style={width ? { width: width } : {}}>
-          <thead style={{border:"1px solid #aaa"}}>
+          <thead style={{ border: "1px solid #aaa" }}>
             <tr>
-              {/* Table header with sorting icons */}
               {columns.map((column, index) => (
                 <th
-                  className={`${tHeadTheme} text-start ${
-                   "title-16 f600"
-                  }`}
+                  className={`${tHeadTheme} text-start ${"title-16 f600"}`}
                   key={index}
-                  style={{borderRight:"1px solid #aaa",backgroundColor:"#eee"}}
+                  style={{
+                    borderRight: "1px solid #aaa",
+                    backgroundColor: "#eee",
+                  }}
                 >
                   {column.label}
-                  {/* Display sorting icons based on the sorting configuration */}
                   {isSort && (
                     <SortIcon
                       isActive={sortConfig.key === column.id}
@@ -132,17 +123,11 @@ const CustomTable2: React.FC<CustomTableProps> = ({
               ))}
             </tr>
           </thead>
-          <tbody className="text-center" style={{border:"1px solid #aaa"}}>
-            {/* Table body with sorted data */}
+          <tbody className="text-center" style={{ border: "1px solid #aaa" }}>
             {itemCount === 0 ? (
               <tr className="text-center ">
-                <td
-                  className={`${tBodyTheme ?? ""}`}
-                  colSpan={columns?.length}
-                >
-                  <p className={`${ "title-14"}`}>
-                    No data available in table
-                  </p>
+                <td className={`${tBodyTheme ?? ""}`} colSpan={columns?.length}>
+                  <p className={`${"title-14"}`}>No data available in table</p>
                 </td>
               </tr>
             ) : (
@@ -151,7 +136,6 @@ const CustomTable2: React.FC<CustomTableProps> = ({
           </tbody>
         </Table>
       </div>
-      {/* Pagination component for navigating through pages */}
       {isPagination && (
         <PaginationComponent
           currentPage={currentPage}

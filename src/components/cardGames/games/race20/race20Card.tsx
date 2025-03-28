@@ -1,11 +1,9 @@
-import React from "react";
 import { Container } from "react-bootstrap";
-import "./style.scss";
-import { ImClubs } from "react-icons/im";
-import { GiSpades } from "react-icons/gi";
 import { BiSolidHeart } from "react-icons/bi";
-import { ImDiamonds } from "react-icons/im";
+import { GiSpades } from "react-icons/gi";
+import { ImClubs, ImDiamonds } from "react-icons/im";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
+import "./style.scss";
 
 const Race20Result: any = ({ data }: any) => {
   const elements = data?.desc?.split(",");

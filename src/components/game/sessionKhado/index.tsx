@@ -151,9 +151,6 @@ const SessionKhado = ({
                   </div>
                   <div
                     className="sessionRateBoxContainer rateBoxWidthKhado"
-                    // style={{
-                    //   width: isLap ? "180px" : !isMobile ? "240px" : "",
-                    // }}
                   >
                     {(item?.activeStatus != "live" ||
                       item?.GameStatus != "") && (

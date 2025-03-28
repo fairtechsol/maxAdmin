@@ -1,7 +1,5 @@
-// SortIcon.tsx
 import React from "react";
 import { FaSort, FaSortDown, FaSortUp } from "react-icons/fa";
-/*** */
 interface SortIconProps {
   isActive: boolean;
   isAscending: boolean;

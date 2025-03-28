@@ -2,18 +2,17 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useRef, useState } from "react";
 import { Col, Container, Row, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import "./style.scss";
-import { cardGamesId, cardUrl } from "../../../../utils/Constants";
-import { RootState } from "../../../../store/store";
-import { formatNumber, handleRoundId } from "../../../../helpers";
-import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
-import CardResultBox from "../../../commonComponent/cardResultBox";
-import UserBets from "../../../game/userBet";
-import RulesModal from "../../../commonComponent/rulesModal";
 import { tprules } from "../../../../assets";
-import TeenTestResult from "./teenCard";
+import { formatNumber, handleRoundId } from "../../../../helpers";
+import { RootState } from "../../../../store/store";
+import { cardGamesId, cardUrl } from "../../../../utils/Constants";
+import CardResultBox from "../../../commonComponent/cardResultBox";
+import RulesModal from "../../../commonComponent/rulesModal";
+import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
+import UserBets from "../../../game/userBet";
 import OddsRateBox from "./oddsRateBox";
-// import TableItemList from "./tableItemList";
+import "./style.scss";
+import TeenTestResult from "./teenCard";
 
 const TeenPattiComponent = () => {
   const placeBetRef = useRef<HTMLDivElement>(null);
@@ -102,7 +101,10 @@ const TeenPattiComponent = () => {
               <div className="teen1daycasino-container">
                 <div className="teentestother">
                   <div className="casino-box-row">
-                    <div className="casino-nation-name" style={{flex:1}}></div>
+                    <div
+                      className="casino-nation-name"
+                      style={{ flex: 1 }}
+                    ></div>
                     {dragonTigerDetail?.sections &&
                       dragonTigerDetail?.sections.map(
                         (section: any, index: any) => (
@@ -138,7 +140,10 @@ const TeenPattiComponent = () => {
                       )}
                   </div>
                   <div className="casino-box-row mb-4">
-                    <div className="casino-nation-name casino-nation-name-bg" style={{flex:1}}>
+                    <div
+                      className="casino-nation-name casino-nation-name-bg"
+                      style={{ flex: 1 }}
+                    >
                       <b>Tiger</b>
                     </div>
                     {dragonTigerDetail?.sections &&
@@ -158,7 +163,10 @@ const TeenPattiComponent = () => {
                       )}
                   </div>
                   <div className="casino-box-row mb-4">
-                    <div className="casino-nation-name casino-nation-name-bg" style={{flex:1}}>
+                    <div
+                      className="casino-nation-name casino-nation-name-bg"
+                      style={{ flex: 1 }}
+                    >
                       <b>Lion</b>
                     </div>
                     {dragonTigerDetail?.sections &&
@@ -178,7 +186,10 @@ const TeenPattiComponent = () => {
                       )}
                   </div>
                   <div className="casino-box-row mb-4">
-                    <div className="casino-nation-name casino-nation-name-bg" style={{flex:1}}>
+                    <div
+                      className="casino-nation-name casino-nation-name-bg"
+                      style={{ flex: 1 }}
+                    >
                       <b>Dragon</b>
                     </div>
                     {dragonTigerDetail?.sections &&
@@ -197,7 +208,6 @@ const TeenPattiComponent = () => {
                         )
                       )}
                   </div>
-                  
                 </div>
               </div>
               <div style={{ width: "100%", marginTop: "10px" }}>

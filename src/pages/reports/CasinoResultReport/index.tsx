@@ -1,26 +1,25 @@
+import moment from "moment-timezone";
 import { useEffect, useState } from "react";
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
+import { FaTimes } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import SelectSearch from "../../../components/commonComponent/SelectSearch";
 import CustomInput from "../../../components/commonComponent/input";
-import CustomTable from "../../../components/commonComponent/table";
-import { TableConfig } from "../../../models/tableInterface";
-import { AppDispatch, RootState } from "../../../store/store";
-import { useDispatch, useSelector } from "react-redux";
-import { getCardReport } from "../../../store/actions/match/matchAction";
-import moment from "moment-timezone";
 import { ResultComponent } from "../../../components/commonComponent/resultComponent";
-import { resultDragonTiger } from "../../../store/actions/card/cardDetail";
-import { cardGamesCasinoResult } from "../../../utils/Constants";
-import { FaTimes } from "react-icons/fa";
+import CustomTable from "../../../components/commonComponent/table";
 import SearchBox from "../../../components/commonComponent/table/tableUtils/search";
+import { TableConfig } from "../../../models/tableInterface";
+import { resultDragonTiger } from "../../../store/actions/card/cardDetail";
+import { getCardReport } from "../../../store/actions/match/matchAction";
+import { AppDispatch, RootState } from "../../../store/store";
+import { cardGamesCasinoResult } from "../../../utils/Constants";
 
 interface Column {
   id: string;
   label: string;
 }
 
-// Example usage
 const columns: Column[] = [
   { id: "roundId", label: "Market Id" },
   { id: "winner", label: "Winner" },
@@ -32,10 +31,7 @@ const CasinoResultReport = () => {
   const [casinoModalShow, setCasinoModalShow] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
-  // const [date, setDate] = useState<any>(
-  //   moment(new Date()).format("YYYY-MM-DD")
-  // );
-  const [date, setDate] = useState<any>(new Date().toISOString().split('T')[0]);
+  const [date, setDate] = useState<any>(new Date().toISOString().split("T")[0]);
 
   const [type, setType] = useState<any>(null);
 
@@ -153,7 +149,7 @@ const CasinoResultReport = () => {
                   setCross("");
                 }}
                 value={date}
-                onClick={()=>setCross("cross")}
+                onClick={() => setCross("cross")}
               />
 
               {cross && (
@@ -165,8 +161,8 @@ const CasinoResultReport = () => {
                     top: "46%",
                     right: "2px",
                     transform: "translateY(-50%)",
-                    background:"#fff",
-                    height:"30px"
+                    background: "#fff",
+                    height: "30px",
                   }}
                 >
                   <FaTimes />
@@ -199,13 +195,16 @@ const CasinoResultReport = () => {
         <Row>
           <div className="w-75"></div>
           <div className="w-25">
-          {tableConfig?.keyword !== undefined ? (
-  <SearchBox value={tableConfig.keyword} onSearch={handleSearch} load={false}/>
-) : (
-  <SearchBox value="" onSearch={handleSearch}  load={false}/>
-)}
+            {tableConfig?.keyword !== undefined ? (
+              <SearchBox
+                value={tableConfig.keyword}
+                onSearch={handleSearch}
+                load={false}
+              />
+            ) : (
+              <SearchBox value="" onSearch={handleSearch} load={false} />
+            )}
           </div>
-       
         </Row>
       </Form>
       <CustomTable
@@ -229,13 +228,6 @@ const CasinoResultReport = () => {
           casinoResultReport?.results?.map((item: any, index: number) => {
             const { mid, result } = item;
             return (
-              // <tr key={index}>
-              //   {columns.map((column) => (
-              //     <td key={column.id}>
-              //       {item[column.id]}
-              //     </td>
-              //   ))}
-              // </tr>
               <tr key={index}>
                 <td>
                   <div onClick={() => handleResult(item?.mid)}>

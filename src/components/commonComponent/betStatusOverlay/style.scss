@@ -1,21 +1,18 @@
 @import "/src/assets/variable.scss";
-.betStatusOverlay{
-        position: absolute;
-        // content: attr(data-title);
-        top: 0;
-        right: 0;
-        background: rgba($black, 0.5);
-        color: $pdf;
-        width: 100%;
-        height: 100%;
-        font-size: 20px;
-        /* text-transform: uppercase; */
-        cursor: not-allowed;
-        align-items: center;
-        display: flex;
-        display: -ms-flex;
-        display: -webkit-flex;
-        justify-content: center;
-        z-index: 222;
-      
-      }
+.betStatusOverlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: rgba($black, 0.5);
+  color: $pdf;
+  width: 100%;
+  height: 100%;
+  font-size: 20px;
+  cursor: not-allowed;
+  align-items: center;
+  display: flex;
+  display: -ms-flex;
+  display: -webkit-flex;
+  justify-content: center;
+  z-index: 222;
+}

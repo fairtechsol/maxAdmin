@@ -1,4 +1,3 @@
-import React from 'react';
 
 const AndarBaharRules = () => {
   const rules = [
@@ -8,46 +7,89 @@ const AndarBaharRules = () => {
     "If the 1st dealt card in 1st bet matches the joker’s card, the Bahar side wins with payout 1:0.5.",
     "If the 1st dealt card in 1st bet matches the joker’s card, the Andar side wins with payout 1:0.5.",
     "If the 2nd dealt card in 1st bet matches the joker’s card, the Bahar side wins with payout 1:0.5.",
-    "If the 2nd dealt card in 1st bet matches the joker’s card, the Andar side wins with payout 1:0.5."
+    "If the 2nd dealt card in 1st bet matches the joker’s card, the Andar side wins with payout 1:0.5.",
   ];
 
   const payoutTable = [
-    { bet: "1st Bet Bahar", description: "Payout if Bahar Wins on the 1st bet", payout: "1 to 1" },
-    { bet: "1st Bet Andar", description: "Payout if Andar wins on the 1st bet", payout: "1 to 1" },
-    { bet: "2nd Bet Bahar", description: "Payout if Bahar wins on the 2nd bet", payout: "1 to 1" },
-    { bet: "2nd Bet Andar", description: "Payout if Andar wins on the 1st bet", payout: "1 to 1" },
-    { bet: "Side Bets Bahar", description: "Payout for winning side bet.", payout: "1 to 14" },
-    { bet: "Side Bets Andar", description: "Payout for winning side bet.", payout: "1 to 14" }
+    {
+      bet: "1st Bet Bahar",
+      description: "Payout if Bahar Wins on the 1st bet",
+      payout: "1 to 1",
+    },
+    {
+      bet: "1st Bet Andar",
+      description: "Payout if Andar wins on the 1st bet",
+      payout: "1 to 1",
+    },
+    {
+      bet: "2nd Bet Bahar",
+      description: "Payout if Bahar wins on the 2nd bet",
+      payout: "1 to 1",
+    },
+    {
+      bet: "2nd Bet Andar",
+      description: "Payout if Andar wins on the 1st bet",
+      payout: "1 to 1",
+    },
+    {
+      bet: "Side Bets Bahar",
+      description: "Payout for winning side bet.",
+      payout: "1 to 14",
+    },
+    {
+      bet: "Side Bets Andar",
+      description: "Payout for winning side bet.",
+      payout: "1 to 14",
+    },
   ];
 
   return (
     <div className="rules-body text-white title-14">
-      <div style={{ textAlign: 'left', marginBottom: '10px' }}>
-        <h6 style={{ color: '#FDCF13', fontSize: '16px' }}>Rules</h6>
-        <ul style={{ paddingLeft: '1rem', paddingRight: '1rem', listStyleType: 'disc' }}>
+      <div style={{ textAlign: "left", marginBottom: "10px" }}>
+        <h6 style={{ color: "#FDCF13", fontSize: "16px" }}>Rules</h6>
+        <ul
+          style={{
+            paddingLeft: "1rem",
+            paddingRight: "1rem",
+            listStyleType: "disc",
+          }}
+        >
           {rules.map((rule, index) => (
-            <li key={index} style={{ marginBottom: '5px' }}>{rule}</li>
+            <li key={index} style={{ marginBottom: "5px" }}>
+              {rule}
+            </li>
           ))}
         </ul>
       </div>
 
-      <div style={{ textAlign: 'left', marginBottom: '10px' }}>
-        <h6 style={{ color: '#FDCF13', fontSize: '16px' }}>Payout</h6>
-        <div style={{ overflowX: 'auto', border: '1px solid #444', backgroundColor: '#222', borderRadius: '5px' }}>
-          <table style={{ color: '#fff', fontSize: '12px', width: '100%' }}>
+      <div style={{ textAlign: "left", marginBottom: "10px" }}>
+        <h6 style={{ color: "#FDCF13", fontSize: "16px" }}>Payout</h6>
+        <div
+          style={{
+            overflowX: "auto",
+            border: "1px solid #444",
+            backgroundColor: "#222",
+            borderRadius: "5px",
+          }}
+        >
+          <table style={{ color: "#fff", fontSize: "12px", width: "100%" }}>
             <thead>
               <tr>
-                <th style={{ borderBottom: '1px solid #444' }}>Bet</th>
-                <th style={{ borderBottom: '1px solid #444' }}>Description</th>
-                <th style={{ borderBottom: '1px solid #444' }}>Payout</th>
+                <th style={{ borderBottom: "1px solid #444" }}>Bet</th>
+                <th style={{ borderBottom: "1px solid #444" }}>Description</th>
+                <th style={{ borderBottom: "1px solid #444" }}>Payout</th>
               </tr>
             </thead>
             <tbody>
               {payoutTable.map((item, index) => (
                 <tr key={index}>
-                  <td style={{ borderBottom: '1px solid #444' }}>{item.bet}</td>
-                  <td style={{ borderBottom: '1px solid #444' }}>{item.description}</td>
-                  <td style={{ borderBottom: '1px solid #444' }}>{item.payout}</td>
+                  <td style={{ borderBottom: "1px solid #444" }}>{item.bet}</td>
+                  <td style={{ borderBottom: "1px solid #444" }}>
+                    {item.description}
+                  </td>
+                  <td style={{ borderBottom: "1px solid #444" }}>
+                    {item.payout}
+                  </td>
                 </tr>
               ))}
             </tbody>

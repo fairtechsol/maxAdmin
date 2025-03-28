@@ -2,22 +2,22 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import { Col, Container, Row, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import "./style.scss";
+import { superOverRules } from "../../../../assets";
+import { RootState } from "../../../../store/store";
 import {
   cardGamesId,
   cardGamesType,
   cardUrl,
   rulesData,
 } from "../../../../utils/Constants";
-import { RootState } from "../../../../store/store";
-import UserBets from "../../../game/userBet";
-import RulesModal from "../../../commonComponent/rulesModal";
-import { superOverRules } from "../../../../assets";
 import CardResultBox from "../../../commonComponent/cardResultBox";
-import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
-import Dragon20Result from "./dragonCard";
+import RulesModal from "../../../commonComponent/rulesModal";
 import ScoreBoard from "../../../commonComponent/scoreBoard";
+import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
+import UserBets from "../../../game/userBet";
 import Bookmaker from "./bookmaker";
+import Dragon20Result from "./dragonCard";
+import "./style.scss";
 
 const SuperOverComponent = () => {
   const [show, setShow] = useState(false);

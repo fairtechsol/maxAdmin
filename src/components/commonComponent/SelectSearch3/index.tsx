@@ -3,24 +3,11 @@ import CustomErrorMessage from "../input/CustomErrorMessage";
 import "./style.scss";
 
 const SelectSearch3 = (props: any) => {
-  const {
-    //id,
-    options,
-    value,
-    onChange,
-    //label,
-    //customClass,
-    //filedClass,
-    //SelectInline,
-    onBlur,
-    touched,
-    errors,
-  } = props;
+  const { options, value, onChange, onBlur, touched, errors } = props;
 
   return (
     <>
       <Form.Group>
-        {/* {label && <Form.Label>{label}</Form.Label>} */}
         <div>
           <div className="custom-radio-group2">
             {options.map((option: any, index: number) => (

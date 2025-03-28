@@ -1,5 +1,8 @@
+import { debounce } from "lodash";
+import moment from "moment-timezone";
 import { useEffect, useMemo, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import SelectSearch from "../../../components/commonComponent/SelectSearch";
 import CustomButton from "../../../components/commonComponent/button";
 import CustomInput from "../../../components/commonComponent/input";
@@ -8,12 +11,9 @@ import CustomTable from "../../../components/commonComponent/table";
 import ProfitLossModal from "../../../components/reports/modals/profitLoss";
 import ProfitLossEventType from "../../../components/reports/profitLossEventType";
 import { TableConfig } from "../../../models/tableInterface";
-import { AppDispatch, RootState } from "../../../store/store";
-import { useDispatch, useSelector } from "react-redux";
-import { searchList } from "../../../store/actions/user/userActions";
-import { debounce } from "lodash";
 import { getProfitLossReport } from "../../../store/actions/match/matchAction";
-import moment from "moment-timezone";
+import { searchList } from "../../../store/actions/user/userActions";
+import { AppDispatch, RootState } from "../../../store/store";
 import { cardGamesTypeNames } from "../../../utils/Constants";
 
 interface Column {
@@ -58,14 +58,12 @@ const ProfitLossReport = () => {
   );
 
   useEffect(() => {
-  
     const currentDate = new Date();
     const formattedCurrentDate = currentDate.toISOString().split("T")[0];
 
     const pastDate = new Date();
     pastDate.setDate(pastDate.getDate() - 7);
     const formattedPastDate = pastDate.toISOString().split("T")[0];
-
 
     setDateFrom(formattedPastDate);
     setDateTo(formattedCurrentDate);
@@ -186,7 +184,6 @@ const ProfitLossReport = () => {
               placeholder={""}
               value={dateFrom}
               onChange={(e: any) => setDateFrom(e.target.value)}
-              // customstyle={"mb-3"}
               type="date"
             />
           </Col>
@@ -195,7 +192,6 @@ const ProfitLossReport = () => {
               title={"To"}
               placeholder={""}
               value={dateTo}
-              // customstyle={"mb-3"}
               onChange={(e: any) => setDateTo(e.target.value)}
               type="date"
             />
@@ -240,11 +236,7 @@ const ProfitLossReport = () => {
                     : eventType}
                 </td>
                 <td>
-                  <CustomButton
-                    className="actionBtn"
-                    variant="dark"
-                    // onClick={() => setProfitLossModalShow((prev) => !prev)}
-                  >
+                  <CustomButton className="actionBtn" variant="dark">
                     {marketType}
                   </CustomButton>
                 </td>
@@ -254,15 +246,7 @@ const ProfitLossReport = () => {
           })}
       </CustomTable>
       <CustomModal
-        customClass="modalFull-90 "
-        // title={[
-        //   <>
-        //     <span className="f400">
-        //       Client Ledger (Total Win Loss : 100) (Total Count : 1) (Total Soda
-        //       : 1)
-        //     </span>
-        //   </>,
-        // ]}
+        customClass="modalFull-90"
         show={profitLossModalShow}
         setShow={setProfitLossModalShow}
       >

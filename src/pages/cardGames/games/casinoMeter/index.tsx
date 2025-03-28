@@ -45,7 +45,9 @@ const CasinoMeter = () => {
   };
   const handleCardResult = (event: any) => {
     if (event?.matchId === dragonTigerDetail?.id) {
-      dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
+      dispatch(
+        getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId })
+      );
     }
   };
   const handleMatchResult = () => {
@@ -54,7 +56,9 @@ const CasinoMeter = () => {
   useEffect(() => {
     try {
       if (socket && dragonTigerDetail?.id) {
-        dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
+        dispatch(
+          getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId })
+        );
         socketService.card.getCardRatesOff(cardGamesType.cmeter);
         socketService.card.userCardBetPlacedOff();
         socketService.card.cardResultOff();

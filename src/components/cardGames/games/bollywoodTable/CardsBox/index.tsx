@@ -1,6 +1,5 @@
-
-import CommonCardImg from "../CommonCardImg";
 import { formatNumber } from "../../../../../helpers";
+import CommonCardImg from "../CommonCardImg";
 
 const CardBox = ({ cardData, data }: any) => {
   const min = cardData?.[0]?.min;
@@ -22,15 +21,13 @@ const CardBox = ({ cardData, data }: any) => {
               ).toFixed(2)}
             </span>
           </div>
-          
         </div>
         <div>
           <CommonCardImg cardData={cardData} data={data} />
         </div>
         <div className="title-12" style={{ textAlign: "end" }}>
           <span>R:</span>
-          <span>{min}</span>-
-          <span>{formatNumber(max)}</span>
+          <span>{min}</span>-<span>{formatNumber(max)}</span>
         </div>
       </div>
     </>

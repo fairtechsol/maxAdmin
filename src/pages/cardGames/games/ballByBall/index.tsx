@@ -46,16 +46,22 @@ const BallByBall = () => {
   };
   const handleCardResult = (event: any) => {
     if (event?.matchId === dragonTigerDetail?.id) {
-      dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
+      dispatch(
+        getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId })
+      );
     }
   };
   const handleMatchResult = () => {
-    dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
+    dispatch(
+      getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId })
+    );
   };
   useEffect(() => {
     try {
       if (socket && dragonTigerDetail?.id) {
-        dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
+        dispatch(
+          getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId })
+        );
         socketService.card.getCardRatesOff(cardGamesType.ballbyball);
         socketService.card.userCardBetPlacedOff();
         socketService.card.cardResultOff();

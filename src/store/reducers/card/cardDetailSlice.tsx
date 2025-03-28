@@ -1,20 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
+import _ from "lodash";
 import {
+  ballbyballMatchRates,
   casinoMeterPattiMatchRates,
   casinoScoreboardMatchRates,
   casinoWarMatchRates,
+  getCardDetailInitial,
   getDragonTigerDetailHorseRacing,
   graphData,
   resetCardDetail,
   resetScoreBoard,
   resultDragonTiger,
+  transactionProviderBets,
+  transactionProviderBetsReset,
+  transactionProviderName,
   update3CardJRates,
   update7BCardMatchRates,
   update7CardMatchRates,
   updateAmarAkbarAnthonyCardMatchRates,
   updateBaccarat1Rates,
   updateBaccarat2Rates,
-  ballbyballMatchRates,
   updateBollywoodTableCardMatchRates,
   updateCard32BMatchRates,
   updateCard32MatchRates,
@@ -38,12 +43,7 @@ import {
   updateTeenPattiMatchRates,
   updateTeenPattiOpenMatchRates,
   updateTeenPattiTestMatchRates,
-  getCardDetailInitial,
-  transactionProviderBets,
-  transactionProviderBetsReset,
-  transactionProviderName,
 } from "../../actions/card/cardDetail";
-import _ from "lodash";
 
 interface InitialState {
   success: boolean;
@@ -71,7 +71,7 @@ const initialState: InitialState = {
   cards32Detail: [],
   resultData: null,
   scoreBoardData: null,
-  liveCasinoProvider: [], 
+  liveCasinoProvider: [],
   liveCasinoProviderBets: [],
 };
 

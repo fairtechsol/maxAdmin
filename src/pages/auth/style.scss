@@ -12,7 +12,6 @@
   height: -moz-max-content;
   height: max-content;
   margin: 100px 0 0 0;
- 
 }
 
 .auth-box-form {
@@ -31,7 +30,8 @@
   font-size: 1.8rem;
 }
 
-.auth-main .auth-title:before, .auth-main .auth-title:after {
+.auth-main .auth-title:before,
+.auth-main .auth-title:after {
   content: "";
   height: 1px;
   position: absolute;
@@ -46,9 +46,9 @@
 
 .auth-main .auth-title:after {
   right: 0;
-}/*# sourceMappingURL=style.css.map */
+}
 .custom-label {
   display: flex;
-  text-align: left !important; 
+  text-align: left !important;
   margin-left: 0%;
 }

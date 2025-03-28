@@ -1,8 +1,8 @@
-import { useState } from "react";
 import moment from "moment";
+import { useState } from "react";
 import { Column } from "../../../models/tableInterface";
-import CustomTable2 from "../table2";
 import DeleteBetOverlay from "../deleteBetRow";
+import CustomTable2 from "../table2";
 
 const columns: Column[] = [
   { id: "nation", label: "Nation " },
@@ -137,15 +137,11 @@ const ResultBetList = ({ bets, total }: any) => {
 
       <div className="w-100">
         <CustomTable2
-          // striped
           columns={columns}
           itemCount={10}
           setTableConfig={() => {}}
           tHeadTheme=""
           customClass=""
-          // CustomTableClass=""
-          // currentPage={currentPage}
-          // setCurrentPage={setCurrentPage}
         >
           {list?.length === 0 && (
             <tr className="text-center">
@@ -169,15 +165,6 @@ const ResultBetList = ({ bets, total }: any) => {
               } = item;
               return (
                 <tr key={id} className="position-relative">
-                  {/* <td
-                  className={
-                    betType === "NO" || betType === "LAY"
-                      ? "bg-red1"
-                      : "bg-blue3"
-                  }
-                >
-                  {index + 1}
-                </td> */}
                   <td
                     className={
                       betType === "NO" || betType === "LAY"
@@ -224,7 +211,11 @@ const ResultBetList = ({ bets, total }: any) => {
                           : "#000",
                     }}
                   >
-                    {result === "LOSS" ? -lossAmount : result === "WIN" ? winAmount : 0}
+                    {result === "LOSS"
+                      ? -lossAmount
+                      : result === "WIN"
+                      ? winAmount
+                      : 0}
                   </td>
                   <td
                     className={
@@ -254,11 +245,9 @@ const ResultBetList = ({ bets, total }: any) => {
                     }
                     style={{ borderRight: "1px solid #aaa" }}
                   >
-                    {/* <TooltipCustom title={browserDetail}> */}
                     <a href="#" title="">
                       Detail
                     </a>
-                    {/* </TooltipCustom> */}
                   </td>
                   <td
                     className={

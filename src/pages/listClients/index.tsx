@@ -16,7 +16,6 @@ import {
 import { AppDispatch, RootState } from "../../store/store";
 import { ApiConstants } from "../../utils/Constants";
 
-// Example usage
 const columns: Column[] = [
   { id: "username", label: "User Name", colSpan: 4 },
   { id: "creditReferance", label: "Credit Reference" },

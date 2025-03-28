@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import { andarBaharCards } from "../../../../../utils/Constants";
 import { back0 } from "../../../../../assets";
-
+import { andarBaharCards } from "../../../../../utils/Constants";
 
 const CommonCardImg = ({ cardData, data, cardInfo }: any) => {
   const [cardImg, setCardImg] = useState(andarBaharCards);

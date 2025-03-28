@@ -1,23 +1,21 @@
-
 import { Col, Container, Row, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import "./style.scss";
-import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
+import { RootState } from "../../../../store/store";
 import {
   cardData,
   cardGamesId,
   cardGamesType,
   cardUrl,
 } from "../../../../utils/Constants";
-import { RootState } from "../../../../store/store";
+import CardResultBox from "../../../commonComponent/cardResultBox";
+import ScoreBoard from "../../../commonComponent/scoreBoard";
+import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
+import UserBets from "../../../game/userBet";
 import Crick5Result from "./cric5Card";
 import MarketComponent from "./marketComponent";
-import CardResultBox from "../../../commonComponent/cardResultBox";
-import UserBets from "../../../game/userBet";
-import ScoreBoard from "../../../commonComponent/scoreBoard";
+import "./style.scss";
 
 const Cricket5Component = () => {
-
   const { dragonTigerDetail, scoreBoardData } = useSelector(
     (state: RootState) => state.card
   );
@@ -26,7 +24,7 @@ const Cricket5Component = () => {
     <>
       <Row>
         <Col md={8} className="five-cricket">
-          <div style={{ width: "100%"}}>
+          <div style={{ width: "100%" }}>
             <div className="horseRacingTabHeader">
               <div>
                 <span style={{ fontSize: "16px", fontWeight: "600" }}>
@@ -39,14 +37,8 @@ const Cricket5Component = () => {
                   : ""}
               </span>
             </div>
-            <div>
-              {scoreBoardData && (
-                <ScoreBoard data={scoreBoardData} />
-              )}
-            </div>
-            <div
-              style={{ width: "100%", backgroundColor: "#000" }}
-            >
+            <div>{scoreBoardData && <ScoreBoard data={scoreBoardData} />}</div>
+            <div style={{ width: "100%", backgroundColor: "#000" }}>
               <VideoFrame
                 data={dragonTigerDetail}
                 time={dragonTigerDetail?.videoInfo?.autotime}
@@ -56,12 +48,12 @@ const Cricket5Component = () => {
             </div>
           </div>
           <div>
-              <MarketComponent
-                odds={dragonTigerDetail?.odds}
-                min={dragonTigerDetail?.videoInfo?.min}
-                max={dragonTigerDetail?.videoInfo?.max}
-                data={dragonTigerDetail}
-              />
+            <MarketComponent
+              odds={dragonTigerDetail?.odds}
+              min={dragonTigerDetail?.videoInfo?.min}
+              max={dragonTigerDetail?.videoInfo?.max}
+              data={dragonTigerDetail}
+            />
             <div className="mt-2">
               <CardResultBox
                 data={dragonTigerDetail}

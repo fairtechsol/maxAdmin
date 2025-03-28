@@ -4,7 +4,6 @@ import {
   addUser,
   successMessageReset,
 } from "../../actions/user/userActions";
-// actions/user/userAction
 
 interface InitialState {
   addSuccess: boolean;

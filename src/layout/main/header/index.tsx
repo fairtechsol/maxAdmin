@@ -13,8 +13,6 @@ import { logout } from "../../../store/actions/auth/authActions";
 import { searchList } from "../../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../../store/store";
 import "./style.scss";
-// import isMobile from "../../../utils/screenDimension";
-// import styled from '@emotion/styled';
 
 interface ItemProps {
   name: string;
@@ -92,28 +90,6 @@ const Topbar = (props: any) => {
     debouncedInputValue(query);
   };
 
-  //   const [selectedUser, setSelectedUser] = useState(null);
-
-  // const handleSearch = (selectedOption: any) => {
-  //   if (selectedOption) {
-  //     setSelectedUser(selectedOption); // Set the selected user
-  //   }
-  // };
-
-  // const handleSearchIconClick = () => {
-  //   if (selectedUser) {
-  //     setSearchModal(true); // Open the modal with the selected user details
-  //   }
-  // };
-
-  // const handleSearch = (selectedOption: any) => {
-  //   if (selectedOption) {
-  //     setSearchValue(selectedOption.label);
-  //     setSearchModal(true); // Open the modal
-  //     debouncedInputValue(selectedOption.label);
-  //   }
-  // };
-
   const optionslist =
     searchListData?.users?.map((item: any) => ({
       value: item?.id,
@@ -128,11 +104,6 @@ const Topbar = (props: any) => {
       alert("Please select user!");
       return;
     }
-
-    // setTimeout(() => {
-
-    // setSearchValue(null);
-    // }, 1000);
   };
 
   useEffect(() => {
@@ -140,12 +111,6 @@ const Topbar = (props: any) => {
       setSearchValue(null);
     }
   }, [success]);
-
-  // useEffect(()=> {
-  //   if(SearchModal){
-  //     dispatch(userModalReset)
-  //   }
-  // }, [])
 
   const customStyles = {
     control: (base: any, state: { isFocused: any }) => ({
@@ -342,12 +307,6 @@ const Topbar = (props: any) => {
                   <UserLockModal show={showModal} setShowModal={setShowModal} />
                 </>
               )}
-              {/* <Nav.Link
-                className="navbar-mainLink"
-                href="/admin/multiLogin"
-              >
-                Multi Login
-              </Nav.Link> */}
             </Nav>
           </Navbar>
           <div className="user-dropdown-container">

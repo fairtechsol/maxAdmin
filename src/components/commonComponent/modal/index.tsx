@@ -1,7 +1,7 @@
 import { Modal } from "react-bootstrap";
-import "./style.scss";
-import { userModalReset } from "../../../store/actions/user/userActions";
 import { useDispatch } from "react-redux";
+import { userModalReset } from "../../../store/actions/user/userActions";
+import "./style.scss";
 
 function CustomModal({
   show,

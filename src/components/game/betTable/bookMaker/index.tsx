@@ -19,7 +19,6 @@ function BookmakerTable({
   matchDetails,
   teamYesNo,
 }: BookmakerTableProps) {
-  // console.log(data);
   return (
     <div
       className={`gameTable table-responsive sessionFancyTable borderTable border `}
@@ -128,8 +127,6 @@ function BookmakerTable({
                         <BackLayBox
                           style={{ width: "60px" }}
                           key={index}
-                          //     customClass={`bookmaker-bet-place  ""
-                          // `}
                           bgColor={`red${index + 1}`}
                           rate={
                             data?.runners?.[i]?.ex?.availableToLay?.[index]

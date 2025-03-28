@@ -80,7 +80,6 @@ const SessionCricketCasino = ({
               </div>
             </div>
             {marketArr?.section?.map((item: any, index: any) => {
-              
               return (
                 <div className="sessionRateContainer" key={index}>
                   <div className="sessionRateName" style={{ flexGrow: 1 }}>

@@ -10,8 +10,8 @@ import {
 } from "../../../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../../../store/store";
 import CustomInput from "../../../commonComponent/input";
-import ModalFooter from "../footer";
 import Loader from "../../../commonComponent/loader";
+import ModalFooter from "../footer";
 
 const initialValues: any = {
   userId: "any",
@@ -99,7 +99,6 @@ const Credit = ({
                   customstyle="input-box"
                   bgColor="gray"
                   disabled={true}
-                  // id="oldCreditInput"
                 />
               </Col>
             </Row>
@@ -118,7 +117,6 @@ const Credit = ({
                   onChange={handleChange}
                   type="number"
                   customstyle="input-box"
-                  // id="newCreditInput"
                   min={0}
                 />
               </Col>
@@ -140,7 +138,6 @@ const Credit = ({
                   type="password"
                   customstyle="input-box"
                   textAlign="left"
-                  // id="transactionPasswordInput"
                 />
               </Col>
             </Row>
@@ -150,7 +147,7 @@ const Credit = ({
           <ModalFooter
             clickHandler={() => {
               setShow(false);
-            }} 
+            }}
             disabled={loading}
           />
         </Modal.Footer>

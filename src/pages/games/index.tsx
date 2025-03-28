@@ -33,8 +33,11 @@ const Games = () => {
   const dispatch: AppDispatch = useDispatch();
   const { state, pathname } = useLocation();
   const navigate = useNavigate();
-
   const { id } = useParams();
+
+  const [showScore, setShowScore] = useState(false);
+  const [tvData, setTvData] = useState<any>(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 1199);
 
   const { matchDetails, success, liveScoreBoardData } = useSelector(
     (state: RootState) => state.match.matchListSlice
@@ -46,37 +49,7 @@ const Games = () => {
   const { marketAnalysisDetail } = useSelector(
     (state: RootState) => state.match.marketAnalysis
   );
-  // const { matchDetails, marketId, loading } = useSelector(
-  //   (state: RootState) => state.match.matchList
-  // );
 
-  // const [liveScoreBoardData, setLiveScoreBoardData] = useState(null);
-  const [showScore, setShowScore] = useState(false);
-  const [tvData, setTvData] = useState<any>(null);
-
-  // const [errorCount, setErrorCount] = useState<number>(0);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 1199);
-
-  useEffect(() => {
-    if (id) {
-      matchService.connect([id]);
-    }
-    return () => {
-      matchService.disconnect();
-    };
-  }, [id]);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 1199);
-    };
-    // Add event listener to update isMobile on window resize
-    window.addEventListener("resize", handleResize);
-    // Cleanup event listener on component unmount
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
   const updateMatchDetailToRedux = (event: any) => {
     try {
       if (id === event?.id) {
@@ -111,8 +84,6 @@ const Games = () => {
   const handleMatchBetPlaced = (event: any) => {
     try {
       if (event?.jobData?.matchId === id) {
-        // dispatch(matchDetailAction(id));
-        // dispatch(getPlacedBets({ id: id, userId: state?.userId }));
         dispatch(updateBetsPlaced(event?.jobData));
         dispatch(updateBalance(event));
       }
@@ -132,9 +103,7 @@ const Games = () => {
   const handleSessionResultDeclare = (event: any) => {
     try {
       if (event?.matchId === id) {
-        // dispatch(removeRunAmount(event));
         dispatch(getPlacedBets({ id: id, userId: state?.userId }));
-        // dispatch(amountupdate(event));
       }
     } catch (error) {
       console.log(error);
@@ -143,7 +112,6 @@ const Games = () => {
   const handleSessionResultUnDeclare = (event: any) => {
     try {
       if (event?.matchId === id) {
-        // dispatch(updateMaxLossForBetOnUndeclare(event));
         dispatch(getPlacedBets({ id: id, userId: state?.userId }));
       }
     } catch (error) {
@@ -160,6 +128,25 @@ const Games = () => {
       console.log(e);
     }
   };
+
+  useEffect(() => {
+    if (id) {
+      matchService.connect([id]);
+    }
+    return () => {
+      matchService.disconnect();
+    };
+  }, [id]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 1199);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     try {
@@ -214,7 +201,6 @@ const Games = () => {
     try {
       if (id) {
         return () => {
-          // socketService.match.leaveMatchRoom(id);
           socketService.match.getMatchRatesOff(id);
           socketService.match.userSessionBetPlacedOff();
           socketService.match.userMatchBetPlacedOff();
@@ -225,8 +211,6 @@ const Games = () => {
           socketService.match.sessionResultOff();
           socketService.match.sessionResultUnDeclareOff();
           socketService.match.updateDeleteReasonOff();
-          // dispatch(resetUserProfitLoss());
-          // dispatch(resetBetSessionProfitLossGraph());
         };
       }
     } catch (error) {
@@ -239,13 +223,11 @@ const Games = () => {
       const handleVisibilityChange = () => {
         if (document.visibilityState === "visible") {
           if (id) {
-            // dispatch(matchDetailAction(id));
             dispatch(getPlacedBets({ id: id, userId: state?.userId }));
             socketService.match.joinMatchRoom(id);
             socketService.match.getMatchRates(id, updateMatchDetailToRedux);
           }
         } else if (document.visibilityState === "hidden") {
-          // socketService.match.leaveMatchRoom(id);
           socketService.match.getMatchRatesOff(id);
         }
       };
@@ -492,7 +474,6 @@ const Games = () => {
                 />
               )}
               <div className="my-2">
-                {/* <ScoreCard /> */}
                 <div className="d-flex w-100 flex-column">
                   <div
                     className="w-100 d-flex justify-content-start title-15 text-white align-items-center f500 ps-2"

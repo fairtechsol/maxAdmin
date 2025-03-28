@@ -1,14 +1,11 @@
 import { Fragment, useState } from "react";
 import { Button, Col, Row, Tab, Table } from "react-bootstrap";
 import CustomModal from "../../commonComponent/modal";
-// import UserBetModalTable from "./modal";
-import UserBetModalForm from "./modal/form";
-import "./style.scss";
+import moment from "moment-timezone";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
-import moment from "moment-timezone";
-// import DeleteBetOverlay from "../../commonComponent/deleteBetRow";
-// import moment from "moment-timezone";
+import UserBetModalForm from "./modal/form";
+import "./style.scss";
 
 const UserBets = ({ matchId }: any) => {
   const { placedBets } = useSelector(
@@ -16,11 +13,6 @@ const UserBets = ({ matchId }: any) => {
   );
 
   const [showModal, setShowModal] = useState(false);
-  // const [activeTab, setActiveTab] = useState("first");
-
-  // const handleSelect = (selectedKey: any) => {
-  //   setActiveTab(selectedKey);
-  // };
   return (
     <div className={`userBets`}>
       <Tab.Container id="left-tabs-example" defaultActiveKey="first">
@@ -45,8 +37,8 @@ const UserBets = ({ matchId }: any) => {
               </div>
             </div>
           </Col>
-      
-            <Col sm={12}>
+
+          <Col sm={12}>
             <div className="casino-container table-responsive">
               <Table table-responsive>
                 <thead>
@@ -64,12 +56,11 @@ const UserBets = ({ matchId }: any) => {
                     return (
                       <Fragment key={index}>
                         <tr
-                           className={`position-relative lh-1 bet-table-right border-none ${
+                          className={`position-relative lh-1 bet-table-right border-none ${
                             bet?.betType === "NO" || bet?.betType === "LAY"
                               ? "bor-red1"
                               : "bor-blue3"
-                          }`
-                         }
+                          }`}
                         >
                           <td
                             className={
@@ -131,15 +122,17 @@ const UserBets = ({ matchId }: any) => {
                             {bet?.eventType}
                           </td>
                         </tr>
-                        <div className="bg-white" style={{ height: "4px" }}></div>
+                        <div
+                          className="bg-white"
+                          style={{ height: "4px" }}
+                        ></div>
                       </Fragment>
                     );
                   })}
                 </tbody>
               </Table>
-              </div>
-            </Col>
-            
+            </div>
+          </Col>
         </Row>
       </Tab.Container>
       <CustomModal

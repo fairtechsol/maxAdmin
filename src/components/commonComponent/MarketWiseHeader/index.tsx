@@ -1,5 +1,6 @@
 import React, { ReactNode, useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
+import { AiOutlineCloseCircle } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import CustomTable from "../../../components/commonComponent/table";
@@ -12,11 +13,8 @@ import {
 } from "../../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../../store/store";
 import { MatchType } from "../../../utils/enum";
-import "./style.scss";
-// import { RxCrossCircled } from "react-icons/rx";
-// import { IoCloseCircleOutline } from "react-icons/io5";
-import { AiOutlineCloseCircle } from "react-icons/ai";
 import Loader from "../loader";
+import "./style.scss";
 interface props {
   bgColor?: string;
   title: string;
@@ -48,7 +46,6 @@ function MarketTableHeader({
   children,
   type,
   data,
-  // sessionType,
   detail,
 }: props) {
   const inlineStyle: React.CSSProperties = {
@@ -77,7 +74,6 @@ function MarketTableHeader({
 
   let columns = [
     { id: "userName", label: "User Name" },
-    //{ id: detail?.teamA, label: detail?.teamA },
     ...(mappedNats ? [] : [{ id: detail?.teamA, label: detail?.teamA }]),
     ...(mappedNats ? [] : [{ id: detail?.teamB, label: detail?.teamB }]),
     ...(mappedNats
@@ -230,15 +226,6 @@ function MarketTableHeader({
       transactionPassword: transactionPass,
     };
     dispatch(updateUserMarketLock(payload));
-    // setTimeout(() => {
-    //   dispatch(
-    //     getMarketLockAllChild({
-    //       matchId: detail?.id,
-    //       betId: data?.id,
-    //       sessionType: type,
-    //     })
-    //   );
-    // }, 1000);
   };
 
   return (
@@ -353,14 +340,12 @@ function MarketTableHeader({
           </Modal.Body>
         </Modal>
         <Modal
-          // {...props}
           show={showModal2 && !loading}
           onHide={handleClose2}
           className={`customModal ${customClass} custom-modal-width`}
         >
           <Modal.Header
             closeButton
-            // className={`${headerStyle ? headerStyle : ""}`}
           >
             <Modal.Title className={`${"Betlock"}`}>{"User Book"}</Modal.Title>
           </Modal.Header>

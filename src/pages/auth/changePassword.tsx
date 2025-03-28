@@ -2,37 +2,28 @@ import { useFormik } from "formik";
 import React, { useEffect, useMemo, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-// import { useNavigate } from "react-router";
+import { debounce } from "lodash";
+import { MaxBet07Logo } from "../../assets";
+import NavigateModal from "../../components/commonComponent/customModal";
 import CustomInput from "../../components/commonComponent/input";
+import { checkOldPassword, logout } from "../../store/actions/auth/authActions";
 import {
   changePassword,
   changePasswordReset,
 } from "../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../store/store";
 import { changePasswordValidation } from "../../utils/fieldValidations/newPassword";
-import { checkOldPassword, logout } from "../../store/actions/auth/authActions";
-import NavigateModal from "../../components/commonComponent/customModal";
 import "./style.scss";
-import { debounce } from "lodash";
-import { MaxBet07Logo } from "../../assets";
-
-// interface Values {
-//   newPassword: string;
-//   confirmPassword: string;
-//   transactionPassword: string;
-// }
 
 const initialValues: any = {
   oldPassword: "",
   newPassword: "",
   confirmPassword: "",
-  // transactionPassword: "",
 };
 
 const ChangePassword = () => {
   const dispatch: AppDispatch = useDispatch();
   const [showModal, setShowModal] = useState<boolean>(false);
-  // const navigate = useNavigate();
   const { transactionPassword, modalSuccess } = useSelector(
     (state: RootState) => state.user.userList
   );

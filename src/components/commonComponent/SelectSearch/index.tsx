@@ -23,20 +23,8 @@ const SelectSearch = (props: any) => {
     onInputChange,
     isOptionDisabled,
     inputValue,
-    onFocus
+    onFocus,
   } = props;
-
-  // const customStyles = {
-  //   control: (provided: any, state: any) => ({
-  //     ...provided,
-  //     minHeight: "30px", // Adjust the minHeight to your desired height
-  //   }),
-  //   menu: (provided: any, state: any) => ({
-  //     ...provided,
-  //     paddingTop: 0,
-  //     paddingBottom: 0,
-  //   }),
-  // };
 
   return (
     <>
@@ -48,29 +36,23 @@ const SelectSearch = (props: any) => {
         {label ? <Form.Label>{label}</Form.Label> : ""}
         <Select
           id={id}
-          // styles={customStyles}
-          // styles={{ minHeight: '20px' }}
           styles={{
             control: (baseStyles, state) => ({
               ...baseStyles,
-            
             }),
-         
 
             menu: (provided) => ({
               ...provided,
-              maxHeight: "72vh", 
-              overflowY: "auto", 
-              fontSize:"14px"
+              maxHeight: "72vh",
+              overflowY: "auto",
+              fontSize: "14px",
             }),
             menuList: (provided) => ({
               ...provided,
-              maxHeight: "72vh", 
-              fontSize:"14px"
+              maxHeight: "72vh",
+              fontSize: "14px",
             }),
-      
-         
-            
+
             dropdownIndicator: (provided, state) => ({
               ...provided,
               color: state.isFocused ? "#00000" : "#00000",

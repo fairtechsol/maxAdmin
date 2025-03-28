@@ -51,7 +51,9 @@ const Superover = () => {
   };
   const handleCardResult = (event: any) => {
     if (event?.matchId === dragonTigerDetail?.id) {
-      dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
+      dispatch(
+        getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId })
+      );
     }
   };
   const handleMatchResult = () => {
@@ -60,7 +62,9 @@ const Superover = () => {
   useEffect(() => {
     try {
       if (dragonTigerDetail?.id) {
-        dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
+        dispatch(
+          getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId })
+        );
       }
     } catch (e) {
       console.error(e);

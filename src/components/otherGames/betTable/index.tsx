@@ -1,15 +1,13 @@
 import { useSelector } from "react-redux";
 import { MatchType } from "../../../utils/enum";
 import { formattedMinMax } from "../../../utils/formatMinMax";
-// import BetTableHeader from "../../commonComponent/betTableHeader";
-import BookmakerTable from "./bookMaker";
-import MatchOdds from "./matchOdds";
 import { RootState } from "../../../store/store";
+import BetTableHeader from "../../commonComponent/betTableHeader";
+import BookmakerTable from "./bookMaker";
+import HTFTMarketTable from "./htftmarket";
+import MatchOdds from "./matchOdds";
 import OverUnderMarket from "./overUnder";
 import SetWinner from "./setWinner";
-import HTFTMarketTable from "./htftmarket";
-import BetTableHeader from "../../commonComponent/betTableHeader";
-// import OtherMarkets from "./otherMarket";
 import Tournament from "../../game/tournament";
 
 interface BetTableProps {
@@ -72,13 +70,9 @@ const BetTable = ({ title, type, data, backLayCount }: BetTableProps) => {
           box={data?.runners?.[0]?.ex?.availableToBack?.length > 2 ? 6 : 2}
           data={data}
           detail={matchDetails}
-          // data={matchDetails?.matchOdd}
         />
       ) : (
         <HTFTMarketTable
-        //   data={data}
-        //   title={title}
-        //   matchDetails={matchDetails}
         />
       )}
     </>

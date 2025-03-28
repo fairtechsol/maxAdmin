@@ -1,4 +1,4 @@
-import { Container, Row, Col } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
 
 const TeenTestResult: any = ({ data }: any) => {

@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import CommonCardImg from "../CommonCardImg";
 
 const CardBox = ({ title, odds, data, cards,cardClass, remark }: any) => {

@@ -22,10 +22,9 @@ const CasinoWarResultComponent: React.FC<Props> = ({ data }) => {
   const resultCards = data?.result?.cards?.split(",");
   const playerIds = data?.result?.sid?.split(",");
 
-  // Create a mapping of player IDs to their respective cards
   const players = resultCards?.map((card, index) => ({
     card,
-    id: playerIds[index], // Distribute player IDs cyclically
+    id: playerIds[index],
   }));
 
   const renderRow = () => (

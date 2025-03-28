@@ -1,5 +1,4 @@
 import "./style.scss";
-//import scorecardBg from "../../assets/images/scorecard-bg.png";
 
 const Iframe = ({ data, width }: any) => {
   return (
@@ -38,22 +37,22 @@ const Iframe = ({ data, width }: any) => {
               </p>
 
               <div className="col-12 d-flex align-items-center justify-content-xl-start">
-              <div className="row">
-                <div className="col-12">
-                  {data?.spnmessage && (
-                    <div
-                      style={{
-                        fontSize: "12px",
-                      }}
-                    >
-                      {data?.dayno} {data?.dayno?"|":""} {data?.spnmessage}
-                    </div>
-                  )}
+                <div className="row">
+                  <div className="col-12">
+                    {data?.spnmessage && (
+                      <div
+                        style={{
+                          fontSize: "12px",
+                        }}
+                      >
+                        {data?.dayno} {data?.dayno ? "|" : ""}{" "}
+                        {data?.spnmessage}
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
-            </div>
-           
           </div>
           <div className="col-12 ">
             <div className="row">

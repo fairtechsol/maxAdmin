@@ -1,18 +1,18 @@
+import { useFormik } from "formik";
+import { debounce } from "lodash";
+import React, { useEffect, useMemo, useState } from "react";
 import { Button, Card, Col, Form, Row, Table } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import SelectSearch from "../../components/commonComponent/SelectSearch";
 import CustomInput from "../../components/commonComponent/input";
-import { addAccountValidationSchema } from "../../utils/fieldValidations/addAccount";
-import { useFormik } from "formik";
 import {
   addSuccessReset,
   addUser,
   getAlreadyUserExist,
   successMessageReset,
 } from "../../store/actions/user/userActions";
-import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
-import React, { useEffect, useMemo, useState } from "react";
-import { debounce } from "lodash";
+import { addAccountValidationSchema } from "../../utils/fieldValidations/addAccount";
 
 interface Values {
   clientName: string;
@@ -168,18 +168,19 @@ const AddAccount = () => {
       if (remainingDownline < 0) {
         return;
       }
-      if (formik?.values.accountType.value === "user"){
+      if (formik?.values.accountType.value === "user") {
         formik.setValues({
           ...formik.values,
           ourPartnership: newValue,
           downlinePartnership: 0,
         });
-      }else{
-      formik.setValues({
-        ...formik.values,
-        ourPartnership: remainingDownline,
-        downlinePartnership: newValue,
-      });}
+      } else {
+        formik.setValues({
+          ...formik.values,
+          ourPartnership: remainingDownline,
+          downlinePartnership: newValue,
+        });
+      }
     } catch (e: any) {
       console.log(e);
     }
@@ -260,7 +261,6 @@ const AddAccount = () => {
 
   useEffect(() => {
     if (addSuccess) {
-      // navigate(`/admin/listClients/${userDetail?.id}`);
       formik.resetForm();
       dispatch(addSuccessReset());
     }
@@ -667,7 +667,6 @@ const AddAccount = () => {
                           }}
                         >
                           <CustomInput
-                            // disabled={true}
                             id={"delay"}
                             type={"number"}
                             min={0}

@@ -1,5 +1,4 @@
 import { Table } from "react-bootstrap";
-// import { Link } from "react-router-dom";
 import isMobile from "../../../../utils/screenDimension";
 import BetStatusOverlay from "../../../commonComponent/betStatusOverlay";
 import YesNoBox from "../../../yesNo";
@@ -95,13 +94,11 @@ function CricketCasinoMarketTable({
                         style={{
                           display: "flex",
                           flexDirection: "column",
-                          // width: "100%",
                         }}
                       >
                         {!currSessionItem?.odds?.length && (
                           <YesNoBox
                             style={{ width: "200px" }}
-                            // overlay={true}
                             bgColor="blue3"
                             rate={0}
                             percent={0}
@@ -112,7 +109,6 @@ function CricketCasinoMarketTable({
                           return (
                             <YesNoBox
                               style={{ width: "200px" }}
-                              // overlay={true}
                               bgColor="blue3"
                               rate={oddData?.odds}
                               percent={oddData?.size}

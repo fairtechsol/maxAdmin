@@ -1,21 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  accountListModalReset,
   changeAmmountUser,
+  changePassword,
+  getAlreadyUserExist,
+  getSearchClientList,
+  getUserHeaderDetail,
   getUsers,
+  getUserWiseExposure,
+  resetSearchUserList,
+  resetUserWiseExposureList,
+  searchList,
   setCreditRefference,
   setExposureLimit,
   setLockUnlockUser,
-  changePassword,
   userBalance,
-  searchList,
-  accountListModalReset,
-  getAlreadyUserExist,
-  getUserHeaderDetail,
   userModalReset,
-  getSearchClientList,
-  resetSearchUserList,
-  getUserWiseExposure,
-  resetUserWiseExposureList,
 } from "../../actions/user/userActions";
 
 interface InitialState {

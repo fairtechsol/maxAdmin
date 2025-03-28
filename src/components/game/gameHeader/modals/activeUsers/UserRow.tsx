@@ -1,9 +1,9 @@
+import React, { useEffect, useState } from "react";
+import { Form } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { updateUserMatchLock } from "../../../../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../../../../store/store";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Form } from "react-bootstrap";
 
 const UserRow = ({ index, userName, userId, lock, type, setCheck }: any) => {
   const [userLock, setUserLock] = useState<boolean>(false);

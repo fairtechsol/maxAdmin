@@ -10,25 +10,13 @@ export let cardSocket: any = null;
 
 export const initialiseSocket = () => {
   socket = io(baseUrls.socket, {
-    transports: [`${Constants.WEBSOCKET}`,`${Constants.POLLING}`],
+    transports: [`${Constants.WEBSOCKET}`, `${Constants.POLLING}`],
     auth: {
       token: `${localStorage.getItem("jwtMaxAdmin")}`,
     },
   });
-  // thirdParty = io(baseUrls.thirdParty, {
-  //   transports: [
-  //     // process.env.NODE_ENV === "production"
-  //     //   ? `${Constants.POLLING}`
-  //     //   :
-  //        `${Constants.WEBSOCKET}`,`${Constants.POLLING}`
-  //   ],
-  //   auth: {
-  //     token: `${localStorage.getItem("jwtMaxAdmin")}`,
-  //   },
-  // });
   cardSocket = io(baseUrls.cardSocket, {
-    transports: [`${Constants.POLLING}`, `${Constants.WEBSOCKET}`,
-    ],
+    transports: [`${Constants.POLLING}`, `${Constants.WEBSOCKET}`],
   });
 };
 
@@ -37,15 +25,14 @@ export const initialiseMatchSocket = (matchId: string[]) => {
     transports: [
       process.env.NODE_ENV === "production"
         ? `${Constants.POLLING}`
-        :
-         `${Constants.WEBSOCKET}`
+        : `${Constants.WEBSOCKET}`,
     ],
     auth: {
       token: `${localStorage.getItem("jwtMaxAdmin")}`,
     },
     query: {
       matchIdArray: matchId,
-      roleName: "superAdmin"
+      roleName: "superAdmin",
     },
   });
 };
@@ -54,9 +41,7 @@ export const socketService = {
   connect: () => {
     try {
       initialiseSocket();
-      // Connect to the socket server
       socket?.connect();
-      // thirdParty?.connect();
       cardSocket?.connect();
     } catch (e) {
       console.log(e);
@@ -65,12 +50,10 @@ export const socketService = {
   disconnect: () => {
     try {
       socket?.disconnect();
-      // thirdParty?.disconnect();
       cardSocket?.disconnect();
     } catch (e) {
       console.log(e);
     }
-    // Disconnect from the socket server
   },
   auth: { ...authSocketService },
   match: { ...matchSocketService },

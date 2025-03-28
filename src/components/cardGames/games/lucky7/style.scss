@@ -9,7 +9,6 @@
   border-radius: 4px;
   margin-right: 5px;
   cursor: pointer;
-  // position: relative;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   -ms-border-radius: 4px;
@@ -48,12 +47,10 @@
   margin-left: 10px;
 }
 
-.lucky7Lock{
+.lucky7Lock {
   position: absolute;
   width: 100%;
   display: flex;
-  // justify-content: start;
-  // align-items: center;
   height: 100%;
   background-color: #ffffffb8;
   background-image: url(../../../../assets/baccarat/lock.svg);
@@ -61,24 +58,6 @@
   background-repeat: no-repeat;
   background-position: 50% 5%;
 }
-// .match-list-tabs {
-//   border-right: 1px solid $secondary !important;
-//   border-radius: 0px !important;
-//   background-color: $gray;
-//   // padding: 2px 10px;
-//   &:hover {
-//     border-right: 1px solid $secondary !important;
-//   }
-//   &.active {
-//     background-color: $secondary !important;
-//     border-color: transparent !important ;
-//   }
-// }
-
-// .navtem {
-//   padding: 0px !important;
-//   margin-top: 10px !important;
-// }
 
 .match-tabs {
   margin: 0 !important;
@@ -135,10 +114,8 @@
   width: 50%;
   display: flex;
   flex-wrap: wrap;
-  // padding: 5px 5px 0 5px;
 }
 .horse-time-detail a {
-  // margin-bottom: 0;
   display: flex;
 }
 .navi-link {
@@ -163,8 +140,8 @@
 }
 
 .navi-tabs .navi-link {
-  padding: 0; /* Remove padding from Nav.Link */
-  margin: 0; /* Remove margin from Nav.Link */
+  padding: 0;
+  margin: 0;
 }
 .tiePairContainer {
   width: 100%;
@@ -188,7 +165,6 @@
   gap: 3px;
 }
 
-
 .cardContainerLucky7 {
   width: 100%;
   background-color: #eee;
@@ -197,12 +173,6 @@
   flex-direction: column;
   justify-content: space-around;
 }
-
-
-
-// .horseRacingTab .nav-link{
-//   margin: 0 !important;
-// }
 
 @media (max-width: 768px) {
   .tabs-navs .nav-link {

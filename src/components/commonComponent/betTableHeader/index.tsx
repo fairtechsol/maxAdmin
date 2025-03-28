@@ -26,11 +26,11 @@ function BetTableHeader({
     ...style,
   };
 
-  const [showModal, setShowModal] = useState(false); // State to control modal visibility
-  const [showChildren,setShowChildren ] = useState<React.ReactNode>(null);
+  const [showModal, setShowModal] = useState(false);
+  const [showChildren, setShowChildren] = useState<React.ReactNode>(null);
   const handleButtonClick = () => {
-    setShowModal(true); // Show the modal on button click
-    setShowChildren(<ActiveUsers type="match" />); // Show ActiveUser content in modal
+    setShowModal(true);
+    setShowChildren(<ActiveUsers type="match" />);
   };
   return (
     <>
@@ -45,10 +45,7 @@ function BetTableHeader({
         {children}
         {type === "" ? null : type === MatchType.MATCH_ODDS ? (
           <div className="float-right">
-            <button
-            onClick={handleButtonClick}
-              className="btn btn-back"
-            >
+            <button onClick={handleButtonClick} className="btn btn-back">
               Bet Lock
             </button>
             <button
@@ -57,19 +54,19 @@ function BetTableHeader({
             >
               User Book
             </button>
-            
           </div>
         ) : (
-          <button
-            className="btn btn-back"
-            onClick={handleButtonClick}
-          >
+          <button className="btn btn-back" onClick={handleButtonClick}>
             Bet Lock
           </button>
         )}
-        <CustomModal show={showModal} setShow={setShowModal} title="Active User">
-        {showChildren}
-      </CustomModal>
+        <CustomModal
+          show={showModal}
+          setShow={setShowModal}
+          title="Active User"
+        >
+          {showChildren}
+        </CustomModal>
       </div>
     </>
   );

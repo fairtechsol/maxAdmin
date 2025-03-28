@@ -84,7 +84,6 @@ const matchListSlice = createSlice({
           firstHalfGoal,
           halfTime,
           overUnder,
-          // setWinner,
           completeManual,
           tournament,
           scoreBoard,
@@ -92,22 +91,8 @@ const matchListSlice = createSlice({
 
         state.liveScoreBoardData = scoreBoard?.data;
         state.loading = false;
-        // let parsedSessionBettings = sessionBettings?.map(
-        //   (item: any) => {
-        //     let parsedItem = JSON.parse(item);
-        //     return parsedItem;
-        //   }
-        // );
-        // let updatedFormat = convertData(parsedSessionBettings);
-
-        // let updatedSessionBettings = updateSessionBettingsItem(
-        //   updatedFormat,
-        //   apiSession
-        // );
         state.matchDetails = {
           ...state.matchDetails,
-          // manualSessionActive: sessionBettings?.length >= 0 ? true : false,
-          // apiSessionActive: apiSession?.length >= 0 ? true : false,
           gmid: action.payload?.gmid,
           apiSession: apiSession,
           apiTideMatch: apiTiedMatch,
@@ -125,11 +110,9 @@ const matchListSlice = createSlice({
           manualCompleteMatch: completeManual,
           sessionBettings: sessionBettings,
           tournament: tournament?.sort((a: any, b: any) => {
-            // Primary sort by sno (ascending)
             if (a.sno !== b.sno) {
               return a.sno - b.sno;
             }
-            // If sno values are equal, sort so that null parentId comes first
             if (a.parentBetId === null && b.parentBetId !== null) return -1;
             if (a.parentBetId !== null && b.parentBetId === null) return 1;
             return 0;
@@ -140,15 +123,6 @@ const matchListSlice = createSlice({
 
       .addCase(updateBalance.fulfilled, (state, action) => {
         const { jobData, userRedisObj } = action.payload;
-        // const {
-        //   newTeamRateData,
-        //   teamArateRedisKey,
-        //   teamBrateRedisKey,
-        //   teamCrateRedisKey,
-        //   betId,
-        //   matchBetType,
-        //   matchId,
-        // } = action.payload;
         if (jobData?.matchBetType === "tournament") {
           state.matchDetails = {
             ...state.matchDetails,

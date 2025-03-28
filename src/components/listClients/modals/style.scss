@@ -1,18 +1,17 @@
 @import "/src/assets/variable.scss";
 
-
-.listClientModals{
-    .input-container{
-        input,textarea{
-            text-align: right;
-            border-radius: 0 !important;
-            border-color: $black;
-            background-color: $white;
-        }
+.listClientModals {
+  .input-container {
+    input,
+    textarea {
+      text-align: right;
+      border-radius: 0 !important;
+      border-color: $black;
+      background-color: $white;
     }
-    
-    .input-inner-container{
-        flex: 2.5;
-    }
+  }
 
+  .input-inner-container {
+    flex: 2.5;
+  }
 }

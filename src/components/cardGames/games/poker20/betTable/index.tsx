@@ -40,7 +40,9 @@ const DynamicTable = ({ odds, data }: any) => {
           <div
             key={index}
             className={`w-100 d-flex back-BackGround justify-content-center align-items-center title-16 f600 ${
-              item?.gstatus === "SUSPENDED" || item?.gstatus === "0" ? "locked" : ""
+              item?.gstatus === "SUSPENDED" || item?.gstatus === "0"
+                ? "locked"
+                : ""
             }`}
             style={{ height: "40px" }}
           >

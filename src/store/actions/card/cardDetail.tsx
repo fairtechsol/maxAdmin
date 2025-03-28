@@ -1,8 +1,8 @@
 import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios, { AxiosError } from "axios";
+import moment from "moment-timezone";
 import service from "../../../service";
 import { ApiConstants, Constants } from "../../../utils/Constants";
-import moment from "moment-timezone";
 
 export const getDragonTigerDetailHorseRacing = createAsyncThunk<any, any>(
   "horseRacing/matchDetail",
@@ -80,12 +80,6 @@ export const transactionProviderBets = createAsyncThunk<any, any>(
     }
   }
 );
-// export const updateprofitLossDataMatchForHorseRacingOnDelete = createAsyncThunk<any, any>(
-//   "horseRacing/profitLossDataMatchUpdateOnDelete",
-//   async (data) => {
-//     return data;
-//   }
-// );
 export const updateCardMatchRates = createAsyncThunk<any, any>(
   "dt20/matchRatesUpdate",
   async (data) => {
@@ -190,10 +184,6 @@ export const casinoScoreboardMatchRates = createAsyncThunk<any, any>(
           "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
         },
       };
-      // const resp = await axios.get(
-      //   `${Constants.thirdPartyCard}${ApiConstants.SCOREBOARD.match}/${requestData?.id}?gameName=${requestData?.type}`,
-      //   config
-      // );
       const resp = await axios.get(
         `${Constants.thirdPartyLive}/cricketScore?eventId=${requestData?.id}`,
         config
@@ -212,7 +202,9 @@ export const transactionProviderName = createAsyncThunk<any, any>(
   "result/transactionProviderName",
   async (_, thunkApi) => {
     try {
-      const resp = await service.get(`${ApiConstants.REPORT.CASINO_REPORT_PROVIDERS}`);
+      const resp = await service.get(
+        `${ApiConstants.REPORT.CASINO_REPORT_PROVIDERS}`
+      );
       if (resp?.data) {
         return resp?.data;
       }
@@ -358,4 +350,6 @@ export const ballbyballMatchRates = createAsyncThunk<any, any>(
 );
 export const resetScoreBoard = createAction("scoreboard/reset");
 export const resetCardDetail = createAction("cardDetail/reset");
-export const transactionProviderBetsReset = createAction("transactionProviderBetsReset/reset");
+export const transactionProviderBetsReset = createAction(
+  "transactionProviderBetsReset/reset"
+);

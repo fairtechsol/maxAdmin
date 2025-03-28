@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
-// import CustomButton from "../../commonComponent/button";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import {
+  getMatchLockAllChild,
+  getUserDetailsOfLock,
+  updateUserMatchLock,
+} from "../../../store/actions/match/matchAction";
+import { AppDispatch, RootState } from "../../../store/store";
 import CustomModal from "../../commonComponent/modal";
 import GameHeaderDropdown from "./dropdown";
 import ActiveUser from "./modals/activeUsers";
 import BookMarkerBook from "./modals/bookMarkersBook";
 import UserBook from "./modals/userBook";
 import "./style.scss";
-import { AppDispatch, RootState } from "../../../store/store";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import {
-  getMatchLockAllChild,
-  updateUserMatchLock,
-  getUserDetailsOfLock,
-} from "../../../store/actions/match/matchAction";
 
 const GameHeader = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -106,20 +105,6 @@ const GameHeader = () => {
               },
             ]}
           />
-          {/* <CustomButton
-            variant="secondary"
-            type="submit"
-            onClick={() => setUserBookShow(true)}
-          >
-            User Book
-          </CustomButton>
-          <CustomButton
-            variant="secondary"
-            type="submit"
-            onClick={() => setBookmarkerShow(true)}
-          >
-            Bookmarkers Book
-          </CustomButton> */}
           <CustomModal
             customClass="modalFull-90"
             show={userBookShow}

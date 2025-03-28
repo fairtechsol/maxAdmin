@@ -2,21 +2,21 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import "./style.scss";
-import RulesModal from "../../../commonComponent/rulesModal";
-import UserBets from "../../../game/userBet";
 import { abjrules } from "../../../../assets";
+import { handleRoundId } from "../../../../helpers";
+import { RootState } from "../../../../store/store";
 import {
   cardGamesId,
   cardGamesType,
   cardUrl,
 } from "../../../../utils/Constants";
 import CardResultBox from "../../../commonComponent/cardResultBox";
+import RulesModal from "../../../commonComponent/rulesModal";
 import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
-import { RootState } from "../../../../store/store";
-import { handleRoundId } from "../../../../helpers";
+import UserBets from "../../../game/userBet";
 import Abj1Result from "./abj1Card";
 import CardBox from "./CardsBox";
+import "./style.scss";
 
 const AndarBahar1Component = () => {
   const [show, setShow] = useState(false);

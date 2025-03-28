@@ -7,7 +7,11 @@ interface PlayingCardProps {
   lock?: boolean;
 }
 
-export const PlayingCard: React.FC<PlayingCardProps> = ({ number, type, lock }) => {
+export const PlayingCard: React.FC<PlayingCardProps> = ({
+  number,
+  type,
+  lock,
+}) => {
   return (
     <div
       style={{
@@ -17,8 +21,8 @@ export const PlayingCard: React.FC<PlayingCardProps> = ({ number, type, lock }) 
         justifyContent: "center",
         alignItems: "center",
         background: lock ? `url(${back})` : "white",
-        height:  "40px",
-        width:  "30px",
+        height: "40px",
+        width: "30px",
         backgroundSize: "100%",
         padding: "0px",
       }}
@@ -29,8 +33,8 @@ export const PlayingCard: React.FC<PlayingCardProps> = ({ number, type, lock }) 
             style={{
               color: type === "heart" || type === "diamond" ? "red" : "black",
               fontWeight: "800",
-              lineHeight:  "1.2",
-              fontSize:  "18px",
+              lineHeight: "1.2",
+              fontSize: "18px",
             }}
           >
             {number}
@@ -70,7 +74,6 @@ interface HandleCardsProps2 {
 }
 
 export const HandleCards2: React.FC<HandleCardsProps2> = ({ card }) => {
-  
   const [type, setType] = useState("");
   const [number, setNumber] = useState("");
 
@@ -95,5 +98,3 @@ export const HandleCards2: React.FC<HandleCardsProps2> = ({ card }) => {
       return null;
   }
 };
-
-

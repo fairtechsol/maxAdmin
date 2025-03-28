@@ -2,22 +2,21 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
 import { Col, Container, Row, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import "./style.scss";
+import { p6rules } from "../../../../assets";
+import { handleRoundId } from "../../../../helpers";
 import { RootState } from "../../../../store/store";
 import {
   cardGamesId,
   cardGamesType,
   cardUrl,
 } from "../../../../utils/Constants";
-import { handleRoundId } from "../../../../helpers";
+import CardResultBox from "../../../commonComponent/cardResultBox";
+import RulesModal from "../../../commonComponent/rulesModal";
 import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
 import UserBets from "../../../game/userBet";
-import RulesModal from "../../../commonComponent/rulesModal";
-import { p6rules } from "../../../../assets";
-import Poker1DayResult from "./poker1DayCard";
 import DynamicTable from "./betTable";
-import CardResultBox from "../../../commonComponent/cardResultBox";
-// import PairBox from "./pairBox";
+import Poker1DayResult from "./poker1DayCard";
+import "./style.scss";
 
 const Poker1DayComponent = () => {
   const [show, setShow] = useState(false);
@@ -95,12 +94,6 @@ const Poker1DayComponent = () => {
                     playerNum={[8, 9]}
                   />
                 </div>
-                {/* <div style={{ width: "60%" }}>
-                  <PairBox
-                    odds={dragonTigerDetail?.playersBonusPair}
-                    data={dragonTigerDetail}
-                  />
-                </div> */}
               </div>
               <div style={{ width: "100%" }}>
                 <CardResultBox

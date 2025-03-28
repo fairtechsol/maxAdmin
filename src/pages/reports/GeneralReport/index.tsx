@@ -1,29 +1,22 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import SelectSearch from "../../../components/commonComponent/SelectSearch";
 import CustomTable from "../../../components/commonComponent/table";
 import { TableConfig } from "../../../models/tableInterface";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../../store/store";
 import { getGeneralReport } from "../../../store/actions/match/matchAction";
+import { AppDispatch, RootState } from "../../../store/store";
 
 interface Column {
   id: string;
   label: string;
 }
 
-// interface DataItem {
-//   [key: string]: string | number;
-// }
-
-// Example usage
 const columns: Column[] = [
   { id: "srNo", label: "Sr No." },
   { id: "userName", label: "Name" },
   { id: "amount", label: "Amount" },
 ];
-
-// const data: DataItem[] = [];
 
 const options = [
   { value: "balance", label: "General Report" },
@@ -120,22 +113,6 @@ const GeneralReport = () => {
               ))}
             </tr>
           ))}
-        <tr>
-          {/* <td></td>
-          <td>General Total</td>
-          <td>0</td>
-          <td></td>
-          <td>General Total</td> */}
-          {/* <td>
-            {gameGeneralList?.usersData?.reduce((acc: any, user: any) => {
-              return (
-                acc +
-                (user?.userBal?.currentBalance || 0) +
-                (user?.creditRefrence || 0)
-              );
-            }, 0)}
-          </td> */}
-        </tr>
       </CustomTable>
     </div>
   );

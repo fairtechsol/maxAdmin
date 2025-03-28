@@ -2,17 +2,17 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useRef, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import "./style.scss";
+import { crick20rules } from "../../../../assets";
+import { handleRoundId } from "../../../../helpers";
 import { RootState } from "../../../../store/store";
 import { cardGamesId, cardUrl } from "../../../../utils/Constants";
-import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
 import CardResultBox from "../../../commonComponent/cardResultBox";
-import UserBets from "../../../game/userBet";
 import RulesModal from "../../../commonComponent/rulesModal";
-import { handleRoundId } from "../../../../helpers";
-import Teen20Result from "./teenCard";
+import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
+import UserBets from "../../../game/userBet";
 import ScoreBox from "./scoreBox";
-import { crick20rules } from "../../../../assets";
+import "./style.scss";
+import Teen20Result from "./teenCard";
 
 interface ProfitLoss {
   pl: number;

@@ -40,7 +40,7 @@ const Bacarrat2 = () => {
       dispatch(updateProfitLossCards(event?.userRedisObj));
     }
   };
-  
+
   const handleLiveGameResultTop10 = (event: any) => {
     dispatch(updateLiveGameResultTop10(event?.data));
     dispatch(graphData(event?.graphdata));
@@ -48,7 +48,9 @@ const Bacarrat2 = () => {
 
   const handleCardResult = (event: any) => {
     if (event?.matchId === dragonTigerDetail?.id) {
-      dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
+      dispatch(
+        getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId })
+      );
     }
   };
 
@@ -59,7 +61,9 @@ const Bacarrat2 = () => {
   useEffect(() => {
     try {
       if (socket && dragonTigerDetail?.id) {
-        dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
+        dispatch(
+          getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId })
+        );
         socketService.card.getCardRatesOff(cardGamesType.baccarat2);
         socketService.card.userCardBetPlacedOff();
         socketService.card.cardResultOff();

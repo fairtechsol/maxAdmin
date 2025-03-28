@@ -46,7 +46,9 @@ const Cards32A = () => {
 
   const handleCardResult = (event: any) => {
     if (event?.matchId === dragonTigerDetail?.id) {
-      dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
+      dispatch(
+        getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId })
+      );
     }
   };
   const handleLiveGameResultTop10 = (event: any) => {
@@ -55,13 +57,15 @@ const Cards32A = () => {
   useEffect(() => {
     try {
       if (dragonTigerDetail?.id) {
-        dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
+        dispatch(
+          getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId })
+        );
       }
     } catch (e) {
       console.error(e);
     }
   }, [dragonTigerDetail?.id]);
-  
+
   const handleMatchResult = () => {
     dispatch(getUsersProfile());
   };

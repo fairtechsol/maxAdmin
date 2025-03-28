@@ -28,14 +28,12 @@ const TableHeader: React.FC<TableHeaderProps> = ({
   tableConfig,
   showHeaderEntries,
 }) => {
-  // const [keyword, setKeyword] = useState("");
 
   const handleSearch = (keyword: string) => {
     setTableConfig((prev: any) => {
       return { ...prev, keyword: keyword };
     });
   };
-  // useEffect(() => {}, [keyword]);
 
   return (
     <div className="d-flex justify-content-between align-items-center">

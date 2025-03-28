@@ -1,15 +1,12 @@
-import { useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../../store/store";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { useState } from "react";
-// import Modal from "react-bootstrap/Modal";
-import { ResultComponent } from "../resultComponent";
-import { ImClubs } from "react-icons/im";
-import { GiSpades } from "react-icons/gi";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { AppDispatch, RootState } from "../../../store/store";
 import { BiSolidHeart } from "react-icons/bi";
-import { ImDiamonds } from "react-icons/im";
+import { GiSpades } from "react-icons/gi";
+import { ImClubs, ImDiamonds } from "react-icons/im";
 import { resultDragonTiger } from "../../../store/actions/card/cardDetail";
+import { ResultComponent } from "../resultComponent";
 
 const CardResultBox = ({ data, name, type }: any) => {
   const navigate = useNavigate();
@@ -445,18 +442,24 @@ const CardResultBox = ({ data, name, type }: any) => {
           ))}
       </div>
       {lgShow && (
-  <div className="custom-modal-overlay mb-2" onClick={() => setLgShow(false)}>
-    <div
-      className="custom-modal-content"
-      onClick={(e) => e.stopPropagation()}
-    >
-      <div className="custom-modal-body">
-        <ResultComponent data={resultData} setfalse={setLgShow} type={type} />
-      </div>
-    </div>
-  </div>
-)}
-
+        <div
+          className="custom-modal-overlay mb-2"
+          onClick={() => setLgShow(false)}
+        >
+          <div
+            className="custom-modal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="custom-modal-body">
+              <ResultComponent
+                data={resultData}
+                setfalse={setLgShow}
+                type={type}
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

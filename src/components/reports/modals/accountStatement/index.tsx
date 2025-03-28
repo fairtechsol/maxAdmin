@@ -5,10 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Column, TableConfig } from "../../../../models/tableInterface";
 import { getBetAccountStatementModal } from "../../../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../../../store/store";
+import DeleteBetOverlay from "../../../commonComponent/deleteBetRow";
 import CustomTable from "../../../commonComponent/table";
 import "../style.scss";
 import TooltipCustom from "./tooltip";
-import DeleteBetOverlay from "../../../commonComponent/deleteBetRow";
 
 const AccountStatementModal = ({ item }: any) => {
   const { betAccountStatementModal } = useSelector(
@@ -21,7 +21,6 @@ const AccountStatementModal = ({ item }: any) => {
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
   useEffect(() => {}, [tableConfig]);
   const columns: Column[] = [
-    // { id: "sr", label: "sr" },
     { id: "upLevel", label: "	UpLevel" },
     { id: "UserName", label: "UserName" },
     { id: "Nation", label: "Nation" },

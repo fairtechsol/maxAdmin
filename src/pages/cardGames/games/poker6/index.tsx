@@ -47,7 +47,9 @@ const Poker6 = () => {
   };
   const handleCardResult = (event: any) => {
     if (event?.matchId === dragonTigerDetail?.id) {
-      dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
+      dispatch(
+        getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId })
+      );
     }
   };
   const handleMatchResult = () => {
@@ -56,7 +58,9 @@ const Poker6 = () => {
   useEffect(() => {
     try {
       if (socket && dragonTigerDetail?.id) {
-        dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
+        dispatch(
+          getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId })
+        );
         socketService.card.getCardRatesOff(cardGamesType.poker6);
         socketService.card.userCardBetPlacedOff();
         socketService.card.cardResultOff();

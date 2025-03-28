@@ -40,13 +40,30 @@ function ApiSessionMarketTable({
           <tr>
             <th className="border-0"></th>
 
-           {data?.gtype==="khado"?<th style={{ width: "50px" }}>
-              
-            </th> :<th className={`text-center ${sessionType==sessionBettingType.oddEven?"bg-blue3":"bg-red1"}`}style={{ width: "50px" }}>
-              {sessionType==sessionBettingType.oddEven?"Back":sessionType==sessionBettingType.fancy1?"Lay":"No"}
-            </th>}
+            {data?.gtype === "khado" ? (
+              <th style={{ width: "50px" }}></th>
+            ) : (
+              <th
+                className={`text-center ${
+                  sessionType == sessionBettingType.oddEven
+                    ? "bg-blue3"
+                    : "bg-red1"
+                }`}
+                style={{ width: "50px" }}
+              >
+                {sessionType == sessionBettingType.oddEven
+                  ? "Back"
+                  : sessionType == sessionBettingType.fancy1
+                  ? "Lay"
+                  : "No"}
+              </th>
+            )}
             <th className="text-center bg-blue3" style={{ width: "50px" }}>
-            {sessionType==sessionBettingType.oddEven||sessionType==sessionBettingType.fancy1||sessionType==sessionBettingType.khado?"Back":"Yes"}
+              {sessionType == sessionBettingType.oddEven ||
+              sessionType == sessionBettingType.fancy1 ||
+              sessionType == sessionBettingType.khado
+                ? "Back"
+                : "Yes"}
             </th>
             <th className="border-0" style={{ width: "100px" }}></th>
           </tr>
@@ -77,9 +94,12 @@ function ApiSessionMarketTable({
                           }
                         }}
                       >
-                        {data?.gtype===sessionBettingType.khado?`${item?.name}-${item?.ex?.availableToLay?.[0]?.price}`:item?.name}
+                        {data?.gtype === sessionBettingType.khado
+                          ? `${item?.name}-${item?.ex?.availableToLay?.[0]?.price}`
+                          : item?.name}
                       </div>
-                      <span className={`title-12 f400 ${
+                      <span
+                        className={`title-12 f400 ${
                           -Number(
                             parseFloat(
                               matchDetails?.profitLossDataSession?.find(
@@ -89,7 +109,8 @@ function ApiSessionMarketTable({
                           ) < 0
                             ? "color-red"
                             : ""
-                        }`}>
+                        }`}
+                      >
                         {matchDetails?.profitLossDataSession.length > 0
                           ? -Number(
                               parseFloat(
@@ -103,7 +124,14 @@ function ApiSessionMarketTable({
                     </div>
                   </td>
                   <td colSpan={3}>
-                    <BetStatusOverlay active={!["active","","open"].includes(item?.GameStatus?.toLowerCase())} title={item?.GameStatus}>
+                    <BetStatusOverlay
+                      active={
+                        !["active", "", "open"].includes(
+                          item?.GameStatus?.toLowerCase()
+                        )
+                      }
+                      title={item?.GameStatus}
+                    >
                       <div
                         style={{
                           display: "flex",
@@ -115,24 +143,36 @@ function ApiSessionMarketTable({
                           <YesNoBox
                             style={{ width: "50px" }}
                             // overlay={true}
-                            bgColor={`${sessionType==sessionBettingType.oddEven?"blue3":"red1"}`}
+                            bgColor={`${
+                              sessionType == sessionBettingType.oddEven
+                                ? "blue3"
+                                : "red1"
+                            }`}
                             rate={0}
                             percent={0}
                             onClick={handleClick}
                           />
                         )}
-                        {data?.gtype==="khado" ? <div style={{ width: "50px" }}></div> :item?.ex?.availableToLay?.map((oddData: any) => {
-                          return (
-                            <YesNoBox
-                              style={{ width: "50px" }}
-                              // overlay={true}
-                              bgColor={`${sessionType==sessionBettingType.oddEven?"blue3":"red1"}`}
-                              rate={oddData?.price}
-                              percent={oddData?.size}
-                              onClick={handleClick}
-                            />
-                          );
-                        })}
+                        {data?.gtype === "khado" ? (
+                          <div style={{ width: "50px" }}></div>
+                        ) : (
+                          item?.ex?.availableToLay?.map((oddData: any) => {
+                            return (
+                              <YesNoBox
+                                style={{ width: "50px" }}
+                                // overlay={true}
+                                bgColor={`${
+                                  sessionType == sessionBettingType.oddEven
+                                    ? "blue3"
+                                    : "red1"
+                                }`}
+                                rate={oddData?.price}
+                                percent={oddData?.size}
+                                onClick={handleClick}
+                              />
+                            );
+                          })
+                        )}
                       </div>
                       <div
                         style={{

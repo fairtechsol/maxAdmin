@@ -11,6 +11,10 @@ import CustomTable from "../../../components/commonComponent/table";
 import AccountStatementModal from "../../../components/reports/modals/accountStatement";
 import { TableConfig } from "../../../models/tableInterface";
 import {
+  transactionProviderBetsReset,
+  transactionProviderName,
+} from "../../../store/actions/card/cardDetail";
+import {
   getBetAccountStatementModal,
   getReportAccountList,
 } from "../../../store/actions/match/matchAction";
@@ -25,10 +29,6 @@ import {
   gameConstantsAccountStatement,
 } from "../../../utils/Constants";
 import LiveCasinoModal from "./liveCasinoModal";
-import {
-  transactionProviderBetsReset,
-  transactionProviderName,
-} from "../../../store/actions/card/cardDetail";
 // import isMobile from "../../../utils/screenDimension";
 
 interface Column {
@@ -389,11 +389,11 @@ const AccountStatement = () => {
 
   useEffect(() => {
     const currentDate = new Date();
-    const formattedCurrentDate = currentDate.toISOString().split("T")[0]; // Format as YYYY-MM-DD
+    const formattedCurrentDate = currentDate.toISOString().split("T")[0]; 
 
     const pastDate = new Date();
     pastDate.setDate(pastDate.getDate() - 7);
-    const formattedPastDate = pastDate.toISOString().split("T")[0]; // Format as YYYY-MM-DD
+    const formattedPastDate = pastDate.toISOString().split("T")[0];
 
     setDateFrom(formattedPastDate);
     setDateTo(formattedCurrentDate);
@@ -403,9 +403,7 @@ const AccountStatement = () => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 1199);
     };
-    // Add event listener to update isMobile on window resize
     window.addEventListener("resize", handleResize);
-    // Cleanup event listener on component unmount
     return () => {
       window.removeEventListener("resize", handleResize);
     };
@@ -455,15 +453,6 @@ const AccountStatement = () => {
                 ))}
               </Form.Select>
             </Form.Group>
-            {/* <SelectSearch
-              defaultValue="All"
-              // options={options}
-              placeholder="All"
-              label={"Account Type"}
-              value={aaccountTypeValues}
-              onChange={handleAccountTypeChange}
-              options={aaccountTypeOptions}
-            /> */}
           </Col>
           {aaccountTypeValues !== "3" && (
             <Col md={isMobile ? 12 : 2}>

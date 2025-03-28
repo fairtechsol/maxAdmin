@@ -1,11 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
-// routes
+
 import config from "../config";
 import AuthRoutes from "./authRoutes";
 import MainRoutes from "./mainRoutes";
-import ReportRoutes from "./reportRoutes";
 import OtherRoutes from "./otherRoutes";
-// ==============================|| ROUTING RENDER ||============================== //
+import ReportRoutes from "./reportRoutes";
 
 export default function routes() {
   return createBrowserRouter(

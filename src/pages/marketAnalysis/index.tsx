@@ -1,12 +1,12 @@
-import { useDispatch, useSelector } from "react-redux";
-import MarketAnalysisComp from "../../components/marketAnalysis";
-import { AppDispatch, RootState } from "../../store/store";
 import { useEffect, useState } from "react";
-import { getMarketAnalysis } from "../../store/actions/match/matchAction";
 import { FaSync } from "react-icons/fa";
-import "./style.scss";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
+import MarketAnalysisComp from "../../components/marketAnalysis";
+import { getMarketAnalysis } from "../../store/actions/match/matchAction";
+import { AppDispatch, RootState } from "../../store/store";
 import { ApiConstants } from "../../utils/Constants";
+import "./style.scss";
 
 const MarketAnalysis = () => {
   const dispatch: AppDispatch = useDispatch();

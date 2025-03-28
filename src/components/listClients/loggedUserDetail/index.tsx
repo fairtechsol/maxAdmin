@@ -1,10 +1,10 @@
 import { Accordion, Col } from "react-bootstrap";
 import { FaRegArrowAltCircleUp } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
+import { formatToINR } from "../../../helpers";
+import { userBalance } from "../../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../../store/store";
 import "./style.scss";
-import { userBalance } from "../../../store/actions/user/userActions";
-import { formatToINR } from "../../../helpers";
 
 const LoggedUserDetail = () => {
   const { userBalanceList } = useSelector(

@@ -32,9 +32,9 @@ interface InitialState {
   statusSuccess: boolean;
   error: any;
   childStatus: any;
-  userMatchBook:any;
-  userMatchLockSuccess:boolean;
-  userMatchLockError:boolean;
+  userMatchBook: any;
+  userMatchLockSuccess: boolean;
+  userMatchLockError: boolean;
 }
 
 const initialState: InitialState = {
@@ -43,16 +43,16 @@ const initialState: InitialState = {
   runAmount: [],
   userMatchLock: [],
   matchLockAllChild: [],
-  marketLockAllChild:[],
+  marketLockAllChild: [],
   userDetailsForParent: [],
   loading: false,
   success: false,
   statusSuccess: false,
   error: null,
   childStatus: {},
-  userMatchBook:[],
-  userMatchLockSuccess:false,
-  userMatchLockError:false
+  userMatchBook: [],
+  userMatchLockSuccess: false,
+  userMatchLockError: false,
 };
 
 const placedBetsSlice = createSlice({
@@ -228,17 +228,11 @@ const placedBetsSlice = createSlice({
         state.userMatchLockSuccess = false;
       })
       .addCase(updateBetsPlaced.fulfilled, (state, action) => {
-        const {newBet,userName} = action.payload;
-        // const {userName,betId} = action.payload?.newBet;
-        // const betId = action.payload?.betId;
-
+        const { newBet, userName } = action.payload;
         const isBetAlreadyPlaced = state.placedBets?.some(
           (item: any) => item?.id === newBet?.betId
         );
         if (!isBetAlreadyPlaced) {
-          // state.placedBets = [action.payload, ...state.placedBets];
-          // const betEntry = {...action.payload,user:{userName}};
-          // console.log(betEntry,'first');
           state.placedBets = [
             { ...newBet, user: { userName } },
             ...state.placedBets,

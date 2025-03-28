@@ -17,7 +17,7 @@ const CustomInput = (props: any) => {
     required,
     customstyle,
     onClick,
-    textAlign, // Add textAlign as a prop
+    textAlign,
     ...prop
   } = props;
 

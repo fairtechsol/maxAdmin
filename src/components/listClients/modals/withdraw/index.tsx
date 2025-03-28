@@ -161,8 +161,6 @@ const Withdraw = ({
                     customstyle="input-box"
                     bgColor="gray"
                     disabled={true}
-                    // value={2}
-                    // id="accountInput1"
                   />
                   <CustomInput
                     name="userUpdatedBalance"
@@ -173,8 +171,6 @@ const Withdraw = ({
                     bgColor="gray"
                     type="text"
                     disabled={true}
-                    // value={2}
-                    // id="accountInput2"
                   />
                 </div>
               </Col>

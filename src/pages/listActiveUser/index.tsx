@@ -23,7 +23,6 @@ import {
 } from "../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../store/store";
 import { ApiConstants } from "../../utils/Constants";
-// Example usage
 const columns: Column[] = [
   { id: "user.userName", label: "User Name", colSpan: 2 },
   { id: "user.creditRefrence", label: "Credit Reference" },
@@ -36,7 +35,6 @@ const columns: Column[] = [
   { id: "exposureLimit", label: "Exposure Limit" },
   { id: "default", label: "Default%" },
   { id: "user.roleName", label: "Account Type" },
-  // { id: "casino", label: "Casino Total" },
   { id: "actions", label: "Actions" },
 ];
 
@@ -61,12 +59,10 @@ const ListActiveInactiveUser: React.FC = () => {
   const [value, setValue] = useState<any>(50);
   const [keyword, setKeyWord] = useState<any>("");
   const [dataForMatchList, setDataForMatchList] = useState<any>({});
-  const [showUserWiseExposureModal, setShowUserWiseExposureModal] = useState(
-    false
-  );
-  const [showUserWiseMatchListModal, setShowUserWiseMatchListModal] = useState(
-    false
-  );
+  const [showUserWiseExposureModal, setShowUserWiseExposureModal] =
+    useState(false);
+  const [showUserWiseMatchListModal, setShowUserWiseMatchListModal] =
+    useState(false);
   const [userWiseExposureName, setUserWiseExposureName] = useState({
     name: "",
     id: "",
@@ -115,11 +111,6 @@ const ListActiveInactiveUser: React.FC = () => {
       name: "S",
       onClick: showEventModals,
     },
-    // {
-    //   id: "more",
-    //   name: "More",
-    //   onClick: () => { },
-    // },
   ];
 
   const { userList, loading } = useSelector(
@@ -378,56 +369,6 @@ const ListActiveInactiveUser: React.FC = () => {
                             {index === 5 &&
                               totalBalance &&
                               formatToINR(totalBalance?.availableBalance)}
-                            {/* {index === 1 &&
-                              userList &&
-                              formatToINR(
-                                localUserList?.reduce(
-                                  (acc: any, match: any) => {
-                                    return acc + +match?.creditRefrence;
-                                  },
-                                  0
-                                ) || 0
-                              )}
-                            {index === 2 &&
-                              userList &&
-                              formatToINR(
-                                localUserList?.reduce(
-                                  (acc: any, match: any) => {
-                                    return acc + +match?.balance;
-                                  },
-                                  0
-                                ) || 0
-                              )}
-                            {index === 3 &&
-                              userList &&
-                              formatToINR(
-                                localUserList?.reduce(
-                                  (acc: any, match: any) => {
-                                    return acc + +match?.userBal?.profitLoss;
-                                  },
-                                  0
-                                ) || 0
-                              )}
-                            {index === 4 &&
-                              userList &&
-                              formatToINR(
-                                localUserList?.reduce(
-                                  (acc: any, match: any) => {
-                                    return acc + +match?.userBal?.exposure;
-                                  },
-                                  0
-                                ) || 0
-                              )}
-                            {index === 5 &&
-                              userList &&
-                              formatToINR(
-                                localUserList?.reduce(
-                                  (acc: any, match: any) => {
-                                    return acc + +match?.availableBalance;
-                                  },
-                                  0
-                                ) || 0
-                              )} */}
                           </td>
                         );
                       })}
@@ -441,7 +382,6 @@ const ListActiveInactiveUser: React.FC = () => {
                           creditRefrence,
                           exposureLimit,
                           roleName,
-                          // matchCommission,
                           id,
                           userBlock,
                           betBlock,
@@ -573,43 +513,6 @@ const ListActiveInactiveUser: React.FC = () => {
                         );
                       })}
                   </CustomTable>
-                  {/* {activeUser?.length > 0 && (
-                    <div
-                      style={{
-                        width: "100%",
-                        marginTop: "5px",
-                        display: "flex",
-                        flexDirection: "row",
-                      }}
-                    >
-                      <div
-                        style={{
-                          width: "50%",
-                          display: "flex",
-                          justifyContent: "flex-start",
-                        }}
-                      >
-                        Showing 1 to {activeUser?.length} of{" "}
-                        {activeUser?.length} entries
-                      </div>
-                      <div
-                        style={{
-                          width: "50%",
-                          display: "flex",
-                          justifyContent: "flex-end",
-                          gap: "5px",
-                        }}
-                      >
-                        <CustomButton className={`actionBtn`} disabled>
-                          Previous
-                        </CustomButton>
-                        <CustomButton className={`actionBtn`}>1</CustomButton>
-                        <CustomButton className={`actionBtn`} disabled>
-                          Next
-                        </CustomButton>
-                      </div>
-                    </div>
-                  )} */}
                 </Tab.Pane>
                 <Tab.Pane eventKey="second">
                   <CustomTable
@@ -830,43 +733,6 @@ const ListActiveInactiveUser: React.FC = () => {
                         );
                       })}
                   </CustomTable>
-                  {/* {deactiveUser?.length > 0 && (
-                    <div
-                      style={{
-                        width: "100%",
-                        marginTop: "5px",
-                        display: "flex",
-                        flexDirection: "row",
-                      }}
-                    >
-                      <div
-                        style={{
-                          width: "50%",
-                          display: "flex",
-                          justifyContent: "flex-start",
-                        }}
-                      >
-                        Showing 1 to {deactiveUser?.length} of{" "}
-                        {deactiveUser?.length} entries
-                      </div>
-                      <div
-                        style={{
-                          width: "50%",
-                          display: "flex",
-                          justifyContent: "flex-end",
-                          gap: "5px",
-                        }}
-                      >
-                        <CustomButton className={`actionBtn`} disabled>
-                          Previous
-                        </CustomButton>
-                        <CustomButton className={`actionBtn`}>1</CustomButton>
-                        <CustomButton className={`actionBtn`} disabled>
-                          Next
-                        </CustomButton>
-                      </div>
-                    </div>
-                  )} */}
                 </Tab.Pane>
               </Tab.Content>
             </Tab.Container>

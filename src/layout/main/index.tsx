@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-// import { GiHamburgerMenu } from 'react-icons/gi';
 import { useDispatch, useSelector } from "react-redux";
 import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 import Loader from "../../components/commonComponent/loader";
@@ -65,14 +64,11 @@ function MainLayout({ eventKey }: any) {
 
   return (
     <>
-      {/* topbar */}
       {userBalanceLoading ? <Loader /> : null}
       <Topbar onClick={handleDrawer} toggle={toggle} />
-      {/* sidebar start */}
       <div className={`sidebar ${toggle ? "sidebarActive" : ""}`}>
         <Sidebar clickHandler={handleDrawer} />
       </div>
-      {/* layout */}
       {location.pathname.includes("/admin/active-inactive-user-list") &&
       summary &&
       !type ? (

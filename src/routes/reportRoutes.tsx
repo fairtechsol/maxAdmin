@@ -1,8 +1,7 @@
 import { lazy } from "react";
+import { Navigate } from "react-router-dom";
 import MainLayout from "../layout/main";
 import Loadable from "../utils/loadable";
-import { Navigate } from "react-router-dom";
-// ==============================|| Main ROUTING ||============================== //
 const AccountStatement = Loadable(
   lazy(() => import("../pages/reports/AccountStatement"))
 );

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import "../style.scss";
 import { dragonTigerCards } from "../../../../../utils/Constants";
+import "../style.scss";
 const CommonCardImg = ({ cardData, data }: any) => {
   const [cardImg, setCardImg] = useState(dragonTigerCards);
   useEffect(() => {
@@ -14,7 +14,7 @@ const CommonCardImg = ({ cardData, data }: any) => {
   }, [cardData]);
 
   return (
-    <div className="commonCardImgContainer" style={{gap:"50px"}}>
+    <div className="commonCardImgContainer" style={{ gap: "50px" }}>
       {cardImg?.map((item: any) => (
         <div className="d-flex flex-column justify-content-center align-items-center">
           <div
@@ -31,7 +31,6 @@ const CommonCardImg = ({ cardData, data }: any) => {
             <img src={item?.imgSrc} width={"48px"} height={"67px"} />
           </div>
           <span
-            // style={{ fontSize: "16px" }}
             className={`title-16 text-red f-bold ${
               data?.profitLoss
                 ? data?.profitLoss[`${data?.videoInfo?.mid}_${item?.sid}_card`]

@@ -1,10 +1,9 @@
-import { Container, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./style.scss";
+import { Col, Container, Row } from "react-bootstrap";
 import isMobile from "../../../utils/screenDimension";
+import "./style.scss";
 
 const ScoreBoard = ({ data }: any) => {
-  // console.log(data);
   return (
     <Container className="scorecard mb-1">
       <Row>

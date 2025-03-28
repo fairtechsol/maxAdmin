@@ -1,6 +1,6 @@
 import { useState } from "react";
-import "../ratebox/style.scss";
 import { formatNumber } from "../../../../../helpers";
+import "../ratebox/style.scss";
 const RateBox = ({ data, odds }: any) => {
   const [openDivIds, setOpenDivIds] = useState<string[]>([]);
   const toggleDiv = (id: string) => {

@@ -5,17 +5,17 @@ import Race20Component from "../../../../components/cardGames/games/race20";
 import Loader from "../../../../components/commonComponent/loader";
 import { socket, socketService } from "../../../../socketManager";
 import {
-    getCardDetailInitial,
-    getDragonTigerDetailHorseRacing,
-    resetCardDetail,
-    updateBalanceOnBetPlaceCards,
-    updateCardRace20Rates,
-    updateLiveGameResultTop10,
-    updateProfitLossCards,
+  getCardDetailInitial,
+  getDragonTigerDetailHorseRacing,
+  resetCardDetail,
+  updateBalanceOnBetPlaceCards,
+  updateCardRace20Rates,
+  updateLiveGameResultTop10,
+  updateProfitLossCards,
 } from "../../../../store/actions/card/cardDetail";
 import {
-    getPlacedBets,
-    updateBetsPlaced,
+  getPlacedBets,
+  updateBetsPlaced,
 } from "../../../../store/actions/match/matchAction";
 import { getUsersProfile } from "../../../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../../../store/store";
@@ -49,7 +49,9 @@ const Race20 = () => {
   };
   const handleCardResult = (event: any) => {
     if (event?.matchId === dragonTigerDetail?.id) {
-      dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
+      dispatch(
+        getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId })
+      );
     }
   };
   const handleMatchResult = () => {
@@ -58,7 +60,9 @@ const Race20 = () => {
   useEffect(() => {
     try {
       if (dragonTigerDetail?.id) {
-        dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
+        dispatch(
+          getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId })
+        );
       }
     } catch (e) {
       console.error(e);

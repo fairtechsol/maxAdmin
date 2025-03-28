@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import CustomTable from "../commonComponent/table";
 import { Column, TableConfig } from "../../models/tableInterface";
+import CustomTable from "../commonComponent/table";
 
 const HeaderFancyBook = ({ data }: any) => {
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
@@ -12,25 +12,23 @@ const HeaderFancyBook = ({ data }: any) => {
   ];
 
   return (
-    <>
-      <CustomTable
-        CustomTableClass=""
-        striped
-        tHeadTheme="bg-transparent text-white"
-        columns={columns}
-        itemCount={10}
-        setTableConfig={setTableConfig}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-      >
-        {data?.map((item: any, index: number) => (
-          <tr key={index}>
-            <td>{item?.eventname} </td>
-            <td>{item?.totallossamount} </td>
-          </tr>
-        ))}
-      </CustomTable>
-    </>
+    <CustomTable
+      CustomTableClass=""
+      striped
+      tHeadTheme="bg-transparent text-white"
+      columns={columns}
+      itemCount={10}
+      setTableConfig={setTableConfig}
+      currentPage={currentPage}
+      setCurrentPage={setCurrentPage}
+    >
+      {data?.map((item: any, index: number) => (
+        <tr key={index}>
+          <td>{item?.eventname} </td>
+          <td>{item?.totallossamount} </td>
+        </tr>
+      ))}
+    </CustomTable>
   );
 };
 

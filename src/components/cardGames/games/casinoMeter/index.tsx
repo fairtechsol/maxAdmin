@@ -2,21 +2,19 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useRef, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import "./style.scss";
-import { RootState } from "../../../../store/store";
 import { handleRoundId } from "../../../../helpers";
-import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
+import { RootState } from "../../../../store/store";
 import {
   cardGamesId,
   cardGamesType,
   cardUrl,
 } from "../../../../utils/Constants";
+import CardResultBox from "../../../commonComponent/cardResultBox";
+import RulesModal from "../../../commonComponent/rulesModal";
+import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
 import UserBets from "../../../game/userBet";
 import Meter from "./meter";
-//import LowCards from "./LowCards";
-import CardResultBox from "../../../commonComponent/cardResultBox";
-//import HighCards from "./HighCards";
-import RulesModal from "../../../commonComponent/rulesModal";
+import "./style.scss";
 
 const CasinoMeterComponent = () => {
   const placeBetRef = useRef<HTMLDivElement>(null);
@@ -80,42 +78,6 @@ const CasinoMeterComponent = () => {
                 }
                 dragonTigerDetai={dragonTigerDetail}
               />
-
-              {/* <div
-                style={{
-                  width: "100%",
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-around",
-                  gap: "10px",
-                  paddingTop: "10px",
-                }}
-              >
-                <LowCards
-                  odds={dragonTigerDetail?.low}
-                  data={dragonTigerDetail}
-                  placedLow={
-                    dragonTigerDetail?.videoInfo?.mid ==
-                    placedBets?.[0]?.runnerId
-                      ? placedBets?.[0]?.teamName == "Low"
-                        ? true
-                        : false
-                      : true
-                  }
-                />
-                <HighCards
-                  odds={dragonTigerDetail?.high}
-                  data={dragonTigerDetail}
-                  placedHigh={
-                    dragonTigerDetail?.videoInfo?.mid ==
-                    placedBets?.[0]?.runnerId
-                      ? placedBets?.[0]?.teamName == "High"
-                        ? true
-                        : false
-                      : true
-                  }
-                />
-              </div> */}
               <div style={{ width: "100%", marginTop: "10px" }}>
                 <CardResultBox
                   data={dragonTigerDetail}

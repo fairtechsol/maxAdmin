@@ -1,18 +1,18 @@
 import { useState } from "react";
 import { Table } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import {
+  getRunAmount,
+  resetRunAmount,
+} from "../../../../store/actions/match/matchAction";
+import { AppDispatch, RootState } from "../../../../store/store";
+import { teamStatus } from "../../../../utils/Constants";
 import BetStatusOverlay from "../../../commonComponent/betStatusOverlay";
 import CustomModal from "../../../commonComponent/modal";
 import YesNoBox from "../../../yesNo";
 import "../../style.scss";
 import TableRunner from "./tableRunner";
-import { teamStatus } from "../../../../utils/Constants";
-import { AppDispatch, RootState } from "../../../../store/store";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  getRunAmount,
-  resetRunAmount,
-} from "../../../../store/actions/match/matchAction";
 interface SessionMarketTableProps {
   data: any;
   title: any;

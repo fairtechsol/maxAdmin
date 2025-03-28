@@ -12,7 +12,7 @@ import { getAlreadyUserExist } from "../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../store/store";
 import { addMultiLoginAccountValidationSchema } from "../../utils/fieldValidations/multiLogin";
 import "./style.scss";
-// Example usage
+
 const columns: Column[] = [
   { id: "action", label: "Action" },
   { id: "username", label: "User Name" },
@@ -90,52 +90,10 @@ const MultiLogin: React.FC = () => {
     eventId: null,
     userData: null,
   });
-  //   const { userList } = useSelector((state: RootState) => state.user.userList);
   const { userAlreadyExist } = useSelector(
     (state: RootState) => state.user.userList
   );
-  //   const showEventModals = (id: any, userData: any) => {
-  //     setEventDetails({
-  //       show: true,
-  //       eventId: id,
-  //       userData: userData,
-  //     });
-  //   };
 
-  //   const actionButtons = [
-  //     {
-  //       id: "u",
-  //       name: "U",
-  //       onClick: showEventModals,
-  //     },
-  //     {
-  //       id: "s",
-  //       name: "S",
-  //       onClick: showEventModals,
-  //     },
-  //     {
-  //       id: "p",
-  //       name: "P",
-  //       onClick: showEventModals,
-  //     },
-
-  //   ];
-
-  //   useEffect(() => {
-  //     if (id) {
-  //       dispatch(
-  //         getUsers({
-  //           userId: id,
-  //           page: tableConfig?.page || 1,
-  //           limit: tableConfig?.rowPerPage,
-  //           userName: keyWord,
-  //           sort: "user.createdAt",
-  //           order: "DESC",
-  //           activeTab: "active",
-  //         })
-  //       );
-  //     }
-  //   }, []);
   const validator = addMultiLoginAccountValidationSchema(userAlreadyExist);
 
   const formik = useFormik({
@@ -232,14 +190,15 @@ const MultiLogin: React.FC = () => {
                   <Col md={2} sm={4} xs={12} key={item.id}>
                     <Form.Check
                       key={item.id}
-                      checked={item.active} // Adjust logic for checked state
+                      checked={item.active}
                       id={`opt${index + 1}`}
                       aria-label={item.name}
-                      label={item.name} // Display the name as a label
+                      label={item.name}
                       onChange={(e) => {
-                        const currElemIndex = formik.values?.privileges.findIndex(
-                          (items: any) => items.id == item.id
-                        );
+                        const currElemIndex =
+                          formik.values?.privileges.findIndex(
+                            (items: any) => items.id == item.id
+                          );
                         let temp = formik.values.privileges;
                         temp[currElemIndex].active = e.target.checked;
 

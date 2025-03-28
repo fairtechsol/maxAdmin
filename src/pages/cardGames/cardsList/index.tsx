@@ -1,7 +1,7 @@
-import { NavLink, useParams } from "react-router-dom";
-import "./index.scss";
 import { Col, Row } from "react-bootstrap";
+import { NavLink, useParams } from "react-router-dom";
 import { card3 } from "../../../utils/Constants";
+import "./index.scss";
 
 type Card3Keys = keyof typeof card3;
 

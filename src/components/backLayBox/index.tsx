@@ -11,7 +11,6 @@ interface props {
   onClick?: any;
   style?: React.CSSProperties;
   active?: boolean;
-  // onClick?: () => void;
 }
 function BackLayBox({
   customClass,
@@ -33,7 +32,7 @@ function BackLayBox({
       } bg-${bgColor}`}
       style={{ ...inlineStyle }}
     >
-      <BetStatusOverlay >
+      <BetStatusOverlay>
         <div
           className={`backLayBox text-center d-flex flex-column cursor-pointer`}
         >

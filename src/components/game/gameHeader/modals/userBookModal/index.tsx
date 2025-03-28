@@ -17,17 +17,15 @@ const UserBookModal = ({ data }: { data: any }) => {
         customClass="userbook"
         columns={columns}
         itemCount={1 || 0}
-        // data={rows || []}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
         setTableConfig={setTableConfig}
       >
-          <tr>
-        <td>DFGDF
-        </td>
-        <td>{"userName"}</td>
-        <td>{"userName"}</td>
-      </tr>
+        <tr>
+          <td>DFGDF</td>
+          <td>{"userName"}</td>
+          <td>{"userName"}</td>
+        </tr>
       </CustomTable>
     </div>
   );

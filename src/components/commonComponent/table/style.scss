@@ -1,76 +1,71 @@
-
 @import "/src/assets/variable.scss";
-.pdfExcel-btns{
-    box-shadow: 0px 5px 6px -6px $black;
-    padding: 2px 4.5px;
-    height: 34px;
+.pdfExcel-btns {
+  box-shadow: 0px 5px 6px -6px $black;
+  padding: 2px 4.5px;
+  height: 34px;
 }
-.sortIcon{
-    float: right;
-    cursor: pointer;
+.sortIcon {
+  float: right;
+  cursor: pointer;
 }
-.sortIconGray svg{
-    color: $gray;
+.sortIconGray svg {
+  color: $gray;
 }
-.sortIconDark svg{
-    color: $blue3;
+.sortIconDark svg {
+  color: $blue3;
 }
-.paginationBtn{
-    margin: 0px 10px ;
-    height: 37px !important;
+.paginationBtn {
+  margin: 0px 10px;
+  height: 37px !important;
 }
-.pagination{
-    margin-top: 10px;
-    align-items: center;
-    justify-content: space-between;
-    .paginationContainer{
-        display: flex;
-        right: 20px;
-        position: absolute;
-        margin-top: 20px;
-    }
+.pagination {
+  margin-top: 10px;
+  align-items: center;
+  justify-content: space-between;
+  .paginationContainer {
+    display: flex;
+    right: 20px;
+    position: absolute;
+    margin-top: 20px;
+  }
 }
-.rowPerPageSelect{
-    padding: 0px !important;
+.rowPerPageSelect {
+  padding: 0px !important;
 }
-.page-item{
-    margin: 0 5px;
-    .page-link{
-        border-radius: 4px;
-    }
+.page-item {
+  margin: 0 5px;
+  .page-link {
+    border-radius: 4px;
+  }
 }
 
-body .reportTable .tableSearchBox input{
-    width: 100px;
+body .reportTable .tableSearchBox input {
+  width: 100px;
 }
 // ==========other pages =========
 
-.commonTable.table.table-striped tr:nth-of-type(odd) td{
-    // .table.table-striped tr:nth-of-type(odd) td{
-        background: rgba(0,0,0, 0.03) ;
-    }
-    .commonTable tr th,
-    .commonTable tr td{
-    border: 2px solid $grayBlue;
-    height: 40px;
-    padding: 6px 5px ;
+.commonTable.table.table-striped tr:nth-of-type(odd) td {
+  // .table.table-striped tr:nth-of-type(odd) td{
+  background: rgba(0, 0, 0, 0.03);
+}
+.commonTable tr th,
+.commonTable tr td {
+  border: 2px solid $grayBlue;
+  height: 40px;
+  padding: 6px 5px;
 }
 .commonTable.reportTable th {
-    border-width: 1px;
-    border-bottom-color: $primary;
-    background-color: transparent;
-    font-size: 14px;
+  border-width: 1px;
+  border-bottom-color: $primary;
+  background-color: transparent;
+  font-size: 14px;
 }
-.commonTable.reportTable tr:nth-of-type(1) td{
-    border-top: 0;
+.commonTable.reportTable tr:nth-of-type(1) td {
+  border-top: 0;
 }
-.commonTable.reportTable tr:last-child td{
-    border-bottom: 1px solid $black;
+.commonTable.reportTable tr:last-child td {
+  border-bottom: 1px solid $black;
 }
-.commonTable .noRecord{
-    background-color: white;
+.commonTable .noRecord {
+  background-color: white;
 }
-
-
-
-

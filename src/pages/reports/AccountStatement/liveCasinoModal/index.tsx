@@ -1,12 +1,8 @@
 import { Col, Modal } from "react-bootstrap";
 import isMobile from "../../../../utils/screenDimension";
-// import SelectSearch from "../../commonComponent/SelectSearch";
-// import CustomButton from "../../commonComponent/button";
 import moment from "moment";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-// import { AppDispatch } from "../../../store/store";
-// import { transactionProviderBets } from "../../../store/actions/cards/cardDetail";
 import SelectSearch from "../../../../components/commonComponent/SelectSearch";
 import CustomButton from "../../../../components/commonComponent/button";
 import { transactionProviderBets } from "../../../../store/actions/card/cardDetail";
@@ -47,8 +43,6 @@ const LiveCasinoModal = ({
       }`}
     >
       <Modal.Header
-        // closeButton
-        // closeVariant={"white"}
         style={{ color: "#fff", backgroundColor: "#004A25" }}
       >
         <Modal.Title className="w-100">Result</Modal.Title>
@@ -152,13 +146,13 @@ const LiveCasinoModal = ({
                 updatedReport?.map((item: any) => {
                   return (
                     <div
-                      key={item?.transactionId} // Use a unique key
+                      key={item?.transactionId} 
                       className="w-100 d-flex flex-row"
                       style={{
                         border: "1px solid #c7c8ca",
                         height: "35px",
                         backgroundColor: "#f2f2f2",
-                        minWidth: "900px", // Set minimum width for horizontal scrolling
+                        minWidth: "900px",
                       }}
                     >
                       <div

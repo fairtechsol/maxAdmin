@@ -1,16 +1,5 @@
 import { isMobile } from "../../utils/screenDimension";
 import "./style.scss";
-// interface CricketData {
-//   spnnation1: string;
-//   spnnation2: string;
-//   score1: string;
-//   score2: string;
-//   spnrunrate1?: string;
-//   spnrunrate2?: string;
-//   spnmessage?: string;
-//   balls: string[];
-//   dayno: string;
-// }
 
 const Iframe = ({ data }: any) => {
   return (
@@ -83,7 +72,7 @@ const Iframe = ({ data }: any) => {
             <div className="row">
               <div className="col-12">
                 <div className="d-flex justify-content-center mb-3">
-                  {data?.balls?.map((ball:any, index:any) => (
+                  {data?.balls?.map((ball: any, index: any) => (
                     <div
                       key={index}
                       style={{
@@ -143,8 +132,6 @@ const Iframe = ({ data }: any) => {
                 )}
               </p>
             </div>
-
-            {/* Team 2 Details */}
             <div>
               <p className=" row" style={{ fontSize: "10px" }}>
                 <span className=" col-3" style={{ fontWeight: "semibold" }}>
@@ -161,7 +148,6 @@ const Iframe = ({ data }: any) => {
             </div>
           </div>
           <div style={{ width: "35%" }}>
-            {/* Match Message */}
             <div>
               {data?.spnmessage && (
                 <div
@@ -176,8 +162,6 @@ const Iframe = ({ data }: any) => {
                 </div>
               )}
             </div>
-
-            {/* Ball by Ball Status */}
             <div className="row">
               <div className="col-12">
                 <div className="d-flex justify-content-center mb-3">

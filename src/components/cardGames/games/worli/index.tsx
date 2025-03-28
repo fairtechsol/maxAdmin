@@ -2,29 +2,27 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useRef, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import "./style.scss";
+import { abjrules } from "../../../../assets";
+import { handleRoundId } from "../../../../helpers";
 import { RootState } from "../../../../store/store";
 import {
   cardGamesId,
   cardGamesType,
   cardUrl,
 } from "../../../../utils/Constants";
-import RulesModal from "../../../commonComponent/rulesModal";
-import { abjrules } from "../../../../assets";
 import CardResultBox from "../../../commonComponent/cardResultBox";
-import UserBets from "../../../game/userBet";
+import RulesModal from "../../../commonComponent/rulesModal";
 import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
-import { handleRoundId } from "../../../../helpers";
-import WorliResult from "./worliResult";
+import UserBets from "../../../game/userBet";
 import CardBox from "./CardsBox";
+import "./style.scss";
+import WorliResult from "./worliResult";
 
 const WorliComponent = () => {
   const [show, setShow] = useState(false);
   const placeBetRef = useRef<HTMLDivElement>(null);
   const [videoFrameId, setVideoFrameId] = useState("");
-  const { dragonTigerDetail } = useSelector(
-    (state: RootState) => state.card
-  );
+  const { dragonTigerDetail } = useSelector((state: RootState) => state.card);
 
   useEffect(() => {
     setVideoFrameId(`${cardUrl}${cardGamesId?.worli}`);
@@ -54,9 +52,7 @@ const WorliComponent = () => {
               </div>
               <div
                 style={{
-                  // flex: '1 0 auto',
                   width: "100%",
-                  // height: "92%",
                   backgroundColor: "#000",
                 }}
               >

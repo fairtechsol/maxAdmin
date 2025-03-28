@@ -29,7 +29,7 @@
   line-height: 0.8;
 }
 .backLayRunner {
-    width: max-content;
+  width: max-content;
   .backLayRunner-country {
     line-height: 1.8;
   }
@@ -37,8 +37,6 @@
 .borderTable.gameTable {
   border-color: $grayBlue !important;
 }
-
-
 
 .match-odd-bet-place-box {
   width: 76px;
@@ -74,11 +72,11 @@ m-b-10 {
   word-wrap: break-word;
   background-color: #fff;
   background-clip: border-box;
-  border: 1px solid rgba(0, 0, 0, .125);
-  border-radius: .25rem;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
 }
 .card-header:first-child {
-  border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
+  border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;
 }
 
 .card-header {
@@ -92,20 +90,21 @@ m-b-10 {
 }
 .card-header {
   background-color: #ffc742b3 !important;
-  padding: .75rem 1.25rem;
+  padding: 0.75rem 1.25rem;
   margin-bottom: 0;
-  background-color: rgba(0, 0, 0, .03);
-  border-bottom: 1px solid rgba(0, 0, 0, .125);
+  background-color: rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
 }
 
 .scorecard .card-body {
   background-color: #f9f9f9;
   padding: 10px;
 }
-.nav-link-a{
+.nav-link-a {
   font-size: 14px;
 }
-#matched th, #unmatched th {
+#matched th,
+#unmatched th {
   padding-left: 10px;
 }
 .my-bet .coupon-table thead th {
@@ -129,7 +128,8 @@ m-b-10 {
   padding-left: 0px;
   text-indent: -6px;
 }
-.table-bordered thead td, .table-bordered thead th {
+.table-bordered thead td,
+.table-bordered thead th {
   border-bottom-width: 2px;
 }
 .table thead th {
@@ -169,7 +169,6 @@ m-b-10 {
   vertical-align: middle;
   font-size: 14px;
   word-wrap: break-word;
-  /* max-width: 80px !important; */
 }
 @media screen and (max-width: 768px) {
   .gameTable table th,
@@ -177,23 +176,3 @@ m-b-10 {
     border: 1px solid $gray500 !important;
   }
 }
-// @media (min-width: 1200px) {
-//   .card {
-//     width: 100%;
-//   }
-// }
-
-// /* Adjust width for medium screens */
-// @media (max-width: 992px) {
-//   .card {
-//     width: 100%;
-//   }
-// }
-
-// /* Adjust width for small screens */
-// @media (max-width: 768px) {
-//   .card {
-//     width: 100%;
-//   }
-// }
-

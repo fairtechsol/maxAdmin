@@ -1,7 +1,6 @@
-import { ImClubs } from "react-icons/im";
-import { GiSpades } from "react-icons/gi";
 import { BiSolidHeart } from "react-icons/bi";
-import { ImDiamonds } from "react-icons/im";
+import { GiSpades } from "react-icons/gi";
+import { ImClubs, ImDiamonds } from "react-icons/im";
 
 const CommonButtonBox = ({
   value1,
@@ -18,7 +17,11 @@ const CommonButtonBox = ({
           {parseFloat(value1 ?? 0).toFixed(2)}
         </span>
       </div>
-      <div className={`tiePairbtn-theme back-BackGround ${lock ? "suspended" : ""}`}>
+      <div
+        className={`tiePairbtn-theme back-BackGround ${
+          lock ? "suspended" : ""
+        }`}
+      >
         <span>
           {value2 === "Red" ? (
             <>

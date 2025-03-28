@@ -69,13 +69,7 @@ const TeenPattiTableRow = ({ player, pairPlus, indx, cardsA }: any) => {
               : 0}
           </span>
         </div>
-        <div
-          className={`teenPatti-table-item ${
-            //pairPlus.gstatus === "0" ? "suspended" :
-            ""
-          }`}
-          style={{ width: "50%" }}
-        >
+        <div className="teenPatti-table-item" style={{ width: "50%" }}>
           <span className="f12-b">{pairPlus.nation}</span>
           <span
             className={`f10-b ${"profit-loss-class"} ${

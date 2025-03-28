@@ -4,10 +4,10 @@ import { Col, Modal, Row, Stack } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { changePassword } from "../../../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../../../store/store";
-import CustomInput from "../../../commonComponent/input";
-import ModalFooter from "../footer";
 import { oldPasswordValidationSchema } from "../../../../utils/fieldValidations/newPassword";
+import CustomInput from "../../../commonComponent/input";
 import Loader from "../../../commonComponent/loader";
+import ModalFooter from "../footer";
 
 const initialValues: any = {
   userid: "any",

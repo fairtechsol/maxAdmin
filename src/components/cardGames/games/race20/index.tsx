@@ -1,21 +1,20 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import "./style.scss";
+import { RootState } from "../../../../store/store";
 import {
   cardGamesId,
   cardGamesType,
   cardUrl,
 } from "../../../../utils/Constants";
 import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
-import { RootState } from "../../../../store/store";
-// import { handleRoundId } from "../../../../helpers";
-import UserBets from "../../../game/userBet";
+import "./style.scss";
 import CardResultBox from "../../../commonComponent/cardResultBox";
+import UserBets from "../../../game/userBet";
+import OddBox from "./OddBox";
 import Race20Result from "./race20Card";
 import TotalsBox from "./TotalBox";
 import WinBox from "./win";
-import OddBox from "./OddBox";
 
 const Race20Component = () => {
   const { dragonTigerDetail } = useSelector((state: RootState) => state.card);
@@ -26,7 +25,6 @@ const Race20Component = () => {
         <Col md={8}>
           <div className="horseRacingTab">
             <div style={{ width: "100%" }}>
-
               <div
                 style={{
                   // flex: '1 0 auto',
@@ -82,7 +80,6 @@ const Race20Component = () => {
                 />
               </div>
             </div>
-            {/* <RulesModal show={show} setShow={setShow} rule={race20rules} /> */}
           </div>
         </Col>
         <Col md={4}>

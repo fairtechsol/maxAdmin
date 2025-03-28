@@ -1,17 +1,14 @@
 import { Form } from "react-bootstrap";
-// import SelectSearch from "../../../commonComponent/SelectSearch";
-import CustomInput from "../../../commonComponent/input";
 import { useEffect, useState } from "react";
-// import { debounce } from "lodash";
+import CustomInput from "../../../commonComponent/input";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../../store/store";
-// import { searchList } from "../../../../store/actions/user/userActions";
+import UserBetModalTable from ".";
 import {
   getMorePlacedBets,
   getMorePlacedBetsReset,
 } from "../../../../store/actions/match/matchAction";
 import CustomButton from "../../../commonComponent/button";
-import UserBetModalTable from ".";
 
 const UserBetModalForm2 = ({ customClass, matchId, morePlacedBets }: any) => {
   const dispatch: AppDispatch = useDispatch();
@@ -240,48 +237,6 @@ const UserBetModalForm2 = ({ customClass, matchId, morePlacedBets }: any) => {
           </div>
 
           <div className="col-lg-12">
-            {/* <div className="flex-column d-flex align-items-start">
-            <div className="col-md-3">
-              <Form.Label>Amount</Form.Label>
-            </div>
-            <div className="col-md-8">
-              <div className="d-flex">
-                <div className="me-2">
-                  <CustomInput
-                    customstyle=" w-50"
-                    type="number"
-                    name="minAmount"
-                    placeholder="Amount From"
-                    value={inputFields.minAmount}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <CustomInput
-                  customstyle="w-50"
-                  type="number"
-                  name="maxAmount"
-                  placeholder="Amount To"
-                  value={inputFields.maxAmount}
-                  onChange={handleInputChange}
-                />
-              </div>
-            </div>
-          </div> */}
-
-            {/* <div className="col-md-3">
-              <Form.Group>Bet Type</Form.Group>
-            </div>
-            <div className="col-md-3">
-              <SelectSearch
-                defaultValue={options[0]}
-                options={options}
-                placeholder="All"
-                isMultiOption={false}
-                name="betType"
-                value={selectedOption}
-                onChange={handleChange}
-              />
-            </div> */}
             <div className="d-flex flex-row justify-content-between w-100 mt-5">
               <div className="d-flex flex-row justify-content-around align-items-center w-20">
                 <div className="d-flex flex-row justify-content-around align-items-center w-25">

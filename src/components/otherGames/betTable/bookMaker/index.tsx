@@ -122,7 +122,6 @@ function BookmakerTable({
                         <BackLayBox
                           style={{ width: "60px" }}
                           key={index}
-                          // customClass={`bookmaker-bet-place W-100`}
                           customClass="match-odd-bet-place-box"
                           bgColor={`blue${index + 1}`}
                           rate={
@@ -143,8 +142,6 @@ function BookmakerTable({
                         <BackLayBox
                           style={{ width: "60px" }}
                           key={index}
-                          //     customClass={`bookmaker-bet-place  ""
-                          // `}
                           customClass="match-odd-bet-place-box"
                           bgColor={`red${index + 1}`}
                           rate={

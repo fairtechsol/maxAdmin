@@ -1,6 +1,5 @@
-
-import PlayerButton from "../PlayerButton";
 import { formatNumber } from "../../../../../helpers";
+import PlayerButton from "../PlayerButton";
 
 const TiePairBox2 = ({ lowHigh, data }: any) => {
   const min = lowHigh?.min;
@@ -24,7 +23,6 @@ const TiePairBox2 = ({ lowHigh, data }: any) => {
   };
   return (
     <div className="tiePairContainer">
-
       <div className="tiePairRateBoxMainlucky">
         <PlayerButton
           value1={lowHigh?.b1 ?? 0}
@@ -39,10 +37,9 @@ const TiePairBox2 = ({ lowHigh, data }: any) => {
         />
       </div>
       <div className="title-12" style={{ textAlign: "end" }}>
-          <span>R:</span>
-          <span>{min}</span>-
-          <span>{formatNumber(max)}</span>
-        </div>
+        <span>R:</span>
+        <span>{min}</span>-<span>{formatNumber(max)}</span>
+      </div>
     </div>
   );
 };

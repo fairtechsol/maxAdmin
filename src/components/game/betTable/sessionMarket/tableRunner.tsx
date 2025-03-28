@@ -15,7 +15,6 @@ const TableRunner = ({ runAmount }: any) => {
     <div className="activeUsers-modal">
       <CustomTable
         bordered={true}
-        // striped
         columns={columns}
         itemCount={10}
         setTableConfig={setTableConfig}

@@ -1,12 +1,10 @@
+import moment from "moment-timezone";
 import { useEffect, useState } from "react";
 import { Column, TableConfig } from "../../../../models/tableInterface";
-import CustomTable from "../../../commonComponent/table";
-import "./style.scss";
-// import { useSelector } from "react-redux";
-// import { RootState } from "../../../../store/store";
-import moment from "moment-timezone";
-import TooltipCustom from "../../../reports/modals/accountStatement/tooltip";
 import DeleteBetOverlay from "../../../commonComponent/deleteBetRow";
+import CustomTable from "../../../commonComponent/table";
+import TooltipCustom from "../../../reports/modals/accountStatement/tooltip";
+import "./style.scss";
 
 function UserBetModalTable({
   selectedCheckedBet,
@@ -18,13 +16,10 @@ function UserBetModalTable({
 
   useEffect(() => {}, [tableConfig]);
   const columns: Column[] = [
-    // { id: "sr", label: "S. NO" },
     { id: "username", label: "	User Name " },
     { id: "nation", label: "Nation " },
     { id: "rate", label: "Rate " },
     { id: "amount", label: "Amount " },
-    // { id: "userRate", label: "UserRate " },
-    // { id: "placeDate", label: "PlaceDate " },
     { id: "matchDate", label: "Date " },
     { id: "ip", label: "IP " },
     { id: "browserDetail", label: "BrowserDetail " },
@@ -44,7 +39,6 @@ function UserBetModalTable({
   return (
     <div className="activeUsers-modal">
       <CustomTable
-        // striped
         columns={columns}
         itemCount={10}
         setTableConfig={setTableConfig}
@@ -68,7 +62,6 @@ function UserBetModalTable({
               betType,
               amount,
               odds,
-              // createdAt,
               match,
               ipAddress,
               browserDetail,
@@ -77,15 +70,6 @@ function UserBetModalTable({
 
             return (
               <tr key={id} className="position-relative">
-                {/* <td
-                  className={
-                    betType === "NO" || betType === "LAY"
-                      ? "bg-red1"
-                      : "bg-blue3"
-                  }
-                >
-                  {index + 1}
-                </td> */}
                 <td
                   className={
                     betType === "NO" || betType === "LAY"
@@ -122,24 +106,7 @@ function UserBetModalTable({
                 >
                   {amount}
                 </td>
-                {/* <td
-                  className={
-                    betType === "NO" || betType === "LAY"
-                      ? "bg-red1"
-                      : "bg-blue3"
-                  }
-                >
-                  {odds}
-                </td> */}
-                {/* <td
-                  className={
-                    betType === "NO" || betType === "LAY"
-                      ? "bg-red1"
-                      : "bg-blue3"
-                  }
-                >
-                  {moment(createdAt).format("YYYY-MM-DD hh:mm:ss")}
-                </td> */}
+
                 <td
                   className={
                     betType === "NO" || betType === "LAY"

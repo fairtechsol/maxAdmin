@@ -137,12 +137,9 @@ const reportListSlice = createSlice({
         state.error = null;
       })
       .addCase(getCardReport.fulfilled, (state, action) => {
-        // state.loading = false;
         state.casinoResultReport = action.payload;
       })
       .addCase(getCardReport.rejected, (state, action) => {
-        // state.loading = false;
-        // state.success = false;
         state.error = action?.error?.message;
       })
       .addCase(getCasinoReport.pending, (state) => {

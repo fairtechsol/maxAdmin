@@ -4,22 +4,20 @@ import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import BackLay from "./BackLay";
 import OddEven from "./OddEvenBox";
-// import PairBox from "./PairBox";
-// import CardBox from "./cardBox";
-import Dragon20Result from "./dragonCard";
-import "./style.scss";
-import UserBets from "../../../game/userBet";
+import { dtrules } from "../../../../assets";
+import { handleRoundId } from "../../../../helpers";
+import { RootState } from "../../../../store/store";
 import {
   cardGamesId,
   cardGamesType,
   cardUrl,
 } from "../../../../utils/Constants";
-import { RootState } from "../../../../store/store";
-import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
-import { handleRoundId } from "../../../../helpers";
 import CardResultBox from "../../../commonComponent/cardResultBox";
 import RulesModal from "../../../commonComponent/rulesModal";
-import { dtrules } from "../../../../assets";
+import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
+import UserBets from "../../../game/userBet";
+import Dragon20Result from "./dragonCard";
+import "./style.scss";
 
 const DragonTigerDesktop = () => {
   const [show, setShow] = useState(false);
@@ -43,9 +41,7 @@ const DragonTigerDesktop = () => {
                   : ""}
               </span>
             </div>
-            <div
-              style={{ width: "100%", backgroundColor: "#000" }}
-            >
+            <div style={{ width: "100%", backgroundColor: "#000" }}>
               <VideoFrame
                 data={dragonTigerDetail}
                 time={dragonTigerDetail?.videoInfo?.autotime}
@@ -54,10 +50,10 @@ const DragonTigerDesktop = () => {
               />
             </div>
           </div>
-          <div >
+          <div>
             <div
               className="d-sm-flex flex-row justify-content-around align-items-center"
-              style={{ width: "100%"}}
+              style={{ width: "100%" }}
             >
               <div className="w-100">
                 <BackLay
@@ -66,20 +62,14 @@ const DragonTigerDesktop = () => {
                   odds={dragonTigerDetail?.pair}
                 />
               </div>
-              {/* <div className="w-50">
-                <PairBox
-                  odds={dragonTigerDetail?.pair}
-                  data={dragonTigerDetail}
-                />
-              </div> */}
             </div>
             <div
               style={{
                 width: "100%",
                 display: "flex",
                 flexDirection: "row",
-                gap:"10px",
-                marginTop:"10px"
+                gap: "10px",
+                marginTop: "10px",
               }}
             >
               <OddEven
@@ -87,14 +77,14 @@ const DragonTigerDesktop = () => {
                 odds={dragonTigerDetail?.dragonData}
                 data={dragonTigerDetail}
               />
-              <div style={{width:"4px",backgroundColor:"#000"}}></div>
+              <div style={{ width: "4px", backgroundColor: "#000" }}></div>
               <OddEven
                 name={"Tiger"}
                 odds={dragonTigerDetail?.tigerData}
                 data={dragonTigerDetail}
               />
             </div>
-           
+
             <div style={{ width: "100%", margin: "5px" }}>
               <CardResultBox
                 data={dragonTigerDetail}

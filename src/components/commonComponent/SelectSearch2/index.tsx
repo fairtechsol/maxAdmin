@@ -4,11 +4,9 @@ import "./style.scss";
 
 const SelectSearch2 = (props: any) => {
   const {
-    //id,
     options,
     value,
     onChange,
-    //label,
     customClass,
     filedClass,
     SelectInline,
@@ -24,7 +22,6 @@ const SelectSearch2 = (props: any) => {
           customClass ?? ""
         }`}
       >
-        {/* {label && <Form.Label>{label}</Form.Label>} */}
         <div className={`modal-chekbox ${filedClass}`}>
           <div className="custom-radio-group">
             {options.map((option: any, index: number) => (

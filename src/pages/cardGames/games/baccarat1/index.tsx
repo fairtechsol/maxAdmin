@@ -48,7 +48,9 @@ const Bacarrat1 = () => {
 
   const handleCardResult = (event: any) => {
     if (event?.matchId === dragonTigerDetail?.id) {
-      dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
+      dispatch(
+        getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId })
+      );
     }
   };
 
@@ -59,7 +61,9 @@ const Bacarrat1 = () => {
   useEffect(() => {
     try {
       if (socket && dragonTigerDetail?.id) {
-        dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
+        dispatch(
+          getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId })
+        );
         socketService.card.getCardRatesOff(cardGamesType.baccarat);
         socketService.card.userCardBetPlacedOff();
         socketService.card.cardResultOff();

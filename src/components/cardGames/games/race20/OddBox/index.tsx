@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { HandleCards } from "../../../../commonComponent/cardsComponent";
 import { formatNumber } from "../../../../../helpers";
+import { HandleCards } from "../../../../commonComponent/cardsComponent";
 
 const OddBox = ({ odds, data }: any) => {
   const handleCardRender = (card: string) => {

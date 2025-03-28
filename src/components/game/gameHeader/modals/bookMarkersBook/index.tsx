@@ -6,17 +6,7 @@ const BookMarkerBook = () => {
   const [currentPage, setCurrentPage] = useState(1);
   useEffect(() => {}, [tableConfig]);
   const columns: Column[] = [
-    // { id: "sr", label: "S. NO" },
     { id: "username", label: "	User Name " },
-    // { id: "nation", label: "nation " },
-    // { id: "betType", label: "betType " },
-    // { id: "amount", label: "amount " },
-    // { id: "userRate", label: "userRate " },
-    // { id: "placeDate", label: "placeDate " },
-    // { id: "matchDate", label: "matchDate " },
-    // { id: "ip", label: "ip " },
-    // { id: "browserDetail", label: "browserDetail " },
-    // { id: "Checked", label: "Checked " },
   ];
 
   const data: any = [

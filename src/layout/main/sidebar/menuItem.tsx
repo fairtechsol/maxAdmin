@@ -18,11 +18,6 @@ interface Props {
 }
 
 const MenuItemChild = (props: any) => {
-  // const [toggle, setToggle] = useState<Boolean>(false);
-
-  // const handleDrawer = () => {
-  //   setToggle(!toggle);
-  // };
 
   const { data } = props;
   return (
@@ -51,28 +46,6 @@ const MenuCollapse = (props: any) => {
   const { competitionMatches } = useSelector(
     (state: RootState) => state.match.sidebarList
   );
-  // useEffect(() => {
-  //   try {
-  //     if (selectedCompetition !== "") {
-  //       const tempList = [...menuItemList];
-  //       const selectedMatchChildren = tempList[selectedMatchIndex].children;
-  //       const competitionIndex = selectedMatchChildren.findIndex(
-  //         (item: any) => item?.id === selectedCompetition
-  //       );
-  //       selectedMatchChildren[competitionIndex].children =
-  //         competitionDates &&
-  //         competitionDates?.map((item: any) => ({
-  //           name: moment(item?.startdate).format("YYYY/MM/DD"),
-  //           id: item?.startdate,
-  //           type: "collapse",
-  //           children: [],
-  //         }));
-  //       setMenuItemList(tempList);
-  //     }
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // }, [competitionDates, selectedCompetition, selectedMatchIndex]);
 
   useEffect(() => {
     try {

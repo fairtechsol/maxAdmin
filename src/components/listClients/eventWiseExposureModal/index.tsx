@@ -19,7 +19,6 @@ const columns: Column[] = [
 ];
 
 const EventWiseExposureModal = ({
-  // userWiseExposureName,
   setShowUserWiseMatchListModal,
   setDataForMatchList,
 }: any) => {
@@ -36,7 +35,6 @@ const EventWiseExposureModal = ({
   });
 
   useEffect(() => {
-    // dispatch(getUserWiseExposure(userWiseExposureName?.id));
     return () => {
       dispatch(resetUserWiseExposureList());
     };
