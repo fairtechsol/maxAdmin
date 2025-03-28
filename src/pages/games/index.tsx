@@ -4,7 +4,6 @@ import { Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import LiveStreamComponent from "../../components/commonComponent/liveStreamComponent";
-import BetTable from "../../components/game/betTable";
 import GameUserBets from "../../components/game/gameUserBets";
 import SessionCricketCasino from "../../components/game/sessionCricketCasino";
 import SessionFancy from "../../components/game/sessionFancy";
@@ -26,7 +25,6 @@ import {
 } from "../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../store/store";
 import { ApiConstants, liveStreamUrl } from "../../utils/Constants";
-import { MatchType } from "../../utils/enum";
 import { getTvData } from "../../utils/tvUrlGet";
 
 const Games = () => {
@@ -42,10 +40,6 @@ const Games = () => {
   const { matchDetails, success, liveScoreBoardData } = useSelector(
     (state: RootState) => state.match.matchListSlice
   );
-  const { breadCrumb } = useSelector(
-    (state: RootState) => state.match.sidebarList
-  );
-
   const { marketAnalysisDetail } = useSelector(
     (state: RootState) => state.match.marketAnalysis
   );
@@ -289,178 +283,158 @@ const Games = () => {
         <div className="gamePage-table">
           <Row className="no-gutters">
             <Col md={8}>
-              {breadCrumb && breadCrumb?.type === "tied_match" ? (
-                <Col md={12}>
-                  <BetTable
-                    title={"Runners"}
-                    type={MatchType.MATCH_ODDS}
-                    data={matchDetails?.apiTideMatch}
-                  />
-                </Col>
-              ) : (
-                <>
-                  <div
-                    className="w-100 d-flex flex-row justify-content-between align-items-center p-1"
-                    style={{ backgroundColor: "#ffc742", color: "#fff" }}
-                  >
-                    <span className="f-bold title-16">
-                      {matchDetails?.competitionName
-                        ? `${matchDetails?.competitionName} > ${matchDetails?.title}`
-                        : matchDetails?.title}
-                    </span>
-                    <span className="title-14">
-                      {moment(matchDetails?.startAt).format(
-                        "DD/MM/YYYY HH:mm:ss"
-                      )}
-                    </span>
-                  </div>
-
-                  {matchDetails?.tournament
-                    ?.filter((item: any) => item?.activeStatus === "live")
-                    ?.map((item: any, index: number) => {
+              <div
+                className="w-100 d-flex flex-row justify-content-between align-items-center p-1"
+                style={{ backgroundColor: "#ffc742", color: "#fff" }}
+              >
+                <span className="f-bold title-16">
+                  {matchDetails?.competitionName
+                    ? `${matchDetails?.competitionName} > ${matchDetails?.title}`
+                    : matchDetails?.title}
+                </span>
+                <span className="title-14">
+                  {moment(matchDetails?.startAt).format("DD/MM/YYYY HH:mm:ss")}
+                </span>
+              </div>
+              {matchDetails?.tournament
+                ?.filter((item: any) => item?.activeStatus === "live")
+                ?.map((item: any, index: number) => {
+                  return (
+                    <Col md={12} key={index}>
+                      <Tournament
+                        title={item?.name}
+                        box={
+                          item?.runners?.[0]?.ex?.availableToBack?.length > 2
+                            ? 6
+                            : 2
+                        }
+                        data={item}
+                        detail={matchDetails}
+                      />
+                    </Col>
+                  );
+                })}
+              <div
+                style={{
+                  display: "flex",
+                  width: "100%",
+                  flexWrap: isMobile ? "nowrap" : "wrap",
+                  gap: "1%",
+                }}
+                className={`${isMobile ? "flex-column" : ""}`}
+              >
+                {[
+                  {
+                    type: "session",
+                    title: "Normal",
+                    data: matchDetails?.apiSession?.session,
+                    component: SessionNormal,
+                  },
+                  {
+                    type: "overByover",
+                    title: "overByover",
+                    data: matchDetails?.apiSession?.overByover,
+                    component: SessionNormal,
+                  },
+                  {
+                    type: "ballByBall",
+                    title: "Ballbyball",
+                    data: matchDetails?.apiSession?.ballByBall,
+                    component: SessionNormal,
+                  },
+                  {
+                    title: "fancy1",
+                    data: matchDetails?.apiSession?.fancy1,
+                    component: SessionFancy,
+                  },
+                  {
+                    title: "khado",
+                    data: matchDetails?.apiSession?.khado,
+                    component: SessionKhado,
+                  },
+                  {
+                    type: "meter",
+                    title: "meter",
+                    data: matchDetails?.apiSession?.meter,
+                    component: SessionNormal,
+                  },
+                  {
+                    title: "oddeven",
+                    data: matchDetails?.apiSession?.oddEven,
+                    component: SessionOddEven,
+                  },
+                ].map((session, index) =>
+                  session.data?.section?.length > 0 ||
+                  (session.type === "session" && manualEntries?.length) ? (
+                    <div
+                      key={index}
+                      style={{ width: isMobile ? "100%" : "49.5%" }}
+                    >
+                      <Col md={12}>
+                        <session.component
+                          title={session.title}
+                          mtype={session.type}
+                          data={session.data}
+                          detail={matchDetails}
+                          manual={
+                            session.type === "session" && manualEntries
+                              ? manualEntries
+                              : []
+                          }
+                          marketAnalysisDetail={marketAnalysisDetail}
+                        />
+                      </Col>
+                    </div>
+                  ) : (
+                    ""
+                  )
+                )}
+              </div>
+              <div
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  gap: "1%",
+                }}
+              >
+                {matchDetails?.apiSession?.cricketCasino?.section?.length > 0 &&
+                  matchDetails?.apiSession?.cricketCasino?.section?.map(
+                    (item: any, index: number) => {
+                      let length =
+                        matchDetails?.apiSession?.cricketCasino?.section
+                          ?.length;
                       return (
-                        <Col md={12} key={index}>
-                          <Tournament
-                            title={item?.name}
-                            box={
-                              item?.runners?.[0]?.ex?.availableToBack?.length >
-                              2
-                                ? 6
-                                : 2
-                            }
-                            data={item}
-                            detail={matchDetails}
-                          />
-                        </Col>
-                      );
-                    })}
-
-                  <div
-                    style={{
-                      display: "flex",
-                      width: "100%",
-                      flexWrap: isMobile ? "nowrap" : "wrap",
-                      gap: "1%",
-                    }}
-                    className={`${isMobile ? "flex-column" : ""}`}
-                  >
-                    {[
-                      {
-                        type: "session",
-                        title: "Normal",
-                        data: matchDetails?.apiSession?.session,
-                        component: SessionNormal,
-                      },
-                      {
-                        type: "overByover",
-                        title: "overByover",
-                        data: matchDetails?.apiSession?.overByover,
-                        component: SessionNormal,
-                      },
-                      {
-                        type: "ballByBall",
-                        title: "Ballbyball",
-                        data: matchDetails?.apiSession?.ballByBall,
-                        component: SessionNormal,
-                      },
-                      {
-                        title: "fancy1",
-                        data: matchDetails?.apiSession?.fancy1,
-                        component: SessionFancy,
-                      },
-                      {
-                        title: "khado",
-                        data: matchDetails?.apiSession?.khado,
-                        component: SessionKhado,
-                      },
-                      {
-                        type: "meter",
-                        title: "meter",
-                        data: matchDetails?.apiSession?.meter,
-                        component: SessionNormal,
-                      },
-                      {
-                        title: "oddeven",
-                        data: matchDetails?.apiSession?.oddEven,
-                        component: SessionOddEven,
-                      },
-                    ].map((session, index) =>
-                      session.data?.section?.length > 0 ||
-                      (session.type === "session" && manualEntries?.length) ? (
                         <div
                           key={index}
-                          style={{ width: isMobile ? "100%" : "49.5%" }}
+                          style={{
+                            width: isMobile
+                              ? "100%"
+                              : length % 2 === 0
+                              ? "49.5%"
+                              : index === length - 1
+                              ? "100%"
+                              : "49.5%",
+                          }}
                         >
-                          <Col md={12}>
-                            <session.component
-                              title={session.title}
-                              mtype={session.type}
-                              data={session.data}
-                              detail={matchDetails}
-                              manual={
-                                session.type === "session" && manualEntries
-                                  ? manualEntries
-                                  : []
-                              }
-                              marketAnalysisDetail={marketAnalysisDetail}
-                            />
-                          </Col>
+                          {item?.activeStatus === "live" && (
+                            <Col md={12}>
+                              <SessionCricketCasino
+                                title={item?.RunnerName}
+                                data={item}
+                                detail={matchDetails}
+                                marketAnalysisDetail={marketAnalysisDetail}
+                              />
+                            </Col>
+                          )}
                         </div>
-                      ) : (
-                        ""
-                      )
-                    )}
-                  </div>
-
-                  <div
-                    style={{
-                      width: "100%",
-                      display: "flex",
-                      flexDirection: "row",
-                      flexWrap: "wrap",
-                      gap: "1%",
-                    }}
-                  >
-                    {matchDetails?.apiSession?.cricketCasino?.section?.length >
-                      0 &&
-                      matchDetails?.apiSession?.cricketCasino?.section?.map(
-                        (item: any, index: number) => {
-                          let length =
-                            matchDetails?.apiSession?.cricketCasino?.section
-                              ?.length;
-                          return (
-                            <div
-                              key={index}
-                              style={{
-                                width: isMobile
-                                  ? "100%"
-                                  : length % 2 === 0
-                                  ? "49.5%"
-                                  : index === length - 1
-                                  ? "100%"
-                                  : "49.5%",
-                              }}
-                            >
-                              {item?.activeStatus === "live" && (
-                                <Col md={12}>
-                                  <SessionCricketCasino
-                                    title={item?.RunnerName}
-                                    data={item}
-                                    detail={matchDetails}
-                                    marketAnalysisDetail={marketAnalysisDetail}
-                                  />
-                                </Col>
-                              )}
-                            </div>
-                          );
-                        }
-                      )}
-                  </div>
-                </>
-              )}
+                      );
+                    }
+                  )}
+              </div>
             </Col>
             <Col md={4} className="text-white">
-              {/* <GameHeader /> */}
               {matchDetails?.eventId && (
                 <LiveStreamComponent
                   url={

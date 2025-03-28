@@ -149,9 +149,7 @@ const SessionKhado = ({
                         : ""}
                     </span>
                   </div>
-                  <div
-                    className="sessionRateBoxContainer rateBoxWidthKhado"
-                  >
+                  <div className="sessionRateBoxContainer rateBoxWidthKhado">
                     {(item?.activeStatus != "live" ||
                       item?.GameStatus != "") && (
                       <div className="suspended-overlayRates">

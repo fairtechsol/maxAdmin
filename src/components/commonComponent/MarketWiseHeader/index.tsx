@@ -258,14 +258,12 @@ function MarketTableHeader({
         )}
 
         <Modal
-          // {...props}
           show={showModal1 && !loading}
           onHide={handleClose1}
           className={`customModal ${customClass} `}
         >
           <Modal.Header
             closeButton
-            // className={`${headerStyle ? headerStyle : ""}`}
           >
             <Modal.Title className={`${"Betlock"}`}>{"Betlock"}</Modal.Title>
           </Modal.Header>
@@ -357,7 +355,6 @@ function MarketTableHeader({
                   striped
                   columns={columns}
                   itemCount={userMatchBook?.length || 0}
-                  // data={rows || []}
                   currentPage={currentPage}
                   setCurrentPage={setCurrentPage}
                   setTableConfig={setTableConfig}

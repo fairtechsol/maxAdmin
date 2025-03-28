@@ -8,7 +8,7 @@ import SessionFancy from "../../components/game/sessionFancy";
 import SessionKhado from "../../components/game/sessionKhado";
 import SessionNormal from "../../components/game/sessionNormal";
 import SessionOddEven from "../../components/game/sessionOddEven";
-import BetTable from "../../components/otherGames/betTable";
+import Tournament from "../../components/game/tournament";
 import NavComponent from "../../components/otherGames/matchList";
 import OtherUserBets from "../../components/otherGames/userBets";
 import { matchService, socket, socketService } from "../../socketManager";
@@ -25,7 +25,6 @@ import {
   liveStreamUrl,
   scoreBoardUrlMain,
 } from "../../utils/Constants";
-import { MatchType } from "../../utils/enum";
 import isMobile from "../../utils/screenDimension";
 import { getTvData } from "../../utils/tvUrlGet";
 
@@ -256,7 +255,6 @@ const OtherGamesDetail = () => {
           "visibilitychange",
           handleVisibilityChange
         );
-        // socketService.match.leaveMatchRoom(id);
         socketService.match.getMatchRatesOff(id);
       };
     } catch (error) {
@@ -304,7 +302,6 @@ const OtherGamesDetail = () => {
           setMarketToShow={setMarketToShow}
           marketToShow={marketToShow}
         />
-        {/* table start here */}
         <div className="gamePage-table">
           <Row className="no-gutters">
             <Col md={8}>
@@ -327,20 +324,15 @@ const OtherGamesDetail = () => {
                 ?.filter((item: any) => item?.id === marketToShow)
                 ?.map((item: any) => (
                   <Col md={12} key={item?.id}>
-                    <BetTable
+                    <Tournament
                       title={item?.name}
-                      type={
-                        ["other", "tournament"]?.includes(item.type)
-                          ? MatchType.OTHER
-                          : [
-                              "quickbookmaker1",
-                              "quickbookmaker2",
-                              "quickbookmaker3",
-                            ]?.includes(item.type)
-                          ? MatchType.BOOKMAKER
-                          : MatchType.MATCH_ODDS
+                      box={
+                        item?.runners?.[0]?.ex?.availableToBack?.length > 2
+                          ? 6
+                          : 2
                       }
                       data={item}
+                      detail={matchDetails}
                     />
                   </Col>
                 ))}

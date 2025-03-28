@@ -32,9 +32,7 @@ const matchListSlice = createSlice({
         state.error = null;
       })
       .addCase(matchDetailAction.fulfilled, (state, action) => {
-        // state.loading = false;
         state.success = true;
-        // state.matchDetails = action.payload;
         state.matchDetails = {
           ...state.matchDetails,
           isBookmaker: action.payload?.isBookmaker,
@@ -68,26 +66,8 @@ const matchListSlice = createSlice({
         state.error = action?.error?.message;
       })
       .addCase(updateMatchRates.fulfilled, (state, action) => {
-        const {
-          apiSession,
-          apiTiedMatch,
-          apiTiedMatch2,
-          other,
-          bookmaker,
-          bookmaker2,
-          marketCompleteMatch,
-          marketCompleteMatch1,
-          matchOdd,
-          sessionBettings,
-          manualTideMatch,
-          quickbookmaker,
-          firstHalfGoal,
-          halfTime,
-          overUnder,
-          completeManual,
-          tournament,
-          scoreBoard,
-        } = action.payload;
+        const { apiSession, sessionBettings, tournament, scoreBoard } =
+          action.payload;
 
         state.liveScoreBoardData = scoreBoard?.data;
         state.loading = false;
@@ -95,21 +75,8 @@ const matchListSlice = createSlice({
           ...state.matchDetails,
           gmid: action.payload?.gmid,
           apiSession: apiSession,
-          apiTideMatch: apiTiedMatch,
-          apiTideMatch2: apiTiedMatch2,
-          bookmaker: bookmaker,
-          bookmaker2,
-          manualTiedMatch: manualTideMatch,
-          marketCompleteMatch: marketCompleteMatch,
-          marketCompleteMatch1,
-          matchOdd: matchOdd,
-          quickBookmaker: quickbookmaker,
-          firstHalfGoal,
-          halfTime,
-          overUnder,
-          manualCompleteMatch: completeManual,
           sessionBettings: sessionBettings,
-          tournament: tournament?.sort((a: any, b: any) => {
+          tournament: (tournament || [])?.sort((a: any, b: any) => {
             if (a.sno !== b.sno) {
               return a.sno - b.sno;
             }
@@ -117,7 +84,6 @@ const matchListSlice = createSlice({
             if (a.parentBetId !== null && b.parentBetId === null) return 1;
             return 0;
           }),
-          other,
         };
       })
 

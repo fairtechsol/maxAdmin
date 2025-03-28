@@ -76,7 +76,7 @@ const MarketAnalysis = () => {
         ? filteredDetail
         : marketAnalysisDetail
       )?.map((match: any) => (
-        <MarketAnalysisComp match={match} />
+        <MarketAnalysisComp key={match?.matchId} match={match} />
       ))}
     </div>
   );

@@ -10,7 +10,7 @@ const Tournament = ({ title, box, data, detail }: any) => {
   const { marketAnalysisDetail } = useSelector(
     (state: RootState) => state.match.marketAnalysis
   );
-  const key = `${data.parentBetId || data.id}_profitLoss_${detail.id}`;
+  const key = `${data?.parentBetId || data?.id}_profitLoss_${detail?.id}`;
 
   const profitLossJson = detail?.profitLossDataMatch?.[key];
 
@@ -92,7 +92,6 @@ const Tournament = ({ title, box, data, detail }: any) => {
                 <div
                   className="tournamentTeam"
                   style={isMobile && box === 6 ? { width: "28%" } : {}}
-                  // style={box === 6 ? { width: "28%" } : {}}
                 >
                   <span className={`teamFont tournamentTeamTxt`}>
                     {item?.nat || item?.runnerName}
