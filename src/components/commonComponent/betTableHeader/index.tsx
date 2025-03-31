@@ -50,7 +50,7 @@ function BetTableHeader({
             </button>
             <button
               className="btn btn-back"
-              onClick={() => console.log("User Book clicked")}
+              onClick={() => {}}
             >
               User Book
             </button>

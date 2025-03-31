@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
-import { Button, Col, Form, Row } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash";
 import moment from "moment-timezone";
-import { Tab, Tabs } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { Button, Col, Form, Row, Tab, Tabs } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import SelectSearch2 from "../../../components/commonComponent/SelectSearch2";
 import SelectSearch3 from "../../../components/commonComponent/SelectSearch3";
 import CustomTable from "../../../components/commonComponent/table";
@@ -75,7 +74,6 @@ const CurrentBets = () => {
     setBetList(ReportBetList);
   }, [ReportBetList]);
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  // console.log('betList',betList);
 
   useEffect(() => {
     dispatch(
