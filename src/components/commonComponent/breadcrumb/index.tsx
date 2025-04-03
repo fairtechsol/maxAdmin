@@ -1,10 +1,10 @@
+import moment from "moment-timezone";
 import React, { useState } from "react";
 import { Breadcrumb } from "react-bootstrap";
-import "./style.scss";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
-import moment from "moment-timezone";
-import { scoreBoardUrlMain } from "../../../utils/Constants";
+import { getTvData } from "../../../utils/tvUrlGet";
+import "./style.scss";
 interface ItemObj {
   name: string;
 }
@@ -13,9 +13,11 @@ interface Props {
   items: Array<ItemObj>;
   style?: React.CSSProperties;
   matchType?: string;
+  url?: string;
+  setTvData?: any;
 }
 
-function CustomBreadcrumb({ items, style, matchType }: Props) {
+function CustomBreadcrumb({ items, style, matchType, url, setTvData }: Props) {
   const [showScoreBoard, setShowScoreBoard] = useState(false);
   const { matchDetails } = useSelector(
     (state: RootState) => state.match.matchListSlice
@@ -30,6 +32,22 @@ function CustomBreadcrumb({ items, style, matchType }: Props) {
         style={{ ...inlineStyle }}
         onClick={() => {
           if (matchType !== "politics") {
+            if (!showScoreBoard) {
+              getTvData(
+                matchDetails?.eventId,
+                setTvData,
+                matchType,
+                false,
+                true
+              );
+            } else {
+              setTvData((prev: any) => {
+                return {
+                  ...prev,
+                  scoreData: null,
+                };
+              });
+            }
             setShowScoreBoard((prev: boolean) => !prev);
           }
         }}
@@ -67,9 +85,7 @@ function CustomBreadcrumb({ items, style, matchType }: Props) {
               left: 0,
               top: 0,
             }}
-            src={`${scoreBoardUrlMain}${matchDetails?.eventId}/${
-              matchDetails?.matchType === "football" ? "1" : "2"
-            }`}
+            src={url}
             title="Live Stream"
             referrerPolicy="strict-origin-when-cross-origin"
           ></iframe>

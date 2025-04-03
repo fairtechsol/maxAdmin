@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "../../assets/common.scss";
 import CustomButton from "../../components/commonComponent/button";
+import Loader from "../../components/commonComponent/loader";
 import CustomModal from "../../components/commonComponent/modal";
 import CustomTable from "../../components/commonComponent/table";
 import SearchBox from "../../components/commonComponent/table/tableUtils/search";
@@ -17,6 +18,7 @@ import {
   dropdownSummary,
   getTotalBalance,
   getUsers,
+  getUserWiseExposure,
   handleExport,
 } from "../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../store/store";
@@ -55,13 +57,16 @@ const ListActiveInactiveUser: React.FC = () => {
     eventId: null,
     userData: null,
   });
-  const [value, setValue] = useState<any>(25);
+
+  const [value, setValue] = useState<any>(50);
   const [keyword, setKeyWord] = useState<any>("");
   const [dataForMatchList, setDataForMatchList] = useState<any>({});
-  const [showUserWiseExposureModal, setShowUserWiseExposureModal] =
-    useState(false);
-  const [showUserWiseMatchListModal, setShowUserWiseMatchListModal] =
-    useState(false);
+  const [showUserWiseExposureModal, setShowUserWiseExposureModal] = useState(
+    false
+  );
+  const [showUserWiseMatchListModal, setShowUserWiseMatchListModal] = useState(
+    false
+  );
   const [userWiseExposureName, setUserWiseExposureName] = useState({
     name: "",
     id: "",
@@ -117,7 +122,9 @@ const ListActiveInactiveUser: React.FC = () => {
     // },
   ];
 
-  const { userList } = useSelector((state: RootState) => state.user.userList);
+  const { userList, loading } = useSelector(
+    (state: RootState) => state.user.userList
+  );
   const [localUserList, setLocalUserList] = useState([]);
   const { totalBalance } = useSelector(
     (state: RootState) => state.user.profile
@@ -239,6 +246,7 @@ const ListActiveInactiveUser: React.FC = () => {
 
   return (
     <>
+      {loading && <Loader />}
       <Container className="listClient listActiveUser" fluid>
         <Row>
           <Col>
@@ -253,6 +261,7 @@ const ListActiveInactiveUser: React.FC = () => {
                   setCurrentPage(1);
                   setValue(e.target.value);
                 }}
+                value={value}
               >
                 <option value={25}>25</option>
                 <option value={50}>50</option>
@@ -478,6 +487,7 @@ const ListActiveInactiveUser: React.FC = () => {
                                 cursor: "pointer",
                               }}
                               onClick={() => {
+                                dispatch(getUserWiseExposure(id));
                                 setShowUserWiseExposureModal(true);
                                 setUserWiseExposureName({
                                   name: userName,
@@ -891,7 +901,7 @@ const ListActiveInactiveUser: React.FC = () => {
             </span>
           </>,
         ]}
-        show={showUserWiseExposureModal}
+        show={showUserWiseExposureModal && !loading}
         setShow={setShowUserWiseExposureModal}
       >
         <EventWiseExposureModal

@@ -1,7 +1,7 @@
-import { Form } from "react-bootstrap";
-import CustomErrorMessage from "./CustomErrorMessage";
 import React from "react";
+import { Form } from "react-bootstrap";
 import { numberInputOnWheelPreventChange } from "../../../helpers";
+import CustomErrorMessage from "./CustomErrorMessage";
 const CustomInput = (props: any) => {
   const {
     title,
@@ -22,7 +22,7 @@ const CustomInput = (props: any) => {
   } = props;
 
   const inlineStyle: React.CSSProperties = {
-    textAlign: textAlign || '',
+    textAlign: textAlign || "",
     ...style,
   };
 
@@ -48,6 +48,8 @@ const CustomInput = (props: any) => {
           {...prop}
           style={{ ...inlineStyle }}
           onClick={onClick}
+          isInvalid={!!errors}
+          isValid={!errors}
         />
         <CustomErrorMessage touched={touched} errors={errors} />
       </Form.Group>

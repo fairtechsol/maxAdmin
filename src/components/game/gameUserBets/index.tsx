@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import moment from "moment-timezone";
+import { useState } from "react";
 import { Button, Col, Nav, Row, Tab, Table } from "react-bootstrap";
-import CustomModal from "../../commonComponent/modal";
-import "./style.scss";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import DeleteBetOverlay from "../../commonComponent/deleteBetRow";
-import moment from "moment-timezone";
+import CustomModal from "../../commonComponent/modal";
+import "./style.scss";
 // import UserBetModalForm from "../userBet/modal/form";
 import UserBetModalForm2 from "../userBet/modal/form2";
 
@@ -116,7 +116,7 @@ const GameUserBets = ({ matchId }: any) => {
                           >
                             <div className="w-100 d-flex flex-row justify-content-between">
                               <div className="w-50 d-flex text-black f700 title-16">
-                                {bet?.marketType}
+                                {bet?.bettingName||bet?.marketType}
                               </div>
                               <div className="w-50 d-flex text-black text-end">
                                 <span className="w-100">
@@ -129,7 +129,7 @@ const GameUserBets = ({ matchId }: any) => {
                             <div className="w-100 d-flex flex-row">
                               <div
                                 className="text-start text-black"
-                                style={{ width: "25%" }}
+                                style={{ width: "25%",wordWrap:"break-word" }}
                               >
                                 {bet?.user?.userName}
                               </div>

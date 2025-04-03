@@ -36,29 +36,33 @@
 
 .custom-radio-group {
   display: flex;
+  align-items: center;
+  margin-bottom: 10px;
   
 }
 
 .custom-radio {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   cursor: pointer;
-  margin-bottom: 10px;
   font-size: 14px;
   position: relative;
+  gap: "5px";
   padding-left: 20px;
   margin-left: 15px;
 }
 
 .custom-radio input[type="radio"] {
   position: absolute;
+  top: auto;
+  right: auto;
   opacity: 0;
   cursor: pointer;
 }
 
 .custom-radio .custom-radio-checkmark {
   position: absolute;
-  top: 0;
   left: 0;
   height: 14px;
   width: 14px;

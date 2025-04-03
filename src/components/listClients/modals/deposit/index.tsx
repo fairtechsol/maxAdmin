@@ -164,6 +164,7 @@ const Deposit = ({
                     customstyle="input-box"
                     bgColor="gray"
                     min={0}
+                    step="any"
                     disabled={true}
                     id="initialBalance"
                     {...getFieldProps("initialBalance")}
@@ -173,6 +174,7 @@ const Deposit = ({
                     bgColor="gray"
                     type="number"
                     min={0}
+                    step="any"
                     disabled={true}
                     id="updatedBalance"
                     {...getFieldProps("updatedBalance")}
@@ -194,6 +196,7 @@ const Deposit = ({
                     customstyle="input-box"
                     bgColor="gray"
                     disabled={true}
+                    step="any"
                     {...getFieldProps("userBalance")}
                   />
                   <CustomInput
@@ -202,6 +205,7 @@ const Deposit = ({
                     bgColor="gray"
                     type="number"
                     disabled={true}
+                    step="any"
                     {...getFieldProps("userUpdatedBalance")}
                   />
                 </div>
@@ -225,6 +229,7 @@ const Deposit = ({
                   touched={touched.amount}
                   errors={errors.amount}
                   min={0}
+                  step="any"
                   placeholder={"Amount"}
                   style={{
                     border: border?.amount ? "1px solid red" : "1px solid #000",

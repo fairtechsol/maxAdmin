@@ -10,7 +10,7 @@ const Tournament = ({ title, box, data, detail }: any) => {
   const { marketAnalysisDetail } = useSelector(
     (state: RootState) => state.match.marketAnalysis
   );
-  const key = `${data.id}_profitLoss_${detail.id}`;
+  const key = `${data.parentBetId || data.id}_profitLoss_${detail.id}`;
 
   const profitLossJson = detail?.profitLossDataMatch?.[key];
 
@@ -61,6 +61,30 @@ const Tournament = ({ title, box, data, detail }: any) => {
             {box === 6 && <div className="tournamentEmptyBox"></div>}
           </div>
         </div>
+
+        {(!data?.isActive ||
+          (!["ACTIVE", "OPEN", ""].includes(data?.status) &&
+            data?.gtype == "match")) && (
+          <div
+            className={`outer-suspended-overlayRatestournament ${
+              box === 6 ? "rateBoxWidth" : "rateBoxWidth2"
+            }`}
+            style={{
+              height: `${data?.runners?.length * 45}px`,
+              bottom: data?.rem ? "20px" : "0px",
+            }}
+          >
+            <span
+              className={`suspendTextCmmn`}
+              style={{ textTransform: "uppercase" }}
+            >
+              {!["ACTIVE", "OPEN", ""].includes(data?.status) &&
+              data?.gtype == "match"
+                ? data?.status
+                : ""}
+            </span>
+          </div>
+        )}
         {data?.runners?.length > 0 &&
           data?.runners?.map((item: any, index: any) => {
             return (
@@ -80,10 +104,11 @@ const Tournament = ({ title, box, data, detail }: any) => {
                           marketAnalysisDetail?.length
                             ? Object.values(
                                 marketAnalysisDetail?.[0]?.betType?.match?.find(
-                                  (item: any) => item.betId == data?.id
+                                  (item: any) =>
+                                    item.betId == (data.parentBetId || data?.id)
                                 )?.profitLoss || {}
                               )?.[index] ?? 0
-                            : profitLossObj?.[item.id]
+                            : profitLossObj?.[item.parentRunnerId || item.id]
                         ) > 0
                           ? "color-green"
                           : "color-red"
@@ -92,13 +117,14 @@ const Tournament = ({ title, box, data, detail }: any) => {
                       {marketAnalysisDetail?.length
                         ? (Object.values(
                             marketAnalysisDetail?.[0]?.betType?.match?.find(
-                              (item: any) => item.betId == data?.id
+                              (item: any) =>
+                                item.betId == (data.parentBetId || data?.id)
                             )?.profitLoss || {}
                           )?.[index] ??
                             0) ||
                           ""
-                        : profitLossObj?.[item.id]
-                        ? profitLossObj?.[item.id]
+                        : profitLossObj?.[item.parentRunnerId || item.id]
+                        ? profitLossObj?.[item.parentRunnerId || item.id]
                         : ""}
                     </span>
                   </div>
@@ -110,18 +136,21 @@ const Tournament = ({ title, box, data, detail }: any) => {
                       : "tournament2RateBox rateBoxWidth2"
                   }
                 >
-                  {item?.status !== "ACTIVE" &&
-                    item?.status !== "OPEN" &&
-                    item?.status !== "" && (
-                      <div className="suspended-overlayRatestournament">
-                        <span
-                          className={`suspendTextCmmn`}
-                          style={{ textTransform: "uppercase" }}
-                        >
-                          {item?.status}
-                        </span>
-                      </div>
-                    )}
+                  {!["ACTIVE", "OPEN", ""].includes(data?.status) &&
+                  data?.gtype == "match"
+                    ? ""
+                    : item?.status !== "ACTIVE" &&
+                      item?.status !== "OPEN" &&
+                      item?.status !== "" && (
+                        <div className="suspended-overlayRatestournament">
+                          <span
+                            className={`suspendTextCmmn`}
+                            style={{ textTransform: "uppercase" }}
+                          >
+                            {item?.status}
+                          </span>
+                        </div>
+                      )}
                   {box === 6 ? (
                     <>
                       {(item?.ex?.availableToBack?.length > 0

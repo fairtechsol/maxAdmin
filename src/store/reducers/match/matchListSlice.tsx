@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { convertData, updateSessionBettingsItem } from "../../../utils/helper";
 import {
   matchDetailAction,
   otherMatchDetailAction,
@@ -10,6 +9,7 @@ interface InitialState {
   success: boolean;
   loading: boolean;
   error: any;
+  liveScoreBoardData: any;
   matchDetails: any;
 }
 
@@ -18,6 +18,7 @@ const initialState: InitialState = {
   success: false,
   error: null,
   matchDetails: null,
+  liveScoreBoardData:null
 };
 
 const matchListSlice = createSlice({
@@ -60,6 +61,7 @@ const matchListSlice = createSlice({
           profitLossDataSession: action.payload?.profitLossDataSession,
           profitLossDataMatch: action.payload?.profitLossDataMatch,
           stopAt: action.payload?.stopAt ?? null,
+          sessionBettings: action.payload?.sessionBettings ?? [],
         };
       })
       .addCase(matchDetailAction.rejected, (state, action) => {
@@ -100,6 +102,7 @@ const matchListSlice = createSlice({
           profitLossDataSession: action.payload?.profitLossDataSession,
           profitLossDataMatch: action.payload?.profitLossDataMatch,
           stopAt: action.payload?.stopAt ?? null,
+          sessionBettings: action.payload?.sessionBettings ?? [],
         };
       })
       .addCase(otherMatchDetailAction.rejected, (state, action) => {
@@ -117,7 +120,7 @@ const matchListSlice = createSlice({
           marketCompleteMatch,
           marketCompleteMatch1,
           matchOdd,
-          // sessionBettings,
+          sessionBettings,
           manualTideMatch,
           quickbookmaker,
           firstHalfGoal,
@@ -126,27 +129,28 @@ const matchListSlice = createSlice({
           // setWinner,
           completeManual,
           tournament,
+          scoreBoard,
         } = action.payload;
-
+        
+        state.liveScoreBoardData = scoreBoard?.data;
         state.loading = false;
+        // let parsedSessionBettings = sessionBettings?.map(
+        //   (item: any) => {
+        //     let parsedItem = JSON.parse(item);
+        //     return parsedItem;
+        //   }
+        // );
+        // let updatedFormat = convertData(parsedSessionBettings);
 
-        let parsedSessionBettings = state?.matchDetails?.sessionBettings?.map(
-          (item: any) => {
-            let parsedItem = JSON.parse(item);
-            return parsedItem;
-          }
-        );
-        let updatedFormat = convertData(parsedSessionBettings);
-
-        let updatedSessionBettings = updateSessionBettingsItem(
-          updatedFormat,
-          apiSession
-        );
-
+        // let updatedSessionBettings = updateSessionBettingsItem(
+        //   updatedFormat,
+        //   apiSession
+        // );
         state.matchDetails = {
           ...state.matchDetails,
           // manualSessionActive: sessionBettings?.length >= 0 ? true : false,
           // apiSessionActive: apiSession?.length >= 0 ? true : false,
+          gmid:action.payload?.gmid,
           apiSession: apiSession,
           apiTideMatch: apiTiedMatch,
           apiTideMatch2: apiTiedMatch2,
@@ -161,8 +165,17 @@ const matchListSlice = createSlice({
           halfTime,
           overUnder,
           manualCompleteMatch: completeManual,
-          updatedSessionBettings: updatedSessionBettings,
-          tournament,
+          sessionBettings: sessionBettings,
+          tournament: tournament?.sort((a: any, b: any) => {
+            // Primary sort by sno (ascending)
+            if (a.sno !== b.sno) {
+              return a.sno - b.sno;
+            }
+            // If sno values are equal, sort so that null parentId comes first
+            if (a.parentBetId === null && b.parentBetId !== null) return -1;
+            if (a.parentBetId !== null && b.parentBetId === null) return 1;
+            return 0;
+          }),
           other,
         };
       })
@@ -183,8 +196,9 @@ const matchListSlice = createSlice({
             ...state.matchDetails,
             profitLossDataMatch: {
               ...state.matchDetails.profitLossDataMatch,
-              [jobData?.betId + "_profitLoss_" + jobData?.matchId]:
-                JSON.stringify(jobData?.newTeamRateData),
+              [jobData?.betId +
+              "_profitLoss_" +
+              jobData?.matchId]: JSON.stringify(userRedisObj),
             },
           };
         } else {
@@ -192,12 +206,15 @@ const matchListSlice = createSlice({
             ...state.matchDetails,
             profitLossDataMatch: {
               ...state.matchDetails.profitLossDataMatch,
-              [jobData?.teamArateRedisKey]:
-                userRedisObj[jobData?.teamArateRedisKey],
-              [jobData?.teamBrateRedisKey]:
-                userRedisObj[jobData?.teamBrateRedisKey],
-              [jobData?.teamCrateRedisKey]:
-                userRedisObj[jobData?.teamCrateRedisKey],
+              [jobData?.teamArateRedisKey]: userRedisObj[
+                jobData?.teamArateRedisKey
+              ],
+              [jobData?.teamBrateRedisKey]: userRedisObj[
+                jobData?.teamBrateRedisKey
+              ],
+              [jobData?.teamCrateRedisKey]: userRedisObj[
+                jobData?.teamCrateRedisKey
+              ],
             },
           };
         }

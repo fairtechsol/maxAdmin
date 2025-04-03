@@ -1,6 +1,7 @@
-import { Button, Card, Tab, Tabs } from "react-bootstrap";
 import { useEffect, useState } from "react";
+import { Button, Card, Tab, Tabs } from "react-bootstrap";
 import { FaAndroid } from "react-icons/fa";
+import OTPInput from "react-otp-input";
 import { useDispatch, useSelector } from "react-redux";
 import {
   generateAuthToken,
@@ -9,9 +10,8 @@ import {
   resendTokenToDisable,
 } from "../../store/actions/auth/authActions";
 import { AppDispatch, RootState } from "../../store/store";
-import "./style.scss";
-import OTPInput from "react-otp-input";
 import { serviceUrl } from "../../utils/Constants";
+import "./style.scss";
 
 const SecureAuth = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -215,11 +215,8 @@ const SecureAuth = () => {
                         </h4>
                         <p className="title-16">
                           Find{" "}
-                          <a
-                            target="_blank"
-                            href="https://t.me/max_bet_2_factor_auth_bot"
-                          >
-                            @max_bet_2_factor_auth_bot
+                          <a target="_blank" href="https://t.me/Auth07_bot">
+                            @Auth07_bot
                           </a>{" "}
                           in your telegram and type<kbd>/start</kbd> command.
                           Bot will respond you.

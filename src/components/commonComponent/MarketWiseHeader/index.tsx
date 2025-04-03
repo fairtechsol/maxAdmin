@@ -1,21 +1,22 @@
 import React, { ReactNode, useEffect, useState } from "react";
-import "./style.scss";
-import { MatchType } from "../../../utils/enum";
 import { Modal } from "react-bootstrap";
-import { AppDispatch, RootState } from "../../../store/store";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import CustomTable from "../../../components/commonComponent/table";
+import { TableConfig } from "../../../models/tableInterface";
 import {
   getMarketLockAllChild,
   getMarketLockChildReset,
   getMarketUserBook,
   updateUserMarketLock,
 } from "../../../store/actions/match/matchAction";
-import { TableConfig } from "../../../models/tableInterface";
-import CustomTable from "../../../components/commonComponent/table";
-import { toast } from "react-toastify";
+import { AppDispatch, RootState } from "../../../store/store";
+import { MatchType } from "../../../utils/enum";
+import "./style.scss";
 // import { RxCrossCircled } from "react-icons/rx";
 // import { IoCloseCircleOutline } from "react-icons/io5";
 import { AiOutlineCloseCircle } from "react-icons/ai";
+import Loader from "../loader";
 interface props {
   bgColor?: string;
   title: string;
@@ -47,7 +48,7 @@ function MarketTableHeader({
   children,
   type,
   data,
-  sessionType,
+  // sessionType,
   detail,
 }: props) {
   const inlineStyle: React.CSSProperties = {
@@ -93,6 +94,7 @@ function MarketTableHeader({
     userMatchBook,
     userMatchLockSuccess,
     userMatchLockError,
+    loading,
   } = useSelector((state: RootState) => state.match.placeBets);
   useEffect(() => {}, [tableConfig]);
   useEffect(() => {
@@ -190,7 +192,11 @@ function MarketTableHeader({
       );
     } else {
       dispatch(
-        getMarketUserBook({ id: detail?.id, type: data?.type, betId: data?.id })
+        getMarketUserBook({
+          id: detail?.id,
+          type: data?.type,
+          betId: data?.parentBetId || data?.id,
+        })
       );
     }
     setShowModal2(true);
@@ -237,6 +243,7 @@ function MarketTableHeader({
 
   return (
     <>
+      {loading && <Loader />}
       <div
         className={`tableHeader text-white d-flex f600 bg-${
           bgColor ? bgColor : "secondaryLight"
@@ -265,7 +272,7 @@ function MarketTableHeader({
 
         <Modal
           // {...props}
-          show={showModal1}
+          show={showModal1 && !loading}
           onHide={handleClose1}
           className={`customModal ${customClass} `}
         >
@@ -347,7 +354,7 @@ function MarketTableHeader({
         </Modal>
         <Modal
           // {...props}
-          show={showModal2}
+          show={showModal2 && !loading}
           onHide={handleClose2}
           className={`customModal ${customClass} custom-modal-width`}
         >

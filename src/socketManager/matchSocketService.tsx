@@ -1,22 +1,39 @@
-import { thirdParty, socket } from ".";
+import { socket, thirdParty } from ".";
+let currSocket: any = [];
 
 export const matchSocketService = {
-  joinMatchRoom: (matchId: any, roleName: any) => {
+  joinMatchRoom: (matchId: any) => {
     socket?.emit("matchRoom", {
       id: matchId,
     });
 
-    thirdParty?.emit("initCricketData", {
-      matchId: matchId,
-      roleName: roleName,
-    });
+    // thirdParty.emit("initCricketData", {
+    //   matchId: matchId,
+    //   roleName: roleName,
+    // });
+    // currSocket.push(
+    //   setInterval(() => {
+    //     thirdParty.emit("initCricketData", {
+    //       matchId: matchId,
+    //       roleName: roleName,
+    //     });
+    //   }, 120000)
+    // );
   },
   leaveMatchRoom: (matchId: any) => {
+    for (let item of currSocket) {
+      clearInterval(item);
+    }
+    currSocket = [];
     thirdParty?.emit("disconnectCricketData", {
       matchId: matchId,
     });
   },
   leaveAllRooms: () => {
+    for (let item of currSocket) {
+      clearInterval(item);
+    }
+    currSocket = [];
     socket?.emit("leaveAll");
   },
   matchAdded: (callback: any) => {
@@ -26,6 +43,10 @@ export const matchSocketService = {
     thirdParty?.on(`liveData${matchId}`, callback);
   },
   getMatchRatesOff: (matchId: any) => {
+    for (let item of currSocket) {
+      clearInterval(item);
+    }
+    currSocket = [];
     thirdParty?.off(`liveData${matchId}`);
   },
   userSessionBetPlaced: (callback: any) => {

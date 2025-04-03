@@ -1,18 +1,31 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { calculateMaxLoss, formatNumber, handleSize } from "../../../helpers";
-import { RootState } from "../../../store/store";
+import {
+  getRunAmount,
+  getRunAmountMeter,
+  resetRunAmount,
+} from "../../../store/actions/match/matchAction";
+import { AppDispatch, RootState } from "../../../store/store";
+import { sessionBettingType } from "../../../utils/Constants";
 import isMobile from "../../../utils/screenDimension";
 import MarketTableHeader from "../../commonComponent/MarketWiseHeader";
+import CustomModal from "../../commonComponent/modal";
+import TableRunner from "../betTable/sessionMarket/tableRunner";
 import "./style.scss";
 
 const SessionNormal = ({ title, data, detail, manual, mtype }: any) => {
   const [marketArr, setMarketArr] = useState(data?.section || []);
+  const [runnerModalShow, setRunnerModalShow] = useState(false);
   const { marketAnalysisDetail } = useSelector(
     (state: RootState) => state.match.marketAnalysis
   );
+  const { runAmount } = useSelector(
+    (state: RootState) => state.match.placeBets
+  );
+  const dispatch: AppDispatch = useDispatch();
   useEffect(() => {
-    const newMarketArr = [...(data?.section || []), ...(manual || [])];
+    const newMarketArr = [...(manual || []), ...(data?.section || [])];
     setMarketArr(newMarketArr);
   }, [data, manual]);
 
@@ -87,6 +100,34 @@ const SessionNormal = ({ title, data, detail, manual, mtype }: any) => {
                       <span
                         className="teamFont"
                         style={{ fontWeight: "400", lineHeight: 1 }}
+                        onClick={() => {
+                          // console.log("first", item);
+                          if (item.activeStatus === "save") {
+                            return true;
+                          } else if (
+                            calculateMaxLoss(
+                              detail?.profitLossDataSession,
+                              item?.id
+                            ) === 0
+                          ) {
+                            return;
+                          } else {
+                            if (
+                              ![
+                                sessionBettingType.fancy1,
+                                sessionBettingType.oddEven,
+                              ].includes(mtype)
+                            ) {
+                              dispatch(resetRunAmount());
+                              setRunnerModalShow((prev) => !prev);
+                              if (title === "meter") {
+                                dispatch(getRunAmountMeter(item?.id));
+                              } else {
+                                dispatch(getRunAmount(item?.id));
+                              }
+                            }
+                          }
+                        }}
                       >
                         {item?.RunnerName || item?.name}
                       </span>{" "}
@@ -280,6 +321,9 @@ const SessionNormal = ({ title, data, detail, manual, mtype }: any) => {
           </div>
         </div>
       </div>
+      <CustomModal show={runnerModalShow} setShow={setRunnerModalShow}>
+        <TableRunner runAmount={runAmount} />
+      </CustomModal>
     </>
   );
 };

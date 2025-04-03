@@ -2,7 +2,11 @@ import { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 //import SelectSearch from "../../../components/commonComponent/SelectSearch";
+import _ from "lodash";
+import moment from "moment-timezone";
+import { Tab, Tabs } from "react-bootstrap";
 import SelectSearch2 from "../../../components/commonComponent/SelectSearch2";
+import SelectSearch3 from "../../../components/commonComponent/SelectSearch3";
 import CustomTable from "../../../components/commonComponent/table";
 import { TableConfig } from "../../../models/tableInterface";
 import {
@@ -10,10 +14,6 @@ import {
   betReportAccountListReset,
 } from "../../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../../store/store";
-import _ from "lodash";
-import moment from "moment-timezone";
-import SelectSearch3 from "../../../components/commonComponent/SelectSearch3";
-import { Tabs, Tab } from "react-bootstrap";
 import "./style.scss";
 
 interface Column {
@@ -26,12 +26,12 @@ const columns: Column[] = [
   { id: "eventType", label: "Event Type" },
   { id: "eventName", label: "Event Name" },
   { id: "user.userName", label: "Username" },
-  { id: "marketType", label: "M Name" },
+  { id: "bettingName", label: "M Name" },
   { id: "teamName", label: "Nation" },
   { id: "odds", label: "User Rate" },
   { id: "amount", label: "Amount" },
   { id: "createdAt", label: "Place Date" },
-  // { id: "startAt", label: "Match Date" },
+  // { id: "startAt", label: "Match Date" }, //eventName
 ];
 
 const options = [
@@ -280,6 +280,8 @@ const CurrentBets = () => {
                             ? moment(getStartAt(item))
                                 .tz(timezone)
                                 .format("YYYY-MMM-DD h:mmA [IST]")
+                            : column?.id === "bettingName"
+                            ? item.bettingName || item.eventName
                             : _.get(item, column.id)}
                         </td>
                       ))}
@@ -295,7 +297,7 @@ const CurrentBets = () => {
         <Tab eventKey="tab2" title="Casino">
           {/* Render the same form and table, you can customize based on tab if necessary */}
           <Form onSubmit={(e) => handleLoad(e)} className="mt-1">
-            <Row className="mb-4 d-flex align-items-center">
+            <Row className="d-flex align-items-center">
               <Col md={3}>
                 <SelectSearch2
                   defaultValue={[selectType]}
@@ -304,6 +306,10 @@ const CurrentBets = () => {
                   value={selectType}
                   onChange={handleType}
                 />
+              </Col>
+            </Row>
+            <Row className="d-flex align-items-center">
+              <Col md={3}>
                 <SelectSearch3
                   defaultValue={[selectType2]}
                   options={options2}
@@ -312,10 +318,7 @@ const CurrentBets = () => {
                   onChange={handleType2}
                 />
               </Col>
-              <Col md={2} className="d-flex align-items-center">
-                <Form.Label className="invisible d-block mt-1">
-                  Label
-                </Form.Label>
+              <Col md={2}>
                 <Button type="submit">Load</Button>
               </Col>
             </Row>

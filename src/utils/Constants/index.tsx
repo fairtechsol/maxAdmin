@@ -189,66 +189,70 @@ export const Constants = {
 };
 
 export const cardUrl =
-  process.env.NODE_ENV === "production"
-    ? "https://maxbet07.com/videoPage/"
-    : "https://maxbet07.com/videoPage/";
+process.env.NODE_ENV === "production"
+? "https://alpha-n.qnsports.live/route/jat.php?id="
+: "https://alpha-n.qnsports.live/route/jat.php?id=";
 
-export const liveStreamUrlCricket = "https://maxbet07.com/liveStreamCricket/";
-export const liveStreamUrl = "https://maxbet07.com/liveStream/";
-export const scoreBoardUrlMain = "https://maxbet07.com/scoreBoardPage/";
+export const liveStreamUrlCricket =
+  "https://dpmatka.in/dd.php?sportId=4&eventId=";
+export const liveStreamUrl = "https://maxbet07.com";
+export const tvUrl = "https://serviceapi.fairgame7.com";
+export const scoreBoardUrlMain =
+  "https://dpmatka.in/anm.php?type=scorecard&eventId=";
 
+  
 // const oldVideoUrl = "https://video.proexch.in/route/?id="
-// use below baseUrl for live build
-
-export const serviceUrl =
-  process.env.NODE_ENV === "production"
-    ? Constants.apiBasePath
-    : Constants.localPath;
-
-export const baseUrls = {
-  socket:
-    process.env.NODE_ENV === "production"
-      ? `${Constants.apiBasePath}`
-      : `${Constants.localPath}`,
-  thirdParty:
-    process.env.NODE_ENV === "production"
-      ? `${Constants.thirdParty}`
-      : `${Constants.localPathThird}`,
-  expertSocket:
-    process.env.NODE_ENV === "production"
-      ? `${Constants.expertPath}`
-      : `${Constants.localPathExpert}`,
-  cardSocket:
-    process.env.NODE_ENV === "production"
-      ? Constants.thirdPartyCard
-      : Constants.localThirdCard,
-};
-
 // use below baseUrl for live build
 
 // export const serviceUrl =
 //   process.env.NODE_ENV === "production"
-//     ? Constants.apiBasePathLive
+//     ? Constants.apiBasePath
 //     : Constants.localPath;
 
 // export const baseUrls = {
 //   socket:
 //     process.env.NODE_ENV === "production"
-//       ? `${Constants.apiBasePathLive}`
+//       ? `${Constants.apiBasePath}`
 //       : `${Constants.localPath}`,
 //   thirdParty:
 //     process.env.NODE_ENV === "production"
-//       ? `${Constants.thirdPartyLive}`
+//       ? `${Constants.thirdParty}`
 //       : `${Constants.localPathThird}`,
 //   expertSocket:
 //     process.env.NODE_ENV === "production"
-//       ? `${Constants.expertPathLive}`
+//       ? `${Constants.expertPath}`
 //       : `${Constants.localPathExpert}`,
 //   cardSocket:
 //     process.env.NODE_ENV === "production"
-//       ? Constants.thirdPartyCardLive
+//       ? Constants.thirdPartyCard
 //       : Constants.localThirdCard,
 // };
+
+// use below baseUrl for live build
+
+export const serviceUrl =
+  process.env.NODE_ENV === "production"
+    ? Constants.apiBasePathLive
+    : Constants.localPath;
+
+export const baseUrls = {
+  socket:
+    process.env.NODE_ENV === "production"
+      ? `${Constants.apiBasePathLive}`
+      : `${Constants.localPath}`,
+  thirdParty:
+    process.env.NODE_ENV === "production"
+      ? `${Constants.thirdPartyLive}`
+      : `${Constants.localPathThird}`,
+  expertSocket:
+    process.env.NODE_ENV === "production"
+      ? `${Constants.expertPathLive}`
+      : `${Constants.localPathExpert}`,
+  cardSocket:
+    process.env.NODE_ENV === "production"
+      ? Constants.thirdPartyCardLive
+      : Constants.localThirdCard,
+};
 
 export const teamStatus = {
   suspended: "suspended",

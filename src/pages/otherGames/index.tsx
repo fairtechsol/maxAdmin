@@ -12,7 +12,7 @@ import SessionOddEven from "../../components/game/sessionOddEven";
 import BetTable from "../../components/otherGames/betTable";
 import NavComponent from "../../components/otherGames/matchList";
 import OtherUserBets from "../../components/otherGames/userBets";
-import { socket, socketService } from "../../socketManager";
+import { matchService, socket, socketService } from "../../socketManager";
 import {
   getMarketAnalysis,
   getPlacedBets,
@@ -22,15 +22,22 @@ import {
   updatePlacedbetsDeleteReason,
 } from "../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../store/store";
-import { ApiConstants, liveStreamUrl } from "../../utils/Constants";
+import {
+  ApiConstants,
+  liveStreamUrl,
+  scoreBoardUrlMain,
+} from "../../utils/Constants";
 import { MatchType } from "../../utils/enum";
 import isMobile from "../../utils/screenDimension";
+import { getTvData } from "../../utils/tvUrlGet";
 
 const OtherGamesDetail = () => {
   const dispatch: AppDispatch = useDispatch();
   const { pathname, state } = useLocation();
   const navigate = useNavigate();
   const [marketToShow, setMarketToShow] = useState<any>("");
+  const [tvData, setTvData] = useState<any>(null);
+
   const { breadCrumb } = useSelector(
     (state: RootState) => state.match.sidebarList
   );
@@ -40,6 +47,15 @@ const OtherGamesDetail = () => {
   const { matchDetails, success } = useSelector(
     (state: RootState) => state.match.matchListSlice
   );
+
+  useEffect(() => {
+    if (id) {
+      matchService.connect([id]);
+    }
+    return () => {
+      matchService.disconnect();
+    };
+  }, [id]);
 
   const updateMatchDetailToRedux = (event: any) => {
     try {
@@ -192,7 +208,7 @@ const OtherGamesDetail = () => {
         socketService.match.sessionResultOff();
         socketService.match.updateDeleteReasonOff();
         socketService.match.sessionResultUnDeclareOff();
-        socketService.match.joinMatchRoom(id, "superAdmin");
+        socketService.match.joinMatchRoom(id);
         socketService.match.getMatchRates(id, updateMatchDetailToRedux);
         socketService.match.matchDeleteBet(handleDeleteBet);
         socketService.match.sessionDeleteBet(handleDeleteBet);
@@ -217,7 +233,7 @@ const OtherGamesDetail = () => {
     try {
       if (id) {
         return () => {
-          socketService.match.leaveMatchRoom(id);
+          // socketService.match.leaveMatchRoom(id);
           socketService.match.getMatchRatesOff(id);
           socketService.match.userSessionBetPlacedOff();
           socketService.match.userMatchBetPlacedOff();
@@ -246,11 +262,11 @@ const OtherGamesDetail = () => {
             //   otherMatchDetailAction({ matchId: id, matchType: "football" })
             // );
             dispatch(getPlacedBets({ id: id, userId: state?.userId }));
-            socketService.match.joinMatchRoom(id, "superAdmin");
+            socketService.match.joinMatchRoom(id);
             socketService.match.getMatchRates(id, updateMatchDetailToRedux);
           }
         } else if (document.visibilityState === "hidden") {
-          socketService.match.leaveMatchRoom(id);
+          // socketService.match.leaveMatchRoom(id);
           socketService.match.getMatchRatesOff(id);
         }
       };
@@ -261,7 +277,7 @@ const OtherGamesDetail = () => {
           "visibilitychange",
           handleVisibilityChange
         );
-        socketService.match.leaveMatchRoom(id);
+        // socketService.match.leaveMatchRoom(id);
         socketService.match.getMatchRatesOff(id);
       };
     } catch (error) {
@@ -289,6 +305,18 @@ const OtherGamesDetail = () => {
     }
   }, [state]);
 
+  useEffect(() => {
+    if (matchDetails?.eventId) {
+      getTvData(
+        matchDetails?.eventId,
+        setTvData,
+        matchDetails?.matchType,
+        true,
+        true
+      );
+    }
+  }, [matchDetails?.id]);
+
   return (
     <div className="gamePage">
       <Container fluid>
@@ -301,14 +329,18 @@ const OtherGamesDetail = () => {
         <div className="gamePage-table">
           <Row className="no-gutters">
             <Col md={8}>
-              {["football", "tennis", "politics"]?.includes(
-                matchDetails?.matchType
-              ) && (
+              {["football", "tennis"]?.includes(matchDetails?.matchType) && (
                 <CustomBreadcrumb
                   items={[
                     { name: matchDetails?.title || breadCrumb?.matchName },
                   ]}
                   matchType={matchDetails?.matchType}
+                  url={
+                    process.env.NODE_ENV == "production"
+                      ? tvData?.scoreData?.iframeUrl
+                      : `${scoreBoardUrlMain}${matchDetails?.eventId}/${matchDetails?.matchType}`
+                  }
+                  setTvData={setTvData}
                 />
               )}
               {updatedMarket
@@ -389,7 +421,7 @@ const OtherGamesDetail = () => {
                 ]
                   ?.filter(
                     (item: any) =>
-                      item?.type?.toLowerCase() === marketToShow.toLowerCase()
+                      item?.type?.toLowerCase() === marketToShow?.toLowerCase()
                   )
                   .map(
                     (session, index) =>
@@ -411,11 +443,17 @@ const OtherGamesDetail = () => {
             <Col md={4}>
               {/* <GameHeader /> */}
               {matchDetails?.eventId &&
+                
                 matchDetails?.matchType !== "politics" && (
                   <LiveStreamComponent
-                    url={`${liveStreamUrl}${matchDetails?.eventId}/${
-                      matchDetails?.matchType === "football" ? 1 : 2
-                    }`}
+                    url={
+                      process.env.NODE_ENV == "production"
+                        ? tvData?.tvData?.iframeUrl
+                        : `${liveStreamUrl}${matchDetails?.eventId}/${matchDetails?.matchType}`
+                    }
+                    eventId={matchDetails?.eventId}
+                    matchType={matchDetails?.matchType}
+                    setTvData={setTvData}
                   />
                 )}
               <OtherUserBets matchId={id} />
