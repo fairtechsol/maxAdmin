@@ -98,7 +98,7 @@ const ListClent: React.FC = () => {
           type: type,
           userId: id,
           userName: keyWord,
-          sort: "user.createdAt",
+          sort: "",
           order: "DESC",
           name: "Users List",
         })
