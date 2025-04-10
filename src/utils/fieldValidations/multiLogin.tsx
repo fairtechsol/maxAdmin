@@ -26,9 +26,10 @@ export const addMultiLoginAccountValidationSchema: any = (item: any) => {
         },
       }),
     password: Yup.string().required("Password is required"),
+    transactionPassword: Yup.string().required("Transaction Code is required"),
     fullName: Yup.string()
       .required("FullName is required")
-      .length(4, "The Full Name field must be at least 4 characters"),
+      .min(4, "The Full Name field must be at least 4 characters"),
     confirmPassword: Yup.string()
       .oneOf(
         [Yup.ref("password"), ""],

@@ -128,6 +128,9 @@ export const ApiConstants = {
     CASINO_REPORT: "/mac88/bets",
     CASINO_REPORT_PROVIDERS: "/mac88/providers",
   },
+  MULTILOGIN: {
+    ACCESSUSER: "/accessUser",
+  },
   MATCH: {
     MATCHLIST: "/match/list",
     SEARCHLIST: "/user/searchlist",

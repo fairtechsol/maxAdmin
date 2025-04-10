@@ -13,6 +13,7 @@ const ChangePassword = Loadable(lazy(() => import("../pages/changePassword")));
 const ChangePasswordFirst = Loadable(
   lazy(() => import("../pages/auth/changePassword"))
 );
+const MultiLogin = Loadable(lazy(() => import("../pages/multiLogin")));
 
 const SecureAuth = Loadable(lazy(() => import("../pages/secureAuth")));
 const CardList3 = Loadable(lazy(() => import("../pages/cardGames/cardsList")));
@@ -143,6 +144,10 @@ const MainRoutes = {
     {
       path: "change_password",
       element: <ChangePassword />,
+    },
+    {
+      path: "multiLogin",
+      element: <MultiLogin />,
     },
     {
       path: "change_password_first",

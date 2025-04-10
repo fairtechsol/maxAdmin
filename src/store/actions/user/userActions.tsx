@@ -422,6 +422,37 @@ export const getUserWiseExposure = createAsyncThunk<any, any>(
     }
   }
 );
+export const addUserMultiLogin = createAsyncThunk<any, any>(
+  "addUserMultiLogin/clientList",
+  async (requestData, thunkApi) => {
+    try {
+      const resp = await service.post(
+        ApiConstants.MULTILOGIN.ACCESSUSER,
+        requestData
+      );
+      if (resp) {
+        return resp?.data;
+      }
+    } catch (error: any) {
+      const err = error as AxiosError;
+      throw thunkApi.rejectWithValue(err.response?.status);
+    }
+  }
+);
+export const getUserMultiLoginList = createAsyncThunk<any>(
+  "getUserMultiLoginList/clientList",
+  async (_, thunkApi) => {
+    try {
+      const resp = await service.get(ApiConstants.MULTILOGIN.ACCESSUSER);
+      if (resp) {
+        return resp?.data;
+      }
+    } catch (error: any) {
+      const err = error as AxiosError;
+      throw thunkApi.rejectWithValue(err.response?.status);
+    }
+  }
+);
 
 export const updateUserBalance = createAsyncThunk<any, any>(
   "updateUserBalance",
@@ -445,6 +476,9 @@ export const profileReset = createAction("profile/reset");
 export const accountListModalReset = createAction("accountListModal/reset");
 export const userModalReset = createAction("userModalReset/reset");
 export const resetSearchUserList = createAction("searchUserList/reset");
+export const resetAddSuccessMultiUser = createAction(
+  "addSuccessMultiUser/reset"
+);
 export const resetUserWiseExposureList = createAction(
   "userWiseExposureList/reset"
 );
