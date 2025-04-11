@@ -450,6 +450,40 @@ export const getUserMultiLoginList = createAsyncThunk<any>(
     }
   }
 );
+export const lockUserMultiLogin = createAsyncThunk<any, any>(
+  "lockUserMultiLogin/clientList",
+  async (requestData, thunkApi) => {
+    try {
+      const resp = await service.post(
+        ApiConstants.MULTILOGIN.LOCKACCESSUSER,
+        requestData
+      );
+      if (resp) {
+        return resp?.data;
+      }
+    } catch (error: any) {
+      const err = error as AxiosError;
+      throw thunkApi.rejectWithValue(err.response?.status);
+    }
+  }
+);
+export const changePasswordUserMultiLogin = createAsyncThunk<any, any>(
+  "changePasswordUserMultiLogin/clientList",
+  async (requestData, thunkApi) => {
+    try {
+      const resp = await service.post(
+        ApiConstants.MULTILOGIN.CHANGEPASSWORDACCESSUSER,
+        requestData
+      );
+      if (resp) {
+        return resp?.data;
+      }
+    } catch (error: any) {
+      const err = error as AxiosError;
+      throw thunkApi.rejectWithValue(err.response?.status);
+    }
+  }
+);
 
 export const updateUserBalance = createAsyncThunk<any, any>(
   "updateUserBalance",
@@ -473,6 +507,7 @@ export const profileReset = createAction("profile/reset");
 export const accountListModalReset = createAction("accountListModal/reset");
 export const userModalReset = createAction("userModalReset/reset");
 export const resetSearchUserList = createAction("searchUserList/reset");
+export const resetMultiLoginSucess = createAction("multiLoginSucess/reset");
 export const resetAddSuccessMultiUser = createAction(
   "addSuccessMultiUser/reset"
 );

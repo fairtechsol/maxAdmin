@@ -8,7 +8,8 @@ import "../../assets/common.scss";
 import CustomInput from "../../components/commonComponent/input";
 import CustomErrorMessage from "../../components/commonComponent/input/CustomErrorMessage";
 import CustomModal from "../../components/commonComponent/modal";
-import Password from "../../components/listClients/modals/password";
+import ChangeStatus from "../../components/multiLogin/modal/ChangeStatus";
+import Password from "../../components/multiLogin/modal/Password";
 import { Column } from "../../models/tableInterface";
 import {
   addUserMultiLogin,
@@ -17,34 +18,50 @@ import {
   resetAddSuccessMultiUser,
 } from "../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../store/store";
-import { addMultiLoginAccountValidationSchema } from "../../utils/fieldValidations/multiLogin";
+import {
+  addMultiLoginAccountValidationSchema,
+  editMultiLoginAccountValidationSchema,
+} from "../../utils/fieldValidations/multiLogin";
 import "./style.scss";
+
+const privelegeColumn = [
+  { id: "all", name: "All", active: false },
+  { id: "dashboard", name: "DashBoard", active: false },
+  { id: "marketAnalysis", name: "Market Analysis", active: false },
+  { id: "userList", name: "User List", active: false },
+  { id: "insertUser", name: "Insert User", active: false },
+  { id: "accountStatement", name: "Account Statement", active: false },
+  { id: "partyWinLoss", name: "Party Win Loss", active: false },
+  { id: "currentBets", name: "Current Bets", active: false },
+  { id: "casinoResult", name: "Casino Result", active: false },
+  { id: "liveCasinoResult", name: "Live Casino Result", active: false },
+  { id: "ourCasino", name: "Our Casino", active: false },
+  { id: "events", name: "Events", active: false },
+  {
+    id: "marketSearchAnalysis",
+    name: "Market Search Analysis",
+    active: false,
+  },
+  { id: "loginUserCreation", name: "Login User creation", active: false },
+  { id: "withdraw", name: "Withdraw", active: false },
+  { id: "deposit", name: "Deposit", active: false },
+  { id: "creditReference", name: "Credit Reference", active: false },
+  { id: "userInfo", name: "User Info", active: false },
+  { id: "userPasswordChange", name: "User Password Change", active: false },
+  { id: "userLock", name: "User Lock", active: false },
+  { id: "betLock", name: "Bet Lock", active: false },
+  { id: "activeUser", name: "Active User", active: false },
+];
 
 const columns: Column[] = [
   { id: "action", label: "Action" },
   { id: "username", label: "User Name" },
   { id: "fullName", label: "Full Name" },
-  { id: "dashboard", label: "DashBoard" },
-  { id: "marketAnalysis", label: "Market Analysis" },
-  { id: "userList", label: "User List" },
-  { id: "insertUser", label: "Insert User" },
-  { id: "accountStatement", label: "Account Statement" },
-  { id: "partyWinLoss", label: "Party Win Loss" },
-  { id: "currentBets", label: "Current Bets" },
-  { id: "casinoResult", label: "Casino Result" },
-  { id: "liveCasinoResult", label: "Live Casino Result" },
-  { id: "ourCasino", label: "Our Casino" },
-  { id: "events", label: "Events" },
-  { id: "marketSearchAnalysis", label: "Market Search Analysis" },
-  { id: "loginUserCreation", label: "Login User creation" },
-  { id: "withdraw", label: "Withdraw" },
-  { id: "deposit", label: "Deposit" },
-  { id: "creditReference", label: "Credit Reference" },
-  { id: "userInfo", label: "User Info" },
-  { id: "userPasswordChange", label: "User Password Change" },
-  { id: "userLock", label: "User Lock" },
-  { id: "betLock", label: "Bet Lock" },
-  { id: "activeUser", label: "Active User" },
+  ...privelegeColumn
+    .filter((item) => item.id !== "all")
+    .map((item) => {
+      return { id: item.id, label: item.name };
+    }),
 ];
 
 interface Values {
@@ -62,56 +79,34 @@ const initialValues = {
   password: "",
   confirmPassword: "",
   transactionPassword: "",
-  privileges: [
-    { id: "all", name: "All", active: false },
-    { id: "dashboard", name: "DashBoard", active: false },
-    { id: "marketAnalysis", name: "Market Analysis", active: false },
-    { id: "userList", name: "User List", active: false },
-    { id: "insertUser", name: "Insert User", active: false },
-    { id: "accountStatement", name: "Account Statement", active: false },
-    { id: "partyWinLoss", name: "Party Win Loss", active: false },
-    { id: "currentBets", name: "Current Bets", active: false },
-    { id: "casinoResult", name: "Casino Result", active: false },
-    { id: "liveCasinoResult", name: "Live Casino Result", active: false },
-    { id: "ourCasino", name: "Our Casino", active: false },
-    { id: "events", name: "Events", active: false },
-    {
-      id: "marketSearchAnalysis",
-      name: "Market Search Analysis",
-      active: false,
-    },
-    { id: "loginUserCreation", name: "Login User creation", active: false },
-    { id: "withdraw", name: "Withdraw", active: false },
-    { id: "deposit", name: "Deposit", active: false },
-    { id: "creditReference", name: "Credit Reference", active: false },
-    { id: "userInfo", name: "User Info", active: false },
-    { id: "userPasswordChange", name: "User Password Change", active: false },
-    { id: "userLock", name: "User Lock", active: false },
-    { id: "betLock", name: "Bet Lock", active: false },
-    { id: "activeUser", name: "Active User", active: false },
-  ],
+  privileges: privelegeColumn,
 };
 
 const MultiLogin: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
 
   const [show, setShow] = useState(false);
+  const [editMode, setEditMode] = useState<any>({ status: false, data: null });
+  const [showChangeStatus, setShowChangeStatus] = useState(false);
+  const [rowData, setRowData] = useState(null);
 
   const { userAlreadyExist } = useSelector(
     (state: RootState) => state.user.userList
   );
-  const { addSuccess } = useSelector(
+  const { addSuccess, multiLoginUserList } = useSelector(
     (state: RootState) => state.user.multiLogin
   );
 
-  const validator = addMultiLoginAccountValidationSchema(userAlreadyExist);
+  const validator = editMode?.status
+    ? editMultiLoginAccountValidationSchema(userAlreadyExist)
+    : addMultiLoginAccountValidationSchema(userAlreadyExist);
 
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: validator,
     onSubmit: (values: Values) => {
       try {
-        let payload = {
+        let payload: any = {
           userName: values.userName,
           fullName: values.fullName,
           password: values.password,
@@ -122,6 +117,11 @@ const MultiLogin: React.FC = () => {
             return acc;
           }, {} as Record<string, boolean>),
         };
+        if (editMode?.status) {
+          payload.id = editMode?.data?.id;
+          delete payload.password;
+          delete payload.confirmPassword;
+        }
         dispatch(addUserMultiLogin(payload));
       } catch (e) {
         console.log(e);
@@ -173,7 +173,27 @@ const MultiLogin: React.FC = () => {
     }
   };
 
-  const handleUpdateUser = (item: any) => {};
+  const handleUpdateUser = (item: any) => {
+    try {
+      setEditMode({
+        status: true,
+        data: item,
+      });
+      formik.setValues({
+        ...formik.values,
+        userName: item.userName,
+        fullName: item.fullName,
+        privileges: privelegeColumn?.map((items) => {
+          return {
+            ...items,
+            active: item?.permission[items.id],
+          };
+        }),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     if (formik.values.userName) {
@@ -185,6 +205,10 @@ const MultiLogin: React.FC = () => {
     if (addSuccess) {
       dispatch(resetAddSuccessMultiUser());
       formik.resetForm();
+      setEditMode({
+        status: false,
+        data: null,
+      });
       dispatch(getUserMultiLoginList());
     }
   }, [addSuccess]);
@@ -220,6 +244,7 @@ const MultiLogin: React.FC = () => {
                   onChange={handleUserNameChange}
                   touched={touched.userName}
                   errors={errors.userName}
+                  disabled={editMode.status}
                 />
               </Col>
               <Col md={3}>
@@ -234,30 +259,34 @@ const MultiLogin: React.FC = () => {
                   errors={errors.fullName}
                 />
               </Col>
-              <Col md={3}>
-                <CustomInput
-                  id="password"
-                  title="Password"
-                  placeholder="Password"
-                  type="password"
-                  customstyle="mb-3"
-                  {...getFieldProps("password")}
-                  touched={touched.password}
-                  errors={errors.password}
-                />
-              </Col>
-              <Col md={3}>
-                <CustomInput
-                  id="confirmPassword"
-                  title="Confirm Password"
-                  placeholder="Confirm Password"
-                  type="password"
-                  customstyle="mb-3"
-                  {...getFieldProps("confirmPassword")}
-                  touched={touched.confirmPassword}
-                  errors={errors.confirmPassword}
-                />
-              </Col>
+              {!editMode.status && (
+                <>
+                  <Col md={3}>
+                    <CustomInput
+                      id="password"
+                      title="Password"
+                      placeholder="Password"
+                      type="password"
+                      customstyle="mb-3"
+                      {...getFieldProps("password")}
+                      touched={touched.password}
+                      errors={errors.password}
+                    />
+                  </Col>
+                  <Col md={3}>
+                    <CustomInput
+                      id="confirmPassword"
+                      title="Confirm Password"
+                      placeholder="Confirm Password"
+                      type="password"
+                      customstyle="mb-3"
+                      {...getFieldProps("confirmPassword")}
+                      touched={touched.confirmPassword}
+                      errors={errors.confirmPassword}
+                    />
+                  </Col>
+                </>
+              )}
             </Row>
             <Row className="p-2">
               <Col md={12}>
@@ -307,7 +336,10 @@ const MultiLogin: React.FC = () => {
                     borderColor: "#eff2f7",
                     color: "#000",
                   }}
-                  onClick={() => formik.resetForm()}
+                  onClick={() => {
+                    formik.resetForm();
+                    setEditMode({ status: false, data: null });
+                  }}
                 >
                   Reset
                 </Button>
@@ -335,72 +367,92 @@ const MultiLogin: React.FC = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td className="fixed-col-1">
-                    <Button
-                      style={{
-                        backgroundColor: "#014421",
-                        border: "none",
-                        width: "30px",
-                        height: "30px",
-                        padding: 0,
-                        marginRight: 3,
-                      }}
-                      onClick={() => handleUpdateUser("a")}
-                    >
-                      U
-                    </Button>
-                    <Button
-                      style={{
-                        backgroundColor: "#4dabf7",
-                        border: "none",
-                        width: "30px",
-                        height: "30px",
-                        padding: 0,
-                        marginRight: 3,
-                      }}
-                    >
-                      S
-                    </Button>
-                    <Button
-                      style={{
-                        backgroundColor: "#38d9a9",
-                        border: "none",
-                        width: "30px",
-                        height: "30px",
-                        padding: 0,
-                      }}
-                      onClick={() => setShow(true)}
-                    >
-                      P
-                    </Button>
-                  </td>
-                  <td className="fixed-col-2">
-                    Abc <FaCheck color={"green"} />
-                  </td>
-                  <td className="fixed-col-3">Abc</td>
-                  {[
-                    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
-                    18, 19, 20, 21,
-                  ].map((item: number) => (
-                    <td key={item}>
-                      <div
+                {multiLoginUserList?.map((item: any) => (
+                  <tr key={item?.id}>
+                    <td className="fixed-col-1">
+                      <Button
                         style={{
-                          width: "24px",
-                          height: "24px",
-                          borderRadius: "50%",
-                          backgroundColor: "#212121",
-                          border: "2px solid #212121",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
+                          backgroundColor: "#014421",
+                          border: "none",
+                          width: "30px",
+                          height: "30px",
+                          padding: 0,
+                          marginRight: 3,
+                        }}
+                        onClick={() => handleUpdateUser(item)}
+                      >
+                        U
+                      </Button>
+                      <Button
+                        style={{
+                          backgroundColor: "#4dabf7",
+                          border: "none",
+                          width: "30px",
+                          height: "30px",
+                          padding: 0,
+                          marginRight: 3,
+                        }}
+                        onClick={() => {
+                          setShowChangeStatus(true);
+                          setRowData(item);
                         }}
                       >
-                        <FaCheck color="white" size={12} />
-                      </div>
+                        S
+                      </Button>
+                      <Button
+                        style={{
+                          backgroundColor: "#38d9a9",
+                          border: "none",
+                          width: "30px",
+                          height: "30px",
+                          padding: 0,
+                        }}
+                        onClick={() => {
+                          setShow(true);
+                          setRowData(item);
+                        }}
+                      >
+                        P
+                      </Button>
                     </td>
-                  ))}
-                </tr>
+                    <td className="fixed-col-2">
+                      {item?.userName}{" "}
+                      <FaCheck color={!item?.userBlock ? "green" : "gray"} />
+                    </td>
+                    <td className="fixed-col-3">{item?.fullName}</td>
+                    {privelegeColumn
+                      .filter((items) => items.id !== "all")
+                      .map((items) => (
+                        <td key={items.id}>
+                          <div
+                            className="d-flex align-items-center justify-content-center"
+                            style={{
+                              height: "100%",
+                            }}
+                          >
+                            <div
+                              style={{
+                                width: "20px",
+                                height: "20px",
+                                borderRadius: "50%",
+                                backgroundColor: item?.permission[items.id]
+                                  ? "#212121"
+                                  : "transparent",
+                                border: "2px solid #212121",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                              }}
+                            >
+                              {item?.permission[items.id] && (
+                                <FaCheck color="white" size={12} />
+                              )}
+                            </div>
+                          </div>
+                        </td>
+                      ))}
+                  </tr>
+                ))}
               </tbody>
             </Table>
           </div>
@@ -410,10 +462,19 @@ const MultiLogin: React.FC = () => {
         customClass="px-2"
         show={show}
         setShow={setShow}
-        title={"Password"}
+        title="Password"
         titleStyle="fw-normal title-22"
       >
-        <Password setShow={setShow} />
+        <Password userData={rowData} setShow={setShow} />
+      </CustomModal>
+      <CustomModal
+        customClass="px-2"
+        show={showChangeStatus}
+        setShow={setShowChangeStatus}
+        title="Change User Status"
+        titleStyle="fw-normal title-22"
+      >
+        <ChangeStatus userData={rowData} setShow={setShowChangeStatus} />
       </CustomModal>
     </>
   );

@@ -1,8 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
-    addUserMultiLogin,
-    getUserMultiLoginList,
-    resetAddSuccessMultiUser,
+  addUserMultiLogin,
+  changePasswordUserMultiLogin,
+  getUserMultiLoginList,
+  lockUserMultiLogin,
+  resetAddSuccessMultiUser,
+  resetMultiLoginSucess,
 } from "../../../store/actions/user/userActions";
 
 interface InitialState {
@@ -41,19 +44,45 @@ const userMultiLoginSlice = createSlice({
       })
       .addCase(getUserMultiLoginList.pending, (state) => {
         state.loading = true;
-        state.success = false;
         state.error = null;
       })
       .addCase(getUserMultiLoginList.fulfilled, (state, action) => {
         state.loading = false;
-        state.success = true;
+        state.multiLoginUserList = action.payload;
       })
       .addCase(getUserMultiLoginList.rejected, (state, action) => {
         state.loading = false;
         state.error = action?.error?.message;
       })
+      .addCase(lockUserMultiLogin.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(lockUserMultiLogin.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+      })
+      .addCase(lockUserMultiLogin.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action?.error?.message;
+      })
+      .addCase(changePasswordUserMultiLogin.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(changePasswordUserMultiLogin.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+      })
+      .addCase(changePasswordUserMultiLogin.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action?.error?.message;
+      })
       .addCase(resetAddSuccessMultiUser, (state) => {
         state.addSuccess = false;
+      })
+      .addCase(resetMultiLoginSucess, (state) => {
+        state.success = false;
       });
   },
 });

@@ -2,7 +2,12 @@ import { FaUndo } from "react-icons/fa";
 import { IoMdExit } from "react-icons/io";
 import CustomButton from "../../commonComponent/button";
 
-const ModalFooter = ({ clickHandler, disabled }: any) => {
+interface ModalFooterProps {
+  clickHandler: (val: any) => void;
+  disabled: boolean;
+}
+
+const ModalFooter = ({ clickHandler, disabled }: ModalFooterProps) => {
   return (
     <div className="d-flex gap-2">
       <CustomButton

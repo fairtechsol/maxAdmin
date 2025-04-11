@@ -130,6 +130,8 @@ export const ApiConstants = {
   },
   MULTILOGIN: {
     ACCESSUSER: "/accessUser",
+    LOCKACCESSUSER: "/accessUser/lock",
+    CHANGEPASSWORDACCESSUSER: "/accessUser/change/password",
   },
   MATCH: {
     MATCHLIST: "/match/list",

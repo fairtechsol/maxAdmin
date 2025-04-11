@@ -52,3 +52,49 @@ export const addMultiLoginAccountValidationSchema: any = (item: any) => {
       }),
   });
 };
+
+export const editMultiLoginAccountValidationSchema: any = (item: any) => {
+  return Yup.object({
+    userName: Yup.string()
+      .required("Client Name is required")
+      .test({
+        name: "userName",
+        message: "Client Name already exists",
+        test: async function (value: any) {
+          if (value) {
+            try {
+              return !item;
+            } catch (error) {
+              console.log(error);
+            }
+          }
+          return true;
+        },
+      })
+      .test({
+        name: "noSpace",
+        message: "Space is not allowed in Client Name",
+        test: function (value: any) {
+          return !/\s/.test(value);
+        },
+      }),
+    transactionPassword: Yup.string().required("Transaction Code is required"),
+    fullName: Yup.string()
+      .required("FullName is required")
+      .min(4, "The Full Name field must be at least 4 characters"),
+    privileges: Yup.array()
+      .of(
+        Yup.object({
+          id: Yup.string().required(),
+          active: Yup.boolean(),
+        })
+      )
+      .test({
+        name: "privileges",
+        message: "The Privileges field is required",
+        test: async function (value: any) {
+          return value.some((privilege: any) => privilege.active);
+        },
+      }),
+  });
+};
