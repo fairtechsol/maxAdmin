@@ -578,7 +578,7 @@ const AccountStatement = () => {
               {/* {columns.map((column) => (
               <td key={column.id}>{item[column.id]}</td>
             ))} */}
-              <td>{moment(createdAt).format("YYYY-MM-DD")} </td>
+              <td>{moment(createdAt).format("YYYY-MM-DD HH:mm:ss")} </td>
               <td
                 className={`cursor-pointer ${amount > 0 ? "color-green" : ""}`}
                 style={{
