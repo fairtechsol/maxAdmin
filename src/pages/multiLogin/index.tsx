@@ -302,6 +302,7 @@ const MultiLogin: React.FC = () => {
                             id={`opt${index + 1}`}
                             aria-label={item.name}
                             label={item.name}
+                            className=""
                             onChange={(e) => handleCheck(e, item)}
                           />
                         </Col>

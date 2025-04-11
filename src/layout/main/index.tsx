@@ -23,7 +23,9 @@ function MainLayout({ eventKey }: any) {
     setToggle(!toggle);
   };
 
-  const { summary } = useSelector((state: RootState) => state.user.profile);
+  const { summary, userDetail } = useSelector(
+    (state: RootState) => state.user.profile
+  );
   const { userBalanceLoading } = useSelector(
     (state: RootState) => state.user.userList
   );
@@ -67,7 +69,11 @@ function MainLayout({ eventKey }: any) {
       {userBalanceLoading ? <Loader /> : null}
       <Topbar onClick={handleDrawer} toggle={toggle} />
       <div className={`sidebar ${toggle ? "sidebarActive" : ""}`}>
-        <Sidebar clickHandler={handleDrawer} />
+        {(!userDetail?.permission ||
+          userDetail?.permission?.all ||
+          userDetail?.permission?.events) && (
+          <Sidebar clickHandler={handleDrawer} />
+        )}
       </div>
       {location.pathname.includes("/admin/active-inactive-user-list") &&
       summary &&

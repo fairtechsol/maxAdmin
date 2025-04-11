@@ -52,3 +52,9 @@
   white-space: nowrap;
   height: 40px;
 }
+.multiLoginInputCont .form-check-input[type="checkbox"] {
+  background-color: #000;
+}
+.multiLoginInputCont .form-check-input[type="checkbox"]:checked {
+  background-color: #000 !important;
+}

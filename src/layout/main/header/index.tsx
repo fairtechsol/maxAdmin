@@ -204,9 +204,15 @@ const Topbar = (props: any) => {
       <Navbar expand="lg" className="bg-primary p-0 px-0" data-bs-theme="light">
         <div className="d-flex ms-0">
           <a
-            href={`/admin/active-inactive-user-list/${localStorage.getItem(
-              "key"
-            )}`}
+            href={
+              !userDetail?.permission ||
+              userDetail?.permission?.all ||
+              userDetail?.permission?.userList
+                ? `/admin/active-inactive-user-list/${localStorage.getItem(
+                    "key"
+                  )}`
+                : "#"
+            }
             className="me-2 mt-1 d-flex"
           >
             <LogoSection width="100%" height="50px" />
@@ -214,25 +220,33 @@ const Topbar = (props: any) => {
 
           <span className="m-3 cursor" onClick={props.onClick}>
             <div className="menuHamBurger d-flex flex-column me-2 mt-1">
-              <span className="mb-1"></span>
-              <span className="mb-1"></span>
-              <span></span>
+              <span className="mb-1" />
+              <span className="mb-1" />
+              <span />
             </div>
           </span>
           <Navbar id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link
-                className="navbar-mainLink"
-                href={`/admin/listClients/${localStorage.getItem("key")}`}
-              >
-                List of clients
-              </Nav.Link>
-              <Nav.Link
-                className="navbar-mainLink"
-                href="/admin/market-analysis"
-              >
-                Market Analysis
-              </Nav.Link>
+              {(!userDetail?.permission ||
+                userDetail?.permission?.all ||
+                userDetail?.permission?.userList) && (
+                <Nav.Link
+                  className="navbar-mainLink"
+                  href={`/admin/listClients/${localStorage.getItem("key")}`}
+                >
+                  List of clients
+                </Nav.Link>
+              )}
+              {(!userDetail?.permission ||
+                userDetail?.permission?.all ||
+                userDetail?.permission?.marketAnalysis) && (
+                <Nav.Link
+                  className="navbar-mainLink"
+                  href="/admin/market-analysis"
+                >
+                  Market Analysis
+                </Nav.Link>
+              )}
               {/* <TopbarDropdown
                 name="Live Market"
                 options={[
@@ -282,19 +296,46 @@ const Topbar = (props: any) => {
                 name="Reports"
                 options={[
                   {
+                    id: "accountStatement",
                     name: "Account Statement",
                     link: "/admin/account-statement",
                   },
-                  { name: "Current Bets", link: "/admin/current-bets" },
-                  { name: "General Report", link: "/admin/general-report" },
-                  { name: "Game Report", link: "/admin/game-report" },
-                  { name: "Casino Report", link: "/admin/casino-report" },
-                  { name: "Profit And Loss", link: "/admin/profit-loss" },
                   {
+                    id: "currentBets",
+                    name: "Current Bets",
+                    link: "/admin/current-bets",
+                  },
+                  {
+                    id: "generalReport",
+                    name: "General Report",
+                    link: "/admin/general-report",
+                  },
+                  {
+                    id: "gameReport",
+                    name: "Game Report",
+                    link: "/admin/game-report",
+                  },
+                  {
+                    id: "liveCasinoResult",
+                    name: "Casino Report",
+                    link: "/admin/casino-report",
+                  },
+                  {
+                    id: "partyWinLoss",
+                    name: "Profit And Loss",
+                    link: "/admin/profit-loss",
+                  },
+                  {
+                    id: "casinoResult",
                     name: "Casino Result Report",
                     link: "/admin/casino-result",
                   },
-                ]}
+                ].filter((item) => {
+                  if (item.id && userDetail?.permission?.[item.id] === false) {
+                    return false;
+                  }
+                  return true;
+                })}
               />
               {userDetail?.roleName === "superAdmin" && (
                 <>
@@ -307,9 +348,13 @@ const Topbar = (props: any) => {
                   <UserLockModal show={showModal} setShowModal={setShowModal} />
                 </>
               )}
-              <Nav.Link className="navbar-mainLink" href="/admin/multiLogin">
-                Multi Login
-              </Nav.Link>
+              {(!userDetail?.permission ||
+                userDetail?.permission?.all ||
+                userDetail?.permission?.loginUserCreation) && (
+                <Nav.Link className="navbar-mainLink" href="/admin/multiLogin">
+                  Multi Login
+                </Nav.Link>
+              )}
             </Nav>
           </Navbar>
           <div className="user-dropdown-container">
