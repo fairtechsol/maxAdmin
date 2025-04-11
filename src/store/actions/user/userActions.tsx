@@ -141,10 +141,7 @@ export const updateUser = createAsyncThunk<any, any>(
   "user/updateUser",
   async (requestData, thunkApi) => {
     try {
-      const resp = await service.post(
-        `${ApiConstants.USER.UPDATE}`,
-        requestData
-      );
+      const resp = await service.post(ApiConstants.USER.UPDATE, requestData);
       if (resp) {
         return resp?.data;
       }
@@ -159,7 +156,7 @@ export const getUsersProfile = createAsyncThunk(
   "user/profile",
   async (_, thunkApi) => {
     try {
-      const resp = await service.get(`${ApiConstants.USER.PROFILE}`);
+      const resp = await service.get(ApiConstants.USER.PROFILE);
       if (resp) {
         localStorage.setItem("key", resp?.data[0][0]?.id);
         return resp?.data[0][0];
@@ -196,7 +193,7 @@ export const changeAmmountUser = createAsyncThunk<any, any>(
   async (requestData, thunkApi) => {
     try {
       const resp = await service.post(
-        `${ApiConstants.USER.BALANCEUPDATE}`,
+        ApiConstants.USER.BALANCEUPDATE,
         requestData
       );
       if (resp) {
@@ -218,7 +215,7 @@ export const userBalance = createAsyncThunk<any>(
   "user/balance",
   async (_, thunkApi) => {
     try {
-      const resp = await service.get(`${ApiConstants.USER.USERBALANCE}`);
+      const resp = await service.get(ApiConstants.USER.USERBALANCE);
       if (resp) {
         return resp?.data?.response;
       }
@@ -234,7 +231,7 @@ export const setCreditRefference = createAsyncThunk<any, any>(
   async (requestData, thunkApi) => {
     try {
       const resp = await service.post(
-        `${ApiConstants.USER.CREDITREFERRENCE}`,
+        ApiConstants.USER.CREDITREFERRENCE,
         requestData
       );
       if (resp) {
@@ -257,7 +254,7 @@ export const setExposureLimit = createAsyncThunk<any, any>(
   async (requestData, thunkApi) => {
     try {
       const resp = await service.post(
-        `${ApiConstants.USER.EXPOSURELIMIT}`,
+        ApiConstants.USER.EXPOSURELIMIT,
         requestData
       );
       if (resp) {
@@ -280,7 +277,7 @@ export const setLockUnlockUser = createAsyncThunk<any, any>(
   async (requestData, thunkApi) => {
     try {
       const resp = await service.post(
-        `${ApiConstants.USER.LOCKUNLOCK}`,
+        ApiConstants.USER.LOCKUNLOCK,
         requestData
       );
       if (resp) {
@@ -322,7 +319,7 @@ export const changePassword = createAsyncThunk<any, ChangePassword>(
   async (requestData, thunkApi) => {
     try {
       const resp = await service.post(
-        `${ApiConstants.USER.CHANGEPASSWORD}`,
+        ApiConstants.USER.CHANGEPASSWORD,
         requestData
       );
       if (resp) {

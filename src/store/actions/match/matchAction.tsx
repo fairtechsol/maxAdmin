@@ -226,7 +226,7 @@ export const getProfitLossReport = createAsyncThunk<any, any>(
   async (requestData, thunkApi) => {
     try {
       const resp = await service.post(
-        `${ApiConstants.REPORT.PROFIT_LOSS}`,
+        ApiConstants.REPORT.PROFIT_LOSS,
         requestData
       );
       if (resp?.data) {
@@ -288,7 +288,6 @@ export const getMorePlacedBets = createAsyncThunk<any, any>(
         }`
       );
       if (resp) {
-        // console.log('resp',resp);
         return resp?.data?.rows;
       }
     } catch (error) {
@@ -303,7 +302,7 @@ export const updateUserMatchLock = createAsyncThunk<any, any>(
   async (requestData, thunkApi) => {
     try {
       const resp = await service.post(
-        `${ApiConstants.USER.USER_MATCH_LOCK}`,
+        ApiConstants.USER.USER_MATCH_LOCK,
         requestData
       );
       if (resp) {
@@ -321,7 +320,7 @@ export const updateUserMarketLock = createAsyncThunk<any, any>(
   async (requestData, thunkApi) => {
     try {
       const resp = await service.post(
-        `${ApiConstants.USER.USER_MARKET_LOCK}`,
+        ApiConstants.USER.USER_MARKET_LOCK,
         requestData
       );
       if (resp) {

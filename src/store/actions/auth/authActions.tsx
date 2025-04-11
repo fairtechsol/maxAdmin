@@ -13,10 +13,7 @@ export const login = createAsyncThunk<any, LoginData>(
   "auth/login",
   async (requestData, thunkApi) => {
     try {
-      const { data } = await service.post(
-        `${ApiConstants.AUTH.LOGIN}`,
-        requestData
-      );
+      const { data } = await service.post(ApiConstants.AUTH.LOGIN, requestData);
       const { token, userId } = data;
       localStorage.setItem("jwtMaxAdmin", token);
       localStorage.setItem("uid", userId);
@@ -33,7 +30,7 @@ export const checkOldPassword = createAsyncThunk<any, any>(
   async (requestData, thunkApi) => {
     try {
       const resp = await service.post(
-        `${ApiConstants.AUTH.OLD_PASSWORD}`,
+        ApiConstants.AUTH.OLD_PASSWORD,
         requestData
       );
       if (resp) {

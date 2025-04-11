@@ -203,7 +203,7 @@ export const transactionProviderName = createAsyncThunk<any, any>(
   async (_, thunkApi) => {
     try {
       const resp = await service.get(
-        `${ApiConstants.REPORT.CASINO_REPORT_PROVIDERS}`
+        ApiConstants.REPORT.CASINO_REPORT_PROVIDERS
       );
       if (resp?.data) {
         return resp?.data;
