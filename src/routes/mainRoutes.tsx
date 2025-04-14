@@ -123,22 +123,23 @@ const MainRoutes = {
       element: <OtherGamesDetail />,
     },
     {
+      key: "userList",
       path: "listClients/:id",
       element: <ListClients />,
     },
     {
+      key: "userList",
       path: "listClients/:type/:id",
       element: <ListClients />,
     },
+    { key: "userList", path: "listAccount", element: <ListAccount /> },
     {
-      path: "listAccount",
-      element: <ListAccount />,
-    },
-    {
+      key: "insertUser",
       path: "add-account",
       element: <AddAccount />,
     },
     {
+      key: "marketAnalysis",
       path: "market-analysis",
       element: <MarketAnalysis />,
     },
@@ -150,10 +151,7 @@ const MainRoutes = {
       path: "change_password",
       element: <ChangePassword />,
     },
-    {
-      path: "multiLogin",
-      element: <MultiLogin />,
-    },
+    { key: "loginUserCreation", path: "multiLogin", element: <MultiLogin /> },
     {
       path: "change_password_first",
       element: <ChangePasswordFirst />,
@@ -163,10 +161,12 @@ const MainRoutes = {
       element: <SecureAuth />,
     },
     {
+      key: "userList",
       path: "active-inactive-user-list/:id",
       element: <ListActiveInactiveUser />,
     },
     {
+      key: "userList",
       path: "active-inactive-user-list/:type/:id",
       element: <ListActiveInactiveUser />,
     },
@@ -300,7 +300,7 @@ const MainRoutes = {
     },
     {
       path: "*",
-      element: <Navigate to={"/admin/listAccount"} replace />,
+      element: <Navigate to={"/admin/home"} replace />,
     },
   ],
 };

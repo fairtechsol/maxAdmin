@@ -17,7 +17,7 @@ interface InitialState {
 }
 
 const initialState: InitialState = {
-  userDetail: null,
+  userDetail: {},
   totalBalance: null,
   loading: false,
   success: false,

@@ -57,11 +57,18 @@ const Login = () => {
         localStorage.setItem("isAuthenticator", "false");
       } else {
         if (loginData?.isBetExist) {
-          navigate("/admin/market-analysis");
+          if (
+            !loginData?.permissions ||
+            loginData?.permissions?.marketAnalysis
+          ) {
+            navigate("/admin/market-analysis");
+          } else navigate("/admin/home");
         } else {
-          navigate(
-            `/admin/active-inactive-user-list/${localStorage.getItem("uid")}`
-          );
+          if (!loginData?.permissions || loginData?.permissions?.userList) {
+            navigate(
+              `/admin/active-inactive-user-list/${localStorage.getItem("uid")}`
+            );
+          } else navigate("/admin/home");
         }
       }
       dispatch(authReset());

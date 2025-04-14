@@ -27,13 +27,11 @@ const ReportRoutes = {
   element: <MainLayout />,
   children: [
     {
+      key: "accountStatement",
       path: "account-statement",
       element: <AccountStatement />,
     },
-    {
-      path: "current-bets",
-      element: <CurrentBets />,
-    },
+    { key: "currentBets", path: "current-bets", element: <CurrentBets /> },
     {
       path: "general-report",
       element: <GeneralReport />,
@@ -43,20 +41,19 @@ const ReportRoutes = {
       element: <GameReport />,
     },
     {
+      key: "liveCasinoResult",
       path: "casino-report",
       element: <CasinoReport />,
     },
+    { key: "partyWinLoss", path: "profit-loss", element: <ProfitLossReport /> },
     {
-      path: "profit-loss",
-      element: <ProfitLossReport />,
-    },
-    {
+      key: "casinoResult",
       path: "casino-result",
       element: <CasinoResultReport />,
     },
     {
       path: "*",
-      element: <Navigate to={"/admin/listAccount"} replace />,
+      element: <Navigate to={"/admin/home"} replace />,
     },
   ],
 };
