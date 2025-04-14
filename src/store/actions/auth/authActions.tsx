@@ -45,7 +45,7 @@ export const checkOldPassword = createAsyncThunk<any, any>(
 
 export const logout = createAsyncThunk<any>("auth/logout", async () => {
   try {
-    const response = await service.post(`${ApiConstants.AUTH.LOGOUT}`);
+    const response = await service.post(ApiConstants.AUTH.LOGOUT);
     localStorage.clear();
     window.location.replace("/admin/login");
     return response;
