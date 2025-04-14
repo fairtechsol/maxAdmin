@@ -151,7 +151,7 @@ const CustomTable: React.FC<CustomTableProps> = ({
         <tbody>
           {itemCount === 0 ? (
             <tr className="text-center">
-              <td className={`noRecord`} colSpan={columns?.length + 1}>
+              <td className="noRecord" colSpan={15}>
                 <p className="title-14 mb-0">No data available in table</p>
               </td>
             </tr>

@@ -87,6 +87,23 @@ const ListClent: React.FC = () => {
     }
   };
 
+  const handleActionButtonFilter = (item: any) => {
+    if (item.key === "userLock") {
+      const userLockPerm = userDetail?.permission?.userLock;
+      const betLockPerm = userDetail?.permission?.betLock;
+      if (!userLockPerm && !betLockPerm) {
+        return false;
+      }
+      return true;
+    }
+
+    if (item.key && userDetail?.permission?.[item.key] === false) {
+      return false;
+    }
+
+    return true;
+  };
+
   useEffect(() => {
     if (id) {
       dispatch(
@@ -153,7 +170,7 @@ const ListClent: React.FC = () => {
               setCurrentPage={setCurrentPage}
             >
               <tr>
-                {columns?.map((item, index) => {
+                {columns?.map((_, index) => {
                   return (
                     <td
                       colSpan={index === 0 ? 4 : undefined}
@@ -231,15 +248,7 @@ const ListClent: React.FC = () => {
                           {type ? (
                             <>
                               {actionButtons
-                                .filter((item) => {
-                                  if (
-                                    item.id &&
-                                    userDetail?.permission?.[item.id] === false
-                                  ) {
-                                    return false;
-                                  }
-                                  return true;
-                                })
+                                .filter(handleActionButtonFilter)
                                 ?.map((item) => {
                                   return (
                                     (item.id === "d" || item.id === "w") && (
@@ -249,7 +258,7 @@ const ListClent: React.FC = () => {
                                           item.onClick(item?.id, userItem);
                                         }}
                                         key={item?.id}
-                                        className={`actionBtn`}
+                                        className="actionBtn"
                                       >
                                         {item?.name}
                                       </CustomButton>
@@ -260,15 +269,7 @@ const ListClent: React.FC = () => {
                           ) : (
                             <>
                               {actionButtons
-                                .filter((item) => {
-                                  if (
-                                    item.id &&
-                                    userDetail?.permission?.[item.id] === false
-                                  ) {
-                                    return false;
-                                  }
-                                  return true;
-                                })
+                                .filter(handleActionButtonFilter)
                                 ?.map((item) => {
                                   return (
                                     <CustomButton
@@ -277,7 +278,7 @@ const ListClent: React.FC = () => {
                                         item.onClick(item?.id, userItem);
                                       }}
                                       key={item?.id}
-                                      className={`actionBtn`}
+                                      className="actionBtn"
                                     >
                                       {item?.name}
                                     </CustomButton>

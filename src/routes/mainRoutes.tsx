@@ -17,6 +17,7 @@ const MultiLogin = Loadable(lazy(() => import("../pages/multiLogin")));
 
 const SecureAuth = Loadable(lazy(() => import("../pages/secureAuth")));
 const CardList3 = Loadable(lazy(() => import("../pages/cardGames/cardsList")));
+const Home = Loadable(lazy(() => import("../pages/home")));
 const ListActiveInactiveUser = Loadable(
   lazy(() => import("../pages/listActiveUser"))
 );
@@ -140,6 +141,10 @@ const MainRoutes = {
     {
       path: "market-analysis",
       element: <MarketAnalysis />,
+    },
+    {
+      path: "home",
+      element: <Home />,
     },
     {
       path: "change_password",

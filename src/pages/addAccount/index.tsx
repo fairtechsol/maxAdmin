@@ -568,7 +568,6 @@ const AddAccount = () => {
                           }
                           value={formik.values.downlinePartnership}
                           onChange={handlePartnershipChange}
-                          // {...getFieldProps("downLinePartnership")}
                         />
                       </td>
                     </tr>
@@ -600,8 +599,8 @@ const AddAccount = () => {
                   <Table striped bordered className="commonTable">
                     <thead>
                       <tr>
-                        <th></th>
-                        <th></th>
+                        <th />
+                        <th />
                       </tr>
                     </thead>
                     <tbody>

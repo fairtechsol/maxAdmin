@@ -438,7 +438,7 @@ const Games = () => {
               {matchDetails?.eventId && (
                 <LiveStreamComponent
                   url={
-                    process.env.NODE_ENV == "production"
+                    process.env.NODE_ENV === "production"
                       ? tvData?.tvData?.iframeUrl
                       : `${liveStreamUrl}${matchDetails?.eventId}/${matchDetails?.matchType}`
                   }

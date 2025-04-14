@@ -1,8 +1,8 @@
 import { useFormik } from "formik";
+import { debounce } from "lodash";
 import React, { useEffect, useMemo, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { debounce } from "lodash";
 import { MaxBet07Logo } from "../../assets";
 import NavigateModal from "../../components/commonComponent/customModal";
 import CustomInput from "../../components/commonComponent/input";

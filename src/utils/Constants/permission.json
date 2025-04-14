@@ -1,0 +1,14 @@
+{
+  "listClients/:id": "userList",
+  "listClients/:type/:id": "userList",
+  "active-inactive-user-list/:id": "userList",
+  "active-inactive-user-list/:type/:id": "userList",
+  "market-analysis": "marketAnalysis",
+  "multiLogin": "loginUserCreation",
+  "account-statement": "accountStatement",
+  "profit-loss": "partyWinLoss",
+  "current-bets": "currentBets",
+  "add-account": "insertUser",
+  "casino-result": "casinoResult",
+  "casino-report": "liveCasinoResult"
+}
