@@ -23,6 +23,8 @@ import {
 } from "../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../store/store";
 import { ApiConstants } from "../../utils/Constants";
+import "./style.scss";
+
 const columns: Column[] = [
   { id: "user.userName", label: "User Name", colSpan: 2 },
   { id: "user.creditRefrence", label: "Credit Reference" },
@@ -441,7 +443,7 @@ const ListActiveInactiveUser: React.FC = () => {
                             <td className="text-end">
                               {formatToINR(availableBalance)}
                             </td>
-                            <td className="text-center">
+                            <td className="text-center multiLoginInputCont">
                               <Form>
                                 <Form.Check
                                   disabled={true}
@@ -451,7 +453,7 @@ const ListActiveInactiveUser: React.FC = () => {
                                 />
                               </Form>
                             </td>
-                            <td className="text-center">
+                            <td className="text-center multiLoginInputCont">
                               <Form>
                                 <Form.Check
                                   disabled={true}
@@ -661,7 +663,7 @@ const ListActiveInactiveUser: React.FC = () => {
                             <td className="text-end">
                               {formatToINR(availableBalance)}
                             </td>
-                            <td className="text-center">
+                            <td className="text-center multiLoginInputCont">
                               <Form>
                                 <Form.Check
                                   disabled={true}
@@ -671,7 +673,7 @@ const ListActiveInactiveUser: React.FC = () => {
                                 />
                               </Form>
                             </td>
-                            <td className="text-center">
+                            <td className="text-center multiLoginInputCont">
                               <Form>
                                 <Form.Check
                                   disabled={true}

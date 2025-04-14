@@ -15,6 +15,7 @@ import {
 } from "../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../store/store";
 import { ApiConstants } from "../../utils/Constants";
+import "./style.scss";
 
 const columns: Column[] = [
   { id: "username", label: "User Name", colSpan: 4 },
@@ -88,7 +89,7 @@ const ListClent: React.FC = () => {
   };
 
   const handleActionButtonFilter = (item: any) => {
-    if (item.key === "userLock") {
+    if (item.key === "userLock" && userDetail?.permission) {
       const userLockPerm = userDetail?.permission?.userLock;
       const betLockPerm = userDetail?.permission?.betLock;
       if (!userLockPerm && !betLockPerm) {
@@ -219,7 +220,7 @@ const ListClent: React.FC = () => {
                         )}
                       </td>
                       <td className="text-end">{creditRefrence}</td>
-                      <td className="text-center">
+                      <td className="text-center multiLoginInputCont">
                         <Form>
                           <Form.Check
                             disabled={true}
@@ -229,7 +230,7 @@ const ListClent: React.FC = () => {
                           />
                         </Form>
                       </td>
-                      <td className="text-center">
+                      <td className="text-center multiLoginInputCont">
                         <Form>
                           <Form.Check
                             disabled={true}
