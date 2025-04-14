@@ -41,19 +41,24 @@ export const getUsers = createAsyncThunk<any, GetUsers | undefined>(
   "user/list",
   async (requestData, thunkApi) => {
     try {
-      const resp = await service.get(
-        `${ApiConstants.USER.LIST}?${
-          requestData?.userId ? `userId=${requestData.userId}&` : ""
-        }searchBy=user.userName&keyword=${
-          requestData?.userName ? requestData?.userName : ""
-        }${requestData?.page ? `&page=${requestData.page}` : ""}${
-          requestData?.limit ? `&limit=${requestData.limit}` : ""
-        }&sort=${requestData?.sort}:${requestData?.order}${
-          requestData?.activeTab === "active"
-            ? "&user.betBlock=false&userBlock=eqfalse"
-            : "&orVal=user.betBlock=true|or|userBlock=eqtrue"
-        }`
-      );
+      const params: any = {
+        userId: requestData?.userId,
+        searchBy: "user.userName",
+        keyword: requestData?.userName,
+        page: requestData?.page,
+        limit: requestData?.limit,
+        sort: requestData?.sort + ":" + requestData?.order,
+      };
+
+      if (requestData?.activeTab === "active") {
+        params["user.betBlock"] = false;
+        params["userBlock"] = "eqfalse";
+      } else {
+        params["orVal"] = "user.betBlock=true|or|userBlock=eqtrue";
+      }
+      const resp = await service.get(ApiConstants.USER.LIST, {
+        params,
+      });
       if (resp) {
         return resp?.data;
       }
@@ -88,11 +93,12 @@ export const searchList = createAsyncThunk<any, SearchUsers | undefined>(
   "user/searchList",
   async (requestData, thunkApi) => {
     try {
-      const resp = await service.get(
-        `${ApiConstants.USER.SEARCH_LIST}?createBy=${
-          requestData?.createdBy
-        }&userName=${requestData?.userName ? requestData?.userName : ""}`
-      );
+      const resp = await service.get(ApiConstants.USER.SEARCH_LIST, {
+        params: {
+          createBy: requestData?.createdBy,
+          userName: requestData?.userName,
+        },
+      });
       if (resp) {
         return resp?.data;
       }
@@ -108,7 +114,12 @@ export const getUserHeaderDetail = createAsyncThunk<any, string>(
   async (requestData, thunkApi) => {
     try {
       const resp = await service.get(
-        `${ApiConstants.USER.USER_DETAILS_FOR_PARENT}?userId=${requestData}`
+        ApiConstants.USER.USER_DETAILS_FOR_PARENT,
+        {
+          params: {
+            userId: requestData,
+          },
+        }
       );
       if (resp) {
         return resp?.data;
@@ -125,9 +136,11 @@ export const getAlreadyUserExist = createAsyncThunk<
   SearchUsers | undefined
 >("user/clientName", async (requestData, thunkApi) => {
   try {
-    const resp = await service.get(
-      `${ApiConstants.USER.ALREADY_EXIST}?userName=${requestData}`
-    );
+    const resp = await service.get(ApiConstants.USER.ALREADY_EXIST, {
+      params: {
+        userName: requestData,
+      },
+    });
     if (resp) {
       return resp?.data?.isUserExist;
     }
