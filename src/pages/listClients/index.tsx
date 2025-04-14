@@ -89,13 +89,15 @@ const ListClent: React.FC = () => {
   };
 
   const handleActionButtonFilter = (item: any) => {
-    if (item.key === "userLock" && userDetail?.permission) {
-      const userLockPerm = userDetail?.permission?.userLock;
-      const betLockPerm = userDetail?.permission?.betLock;
-      if (!userLockPerm && !betLockPerm) {
-        return false;
-      }
-      return true;
+    if (item.key === "userLock") {
+      if (userDetail?.permission) {
+        const userLockPerm = userDetail?.permission?.userLock;
+        const betLockPerm = userDetail?.permission?.betLock;
+        if (!userLockPerm && !betLockPerm) {
+          return false;
+        }
+        return true;
+      } else return true;
     }
 
     if (item.key && userDetail?.permission?.[item.key] === false) {

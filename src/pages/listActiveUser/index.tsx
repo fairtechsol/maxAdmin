@@ -83,43 +83,19 @@ const ListActiveInactiveUser: React.FC = () => {
   };
 
   const actionButtons = [
-    {
-      id: "d",
-      name: "D",
-      onClick: showEventModals,
-    },
-    {
-      id: "w",
-      name: "W",
-      onClick: showEventModals,
-    },
-    {
-      id: "l",
-      name: "L",
-      onClick: showEventModals,
-    },
-    {
-      id: "c",
-      name: "C",
-      onClick: showEventModals,
-    },
-    {
-      id: "p",
-      name: "P",
-      onClick: showEventModals,
-    },
-    {
-      id: "s",
-      name: "S",
-      onClick: showEventModals,
-    },
+    { key: "deposit", id: "d", name: "D", onClick: showEventModals },
+    { key: "withdraw", id: "w", name: "W", onClick: showEventModals },
+    { key: "", id: "l", name: "L", onClick: showEventModals },
+    { key: "creditReference", id: "c", name: "C", onClick: showEventModals },
+    { key: "userPasswordChange", id: "p", name: "P", onClick: showEventModals },
+    { key: "userLock", id: "s", name: "S", onClick: showEventModals },
   ];
 
   const { userList, loading } = useSelector(
     (state: RootState) => state.user.userList
   );
   const [localUserList, setLocalUserList] = useState([]);
-  const { totalBalance } = useSelector(
+  const { totalBalance, userDetail } = useSelector(
     (state: RootState) => state.user.profile
   );
   const sortData = (key: string) => {
@@ -165,6 +141,25 @@ const ListActiveInactiveUser: React.FC = () => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleActionButtonFilter = (item: any) => {
+    if (item.key === "userLock") {
+      if (userDetail?.permission) {
+        const userLockPerm = userDetail?.permission?.userLock;
+        const betLockPerm = userDetail?.permission?.betLock;
+        if (!userLockPerm && !betLockPerm) {
+          return false;
+        }
+        return true;
+      } else return true;
+    }
+
+    if (item.key && userDetail?.permission?.[item.key] === false) {
+      return false;
+    }
+
+    return true;
   };
 
   useEffect(() => {
@@ -473,10 +468,35 @@ const ListActiveInactiveUser: React.FC = () => {
                               <div className="d-flex gap-1 border-right-0 border-left-0">
                                 {type ? (
                                   <>
-                                    {actionButtons?.map((item) => {
-                                      return (
-                                        (item.id === "d" ||
-                                          item.id === "w") && (
+                                    {actionButtons
+                                      .filter(handleActionButtonFilter)
+                                      ?.map((item) => {
+                                        return (
+                                          (item.id === "d" ||
+                                            item.id === "w") && (
+                                            <CustomButton
+                                              variant="dark"
+                                              onClick={() => {
+                                                item.onClick(
+                                                  item?.id,
+                                                  userItem
+                                                );
+                                              }}
+                                              key={item?.id}
+                                              className={`actionBtn`}
+                                            >
+                                              {item?.name}
+                                            </CustomButton>
+                                          )
+                                        );
+                                      })}
+                                  </>
+                                ) : (
+                                  <>
+                                    {actionButtons
+                                      .filter(handleActionButtonFilter)
+                                      ?.map((item) => {
+                                        return (
                                           <CustomButton
                                             variant="dark"
                                             onClick={() => {
@@ -487,26 +507,8 @@ const ListActiveInactiveUser: React.FC = () => {
                                           >
                                             {item?.name}
                                           </CustomButton>
-                                        )
-                                      );
-                                    })}
-                                  </>
-                                ) : (
-                                  <>
-                                    {actionButtons?.map((item) => {
-                                      return (
-                                        <CustomButton
-                                          variant="dark"
-                                          onClick={() => {
-                                            item.onClick(item?.id, userItem);
-                                          }}
-                                          key={item?.id}
-                                          className={`actionBtn`}
-                                        >
-                                          {item?.name}
-                                        </CustomButton>
-                                      );
-                                    })}
+                                        );
+                                      })}
                                   </>
                                 )}
                               </div>
@@ -693,10 +695,35 @@ const ListActiveInactiveUser: React.FC = () => {
                               <div className="d-flex gap-1 border-right-0 border-left-0">
                                 {type ? (
                                   <>
-                                    {actionButtons?.map((item) => {
-                                      return (
-                                        (item.id === "d" ||
-                                          item.id === "w") && (
+                                    {actionButtons
+                                      .filter(handleActionButtonFilter)
+                                      ?.map((item) => {
+                                        return (
+                                          (item.id === "d" ||
+                                            item.id === "w") && (
+                                            <CustomButton
+                                              variant="dark"
+                                              onClick={() => {
+                                                item.onClick(
+                                                  item?.id,
+                                                  userItem
+                                                );
+                                              }}
+                                              key={item?.id}
+                                              className={`actionBtn`}
+                                            >
+                                              {item?.name}
+                                            </CustomButton>
+                                          )
+                                        );
+                                      })}
+                                  </>
+                                ) : (
+                                  <>
+                                    {actionButtons
+                                      .filter(handleActionButtonFilter)
+                                      ?.map((item) => {
+                                        return (
                                           <CustomButton
                                             variant="dark"
                                             onClick={() => {
@@ -707,26 +734,8 @@ const ListActiveInactiveUser: React.FC = () => {
                                           >
                                             {item?.name}
                                           </CustomButton>
-                                        )
-                                      );
-                                    })}
-                                  </>
-                                ) : (
-                                  <>
-                                    {actionButtons?.map((item) => {
-                                      return (
-                                        <CustomButton
-                                          variant="dark"
-                                          onClick={() => {
-                                            item.onClick(item?.id, userItem);
-                                          }}
-                                          key={item?.id}
-                                          className={`actionBtn`}
-                                        >
-                                          {item?.name}
-                                        </CustomButton>
-                                      );
-                                    })}
+                                        );
+                                      })}
                                   </>
                                 )}
                               </div>
