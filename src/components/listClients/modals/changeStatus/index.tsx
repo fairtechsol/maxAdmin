@@ -93,11 +93,6 @@ const ChangeStatus = ({
                   <h3 className="text-secondary title-14 fw-normal">
                     {userData?.userName}
                   </h3>
-                  <h3
-                    className={`${
-                      !lockUnlockObj?.allBlocked ? "text-green" : "text-red"
-                    } title-14`}
-                  ></h3>
                 </div>
                 <div className="row">
                   {(!userDetail?.permission ||

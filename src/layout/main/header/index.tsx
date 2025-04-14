@@ -19,6 +19,44 @@ interface ItemProps {
   options: Array<any>;
 }
 
+const reportOptions = [
+  {
+    id: "accountStatement",
+    name: "Account Statement",
+    link: "/admin/account-statement",
+  },
+  {
+    id: "currentBets",
+    name: "Current Bets",
+    link: "/admin/current-bets",
+  },
+  {
+    id: "generalReport",
+    name: "General Report",
+    link: "/admin/general-report",
+  },
+  {
+    id: "gameReport",
+    name: "Game Report",
+    link: "/admin/game-report",
+  },
+  {
+    id: "liveCasinoResult",
+    name: "Casino Report",
+    link: "/admin/casino-report",
+  },
+  {
+    id: "partyWinLoss",
+    name: "Profit And Loss",
+    link: "/admin/profit-loss",
+  },
+  {
+    id: "casinoResult",
+    name: "Casino Result Report",
+    link: "/admin/casino-result",
+  },
+];
+
 const TopbarDropdown = ({ name, options }: ItemProps) => {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
@@ -294,43 +332,7 @@ const Topbar = (props: any) => {
               /> */}
               <TopbarDropdown
                 name="Reports"
-                options={[
-                  {
-                    id: "accountStatement",
-                    name: "Account Statement",
-                    link: "/admin/account-statement",
-                  },
-                  {
-                    id: "currentBets",
-                    name: "Current Bets",
-                    link: "/admin/current-bets",
-                  },
-                  {
-                    id: "generalReport",
-                    name: "General Report",
-                    link: "/admin/general-report",
-                  },
-                  {
-                    id: "gameReport",
-                    name: "Game Report",
-                    link: "/admin/game-report",
-                  },
-                  {
-                    id: "liveCasinoResult",
-                    name: "Casino Report",
-                    link: "/admin/casino-report",
-                  },
-                  {
-                    id: "partyWinLoss",
-                    name: "Profit And Loss",
-                    link: "/admin/profit-loss",
-                  },
-                  {
-                    id: "casinoResult",
-                    name: "Casino Result Report",
-                    link: "/admin/casino-result",
-                  },
-                ].filter((item) => {
+                options={reportOptions.filter((item) => {
                   if (item.id && userDetail?.permission?.[item.id] === false) {
                     return false;
                   }

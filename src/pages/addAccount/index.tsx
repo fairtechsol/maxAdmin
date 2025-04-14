@@ -332,7 +332,6 @@ const AddAccount = () => {
           </div>
         )}
       </Card.Header>
-
       <Card.Body className="bg-light">
         <Form onSubmit={onFormSubmit}>
           <Row>

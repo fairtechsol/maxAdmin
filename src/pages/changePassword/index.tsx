@@ -80,7 +80,6 @@ const ChangePassword = () => {
             />
           </Col>
         </Row>
-
         <Row>
           <Col md={4}>
             <CustomInput
@@ -96,7 +95,6 @@ const ChangePassword = () => {
             />
           </Col>
         </Row>
-
         <Button variant="primary" type="submit">
           Submit
         </Button>

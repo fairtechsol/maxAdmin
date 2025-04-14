@@ -41,41 +41,39 @@ const Sidebar = (props: any) => {
   }, [competitionDates, selectedMatch]);
 
   return (
-    <>
-      <div className="sidebarBox bg-light">
-        <div className="">
-          <div
-            className="sidebarBox-close cursor-pointer"
-            onClick={props.clickHandler}
-          >
-            {" "}
-            <FaTimes />
-          </div>
-          <h3 className="title-28 f400 mb-3">Sports</h3>
+    <div className="sidebarBox bg-light">
+      <div className="">
+        <div
+          className="sidebarBox-close cursor-pointer"
+          onClick={props.clickHandler}
+        >
+          {" "}
+          <FaTimes />
         </div>
-        {menuItemList?.map((item: any) => (
-          <Accordion
-            onSelect={(e: any) => {
-              if (e == 0) {
-                setSelectedMatch(item?.id);
-                dispatch(getCompetitionDates(item?.id));
-              }
-            }}
-            key={item?.id}
-            defaultActiveKey={[]}
-          >
-            <MenuItem
-              onClickMenuItem={props.clickHandler}
-              item={item}
-              menuItemList={menuItemList}
-              setMenuItemList={setMenuItemList}
-              selectedMatchIndex={selectedMatchIndex}
-              selectedMatch={selectedMatch}
-            />
-          </Accordion>
-        ))}
+        <h3 className="title-28 f400 mb-3">Sports</h3>
       </div>
-    </>
+      {menuItemList?.map((item: any) => (
+        <Accordion
+          onSelect={(e: any) => {
+            if (e == 0) {
+              setSelectedMatch(item?.id);
+              dispatch(getCompetitionDates(item?.id));
+            }
+          }}
+          key={item?.id}
+          defaultActiveKey={[]}
+        >
+          <MenuItem
+            onClickMenuItem={props.clickHandler}
+            item={item}
+            menuItemList={menuItemList}
+            setMenuItemList={setMenuItemList}
+            selectedMatchIndex={selectedMatchIndex}
+            selectedMatch={selectedMatch}
+          />
+        </Accordion>
+      ))}
+    </div>
   );
 };
 export default Sidebar;
