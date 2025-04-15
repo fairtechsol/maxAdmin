@@ -1,12 +1,12 @@
-import { Col, Modal } from "react-bootstrap";
-import isMobile from "../../../../utils/screenDimension";
 import moment from "moment";
 import { useState } from "react";
+import { Col, Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import SelectSearch from "../../../../components/commonComponent/SelectSearch";
 import CustomButton from "../../../../components/commonComponent/button";
 import { transactionProviderBets } from "../../../../store/actions/card/cardDetail";
 import { AppDispatch } from "../../../../store/store";
+import isMobile from "../../../../utils/screenDimension";
 
 const LiveCasinoModal = ({
   selected,
@@ -42,9 +42,7 @@ const LiveCasinoModal = ({
         isMobile ? "provider-modal-m m-0" : "provider-modal custom-modal"
       }`}
     >
-      <Modal.Header
-        style={{ color: "#fff", backgroundColor: "#004A25" }}
-      >
+      <Modal.Header style={{ color: "#fff", backgroundColor: "#004A25" }}>
         <Modal.Title className="w-100">Result</Modal.Title>
         <button
           style={{
@@ -146,7 +144,7 @@ const LiveCasinoModal = ({
                 updatedReport?.map((item: any) => {
                   return (
                     <div
-                      key={item?.transactionId} 
+                      key={item?.transactionId}
                       className="w-100 d-flex flex-row"
                       style={{
                         border: "1px solid #c7c8ca",

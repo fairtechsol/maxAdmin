@@ -173,7 +173,6 @@ const CasinoReport = () => {
   return (
     <div className="p-2 pt-0">
       <h5 className="title-22 fw-normal">Casino Report</h5>
-
       <div
         style={{
           minHeight: "1px",
@@ -204,7 +203,6 @@ const CasinoReport = () => {
             </Col>
             <Col lg={2} className="mb-3">
               <SelectSearch
-                // label={"Search By Client Name"}
                 inputValue={inputValue}
                 options={userOptions}
                 value={tempUser ? null : selectedUser}

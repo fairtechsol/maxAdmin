@@ -94,7 +94,6 @@ const AddAccount = () => {
           city: values.city,
           roleName: values.accountType.value,
           creditRefrence: values.creditReference,
-          // commissionDownPartnership: values.commissionDownPartnership,
           myPartnership:
             values?.accountType.value === "user"
               ? values?.downlinePartnership
@@ -594,7 +593,6 @@ const AddAccount = () => {
                 >
                   Min Max Bet
                 </h6>
-
                 <Table striped bordered className="commonTable">
                   <thead>
                     <tr>

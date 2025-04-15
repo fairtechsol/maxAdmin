@@ -97,9 +97,9 @@ const GameReport = () => {
         <Row>
           <Col md={2}>
             <CustomInput
-              title={"From"}
-              placeholder={""}
-              customstyle={"mb-3"}
+              title="From"
+              placeholder=""
+              customstyle="mb-3"
               onChange={(e: any) => {
                 setDateFrom(e.target.value);
               }}
@@ -110,9 +110,9 @@ const GameReport = () => {
           </Col>
           <Col md={2}>
             <CustomInput
-              title={"To"}
-              placeholder={""}
-              customstyle={"mb-3"}
+              title="To"
+              placeholder=""
+              customstyle="mb-3"
               onChange={(e: any) => setDateTo(e.target.value)}
               type="date"
               value={dateTo}
@@ -123,7 +123,7 @@ const GameReport = () => {
             <SelectSearch
               defaultValue={[selectType]}
               options={options}
-              label={"Type"}
+              label="Type"
               onChange={handleType}
             />
           </Col>

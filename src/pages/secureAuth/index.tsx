@@ -79,7 +79,7 @@ const SecureAuth = () => {
               <div className="page-title-right"></div>
             </div>
           </div>
-        </div>{" "}
+        </div>
       </div>
       <Card>
         <Card.Body>

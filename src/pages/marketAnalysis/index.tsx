@@ -61,7 +61,7 @@ const MarketAnalysis = () => {
               )
             }
             size={15}
-            cursor={"pointer"}
+            cursor="pointer"
             className={loading ? "rotate" : ""}
           />
         </h3>

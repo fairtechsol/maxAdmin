@@ -155,7 +155,7 @@ const ProfitLossReport = () => {
         <Row className="mb-3">
           <Col md={2}>
             <SelectSearch
-              label={"Search By Client Name"}
+              label="Search By Client Name"
               options={userOptions}
               value={selectedUser}
               inputValue={inputValue}
@@ -169,7 +169,7 @@ const ProfitLossReport = () => {
                   setSelectedUser(value);
                 }
               }}
-              placeholder={"Client Name:"}
+              placeholder="Client Name:"
               isMultiOption={true}
               isSearchable={true}
               onInputChange={(value: any) => {
@@ -180,8 +180,8 @@ const ProfitLossReport = () => {
           </Col>
           <Col md={2}>
             <CustomInput
-              title={"From"}
-              placeholder={""}
+              title="From"
+              placeholder=""
               value={dateFrom}
               onChange={(e: any) => setDateFrom(e.target.value)}
               type="date"
@@ -189,8 +189,8 @@ const ProfitLossReport = () => {
           </Col>
           <Col md={2}>
             <CustomInput
-              title={"To"}
-              placeholder={""}
+              title="To"
+              placeholder=""
               value={dateTo}
               onChange={(e: any) => setDateTo(e.target.value)}
               type="date"

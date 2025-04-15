@@ -9,7 +9,7 @@ interface ItemObj {
   name: string;
 }
 
-interface Props {
+interface CustomBreadcrumbProps {
   items: Array<ItemObj>;
   style?: React.CSSProperties;
   matchType?: string;
@@ -17,7 +17,13 @@ interface Props {
   setTvData?: any;
 }
 
-function CustomBreadcrumb({ items, style, matchType, url, setTvData }: Props) {
+function CustomBreadcrumb({
+  items,
+  style,
+  matchType,
+  url,
+  setTvData,
+}: CustomBreadcrumbProps) {
   const [showScoreBoard, setShowScoreBoard] = useState(false);
   const { matchDetails } = useSelector(
     (state: RootState) => state.match.matchListSlice
@@ -88,7 +94,7 @@ function CustomBreadcrumb({ items, style, matchType, url, setTvData }: Props) {
             src={url}
             title="Live Stream"
             referrerPolicy="strict-origin-when-cross-origin"
-          ></iframe>
+          />
         </div>
       )}
     </>

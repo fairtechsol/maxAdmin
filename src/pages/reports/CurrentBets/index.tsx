@@ -175,9 +175,7 @@ const CurrentBets = () => {
   return (
     <div className="p-2 pt-0">
       <h5 className="title-22 fw-normal">Current Bets</h5>
-
       <Tabs defaultActiveKey="tab1" id="betReportTabs" onSelect={handleSelect}>
-        {/* Tab 1 */}
         <Tab eventKey="tab1" title="Sports">
           <Form
             onSubmit={(e) => {
@@ -223,13 +221,10 @@ const CurrentBets = () => {
               </Col>
             </Row>
           </Form>
-
           <CustomTable
             customClass="commonTable reportTable"
-            // striped
             columns={columns}
             isPagination={true}
-            // isSort={true}
             isSearch={true}
             itemCount={betList && betList?.count > 0 ? betList?.count : 1}
             setTableConfig={setTableConfig}
@@ -286,7 +281,6 @@ const CurrentBets = () => {
               })}
           </CustomTable>
         </Tab>
-
         <Tab eventKey="tab2" title="Casino">
           <Form onSubmit={(e) => handleLoad(e)} className="mt-1">
             <Row className="d-flex align-items-center">
@@ -315,7 +309,6 @@ const CurrentBets = () => {
               </Col>
             </Row>
           </Form>
-
           <CustomTable
             customClass="commonTable reportTable"
             striped

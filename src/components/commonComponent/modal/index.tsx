@@ -20,27 +20,22 @@ function CustomModal({
     dispatch(userModalReset());
   };
   return (
-    <>
-      <Modal
-        {...props}
-        show={show}
-        onHide={handleClose}
-        className={`customModal ${customClass}`}
-      >
-        <Modal.Header
-          closeButton
-          className={`${headerStyle ? headerStyle : ""}`}
-        >
-          <Modal.Title className={`${titleStyle}`}>{title}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>{children}</Modal.Body>
-        {footer ? (
-          <Modal.Footer className="border-0 mt-3">{footer}</Modal.Footer>
-        ) : (
-          ""
-        )}
-      </Modal>
-    </>
+    <Modal
+      {...props}
+      show={show}
+      onHide={handleClose}
+      className={`customModal ${customClass}`}
+    >
+      <Modal.Header closeButton className={`${headerStyle ? headerStyle : ""}`}>
+        <Modal.Title className={`${titleStyle}`}>{title}</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>{children}</Modal.Body>
+      {footer ? (
+        <Modal.Footer className="border-0 mt-3">{footer}</Modal.Footer>
+      ) : (
+        ""
+      )}
+    </Modal>
   );
 }
 

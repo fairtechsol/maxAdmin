@@ -126,7 +126,7 @@ const CasinoResultReport = () => {
   const [cross, setCross] = useState("");
 
   const clearDate = () => {
-    setCross(""); // Clear the selected date
+    setCross("");
   };
   const handleSearch = (keyword: string) => {
     setTableConfig((prev: any) => {
@@ -142,7 +142,6 @@ const CasinoResultReport = () => {
             <div className="position-relative">
               <CustomInput
                 placeholder={""}
-                // customstyle={"mb-3"}
                 type="date"
                 onChange={(e: any) => {
                   setDate(moment(e.target.value).format("YYYY-MM-DD"));
@@ -213,7 +212,6 @@ const CasinoResultReport = () => {
         columns={columns}
         isPagination={true}
         isSort={false}
-        // isSearch={true}
         itemCount={casinoResultReport ? casinoResultReport?.count : 0}
         setTableConfig={setTableConfig}
         enablePdfExcel={false}

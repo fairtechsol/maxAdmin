@@ -69,8 +69,8 @@ const GeneralReport = () => {
             <SelectSearch
               defaultValue={[selectType]}
               options={options}
-              label={"Select Type"}
-              placeholder={"All"}
+              label="Select Type"
+              placeholder="All"
               onChange={handleType}
             />
           </Col>
@@ -89,7 +89,6 @@ const GeneralReport = () => {
         isPagination={false}
         isSort={false}
         isSearch={false}
-        // itemCount={data?.length}
         itemCount={gameGeneralList?.usersData?.length}
         setTableConfig={setTableConfig}
         enablePdfExcel={false}

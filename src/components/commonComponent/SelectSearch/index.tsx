@@ -3,29 +3,27 @@ import Select from "react-select";
 import CustomErrorMessage from "../input/CustomErrorMessage";
 import "./style.scss";
 
-const SelectSearch = (props: any) => {
-  const {
-    id,
-    options,
-    placeholder,
-    isMultiOption,
-    isSearchable,
-    onChange,
-    value,
-    defaultValue,
-    label,
-    customClass,
-    filedClass,
-    SelectInline,
-    onBlur,
-    touched,
-    errors,
-    onInputChange,
-    isOptionDisabled,
-    inputValue,
-    onFocus,
-  } = props;
-
+const SelectSearch = ({
+  id,
+  options,
+  placeholder,
+  isMultiOption,
+  isSearchable,
+  onChange,
+  value,
+  defaultValue,
+  label,
+  customClass,
+  filedClass,
+  SelectInline,
+  onBlur,
+  touched,
+  errors,
+  onInputChange,
+  isOptionDisabled,
+  inputValue,
+  onFocus,
+}: any) => {
   return (
     <>
       <Form.Group

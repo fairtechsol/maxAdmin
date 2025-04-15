@@ -6,7 +6,14 @@ import MarketTableHeader from "../../commonComponent/MarketWiseHeader";
 import BetBox from "../betBox";
 import "./style.scss";
 
-const Tournament = ({ title, box, data, detail }: any) => {
+interface TournamentProps {
+  title: string;
+  box: number;
+  data: any;
+  detail: any;
+}
+
+const Tournament = ({ title, box, data, detail }: TournamentProps) => {
   const { marketAnalysisDetail } = useSelector(
     (state: RootState) => state.match.marketAnalysis
   );

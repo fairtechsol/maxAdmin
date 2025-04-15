@@ -262,9 +262,7 @@ function MarketTableHeader({
           onHide={handleClose1}
           className={`customModal ${customClass} `}
         >
-          <Modal.Header
-            closeButton
-          >
+          <Modal.Header closeButton>
             <Modal.Title className={`${"Betlock"}`}>{"Betlock"}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -342,9 +340,7 @@ function MarketTableHeader({
           onHide={handleClose2}
           className={`customModal ${customClass} custom-modal-width`}
         >
-          <Modal.Header
-            closeButton
-          >
+          <Modal.Header closeButton>
             <Modal.Title className={`${"Betlock"}`}>{"User Book"}</Modal.Title>
           </Modal.Header>
           <Modal.Body>

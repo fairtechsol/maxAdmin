@@ -63,7 +63,7 @@ const ChangePassword = () => {
   }, [modalSuccess]);
 
   return (
-    <div>
+    <>
       <Form
         className="auth-main text-center d-flex  justify-content-center"
         onSubmit={handleSubmit}
@@ -75,11 +75,11 @@ const ChangePassword = () => {
 
             <Form.Group className="mb-3 d-block">
               <CustomInput
-                id={"oldPassword"}
-                title={"Old Password"}
-                placeholder={"Old Password"}
-                type={"password"}
-                customstyle={"mb-3"}
+                id="oldPassword"
+                title="Old Password"
+                placeholder="Old Password"
+                type="password"
+                customstyle="mb-3"
                 {...getFieldProps("oldPassword")}
                 onChange={handleOldPasswordChange}
                 touched={touched.oldPassword}
@@ -89,11 +89,11 @@ const ChangePassword = () => {
 
             <Form.Group className="mb-3 d-block">
               <CustomInput
-                id={"newPassword"}
-                title={"New Password"}
-                placeholder={"New Password"}
-                type={"password"}
-                customstyle={"mb-3"}
+                id="newPassword"
+                title="New Password"
+                placeholder="New Password"
+                type="password"
+                customstyle="mb-3"
                 {...getFieldProps("newPassword")}
                 touched={touched.newPassword}
                 errors={errors.newPassword}
@@ -102,11 +102,11 @@ const ChangePassword = () => {
 
             <Form.Group className="mb-3 d-block">
               <CustomInput
-                id={"confirmPassword"}
-                title={"Confirm Password"}
-                placeholder={"Confirm Password"}
-                type={"password"}
-                customstyle={"mb-3"}
+                id="confirmPassword"
+                title="Confirm Password"
+                placeholder="Confirm Password"
+                type="password"
+                customstyle="mb-3"
                 {...getFieldProps("confirmPassword")}
                 touched={touched.confirmPassword}
                 errors={errors.confirmPassword}
@@ -133,13 +133,13 @@ const ChangePassword = () => {
                 dispatch(logout());
               }
             }}
-            buttonMessage={"Navigate To Login"}
-            navigateTo={"/admin/login"}
+            buttonMessage="Navigate To Login"
+            navigateTo="/admin/login"
             transactionMessage={transactionPassword?.transactionPassword}
           />
         </>
       )}
-    </div>
+    </>
   );
 };
 

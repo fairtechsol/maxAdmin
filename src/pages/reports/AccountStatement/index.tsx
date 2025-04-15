@@ -29,14 +29,12 @@ import {
   gameConstantsAccountStatement,
 } from "../../../utils/Constants";
 import LiveCasinoModal from "./liveCasinoModal";
-// import isMobile from "../../../utils/screenDimension";
 
 interface Column {
   id: string;
   label: string;
 }
 
-// Example usage
 const columns: Column[] = [
   { id: "date", label: "Date" },
   { id: "credit", label: "Credit" },
@@ -389,7 +387,7 @@ const AccountStatement = () => {
 
   useEffect(() => {
     const currentDate = new Date();
-    const formattedCurrentDate = currentDate.toISOString().split("T")[0]; 
+    const formattedCurrentDate = currentDate.toISOString().split("T")[0];
 
     const pastDate = new Date();
     pastDate.setDate(pastDate.getDate() - 7);
@@ -503,7 +501,6 @@ const AccountStatement = () => {
               isSearchable={true}
               onInputChange={(value: any) => {
                 setInputValue(value);
-                //debouncedInputValue(value);
               }}
             />
           </Col>
@@ -575,10 +572,7 @@ const AccountStatement = () => {
           } = item;
           return (
             <tr key={item?.id}>
-              {/* {columns.map((column) => (
-              <td key={column.id}>{item[column.id]}</td>
-            ))} */}
-              <td>{moment(createdAt).format("YYYY-MM-DD HH:mm:ss")} </td>
+              <td>{moment(createdAt).format("YYYY-MM-DD HH:mm:ss")}</td>
               <td
                 className={`cursor-pointer ${amount > 0 ? "color-green" : ""}`}
                 style={{
@@ -639,15 +633,11 @@ const AccountStatement = () => {
       <CustomModal
         customClass="modalFull-90 "
         title={[
-          <>
-            <span className="f400">
-              Client Ledger (Total Win Loss :{" "}
-              {betAccountStatementModal?.totalCount?.amount || 0})
-              {/* (Total Count
-              : {betAccountStatementModal?.totalCount?.totalCount || 0})  */}{" "}
-              (Total Bets : {betAccountStatementModal?.totalCount?.soda || 0})
-            </span>
-          </>,
+          <span className="f400">
+            Client Ledger (Total Win Loss :{" "}
+            {betAccountStatementModal?.totalCount?.amount || 0}) (Total Bets :{" "}
+            {betAccountStatementModal?.totalCount?.soda || 0})
+          </span>,
         ]}
         show={AccountStatementModalShow}
         setShow={setAccountStatementModalShow}

@@ -12,23 +12,18 @@ const RightPanelContainer = ({
   children,
 }: RightPanelContainerProps) => {
   return (
-    <div>
-      <div>
-        <BetTableHeader
-          customClass="rounded-top-1  rounded-bottom-0 py-2"
-          customTextClass="cursor-pointer text-white"
-          title={title}
-          rightComponent={
-            <FiMonitor
-              className="text-white"
-              style={{ cursor: "pointer" }}
-            />
-          }
-          setShowVideo={setShowVideo}
-        />
-      </div>
+    <>
+      <BetTableHeader
+        customClass="rounded-top-1  rounded-bottom-0 py-2"
+        customTextClass="cursor-pointer text-white"
+        title={title}
+        rightComponent={
+          <FiMonitor className="text-white" style={{ cursor: "pointer" }} />
+        }
+        setShowVideo={setShowVideo}
+      />
       <div className="borderTable border rounded-bottom-1">{children}</div>
-    </div>
+    </>
   );
 };
 

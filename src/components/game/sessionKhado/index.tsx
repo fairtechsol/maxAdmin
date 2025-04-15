@@ -21,13 +21,6 @@ const SessionKhado = ({
   mtype,
   marketAnalysisDetail,
 }: any) => {
-  const handlePrice = (rate: any) => {
-    if (rate && rate != 0) {
-      return rate;
-    } else {
-      return "-";
-    }
-  };
   const [runnerModalShow, setRunnerModalShow] = useState(false);
 
   const { runAmount } = useSelector(
@@ -35,18 +28,45 @@ const SessionKhado = ({
   );
   const dispatch: AppDispatch = useDispatch();
 
+  const handlePrice = (rate: any) => {
+    if (rate && rate != 0) {
+      return rate;
+    } else {
+      return "-";
+    }
+  };
+
+  const handleRunAmountClick = (item: any) => {
+    if (item.activeStatus === "save") {
+      return true;
+    } else if (
+      calculateMaxLoss(detail?.profitLossDataSession, item?.id) === 0
+    ) {
+      return;
+    } else {
+      if (
+        ![sessionBettingType.fancy1, sessionBettingType.oddEven].includes(mtype)
+      ) {
+        dispatch(resetRunAmount());
+        setRunnerModalShow((prev) => !prev);
+        if (title === "meter") {
+          dispatch(getRunAmountMeter(item?.id));
+        } else {
+          dispatch(getRunAmount(item?.id));
+        }
+      }
+    }
+  };
+
   return (
     <>
       <div
         className="sessionNormalContainer"
         style={{ marginTop: isMobile ? "" : "10px" }}
       >
-        {/* <div className="sessionNormalTitle">
-          <span className="sessionNormalTitleTxt f-size15">{title}</span>
-        </div> */}
         <MarketTableHeader
           title={title}
-          type={"khado"}
+          type="khado"
           data={data}
           detail={detail}
         />
@@ -62,15 +82,12 @@ const SessionKhado = ({
             style={{ width: "100%", display: "flex", flexDirection: "column" }}
           >
             <div className="sessionYesNoBoxContainer">
-              <div
-                className="sessionYesNoBox  rateBoxWidthKhado"
-                // style={{ width: isLap ? "180px" : !isMobile ? "240px" : "" }}
-              >
+              <div className="sessionYesNoBox  rateBoxWidthKhado">
                 <div className="sessionKhadoYesBox back1Background">
                   <span className={`f-size16 sessionBackTxt`}>Back</span>
                 </div>
 
-                <div className="sessionEmptyBox"></div>
+                <div className="sessionEmptyBox" />
               </div>
             </div>
             {data?.section?.map((item: any, index: any) => {
@@ -83,37 +100,10 @@ const SessionKhado = ({
                     <span
                       className="teamFont"
                       style={{ fontWeight: "400", lineHeight: 1 }}
-                      onClick={() => {
-                        // console.log("first", item);
-                        if (item.activeStatus === "save") {
-                          return true;
-                        } else if (
-                          calculateMaxLoss(
-                            detail?.profitLossDataSession,
-                            item?.id
-                          ) === 0
-                        ) {
-                          return;
-                        } else {
-                          if (
-                            ![
-                              sessionBettingType.fancy1,
-                              sessionBettingType.oddEven,
-                            ].includes(mtype)
-                          ) {
-                            dispatch(resetRunAmount());
-                            setRunnerModalShow((prev) => !prev);
-                            if (title === "meter") {
-                              dispatch(getRunAmountMeter(item?.id));
-                            } else {
-                              dispatch(getRunAmount(item?.id));
-                            }
-                          }
-                        }
-                      }}
+                      onClick={() => handleRunAmountClick(item)}
                     >
                       {item?.RunnerName}-{item?.ex?.availableToLay?.[0]?.price}
-                    </span>{" "}
+                    </span>
                     <span
                       className={`${
                         (marketAnalysisDetail?.length
@@ -170,7 +160,6 @@ const SessionKhado = ({
                         {handleSize(item?.ex?.availableToBack?.[0]?.size)}
                       </span>
                     </div>
-
                     <div className="sessionMinBoxContainer">
                       <span className={`sessionMinBox sessionMinMaxFont`}>
                         Min:{formatNumber(item?.min)}

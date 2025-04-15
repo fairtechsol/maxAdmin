@@ -336,7 +336,6 @@ const OtherGamesDetail = () => {
                     />
                   </Col>
                 ))}
-
               <div
                 style={{
                   display: "flex",

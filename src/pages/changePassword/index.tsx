@@ -64,7 +64,6 @@ const ChangePassword = () => {
             />
           </Col>
         </Row>
-
         <Row>
           <Col md={4}>
             <CustomInput

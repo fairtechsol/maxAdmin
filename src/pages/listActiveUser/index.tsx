@@ -251,15 +251,13 @@ const ListActiveInactiveUser: React.FC = () => {
                 }}
                 value={value}
               >
-                <option value={25}>25</option>
-                <option value={50}>50</option>
-                <option value={100}>100</option>
-                <option value={250}>250</option>
-                <option value={500}>500</option>
-                <option value={750}>750</option>
-                <option value={1000}>1000</option>
+                {[25, 50, 100, 250, 500, 750, 1000].map((item: number) => (
+                  <option key={item} value={item}>
+                    {item}
+                  </option>
+                ))}
               </select>
-              <span className="title-12 ms-1">entries</span>{" "}
+              <span className="title-12 ms-1">entries</span>
             </div>
           </Col>
           <Col className="d-flex flex-column align-items-end">
@@ -288,7 +286,6 @@ const ListActiveInactiveUser: React.FC = () => {
                         return {
                           ...prev,
                           keyword: "",
-                          // page: 1,
                         };
                       });
                       setActiveTab("active");
@@ -410,7 +407,6 @@ const ListActiveInactiveUser: React.FC = () => {
                                 </Link>
                               )}
                             </td>
-
                             <td className="text-end">
                               {formatToINR(creditRefrence)}
                             </td>
@@ -463,7 +459,6 @@ const ListActiveInactiveUser: React.FC = () => {
                             </td>
                             <td>0</td>
                             <td>{roleName}</td>
-                            {/* <td className="text-end">0</td> */}
                             <td>
                               <div className="d-flex gap-1 border-right-0 border-left-0">
                                 {type ? (

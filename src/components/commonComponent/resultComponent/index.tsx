@@ -38,8 +38,42 @@ import WorliResultComponent from "../../cardGames/games/worli/resultModalCompone
 interface ResultComponentProps {
   data: any;
   setfalse: any;
-  type: keyof typeof cardGamesTypeNames;
+  type: any;
 }
+
+const resultComponentMap: { [key: string]: React.FC<{ data: any }> } = {
+  [cardGamesType.dragonTiger20]: Dragon20ResultComponent,
+  [cardGamesType.andarBahar2]: AbjResultComponent,
+  [cardGamesType.teen20]: Teen20ResultComponent,
+  [cardGamesType.card32]: Card32ResultComponent,
+  [cardGamesType.lucky7]: Lucky7ResultComponent,
+  [cardGamesType.lucky7B]: Lucky7BResultComponent,
+  [cardGamesType.dragonTiger202]: Dragon202ResultComponent,
+  [cardGamesType.dragonTigerLion]: DragonTigerLionResultComponent,
+  [cardGamesType.teenOneDay]: Teen1DResultComponent,
+  [cardGamesType.dragonTigerOneDay]: DragonTigerOneDayResultComponent,
+  [cardGamesType.teenOpen]: TeenOpenResultComponent,
+  [cardGamesType.andarBahar1]: Abj1ResultComponent,
+  [cardGamesType.superover]: SuperOverResultComponent,
+  [cardGamesType.race20]: Race20ResultComponent,
+  [cardGamesType.cricketv3]: Cricket5ResultComponent,
+  [cardGamesType.card32B]: Card32BResultComponent,
+  [cardGamesType.casinoWar]: CasinoWarResultComponent,
+  [cardGamesType.poker1Day]: Poker1DayResultComponent,
+  [cardGamesType.poker6]: Poker6ResultComponent,
+  [cardGamesType.poker20]: Poker20ResultComponent,
+  [cardGamesType.teenTest]: TeenTestResultComponent,
+  [cardGamesType.cmatch20]: CricketMatch20ResultComponent,
+  [cardGamesType.amarAkbarAnthony]: AmarAkbarAnthonyResultComponent,
+  [cardGamesType.btable]: BollywoodTableResultComponent,
+  [cardGamesType.worli]: WorliResultComponent,
+  [cardGamesType.baccarat]: Bacarrat1ResultComponent,
+  [cardGamesType.ballbyball]: BallByBallResultComponent,
+  [cardGamesType.baccarat2]: Bacarrat2ResultComponent,
+  [cardGamesType.cardj]: CardJResultComponent,
+  [cardGamesType.cmeter]: CasinoMeterResultComponent,
+  [cardGamesType.queen]: QueenResultComponent,
+};
 
 export const ResultComponent: React.FC<ResultComponentProps> = ({
   data,
@@ -53,6 +87,9 @@ export const ResultComponent: React.FC<ResultComponentProps> = ({
       setDate(Date.now());
     }
   }, []);
+
+  const SelectedResultComponent = resultComponentMap[type];
+
   return (
     <div style={{ padding: 0 }}>
       <div className="resultModalHeader">
@@ -88,68 +125,8 @@ export const ResultComponent: React.FC<ResultComponentProps> = ({
           </span>
         </div>
       </div>
-      {type === cardGamesType?.dragonTiger20 ? (
-        <Dragon20ResultComponent data={data} />
-      ) : type === cardGamesType?.andarBahar2 ? (
-        <AbjResultComponent data={data} />
-      ) : type === cardGamesType?.teen20 ? (
-        <Teen20ResultComponent data={data} />
-      ) : type === cardGamesType?.card32 ? (
-        <Card32ResultComponent data={data} />
-      ) : type === cardGamesType?.lucky7 ? (
-        <Lucky7ResultComponent data={data} />
-      ) : type === cardGamesType?.lucky7B ? (
-        <Lucky7BResultComponent data={data} />
-      ) : type === cardGamesType?.dragonTiger202 ? (
-        <Dragon202ResultComponent data={data} />
-      ) : type === cardGamesType?.dragonTigerLion ? (
-        <DragonTigerLionResultComponent data={data} />
-      ) : type === cardGamesType?.teenOneDay ? (
-        <Teen1DResultComponent data={data} />
-      ) : type === cardGamesType?.dragonTigerOneDay ? (
-        <DragonTigerOneDayResultComponent data={data} />
-      ) : type === cardGamesType?.teenOpen ? (
-        <TeenOpenResultComponent data={data} />
-      ) : type === cardGamesType?.andarBahar1 ? (
-        <Abj1ResultComponent data={data} />
-      ) : type === cardGamesType?.superover ? (
-        <SuperOverResultComponent data={data} />
-      ) : type === cardGamesType?.race20 ? (
-        <Race20ResultComponent data={data} />
-      ) : type === cardGamesType?.cricketv3 ? (
-        <Cricket5ResultComponent data={data} />
-      ) : type === cardGamesType?.card32B ? (
-        <Card32BResultComponent data={data} />
-      ) : type === cardGamesType?.casinoWar ? (
-        <CasinoWarResultComponent data={data} />
-      ) : type === cardGamesType?.poker1Day ? (
-        <Poker1DayResultComponent data={data} />
-      ) : type === cardGamesType?.poker6 ? (
-        <Poker6ResultComponent data={data} />
-      ) : type === cardGamesType?.poker20 ? (
-        <Poker20ResultComponent data={data} />
-      ) : type === cardGamesType?.teenTest ? (
-        <TeenTestResultComponent data={data} />
-      ) : type === cardGamesType?.cmatch20 ? (
-        <CricketMatch20ResultComponent data={data} />
-      ) : type === cardGamesType?.amarAkbarAnthony ? (
-        <AmarAkbarAnthonyResultComponent data={data} />
-      ) : type === cardGamesType?.btable ? (
-        <BollywoodTableResultComponent data={data} />
-      ) : type === cardGamesType?.worli ? (
-        <WorliResultComponent data={data} />
-      ) : type === cardGamesType?.baccarat ? (
-        <Bacarrat1ResultComponent data={data} />
-      ) : type === cardGamesType?.ballbyball ? (
-        <BallByBallResultComponent data={data} />
-      ) : type === cardGamesType?.baccarat2 ? (
-        <Bacarrat2ResultComponent data={data} />
-      ) : type === cardGamesType?.cardj ? (
-        <CardJResultComponent data={data} />
-      ) : type === cardGamesType?.cmeter ? (
-        <CasinoMeterResultComponent data={data} />
-      ) : type === cardGamesType?.queen ? (
-        <QueenResultComponent data={data} />
+      {SelectedResultComponent ? (
+        <SelectedResultComponent data={data} />
       ) : (
         <></>
       )}

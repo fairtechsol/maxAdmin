@@ -1,20 +1,24 @@
+import moment from "moment-timezone";
 import { Fragment, useState } from "react";
 import { Button, Col, Row, Tab, Table } from "react-bootstrap";
-import CustomModal from "../../commonComponent/modal";
-import moment from "moment-timezone";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
+import CustomModal from "../../commonComponent/modal";
 import UserBetModalForm from "./modal/form";
 import "./style.scss";
 
-const UserBets = ({ matchId }: any) => {
+interface UserBetsProps {
+  matchId?: string;
+}
+
+const UserBets = ({ matchId }: UserBetsProps) => {
   const { placedBets } = useSelector(
     (state: RootState) => state.match.placeBets
   );
 
   const [showModal, setShowModal] = useState(false);
   return (
-    <div className={`userBets`}>
+    <div className="userBets">
       <Tab.Container id="left-tabs-example" defaultActiveKey="first">
         <Row>
           <Col sm={12}>
@@ -87,7 +91,6 @@ const UserBets = ({ matchId }: any) => {
                                 : "bg-blu text-center"
                             }
                           >
-                            {" "}
                             {bet?.odds}
                           </td>
                           <td
@@ -97,7 +100,6 @@ const UserBets = ({ matchId }: any) => {
                                 : "bg-blu text-center"
                             }
                           >
-                            {" "}
                             {bet?.amount}
                           </td>
                           <td
@@ -118,14 +120,10 @@ const UserBets = ({ matchId }: any) => {
                                 : "bg-blu text-end"
                             }
                           >
-                            {" "}
                             {bet?.eventType}
                           </td>
                         </tr>
-                        <div
-                          className="bg-white"
-                          style={{ height: "4px" }}
-                        ></div>
+                        <div className="bg-white" style={{ height: "4px" }} />
                       </Fragment>
                     );
                   })}
@@ -146,7 +144,6 @@ const UserBets = ({ matchId }: any) => {
           matchId={matchId}
           morePlacedBets={placedBets}
         />
-        {/* <UserBetModalTable /> */}
       </CustomModal>
     </div>
   );
