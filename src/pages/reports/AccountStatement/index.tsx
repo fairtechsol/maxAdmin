@@ -479,7 +479,7 @@ const AccountStatement = () => {
           )}
           <Col md={isMobile ? 12 : 2}>
             <SelectSearch
-              label={"Search By Client Name"}
+              label="Search By Client Name"
               inputValue={inputValue}
               options={userOptions}
               value={tempUser ? selectedUserValue : selectedUser}
@@ -506,9 +506,9 @@ const AccountStatement = () => {
           </Col>
           <Col md={isMobile ? 12 : 2}>
             <CustomInput
-              title={"From"}
-              placeholder={""}
-              customstyle={"mb-3"}
+              title="From"
+              placeholder=""
+              customstyle="mb-3"
               onChange={(e: any) => {
                 setDateFrom(e.target.value);
               }}
@@ -519,10 +519,10 @@ const AccountStatement = () => {
           </Col>
           <Col md={isMobile ? 12 : 2}>
             <CustomInput
-              title={"To"}
-              placeholder={""}
+              title="To"
+              placeholder=""
               onChange={(e: any) => setDateTo(e.target.value)}
-              customstyle={"mb-3"}
+              customstyle="mb-3"
               type="date"
               bgColor="lightGray"
               value={dateTo}
@@ -532,7 +532,7 @@ const AccountStatement = () => {
         <Col md={2}>
           <Form.Label className="invisible d-block">dasd</Form.Label>
           <CustomButton
-            type={"submit"}
+            type="submit"
             onClick={() => {
               setFirstTime(true);
             }}
