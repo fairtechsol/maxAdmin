@@ -17,6 +17,9 @@ export const login = createAsyncThunk<any, LoginData>(
       const { token, userId } = data;
       localStorage.setItem("jwtMaxAdmin", token);
       localStorage.setItem("uid", userId);
+      if (data?.permissions) {
+        localStorage.setItem("permissions", JSON.stringify(data?.permissions));
+      }
       return data;
     } catch (error) {
       const err = error as AxiosError;

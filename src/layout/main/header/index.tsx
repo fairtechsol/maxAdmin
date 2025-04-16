@@ -221,7 +221,6 @@ const Topbar = (props: any) => {
   };
 
   const [isMobile, setIsMobile] = React.useState(window.innerWidth <= 768);
-  // const [searchValue, setSearchValue] = React.useState(null);
 
   React.useEffect(() => {
     const handleResize = () => {
@@ -237,15 +236,17 @@ const Topbar = (props: any) => {
     setShowModal(true);
   };
 
+  let permissions: any = localStorage.getItem("permissions");
+
   return (
     <>
       <Navbar expand="lg" className="bg-primary p-0 px-0" data-bs-theme="light">
         <div className="d-flex ms-0">
           <a
             href={
-              !userDetail?.permission ||
-              userDetail?.permission?.all ||
-              userDetail?.permission?.userList
+              !JSON.parse(permissions) ||
+              JSON.parse(permissions)?.all ||
+              JSON.parse(permissions)?.userList
                 ? `/admin/active-inactive-user-list/${localStorage.getItem(
                     "key"
                   )}`
@@ -265,9 +266,9 @@ const Topbar = (props: any) => {
           </span>
           <Navbar id="basic-navbar-nav">
             <Nav className="me-auto">
-              {(!userDetail?.permission ||
-                userDetail?.permission?.all ||
-                userDetail?.permission?.userList) && (
+              {(!JSON.parse(permissions) ||
+                JSON.parse(permissions)?.all ||
+                JSON.parse(permissions)?.userList) && (
                 <Nav.Link
                   className="navbar-mainLink"
                   href={`/admin/listClients/${localStorage.getItem("key")}`}
@@ -275,9 +276,9 @@ const Topbar = (props: any) => {
                   List of clients
                 </Nav.Link>
               )}
-              {(!userDetail?.permission ||
-                userDetail?.permission?.all ||
-                userDetail?.permission?.marketAnalysis) && (
+              {(!JSON.parse(permissions) ||
+                JSON.parse(permissions)?.all ||
+                JSON.parse(permissions)?.marketAnalysis) && (
                 <Nav.Link
                   className="navbar-mainLink"
                   href="/admin/market-analysis"
@@ -333,7 +334,7 @@ const Topbar = (props: any) => {
               <TopbarDropdown
                 name="Reports"
                 options={reportOptions.filter((item) => {
-                  if (item.id && userDetail?.permission?.[item.id] === false) {
+                  if (item.id && JSON.parse(permissions)?.[item.id] === false) {
                     return false;
                   }
                   return true;
@@ -350,9 +351,9 @@ const Topbar = (props: any) => {
                   <UserLockModal show={showModal} setShowModal={setShowModal} />
                 </>
               )}
-              {(!userDetail?.permission ||
-                userDetail?.permission?.all ||
-                userDetail?.permission?.loginUserCreation) && (
+              {(!JSON.parse(permissions) ||
+                JSON.parse(permissions)?.all ||
+                JSON.parse(permissions)?.loginUserCreation) && (
                 <Nav.Link className="navbar-mainLink" href="/admin/multiLogin">
                   Multi Login
                 </Nav.Link>
