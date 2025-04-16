@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import Poker6Component from "../../../../components/cardGames/games/poker6";
@@ -137,4 +137,4 @@ const Poker6 = () => {
   return loading ? <Loader /> : <Poker6Component />;
 };
 
-export default Poker6;
+export default memo(Poker6);

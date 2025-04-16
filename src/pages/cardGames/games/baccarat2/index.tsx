@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import Baccarat2Component from "../../../../components/cardGames/games/baccarat2";
@@ -153,4 +153,4 @@ const Bacarrat2 = () => {
   return <Baccarat2Component />;
 };
 
-export default Bacarrat2;
+export default memo(Bacarrat2);

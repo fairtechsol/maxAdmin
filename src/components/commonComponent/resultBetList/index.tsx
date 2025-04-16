@@ -1,5 +1,5 @@
 import moment from "moment";
-import { useState } from "react";
+import { memo, useState } from "react";
 import { Column } from "../../../models/tableInterface";
 import DeleteBetOverlay from "../deleteBetRow";
 import CustomTable2 from "../table2";
@@ -271,4 +271,4 @@ const ResultBetList = ({ bets, total }: any) => {
     </div>
   );
 };
-export default ResultBetList;
+export default memo(ResultBetList);

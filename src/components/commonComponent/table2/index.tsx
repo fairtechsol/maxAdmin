@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { Column } from "../../../models/tableInterface";
 import "./style.scss";
@@ -147,4 +147,4 @@ const CustomTable2: React.FC<CustomTableProps> = ({
   );
 };
 
-export default CustomTable2;
+export default memo(CustomTable2);

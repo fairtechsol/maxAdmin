@@ -1,12 +1,12 @@
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { AppDispatch, RootState } from "../../../store/store";
+import { memo, useState } from "react";
 import { BiSolidHeart } from "react-icons/bi";
 import { GiSpades } from "react-icons/gi";
 import { ImClubs, ImDiamonds } from "react-icons/im";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { resultDragonTiger } from "../../../store/actions/card/cardDetail";
-import { ResultComponent } from "../resultComponent";
+import { AppDispatch, RootState } from "../../../store/store";
+import ResultComponent from "../resultComponent";
 
 const CardResultBox = ({ data, name, type }: any) => {
   const navigate = useNavigate();
@@ -464,4 +464,4 @@ const CardResultBox = ({ data, name, type }: any) => {
   );
 };
 
-export default CardResultBox;
+export default memo(CardResultBox);

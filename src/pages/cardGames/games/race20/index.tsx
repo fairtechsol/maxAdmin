@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import Race20Component from "../../../../components/cardGames/games/race20";
@@ -139,4 +139,4 @@ const Race20 = () => {
   return loading ? <Loader /> : <Race20Component />;
 };
 
-export default Race20;
+export default memo(Race20);

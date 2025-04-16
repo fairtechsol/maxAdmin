@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { RuleTableData } from "./index.json";
 import "./style.scss";
 import RuleTableheader from "./tableHeader";
@@ -14,7 +15,10 @@ const Rules = ({ teamName }: Props) => {
           <ul className="ruleTableList p-2 my-0 pb-1">
             {RuleTableData().map((item: any) => {
               return (
-                <li className="ruleTableList-box d-flex justify-content-between title-14 mb-1" key={item?.value}>
+                <li
+                  className="ruleTableList-box d-flex justify-content-between title-14 mb-1"
+                  key={item?.value}
+                >
                   <div className="ruleTableList-boxCard d-flex align-items-center ">
                     <span className="ruleTableList-boxCard-name title-16 fw-bold d-flex align-items-center justify-content-center">
                       {item?.cardName}
@@ -50,4 +54,4 @@ const Rules = ({ teamName }: Props) => {
   );
 };
 
-export default Rules;
+export default memo(Rules);

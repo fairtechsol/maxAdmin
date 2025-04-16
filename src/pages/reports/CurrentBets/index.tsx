@@ -1,6 +1,6 @@
 import _ from "lodash";
 import moment from "moment-timezone";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Button, Col, Form, Row, Tab, Tabs } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import SelectSearch2 from "../../../components/commonComponent/SelectSearch2";
@@ -373,4 +373,4 @@ const CurrentBets = () => {
   );
 };
 
-export default CurrentBets;
+export default memo(CurrentBets);

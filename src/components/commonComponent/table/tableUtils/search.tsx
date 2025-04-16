@@ -1,5 +1,5 @@
 import { debounce } from "lodash";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { memo, useEffect, useMemo, useState } from "react";
 import { Form, FormControl, InputGroup } from "react-bootstrap";
 
 interface SearchBoxProps {
@@ -62,4 +62,4 @@ const SearchBox: React.FC<SearchBoxProps> = ({
   );
 };
 
-export default SearchBox;
+export default memo(SearchBox);

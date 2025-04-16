@@ -6,6 +6,7 @@ import {
   accountListModalReset,
   changePasswordReset,
 } from "../../../store/actions/user/userActions";
+import { memo } from "react";
 
 const NavigateModal = ({
   transactionMessage,
@@ -66,4 +67,4 @@ const NavigateModal = ({
   );
 };
 
-export default NavigateModal;
+export default memo(NavigateModal);

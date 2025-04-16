@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 const Winner = () => {
   return (
     <div className="casino-result-cards-item">
@@ -8,4 +10,4 @@ const Winner = () => {
     </div>
   );
 };
-export default Winner;
+export default memo(Winner);

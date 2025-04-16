@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import TeentPatti1DComponent from "../../../../components/cardGames/games/teenpatti1D";
@@ -137,4 +137,4 @@ const TeenPatti1D = () => {
   return loading ? <Loader /> : <TeentPatti1DComponent />;
 };
 
-export default TeenPatti1D;
+export default memo(TeenPatti1D);

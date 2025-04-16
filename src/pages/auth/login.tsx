@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { Form } from "react-bootstrap";
 import { MdOutlineLogin } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
@@ -125,4 +125,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default memo(Login);

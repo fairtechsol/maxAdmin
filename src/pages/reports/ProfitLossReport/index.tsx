@@ -1,6 +1,6 @@
 import { debounce } from "lodash";
 import moment from "moment-timezone";
-import { useEffect, useMemo, useState } from "react";
+import { memo, useEffect, useMemo, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import SelectSearch from "../../../components/commonComponent/SelectSearch";
@@ -256,4 +256,4 @@ const ProfitLossReport = () => {
   );
 };
 
-export default ProfitLossReport;
+export default memo(ProfitLossReport);

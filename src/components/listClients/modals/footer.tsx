@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { FaUndo } from "react-icons/fa";
 import { IoMdExit } from "react-icons/io";
 import CustomButton from "../../commonComponent/button";
@@ -30,4 +31,4 @@ const ModalFooter = ({ clickHandler, disabled }: ModalFooterProps) => {
   );
 };
 
-export default ModalFooter;
+export default memo(ModalFooter);

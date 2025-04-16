@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import DragonSecond20Component from "../../../../components/cardGames/games/dragon2nd20";
@@ -142,4 +142,4 @@ const DragonTiger20Second = () => {
   return loading ? <Loader /> : <DragonSecond20Component />;
 };
 
-export default DragonTiger20Second;
+export default memo(DragonTiger20Second);

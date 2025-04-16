@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { FaRegFileExcel, FaRegFilePdf } from "react-icons/fa";
 import CustomButton from "../button";
 import RowPerPage from "./tableUtils/rowPerPage";
@@ -28,7 +28,6 @@ const TableHeader: React.FC<TableHeaderProps> = ({
   tableConfig,
   showHeaderEntries,
 }) => {
-
   const handleSearch = (keyword: string) => {
     setTableConfig((prev: any) => {
       return { ...prev, keyword: keyword };
@@ -74,4 +73,4 @@ const TableHeader: React.FC<TableHeaderProps> = ({
   );
 };
 
-export default TableHeader;
+export default memo(TableHeader);

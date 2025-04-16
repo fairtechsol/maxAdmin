@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Column, TableConfig } from "../../../../models/tableInterface";
 import CustomTable from "../../../commonComponent/table";
 
@@ -45,4 +45,4 @@ const TableRunner = ({ runAmount }: any) => {
   );
 };
 
-export default TableRunner;
+export default memo(TableRunner);

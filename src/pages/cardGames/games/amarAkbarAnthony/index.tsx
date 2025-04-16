@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import AmarAkbarAnthonyComponent from "../../../../components/cardGames/games/amarAkbarAnthony";
@@ -122,4 +122,4 @@ const AmarAkbarAnthony = () => {
   return <AmarAkbarAnthonyComponent />;
 };
 
-export default AmarAkbarAnthony;
+export default memo(AmarAkbarAnthony);

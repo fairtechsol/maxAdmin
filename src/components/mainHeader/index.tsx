@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserHeaderDetail } from "../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../store/store";
@@ -84,4 +84,4 @@ const MainHeader = ({ userId }: any) => {
   );
 };
 
-export default MainHeader;
+export default memo(MainHeader);

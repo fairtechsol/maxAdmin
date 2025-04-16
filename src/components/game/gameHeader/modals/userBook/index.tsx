@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Column, TableConfig } from "../../../../../models/tableInterface";
 import CustomTable from "../../../../commonComponent/table";
 const UserBook = () => {
@@ -78,4 +78,4 @@ const UserBook = () => {
   );
 };
 
-export default UserBook;
+export default memo(UserBook);

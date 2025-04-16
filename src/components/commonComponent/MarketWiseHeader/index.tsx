@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { memo, ReactNode, useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
@@ -376,4 +376,4 @@ function MarketTableHeader({
   );
 }
 
-export default MarketTableHeader;
+export default memo(MarketTableHeader);

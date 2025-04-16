@@ -1,5 +1,5 @@
 import moment from "moment";
-import { useState } from "react";
+import { memo, useState } from "react";
 import { Col, Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import SelectSearch from "../../../../components/commonComponent/SelectSearch";
@@ -226,4 +226,4 @@ const LiveCasinoModal = ({
   );
 };
 
-export default LiveCasinoModal;
+export default memo(LiveCasinoModal);

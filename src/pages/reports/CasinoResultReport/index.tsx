@@ -1,12 +1,12 @@
 import moment from "moment-timezone";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import { FaTimes } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import SelectSearch from "../../../components/commonComponent/SelectSearch";
 import CustomInput from "../../../components/commonComponent/input";
-import { ResultComponent } from "../../../components/commonComponent/resultComponent";
+import ResultComponent from "../../../components/commonComponent/resultComponent";
 import CustomTable from "../../../components/commonComponent/table";
 import SearchBox from "../../../components/commonComponent/table/tableUtils/search";
 import { TableConfig } from "../../../models/tableInterface";
@@ -255,4 +255,4 @@ const CasinoResultReport = () => {
   );
 };
 
-export default CasinoResultReport;
+export default memo(CasinoResultReport);

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getMorePlacedBetsReset } from "../../../../store/actions/match/matchAction";
 import { AppDispatch } from "../../../../store/store";
@@ -39,4 +39,4 @@ const UserBetModalForm = ({
   );
 };
 
-export default UserBetModalForm;
+export default memo(UserBetModalForm);

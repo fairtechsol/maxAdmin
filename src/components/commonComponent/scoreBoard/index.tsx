@@ -1,4 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+import { memo } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import isMobile from "../../../utils/screenDimension";
 import "./style.scss";
@@ -104,4 +105,4 @@ const getBallClass = (ball: any) => {
   }
 };
 
-export default ScoreBoard;
+export default memo(ScoreBoard);

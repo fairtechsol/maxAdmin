@@ -1,3 +1,4 @@
+import { memo } from "react";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import "./tooltipCustom.scss";
@@ -21,4 +22,4 @@ function TooltipCustom({ children, title }: any) {
   );
 }
 
-export default TooltipCustom;
+export default memo(TooltipCustom);

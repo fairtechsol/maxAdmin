@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import CasinoMeterComponent from "../../../../components/cardGames/games/casinoMeter";
@@ -148,4 +148,4 @@ const CasinoMeter = () => {
   return <CasinoMeterComponent />;
 };
 
-export default CasinoMeter;
+export default memo(CasinoMeter);

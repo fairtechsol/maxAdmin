@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Accordion, Col } from "react-bootstrap";
 import { FaRegArrowAltCircleUp } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
@@ -141,4 +142,4 @@ const LoggedUserDetail = () => {
   );
 };
 
-export default LoggedUserDetail;
+export default memo(LoggedUserDetail);

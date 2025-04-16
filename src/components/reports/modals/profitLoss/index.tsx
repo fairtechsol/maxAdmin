@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import { Column, TableConfig } from "../../../../models/tableInterface";
 import CustomTable from "../../../commonComponent/table";
@@ -107,4 +107,4 @@ const ProfitLossModal = () => {
   );
 };
 
-export default ProfitLossModal;
+export default memo(ProfitLossModal);

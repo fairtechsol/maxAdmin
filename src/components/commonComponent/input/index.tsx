@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { Form } from "react-bootstrap";
 import { numberInputOnWheelPreventChange } from "../../../helpers";
 import CustomErrorMessage from "./CustomErrorMessage";
@@ -53,4 +53,4 @@ const CustomInput = ({
   );
 };
 
-export default CustomInput;
+export default memo(CustomInput);

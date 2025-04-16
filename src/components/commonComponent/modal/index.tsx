@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { userModalReset } from "../../../store/actions/user/userActions";
@@ -39,4 +40,4 @@ function CustomModal({
   );
 }
 
-export default CustomModal;
+export default memo(CustomModal);

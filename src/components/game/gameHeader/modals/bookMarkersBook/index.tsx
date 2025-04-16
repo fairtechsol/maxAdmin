@@ -1,13 +1,11 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Column, TableConfig } from "../../../../../models/tableInterface";
 import CustomTable from "../../../../commonComponent/table";
 const BookMarkerBook = () => {
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   useEffect(() => {}, [tableConfig]);
-  const columns: Column[] = [
-    { id: "username", label: "	User Name " },
-  ];
+  const columns: Column[] = [{ id: "username", label: "	User Name " }];
 
   const data: any = [
     {
@@ -70,4 +68,4 @@ const BookMarkerBook = () => {
   );
 };
 
-export default BookMarkerBook;
+export default memo(BookMarkerBook);

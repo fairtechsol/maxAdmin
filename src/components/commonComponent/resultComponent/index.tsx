@@ -1,5 +1,5 @@
 import moment from "moment-timezone";
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { handleRoundId } from "../../../helpers";
 import { cardGamesType, cardGamesTypeNames } from "../../../utils/Constants";
 import isMobile from "../../../utils/screenDimension";
@@ -75,7 +75,7 @@ const resultComponentMap: { [key: string]: React.FC<{ data: any }> } = {
   [cardGamesType.queen]: QueenResultComponent,
 };
 
-export const ResultComponent: React.FC<ResultComponentProps> = ({
+const ResultComponent: React.FC<ResultComponentProps> = ({
   data,
   setfalse,
   type,
@@ -133,3 +133,5 @@ export const ResultComponent: React.FC<ResultComponentProps> = ({
     </div>
   );
 };
+
+export default memo(ResultComponent);

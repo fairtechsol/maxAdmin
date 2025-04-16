@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { Col, Container, Form, Nav, Row, Tab } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -803,4 +803,4 @@ const ListActiveInactiveUser: React.FC = () => {
   );
 };
 
-export default ListActiveInactiveUser;
+export default memo(ListActiveInactiveUser);

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   ballbyballMatchRates,
@@ -120,4 +120,4 @@ const BallByBall = () => {
   return <BallbyballComponentList />;
 };
 
-export default BallByBall;
+export default memo(BallByBall);

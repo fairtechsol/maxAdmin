@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Col, Row } from "react-bootstrap";
 import { NavLink, useParams } from "react-router-dom";
 import { card3 } from "../../../utils/Constants";
@@ -55,4 +56,4 @@ const CardsList = () => {
   );
 };
 
-export default CardsList;
+export default memo(CardsList);

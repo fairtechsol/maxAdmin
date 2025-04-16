@@ -1,5 +1,5 @@
 import moment from "moment-timezone";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Column, TableConfig } from "../../../../models/tableInterface";
 import DeleteBetOverlay from "../../../commonComponent/deleteBetRow";
 import CustomTable from "../../../commonComponent/table";
@@ -163,4 +163,4 @@ function UserBetModalTable({
   );
 }
 
-export default UserBetModalTable;
+export default memo(UserBetModalTable);

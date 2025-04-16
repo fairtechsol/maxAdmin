@@ -1,3 +1,4 @@
+import { memo } from "react";
 import Modal from "react-bootstrap/Modal";
 
 const RulesModal = ({ show, setShow, rule }: any) => {
@@ -16,4 +17,4 @@ const RulesModal = ({ show, setShow, rule }: any) => {
     </Modal>
   );
 };
-export default RulesModal;
+export default memo(RulesModal);

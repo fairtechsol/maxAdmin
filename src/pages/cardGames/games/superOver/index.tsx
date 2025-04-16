@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import SuperoverComponent from "../../../../components/cardGames/games/superOver";
@@ -174,4 +174,4 @@ const Superover = () => {
   return loading ? <Loader /> : <SuperoverComponent />;
 };
 
-export default Superover;
+export default memo(Superover);

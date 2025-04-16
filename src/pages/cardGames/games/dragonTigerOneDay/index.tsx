@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import DragonTigerOneDayComponent from "../../../../components/cardGames/games/dragontigerOneDay";
@@ -143,4 +143,4 @@ const DragonTigerOneDay = () => {
   return loading ? <Loader /> : <DragonTigerOneDayComponent />;
 };
 
-export default DragonTigerOneDay;
+export default memo(DragonTigerOneDay);

@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import { debounce } from "lodash";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { memo, useEffect, useMemo, useState } from "react";
 import { Button, Card, Col, Form, Row, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import SelectSearch from "../../components/commonComponent/SelectSearch";
@@ -700,4 +700,4 @@ const AddAccount = () => {
   );
 };
 
-export default AddAccount;
+export default memo(AddAccount);

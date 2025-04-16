@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import NavigateModal from "../../components/commonComponent/customModal";
@@ -118,4 +118,4 @@ const ChangePassword = () => {
   );
 };
 
-export default ChangePassword;
+export default memo(ChangePassword);

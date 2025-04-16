@@ -1,5 +1,5 @@
 import moment from "moment-timezone";
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import { Breadcrumb } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
@@ -101,4 +101,4 @@ function CustomBreadcrumb({
   );
 }
 
-export default CustomBreadcrumb;
+export default memo(CustomBreadcrumb);

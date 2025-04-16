@@ -1,11 +1,10 @@
-import { useState } from "react";
-import { Button, Col, Row, Tab, Table } from "react-bootstrap";
+import moment from "moment-timezone";
+import { memo, useState } from "react";
+import { Button, Col, Nav, Row, Tab, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
-import CustomModal from "../../commonComponent/modal";
-import moment from "moment-timezone";
-import { Nav } from "react-bootstrap";
 import DeleteBetOverlay from "../../commonComponent/deleteBetRow";
+import CustomModal from "../../commonComponent/modal";
 import UserBetModalForm2 from "../../game/userBet/modal/form2";
 const OtherUserBets = ({ matchId }: any) => {
   const [showModal, setShowModal] = useState(false);
@@ -197,4 +196,4 @@ const OtherUserBets = ({ matchId }: any) => {
   );
 };
 
-export default OtherUserBets;
+export default memo(OtherUserBets);

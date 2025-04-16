@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import OTPInput from "react-otp-input";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -91,4 +91,4 @@ const SecurityAuth = () => {
     </div>
   );
 };
-export default SecurityAuth;
+export default memo(SecurityAuth);

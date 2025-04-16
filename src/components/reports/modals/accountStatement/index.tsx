@@ -1,5 +1,5 @@
 import moment from "moment-timezone";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Column, TableConfig } from "../../../../models/tableInterface";
@@ -310,4 +310,4 @@ const AccountStatementModal = ({ item }: any) => {
   );
 };
 
-export default AccountStatementModal;
+export default memo(AccountStatementModal);

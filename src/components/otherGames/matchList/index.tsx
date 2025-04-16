@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import "./style.scss";
 
 const NavComponent = ({ matchDetail, setMarketToShow, marketToShow }: any) => {
@@ -124,4 +124,4 @@ const NavComponent = ({ matchDetail, setMarketToShow, marketToShow }: any) => {
   );
 };
 
-export default NavComponent;
+export default memo(NavComponent);

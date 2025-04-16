@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { MaxBet07Logo } from "../../../assets";
 
 interface Props {
@@ -12,4 +13,4 @@ function LogoSection(props: Props) {
   );
 }
 
-export default LogoSection;
+export default memo(LogoSection);

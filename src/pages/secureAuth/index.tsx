@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Button, Card, Tab, Tabs } from "react-bootstrap";
 import { FaAndroid } from "react-icons/fa";
 import OTPInput from "react-otp-input";
@@ -243,4 +243,4 @@ const SecureAuth = () => {
   );
 };
 
-export default SecureAuth;
+export default memo(SecureAuth);

@@ -1,11 +1,11 @@
 import moment from "moment";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Accordion } from "react-bootstrap";
 import { FaTimes } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { getCompetitionDates } from "../../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../../store/store";
-import { MenuItem } from "./menuItem";
+import MenuItem from "./menuItem";
 import menuItemJson from "./menuItem.json";
 const Sidebar = (props: any) => {
   const [menuItemList, setMenuItemList] = useState<any>([]);
@@ -76,4 +76,4 @@ const Sidebar = (props: any) => {
     </div>
   );
 };
-export default Sidebar;
+export default memo(Sidebar);

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Column, TableConfig } from "../../models/tableInterface";
 import CustomTable from "../commonComponent/table";
 
@@ -32,4 +32,4 @@ const HeaderFancyBook = ({ data }: any) => {
   );
 };
 
-export default HeaderFancyBook;
+export default memo(HeaderFancyBook);

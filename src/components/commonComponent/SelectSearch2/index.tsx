@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Form } from "react-bootstrap";
 import CustomErrorMessage from "../input/CustomErrorMessage";
 import "./style.scss";
@@ -43,4 +44,4 @@ const SelectSearch2 = ({
   );
 };
 
-export default SelectSearch2;
+export default memo(SelectSearch2);

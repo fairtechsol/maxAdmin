@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import Cards32AComponent from "../../../../components/cardGames/games/card32A";
@@ -135,4 +135,4 @@ const Cards32A = () => {
   return loading ? <Loader /> : <Cards32AComponent />;
 };
 
-export default Cards32A;
+export default memo(Cards32A);

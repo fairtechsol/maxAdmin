@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { FaSort, FaSortDown, FaSortUp } from "react-icons/fa";
 interface SortIconProps {
   isActive: boolean;
@@ -29,4 +29,4 @@ const SortIcon: React.FC<SortIconProps> = ({
   );
 };
 
-export default SortIcon;
+export default memo(SortIcon);

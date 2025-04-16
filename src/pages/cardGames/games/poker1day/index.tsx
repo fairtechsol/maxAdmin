@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import Poker1DayComponent from "../../../../components/cardGames/games/poker1Day";
@@ -138,4 +138,4 @@ const Poker1day = () => {
   return loading ? <Loader /> : <Poker1DayComponent />;
 };
 
-export default Poker1day;
+export default memo(Poker1day);

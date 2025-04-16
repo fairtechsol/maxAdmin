@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 import Loader from "../../components/commonComponent/loader";
@@ -87,4 +87,4 @@ function MainLayout({ eventKey }: any) {
   );
 }
 
-export default MainLayout;
+export default memo(MainLayout);

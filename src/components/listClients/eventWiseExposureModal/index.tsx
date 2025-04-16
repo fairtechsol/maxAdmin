@@ -1,10 +1,8 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { formatToINR } from "../../../helpers";
 import { TableConfig } from "../../../models/tableInterface";
-import {
-  resetUserWiseExposureList
-} from "../../../store/actions/user/userActions";
+import { resetUserWiseExposureList } from "../../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../../store/store";
 import CustomTable from "../../commonComponent/table";
 
@@ -72,4 +70,4 @@ const EventWiseExposureModal = ({
   );
 };
 
-export default EventWiseExposureModal;
+export default memo(EventWiseExposureModal);

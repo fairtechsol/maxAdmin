@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { isMobile } from "../../utils/screenDimension";
 import "./style.scss";
 
@@ -200,4 +201,4 @@ const Iframe = ({ data }: any) => {
   );
 };
 
-export default Iframe;
+export default memo(Iframe);

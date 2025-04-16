@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import WorliComponent from "../../../../components/cardGames/games/worli";
@@ -117,4 +117,4 @@ const Worli = () => {
   return <WorliComponent />;
 };
 
-export default Worli;
+export default memo(Worli);

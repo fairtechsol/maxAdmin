@@ -1,6 +1,6 @@
 import _ from "lodash";
 import moment from "moment-timezone";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import SelectSearch from "../../../components/commonComponent/SelectSearch";
@@ -184,4 +184,4 @@ const GameReport = () => {
   );
 };
 
-export default GameReport;
+export default memo(GameReport);

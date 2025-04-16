@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { Pagination } from "react-bootstrap";
 import {
   MdOutlineKeyboardArrowLeft,
@@ -62,4 +62,4 @@ const PaginationComponent: React.FC<PaginationComponentProps> = ({
   );
 };
 
-export default PaginationComponent;
+export default memo(PaginationComponent);

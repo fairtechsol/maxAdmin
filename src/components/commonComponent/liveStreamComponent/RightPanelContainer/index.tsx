@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { FiMonitor } from "react-icons/fi";
 import BetTableHeader from "../BetTableHeader";
 interface RightPanelContainerProps {
@@ -27,4 +27,4 @@ const RightPanelContainer = ({
   );
 };
 
-export default RightPanelContainer;
+export default memo(RightPanelContainer);

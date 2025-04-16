@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import CardJComponent from "../../../../components/cardGames/games/3CardJ";
@@ -161,4 +161,4 @@ const CardJ = () => {
   return <CardJComponent />;
 };
 
-export default CardJ;
+export default memo(CardJ);

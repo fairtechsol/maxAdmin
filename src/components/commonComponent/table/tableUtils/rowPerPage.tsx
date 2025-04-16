@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { Form } from "react-bootstrap";
 
 interface RowPerPageProps {
@@ -28,4 +28,4 @@ const RowPerPage: React.FC<RowPerPageProps> = ({ value, onChange }) => {
   );
 };
 
-export default RowPerPage;
+export default memo(RowPerPage);

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { formatToINR } from "../../../helpers";
 import { TableConfig } from "../../../models/tableInterface";
@@ -85,4 +85,4 @@ const EventWiseMatchListModal = ({ userWiseExposureName, data }: any) => {
   );
 };
 
-export default EventWiseMatchListModal;
+export default memo(EventWiseMatchListModal);

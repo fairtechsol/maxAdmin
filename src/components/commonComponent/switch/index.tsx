@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { Form } from "react-bootstrap";
 
 interface MySwitchProps {
@@ -31,4 +31,4 @@ const Switch: FC<MySwitchProps> = ({
   );
 };
 
-export default Switch;
+export default memo(Switch);

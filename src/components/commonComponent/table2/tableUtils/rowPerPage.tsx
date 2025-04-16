@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import CustomInput from "../../input";
 
 interface RowPerPageProps {
@@ -43,4 +43,4 @@ const RowPerPage: React.FC<RowPerPageProps> = ({ value, onChange }) => {
   );
 };
 
-export default RowPerPage;
+export default memo(RowPerPage);

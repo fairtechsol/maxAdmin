@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import SelectSearch from "../../../components/commonComponent/SelectSearch";
@@ -117,4 +117,4 @@ const GeneralReport = () => {
   );
 };
 
-export default GeneralReport;
+export default memo(GeneralReport);

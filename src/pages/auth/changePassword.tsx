@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import { debounce } from "lodash";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { memo, useEffect, useMemo, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { MaxBet07Logo } from "../../assets";
@@ -143,4 +143,4 @@ const ChangePassword = () => {
   );
 };
 
-export default ChangePassword;
+export default memo(ChangePassword);

@@ -1,7 +1,7 @@
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
-export default function AuthLayout() {
+const AuthLayout = () => {
   const navigate = useNavigate();
 
   const permissions: any = localStorage.getItem("permissions");
@@ -19,4 +19,5 @@ export default function AuthLayout() {
   }, []);
 
   return <Outlet />;
-}
+};
+export default memo(AuthLayout);

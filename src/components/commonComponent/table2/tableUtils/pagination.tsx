@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { Pagination } from "react-bootstrap";
 
 interface PaginationComponentProps {
@@ -108,4 +108,4 @@ const PaginationComponent: React.FC<PaginationComponentProps> = ({
   );
 };
 
-export default PaginationComponent;
+export default memo(PaginationComponent);

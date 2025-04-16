@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import CasinoWarComponent from "../../../../components/cardGames/games/casinoWar";
@@ -138,4 +138,4 @@ const CasinoWar = () => {
   return loading ? <Loader /> : <CasinoWarComponent />;
 };
 
-export default CasinoWar;
+export default memo(CasinoWar);

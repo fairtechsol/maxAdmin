@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import Lucky7Component from "../../../../components/cardGames/games/lucky7";
@@ -135,4 +135,4 @@ const Lucky7 = () => {
   return loading ? <Loader /> : <Lucky7Component />;
 };
 
-export default Lucky7;
+export default memo(Lucky7);

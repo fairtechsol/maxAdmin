@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import Abj2Component from "../../../../components/cardGames/games/abj2";
@@ -135,4 +135,4 @@ const Abj2 = () => {
   return loading ? <Loader /> : <Abj2Component />;
 };
 
-export default Abj2;
+export default memo(Abj2);

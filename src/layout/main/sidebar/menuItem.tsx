@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { Accordion } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -177,7 +177,7 @@ const MenuCollapse = ({
   );
 };
 
-export const MenuItem: React.FC<Props> = ({
+const MenuItem: React.FC<Props> = ({
   item,
   setMenuItemList,
   menuItemList,
@@ -202,3 +202,4 @@ export const MenuItem: React.FC<Props> = ({
     </>
   );
 };
+export default memo(MenuItem);
