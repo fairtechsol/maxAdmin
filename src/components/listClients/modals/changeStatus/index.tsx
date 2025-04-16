@@ -96,7 +96,6 @@ const ChangeStatus = ({
                 </div>
                 <div className="row">
                   {(!userDetail?.permission ||
-                    userDetail?.permission?.all ||
                     userDetail?.permission?.userLock) && (
                     <Col sm={6} className="text-center">
                       <p className="m-0 mb-1 title-14">User Active</p>
@@ -149,7 +148,6 @@ const ChangeStatus = ({
                   )}
 
                   {(!userDetail?.permission ||
-                    userDetail?.permission?.all ||
                     userDetail?.permission?.betLock) && (
                     <Col sm={6} className="text-center">
                       <p className="m-0 mb-1 title-14">Bet Active</p>

@@ -140,9 +140,7 @@ const ListClent: React.FC = () => {
           <Col>
             <p className="title-22">Account List</p>
           </Col>
-          {(!userDetail?.permission ||
-            userDetail?.permission?.all ||
-            userDetail?.permission?.insertUser) && (
+          {(!userDetail?.permission || userDetail?.permission?.insertUser) && (
             <Col>
               <CustomButton
                 className="float-end mt-2"

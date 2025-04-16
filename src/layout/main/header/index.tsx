@@ -244,9 +244,7 @@ const Topbar = (props: any) => {
         <div className="d-flex ms-0">
           <a
             href={
-              !JSON.parse(permissions) ||
-              JSON.parse(permissions)?.all ||
-              JSON.parse(permissions)?.userList
+              !JSON.parse(permissions) || JSON.parse(permissions)?.userList
                 ? `/admin/active-inactive-user-list/${localStorage.getItem(
                     "key"
                   )}`
@@ -257,17 +255,18 @@ const Topbar = (props: any) => {
             <LogoSection width="100%" height="50px" />
           </a>
 
-          <span className="m-3 cursor" onClick={props.onClick}>
-            <div className="menuHamBurger d-flex flex-column me-2 mt-1">
-              <span className="mb-1" />
-              <span className="mb-1" />
-              <span />
-            </div>
-          </span>
+          {(!JSON.parse(permissions) || JSON.parse(permissions)?.events) && (
+            <span className="m-3 cursor" onClick={props.onClick}>
+              <div className="menuHamBurger d-flex flex-column me-2 mt-1">
+                <span className="mb-1" />
+                <span className="mb-1" />
+                <span />
+              </div>
+            </span>
+          )}
           <Navbar id="basic-navbar-nav">
             <Nav className="me-auto">
               {(!JSON.parse(permissions) ||
-                JSON.parse(permissions)?.all ||
                 JSON.parse(permissions)?.userList) && (
                 <Nav.Link
                   className="navbar-mainLink"
@@ -277,7 +276,6 @@ const Topbar = (props: any) => {
                 </Nav.Link>
               )}
               {(!JSON.parse(permissions) ||
-                JSON.parse(permissions)?.all ||
                 JSON.parse(permissions)?.marketAnalysis) && (
                 <Nav.Link
                   className="navbar-mainLink"
@@ -352,7 +350,6 @@ const Topbar = (props: any) => {
                 </>
               )}
               {(!JSON.parse(permissions) ||
-                JSON.parse(permissions)?.all ||
                 JSON.parse(permissions)?.loginUserCreation) && (
                 <Nav.Link className="navbar-mainLink" href="/admin/multiLogin">
                   Multi Login
