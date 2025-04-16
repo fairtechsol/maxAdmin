@@ -1,14 +1,14 @@
+import { memo, useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
-import { useEffect, useState } from "react";
-import CustomInput from "../../../commonComponent/input";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../../../store/store";
 import UserBetModalTable from ".";
 import {
   getMorePlacedBets,
   getMorePlacedBetsReset,
 } from "../../../../store/actions/match/matchAction";
+import { AppDispatch } from "../../../../store/store";
 import CustomButton from "../../../commonComponent/button";
+import CustomInput from "../../../commonComponent/input";
 
 const UserBetModalForm2 = ({ customClass, matchId, morePlacedBets }: any) => {
   const dispatch: AppDispatch = useDispatch();
@@ -319,4 +319,4 @@ const UserBetModalForm2 = ({ customClass, matchId, morePlacedBets }: any) => {
   );
 };
 
-export default UserBetModalForm2;
+export default memo(UserBetModalForm2);

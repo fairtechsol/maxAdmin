@@ -1,5 +1,5 @@
 import moment from "moment-timezone";
-import React, { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
@@ -474,4 +474,4 @@ const Games = () => {
   );
 };
 
-export default React.memo(Games);
+export default memo(Games);

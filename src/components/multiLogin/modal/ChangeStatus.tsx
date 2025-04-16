@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Col, Modal, Row, Stack } from "react-bootstrap";
 import { IoMdExit } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
@@ -157,4 +157,4 @@ const ChangeStatus = ({ userData, setShow }: any) => {
   );
 };
 
-export default ChangeStatus;
+export default memo(ChangeStatus);

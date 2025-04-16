@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { calculateMaxLoss, formatNumber, handleSize } from "../../../helpers";
 import {
@@ -181,4 +181,4 @@ const SessionKhado = ({
     </>
   );
 };
-export default SessionKhado;
+export default memo(SessionKhado);

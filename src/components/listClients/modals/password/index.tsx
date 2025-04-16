@@ -7,6 +7,7 @@ import { oldPasswordValidationSchema } from "../../../../utils/fieldValidations/
 import CustomInput from "../../../commonComponent/input";
 import Loader from "../../../commonComponent/loader";
 import ModalFooter from "../footer";
+import { memo } from "react";
 
 const initialValues: any = {
   userid: "any",
@@ -114,4 +115,4 @@ const Password = ({ userData, setShow }: any) => {
   );
 };
 
-export default Password;
+export default memo(Password);

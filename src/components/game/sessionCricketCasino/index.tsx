@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { FaLock } from "react-icons/fa";
 import { formatNumber, handleSize } from "../../../helpers";
 import isMobile from "../../../utils/screenDimension";
@@ -171,4 +171,4 @@ const SessionCricketCasino = ({
     </>
   );
 };
-export default SessionCricketCasino;
+export default memo(SessionCricketCasino);

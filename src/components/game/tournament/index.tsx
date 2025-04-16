@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { useSelector } from "react-redux";
 import { dummyArray, formatNumber } from "../../../helpers";
 import { RootState } from "../../../store/store";
@@ -217,4 +218,4 @@ const Tournament = ({ title, box, data, detail }: TournamentProps) => {
     </>
   );
 };
-export default Tournament;
+export default memo(Tournament);

@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { Col, Modal, Row, Stack } from "react-bootstrap";
 import { IoMdExit } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
@@ -131,4 +131,4 @@ const Password = ({ userData, setShow }: any) => {
   );
 };
 
-export default Password;
+export default memo(Password);

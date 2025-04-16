@@ -1,5 +1,5 @@
 import moment from "moment-timezone";
-import { useState } from "react";
+import { memo, useState } from "react";
 import { Button, Col, Nav, Row, Tab, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
@@ -199,4 +199,4 @@ const GameUserBets = ({ matchId }: any) => {
   );
 };
 
-export default GameUserBets;
+export default memo(GameUserBets);

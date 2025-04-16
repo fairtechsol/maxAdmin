@@ -1,6 +1,6 @@
 import { debounce } from "lodash";
 import moment from "moment-timezone";
-import { useEffect, useMemo, useState } from "react";
+import { memo, useEffect, useMemo, useState } from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import SelectSearch from "../../../components/commonComponent/SelectSearch";
@@ -655,4 +655,4 @@ const AccountStatement = () => {
   );
 };
 
-export default AccountStatement;
+export default memo(AccountStatement);

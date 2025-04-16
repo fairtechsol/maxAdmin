@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { FaSync } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
@@ -82,4 +82,4 @@ const MarketAnalysis = () => {
   );
 };
 
-export default MarketAnalysis;
+export default memo(MarketAnalysis);

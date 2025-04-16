@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { Col, Modal, Row, Stack } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -250,4 +250,4 @@ const Withdraw = ({
   );
 };
 
-export default Withdraw;
+export default memo(Withdraw);

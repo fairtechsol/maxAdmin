@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { calculateMaxLoss, formatNumber, handleSize } from "../../../helpers";
 import {
@@ -313,4 +313,4 @@ const SessionNormal = ({ title, data, detail, manual, mtype }: any) => {
     </>
   );
 };
-export default SessionNormal;
+export default memo(SessionNormal);

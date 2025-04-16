@@ -1,4 +1,5 @@
 import moment from "moment-timezone";
+import { memo } from "react";
 import { sessionBettingType } from "../../utils/Constants";
 import "./styles.scss";
 
@@ -234,4 +235,4 @@ const MarketAnalysisComp = ({ match }: any) => {
   );
 };
 
-export default MarketAnalysisComp;
+export default memo(MarketAnalysisComp);

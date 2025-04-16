@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { calculateMaxLoss, formatNumber, handleSize } from "../../../helpers";
 import isMobile from "../../../utils/screenDimension";
 import MarketTableHeader from "../../commonComponent/MarketWiseHeader";
@@ -145,4 +146,4 @@ const SessionFancy = ({ title, data, detail, marketAnalysisDetail }: any) => {
     </div>
   );
 };
-export default SessionFancy;
+export default memo(SessionFancy);

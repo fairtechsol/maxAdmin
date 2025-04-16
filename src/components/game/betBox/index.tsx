@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { formatNumber, handlePrice, handleSize } from "../../../helpers";
 
-const BetBox = ({ data, type,detail,runner }: any) => {
+const BetBox = ({ data, type }: any) => {
   const [tempRate, setTempRate] = useState("0");
   const [isYellow, setIsYellow] = useState(false);
-
 
   useEffect(() => {
     if (parseFloat(data?.price) != parseFloat(tempRate)) {
@@ -15,7 +14,6 @@ const BetBox = ({ data, type,detail,runner }: any) => {
       setTempRate(data?.price);
     }
   }, [data?.price]);
-
 
   const handleBackground = (index: any) => {
     if (type === "back") {
@@ -35,18 +33,14 @@ const BetBox = ({ data, type,detail,runner }: any) => {
         return isYellow ? "bg-rateChange2" : "lay1Background";
       }
     }
-  };  
+  };
   return (
-    <div
-      className={`matchOddBackBox ${handleBackground(data?.tno)}`}
-    >
-      <span className={`rateFont`}>
-        {handlePrice(data?.price)}
-      </span>
+    <div className={`matchOddBackBox ${handleBackground(data?.tno)}`}>
+      <span className={`rateFont`}>{handlePrice(data?.price)}</span>
       <span className={`sizeFont matchOddRate2Box`}>
         {formatNumber(handleSize(data?.size))}
       </span>
     </div>
   );
 };
-export default BetBox;
+export default memo(BetBox);

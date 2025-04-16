@@ -1,3 +1,4 @@
+import { memo } from "react";
 import CustomModal from "../../commonComponent/modal";
 import ChangeStatus from "./changeStatus";
 import Credit from "./credit";
@@ -74,4 +75,4 @@ const ListClientModals = ({
   );
 };
 
-export default ListClientModals;
+export default memo(ListClientModals);

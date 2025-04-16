@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Col, Modal, Row, Stack } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Switch from "react-switch";
@@ -235,4 +235,4 @@ const ChangeStatus = ({
   );
 };
 
-export default ChangeStatus;
+export default memo(ChangeStatus);

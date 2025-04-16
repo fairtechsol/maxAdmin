@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import { Col, Container, Ratio, Row } from "react-bootstrap";
 import { getTvData } from "../../../utils/tvUrlGet";
 import RightPanelContainer from "./RightPanelContainer";
@@ -53,4 +53,4 @@ const LiveStreamComponent = ({
   );
 };
 
-export default LiveStreamComponent;
+export default memo(LiveStreamComponent);
