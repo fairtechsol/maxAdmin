@@ -61,12 +61,10 @@ const ListActiveInactiveUser: React.FC = () => {
   const [value, setValue] = useState<any>(50);
   const [keyword, setKeyWord] = useState<any>("");
   const [dataForMatchList, setDataForMatchList] = useState<any>({});
-  const [showUserWiseExposureModal, setShowUserWiseExposureModal] = useState(
-    false
-  );
-  const [showUserWiseMatchListModal, setShowUserWiseMatchListModal] = useState(
-    false
-  );
+  const [showUserWiseExposureModal, setShowUserWiseExposureModal] =
+    useState(false);
+  const [showUserWiseMatchListModal, setShowUserWiseMatchListModal] =
+    useState(false);
   const [userWiseExposureName, setUserWiseExposureName] = useState({
     name: "",
     id: "",
@@ -745,6 +743,7 @@ const ListActiveInactiveUser: React.FC = () => {
                                 cursor: "pointer",
                               }}
                               onClick={() => {
+                                dispatch(getUserWiseExposure(id));
                                 setShowUserWiseExposureModal(true);
                                 setUserWiseExposureName({
                                   name: userName,
