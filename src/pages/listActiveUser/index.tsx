@@ -647,6 +647,7 @@ const ListActiveInactiveUser: React.FC = () => {
                                 cursor: "pointer",
                               }}
                               onClick={() => {
+                                dispatch(getUserWiseExposure(id));
                                 setShowUserWiseExposureModal(true);
                                 setUserWiseExposureName({
                                   name: userName,
