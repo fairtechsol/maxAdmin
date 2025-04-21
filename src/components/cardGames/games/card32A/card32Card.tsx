@@ -30,8 +30,10 @@ const Card32Result: any = ({ data }: any) => {
               {parseInt(data?.C1) > 0 ? "Player 8:" + data?.C1 : ""}
             </span>
             <div style={{ display: "flex", gap: "10px", flexDirection: "row" }}>
-              {result?.[0]?.map((item: any) => {
-                return <HandleCards card={item !== "1" ? item : ""} />;
+              {result?.[0]?.map((item: any, index: number) => {
+                return (
+                  <HandleCards card={item !== "1" ? item : ""} key={index} />
+                );
               })}
             </div>
           </Col>
@@ -47,8 +49,10 @@ const Card32Result: any = ({ data }: any) => {
               {parseInt(data?.C1) > 0 ? "Player 9:" + data?.C2 : ""}
             </span>
             <div style={{ display: "flex", gap: "10px", flexDirection: "row" }}>
-              {result?.[1]?.map((item: any) => {
-                return <HandleCards card={item !== "1" ? item : ""} />;
+              {result?.[1]?.map((item: any, index: number) => {
+                return (
+                  <HandleCards card={item !== "1" ? item : ""} key={index} />
+                );
               })}
             </div>
           </Col>
@@ -64,8 +68,10 @@ const Card32Result: any = ({ data }: any) => {
               {parseInt(data?.C1) > 0 ? "Player 10:" + data?.C3 : ""}
             </span>
             <div style={{ display: "flex", gap: "10px", flexDirection: "row" }}>
-              {result?.[2]?.map((item: any) => {
-                return <HandleCards card={item !== "1" ? item : ""} />;
+              {result?.[2]?.map((item: any, index: number) => {
+                return (
+                  <HandleCards card={item !== "1" ? item : ""} key={index} />
+                );
               })}
             </div>
           </Col>
@@ -81,8 +87,10 @@ const Card32Result: any = ({ data }: any) => {
               {parseInt(data?.C1) > 0 ? "Player 11:" + data?.C4 : ""}
             </span>
             <div style={{ display: "flex", gap: "10px", flexDirection: "row" }}>
-              {result?.[3]?.map((item: any) => {
-                return <HandleCards card={item !== "1" ? item : ""} />;
+              {result?.[3]?.map((item: any, index: number) => {
+                return (
+                  <HandleCards card={item !== "1" ? item : ""} key={index} />
+                );
               })}
             </div>
           </Col>

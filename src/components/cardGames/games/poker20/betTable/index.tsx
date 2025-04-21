@@ -18,6 +18,7 @@ const DynamicTable = ({ odds, data }: any) => {
         <div
           className="ms-2 d-flex justify-content-center align-items-center flex-column title-14"
           style={{ width: "30%" }}
+          key={index}
         >
           <div>
             <span>{item?.nation}</span>

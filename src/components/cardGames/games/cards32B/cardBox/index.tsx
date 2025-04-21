@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 
 import { formatNumber } from "../../../../../helpers";
 
@@ -20,7 +20,6 @@ const CardBox = ({ odds, data }: any) => {
   };
   const renderItem = (item: any, index: number) => (
     <div
-      key={index}
       className={`dtlsubTitle back-cell-B`}
       style={{ position: "relative", height: "80px" }}
     >
@@ -75,7 +74,7 @@ const CardBox = ({ odds, data }: any) => {
           style={{ height: "auto", padding: "0px 10px" }}
         >
           {odds?.map((item: any, index: number) => {
-            return <>{renderItem(item, index)}</>;
+            return <Fragment key={index}>{renderItem(item, index)}</Fragment>;
           })}
         </div>
         <div
@@ -84,38 +83,36 @@ const CardBox = ({ odds, data }: any) => {
         >
           {odds?.map((item: any) => {
             return (
-              <>
-                {" "}
-                <span
-                  className={`title-14 w-100 text-center f400 ${
-                    data?.profitLoss
-                      ? data?.profitLoss[
-                          `${data?.videoInfo?.mid}_${item?.sid}_card`
-                        ]
-                        ? data?.profitLoss[
-                            `${data?.videoInfo?.mid}_${item?.sid}_card`
-                          ] > 0
-                          ? "color-green"
-                          : data?.profitLoss[
-                              `${data?.videoInfo?.mid}_${item?.sid}_card`
-                            ] < 0
-                          ? "color-red"
-                          : ""
-                        : ""
-                      : ""
-                  }`}
-                >
-                  {data?.profitLoss
+              <span
+                className={`title-14 w-100 text-center f400 ${
+                  data?.profitLoss
                     ? data?.profitLoss[
                         `${data?.videoInfo?.mid}_${item?.sid}_card`
                       ]
                       ? data?.profitLoss[
                           `${data?.videoInfo?.mid}_${item?.sid}_card`
-                        ]
-                      : 0
-                    : 0}
-                </span>
-              </>
+                        ] > 0
+                        ? "color-green"
+                        : data?.profitLoss[
+                            `${data?.videoInfo?.mid}_${item?.sid}_card`
+                          ] < 0
+                        ? "color-red"
+                        : ""
+                      : ""
+                    : ""
+                }`}
+                key={item?.sid}
+              >
+                {data?.profitLoss
+                  ? data?.profitLoss[
+                      `${data?.videoInfo?.mid}_${item?.sid}_card`
+                    ]
+                    ? data?.profitLoss[
+                        `${data?.videoInfo?.mid}_${item?.sid}_card`
+                      ]
+                    : 0
+                  : 0}
+              </span>
             );
           })}
         </div>

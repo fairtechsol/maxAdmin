@@ -24,9 +24,9 @@ const CommonCardImg = ({ cardData, data }: any) => {
             marginBottom: "10px",
             minWidth: "80px",
           }}
+          key={item?.code}
         >
           <div
-            key={item?.code}
             className={item?.gstatus === "0" ? "suspended" : ""}
             style={{
               display: "flex",

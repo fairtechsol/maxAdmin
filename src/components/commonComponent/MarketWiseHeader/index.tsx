@@ -308,6 +308,7 @@ function MarketTableHeader({
                     <div
                       className="w-100 d-flex flex-row"
                       style={{ border: "1px solid #eee" }}
+                      key={index}
                     >
                       <div className="custom-control w-25 d-flex justify-content-start align-items-start ">
                         <input

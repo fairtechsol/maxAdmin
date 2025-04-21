@@ -121,27 +121,26 @@ const CricketMatch20Component = () => {
                   >
                     {dragonTigerDetail?.leftBoard?.map(
                       (item: any, index: any) => (
-                        <div>
-                          <ScoreBox
-                            teamA="Team A"
-                            teamAScore={`${dragonTigerDetail?.videoInfo?.C2}/${dragonTigerDetail?.videoInfo?.C3}`}
-                            teamAOver={dragonTigerDetail?.videoInfo?.C4}
-                            teamB="Team B"
-                            teamBScore={`${dragonTigerDetail?.videoInfo?.C5}/${dragonTigerDetail?.videoInfo?.C6}`}
-                            teamBOver={dragonTigerDetail?.videoInfo?.C7}
-                            ballIconUrl={`https://versionobj.ecoassetsservice.com/v13/static/front/img/balls/cricket20/ball${
-                              2 + index
-                            }.png`}
-                            backOdds={item.b1}
-                            layOdds={item.l1}
-                            item={item}
-                            runs={
-                              Object.keys(profitLossData).length > 0
-                                ? profitLossData[String(2 + index)]?.run ?? 0
-                                : 0
-                            }
-                          />
-                        </div>
+                        <ScoreBox
+                          key={index}
+                          teamA="Team A"
+                          teamAScore={`${dragonTigerDetail?.videoInfo?.C2}/${dragonTigerDetail?.videoInfo?.C3}`}
+                          teamAOver={dragonTigerDetail?.videoInfo?.C4}
+                          teamB="Team B"
+                          teamBScore={`${dragonTigerDetail?.videoInfo?.C5}/${dragonTigerDetail?.videoInfo?.C6}`}
+                          teamBOver={dragonTigerDetail?.videoInfo?.C7}
+                          ballIconUrl={`https://versionobj.ecoassetsservice.com/v13/static/front/img/balls/cricket20/ball${
+                            2 + index
+                          }.png`}
+                          backOdds={item.b1}
+                          layOdds={item.l1}
+                          item={item}
+                          runs={
+                            Object.keys(profitLossData).length > 0
+                              ? profitLossData[String(2 + index)]?.run ?? 0
+                              : 0
+                          }
+                        />
                       )
                     )}
                   </div>
@@ -155,27 +154,26 @@ const CricketMatch20Component = () => {
                   >
                     {dragonTigerDetail?.rightBoard?.map(
                       (item: any, index: any) => (
-                        <div>
-                          <ScoreBox
-                            teamA="Team A"
-                            teamAScore={`${dragonTigerDetail?.videoInfo?.C2}/${dragonTigerDetail?.videoInfo?.C3}`}
-                            teamAOver={dragonTigerDetail?.videoInfo?.C4}
-                            teamB="Team B"
-                            teamBScore={`${dragonTigerDetail?.videoInfo?.C5}/${dragonTigerDetail?.videoInfo?.C6}`}
-                            teamBOver={dragonTigerDetail?.videoInfo?.C7}
-                            ballIconUrl={`https://versionobj.ecoassetsservice.com/v13/static/front/img/balls/cricket20/ball${
-                              7 + index
-                            }.png`}
-                            backOdds={item.b1}
-                            layOdds={item.l1}
-                            item={item}
-                            runs={
-                              Object.keys(profitLossData).length > 0
-                                ? profitLossData[String(7 + index)]?.run ?? 0
-                                : 0
-                            }
-                          />
-                        </div>
+                        <ScoreBox
+                          key={index}
+                          teamA="Team A"
+                          teamAScore={`${dragonTigerDetail?.videoInfo?.C2}/${dragonTigerDetail?.videoInfo?.C3}`}
+                          teamAOver={dragonTigerDetail?.videoInfo?.C4}
+                          teamB="Team B"
+                          teamBScore={`${dragonTigerDetail?.videoInfo?.C5}/${dragonTigerDetail?.videoInfo?.C6}`}
+                          teamBOver={dragonTigerDetail?.videoInfo?.C7}
+                          ballIconUrl={`https://versionobj.ecoassetsservice.com/v13/static/front/img/balls/cricket20/ball${
+                            7 + index
+                          }.png`}
+                          backOdds={item.b1}
+                          layOdds={item.l1}
+                          item={item}
+                          runs={
+                            Object.keys(profitLossData).length > 0
+                              ? profitLossData[String(7 + index)]?.run ?? 0
+                              : 0
+                          }
+                        />
                       )
                     )}
                   </div>

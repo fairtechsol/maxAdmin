@@ -135,9 +135,11 @@ const OddEven = ({ name, data, odds, cards }: any) => {
           style={{ gap: "40px" }}
         >
           {cardImg?.map((item: any) => (
-            <div className="d-flex flex-column justify-content-around align-items-center">
+            <div
+              className="d-flex flex-column justify-content-around align-items-center"
+              key={item?.code}
+            >
               <div
-                key={item?.code}
                 className={item?.gstatus === "0" ? "suspended" : ""}
                 style={{
                   display: "flex",

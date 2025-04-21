@@ -28,9 +28,8 @@ const CommonCardImg = ({ cardData, data, cardInfo }: any) => {
     <div className="commonCardImgContainerabj1">
       {cardImg?.map((item: any) => {
         return (
-          <div className="casino-card-item mx-3">
+          <div className="casino-card-item mx-3" key={item?.code}>
             <div
-              key={item?.code}
               className={handlock(item)}
               style={{
                 display: "flex",

@@ -136,11 +136,12 @@ const Abj2Result: any = ({ data }: any) => {
                 ) : (
                   <Row style={{ gap: "10px" }}>
                     {teamB &&
-                      teamB?.map((item: any) => {
+                      teamB?.map((item: any, index: number) => {
                         return (
-                          <>
-                            <HandleCards card={item !== "1" ? item : ""} />
-                          </>
+                          <HandleCards
+                            card={item !== "1" ? item : ""}
+                            key={index}
+                          />
                         );
                       })}
                   </Row>
@@ -159,11 +160,12 @@ const Abj2Result: any = ({ data }: any) => {
                 ) : (
                   <Row style={{ gap: "10px" }}>
                     {teamA &&
-                      teamA?.map((item: any) => {
+                      teamA?.map((item: any, index: number) => {
                         return (
-                          <>
-                            <HandleCards card={item !== "1" ? item : ""} />
-                          </>
+                          <HandleCards
+                            card={item !== "1" ? item : ""}
+                            key={index}
+                          />
                         );
                       })}
                   </Row>

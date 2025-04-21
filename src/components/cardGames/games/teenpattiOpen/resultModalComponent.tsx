@@ -55,7 +55,10 @@ const TeenOpenResultComponent: React.FC<Props> = ({ data }: any) => {
                   {rowIndex == 8 ? "D" : rowIndex + 1}
                 </span>
                 {row.map((card: any, cardIndex: any) => (
-                  <div style={{ marginTop: "3px", marginLeft: "10px" }}>
+                  <div
+                    style={{ marginTop: "3px", marginLeft: "10px" }}
+                    key={cardIndex}
+                  >
                     <HandleCards card={card} />
                   </div>
                 ))}
@@ -89,8 +92,10 @@ const TeenOpenResultComponent: React.FC<Props> = ({ data }: any) => {
           {data?.result?.sid
             .split("|")[0]
             .split(",")
-            .map((v: any) => (
-              <span style={{ marginLeft: "5px", display: "flex" }}>{v}</span>
+            .map((v: any, index: number) => (
+              <span style={{ marginLeft: "5px", display: "flex" }} key={index}>
+                {v}
+              </span>
             ))}
         </div>
       </div>

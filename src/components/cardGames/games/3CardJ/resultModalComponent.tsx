@@ -72,8 +72,10 @@ const CardJResultComponent: React.FC<Props> = ({ data }: any) => {
                 >
                   {" "}
                   Result
-                  {elementsAndar?.map((item: any, index: any) => (
-                    <div style={{ color: "#000" }}>{item}</div>
+                  {elementsAndar?.map((item: any, index: number) => (
+                    <div style={{ color: "#000" }} key={index}>
+                      {item}
+                    </div>
                   ))}
                 </div>
               </div>

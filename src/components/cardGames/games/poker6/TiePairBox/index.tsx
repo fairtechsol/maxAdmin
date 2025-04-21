@@ -24,6 +24,7 @@ const TiePairBox = ({ odds, data, title, cards }: any) => {
             <div
               className="d-flex flex-column justify-content-center align-items-center"
               style={{ width: "30%" }}
+              key={index}
             >
               <div className="w-100 d-flex flex-row justify-content-between align-items-center position-relative">
                 <span className="title-14 f-bold">

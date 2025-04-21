@@ -304,7 +304,7 @@ const CasinoWarComponent = () => {
                       >
                         {playerA?.map((player: any, idx: any) => (
                           <div
-                            key={player.sid}
+                            key={idx}
                             className={`teenPatti-table-item ${
                               player.gstatus === "0" ? "locked" : ""
                             }`}
