@@ -162,6 +162,18 @@ const ListActiveInactiveUser: React.FC = () => {
     return true;
   };
 
+  const handleActiveDeactiveTab = (val: string) => {
+    dispatch(dropdownSummary({ summary: true }));
+    setCurrentPage(1);
+    setTableConfig((prev: any) => {
+      return {
+        ...prev,
+        keyword: "",
+      };
+    });
+    setActiveTab(val);
+  };
+
   useEffect(() => {
     try {
       if (id) {
@@ -279,17 +291,7 @@ const ListActiveInactiveUser: React.FC = () => {
                   <Nav.Link
                     className="rounded-0 "
                     eventKey="first"
-                    onClick={() => {
-                      dispatch(dropdownSummary({ summary: true }));
-                      setCurrentPage(1);
-                      setTableConfig((prev: any) => {
-                        return {
-                          ...prev,
-                          keyword: "",
-                        };
-                      });
-                      setActiveTab("active");
-                    }}
+                    onClick={() => handleActiveDeactiveTab("active")}
                   >
                     Active Users
                   </Nav.Link>
@@ -298,18 +300,7 @@ const ListActiveInactiveUser: React.FC = () => {
                   <Nav.Link
                     className="rounded-0 "
                     eventKey="second"
-                    onClick={() => {
-                      dispatch(dropdownSummary({ summary: false }));
-                      setCurrentPage(1);
-                      setTableConfig((prev: any) => {
-                        return {
-                          ...prev,
-                          keyword: "",
-                          // page: 1,
-                        };
-                      });
-                      setActiveTab("deactive");
-                    }}
+                    onClick={() => handleActiveDeactiveTab("deactive")}
                   >
                     Deactive Users
                   </Nav.Link>
@@ -530,6 +521,7 @@ const ListActiveInactiveUser: React.FC = () => {
                     tableConfig={tableConfig}
                     currentPage={currentPage}
                     setCurrentPage={setCurrentPage}
+                    value={value}
                   >
                     <tr>
                       {columns?.map((_, index) => {
