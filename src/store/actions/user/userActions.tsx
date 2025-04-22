@@ -171,8 +171,8 @@ export const getUsersProfile = createAsyncThunk(
     try {
       const resp = await service.get(ApiConstants.USER.PROFILE);
       if (resp) {
-        localStorage.setItem("key", resp?.data?.id);
-        return resp?.data;
+        localStorage.setItem("key", resp?.data[0][0]?.id);
+        return resp?.data[0][0];
       }
     } catch (error: any) {
       const err = error as AxiosError;
