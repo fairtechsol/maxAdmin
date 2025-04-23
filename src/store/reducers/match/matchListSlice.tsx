@@ -89,29 +89,14 @@ const matchListSlice = createSlice({
 
       .addCase(updateBalance.fulfilled, (state, action) => {
         const { jobData, userRedisObj } = action.payload;
-        if (jobData?.matchBetType === "tournament") {
-          state.matchDetails = {
-            ...state.matchDetails,
-            profitLossDataMatch: {
-              ...state.matchDetails.profitLossDataMatch,
-              [jobData?.betId + "_profitLoss_" + jobData?.matchId]:
-                JSON.stringify(userRedisObj),
-            },
-          };
-        } else {
-          state.matchDetails = {
-            ...state.matchDetails,
-            profitLossDataMatch: {
-              ...state.matchDetails.profitLossDataMatch,
-              [jobData?.teamArateRedisKey]:
-                userRedisObj[jobData?.teamArateRedisKey],
-              [jobData?.teamBrateRedisKey]:
-                userRedisObj[jobData?.teamBrateRedisKey],
-              [jobData?.teamCrateRedisKey]:
-                userRedisObj[jobData?.teamCrateRedisKey],
-            },
-          };
-        }
+        state.matchDetails = {
+          ...state.matchDetails,
+          profitLossDataMatch: {
+            ...state.matchDetails.profitLossDataMatch,
+            [jobData?.betId + "_profitLoss_" + jobData?.matchId]:
+              JSON.stringify(userRedisObj),
+          },
+        };
       });
   },
 });
