@@ -22,6 +22,7 @@ import {
   updateBetsPlaced,
   updateMatchRates,
   updatePlacedbetsDeleteReason,
+  updateTeamRatesOnMarketUndeclare,
 } from "../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../store/store";
 import { ApiConstants, liveStreamUrl } from "../../utils/Constants";
@@ -123,6 +124,16 @@ const Games = () => {
     }
   };
 
+  const handleMatchResultUndeclared = (event: any) => {
+    if (event?.matchId !== id) return;
+    if (event?.betType) {
+      dispatch(updateTeamRatesOnMarketUndeclare(event));
+    } else {
+      dispatch(matchDetailAction(id));
+    }
+    dispatch(getPlacedBets({ id: id, userId: state?.userId }));
+  };
+
   useEffect(() => {
     if (id) {
       matchService.connect([id]);
@@ -184,6 +195,9 @@ const Games = () => {
             handleSessionResultUnDeclare
           );
           socketService.match.updateDeleteReason(handleDeleteReasonUpdate);
+          socketService.match.matchResultUnDeclared(
+            handleMatchResultUndeclared
+          );
         }
       }
     } catch (e) {

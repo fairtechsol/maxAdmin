@@ -3,6 +3,7 @@ import {
   matchDetailAction,
   updateBalance,
   updateMatchRates,
+  updateTeamRatesOnMarketUndeclare,
 } from "../../actions/match/matchAction";
 interface InitialState {
   success: boolean;
@@ -86,7 +87,19 @@ const matchListSlice = createSlice({
           }),
         };
       })
+      .addCase(updateTeamRatesOnMarketUndeclare.fulfilled, (state, action) => {
+        const { betId, profitLossData } = action.payload;
 
+        state.matchDetails = {
+          ...state.matchDetails,
+          profitLossDataMatch: {
+            ...state.matchDetails.profitLossDataMatch,
+            [betId + "_profitLoss_" + state.matchDetails?.id]: JSON.stringify(
+              profitLossData?.[betId + "_profitLoss_" + state.matchDetails?.id]
+            ),
+          },
+        };
+      })
       .addCase(updateBalance.fulfilled, (state, action) => {
         const { jobData, userRedisObj } = action.payload;
         state.matchDetails = {

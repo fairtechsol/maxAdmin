@@ -531,6 +531,12 @@ export const updateBalance = createAsyncThunk<any, any>(
     return balance;
   }
 );
+export const updateTeamRatesOnMarketUndeclare = createAsyncThunk<any, any>(
+  "/teamRates/updateOnMarketUndeclare",
+  async (data) => {
+    return data;
+  }
+);
 export const updatePlacedbetsDeleteReason = createAsyncThunk<any, any>(
   "/updatePlacedbetsDeleteReason/bets",
   async (data) => {
