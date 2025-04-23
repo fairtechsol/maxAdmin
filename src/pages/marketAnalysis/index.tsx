@@ -3,7 +3,10 @@ import { FaSync } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import MarketAnalysisComp from "../../components/marketAnalysis";
-import { getMarketAnalysis } from "../../store/actions/match/matchAction";
+import {
+  getMarketAnalysis,
+  resetMarketAnalysys,
+} from "../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../store/store";
 import { ApiConstants } from "../../utils/Constants";
 import "./style.scss";
@@ -43,6 +46,9 @@ const MarketAnalysis = () => {
     } catch (error) {
       console.log(error);
     }
+    return () => {
+      dispatch(resetMarketAnalysys());
+    };
   }, [state, dispatch]);
 
   return (

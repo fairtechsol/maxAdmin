@@ -39,7 +39,7 @@ const marketAnalysisSlice = createSlice({
         state.error = action?.error?.message;
       })
       .addCase(resetMarketAnalysys, (state) => {
-        state.marketAnalysisDetail = null;
+        state.marketAnalysisDetail = [];
       });
   },
 });
