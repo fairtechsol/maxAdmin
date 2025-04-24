@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
-  betReportAccountList,
-  betReportAccountListReset,
+    betReportAccountList,
+    betReportAccountListReset,
 } from "../../actions/match/matchAction";
 
 interface InitialState {
@@ -40,7 +40,7 @@ const bettListSlice = createSlice({
       })
       .addCase(betReportAccountList.rejected, (state, action) => {
         state.loading = false;
-        state.error = action?.error?.message;
+        state.error = action.error?.message;
       })
       .addCase(betReportAccountListReset, (state) => {
         state.ReportBetList = {

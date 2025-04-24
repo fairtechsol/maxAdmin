@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
-  addUserMultiLogin,
-  changePasswordUserMultiLogin,
-  getUserMultiLoginList,
-  lockUserMultiLogin,
-  resetAddSuccessMultiUser,
-  resetMultiLoginSucess,
+    addUserMultiLogin,
+    changePasswordUserMultiLogin,
+    getUserMultiLoginList,
+    lockUserMultiLogin,
+    resetAddSuccessMultiUser,
+    resetMultiLoginSucess,
 } from "../../../store/actions/user/userActions";
 
 interface InitialState {
@@ -40,7 +40,7 @@ const userMultiLoginSlice = createSlice({
       })
       .addCase(addUserMultiLogin.rejected, (state, action) => {
         state.loading = false;
-        state.error = action?.error?.message;
+        state.error = action.error?.message;
       })
       .addCase(getUserMultiLoginList.pending, (state) => {
         state.loading = true;
@@ -52,7 +52,7 @@ const userMultiLoginSlice = createSlice({
       })
       .addCase(getUserMultiLoginList.rejected, (state, action) => {
         state.loading = false;
-        state.error = action?.error?.message;
+        state.error = action.error?.message;
       })
       .addCase(lockUserMultiLogin.pending, (state) => {
         state.loading = true;
@@ -64,7 +64,7 @@ const userMultiLoginSlice = createSlice({
       })
       .addCase(lockUserMultiLogin.rejected, (state, action) => {
         state.loading = false;
-        state.error = action?.error?.message;
+        state.error = action.error?.message;
       })
       .addCase(changePasswordUserMultiLogin.pending, (state) => {
         state.loading = true;
@@ -76,7 +76,7 @@ const userMultiLoginSlice = createSlice({
       })
       .addCase(changePasswordUserMultiLogin.rejected, (state, action) => {
         state.loading = false;
-        state.error = action?.error?.message;
+        state.error = action.error?.message;
       })
       .addCase(resetAddSuccessMultiUser, (state) => {
         state.addSuccess = false;

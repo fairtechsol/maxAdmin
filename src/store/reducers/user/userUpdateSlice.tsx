@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
-  addSuccessReset,
-  addUser,
-  successMessageReset,
+    addSuccessReset,
+    addUser,
+    successMessageReset,
 } from "../../actions/user/userActions";
 
 interface InitialState {
@@ -42,7 +42,7 @@ const userUpdateSlice = createSlice({
             `transaction code not valid. You have ${attemptLeftData.data.data.attemptsLeft}attempt left` ||
             " ";
         }
-        state.error = action?.error?.message;
+        state.error = action.error?.message;
       })
       .addCase(addSuccessReset, (state) => {
         state.addSuccess = false;

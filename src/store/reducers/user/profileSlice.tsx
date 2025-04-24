@@ -43,7 +43,7 @@ const profileSlice = createSlice({
       })
       .addCase(getUsersProfile.rejected, (state, action) => {
         state.loading = false;
-        state.error = action?.error?.message;
+        state.error = action.error?.message;
       })
       .addCase(profileReset, (state) => {
         state.success = false;
@@ -52,12 +52,13 @@ const profileSlice = createSlice({
         state.summary = action.payload.summary;
       })
       .addCase(updateUserBalance.fulfilled, (state, action) => {
+        const { currentBalance, profitLoss } = action.payload;
         state.userDetail = {
           ...state.userDetail,
           userBal: {
             ...state.userDetail.userBal,
-            currentBalance: action.payload?.currentBalance,
-            profitLoss: action.payload?.profitLoss,
+            currentBalance: currentBalance,
+            profitLoss: profitLoss,
           },
         };
       })
@@ -66,12 +67,12 @@ const profileSlice = createSlice({
         state.error = null;
       })
       .addCase(getTotalBalance.fulfilled, (state, action) => {
-        state.totalBalance = action?.payload;
+        state.totalBalance = action.payload;
         state.loading = false;
       })
       .addCase(getTotalBalance.rejected, (state, action) => {
         state.loading = false;
-        state.error = action?.error?.message;
+        state.error = action.error?.message;
       });
   },
 });

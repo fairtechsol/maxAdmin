@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
-  matchDetailAction,
-  updateBalance,
-  updateMatchRates,
-  updateTeamRatesOnMarketUndeclare,
+    matchDetailAction,
+    updateBalance,
+    updateMatchRates,
+    updateTeamRatesOnMarketUndeclare,
 } from "../../actions/match/matchAction";
 interface InitialState {
   success: boolean;
@@ -64,7 +64,7 @@ const matchListSlice = createSlice({
       })
       .addCase(matchDetailAction.rejected, (state, action) => {
         state.loading = false;
-        state.error = action?.error?.message;
+        state.error = action.error?.message;
       })
       .addCase(updateMatchRates.fulfilled, (state, action) => {
         const { apiSession, sessionBettings, tournament, scoreBoard } =
