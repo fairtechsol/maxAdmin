@@ -53,11 +53,11 @@ const ChangePassword = () => {
           <Col md={4}>
             <CustomInput
               required={true}
-              id={"newPassword"}
-              title={"New Password"}
-              placeholder={""}
-              type={"password"}
-              customstyle={"mb-3"}
+              id="newPassword"
+              title="New Password"
+              placeholder=""
+              type="password"
+              customstyle="mb-3"
               {...getFieldProps("newPassword")}
               touched={touched.newPassword}
               errors={errors.newPassword}
@@ -68,11 +68,11 @@ const ChangePassword = () => {
           <Col md={4}>
             <CustomInput
               required={true}
-              id={"confirmPassword"}
-              title={"Confirm Password"}
-              placeholder={""}
-              type={"password"}
-              customstyle={"mb-3"}
+              id="confirmPassword"
+              title="Confirm Password"
+              placeholder=""
+              type="password"
+              customstyle="mb-3"
               {...getFieldProps("confirmPassword")}
               touched={touched.confirmPassword}
               errors={errors.confirmPassword}
@@ -83,11 +83,11 @@ const ChangePassword = () => {
           <Col md={4}>
             <CustomInput
               required={true}
-              id={"transactionPassword"}
-              title={"Transaction Password"}
-              placeholder={""}
-              type={"password"}
-              customstyle={"mb-3"}
+              id="transactionPassword"
+              title="Transaction Password"
+              placeholder=""
+              type="password"
+              customstyle="mb-3"
               {...getFieldProps("transactionPassword")}
               touched={touched.transactionPassword}
               errors={errors.transactionPassword}
