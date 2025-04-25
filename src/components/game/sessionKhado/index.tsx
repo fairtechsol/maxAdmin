@@ -143,13 +143,13 @@ const SessionKhado = ({
                     {(item?.activeStatus != "live" ||
                       item?.GameStatus != "") && (
                       <div className="suspended-overlayRates">
-                        <span className={`suspendTextCmmn`}>
+                        <span className="suspendTextCmmn">
                           {item?.GameStatus ?? "SUSPENDED"}
                         </span>
                       </div>
                     )}
                     <div
-                      className={`sessionRateBox rateFont back1Background`}
+                      className="sessionRateBox rateFont back1Background"
                       style={{ cursor: "pointer" }}
                     >
                       <span className={`rateFont`}>

@@ -37,138 +37,136 @@ const SessionCricketCasino = ({
   };
 
   return (
-    <>
+    <div
+      className="sessionNormalContainer"
+      style={{ marginTop: isMobile ? "" : "10px" }}
+    >
+      <MarketTableHeader
+        title={title}
+        type="cricketCasino"
+        data={data}
+        detail={detail}
+      />
       <div
-        className="sessionNormalContainer"
-        style={{ marginTop: isMobile ? "" : "10px" }}
+        style={{
+          width: "100%",
+          display: "flex",
+          flexDirection: "row",
+          gap: "10px",
+        }}
       >
-        <MarketTableHeader
-          title={title}
-          type={"cricketCasino"}
-          data={data}
-          detail={detail}
-        />
         <div
-          style={{
-            width: "100%",
-            display: "flex",
-            flexDirection: "row",
-            gap: "10px",
-          }}
+          style={{ width: "100%", display: "flex", flexDirection: "column" }}
         >
           <div
-            style={{ width: "100%", display: "flex", flexDirection: "column" }}
+            className="sessionCasinoMinMax"
+            style={{ borderBottom: "1px solid #c7c8ca" }}
           >
-            <div
-              className="sessionCasinoMinMax"
-              style={{ borderBottom: "1px solid #c7c8ca" }}
-            >
-              <div style={{ backgroundColor: "#f2f2f2", flexGrow: 1 }}>
-                <span
-                  className={`sessionMinBox sessionMinMaxFont`}
-                  style={{ marginLeft: "1%" }}
-                >
-                  Min:{formatNumber(marketArr?.min)} Max:
-                  {formatNumber(marketArr?.max)}
-                </span>
-              </div>
-              <div
-                className="sessionRateBox back1Background"
-                style={{ width: !isMobile ? "81px" : "20%" }}
+            <div style={{ backgroundColor: "#f2f2f2", flexGrow: 1 }}>
+              <span
+                className={`sessionMinBox sessionMinMaxFont`}
+                style={{ marginLeft: "1%" }}
               >
-                <span className={`f-size16 sessionBackTxt`}>Back</span>
-              </div>
+                Min:{formatNumber(marketArr?.min)} Max:
+                {formatNumber(marketArr?.max)}
+              </span>
             </div>
-            {marketArr?.section?.map((item: any, index: any) => {
-              return (
-                <div className="sessionRateContainer" key={index}>
-                  <div className="sessionRateName" style={{ flexGrow: 1 }}>
-                    <span className="teamFont" style={{ fontWeight: "400" }}>
-                      {index} Number
-                    </span>
-                    <span
-                      className={`${
-                        marketAnalysisDetail?.length
-                          ? (parseFloat(
-                              marketAnalysisDetail?.[0]?.betType?.session?.find(
-                                (items: any) => items.betId == data?.id
-                              )?.profitLoss?.betPlaced[index]
-                            ) ?? 0) > 0
-                            ? "color-green"
-                            : "color-red"
-                          : detail?.profitLossDataSession
-                          ? detail?.profitLossDataSession?.filter(
-                              (a: any) => a?.betId === data?.id
-                            )
-                            ? detail?.profitLossDataSession?.filter(
-                                (a: any) => a?.betId === data?.id
-                              )[0]?.profitLoss?.[index] > 0
-                              ? "color-green"
-                              : detail?.profitLossDataSession?.filter(
-                                  (a: any) => a?.betId === data?.id
-                                )[0]?.profitLoss?.[index] < 0
-                              ? "color-red"
-                              : "color-red"
-                            : 0
-                          : 0
-                      }`}
-                    >
-                      {marketAnalysisDetail?.length
-                        ? marketAnalysisDetail?.[0]?.betType?.session?.find(
-                            (items: any) => items.betId == data?.id
-                          )?.profitLoss?.betPlaced[index] ?? 0
+            <div
+              className="sessionRateBox back1Background"
+              style={{ width: !isMobile ? "81px" : "20%" }}
+            >
+              <span className={`f-size16 sessionBackTxt`}>Back</span>
+            </div>
+          </div>
+          {marketArr?.section?.map((item: any, index: any) => {
+            return (
+              <div className="sessionRateContainer" key={index}>
+                <div className="sessionRateName" style={{ flexGrow: 1 }}>
+                  <span className="teamFont" style={{ fontWeight: "400" }}>
+                    {index} Number
+                  </span>
+                  <span
+                    className={`${
+                      marketAnalysisDetail?.length
+                        ? (parseFloat(
+                            marketAnalysisDetail?.[0]?.betType?.session?.find(
+                              (items: any) => items.betId == data?.id
+                            )?.profitLoss?.betPlaced[index]
+                          ) ?? 0) > 0
+                          ? "color-green"
+                          : "color-red"
                         : detail?.profitLossDataSession
                         ? detail?.profitLossDataSession?.filter(
                             (a: any) => a?.betId === data?.id
                           )
                           ? detail?.profitLossDataSession?.filter(
                               (a: any) => a?.betId === data?.id
-                            )[0]?.profitLoss?.[index]
-                          : ""
-                        : ""}
-                    </span>
-                  </div>
-                  <div
-                    className="sessionCCRateBoxContainer"
-                    style={{ width: !isMobile ? "81px" : "" }}
+                            )[0]?.profitLoss?.[index] > 0
+                            ? "color-green"
+                            : detail?.profitLossDataSession?.filter(
+                                (a: any) => a?.betId === data?.id
+                              )[0]?.profitLoss?.[index] < 0
+                            ? "color-red"
+                            : "color-red"
+                          : 0
+                        : 0
+                    }`}
                   >
-                    {item?.gstatus !== "" && (
-                      <div className="suspended-overlayRates">
-                        <FaLock color="#fff" />
-                      </div>
-                    )}
+                    {marketAnalysisDetail?.length
+                      ? marketAnalysisDetail?.[0]?.betType?.session?.find(
+                          (items: any) => items.betId == data?.id
+                        )?.profitLoss?.betPlaced[index] ?? 0
+                      : detail?.profitLossDataSession
+                      ? detail?.profitLossDataSession?.filter(
+                          (a: any) => a?.betId === data?.id
+                        )
+                        ? detail?.profitLossDataSession?.filter(
+                            (a: any) => a?.betId === data?.id
+                          )[0]?.profitLoss?.[index]
+                        : ""
+                      : ""}
+                  </span>
+                </div>
+                <div
+                  className="sessionCCRateBoxContainer"
+                  style={{ width: !isMobile ? "81px" : "" }}
+                >
+                  {item?.gstatus !== "" && (
+                    <div className="suspended-overlayRates">
+                      <FaLock color="#fff" />
+                    </div>
+                  )}
+                  <div
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      flexDirection: "column",
+                      borderRight: "1px solid #c7c8ca",
+                    }}
+                  >
                     <div
-                      style={{
-                        width: "100%",
-                        display: "flex",
-                        flexDirection: "column",
-                        borderRight: "1px solid #c7c8ca",
-                      }}
+                      className="sessionRateBox back1Background"
+                      style={{ height: "45px" }}
                     >
-                      <div
-                        className={`sessionRateBox back1Background`}
-                        style={{ height: "45px" }}
+                      <span className="rateFont">
+                        {handlePrice(item?.odds?.[0]?.odds) ?? "-"}
+                      </span>
+                      <span
+                        className={`${
+                          !isMobile ? "f-size12" : "f-size11"
+                        } sessionRate2Box`}
                       >
-                        <span className={`rateFont`}>
-                          {handlePrice(item?.odds?.[0]?.odds) ?? "-"}
-                        </span>
-                        <span
-                          className={`${
-                            !isMobile ? "f-size12" : "f-size11"
-                          } sessionRate2Box`}
-                        >
-                          {handleSize(item?.odds?.[0]?.size)}
-                        </span>
-                      </div>
+                        {handleSize(item?.odds?.[0]?.size)}
+                      </span>
                     </div>
                   </div>
                 </div>
-              );
-            })}
-          </div>
+              </div>
+            );
+          })}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 export default memo(SessionCricketCasino);
