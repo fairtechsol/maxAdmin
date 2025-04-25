@@ -51,10 +51,10 @@ export const getUsers = createAsyncThunk<any, GetUsers | undefined>(
       };
 
       if (requestData?.activeTab === "active") {
-        params["user.betBlock"] = false;
+        params["betBlock"] = "eqfalse";
         params["userBlock"] = "eqfalse";
       } else {
-        params["orVal"] = "user.betBlock=true|or|userBlock=eqtrue";
+        params["orVal"] = "true";
       }
       const resp = await service.get(ApiConstants.USER.LIST, {
         params,
