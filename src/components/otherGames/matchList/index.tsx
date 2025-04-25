@@ -102,8 +102,8 @@ const NavComponent = ({ matchDetail, setMarketToShow, marketToShow }: any) => {
                 <span
                   onClick={() => {
                     if (item?.dataType) {
-                      setMarketToShow((prev: any) => item?.key);
-                    } else setMarketToShow((prev: any) => item?.id);
+                      setMarketToShow(() => item?.key);
+                    } else setMarketToShow(() => item?.id);
                   }}
                   className={`market-tab-link ${
                     (item?.dataType ? item?.key : item?.id) === marketToShow

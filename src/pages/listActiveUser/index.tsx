@@ -625,7 +625,6 @@ const ListActiveInactiveUser: React.FC = () => {
                                 </Link>
                               )}
                             </td>
-
                             <td className="text-end">
                               {formatToINR(creditRefrence)}
                             </td>
@@ -760,11 +759,9 @@ const ListActiveInactiveUser: React.FC = () => {
       <CustomModal
         customClass="modalFull-90 "
         title={[
-          <>
-            <span className="f400">
-              {userWiseExposureName?.name} EventWise Expoure
-            </span>
-          </>,
+          <span className="f400">
+            {userWiseExposureName?.name} EventWise Expoure
+          </span>,
         ]}
         show={showUserWiseExposureModal && !loading}
         setShow={setShowUserWiseExposureModal}
@@ -778,11 +775,9 @@ const ListActiveInactiveUser: React.FC = () => {
       <CustomModal
         customClass="modalFull-90 "
         title={[
-          <>
-            <span className="f400">
-              {userWiseExposureName?.name} Match Wise Exposure
-            </span>
-          </>,
+          <span className="f400">
+            {userWiseExposureName?.name} Match Wise Exposure
+          </span>,
         ]}
         show={showUserWiseMatchListModal}
         setShow={setShowUserWiseMatchListModal}

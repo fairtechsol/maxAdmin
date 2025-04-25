@@ -39,34 +39,32 @@ const EventWiseExposureModal = ({
   }, []);
 
   return (
-    <>
-      <CustomTable
-        customClass="commonTable reportTable"
-        striped
-        columns={columns}
-        itemCount={Object.keys(userWiseExposureList).length}
-        setTableConfig={setTableConfig}
-        tableConfig={tableConfig}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-      >
-        {Object.entries(userWiseExposureList).map(([key, value]: any) => (
-          <tr
-            key={key}
-            onClick={() => {
-              if (value?.match) {
-                setShowUserWiseMatchListModal(true);
-                setDataForMatchList({ eventType: key, value: value?.match });
-              }
-            }}
-            style={{ cursor: "pointer" }}
-          >
-            <td>{key}</td>
-            <td>{formatToINR(value?.exposure) || 0}</td>
-          </tr>
-        ))}
-      </CustomTable>
-    </>
+    <CustomTable
+      customClass="commonTable reportTable"
+      striped
+      columns={columns}
+      itemCount={Object.keys(userWiseExposureList).length}
+      setTableConfig={setTableConfig}
+      tableConfig={tableConfig}
+      currentPage={currentPage}
+      setCurrentPage={setCurrentPage}
+    >
+      {Object.entries(userWiseExposureList).map(([key, value]: any) => (
+        <tr
+          key={key}
+          onClick={() => {
+            if (value?.match) {
+              setShowUserWiseMatchListModal(true);
+              setDataForMatchList({ eventType: key, value: value?.match });
+            }
+          }}
+          style={{ cursor: "pointer" }}
+        >
+          <td>{key}</td>
+          <td>{formatToINR(value?.exposure) || 0}</td>
+        </tr>
+      ))}
+    </CustomTable>
   );
 };
 
