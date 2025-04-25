@@ -180,11 +180,11 @@ const ListActiveInactiveUser: React.FC = () => {
         dispatch(
           getUsers({
             userId: id,
-            page: tableConfig?.page || 1,
+            page: currentPage || 1,
             limit: value,
             userName: keyword || "",
-            sort: tableConfig?.key || "",
-            order: tableConfig?.direction || "DESC",
+            sort: sort?.key || "",
+            order: sort?.direction || "DESC",
             activeTab: activeTab,
           })
         );
@@ -192,7 +192,7 @@ const ListActiveInactiveUser: React.FC = () => {
     } catch (error) {
       console.log(error);
     }
-  }, [id, tableConfig, value, keyword, activeTab]);
+  }, [id, value, keyword, activeTab, currentPage, sort]);
 
   useEffect(() => {
     try {
