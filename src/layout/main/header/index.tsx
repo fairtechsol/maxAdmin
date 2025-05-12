@@ -237,6 +237,7 @@ const Topbar = (props: any) => {
   };
 
   let permissions: any = localStorage.getItem("permissions");
+  const parsedPermissions = JSON.parse(permissions);
 
   return (
     <>
@@ -244,7 +245,7 @@ const Topbar = (props: any) => {
         <div className="d-flex ms-0">
           <a
             href={
-              !JSON.parse(permissions) || JSON.parse(permissions)?.userList
+              !parsedPermissions || parsedPermissions?.userList
                 ? `/admin/active-inactive-user-list/${localStorage.getItem(
                     "key"
                   )}`
@@ -255,7 +256,7 @@ const Topbar = (props: any) => {
             <LogoSection width="100%" height="50px" />
           </a>
 
-          {(!JSON.parse(permissions) || JSON.parse(permissions)?.events) && (
+          {(!parsedPermissions || parsedPermissions?.events) && (
             <span className="m-3 cursor" onClick={props.onClick}>
               <div className="menuHamBurger d-flex flex-column me-2 mt-1">
                 <span className="mb-1" />
@@ -266,8 +267,7 @@ const Topbar = (props: any) => {
           )}
           <Navbar id="basic-navbar-nav">
             <Nav className="me-auto">
-              {(!JSON.parse(permissions) ||
-                JSON.parse(permissions)?.userList) && (
+              {(!parsedPermissions || parsedPermissions?.userList) && (
                 <Nav.Link
                   className="navbar-mainLink"
                   href={`/admin/listClients/${localStorage.getItem("key")}`}
@@ -275,8 +275,7 @@ const Topbar = (props: any) => {
                   List of clients
                 </Nav.Link>
               )}
-              {(!JSON.parse(permissions) ||
-                JSON.parse(permissions)?.marketAnalysis) && (
+              {(!parsedPermissions || parsedPermissions?.marketAnalysis) && (
                 <Nav.Link
                   className="navbar-mainLink"
                   href="/admin/market-analysis"
@@ -332,7 +331,7 @@ const Topbar = (props: any) => {
               <TopbarDropdown
                 name="Reports"
                 options={reportOptions.filter((item) => {
-                  if (item.id && JSON.parse(permissions)?.[item.id] === false) {
+                  if (item.id && parsedPermissions?.[item.id] === false) {
                     return false;
                   }
                   return true;
@@ -349,8 +348,7 @@ const Topbar = (props: any) => {
                   <UserLockModal show={showModal} setShowModal={setShowModal} />
                 </>
               )}
-              {(!JSON.parse(permissions) ||
-                JSON.parse(permissions)?.loginUserCreation) && (
+              {(!parsedPermissions || parsedPermissions?.loginUserCreation) && (
                 <Nav.Link className="navbar-mainLink" href="/admin/multiLogin">
                   Multi Login
                 </Nav.Link>

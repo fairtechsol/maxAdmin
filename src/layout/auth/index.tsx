@@ -6,9 +6,11 @@ const AuthLayout = () => {
 
   const permissions: any = localStorage.getItem("permissions");
 
+  const parsedPermissions = JSON.parse(permissions);
+
   useEffect(() => {
     if (localStorage.getItem("jwtMaxAdmin")) {
-      if (!JSON.parse(permissions) || JSON.parse(permissions)?.marketAnalysis) {
+      if (!parsedPermissions || parsedPermissions?.marketAnalysis) {
         navigate("/admin/market-analysis");
       } else navigate("/admin/home");
     } else {
