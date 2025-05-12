@@ -174,6 +174,7 @@ const ProfitLossReport = () => {
                 } else {
                   setSelectedUser(value);
                 }
+                setUserOptions([]);
               }}
               placeholder="Client Name:"
               isMultiOption={true}
