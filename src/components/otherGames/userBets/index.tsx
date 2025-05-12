@@ -111,7 +111,7 @@ const OtherUserBets = ({ matchId }: any) => {
                           >
                             <div className="w-100 d-flex flex-row justify-content-between">
                               <div className="w-50 d-flex text-black f700 title-16">
-                                {bet?.marketType}
+                                {bet?.bettingName || bet?.marketType}
                               </div>
                               <div className="w-50 d-flex text-black text-end">
                                 <span className="w-100">
