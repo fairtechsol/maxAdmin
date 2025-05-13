@@ -253,12 +253,10 @@ const AccountStatement = () => {
       dispatch(
         handleExport({
           endpoint: `${ApiConstants.REPORT.ACCOUNTLIST}/${
-            selectedUser ? selectedUser[0]?.value : localStorage.getItem("key")
+            selectedUser ? selectedUser?.value : localStorage.getItem("key")
           }`,
           type: type,
-          id: selectedUser
-            ? selectedUser[0]?.value
-            : localStorage.getItem("key"),
+          id: selectedUser ? selectedUser?.value : localStorage.getItem("key"),
           filter: filter,
           searchBy: "description",
           keyword: tableConfig?.keyword ?? "",
@@ -329,8 +327,8 @@ const AccountStatement = () => {
         dispatch(
           getReportAccountList({
             id: selectedUser
-              ? selectedUser[0]?.value
-                ? selectedUser[0]?.value
+              ? selectedUser?.value
+                ? selectedUser?.value
                 : selectedUser?.value
               : localStorage.getItem("key"),
             page: tableConfig?.page,
