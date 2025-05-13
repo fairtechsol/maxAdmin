@@ -214,16 +214,16 @@ export const scoreBoardUrlMain =
 // export const baseUrls = {
 //   socket:
 //     process.env.NODE_ENV === "production"
-//       ? `${Constants.apiBasePath}`
-//       : `${Constants.localPath}`,
+//       ? Constants.apiBasePath
+//       : Constants.localPath,
 //   thirdParty:
 //     process.env.NODE_ENV === "production"
-//       ? `${Constants.thirdParty}`
-//       : `${Constants.localPathThird}`,
+//       ? Constants.thirdParty
+//       : Constants.localPathThird,
 //   expertSocket:
 //     process.env.NODE_ENV === "production"
-//       ? `${Constants.expertPath}`
-//       : `${Constants.localPathExpert}`,
+//       ? Constants.expertPath
+//       : Constants.localPathExpert,
 //   cardSocket:
 //     process.env.NODE_ENV === "production"
 //       ? Constants.thirdPartyCard
@@ -240,16 +240,16 @@ export const serviceUrl =
 export const baseUrls = {
   socket:
     process.env.NODE_ENV === "production"
-      ? `${Constants.apiBasePathLive}`
-      : `${Constants.localPath}`,
+      ? Constants.apiBasePathLive
+      : Constants.localPath,
   thirdParty:
     process.env.NODE_ENV === "production"
-      ? `${Constants.thirdPartyLive}`
-      : `${Constants.localPathThird}`,
+      ? Constants.thirdPartyLive
+      : Constants.localPathThird,
   expertSocket:
     process.env.NODE_ENV === "production"
-      ? `${Constants.expertPathLive}`
-      : `${Constants.localPathExpert}`,
+      ? Constants.expertPathLive
+      : Constants.localPathExpert,
   cardSocket:
     process.env.NODE_ENV === "production"
       ? Constants.thirdPartyCardLive
