@@ -10,13 +10,13 @@ export let cardSocket: any = null;
 
 export const initialiseSocket = () => {
   socket = io(baseUrls.socket, {
-    transports: [`${Constants.WEBSOCKET}`, `${Constants.POLLING}`],
+    transports: [Constants.WEBSOCKET, Constants.POLLING],
     auth: {
-      token: `${localStorage.getItem("jwtMaxAdmin")}`,
+      token: localStorage.getItem("jwtMaxAdmin"),
     },
   });
   cardSocket = io(baseUrls.cardSocket, {
-    transports: [`${Constants.POLLING}`, `${Constants.WEBSOCKET}`],
+    transports: [Constants.POLLING, Constants.WEBSOCKET],
   });
 };
 
@@ -24,11 +24,11 @@ export const initialiseMatchSocket = (matchId: string[]) => {
   thirdParty = io(baseUrls.thirdParty, {
     transports: [
       process.env.NODE_ENV === "production"
-        ? `${Constants.POLLING}`
-        : `${Constants.WEBSOCKET}`,
+        ? Constants.POLLING
+        : Constants.WEBSOCKET,
     ],
     auth: {
-      token: `${localStorage.getItem("jwtMaxAdmin")}`,
+      token: localStorage.getItem("jwtMaxAdmin"),
     },
     query: {
       matchIdArray: matchId,
