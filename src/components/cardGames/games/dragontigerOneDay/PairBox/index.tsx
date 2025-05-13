@@ -1,6 +1,6 @@
 import { useState } from "react";
-import CommonButtonBox from "../CommonButtonBox";
 import { IoInformationCircle } from "react-icons/io5";
+import CommonButtonBox from "../CommonButtonBox";
 import SmoothDropdownModal from "../minMaxModal";
 
 const PairBox = ({ odds, data }: any) => {

@@ -1,9 +1,9 @@
-import { Row, Col } from "react-bootstrap";
-import "./style.scss";
+import { Col, Row } from "react-bootstrap";
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
+import "./style.scss";
 
 const Abj2Result: any = ({ data }: any) => {
   const elements = data?.cards?.split(",");
@@ -16,7 +16,6 @@ const Abj2Result: any = ({ data }: any) => {
     (item: any, index: number) => index % 2 !== 0 && item !== "1"
   );
 
-  // console.log(data , "dws")
   const sliderSettings = (length: any, arrow: any) => ({
     infinite: false,
     speed: 500,
@@ -137,11 +136,12 @@ const Abj2Result: any = ({ data }: any) => {
                 ) : (
                   <Row style={{ gap: "10px" }}>
                     {teamB &&
-                      teamB?.map((item: any) => {
+                      teamB?.map((item: any, index: number) => {
                         return (
-                          <>
-                            <HandleCards card={item !== "1" ? item : ""} />
-                          </>
+                          <HandleCards
+                            card={item !== "1" ? item : ""}
+                            key={index}
+                          />
                         );
                       })}
                   </Row>
@@ -160,11 +160,12 @@ const Abj2Result: any = ({ data }: any) => {
                 ) : (
                   <Row style={{ gap: "10px" }}>
                     {teamA &&
-                      teamA?.map((item: any) => {
+                      teamA?.map((item: any, index: number) => {
                         return (
-                          <>
-                            <HandleCards card={item !== "1" ? item : ""} />
-                          </>
+                          <HandleCards
+                            card={item !== "1" ? item : ""}
+                            key={index}
+                          />
                         );
                       })}
                   </Row>

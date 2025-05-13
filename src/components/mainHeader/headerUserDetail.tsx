@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Column, TableConfig } from "../../models/tableInterface";
 import CustomTable from "../commonComponent/table";
 
@@ -15,29 +15,27 @@ const HeaderUserDetail = ({ data }: any) => {
   ];
 
   return (
-    <>
-      <CustomTable
-        CustomTableClass=""
-        striped
-        tHeadTheme="bg-transparent text-white"
-        columns={columns}
-        itemCount={10}
-        setTableConfig={setTableConfig}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-      >
-        {data?.map((item: any, index: number) => (
-          <tr key={index}>
-            <td>{item?.userName} </td>
-            <td>{item?.userBal?.exposure} </td>
-            <td>{item?.creditRefrence} </td>
-            <td>{item?.exposureLimit} </td>
-            <td>{item?.userBal?.currentBalance} </td>
-          </tr>
-        ))}
-      </CustomTable>
-    </>
+    <CustomTable
+      CustomTableClass=""
+      striped
+      tHeadTheme="bg-transparent text-white"
+      columns={columns}
+      itemCount={10}
+      setTableConfig={setTableConfig}
+      currentPage={currentPage}
+      setCurrentPage={setCurrentPage}
+    >
+      {data?.map((item: any, index: number) => (
+        <tr key={index}>
+          <td>{item?.userName} </td>
+          <td>{item?.userBal?.exposure} </td>
+          <td>{item?.creditRefrence} </td>
+          <td>{item?.exposureLimit} </td>
+          <td>{item?.userBal?.currentBalance} </td>
+        </tr>
+      ))}
+    </CustomTable>
   );
 };
 
-export default HeaderUserDetail;
+export default memo(HeaderUserDetail);

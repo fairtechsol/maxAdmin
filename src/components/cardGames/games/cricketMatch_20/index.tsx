@@ -2,17 +2,17 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useRef, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import "./style.scss";
+import { crick20rules } from "../../../../assets";
+import { handleRoundId } from "../../../../helpers";
 import { RootState } from "../../../../store/store";
 import { cardGamesId, cardUrl } from "../../../../utils/Constants";
-import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
 import CardResultBox from "../../../commonComponent/cardResultBox";
-import UserBets from "../../../game/userBet";
 import RulesModal from "../../../commonComponent/rulesModal";
-import { handleRoundId } from "../../../../helpers";
-import Teen20Result from "./teenCard";
+import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
+import UserBets from "../../../game/userBet";
 import ScoreBox from "./scoreBox";
-import { crick20rules } from "../../../../assets";
+import "./style.scss";
+import Teen20Result from "./teenCard";
 
 interface ProfitLoss {
   pl: number;
@@ -121,27 +121,26 @@ const CricketMatch20Component = () => {
                   >
                     {dragonTigerDetail?.leftBoard?.map(
                       (item: any, index: any) => (
-                        <div>
-                          <ScoreBox
-                            teamA="Team A"
-                            teamAScore={`${dragonTigerDetail?.videoInfo?.C2}/${dragonTigerDetail?.videoInfo?.C3}`}
-                            teamAOver={dragonTigerDetail?.videoInfo?.C4}
-                            teamB="Team B"
-                            teamBScore={`${dragonTigerDetail?.videoInfo?.C5}/${dragonTigerDetail?.videoInfo?.C6}`}
-                            teamBOver={dragonTigerDetail?.videoInfo?.C7}
-                            ballIconUrl={`https://versionobj.ecoassetsservice.com/v13/static/front/img/balls/cricket20/ball${
-                              2 + index
-                            }.png`}
-                            backOdds={item.b1}
-                            layOdds={item.l1}
-                            item={item}
-                            runs={
-                              Object.keys(profitLossData).length > 0
-                                ? profitLossData[String(2 + index)]?.run ?? 0
-                                : 0
-                            }
-                          />
-                        </div>
+                        <ScoreBox
+                          key={index}
+                          teamA="Team A"
+                          teamAScore={`${dragonTigerDetail?.videoInfo?.C2}/${dragonTigerDetail?.videoInfo?.C3}`}
+                          teamAOver={dragonTigerDetail?.videoInfo?.C4}
+                          teamB="Team B"
+                          teamBScore={`${dragonTigerDetail?.videoInfo?.C5}/${dragonTigerDetail?.videoInfo?.C6}`}
+                          teamBOver={dragonTigerDetail?.videoInfo?.C7}
+                          ballIconUrl={`https://versionobj.ecoassetsservice.com/v13/static/front/img/balls/cricket20/ball${
+                            2 + index
+                          }.png`}
+                          backOdds={item.b1}
+                          layOdds={item.l1}
+                          item={item}
+                          runs={
+                            Object.keys(profitLossData).length > 0
+                              ? profitLossData[String(2 + index)]?.run ?? 0
+                              : 0
+                          }
+                        />
                       )
                     )}
                   </div>
@@ -155,27 +154,26 @@ const CricketMatch20Component = () => {
                   >
                     {dragonTigerDetail?.rightBoard?.map(
                       (item: any, index: any) => (
-                        <div>
-                          <ScoreBox
-                            teamA="Team A"
-                            teamAScore={`${dragonTigerDetail?.videoInfo?.C2}/${dragonTigerDetail?.videoInfo?.C3}`}
-                            teamAOver={dragonTigerDetail?.videoInfo?.C4}
-                            teamB="Team B"
-                            teamBScore={`${dragonTigerDetail?.videoInfo?.C5}/${dragonTigerDetail?.videoInfo?.C6}`}
-                            teamBOver={dragonTigerDetail?.videoInfo?.C7}
-                            ballIconUrl={`https://versionobj.ecoassetsservice.com/v13/static/front/img/balls/cricket20/ball${
-                              7 + index
-                            }.png`}
-                            backOdds={item.b1}
-                            layOdds={item.l1}
-                            item={item}
-                            runs={
-                              Object.keys(profitLossData).length > 0
-                                ? profitLossData[String(7 + index)]?.run ?? 0
-                                : 0
-                            }
-                          />
-                        </div>
+                        <ScoreBox
+                          key={index}
+                          teamA="Team A"
+                          teamAScore={`${dragonTigerDetail?.videoInfo?.C2}/${dragonTigerDetail?.videoInfo?.C3}`}
+                          teamAOver={dragonTigerDetail?.videoInfo?.C4}
+                          teamB="Team B"
+                          teamBScore={`${dragonTigerDetail?.videoInfo?.C5}/${dragonTigerDetail?.videoInfo?.C6}`}
+                          teamBOver={dragonTigerDetail?.videoInfo?.C7}
+                          ballIconUrl={`https://versionobj.ecoassetsservice.com/v13/static/front/img/balls/cricket20/ball${
+                            7 + index
+                          }.png`}
+                          backOdds={item.b1}
+                          layOdds={item.l1}
+                          item={item}
+                          runs={
+                            Object.keys(profitLossData).length > 0
+                              ? profitLossData[String(7 + index)]?.run ?? 0
+                              : 0
+                          }
+                        />
                       )
                     )}
                   </div>

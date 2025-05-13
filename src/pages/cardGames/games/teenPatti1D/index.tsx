@@ -1,21 +1,21 @@
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import TeentPatti1DComponent from "../../../../components/cardGames/games/teenpatti1D";
 import Loader from "../../../../components/commonComponent/loader";
 import { socket, socketService } from "../../../../socketManager";
 import {
-    getCardDetailInitial,
-    getDragonTigerDetailHorseRacing,
-    resetCardDetail,
-    updateBalanceOnBetPlaceCards,
-    updateLiveGameResultTop10,
-    updateProfitLossCards,
-    updateTeenPatti1DMatchRates,
+  getCardDetailInitial,
+  getDragonTigerDetailHorseRacing,
+  resetCardDetail,
+  updateBalanceOnBetPlaceCards,
+  updateLiveGameResultTop10,
+  updateProfitLossCards,
+  updateTeenPatti1DMatchRates,
 } from "../../../../store/actions/card/cardDetail";
 import {
-    getPlacedBets,
-    updateBetsPlaced,
+  getPlacedBets,
+  updateBetsPlaced,
 } from "../../../../store/actions/match/matchAction";
 import { getUsersProfile } from "../../../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../../../store/store";
@@ -48,7 +48,9 @@ const TeenPatti1D = () => {
   };
   const handleCardResult = (event: any) => {
     if (event?.matchId === dragonTigerDetail?.id) {
-      dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
+      dispatch(
+        getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId })
+      );
     }
   };
   const handleMatchResult = () => {
@@ -57,7 +59,9 @@ const TeenPatti1D = () => {
   useEffect(() => {
     try {
       if (dragonTigerDetail?.id) {
-        dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
+        dispatch(
+          getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId })
+        );
       }
     } catch (e) {
       console.error(e);
@@ -133,4 +137,4 @@ const TeenPatti1D = () => {
   return loading ? <Loader /> : <TeentPatti1DComponent />;
 };
 
-export default TeenPatti1D;
+export default memo(TeenPatti1D);

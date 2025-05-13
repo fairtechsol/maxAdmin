@@ -1,4 +1,3 @@
-import React from 'react';
 
 const AmarAkbarRules = () => {
   return (
@@ -53,7 +52,10 @@ const AmarAkbarRules = () => {
 
       <p>
         <b>Note:</b>
-        <span>If the card is 7, bets on under 7 and over 7 will lose 50% of the bet amount.</span>
+        <span>
+          If the card is 7, bets on under 7 and over 7 will lose 50% of the bet
+          amount.
+        </span>
       </p>
 
       <p>

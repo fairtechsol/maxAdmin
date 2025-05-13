@@ -1,15 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
-  getReportAccountList,
-  getReportCurrentBet,
-  getGameReport,
-  getGeneralReport,
-  getProfitLossReport,
-  getBetAccountStatementModal,
-  getCardReport,
-  resetGameReportList,
-  getCasinoReport,
-  getCasinoReportGameList,
+    getBetAccountStatementModal,
+    getCardReport,
+    getCasinoReport,
+    getCasinoReportGameList,
+    getGameReport,
+    getGeneralReport,
+    getProfitLossReport,
+    getReportAccountList,
+    getReportCurrentBet,
+    resetGameReportList,
 } from "../../actions/match/matchAction";
 
 interface InitialState {
@@ -60,7 +60,7 @@ const reportListSlice = createSlice({
       })
       .addCase(getReportAccountList.rejected, (state, action) => {
         state.loading = false;
-        state.error = action?.error?.message;
+        state.error = action.error?.message;
       })
       .addCase(getReportCurrentBet.pending, (state) => {
         state.loading = false;
@@ -74,7 +74,7 @@ const reportListSlice = createSlice({
       })
       .addCase(getReportCurrentBet.rejected, (state, action) => {
         state.loading = false;
-        state.error = action?.error?.message;
+        state.error = action.error?.message;
       })
       .addCase(getGameReport.pending, (state) => {
         state.loading = false;
@@ -88,7 +88,7 @@ const reportListSlice = createSlice({
       })
       .addCase(getGameReport.rejected, (state, action) => {
         state.loading = false;
-        state.error = action?.error?.message;
+        state.error = action.error?.message;
       })
       .addCase(getGeneralReport.pending, (state) => {
         state.loading = false;
@@ -102,7 +102,7 @@ const reportListSlice = createSlice({
       })
       .addCase(getGeneralReport.rejected, (state, action) => {
         state.loading = false;
-        state.error = action?.error?.message;
+        state.error = action.error?.message;
       })
       .addCase(getProfitLossReport.pending, (state) => {
         state.loading = false;
@@ -116,7 +116,7 @@ const reportListSlice = createSlice({
       })
       .addCase(getProfitLossReport.rejected, (state, action) => {
         state.loading = false;
-        state.error = action?.error?.message;
+        state.error = action.error?.message;
       })
       .addCase(getBetAccountStatementModal.pending, (state) => {
         state.loading = false;
@@ -129,21 +129,17 @@ const reportListSlice = createSlice({
       })
       .addCase(getBetAccountStatementModal.rejected, (state, action) => {
         state.loading = false;
-        state.error = action?.error?.message;
+        state.error = action.error?.message;
       })
       .addCase(getCardReport.pending, (state) => {
-        // state.loading = true;
         state.success = false;
         state.error = null;
       })
       .addCase(getCardReport.fulfilled, (state, action) => {
-        // state.loading = false;
         state.casinoResultReport = action.payload;
       })
       .addCase(getCardReport.rejected, (state, action) => {
-        // state.loading = false;
-        // state.success = false;
-        state.error = action?.error?.message;
+        state.error = action.error?.message;
       })
       .addCase(getCasinoReport.pending, (state) => {
         state.loading = true;
@@ -157,7 +153,7 @@ const reportListSlice = createSlice({
       })
       .addCase(getCasinoReport.rejected, (state, action) => {
         state.loading = false;
-        state.error = action?.error?.message;
+        state.error = action.error?.message;
       })
       .addCase(getCasinoReportGameList.pending, (state) => {
         state.loading = true;
@@ -171,7 +167,7 @@ const reportListSlice = createSlice({
       })
       .addCase(getCasinoReportGameList.rejected, (state, action) => {
         state.loading = false;
-        state.error = action?.error?.message;
+        state.error = action.error?.message;
       })
 
       .addCase(resetGameReportList, (state) => {

@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 
-export default function OtherLayout() {
+const OtherLayout = () => {
   return (
     <div className="main-container">
       <div className="content-wrapper">
@@ -8,4 +8,5 @@ export default function OtherLayout() {
       </div>
     </div>
   );
-}
+};
+export default OtherLayout;

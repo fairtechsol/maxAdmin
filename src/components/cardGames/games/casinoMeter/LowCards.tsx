@@ -1,5 +1,5 @@
-import { HandleCards } from "../../../commonComponent/cardsComponent";
 import { dragonTigerCards } from "../../../../utils/Constants";
+import { HandleCards } from "../../../commonComponent/cardsComponent";
 
 const LowCards = ({ odds, data }: any) => {
   return (

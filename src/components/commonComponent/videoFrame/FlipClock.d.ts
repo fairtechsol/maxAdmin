@@ -1,15 +1,12 @@
-// FlipClock.d.ts
-
-import { FC } from 'react';
+import { FC } from "react";
 
 interface FlipClockProps {
-  value: number | string; // Adjust the type according to what `value` should be
+  value: number | string;
 }
 
 interface Tick {
-    value: number | string;
-    // Add other properties of the Tick object if needed
-  }
+  value: number | string;
+}
 
 declare const FlipClock: FC<FlipClockProps>;
 

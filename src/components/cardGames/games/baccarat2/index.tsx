@@ -2,20 +2,20 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useRef, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import "./style.scss";
+import { Baccarat1rules } from "../../../../assets";
+import { handleRoundId } from "../../../../helpers";
 import { RootState } from "../../../../store/store";
 import {
   cardGamesId,
   cardGamesType,
   cardUrl,
 } from "../../../../utils/Constants";
-import { handleRoundId } from "../../../../helpers";
-import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
 import CardResultBox from "../../../commonComponent/cardResultBox";
 import RulesModal from "../../../commonComponent/rulesModal";
-import { Baccarat1rules } from "../../../../assets";
+import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
 import UserBets from "../../../game/userBet";
 import BaccaratStatistics from "./betTable";
+import "./style.scss";
 export const data = [
   ["Task", "Hours per Day"],
   ["Work", 15],
@@ -62,16 +62,13 @@ const Baccarat2Component = () => {
               </div>
               <div
                 style={{
-                  // flex: '1 0 auto',
                   width: "100%",
-                  // height: "92%",
                   backgroundColor: "#000",
                 }}
               >
                 <VideoFrame
-                data={dragonTigerDetail}
+                  data={dragonTigerDetail}
                   time={dragonTigerDetail?.videoInfo?.autotime}
-                  //   result={<Abj2Result data={dragonTigerDetail?.videoInfo} />}
                   id={videoFrameId}
                 />
               </div>

@@ -2,10 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import "./style.scss";
-import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
-import RulesModal from "../../../commonComponent/rulesModal";
-import UserBets from "../../../game/userBet";
+import { abjrules } from "../../../../assets";
 import { RootState } from "../../../../store/store";
 import {
   cardGamesId,
@@ -13,9 +10,12 @@ import {
   cardUrl,
 } from "../../../../utils/Constants";
 import CardResultBox from "../../../commonComponent/cardResultBox";
-import { abjrules } from "../../../../assets";
-import QueenCard from "./queenCard";
+import RulesModal from "../../../commonComponent/rulesModal";
+import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
+import UserBets from "../../../game/userBet";
 import BetBox from "./betBox";
+import QueenCard from "./queenCard";
+import "./style.scss";
 
 const CasinoQueenComponent = () => {
   const [show, setShow] = useState(false);
@@ -32,17 +32,15 @@ const CasinoQueenComponent = () => {
       <Row>
         <Col md={8}>
           <div className="horseRacingTab">
-            <div style={{ width: "100%"}}>
+            <div style={{ width: "100%" }}>
               <div
                 style={{
-                  // flex: '1 0 auto',
                   width: "100%",
-                  // height: "92%",
                   backgroundColor: "#000",
                 }}
               >
                 <VideoFrame
-                data={dragonTigerDetail}
+                  data={dragonTigerDetail}
                   time={dragonTigerDetail?.videoInfo?.autotime}
                   result={<QueenCard data={dragonTigerDetail?.videoInfo} />}
                   id={videoFrameId}
@@ -53,7 +51,6 @@ const CasinoQueenComponent = () => {
               <div
                 style={{
                   width: "100%",
-                  // margin: "5px",
                   display: "flex",
                   flexDirection: "column",
                 }}
@@ -64,7 +61,8 @@ const CasinoQueenComponent = () => {
                   playerNum={[0, 1, 2, 3]}
                 />
                 <div className="col-12 text-end title-12 mt-1">
-                R:<span>{min}</span>-<span>{max}</span></div>
+                  R:<span>{min}</span>-<span>{max}</span>
+                </div>
                 <div className="ticker-container mt-4">
                   <div className="ticker-wrap">
                     <div
@@ -88,8 +86,8 @@ const CasinoQueenComponent = () => {
             <RulesModal show={show} setShow={setShow} rule={abjrules} />
           </div>
         </Col>
-        <Col  md={4}>
-          <Container className="p-0" fluid >
+        <Col md={4}>
+          <Container className="p-0" fluid>
             <Row>
               <Col md={12}>
                 <UserBets matchId={dragonTigerDetail?.id} />

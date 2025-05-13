@@ -18,7 +18,6 @@ import Dragon20Result from "./dragonCard";
 import OddEven from "./OddEvenBox";
 import "./style.scss";
 import TiePairBox from "./TiePairBox";
-// import CardBox from "./CardsBox";
 
 const DragonTiger2020Component = () => {
   const [show, setShow] = useState(false);
@@ -43,9 +42,7 @@ const DragonTiger2020Component = () => {
                   : ""}
               </span>
             </div>
-            <div
-              style={{ width: "100%",backgroundColor: "#000" }}
-            >
+            <div style={{ width: "100%", backgroundColor: "#000" }}>
               <VideoFrame
                 data={dragonTigerDetail}
                 time={dragonTigerDetail?.videoInfo?.autotime}
@@ -54,7 +51,7 @@ const DragonTiger2020Component = () => {
               />
             </div>
           </div>
-          <div style={{backgroundColor:"#eee"}}>
+          <div style={{ backgroundColor: "#eee" }}>
             <div style={{ width: "100%" }}>
               <TiePairBox
                 tiePair={dragonTigerDetail?.tiePair}
@@ -76,7 +73,7 @@ const DragonTiger2020Component = () => {
                 data={dragonTigerDetail}
                 cards={dragonTigerDetail?.dragonCards}
               />
-              <div style={{width:"4px",backgroundColor:"#000"}}></div>
+              <div style={{ width: "4px", backgroundColor: "#000" }}></div>
               <OddEven
                 name={"Tiger"}
                 odds={dragonTigerDetail?.tigerOdds}

@@ -41,19 +41,24 @@ export const getUsers = createAsyncThunk<any, GetUsers | undefined>(
   "user/list",
   async (requestData, thunkApi) => {
     try {
-      const resp = await service.get(
-        `${ApiConstants.USER.LIST}?${
-          requestData?.userId ? `userId=${requestData.userId}&` : ""
-        }searchBy=user.userName&keyword=${
-          requestData?.userName ? requestData?.userName : ""
-        }${requestData?.page ? `&page=${requestData.page}` : ""}${
-          requestData?.limit ? `&limit=${requestData.limit}` : ""
-        }&sort=${requestData?.sort}:${requestData?.order}${
-          requestData?.activeTab === "active"
-            ? "&user.betBlock=false&userBlock=eqfalse"
-            : "&orVal=user.betBlock=true|or|userBlock=eqtrue"
-        }`
-      );
+      const params: any = {
+        userId: requestData?.userId,
+        searchBy: "user.userName",
+        keyword: requestData?.userName,
+        page: requestData?.page,
+        limit: requestData?.limit,
+        sort: requestData?.sort + ":" + requestData?.order,
+      };
+
+      if (requestData?.activeTab === "active") {
+        params["betBlock"] = "eqfalse";
+        params["userBlock"] = "eqfalse";
+      } else {
+        params["orVal"] = "true";
+      }
+      const resp = await service.get(ApiConstants.USER.LIST, {
+        params,
+      });
       if (resp) {
         return resp?.data;
       }
@@ -88,11 +93,12 @@ export const searchList = createAsyncThunk<any, SearchUsers | undefined>(
   "user/searchList",
   async (requestData, thunkApi) => {
     try {
-      const resp = await service.get(
-        `${ApiConstants.USER.SEARCH_LIST}?createBy=${
-          requestData?.createdBy
-        }&userName=${requestData?.userName ? requestData?.userName : ""}`
-      );
+      const resp = await service.get(ApiConstants.USER.SEARCH_LIST, {
+        params: {
+          createBy: requestData?.createdBy,
+          userName: requestData?.userName,
+        },
+      });
       if (resp) {
         return resp?.data;
       }
@@ -108,7 +114,12 @@ export const getUserHeaderDetail = createAsyncThunk<any, string>(
   async (requestData, thunkApi) => {
     try {
       const resp = await service.get(
-        `${ApiConstants.USER.USER_DETAILS_FOR_PARENT}?userId=${requestData}`
+        ApiConstants.USER.USER_DETAILS_FOR_PARENT,
+        {
+          params: {
+            userId: requestData,
+          },
+        }
       );
       if (resp) {
         return resp?.data;
@@ -125,9 +136,11 @@ export const getAlreadyUserExist = createAsyncThunk<
   SearchUsers | undefined
 >("user/clientName", async (requestData, thunkApi) => {
   try {
-    const resp = await service.get(
-      `${ApiConstants.USER.ALREADY_EXIST}?userName=${requestData}`
-    );
+    const resp = await service.get(ApiConstants.USER.ALREADY_EXIST, {
+      params: {
+        userName: requestData,
+      },
+    });
     if (resp) {
       return resp?.data?.isUserExist;
     }
@@ -141,10 +154,7 @@ export const updateUser = createAsyncThunk<any, any>(
   "user/updateUser",
   async (requestData, thunkApi) => {
     try {
-      const resp = await service.post(
-        `${ApiConstants.USER.UPDATE}`,
-        requestData
-      );
+      const resp = await service.post(ApiConstants.USER.UPDATE, requestData);
       if (resp) {
         return resp?.data;
       }
@@ -159,7 +169,7 @@ export const getUsersProfile = createAsyncThunk(
   "user/profile",
   async (_, thunkApi) => {
     try {
-      const resp = await service.get(`${ApiConstants.USER.PROFILE}`);
+      const resp = await service.get(ApiConstants.USER.PROFILE);
       if (resp) {
         localStorage.setItem("key", resp?.data[0][0]?.id);
         return resp?.data[0][0];
@@ -196,7 +206,7 @@ export const changeAmmountUser = createAsyncThunk<any, any>(
   async (requestData, thunkApi) => {
     try {
       const resp = await service.post(
-        `${ApiConstants.USER.BALANCEUPDATE}`,
+        ApiConstants.USER.BALANCEUPDATE,
         requestData
       );
       if (resp) {
@@ -218,7 +228,7 @@ export const userBalance = createAsyncThunk<any>(
   "user/balance",
   async (_, thunkApi) => {
     try {
-      const resp = await service.get(`${ApiConstants.USER.USERBALANCE}`);
+      const resp = await service.get(ApiConstants.USER.USERBALANCE);
       if (resp) {
         return resp?.data?.response;
       }
@@ -234,7 +244,7 @@ export const setCreditRefference = createAsyncThunk<any, any>(
   async (requestData, thunkApi) => {
     try {
       const resp = await service.post(
-        `${ApiConstants.USER.CREDITREFERRENCE}`,
+        ApiConstants.USER.CREDITREFERRENCE,
         requestData
       );
       if (resp) {
@@ -257,7 +267,7 @@ export const setExposureLimit = createAsyncThunk<any, any>(
   async (requestData, thunkApi) => {
     try {
       const resp = await service.post(
-        `${ApiConstants.USER.EXPOSURELIMIT}`,
+        ApiConstants.USER.EXPOSURELIMIT,
         requestData
       );
       if (resp) {
@@ -280,7 +290,7 @@ export const setLockUnlockUser = createAsyncThunk<any, any>(
   async (requestData, thunkApi) => {
     try {
       const resp = await service.post(
-        `${ApiConstants.USER.LOCKUNLOCK}`,
+        ApiConstants.USER.LOCKUNLOCK,
         requestData
       );
       if (resp) {
@@ -322,7 +332,7 @@ export const changePassword = createAsyncThunk<any, ChangePassword>(
   async (requestData, thunkApi) => {
     try {
       const resp = await service.post(
-        `${ApiConstants.USER.CHANGEPASSWORD}`,
+        ApiConstants.USER.CHANGEPASSWORD,
         requestData
       );
       if (resp) {
@@ -422,6 +432,71 @@ export const getUserWiseExposure = createAsyncThunk<any, any>(
     }
   }
 );
+export const addUserMultiLogin = createAsyncThunk<any, any>(
+  "addUserMultiLogin/clientList",
+  async (requestData, thunkApi) => {
+    try {
+      const resp = await service.post(
+        ApiConstants.MULTILOGIN.ACCESSUSER,
+        requestData
+      );
+      if (resp) {
+        return resp?.data;
+      }
+    } catch (error: any) {
+      const err = error as AxiosError;
+      throw thunkApi.rejectWithValue(err.response?.status);
+    }
+  }
+);
+export const getUserMultiLoginList = createAsyncThunk<any>(
+  "getUserMultiLoginList/clientList",
+  async (_, thunkApi) => {
+    try {
+      const resp = await service.get(ApiConstants.MULTILOGIN.ACCESSUSER);
+      if (resp) {
+        return resp?.data;
+      }
+    } catch (error: any) {
+      const err = error as AxiosError;
+      throw thunkApi.rejectWithValue(err.response?.status);
+    }
+  }
+);
+export const lockUserMultiLogin = createAsyncThunk<any, any>(
+  "lockUserMultiLogin/clientList",
+  async (requestData, thunkApi) => {
+    try {
+      const resp = await service.post(
+        ApiConstants.MULTILOGIN.LOCKACCESSUSER,
+        requestData
+      );
+      if (resp) {
+        return resp?.data;
+      }
+    } catch (error: any) {
+      const err = error as AxiosError;
+      throw thunkApi.rejectWithValue(err.response?.status);
+    }
+  }
+);
+export const changePasswordUserMultiLogin = createAsyncThunk<any, any>(
+  "changePasswordUserMultiLogin/clientList",
+  async (requestData, thunkApi) => {
+    try {
+      const resp = await service.post(
+        ApiConstants.MULTILOGIN.CHANGEPASSWORDACCESSUSER,
+        requestData
+      );
+      if (resp) {
+        return resp?.data;
+      }
+    } catch (error: any) {
+      const err = error as AxiosError;
+      throw thunkApi.rejectWithValue(err.response?.status);
+    }
+  }
+);
 
 export const updateUserBalance = createAsyncThunk<any, any>(
   "updateUserBalance",
@@ -445,6 +520,10 @@ export const profileReset = createAction("profile/reset");
 export const accountListModalReset = createAction("accountListModal/reset");
 export const userModalReset = createAction("userModalReset/reset");
 export const resetSearchUserList = createAction("searchUserList/reset");
+export const resetMultiLoginSucess = createAction("multiLoginSucess/reset");
+export const resetAddSuccessMultiUser = createAction(
+  "addSuccessMultiUser/reset"
+);
 export const resetUserWiseExposureList = createAction(
   "userWiseExposureList/reset"
 );

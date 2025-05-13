@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import Cards32BComponent from "../../../../components/cardGames/games/cards32B";
@@ -46,7 +46,9 @@ const Cards32B = () => {
 
   const handleCardResult = (event: any) => {
     if (event?.matchId === dragonTigerDetail?.id) {
-      dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
+      dispatch(
+        getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId })
+      );
     }
   };
   const handleLiveGameResultTop10 = (event: any) => {
@@ -60,7 +62,9 @@ const Cards32B = () => {
   useEffect(() => {
     try {
       if (dragonTigerDetail?.id) {
-        dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
+        dispatch(
+          getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId })
+        );
       }
     } catch (e) {
       console.error(e);
@@ -135,4 +139,4 @@ const Cards32B = () => {
   return loading ? <Loader /> : <Cards32BComponent />;
 };
 
-export default Cards32B;
+export default memo(Cards32B);

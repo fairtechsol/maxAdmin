@@ -26,29 +26,27 @@ export const authReducer = createReducer(initialState, (builder) => {
       state.loading = true;
     })
     .addCase(login.fulfilled, (state, action) => {
+      const { roleName, forceChangePassword, isAuthenticator } = action.payload;
       state.loading = false;
       state.success = true;
-      state.userRole = action.payload.roleName;
-      state.forceChangePassword = action?.payload?.forceChangePassword;
+      state.userRole = roleName;
+      state.forceChangePassword = forceChangePassword;
       state.loginData = action.payload;
-      state.isAuthenticator = action?.payload?.isAuthenticator;
+      state.isAuthenticator = isAuthenticator;
     })
     .addCase(login.rejected, (state, action) => {
       state.loading = false;
     })
     .addCase(checkOldPassword.pending, (state) => {
-      // state.loading = true;
       state.oldPasswordMatched = false;
     })
     .addCase(checkOldPassword.fulfilled, (state, action) => {
-      // state.loading = false;
       state.oldPasswordMatched = action.payload;
     })
     .addCase(checkOldPassword.rejected, (state) => {
       // state.loading = false;
     })
     .addCase(authReset, (state) => {
-      // Reset the state to initial state
       state.success = false;
       state.forceChangePassword = false;
     })

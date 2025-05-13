@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import { Column, TableConfig } from "../../../../models/tableInterface";
 import CustomTable from "../../../commonComponent/table";
@@ -9,7 +9,6 @@ const ProfitLossModal = () => {
   const [currentPage, setCurrentPage] = useState(1);
   useEffect(() => {}, [tableConfig]);
   const columns: Column[] = [
-    // { id: "sr", label: "sr" },
     { id: "Sr", label: "	Sr.No" },
     { id: "TranDate", label: "TranDate" },
     { id: "Credit", label: "Credit" },
@@ -108,4 +107,4 @@ const ProfitLossModal = () => {
   );
 };
 
-export default ProfitLossModal;
+export default memo(ProfitLossModal);

@@ -1,11 +1,9 @@
-import React from "react";
 import { Container } from "react-bootstrap";
-import "./style.scss";
-import { ImClubs } from "react-icons/im";
-import { GiSpades } from "react-icons/gi";
 import { BiSolidHeart } from "react-icons/bi";
-import { ImDiamonds } from "react-icons/im";
+import { GiSpades } from "react-icons/gi";
+import { ImClubs, ImDiamonds } from "react-icons/im";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
+import "./style.scss";
 
 const Race20Result: any = ({ data }: any) => {
   const elements = data?.desc?.split(",");
@@ -51,26 +49,26 @@ const Race20Result: any = ({ data }: any) => {
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
             <div className="result-card-container" style={{ height: "40px" }}>
-              {hh?.map((item: any) => {
-                return <HandleCards card={item} />;
+              {hh?.map((item: any, index: number) => {
+                return <HandleCards card={item} key={index} />;
               })}{" "}
               {hh?.length > 0 ? <HandleCards card={"KHH"} /> : ""}{" "}
             </div>
             <div className="result-card-container" style={{ height: "40px" }}>
-              {dd?.map((item: any) => {
-                return <HandleCards card={item} />;
+              {dd?.map((item: any, index: number) => {
+                return <HandleCards card={item} key={index} />;
               })}{" "}
               {dd?.length > 0 ? <HandleCards card={"KDD"} /> : ""}{" "}
             </div>
             <div className="result-card-container" style={{ height: "40px" }}>
-              {cc?.map((item: any) => {
-                return <HandleCards card={item} />;
+              {cc?.map((item: any, index: number) => {
+                return <HandleCards card={item} key={index} />;
               })}{" "}
               {cc?.length > 0 ? <HandleCards card={"KCC"} /> : ""}{" "}
             </div>
             <div className="result-card-container" style={{ height: "40px" }}>
-              {ss?.map((item: any) => {
-                return <HandleCards card={item} />;
+              {ss?.map((item: any, index: number) => {
+                return <HandleCards card={item} key={index} />;
               })}{" "}
               {ss?.length > 0 ? <HandleCards card={"KSS"} /> : ""}{" "}
             </div>

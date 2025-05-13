@@ -1,6 +1,6 @@
+import { lazy } from "react";
 import { Navigate } from "react-router-dom";
 import Loadable from "../utils/loadable";
-import { lazy } from "react";
 
 const OtherLayout = Loadable(lazy(() => import("../layout/otherLayout")));
 const SecurityAuth = Loadable(lazy(() => import("../pages/security")));

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import Poker1DayComponent from "../../../../components/cardGames/games/poker1Day";
@@ -48,7 +48,9 @@ const Poker1day = () => {
   };
   const handleCardResult = (event: any) => {
     if (event?.matchId === dragonTigerDetail?.id) {
-      dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
+      dispatch(
+        getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId })
+      );
     }
   };
   const handleMatchResult = () => {
@@ -57,7 +59,9 @@ const Poker1day = () => {
   useEffect(() => {
     try {
       if (socket && dragonTigerDetail?.id) {
-        dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
+        dispatch(
+          getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId })
+        );
         socketService.card.getCardRatesOff(cardGamesType.poker1Day);
         socketService.card.userCardBetPlacedOff();
         socketService.card.cardResultOff();
@@ -134,4 +138,4 @@ const Poker1day = () => {
   return loading ? <Loader /> : <Poker1DayComponent />;
 };
 
-export default Poker1day;
+export default memo(Poker1day);

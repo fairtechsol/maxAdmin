@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { authReducer } from "./reducers/auth/authReducer";
+import { cardDetailReducers } from "./reducers/card/cardDetailSlice";
 import { matchReducer } from "./reducers/match";
 import { userReducer } from "./reducers/user";
-import { cardDetailReducers } from "./reducers/card/cardDetailSlice";
 
 const store = configureStore({
   reducer: {

@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { cardGamesTypeNames } from "../../../utils/Constants";
 import "./style.scss";
 
@@ -34,7 +35,10 @@ const ProfitLossEventType = (props: any) => {
                 : item?.name}
               :
             </label>
-            <span className="text-white title-12"> {parseFloat(item?.amount).toFixed(2)}</span>
+            <span className="text-white title-12">
+              {" "}
+              {parseFloat(item?.amount).toFixed(2)}
+            </span>
           </div>
         ))}
       </div>
@@ -42,4 +46,4 @@ const ProfitLossEventType = (props: any) => {
   );
 };
 
-export default ProfitLossEventType;
+export default memo(ProfitLossEventType);

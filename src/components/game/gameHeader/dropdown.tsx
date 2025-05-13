@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Dropdown } from "react-bootstrap";
 
-import CustomModal from "../../commonComponent/modal";
+import { useDispatch } from "react-redux";
 import { getUserDetailsOfLock } from "../../../store/actions/match/matchAction";
 import { AppDispatch } from "../../../store/store";
-import { useDispatch } from "react-redux";
+import CustomModal from "../../commonComponent/modal";
 
 interface Props {
   name: string;

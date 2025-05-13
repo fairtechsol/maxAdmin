@@ -1,13 +1,13 @@
-import { useEffect } from "react";
-import HeaderGameLock from "./headerGameLock";
-import "./style.scss";
-import { AppDispatch, RootState } from "../../store/store";
+import { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserHeaderDetail } from "../../store/actions/user/userActions";
-import HeaderUserLock from "./headerUserLock";
-import HeaderUserDetail from "./headerUserDetail";
+import { AppDispatch, RootState } from "../../store/store";
 import HeaderFancyBook from "./headerFancyBook";
 import HeaderGameBook from "./headerGameBook";
+import HeaderGameLock from "./headerGameLock";
+import HeaderUserDetail from "./headerUserDetail";
+import HeaderUserLock from "./headerUserLock";
+import "./style.scss";
 const MainHeader = ({ userId }: any) => {
   const dispatch: AppDispatch = useDispatch();
 
@@ -84,4 +84,4 @@ const MainHeader = ({ userId }: any) => {
   );
 };
 
-export default MainHeader;
+export default memo(MainHeader);

@@ -1,54 +1,60 @@
 @import "/src/assets/variable.scss";
 
 .multiLoginInputCont {
-    background-color: $extragray;
-    border: 1px solid $gray;
+  background-color: $extragray;
+  border: 1px solid $gray;
 }
 .multiAccountLoginInt {
-    background-color: $light;
-    border: 1px solid $lightGray;
+  background-color: $light;
+  border: 1px solid $lightGray;
 }
 
 .listClientTable thead tr {
-    border: 0;
+  border: 0;
 }
 .listClientTable tr td button {
-    min-height: 25px;
-    min-width: 28px;
+  min-height: 25px;
+  min-width: 28px;
 }
 .listClientTable tbody {
-    box-shadow: 0 0 0 1px rgba($black, 1) !important;
-    -webkit-clip-path: inset(-2px 0px -2px 0);
-    clip-path: inset(-2px 0px -2px 0);
+  box-shadow: 0 0 0 1px rgba($black, 1) !important;
+  -webkit-clip-path: inset(-2px 0px -2px 0);
+  clip-path: inset(-2px 0px -2px 0);
 }
 .outer {
-    position: relative;
+  position: relative;
 }
 .inner {
-    overflow-x: scroll;
-    overflow-y: visible;
-    margin-left: 450px;
+  overflow-x: scroll;
+  overflow-y: visible;
+  margin-left: 450px;
 }
 .multiAccountLogin table {
-    width: 100%;
+  width: 100%;
 }
-.multiAccountLogin .fixed-col-1{
-    position: absolute;
-    left: 0;
-    width: 150px;
+.multiAccountLogin .fixed-col-1 {
+  position: absolute;
+  left: 0;
+  width: 150px;
 }
-.multiAccountLogin .fixed-col-2{
-    position: absolute;
-    left: 150px;
-    width: 150px;
+.multiAccountLogin .fixed-col-2 {
+  position: absolute;
+  left: 150px;
+  width: 150px;
 }
-.multiAccountLogin .fixed-col-3{
-    position: absolute;
-    left: 300px;
-    width: 150px;
+.multiAccountLogin .fixed-col-3 {
+  position: absolute;
+  left: 300px;
+  width: 150px;
 }
 .multiAccountLogin th,
-.multiAccountLogin td{
-    white-space:nowrap;
-    height: 40px;
+.multiAccountLogin td {
+  white-space: nowrap;
+  height: 40px;
+}
+.multiLoginInputCont .form-check-input[type="checkbox"] {
+  background-color: #000;
+}
+.multiLoginInputCont .form-check-input[type="checkbox"]:checked {
+  background-color: #000 !important;
 }

@@ -39,17 +39,21 @@ export const betReportAccountList = createAsyncThunk<any, any>(
   "competition/betReportList",
   async (requestData, thunkApi) => {
     try {
-      const resp = await service.get(
-        `${ApiConstants.REPORT.BETHISTORY}?status=${requestData.status}&page=${
-          requestData.page || 1
-        }&limit=${requestData.limit || 15}&searchBy=${
-          requestData.searchBy ?? ""
-        }&keyword=${
-          requestData.keyword ?? ""
-        }&isCurrentBets=${true}&marketBetType=${
-          requestData.marketBetType ?? ""
-        }${requestData.betType ? "&betType=eq" + requestData.betType : ""}`
-      );
+      let params: any = {
+        status: requestData.status,
+        page: requestData.page || 1,
+        limit: requestData.limit || 15,
+        searchBy: requestData.searchBy,
+        keyword: requestData.keyword,
+        isCurrentBets: true,
+        marketBetType: requestData.marketBetType,
+      };
+      if (requestData.betType) {
+        params["betType"] = `eq${requestData.betType}`;
+      }
+      const resp = await service.get(ApiConstants.REPORT.BETHISTORY, {
+        params,
+      });
       if (resp?.data) {
         return resp?.data;
       }
@@ -209,9 +213,11 @@ export const getGeneralReport = createAsyncThunk<any, any>(
   "user/generalReport",
   async ({ type, page, limit, searchBy, keyword, filter }, thunkApi) => {
     try {
-      const resp = await service.get(
-        `${ApiConstants.REPORT.GENRALREPORT}?type=${type}`
-      );
+      const resp = await service.get(ApiConstants.REPORT.GENRALREPORT, {
+        params: {
+          type,
+        },
+      });
       if (resp?.data) {
         return resp?.data;
       }
@@ -226,7 +232,7 @@ export const getProfitLossReport = createAsyncThunk<any, any>(
   async (requestData, thunkApi) => {
     try {
       const resp = await service.post(
-        `${ApiConstants.REPORT.PROFIT_LOSS}`,
+        ApiConstants.REPORT.PROFIT_LOSS,
         requestData
       );
       if (resp?.data) {
@@ -255,33 +261,18 @@ export const matchDetailAction = createAsyncThunk<any, any>(
     }
   }
 );
-export const otherMatchDetailAction = createAsyncThunk<any, any>(
-  "/otherMatch/details",
-  async (requestData, thunkApi) => {
-    try {
-      const resp = await service.get(
-        `${ApiConstants.MATCH.OTHERMATCHDETAILS}${requestData?.matchId}?matchType=${requestData?.matchType}`
-      );
-      if (resp) {
-        return resp?.data;
-      }
-    } catch (error) {
-      const err = error as AxiosError;
-      return thunkApi.rejectWithValue(err.response?.status);
-    }
-  }
-);
 
 export const getPlacedBets = createAsyncThunk<any, any>(
   "/bet",
   async ({ userId, id }, thunkApi) => {
     try {
-      const resp = await service.get(
-        `${ApiConstants.BET.GETPLACEDBETS}?result=inArr${JSON.stringify([
-          "PENDING",
-          "UNDECLARE",
-        ])}&betPlaced.matchId=${id}${userId ? `&userId=${userId}` : ""}`
-      );
+      const resp = await service.get(ApiConstants.BET.GETPLACEDBETS, {
+        params: {
+          result: `inArr${JSON.stringify(["PENDING", "UNDECLARE"])}`,
+          "betPlaced.matchId": id,
+          userId: userId,
+        },
+      });
       if (resp) {
         return resp?.data?.rows;
       }
@@ -304,7 +295,6 @@ export const getMorePlacedBets = createAsyncThunk<any, any>(
         }`
       );
       if (resp) {
-        // console.log('resp',resp);
         return resp?.data?.rows;
       }
     } catch (error) {
@@ -319,7 +309,7 @@ export const updateUserMatchLock = createAsyncThunk<any, any>(
   async (requestData, thunkApi) => {
     try {
       const resp = await service.post(
-        `${ApiConstants.USER.USER_MATCH_LOCK}`,
+        ApiConstants.USER.USER_MATCH_LOCK,
         requestData
       );
       if (resp) {
@@ -337,7 +327,7 @@ export const updateUserMarketLock = createAsyncThunk<any, any>(
   async (requestData, thunkApi) => {
     try {
       const resp = await service.post(
-        `${ApiConstants.USER.USER_MARKET_LOCK}`,
+        ApiConstants.USER.USER_MARKET_LOCK,
         requestData
       );
       if (resp) {
@@ -355,7 +345,12 @@ export const getMatchLockAllChild = createAsyncThunk<any, any>(
   async (id, thunkApi) => {
     try {
       const resp = await service.get(
-        `${ApiConstants.USER.USER_MARKET_LOCK_ALL_CHILD}?matchId=${id}`
+        ApiConstants.USER.USER_MARKET_LOCK_ALL_CHILD,
+        {
+          params: {
+            matchId: id,
+          },
+        }
       );
       if (resp) {
         return resp?.data;
@@ -370,14 +365,20 @@ export const getMarketLockAllChild = createAsyncThunk<any, any>(
   "/marketLockAllChild",
   async (requestData, thunkApi) => {
     try {
+      let params: any = {
+        matchId: requestData?.matchId,
+      };
+      if (requestData?.betId) {
+        params["betId"] = requestData?.betId;
+      } else {
+        params["sessionType"] = requestData?.sessionType;
+      }
+
       const resp = await service.get(
-        `${ApiConstants.USER.USER_MARKET_LOCK_ALL_CHILD}?matchId=${
-          requestData?.matchId
-        }${
-          requestData?.betId
-            ? `&betId=${requestData?.betId}`
-            : `&sessionType=${requestData?.sessionType}`
-        }`
+        ApiConstants.USER.USER_MARKET_LOCK_ALL_CHILD,
+        {
+          params,
+        }
       );
       if (resp) {
         return resp?.data;
@@ -392,9 +393,11 @@ export const getUserDetailsForParent = createAsyncThunk<any, any>(
   "/userDetails_ForParent",
   async (id, thunkApi) => {
     try {
-      const resp = await service.get(
-        `${ApiConstants.USER.USER_DETAIL_FOR_PARENT}?userId=${id}`
-      );
+      const resp = await service.get(ApiConstants.USER.USER_DETAIL_FOR_PARENT, {
+        params: {
+          userId: id,
+        },
+      });
       if (resp) {
         return resp?.data;
       }
@@ -526,6 +529,12 @@ export const updateBalance = createAsyncThunk<any, any>(
   "/user/balance",
   async (balance) => {
     return balance;
+  }
+);
+export const updateTeamRatesOnMarketUndeclare = createAsyncThunk<any, any>(
+  "/teamRates/updateOnMarketUndeclare",
+  async (data) => {
+    return data;
   }
 );
 export const updatePlacedbetsDeleteReason = createAsyncThunk<any, any>(

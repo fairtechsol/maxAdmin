@@ -13,13 +13,13 @@ export const login = createAsyncThunk<any, LoginData>(
   "auth/login",
   async (requestData, thunkApi) => {
     try {
-      const { data } = await service.post(
-        `${ApiConstants.AUTH.LOGIN}`,
-        requestData
-      );
+      const { data } = await service.post(ApiConstants.AUTH.LOGIN, requestData);
       const { token, userId } = data;
       localStorage.setItem("jwtMaxAdmin", token);
       localStorage.setItem("uid", userId);
+      if (data?.permissions) {
+        localStorage.setItem("permissions", JSON.stringify(data?.permissions));
+      }
       return data;
     } catch (error) {
       const err = error as AxiosError;
@@ -33,7 +33,7 @@ export const checkOldPassword = createAsyncThunk<any, any>(
   async (requestData, thunkApi) => {
     try {
       const resp = await service.post(
-        `${ApiConstants.AUTH.OLD_PASSWORD}`,
+        ApiConstants.AUTH.OLD_PASSWORD,
         requestData
       );
       if (resp) {
@@ -48,7 +48,7 @@ export const checkOldPassword = createAsyncThunk<any, any>(
 
 export const logout = createAsyncThunk<any>("auth/logout", async () => {
   try {
-    const response = await service.post(`${ApiConstants.AUTH.LOGOUT}`);
+    const response = await service.post(ApiConstants.AUTH.LOGOUT);
     localStorage.clear();
     window.location.replace("/admin/login");
     return response;

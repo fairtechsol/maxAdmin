@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import "../style.scss";
 import { dragonTigerCards } from "../../../../../utils/Constants";
+import "../style.scss";
 
 const CommonCardImg = ({ cardData, data }: any) => {
   const [cardImg, setCardImg] = useState(dragonTigerCards);
@@ -18,7 +18,7 @@ const CommonCardImg = ({ cardData, data }: any) => {
     <div className="commonCardImgContainerA">
       {cardImg?.map((item: any) => {
         return (
-          <div>
+          <div key={item?.code}>
             <div
               className={item?.gstatus === "SUSPENDED" ? "suspended" : ""}
               style={{
@@ -27,7 +27,6 @@ const CommonCardImg = ({ cardData, data }: any) => {
                 justifyContent: "space-between",
                 alignItems: "center",
               }}
-              key={item?.code}
             >
               {" "}
               <img src={item?.imgSrc} width={"60px"} />

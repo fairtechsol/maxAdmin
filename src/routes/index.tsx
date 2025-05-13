@@ -1,15 +1,39 @@
 import { createBrowserRouter } from "react-router-dom";
-// routes
+
 import config from "../config";
 import AuthRoutes from "./authRoutes";
 import MainRoutes from "./mainRoutes";
-import ReportRoutes from "./reportRoutes";
 import OtherRoutes from "./otherRoutes";
-// ==============================|| ROUTING RENDER ||============================== //
+import ReportRoutes from "./reportRoutes";
 
-export default function routes() {
+export default function routes(userDetail: any) {
+  const restrictedIds = new Set(
+    MainRoutes.children
+      .filter(
+        (item) => item.key && userDetail?.permission?.[item.key] === false
+      )
+      .map((item) => item.key)
+  );
+
+  const filteredMainRoutes = {
+    ...MainRoutes,
+    children: MainRoutes.children.filter((item) => {
+      if (!item.key) return true;
+      return !restrictedIds.has(item.key);
+    }),
+  };
+
+  const filteredReportRoutes = {
+    ...ReportRoutes,
+    children: ReportRoutes.children.filter((item: any) => {
+      if (item.key && userDetail?.permission?.[item.key] === false) {
+        return false;
+      }
+      return true;
+    }),
+  };
   return createBrowserRouter(
-    [OtherRoutes, AuthRoutes, MainRoutes, ReportRoutes],
+    [OtherRoutes, AuthRoutes, filteredMainRoutes, filteredReportRoutes],
     {
       basename: config.BASE_NAME,
     }

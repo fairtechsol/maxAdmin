@@ -1,20 +1,20 @@
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import AmarAkbarAnthonyComponent from "../../../../components/cardGames/games/amarAkbarAnthony";
 import { socket, socketService } from "../../../../socketManager";
 import {
-    getCardDetailInitial,
-    getDragonTigerDetailHorseRacing,
-    resetCardDetail,
-    updateAmarAkbarAnthonyCardMatchRates,
-    updateBalanceOnBetPlaceCards,
-    updateLiveGameResultTop10,
-    updateProfitLossCards,
+  getCardDetailInitial,
+  getDragonTigerDetailHorseRacing,
+  resetCardDetail,
+  updateAmarAkbarAnthonyCardMatchRates,
+  updateBalanceOnBetPlaceCards,
+  updateLiveGameResultTop10,
+  updateProfitLossCards,
 } from "../../../../store/actions/card/cardDetail";
 import {
-    getPlacedBets,
-    updateBetsPlaced,
+  getPlacedBets,
+  updateBetsPlaced,
 } from "../../../../store/actions/match/matchAction";
 import { getUsersProfile } from "../../../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../../../store/store";
@@ -45,7 +45,9 @@ const AmarAkbarAnthony = () => {
   };
   const handleCardResult = (event: any) => {
     if (event?.matchId === dragonTigerDetail?.id) {
-      dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
+      dispatch(
+        getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId })
+      );
     }
   };
   const handleMatchResult = () => {
@@ -55,7 +57,9 @@ const AmarAkbarAnthony = () => {
   useEffect(() => {
     try {
       if (socket && dragonTigerDetail?.id) {
-        dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
+        dispatch(
+          getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId })
+        );
         socketService.card.getCardRatesOff(cardGamesType.amarAkbarAnthony);
         socketService.card.userCardBetPlacedOff();
         socketService.card.cardResultOff();
@@ -118,4 +122,4 @@ const AmarAkbarAnthony = () => {
   return <AmarAkbarAnthonyComponent />;
 };
 
-export default AmarAkbarAnthony;
+export default memo(AmarAkbarAnthony);

@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { Col, Modal, Row, Stack } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -9,10 +9,10 @@ import {
   setExposureLimit,
 } from "../../../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../../../store/store";
-import CustomInput from "../../../commonComponent/input";
-import ModalFooter from "../footer";
 import { widthdrawAmountValidations } from "../../../../utils/fieldValidations/addAccount";
+import CustomInput from "../../../commonComponent/input";
 import Loader from "../../../commonComponent/loader";
+import ModalFooter from "../footer";
 
 const initialValues: any = {
   userId: "",
@@ -44,10 +44,6 @@ const ExposureLimit = ({
 
     validationSchema: widthdrawAmountValidations,
     onSubmit: (values: any) => {
-      // if (userData?.roleName !== "user") {
-      //   alert("This function work only on User Account.");
-      //   return;
-      // }
       try {
         let payload = {
           userId: userData?.id,
@@ -129,7 +125,6 @@ const ExposureLimit = ({
                   onChange={handleChange}
                   type="number"
                   customstyle="input-box"
-                  // id="newLimitInput"
                   min={0}
                 />
               </Col>
@@ -149,7 +144,6 @@ const ExposureLimit = ({
                   onChange={handleChange}
                   type="password"
                   customstyle="input-box"
-                  // id="transactionPasswordInput"
                   textAlign="left"
                 />
               </Col>
@@ -169,4 +163,4 @@ const ExposureLimit = ({
   );
 };
 
-export default ExposureLimit;
+export default memo(ExposureLimit);

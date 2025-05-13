@@ -1,22 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
-  getMarketLockAllChild,
-  getMarketLockChildReset,
-  getMarketUserBook,
-  getMatchLockAllChild,
-  getMorePlacedBets,
-  getMorePlacedBetsReset,
-  getPlacedBets,
-  getRunAmount,
-  getRunAmountMeter,
-  getUserDetailsForParent,
-  getUserDetailsOfLock,
-  resetRunAmount,
-  successResetForLockUnlock,
-  updateBetsPlaced,
-  updatePlacedbetsDeleteReason,
-  updateUserMarketLock,
-  updateUserMatchLock,
+    getMarketLockAllChild,
+    getMarketLockChildReset,
+    getMarketUserBook,
+    getMatchLockAllChild,
+    getMorePlacedBets,
+    getMorePlacedBetsReset,
+    getPlacedBets,
+    getRunAmount,
+    getRunAmountMeter,
+    getUserDetailsForParent,
+    getUserDetailsOfLock,
+    resetRunAmount,
+    successResetForLockUnlock,
+    updateBetsPlaced,
+    updatePlacedbetsDeleteReason,
+    updateUserMarketLock,
+    updateUserMatchLock,
 } from "../../actions/match/matchAction";
 
 interface InitialState {
@@ -32,9 +32,9 @@ interface InitialState {
   statusSuccess: boolean;
   error: any;
   childStatus: any;
-  userMatchBook:any;
-  userMatchLockSuccess:boolean;
-  userMatchLockError:boolean;
+  userMatchBook: any;
+  userMatchLockSuccess: boolean;
+  userMatchLockError: boolean;
 }
 
 const initialState: InitialState = {
@@ -43,16 +43,16 @@ const initialState: InitialState = {
   runAmount: [],
   userMatchLock: [],
   matchLockAllChild: [],
-  marketLockAllChild:[],
+  marketLockAllChild: [],
   userDetailsForParent: [],
   loading: false,
   success: false,
   statusSuccess: false,
   error: null,
   childStatus: {},
-  userMatchBook:[],
-  userMatchLockSuccess:false,
-  userMatchLockError:false
+  userMatchBook: [],
+  userMatchLockSuccess: false,
+  userMatchLockError: false,
 };
 
 const placedBetsSlice = createSlice({
@@ -73,7 +73,7 @@ const placedBetsSlice = createSlice({
       })
       .addCase(getPlacedBets.rejected, (state, action) => {
         state.loading = false;
-        state.error = action?.error?.message;
+        state.error = action.error?.message;
       })
       .addCase(getMorePlacedBets.pending, (state) => {
         state.loading = false;
@@ -85,7 +85,7 @@ const placedBetsSlice = createSlice({
       })
       .addCase(getMorePlacedBets.rejected, (state, action) => {
         state.loading = false;
-        state.error = action?.error?.message;
+        state.error = action.error?.message;
       })
       .addCase(getMorePlacedBetsReset, (state) => {
         state.morePlacedBets = [];
@@ -105,7 +105,7 @@ const placedBetsSlice = createSlice({
       })
       .addCase(getRunAmount.rejected, (state, action) => {
         state.loading = false;
-        state.error = action?.error?.message;
+        state.error = action.error?.message;
       })
       .addCase(getRunAmountMeter.pending, (state) => {
         state.loading = true;
@@ -123,7 +123,7 @@ const placedBetsSlice = createSlice({
       })
       .addCase(getRunAmountMeter.rejected, (state, action) => {
         state.loading = false;
-        state.error = action?.error?.message;
+        state.error = action.error?.message;
       })
       .addCase(updateUserMatchLock.pending, (state) => {
         state.loading = true;
@@ -138,7 +138,7 @@ const placedBetsSlice = createSlice({
       })
       .addCase(updateUserMatchLock.rejected, (state, action) => {
         state.loading = false;
-        state.error = action?.error?.message;
+        state.error = action.error?.message;
       })
       .addCase(getMatchLockAllChild.pending, (state) => {
         state.loading = true;
@@ -152,7 +152,7 @@ const placedBetsSlice = createSlice({
       })
       .addCase(getMatchLockAllChild.rejected, (state, action) => {
         state.loading = false;
-        state.error = action?.error?.message;
+        state.error = action.error?.message;
       })
       .addCase(getMarketLockAllChild.pending, (state) => {
         state.loading = true;
@@ -166,7 +166,7 @@ const placedBetsSlice = createSlice({
       })
       .addCase(getMarketLockAllChild.rejected, (state, action) => {
         state.loading = false;
-        state.error = action?.error?.message;
+        state.error = action.error?.message;
       })
       .addCase(getMarketUserBook.pending, (state) => {
         state.loading = true;
@@ -180,7 +180,7 @@ const placedBetsSlice = createSlice({
       })
       .addCase(getMarketUserBook.rejected, (state, action) => {
         state.loading = false;
-        state.error = action?.error?.message;
+        state.error = action.error?.message;
       })
       .addCase(getUserDetailsForParent.pending, (state) => {
         state.loading = true;
@@ -194,7 +194,7 @@ const placedBetsSlice = createSlice({
       })
       .addCase(getUserDetailsForParent.rejected, (state, action) => {
         state.loading = false;
-        state.error = action?.error?.message;
+        state.error = action.error?.message;
       })
       .addCase(resetRunAmount, (state) => {
         state.runAmount = [];
@@ -214,7 +214,7 @@ const placedBetsSlice = createSlice({
       })
       .addCase(getUserDetailsOfLock.rejected, (state, action) => {
         state.loading = false;
-        state.error = action?.error?.message;
+        state.error = action.error?.message;
       })
       .addCase(updateUserMarketLock.pending, (state) => {
         state.userMatchLockError = false;
@@ -228,17 +228,11 @@ const placedBetsSlice = createSlice({
         state.userMatchLockSuccess = false;
       })
       .addCase(updateBetsPlaced.fulfilled, (state, action) => {
-        const {newBet,userName} = action.payload;
-        // const {userName,betId} = action.payload?.newBet;
-        // const betId = action.payload?.betId;
-
+        const { newBet, userName } = action.payload;
         const isBetAlreadyPlaced = state.placedBets?.some(
           (item: any) => item?.id === newBet?.betId
         );
         if (!isBetAlreadyPlaced) {
-          // state.placedBets = [action.payload, ...state.placedBets];
-          // const betEntry = {...action.payload,user:{userName}};
-          // console.log(betEntry,'first');
           state.placedBets = [
             { ...newBet, user: { userName } },
             ...state.placedBets,

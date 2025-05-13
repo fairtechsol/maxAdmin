@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
-  getCompetitionDates,
-  getCompetitionList,
-  getCompetitionMatches,
-  setBreadCrumb,
+    getCompetitionDates,
+    getCompetitionList,
+    getCompetitionMatches,
+    setBreadCrumb,
 } from "../../actions/match/matchAction";
 
 interface InitialState {
@@ -44,7 +44,7 @@ const sidebarListSlice = createSlice({
       })
       .addCase(getCompetitionList.rejected, (state, action) => {
         state.loading = false;
-        state.error = action?.error?.message;
+        state.error = action.error?.message;
       })
       .addCase(getCompetitionDates.pending, (state) => {
         state.loading = false;
@@ -58,7 +58,7 @@ const sidebarListSlice = createSlice({
       })
       .addCase(getCompetitionDates.rejected, (state, action) => {
         state.loading = false;
-        state.error = action?.error?.message;
+        state.error = action.error?.message;
       })
       .addCase(getCompetitionMatches.pending, (state) => {
         state.loading = false;
@@ -72,7 +72,7 @@ const sidebarListSlice = createSlice({
       })
       .addCase(getCompetitionMatches.rejected, (state, action) => {
         state.loading = false;
-        state.error = action?.error?.message;
+        state.error = action.error?.message;
       })
       .addCase(setBreadCrumb.fulfilled, (state, action) => {
         state.breadCrumb = action.payload;

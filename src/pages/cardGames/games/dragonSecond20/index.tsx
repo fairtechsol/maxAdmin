@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import DragonSecond20Component from "../../../../components/cardGames/games/dragon2nd20";
@@ -49,7 +49,9 @@ const DragonTiger20Second = () => {
   };
   const handleCardResult = (event: any) => {
     if (event?.matchId === dragonTigerDetail?.id) {
-      dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
+      dispatch(
+        getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId })
+      );
     }
   };
   const handleMatchResult = () => {
@@ -58,7 +60,9 @@ const DragonTiger20Second = () => {
   useEffect(() => {
     try {
       if (dragonTigerDetail?.id) {
-        dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
+        dispatch(
+          getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId })
+        );
       }
     } catch (e) {
       console.error(e);
@@ -98,7 +102,9 @@ const DragonTiger20Second = () => {
         return () => {
           socketService.card.leaveMatchRoom(cardGamesType.dragonTiger202);
           socketService.card.getCardRatesOff(cardGamesType.dragonTiger202);
-          socketService.card.getLiveGameResultTop10Off(cardGamesType.dragonTiger202);
+          socketService.card.getLiveGameResultTop10Off(
+            cardGamesType.dragonTiger202
+          );
           if (!state?.userId) {
             socketService.card.userCardBetPlacedOff();
             socketService.card.cardResultOff();
@@ -136,4 +142,4 @@ const DragonTiger20Second = () => {
   return loading ? <Loader /> : <DragonSecond20Component />;
 };
 
-export default DragonTiger20Second;
+export default memo(DragonTiger20Second);

@@ -2,13 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import "./style.scss";
-import UserBets from "../../../game/userBet";
 import { dtrules } from "../../../../assets";
-import RulesModal from "../../../commonComponent/rulesModal";
-import CardResultBox from "../../../commonComponent/cardResultBox";
-import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
-import Dragon20Result from "./dragonCard";
 import { handleRoundId } from "../../../../helpers";
 import { RootState } from "../../../../store/store";
 import {
@@ -16,13 +10,19 @@ import {
   cardGamesType,
   cardUrl,
 } from "../../../../utils/Constants";
-import TiePairBox from "./TiePairBox";
+import CardResultBox from "../../../commonComponent/cardResultBox";
+import RulesModal from "../../../commonComponent/rulesModal";
+import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
+import UserBets from "../../../game/userBet";
+import Dragon20Result from "./dragonCard";
 import OddEven from "./OddEvenBox";
+import "./style.scss";
+import TiePairBox from "./TiePairBox";
 
 const DragonSecond20Component = () => {
   const [show, setShow] = useState(false);
   const { dragonTigerDetail } = useSelector((state: RootState) => state.card);
-  
+
   return (
     <div>
       <Row>
@@ -42,9 +42,7 @@ const DragonSecond20Component = () => {
                   : ""}
               </span>
             </div>
-            <div
-              style={{ width: "100%", backgroundColor: "#000" }}
-            >
+            <div style={{ width: "100%", backgroundColor: "#000" }}>
               <VideoFrame
                 data={dragonTigerDetail}
                 time={dragonTigerDetail?.videoInfo?.autotime}
@@ -54,7 +52,7 @@ const DragonSecond20Component = () => {
             </div>
           </div>
           <div>
-          <div style={{ width: "100%" }}>
+            <div style={{ width: "100%" }}>
               <TiePairBox
                 tiePair={dragonTigerDetail?.tiePair}
                 data={dragonTigerDetail}
@@ -63,7 +61,6 @@ const DragonSecond20Component = () => {
             <div
               style={{
                 width: "100%",
-                // margin: "5px",
                 display: "flex",
                 flexDirection: "row",
                 gap: "8px",
@@ -75,7 +72,7 @@ const DragonSecond20Component = () => {
                 data={dragonTigerDetail}
                 cards={dragonTigerDetail?.dragonCards}
               />
-              <div style={{width:"4px",backgroundColor:"#000"}}></div>
+              <div style={{ width: "4px", backgroundColor: "#000" }}></div>
               <OddEven
                 name={"Tiger"}
                 odds={dragonTigerDetail?.tigerOdds}

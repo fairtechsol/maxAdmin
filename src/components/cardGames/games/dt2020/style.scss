@@ -61,25 +61,6 @@
   margin-left: 10px;
 }
 
-// .match-list-tabs {
-//   border-right: 1px solid $secondary !important;
-//   border-radius: 0px !important;
-//   background-color: $gray;
-//   // padding: 2px 10px;
-//   &:hover {
-//     border-right: 1px solid $secondary !important;
-//   }
-//   &.active {
-//     background-color: $secondary !important;
-//     border-color: transparent !important ;
-//   }
-// }
-
-// .navtem {
-//   padding: 0px !important;
-//   margin-top: 10px !important;
-// }
-
 .match-tabs {
   margin: 0 !important;
   border-right: 1px solid $secondary !important;
@@ -135,10 +116,8 @@
   width: 50%;
   display: flex;
   flex-wrap: wrap;
-  // padding: 5px 5px 0 5px;
 }
 .horse-time-detail a {
-  // margin-bottom: 0;
   display: flex;
 }
 .navi-link {
@@ -163,8 +142,8 @@
 }
 
 .navi-tabs .navi-link {
-  padding: 0; /* Remove padding from Nav.Link */
-  margin: 0; /* Remove margin from Nav.Link */
+  padding: 0;
+  margin: 0;
 }
 .tiePairContainer {
   width: 100%;
@@ -187,9 +166,6 @@
   gap: 3px;
 }
 
-
-
-
 .cardContainer {
   width: 50%;
   background-color: #eee;
@@ -207,7 +183,7 @@
   justify-content: space-between;
   padding: 6px 8px;
 }
-.dt20tie{
+.dt20tie {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -216,7 +192,7 @@
   align-items: center;
   margin-top: 20px;
 }
-.dt20pair{
+.dt20pair {
   width: 100%;
   height: 60px;
   display: flex;
@@ -229,7 +205,7 @@
   color: #fff;
   border: 2px solid #0041a2;
 }
-.dt20dummy{
+.dt20dummy {
   position: absolute;
   width: 100px;
   height: 100px;
@@ -245,7 +221,7 @@
   justify-content: center;
   z-index: 10;
 }
-.dt20dummy2{
+.dt20dummy2 {
   width: 50%;
   // padding: 6px;
   padding-right: 6px;
@@ -259,27 +235,20 @@
   position: relative;
   border: 2px solid #fc4242;
 }
-.dt20dummy3{
+.dt20dummy3 {
   width: 50%;
-  // padding: 6px;
-  // padding-left: 6px;
   border: 2px solid var(--text-fancy);
-  background-color:#fdcf132e;
+  background-color: #fdcf132e;
   display: flex;
   justify-content: space-between;
   align-items: center;
   min-height: 60px;
-  // padding-left: 60px;
   position: relative;
   border: 2px solid #fdcf13;
 }
-// .horseRacingTab .nav-link{
-//   margin: 0 !important;
-// }
 
 .icon-range-dt20 {
   position: absolute;
-  // top: 100%;
   background-color: #16191c;
   padding: 4px;
   width: 70px;
@@ -293,7 +262,7 @@
   z-index: 150;
 }
 
-.dt20bLock{
+.dt20bLock {
   position: absolute;
   width: 100%;
   display: flex;
@@ -306,7 +275,7 @@
   background-repeat: no-repeat;
   background-position: center;
 }
-.dt20bLock2{
+.dt20bLock2 {
   position: absolute;
   width: 100%;
   display: flex;
@@ -320,15 +289,15 @@
   background-position: center;
   border-radius: 50%;
 }
-.dt20oddEvenContainer{
+.dt20oddEvenContainer {
   width: 100%;
   display: flex;
   flex-direction: column;
 }
-.g-back{
+.g-back {
   background-color: #dddddd;
 }
-.dt20OEbox{
+.dt20OEbox {
   width: 20%;
   height: 45px;
   display: flex;

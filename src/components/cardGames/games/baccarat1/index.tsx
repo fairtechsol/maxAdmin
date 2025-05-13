@@ -2,20 +2,20 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useRef, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import "./style.scss";
+import { Baccarat1rules } from "../../../../assets";
+import { handleRoundId } from "../../../../helpers";
 import { RootState } from "../../../../store/store";
 import {
   cardGamesId,
   cardGamesType,
   cardUrl,
 } from "../../../../utils/Constants";
-import { handleRoundId } from "../../../../helpers";
+import CardResultBox from "../../../commonComponent/cardResultBox";
+import RulesModal from "../../../commonComponent/rulesModal";
 import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
 import UserBets from "../../../game/userBet";
-import RulesModal from "../../../commonComponent/rulesModal";
-import CardResultBox from "../../../commonComponent/cardResultBox";
 import BaccaratStatistics from "./betTable";
-import { Baccarat1rules } from "../../../../assets";
+import "./style.scss";
 export const data = [
   ["Task", "Hours per Day"],
   ["Work", 15],
@@ -62,9 +62,7 @@ const BaccaratComponent = () => {
               </div>
               <div
                 style={{
-                  // flex: '1 0 auto',
                   width: "100%",
-                  // height: "92%",
                   backgroundColor: "#000",
                 }}
               >

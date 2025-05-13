@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { memo, ReactNode } from "react";
 import "./style.scss";
 
 interface Props {
@@ -20,4 +20,4 @@ const DeleteBetOverlay = ({ title }: Props) => {
   );
 };
 
-export default DeleteBetOverlay;
+export default memo(DeleteBetOverlay);

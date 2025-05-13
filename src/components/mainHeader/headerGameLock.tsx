@@ -1,14 +1,9 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import { Column, TableConfig } from "../../models/tableInterface";
 import CustomTable from "../commonComponent/table";
 
-// import { useDispatch } from "react-redux";
-// import { getUsers } from "../../store/actions/user/userActions";
-// import { AppDispatch } from "../../store/store";
-
 const HeaderGameLock = ({ data, userDetail }: any) => {
-  // const dispatch: AppDispatch = useDispatch();
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   useEffect(() => {}, [tableConfig]);
@@ -70,4 +65,4 @@ const HeaderGameLock = ({ data, userDetail }: any) => {
   );
 };
 
-export default HeaderGameLock;
+export default memo(HeaderGameLock);

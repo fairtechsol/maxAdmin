@@ -13,13 +13,49 @@ import { logout } from "../../../store/actions/auth/authActions";
 import { searchList } from "../../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../../store/store";
 import "./style.scss";
-// import isMobile from "../../../utils/screenDimension";
-// import styled from '@emotion/styled';
 
 interface ItemProps {
   name: string;
   options: Array<any>;
 }
+
+const reportOptions = [
+  {
+    id: "accountStatement",
+    name: "Account Statement",
+    link: "/admin/account-statement",
+  },
+  {
+    id: "currentBets",
+    name: "Current Bets",
+    link: "/admin/current-bets",
+  },
+  {
+    id: "generalReport",
+    name: "General Report",
+    link: "/admin/general-report",
+  },
+  {
+    id: "gameReport",
+    name: "Game Report",
+    link: "/admin/game-report",
+  },
+  {
+    id: "liveCasinoResult",
+    name: "Casino Report",
+    link: "/admin/casino-report",
+  },
+  {
+    id: "partyWinLoss",
+    name: "Profit And Loss",
+    link: "/admin/profit-loss",
+  },
+  {
+    id: "casinoResult",
+    name: "Casino Result Report",
+    link: "/admin/casino-result",
+  },
+];
 
 const TopbarDropdown = ({ name, options }: ItemProps) => {
   const navigate = useNavigate();
@@ -92,28 +128,6 @@ const Topbar = (props: any) => {
     debouncedInputValue(query);
   };
 
-  //   const [selectedUser, setSelectedUser] = useState(null);
-
-  // const handleSearch = (selectedOption: any) => {
-  //   if (selectedOption) {
-  //     setSelectedUser(selectedOption); // Set the selected user
-  //   }
-  // };
-
-  // const handleSearchIconClick = () => {
-  //   if (selectedUser) {
-  //     setSearchModal(true); // Open the modal with the selected user details
-  //   }
-  // };
-
-  // const handleSearch = (selectedOption: any) => {
-  //   if (selectedOption) {
-  //     setSearchValue(selectedOption.label);
-  //     setSearchModal(true); // Open the modal
-  //     debouncedInputValue(selectedOption.label);
-  //   }
-  // };
-
   const optionslist =
     searchListData?.users?.map((item: any) => ({
       value: item?.id,
@@ -128,11 +142,6 @@ const Topbar = (props: any) => {
       alert("Please select user!");
       return;
     }
-
-    // setTimeout(() => {
-
-    // setSearchValue(null);
-    // }, 1000);
   };
 
   useEffect(() => {
@@ -140,12 +149,6 @@ const Topbar = (props: any) => {
       setSearchValue(null);
     }
   }, [success]);
-
-  // useEffect(()=> {
-  //   if(SearchModal){
-  //     dispatch(userModalReset)
-  //   }
-  // }, [])
 
   const customStyles = {
     control: (base: any, state: { isFocused: any }) => ({
@@ -218,7 +221,6 @@ const Topbar = (props: any) => {
   };
 
   const [isMobile, setIsMobile] = React.useState(window.innerWidth <= 768);
-  // const [searchValue, setSearchValue] = React.useState(null);
 
   React.useEffect(() => {
     const handleResize = () => {
@@ -234,40 +236,53 @@ const Topbar = (props: any) => {
     setShowModal(true);
   };
 
+  let permissions: any = localStorage.getItem("permissions");
+  const parsedPermissions = JSON.parse(permissions);
+
   return (
     <>
       <Navbar expand="lg" className="bg-primary p-0 px-0" data-bs-theme="light">
         <div className="d-flex ms-0">
           <a
-            href={`/admin/active-inactive-user-list/${localStorage.getItem(
-              "key"
-            )}`}
+            href={
+              !parsedPermissions || parsedPermissions?.userList
+                ? `/admin/active-inactive-user-list/${localStorage.getItem(
+                    "key"
+                  )}`
+                : "#"
+            }
             className="me-2 mt-1 d-flex"
           >
             <LogoSection width="100%" height="50px" />
           </a>
 
-          <span className="m-3 cursor" onClick={props.onClick}>
-            <div className="menuHamBurger d-flex flex-column me-2 mt-1">
-              <span className="mb-1"></span>
-              <span className="mb-1"></span>
-              <span></span>
-            </div>
-          </span>
+          {(!parsedPermissions || parsedPermissions?.events) && (
+            <span className="m-3 cursor" onClick={props.onClick}>
+              <div className="menuHamBurger d-flex flex-column me-2 mt-1">
+                <span className="mb-1" />
+                <span className="mb-1" />
+                <span />
+              </div>
+            </span>
+          )}
           <Navbar id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link
-                className="navbar-mainLink"
-                href={`/admin/listClients/${localStorage.getItem("key")}`}
-              >
-                List of clients
-              </Nav.Link>
-              <Nav.Link
-                className="navbar-mainLink"
-                href="/admin/market-analysis"
-              >
-                Market Analysis
-              </Nav.Link>
+              {(!parsedPermissions || parsedPermissions?.userList) && (
+                <Nav.Link
+                  className="navbar-mainLink"
+                  href={`/admin/listClients/${localStorage.getItem("key")}`}
+                >
+                  List of clients
+                </Nav.Link>
+              )}
+              {(!parsedPermissions || parsedPermissions?.marketAnalysis) && (
+                <Nav.Link
+                  className="navbar-mainLink"
+                  href="/admin/market-analysis"
+                >
+                  Market Analysis
+                </Nav.Link>
+              )}
               {/* <TopbarDropdown
                 name="Live Market"
                 options={[
@@ -315,23 +330,14 @@ const Topbar = (props: any) => {
               /> */}
               <TopbarDropdown
                 name="Reports"
-                options={[
-                  {
-                    name: "Account Statement",
-                    link: "/admin/account-statement",
-                  },
-                  { name: "Current Bets", link: "/admin/current-bets" },
-                  { name: "General Report", link: "/admin/general-report" },
-                  { name: "Game Report", link: "/admin/game-report" },
-                  { name: "Casino Report", link: "/admin/casino-report" },
-                  { name: "Profit And Loss", link: "/admin/profit-loss" },
-                  {
-                    name: "Casino Result Report",
-                    link: "/admin/casino-result",
-                  },
-                ]}
+                options={reportOptions.filter((item) => {
+                  if (item.id && parsedPermissions?.[item.id] === false) {
+                    return false;
+                  }
+                  return true;
+                })}
               />
-              {userDetail?.roleName === "superAdmin" && (
+              {localStorage.getItem("userRole") === "superAdmin" && (
                 <>
                   <Nav.Link
                     className="navbar-mainLink"
@@ -342,12 +348,11 @@ const Topbar = (props: any) => {
                   <UserLockModal show={showModal} setShowModal={setShowModal} />
                 </>
               )}
-              {/* <Nav.Link
-                className="navbar-mainLink"
-                href="/admin/multiLogin"
-              >
-                Multi Login
-              </Nav.Link> */}
+              {/* {(!parsedPermissions || parsedPermissions?.loginUserCreation) && (
+                <Nav.Link className="navbar-mainLink" href="/admin/multiLogin">
+                  Multi Login
+                </Nav.Link>
+              )} */}
             </Nav>
           </Navbar>
           <div className="user-dropdown-container">

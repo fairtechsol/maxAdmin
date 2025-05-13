@@ -1,12 +1,11 @@
 import { memo, useEffect, useState } from "react";
-import FlipClock from "./FlipClock";
-import isMobile from "../../../utils/screenDimension";
-import { Col, Row, Container } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { handleRoundId } from "../../../helpers";
 import { gameRulesComponents } from "../../../utils/Constants";
+import isMobile from "../../../utils/screenDimension";
+import FlipClock from "./FlipClock";
 
 const VideoFrame = ({ result, time, id, profitLoss, data }: any) => {
-
   useEffect(() => {
     const element = document.getElementById("middleView-playerDiv");
     if (element) {
@@ -85,10 +84,7 @@ const VideoFrame = ({ result, time, id, profitLoss, data }: any) => {
                 {result}
               </div>
             )}
-            <div
-              style={{ zIndex: "99" }}
-              className="casino-video-right-icons"
-            >
+            <div style={{ zIndex: "99" }} className="casino-video-right-icons">
               <div
                 title="Rules"
                 className="casino-video-rules-icon"
@@ -100,17 +96,19 @@ const VideoFrame = ({ result, time, id, profitLoss, data }: any) => {
               >
                 <i className="fas fa-info-circle title-24"></i>
               </div>
+            </div>
+            {showModal && (
+              <div className="modal-new">
+                <div className="rules-header-new">
+                  <div>Rules</div>
+                  <span className="close-new" onClick={closeModal}>
+                    &times;
+                  </span>
+                </div>
+
+                {currentGameRules && gameRulesComponents[currentGameRules]}
               </div>
-              {showModal && (
-                <div className="modal-new" >
-                  <div className="rules-header-new"><div>Rules</div><span className="close-new" onClick={closeModal}>
-                      &times;
-                    </span></div>
-                    
-                    {currentGameRules && gameRulesComponents[currentGameRules]}
-                  </div>
-              )}
-          
+            )}
             <div>
               <Container className="p-0">
                 <Row className="justify-content-md-center p-0">
@@ -182,7 +180,9 @@ const VideoFrame = ({ result, time, id, profitLoss, data }: any) => {
                   width: isMobile ? "150px" : "",
                 }}
               >
-                <FlipClock value={(""+time)?.length === 1 ? "0" + time : time} />
+                <FlipClock
+                  value={("" + time)?.length === 1 ? "0" + time : time}
+                />
               </div>
             )}
           </div>

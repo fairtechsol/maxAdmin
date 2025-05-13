@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   ballbyballMatchRates,
@@ -46,16 +46,22 @@ const BallByBall = () => {
   };
   const handleCardResult = (event: any) => {
     if (event?.matchId === dragonTigerDetail?.id) {
-      dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
+      dispatch(
+        getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId })
+      );
     }
   };
   const handleMatchResult = () => {
-    dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
+    dispatch(
+      getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId })
+    );
   };
   useEffect(() => {
     try {
       if (socket && dragonTigerDetail?.id) {
-        dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
+        dispatch(
+          getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId })
+        );
         socketService.card.getCardRatesOff(cardGamesType.ballbyball);
         socketService.card.userCardBetPlacedOff();
         socketService.card.cardResultOff();
@@ -114,4 +120,4 @@ const BallByBall = () => {
   return <BallbyballComponentList />;
 };
 
-export default BallByBall;
+export default memo(BallByBall);

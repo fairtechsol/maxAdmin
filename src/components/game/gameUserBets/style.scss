@@ -1,47 +1,37 @@
 @import "/src/assets/variable.scss";
 
-.userBets{
-    .userBets-headerLeft{
-        .userBets-headerLeft-tabs{
-            // border-bottom: 1px solid $primary;
-        }
-    }
-    .userBets-headerRight{
-    }
-}
-.userBetModal{
-   .modal-dialog{
+.userBetModal {
+  .modal-dialog {
     width: 90vw;
     max-width: none;
-   }
+  }
 }
 
-.tab-new{
-color: #495057 !important;
-background-color: #fff !important;
-border-color: #ced4da #ced4da #fff !important;
-border: 1px solid transparent;
-border-top-left-radius: 0.25rem;
-border-top-right-radius: 0.25rem;
+.tab-new {
+  color: #495057 !important;
+  background-color: #fff !important;
+  border-color: #ced4da #ced4da #fff !important;
+  border: 1px solid transparent;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
 }
 .coupon-table thead th {
-    font-size: 12px;
-    font-weight: 500;
-    text-align: center;
-    padding: 6px 0;
-    padding-left: 0px;
-    text-indent: -6px;
-    overflow-x: auto;
-    width: 10vw;
+  font-size: 12px;
+  font-weight: 500;
+  text-align: center;
+  padding: 6px 0;
+  padding-left: 0px;
+  text-indent: -6px;
+  overflow-x: auto;
+  width: 10vw;
 }
-.bet-head{
-    // display: flex;
-    overflow-x: auto;
-    ::-webkit-scrollbar {
-        display: none;
-      }
+.bet-head {
+  overflow-x: auto;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 }
 
-.shadow{
-    box-shadow: inset 3px 0 0px #72bbef !important;
+.shadow {
+  box-shadow: inset 3px 0 0px #72bbef !important;
 }

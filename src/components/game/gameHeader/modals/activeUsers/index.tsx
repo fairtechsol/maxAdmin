@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import { Column, TableConfig } from "../../../../../models/tableInterface";
+import { getMatchLockAllChild } from "../../../../../store/actions/match/matchAction";
+import { AppDispatch, RootState } from "../../../../../store/store";
 import CustomTable from "../../../../commonComponent/table";
 import "./style.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../../../../store/store";
 import UserRow from "./UserRow";
-import { getMatchLockAllChild } from "../../../../../store/actions/match/matchAction";
-import { useParams } from "react-router-dom";
 
 const ActiveUser = (props: any) => {
   const { type } = props;

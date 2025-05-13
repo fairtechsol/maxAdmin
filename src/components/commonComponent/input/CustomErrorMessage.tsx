@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 const CustomErrorMessage = (props: any) => {
   return (
     <>
@@ -8,4 +10,4 @@ const CustomErrorMessage = (props: any) => {
   );
 };
 
-export default CustomErrorMessage;
+export default memo(CustomErrorMessage);

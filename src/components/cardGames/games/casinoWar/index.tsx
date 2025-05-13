@@ -2,20 +2,20 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import "./style.scss";
-import { RootState } from "../../../../store/store";
+import { club, diamond, heart, spade } from "../../../../assets";
 import { formatNumber, handleRoundId } from "../../../../helpers";
-import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
+import { RootState } from "../../../../store/store";
 import {
   cardGamesId,
   cardGamesType,
   cardUrl,
 } from "../../../../utils/Constants";
 import CardResultBox from "../../../commonComponent/cardResultBox";
-import UserBets from "../../../game/userBet";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
+import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
+import UserBets from "../../../game/userBet";
 import CasinoWarCard from "./casinoWarCard";
-import { club, diamond, heart, spade } from "../../../../assets";
+import "./style.scss";
 
 const CasinoWarComponent = () => {
   const { dragonTigerDetail } = useSelector((state: RootState) => state.card);
@@ -208,12 +208,20 @@ const CasinoWarComponent = () => {
                               <img
                                 src={spade}
                                 alt="Player 1 Image"
-                                style={{ width: "15px", height: "15px", marginRight: "5px"}}
+                                style={{
+                                  width: "15px",
+                                  height: "15px",
+                                  marginRight: "5px",
+                                }}
                               />
                               <img
                                 src={club}
                                 alt="Player 6 Image"
-                                style={{ width: "15px", height: "15px", marginLeft: "5px"  }}
+                                style={{
+                                  width: "15px",
+                                  height: "15px",
+                                  marginLeft: "5px",
+                                }}
                               />
                             </>
                           )}
@@ -222,12 +230,20 @@ const CasinoWarComponent = () => {
                               <img
                                 src={heart}
                                 alt="Player 2 Image"
-                                style={{ width: "15px", height: "15px", marginRight: "5px" }}
+                                style={{
+                                  width: "15px",
+                                  height: "15px",
+                                  marginRight: "5px",
+                                }}
                               />
                               <img
                                 src={diamond}
                                 alt="Player 8 Image"
-                                style={{ width: "18px", height: "18px", marginLeft: "5px" }}
+                                style={{
+                                  width: "18px",
+                                  height: "18px",
+                                  marginLeft: "5px",
+                                }}
                               />
                             </>
                           )}
@@ -288,7 +304,7 @@ const CasinoWarComponent = () => {
                       >
                         {playerA?.map((player: any, idx: any) => (
                           <div
-                            key={player.sid}
+                            key={idx}
                             className={`teenPatti-table-item ${
                               player.gstatus === "0" ? "locked" : ""
                             }`}
@@ -352,30 +368,7 @@ const CasinoWarComponent = () => {
               <Col md={12}>
                 <UserBets matchId={dragonTigerDetail?.id} />
               </Col>
-              <Col>
-                {/* <div className="casino-title" style={{ position: "relative" }}>
-                  <span>Rules</span>
-                </div>
-                <div className="table-responsive rules-table">
-                  <Table bordered>
-                    <thead>
-                      <tr>
-                        <th colSpan={2} className="box-10 text-center">
-                          Pair Plus
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {rules.map((item, index) => (
-                        <tr key={index}>
-                          <td className="box-7">{item.label}</td>
-                          <td className="box-3">{item.value}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </Table>
-                </div> */}
-              </Col>
+              <Col></Col>
             </Row>
           </Container>
         </Col>

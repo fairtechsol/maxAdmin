@@ -48,7 +48,6 @@ import {
   six,
   six6,
   superover,
-  // teencasino,
   teenplayer,
   ten,
   ten10,
@@ -128,11 +127,15 @@ export const ApiConstants = {
     CASINO_REPORT: "/mac88/bets",
     CASINO_REPORT_PROVIDERS: "/mac88/providers",
   },
+  MULTILOGIN: {
+    ACCESSUSER: "/accessUser",
+    LOCKACCESSUSER: "/accessUser/lock",
+    CHANGEPASSWORDACCESSUSER: "/accessUser/change/password",
+  },
   MATCH: {
     MATCHLIST: "/match/list",
     SEARCHLIST: "/user/searchlist",
     MATCHDETAILS: "/match/",
-    OTHERMATCHDETAILS: "/match/other/",
     CURRENTBET: "/bet",
     MARKETANALYSIS: "/match/marketAnalysis",
     MARKETWISE_USERBOOK: "/match/marketWise/userBook/",
@@ -189,9 +192,9 @@ export const Constants = {
 };
 
 export const cardUrl =
-process.env.NODE_ENV === "production"
-? "https://alpha-n.qnsports.live/route/jat.php?id="
-: "https://alpha-n.qnsports.live/route/jat.php?id=";
+  process.env.NODE_ENV === "production"
+    ? "https://alpha-n.qnsports.live/route/jat.php?id="
+    : "https://alpha-n.qnsports.live/route/jat.php?id=";
 
 export const liveStreamUrlCricket =
   "https://dpmatka.in/dd.php?sportId=4&eventId=";
@@ -200,69 +203,58 @@ export const tvUrl = "https://serviceapi.fairgame7.com";
 export const scoreBoardUrlMain =
   "https://dpmatka.in/anm.php?type=scorecard&eventId=";
 
-  
 // const oldVideoUrl = "https://video.proexch.in/route/?id="
-// use below baseUrl for live build
-
-// export const serviceUrl =
-//   process.env.NODE_ENV === "production"
-//     ? Constants.apiBasePath
-//     : Constants.localPath;
-
-// export const baseUrls = {
-//   socket:
-//     process.env.NODE_ENV === "production"
-//       ? `${Constants.apiBasePath}`
-//       : `${Constants.localPath}`,
-//   thirdParty:
-//     process.env.NODE_ENV === "production"
-//       ? `${Constants.thirdParty}`
-//       : `${Constants.localPathThird}`,
-//   expertSocket:
-//     process.env.NODE_ENV === "production"
-//       ? `${Constants.expertPath}`
-//       : `${Constants.localPathExpert}`,
-//   cardSocket:
-//     process.env.NODE_ENV === "production"
-//       ? Constants.thirdPartyCard
-//       : Constants.localThirdCard,
-// };
-
 // use below baseUrl for live build
 
 export const serviceUrl =
   process.env.NODE_ENV === "production"
-    ? Constants.apiBasePathLive
+    ? Constants.apiBasePath
     : Constants.localPath;
 
 export const baseUrls = {
   socket:
     process.env.NODE_ENV === "production"
-      ? `${Constants.apiBasePathLive}`
+      ? `${Constants.apiBasePath}`
       : `${Constants.localPath}`,
   thirdParty:
     process.env.NODE_ENV === "production"
-      ? `${Constants.thirdPartyLive}`
+      ? `${Constants.thirdParty}`
       : `${Constants.localPathThird}`,
   expertSocket:
     process.env.NODE_ENV === "production"
-      ? `${Constants.expertPathLive}`
+      ? `${Constants.expertPath}`
       : `${Constants.localPathExpert}`,
   cardSocket:
     process.env.NODE_ENV === "production"
-      ? Constants.thirdPartyCardLive
+      ? Constants.thirdPartyCard
       : Constants.localThirdCard,
 };
 
-export const teamStatus = {
-  suspended: "suspended",
-  active: "active",
-  open: "open",
-  closed: "closed",
-  ballStart: "ball start",
-  ballStop: "ball stop",
-  ballRunning: "ball running",
-};
+// use below baseUrl for live build
+
+// export const serviceUrl =
+//   process.env.NODE_ENV === "production"
+//     ? Constants.apiBasePathLive
+//     : Constants.localPath;
+
+// export const baseUrls = {
+//   socket:
+//     process.env.NODE_ENV === "production"
+//       ? `${Constants.apiBasePathLive}`
+//       : `${Constants.localPath}`,
+//   thirdParty:
+//     process.env.NODE_ENV === "production"
+//       ? `${Constants.thirdPartyLive}`
+//       : `${Constants.localPathThird}`,
+//   expertSocket:
+//     process.env.NODE_ENV === "production"
+//       ? `${Constants.expertPathLive}`
+//       : `${Constants.localPathExpert}`,
+//   cardSocket:
+//     process.env.NODE_ENV === "production"
+//       ? Constants.thirdPartyCardLive
+//       : Constants.localThirdCard,
+// };
 
 export const sessionBettingType = {
   session: "session",
@@ -273,135 +265,6 @@ export const sessionBettingType = {
   cricketCasino: "cricketCasino",
   khado: "khado",
   meter: "meter",
-};
-
-export const matchBettingType = {
-  matchOdd: "matchOdd",
-  bookmaker: "bookmaker",
-  bookmaker2: "bookmaker2",
-  quickbookmaker1: "quickbookmaker1",
-  quickbookmaker2: "quickbookmaker2",
-  quickbookmaker3: "quickbookmaker3",
-  other: "other",
-  tiedMatch1: "tiedMatch1",
-  tiedMatch2: "tiedMatch2",
-  tiedMatch3: "tiedMatch3",
-  completeMatch: "completeMatch",
-  completeMatch1: "completeMatch1",
-  completeManual: "completeManual",
-  ...Array.from({ length: 20 }, (_, index) => index).reduce(
-    (prev: any, curr) => {
-      prev[`overUnder${curr}.5`] = `overUnder${curr}.5`;
-      return prev;
-    },
-    {}
-  ),
-  ...Array.from({ length: 20 }, (_, index) => index).reduce(
-    (prev: any, curr) => {
-      prev[`firstHalfGoal${curr}.5`] = `firstHalfGoal${curr}.5`;
-      return prev;
-    },
-    {}
-  ),
-  halfTime: "halfTime",
-};
-
-export const profitLossDataForMatchConstants = {
-  [matchBettingType.matchOdd]: {
-    A: "teamARate",
-    B: "teamBRate",
-    C: "teamCRate",
-  },
-  [matchBettingType.bookmaker]: {
-    A: "teamARate",
-    B: "teamBRate",
-    C: "teamCRate",
-  },
-  [matchBettingType.bookmaker2]: {
-    A: "teamARate",
-    B: "teamBRate",
-    C: "teamCRate",
-  },
-  [matchBettingType.quickbookmaker1]: {
-    A: "teamARate",
-    B: "teamBRate",
-    C: "teamCRate",
-  },
-  [matchBettingType.quickbookmaker2]: {
-    A: "teamARate",
-    B: "teamBRate",
-    C: "teamCRate",
-  },
-  [matchBettingType.quickbookmaker3]: {
-    A: "teamARate",
-    B: "teamBRate",
-    C: "teamCRate",
-  },
-  [matchBettingType.other]: {
-    A: "userTeamARateOther",
-    B: "userTeamBRateOther",
-    C: "userTeamCRateOther",
-  },
-  [matchBettingType.tiedMatch1]: {
-    A: "yesRateTie",
-    B: "noRateTie",
-  },
-  [matchBettingType.tiedMatch2]: {
-    A: "yesRateTie",
-    B: "noRateTie",
-  },
-  [matchBettingType.tiedMatch3]: {
-    A: "yesRateTie",
-    B: "noRateTie",
-  },
-  [matchBettingType.completeMatch]: {
-    A: "yesRateComplete",
-    B: "noRateComplete",
-  },
-  [matchBettingType.completeMatch1]: {
-    A: "yesRateComplete",
-    B: "noRateComplete",
-  },
-  [matchBettingType.completeManual]: {
-    A: "yesRateComplete",
-    B: "noRateComplete",
-  },
-  ...Array.from({ length: 20 }, (_, index) => index).reduce(
-    (prev: any, curr) => {
-      prev[`overUnder${curr}.5`] = {
-        A: `yesRateUnderOver${curr}.5`,
-        B: `noRateUnderOver${curr}.5`,
-      };
-      return prev;
-    },
-    {}
-  ),
-  ...Array.from({ length: 20 }, (_, index) => index).reduce(
-    (prev: any, curr) => {
-      prev[`setWinner${curr}`] = {
-        A: `userTeamARateSetWinner${curr}`,
-        B: `userTeamBRateSetWinner${curr}`,
-        C: `userprofitLossDataMatchetWinner${curr}`,
-      };
-      return prev;
-    },
-    {}
-  ),
-  ...Array.from({ length: 20 }, (_, index) => index).reduce(
-    (prev: any, curr) => {
-      prev[`firstHalfGoal${curr}.5`] = {
-        A: `yesRateFirstHalfGoal${curr}.5`,
-        B: `noRateFirstHalfGoal${curr}.5`,
-      };
-      return prev;
-    },
-    {}
-  ),
-  [matchBettingType.halfTime]: {
-    A: "userTeamARateHalfTime",
-    B: "userTeamBRateHalfTime",
-    C: "userTeamCRateHalfTime",
-  },
 };
 
 export const card3 = {

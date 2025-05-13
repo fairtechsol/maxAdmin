@@ -2,22 +2,22 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { RootState } from "../../../../store/store";
-import UserBets from "../../../game/userBet";
+import { abjrules } from "../../../../assets";
 import { handleRoundId } from "../../../../helpers";
-import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
+import { RootState } from "../../../../store/store";
 import {
   cardGamesId,
   cardGamesType,
   cardUrl,
 } from "../../../../utils/Constants";
-import SBetBox from "./Sbox";
-import OddEven from "./OddEvenBox";
-import CardBox from "./CardsBox";
 import CardResultBox from "../../../commonComponent/cardResultBox";
 import RulesModal from "../../../commonComponent/rulesModal";
-import { abjrules } from "../../../../assets";
+import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
+import UserBets from "../../../game/userBet";
 import Abj2Result from "./abj2Card";
+import CardBox from "./CardsBox";
+import OddEven from "./OddEvenBox";
+import SBetBox from "./Sbox";
 
 const Abj2Component = () => {
   const [show, setShow] = useState(false);
@@ -51,7 +51,7 @@ const Abj2Component = () => {
                 }}
               >
                 <VideoFrame
-                data={dragonTigerDetail}
+                  data={dragonTigerDetail}
                   time={dragonTigerDetail?.videoInfo?.autotime}
                   result={<Abj2Result data={dragonTigerDetail?.videoInfo} />}
                   id={`${cardUrl}${cardGamesId.andarBahar2}`}

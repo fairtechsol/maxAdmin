@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react";
+import _ from "lodash";
+import moment from "moment-timezone";
+import { memo, useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import SelectSearch from "../../../components/commonComponent/SelectSearch";
@@ -10,8 +12,6 @@ import {
   resetGameReportList,
 } from "../../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../../store/store";
-import moment from "moment-timezone";
-import _ from "lodash";
 
 interface Column {
   id: string;
@@ -19,18 +19,11 @@ interface Column {
   type?: string;
 }
 
-// interface DataItem {
-//   [key: string]: string | number;
-// }
-
-// Example usage
 const columns: Column[] = [
   { id: "srNo", label: "Sr No", type: "index" },
   { id: "user.userName", label: "Name" },
   { id: "amount", label: "Amount" },
 ];
-
-// const data: DataItem[] = [];
 
 const options = [
   { value: "all", label: "All" },
@@ -88,7 +81,6 @@ const GameReport = () => {
       dispatch(
         getGameReport({
           type: selectType?.value,
-          // page: 1,
           limit: tableConfig?.rowPerPage,
           searchBy: "description",
           keyword: tableConfig?.keyword || "",
@@ -97,13 +89,7 @@ const GameReport = () => {
       );
     }
   };
-  // const getTodayDate = () => new Date().toISOString().split('T')[0];
 
-  // const getMaxToDate = (fromDate: string) => {
-  //   const from = new Date(fromDate);
-  //   from.setDate(from.getDate() + 7);
-  //   return from.toISOString().split('T')[0];
-  // };
   return (
     <div className="p-2 pt-0">
       <h5 className="title-22 fw-normal">Game Report</h5>
@@ -111,9 +97,9 @@ const GameReport = () => {
         <Row>
           <Col md={2}>
             <CustomInput
-              title={"From"}
-              placeholder={""}
-              customstyle={"mb-3"}
+              title="From"
+              placeholder=""
+              customstyle="mb-3"
               onChange={(e: any) => {
                 setDateFrom(e.target.value);
               }}
@@ -124,13 +110,12 @@ const GameReport = () => {
           </Col>
           <Col md={2}>
             <CustomInput
-              title={"To"}
-              placeholder={""}
-              customstyle={"mb-3"}
+              title="To"
+              placeholder=""
+              customstyle="mb-3"
               onChange={(e: any) => setDateTo(e.target.value)}
               type="date"
               value={dateTo}
-              // min={dateFrom || getTodayDate()}
               max={new Date().toISOString().split("T")[0]}
             />
           </Col>
@@ -138,7 +123,7 @@ const GameReport = () => {
             <SelectSearch
               defaultValue={[selectType]}
               options={options}
-              label={"Type"}
+              label="Type"
               onChange={handleType}
             />
           </Col>
@@ -169,7 +154,6 @@ const GameReport = () => {
         isPagination={false}
         isSort={false}
         isSearch={false}
-        // itemCount={data?.length}
         itemCount={
           gameReportList && gameReportList?.count > 0
             ? gameReportList?.count
@@ -195,25 +179,9 @@ const GameReport = () => {
               ))}
             </tr>
           ))}
-        {/* {gameReportList?.count > 0 && (
-          <tr>
-            <td></td>
-            <td>General Total</td>
-            <td>0</td>
-            <td></td>
-            <td>General Total</td>
-            <td>
-              {gameReportList?.count > 0
-                ? gameReportList?.rows?.reduce((acc: any, match: any) => {
-                    return acc + +match?.amount;
-                  }, 0)
-                : 0}
-            </td>
-          </tr>
-        )} */}
       </CustomTable>
     </div>
   );
 };
 
-export default GameReport;
+export default memo(GameReport);

@@ -33,9 +33,7 @@ const Abj1ResultComponent: React.FC<Props> = ({ data }: any) => {
           borderRadius: "10px",
         }}
         onClick={onClick}
-      >
-        {/* <img src={rightArrow} alt="Next" /> */}
-      </div>
+      ></div>
     );
   }
 
@@ -52,23 +50,18 @@ const Abj1ResultComponent: React.FC<Props> = ({ data }: any) => {
           borderRadius: "10px",
         }}
         onClick={onClick}
-      >
-        {/* <img src={leftArrow} alt="Previous" /> */}
-      </div>
+      ></div>
     );
   }
 
   const sliderSettings = (length: any, arrow: any) => ({
     infinite: false,
-    // arrows: false,
     speed: 500,
     slidesToShow: 15,
     slidesToScroll: 5,
     arrows: true,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
-    // initialSlide: isMobile ? (length > 3 ? length - 3 : 0) : 3,
-
     responsive: [
       {
         breakpoint: 1024,

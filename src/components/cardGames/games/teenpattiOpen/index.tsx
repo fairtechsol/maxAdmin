@@ -2,36 +2,25 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import { Col, Container, Row, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import "./style.scss";
+import { tprules } from "../../../../assets";
+import { handleRoundId } from "../../../../helpers";
 import { RootState } from "../../../../store/store";
 import {
   cardGamesId,
   cardGamesType,
   cardUrl,
 } from "../../../../utils/Constants";
-import { handleRoundId } from "../../../../helpers";
-import RulesModal from "../../../commonComponent/rulesModal";
-import { tprules } from "../../../../assets";
 import CardResultBox from "../../../commonComponent/cardResultBox";
-import UserBets from "../../../game/userBet";
-//import TeenPattiTableRow from "./tableRow";
-import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
-import TeenOpenResult from "./teenCard";
-import OddsRateBox from "./oddsRateBox";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
-//import { formatNumber } from "../../../../helpers";
+import RulesModal from "../../../commonComponent/rulesModal";
+import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
+import UserBets from "../../../game/userBet";
+import OddsRateBox from "./oddsRateBox";
+import "./style.scss";
+import TeenOpenResult from "./teenCard";
 const TeenPattiOpenComponent = () => {
   const [show, setShow] = useState(false);
   const { dragonTigerDetail } = useSelector((state: RootState) => state.card);
-  //const [openDivIds, setOpenDivIds] = useState<string[]>([]);
-
-  // const toggleDiv = (id: string) => {
-  //   if (openDivIds.includes(id)) {
-  //     setOpenDivIds(openDivIds.filter((openId) => openId !== id));
-  //   } else {
-  //     setOpenDivIds([...openDivIds, id]);
-  //   }
-  // };
   const rules = [
     { label: "Pair (Double)", value: "1 To 1" },
     { label: "Flush (Color)", value: "1 To 4" },
@@ -85,32 +74,21 @@ const TeenPattiOpenComponent = () => {
   const groupedCards: CardSection[] = [];
   let sectionNumber = 1;
 
-  // cardArray?.forEach((card: any, index: any) => {
-  //   if (index % 3 === 0) {
-  //     groupedCards.push({ number: sectionNumber++, cards: [] });
-  //   }
-
-  //   groupedCards[groupedCards.length - 1].cards.push(card);
-  // });
-
   if (cardArray?.length > 0) {
     for (let i = 0; i < 8; i++) {
       groupedCards.push({ number: sectionNumber++, cards: [] });
 
-      groupedCards[groupedCards.length - 1]?.cards.push(cardArray?.[i]); // Index i is safe as long as i < 9
+      groupedCards[groupedCards.length - 1]?.cards.push(cardArray?.[i]);
 
       if (cardArray[i + 9] !== undefined) {
-        // Add bounds check
         groupedCards[groupedCards.length - 1]?.cards.push(cardArray?.[i + 9]);
       }
 
       if (cardArray[i + 18] !== undefined) {
-        // Add bounds check
         groupedCards[groupedCards.length - 1]?.cards.push(cardArray?.[i + 18]);
       }
     }
   }
-
 
   return (
     <>
@@ -151,47 +129,9 @@ const TeenPattiOpenComponent = () => {
                 className="teenPatti-table-container"
                 style={{ display: "flex", alignItems: "center" }}
               >
-                {/* <div className="teenPatti-table-row" style={{ lineHeight: 2 }}>
-                  <div
-                    style={{ width: "40%", border: "0.1px solid #fff" }}
-                  ></div>
-                  <div
-                    style={{
-                      width: "60%",
-                      backgroundColor: "#72bbef",
-                      display: "flex",
-                      flexDirection: "row",
-                    }}
-                  >
-                    <div
-                      className="teenPatti-table-item f12-b"
-                      style={{ width: "50%" }}
-                    >
-                      BACK(Min:{" "}
-                      {
-                        dragonTigerDetail?.dragonTigerDetail?.players?.player1
-                          ?.min
-                      }{" "}
-                      Max:{" "}
-                      {
-                        dragonTigerDetail?.dragonTigerDetail?.players?.player1
-                          ?.max
-                      }
-                      )
-                    </div>
-                    <div
-                      className="teenPatti-table-item f12-b"
-                      style={{ width: "50%" }}
-                    >
-                      (Min: {dragonTigerDetail?.pairsPlus?.pairPlus1?.min} Max:{" "}
-                      {dragonTigerDetail?.pairsPlus?.pairPlus1?.max})
-                    </div>
-                  </div>
-                </div> */}
-
                 <div className="teenpattiopen casino-open-card-box">
                   {groupedCards?.map((section) => (
-                    <div  key={section.number}>
+                    <div key={section.number}>
                       <div>
                         <b>{section.number}</b>
                       </div>
@@ -270,26 +210,6 @@ const TeenPattiOpenComponent = () => {
                         }
                       )}
                   </div>
-                  {/* <div className="casino-box-row mb-4">
-                    <div className="casino-nation-name casino-nation-name-bg">
-                      <b>Total</b>
-                    </div>
-                    {dragonTigerDetail?.sections &&
-                      dragonTigerDetail?.sections.map(
-                        (section: any, index: any) => (
-                          <OddsRateBox
-                            key={index}
-                            status={section?.dstatus}
-                            rate={section?.drate}
-                            profitLoss={
-                              dragonTigerDetail?.profitLoss?.[
-                                `${section?.mid}_${section?.dsectionid}_card`
-                              ]
-                            }
-                          />
-                        )
-                      )}
-                  </div> */}
                 </div>
               </div>
               <div style={{ width: "100%", marginTop: "10px" }}>

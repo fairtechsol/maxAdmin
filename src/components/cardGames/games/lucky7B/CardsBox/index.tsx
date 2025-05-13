@@ -14,10 +14,7 @@ const CardBox = ({ cardData, data }: any) => {
           </span>
         </div>
         <div>
-          <CommonCardImg
-            cardData={cardData}
-            data={data}
-          />
+          <CommonCardImg cardData={cardData} data={data} />
         </div>
         <div style={{ textAlign: "end" }}>
           <span style={{ fontWeight: "bolder" }}>Min:</span>

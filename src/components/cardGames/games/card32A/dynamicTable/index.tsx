@@ -1,6 +1,6 @@
 import { useState } from "react";
-import "./style.scss";
 import { formatNumber } from "../../../../../helpers";
+import "./style.scss";
 
 const DynamicTable = ({ odds, data, playerNum }: any) => {
   let player1Key = `player${playerNum[0]}`;
@@ -9,7 +9,7 @@ const DynamicTable = ({ odds, data, playerNum }: any) => {
 
   const toggleDiv = (id: string) => {
     if (openDivIds.includes(id)) {
-      setOpenDivIds(openDivIds.filter(openId => openId !== id));
+      setOpenDivIds(openDivIds.filter((openId) => openId !== id));
     } else {
       setOpenDivIds([...openDivIds, id]);
     }
@@ -90,11 +90,17 @@ const DynamicTable = ({ odds, data, playerNum }: any) => {
             cursor: "pointer",
           }}
         >
-          <div className="card32-table-item back-cell-A" style={{ width: "50%" }}>
+          <div
+            className="card32-table-item back-cell-A"
+            style={{ width: "50%" }}
+          >
             <span className="f12-b">{odds?.[0]?.b1}</span>
             <span className="f10-b">{odds?.[0]?.bs1}</span>
           </div>
-          <div className="card32-table-item lay-cell-A" style={{ width: "50%" }}>
+          <div
+            className="card32-table-item lay-cell-A"
+            style={{ width: "50%" }}
+          >
             <span className="f12-b">{odds?.[0]?.l1}</span>
             <span className="f10-b">{odds?.[0]?.ls1}</span>
           </div>
@@ -174,11 +180,17 @@ const DynamicTable = ({ odds, data, playerNum }: any) => {
             cursor: "pointer",
           }}
         >
-          <div className="card32-table-item back-cell-A" style={{ width: "50%" }}>
+          <div
+            className="card32-table-item back-cell-A"
+            style={{ width: "50%" }}
+          >
             <span className="f12-b">{odds?.[1]?.b1}</span>
             <span className="f10-b">{odds?.[1]?.bs1}</span>
           </div>
-          <div className="card32-table-item lay-cell-A" style={{ width: "50%" }}>
+          <div
+            className="card32-table-item lay-cell-A"
+            style={{ width: "50%" }}
+          >
             <span className="f12-b">{odds?.[1]?.l1}</span>
             <span className="f10-b">{odds?.[1]?.ls1}</span>
           </div>

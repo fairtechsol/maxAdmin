@@ -1,21 +1,21 @@
 import { useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import "./style.scss";
+import { card32rules } from "../../../../assets";
+import { handleRoundId } from "../../../../helpers";
 import { RootState } from "../../../../store/store";
-import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
 import {
   cardGamesId,
   cardGamesType,
   cardUrl,
 } from "../../../../utils/Constants";
-import RulesModal from "../../../commonComponent/rulesModal";
-import { card32rules } from "../../../../assets";
 import CardResultBox from "../../../commonComponent/cardResultBox";
-import DynamicTable from "./dynamicTable";
-import { handleRoundId } from "../../../../helpers";
+import RulesModal from "../../../commonComponent/rulesModal";
+import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
 import UserBets from "../../../game/userBet";
 import Card32Result from "./card32Card";
+import DynamicTable from "./dynamicTable";
+import "./style.scss";
 
 const Cards32AComponent = () => {
   const [show, setShow] = useState(false);
@@ -41,18 +41,16 @@ const Cards32AComponent = () => {
                   : ""}
               </span>
             </div>
-            <div
-              style={{ width: "100%", backgroundColor: "#000" }}
-            >
+            <div style={{ width: "100%", backgroundColor: "#000" }}>
               <VideoFrame
-              data={dragonTigerDetail}
+                data={dragonTigerDetail}
                 time={dragonTigerDetail?.videoInfo?.autotime}
                 result={<Card32Result data={dragonTigerDetail?.videoInfo} />}
                 id={`${cardUrl}${cardGamesId.card32}`}
               />
             </div>
           </div>
-          <div >
+          <div>
             <div className="d-flex px-2 mt-1">
               <DynamicTable
                 odds={dragonTigerDetail?.set1}

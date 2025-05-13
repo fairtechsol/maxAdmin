@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { dragonTigerCards } from "../../../../../utils/Constants";
 import { back } from "../../../../../assets";
+import { dragonTigerCards } from "../../../../../utils/Constants";
 const CommonCardImg = ({ cardData, data, cardInfo }: any) => {
   const [cardImg, setCardImg] = useState(dragonTigerCards);
 

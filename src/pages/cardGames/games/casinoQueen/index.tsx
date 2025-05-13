@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import CasinoQueenComponent from "../../../../components/cardGames/games/casinoQueen";
@@ -44,7 +44,9 @@ const CasinoQueen = () => {
   };
   const handleCardResult = (event: any) => {
     if (event?.matchId === dragonTigerDetail?.id) {
-      dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
+      dispatch(
+        getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId })
+      );
     }
   };
 
@@ -55,7 +57,9 @@ const CasinoQueen = () => {
   useEffect(() => {
     try {
       if (socket && dragonTigerDetail?.id) {
-        dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
+        dispatch(
+          getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId })
+        );
         socketService.card.getCardRatesOff(cardGamesType.queen);
         socketService.card.userCardBetPlacedOff();
         socketService.card.cardResultOff();
@@ -145,4 +149,4 @@ const CasinoQueen = () => {
   return <CasinoQueenComponent />;
 };
 
-export default CasinoQueen;
+export default memo(CasinoQueen);

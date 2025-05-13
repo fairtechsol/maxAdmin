@@ -1,21 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
-  changeAmmountUser,
-  getUsers,
-  setCreditRefference,
-  setExposureLimit,
-  setLockUnlockUser,
-  changePassword,
-  userBalance,
-  searchList,
-  accountListModalReset,
-  getAlreadyUserExist,
-  getUserHeaderDetail,
-  userModalReset,
-  getSearchClientList,
-  resetSearchUserList,
-  getUserWiseExposure,
-  resetUserWiseExposureList,
+    accountListModalReset,
+    changeAmmountUser,
+    changePassword,
+    getAlreadyUserExist,
+    getSearchClientList,
+    getUserHeaderDetail,
+    getUsers,
+    getUserWiseExposure,
+    resetSearchUserList,
+    resetUserWiseExposureList,
+    searchList,
+    setCreditRefference,
+    setExposureLimit,
+    setLockUnlockUser,
+    userBalance,
+    userModalReset,
 } from "../../actions/user/userActions";
 
 interface InitialState {
@@ -70,21 +70,18 @@ export const userList = createSlice({
       })
       .addCase(getUsers.rejected, (state, action) => {
         state.loading = false;
-        state.error = action?.error?.message;
+        state.error = action.error?.message;
       })
       .addCase(searchList.pending, (state) => {
-        // state.loading = true;
         state.success = false;
         state.error = null;
       })
       .addCase(searchList.fulfilled, (state, action) => {
-        // state.loading = false;
         state.success = true;
         state.searchListData = action.payload;
       })
       .addCase(searchList.rejected, (state, action) => {
-        // state.loading = false;
-        state.error = action?.error?.message;
+        state.error = action.error?.message;
       })
       .addCase(getUserHeaderDetail.pending, (state) => {
         state.loading = true;
@@ -99,7 +96,7 @@ export const userList = createSlice({
       })
       .addCase(getUserHeaderDetail.rejected, (state, action) => {
         state.loading = false;
-        state.error = action?.error?.message;
+        state.error = action.error?.message;
       })
       .addCase(userBalance.pending, (state) => {
         state.userBalanceLoading = true;
@@ -113,7 +110,7 @@ export const userList = createSlice({
       })
       .addCase(userBalance.rejected, (state, action) => {
         state.userBalanceLoading = false;
-        state.error = action?.error?.message;
+        state.error = action.error?.message;
       })
       .addCase(changeAmmountUser.pending, (state) => {
         state.loading = true;
@@ -127,7 +124,7 @@ export const userList = createSlice({
       })
       .addCase(changeAmmountUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action?.error?.message;
+        state.error = action.error?.message;
       })
       .addCase(setCreditRefference.pending, (state) => {
         state.loading = true;
@@ -140,7 +137,7 @@ export const userList = createSlice({
       })
       .addCase(setCreditRefference.rejected, (state, action) => {
         state.loading = false;
-        state.error = action?.error?.message;
+        state.error = action.error?.message;
       })
       .addCase(setExposureLimit.pending, (state) => {
         state.loading = true;
@@ -153,7 +150,7 @@ export const userList = createSlice({
       })
       .addCase(setExposureLimit.rejected, (state, action) => {
         state.loading = false;
-        state.error = action?.error?.message;
+        state.error = action.error?.message;
       })
       .addCase(setLockUnlockUser.pending, (state) => {
         state.loading = true;
@@ -165,7 +162,7 @@ export const userList = createSlice({
       })
       .addCase(setLockUnlockUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action?.error?.message;
+        state.error = action.error?.message;
       })
       .addCase(changePassword.pending, (state) => {
         state.loading = true;
@@ -179,7 +176,7 @@ export const userList = createSlice({
       })
       .addCase(changePassword.rejected, (state, action) => {
         state.loading = false;
-        state.error = action?.error?.message;
+        state.error = action.error?.message;
       })
       .addCase(getAlreadyUserExist.pending, (state) => {
         state.loading = true;
@@ -193,7 +190,7 @@ export const userList = createSlice({
       })
       .addCase(getAlreadyUserExist.rejected, (state, action) => {
         state.loading = false;
-        state.error = action?.error?.message;
+        state.error = action.error?.message;
       })
       .addCase(accountListModalReset, (state) => {
         state.modalSuccess = false;
@@ -207,11 +204,11 @@ export const userList = createSlice({
       })
       .addCase(getSearchClientList.fulfilled, (state, action) => {
         state.loading = false;
-        state.searchUserList = action?.payload;
+        state.searchUserList = action.payload;
       })
       .addCase(getSearchClientList.rejected, (state, action) => {
         state.loading = false;
-        state.error = action?.error?.message;
+        state.error = action.error?.message;
       })
       .addCase(getUserWiseExposure.pending, (state) => {
         state.loading = true;
@@ -219,11 +216,11 @@ export const userList = createSlice({
       })
       .addCase(getUserWiseExposure.fulfilled, (state, action) => {
         state.loading = false;
-        state.userWiseExposureList = action?.payload;
+        state.userWiseExposureList = action.payload;
       })
       .addCase(getUserWiseExposure.rejected, (state, action) => {
         state.loading = false;
-        state.error = action?.error?.message;
+        state.error = action.error?.message;
       })
       .addCase(resetUserWiseExposureList, (state) => {
         state.userWiseExposureList = {};

@@ -10,7 +10,6 @@ const Matchodd = ({ data, odds, name }: any) => {
       setOpenDivIds([...openDivIds, id]);
     }
   };
-//   console.log("odds", odds);
   return (
     <div className="w-100 d-flex flex-column">
       <div
@@ -97,9 +96,7 @@ const Matchodd = ({ data, odds, name }: any) => {
           }`}
         >
           {data?.profitLoss
-            ? data?.profitLoss[
-                `${data?.videoInfo?.mid}_${odds?.[0]?.sid}_card`
-              ]
+            ? data?.profitLoss[`${data?.videoInfo?.mid}_${odds?.[0]?.sid}_card`]
               ? data?.profitLoss[
                   `${data?.videoInfo?.mid}_${odds?.[0]?.sid}_card`
                 ]
@@ -126,9 +123,7 @@ const Matchodd = ({ data, odds, name }: any) => {
           }`}
         >
           {data?.profitLoss
-            ? data?.profitLoss[
-                `${data?.videoInfo?.mid}_${odds?.[1]?.sid}_card`
-              ]
+            ? data?.profitLoss[`${data?.videoInfo?.mid}_${odds?.[1]?.sid}_card`]
               ? data?.profitLoss[
                   `${data?.videoInfo?.mid}_${odds?.[1]?.sid}_card`
                 ]

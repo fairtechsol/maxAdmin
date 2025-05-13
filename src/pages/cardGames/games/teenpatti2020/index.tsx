@@ -1,21 +1,21 @@
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import TeentPatti2020Component from "../../../../components/cardGames/games/teenpatti2020";
 import Loader from "../../../../components/commonComponent/loader";
 import { socket, socketService } from "../../../../socketManager";
 import {
-    getCardDetailInitial,
-    getDragonTigerDetailHorseRacing,
-    resetCardDetail,
-    updateBalanceOnBetPlaceCards,
-    updateLiveGameResultTop10,
-    updateProfitLossCards,
-    updateTeenPattiMatchRates,
+  getCardDetailInitial,
+  getDragonTigerDetailHorseRacing,
+  resetCardDetail,
+  updateBalanceOnBetPlaceCards,
+  updateLiveGameResultTop10,
+  updateProfitLossCards,
+  updateTeenPattiMatchRates,
 } from "../../../../store/actions/card/cardDetail";
 import {
-    getPlacedBets,
-    updateBetsPlaced,
+  getPlacedBets,
+  updateBetsPlaced,
 } from "../../../../store/actions/match/matchAction";
 import { getUsersProfile } from "../../../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../../../store/store";
@@ -48,7 +48,9 @@ const TeenPatti2020 = () => {
   };
   const handleCardResult = (event: any) => {
     if (event?.matchId === dragonTigerDetail?.id) {
-      dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
+      dispatch(
+        getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId })
+      );
     }
   };
   const handleMatchResult = () => {
@@ -57,7 +59,9 @@ const TeenPatti2020 = () => {
   useEffect(() => {
     try {
       if (dragonTigerDetail?.id) {
-        dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
+        dispatch(
+          getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId })
+        );
       }
     } catch (e) {
       console.error(e);
@@ -129,4 +133,4 @@ const TeenPatti2020 = () => {
   return loading ? <Loader /> : <TeentPatti2020Component />;
 };
 
-export default TeenPatti2020;
+export default memo(TeenPatti2020);

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import Baccarat2Component from "../../../../components/cardGames/games/baccarat2";
@@ -40,7 +40,7 @@ const Bacarrat2 = () => {
       dispatch(updateProfitLossCards(event?.userRedisObj));
     }
   };
-  
+
   const handleLiveGameResultTop10 = (event: any) => {
     dispatch(updateLiveGameResultTop10(event?.data));
     dispatch(graphData(event?.graphdata));
@@ -48,7 +48,9 @@ const Bacarrat2 = () => {
 
   const handleCardResult = (event: any) => {
     if (event?.matchId === dragonTigerDetail?.id) {
-      dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
+      dispatch(
+        getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId })
+      );
     }
   };
 
@@ -59,7 +61,9 @@ const Bacarrat2 = () => {
   useEffect(() => {
     try {
       if (socket && dragonTigerDetail?.id) {
-        dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
+        dispatch(
+          getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId })
+        );
         socketService.card.getCardRatesOff(cardGamesType.baccarat2);
         socketService.card.userCardBetPlacedOff();
         socketService.card.cardResultOff();
@@ -149,4 +153,4 @@ const Bacarrat2 = () => {
   return <Baccarat2Component />;
 };
 
-export default Bacarrat2;
+export default memo(Bacarrat2);

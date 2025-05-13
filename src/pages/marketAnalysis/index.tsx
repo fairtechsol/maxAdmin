@@ -1,12 +1,15 @@
-import { useDispatch, useSelector } from "react-redux";
-import MarketAnalysisComp from "../../components/marketAnalysis";
-import { AppDispatch, RootState } from "../../store/store";
-import { useEffect, useState } from "react";
-import { getMarketAnalysis } from "../../store/actions/match/matchAction";
+import { memo, useEffect, useState } from "react";
 import { FaSync } from "react-icons/fa";
-import "./style.scss";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
+import MarketAnalysisComp from "../../components/marketAnalysis";
+import {
+  getMarketAnalysis,
+  resetMarketAnalysys,
+} from "../../store/actions/match/matchAction";
+import { AppDispatch, RootState } from "../../store/store";
 import { ApiConstants } from "../../utils/Constants";
+import "./style.scss";
 
 const MarketAnalysis = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -43,6 +46,9 @@ const MarketAnalysis = () => {
     } catch (error) {
       console.log(error);
     }
+    return () => {
+      dispatch(resetMarketAnalysys());
+    };
   }, [state, dispatch]);
 
   return (
@@ -61,7 +67,7 @@ const MarketAnalysis = () => {
               )
             }
             size={15}
-            cursor={"pointer"}
+            cursor="pointer"
             className={loading ? "rotate" : ""}
           />
         </h3>
@@ -76,10 +82,10 @@ const MarketAnalysis = () => {
         ? filteredDetail
         : marketAnalysisDetail
       )?.map((match: any) => (
-        <MarketAnalysisComp match={match} />
+        <MarketAnalysisComp key={match?.matchId} match={match} />
       ))}
     </div>
   );
 };
 
-export default MarketAnalysis;
+export default memo(MarketAnalysis);

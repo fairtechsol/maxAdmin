@@ -20,8 +20,6 @@ const Teen1DResultComponent: React.FC<Props> = ({ data }: any) => {
     (_: any, index: number) => index % 2 !== 0
   );
 
-  //console.log(playerA,"WIN",data)
-
   return (
     <Container style={{ display: "flex", flexDirection: "column" }}>
       <div

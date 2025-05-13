@@ -1,68 +1,59 @@
-/* Custom styles for the Select component */
 .my-custom-select {
-    //width: 160px; /* Set the width of the select box */
-    border: none; /* Remove border to eliminate the line */
-    border-radius: 5px;
-    background-color: #fff;
-    box-shadow: none;
+  border: none;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: none;
 }
 
-/* Control styling */
 .my-custom-select .select__control {
-    border: none; /* Remove border to eliminate the line */
-    padding: 0px 12px;
+  border: none;
+  padding: 0px 12px;
 }
 
-/* Placeholder styling */
 .my-custom-select .select__placeholder {
-    color: #d3d3d3; /* Lighter color for the placeholder */
-    font-size: 14px; /* Font size for the placeholder */
+  color: #d3d3d3;
+  font-size: 14px;
 }
 
-/* Input styling */
 .my-custom-select .select__input {
-    padding: 8px 10px;
-    border: none;
-    background: transparent;
+  padding: 8px 10px;
+  border: none;
+  background: transparent;
 }
 
-/* Dropdown indicator styling */
 .my-custom-select .select__dropdown-indicator {
-    color: #495057; /* Color for the dropdown indicator */
+  color: #495057;
 }
 
-/* Menu styling */
 .my-custom-select .select__menu {
-    max-height: 200px; /* Max height for dropdown */
-    overflow-y: auto;
-    border: 1px solid #ced4da; /* Border for dropdown */
-    border-radius: 5px;
-    background-color: #fff; /* Background color for dropdown */
-    z-index: 1000; /* Ensure dropdown appears above other content */
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  background-color: #fff;
+  z-index: 1000;
 }
 
-/* Option styling */
 .my-custom-select .select__option {
-    padding: 10px 12px; /* Padding for options */
-    color: #495057; /* Color for options */
-    cursor: pointer; /* Cursor style for options */
+  padding: 10px 12px;
+  color: #495057;
+  cursor: pointer;
 }
 
 .my-custom-select .select__option:hover {
-    background-color: #f1f1f1; /* Hover effect for options */
+  background-color: #f1f1f1;
 }
 
-/* Additional styles to ensure consistency */
 .my-custom-select * {
-    box-sizing: border-box; /* Ensures consistent box-sizing */
+  box-sizing: border-box;
 }
 .css-1u9des2-indicatorSeparator {
-    -webkit-align-self: stretch;
-    -ms-flex-item-align: stretch;
-    align-self: stretch;
-    width: 0px !important;
-    background-color:#fff !important;
-    margin-bottom: 8px;
-    margin-top: 8px;
-    box-sizing: border-box;
+  -webkit-align-self: stretch;
+  -ms-flex-item-align: stretch;
+  align-self: stretch;
+  width: 0px !important;
+  background-color: #fff !important;
+  margin-bottom: 8px;
+  margin-top: 8px;
+  box-sizing: border-box;
 }

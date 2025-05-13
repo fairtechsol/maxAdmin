@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Col, Modal, Row, Stack } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -11,7 +11,6 @@ import {
 import { AppDispatch, RootState } from "../../../../store/store";
 import CustomInput from "../../../commonComponent/input";
 import ModalFooter from "../footer";
-// import { depositAmountValidations } from "../../../../utils/fieldValidations/addAccount";
 import Loader from "../../../commonComponent/loader";
 
 const initialValues: any = {
@@ -219,7 +218,6 @@ const Deposit = ({
               </Col>
               <Col sm={8}>
                 <CustomInput
-                  // required={true}
                   name="amount"
                   id="amount"
                   value={values.amount}
@@ -272,7 +270,6 @@ const Deposit = ({
               </Col>
               <Col sm={8}>
                 <CustomInput
-                  // required={true}
                   id="transactionPassword"
                   type="password"
                   customstyle="input-box"
@@ -302,4 +299,4 @@ const Deposit = ({
   );
 };
 
-export default Deposit;
+export default memo(Deposit);

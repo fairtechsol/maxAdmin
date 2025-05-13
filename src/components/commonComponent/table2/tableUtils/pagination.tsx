@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { Pagination } from "react-bootstrap";
 
 interface PaginationComponentProps {
@@ -13,7 +13,7 @@ const PaginationComponent: React.FC<PaginationComponentProps> = ({
   onPageChange,
 }) => {
   const [setCmp, setPageComp] = useState([]);
-  if(!setCmp){
+  if (!setCmp) {
     setPageComp([]);
   }
   useEffect(() => {
@@ -93,7 +93,13 @@ const PaginationComponent: React.FC<PaginationComponentProps> = ({
               onChange={(e: any) => onPageChange(e.target.value)}
               min={1}
               max={totalPages}
-              style={{ width: "100px", height: "38px" ,border:"1px solid #dbdbdb",padding:"5px",marginLeft:"5px"}}
+              style={{
+                width: "100px",
+                height: "38px",
+                border: "1px solid #dbdbdb",
+                padding: "5px",
+                marginLeft: "5px",
+              }}
             />
           </div>
         </div>
@@ -102,4 +108,4 @@ const PaginationComponent: React.FC<PaginationComponentProps> = ({
   );
 };
 
-export default PaginationComponent;
+export default memo(PaginationComponent);

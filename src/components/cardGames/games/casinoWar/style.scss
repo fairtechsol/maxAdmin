@@ -9,7 +9,6 @@
   border-radius: 4px;
   margin-right: 5px;
   cursor: pointer;
-  // position: relative;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   -ms-border-radius: 4px;
@@ -26,7 +25,6 @@
 .teenPatti-table-row .icon-range {
   left: 25%;
   transform: translateX(-50%);
-  // right: unset;
 }
 
 .match-tabs {
@@ -84,10 +82,8 @@
   width: 50%;
   display: flex;
   flex-wrap: wrap;
-  // padding: 5px 5px 0 5px;
 }
 .horse-time-detail a {
-  // margin-bottom: 0;
   display: flex;
 }
 .navi-link {
@@ -112,14 +108,9 @@
 }
 
 .navi-tabs .navi-link {
-  padding: 0; /* Remove padding from Nav.Link */
-  margin: 0; /* Remove margin from Nav.Link */
+  padding: 0;
+  margin: 0;
 }
-
-
-
-
-
 
 .locked {
   position: relative;
@@ -131,11 +122,6 @@
   justify-content: space-around;
   width: 100%;
 }
-
-// .horseRacingTab .nav-link{
-//   margin: 0 !important;
-// }
-
 @media (max-width: 768px) {
   .tabs-navs .nav-link {
     flex: 1 0 10%;

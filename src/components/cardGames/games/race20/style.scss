@@ -36,24 +36,6 @@
   border-right: 10px solid transparent;
   border-top: 10px solid green;
 }
-// .match-list-tabs {
-//   border-right: 1px solid $secondary !important;
-//   border-radius: 0px !important;
-//   background-color: $gray;
-//   // padding: 2px 10px;
-//   &:hover {
-//     border-right: 1px solid $secondary !important;
-//   }
-//   &.active {
-//     background-color: $secondary !important;
-//     border-color: transparent !important ;
-//   }
-// }
-
-// .navtem {
-//   padding: 0px !important;
-//   margin-top: 10px !important;
-// }
 
 .match-tabs {
   margin: 0 !important;
@@ -257,7 +239,6 @@
   line-height: 1;
 }
 
-
 .commonButtonBoxContainerOdd {
   width: 50%;
   display: flex;
@@ -322,16 +303,12 @@
   margin-top: 5px;
 }
 
-
 .result-card-container {
   display: flex;
   flex-direction: row;
   gap: 8px;
 }
 
-// .horseRacingTab .nav-link{
-//   margin: 0 !important;
-// }
 .oddsBoxProfitLoss {
   display: flex;
   justify-content: center;

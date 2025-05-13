@@ -1,0 +1,10 @@
+@import "/src/assets/variable.scss";
+
+.multiLoginInputCont .form-check-input[type="checkbox"] {
+  background-color: #000;
+  opacity: 1;
+}
+.multiLoginInputCont .form-check-input[type="checkbox"]:checked {
+  background-color: #000 !important;
+  opacity: 1;
+}

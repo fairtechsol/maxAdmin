@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import TeenPattiOpenComponent from "../../../../components/cardGames/games/teenpattiOpen";
@@ -48,7 +48,9 @@ const TeenPattiOpen = () => {
   };
   const handleCardResult = (event: any) => {
     if (event?.matchId === dragonTigerDetail?.id) {
-      dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
+      dispatch(
+        getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId })
+      );
     }
   };
   const handleMatchResult = () => {
@@ -57,7 +59,9 @@ const TeenPattiOpen = () => {
   useEffect(() => {
     try {
       if (dragonTigerDetail?.id) {
-        dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
+        dispatch(
+          getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId })
+        );
       }
     } catch (e) {
       console.error(e);
@@ -133,4 +137,4 @@ const TeenPattiOpen = () => {
   return loading ? <Loader /> : <TeenPattiOpenComponent />;
 };
 
-export default TeenPattiOpen;
+export default memo(TeenPattiOpen);

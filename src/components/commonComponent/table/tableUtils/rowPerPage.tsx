@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { Form } from "react-bootstrap";
 
 interface RowPerPageProps {
@@ -7,19 +7,16 @@ interface RowPerPageProps {
 }
 
 const RowPerPage: React.FC<RowPerPageProps> = ({ value, onChange }) => {
-  // Define an array of options
-  const options = [25, 50, 100, 250,500,750,1000];
+  const options = [25, 50, 100, 250, 500, 750, 1000];
 
   return (
     <Form.Group controlId="itemsPerPage" className="mb-3">
       <label>Show</label>
-      {/* Dropdown for selecting items per page */}
       <select
         className="rowPerPageSelect mx-2"
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
       >
-        {/* Map over the options array to create option elements */}
         {options.map((option) => (
           <option key={option} value={option}>
             {option}
@@ -31,4 +28,4 @@ const RowPerPage: React.FC<RowPerPageProps> = ({ value, onChange }) => {
   );
 };
 
-export default RowPerPage;
+export default memo(RowPerPage);

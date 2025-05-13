@@ -1,6 +1,6 @@
 import { debounce } from "lodash";
 import moment from "moment-timezone";
-import { useEffect, useMemo, useState } from "react";
+import { memo, useEffect, useMemo, useState } from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import SelectSearch from "../../../components/commonComponent/SelectSearch";
@@ -10,6 +10,10 @@ import CustomModal from "../../../components/commonComponent/modal";
 import CustomTable from "../../../components/commonComponent/table";
 import AccountStatementModal from "../../../components/reports/modals/accountStatement";
 import { TableConfig } from "../../../models/tableInterface";
+import {
+  transactionProviderBetsReset,
+  transactionProviderName,
+} from "../../../store/actions/card/cardDetail";
 import {
   getBetAccountStatementModal,
   getReportAccountList,
@@ -25,18 +29,12 @@ import {
   gameConstantsAccountStatement,
 } from "../../../utils/Constants";
 import LiveCasinoModal from "./liveCasinoModal";
-import {
-  transactionProviderBetsReset,
-  transactionProviderName,
-} from "../../../store/actions/card/cardDetail";
-// import isMobile from "../../../utils/screenDimension";
 
 interface Column {
   id: string;
   label: string;
 }
 
-// Example usage
 const columns: Column[] = [
   { id: "date", label: "Date" },
   { id: "credit", label: "Credit" },
@@ -169,7 +167,7 @@ const AccountStatement = () => {
     if (inputValue != "") {
       debouncedInputValue(inputValue);
     }
-  }, [inputValue, selectedUser]);
+  }, [inputValue]);
 
   const handleSubmit = (e: any) => {
     try {
@@ -389,11 +387,11 @@ const AccountStatement = () => {
 
   useEffect(() => {
     const currentDate = new Date();
-    const formattedCurrentDate = currentDate.toISOString().split("T")[0]; // Format as YYYY-MM-DD
+    const formattedCurrentDate = currentDate.toISOString().split("T")[0];
 
     const pastDate = new Date();
     pastDate.setDate(pastDate.getDate() - 7);
-    const formattedPastDate = pastDate.toISOString().split("T")[0]; // Format as YYYY-MM-DD
+    const formattedPastDate = pastDate.toISOString().split("T")[0];
 
     setDateFrom(formattedPastDate);
     setDateTo(formattedCurrentDate);
@@ -403,9 +401,7 @@ const AccountStatement = () => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 1199);
     };
-    // Add event listener to update isMobile on window resize
     window.addEventListener("resize", handleResize);
-    // Cleanup event listener on component unmount
     return () => {
       window.removeEventListener("resize", handleResize);
     };
@@ -455,15 +451,6 @@ const AccountStatement = () => {
                 ))}
               </Form.Select>
             </Form.Group>
-            {/* <SelectSearch
-              defaultValue="All"
-              // options={options}
-              placeholder="All"
-              label={"Account Type"}
-              value={aaccountTypeValues}
-              onChange={handleAccountTypeChange}
-              options={aaccountTypeOptions}
-            /> */}
           </Col>
           {aaccountTypeValues !== "3" && (
             <Col md={isMobile ? 12 : 2}>
@@ -492,7 +479,7 @@ const AccountStatement = () => {
           )}
           <Col md={isMobile ? 12 : 2}>
             <SelectSearch
-              label={"Search By Client Name"}
+              label="Search By Client Name"
               inputValue={inputValue}
               options={userOptions}
               value={tempUser ? selectedUserValue : selectedUser}
@@ -508,21 +495,21 @@ const AccountStatement = () => {
                 } else {
                   setSelectedUser(value);
                 }
+                setUserOptions([]);
               }}
               placeholder={"Please enter 3 or more characters"}
               isMultiOption={false}
               isSearchable={true}
               onInputChange={(value: any) => {
                 setInputValue(value);
-                //debouncedInputValue(value);
               }}
             />
           </Col>
           <Col md={isMobile ? 12 : 2}>
             <CustomInput
-              title={"From"}
-              placeholder={""}
-              customstyle={"mb-3"}
+              title="From"
+              placeholder=""
+              customstyle="mb-3"
               onChange={(e: any) => {
                 setDateFrom(e.target.value);
               }}
@@ -533,10 +520,10 @@ const AccountStatement = () => {
           </Col>
           <Col md={isMobile ? 12 : 2}>
             <CustomInput
-              title={"To"}
-              placeholder={""}
+              title="To"
+              placeholder=""
               onChange={(e: any) => setDateTo(e.target.value)}
-              customstyle={"mb-3"}
+              customstyle="mb-3"
               type="date"
               bgColor="lightGray"
               value={dateTo}
@@ -546,7 +533,7 @@ const AccountStatement = () => {
         <Col md={2}>
           <Form.Label className="invisible d-block">dasd</Form.Label>
           <CustomButton
-            type={"submit"}
+            type="submit"
             onClick={() => {
               setFirstTime(true);
             }}
@@ -586,10 +573,7 @@ const AccountStatement = () => {
           } = item;
           return (
             <tr key={item?.id}>
-              {/* {columns.map((column) => (
-              <td key={column.id}>{item[column.id]}</td>
-            ))} */}
-              <td>{moment(createdAt).format("YYYY-MM-DD")} </td>
+              <td>{moment(createdAt).format("YYYY-MM-DD HH:mm:ss")}</td>
               <td
                 className={`cursor-pointer ${amount > 0 ? "color-green" : ""}`}
                 style={{
@@ -650,15 +634,11 @@ const AccountStatement = () => {
       <CustomModal
         customClass="modalFull-90 "
         title={[
-          <>
-            <span className="f400">
-              Client Ledger (Total Win Loss :{" "}
-              {betAccountStatementModal?.totalCount?.amount || 0})
-              {/* (Total Count
-              : {betAccountStatementModal?.totalCount?.totalCount || 0})  */}{" "}
-              (Total Bets : {betAccountStatementModal?.totalCount?.soda || 0})
-            </span>
-          </>,
+          <span className="f400">
+            Client Ledger (Total Win Loss :{" "}
+            {betAccountStatementModal?.totalCount?.amount || 0}) (Total Bets :{" "}
+            {betAccountStatementModal?.totalCount?.soda || 0})
+          </span>,
         ]}
         show={AccountStatementModalShow}
         setShow={setAccountStatementModalShow}
@@ -676,4 +656,4 @@ const AccountStatement = () => {
   );
 };
 
-export default AccountStatement;
+export default memo(AccountStatement);

@@ -6,19 +6,6 @@ export const matchSocketService = {
     socket?.emit("matchRoom", {
       id: matchId,
     });
-
-    // thirdParty.emit("initCricketData", {
-    //   matchId: matchId,
-    //   roleName: roleName,
-    // });
-    // currSocket.push(
-    //   setInterval(() => {
-    //     thirdParty.emit("initCricketData", {
-    //       matchId: matchId,
-    //       roleName: roleName,
-    //     });
-    //   }, 120000)
-    // );
   },
   leaveMatchRoom: (matchId: any) => {
     for (let item of currSocket) {
@@ -55,8 +42,14 @@ export const matchSocketService = {
   matchResultDeclared: (callback: any) => {
     socket?.on("matchResult", callback);
   },
+  matchResultUnDeclared: (callback: any) => {
+    socket?.on("matchResultUnDeclare", callback);
+  },
   declaredMatchResultAllUser: (callback: any) => {
     socket?.on("matchResultDeclareAllUser", callback);
+  },
+  unDeclaredMatchResultAllUser: (callback: any) => {
+    socket?.on("matchResultUnDeclareAllUser", callback);
   },
   matchDeleteBet: (callback: any) => {
     socket?.on(`matchDeleteBet`, callback);

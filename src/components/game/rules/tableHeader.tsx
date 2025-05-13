@@ -1,3 +1,4 @@
+import { memo } from "react";
 import "./style.scss";
 
 interface Props {
@@ -15,4 +16,4 @@ const RuleTableheader = ({ teamName }: Props) => {
   );
 };
 
-export default RuleTableheader;
+export default memo(RuleTableheader);

@@ -1,5 +1,4 @@
-import React from 'react';
-import './style.scss'; // Create a CSS file to hold the styles
+import "./style.scss";
 
 const BaccaratRules2 = () => {
   return (
@@ -7,7 +6,11 @@ const BaccaratRules2 = () => {
       <div className="rules-section">
         <ul className="pl-2 pr-2 list-style">
           <li>
-            In the Baccarat game two hands are dealt; once for the banker and another for the player. The player best which will win or if they will tie. The winning hand has the closest value to nine. In case of Banker winning, if banker's point sum is equals to 6, then payout will be 50%.
+            In the Baccarat game two hands are dealt; once for the banker and
+            another for the player. The player best which will win or if they
+            will tie. The winning hand has the closest value to nine. In case of
+            Banker winning, if banker's point sum is equals to 6, then payout
+            will be 50%.
           </li>
         </ul>
       </div>
@@ -39,7 +42,10 @@ const BaccaratRules2 = () => {
         <h6 className="rules-highlight">Rules for Banker:</h6>
         <ul className="pl-2 pr-2 list-style">
           <li>
-            When the PLAYER stands on 6 or 7, the BANKER will always draw on totals of 0-1-2-3-4 and 5, and stands on 6-7-8 and 9. When the PLAYER does not have a natural, the BANKER shall draw on the totals of 0-1 or 2, and then observe the following rules:
+            When the PLAYER stands on 6 or 7, the BANKER will always draw on
+            totals of 0-1-2-3-4 and 5, and stands on 6-7-8 and 9. When the
+            PLAYER does not have a natural, the BANKER shall draw on the totals
+            of 0-1 or 2, and then observe the following rules:
           </li>
         </ul>
         <div className="table-responsive">
@@ -83,7 +89,9 @@ const BaccaratRules2 = () => {
         </div>
         <ul className="pl-2 pr-2 list-style">
           <li>
-            If the PLAYER takes no third card BANKER stands on 6. The hand closest to 9 wins. All Winning bets are paid even money. TIE bets pay 8 for 1
+            If the PLAYER takes no third card BANKER stands on 6. The hand
+            closest to 9 wins. All Winning bets are paid even money. TIE bets
+            pay 8 for 1
           </li>
         </ul>
       </div>
@@ -92,13 +100,17 @@ const BaccaratRules2 = () => {
         <h6 className="rules-highlight">Side Bets:</h6>
         <ul className="pl-2 pr-2 list-style">
           <li>
-            <b>Player Pair</b> - Bet on the chance that the first two cards dealt to the player, are a pair.
+            <b>Player Pair</b> - Bet on the chance that the first two cards
+            dealt to the player, are a pair.
           </li>
           <li>
-            <b>Banker Pair</b> - Bet on the chance that the first two cards dealt to the banker, are a pair.
+            <b>Banker Pair</b> - Bet on the chance that the first two cards
+            dealt to the banker, are a pair.
           </li>
           <li>
-            Select the Player/Banker winning score and get paid according to the payout shown. In the event of a tie, bets on “Winning Total” are lost.
+            Select the Player/Banker winning score and get paid according to the
+            payout shown. In the event of a tie, bets on “Winning Total” are
+            lost.
           </li>
         </ul>
         <div className="table-responsive">
@@ -116,7 +128,9 @@ const BaccaratRules2 = () => {
         </div>
         <ul className="pl-2 pr-2 list-style">
           <li>
-            For example, if you believe the Player/Banker winning score will be ‘5-6’ (meaning 5 or 6), then if this side bet wins you can win 4 times your side bet amount.
+            For example, if you believe the Player/Banker winning score will be
+            ‘5-6’ (meaning 5 or 6), then if this side bet wins you can win 4
+            times your side bet amount.
           </li>
         </ul>
       </div>

@@ -2,24 +2,24 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useRef, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import "./style.scss";
-import { handleRoundId } from "../../../../helpers";
-import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
-import { RootState } from "../../../../store/store";
-import UserBets from "../../../game/userBet";
-import RulesModal from "../../../commonComponent/rulesModal";
 import { luckyrules } from "../../../../assets";
+import { handleRoundId } from "../../../../helpers";
+import { RootState } from "../../../../store/store";
 import {
   cardGamesId,
   cardGamesType,
   cardUrl,
 } from "../../../../utils/Constants";
 import CardResultBox from "../../../commonComponent/cardResultBox";
+import RulesModal from "../../../commonComponent/rulesModal";
+import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
+import UserBets from "../../../game/userBet";
+import CardBox from "./CardsBox";
 import BollywoodTableCard from "./lucky7Card";
+import OddEven from "./OddEvenBox";
+import "./style.scss";
 import TiePairBox from "./TiePairBox";
 import TiePairBox2 from "./TiePairBox2";
-import OddEven from "./OddEvenBox";
-import CardBox from "./CardsBox";
 
 const BollywoodTableComponent = () => {
   const [show, setShow] = useState(false);
@@ -35,7 +35,7 @@ const BollywoodTableComponent = () => {
       <Row>
         <Col md={8}>
           <div className="horseRacingTab">
-            <div style={{ width: "100%"}}>
+            <div style={{ width: "100%" }}>
               <div className="horseRacingTabHeader">
                 <div>
                   <span style={{ fontSize: "16px", fontWeight: "600" }}>

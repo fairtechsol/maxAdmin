@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { Accordion } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -18,12 +18,6 @@ interface Props {
 }
 
 const MenuItemChild = (props: any) => {
-  // const [toggle, setToggle] = useState<Boolean>(false);
-
-  // const handleDrawer = () => {
-  //   setToggle(!toggle);
-  // };
-
   const { data } = props;
   return (
     <Link to={`${data?.path}`} className="title-12">
@@ -32,16 +26,14 @@ const MenuItemChild = (props: any) => {
   );
 };
 
-const MenuCollapse = (props: any) => {
-  const {
-    data,
-    menuItemList,
-    setMenuItemList,
-    selectedMatchIndex,
-    onClickMenuItem,
-    selectedMatch,
-  } = props;
-
+const MenuCollapse = ({
+  data,
+  menuItemList,
+  setMenuItemList,
+  selectedMatchIndex,
+  onClickMenuItem,
+  selectedMatch,
+}: any) => {
   const navigate = useNavigate();
 
   const [selectedDate, setSelectedDate] = useState("");
@@ -51,28 +43,6 @@ const MenuCollapse = (props: any) => {
   const { competitionMatches } = useSelector(
     (state: RootState) => state.match.sidebarList
   );
-  // useEffect(() => {
-  //   try {
-  //     if (selectedCompetition !== "") {
-  //       const tempList = [...menuItemList];
-  //       const selectedMatchChildren = tempList[selectedMatchIndex].children;
-  //       const competitionIndex = selectedMatchChildren.findIndex(
-  //         (item: any) => item?.id === selectedCompetition
-  //       );
-  //       selectedMatchChildren[competitionIndex].children =
-  //         competitionDates &&
-  //         competitionDates?.map((item: any) => ({
-  //           name: moment(item?.startdate).format("YYYY/MM/DD"),
-  //           id: item?.startdate,
-  //           type: "collapse",
-  //           children: [],
-  //         }));
-  //       setMenuItemList(tempList);
-  //     }
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // }, [competitionDates, selectedCompetition, selectedMatchIndex]);
 
   useEffect(() => {
     try {
@@ -207,7 +177,7 @@ const MenuCollapse = (props: any) => {
   );
 };
 
-export const MenuItem: React.FC<Props> = ({
+const MenuItem: React.FC<Props> = ({
   item,
   setMenuItemList,
   menuItemList,
@@ -232,3 +202,4 @@ export const MenuItem: React.FC<Props> = ({
     </>
   );
 };
+export default memo(MenuItem);

@@ -1,13 +1,13 @@
 import { useFormik } from "formik";
-import { useEffect } from "react";
 import { Col, Modal, Row, Stack } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { changePassword } from "../../../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../../../store/store";
-import CustomInput from "../../../commonComponent/input";
-import ModalFooter from "../footer";
 import { oldPasswordValidationSchema } from "../../../../utils/fieldValidations/newPassword";
+import CustomInput from "../../../commonComponent/input";
 import Loader from "../../../commonComponent/loader";
+import ModalFooter from "../footer";
+import { memo } from "react";
 
 const initialValues: any = {
   userid: "any",
@@ -20,9 +20,7 @@ const initialValues: any = {
 const Password = ({ userData, setShow }: any) => {
   const dispatch: AppDispatch = useDispatch();
 
-  const { loading } = useSelector(
-    (state: RootState) => state.user.userList
-  );
+  const { loading } = useSelector((state: RootState) => state.user.userList);
 
   const formik = useFormik({
     initialValues: initialValues,
@@ -41,15 +39,6 @@ const Password = ({ userData, setShow }: any) => {
 
   const { handleSubmit, touched, errors, getFieldProps } = formik;
 
-  useEffect(() => {
-    if (userData) {
-      formik.setValues({
-        ...formik.values,
-        initialBalance: userData?.balance,
-      });
-    }
-  }, [userData]);
-
   return (
     <>
       {loading ? <Loader /> : null}
@@ -58,7 +47,7 @@ const Password = ({ userData, setShow }: any) => {
           <div className="input-container">
             <Row>
               <Col sm={4}>
-                <span style={{fontSize:"0.9rem"}}>New Password</span>
+                <span style={{ fontSize: "0.9rem" }}>New Password</span>
               </Col>
               <Col sm={8}>
                 <CustomInput
@@ -69,7 +58,7 @@ const Password = ({ userData, setShow }: any) => {
                   {...getFieldProps("newPassword")}
                   touched={touched.newPassword}
                   errors={errors.newPassword}
-                  textAlign="left" 
+                  textAlign="left"
                 />
               </Col>
             </Row>
@@ -77,7 +66,7 @@ const Password = ({ userData, setShow }: any) => {
           <div className="input-container mt-3">
             <Row>
               <Col sm={4}>
-                <span style={{fontSize:"0.9rem"}}>Confirm Password</span>
+                <span style={{ fontSize: "0.9rem" }}>Confirm Password</span>
               </Col>
               <Col sm={8}>
                 <CustomInput
@@ -88,7 +77,7 @@ const Password = ({ userData, setShow }: any) => {
                   {...getFieldProps("confirmPassword")}
                   touched={touched.confirmPassword}
                   errors={errors.confirmPassword}
-                  textAlign="left" 
+                  textAlign="left"
                 />
               </Col>
             </Row>
@@ -96,7 +85,7 @@ const Password = ({ userData, setShow }: any) => {
           <div className="input-container mt-3">
             <Row>
               <Col sm={4}>
-                <span style={{fontSize:"0.9rem"}}>Transaction Password</span>
+                <span style={{ fontSize: "0.9rem" }}>Transaction Password</span>
               </Col>
               <Col sm={8}>
                 <CustomInput
@@ -107,7 +96,7 @@ const Password = ({ userData, setShow }: any) => {
                   {...getFieldProps("transactionPassword")}
                   touched={touched.transactionPassword}
                   errors={errors.transactionPassword}
-                  textAlign="left" 
+                  textAlign="left"
                 />
               </Col>
             </Row>
@@ -126,4 +115,4 @@ const Password = ({ userData, setShow }: any) => {
   );
 };
 
-export default Password;
+export default memo(Password);

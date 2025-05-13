@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { calculateMaxLoss, formatNumber, handleSize } from "../../../helpers";
 import {
@@ -52,6 +52,29 @@ const SessionNormal = ({ title, data, detail, manual, mtype }: any) => {
       return true;
     }
   };
+
+  const handleRunAmount = (item: any) => {
+    if (item.activeStatus === "save") {
+      return true;
+    } else if (
+      detail?.profitLossDataSession?.some(
+        (entry: any) => entry.betId === item?.id
+      )
+    ) {
+      if (
+        ![sessionBettingType.fancy1, sessionBettingType.oddEven].includes(mtype)
+      ) {
+        dispatch(resetRunAmount());
+        setRunnerModalShow((prev) => !prev);
+        if (title === "meter") {
+          dispatch(getRunAmountMeter(item?.id));
+        } else {
+          dispatch(getRunAmount(item?.id));
+        }
+      }
+    }
+  };
+
   return (
     <>
       <div
@@ -76,10 +99,7 @@ const SessionNormal = ({ title, data, detail, manual, mtype }: any) => {
             style={{ width: "100%", display: "flex", flexDirection: "column" }}
           >
             <div className="sessionYesNoBoxContainer">
-              <div
-                className="sessionYesNoBox rateBoxWidthNormal"
-                // style={{ width: isLap ? "180px" : !isMobile ? "240px" : "" }}
-              >
+              <div className="sessionYesNoBox rateBoxWidthNormal">
                 <div className="sessionYesBox lay1Background">
                   <span className={`f-size16 sessionBackTxt`}>No</span>
                 </div>
@@ -91,46 +111,19 @@ const SessionNormal = ({ title, data, detail, manual, mtype }: any) => {
             </div>
             {marketArr?.map((item: any, index: any) => {
               return (
-                <div className="w-100 d-flex flex-column">
-                  <div className="sessionRateContainer" key={index}>
+                <div className="w-100 d-flex flex-column" key={index}>
+                  <div className="sessionRateContainer">
                     <div
                       className="sessionRateName runnerWidthNormal"
                       style={{ overflow: "hidden" }}
                     >
                       <span
-                        className="teamFont"
+                        className="teamFont cursor-pointer"
                         style={{ fontWeight: "400", lineHeight: 1 }}
-                        onClick={() => {
-                          // console.log("first", item);
-                          if (item.activeStatus === "save") {
-                            return true;
-                          } else if (
-                            calculateMaxLoss(
-                              detail?.profitLossDataSession,
-                              item?.id
-                            ) === 0
-                          ) {
-                            return;
-                          } else {
-                            if (
-                              ![
-                                sessionBettingType.fancy1,
-                                sessionBettingType.oddEven,
-                              ].includes(mtype)
-                            ) {
-                              dispatch(resetRunAmount());
-                              setRunnerModalShow((prev) => !prev);
-                              if (title === "meter") {
-                                dispatch(getRunAmountMeter(item?.id));
-                              } else {
-                                dispatch(getRunAmount(item?.id));
-                              }
-                            }
-                          }
-                        }}
+                        onClick={() => handleRunAmount(item)}
                       >
                         {item?.RunnerName || item?.name}
-                      </span>{" "}
+                      </span>
                       <span
                         className={`${
                           (marketAnalysisDetail?.length
@@ -166,12 +159,7 @@ const SessionNormal = ({ title, data, detail, manual, mtype }: any) => {
                           : ""}
                       </span>
                     </div>
-                    <div
-                      className="sessionRateBoxContainer rateBoxWidthNormal"
-                      // style={{
-                      //   width: isLap ? "180px" : !isMobile ? "240px" : "",
-                      // }}
-                    >
+                    <div className="sessionRateBoxContainer rateBoxWidthNormal">
                       {handleStatus(
                         item?.activeStatus,
                         item?.GameStatus,
@@ -190,7 +178,6 @@ const SessionNormal = ({ title, data, detail, manual, mtype }: any) => {
                           width: "100%",
                           display: "flex",
                           flexDirection: "column",
-                          // borderRight: "1px solid #c7c8ca",
                         }}
                       >
                         <div
@@ -327,4 +314,4 @@ const SessionNormal = ({ title, data, detail, manual, mtype }: any) => {
     </>
   );
 };
-export default SessionNormal;
+export default memo(SessionNormal);

@@ -1,4 +1,3 @@
-import React from 'react';
 
 const Card32ARules = () => {
   return (
@@ -49,30 +48,44 @@ const Card32ARules = () => {
           </table>
         </div>
         <ul className="pl-4 pr-4 list-style">
-          <li>This is a value card game &amp; Winning result will count on Highest cards total.</li>
-          <li>There are total 4 players, every player has default prefix points. Default points will be consider as following table.</li>
+          <li>
+            This is a value card game &amp; Winning result will count on Highest
+            cards total.
+          </li>
+          <li>
+            There are total 4 players, every player has default prefix points.
+            Default points will be consider as following table.
+          </li>
         </ul>
-        
+
         <h6 className="rules-highlight">Playing Game Rules:</h6>
-        
+
         <div className="table-responsive">
           <table className="table">
             <tbody>
               <tr>
                 <td>
-                  <div><b>PLAYER 8</b></div>
+                  <div>
+                    <b>PLAYER 8</b>
+                  </div>
                   <div>8 Point</div>
                 </td>
                 <td>
-                  <div><b>PLAYER 9</b></div>
+                  <div>
+                    <b>PLAYER 9</b>
+                  </div>
                   <div>9 Point</div>
                 </td>
                 <td>
-                  <div><b>PLAYER 10</b></div>
+                  <div>
+                    <b>PLAYER 10</b>
+                  </div>
                   <div>10 Point</div>
                 </td>
                 <td>
-                  <div><b>PLAYER 11</b></div>
+                  <div>
+                    <b>PLAYER 11</b>
+                  </div>
                   <div>11 Point</div>
                 </td>
               </tr>
@@ -80,9 +93,17 @@ const Card32ARules = () => {
           </table>
         </div>
         <ul className="pl-4 pr-4 list-style">
-          <li>In game, every player has to count sum of default points and their own opened card's point.</li>
-          <li>If in first level, the sum is same with more than one player, then that will be tie and winner tied players go for next level.</li>
-          <li>This sum will go and go up to Single Player Highest Sum of Point.</li>
+          <li>
+            In game, every player has to count sum of default points and their
+            own opened card's point.
+          </li>
+          <li>
+            If in first level, the sum is same with more than one player, then
+            that will be tie and winner tied players go for next level.
+          </li>
+          <li>
+            This sum will go and go up to Single Player Highest Sum of Point.
+          </li>
           <li>At last, Highest Point Cards' Player declare as a Winner.</li>
         </ul>
       </div>

@@ -6,10 +6,8 @@ export const options = {
   chartArea: { left: 0, top: 0, width: "180", height: "200" },
 };
 const BaccaratStatistics = ({ odds, graphsData, cardData, data }: any) => {
- 
   return (
     <div className="baccarateContainer">
-      
       <div className="baccarateRateContainer w-100">
         <div className="baccarateRateContainer1">
           <div
@@ -198,8 +196,8 @@ const BaccaratStatistics = ({ odds, graphsData, cardData, data }: any) => {
               }`}
             >
               <div className="d-flex flex-row ">
-              <span>Player</span>
-              <span>{parseFloat(odds?.[0]?.b1 ?? 0)}:1</span>
+                <span>Player</span>
+                <span>{parseFloat(odds?.[0]?.b1 ?? 0)}:1</span>
               </div>
               <div
                 className="bacarrateCards"
@@ -228,10 +226,10 @@ const BaccaratStatistics = ({ odds, graphsData, cardData, data }: any) => {
               }`}
             >
               <div className="d-flex flex-row">
-              <span>Banker</span>
-              <span>{parseFloat(odds?.[1]?.b1 ?? 0)}:1</span>
+                <span>Banker</span>
+                <span>{parseFloat(odds?.[1]?.b1 ?? 0)}:1</span>
               </div>
-              
+
               <div
                 className="bacarrateCards"
                 style={{ width: cardData?.C6 != "1" ? "75px" : "45px" }}
@@ -239,7 +237,7 @@ const BaccaratStatistics = ({ odds, graphsData, cardData, data }: any) => {
                 <HandleGameCards card={cardData?.C2} />
                 <HandleGameCards card={cardData?.C4} />
                 {cardData?.C6 != "1" && (
-                  <div style={{ transform: "rotate(90deg)"}}>
+                  <div style={{ transform: "rotate(90deg)" }}>
                     <HandleGameCards card={cardData?.C6} />
                   </div>
                 )}

@@ -1,11 +1,12 @@
 import { Button, Modal } from "react-bootstrap";
 import { IoCloseCircle } from "react-icons/io5";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
   accountListModalReset,
   changePasswordReset,
 } from "../../../store/actions/user/userActions";
-import { useDispatch } from "react-redux";
+import { memo } from "react";
 
 const NavigateModal = ({
   transactionMessage,
@@ -66,4 +67,4 @@ const NavigateModal = ({
   );
 };
 
-export default NavigateModal;
+export default memo(NavigateModal);

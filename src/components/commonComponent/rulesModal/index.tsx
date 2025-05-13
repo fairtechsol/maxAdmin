@@ -1,19 +1,20 @@
+import { memo } from "react";
 import Modal from "react-bootstrap/Modal";
 
 const RulesModal = ({ show, setShow, rule }: any) => {
-
   const handleClose = () => setShow(false);
   return (
-    <div>
-      <Modal show={show} onHide={handleClose} >
-        <Modal.Header closeButton style={{backgroundColor:"#004a25",color:"#fff"}}>
-          <Modal.Title>Rules</Modal.Title>
-        </Modal.Header>
-        <Modal.Body style={{padding:"0px"}}>
-          <img src={rule} width={"100%"} height={"550px"} />
-        </Modal.Body>
-      </Modal>
-    </div>
+    <Modal show={show} onHide={handleClose}>
+      <Modal.Header
+        closeButton
+        style={{ backgroundColor: "#004a25", color: "#fff" }}
+      >
+        <Modal.Title>Rules</Modal.Title>
+      </Modal.Header>
+      <Modal.Body style={{ padding: "0px" }}>
+        <img src={rule} width={"100%"} height={"550px"} />
+      </Modal.Body>
+    </Modal>
   );
 };
-export default RulesModal;
+export default memo(RulesModal);

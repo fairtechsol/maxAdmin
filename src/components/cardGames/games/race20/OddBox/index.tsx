@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { HandleCards } from "../../../../commonComponent/cardsComponent";
 import { formatNumber } from "../../../../../helpers";
+import { HandleCards } from "../../../../commonComponent/cardsComponent";
 
 const OddBox = ({ odds, data }: any) => {
   const handleCardRender = (card: string) => {
@@ -66,106 +66,84 @@ const OddBox = ({ odds, data }: any) => {
           {odds?.map((item: any, index: number) => {
             // console.log(item, "jhvf");
             return (
-              <>
+              <div
+                style={{
+                  width: "25%",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "5px",
+                }}
+                key={index}
+              >
+                <div
+                  className="position-relative"
+                  style={{
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <HandleCards card={handleCardRender(item?.nat)} />
+                  <span
+                    onClick={() => toggleDiv(`demo${index}`)}
+                    className="range-icon d-inline-block ms-1"
+                  >
+                    <i className="fas fa-info-circle float-right"></i>{" "}
+                    <div
+                      id={`demo${index}`}
+                      className={`icon-range-dt1day collapse ${
+                        openDivIds.includes(`demo${index}`) ? "show" : ""
+                      }`}
+                    >
+                      R:<span>{parseFloat(item?.min)}</span>-
+                      <span>{formatNumber(item?.max)}</span>
+                    </div>
+                  </span>
+                </div>
                 <div
                   style={{
-                    width: "25%",
+                    width: "100%",
                     display: "flex",
-                    flexDirection: "column",
+                    justifyContent: "space-around",
                     gap: "5px",
+                    lineHeight: 1,
                   }}
-                  key={index}
                 >
                   <div
-                    className="position-relative"
+                    className={`back-BackGround cursor-pointer ${
+                      handleLock(item, "back") ? "suspended" : ""
+                    }`}
                     style={{
-                      width: "100%",
+                      width: "45%",
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
+                      flexDirection: "column",
+                      padding: "14px",
                     }}
                   >
-                    <HandleCards card={handleCardRender(item?.nat)} />
-                    <span
-                      onClick={() => toggleDiv(`demo${index}`)}
-                      className="range-icon d-inline-block ms-1"
-                    >
-                      <i className="fas fa-info-circle float-right"></i>{" "}
-                      <div
-                        id={`demo${index}`}
-                        className={`icon-range-dt1day collapse ${
-                          openDivIds.includes(`demo${index}`) ? "show" : ""
-                        }`}
-                      >
-                        R:<span>{parseFloat(item?.min)}</span>-
-                        <span>{formatNumber(item?.max)}</span>
-                      </div>
-                    </span>
+                    <span className="rate-box">{item?.b1}</span>
                   </div>
                   <div
+                    className={`lay-BackGround cursor-pointer ${
+                      handleLock(item, "lay") ? "suspended" : ""
+                    }`}
                     style={{
-                      width: "100%",
+                      width: "50%",
                       display: "flex",
-                      justifyContent: "space-around",
-                      gap: "5px",
-                      lineHeight: 1,
+                      justifyContent: "center",
+                      alignItems: "center",
+                      flexDirection: "column",
+                      paddingTop: "7px",
                     }}
                   >
-                    <div
-                      className={`back-BackGround cursor-pointer ${
-                        handleLock(item, "back") ? "suspended" : ""
-                      }`}
-                      style={{
-                        width: "45%",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        flexDirection: "column",
-                        padding: "14px",
-                      }}
-                    >
-                      <span className="rate-box">{item?.b1}</span>
-                    </div>
-                    <div
-                      className={`lay-BackGround cursor-pointer ${
-                        handleLock(item, "lay") ? "suspended" : ""
-                      }`}
-                      style={{
-                        width: "50%",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        flexDirection: "column",
-                        paddingTop: "7px",
-                      }}
-                    >
-                      <span className="rate-box">{item?.l1}</span>
-                    </div>
+                    <span className="rate-box">{item?.l1}</span>
                   </div>
-                  <span
-                    className={`oddsBoxProfitLoss color-red ${
-                      data?.profitLoss
-                        ? data?.profitLoss[
-                            `${data?.videoInfo?.mid}_${data?.cards?.[0]?.sid}_card`
-                          ]
-                          ? JSON.parse(
-                              data?.profitLoss[
-                                `${data?.videoInfo?.mid}_${data?.cards?.[0]?.sid}_card`
-                              ]
-                            )[hanleProfitLossForK(item?.nat)] > 0
-                            ? "color-green"
-                            : JSON.parse(
-                                data?.profitLoss[
-                                  `${data?.videoInfo?.mid}_${data?.cards?.[0]?.sid}_card`
-                                ]
-                              )[hanleProfitLossForK(item?.nat)] < 0
-                            ? "color-red"
-                            : ""
-                          : ""
-                        : ""
-                    }`}
-                  >
-                    {data?.profitLoss
+                </div>
+                <span
+                  className={`oddsBoxProfitLoss color-red ${
+                    data?.profitLoss
                       ? data?.profitLoss[
                           `${data?.videoInfo?.mid}_${data?.cards?.[0]?.sid}_card`
                         ]
@@ -173,12 +151,32 @@ const OddBox = ({ odds, data }: any) => {
                             data?.profitLoss[
                               `${data?.videoInfo?.mid}_${data?.cards?.[0]?.sid}_card`
                             ]
-                          )[hanleProfitLossForK(item?.nat)]
-                        : 0
-                      : 0}
-                  </span>
-                </div>
-              </>
+                          )[hanleProfitLossForK(item?.nat)] > 0
+                          ? "color-green"
+                          : JSON.parse(
+                              data?.profitLoss[
+                                `${data?.videoInfo?.mid}_${data?.cards?.[0]?.sid}_card`
+                              ]
+                            )[hanleProfitLossForK(item?.nat)] < 0
+                          ? "color-red"
+                          : ""
+                        : ""
+                      : ""
+                  }`}
+                >
+                  {data?.profitLoss
+                    ? data?.profitLoss[
+                        `${data?.videoInfo?.mid}_${data?.cards?.[0]?.sid}_card`
+                      ]
+                      ? JSON.parse(
+                          data?.profitLoss[
+                            `${data?.videoInfo?.mid}_${data?.cards?.[0]?.sid}_card`
+                          ]
+                        )[hanleProfitLossForK(item?.nat)]
+                      : 0
+                    : 0}
+                </span>
+              </div>
             );
           })}
         </div>

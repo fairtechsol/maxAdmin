@@ -1,10 +1,8 @@
-import { useEffect, useState } from "react";
-import { Button, Col, Form, Row } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-//import SelectSearch from "../../../components/commonComponent/SelectSearch";
 import _ from "lodash";
 import moment from "moment-timezone";
-import { Tab, Tabs } from "react-bootstrap";
+import { memo, useEffect, useState } from "react";
+import { Button, Col, Form, Row, Tab, Tabs } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import SelectSearch2 from "../../../components/commonComponent/SelectSearch2";
 import SelectSearch3 from "../../../components/commonComponent/SelectSearch3";
 import CustomTable from "../../../components/commonComponent/table";
@@ -21,7 +19,6 @@ interface Column {
   label: string;
 }
 
-// Example usage
 const columns: Column[] = [
   { id: "eventType", label: "Event Type" },
   { id: "eventName", label: "Event Name" },
@@ -31,12 +28,10 @@ const columns: Column[] = [
   { id: "odds", label: "User Rate" },
   { id: "amount", label: "Amount" },
   { id: "createdAt", label: "Place Date" },
-  // { id: "startAt", label: "Match Date" }, //eventName
 ];
 
 const options = [
   { value: "PENDING", label: "Matched" },
-  // { value: "UNMATCHED", label: "UnMatched" },
   { value: "DELETED", label: "Deleted" },
 ];
 
@@ -79,7 +74,6 @@ const CurrentBets = () => {
     setBetList(ReportBetList);
   }, [ReportBetList]);
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  // console.log('betList',betList);
 
   useEffect(() => {
     dispatch(
@@ -181,9 +175,7 @@ const CurrentBets = () => {
   return (
     <div className="p-2 pt-0">
       <h5 className="title-22 fw-normal">Current Bets</h5>
-
       <Tabs defaultActiveKey="tab1" id="betReportTabs" onSelect={handleSelect}>
-        {/* Tab 1 */}
         <Tab eventKey="tab1" title="Sports">
           <Form
             onSubmit={(e) => {
@@ -229,13 +221,10 @@ const CurrentBets = () => {
               </Col>
             </Row>
           </Form>
-
           <CustomTable
             customClass="commonTable reportTable"
-            // striped
             columns={columns}
             isPagination={true}
-            // isSort={true}
             isSearch={true}
             itemCount={betList && betList?.count > 0 ? betList?.count : 1}
             setTableConfig={setTableConfig}
@@ -292,10 +281,7 @@ const CurrentBets = () => {
               })}
           </CustomTable>
         </Tab>
-
-        {/* Tab 2 */}
         <Tab eventKey="tab2" title="Casino">
-          {/* Render the same form and table, you can customize based on tab if necessary */}
           <Form onSubmit={(e) => handleLoad(e)} className="mt-1">
             <Row className="d-flex align-items-center">
               <Col md={3}>
@@ -323,7 +309,6 @@ const CurrentBets = () => {
               </Col>
             </Row>
           </Form>
-
           <CustomTable
             customClass="commonTable reportTable"
             striped
@@ -388,4 +373,4 @@ const CurrentBets = () => {
   );
 };
 
-export default CurrentBets;
+export default memo(CurrentBets);

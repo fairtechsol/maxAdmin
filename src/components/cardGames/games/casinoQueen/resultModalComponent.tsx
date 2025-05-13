@@ -49,7 +49,6 @@ const QueenResultComponent: React.FC<Props> = ({ data }: any) => {
   const total2 = handleCount(result?.[2], 2);
   const total3 = handleCount(result?.[3], 3);
 
-  // const maxSum = Math.max(total0, total1, total2, total3);
   return (
     <Container
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
@@ -64,7 +63,7 @@ const QueenResultComponent: React.FC<Props> = ({ data }: any) => {
               "d-sm-flex flex-row justify-content-center align-items-center"
             }
           >
-            {result?.[0]?.map((item: any) => {
+            {result?.[0]?.map((item: any, index: number) => {
               return (
                 item != "1" && (
                   <div
@@ -73,6 +72,7 @@ const QueenResultComponent: React.FC<Props> = ({ data }: any) => {
                       borderRadius: "1px",
                       marginLeft: "5px",
                     }}
+                    key={index}
                   >
                     <HandleCards card={item} />
                   </div>
@@ -95,7 +95,7 @@ const QueenResultComponent: React.FC<Props> = ({ data }: any) => {
               "d-sm-flex flex-row justify-content-center align-items-center"
             }
           >
-            {result?.[1]?.map((item: any) => {
+            {result?.[1]?.map((item: any, index: number) => {
               return (
                 item != "1" && (
                   <div
@@ -104,6 +104,7 @@ const QueenResultComponent: React.FC<Props> = ({ data }: any) => {
                       borderRadius: "1px",
                       marginLeft: "5px",
                     }}
+                    key={index}
                   >
                     <HandleCards card={item} />
                   </div>
@@ -126,7 +127,7 @@ const QueenResultComponent: React.FC<Props> = ({ data }: any) => {
               "d-sm-flex flex-row justify-content-center align-items-center"
             }
           >
-            {result?.[2]?.map((item: any) => {
+            {result?.[2]?.map((item: any, index: number) => {
               return (
                 item != "1" && (
                   <div
@@ -135,6 +136,7 @@ const QueenResultComponent: React.FC<Props> = ({ data }: any) => {
                       borderRadius: "1px",
                       marginLeft: "5px",
                     }}
+                    key={index}
                   >
                     <HandleCards card={item} />
                   </div>
@@ -157,7 +159,7 @@ const QueenResultComponent: React.FC<Props> = ({ data }: any) => {
               "d-sm-flex flex-row justify-content-center align-items-center"
             }
           >
-            {result?.[3]?.map((item: any) => {
+            {result?.[3]?.map((item: any, index: number) => {
               return (
                 item != "1" && (
                   <div
@@ -166,6 +168,7 @@ const QueenResultComponent: React.FC<Props> = ({ data }: any) => {
                       borderRadius: "1px",
                       marginLeft: "5px",
                     }}
+                    key={index}
                   >
                     <HandleCards card={item} />
                   </div>

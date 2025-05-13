@@ -3,8 +3,6 @@ import { formatNumber } from "../../../../../helpers";
 import { HandleCards } from "../../../../commonComponent/cardsComponent";
 import "./style.scss";
 const DynamicTable = ({ odds, data }: any) => {
-  // let player1Key = `playera`;
-  // let player2Key = `playerb`;
   const [openDivIds, setOpenDivIds] = useState<string[]>([]);
 
   const toggleDiv = (id: string) => {
@@ -16,7 +14,6 @@ const DynamicTable = ({ odds, data }: any) => {
   };
   return (
     <div className="d-flex justify-content-sm-between casino-detail-poker20">
-      {/* Player A */}
       <div className="playerabox">
         <div className="casino-box-row playerafabcy">
           <div className="casino-nation-name">
@@ -170,11 +167,15 @@ const DynamicTable = ({ odds, data }: any) => {
                       : "color-green"
                     : "coor-red"
                 } f700 title-16`}
-                style={{  position:
-                  odds?.[1]?.gstatus === "SUSPENDED" ||
-                  odds?.[1]?.gstatus === "CLOSED"
-                    ? "absolute"
-                    : "relative", bottom: "-20px", right: "60px" }}
+                style={{
+                  position:
+                    odds?.[1]?.gstatus === "SUSPENDED" ||
+                    odds?.[1]?.gstatus === "CLOSED"
+                      ? "absolute"
+                      : "relative",
+                  bottom: "-20px",
+                  right: "60px",
+                }}
               >
                 {data?.profitLoss?.[
                   `${data?.playersBonusPair?.[1]?.mid}_${data?.playersBonusPair?.[1]?.sid}_card`
@@ -328,11 +329,15 @@ const DynamicTable = ({ odds, data }: any) => {
                       : "color-green"
                     : "color-red"
                 } f700 title-16`}
-                style={{  position:
-                  odds?.[1]?.gstatus === "SUSPENDED" ||
-                  odds?.[1]?.gstatus === "CLOSED"
-                    ? "absolute"
-                    : "relative", bottom: "-20px", right: "60px" }}
+                style={{
+                  position:
+                    odds?.[1]?.gstatus === "SUSPENDED" ||
+                    odds?.[1]?.gstatus === "CLOSED"
+                      ? "absolute"
+                      : "relative",
+                  bottom: "-20px",
+                  right: "60px",
+                }}
               >
                 {data?.profitLoss?.[
                   `${data?.playersBonusPair?.[2]?.mid}_${data?.playersBonusPair?.[2]?.sid}_card`
@@ -369,11 +374,15 @@ const DynamicTable = ({ odds, data }: any) => {
                       : "color-green"
                     : "color-red"
                 } f700 title-16`}
-                style={{  position:
-                  odds?.[1]?.gstatus === "SUSPENDED" ||
-                  odds?.[1]?.gstatus === "CLOSED"
-                    ? "absolute"
-                    : "relative", bottom: "-20px", right: "60px" }}
+                style={{
+                  position:
+                    odds?.[1]?.gstatus === "SUSPENDED" ||
+                    odds?.[1]?.gstatus === "CLOSED"
+                      ? "absolute"
+                      : "relative",
+                  bottom: "-20px",
+                  right: "60px",
+                }}
               >
                 {data?.profitLoss?.[
                   `${data?.playersBonusPair?.[3]?.mid}_${data?.playersBonusPair?.[3]?.sid}_card`

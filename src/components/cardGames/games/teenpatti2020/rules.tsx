@@ -1,18 +1,4 @@
-import React from "react";
-
 const Teen20Rules = () => {
-  // const rulesStyle = {
-  //     textAlign: 'left',
-  //     marginBottom: '10px',
-  //     color: '#fff',
-  //     backgroundColor: '#222',
-  //     border: '1px solid #444',
-  //     fontSize: '12px',
-  //     padding: '1rem',
-  //     overflowY: 'scroll',
-  //     height: '400px', // Adjust height as needed
-  // };
-
   const ulStyle = {
     listStyleType: "disc",
     paddingLeft: "1rem",

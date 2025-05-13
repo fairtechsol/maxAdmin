@@ -1,10 +1,9 @@
-// CustomTable.tsx
 import React, { memo, useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { Column } from "../../../models/tableInterface";
 import "./style.scss";
 import TableHeader from "./tableHeader";
-import PaginationComponent from "./tableUtils/pagination"; // Import the PaginationComponent
+import PaginationComponent from "./tableUtils/pagination";
 import SortIcon from "./tableUtils/sort";
 
 interface SortConfig {
@@ -96,10 +95,8 @@ const CustomTable: React.FC<CustomTableProps> = ({
     }
   };
 
-  // Handle pagination item click to set the current page
   const onPageChange = (pageNumber: number) => setCurrentPage(pageNumber);
 
-  //   for api fetching when sort or page change
   useEffect(() => {
     setTableConfig((prev: any) => {
       return {
@@ -109,7 +106,6 @@ const CustomTable: React.FC<CustomTableProps> = ({
         rowPerPage: rowPerPage,
       };
     });
-    // alert(tHeadTheme);
   }, [currentPage, sortConfig, rowPerPage]);
 
   useEffect(() => {
@@ -130,11 +126,9 @@ const CustomTable: React.FC<CustomTableProps> = ({
         handleReportExport={handleReportExport}
         tableConfig={tableConfig}
       />
-      {/* Table for displaying data */}
       <Table {...props} className={`${CustomTableClass}`} responsive>
         <thead>
           <tr>
-            {/* Table header with sorting icons */}
             {columns.map((column, index) => (
               <th
                 className={`${tHeadTheme}`}
@@ -142,7 +136,6 @@ const CustomTable: React.FC<CustomTableProps> = ({
                 colSpan={column?.colSpan}
               >
                 {column.label}
-                {/* Display sorting icons based on the sorting configuration */}
                 {isSort && (
                   <SortIcon
                     isActive={sortConfig.key === column.id}
@@ -156,10 +149,9 @@ const CustomTable: React.FC<CustomTableProps> = ({
           </tr>
         </thead>
         <tbody>
-          {/* Table body with sorted data */}
           {itemCount === 0 ? (
             <tr className="text-center">
-              <td className={`noRecord`} colSpan={columns?.length + 1}>
+              <td className="noRecord" colSpan={15}>
                 <p className="title-14 mb-0">No data available in table</p>
               </td>
             </tr>
@@ -168,7 +160,6 @@ const CustomTable: React.FC<CustomTableProps> = ({
           )}
         </tbody>
       </Table>
-      {/* Pagination component for navigating through pages */}
       {isPagination && (
         <PaginationComponent
           currentPage={currentPage}

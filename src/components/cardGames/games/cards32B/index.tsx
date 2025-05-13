@@ -2,26 +2,25 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import "./style.scss";
-import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
-import { RootState } from "../../../../store/store";
+import { card32rules } from "../../../../assets";
 import { handleRoundId } from "../../../../helpers";
+import { RootState } from "../../../../store/store";
 import {
   cardGamesId,
   cardGamesType,
   cardUrl,
 } from "../../../../utils/Constants";
-import RulesModal from "../../../commonComponent/rulesModal";
-import { card32rules } from "../../../../assets";
-import UserBets from "../../../game/userBet";
 import CardResultBox from "../../../commonComponent/cardResultBox";
-// import BackLay from "./BackLay";
+import RulesModal from "../../../commonComponent/rulesModal";
+import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
+import UserBets from "../../../game/userBet";
+import "./style.scss";
+import Card32BResult from "./card32B";
+import CardBox from "./cardBox";
 import OddEven from "./OddEvenBox";
 import PairBox from "./PairBox";
-import TotalCards from "./totalCards";
-import CardBox from "./cardBox";
 import RateBox from "./ratebox";
-import Card32BResult from "./card32B";
+import TotalCards from "./totalCards";
 
 const Card32BComponent = () => {
   const [show, setShow] = useState(false);
@@ -31,7 +30,7 @@ const Card32BComponent = () => {
     <div>
       <Row>
         <Col md={8}>
-          <div style={{ width: "100%"}}>
+          <div style={{ width: "100%" }}>
             <div className="horseRacingTabHeader">
               <div>
                 <span style={{ fontSize: "16px", fontWeight: "600" }}>
@@ -46,9 +45,7 @@ const Card32BComponent = () => {
                   : ""}
               </span>
             </div>
-            <div
-              style={{ width: "100%",backgroundColor: "#000" }}
-            >
+            <div style={{ width: "100%", backgroundColor: "#000" }}>
               <VideoFrame
                 data={dragonTigerDetail}
                 time={dragonTigerDetail?.videoInfo?.autotime}
@@ -60,14 +57,16 @@ const Card32BComponent = () => {
           <div>
             <div
               className="d-sm-flex flex-row justify-content-around mt-2"
-              style={{ width: "100%",gap:"15px" }}
+              style={{ width: "100%", gap: "15px" }}
             >
-              <RateBox data={dragonTigerDetail} odds={dragonTigerDetail?.matchOdd}/>
+              <RateBox
+                data={dragonTigerDetail}
+                odds={dragonTigerDetail?.matchOdd}
+              />
               <OddEven
-                  odds={dragonTigerDetail?.oddEven}
-                  data={dragonTigerDetail}
-                />
-             
+                odds={dragonTigerDetail?.oddEven}
+                data={dragonTigerDetail}
+              />
             </div>
             <div
               style={{
@@ -78,7 +77,6 @@ const Card32BComponent = () => {
                 gap: "15px",
               }}
             >
-             
               <PairBox
                 odds={dragonTigerDetail?.redBlack}
                 data={dragonTigerDetail}

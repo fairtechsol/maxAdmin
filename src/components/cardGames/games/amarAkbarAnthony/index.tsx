@@ -2,23 +2,23 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useRef, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import "./style.scss";
+import { aaarules } from "../../../../assets";
+import { handleRoundId } from "../../../../helpers";
 import { RootState } from "../../../../store/store";
 import {
   cardGamesId,
   cardGamesType,
   cardUrl,
 } from "../../../../utils/Constants";
-import UserBets from "../../../game/userBet";
-import RulesModal from "../../../commonComponent/rulesModal";
-import { aaarules } from "../../../../assets";
 import CardResultBox from "../../../commonComponent/cardResultBox";
+import RulesModal from "../../../commonComponent/rulesModal";
 import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
-import { handleRoundId } from "../../../../helpers";
+import UserBets from "../../../game/userBet";
 import AmarAkbarAnthonyCard from "./amarAkbarAnthonyCard";
-import TiePairBox from "./TiePairBox";
-import OddEven from "./OddEvenBox";
 import CardBox from "./CardsBox";
+import OddEven from "./OddEvenBox";
+import "./style.scss";
+import TiePairBox from "./TiePairBox";
 
 const AmarAkbarAnthonyComponent = () => {
   const [show, setShow] = useState(false);

@@ -2,22 +2,21 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import "./style.scss";
+import { luckyrules } from "../../../../assets";
+import { handleRoundId } from "../../../../helpers";
+import { RootState } from "../../../../store/store";
 import {
   cardGamesId,
   cardGamesType,
   cardUrl,
 } from "../../../../utils/Constants";
-import { RootState } from "../../../../store/store";
-import { handleRoundId } from "../../../../helpers";
-import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
 import CardResultBox from "../../../commonComponent/cardResultBox";
 import RulesModal from "../../../commonComponent/rulesModal";
-import { luckyrules } from "../../../../assets";
+import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
 import UserBets from "../../../game/userBet";
 import TiePairBox from "./TiePairBox";
 import Lucky7BResult from "./lucky7Card";
-// import OddEven from "./OddEvenBox";
+import "./style.scss";
 import CardBox from "./CardsBox";
 
 const Lucky7BComponent = () => {
@@ -60,14 +59,14 @@ const Lucky7BComponent = () => {
             </div>
             <div>
               <div style={{ width: "100%" }}>
-              <TiePairBox
+                <TiePairBox
                   lowHigh={dragonTigerDetail?.lowHigh}
                   odds={dragonTigerDetail?.redBlack}
                   cards={dragonTigerDetail?.luckOdds}
                   data={dragonTigerDetail}
                 />
               </div>
-             
+
               <div
                 style={{
                   width: "100%",

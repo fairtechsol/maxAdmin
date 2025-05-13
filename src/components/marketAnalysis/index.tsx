@@ -1,7 +1,7 @@
-import React from "react";
-import "./styles.scss";
 import moment from "moment-timezone";
+import { memo } from "react";
 import { sessionBettingType } from "../../utils/Constants";
+import "./styles.scss";
 
 const profitLossObj: Record<number, string> = {
   0: "a",
@@ -235,4 +235,4 @@ const MarketAnalysisComp = ({ match }: any) => {
   );
 };
 
-export default MarketAnalysisComp;
+export default memo(MarketAnalysisComp);

@@ -1,3 +1,4 @@
+import { memo } from "react";
 import CustomModal from "../../commonComponent/modal";
 import ChangeStatus from "./changeStatus";
 import Credit from "./credit";
@@ -58,13 +59,6 @@ const ListClientModals = ({
       setShow={setShow}
       title={modalTitle?.[id]?.name}
       titleStyle="fw-normal title-22"
-      // footer={
-      //   <ModalFooter
-      //     clickHandler={() => {
-      //       setShow(false);
-      //     }}
-      //   />
-      // }
     >
       <ModalComponent
         userData={userData}
@@ -81,4 +75,4 @@ const ListClientModals = ({
   );
 };
 
-export default ListClientModals;
+export default memo(ListClientModals);

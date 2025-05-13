@@ -1,23 +1,22 @@
 import { useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import VideoFrame from "../../../../components/commonComponent/videoFrame/VideoFrame";
 import TiePairBox from "../../../../components/cardGames/games/lucky7/TiePairBox";
-// import OddEven from "../../../../components/cardGames/games/lucky7/OddEvenBox";
+import VideoFrame from "../../../../components/commonComponent/videoFrame/VideoFrame";
+import { useSelector } from "react-redux";
+import { luckyrules } from "../../../../assets";
 import CardResultBox from "../../../../components/commonComponent/cardResultBox";
 import RulesModal from "../../../../components/commonComponent/rulesModal";
-import { handleRoundId } from "../../../../helpers";
 import UserBets from "../../../../components/game/userBet";
+import { handleRoundId } from "../../../../helpers";
+import { RootState } from "../../../../store/store";
 import {
   cardGamesId,
   cardGamesType,
   cardUrl,
 } from "../../../../utils/Constants";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../../store/store";
-import { luckyrules } from "../../../../assets";
+import CardBox from "./CardsBox";
 import Lucky7Result from "./lucky7Card";
 import "./style.scss";
-import CardBox from "./CardsBox";
 
 const Lucky7Component = () => {
   const [show, setShow] = useState(false);
@@ -29,7 +28,7 @@ const Lucky7Component = () => {
       <Row>
         <Col md={8}>
           <div className="horseRacingTab">
-            <div style={{ width: "100%"}}>
+            <div style={{ width: "100%" }}>
               <div className="horseRacingTabHeader">
                 <div>
                   <span style={{ fontSize: "16px", fontWeight: "600" }}>
@@ -59,7 +58,7 @@ const Lucky7Component = () => {
               </div>
             </div>
             <div>
-              <div style={{ width: "100%"}}>
+              <div style={{ width: "100%" }}>
                 <TiePairBox
                   lowHigh={dragonTigerDetail?.lowHigh}
                   odds={dragonTigerDetail?.redBlack}
@@ -67,7 +66,7 @@ const Lucky7Component = () => {
                   data={dragonTigerDetail}
                 />
               </div>
-             
+
               <div
                 style={{
                   width: "100%",

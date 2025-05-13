@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { useSelector } from "react-redux";
 import { dummyArray, formatNumber } from "../../../helpers";
 import { RootState } from "../../../store/store";
@@ -6,11 +7,18 @@ import MarketTableHeader from "../../commonComponent/MarketWiseHeader";
 import BetBox from "../betBox";
 import "./style.scss";
 
-const Tournament = ({ title, box, data, detail }: any) => {
+interface TournamentProps {
+  title: string;
+  box: number;
+  data: any;
+  detail: any;
+}
+
+const Tournament = ({ title, box, data, detail }: TournamentProps) => {
   const { marketAnalysisDetail } = useSelector(
     (state: RootState) => state.match.marketAnalysis
   );
-  const key = `${data.parentBetId || data.id}_profitLoss_${detail.id}`;
+  const key = `${data?.parentBetId || data?.id}_profitLoss_${detail?.id}`;
 
   const profitLossJson = detail?.profitLossDataMatch?.[key];
 
@@ -92,7 +100,6 @@ const Tournament = ({ title, box, data, detail }: any) => {
                 <div
                   className="tournamentTeam"
                   style={isMobile && box === 6 ? { width: "28%" } : {}}
-                  // style={box === 6 ? { width: "28%" } : {}}
                 >
                   <span className={`teamFont tournamentTeamTxt`}>
                     {item?.nat || item?.runnerName}
@@ -156,9 +163,10 @@ const Tournament = ({ title, box, data, detail }: any) => {
                       {(item?.ex?.availableToBack?.length > 0
                         ? item?.ex?.availableToBack
                         : dummyArray
-                      )?.map((item2: any) => {
+                      )?.map((item2: any, index: number) => {
                         return (
                           <BetBox
+                            key={index}
                             data={item2}
                             type={"back"}
                             detail={detail}
@@ -169,9 +177,10 @@ const Tournament = ({ title, box, data, detail }: any) => {
                       {(item?.ex?.availableToLay?.length > 0
                         ? item?.ex?.availableToLay
                         : dummyArray
-                      )?.map((item2: any) => {
+                      )?.map((item2: any, index: number) => {
                         return (
                           <BetBox
+                            key={index}
                             data={item2}
                             type={"lay"}
                             detail={detail}
@@ -211,4 +220,4 @@ const Tournament = ({ title, box, data, detail }: any) => {
     </>
   );
 };
-export default Tournament;
+export default memo(Tournament);

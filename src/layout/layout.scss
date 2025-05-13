@@ -1,260 +1,250 @@
 @import "/src/assets/variable.scss";
 
-
-.user-dropdown-container{
-    text-transform: capitalize;
-    font-size: 10px;
-    font-weight: 600;
-    color: $white;
-    display: flex;
-    flex-direction: row;
-    background-color: rgb(0, 74, 37);
-    // margin-bottom: 10px;
-    height: 10%;
-    right: 120px;
-    position: absolute;
-    top: 5px;
+.user-dropdown-container {
+  text-transform: capitalize;
+  font-size: 10px;
+  font-weight: 600;
+  color: $white;
+  display: flex;
+  flex-direction: row;
+  background-color: rgb(0, 74, 37);
+  height: 10%;
+  right: 120px;
+  position: absolute;
+  top: 5px;
 }
-.selectheight{
-    height: 2vh;
-    width: 5vw;
+.selectheight {
+  height: 2vh;
+  width: 5vw;
 }
-.user-dropdown-containerM{
-    text-transform: capitalize;
-    font-size: 10px;
-    font-weight: 600;
-    color: $white;
-    width: 45%;
-    display: flex;
-    flex-direction: row;
-    background-color: rgb(0, 74, 37);
-    margin-bottom: 10px;
+.user-dropdown-containerM {
+  text-transform: capitalize;
+  font-size: 10px;
+  font-weight: 600;
+  color: $white;
+  width: 45%;
+  display: flex;
+  flex-direction: row;
+  background-color: rgb(0, 74, 37);
+  margin-bottom: 10px;
 }
 
 .dropdown-content {
-    display: flex;
-    align-items: center;
-    // gap: 10px; /* Adjust the gap between items as needed */
-  }
-  
-.navbar {
-    height: 52px;
-    .menuHamBurger{
-        span{
-            height: 2px;
-            background-color: $white;
-            width: 16px;
-        }
-    }
-    a.nav-link{
-        text-transform: capitalize;
-        // padding: 10px 10px;
-        font-size: 14px;
-        line-height: 15px;
-        font-weight: 600;
-        color: $white;
-        margin: 10px 2px;
-        background-color: rgb(0, 74, 37);
-    }
-    .dropdown-menu {
-        background-color: $primary;
-        border: 0;
-        border-radius: 0;
-        a{
-            &:first-child{
-                a{
-                    
-                    position: relative;
-                    // animation: blinkingText 0.8s infinite;
-                    // &::after{
-                    //         height: 1px;
-                    //         width: 20px;
-                    //         background-color: red;
-                    //         animation: pulse 4s ease infinite alternate, nudge .5s linear infinite alternate;
-                    //         border-radius: 100%;
-                    //         position: absolute;
-                    //         bottom: -3px;
-                    //         content: "";
-                    //         animation: blinkingText 0.8s infinite;
-
-                    // }
-                }
-            }
-        }
-        a{
-            color: $white;
-            text-decoration: none;
-            font-size: 15px;
-        }
-        :hover{
-            background-color: $secondary;
-        }
-    }
-    .headerSearch{
-        // position: relative;
-        // width: 12%;
-        margin-top: 5px;
-        .headerSearch-ico{
-            position: absolute;
-            right: 10px;
-            top: 5px;
-            cursor: pointer;
-            z-index: 9999;
-        }
-    }
-    .headerSearchMobile{
-        position: relative;
-        // width: 2vw;
-        .headerSearch-ico{
-            position: absolute;
-            right: 10px;
-            top: 5px;
-            cursor: pointer;
-            z-index: 9999;
-        }
-    }
-    
+  display: flex;
+  align-items: center;
 }
 
-.cursor{
-    cursor: pointer;
+.navbar {
+  height: 52px;
+  .menuHamBurger {
+    span {
+      height: 2px;
+      background-color: $white;
+      width: 16px;
+    }
+  }
+  a.nav-link {
+    text-transform: capitalize;
+    font-size: 14px;
+    line-height: 15px;
+    font-weight: 600;
+    color: $white;
+    margin: 10px 2px;
+    background-color: rgb(0, 74, 37);
+  }
+  .dropdown-menu {
+    background-color: $primary;
+    border: 0;
+    border-radius: 0;
+    a {
+      &:first-child {
+        a {
+          position: relative;
+        }
+      }
+    }
+    a {
+      color: $white;
+      text-decoration: none;
+      font-size: 15px;
+    }
+    :hover {
+      background-color: $secondary;
+    }
+  }
+  .headerSearch {
+    margin-top: 5px;
+    .headerSearch-ico {
+      position: absolute;
+      right: 10px;
+      top: 5px;
+      cursor: pointer;
+      z-index: 9999;
+    }
+  }
+  .headerSearchMobile {
+    position: relative;
+    .headerSearch-ico {
+      position: absolute;
+      right: 10px;
+      top: 5px;
+      cursor: pointer;
+      z-index: 9999;
+    }
+  }
+}
+
+.cursor {
+  cursor: pointer;
 }
 @keyframes pulse {
-    0% {
-       background-color: red;
-   }
-    50% {
-        background-color: #F9A9BA;
-    }
-     100% {
-        background-color: red;
-    }
-} 
-.navbar  a.nav-link:focus{
-    color: $white;
+  0% {
+    background-color: red;
+  }
+  50% {
+    background-color: #f9a9ba;
+  }
+  100% {
+    background-color: red;
+  }
 }
-.navbar  a.nav-link:hover{
-    text-decoration: underline;
-    background-color: $secondary;
-    color: $black;
+.navbar a.nav-link:focus {
+  color: $white;
 }
-
-.sidebar{
-    position: absolute;
-    left: -100%;
-    top: 52px;
-    width: 300px;
-    transition: 1s;
-    height: calc(100vh - 52px);
+.navbar a.nav-link:hover {
+  text-decoration: underline;
+  background-color: $secondary;
+  color: $black;
 }
 
-.sidebar .sidebarBox-close{
-    position: absolute;
-    right: 10px;
-    font-size: 22px;
-    cursor: pointer;
-    font-weight: 400;
+.sidebar {
+  position: absolute;
+  left: -100%;
+  top: 52px;
+  width: 300px;
+  transition: 1s;
+  height: calc(100vh - 52px);
 }
-.sidebar.sidebarActive{
-    left: 0;
-}
-.sidebar .sidebarBox{
-    height: 100em;
-    padding: 20px 10px;
-    position: relative;
-    z-index: 333;
 
+.sidebar .sidebarBox-close {
+  position: absolute;
+  right: 10px;
+  font-size: 22px;
+  cursor: pointer;
+  font-weight: 400;
 }
-.sidebar .sidebarBox .accordion-body{
-    padding: 0;
-    
+.sidebar.sidebarActive {
+  left: 0;
 }
-.sidebar .sidebarBox .accordion-body .accordion-body{
-    padding: 0px 12px;
+.sidebar .sidebarBox {
+  height: 100em;
+  padding: 20px 10px;
+  position: relative;
+  z-index: 333;
+}
+.sidebar .sidebarBox .accordion-body {
+  padding: 0;
+}
+.sidebar .sidebarBox .accordion-body .accordion-body {
+  padding: 0px 12px;
 }
 .sidebar .sidebarBox .accordion-item {
-    border: 0;
-    background: none;
-    position: relative;
+  border: 0;
+  background: none;
+  position: relative;
 }
-.sidebar .sidebarBox .accordion-item  .accordion-header .accordion-button{
-    margin: 5px 0 0 0;
+.sidebar .sidebarBox .accordion-item .accordion-header .accordion-button {
+  margin: 5px 0 0 0;
 }
-.sidebar .sidebarBox .accordion-item  .accordion-body .accordion-button{
-    margin: 0;
+.sidebar .sidebarBox .accordion-item .accordion-body .accordion-button {
+  margin: 0;
 }
-.sidebar .sidebarBox .accordion-item .accordion-body .accordion-item:after{
-    border-left: 1px solid $primary;
-    bottom: 0;
-    content: "";
-    left: 4px;
-    position: absolute;
-    top: 0px;
+.sidebar .sidebarBox .accordion-item .accordion-body .accordion-item:after {
+  border-left: 1px solid $primary;
+  bottom: 0;
+  content: "";
+  left: 4px;
+  position: absolute;
+  top: 0px;
 }
-.sidebar .sidebarBox .accordion-item  .accordion-header .accordion-button,
-    .sidebar .sidebarBox .accordion-item a{
-    padding: 0 !important;
-    background: none;
-    box-shadow: none;
-    font-size: 12px;
-    position: relative;
-    text-decoration: none;
+.sidebar .sidebarBox .accordion-item .accordion-header .accordion-button,
+.sidebar .sidebarBox .accordion-item a {
+  padding: 0 !important;
+  background: none;
+  box-shadow: none;
+  font-size: 12px;
+  position: relative;
+  text-decoration: none;
 }
-.sidebar .sidebarBox .accordion-item .accordion-item .accordion-header .accordion-button,
-.sidebar .sidebarBox .accordion-item a{
-    padding: 0 0 0 12px !important;
-}   
-.sidebar .sidebarBox .accordion-item .accordion-header .accordion-button:after{
-    flex-shrink: 0;
-    background: none;
-    transition: transform .2s ease-in-out;
-    float: left;
-    margin-left: 6px !important;
-    font-size: 15px;
-    transform: rotate(0);
-    color: $black;
+.sidebar
+  .sidebarBox
+  .accordion-item
+  .accordion-item
+  .accordion-header
+  .accordion-button,
+.sidebar .sidebarBox .accordion-item a {
+  padding: 0 0 0 12px !important;
 }
-.sidebar .sidebarBox .accordion-item  .accordion-header .accordion-button.collapsed:after{
-    content: "+";
+.sidebar .sidebarBox .accordion-item .accordion-header .accordion-button:after {
+  flex-shrink: 0;
+  background: none;
+  transition: transform 0.2s ease-in-out;
+  float: left;
+  margin-left: 6px !important;
+  font-size: 15px;
+  transform: rotate(0);
+  color: $black;
+}
+.sidebar
+  .sidebarBox
+  .accordion-item
+  .accordion-header
+  .accordion-button.collapsed:after {
+  content: "+";
 }
 
-.sidebar .sidebarBox .accordion-item  .accordion-header .accordion-button:after{
-    content: "-";
+.sidebar .sidebarBox .accordion-item .accordion-header .accordion-button:after {
+  content: "-";
 }
-.sidebar .sidebarBox .accordion-item .accordion-body .accordion-header .accordion-button:before,
-.sidebar .sidebarBox .accordion-item .accordion-body .accordion a:before{
-    background: $primary;
-    bottom: auto;
-    content: "";
-    height: 8px;
-    width: 8px;
-    left: 0px;
-    margin-top: 0;
-    position: absolute;
-    right: auto;
-    z-index: 1;
-    border-radius: 50%; 
+.sidebar
+  .sidebarBox
+  .accordion-item
+  .accordion-body
+  .accordion-header
+  .accordion-button:before,
+.sidebar .sidebarBox .accordion-item .accordion-body .accordion a:before {
+  background: $primary;
+  bottom: auto;
+  content: "";
+  height: 8px;
+  width: 8px;
+  left: 0px;
+  margin-top: 0;
+  position: absolute;
+  right: auto;
+  z-index: 1;
+  border-radius: 50%;
 }
-.sidebar .sidebarBox .accordion-item .accordion-body .accordion a:before{
-    margin-top: 10px;
+.sidebar .sidebarBox .accordion-item .accordion-body .accordion a:before {
+  margin-top: 10px;
 }
 .sidebar .list-group .list-group-item {
-    font-size: 12px;
+  font-size: 12px;
 }
-.page-content{
-    background-color: $light;
-    // height: calc(100vh - 76px);
-    margin: 12px;
-    padding: 10px 0;
+.page-content {
+  background-color: $light;
+  // height: calc(100vh - 76px);
+  margin: 12px;
+  padding: 10px 0;
 }
 /* ===== main content ===== */
-.addAcc{
-    box-shadow: 0px 0px 5px rgba($black, 0.5);
-    border-radius: 5px;
+.addAcc {
+  box-shadow: 0px 0px 5px rgba($black, 0.5);
+  border-radius: 5px;
 }
 
 @media screen and (max-width: 768px) {
-    .sidebar {
-        width: 300px; /* New width for smaller screens */
-    }
+  .sidebar {
+    width: 300px; /* New width for smaller screens */
+  }
 }

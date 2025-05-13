@@ -1,5 +1,4 @@
-import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
 
 const Card32BResult: any = ({ data }: any) => {
@@ -50,8 +49,10 @@ const Card32BResult: any = ({ data }: any) => {
                   justifyContent: "center",
                 }}
               >
-                {result?.[0]?.map((item: any) => {
-                  return <HandleCards card={item != "1" ? item : ""} />;
+                {result?.[0]?.map((item: any, index: number) => {
+                  return (
+                    <HandleCards card={item != "1" ? item : ""} key={index} />
+                  );
                 })}
               </div>
             </Col>
@@ -87,8 +88,10 @@ const Card32BResult: any = ({ data }: any) => {
                   justifyContent: "center",
                 }}
               >
-                {result?.[1]?.map((item: any) => {
-                  return <HandleCards card={item != "1" ? item : ""} />;
+                {result?.[1]?.map((item: any, index: number) => {
+                  return (
+                    <HandleCards card={item != "1" ? item : ""} key={index} />
+                  );
                 })}
               </div>
             </Col>
@@ -124,8 +127,10 @@ const Card32BResult: any = ({ data }: any) => {
                   justifyContent: "center",
                 }}
               >
-                {result?.[2]?.map((item: any) => {
-                  return <HandleCards card={item != "1" ? item : ""} />;
+                {result?.[2]?.map((item: any, index: number) => {
+                  return (
+                    <HandleCards card={item != "1" ? item : ""} key={index} />
+                  );
                 })}
               </div>
             </Col>
@@ -161,8 +166,10 @@ const Card32BResult: any = ({ data }: any) => {
                   justifyContent: "center",
                 }}
               >
-                {result?.[3]?.map((item: any) => {
-                  return <HandleCards card={item != "1" ? item : ""} />;
+                {result?.[3]?.map((item: any, index: number) => {
+                  return (
+                    <HandleCards card={item != "1" ? item : ""} key={index} />
+                  );
                 })}
               </div>
             </Col>

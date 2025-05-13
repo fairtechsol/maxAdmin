@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { Col, Container, Form, Nav, Row, Tab } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -23,7 +23,8 @@ import {
 } from "../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../store/store";
 import { ApiConstants } from "../../utils/Constants";
-// Example usage
+import "./style.scss";
+
 const columns: Column[] = [
   { id: "user.userName", label: "User Name", colSpan: 2 },
   { id: "user.creditRefrence", label: "Credit Reference" },
@@ -36,7 +37,6 @@ const columns: Column[] = [
   { id: "exposureLimit", label: "Exposure Limit" },
   { id: "default", label: "Default%" },
   { id: "user.roleName", label: "Account Type" },
-  // { id: "casino", label: "Casino Total" },
   { id: "actions", label: "Actions" },
 ];
 
@@ -83,48 +83,19 @@ const ListActiveInactiveUser: React.FC = () => {
   };
 
   const actionButtons = [
-    {
-      id: "d",
-      name: "D",
-      onClick: showEventModals,
-    },
-    {
-      id: "w",
-      name: "W",
-      onClick: showEventModals,
-    },
-    {
-      id: "l",
-      name: "L",
-      onClick: showEventModals,
-    },
-    {
-      id: "c",
-      name: "C",
-      onClick: showEventModals,
-    },
-    {
-      id: "p",
-      name: "P",
-      onClick: showEventModals,
-    },
-    {
-      id: "s",
-      name: "S",
-      onClick: showEventModals,
-    },
-    // {
-    //   id: "more",
-    //   name: "More",
-    //   onClick: () => { },
-    // },
+    { key: "deposit", id: "d", name: "D", onClick: showEventModals },
+    { key: "withdraw", id: "w", name: "W", onClick: showEventModals },
+    { key: "", id: "l", name: "L", onClick: showEventModals },
+    { key: "creditReference", id: "c", name: "C", onClick: showEventModals },
+    { key: "userPasswordChange", id: "p", name: "P", onClick: showEventModals },
+    { key: "userLock", id: "s", name: "S", onClick: showEventModals },
   ];
 
   const { userList, loading } = useSelector(
     (state: RootState) => state.user.userList
   );
   const [localUserList, setLocalUserList] = useState([]);
-  const { totalBalance } = useSelector(
+  const { totalBalance, userDetail } = useSelector(
     (state: RootState) => state.user.profile
   );
   const sortData = (key: string) => {
@@ -172,17 +143,48 @@ const ListActiveInactiveUser: React.FC = () => {
     }
   };
 
+  const handleActionButtonFilter = (item: any) => {
+    if (item.key === "userLock") {
+      if (userDetail?.permission) {
+        const userLockPerm = userDetail?.permission?.userLock;
+        const betLockPerm = userDetail?.permission?.betLock;
+        if (!userLockPerm && !betLockPerm) {
+          return false;
+        }
+        return true;
+      } else return true;
+    }
+
+    if (item.key && userDetail?.permission?.[item.key] === false) {
+      return false;
+    }
+
+    return true;
+  };
+
+  const handleActiveDeactiveTab = (val: string) => {
+    dispatch(dropdownSummary({ summary: true }));
+    setCurrentPage(1);
+    setTableConfig((prev: any) => {
+      return {
+        ...prev,
+        keyword: "",
+      };
+    });
+    setActiveTab(val);
+  };
+
   useEffect(() => {
     try {
       if (id) {
         dispatch(
           getUsers({
             userId: id,
-            page: tableConfig?.page || 1,
+            page: currentPage || 1,
             limit: value,
             userName: keyword || "",
-            sort: tableConfig?.key || "",
-            order: tableConfig?.direction || "DESC",
+            sort: sort?.key || "",
+            order: sort?.direction || "DESC",
             activeTab: activeTab,
           })
         );
@@ -190,7 +192,7 @@ const ListActiveInactiveUser: React.FC = () => {
     } catch (error) {
       console.log(error);
     }
-  }, [id, tableConfig, value, keyword, activeTab]);
+  }, [id, value, keyword, activeTab, currentPage, sort]);
 
   useEffect(() => {
     try {
@@ -261,15 +263,13 @@ const ListActiveInactiveUser: React.FC = () => {
                 }}
                 value={value}
               >
-                <option value={25}>25</option>
-                <option value={50}>50</option>
-                <option value={100}>100</option>
-                <option value={250}>250</option>
-                <option value={500}>500</option>
-                <option value={750}>750</option>
-                <option value={1000}>1000</option>
+                {[25, 50, 100, 250, 500, 750, 1000].map((item: number) => (
+                  <option key={item} value={item}>
+                    {item}
+                  </option>
+                ))}
               </select>
-              <span className="title-12 ms-1">entries</span>{" "}
+              <span className="title-12 ms-1">entries</span>
             </div>
           </Col>
           <Col className="d-flex flex-column align-items-end">
@@ -291,18 +291,7 @@ const ListActiveInactiveUser: React.FC = () => {
                   <Nav.Link
                     className="rounded-0 "
                     eventKey="first"
-                    onClick={() => {
-                      dispatch(dropdownSummary({ summary: true }));
-                      setCurrentPage(1);
-                      setTableConfig((prev: any) => {
-                        return {
-                          ...prev,
-                          keyword: "",
-                          // page: 1,
-                        };
-                      });
-                      setActiveTab("active");
-                    }}
+                    onClick={() => handleActiveDeactiveTab("active")}
                   >
                     Active Users
                   </Nav.Link>
@@ -311,18 +300,7 @@ const ListActiveInactiveUser: React.FC = () => {
                   <Nav.Link
                     className="rounded-0 "
                     eventKey="second"
-                    onClick={() => {
-                      dispatch(dropdownSummary({ summary: false }));
-                      setCurrentPage(1);
-                      setTableConfig((prev: any) => {
-                        return {
-                          ...prev,
-                          keyword: "",
-                          // page: 1,
-                        };
-                      });
-                      setActiveTab("deactive");
-                    }}
+                    onClick={() => handleActiveDeactiveTab("deactive")}
                   >
                     Deactive Users
                   </Nav.Link>
@@ -376,56 +354,6 @@ const ListActiveInactiveUser: React.FC = () => {
                             {index === 5 &&
                               totalBalance &&
                               formatToINR(totalBalance?.availableBalance)}
-                            {/* {index === 1 &&
-                              userList &&
-                              formatToINR(
-                                localUserList?.reduce(
-                                  (acc: any, match: any) => {
-                                    return acc + +match?.creditRefrence;
-                                  },
-                                  0
-                                ) || 0
-                              )}
-                            {index === 2 &&
-                              userList &&
-                              formatToINR(
-                                localUserList?.reduce(
-                                  (acc: any, match: any) => {
-                                    return acc + +match?.balance;
-                                  },
-                                  0
-                                ) || 0
-                              )}
-                            {index === 3 &&
-                              userList &&
-                              formatToINR(
-                                localUserList?.reduce(
-                                  (acc: any, match: any) => {
-                                    return acc + +match?.userBal?.profitLoss;
-                                  },
-                                  0
-                                ) || 0
-                              )}
-                            {index === 4 &&
-                              userList &&
-                              formatToINR(
-                                localUserList?.reduce(
-                                  (acc: any, match: any) => {
-                                    return acc + +match?.userBal?.exposure;
-                                  },
-                                  0
-                                ) || 0
-                              )}
-                            {index === 5 &&
-                              userList &&
-                              formatToINR(
-                                localUserList?.reduce(
-                                  (acc: any, match: any) => {
-                                    return acc + +match?.availableBalance;
-                                  },
-                                  0
-                                ) || 0
-                              )} */}
                           </td>
                         );
                       })}
@@ -439,7 +367,6 @@ const ListActiveInactiveUser: React.FC = () => {
                           creditRefrence,
                           exposureLimit,
                           roleName,
-                          // matchCommission,
                           id,
                           userBlock,
                           betBlock,
@@ -471,7 +398,6 @@ const ListActiveInactiveUser: React.FC = () => {
                                 </Link>
                               )}
                             </td>
-
                             <td className="text-end">
                               {formatToINR(creditRefrence)}
                             </td>
@@ -499,7 +425,7 @@ const ListActiveInactiveUser: React.FC = () => {
                             <td className="text-end">
                               {formatToINR(availableBalance)}
                             </td>
-                            <td className="text-center">
+                            <td className="text-center multiLoginInputCont">
                               <Form>
                                 <Form.Check
                                   disabled={true}
@@ -509,7 +435,7 @@ const ListActiveInactiveUser: React.FC = () => {
                                 />
                               </Form>
                             </td>
-                            <td className="text-center">
+                            <td className="text-center multiLoginInputCont">
                               <Form>
                                 <Form.Check
                                   disabled={true}
@@ -524,15 +450,39 @@ const ListActiveInactiveUser: React.FC = () => {
                             </td>
                             <td>0</td>
                             <td>{roleName}</td>
-                            {/* <td className="text-end">0</td> */}
                             <td>
                               <div className="d-flex gap-1 border-right-0 border-left-0">
                                 {type ? (
                                   <>
-                                    {actionButtons?.map((item) => {
-                                      return (
-                                        (item.id === "d" ||
-                                          item.id === "w") && (
+                                    {actionButtons
+                                      .filter(handleActionButtonFilter)
+                                      ?.map((item) => {
+                                        return (
+                                          (item.id === "d" ||
+                                            item.id === "w") && (
+                                            <CustomButton
+                                              variant="dark"
+                                              onClick={() => {
+                                                item.onClick(
+                                                  item?.id,
+                                                  userItem
+                                                );
+                                              }}
+                                              key={item?.id}
+                                              className={`actionBtn`}
+                                            >
+                                              {item?.name}
+                                            </CustomButton>
+                                          )
+                                        );
+                                      })}
+                                  </>
+                                ) : (
+                                  <>
+                                    {actionButtons
+                                      .filter(handleActionButtonFilter)
+                                      ?.map((item) => {
+                                        return (
                                           <CustomButton
                                             variant="dark"
                                             onClick={() => {
@@ -543,26 +493,8 @@ const ListActiveInactiveUser: React.FC = () => {
                                           >
                                             {item?.name}
                                           </CustomButton>
-                                        )
-                                      );
-                                    })}
-                                  </>
-                                ) : (
-                                  <>
-                                    {actionButtons?.map((item) => {
-                                      return (
-                                        <CustomButton
-                                          variant="dark"
-                                          onClick={() => {
-                                            item.onClick(item?.id, userItem);
-                                          }}
-                                          key={item?.id}
-                                          className={`actionBtn`}
-                                        >
-                                          {item?.name}
-                                        </CustomButton>
-                                      );
-                                    })}
+                                        );
+                                      })}
                                   </>
                                 )}
                               </div>
@@ -571,43 +503,6 @@ const ListActiveInactiveUser: React.FC = () => {
                         );
                       })}
                   </CustomTable>
-                  {/* {activeUser?.length > 0 && (
-                    <div
-                      style={{
-                        width: "100%",
-                        marginTop: "5px",
-                        display: "flex",
-                        flexDirection: "row",
-                      }}
-                    >
-                      <div
-                        style={{
-                          width: "50%",
-                          display: "flex",
-                          justifyContent: "flex-start",
-                        }}
-                      >
-                        Showing 1 to {activeUser?.length} of{" "}
-                        {activeUser?.length} entries
-                      </div>
-                      <div
-                        style={{
-                          width: "50%",
-                          display: "flex",
-                          justifyContent: "flex-end",
-                          gap: "5px",
-                        }}
-                      >
-                        <CustomButton className={`actionBtn`} disabled>
-                          Previous
-                        </CustomButton>
-                        <CustomButton className={`actionBtn`}>1</CustomButton>
-                        <CustomButton className={`actionBtn`} disabled>
-                          Next
-                        </CustomButton>
-                      </div>
-                    </div>
-                  )} */}
                 </Tab.Pane>
                 <Tab.Pane eventKey="second">
                   <CustomTable
@@ -626,6 +521,7 @@ const ListActiveInactiveUser: React.FC = () => {
                     tableConfig={tableConfig}
                     currentPage={currentPage}
                     setCurrentPage={setCurrentPage}
+                    value={value}
                   >
                     <tr>
                       {columns?.map((_, index) => {
@@ -729,7 +625,6 @@ const ListActiveInactiveUser: React.FC = () => {
                                 </Link>
                               )}
                             </td>
-
                             <td className="text-end">
                               {formatToINR(creditRefrence)}
                             </td>
@@ -757,7 +652,7 @@ const ListActiveInactiveUser: React.FC = () => {
                             <td className="text-end">
                               {formatToINR(availableBalance)}
                             </td>
-                            <td className="text-center">
+                            <td className="text-center multiLoginInputCont">
                               <Form>
                                 <Form.Check
                                   disabled={true}
@@ -767,7 +662,7 @@ const ListActiveInactiveUser: React.FC = () => {
                                 />
                               </Form>
                             </td>
-                            <td className="text-center">
+                            <td className="text-center multiLoginInputCont">
                               <Form>
                                 <Form.Check
                                   disabled={true}
@@ -787,10 +682,35 @@ const ListActiveInactiveUser: React.FC = () => {
                               <div className="d-flex gap-1 border-right-0 border-left-0">
                                 {type ? (
                                   <>
-                                    {actionButtons?.map((item) => {
-                                      return (
-                                        (item.id === "d" ||
-                                          item.id === "w") && (
+                                    {actionButtons
+                                      .filter(handleActionButtonFilter)
+                                      ?.map((item) => {
+                                        return (
+                                          (item.id === "d" ||
+                                            item.id === "w") && (
+                                            <CustomButton
+                                              variant="dark"
+                                              onClick={() => {
+                                                item.onClick(
+                                                  item?.id,
+                                                  userItem
+                                                );
+                                              }}
+                                              key={item?.id}
+                                              className={`actionBtn`}
+                                            >
+                                              {item?.name}
+                                            </CustomButton>
+                                          )
+                                        );
+                                      })}
+                                  </>
+                                ) : (
+                                  <>
+                                    {actionButtons
+                                      .filter(handleActionButtonFilter)
+                                      ?.map((item) => {
+                                        return (
                                           <CustomButton
                                             variant="dark"
                                             onClick={() => {
@@ -801,26 +721,8 @@ const ListActiveInactiveUser: React.FC = () => {
                                           >
                                             {item?.name}
                                           </CustomButton>
-                                        )
-                                      );
-                                    })}
-                                  </>
-                                ) : (
-                                  <>
-                                    {actionButtons?.map((item) => {
-                                      return (
-                                        <CustomButton
-                                          variant="dark"
-                                          onClick={() => {
-                                            item.onClick(item?.id, userItem);
-                                          }}
-                                          key={item?.id}
-                                          className={`actionBtn`}
-                                        >
-                                          {item?.name}
-                                        </CustomButton>
-                                      );
-                                    })}
+                                        );
+                                      })}
                                   </>
                                 )}
                               </div>
@@ -829,43 +731,6 @@ const ListActiveInactiveUser: React.FC = () => {
                         );
                       })}
                   </CustomTable>
-                  {/* {deactiveUser?.length > 0 && (
-                    <div
-                      style={{
-                        width: "100%",
-                        marginTop: "5px",
-                        display: "flex",
-                        flexDirection: "row",
-                      }}
-                    >
-                      <div
-                        style={{
-                          width: "50%",
-                          display: "flex",
-                          justifyContent: "flex-start",
-                        }}
-                      >
-                        Showing 1 to {deactiveUser?.length} of{" "}
-                        {deactiveUser?.length} entries
-                      </div>
-                      <div
-                        style={{
-                          width: "50%",
-                          display: "flex",
-                          justifyContent: "flex-end",
-                          gap: "5px",
-                        }}
-                      >
-                        <CustomButton className={`actionBtn`} disabled>
-                          Previous
-                        </CustomButton>
-                        <CustomButton className={`actionBtn`}>1</CustomButton>
-                        <CustomButton className={`actionBtn`} disabled>
-                          Next
-                        </CustomButton>
-                      </div>
-                    </div>
-                  )} */}
                 </Tab.Pane>
               </Tab.Content>
             </Tab.Container>
@@ -894,11 +759,9 @@ const ListActiveInactiveUser: React.FC = () => {
       <CustomModal
         customClass="modalFull-90 "
         title={[
-          <>
-            <span className="f400">
-              {userWiseExposureName?.name} EventWise Expoure
-            </span>
-          </>,
+          <span className="f400">
+            {userWiseExposureName?.name} EventWise Expoure
+          </span>,
         ]}
         show={showUserWiseExposureModal && !loading}
         setShow={setShowUserWiseExposureModal}
@@ -912,11 +775,9 @@ const ListActiveInactiveUser: React.FC = () => {
       <CustomModal
         customClass="modalFull-90 "
         title={[
-          <>
-            <span className="f400">
-              {userWiseExposureName?.name} Match Wise Exposure
-            </span>
-          </>,
+          <span className="f400">
+            {userWiseExposureName?.name} Match Wise Exposure
+          </span>,
         ]}
         show={showUserWiseMatchListModal}
         setShow={setShowUserWiseMatchListModal}
@@ -930,4 +791,4 @@ const ListActiveInactiveUser: React.FC = () => {
   );
 };
 
-export default ListActiveInactiveUser;
+export default memo(ListActiveInactiveUser);

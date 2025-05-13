@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import CasinoMeterComponent from "../../../../components/cardGames/games/casinoMeter";
@@ -45,7 +45,9 @@ const CasinoMeter = () => {
   };
   const handleCardResult = (event: any) => {
     if (event?.matchId === dragonTigerDetail?.id) {
-      dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
+      dispatch(
+        getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId })
+      );
     }
   };
   const handleMatchResult = () => {
@@ -54,7 +56,9 @@ const CasinoMeter = () => {
   useEffect(() => {
     try {
       if (socket && dragonTigerDetail?.id) {
-        dispatch(getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId }));
+        dispatch(
+          getPlacedBets({ id: dragonTigerDetail?.id, userId: state?.userId })
+        );
         socketService.card.getCardRatesOff(cardGamesType.cmeter);
         socketService.card.userCardBetPlacedOff();
         socketService.card.cardResultOff();
@@ -144,4 +148,4 @@ const CasinoMeter = () => {
   return <CasinoMeterComponent />;
 };
 
-export default CasinoMeter;
+export default memo(CasinoMeter);

@@ -3,7 +3,6 @@ import { Container } from "react-bootstrap";
 import { HandleCards } from "../../../commonComponent/cardsComponent";
 import ResultBetList from "../../../commonComponent/resultBetList";
 import "./style.scss";
-//import Winner from "../../../commonComponent/trophyWinner";
 
 interface Props {
   data: {
@@ -19,16 +18,7 @@ interface Props {
 }
 
 const CasinoMeterResultComponent: React.FC<Props> = ({ data }) => {
-  //const resultCards = data?.result?.cards?.split(",");
-  //const playerIds = data?.result?.sid?.split(",");
-
-  // const players = resultCards?.map((card, index) => ({
-  //   card,
-  //   id: playerIds[index],
-  // }));
-
   const cards = data?.result?.cards?.split(",");
-
   const lowCards: string[] = [];
   const highCards: string[] = [];
 
@@ -89,9 +79,9 @@ const CasinoMeterResultComponent: React.FC<Props> = ({ data }) => {
               <span style={{ fontSize: "14px", fontWeight: "bold" }}>
                 Low Cards
               </span>
-              {lowCards?.map((cd: any) => {
+              {lowCards?.map((cd: any, index: number) => {
                 return (
-                  <div style={{ marginLeft: "5px" }}>
+                  <div style={{ marginLeft: "5px" }} key={index}>
                     <HandleCards card={cd} />
                   </div>
                 );
@@ -102,9 +92,9 @@ const CasinoMeterResultComponent: React.FC<Props> = ({ data }) => {
               <span style={{ fontSize: "14px", fontWeight: "bold" }}>
                 High Cards
               </span>
-              {highCards?.map((cd: any) => {
+              {highCards?.map((cd: any, index: number) => {
                 return (
-                  <div style={{ marginLeft: "5px" }}>
+                  <div style={{ marginLeft: "5px" }} key={index}>
                     <HandleCards card={cd} />
                   </div>
                 );
@@ -113,8 +103,8 @@ const CasinoMeterResultComponent: React.FC<Props> = ({ data }) => {
           </div>
 
           <div style={{ display: "flex", gap: "5px", marginLeft: "30px" }}>
-            {spadeCard?.split(",")?.map((crd) => {
-              return <HandleCards card={crd} />;
+            {spadeCard?.split(",")?.map((crd, index: number) => {
+              return <HandleCards card={crd} key={index} />;
             })}
           </div>
         </div>

@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { formatNumber } from "../../../../../helpers";
-// import { IoInformationCircle } from "react-icons/io5";
-// import SmoothDropdownModal from "../minMaxModal";
 
 const BackLay = ({ matchOddsData, data, odds }: any) => {
   const [openDivIds, setOpenDivIds] = useState<string[]>([]);
@@ -158,11 +156,7 @@ const BackLay = ({ matchOddsData, data, odds }: any) => {
         </div>
       </div>
       <div className="w-100 d-flex flex-row justify-content-around">
-        <span
-          className={
-           `text-red f-bold `
-          }
-        >
+        <span className={`text-red f-bold `}>
           {data?.profitLoss
             ? data?.profitLoss[
                 `${data?.videoInfo?.mid}_${matchOddsData?.[0]?.sid}_card`
@@ -181,8 +175,8 @@ const BackLay = ({ matchOddsData, data, odds }: any) => {
             : 0}
         </span>
         <span
-          className={
-            `text-red f-bold ${data?.profitLoss
+          className={`text-red f-bold ${
+            data?.profitLoss
               ? data?.profitLoss[
                   `${data?.videoInfo?.mid}_${matchOddsData?.[0]?.sid}_card`
                 ]
@@ -200,8 +194,8 @@ const BackLay = ({ matchOddsData, data, odds }: any) => {
                   ? "color-red title-16 f-bold"
                   : ""
                 : ""
-              : ""}`
-          }
+              : ""
+          }`}
         >
           {data?.profitLoss
             ? data?.profitLoss[

@@ -1,5 +1,5 @@
-import { HandleCards } from "../../../commonComponent/cardsComponent";
 import { formatNumber } from "../../../../helpers";
+import { HandleCards } from "../../../commonComponent/cardsComponent";
 const Meter = ({
   data,
   runPosition,

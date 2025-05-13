@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import "../style.scss";
 import { bollywoodTableCards } from "../../../../../utils/Constants";
+import "../style.scss";
 
 const CommonCardImg = ({ cardData, data }: any) => {
   const [cardImg, setCardImg] = useState(bollywoodTableCards);
@@ -18,7 +18,7 @@ const CommonCardImg = ({ cardData, data }: any) => {
     <div className="commonCardImgContainer">
       {cardImg?.map((item: any) => {
         return (
-          <div>
+          <div key={item?.code}>
             <div
               className={
                 item?.gstatus === "CLOSED" || item?.b1 === "0.00"
@@ -31,7 +31,6 @@ const CommonCardImg = ({ cardData, data }: any) => {
                 justifyContent: "space-around",
                 alignItems: "center",
               }}
-              key={item?.code}
             >
               {" "}
               <img src={item?.imgSrc} width={"40px"} />

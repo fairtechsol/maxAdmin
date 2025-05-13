@@ -2,21 +2,21 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import "./style.scss";
+import { p6rules } from "../../../../assets";
+import { handleRoundId } from "../../../../helpers";
 import { RootState } from "../../../../store/store";
 import {
   cardGamesId,
   cardGamesType,
   cardUrl,
 } from "../../../../utils/Constants";
-import { handleRoundId } from "../../../../helpers";
-import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
 import CardResultBox from "../../../commonComponent/cardResultBox";
+import RulesModal from "../../../commonComponent/rulesModal";
+import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
 import UserBets from "../../../game/userBet";
 import Poker6Result from "./poker6Card";
+import "./style.scss";
 import TiePairBox from "./TiePairBox";
-import RulesModal from "../../../commonComponent/rulesModal";
-import { p6rules } from "../../../../assets";
 
 const Poker6Component = () => {
   const [show, setShow] = useState(false);
@@ -46,9 +46,7 @@ const Poker6Component = () => {
                   : ""}
               </span>
             </div>
-            <div
-              style={{ width: "100%", backgroundColor: "#000" }}
-            >
+            <div style={{ width: "100%", backgroundColor: "#000" }}>
               <VideoFrame
                 time={dragonTigerDetail?.videoInfo?.autotime}
                 result={<Poker6Result data={dragonTigerDetail?.videoInfo} />}
@@ -58,28 +56,23 @@ const Poker6Component = () => {
             </div>
           </div>
           <div className="w-100">
-            
-
             <div className="tab-contentp">
-             
-                <div className="w-100">
-                  <TiePairBox
-                    odds={dragonTigerDetail?.handsData}
-                    data={dragonTigerDetail}
-                    title={"Hands"}
-                    cards={dragonTigerDetail?.videoInfo}
-                  />
-                </div>
-              
-             
-                <div className="w-100">
-                  <TiePairBox
-                    odds={dragonTigerDetail?.patternData}
-                    data={dragonTigerDetail}
-                    title={"Pattern"}
-                  />
-                </div>
-             
+              <div className="w-100">
+                <TiePairBox
+                  odds={dragonTigerDetail?.handsData}
+                  data={dragonTigerDetail}
+                  title={"Hands"}
+                  cards={dragonTigerDetail?.videoInfo}
+                />
+              </div>
+
+              <div className="w-100">
+                <TiePairBox
+                  odds={dragonTigerDetail?.patternData}
+                  data={dragonTigerDetail}
+                  title={"Pattern"}
+                />
+              </div>
             </div>
 
             <div style={{ width: "100%", margin: "5px" }}>

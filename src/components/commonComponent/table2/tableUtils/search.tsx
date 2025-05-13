@@ -1,18 +1,18 @@
 import { debounce } from "lodash";
-import React, { useMemo, useState } from "react";
+import React, { memo, useMemo, useState } from "react";
 import CustomInput from "../../input";
 
 interface SearchBoxProps {
   onSearch: (query: string) => void;
   value: string;
-  placeHolder?:any;
+  placeHolder?: any;
 }
 
-const SearchBox: React.FC<SearchBoxProps> = ({ onSearch,placeHolder }) => {
+const SearchBox: React.FC<SearchBoxProps> = ({ onSearch, placeHolder }) => {
   const [keyword, setKeyword] = useState("");
 
   const debouncedInputValue = useMemo(() => {
-    return debounce((value:any) => {
+    return debounce((value: any) => {
       onSearch(value);
     }, 500);
   }, []);
@@ -30,13 +30,11 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onSearch,placeHolder }) => {
       type="text"
       onChange={handleSearchChange}
       placeholder={placeHolder ?? "Type your search"}
-      inputClass={`${ "p-1"}`}
-      customStyle={`${
-         "flex-row align-items-center"
-      } `}
+      inputClass={`${"p-1"}`}
+      customStyle={`${"flex-row align-items-center"} `}
       isUnderlinedInput={false}
     />
   );
 };
 
-export default SearchBox;
+export default memo(SearchBox);

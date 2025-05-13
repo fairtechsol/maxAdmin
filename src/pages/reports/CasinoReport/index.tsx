@@ -1,17 +1,17 @@
-import { useEffect, useMemo, useState } from "react";
+import { debounce } from "lodash";
+import moment from "moment-timezone";
+import { memo, useEffect, useMemo, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import SelectSearch from "../../../components/commonComponent/SelectSearch";
 import CustomTable from "../../../components/commonComponent/table";
 import { TableConfig } from "../../../models/tableInterface";
-import { AppDispatch, RootState } from "../../../store/store";
-import { useDispatch, useSelector } from "react-redux";
 import {
   getCasinoReport,
   getCasinoReportGameList,
 } from "../../../store/actions/match/matchAction";
-import moment from "moment-timezone";
-import SelectSearch from "../../../components/commonComponent/SelectSearch";
-import { debounce } from "lodash";
 import { searchList } from "../../../store/actions/user/userActions";
+import { AppDispatch, RootState } from "../../../store/store";
 
 interface Column {
   id: string;
@@ -173,7 +173,6 @@ const CasinoReport = () => {
   return (
     <div className="p-2 pt-0">
       <h5 className="title-22 fw-normal">Casino Report</h5>
-
       <div
         style={{
           minHeight: "1px",
@@ -204,7 +203,6 @@ const CasinoReport = () => {
             </Col>
             <Col lg={2} className="mb-3">
               <SelectSearch
-                // label={"Search By Client Name"}
                 inputValue={inputValue}
                 options={userOptions}
                 value={tempUser ? null : selectedUser}
@@ -311,4 +309,4 @@ const CasinoReport = () => {
   );
 };
 
-export default CasinoReport;
+export default memo(CasinoReport);

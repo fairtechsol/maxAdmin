@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import "./style.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { Column, TableConfig } from "../../../../models/tableInterface";
-import { AppDispatch, RootState } from "../../../../store/store";
-import { getMatchLockAllChild } from "../../../../store/actions/match/matchAction";
 import CustomTable from "../../../../components/commonComponent/table";
+import { Column, TableConfig } from "../../../../models/tableInterface";
+import { getMatchLockAllChild } from "../../../../store/actions/match/matchAction";
+import { AppDispatch, RootState } from "../../../../store/store";
+import "./style.scss";
 import UserLockMarketWise from "./UserLockMarketWise";
 const LockUser = (props: any) => {
   const { data } = props;
@@ -13,7 +13,7 @@ const LockUser = (props: any) => {
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [check, setCheck] = useState(false);
-  const [selectAll, setSelectAll] = useState(false); // "Select All" checkbox state
+  const [selectAll, setSelectAll] = useState(false); 
   const [updatedMatchLockAllChild, setUpdatedMatchLockAllChild] = useState<
     any[]
   >([]); 

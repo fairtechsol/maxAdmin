@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from "react";
-import CustomModal from "../modal";
-import { AppDispatch, RootState } from "../../../store/store";
+import React, { memo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getSearchClientList, resetSearchUserList } from "../../../store/actions/user/userActions";
 import { toast } from "react-toastify";
 import service from "../../../service";
+import {
+  getSearchClientList,
+  resetSearchUserList,
+} from "../../../store/actions/user/userActions";
+import { AppDispatch, RootState } from "../../../store/store";
 import { ApiConstants } from "../../../utils/Constants";
+import CustomModal from "../modal";
 
 const UserLockModal = ({
   show,
@@ -156,4 +159,4 @@ const UserLockModal = ({
   );
 };
 
-export default UserLockModal;
+export default memo(UserLockModal);

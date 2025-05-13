@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Col, Modal, Row, Stack } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Switch from "react-switch";
@@ -11,8 +11,8 @@ import {
 } from "../../../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../../../store/store";
 import CustomInput from "../../../commonComponent/input";
-import ModalFooter from "../footer";
 import Loader from "../../../commonComponent/loader";
+import ModalFooter from "../footer";
 
 const initialValues: any = {
   userId: "",
@@ -44,6 +44,7 @@ const ChangeStatus = ({
   const { modalSuccess, loading } = useSelector(
     (state: RootState) => state.user.userList
   );
+  const { userDetail } = useSelector((state: RootState) => state.user.profile);
 
   const formik = useFormik({
     initialValues: initialValues,
@@ -92,112 +93,111 @@ const ChangeStatus = ({
                   <h3 className="text-secondary title-14 fw-normal">
                     {userData?.userName}
                   </h3>
-                  <h3
-                    className={`${
-                      !lockUnlockObj?.allBlocked ? "text-green" : "text-red"
-                    } title-14`}
-                  >
-                    {/* {!lockUnlockObj?.allBlocked ? "Active" : "InActive"} */}
-                  </h3>
                 </div>
                 <div className="row">
-                  <Col sm={6} className="text-center">
-                    <p className="m-0 mb-1 title-14">User Active</p>
-                    <label>
-                      <Switch
-                        onChange={() => {
-                          setLockUnlockObj((prev: any) => {
-                            return {
-                              ...prev,
-                              allBlocked: !lockUnlockObj?.allBlocked,
-                            };
-                          });
-                        }}
-                        checked={!lockUnlockObj?.allBlocked}
-                        uncheckedIcon={
-                          <span
-                            style={{
-                              display: "flex",
-                              justifyContent: "center",
-                              alignItems: "center",
-                              height: "100%",
-                              fontSize: 12,
-                              fontWeight: 600,
-                            }}
-                          >
-                            OFF
-                          </span>
-                        }
-                        onColor="#0088cc"
-                        checkedIcon={
-                          <span
-                            style={{
-                              display: "flex",
-                              justifyContent: "center",
-                              alignItems: "center",
-                              height: "100%",
-                              fontSize: 12,
-                              fontWeight: 600,
-                              paddingRight: 2,
-                            }}
-                          >
-                            ON
-                          </span>
-                        }
-                        height={24}
-                        width={60}
-                      />
-                    </label>
-                  </Col>
+                  {(!userDetail?.permission ||
+                    userDetail?.permission?.userLock) && (
+                    <Col sm={6} className="text-center">
+                      <p className="m-0 mb-1 title-14">User Active</p>
+                      <label>
+                        <Switch
+                          onChange={() => {
+                            setLockUnlockObj((prev: any) => {
+                              return {
+                                ...prev,
+                                allBlocked: !lockUnlockObj?.allBlocked,
+                              };
+                            });
+                          }}
+                          checked={!lockUnlockObj?.allBlocked}
+                          uncheckedIcon={
+                            <span
+                              style={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                height: "100%",
+                                fontSize: 12,
+                                fontWeight: 600,
+                              }}
+                            >
+                              OFF
+                            </span>
+                          }
+                          onColor="#0088cc"
+                          checkedIcon={
+                            <span
+                              style={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                height: "100%",
+                                fontSize: 12,
+                                fontWeight: 600,
+                                paddingRight: 2,
+                              }}
+                            >
+                              ON
+                            </span>
+                          }
+                          height={24}
+                          width={60}
+                        />
+                      </label>
+                    </Col>
+                  )}
 
-                  <Col sm={6} className="text-center">
-                    <p className="m-0 mb-1 title-14">Bet Active</p>
-                    <label>
-                      <Switch
-                        onChange={() => {
-                          setLockUnlockObj((prev: any) => {
-                            return {
-                              ...prev,
-                              betBlocked: !lockUnlockObj?.betBlocked,
-                            };
-                          });
-                        }}
-                        checked={!lockUnlockObj?.betBlocked}
-                        onColor="#0088cc"
-                        uncheckedIcon={
-                          <span
-                            style={{
-                              display: "flex",
-                              justifyContent: "center",
-                              alignItems: "center",
-                              height: "100%",
-                              fontSize: 12,
-                              fontWeight: 600,
-                            }}
-                          >
-                            OFF
-                          </span>
-                        }
-                        checkedIcon={
-                          <span
-                            style={{
-                              display: "flex",
-                              justifyContent: "center",
-                              alignItems: "center",
-                              height: "100%",
-                              fontSize: 12,
-                              fontWeight: 600,
-                              paddingRight: 2,
-                            }}
-                          >
-                            ON
-                          </span>
-                        }
-                        height={24}
-                        width={60}
-                      />
-                    </label>
-                  </Col>
+                  {(!userDetail?.permission ||
+                    userDetail?.permission?.betLock) && (
+                    <Col sm={6} className="text-center">
+                      <p className="m-0 mb-1 title-14">Bet Active</p>
+                      <label>
+                        <Switch
+                          onChange={() => {
+                            setLockUnlockObj((prev: any) => {
+                              return {
+                                ...prev,
+                                betBlocked: !lockUnlockObj?.betBlocked,
+                              };
+                            });
+                          }}
+                          checked={!lockUnlockObj?.betBlocked}
+                          onColor="#0088cc"
+                          uncheckedIcon={
+                            <span
+                              style={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                height: "100%",
+                                fontSize: 12,
+                                fontWeight: 600,
+                              }}
+                            >
+                              OFF
+                            </span>
+                          }
+                          checkedIcon={
+                            <span
+                              style={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                height: "100%",
+                                fontSize: 12,
+                                fontWeight: 600,
+                                paddingRight: 2,
+                              }}
+                            >
+                              ON
+                            </span>
+                          }
+                          height={24}
+                          width={60}
+                        />
+                      </label>
+                    </Col>
+                  )}
                 </div>
               </Col>
               <Col sm={8}></Col>
@@ -235,4 +235,4 @@ const ChangeStatus = ({
   );
 };
 
-export default ChangeStatus;
+export default memo(ChangeStatus);

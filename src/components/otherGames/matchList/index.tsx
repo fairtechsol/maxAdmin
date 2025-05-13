@@ -1,9 +1,7 @@
-// import { useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import "./style.scss";
 
 const NavComponent = ({ matchDetail, setMarketToShow, marketToShow }: any) => {
-  // const { marketId } = useParams();
   function formatMarkets(matchDetail: any) {
     const formattedArray = [];
 
@@ -81,7 +79,7 @@ const NavComponent = ({ matchDetail, setMarketToShow, marketToShow }: any) => {
       console.log(error);
     }
   };
-  
+
   useEffect(() => {
     if (
       navItems?.length &&
@@ -104,10 +102,9 @@ const NavComponent = ({ matchDetail, setMarketToShow, marketToShow }: any) => {
                 <span
                   onClick={() => {
                     if (item?.dataType) {
-                      setMarketToShow((prev:any)=>item?.key);
-                    } else setMarketToShow((prev:any)=>item?.id);
+                      setMarketToShow(() => item?.key);
+                    } else setMarketToShow(() => item?.id);
                   }}
-                  // to={`/admin/other_match_detail/${matchDetail?.id}/${item?.id}`}
                   className={`market-tab-link ${
                     (item?.dataType ? item?.key : item?.id) === marketToShow
                       ? "active"
@@ -127,4 +124,4 @@ const NavComponent = ({ matchDetail, setMarketToShow, marketToShow }: any) => {
   );
 };
 
-export default NavComponent;
+export default memo(NavComponent);

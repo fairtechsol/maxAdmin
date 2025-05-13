@@ -1,11 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Col, Container, Row, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import "./style.scss";
-import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
-import UserBets from "../../../game/userBet";
-import CardResultBox from "../../../commonComponent/cardResultBox";
-import Teen1DResult from "./teenCard";
 import { handleRoundId } from "../../../../helpers";
 import { RootState } from "../../../../store/store";
 import {
@@ -13,7 +8,12 @@ import {
   cardGamesType,
   cardUrl,
 } from "../../../../utils/Constants";
+import CardResultBox from "../../../commonComponent/cardResultBox";
+import VideoFrame from "../../../commonComponent/videoFrame/VideoFrame";
+import UserBets from "../../../game/userBet";
 import BackLay from "./backLay";
+import "./style.scss";
+import Teen1DResult from "./teenCard";
 
 const TeentPatti1DComponent = () => {
   const { dragonTigerDetail } = useSelector((state: RootState) => state.card);
@@ -26,14 +26,6 @@ const TeentPatti1DComponent = () => {
     { label: "Straight Flush (Pakki Rown)", value: "1 To 45" },
   ];
 
-  // const updatedValue = (value: any) => {
-  //   let parsedValue = parseFloat(value) * 0.01;
-  //   if (parsedValue !== 0) {
-  //     parsedValue += 1;
-  //   }
-  //   return parsedValue.toFixed(2);
-  // };
-// console.log('dragonTigerDetail',dragonTigerDetail);
   return (
     <>
       <Row>
@@ -50,9 +42,9 @@ const TeentPatti1DComponent = () => {
                   {dragonTigerDetail?.videoInfo
                     ? `Round ID:  ${handleRoundId(
                         dragonTigerDetail?.videoInfo?.mid
-                      )}|Min: ${parseFloat(dragonTigerDetail?.videoInfo?.min)}|Max: ${
-                        parseFloat(dragonTigerDetail?.videoInfo?.max)
-                      }`
+                      )}|Min: ${parseFloat(
+                        dragonTigerDetail?.videoInfo?.min
+                      )}|Max: ${parseFloat(dragonTigerDetail?.videoInfo?.max)}`
                     : ""}
                 </span>
               </div>
@@ -72,16 +64,25 @@ const TeentPatti1DComponent = () => {
               </div>
             </div>
             <div className="w-100">
-              <div className="w-100 d-flex flex-row mt-3" style={{gap:"10px"}}>
-              <div className="w-50">
-                  <BackLay data={dragonTigerDetail} odds={dragonTigerDetail?.playerA} />
+              <div
+                className="w-100 d-flex flex-row mt-3"
+                style={{ gap: "10px" }}
+              >
+                <div className="w-50">
+                  <BackLay
+                    data={dragonTigerDetail}
+                    odds={dragonTigerDetail?.playerA}
+                  />
+                </div>
+                <div style={{ width: "2px", backgroundColor: "#333" }}></div>
+                <div className="w-50">
+                  <BackLay
+                    data={dragonTigerDetail}
+                    odds={dragonTigerDetail?.playerB}
+                  />
+                </div>
               </div>
-              <div style={{width:"2px",backgroundColor:"#333"}}></div>
-              <div className="w-50">
-                  <BackLay data={dragonTigerDetail} odds={dragonTigerDetail?.playerB} />
-              </div>
-              </div>
-              
+
               <div style={{ width: "100%", marginTop: "10px" }}>
                 <CardResultBox
                   data={dragonTigerDetail}

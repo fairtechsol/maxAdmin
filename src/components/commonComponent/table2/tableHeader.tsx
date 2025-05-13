@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { FaRegFileExcel, FaRegFilePdf } from "react-icons/fa";
 import CustomButton from "../button";
 import RowPerPage from "./tableUtils/rowPerPage";
@@ -11,8 +11,8 @@ interface TableHeaderProps {
   setTableConfig: any;
   rowPerPage: number;
   setRowPerPage: any;
-  paginationCount?:boolean;
-  placeHolder?:any;
+  paginationCount?: boolean;
+  placeHolder?: any;
 }
 
 const TableHeader: React.FC<TableHeaderProps> = ({
@@ -23,7 +23,7 @@ const TableHeader: React.FC<TableHeaderProps> = ({
   rowPerPage,
   setRowPerPage,
   paginationCount,
-  placeHolder
+  placeHolder,
 }) => {
   const [keyword, setKeyword] = useState("");
   useEffect(() => {
@@ -34,9 +34,7 @@ const TableHeader: React.FC<TableHeaderProps> = ({
 
   return (
     <div
-      className={`d-flex justify-content-between ${
-       "align-items-center"
-      } mb-3`}
+      className={`d-flex justify-content-between ${"align-items-center"} mb-3`}
     >
       {enablePdfExcel && (
         <div className="d-flex gap-2 mb-2">
@@ -50,12 +48,18 @@ const TableHeader: React.FC<TableHeaderProps> = ({
           </CustomButton>
         </div>
       )}
-      {isPagination && paginationCount &&(
+      {isPagination && paginationCount && (
         <RowPerPage value={rowPerPage} onChange={setRowPerPage} />
       )}
-      {isSearch && <SearchBox value={keyword} onSearch={setKeyword} placeHolder={placeHolder}/>}
+      {isSearch && (
+        <SearchBox
+          value={keyword}
+          onSearch={setKeyword}
+          placeHolder={placeHolder}
+        />
+      )}
     </div>
   );
 };
 
-export default TableHeader;
+export default memo(TableHeader);

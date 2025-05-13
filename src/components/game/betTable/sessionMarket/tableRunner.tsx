@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Column, TableConfig } from "../../../../models/tableInterface";
 import CustomTable from "../../../commonComponent/table";
 
@@ -15,7 +15,6 @@ const TableRunner = ({ runAmount }: any) => {
     <div className="activeUsers-modal">
       <CustomTable
         bordered={true}
-        // striped
         columns={columns}
         itemCount={10}
         setTableConfig={setTableConfig}
@@ -46,4 +45,4 @@ const TableRunner = ({ runAmount }: any) => {
   );
 };
 
-export default TableRunner;
+export default memo(TableRunner);

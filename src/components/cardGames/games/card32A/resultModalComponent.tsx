@@ -20,11 +20,6 @@ const Card32ResultComponent: React.FC<Props> = ({ data }: any) => {
       result[targetArray].push(item);
     });
   }
-  // console.log('sssss',result)
-  // const allKeys = Object.keys(data ? data : 0);
-  // const cArray = allKeys?.filter((key) => /^C\d+$/.test(key));
-  // const numbers = cArray.map((key) => Number(data[key]));
-  // const max = Math.max(...numbers);
   return (
     <Container style={{ display: "flex", flexDirection: "column" }}>
       <div className="card32resultModal ">
@@ -36,7 +31,7 @@ const Card32ResultComponent: React.FC<Props> = ({ data }: any) => {
                 <Winner />
               </div>
             )}
-            {result?.[0]?.map((item: any) => {
+            {result?.[0]?.map((item: any, index: number) => {
               return (
                 item != "1" && (
                   <div
@@ -45,6 +40,7 @@ const Card32ResultComponent: React.FC<Props> = ({ data }: any) => {
                       borderRadius: "1px",
                       marginLeft: "5px",
                     }}
+                    key={index}
                   >
                     <HandleCards card={item} />
                   </div>
@@ -61,7 +57,7 @@ const Card32ResultComponent: React.FC<Props> = ({ data }: any) => {
                 <Winner />
               </div>
             )}
-            {result?.[1]?.map((item: any) => {
+            {result?.[1]?.map((item: any, index: number) => {
               return (
                 item != "1" && (
                   <div
@@ -70,6 +66,7 @@ const Card32ResultComponent: React.FC<Props> = ({ data }: any) => {
                       borderRadius: "1px",
                       marginLeft: "5px",
                     }}
+                    key={index}
                   >
                     <HandleCards card={item} />
                   </div>
@@ -86,7 +83,7 @@ const Card32ResultComponent: React.FC<Props> = ({ data }: any) => {
                 <Winner />
               </div>
             )}
-            {result?.[2]?.map((item: any) => {
+            {result?.[2]?.map((item: any, index: number) => {
               return (
                 item != "1" && (
                   <div
@@ -95,6 +92,7 @@ const Card32ResultComponent: React.FC<Props> = ({ data }: any) => {
                       borderRadius: "1px",
                       marginLeft: "5px",
                     }}
+                    key={index}
                   >
                     <HandleCards card={item} />
                   </div>
@@ -111,7 +109,7 @@ const Card32ResultComponent: React.FC<Props> = ({ data }: any) => {
                 <Winner />
               </div>
             )}
-            {result?.[3]?.map((item: any) => {
+            {result?.[3]?.map((item: any, index: number) => {
               return (
                 item != "1" && (
                   <div
@@ -120,6 +118,7 @@ const Card32ResultComponent: React.FC<Props> = ({ data }: any) => {
                       borderRadius: "1px",
                       marginLeft: "5px",
                     }}
+                    key={index}
                   >
                     <HandleCards card={item} />
                   </div>

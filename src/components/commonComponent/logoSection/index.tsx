@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { MaxBet07Logo } from "../../../assets";
 
 interface Props {
@@ -5,7 +6,11 @@ interface Props {
   width?: string;
 }
 function LogoSection(props: Props) {
-  return <span><img className="logo-sec" src={MaxBet07Logo} {...props} alt="MAXBET07" /></span>;
+  return (
+    <span>
+      <img className="logo-sec" src={MaxBet07Logo} {...props} alt="MAXBET07" />
+    </span>
+  );
 }
 
-export default LogoSection;
+export default memo(LogoSection);

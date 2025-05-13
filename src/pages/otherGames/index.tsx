@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-// import GameHeader from "../../components/game/gameHeader";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import CustomBreadcrumb from "../../components/commonComponent/breadcrumb";
@@ -9,7 +8,7 @@ import SessionFancy from "../../components/game/sessionFancy";
 import SessionKhado from "../../components/game/sessionKhado";
 import SessionNormal from "../../components/game/sessionNormal";
 import SessionOddEven from "../../components/game/sessionOddEven";
-import BetTable from "../../components/otherGames/betTable";
+import Tournament from "../../components/game/tournament";
 import NavComponent from "../../components/otherGames/matchList";
 import OtherUserBets from "../../components/otherGames/userBets";
 import { matchService, socket, socketService } from "../../socketManager";
@@ -17,7 +16,6 @@ import {
   getMarketAnalysis,
   getPlacedBets,
   matchDetailAction,
-  otherMatchDetailAction,
   updateMatchRates,
   updatePlacedbetsDeleteReason,
 } from "../../store/actions/match/matchAction";
@@ -27,7 +25,6 @@ import {
   liveStreamUrl,
   scoreBoardUrlMain,
 } from "../../utils/Constants";
-import { MatchType } from "../../utils/enum";
 import isMobile from "../../utils/screenDimension";
 import { getTvData } from "../../utils/tvUrlGet";
 
@@ -73,9 +70,7 @@ const OtherGamesDetail = () => {
         if (gameType === "politics") {
           dispatch(matchDetailAction(id));
         } else {
-          dispatch(
-            otherMatchDetailAction({ matchId: id, matchType: gameType })
-          );
+          dispatch(matchDetailAction(id));
         }
         dispatch(getPlacedBets({ id: id, userId: state?.userId }));
       }
@@ -90,9 +85,7 @@ const OtherGamesDetail = () => {
         if (gameType === "politics") {
           dispatch(matchDetailAction(id));
         } else {
-          dispatch(
-            otherMatchDetailAction({ matchId: id, matchType: gameType })
-          );
+          dispatch(matchDetailAction(id));
         }
         dispatch(getPlacedBets({ id: id, userId: state?.userId }));
       }
@@ -106,9 +99,7 @@ const OtherGamesDetail = () => {
         if (gameType === "politics") {
           dispatch(matchDetailAction(id));
         } else {
-          dispatch(
-            otherMatchDetailAction({ matchId: id, matchType: gameType })
-          );
+          dispatch(matchDetailAction(id));
         }
         dispatch(getPlacedBets({ id: id, userId: state?.userId }));
       }
@@ -128,9 +119,7 @@ const OtherGamesDetail = () => {
   const handleSessionResultDeclare = (event: any) => {
     try {
       if (event?.matchId === id) {
-        // dispatch(removeRunAmount(event));
         dispatch(getPlacedBets({ id: id, userId: state?.userId }));
-        // dispatch(amountupdate(event));
       }
     } catch (error) {
       console.log(error);
@@ -139,7 +128,6 @@ const OtherGamesDetail = () => {
   const handleSessionResultUnDeclare = (event: any) => {
     try {
       if (event?.matchId === id) {
-        // dispatch(updateMaxLossForBetOnUndeclare(event));
         dispatch(getPlacedBets({ id: id, userId: state?.userId }));
       }
     } catch (error) {
@@ -150,7 +138,6 @@ const OtherGamesDetail = () => {
   function formatMarkets(matchDetail: any) {
     const formattedArray = [];
 
-    // Iterate through each type of market
     for (const marketType in matchDetail) {
       const marketValue: any = matchDetail[marketType];
       if (typeof marketValue === "object" && marketValue !== null) {
@@ -184,9 +171,7 @@ const OtherGamesDetail = () => {
         if (gameType === "politics") {
           dispatch(matchDetailAction(id));
         } else {
-          dispatch(
-            otherMatchDetailAction({ matchId: id, matchType: gameType })
-          );
+          dispatch(matchDetailAction(id));
         }
         dispatch(getPlacedBets({ id: id, userId: state?.userId }));
       }
@@ -233,7 +218,6 @@ const OtherGamesDetail = () => {
     try {
       if (id) {
         return () => {
-          // socketService.match.leaveMatchRoom(id);
           socketService.match.getMatchRatesOff(id);
           socketService.match.userSessionBetPlacedOff();
           socketService.match.userMatchBetPlacedOff();
@@ -244,8 +228,6 @@ const OtherGamesDetail = () => {
           socketService.match.sessionResultOff();
           socketService.match.sessionResultUnDeclareOff();
           socketService.match.updateDeleteReasonOff();
-          // dispatch(resetUserProfitLoss());
-          // dispatch(resetBetSessionProfitLossGraph());
         };
       }
     } catch (error) {
@@ -258,15 +240,11 @@ const OtherGamesDetail = () => {
       const handleVisibilityChange = () => {
         if (document.visibilityState === "visible") {
           if (id) {
-            // dispatch(
-            //   otherMatchDetailAction({ matchId: id, matchType: "football" })
-            // );
             dispatch(getPlacedBets({ id: id, userId: state?.userId }));
             socketService.match.joinMatchRoom(id);
             socketService.match.getMatchRates(id, updateMatchDetailToRedux);
           }
         } else if (document.visibilityState === "hidden") {
-          // socketService.match.leaveMatchRoom(id);
           socketService.match.getMatchRatesOff(id);
         }
       };
@@ -277,7 +255,6 @@ const OtherGamesDetail = () => {
           "visibilitychange",
           handleVisibilityChange
         );
-        // socketService.match.leaveMatchRoom(id);
         socketService.match.getMatchRatesOff(id);
       };
     } catch (error) {
@@ -325,7 +302,6 @@ const OtherGamesDetail = () => {
           setMarketToShow={setMarketToShow}
           marketToShow={marketToShow}
         />
-        {/* table start here */}
         <div className="gamePage-table">
           <Row className="no-gutters">
             <Col md={8}>
@@ -348,24 +324,18 @@ const OtherGamesDetail = () => {
                 ?.filter((item: any) => item?.id === marketToShow)
                 ?.map((item: any) => (
                   <Col md={12} key={item?.id}>
-                    <BetTable
+                    <Tournament
                       title={item?.name}
-                      type={
-                        ["other", "tournament"]?.includes(item.type)
-                          ? MatchType.OTHER
-                          : [
-                              "quickbookmaker1",
-                              "quickbookmaker2",
-                              "quickbookmaker3",
-                            ]?.includes(item.type)
-                          ? MatchType.BOOKMAKER
-                          : MatchType.MATCH_ODDS
+                      box={
+                        item?.runners?.[0]?.ex?.availableToBack?.length > 2
+                          ? 6
+                          : 2
                       }
                       data={item}
+                      detail={matchDetails}
                     />
                   </Col>
                 ))}
-
               <div
                 style={{
                   display: "flex",
@@ -441,9 +411,7 @@ const OtherGamesDetail = () => {
               </div>
             </Col>
             <Col md={4}>
-              {/* <GameHeader /> */}
               {matchDetails?.eventId &&
-                
                 matchDetails?.matchType !== "politics" && (
                   <LiveStreamComponent
                     url={
