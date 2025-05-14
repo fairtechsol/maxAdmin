@@ -15,6 +15,9 @@ const GameUserBets = ({ matchId }: any) => {
   const [showModal, setShowModal] = useState(false);
   const [activeTab, setActiveTab] = useState("first");
 
+  const permissions: any = localStorage.getItem("permissions");
+  const parsedPermissions = JSON.parse(permissions);
+
   const handleSelect = (selectedKey: any) => {
     setActiveTab(selectedKey);
   };
@@ -30,15 +33,17 @@ const GameUserBets = ({ matchId }: any) => {
                 <div className="text-white text-start f600 title-14 p-0">
                   MY BETS
                 </div>
-                <div className="d-flex flex-end">
-                  <Button
-                    variant="secondary"
-                    onClick={() => setShowModal(true)}
-                    style={{ height: "100%", color: "white" }}
-                  >
-                    View More
-                  </Button>
-                </div>
+                {(!parsedPermissions || parsedPermissions?.currentBets) && 
+                  <div className="d-flex flex-end">
+                    <Button
+                      variant="secondary"
+                      onClick={() => setShowModal(true)}
+                      style={{ height: "100%", color: "white" }}
+                    >
+                      View More
+                    </Button>
+                  </div>
+                }
               </div>
             </div>
           </Col>

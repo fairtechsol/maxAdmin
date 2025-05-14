@@ -44,7 +44,8 @@ const ChangeStatus = ({
   const { modalSuccess, loading } = useSelector(
     (state: RootState) => state.user.userList
   );
-  const { userDetail } = useSelector((state: RootState) => state.user.profile);
+  const permissions: any = localStorage.getItem("permissions");
+  const parsedPermissions = JSON.parse(permissions);
 
   const formik = useFormik({
     initialValues: initialValues,
@@ -95,8 +96,7 @@ const ChangeStatus = ({
                   </h3>
                 </div>
                 <div className="row">
-                  {(!userDetail?.permission ||
-                    userDetail?.permission?.userLock) && (
+                  {(!parsedPermissions || parsedPermissions?.userLock) && (
                     <Col sm={6} className="text-center">
                       <p className="m-0 mb-1 title-14">User Active</p>
                       <label>
@@ -147,8 +147,7 @@ const ChangeStatus = ({
                     </Col>
                   )}
 
-                  {(!userDetail?.permission ||
-                    userDetail?.permission?.betLock) && (
+                  {(!parsedPermissions || parsedPermissions?.betLock) && (
                     <Col sm={6} className="text-center">
                       <p className="m-0 mb-1 title-14">Bet Active</p>
                       <label>

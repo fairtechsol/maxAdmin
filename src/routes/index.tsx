@@ -6,12 +6,10 @@ import MainRoutes from "./mainRoutes";
 import OtherRoutes from "./otherRoutes";
 import ReportRoutes from "./reportRoutes";
 
-export default function routes(userDetail: any) {
+export default function routes(parsedPermissions: any) {
   const restrictedIds = new Set(
     MainRoutes.children
-      .filter(
-        (item) => item.key && userDetail?.permission?.[item.key] === false
-      )
+      .filter((item) => item.key && parsedPermissions?.[item.key] === false)
       .map((item) => item.key)
   );
 
@@ -26,7 +24,7 @@ export default function routes(userDetail: any) {
   const filteredReportRoutes = {
     ...ReportRoutes,
     children: ReportRoutes.children.filter((item: any) => {
-      if (item.key && userDetail?.permission?.[item.key] === false) {
+      if (item.key && parsedPermissions?.[item.key] === false) {
         return false;
       }
       return true;

@@ -47,9 +47,12 @@ const ListClent: React.FC = () => {
     userData: null,
   });
   const { userList } = useSelector((state: RootState) => state.user.userList);
-  const { totalBalance, userDetail } = useSelector(
+  const { totalBalance } = useSelector(
     (state: RootState) => state.user.profile
   );
+
+  const permissions: any = localStorage.getItem("permissions");
+  const parsedPermissions = JSON.parse(permissions);
   const showEventModals = (id: any, userData: any) => {
     setEventDetails({
       show: true,
@@ -90,9 +93,9 @@ const ListClent: React.FC = () => {
 
   const handleActionButtonFilter = (item: any) => {
     if (item.key === "userLock") {
-      if (userDetail?.permission) {
-        const userLockPerm = userDetail?.permission?.userLock;
-        const betLockPerm = userDetail?.permission?.betLock;
+      if (parsedPermissions) {
+        const userLockPerm = parsedPermissions?.userLock;
+        const betLockPerm = parsedPermissions?.betLock;
         if (!userLockPerm && !betLockPerm) {
           return false;
         }
@@ -100,7 +103,7 @@ const ListClent: React.FC = () => {
       } else return true;
     }
 
-    if (item.key && userDetail?.permission?.[item.key] === false) {
+    if (item.key && parsedPermissions?.[item.key] === false) {
       return false;
     }
 
@@ -139,7 +142,7 @@ const ListClent: React.FC = () => {
         <Col>
           <p className="title-22">Account List</p>
         </Col>
-        {(!userDetail?.permission || userDetail?.permission?.insertUser) && (
+        {(!parsedPermissions || parsedPermissions?.insertUser) && (
           <Col>
             <CustomButton
               className="float-end mt-2"

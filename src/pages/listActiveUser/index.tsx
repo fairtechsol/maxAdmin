@@ -74,6 +74,10 @@ const ListActiveInactiveUser: React.FC = () => {
     direction: "ASC",
     key: null,
   });
+
+  const permissions: any = localStorage.getItem("permissions");
+  const parsedPermissions = JSON.parse(permissions);
+
   const showEventModals = (id: any, userData: any) => {
     setEventDetails({
       show: true,
@@ -95,7 +99,7 @@ const ListActiveInactiveUser: React.FC = () => {
     (state: RootState) => state.user.userList
   );
   const [localUserList, setLocalUserList] = useState([]);
-  const { totalBalance, userDetail } = useSelector(
+  const { totalBalance } = useSelector(
     (state: RootState) => state.user.profile
   );
   const sortData = (key: string) => {
@@ -145,9 +149,9 @@ const ListActiveInactiveUser: React.FC = () => {
 
   const handleActionButtonFilter = (item: any) => {
     if (item.key === "userLock") {
-      if (userDetail?.permission) {
-        const userLockPerm = userDetail?.permission?.userLock;
-        const betLockPerm = userDetail?.permission?.betLock;
+      if (parsedPermissions) {
+        const userLockPerm = parsedPermissions?.userLock;
+        const betLockPerm = parsedPermissions?.betLock;
         if (!userLockPerm && !betLockPerm) {
           return false;
         }
@@ -155,7 +159,7 @@ const ListActiveInactiveUser: React.FC = () => {
       } else return true;
     }
 
-    if (item.key && userDetail?.permission?.[item.key] === false) {
+    if (item.key && parsedPermissions?.[item.key] === false) {
       return false;
     }
 
@@ -273,13 +277,15 @@ const ListActiveInactiveUser: React.FC = () => {
             </div>
           </Col>
           <Col className="d-flex flex-column align-items-end">
-            <CustomButton
-              className="float-end mb-2"
-              style={{ width: "100px" }}
-              onClick={() => navigate(`/admin/add-account`)}
-            >
-              Add Account
-            </CustomButton>
+            {(!parsedPermissions || parsedPermissions?.insertUser) && (
+              <CustomButton
+                className="float-end mb-2"
+                style={{ width: "100px" }}
+                onClick={() => navigate(`/admin/add-account`)}
+              >
+                Add Account
+              </CustomButton>
+            )}
             <SearchBox value={tableConfig?.keyword} onSearch={handleSearch} />
           </Col>
         </Row>
