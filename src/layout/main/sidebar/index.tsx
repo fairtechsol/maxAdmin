@@ -7,7 +7,8 @@ import { getCompetitionDates } from "../../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../../store/store";
 import MenuItem from "./menuItem";
 import menuItemJson from "./menuItem.json";
-const Sidebar = (props: any) => {
+
+const Sidebar = ({ clickHandler }: any) => {
   const [menuItemList, setMenuItemList] = useState<any>([]);
   const [selectedMatch, setSelectedMatch] = useState("");
   const [selectedMatchIndex, setSelectedMatchIndex] = useState(0);
@@ -40,39 +41,45 @@ const Sidebar = (props: any) => {
     }
   }, [competitionDates, selectedMatch]);
 
+  let permissions: any = localStorage.getItem("permissions");
+  const parsedPermissions = JSON.parse(permissions);
+
   return (
     <div className="sidebarBox bg-light">
-      <div className="">
-        <div
-          className="sidebarBox-close cursor-pointer"
-          onClick={props.clickHandler}
-        >
-          {" "}
-          <FaTimes />
-        </div>
-        <h3 className="title-28 f400 mb-3">Sports</h3>
-      </div>
-      {menuItemList?.map((item: any) => (
-        <Accordion
-          onSelect={(e: any) => {
-            if (e == 0) {
-              setSelectedMatch(item?.id);
-              dispatch(getCompetitionDates(item?.id));
-            }
-          }}
-          key={item?.id}
-          defaultActiveKey={[]}
-        >
-          <MenuItem
-            onClickMenuItem={props.clickHandler}
-            item={item}
-            menuItemList={menuItemList}
-            setMenuItemList={setMenuItemList}
-            selectedMatchIndex={selectedMatchIndex}
-            selectedMatch={selectedMatch}
-          />
-        </Accordion>
-      ))}
+      {(!parsedPermissions || parsedPermissions?.events) && (
+        <>
+          <div className="">
+            <div
+              className="sidebarBox-close cursor-pointer"
+              onClick={clickHandler}
+            >
+              <FaTimes />
+            </div>
+            <h3 className="title-28 f400 mb-3">Sports</h3>
+          </div>
+          {menuItemList?.map((item: any) => (
+            <Accordion
+              onSelect={(e: any) => {
+                if (e == 0) {
+                  setSelectedMatch(item?.id);
+                  dispatch(getCompetitionDates(item?.id));
+                }
+              }}
+              key={item?.id}
+              defaultActiveKey={[]}
+            >
+              <MenuItem
+                onClickMenuItem={clickHandler}
+                item={item}
+                menuItemList={menuItemList}
+                setMenuItemList={setMenuItemList}
+                selectedMatchIndex={selectedMatchIndex}
+                selectedMatch={selectedMatch}
+              />
+            </Accordion>
+          ))}
+        </>
+      )}
     </div>
   );
 };

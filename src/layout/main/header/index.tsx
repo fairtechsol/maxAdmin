@@ -256,15 +256,13 @@ const Topbar = (props: any) => {
             <LogoSection width="100%" height="50px" />
           </a>
 
-          {(!parsedPermissions || parsedPermissions?.events) && (
-            <span className="m-3 cursor" onClick={props.onClick}>
-              <div className="menuHamBurger d-flex flex-column me-2 mt-1">
-                <span className="mb-1" />
-                <span className="mb-1" />
-                <span />
-              </div>
-            </span>
-          )}
+          <span className="m-3 cursor" onClick={props.onClick}>
+            <div className="menuHamBurger d-flex flex-column me-2 mt-1">
+              <span className="mb-1" />
+              <span className="mb-1" />
+              <span />
+            </div>
+          </span>
           <Navbar id="basic-navbar-nav">
             <Nav className="me-auto">
               {(!parsedPermissions || parsedPermissions?.userList) && (
