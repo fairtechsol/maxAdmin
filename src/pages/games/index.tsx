@@ -45,6 +45,9 @@ const Games = () => {
     (state: RootState) => state.match.marketAnalysis
   );
 
+  let permissions: any = localStorage.getItem("permissions");
+  const parsedPermissions = JSON.parse(permissions);
+
   const updateMatchDetailToRedux = (event: any) => {
     try {
       if (id === event?.id) {
@@ -59,7 +62,9 @@ const Games = () => {
     try {
       if (event?.matchId === id) {
         dispatch(matchDetailAction(id));
-        dispatch(getPlacedBets({ id: id, userId: state?.userId }));
+        if (!parsedPermissions || parsedPermissions?.currentBets) {
+          dispatch(getPlacedBets({ id: id, userId: state?.userId }));
+        }
       }
     } catch (e) {
       console.log(e);
@@ -70,7 +75,9 @@ const Games = () => {
     try {
       if (event?.jobData?.placedBet?.matchId === id) {
         dispatch(matchDetailAction(id));
-        dispatch(getPlacedBets({ id: id, userId: state?.userId }));
+        if (!parsedPermissions || parsedPermissions?.currentBets) {
+          dispatch(getPlacedBets({ id: id, userId: state?.userId }));
+        }
       }
     } catch (e) {
       console.log(e);
@@ -79,7 +86,9 @@ const Games = () => {
   const handleMatchBetPlaced = (event: any) => {
     try {
       if (event?.jobData?.matchId === id) {
-        dispatch(updateBetsPlaced(event?.jobData));
+        if (!parsedPermissions || parsedPermissions?.currentBets) {
+          dispatch(updateBetsPlaced(event?.jobData));
+        }
         dispatch(updateBalance(event));
       }
     } catch (e) {
@@ -90,7 +99,11 @@ const Games = () => {
     try {
       if (event?.matchId === id && event.isMatchDeclare) {
         navigate("/admin/market-analysis");
-      } else dispatch(getPlacedBets({ id: id, userId: state?.userId }));
+      } else {
+        if (!parsedPermissions || parsedPermissions?.currentBets) {
+          dispatch(getPlacedBets({ id: id, userId: state?.userId }));
+        }
+      }
     } catch (e) {
       console.log(e);
     }
@@ -98,7 +111,9 @@ const Games = () => {
   const handleSessionResultDeclare = (event: any) => {
     try {
       if (event?.matchId === id) {
-        dispatch(getPlacedBets({ id: id, userId: state?.userId }));
+        if (!parsedPermissions || parsedPermissions?.currentBets) {
+          dispatch(getPlacedBets({ id: id, userId: state?.userId }));
+        }
       }
     } catch (error) {
       console.log(error);
@@ -107,7 +122,9 @@ const Games = () => {
   const handleSessionResultUnDeclare = (event: any) => {
     try {
       if (event?.matchId === id) {
-        dispatch(getPlacedBets({ id: id, userId: state?.userId }));
+        if (!parsedPermissions || parsedPermissions?.currentBets) {
+          dispatch(getPlacedBets({ id: id, userId: state?.userId }));
+        }
       }
     } catch (error) {
       console.log(error);
@@ -131,7 +148,9 @@ const Games = () => {
     } else {
       dispatch(matchDetailAction(id));
     }
-    dispatch(getPlacedBets({ id: id, userId: state?.userId }));
+    if (!parsedPermissions || parsedPermissions?.currentBets) {
+      dispatch(getPlacedBets({ id: id, userId: state?.userId }));
+    }
   };
 
   useEffect(() => {
@@ -157,7 +176,9 @@ const Games = () => {
     try {
       if (id) {
         dispatch(matchDetailAction(id));
-        dispatch(getPlacedBets({ id: id, userId: state?.userId }));
+        if (!parsedPermissions || parsedPermissions?.currentBets) {
+          dispatch(getPlacedBets({ id: id, userId: state?.userId }));
+        }
       }
     } catch (e) {
       console.log(e);
@@ -231,7 +252,9 @@ const Games = () => {
       const handleVisibilityChange = () => {
         if (document.visibilityState === "visible") {
           if (id) {
-            dispatch(getPlacedBets({ id: id, userId: state?.userId }));
+            if (!parsedPermissions || parsedPermissions?.currentBets) {
+              dispatch(getPlacedBets({ id: id, userId: state?.userId }));
+            }
             socketService.match.joinMatchRoom(id);
             socketService.match.getMatchRates(id, updateMatchDetailToRedux);
           }

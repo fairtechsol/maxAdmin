@@ -45,6 +45,9 @@ const OtherGamesDetail = () => {
     (state: RootState) => state.match.matchListSlice
   );
 
+  let permissions: any = localStorage.getItem("permissions");
+  const parsedPermissions = JSON.parse(permissions);
+
   useEffect(() => {
     if (id) {
       matchService.connect([id]);
@@ -72,7 +75,9 @@ const OtherGamesDetail = () => {
         } else {
           dispatch(matchDetailAction(id));
         }
-        dispatch(getPlacedBets({ id: id, userId: state?.userId }));
+        if (!parsedPermissions || parsedPermissions?.currentBets) {
+          dispatch(getPlacedBets({ id: id, userId: state?.userId }));
+        }
       }
     } catch (e) {
       console.log(e);
@@ -87,7 +92,9 @@ const OtherGamesDetail = () => {
         } else {
           dispatch(matchDetailAction(id));
         }
-        dispatch(getPlacedBets({ id: id, userId: state?.userId }));
+        if (!parsedPermissions || parsedPermissions?.currentBets) {
+          dispatch(getPlacedBets({ id: id, userId: state?.userId }));
+        }
       }
     } catch (e) {
       console.log(e);
@@ -101,7 +108,9 @@ const OtherGamesDetail = () => {
         } else {
           dispatch(matchDetailAction(id));
         }
-        dispatch(getPlacedBets({ id: id, userId: state?.userId }));
+        if (!parsedPermissions || parsedPermissions?.currentBets) {
+          dispatch(getPlacedBets({ id: id, userId: state?.userId }));
+        }
       }
     } catch (e) {
       console.log(e);
@@ -111,7 +120,11 @@ const OtherGamesDetail = () => {
     try {
       if (event?.matchId === id && event?.isMatchDeclare) {
         navigate("/admin/market-analysis");
-      } else dispatch(getPlacedBets({ id: id, userId: state?.userId }));
+      } else {
+        if (!parsedPermissions || parsedPermissions?.currentBets) {
+          dispatch(getPlacedBets({ id: id, userId: state?.userId }));
+        }
+      }
     } catch (e) {
       console.log(e);
     }
@@ -119,7 +132,9 @@ const OtherGamesDetail = () => {
   const handleSessionResultDeclare = (event: any) => {
     try {
       if (event?.matchId === id) {
-        dispatch(getPlacedBets({ id: id, userId: state?.userId }));
+        if (!parsedPermissions || parsedPermissions?.currentBets) {
+          dispatch(getPlacedBets({ id: id, userId: state?.userId }));
+        }
       }
     } catch (error) {
       console.log(error);
@@ -128,7 +143,9 @@ const OtherGamesDetail = () => {
   const handleSessionResultUnDeclare = (event: any) => {
     try {
       if (event?.matchId === id) {
-        dispatch(getPlacedBets({ id: id, userId: state?.userId }));
+        if (!parsedPermissions || parsedPermissions?.currentBets) {
+          dispatch(getPlacedBets({ id: id, userId: state?.userId }));
+        }
       }
     } catch (error) {
       console.log(error);
@@ -173,7 +190,9 @@ const OtherGamesDetail = () => {
         } else {
           dispatch(matchDetailAction(id));
         }
-        dispatch(getPlacedBets({ id: id, userId: state?.userId }));
+        if (!parsedPermissions || parsedPermissions?.currentBets) {
+          dispatch(getPlacedBets({ id: id, userId: state?.userId }));
+        }
       }
     } catch (e) {
       console.log(e);
@@ -240,7 +259,9 @@ const OtherGamesDetail = () => {
       const handleVisibilityChange = () => {
         if (document.visibilityState === "visible") {
           if (id) {
-            dispatch(getPlacedBets({ id: id, userId: state?.userId }));
+            if (!parsedPermissions || parsedPermissions?.currentBets) {
+              dispatch(getPlacedBets({ id: id, userId: state?.userId }));
+            }
             socketService.match.joinMatchRoom(id);
             socketService.match.getMatchRates(id, updateMatchDetailToRedux);
           }
