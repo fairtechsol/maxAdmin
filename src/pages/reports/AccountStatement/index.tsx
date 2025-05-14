@@ -127,6 +127,9 @@ const AccountStatement = () => {
     },
   ];
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 1199);
+  const permissions: any = localStorage.getItem("permissions");
+  const parsedPermissions = JSON.parse(permissions);
+
   const handleAccountTypeChange = (selectedOption: any) => {
     setAccountTypeValues(selectedOption);
     if (selectedOption && selectedOption === "0") {
@@ -380,7 +383,9 @@ const AccountStatement = () => {
   }, [searchListData]);
 
   useEffect(() => {
-    dispatch(transactionProviderName(""));
+    if (!parsedPermissions || parsedPermissions.liveCasinoResult) {
+      dispatch(transactionProviderName(""));
+    }
   }, []);
 
   useEffect(() => {
@@ -405,7 +410,7 @@ const AccountStatement = () => {
     };
   }, []);
 
-  const handleLiveCasinoModalOpen = (item: any, user: any) => {
+  const handleLiveCasinoModalOpen = (item: any) => {
     setLiveCasinoModal(true);
     setItemForModal(item);
   };
@@ -607,9 +612,9 @@ const AccountStatement = () => {
                   variant="dark"
                   onClick={() => {
                     type == 3
-                      ? handleLiveCasinoModalOpen(item, user)
+                      ? handleLiveCasinoModalOpen(item)
                       : aaccountTypeValues === "3"
-                      ? handleLiveCasinoModalOpen(item, user)
+                      ? handleLiveCasinoModalOpen(item)
                       : handleClickToOpenBetModal(item, user);
                   }}
                 >

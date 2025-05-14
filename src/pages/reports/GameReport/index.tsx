@@ -46,6 +46,9 @@ const GameReport = () => {
     new Date().toISOString().split("T")[0]
   );
 
+  const permissions: any = localStorage.getItem("permissions");
+  const parsedPermissions = JSON.parse(permissions);
+
   useEffect(() => {}, [tableConfig]);
 
   const { gameReportList } = useSelector(
@@ -58,7 +61,9 @@ const GameReport = () => {
   };
 
   useEffect(() => {
-    dispatch(getGameReport({}));
+    if (!parsedPermissions || parsedPermissions.currentBets) {
+      dispatch(getGameReport({}));
+    }
   }, []);
 
   const handleLoad = (e: any) => {
@@ -78,15 +83,17 @@ const GameReport = () => {
     if (selectType.value && selectType.value === "fancy") {
       dispatch(resetGameReportList());
     } else {
-      dispatch(
-        getGameReport({
-          type: selectType?.value,
-          limit: tableConfig?.rowPerPage,
-          searchBy: "description",
-          keyword: tableConfig?.keyword || "",
-          filter,
-        })
-      );
+      if (!parsedPermissions && parsedPermissions.currentBets) {
+        dispatch(
+          getGameReport({
+            type: selectType?.value,
+            limit: tableConfig?.rowPerPage,
+            searchBy: "description",
+            keyword: tableConfig?.keyword || "",
+            filter,
+          })
+        );
+      }
     }
   };
 
