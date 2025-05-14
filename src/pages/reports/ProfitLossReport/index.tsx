@@ -43,12 +43,19 @@ const ProfitLossReport = () => {
     direction: "ASC",
     key: null,
   });
+  const currentDate = new Date();
+  const formattedCurrentDate = currentDate.toISOString().split("T")[0];
+
+  const pastDate = new Date();
+  pastDate.setDate(pastDate.getDate() - 7);
+  const formattedPastDate = pastDate.toISOString().split("T")[0];
+
   const [profitLossModalShow, setProfitLossModalShow] = useState(false);
   const [selectedUser, setSelectedUser] = useState<any>([]);
   const [userOptions, setUserOptions] = useState([]);
   const [inputValue, setInputValue] = useState("");
-  const [dateFrom, setDateFrom] = useState<any>();
-  const [dateTo, setDateTo] = useState<any>();
+  const [dateFrom, setDateFrom] = useState<any>(formattedPastDate);
+  const [dateTo, setDateTo] = useState<any>(formattedCurrentDate);
   const { userDetail } = useSelector((state: RootState) => state.user.profile);
   const { searchListData } = useSelector(
     (state: RootState) => state.user.userList
@@ -57,17 +64,7 @@ const ProfitLossReport = () => {
     (state: RootState) => state.match.reportList
   );
 
-  useEffect(() => {
-    const currentDate = new Date();
-    const formattedCurrentDate = currentDate.toISOString().split("T")[0];
-
-    const pastDate = new Date();
-    pastDate.setDate(pastDate.getDate() - 7);
-    const formattedPastDate = pastDate.toISOString().split("T")[0];
-
-    setDateFrom(formattedPastDate);
-    setDateTo(formattedCurrentDate);
-  }, []);
+  useEffect(() => {}, []);
 
   const debouncedInputValue = useMemo(() => {
     return debounce((value) => {

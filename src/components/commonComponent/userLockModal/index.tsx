@@ -27,6 +27,9 @@ const UserLockModal = ({
   const [transactionPassword, setTransactionPassword] = useState("");
   const [users, setUsers] = useState([]);
 
+  const permissions: any = localStorage.getItem("permissions");
+  const parsedPermissions = JSON.parse(permissions);
+
   const handleSearch = () => {
     dispatch(
       getSearchClientList({
@@ -114,7 +117,6 @@ const UserLockModal = ({
             </span>
           </div>
           <div>
-            {" "}
             <input
               placeholder="Transaction Code"
               value={transactionPassword}
@@ -128,28 +130,36 @@ const UserLockModal = ({
           <thead>
             <tr>
               <th>Username</th>
-              <th>User Lock</th>
-              <th>Bet Lock</th>
+              {(!parsedPermissions || parsedPermissions?.userLock) && (
+                <th>User Lock</th>
+              )}
+              {(!parsedPermissions || parsedPermissions?.betLock) && (
+                <th>Bet Lock</th>
+              )}
             </tr>
           </thead>
           <tbody>
             {users.map((user: any) => (
               <tr key={user.id}>
-                <td>{user.userName}</td>
-                <td>
-                  <input
-                    type="checkbox"
-                    checked={user.userBlock}
-                    onChange={() => handleToggle(user, "userBlock")}
-                  />
-                </td>
-                <td>
-                  <input
-                    type="checkbox"
-                    checked={user.betBlock}
-                    onChange={() => handleToggle(user, "betBlock")}
-                  />
-                </td>
+                <td>{user.userName}</td>{" "}
+                {(!parsedPermissions || parsedPermissions?.userLock) && (
+                  <td>
+                    <input
+                      type="checkbox"
+                      checked={user.userBlock}
+                      onChange={() => handleToggle(user, "userBlock")}
+                    />
+                  </td>
+                )}{" "}
+                {(!parsedPermissions || parsedPermissions?.betLock) && (
+                  <td>
+                    <input
+                      type="checkbox"
+                      checked={user.betBlock}
+                      onChange={() => handleToggle(user, "betBlock")}
+                    />
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>
