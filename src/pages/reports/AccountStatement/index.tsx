@@ -70,7 +70,7 @@ const AccountStatement = () => {
   const [keyword, setKeyword] = useState<any>("");
   const [page, setPage] = useState<any>(1);
   const [currentPage, setCurrentPage] = useState(1);
-  const [rowPerPage, setRowPerPage] = useState<any>(10);
+  const [rowPerPage, setRowPerPage] = useState<any>(25);
   const [sort, setSort] = useState({
     direction: "ASC",
     key: null,
@@ -83,7 +83,7 @@ const AccountStatement = () => {
   const [tableConfig, setTableConfig] = useState<TableConfig | null>({
     page: 1,
     sort: { direction: "ASC", key: null },
-    rowPerPage: 10,
+    rowPerPage: 25,
     keyword: "",
   });
   const [aaccountTypeValues, setAccountTypeValues] = useState<any>(null);
