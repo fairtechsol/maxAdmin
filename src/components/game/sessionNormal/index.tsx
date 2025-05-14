@@ -57,10 +57,10 @@ const SessionNormal = ({ title, data, detail, manual, mtype }: any) => {
     if (item.activeStatus === "save") {
       return true;
     } else if (
-      calculateMaxLoss(detail?.profitLossDataSession, item?.id) === 0
+      detail?.profitLossDataSession?.some(
+        (entry: any) => entry.betId === item?.id
+      )
     ) {
-      return;
-    } else {
       if (
         ![sessionBettingType.fancy1, sessionBettingType.oddEven].includes(mtype)
       ) {
@@ -74,6 +74,7 @@ const SessionNormal = ({ title, data, detail, manual, mtype }: any) => {
       }
     }
   };
+
   return (
     <>
       <div
@@ -117,7 +118,7 @@ const SessionNormal = ({ title, data, detail, manual, mtype }: any) => {
                       style={{ overflow: "hidden" }}
                     >
                       <span
-                        className="teamFont"
+                        className="teamFont cursor-pointer"
                         style={{ fontWeight: "400", lineHeight: 1 }}
                         onClick={() => handleRunAmount(item)}
                       >

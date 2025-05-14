@@ -81,6 +81,12 @@ const ProfitLossReport = () => {
   }, []);
 
   useEffect(() => {
+    if (inputValue !== "") {
+      debouncedInputValue(inputValue);
+    }
+  }, [inputValue]);
+
+  useEffect(() => {
     let payload: any = {
       startDate: dateFrom ? dateFrom : "",
       endDate: dateTo
@@ -168,13 +174,14 @@ const ProfitLossReport = () => {
                 } else {
                   setSelectedUser(value);
                 }
+                setUserOptions([]);
               }}
               placeholder="Client Name:"
               isMultiOption={true}
+              isClearable
               isSearchable={true}
               onInputChange={(value: any) => {
                 setInputValue(value);
-                debouncedInputValue(value);
               }}
             />
           </Col>

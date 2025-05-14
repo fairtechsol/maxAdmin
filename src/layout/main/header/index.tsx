@@ -337,7 +337,7 @@ const Topbar = (props: any) => {
                   return true;
                 })}
               />
-              {userDetail?.roleName === "superAdmin" && (
+              {localStorage.getItem("userRole") === "superAdmin" && (
                 <>
                   <Nav.Link
                     className="navbar-mainLink"
@@ -348,11 +348,11 @@ const Topbar = (props: any) => {
                   <UserLockModal show={showModal} setShowModal={setShowModal} />
                 </>
               )}
-              {(!parsedPermissions || parsedPermissions?.loginUserCreation) && (
+              {/* {(!parsedPermissions || parsedPermissions?.loginUserCreation) && (
                 <Nav.Link className="navbar-mainLink" href="/admin/multiLogin">
                   Multi Login
                 </Nav.Link>
-              )}
+              )} */}
             </Nav>
           </Navbar>
           <div className="user-dropdown-container">

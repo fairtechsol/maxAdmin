@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
-    addUserMultiLogin,
-    changePasswordUserMultiLogin,
-    getUserMultiLoginList,
-    lockUserMultiLogin,
-    resetAddSuccessMultiUser,
-    resetMultiLoginSucess,
+  addUserMultiLogin,
+  changePasswordUserMultiLogin,
+  getUserMultiLoginList,
+  lockUserMultiLogin,
+  resetAddSuccessMultiUser,
+  resetMultiLoginSucess,
 } from "../../../store/actions/user/userActions";
 
 interface InitialState {

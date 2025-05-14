@@ -167,7 +167,7 @@ const AccountStatement = () => {
     if (inputValue != "") {
       debouncedInputValue(inputValue);
     }
-  }, [inputValue, selectedUser]);
+  }, [inputValue]);
 
   const handleSubmit = (e: any) => {
     try {
@@ -495,6 +495,7 @@ const AccountStatement = () => {
                 } else {
                   setSelectedUser(value);
                 }
+                setUserOptions([]);
               }}
               placeholder={"Please enter 3 or more characters"}
               isMultiOption={false}
