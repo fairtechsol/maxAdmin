@@ -228,6 +228,9 @@ function MarketTableHeader({
     dispatch(updateUserMarketLock(payload));
   };
 
+  const permissions: any = localStorage.getItem("permissions");
+  const parsedPermissions = JSON.parse(permissions);
+
   return (
     <>
       {loading && <Loader />}
@@ -242,19 +245,25 @@ function MarketTableHeader({
         {children}
         {type === MatchType.MATCH_ODDS ? (
           <div className="float-right">
-            <button onClick={handleButtonClick} className="btn btn-back">
-              Bet Lock
-            </button>
+            {(!parsedPermissions || parsedPermissions?.betLock) && (
+              <button onClick={handleButtonClick} className="btn btn-back">
+                Bet Lock
+              </button>
+            )}
             <button className="btn btn-back" onClick={handleUserBookClick}>
               User Book
             </button>
           </div>
         ) : (
-          <div className="float-right">
-            <button className="btn btn-back" onClick={handleButtonClick}>
-              Bet Lock
-            </button>
-          </div>
+          <>
+            {(!parsedPermissions || parsedPermissions?.betLock) && (
+              <div className="float-right">
+                <button className="btn btn-back" onClick={handleButtonClick}>
+                  Bet Lock
+                </button>
+              </div>
+            )}
+          </>
         )}
 
         <Modal
@@ -263,7 +272,7 @@ function MarketTableHeader({
           className={`customModal ${customClass} `}
         >
           <Modal.Header closeButton>
-            <Modal.Title className={`${"Betlock"}`}>{"Betlock"}</Modal.Title>
+            <Modal.Title className={`${"Betlock"}`}>Betlock</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className="w-100 d-flex flex-column">

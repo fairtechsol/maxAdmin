@@ -5,7 +5,6 @@ const AuthLayout = () => {
   const navigate = useNavigate();
 
   const permissions: any = localStorage.getItem("permissions");
-
   const parsedPermissions = JSON.parse(permissions);
 
   useEffect(() => {
