@@ -22,7 +22,7 @@ const GameUserBets = ({ matchId }: any) => {
     setActiveTab(selectedKey);
   };
   return (
-    <div className={`userBets`}>
+    <>
       <Tab.Container id="left-tabs-example" defaultActiveKey="first">
         <Row>
           <Col sm={12}>
@@ -33,7 +33,7 @@ const GameUserBets = ({ matchId }: any) => {
                 <div className="text-white text-start f600 title-14 p-0">
                   MY BETS
                 </div>
-                {(!parsedPermissions || parsedPermissions?.currentBets) && 
+                {(!parsedPermissions || parsedPermissions?.currentBets) && (
                   <div className="d-flex flex-end">
                     <Button
                       variant="secondary"
@@ -43,7 +43,7 @@ const GameUserBets = ({ matchId }: any) => {
                       View More
                     </Button>
                   </div>
-                }
+                )}
               </div>
             </div>
           </Col>
@@ -200,7 +200,7 @@ const GameUserBets = ({ matchId }: any) => {
           morePlacedBets={morePlacedBets}
         />
       </CustomModal>
-    </div>
+    </>
   );
 };
 
