@@ -83,7 +83,7 @@ const GameReport = () => {
     if (selectType.value && selectType.value === "fancy") {
       dispatch(resetGameReportList());
     } else {
-      if (!parsedPermissions && parsedPermissions.currentBets) {
+      if (!parsedPermissions || parsedPermissions.currentBets) {
         dispatch(
           getGameReport({
             type: selectType?.value,
