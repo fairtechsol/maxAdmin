@@ -765,7 +765,7 @@ const ListActiveInactiveUser: React.FC = () => {
       <CustomModal
         customClass="modalFull-90 "
         title={[
-          <span className="f400">
+          <span className="f400" key={"adf"}>
             {userWiseExposureName?.name} EventWise Expoure
           </span>,
         ]}
@@ -781,7 +781,7 @@ const ListActiveInactiveUser: React.FC = () => {
       <CustomModal
         customClass="modalFull-90 "
         title={[
-          <span className="f400">
+          <span className="f400" key={"abc"}>
             {userWiseExposureName?.name} Match Wise Exposure
           </span>,
         ]}
