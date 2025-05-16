@@ -3,6 +3,7 @@
   border-left: 0;
   background-color: #f994ba57 !important;
 }
+
 .lay-border {
   border-left: 2px solid #f994ba;
   background-color: #f994ba57 !important;
@@ -13,7 +14,42 @@
   border-left: 0;
   background-color: #72bbef57 !important;
 }
+
 .back-border {
   border-left: 2px solid #72bbef;
   background-color: #72bbef57 !important;
+}
+
+.modal-betDeleteOverlay {
+  position: absolute;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5) !important;
+  color: #ffffff !important;
+  width: 100%;
+  cursor: not-allowed;
+  align-items: flex-end;
+  display: flex;
+  justify-content: flex-end;
+  z-index: 222;
+}
+
+.modal-betDeleteOverlay h5 {
+  font-family: Arial, Verdana, Helvetica, sans-serif;
+  z-index: 223;
+  font-size: 10px;
+  font-weight: 700;
+  margin-bottom: 0px !important;
+  align-items: flex-end;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 400px;
+}
+
+.modal-betDeleteOverlay span {
+  color: #ff0000 !important;
+}
+
+.ovelay-bet {
+  position: relative;
 }
