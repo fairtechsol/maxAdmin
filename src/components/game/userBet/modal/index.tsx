@@ -1,7 +1,6 @@
 import moment from "moment-timezone";
-import { memo, useEffect, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import { Column, TableConfig } from "../../../../models/tableInterface";
-import DeleteBetOverlay from "../../../commonComponent/deleteBetRow";
 import CustomTable from "../../../commonComponent/table";
 import TooltipCustom from "../../../reports/modals/accountStatement/tooltip";
 import "./style.scss";
@@ -14,7 +13,17 @@ function UserBetModalTable({
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
 
-  useEffect(() => {}, [tableConfig]);
+  const rowRef = useRef<HTMLTableRowElement>(null);
+  const [rowHeight, setRowHeight] = useState(0);
+
+  useEffect(() => {
+    if (rowRef.current) {
+      setRowHeight(rowRef.current.offsetHeight - 1);
+    }
+  }, [list]);
+
+
+  useEffect(() => { }, [tableConfig]);
   const columns: Column[] = [
     { id: "username", label: "	User Name " },
     { id: "nation", label: "Nation " },
@@ -30,8 +39,8 @@ function UserBetModalTable({
     setSelectedCheckedBet((prevSelected: any) =>
       prevSelected.includes(item)
         ? prevSelected.filter(
-            (selectedItem: any) => selectedItem?.id !== item?.id
-          )
+          (selectedItem: any) => selectedItem?.id !== item?.id
+        )
         : [...prevSelected, item]
     );
   }
@@ -44,7 +53,7 @@ function UserBetModalTable({
         setTableConfig={setTableConfig}
         tHeadTheme=""
         customClass=""
-        CustomTableClass=""
+        CustomTableClass="ovelay-bet"
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
       >
@@ -69,7 +78,7 @@ function UserBetModalTable({
             } = item;
 
             return (
-              <tr key={id} className="position-relative">
+              <tr ref={rowRef} key={id} className="position-relative">
                 <td
                   className={
                     betType === "NO" || betType === "LAY"
@@ -139,22 +148,27 @@ function UserBetModalTable({
                   </TooltipCustom>
                 </td>
                 <td
-                  className={`${
-                    betType === "NO" || betType === "LAY"
-                      ? "bg-red1"
-                      : "bg-blue1"
-                  } text-end`}
+                  className={`${betType === "NO" || betType === "LAY"
+                    ? "bg-red1"
+                    : "bg-blue1"
+                    } text-end position-relative`}
                 >
                   <input
                     type="checkbox"
                     checked={selectedCheckedBet?.includes(item)}
                     onClick={() => handleCheckboxToggle(item)}
-                    className={`customCheckbox ${
-                      selectedCheckedBet?.includes(item) ? "checkbox-bg" : ""
-                    }`}
+                    className={`customCheckbox ${selectedCheckedBet?.includes(item) ? "checkbox-bg" : ""
+                      }`}
                   />
                 </td>
-                <DeleteBetOverlay title={deleteReason} />
+                {deleteReason && (
+                  <div className="modal-betDeleteOverlay" style={{ height: `${rowHeight}px` }}>
+                    <h5 className="text-uppercase" title={`Bet Deleted  Due To ${deleteReason}`}>
+                      Bet <span> Deleted </span> Due To {deleteReason}
+                    </h5>
+                  </div>
+                )}
+
               </tr>
             );
           })}
