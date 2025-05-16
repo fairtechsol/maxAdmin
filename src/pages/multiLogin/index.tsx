@@ -4,6 +4,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Button, Col, Container, Form, Row, Table } from "react-bootstrap";
 import { FaCheck } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import "../../assets/common.scss";
 import CustomInput from "../../components/commonComponent/input";
 import CustomErrorMessage from "../../components/commonComponent/input/CustomErrorMessage";
@@ -84,6 +85,9 @@ const initialValues = {
 
 const MultiLogin: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
+  const navigate = useNavigate();
+  const permissions: any = localStorage.getItem("permissions");
+  const parsedPermissions = JSON.parse(permissions);
 
   const [show, setShow] = useState(false);
   const [editMode, setEditMode] = useState<any>({ status: false, data: null });
@@ -214,7 +218,9 @@ const MultiLogin: React.FC = () => {
   }, [addSuccess]);
 
   useEffect(() => {
-    dispatch(getUserMultiLoginList());
+    if (!parsedPermissions || parsedPermissions?.loginUserCreation) {
+      dispatch(getUserMultiLoginList());
+    } else navigate("/admin/404");
   }, []);
 
   return (

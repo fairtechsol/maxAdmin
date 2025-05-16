@@ -1,7 +1,7 @@
 import { memo, useEffect, useState } from "react";
 import { FaSync } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import MarketAnalysisComp from "../../components/marketAnalysis";
 import {
   getMarketAnalysis,
@@ -14,9 +14,13 @@ import "./style.scss";
 const MarketAnalysis = () => {
   const dispatch: AppDispatch = useDispatch();
   const { state } = useLocation();
+  const navigate = useNavigate();
   const { marketAnalysisDetail, loading } = useSelector(
     (state: RootState) => state.match.marketAnalysis
   );
+
+  const permissions: any = localStorage.getItem("permissions");
+  const parsedPermissions = JSON.parse(permissions);
 
   const [filteredDetail, setFilteredDetail] = useState<any>([]);
 
@@ -29,26 +33,28 @@ const MarketAnalysis = () => {
   };
 
   useEffect(() => {
-    try {
-      if (state?.userId) {
-        dispatch(
-          getMarketAnalysis({
-            url: `${ApiConstants.MATCH.MARKETANALYSIS}?userId=${state?.userId}&matchId=${state?.matchId}`,
-          })
-        );
-      } else {
-        setTimeout(() => {
+    if (!parsedPermissions || parsedPermissions?.marketAnalysis) {
+      try {
+        if (state?.userId) {
           dispatch(
-            getMarketAnalysis({ url: ApiConstants.MATCH.MARKETANALYSIS })
+            getMarketAnalysis({
+              url: `${ApiConstants.MATCH.MARKETANALYSIS}?userId=${state?.userId}&matchId=${state?.matchId}`,
+            })
           );
-        }, 500);
+        } else {
+          setTimeout(() => {
+            dispatch(
+              getMarketAnalysis({ url: ApiConstants.MATCH.MARKETANALYSIS })
+            );
+          }, 500);
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
-    }
-    return () => {
-      dispatch(resetMarketAnalysys());
-    };
+      return () => {
+        dispatch(resetMarketAnalysys());
+      };
+    } else navigate("/admin/404");
   }, [state, dispatch]);
 
   return (
