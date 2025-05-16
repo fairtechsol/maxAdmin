@@ -58,10 +58,17 @@ let sortConstant: any = {
 };
 
 const AccountStatement = () => {
+  const currentDate = new Date();
+  const formattedCurrentDate = currentDate.toISOString().split("T")[0];
+
+  const pastDate = new Date();
+  pastDate.setDate(pastDate.getDate() - 7);
+  const formattedPastDate = pastDate.toISOString().split("T")[0];
+
   const dispatch: AppDispatch = useDispatch();
   const [excel, setExcel] = useState(false);
-  const [dateFrom, setDateFrom] = useState<any>();
-  const [dateTo, setDateTo] = useState<any>();
+  const [dateFrom, setDateFrom] = useState<any>(formattedPastDate);
+  const [dateTo, setDateTo] = useState<any>(formattedCurrentDate);
   const [firstTime, setFirstTime] = useState(false);
   const [selectedUser, setSelectedUser] = useState<any>(null);
   const [selectedUserValue] = useState<any>("null");
@@ -86,10 +93,10 @@ const AccountStatement = () => {
     rowPerPage: 25,
     keyword: "",
   });
-  const [aaccountTypeValues, setAccountTypeValues] = useState<any>(null);
+  const [aaccountTypeValues, setAccountTypeValues] = useState<any>("");
 
   const [gameNameOptions, setGameNameOptions] = useState<Option[]>([]);
-  const [gameNameValues, setGameNameValues] = useState<any>(null);
+  const [gameNameValues, setGameNameValues] = useState<any>("");
   const [inputValue, setInputValue] = useState("");
   const [updatedReport, setUpdateReports] = useState<any>([]);
 
@@ -389,18 +396,6 @@ const AccountStatement = () => {
   }, []);
 
   useEffect(() => {
-    const currentDate = new Date();
-    const formattedCurrentDate = currentDate.toISOString().split("T")[0];
-
-    const pastDate = new Date();
-    pastDate.setDate(pastDate.getDate() - 7);
-    const formattedPastDate = pastDate.toISOString().split("T")[0];
-
-    setDateFrom(formattedPastDate);
-    setDateTo(formattedCurrentDate);
-  }, []);
-
-  useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 1199);
     };
@@ -518,7 +513,7 @@ const AccountStatement = () => {
               }}
               type="date"
               bgColor="lightGray"
-              value={dateFrom}
+              value={dateFrom ?? ""}
             />
           </Col>
           <Col md={isMobile ? 12 : 2}>
@@ -529,7 +524,7 @@ const AccountStatement = () => {
               customstyle="mb-3"
               type="date"
               bgColor="lightGray"
-              value={dateTo}
+              value={dateTo ?? ""}
             />
           </Col>
         </Row>
@@ -637,7 +632,7 @@ const AccountStatement = () => {
       <CustomModal
         customClass="modalFull-90 "
         title={[
-          <span className="f400">
+          <span className="f400" key="qwe">
             Client Ledger (Total Win Loss :{" "}
             {betAccountStatementModal?.totalCount?.amount || 0}) (Total Bets :{" "}
             {betAccountStatementModal?.totalCount?.soda || 0})
