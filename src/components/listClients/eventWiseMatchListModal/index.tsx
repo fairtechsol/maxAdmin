@@ -76,7 +76,7 @@ const EventWiseMatchListModal = ({ userWiseExposureName, data }: any) => {
           style={{ cursor: "pointer" }}
           key={key}
           onClick={() => {
-            if (!parsedPermissions && parsedPermissions?.marketAnalysis)
+            if (!parsedPermissions || parsedPermissions?.marketAnalysis)
               handlerowClick(value, key);
           }}
         >
