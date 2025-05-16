@@ -24,6 +24,42 @@ const EventWiseMatchListModal = ({ userWiseExposureName, data }: any) => {
     keyword: "",
   });
 
+  const handlerowClick = (value: any, key: any) => {
+    if (data?.eventType === "virtual") {
+      return;
+    }
+    if (data?.eventType === "card") {
+      navigate(`/admin/casinoDetail/${value?.type}`, {
+        state: {
+          userId: userWiseExposureName?.id,
+          roleName: userWiseExposureName?.roleName,
+        },
+      });
+    } else if (data?.eventType === "cricket") {
+      navigate(`/admin/match_details/${key}`, {
+        state: {
+          submit: true,
+          matchId: key,
+          userId: userWiseExposureName?.id,
+        },
+      });
+    } else {
+      navigate(
+        `/admin/other_match_detail/${data?.eventType}/${key}/44c1a5c9-e1ee-4706-8359-c692f25bdb1f`,
+        {
+          state: {
+            submit: true,
+            matchId: key,
+            userId: userWiseExposureName?.id,
+          },
+        }
+      );
+    }
+  };
+
+  const permissions: any = localStorage.getItem("permissions");
+  const parsedPermissions = JSON.parse(permissions);
+
   return (
     <CustomTable
       customClass="commonTable reportTable"
@@ -40,36 +76,8 @@ const EventWiseMatchListModal = ({ userWiseExposureName, data }: any) => {
           style={{ cursor: "pointer" }}
           key={key}
           onClick={() => {
-            if (data?.eventType === "virtual") {
-              return;
-            }
-            if (data?.eventType === "card") {
-              navigate(`/admin/casinoDetail/${value?.type}`, {
-                state: {
-                  userId: userWiseExposureName?.id,
-                  roleName: userWiseExposureName?.roleName,
-                },
-              });
-            } else if (data?.eventType === "cricket") {
-              navigate(`/admin/match_details/${key}`, {
-                state: {
-                  submit: true,
-                  matchId: key,
-                  userId: userWiseExposureName?.id,
-                },
-              });
-            } else {
-              navigate(
-                `/admin/other_match_detail/${data?.eventType}/${key}/44c1a5c9-e1ee-4706-8359-c692f25bdb1f`,
-                {
-                  state: {
-                    submit: true,
-                    matchId: key,
-                    userId: userWiseExposureName?.id,
-                  },
-                }
-              );
-            }
+            if (!parsedPermissions && parsedPermissions?.marketAnalysis)
+              handlerowClick(value, key);
           }}
         >
           <td>
