@@ -1,6 +1,6 @@
 import _ from "lodash";
 import moment from "moment-timezone";
-import { memo, useEffect, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import { Button, Col, Form, Row, Tab, Tabs } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import SelectSearch2 from "../../../components/commonComponent/SelectSearch2";
@@ -74,6 +74,14 @@ const CurrentBets = () => {
     setBetList(ReportBetList);
   }, [ReportBetList]);
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const rowRef = useRef<HTMLTableRowElement>(null);
+  const [rowHeight, setRowHeight] = useState(0);
+
+  useEffect(() => {
+    if (rowRef.current) {
+      setRowHeight(rowRef.current.offsetHeight - 1);
+    }
+  }, [betList]);
 
   useEffect(() => {
     dispatch(
@@ -210,13 +218,12 @@ const CurrentBets = () => {
               <Col md={{ span: 4 }} />
               <Col md={3} className="text-end">
                 <span>
-                  {`Total Soda: ${
-                    betList?.rows?.length
-                  } Total Amount: ${parseFloat(
-                    betList?.rows?.reduce((acc: any, match: any) => {
-                      return acc + +match?.amount;
-                    }, 0) || "0.00"
-                  ).toFixed(2)}`}
+                  {`Total Soda: ${betList?.rows?.length
+                    } Total Amount: ${parseFloat(
+                      betList?.rows?.reduce((acc: any, match: any) => {
+                        return acc + +match?.amount;
+                      }, 0) || "0.00"
+                    ).toFixed(2)}`}
                 </span>
               </Col>
             </Row>
@@ -228,6 +235,7 @@ const CurrentBets = () => {
             isSearch={true}
             itemCount={betList && betList?.count > 0 ? betList?.count : 1}
             setTableConfig={setTableConfig}
+            CustomTableClass="ovelay-bet"
             enablePdfExcel={false}
             tableConfig={tableConfig}
             currentPage={currentPage}
@@ -252,6 +260,7 @@ const CurrentBets = () => {
                 ) {
                   return (
                     <tr
+                      ref={rowRef}
                       key={index}
                       className={isBackBet ? "back-border" : "lay-border"}
                     >
@@ -263,17 +272,24 @@ const CurrentBets = () => {
                         >
                           {column?.id === "createdAt"
                             ? moment(_.get(item, column.id))
-                                .tz(timezone)
-                                .format("YYYY-MMM-DD h:mmA [IST]")
+                              .tz(timezone)
+                              .format("YYYY-MMM-DD h:mmA [IST]")
                             : column?.id === "startAt"
-                            ? moment(getStartAt(item))
+                              ? moment(getStartAt(item))
                                 .tz(timezone)
                                 .format("YYYY-MMM-DD h:mmA [IST]")
-                            : column?.id === "bettingName"
-                            ? item.bettingName || item.eventName
-                            : _.get(item, column.id)}
+                              : column?.id === "bettingName"
+                                ? item.bettingName || item.eventName
+                                : _.get(item, column.id)}
                         </td>
                       ))}
+                      {item?.deleteReason && (
+                        <div className="modal-betDeleteOverlay" style={{ height: `${rowHeight}px` }}>
+                          <h5 className="text-uppercase" title={`Bet Deleted  Due To ${item?.deleteReason}`}>
+                            Bet <span> Deleted </span> Due To {item?.deleteReason}
+                          </h5>
+                        </div>
+                      )}
                     </tr>
                   );
                 }
@@ -352,13 +368,13 @@ const CurrentBets = () => {
                         >
                           {column?.id === "createdAt"
                             ? moment(_.get(item, column.id))
-                                .tz(timezone)
-                                .format("YYYY-MMM-DD h:mmA [IST]")
+                              .tz(timezone)
+                              .format("YYYY-MMM-DD h:mmA [IST]")
                             : column?.id === "startAt"
-                            ? moment(getStartAt(item))
+                              ? moment(getStartAt(item))
                                 .tz(timezone)
                                 .format("YYYY-MMM-DD h:mmA [IST]")
-                            : _.get(item, column.id)}
+                              : _.get(item, column.id)}
                         </td>
                       ))}
                     </tr>
