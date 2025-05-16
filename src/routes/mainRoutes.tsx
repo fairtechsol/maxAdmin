@@ -139,7 +139,7 @@ const MainRoutes = {
       element: <AddAccount />,
     },
     {
-      // key: "marketAnalysis",
+      key: "marketAnalysis",
       path: "market-analysis",
       element: <MarketAnalysis />,
     },
@@ -152,7 +152,7 @@ const MainRoutes = {
       element: <ChangePassword />,
     },
     {
-      // key: "loginUserCreation",
+      key: "loginUserCreation",
       path: "multiLogin",
       element: <MultiLogin />,
     },

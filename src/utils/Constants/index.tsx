@@ -267,6 +267,20 @@ export const sessionBettingType = {
   meter: "meter",
 };
 
+export const routeKeyContant: any = {
+  listClients: "userList",
+  listAccount: "userList",
+  "active-inactive-user-list": "userList",
+  "add-account": "insertUser",
+  multiLogin: "loginUserCreation",
+  "market-analysis": "marketAnalysis",
+  "account-statement": "accountStatement",
+  "current-bets": "currentBets",
+  "casino-report": "liveCasinoResult",
+  "profit-loss": "partyWinLoss",
+  "casino-result": "casinoResult",
+};
+
 export const card3 = {
   dragonTiger: [
     {
