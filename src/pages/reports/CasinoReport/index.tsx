@@ -37,9 +37,9 @@ const CasinoReport = () => {
   const dispatch: AppDispatch = useDispatch();
   const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [casinoTypeValues, setCasinoTypeValues] = useState<any>(null);
-  const [gameTypeValues, setGameTypeValues] = useState<any>(null);
-  const [selectedUser, setSelectedUser] = useState<any>(null);
+  const [casinoTypeValues, setCasinoTypeValues] = useState<any>("");
+  const [gameTypeValues, setGameTypeValues] = useState<any>("");
+  const [selectedUser, setSelectedUser] = useState<any>("");
   const [date, setDate] = useState<any>();
   const [userOptions, setUserOptions] = useState([]);
   const [inputValue, setInputValue] = useState("");
@@ -232,7 +232,7 @@ const CasinoReport = () => {
               <Col lg={2} className="mb-3">
                 <Form.Control
                   type="date"
-                  value={date}
+                  value={date ?? ""}
                   onChange={(e) => setDate(e.target.value)}
                 />
               </Col>
