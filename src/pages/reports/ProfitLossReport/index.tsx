@@ -64,8 +64,6 @@ const ProfitLossReport = () => {
     (state: RootState) => state.match.reportList
   );
 
-  useEffect(() => {}, []);
-
   const debouncedInputValue = useMemo(() => {
     return debounce((value) => {
       dispatch(
