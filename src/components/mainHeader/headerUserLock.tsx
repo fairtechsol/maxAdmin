@@ -27,8 +27,8 @@ const HeaderUserLock = ({ data }: any) => {
     >
       {data?.map((item: any, index: number) => (
         <tr key={index}>
-          <td>{item?.userName} </td>
-          <td>{item?.roleName} </td>
+          <td>{item?.userName}</td>
+          <td>{item?.roleName}</td>
           <td>
             <Form>
               <Form.Check

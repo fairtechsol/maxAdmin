@@ -52,8 +52,8 @@ const ResultBetList = ({ bets, total }: any) => {
   };
   return (
     <div className="w-100 d-flex flex-column">
-      <div className={"w-100 d-flex flex-row justify-content-between"}>
-        <div className={"w-25 lh-2 d-flex flex-row justify-content-between"}>
+      <div className="w-100 d-flex flex-row justify-content-between">
+        <div className="w-25 lh-2 d-flex flex-row justify-content-between">
           <input
             type="radio"
             id={selected}
@@ -85,9 +85,7 @@ const ResultBetList = ({ bets, total }: any) => {
           <label>Deleted</label>
         </div>
       </div>
-      <div
-        className={"title-16 d-flex flex-row justify-content-end  float-end"}
-      >
+      <div className="title-16 d-flex flex-row justify-content-end float-end">
         <span className="px-2">
           {" "}
           Total Bets:{" "}

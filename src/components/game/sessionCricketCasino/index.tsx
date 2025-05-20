@@ -64,7 +64,7 @@ const SessionCricketCasino = ({
           >
             <div style={{ backgroundColor: "#f2f2f2", flexGrow: 1 }}>
               <span
-                className={`sessionMinBox sessionMinMaxFont`}
+                className="sessionMinBox sessionMinMaxFont"
                 style={{ marginLeft: "1%" }}
               >
                 Min:{formatNumber(marketArr?.min)} Max:

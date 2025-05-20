@@ -27,11 +27,11 @@ const HeaderUserDetail = ({ data }: any) => {
     >
       {data?.map((item: any, index: number) => (
         <tr key={index}>
-          <td>{item?.userName} </td>
-          <td>{item?.userBal?.exposure} </td>
-          <td>{item?.creditRefrence} </td>
-          <td>{item?.exposureLimit} </td>
-          <td>{item?.userBal?.currentBalance} </td>
+          <td>{item?.userName}</td>
+          <td>{item?.userBal?.exposure}</td>
+          <td>{item?.creditRefrence}</td>
+          <td>{item?.exposureLimit}</td>
+          <td>{item?.userBal?.currentBalance}</td>
         </tr>
       ))}
     </CustomTable>

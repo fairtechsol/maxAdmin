@@ -241,7 +241,7 @@ function MarketTableHeader({
       `}
         style={{ ...inlineStyle }}
       >
-        <span className="title-14  text-white">{title}</span>
+        <span className="title-14 text-white">{title}</span>
         {children}
         {type === MatchType.MATCH_ODDS ? (
           <div className="float-right">
@@ -272,7 +272,7 @@ function MarketTableHeader({
           className={`customModal ${customClass} `}
         >
           <Modal.Header closeButton>
-            <Modal.Title className={`${"Betlock"}`}>Betlock</Modal.Title>
+            <Modal.Title className="Betlock">Betlock</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className="w-100 d-flex flex-column">
@@ -300,8 +300,8 @@ function MarketTableHeader({
                   />
                   <label
                     className="custom-control-label"
-                    htmlFor={`custom-checkbox`}
-                  ></label>
+                    htmlFor="custom-checkbox"
+                  />
                 </div>
                 <div
                   className="w-75 d-flex justify-content-start align-items-start f-bold ps-1"
@@ -319,7 +319,7 @@ function MarketTableHeader({
                       style={{ border: "1px solid #eee" }}
                       key={index}
                     >
-                      <div className="custom-control w-25 d-flex justify-content-start align-items-start ">
+                      <div className="custom-control w-25 d-flex justify-content-start align-items-start">
                         <input
                           className="custom-control-input d-none"
                           type="checkbox"
@@ -351,7 +351,7 @@ function MarketTableHeader({
           className={`customModal ${customClass} custom-modal-width`}
         >
           <Modal.Header closeButton>
-            <Modal.Title className={`${"Betlock"}`}>{"User Book"}</Modal.Title>
+            <Modal.Title className="Betlock">User Book</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className="w-100 d-flex flex-column">

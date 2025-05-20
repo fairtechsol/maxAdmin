@@ -36,7 +36,6 @@ const ProfitLossEventType = (props: any) => {
               :
             </label>
             <span className="text-white title-12">
-              {" "}
               {parseFloat(item?.amount).toFixed(2)}
             </span>
           </div>

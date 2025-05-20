@@ -57,14 +57,14 @@ const Tournament = ({ title, box, data, detail }: TournamentProps) => {
                 box === 6 ? "tournament1BackBoxTab" : "tournament2BackBoxTab"
               }
             >
-              <span className={`f-size16 tournamentBackTxt`}>Back</span>
+              <span className="f-size16 tournamentBackTxt">Back</span>
             </div>
             <div
               className={
                 box === 6 ? "tournament1LayBoxTab" : "tournament2LayBoxTab"
               }
             >
-              <span className={`f-size16 tournamentBackTxt`}>Lay</span>
+              <span className="f-size16 tournamentBackTxt">Lay</span>
             </div>
             {box === 6 && <div className="tournamentEmptyBox"></div>}
           </div>
@@ -101,7 +101,7 @@ const Tournament = ({ title, box, data, detail }: TournamentProps) => {
                   className="tournamentTeam"
                   style={isMobile && box === 6 ? { width: "28%" } : {}}
                 >
-                  <span className={`teamFont tournamentTeamTxt`}>
+                  <span className="teamFont tournamentTeamTxt">
                     {item?.nat || item?.runnerName}
                   </span>
                   <div className="d-flex flex-row justify-content-between w-100">

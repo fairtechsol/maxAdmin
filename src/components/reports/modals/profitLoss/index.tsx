@@ -48,14 +48,14 @@ const ProfitLossModal = () => {
     <div className="accountStatementModal">
       <Row>
         <Col sm={12}>
-          <div className={`d-flex justify-content-between py-2 px-3`}>
+          <div className="d-flex justify-content-between py-2 px-3">
             <div className="d-flex align-items-center">
               <Form.Check
                 inline
                 label="All"
                 name="group1"
                 type="radio"
-                id={`All`}
+                id="All"
               />
               <Form.Check
                 color="secondary"
@@ -63,7 +63,7 @@ const ProfitLossModal = () => {
                 label="Matched"
                 name="group1"
                 type="radio"
-                id={`Matched`}
+                id="Matched"
               />
               <Form.Check
                 color="secondary"
@@ -71,7 +71,7 @@ const ProfitLossModal = () => {
                 label="Delete"
                 name="group1"
                 type="radio"
-                id={`Delete`}
+                id="Delete"
               />
             </div>
           </div>

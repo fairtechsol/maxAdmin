@@ -10,8 +10,8 @@ import {
 } from "../../../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../../../store/store";
 import CustomInput from "../../../commonComponent/input";
-import ModalFooter from "../footer";
 import Loader from "../../../commonComponent/loader";
+import ModalFooter from "../footer";
 
 const initialValues: any = {
   initialBalance: "",
@@ -228,7 +228,7 @@ const Deposit = ({
                   errors={errors.amount}
                   min={0}
                   step="any"
-                  placeholder={"Amount"}
+                  placeholder="Amount"
                   style={{
                     border: border?.amount ? "1px solid red" : "1px solid #000",
                   }}
@@ -248,7 +248,7 @@ const Deposit = ({
                   type="textarea"
                   as="textarea"
                   rows={4}
-                  placeholder={"Remark"}
+                  placeholder="Remark"
                   customstyle="input-box"
                   touched={touched.remark}
                   errors={errors.remark}

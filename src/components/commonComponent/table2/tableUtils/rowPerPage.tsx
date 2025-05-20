@@ -27,16 +27,16 @@ const RowPerPage: React.FC<RowPerPageProps> = ({ value, onChange }) => {
   ];
 
   return (
-    <div className={`d-flex align-items-center ${"gap-2 "}`}>
+    <div className="d-flex align-items-center gap-2">
       <label>Show</label>
       <CustomInput
         type="select"
         value={value}
         onChange={(e: any) => onChange(Number(e.target.value))}
-        customStyle={`d-flex`}
+        customStyle="d-flex"
         options={options}
         isUnderlinedInput={false}
-        inputClass={"py-1"}
+        inputClass="py-1"
       />
       <label>Entries</label>
     </div>

@@ -37,7 +37,7 @@ const UserLockMarketWise = ({
     }
   };
   return (
-    <tr key={index}>
+    <tr>
       <td>
         <div
           className={`custom-checkbox custom-control ${

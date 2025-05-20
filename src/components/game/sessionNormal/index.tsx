@@ -104,7 +104,7 @@ const SessionNormal = ({ title, data, detail, manual, mtype }: any) => {
                   <span className={`f-size16 sessionBackTxt`}>No</span>
                 </div>
                 <div className="sessionYesBox back1Background">
-                  <span className={`f-size16 sessionBackTxt`}>Yes</span>
+                  <span className="f-size16 sessionBackTxt">Yes</span>
                 </div>
                 <div className="sessionEmptyBox"></div>
               </div>
@@ -181,23 +181,23 @@ const SessionNormal = ({ title, data, detail, manual, mtype }: any) => {
                         }}
                       >
                         <div
-                          className={`sessionRateBox rateFont lay1Background`}
+                          className="sessionRateBox rateFont lay1Background"
                           style={{ cursor: "pointer" }}
                         >
-                          <span className={`rateFont`}>
+                          <span className="rateFont">
                             {handlePrice(
                               item?.ex?.availableToLay?.[0]?.price ||
                                 item?.noRate
                             ) ?? "-"}
                           </span>
-                          <span className={`f-size12 sessionRate2Box`}>
+                          <span className="f-size12 sessionRate2Box">
                             {handleSize(item?.ex?.availableToLay?.[0]?.size) ||
                               item?.noPercent}
                           </span>
                         </div>
                         {item?.ex?.availableToLay?.length > 1 && (
                           <div
-                            className={`sessionRateBox rateFont lay1Background`}
+                            className="sessionRateBox rateFont lay1Background"
                             style={{ cursor: "pointer" }}
                           >
                             <span className={`rateFont`}>
@@ -205,14 +205,14 @@ const SessionNormal = ({ title, data, detail, manual, mtype }: any) => {
                                 item?.ex?.availableToLay?.[1]?.price
                               ) ?? "-"}
                             </span>
-                            <span className={`f-size12 sessionRate2Box`}>
+                            <span className="f-size12 sessionRate2Box">
                               {handleSize(item?.ex?.availableToLay?.[1]?.size)}
                             </span>
                           </div>
                         )}
                         {item?.ex?.availableToLay?.length > 2 && (
                           <div
-                            className={`sessionRateBox lay1Background`}
+                            className="sessionRateBox lay1Background"
                             style={{ cursor: "pointer" }}
                           >
                             <span className={`rateFont`}>
@@ -220,7 +220,7 @@ const SessionNormal = ({ title, data, detail, manual, mtype }: any) => {
                                 item?.ex?.availableToLay?.[2]?.price
                               ) ?? "-"}
                             </span>
-                            <span className={`f-size12 sessionRate2Box`}>
+                            <span className="f-size12 sessionRate2Box">
                               {handleSize(item?.ex?.availableToLay?.[2]?.size)}
                             </span>
                           </div>
@@ -237,13 +237,13 @@ const SessionNormal = ({ title, data, detail, manual, mtype }: any) => {
                           className="sessionRateBox back1Background"
                           style={{ cursor: "pointer" }}
                         >
-                          <span className={`rateFont`}>
+                          <span className="rateFont">
                             {handlePrice(
                               item?.ex?.availableToBack?.[0]?.price ||
                                 item?.yesRate
                             ) ?? "-"}
                           </span>
-                          <span className={`f-size12 sessionRate2Box`}>
+                          <span className="f-size12 sessionRate2Box">
                             {handleSize(item?.ex?.availableToBack?.[0]?.size) ||
                               item?.yesPercent}
                           </span>
@@ -253,12 +253,12 @@ const SessionNormal = ({ title, data, detail, manual, mtype }: any) => {
                             className="sessionRateBox back1Background"
                             style={{ cursor: "pointer" }}
                           >
-                            <span className={`rateFont`}>
+                            <span className="rateFont">
                               {handlePrice(
                                 item?.ex?.availableToBack?.[1]?.price
                               ) ?? "-"}
                             </span>
-                            <span className={`f-size12 sessionRate2Box`}>
+                            <span className="f-size12 sessionRate2Box">
                               {handleSize(item?.ex?.availableToBack?.[1]?.size)}
                             </span>
                           </div>
@@ -268,22 +268,22 @@ const SessionNormal = ({ title, data, detail, manual, mtype }: any) => {
                             className="sessionRateBox back1Background"
                             style={{ cursor: "pointer" }}
                           >
-                            <span className={`rateFont`}>
+                            <span className="rateFont">
                               {handlePrice(
                                 item?.ex?.availableToBack?.[2]?.price
                               ) ?? "-"}
                             </span>
-                            <span className={`f-size12 sessionRate2Box`}>
+                            <span className="f-size12 sessionRate2Box">
                               {handleSize(item?.ex?.availableToBack?.[2]?.size)}
                             </span>
                           </div>
                         )}
                       </div>
                       <div className="sessionMinBoxContainer">
-                        <span className={`sessionMinBox sessionMinMaxFont`}>
+                        <span className="sessionMinBox sessionMinMaxFont">
                           Min:{formatNumber(item?.min || item?.minBet)}
                         </span>
-                        <span className={`sessionMinBox sessionMinMaxFont`}>
+                        <span className="sessionMinBox sessionMinMaxFont">
                           Max:{formatNumber(item?.max || item?.maxBet)}
                         </span>
                       </div>

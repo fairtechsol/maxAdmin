@@ -36,8 +36,8 @@ const BetBox = ({ data, type }: any) => {
   };
   return (
     <div className={`matchOddBackBox ${handleBackground(data?.tno)}`}>
-      <span className={`rateFont`}>{handlePrice(data?.price)}</span>
-      <span className={`sizeFont matchOddRate2Box`}>
+      <span className="rateFont">{handlePrice(data?.price)}</span>
+      <span className="sizeFont matchOddRate2Box">
         {formatNumber(handleSize(data?.size))}
       </span>
     </div>

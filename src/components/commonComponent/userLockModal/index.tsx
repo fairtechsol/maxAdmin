@@ -99,7 +99,7 @@ const UserLockModal = ({
       setShow={() => setShowModal(false)}
     >
       <div>
-        <div className="d-flex align-items-center mb-3 row  gap-2">
+        <div className="d-flex align-items-center mb-3 row gap-2">
           <div className="d-flex">
             <input
               type="text"
@@ -111,7 +111,7 @@ const UserLockModal = ({
               style={{ width: "100%" }}
             />
             <span className="">
-              <button onClick={handleSearch} className="btn btn-primary ">
+              <button onClick={handleSearch} className="btn btn-primary">
                 Load
               </button>
             </span>
@@ -150,7 +150,7 @@ const UserLockModal = ({
                       onChange={() => handleToggle(user, "userBlock")}
                     />
                   </td>
-                )}{" "}
+                )}
                 {(!parsedPermissions || parsedPermissions?.betLock) && (
                   <td>
                     <input

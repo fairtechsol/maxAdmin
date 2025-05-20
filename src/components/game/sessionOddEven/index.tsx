@@ -40,10 +40,10 @@ const SessionOddEven = ({ title, data, detail, marketAnalysisDetail }: any) => {
                 className="sessionYesBox back1Background"
                 style={{ borderRight: "1px solid #c7c8ca" }}
               >
-                <span className={`f-size16 sessionBackTxt`}>Odd</span>
+                <span className="f-size16 sessionBackTxt">Odd</span>
               </div>
               <div className="sessionYesBox back1Background">
-                <span className={`f-size16 sessionBackTxt`}>Even</span>
+                <span className="f-size16 sessionBackTxt">Even</span>
               </div>
               <div className="sessionEmptyBox"></div>
             </div>
@@ -105,7 +105,7 @@ const SessionOddEven = ({ title, data, detail, marketAnalysisDetail }: any) => {
                     {(item?.activeStatus != "live" ||
                       item?.GameStatus != "") && (
                       <div className="suspended-overlayRates">
-                        <span className={`suspendTextCmmn`}>
+                        <span className="suspendTextCmmn">
                           {item?.GameStatus ?? "SUSPENDED"}
                         </span>
                       </div>
@@ -119,14 +119,14 @@ const SessionOddEven = ({ title, data, detail, marketAnalysisDetail }: any) => {
                       }}
                     >
                       <div
-                        className={`sessionRateBox back1Background`}
+                        className="sessionRateBox back1Background"
                         style={{ cursor: "pointer" }}
                       >
-                        <span className={`rateFont`}>
+                        <span className="rateFont">
                           {handlePrice(item?.ex?.availableToBack?.[0]?.price) ??
                             "-"}
                         </span>
-                        <span className={`f-size12 sessionRate2Box`}>
+                        <span className="f-size12 sessionRate2Box">
                           {handleSize(item?.ex?.availableToBack?.[0]?.size)}
                         </span>
                       </div>
@@ -142,11 +142,11 @@ const SessionOddEven = ({ title, data, detail, marketAnalysisDetail }: any) => {
                         className="sessionRateBox back1Background"
                         style={{ cursor: "pointer" }}
                       >
-                        <span className={`rateFont`}>
+                        <span className="rateFont">
                           {handlePrice(item?.ex?.availableToLay?.[0]?.price) ??
                             "-"}
                         </span>
-                        <span className={`f-size12 sessionRate2Box`}>
+                        <span className="f-size12 sessionRate2Box">
                           {handleSize(item?.ex?.availableToLay?.[0]?.size)}
                         </span>
                       </div>
@@ -155,10 +155,10 @@ const SessionOddEven = ({ title, data, detail, marketAnalysisDetail }: any) => {
                       className="sessionMinBoxContainer"
                       style={{ width: "33.33%" }}
                     >
-                      <span className={`sessionMinBox sessionMinMaxFont`}>
+                      <span className="sessionMinBox sessionMinMaxFont">
                         Min:{formatNumber(item?.min)}
                       </span>
-                      <span className={`sessionMinBox sessionMinMaxFont`}>
+                      <span className="sessionMinBox sessionMinMaxFont">
                         Max:{formatNumber(item?.max)}
                       </span>
                     </div>

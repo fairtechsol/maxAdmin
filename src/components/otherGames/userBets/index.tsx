@@ -20,9 +20,7 @@ const OtherUserBets = ({ matchId }: any) => {
       <Tab.Container id="left-tabs-example" defaultActiveKey="first">
         <Row>
           <Col sm={12}>
-            <div
-              className={`userBets-header bg-secondaryLight d-flex justify-content-between py-2 px-3`}
-            >
+            <div className="userBets-header bg-secondaryLight d-flex justify-content-between py-2 px-3">
               <div className="userBets-headerRight w-100 d-flex justify-content-between align-items-center ">
                 <div className="text-white text-start f600 title-14 p-0">
                   MY BETS

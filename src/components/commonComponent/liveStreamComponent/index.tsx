@@ -42,7 +42,7 @@ const LiveStreamComponent = ({
                 <iframe
                   src={url}
                   title="Live Stream"
-                  referrerPolicy={"strict-origin-when-cross-origin"}
+                  referrerPolicy="strict-origin-when-cross-origin"
                 />
               </Ratio>
             </Col>

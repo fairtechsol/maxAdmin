@@ -13,7 +13,7 @@ const SelectSearch3 = ({
 }: any) => {
   return (
     <Form.Group>
-      <div>
+      <>
         <div className="custom-radio-group2">
           {options.map((option: any, index: number) => (
             <label className="custom-radio2" key={index}>
@@ -30,7 +30,7 @@ const SelectSearch3 = ({
             </label>
           ))}
         </div>
-      </div>
+      </>
 
       <CustomErrorMessage touched={touched} errors={errors} />
     </Form.Group>

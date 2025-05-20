@@ -82,9 +82,9 @@ const SessionKhado = ({
             style={{ width: "100%", display: "flex", flexDirection: "column" }}
           >
             <div className="sessionYesNoBoxContainer">
-              <div className="sessionYesNoBox  rateBoxWidthKhado">
+              <div className="sessionYesNoBox rateBoxWidthKhado">
                 <div className="sessionKhadoYesBox back1Background">
-                  <span className={`f-size16 sessionBackTxt`}>Back</span>
+                  <span className="f-size16 sessionBackTxt">Back</span>
                 </div>
 
                 <div className="sessionEmptyBox" />
@@ -152,19 +152,19 @@ const SessionKhado = ({
                       className="sessionRateBox rateFont back1Background"
                       style={{ cursor: "pointer" }}
                     >
-                      <span className={`rateFont`}>
+                      <span className="rateFont">
                         {handlePrice(item?.ex?.availableToBack?.[0]?.price) ??
                           "-"}
                       </span>
-                      <span className={`f-size12 sessionRate2Box`}>
+                      <span className="f-size12 sessionRate2Box">
                         {handleSize(item?.ex?.availableToBack?.[0]?.size)}
                       </span>
                     </div>
                     <div className="sessionMinBoxContainer">
-                      <span className={`sessionMinBox sessionMinMaxFont`}>
+                      <span className="sessionMinBox sessionMinMaxFont">
                         Min:{formatNumber(item?.min)}
                       </span>
-                      <span className={`sessionMinBox sessionMinMaxFont`}>
+                      <span className="sessionMinBox sessionMinMaxFont">
                         Max:{formatNumber(item?.max)}
                       </span>
                     </div>

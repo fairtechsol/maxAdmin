@@ -79,7 +79,7 @@ function MainLayout({ eventKey }: any) {
       <main
         className={`page-content bg-light ${
           location.pathname === "/admin/add-account" ? "addAcc" : ""
-        }  `}
+        }`}
       >
         <Outlet />
       </main>
