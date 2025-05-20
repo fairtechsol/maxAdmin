@@ -57,3 +57,11 @@
   margin-top: 8px;
   box-sizing: border-box;
 }
+
+.custom-hover {
+  color: white !important;
+}
+
+.custom-hover:hover {
+  color: black !important;
+}

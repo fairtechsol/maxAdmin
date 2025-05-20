@@ -3,7 +3,7 @@ import React, { memo, useEffect, useMemo, useState } from "react";
 import { Form, Nav, NavDropdown, Navbar } from "react-bootstrap";
 import { FaSearchPlus } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import Select, { components } from "react-select";
 import LogoSection from "../../../components/commonComponent/logoSection";
 import CustomModal from "../../../components/commonComponent/modal";
@@ -58,7 +58,6 @@ const reportOptions = [
 ];
 
 const TopbarDropdown = ({ name, options }: ItemProps) => {
-  const navigate = useNavigate();
   const [show, setShow] = useState(false);
   let location = useLocation();
   const handleMouseEnter = () => {
@@ -74,11 +73,6 @@ const TopbarDropdown = ({ name, options }: ItemProps) => {
     handleMouseLeave();
   }, [location.pathname]);
 
-  const handleItemClick = (link: string) => {
-    navigate(link);
-    setShow(false);
-  };
-
   return (
     <NavDropdown
       onMouseEnter={handleMouseEnter}
@@ -90,13 +84,14 @@ const TopbarDropdown = ({ name, options }: ItemProps) => {
       onClick={handleMouseClick}
     >
       {options?.map((option, index) => (
-        <NavDropdown.Item
+        <NavLink
           key={index}
-          onClick={() => handleItemClick(option.link)}
-          style={{ cursor: "pointer" }}
+          to={option.link}
+          onClick={() => setShow(false)}
+          className="nav-link custom-hover m-0"
         >
           {option.name}
-        </NavDropdown.Item>
+        </NavLink>
       ))}
     </NavDropdown>
   );
@@ -243,8 +238,8 @@ const Topbar = (props: any) => {
     <>
       <Navbar expand="lg" className="bg-primary p-0 px-0" data-bs-theme="light">
         <div className="d-flex ms-0">
-          <a
-            href={
+          <NavLink
+            to={
               !parsedPermissions || parsedPermissions?.userList
                 ? `/admin/active-inactive-user-list/${localStorage.getItem(
                     "key"
@@ -254,7 +249,7 @@ const Topbar = (props: any) => {
             className="me-2 mt-1 d-flex"
           >
             <LogoSection width="100%" height="50px" />
-          </a>
+          </NavLink>
 
           <span className="m-3 cursor" onClick={props.onClick}>
             <div className="menuHamBurger d-flex flex-column me-2 mt-1">
@@ -266,20 +261,20 @@ const Topbar = (props: any) => {
           <Navbar id="basic-navbar-nav">
             <Nav className="me-auto">
               {(!parsedPermissions || parsedPermissions?.userList) && (
-                <Nav.Link
-                  className="navbar-mainLink"
-                  href={`/admin/listClients/${localStorage.getItem("key")}`}
+                <NavLink
+                  to={`/admin/listClients/${localStorage.getItem("key")}`}
+                  className="nav-link navbar-mainLink custom-hover"
                 >
                   List of clients
-                </Nav.Link>
+                </NavLink>
               )}
               {(!parsedPermissions || parsedPermissions?.marketAnalysis) && (
-                <Nav.Link
-                  className="navbar-mainLink"
-                  href="/admin/market-analysis"
+                <NavLink
+                  to="/admin/market-analysis"
+                  className="nav-link navbar-mainLink custom-hover"
                 >
                   Market Analysis
-                </Nav.Link>
+                </NavLink>
               )}
               {/* <TopbarDropdown
                 name="Live Market"
@@ -347,9 +342,12 @@ const Topbar = (props: any) => {
                 </>
               )}
               {(!parsedPermissions || parsedPermissions?.loginUserCreation) && (
-                <Nav.Link className="navbar-mainLink" href="/admin/multiLogin">
+                <NavLink
+                  to="/admin/multiLogin"
+                  className="nav-link navbar-mainLink custom-hover"
+                >
                   Multi Login
-                </Nav.Link>
+                </NavLink>
               )}
             </Nav>
           </Navbar>
