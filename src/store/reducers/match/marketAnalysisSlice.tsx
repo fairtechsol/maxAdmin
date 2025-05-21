@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
-    getMarketAnalysis,
-    resetMarketAnalysys,
+  getMarketAnalysis,
+  resetMarketAnalysys,
 } from "../../actions/match/matchAction";
 
 interface InitialState {
@@ -28,6 +28,7 @@ const marketAnalysisSlice = createSlice({
         state.loading = true;
         state.success = false;
         state.error = null;
+        state.marketAnalysisDetail = null;
       })
       .addCase(getMarketAnalysis.fulfilled, (state, action) => {
         state.loading = false;

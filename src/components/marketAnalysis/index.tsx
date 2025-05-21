@@ -1,5 +1,6 @@
 import moment from "moment-timezone";
 import { memo } from "react";
+import { NavLink } from "react-router-dom";
 import { sessionBettingType } from "../../utils/Constants";
 import "./styles.scss";
 
@@ -48,8 +49,8 @@ const MarketAnalysisComp = ({ match }: any) => {
       <div className="market-analysis-container">
         <div className="market-analysis-title">
           <div>
-            <a
-              href={
+            <NavLink
+              to={
                 match?.eventType === "cricket"
                   ? `/admin/match_details/${match?.matchId}`
                   : match?.eventType === "politics"
@@ -63,7 +64,7 @@ const MarketAnalysisComp = ({ match }: any) => {
               }
             >
               {match?.title}
-            </a>
+            </NavLink>
           </div>
           <div>{moment(match?.startAt).format("DD/MM/YYYY hh:mm:ss")}</div>
         </div>

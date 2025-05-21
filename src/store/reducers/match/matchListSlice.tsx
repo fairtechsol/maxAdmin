@@ -31,6 +31,7 @@ const matchListSlice = createSlice({
         state.loading = true;
         state.success = false;
         state.error = null;
+        state.matchDetails = null;
       })
       .addCase(matchDetailAction.fulfilled, (state, action) => {
         state.success = true;
