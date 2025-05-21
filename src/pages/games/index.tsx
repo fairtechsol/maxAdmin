@@ -18,6 +18,7 @@ import {
   getPlacedBets,
   matchDetailAction,
   resetMarketAnalysys,
+  resetPlacedBets,
   updateBalance,
   updateBetsPlaced,
   updateMatchRates,
@@ -180,6 +181,9 @@ const Games = () => {
           dispatch(getPlacedBets({ id: id, userId: state?.userId }));
         }
       }
+      return () => {
+        dispatch(resetPlacedBets());
+      };
     } catch (e) {
       console.log(e);
     }
@@ -403,7 +407,7 @@ const Games = () => {
                   },
                 ].map((session, index) =>
                   session.data?.section?.length > 0 ||
-                    (session.type === "session" && manualEntries?.length) ? (
+                  (session.type === "session" && manualEntries?.length) ? (
                     <div
                       key={index}
                       style={{ width: isMobile ? "100%" : "49.5%" }}
@@ -450,10 +454,10 @@ const Games = () => {
                             width: isMobile
                               ? "100%"
                               : length % 2 === 0
-                                ? "49.5%"
-                                : index === length - 1
-                                  ? "100%"
-                                  : "49.5%",
+                              ? "49.5%"
+                              : index === length - 1
+                              ? "100%"
+                              : "49.5%",
                           }}
                         >
                           {item?.activeStatus === "live" && (

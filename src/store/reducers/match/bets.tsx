@@ -1,22 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
-    getMarketLockAllChild,
-    getMarketLockChildReset,
-    getMarketUserBook,
-    getMatchLockAllChild,
-    getMorePlacedBets,
-    getMorePlacedBetsReset,
-    getPlacedBets,
-    getRunAmount,
-    getRunAmountMeter,
-    getUserDetailsForParent,
-    getUserDetailsOfLock,
-    resetRunAmount,
-    successResetForLockUnlock,
-    updateBetsPlaced,
-    updatePlacedbetsDeleteReason,
-    updateUserMarketLock,
-    updateUserMatchLock,
+  getMarketLockAllChild,
+  getMarketLockChildReset,
+  getMarketUserBook,
+  getMatchLockAllChild,
+  getMorePlacedBets,
+  getMorePlacedBetsReset,
+  getPlacedBets,
+  getRunAmount,
+  getRunAmountMeter,
+  getUserDetailsForParent,
+  getUserDetailsOfLock,
+  resetPlacedBets,
+  resetRunAmount,
+  successResetForLockUnlock,
+  updateBetsPlaced,
+  updatePlacedbetsDeleteReason,
+  updateUserMarketLock,
+  updateUserMatchLock,
 } from "../../actions/match/matchAction";
 
 interface InitialState {
@@ -74,6 +75,9 @@ const placedBetsSlice = createSlice({
       .addCase(getPlacedBets.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error?.message;
+      })
+      .addCase(resetPlacedBets, (state) => {
+        state.placedBets = [];
       })
       .addCase(getMorePlacedBets.pending, (state) => {
         state.loading = false;
