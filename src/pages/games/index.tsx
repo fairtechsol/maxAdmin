@@ -333,24 +333,25 @@ const Games = () => {
                   {moment(matchDetails?.startAt).format("DD/MM/YYYY HH:mm:ss")}
                 </span>
               </div>
-              {matchDetails?.tournament
-                ?.filter((item: any) => item?.activeStatus === "live")
-                ?.map((item: any, index: number) => {
-                  return (
-                    <Col md={12} key={index}>
-                      <Tournament
-                        title={item?.name}
-                        box={
-                          item?.runners?.[0]?.ex?.availableToBack?.length > 2
-                            ? 6
-                            : 2
-                        }
-                        data={item}
-                        detail={matchDetails}
-                      />
-                    </Col>
-                  );
-                })}
+              {Array.isArray(matchDetails?.tournament) &&
+                matchDetails.tournament
+                  .filter((item: any) => item?.activeStatus === "live")
+                  ?.map((item: any, index: number) => {
+                    return (
+                      <Col md={12} key={index}>
+                        <Tournament
+                          title={item?.name}
+                          box={
+                            item?.runners?.[0]?.ex?.availableToBack?.length > 2
+                              ? 6
+                              : 2
+                          }
+                          data={item}
+                          detail={matchDetails}
+                        />
+                      </Col>
+                    );
+                  })}
               <div
                 style={{
                   display: "flex",
@@ -402,7 +403,7 @@ const Games = () => {
                   },
                 ].map((session, index) =>
                   session.data?.section?.length > 0 ||
-                  (session.type === "session" && manualEntries?.length) ? (
+                    (session.type === "session" && manualEntries?.length) ? (
                     <div
                       key={index}
                       style={{ width: isMobile ? "100%" : "49.5%" }}
@@ -449,10 +450,10 @@ const Games = () => {
                             width: isMobile
                               ? "100%"
                               : length % 2 === 0
-                              ? "49.5%"
-                              : index === length - 1
-                              ? "100%"
-                              : "49.5%",
+                                ? "49.5%"
+                                : index === length - 1
+                                  ? "100%"
+                                  : "49.5%",
                           }}
                         >
                           {item?.activeStatus === "live" && (
