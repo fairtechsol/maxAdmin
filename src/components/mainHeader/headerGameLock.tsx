@@ -37,6 +37,7 @@ const HeaderGameLock = ({ data, userDetail }: any) => {
                   aria-label="option 1"
                   checked={!userDetail[0]?.userBlock}
                   disabled={true}
+                  onChange={() => {}}
                 />
               </Form>
             </td>
@@ -46,6 +47,7 @@ const HeaderGameLock = ({ data, userDetail }: any) => {
                   aria-label="option 2"
                   checked={item?.matchLock}
                   disabled={true}
+                  onChange={() => {}}
                 />
               </Form>
             </td>
@@ -55,6 +57,7 @@ const HeaderGameLock = ({ data, userDetail }: any) => {
                   aria-label="option 3"
                   checked={item?.sessionLock}
                   disabled={true}
+                  onChange={() => {}}
                 />
               </Form>
             </td>

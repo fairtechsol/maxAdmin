@@ -258,6 +258,7 @@ const ResultBetList = ({ bets, total }: any) => {
                       type="checkbox"
                       onClick={() => handleCheckBox(item)}
                       checked={selectedItems.includes(item)}
+                      onChange={() => {}}
                     />
                   </td>
                   <DeleteBetOverlay title={deleteReason} />

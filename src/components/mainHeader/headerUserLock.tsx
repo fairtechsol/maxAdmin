@@ -35,6 +35,7 @@ const HeaderUserLock = ({ data }: any) => {
                 aria-label="option 1"
                 checked={!item?.userBlock}
                 disabled={true}
+                onChange={() => {}}
               />
             </Form>
           </td>
@@ -44,6 +45,7 @@ const HeaderUserLock = ({ data }: any) => {
                 aria-label="option 2"
                 checked={!item?.betBlock}
                 disabled={true}
+                onChange={() => {}}
               />
             </Form>
           </td>

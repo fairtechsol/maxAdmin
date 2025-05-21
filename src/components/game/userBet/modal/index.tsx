@@ -22,8 +22,7 @@ function UserBetModalTable({
     }
   }, [list]);
 
-
-  useEffect(() => { }, [tableConfig]);
+  useEffect(() => {}, [tableConfig]);
   const columns: Column[] = [
     { id: "username", label: "	User Name " },
     { id: "nation", label: "Nation " },
@@ -39,8 +38,8 @@ function UserBetModalTable({
     setSelectedCheckedBet((prevSelected: any) =>
       prevSelected.includes(item)
         ? prevSelected.filter(
-          (selectedItem: any) => selectedItem?.id !== item?.id
-        )
+            (selectedItem: any) => selectedItem?.id !== item?.id
+          )
         : [...prevSelected, item]
     );
   }
@@ -148,27 +147,35 @@ function UserBetModalTable({
                   </TooltipCustom>
                 </td>
                 <td
-                  className={`${betType === "NO" || betType === "LAY"
-                    ? "bg-red1"
-                    : "bg-blue1"
-                    } text-end position-relative`}
+                  className={`${
+                    betType === "NO" || betType === "LAY"
+                      ? "bg-red1"
+                      : "bg-blue1"
+                  } text-end position-relative`}
                 >
                   <input
                     type="checkbox"
                     checked={selectedCheckedBet?.includes(item)}
+                    onChange={() => {}}
                     onClick={() => handleCheckboxToggle(item)}
-                    className={`customCheckbox ${selectedCheckedBet?.includes(item) ? "checkbox-bg" : ""
-                      }`}
+                    className={`customCheckbox ${
+                      selectedCheckedBet?.includes(item) ? "checkbox-bg" : ""
+                    }`}
                   />
                 </td>
                 {deleteReason && (
-                  <div className="modal-betDeleteOverlay" style={{ height: `${rowHeight}px` }}>
-                    <h5 className="text-uppercase" title={`Bet Deleted  Due To ${deleteReason}`}>
+                  <div
+                    className="modal-betDeleteOverlay"
+                    style={{ height: `${rowHeight}px` }}
+                  >
+                    <h5
+                      className="text-uppercase"
+                      title={`Bet Deleted  Due To ${deleteReason}`}
+                    >
                       Bet <span> Deleted </span> Due To {deleteReason}
                     </h5>
                   </div>
                 )}
-
               </tr>
             );
           })}

@@ -79,15 +79,18 @@ const matchListSlice = createSlice({
           apiSession: apiSession,
           sessionBettings: sessionBettings,
           tournament:
-            tournament?.length > 0 &&
-            tournament?.sort((a: any, b: any) => {
-              if (a.sno !== b.sno) {
-                return a.sno - b.sno;
-              }
-              if (a.parentBetId === null && b.parentBetId !== null) return -1;
-              if (a.parentBetId !== null && b.parentBetId === null) return 1;
-              return 0;
-            }),
+            tournament?.length > 0
+              ? tournament?.sort((a: any, b: any) => {
+                  if (a.sno !== b.sno) {
+                    return a.sno - b.sno;
+                  }
+                  if (a.parentBetId === null && b.parentBetId !== null)
+                    return -1;
+                  if (a.parentBetId !== null && b.parentBetId === null)
+                    return 1;
+                  return 0;
+                })
+              : [],
         };
       })
       .addCase(updateTeamRatesOnMarketUndeclare.fulfilled, (state, action) => {
