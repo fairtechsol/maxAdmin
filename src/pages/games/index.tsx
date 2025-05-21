@@ -340,22 +340,20 @@ const Games = () => {
               {Array.isArray(matchDetails?.tournament) &&
                 matchDetails.tournament
                   .filter((item: any) => item?.activeStatus === "live")
-                  ?.map((item: any, index: number) => {
-                    return (
-                      <Col md={12} key={index}>
-                        <Tournament
-                          title={item?.name}
-                          box={
-                            item?.runners?.[0]?.ex?.availableToBack?.length > 2
-                              ? 6
-                              : 2
-                          }
-                          data={item}
-                          detail={matchDetails}
-                        />
-                      </Col>
-                    );
-                  })}
+                  ?.map((item: any, index: number) => (
+                    <Col md={12} key={index}>
+                      <Tournament
+                        title={item?.name}
+                        box={
+                          item?.runners?.[0]?.ex?.availableToBack?.length > 2
+                            ? 6
+                            : 2
+                        }
+                        data={item}
+                        detail={matchDetails}
+                      />
+                    </Col>
+                  ))}
               <div
                 style={{
                   display: "flex",
