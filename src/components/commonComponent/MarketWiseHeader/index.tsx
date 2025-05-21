@@ -281,7 +281,7 @@ function MarketTableHeader({
                   type="text"
                   placeholder="Transaction Code"
                   className="form-control w-auto"
-                  value={transactionPass}
+                  value={transactionPass ?? ""}
                   onChange={(e) => setTransactionPass(e.target.value)}
                 />
               </div>
