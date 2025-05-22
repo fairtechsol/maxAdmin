@@ -67,9 +67,9 @@ const SessionNormal = ({ title, data, detail, manual, mtype }: any) => {
         dispatch(resetRunAmount());
         setRunnerModalShow((prev) => !prev);
         if (title === "meter") {
-          dispatch(getRunAmountMeter(item?.id));
+          dispatch(getRunAmountMeter({ id: item?.id, matchId: detail?.id }));
         } else {
-          dispatch(getRunAmount(item?.id));
+          dispatch(getRunAmount({ id: item?.id, matchId: detail?.id }));
         }
       }
     }

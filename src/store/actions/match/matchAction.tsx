@@ -442,9 +442,11 @@ export const getUserDetailsOfLock = createAsyncThunk<any, any>(
 
 export const getRunAmount = createAsyncThunk<any, any>(
   "/runAmount",
-  async (id, thunkApi) => {
+  async ({ id, matchId }, thunkApi) => {
     try {
-      const resp = await service.get(`${ApiConstants.BET.RUN_AMOUNT}/${id}`);
+      const resp = await service.get(
+        `${ApiConstants.BET.RUN_AMOUNT}/${id}?matchId=${matchId}`
+      );
       if (resp?.data !== null) {
         return JSON.parse(resp?.data?.profitLoss).betPlaced;
       }
@@ -506,9 +508,11 @@ export const updateBetsPlaced: any = createAsyncThunk<any, any>(
 );
 export const getRunAmountMeter = createAsyncThunk<any, any>(
   "/runAmountMeter",
-  async (id, thunkApi) => {
+  async ({ id, matchId }, thunkApi) => {
     try {
-      const resp = await service.get(`${ApiConstants.BET.RUN_AMOUNT}/${id}`);
+      const resp = await service.get(
+        `${ApiConstants.BET.RUN_AMOUNT}/${id}?matchId=${matchId}`
+      );
       if (resp?.data?.profitLoss) {
         let data = {
           id: id,
