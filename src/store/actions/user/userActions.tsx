@@ -172,7 +172,7 @@ export const getUsersProfile = createAsyncThunk(
       const resp = await service.get(ApiConstants.USER.PROFILE);
       if (resp) {
         localStorage.setItem("key", resp?.data?.id);
-        return resp?.data;
+        return resp?.data[0][0];
       }
     } catch (error: any) {
       const err = error as AxiosError;

@@ -448,7 +448,7 @@ export const getRunAmount = createAsyncThunk<any, any>(
         `${ApiConstants.BET.RUN_AMOUNT}/${id}?matchId=${matchId}`
       );
       if (resp?.data !== null) {
-        return JSON.parse(resp?.data?.profitLoss).betPlaced;
+        return resp?.data?.profitLoss.betPlaced;
       }
     } catch (error) {
       const err = error as AxiosError;
@@ -516,9 +516,7 @@ export const getRunAmountMeter = createAsyncThunk<any, any>(
       if (resp?.data?.profitLoss) {
         let data = {
           id: id,
-          arr: JSON.parse(resp?.data?.profitLoss[0])
-            ? JSON.parse(resp?.data?.profitLoss).betPlaced
-            : [],
+          arr: resp?.data?.profitLoss ? resp?.data?.profitLoss.betPlaced : [],
         };
         return data;
       }
