@@ -19,6 +19,7 @@ interface Column {
 }
 
 const columns: Column[] = [
+  { id: "userName", label: "User Name" },
   { id: "gameName", label: "Game Name" },
   { id: "type", label: "Type" },
   { id: "amount", label: "Amount" },
@@ -287,7 +288,9 @@ const CasinoReport = () => {
                           : ""
                       }`}
                     >
-                      {column.id === "createdAt"
+                      {column.id === "userName"
+                        ? item.user.userName
+                        : column.id === "createdAt"
                         ? moment(item[column.id]).format("DD/MM/YYYY hh:mm:ss ")
                         : column.id === "amount"
                         ? Math.abs(item[column.id]).toFixed(2)
