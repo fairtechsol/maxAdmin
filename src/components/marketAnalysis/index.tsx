@@ -96,8 +96,10 @@ const MarketAnalysisComp = ({ match }: any) => {
                                   <td>{i}</td>
                                   <td className="text-end">
                                     {parseFloat(
-                                      items?.profitLoss?.[profitLossObj[index]]
-                                    ).toFixed(2) || "0.00"}
+                                      items?.profitLoss?.[
+                                        profitLossObj[index]
+                                      ] || 0
+                                    ).toFixed(2)}
                                   </td>
                                 </tr>
                               ))}
@@ -128,8 +130,8 @@ const MarketAnalysisComp = ({ match }: any) => {
                                     <td>{i} number</td>
                                     <td className="text-end">
                                       {parseFloat(
-                                        items?.profitLoss?.betPlaced?.[i]
-                                      ).toFixed(2) || "0.00"}
+                                        items?.profitLoss?.betPlaced?.[i] || 0
+                                      ).toFixed(2)}
                                     </td>
                                   </tr>
                                 )
