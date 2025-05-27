@@ -42,6 +42,7 @@ const CasinoReport = () => {
   const [casinoTypeValues, setCasinoTypeValues] = useState<any>("");
   const [gameTypeValues, setGameTypeValues] = useState<any>("");
   const [selectedUser, setSelectedUser] = useState<any>("");
+  const [firstTime, setFirstTime] = useState(false);
   const [date, setDate] = useState<any>();
   const [userOptions, setUserOptions] = useState([]);
   const [inputValue, setInputValue] = useState("");
@@ -161,18 +162,22 @@ const CasinoReport = () => {
       if (casinoTypeValues === "unsettledBets") {
         filter += `&settled=eqfalse`;
       }
-      dispatch(
-        getCasinoReport({
-          id: selectedUser ? selectedUser?.value : localStorage.getItem("key"),
-          page: tableConfig?.page,
-          limit: tableConfig?.rowPerPage,
-          searchBy:
-            "virtualCasinoBetPlaced.gameName,virtualCasinoBetPlaced.providerName,virtualCasinoBetPlaced.gameId",
-          keyword: tableConfig?.keyword ?? "",
-          sort: "virtualCasinoBetPlaced.createdAt:ASC",
-          filter: filter,
-        })
-      );
+      if (firstTime) {
+        dispatch(
+          getCasinoReport({
+            id: selectedUser
+              ? selectedUser?.value
+              : localStorage.getItem("key"),
+            page: tableConfig?.page,
+            limit: tableConfig?.rowPerPage,
+            searchBy:
+              "virtualCasinoBetPlaced.gameName,virtualCasinoBetPlaced.providerName,virtualCasinoBetPlaced.gameId",
+            keyword: tableConfig?.keyword ?? "",
+            sort: "virtualCasinoBetPlaced.createdAt:ASC",
+            filter: filter,
+          })
+        );
+      }
     } catch (error) {
       console.log(error);
     }
@@ -262,7 +267,9 @@ const CasinoReport = () => {
               </Form.Group>
             </Col>
             <Col md={2} className="mb-3">
-              <Button type="submit">Submit</Button>
+              <Button type="submit" onClick={() => setFirstTime(true)}>
+                Submit
+              </Button>
             </Col>
           </Row>
         </Form>
