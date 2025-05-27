@@ -154,6 +154,7 @@ const Games = () => {
     }
   };
 
+  console.log("matchDetails?.tournament :", matchDetails?.tournament);
   useEffect(() => {
     if (id) {
       matchService.connect([id]);
@@ -339,7 +340,8 @@ const Games = () => {
               </div>
               {Array.isArray(matchDetails?.tournament) &&
                 matchDetails.tournament
-                  .filter((item: any) => item?.activeStatus === "live")
+                  .filter((item: any) => item?.activeStatus === "live" &&
+                    !["completed_match", "tied_match"].includes(item?.name?.toLowerCase()))
                   ?.map((item: any, index: number) => (
                     <Col md={12} key={index}>
                       <Tournament
@@ -405,7 +407,7 @@ const Games = () => {
                   },
                 ].map((session, index) =>
                   session.data?.section?.length > 0 ||
-                  (session.type === "session" && manualEntries?.length) ? (
+                    (session.type === "session" && manualEntries?.length) ? (
                     <div
                       key={index}
                       style={{ width: isMobile ? "100%" : "49.5%" }}
@@ -452,10 +454,10 @@ const Games = () => {
                             width: isMobile
                               ? "100%"
                               : length % 2 === 0
-                              ? "49.5%"
-                              : index === length - 1
-                              ? "100%"
-                              : "49.5%",
+                                ? "49.5%"
+                                : index === length - 1
+                                  ? "100%"
+                                  : "49.5%",
                           }}
                         >
                           {item?.activeStatus === "live" && (
@@ -473,6 +475,24 @@ const Games = () => {
                     }
                   )}
               </div>
+              {Array.isArray(matchDetails?.tournament) &&
+                matchDetails.tournament
+                  .filter((item: any) => item?.activeStatus === "live" &&
+                    ["completed_match", "tied_match"].includes(item?.name?.toLowerCase()))
+                  ?.map((item: any, index: number) => (
+                    <Col md={12} key={index}>
+                      <Tournament
+                        title={item?.name}
+                        box={
+                          item?.runners?.[0]?.ex?.availableToBack?.length > 2
+                            ? 6
+                            : 2
+                        }
+                        data={item}
+                        detail={matchDetails}
+                      />
+                    </Col>
+                  ))}
             </Col>
             <Col md={4} className="text-white">
               {matchDetails?.eventId && (
