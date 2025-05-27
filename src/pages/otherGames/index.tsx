@@ -16,8 +16,13 @@ import {
   getMarketAnalysis,
   getPlacedBets,
   matchDetailAction,
+  updateBalance,
+  updateBetsPlaced,
   updateMatchRates,
+  updatePlacedbets,
   updatePlacedbetsDeleteReason,
+  updateTeamRates,
+  updateTeamRatesOnDelete,
 } from "../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../store/store";
 import {
@@ -70,30 +75,9 @@ const OtherGamesDetail = () => {
   const handleDeleteBet = (event: any) => {
     try {
       if (event?.matchId === id) {
-        if (gameType === "politics") {
-          dispatch(matchDetailAction(id));
-        } else {
-          dispatch(matchDetailAction(id));
-        }
+        dispatch(updateTeamRatesOnDelete(event));
         if (!parsedPermissions || parsedPermissions?.currentBets) {
-          dispatch(getPlacedBets({ id: id, userId: state?.userId }));
-        }
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  const handleSessionBetPlaced = (event: any) => {
-    try {
-      if (event?.jobData?.placedBet?.matchId === id) {
-        if (gameType === "politics") {
-          dispatch(matchDetailAction(id));
-        } else {
-          dispatch(matchDetailAction(id));
-        }
-        if (!parsedPermissions || parsedPermissions?.currentBets) {
-          dispatch(getPlacedBets({ id: id, userId: state?.userId }));
+          dispatch(updatePlacedbets(event));
         }
       }
     } catch (e) {
@@ -103,14 +87,11 @@ const OtherGamesDetail = () => {
   const handleMatchBetPlaced = (event: any) => {
     try {
       if (event?.jobData?.matchId === id) {
-        if (gameType === "politics") {
-          dispatch(matchDetailAction(id));
-        } else {
-          dispatch(matchDetailAction(id));
-        }
         if (!parsedPermissions || parsedPermissions?.currentBets) {
-          dispatch(getPlacedBets({ id: id, userId: state?.userId }));
+          dispatch(updateBetsPlaced(event?.jobData));
         }
+        dispatch(updateBalance(event));
+        dispatch(updateTeamRates(event));
       }
     } catch (e) {
       console.log(e);
@@ -127,28 +108,6 @@ const OtherGamesDetail = () => {
       }
     } catch (e) {
       console.log(e);
-    }
-  };
-  const handleSessionResultDeclare = (event: any) => {
-    try {
-      if (event?.matchId === id) {
-        if (!parsedPermissions || parsedPermissions?.currentBets) {
-          dispatch(getPlacedBets({ id: id, userId: state?.userId }));
-        }
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const handleSessionResultUnDeclare = (event: any) => {
-    try {
-      if (event?.matchId === id) {
-        if (!parsedPermissions || parsedPermissions?.currentBets) {
-          dispatch(getPlacedBets({ id: id, userId: state?.userId }));
-        }
-      }
-    } catch (error) {
-      console.log(error);
     }
   };
 
@@ -215,17 +174,17 @@ const OtherGamesDetail = () => {
         socketService.match.joinMatchRoom(id);
         socketService.match.getMatchRates(id, updateMatchDetailToRedux);
         socketService.match.matchDeleteBet(handleDeleteBet);
-        socketService.match.sessionDeleteBet(handleDeleteBet);
-        socketService.match.userSessionBetPlaced(handleSessionBetPlaced);
+        // socketService.match.sessionDeleteBet(handleDeleteBet);
+        // socketService.match.userSessionBetPlaced(handleSessionBetPlaced);
         socketService.match.userMatchBetPlaced(handleMatchBetPlaced);
         socketService.match.matchResultDeclared(handleMatchResultDeclarted);
         socketService.match.declaredMatchResultAllUser(
           handleMatchResultDeclarted
         );
-        socketService.match.sessionResult(handleSessionResultDeclare);
-        socketService.match.sessionResultUnDeclare(
-          handleSessionResultUnDeclare
-        );
+        // socketService.match.sessionResult(handleSessionResultDeclare);
+        // socketService.match.sessionResultUnDeclare(
+        //   handleSessionResultUnDeclare
+        // );
         socketService.match.updateDeleteReason(handleDeleteReasonUpdate);
       }
     } catch (e) {
