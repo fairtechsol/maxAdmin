@@ -37,7 +37,9 @@ const casinoTypeOptions = [
 
 const CasinoReport = () => {
   const dispatch: AppDispatch = useDispatch();
-  const [tableConfig, setTableConfig] = useState<TableConfig | null>(null);
+  const [tableConfig, setTableConfig] = useState<TableConfig | null | any>(
+    null
+  );
   const [currentPage, setCurrentPage] = useState(1);
   const [casinoTypeValues, setCasinoTypeValues] = useState<any>("");
   const [gameTypeValues, setGameTypeValues] = useState<any>("");
@@ -181,7 +183,7 @@ const CasinoReport = () => {
     } catch (error) {
       console.log(error);
     }
-  }, [tableConfig]);
+  }, [tableConfig?.page, tableConfig?.rowPerPage, tableConfig?.keyword]);
 
   return (
     <div className="p-2 pt-0">
