@@ -15,9 +15,9 @@ export const initialiseSocket = () => {
       token: localStorage.getItem("jwtMaxAdmin"),
     },
   });
-  cardSocket = io(baseUrls.cardSocket, {
-    transports: [Constants.POLLING, Constants.WEBSOCKET],
-  });
+  // cardSocket = io(baseUrls.cardSocket, {
+  //   transports: [Constants.POLLING, Constants.WEBSOCKET],
+  // });
 };
 
 export const initialiseMatchSocket = (matchId: string[]) => {
@@ -42,7 +42,7 @@ export const socketService = {
     try {
       initialiseSocket();
       socket?.connect();
-      cardSocket?.connect();
+      // cardSocket?.connect();
     } catch (e) {
       console.log(e);
     }
@@ -50,7 +50,7 @@ export const socketService = {
   disconnect: () => {
     try {
       socket?.disconnect();
-      cardSocket?.disconnect();
+      // cardSocket?.disconnect();
     } catch (e) {
       console.log(e);
     }
