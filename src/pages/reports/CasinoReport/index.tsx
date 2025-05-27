@@ -9,6 +9,7 @@ import { TableConfig } from "../../../models/tableInterface";
 import {
   getCasinoReport,
   getCasinoReportGameList,
+  resetCasinoReport,
 } from "../../../store/actions/match/matchAction";
 import { searchList } from "../../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../../store/store";
@@ -103,12 +104,14 @@ const CasinoReport = () => {
 
   const debouncedInputValue = useMemo(() => {
     return debounce((value) => {
-      dispatch(
-        searchList({
-          userName: value,
-          createdBy: userDetail?.id,
-        })
-      );
+      if (value !== "") {
+        dispatch(
+          searchList({
+            userName: value,
+            createdBy: userDetail?.id,
+          })
+        );
+      }
     }, 500);
   }, []);
 
@@ -124,6 +127,10 @@ const CasinoReport = () => {
 
   useEffect(() => {
     dispatch(getCasinoReportGameList());
+
+    return () => {
+      dispatch(resetCasinoReport());
+    };
   }, []);
 
   useEffect(() => {
