@@ -3,6 +3,10 @@ import {
   matchDetailAction,
   updateBalance,
   updateMatchRates,
+  updateMaxLossForBet,
+  updateMaxLossForDeleteBet,
+  updateTeamRates,
+  updateTeamRatesOnDelete,
   updateTeamRatesOnMarketUndeclare,
 } from "../../actions/match/matchAction";
 interface InitialState {
@@ -115,6 +119,84 @@ const matchListSlice = createSlice({
             [jobData?.betId + "_profitLoss_" + jobData?.matchId]:
               JSON.stringify(userRedisObj),
           },
+        };
+      })
+      .addCase(updateTeamRatesOnDelete.fulfilled, (state, action) => {
+        const { betId, teamRate } = action.payload;
+        state.matchDetails = {
+          ...state.matchDetails,
+          profitLossDataMatch: {
+            ...state.matchDetails.profitLossDataMatch,
+            [betId + "_profitLoss_" + state.matchDetails?.id]:
+              JSON.stringify(teamRate),
+          },
+        };
+      })
+      .addCase(updateMaxLossForDeleteBet.fulfilled, (state, action) => {
+        const { bets, betId, profitLoss } = action.payload;
+        const match = state?.matchDetails;
+        if (!bets?.length || match?.id !== bets?.[0]?.matchId) return;
+        let updated = false;
+        const updatedProfitLossDataSession =
+          match.profitLossDataSession?.map((item: any) => {
+            if (item.betId !== betId) return item;
+            updated = true;
+            return {
+              ...item,
+              maxLoss: profitLoss?.maxLoss,
+              totalBet: profitLoss?.totalBet,
+              profitLoss: profitLoss?.betPlaced,
+            };
+          }) || [];
+        if (!updated) {
+          updatedProfitLossDataSession.push({
+            betId,
+            maxLoss: profitLoss?.maxLoss,
+            profitLoss: profitLoss?.betPlaced,
+            totalBet: 1,
+          });
+        }
+        state.matchDetails = {
+          ...match,
+          profitLossDataSession: updatedProfitLossDataSession,
+        };
+      })
+      .addCase(updateMaxLossForBet.fulfilled, (state, action) => {
+        const { jobData, profitLoss } = action.payload;
+        const match = state?.matchDetails;
+        const placedBet = jobData?.placedBet;
+        if (match?.id !== placedBet?.matchId) return;
+        let updated = false;
+        const updatedProfitLossDataSession =
+          match.profitLossDataSession?.map((item: any) => {
+            if (item.betId !== placedBet.betId) return item;
+            updated = true;
+            return {
+              ...item,
+              maxLoss: profitLoss?.maxLoss,
+              totalBet: profitLoss?.totalBet,
+              profitLoss: profitLoss?.betPlaced,
+            };
+          }) || [];
+        if (!updated) {
+          updatedProfitLossDataSession.push({
+            betId: placedBet.betId,
+            maxLoss: profitLoss?.maxLoss,
+            profitLoss: profitLoss?.betPlaced,
+            totalBet: 1,
+          });
+        }
+        state.matchDetails = {
+          ...match,
+          profitLossDataSession: updatedProfitLossDataSession,
+        };
+      })
+      .addCase(updateTeamRates.fulfilled, (state, action) => {
+        const { userRedisObj, jobData } = action.payload;
+        state.matchDetails.profitLossDataMatch = {
+          ...state.matchDetails.profitLossDataMatch,
+          [jobData?.betId + "_" + "profitLoss" + "_" + state.matchDetails?.id]:
+            JSON.stringify(userRedisObj),
         };
       });
   },

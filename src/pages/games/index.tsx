@@ -22,7 +22,12 @@ import {
   updateBalance,
   updateBetsPlaced,
   updateMatchRates,
+  updateMaxLossForBet,
+  updateMaxLossForDeleteBet,
+  updatePlacedbets,
   updatePlacedbetsDeleteReason,
+  updateTeamRates,
+  updateTeamRatesOnDelete,
   updateTeamRatesOnMarketUndeclare,
 } from "../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../store/store";
@@ -59,31 +64,62 @@ const Games = () => {
     }
   };
 
-  const handleDeleteBet = (event: any) => {
+  const matchDeleteBet = (event: any) => {
     try {
       if (event?.matchId === id) {
-        dispatch(matchDetailAction(id));
+        dispatch(updateTeamRatesOnDelete(event));
         if (!parsedPermissions || parsedPermissions?.currentBets) {
-          dispatch(getPlacedBets({ id: id, userId: state?.userId }));
+          dispatch(updatePlacedbets(event));
         }
-      }
+      } else return;
     } catch (e) {
       console.log(e);
     }
   };
 
-  const handleSessionBetPlaced = (event: any) => {
+  const handleSessionDeleteBet = (event: any) => {
     try {
-      if (event?.jobData?.placedBet?.matchId === id) {
-        dispatch(matchDetailAction(id));
+      if (event?.matchId === id) {
+        dispatch(updateMaxLossForDeleteBet(event));
         if (!parsedPermissions || parsedPermissions?.currentBets) {
-          dispatch(getPlacedBets({ id: id, userId: state?.userId }));
+          dispatch(updatePlacedbets(event));
         }
-      }
+      } else return;
     } catch (e) {
       console.log(e);
     }
   };
+
+  const setSessionBetsPlaced = (event: any) => {
+    try {
+      if (event?.jobData?.placedBet?.matchId === id) {
+        if (!parsedPermissions || parsedPermissions?.currentBets) {
+          dispatch(
+            updateBetsPlaced({
+              newBet: event?.jobData?.placedBet,
+              userName: event?.jobData?.betPlaceObject?.betPlacedData?.userName,
+            })
+          );
+        }
+        dispatch(updateMaxLossForBet(event));
+      } else return;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  // const handleSessionBetPlaced = (event: any) => {
+  //   try {
+  //     if (event?.jobData?.placedBet?.matchId === id) {
+  //       dispatch(matchDetailAction(id));
+  //       if (!parsedPermissions || parsedPermissions?.currentBets) {
+  //         dispatch(getPlacedBets({ id: id, userId: state?.userId }));
+  //       }
+  //     }
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
   const handleMatchBetPlaced = (event: any) => {
     try {
       if (event?.jobData?.matchId === id) {
@@ -91,6 +127,7 @@ const Games = () => {
           dispatch(updateBetsPlaced(event?.jobData));
         }
         dispatch(updateBalance(event));
+        dispatch(updateTeamRates(event));
       }
     } catch (e) {
       console.log(e);
@@ -154,7 +191,6 @@ const Games = () => {
     }
   };
 
-  console.log("matchDetails?.tournament :", matchDetails?.tournament);
   useEffect(() => {
     if (id) {
       matchService.connect([id]);
@@ -208,10 +244,10 @@ const Games = () => {
         socketService.match.getMatchRates(id, updateMatchDetailToRedux);
 
         if (!state?.userId) {
-          socketService.match.matchDeleteBet(handleDeleteBet);
-          socketService.match.sessionDeleteBet(handleDeleteBet);
-          socketService.match.userSessionBetPlaced(handleSessionBetPlaced);
-          socketService.match.userMatchBetPlaced(handleMatchBetPlaced);
+          socketService.match.matchDeleteBet(matchDeleteBet); //
+          socketService.match.sessionDeleteBet(handleSessionDeleteBet);
+          socketService.match.userSessionBetPlaced(setSessionBetsPlaced);
+          socketService.match.userMatchBetPlaced(handleMatchBetPlaced); //
           socketService.match.matchResultDeclared(handleMatchResultDeclarted);
           socketService.match.declaredMatchResultAllUser(
             handleMatchResultDeclarted
@@ -340,8 +376,13 @@ const Games = () => {
               </div>
               {Array.isArray(matchDetails?.tournament) &&
                 matchDetails.tournament
-                  .filter((item: any) => item?.activeStatus === "live" &&
-                    !["completed_match", "tied_match"].includes(item?.name?.toLowerCase()))
+                  .filter(
+                    (item: any) =>
+                      item?.activeStatus === "live" &&
+                      !["completed_match", "tied_match"].includes(
+                        item?.name?.toLowerCase()
+                      )
+                  )
                   ?.map((item: any, index: number) => (
                     <Col md={12} key={index}>
                       <Tournament
@@ -407,7 +448,7 @@ const Games = () => {
                   },
                 ].map((session, index) =>
                   session.data?.section?.length > 0 ||
-                    (session.type === "session" && manualEntries?.length) ? (
+                  (session.type === "session" && manualEntries?.length) ? (
                     <div
                       key={index}
                       style={{ width: isMobile ? "100%" : "49.5%" }}
@@ -454,10 +495,10 @@ const Games = () => {
                             width: isMobile
                               ? "100%"
                               : length % 2 === 0
-                                ? "49.5%"
-                                : index === length - 1
-                                  ? "100%"
-                                  : "49.5%",
+                              ? "49.5%"
+                              : index === length - 1
+                              ? "100%"
+                              : "49.5%",
                           }}
                         >
                           {item?.activeStatus === "live" && (
@@ -477,8 +518,13 @@ const Games = () => {
               </div>
               {Array.isArray(matchDetails?.tournament) &&
                 matchDetails.tournament
-                  .filter((item: any) => item?.activeStatus === "live" &&
-                    ["completed_match", "tied_match"].includes(item?.name?.toLowerCase()))
+                  .filter(
+                    (item: any) =>
+                      item?.activeStatus === "live" &&
+                      ["completed_match", "tied_match"].includes(
+                        item?.name?.toLowerCase()
+                      )
+                  )
                   ?.map((item: any, index: number) => (
                     <Col md={12} key={index}>
                       <Tournament
