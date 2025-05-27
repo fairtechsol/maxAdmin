@@ -553,6 +553,38 @@ export const successResetForLockUnlock = createAction(
 export const betReportAccountListReset = createAction(
   "betReportAccountList/reset"
 );
+
+export const updateTeamRatesOnDelete = createAsyncThunk<any, any>(
+  "/teamRates/updateOnDelete",
+  async (data) => {
+    return data;
+  }
+);
+
+export const updateMaxLossForDeleteBet = createAsyncThunk<any, any>(
+  "/maxLossOnDelete/update",
+  async (data) => {
+    return data;
+  }
+);
+export const updateMaxLossForBet = createAsyncThunk<any, any>(
+  "/maxLoss/update",
+  async (data) => {
+    return data;
+  }
+);
+export const updateTeamRates = createAsyncThunk<any, any>(
+  "/teamRates/update",
+  async (data) => {
+    return data;
+  }
+);
+export const updatePlacedbets = createAsyncThunk<any, any>(
+  "/maxLoss/updatePlacedbets",
+  async (data) => {
+    return data;
+  }
+);
 export const resetGameReportList = createAction("gameReportList/reset");
 export const getMorePlacedBetsReset = createAction("getMorePlacedBets/reset");
 export const getMarketLockChildReset = createAction("getMarketLockChild/reset");
