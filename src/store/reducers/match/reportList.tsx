@@ -1,15 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
-    getBetAccountStatementModal,
-    getCardReport,
-    getCasinoReport,
-    getCasinoReportGameList,
-    getGameReport,
-    getGeneralReport,
-    getProfitLossReport,
-    getReportAccountList,
-    getReportCurrentBet,
-    resetGameReportList,
+  getBetAccountStatementModal,
+  getCardReport,
+  getCasinoReport,
+  getCasinoReportGameList,
+  getGameReport,
+  getGeneralReport,
+  getProfitLossReport,
+  getReportAccountList,
+  getReportCurrentBet,
+  resetCasinoReport,
+  resetGameReportList,
 } from "../../actions/match/matchAction";
 
 interface InitialState {
@@ -154,6 +155,9 @@ const reportListSlice = createSlice({
       .addCase(getCasinoReport.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error?.message;
+      })
+      .addCase(resetCasinoReport, (state) => {
+        state.casinoReport = [];
       })
       .addCase(getCasinoReportGameList.pending, (state) => {
         state.loading = true;
