@@ -278,7 +278,7 @@ const CasinoReport = () => {
           striped
           columns={columns}
           isPagination={true}
-          isSort={true}
+          isSort={false}
           isSearch={true}
           itemCount={casinoReport?.count || 0}
           setTableConfig={setTableConfig}
