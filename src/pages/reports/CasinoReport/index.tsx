@@ -9,6 +9,7 @@ import { TableConfig } from "../../../models/tableInterface";
 import {
   getCasinoReport,
   getCasinoReportGameList,
+  resetCasinoReport,
 } from "../../../store/actions/match/matchAction";
 import { searchList } from "../../../store/actions/user/userActions";
 import { AppDispatch, RootState } from "../../../store/store";
@@ -19,6 +20,7 @@ interface Column {
 }
 
 const columns: Column[] = [
+  { id: "userName", label: "User Name" },
   { id: "gameName", label: "Game Name" },
   { id: "type", label: "Type" },
   { id: "amount", label: "Amount" },
@@ -102,12 +104,14 @@ const CasinoReport = () => {
 
   const debouncedInputValue = useMemo(() => {
     return debounce((value) => {
-      dispatch(
-        searchList({
-          userName: value,
-          createdBy: userDetail?.id,
-        })
-      );
+      if (value !== "") {
+        dispatch(
+          searchList({
+            userName: value,
+            createdBy: userDetail?.id,
+          })
+        );
+      }
     }, 500);
   }, []);
 
@@ -123,6 +127,10 @@ const CasinoReport = () => {
 
   useEffect(() => {
     dispatch(getCasinoReportGameList());
+
+    return () => {
+      dispatch(resetCasinoReport());
+    };
   }, []);
 
   useEffect(() => {
@@ -287,7 +295,9 @@ const CasinoReport = () => {
                           : ""
                       }`}
                     >
-                      {column.id === "createdAt"
+                      {column.id === "userName"
+                        ? item.user.userName
+                        : column.id === "createdAt"
                         ? moment(item[column.id]).format("DD/MM/YYYY hh:mm:ss ")
                         : column.id === "amount"
                         ? Math.abs(item[column.id]).toFixed(2)
