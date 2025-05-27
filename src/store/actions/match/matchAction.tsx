@@ -114,7 +114,7 @@ export const getCasinoReport = createAsyncThunk<any, any>(
     try {
       const resp = await service.get(
         `${ApiConstants.REPORT.CASINO_REPORT}/${id}?page=${page || 1}&limit=${
-          limit || 15
+          limit || 25
         }&searchBy=${searchBy}&keyword=${keyword}${filter ? filter : ""}&sort=${
           sort ? sort : ""
         }`
@@ -558,3 +558,4 @@ export const getMorePlacedBetsReset = createAction("getMorePlacedBets/reset");
 export const getMarketLockChildReset = createAction("getMarketLockChild/reset");
 export const resetMarketAnalysys = createAction("marketAnalysis/reset");
 export const resetPlacedBets = createAction("placedBets/reset");
+export const resetCasinoReport = createAction("casinoReport/reset");
