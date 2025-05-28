@@ -88,18 +88,24 @@ const CasinoReport = () => {
       if (casinoTypeValues === "unsettledBets") {
         filter += `&settled=eqfalse`;
       }
-      dispatch(
-        getCasinoReport({
-          id: selectedUser ? selectedUser?.value : localStorage.getItem("key"),
-          page: 1,
-          limit: tableConfig?.rowPerPage,
-          searchBy:
-            "virtualCasinoBetPlaced.gameName,virtualCasinoBetPlaced.providerName,virtualCasinoBetPlaced.gameId",
-          keyword: tableConfig?.keyword ?? "",
-          sort: "virtualCasinoBetPlaced.createdAt:ASC",
-          filter: filter,
-        })
-      );
+      if (currentPage === 1) {
+        dispatch(
+          getCasinoReport({
+            id: selectedUser
+              ? selectedUser?.value
+              : localStorage.getItem("key"),
+            page: 1,
+            limit: tableConfig?.rowPerPage,
+            searchBy:
+              "virtualCasinoBetPlaced.gameName,virtualCasinoBetPlaced.providerName,virtualCasinoBetPlaced.gameId",
+            keyword: tableConfig?.keyword ?? "",
+            sort: "virtualCasinoBetPlaced.createdAt:ASC",
+            filter: filter,
+          })
+        );
+      } else {
+        setCurrentPage(1);
+      }
     } catch (error) {
       console.log(error);
     }
