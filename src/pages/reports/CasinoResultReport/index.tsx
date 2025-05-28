@@ -51,21 +51,23 @@ const CasinoResultReport = () => {
       if (date) {
         filter += `&DATE(cardResult.createdAt)=${date}`;
       }
-      setCurrentPage(1);
-      dispatch(
-        getCardReport({
-          type: type
-            ? type.value
-            : typeFromState
-            ? typeFromState.value
-            : "teen20",
-          page: 1,
-          limit: tableConfig?.rowPerPage,
-          searchBy: "cardResult.result ->> 'mid'",
-          keyword: tableConfig?.keyword || "",
-          filter,
-        })
-      );
+
+      if (currentPage === 1) {
+        dispatch(
+          getCardReport({
+            type: type
+              ? type.value
+              : typeFromState
+              ? typeFromState.value
+              : "teen20",
+            page: 1,
+            limit: tableConfig?.rowPerPage,
+            searchBy: "cardResult.result ->> 'mid'",
+            keyword: tableConfig?.keyword || "",
+            filter,
+          })
+        );
+      } else setCurrentPage(1);
     } catch (error) {
       console.error(error);
     }

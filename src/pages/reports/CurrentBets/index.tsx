@@ -129,18 +129,19 @@ const CurrentBets = () => {
     try {
       e.preventDefault();
       if (selectType?.value === "PENDING" || selectType?.value === "DELETED") {
-        dispatch(
-          betReportAccountList({
-            status: selectType?.value,
-            page: 1,
-            limit: rowPerPage,
-            searchBy: "user.userName",
-            keyword: keyword || "",
-            marketBetType: tab,
-            // betType: "BACK",
-          })
-        );
-        setCurrentPage(1);
+        if (currentPage === 1) {
+          dispatch(
+            betReportAccountList({
+              status: selectType?.value,
+              page: 1,
+              limit: rowPerPage,
+              searchBy: "user.userName",
+              keyword: keyword || "",
+              marketBetType: tab,
+              // betType: "BACK",
+            })
+          );
+        } else setCurrentPage(1);
       } else if (selectType?.value === "UNMATCHED") {
         dispatch(betReportAccountListReset());
         setCurrentPage(1);
@@ -218,12 +219,13 @@ const CurrentBets = () => {
               <Col md={{ span: 4 }} />
               <Col md={3} className="text-end">
                 <span>
-                  {`Total Soda: ${betList?.rows?.length
-                    } Total Amount: ${parseFloat(
-                      betList?.rows?.reduce((acc: any, match: any) => {
-                        return acc + +match?.amount;
-                      }, 0) || "0.00"
-                    ).toFixed(2)}`}
+                  {`Total Soda: ${
+                    betList?.rows?.length
+                  } Total Amount: ${parseFloat(
+                    betList?.rows?.reduce((acc: any, match: any) => {
+                      return acc + +match?.amount;
+                    }, 0) || "0.00"
+                  ).toFixed(2)}`}
                 </span>
               </Col>
             </Row>
@@ -272,21 +274,28 @@ const CurrentBets = () => {
                         >
                           {column?.id === "createdAt"
                             ? moment(_.get(item, column.id))
-                              .tz(timezone)
-                              .format("YYYY-MMM-DD h:mmA [IST]")
-                            : column?.id === "startAt"
-                              ? moment(getStartAt(item))
                                 .tz(timezone)
                                 .format("YYYY-MMM-DD h:mmA [IST]")
-                              : column?.id === "bettingName"
-                                ? item.bettingName || item.eventName
-                                : _.get(item, column.id)}
+                            : column?.id === "startAt"
+                            ? moment(getStartAt(item))
+                                .tz(timezone)
+                                .format("YYYY-MMM-DD h:mmA [IST]")
+                            : column?.id === "bettingName"
+                            ? item.bettingName || item.eventName
+                            : _.get(item, column.id)}
                         </td>
                       ))}
                       {item?.deleteReason && (
-                        <div className="modal-betDeleteOverlay" style={{ height: `${rowHeight}px` }}>
-                          <h5 className="text-uppercase" title={`Bet Deleted  Due To ${item?.deleteReason}`}>
-                            Bet <span> Deleted </span> Due To {item?.deleteReason}
+                        <div
+                          className="modal-betDeleteOverlay"
+                          style={{ height: `${rowHeight}px` }}
+                        >
+                          <h5
+                            className="text-uppercase"
+                            title={`Bet Deleted  Due To ${item?.deleteReason}`}
+                          >
+                            Bet <span> Deleted </span> Due To{" "}
+                            {item?.deleteReason}
                           </h5>
                         </div>
                       )}
@@ -368,13 +377,13 @@ const CurrentBets = () => {
                         >
                           {column?.id === "createdAt"
                             ? moment(_.get(item, column.id))
-                              .tz(timezone)
-                              .format("YYYY-MMM-DD h:mmA [IST]")
-                            : column?.id === "startAt"
-                              ? moment(getStartAt(item))
                                 .tz(timezone)
                                 .format("YYYY-MMM-DD h:mmA [IST]")
-                              : _.get(item, column.id)}
+                            : column?.id === "startAt"
+                            ? moment(getStartAt(item))
+                                .tz(timezone)
+                                .format("YYYY-MMM-DD h:mmA [IST]")
+                            : _.get(item, column.id)}
                         </td>
                       ))}
                     </tr>

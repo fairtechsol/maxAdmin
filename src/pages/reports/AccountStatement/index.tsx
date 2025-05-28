@@ -209,18 +209,24 @@ const AccountStatement = () => {
       if (aaccountTypeValues && aaccountTypeValues !== "All") {
         filter += `&transaction.type=${aaccountTypeValues}`;
       }
-      setCurrentPage(1);
-      dispatch(
-        getReportAccountList({
-          id: selectedUser ? selectedUser?.value : localStorage.getItem("key"),
-          page: 1,
-          limit: tableConfig?.rowPerPage,
-          searchBy: "description",
-          keyword: tableConfig?.keyword ?? "",
-          filter: filter,
-          sort: "transaction.createdAt:DESC,transaction.uniqueId:DESC",
-        })
-      );
+
+      if (currentPage === 1) {
+        dispatch(
+          getReportAccountList({
+            id: selectedUser
+              ? selectedUser?.value
+              : localStorage.getItem("key"),
+            page: 1,
+            limit: tableConfig?.rowPerPage,
+            searchBy: "description",
+            keyword: tableConfig?.keyword ?? "",
+            filter: filter,
+            sort: "transaction.createdAt:DESC,transaction.uniqueId:DESC",
+          })
+        );
+      } else {
+        setCurrentPage(1);
+      }
       setTableConfig((prev: any) => {
         return {
           ...prev,
