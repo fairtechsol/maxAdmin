@@ -220,7 +220,7 @@ const CurrentBets = () => {
               <Col md={3} className="text-end">
                 <span>
                   {`Total Soda: ${
-                    betList?.rows?.length
+                    betList?.rows?.length || 0
                   } Total Amount: ${parseFloat(
                     betList?.rows?.reduce((acc: any, match: any) => {
                       return acc + +match?.amount;
