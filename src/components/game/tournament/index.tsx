@@ -22,7 +22,7 @@ const Tournament = ({ title, box, data, detail }: TournamentProps) => {
 
   const profitLossJson = detail?.profitLossDataMatch?.[key];
 
-  const profitLossObj = profitLossJson ? JSON.parse(profitLossJson) : {};
+  const profitLossObj = profitLossJson ? profitLossJson : {};
   return (
     <>
       <div className="tournamentContainer">
@@ -116,6 +116,8 @@ const Tournament = ({ title, box, data, detail }: TournamentProps) => {
                                 )?.profitLoss || {}
                               )?.[index] ?? 0
                             : profitLossObj?.[item.parentRunnerId || item.id]
+                            ? profitLossObj?.[item.parentRunnerId || item.id]
+                            : ""
                         ) > 0
                           ? "color-green"
                           : "color-red"
@@ -131,7 +133,9 @@ const Tournament = ({ title, box, data, detail }: TournamentProps) => {
                             0) ||
                           ""
                         : profitLossObj?.[item.parentRunnerId || item.id]
-                        ? profitLossObj?.[item.parentRunnerId || item.id]
+                        ? (parseFloat(
+                            profitLossObj?.[item.parentRunnerId || item.id]
+                          ).toFixed(2) as any)
                         : ""}
                     </span>
                   </div>

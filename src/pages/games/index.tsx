@@ -244,10 +244,10 @@ const Games = () => {
         socketService.match.getMatchRates(id, updateMatchDetailToRedux);
 
         if (!state?.userId) {
-          socketService.match.matchDeleteBet(matchDeleteBet); //
+          socketService.match.matchDeleteBet(matchDeleteBet);
           socketService.match.sessionDeleteBet(handleSessionDeleteBet);
           socketService.match.userSessionBetPlaced(setSessionBetsPlaced);
-          socketService.match.userMatchBetPlaced(handleMatchBetPlaced); //
+          socketService.match.userMatchBetPlaced(handleMatchBetPlaced);
           socketService.match.matchResultDeclared(handleMatchResultDeclarted);
           socketService.match.declaredMatchResultAllUser(
             handleMatchResultDeclarted
