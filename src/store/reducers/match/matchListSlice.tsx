@@ -104,9 +104,8 @@ const matchListSlice = createSlice({
           ...state.matchDetails,
           profitLossDataMatch: {
             ...state.matchDetails.profitLossDataMatch,
-            [betId + "_profitLoss_" + state.matchDetails?.id]: JSON.stringify(
-              profitLossData?.[betId + "_profitLoss_" + state.matchDetails?.id]
-            ),
+            [betId + "_profitLoss_" + state.matchDetails?.id]:
+              profitLossData?.[betId + "_profitLoss_" + state.matchDetails?.id],
           },
         };
       })
@@ -116,8 +115,7 @@ const matchListSlice = createSlice({
           ...state.matchDetails,
           profitLossDataMatch: {
             ...state.matchDetails.profitLossDataMatch,
-            [jobData?.betId + "_profitLoss_" + jobData?.matchId]:
-              JSON.stringify(userRedisObj),
+            [jobData?.betId + "_profitLoss_" + jobData?.matchId]: userRedisObj,
           },
         };
       })
@@ -127,8 +125,7 @@ const matchListSlice = createSlice({
           ...state.matchDetails,
           profitLossDataMatch: {
             ...state.matchDetails.profitLossDataMatch,
-            [betId + "_profitLoss_" + state.matchDetails?.id]:
-              JSON.stringify(teamRate),
+            [betId + "_profitLoss_" + state.matchDetails?.id]: teamRate,
           },
         };
       })
@@ -195,8 +192,8 @@ const matchListSlice = createSlice({
         const { userRedisObj, jobData } = action.payload;
         state.matchDetails.profitLossDataMatch = {
           ...state.matchDetails.profitLossDataMatch,
-          [jobData?.betId + "_" + "profitLoss" + "_" + state.matchDetails?.id]:
-            JSON.stringify(userRedisObj),
+          [jobData?.betId + "_profitLoss_" + state.matchDetails?.id]:
+            userRedisObj,
         };
       });
   },
