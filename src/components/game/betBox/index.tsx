@@ -1,5 +1,5 @@
 import { memo, useEffect, useState } from "react";
-import { formatNumber, handlePrice, handleSize } from "../../../helpers";
+import { handlePrice, handleSize } from "../../../helpers";
 
 const BetBox = ({ data, type }: any) => {
   const [tempRate, setTempRate] = useState("0");
@@ -38,7 +38,11 @@ const BetBox = ({ data, type }: any) => {
     <div className={`matchOddBackBox ${handleBackground(data?.tno)}`}>
       <span className="rateFont">{handlePrice(data?.price)}</span>
       <span className="sizeFont matchOddRate2Box">
-        {formatNumber(handleSize(data?.size))}
+        {
+          // formatNumber(
+          handleSize(data?.size)
+          // )
+        }
       </span>
     </div>
   );
