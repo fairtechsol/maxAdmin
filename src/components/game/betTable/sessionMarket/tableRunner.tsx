@@ -35,7 +35,7 @@ const TableRunner = ({ runAmount }: any) => {
                   {odds}
                 </td>
                 <td className={+profitLoss >= 0 ? "bg-blue1" : "bg-red1"}>
-                  {profitLoss}
+                  {parseFloat(profitLoss).toFixed(2)}
                 </td>
               </tr>
             );
