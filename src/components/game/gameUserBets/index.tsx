@@ -56,9 +56,8 @@ const GameUserBets = ({ matchId }: any) => {
             >
               <Nav.Item>
                 <Nav.Link
-                  className={`rounded-0 title-12 lh-1 ${
-                    activeTab === "first" ? "tab-new" : ""
-                  }`}
+                  className={`rounded-0 title-12 lh-1 ${activeTab === "first" ? "tab-new" : ""
+                    }`}
                   eventKey="first"
                 >
                   Matched{`(${placedBets?.length})`}
@@ -66,9 +65,8 @@ const GameUserBets = ({ matchId }: any) => {
               </Nav.Item>
               <Nav.Item>
                 <Nav.Link
-                  className={`rounded-0 title-12 lh-1 ${
-                    activeTab === "second" ? "tab-new" : ""
-                  }`}
+                  className={`rounded-0 title-12 lh-1 ${activeTab === "second" ? "tab-new" : ""
+                    }`}
                   eventKey="second"
                 >
                   Unmatched
@@ -112,17 +110,16 @@ const GameUserBets = ({ matchId }: any) => {
                         return (
                           <div
                             key={bet?.id}
-                            className={` position-relative w-100 d-flex flex-column title-16 mb-1 ${
-                              bet?.betType === "NO" || bet?.betType === "LAY"
-                                ? "bg-pink"
-                                : "bg-blu"
-                            }`}
+                            className={` position-relative w-100 d-flex flex-column title-12 mb-1 ${bet?.betType === "NO" || bet?.betType === "LAY"
+                              ? "bg-pink"
+                              : "bg-blu"
+                              }`}
                           >
                             <div className="w-100 d-flex flex-row justify-content-between">
-                              <div className="w-50 d-flex text-black f700 title-16">
+                              <div className="w-50 d-flex text-black f700 title-12">
                                 {bet?.bettingName || bet?.marketType}
                               </div>
-                              <div className="w-50 d-flex text-black text-end">
+                              <div className="w-50 d-flex text-black text-end title-12">
                                 <span className="w-100">
                                   {moment(bet?.createdAt).format("DD-MM-YYYY")}
                                   {"\u00A0"}
@@ -130,7 +127,7 @@ const GameUserBets = ({ matchId }: any) => {
                                 </span>
                               </div>
                             </div>
-                            <div className="w-100 d-flex flex-row">
+                            <div className="w-100 d-flex flex-row title-12 lineHeight-normal">
                               <div
                                 className="text-start text-black"
                                 style={{ width: "25%", wordWrap: "break-word" }}

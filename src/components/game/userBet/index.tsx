@@ -58,11 +58,10 @@ const UserBets = ({ matchId }: UserBetsProps) => {
                     return (
                       <Fragment key={index}>
                         <tr
-                          className={`position-relative lh-1 bet-table-right border-none ${
-                            bet?.betType === "NO" || bet?.betType === "LAY"
+                          className={`position-relative lh-1 bet-table-right border-none ${bet?.betType === "NO" || bet?.betType === "LAY"
                               ? "bor-red1"
                               : "bor-blue3"
-                          }`}
+                            }`}
                         >
                           <td
                             className={
