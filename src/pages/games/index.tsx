@@ -19,7 +19,6 @@ import {
   matchDetailAction,
   resetMarketAnalysys,
   resetPlacedBets,
-  updateBalance,
   updateBetsPlaced,
   updateMatchRates,
   updateMaxLossForBet,
@@ -28,7 +27,7 @@ import {
   updatePlacedbetsDeleteReason,
   updateTeamRates,
   updateTeamRatesOnDelete,
-  updateTeamRatesOnMarketUndeclare,
+  updateTeamRatesOnMarketUndeclare
 } from "../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../store/store";
 import { ApiConstants, liveStreamUrl } from "../../utils/Constants";
@@ -126,7 +125,7 @@ const Games = () => {
         if (!parsedPermissions || parsedPermissions?.currentBets) {
           dispatch(updateBetsPlaced(event?.jobData));
         }
-        dispatch(updateBalance(event));
+        // dispatch(updateBalance(event));
         dispatch(updateTeamRates(event));
       }
     } catch (e) {
