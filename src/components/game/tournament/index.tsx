@@ -22,7 +22,7 @@ const Tournament = ({ title, box, data, detail }: TournamentProps) => {
 
   const profitLossJson = detail?.profitLossDataMatch?.[key];
 
-  const profitLossObj = profitLossJson ? profitLossJson : {};
+  const profitLossObj = profitLossJson ? JSON.parse(profitLossJson) : {};
   return (
     <>
       <div className="tournamentContainer">

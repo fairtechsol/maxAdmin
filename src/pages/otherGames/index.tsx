@@ -16,13 +16,12 @@ import {
   getMarketAnalysis,
   getPlacedBets,
   matchDetailAction,
-  updateBalance,
   updateBetsPlaced,
   updateMatchRates,
   updatePlacedbets,
   updatePlacedbetsDeleteReason,
   updateTeamRates,
-  updateTeamRatesOnDelete,
+  updateTeamRatesOnDelete
 } from "../../store/actions/match/matchAction";
 import { AppDispatch, RootState } from "../../store/store";
 import {
@@ -90,7 +89,7 @@ const OtherGamesDetail = () => {
         if (!parsedPermissions || parsedPermissions?.currentBets) {
           dispatch(updateBetsPlaced(event?.jobData));
         }
-        dispatch(updateBalance(event));
+        // dispatch(updateBalance(event));
         dispatch(updateTeamRates(event));
       }
     } catch (e) {
