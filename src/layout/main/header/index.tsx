@@ -276,51 +276,6 @@ const Topbar = (props: any) => {
                   Market Analysis
                 </NavLink>
               )}
-              {/* <TopbarDropdown
-                name="Live Market"
-                options={[
-                  {
-                    name: "Ball By Ball",
-                    link: "/admin/casinoDetail/ballbyball",
-                  },
-                  {
-                    name: "Race 20-20",
-                    link: "/admin/casinoDetail/race20",
-                  },
-                  { name: "Queen", link: "/admin/casinoDetail/queen" },
-                  { name: "Baccarat", link: "/admin/casino/baccarat" },
-                  {
-                    name: "Sports Casino",
-                    link: "/admin/casino/sportCasino",
-                  },
-                  { name: "Casino War", link: "/admin/casinoDetail/war" },
-                  { name: "Worli", link: "/admin/casino/worli" },
-                  {
-                    name: "3 Cards Judgement",
-                    link: "/admin/casino/3cardj",
-                  },
-                  {
-                    name: "32 Cards Casino",
-                    link: "/admin/casino/cards32",
-                  },
-                  {
-                    name: "Live TeenPatti",
-                    link: "/admin/casino/teenPatti",
-                  },
-                  { name: "Live Poker", link: "/admin/casino/poker" },
-                  { name: "Andar Bahar", link: "/admin/casino/abj" },
-                  { name: "Lucky 7", link: "/admin/casino/lucky7" },
-                  {
-                    name: "Dragon Tiger",
-                    link: "/admin/casino/dragonTiger",
-                  },
-                  {
-                    name: "Bollywood Casino",
-                    link: "/admin/casino/bollywoodCasino",
-                  },
-                  { name: "Cricket Casino", link: "#16" },
-                ]}
-              /> */}
               <TopbarDropdown
                 name="Reports"
                 options={reportOptions.filter((item) => {
