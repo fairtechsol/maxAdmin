@@ -106,26 +106,12 @@ const Games = () => {
       console.log(e);
     }
   };
-
-  // const handleSessionBetPlaced = (event: any) => {
-  //   try {
-  //     if (event?.jobData?.placedBet?.matchId === id) {
-  //       dispatch(matchDetailAction(id));
-  //       if (!parsedPermissions || parsedPermissions?.currentBets) {
-  //         dispatch(getPlacedBets({ id: id, userId: state?.userId }));
-  //       }
-  //     }
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
   const handleMatchBetPlaced = (event: any) => {
     try {
       if (event?.jobData?.matchId === id) {
         if (!parsedPermissions || parsedPermissions?.currentBets) {
           dispatch(updateBetsPlaced(event?.jobData));
         }
-        // dispatch(updateBalance(event));
         dispatch(updateTeamRates(event));
       }
     } catch (e) {
