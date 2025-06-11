@@ -18,9 +18,6 @@ const GameReport = Loadable(lazy(() => import("../pages/reports/GameReport")));
 const ProfitLossReport = Loadable(
   lazy(() => import("../pages/reports/ProfitLossReport"))
 );
-const CasinoResultReport = Loadable(
-  lazy(() => import("../pages/reports/CasinoResultReport"))
-);
 
 const ReportRoutes = {
   path: "/admin",
@@ -46,11 +43,6 @@ const ReportRoutes = {
       element: <CasinoReport />,
     },
     { key: "partyWinLoss", path: "profit-loss", element: <ProfitLossReport /> },
-    {
-      key: "casinoResult",
-      path: "casino-result",
-      element: <CasinoResultReport />,
-    },
     {
       path: "*",
       element: <Navigate to={"/admin/home"} replace />,
