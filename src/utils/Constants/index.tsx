@@ -62,25 +62,6 @@ import {
   two,
   two2,
 } from "../../assets";
-import AndarBaharRules from "../../components/cardGames/games/abj2/rules";
-import AmarAkbarRules from "../../components/cardGames/games/amarAkbarAnthony/rules";
-import BaccaratRules from "../../components/cardGames/games/baccarat1/rules";
-import BaccaratRules2 from "../../components/cardGames/games/baccarat2/rules";
-import BallByBallRules from "../../components/cardGames/games/ballbyball/desktop/rules";
-import BollywoodTableGameRules from "../../components/cardGames/games/bollywoodTable/rules";
-import Card32ARules from "../../components/cardGames/games/card32A/rules";
-import CasinoRulesImage from "../../components/cardGames/games/casinoMeter/rules";
-import CasinoWarRules from "../../components/cardGames/games/casinoWar/rules";
-import Cricket5Rules from "../../components/cardGames/games/cricket5/rules";
-import Cricket20Rules from "../../components/cardGames/games/cricketMatch_20/rules";
-import DragonRules from "../../components/cardGames/games/dragon2nd20/rules";
-import DTLGameRules from "../../components/cardGames/games/dragonTigerLion/rules";
-import Lucky7Rules from "../../components/cardGames/games/lucky7/rules";
-import PokerRules from "../../components/cardGames/games/poker1Day/rules";
-import Race20Rules from "../../components/cardGames/games/race20/rules";
-import SuperOverRules from "../../components/cardGames/games/superOver/rules";
-import TeenpattiRules from "../../components/cardGames/games/teenpatti1D/rules";
-import Teen20Rules from "../../components/cardGames/games/teenpatti2020/rules";
 export const ApiConstants = {
   AUTH: {
     LOGIN: "/auth/login",
@@ -1098,33 +1079,3 @@ export const rulesData1 = [
     ],
   },
 ];
-
-export const gameRulesComponents: any = {
-  ballbyball: <BallByBallRules />,
-  race20: <Race20Rules />,
-  baccarat: <BaccaratRules />,
-  baccarat2: <BaccaratRules2 />,
-  superover: <SuperOverRules />,
-  cricketv3: <Cricket5Rules />,
-  cmeter: <CasinoRulesImage />,
-  cmatch20: <Cricket20Rules />,
-  war: <CasinoWarRules />,
-  card32: <Card32ARules />,
-  card32eu: <Card32ARules />,
-  teen20: <Teen20Rules />,
-  teen: <Teen20Rules />,
-  teen9: <TeenpattiRules />,
-  teen8: <TeenpattiRules />,
-  poker6: <PokerRules />,
-  poker20: <PokerRules />,
-  poker: <PokerRules />,
-  abj: <AndarBaharRules />,
-  lucky7: <Lucky7Rules />,
-  lucky7eu: <Lucky7Rules />,
-  dtl20: <DTLGameRules />,
-  dt6: <DragonRules />,
-  dt202: <DragonRules />,
-  dt20: <DragonRules />,
-  aaa: <AmarAkbarRules />,
-  btable: <BollywoodTableGameRules />,
-};

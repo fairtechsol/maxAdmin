@@ -50,11 +50,6 @@ const reportOptions = [
     name: "Profit And Loss",
     link: "/admin/profit-loss",
   },
-  {
-    id: "casinoResult",
-    name: "Casino Result Report",
-    link: "/admin/casino-result",
-  },
 ];
 
 const TopbarDropdown = ({ name, options }: ItemProps) => {
