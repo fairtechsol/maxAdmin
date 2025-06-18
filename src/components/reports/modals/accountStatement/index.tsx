@@ -10,7 +10,7 @@ import CustomTable from "../../../commonComponent/table";
 import "../style.scss";
 import TooltipCustom from "./tooltip";
 
-const AccountStatementModal = ({ item }: any) => {
+const AccountStatementModal = ({ item }: { item: any }) => {
   const { betAccountStatementModal } = useSelector(
     (state: RootState) => state.match.reportList
   );

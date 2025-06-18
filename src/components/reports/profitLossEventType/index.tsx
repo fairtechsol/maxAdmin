@@ -2,9 +2,13 @@ import { memo } from "react";
 import { cardGamesTypeNames } from "../../../utils/Constants";
 import "./style.scss";
 
-const ProfitLossEventType = (props: any) => {
-  const { totalProLoss } = props;
-
+const ProfitLossEventType = ({
+  totalProLoss,
+  customClass,
+}: {
+  totalProLoss: any;
+  customClass: string;
+}) => {
   let dataArray = [];
 
   for (let key in totalProLoss) {
@@ -15,7 +19,7 @@ const ProfitLossEventType = (props: any) => {
   }
 
   return (
-    <div className={`profitLossEventType ${props.customClass}`}>
+    <div className={`profitLossEventType ${customClass}`}>
       <h5 className="f400">Profit & Loss for Event type</h5>
       <div className="d-flex" style={{ gap: "12px", flexWrap: "wrap" }}>
         {dataArray?.map((item: any, index: number) => (

@@ -29,21 +29,20 @@ const profitLossObj: Record<number, string> = {
   21: "v",
 };
 
-function getFirstBetId(betType: any) {
+const getFirstBetId = (betType: any) => {
   if (Array.isArray(betType?.match) && betType.match.length > 0) {
     return betType.match[0]?.betId;
   }
   return undefined;
-}
+};
 
-// Function to get the first available key name in betType (like session)
-function getFirstAvailableKey(betType: any) {
+const getFirstAvailableKey = (betType: any) => {
   return Object.keys(betType).find(
     (key) => Array.isArray(betType[key]) && betType[key].length > 0
   );
-}
+};
 
-const MarketAnalysisComp = ({ match }: any) => {
+const MarketAnalysisComp = ({ match }: { match: any }) => {
   return (
     <div className="market-analysis-container">
       <div className="market-analysis-container">

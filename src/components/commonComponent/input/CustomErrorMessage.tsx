@@ -1,11 +1,14 @@
 import { memo } from "react";
 
-const CustomErrorMessage = (props: any) => {
+interface CustomErrorMessageProps {
+  touched: any;
+  errors: any;
+}
+
+const CustomErrorMessage = ({ touched, errors }: CustomErrorMessageProps) => {
   return (
     <>
-      {props?.touched && props?.errors ? (
-        <div className="text-danger">{props?.errors}</div>
-      ) : null}
+      {touched && errors ? <div className="text-danger">{errors}</div> : null}
     </>
   );
 };

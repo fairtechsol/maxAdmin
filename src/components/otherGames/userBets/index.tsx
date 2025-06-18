@@ -6,7 +6,7 @@ import { RootState } from "../../../store/store";
 import DeleteBetOverlay from "../../commonComponent/deleteBetRow";
 import CustomModal from "../../commonComponent/modal";
 import UserBetModalForm2 from "../../game/userBet/modal/form2";
-const OtherUserBets = ({ matchId }: any) => {
+const OtherUserBets = ({ matchId }: { matchId: string | any }) => {
   const [showModal, setShowModal] = useState(false);
   const { placedBets, morePlacedBets } = useSelector(
     (state: RootState) => state.match.placeBets

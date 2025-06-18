@@ -15,7 +15,7 @@ const UserLockModal = ({
   setShowModal,
 }: {
   show: boolean;
-  setShowModal: any;
+  setShowModal: (val: boolean) => void;
 }) => {
   const dispatch: AppDispatch = useDispatch();
 

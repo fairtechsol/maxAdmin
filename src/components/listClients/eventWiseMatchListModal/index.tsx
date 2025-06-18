@@ -14,7 +14,15 @@ const columns: Column[] = [
   { id: "exposure", label: "Exposure" },
 ];
 
-const EventWiseMatchListModal = ({ userWiseExposureName, data }: any) => {
+interface EventWiseMatchListModalProps {
+  userWiseExposureName: any;
+  data: any;
+}
+
+const EventWiseMatchListModal = ({
+  userWiseExposureName,
+  data,
+}: EventWiseMatchListModalProps) => {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const [tableConfig, setTableConfig] = useState<TableConfig | null>({

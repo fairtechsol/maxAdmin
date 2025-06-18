@@ -23,6 +23,18 @@ const initialValues: any = {
   transactionPassword: "",
 };
 
+interface DepositProps {
+  userData: any;
+  setShow: (val: boolean) => void;
+  userId: string;
+  page: number;
+  limit: number;
+  userName: string;
+  sort: any;
+  order: any;
+  activeTab: any;
+}
+
 const Deposit = ({
   userData,
   setShow,
@@ -33,7 +45,7 @@ const Deposit = ({
   sort,
   order,
   activeTab,
-}: any) => {
+}: DepositProps) => {
   const dispatch: AppDispatch = useDispatch();
   const [border, setBorder] = useState({
     amount: false,

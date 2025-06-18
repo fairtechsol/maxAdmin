@@ -169,28 +169,14 @@ const Tournament = ({ title, box, data, detail }: TournamentProps) => {
                         : dummyArray
                       )?.map((item2: any, index: number) => {
                         return (
-                          <BetBox
-                            key={index}
-                            data={item2}
-                            type={"back"}
-                            detail={detail}
-                            runner={item}
-                          />
+                          <BetBox key={index} data={item2} type={"back"} />
                         );
                       })}
                       {(item?.ex?.availableToLay?.length > 0
                         ? item?.ex?.availableToLay
                         : dummyArray
                       )?.map((item2: any, index: number) => {
-                        return (
-                          <BetBox
-                            key={index}
-                            data={item2}
-                            type={"lay"}
-                            detail={detail}
-                            runner={item}
-                          />
-                        );
+                        return <BetBox key={index} data={item2} type={"lay"} />;
                       })}
                     </>
                   ) : (
@@ -198,15 +184,11 @@ const Tournament = ({ title, box, data, detail }: TournamentProps) => {
                       <BetBox
                         data={item?.ex?.availableToBack?.[0]}
                         type={"back"}
-                        detail={detail}
-                        runner={item}
                       />
 
                       <BetBox
                         data={item?.ex?.availableToLay?.[0]}
                         type={"lay"}
-                        detail={detail}
-                        runner={item}
                       />
                     </>
                   )}

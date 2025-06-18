@@ -8,7 +8,7 @@ import { AppDispatch, RootState } from "../../../store/store";
 import MenuItem from "./menuItem";
 import menuItemJson from "./menuItem.json";
 
-const Sidebar = ({ clickHandler }: any) => {
+const Sidebar = ({ clickHandler }: { clickHandler: () => void }) => {
   const [menuItemList, setMenuItemList] = useState<any>([]);
   const [selectedMatch, setSelectedMatch] = useState("");
   const [selectedMatchIndex, setSelectedMatchIndex] = useState(0);

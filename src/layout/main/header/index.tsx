@@ -92,7 +92,7 @@ const TopbarDropdown = ({ name, options }: ItemProps) => {
   );
 };
 
-const Topbar = (props: any) => {
+const Topbar = ({ onClick }: { onClick: (val: any) => void }) => {
   const dispatch: AppDispatch = useDispatch();
   const [SearchModal, setSearchModal] = useState(false);
   const [searchValue, setSearchValue] = useState<any>(null);
@@ -246,7 +246,7 @@ const Topbar = (props: any) => {
             <LogoSection width="100%" height="50px" />
           </NavLink>
 
-          <span className="m-3 cursor" onClick={props.onClick}>
+          <span className="m-3 cursor" onClick={onClick}>
             <div className="menuHamBurger d-flex flex-column me-2 mt-1">
               <span className="mb-1" />
               <span className="mb-1" />

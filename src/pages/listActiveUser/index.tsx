@@ -777,7 +777,6 @@ const ListActiveInactiveUser: React.FC = () => {
         setShow={setShowUserWiseExposureModal}
       >
         <EventWiseExposureModal
-          userWiseExposureName={userWiseExposureName}
           setDataForMatchList={setDataForMatchList}
           setShowUserWiseMatchListModal={setShowUserWiseMatchListModal}
         />

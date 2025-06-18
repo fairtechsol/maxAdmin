@@ -3,7 +3,7 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import "./tooltipCustom.scss";
 
-function TooltipCustom({ children, title }: any) {
+function TooltipCustom({ children, title }: { children: any; title: string }) {
   const renderTooltip = (props: any) => (
     <Tooltip id="button-tooltip" {...props} className="custom-tooltip">
       {title}

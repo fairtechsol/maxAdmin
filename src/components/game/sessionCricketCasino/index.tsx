@@ -5,12 +5,19 @@ import isMobile from "../../../utils/screenDimension";
 import MarketTableHeader from "../../commonComponent/MarketWiseHeader";
 import "./style.scss";
 
+interface SessionCricketCasinoProps {
+  title: string;
+  data: any;
+  detail: any;
+  marketAnalysisDetail: any;
+}
+
 const SessionCricketCasino = ({
   title,
   data,
   detail,
   marketAnalysisDetail,
-}: any) => {
+}: SessionCricketCasinoProps) => {
   const [marketArr, setMarketArr] = useState<any>(data);
   useEffect(() => {
     if (!data?.section || !Array.isArray(data.section)) {

@@ -26,6 +26,15 @@ const MenuItemChild = (props: any) => {
   );
 };
 
+interface MenuCollapseProps {
+  data: any;
+  menuItemList: any;
+  setMenuItemList: any;
+  selectedMatchIndex: any;
+  onClickMenuItem: any;
+  selectedMatch: any;
+}
+
 const MenuCollapse = ({
   data,
   menuItemList,
@@ -33,7 +42,7 @@ const MenuCollapse = ({
   selectedMatchIndex,
   onClickMenuItem,
   selectedMatch,
-}: any) => {
+}: MenuCollapseProps) => {
   const navigate = useNavigate();
 
   const [selectedDate, setSelectedDate] = useState("");

@@ -8,11 +8,7 @@ interface SearchBoxProps {
   load?: boolean;
 }
 
-const SearchBox: React.FC<SearchBoxProps> = ({
-  value,
-  onSearch,
-  load,
-}: any) => {
+const SearchBox: React.FC<SearchBoxProps> = ({ value, onSearch, load }) => {
   const [keyword, setKeyword] = useState("");
 
   const debouncedInputValue = useMemo(

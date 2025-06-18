@@ -1,7 +1,17 @@
 import { memo, useEffect } from "react";
 import "./style.scss";
 
-const NavComponent = ({ matchDetail, setMarketToShow, marketToShow }: any) => {
+interface NavComponentProps {
+  matchDetail: any;
+  setMarketToShow: (val: any) => void;
+  marketToShow: string;
+}
+
+const NavComponent = ({
+  matchDetail,
+  setMarketToShow,
+  marketToShow,
+}: NavComponentProps) => {
   function formatMarkets(matchDetail: any) {
     const formattedArray = [];
 

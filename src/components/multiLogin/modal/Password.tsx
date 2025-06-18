@@ -21,7 +21,12 @@ const initialValues: any = {
   transactionPassword: "",
 };
 
-const Password = ({ userData, setShow }: any) => {
+interface PasswordProps {
+  userData: any;
+  setShow: (val: boolean) => void;
+}
+
+const Password = ({ userData, setShow }: PasswordProps) => {
   const dispatch: AppDispatch = useDispatch();
 
   const { loading, success } = useSelector(
