@@ -102,7 +102,6 @@ const ChangePassword = () => {
         <>
           <h3>Navigate to login</h3>
           <NavigateModal
-            show={showModal}
             setShowModal={setShowModal}
             modalTitle="Your password has been changed sucessfully"
             functionDispatch={() => {

@@ -1,22 +1,29 @@
+import { memo } from "react";
 import { Button, Modal } from "react-bootstrap";
-import { IoCloseCircle } from "react-icons/io5";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
   accountListModalReset,
   changePasswordReset,
 } from "../../../store/actions/user/userActions";
-import { memo } from "react";
+
+interface NavigateModalProps {
+  transactionMessage: string;
+  modalTitle: string;
+  buttonMessage: string;
+  setShowModal: (val: boolean) => void;
+  functionDispatch: () => void;
+  navigateTo: string;
+}
 
 const NavigateModal = ({
   transactionMessage,
   modalTitle,
   buttonMessage,
   setShowModal,
-  closeBtn,
   functionDispatch,
   navigateTo,
-}: any) => {
+}: NavigateModalProps) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -30,19 +37,6 @@ const NavigateModal = ({
       backdrop="static"
       keyboard={false}
     >
-      <Modal.Header closeButton={closeBtn}>
-        {closeBtn && (
-          <IoCloseCircle
-            style={{
-              position: "absolute",
-              right: "10px",
-              top: "10px",
-              color: "#fff",
-              fontSize: "28px",
-            }}
-          />
-        )}
-      </Modal.Header>
       <Modal.Body>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <p style={{ marginBottom: "20px", color: "#000" }}>
