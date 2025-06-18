@@ -91,6 +91,7 @@ function MarketTableHeader({
     userMatchLockSuccess,
     userMatchLockError,
     loading,
+    smallLoading,
   } = useSelector((state: RootState) => state.match.placeBets);
   useEffect(() => {}, [tableConfig]);
   useEffect(() => {
@@ -267,7 +268,7 @@ function MarketTableHeader({
         )}
 
         <Modal
-          show={showModal1 && !loading}
+          show={showModal1}
           onHide={handleClose1}
           className={`customModal ${customClass} `}
         >
@@ -310,7 +311,16 @@ function MarketTableHeader({
                   All Account
                 </div>
               </div>
-              {updatedMatchLockAllChild?.length > 0 &&
+              {smallLoading && (
+                <div
+                  className="w-100 d-flex flex-row justify-content-center"
+                  style={{ border: "1px solid #eee" }}
+                >
+                  Loading...
+                </div>
+              )}
+              {!smallLoading &&
+                updatedMatchLockAllChild?.length > 0 &&
                 updatedMatchLockAllChild.map((item: any, index: number) => {
                   const { userName, id, isLock } = item;
                   return (
@@ -346,7 +356,7 @@ function MarketTableHeader({
           </Modal.Body>
         </Modal>
         <Modal
-          show={showModal2 && !loading}
+          show={showModal2}
           onHide={handleClose2}
           className={`customModal ${customClass} custom-modal-width`}
         >
@@ -355,17 +365,22 @@ function MarketTableHeader({
           </Modal.Header>
           <Modal.Body>
             <div className="w-100 d-flex flex-column">
-              <div>
-                <CustomTable
-                  className=""
-                  striped
-                  columns={columns}
-                  itemCount={userMatchBook?.length || 0}
-                  currentPage={currentPage}
-                  setCurrentPage={setCurrentPage}
-                  setTableConfig={setTableConfig}
-                >
-                  {userMatchBook?.map((item: any, index: number) => (
+              <CustomTable
+                className=""
+                striped
+                columns={columns}
+                itemCount={smallLoading ? 1 : userMatchBook?.length || 0}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                setTableConfig={setTableConfig}
+              >
+                {smallLoading && (
+                  <tr style={{ border: "1px solid #eee" }}>
+                    <td colSpan={12} className="text-center">Loading...</td>
+                  </tr>
+                )}
+                {!smallLoading &&
+                  userMatchBook?.map((item: any, index: number) => (
                     <tr key={index}>
                       <td>{item?.user?.userName}</td>
                       {item?.profitLoss &&
@@ -376,8 +391,7 @@ function MarketTableHeader({
                         )}
                     </tr>
                   ))}
-                </CustomTable>
-              </div>
+              </CustomTable>
             </div>
           </Modal.Body>
         </Modal>

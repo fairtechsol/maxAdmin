@@ -30,6 +30,7 @@ interface InitialState {
   marketLockAllChild: any;
   userDetailsForParent: any;
   loading: boolean;
+  smallLoading: boolean;
   success: boolean;
   statusSuccess: boolean;
   error: any;
@@ -48,6 +49,7 @@ const initialState: InitialState = {
   marketLockAllChild: [],
   userDetailsForParent: [],
   loading: false,
+  smallLoading: false,
   success: false,
   statusSuccess: false,
   error: null,
@@ -160,31 +162,31 @@ const placedBetsSlice = createSlice({
         state.error = action.error?.message;
       })
       .addCase(getMarketLockAllChild.pending, (state) => {
-        state.loading = true;
+        state.smallLoading = true;
         state.success = false;
         state.error = null;
       })
       .addCase(getMarketLockAllChild.fulfilled, (state, action) => {
-        state.loading = false;
+        state.smallLoading = false;
         state.success = true;
         state.marketLockAllChild = action.payload;
       })
       .addCase(getMarketLockAllChild.rejected, (state, action) => {
-        state.loading = false;
+        state.smallLoading = false;
         state.error = action.error?.message;
       })
       .addCase(getMarketUserBook.pending, (state) => {
-        state.loading = true;
+        state.smallLoading = true;
         state.success = false;
         state.error = null;
       })
       .addCase(getMarketUserBook.fulfilled, (state, action) => {
-        state.loading = false;
+        state.smallLoading = false;
         state.success = true;
         state.userMatchBook = action.payload;
       })
       .addCase(getMarketUserBook.rejected, (state, action) => {
-        state.loading = false;
+        state.smallLoading = false;
         state.error = action.error?.message;
       })
       .addCase(getUserDetailsForParent.pending, (state) => {
