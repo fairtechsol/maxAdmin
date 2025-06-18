@@ -71,7 +71,6 @@ const AccountStatement = () => {
   const [dateTo, setDateTo] = useState<any>(formattedCurrentDate);
   const [firstTime, setFirstTime] = useState(false);
   const [selectedUser, setSelectedUser] = useState<any>(null);
-  const [selectedUserValue] = useState<any>("null");
   const [tempUser, setTempUser] = useState<any>(false);
   const [userOptions, setUserOptions] = useState([]);
   const [keyword, setKeyword] = useState<any>("");
@@ -486,7 +485,7 @@ const AccountStatement = () => {
               label="Search By Client Name"
               inputValue={inputValue}
               options={userOptions}
-              value={tempUser ? selectedUserValue : selectedUser}
+              value={tempUser ? "null" : selectedUser}
               onBlur={() => setTempUser(false)}
               onFocus={() => setTempUser(true)}
               onChange={(value: any) => {
