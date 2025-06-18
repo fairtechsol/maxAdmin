@@ -341,7 +341,7 @@ function MarketTableHeader({
                         <label
                           className="custom-control-label"
                           htmlFor={`custom-checkbox-${index}`}
-                        ></label>
+                        />
                       </div>
                       <div
                         className="w-75 d-flex"

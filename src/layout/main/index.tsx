@@ -13,7 +13,7 @@ import "../layout.scss";
 import Topbar from "./header";
 import Sidebar from "./sidebar";
 
-function MainLayout({ eventKey }: any) {
+function MainLayout() {
   let location = useLocation();
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
@@ -65,7 +65,7 @@ function MainLayout({ eventKey }: any) {
   return (
     <>
       {userBalanceLoading ? <Loader /> : null}
-      <Topbar onClick={handleDrawer} toggle={toggle} />
+      <Topbar onClick={handleDrawer} />
       <div className={`sidebar ${toggle ? "sidebarActive" : ""}`}>
         <Sidebar clickHandler={handleDrawer} />
       </div>

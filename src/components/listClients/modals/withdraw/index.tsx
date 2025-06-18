@@ -24,6 +24,18 @@ const initialValues: any = {
   transactionPassword: "",
 };
 
+interface WithdrawProps {
+  userData: any;
+  setShow: (val: boolean) => void;
+  userId: string;
+  page: number;
+  limit: number;
+  userName: string;
+  sort: any;
+  order: any;
+  activeTab: any;
+}
+
 const Withdraw = ({
   userData,
   setShow,
@@ -34,7 +46,7 @@ const Withdraw = ({
   sort,
   order,
   activeTab,
-}: any) => {
+}: WithdrawProps) => {
   const dispatch: AppDispatch = useDispatch();
 
   const { modalSuccess, loading } = useSelector(

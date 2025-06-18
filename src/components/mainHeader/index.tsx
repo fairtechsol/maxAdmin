@@ -8,7 +8,7 @@ import HeaderGameLock from "./headerGameLock";
 import HeaderUserDetail from "./headerUserDetail";
 import HeaderUserLock from "./headerUserLock";
 import "./style.scss";
-const MainHeader = ({ userId }: any) => {
+const MainHeader = ({ userId }: { userId: string }) => {
   const dispatch: AppDispatch = useDispatch();
 
   const { childUsersData } = useSelector(

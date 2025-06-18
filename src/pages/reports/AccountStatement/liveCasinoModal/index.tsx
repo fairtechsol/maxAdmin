@@ -8,13 +8,20 @@ import { transactionProviderBets } from "../../../../store/actions/card/cardDeta
 import { AppDispatch } from "../../../../store/store";
 import isMobile from "../../../../utils/screenDimension";
 
+interface LiveCasinoModalProps {
+  selected: any;
+  liveCasinoModal: boolean;
+  handleCloseLiveCasinoModal: () => void;
+  liveCasinoProvider: any;
+  updatedReport: any;
+}
 const LiveCasinoModal = ({
   selected,
   liveCasinoModal,
   handleCloseLiveCasinoModal,
   liveCasinoProvider,
   updatedReport,
-}: any) => {
+}: LiveCasinoModalProps) => {
   const dispatch: AppDispatch = useDispatch();
   const [type2, setType2] = useState<any>({
     label: "Select Casino Type",

@@ -20,7 +20,12 @@ const initialValues: any = {
   transactionPassword: "",
 };
 
-const ChangeStatus = ({ userData, setShow }: any) => {
+interface ChangeStatusProps {
+  userData: any;
+  setShow: (val: boolean) => void;
+}
+
+const ChangeStatus = ({ userData, setShow }: ChangeStatusProps) => {
   const defaultLockUnlockObj = {
     allBlocked: userData?.userBlock,
   };

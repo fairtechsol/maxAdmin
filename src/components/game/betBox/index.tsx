@@ -1,7 +1,12 @@
 import { memo, useEffect, useState } from "react";
 import { handlePrice, handleSize } from "../../../helpers";
 
-const BetBox = ({ data, type }: any) => {
+interface BetBoxProps {
+  data: any;
+  type: string;
+}
+
+const BetBox = ({ data, type }: BetBoxProps) => {
   const [tempRate, setTempRate] = useState("0");
   const [isYellow, setIsYellow] = useState(false);
 

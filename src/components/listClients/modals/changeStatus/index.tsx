@@ -21,6 +21,18 @@ const initialValues: any = {
   transactionPassword: "",
 };
 
+interface ChangeStatusProps {
+  setShow: (val: boolean) => void;
+  userData: any;
+  userId: string;
+  page: number;
+  limit: number;
+  userName: string;
+  sort: any;
+  order: any;
+  activeTab: any;
+}
+
 const ChangeStatus = ({
   setShow,
   userData,
@@ -31,13 +43,11 @@ const ChangeStatus = ({
   sort,
   order,
   activeTab,
-}: any) => {
-  // const [userChecked, setUserChecked] = useState(false);
+}: ChangeStatusProps) => {
   const defaultLockUnlockObj = {
     allBlocked: userData?.userBlock,
     betBlocked: userData?.betBlock,
   };
-  // const [betChecked, setbetChecked] = useState(false);
   const [lockUnlockObj, setLockUnlockObj] = useState(defaultLockUnlockObj);
   const dispatch: AppDispatch = useDispatch();
 

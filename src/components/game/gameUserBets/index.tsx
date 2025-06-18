@@ -8,7 +8,7 @@ import CustomModal from "../../commonComponent/modal";
 import UserBetModalForm2 from "../userBet/modal/form2";
 import "./style.scss";
 
-const GameUserBets = ({ matchId }: any) => {
+const GameUserBets = ({ matchId }: { matchId: string | any }) => {
   const { placedBets, morePlacedBets } = useSelector(
     (state: RootState) => state.match.placeBets
   );
@@ -56,8 +56,9 @@ const GameUserBets = ({ matchId }: any) => {
             >
               <Nav.Item>
                 <Nav.Link
-                  className={`rounded-0 title-12 lh-1 ${activeTab === "first" ? "tab-new" : ""
-                    }`}
+                  className={`rounded-0 title-12 lh-1 ${
+                    activeTab === "first" ? "tab-new" : ""
+                  }`}
                   eventKey="first"
                 >
                   Matched{`(${placedBets?.length})`}
@@ -65,8 +66,9 @@ const GameUserBets = ({ matchId }: any) => {
               </Nav.Item>
               <Nav.Item>
                 <Nav.Link
-                  className={`rounded-0 title-12 lh-1 ${activeTab === "second" ? "tab-new" : ""
-                    }`}
+                  className={`rounded-0 title-12 lh-1 ${
+                    activeTab === "second" ? "tab-new" : ""
+                  }`}
                   eventKey="second"
                 >
                   Unmatched
@@ -110,10 +112,11 @@ const GameUserBets = ({ matchId }: any) => {
                         return (
                           <div
                             key={bet?.id}
-                            className={` position-relative w-100 d-flex flex-column title-12 mb-1 ${bet?.betType === "NO" || bet?.betType === "LAY"
-                              ? "bg-pink"
-                              : "bg-blu"
-                              }`}
+                            className={` position-relative w-100 d-flex flex-column title-12 mb-1 ${
+                              bet?.betType === "NO" || bet?.betType === "LAY"
+                                ? "bg-pink"
+                                : "bg-blu"
+                            }`}
                           >
                             <div className="w-100 d-flex flex-row justify-content-between">
                               <div className="w-50 d-flex text-black f700 title-12">

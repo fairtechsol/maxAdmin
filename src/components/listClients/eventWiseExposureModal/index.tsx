@@ -16,10 +16,15 @@ const columns: Column[] = [
   { id: "exposure", label: "Exposure" },
 ];
 
+interface EventWiseExposureModalProps {
+  setShowUserWiseMatchListModal: (val: boolean) => void;
+  setDataForMatchList: (val: any) => void;
+}
+
 const EventWiseExposureModal = ({
   setShowUserWiseMatchListModal,
   setDataForMatchList,
-}: any) => {
+}: EventWiseExposureModalProps) => {
   const dispatch: AppDispatch = useDispatch();
   const { userWiseExposureList } = useSelector(
     (state: RootState) => state.user.userList

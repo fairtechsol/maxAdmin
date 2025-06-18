@@ -20,6 +20,18 @@ const initialValues: any = {
   transactionPassword: "",
 };
 
+interface CreditProps {
+  userData: any;
+  setShow: (val: boolean) => void;
+  userId: string;
+  page: number;
+  limit: number;
+  userName: string;
+  sort: any;
+  order: any;
+  activeTab: any;
+}
+
 const Credit = ({
   userData,
   setShow,
@@ -30,7 +42,7 @@ const Credit = ({
   sort,
   order,
   activeTab,
-}: any) => {
+}: CreditProps) => {
   const dispatch: AppDispatch = useDispatch();
 
   const { modalSuccess, loading } = useSelector(

@@ -22,6 +22,18 @@ const initialValues: any = {
   transactionPassword: "",
 };
 
+interface ExposureLimitProps {
+  setShow: (val: boolean) => void;
+  userData: any;
+  userId: string;
+  page: number;
+  limit: number;
+  userName: string;
+  sort: any;
+  order: any;
+  activeTab: any;
+}
+
 const ExposureLimit = ({
   setShow,
   userData,
@@ -32,7 +44,7 @@ const ExposureLimit = ({
   sort,
   order,
   activeTab,
-}: any) => {
+}: ExposureLimitProps) => {
   const dispatch: AppDispatch = useDispatch();
 
   const { modalSuccess, loading } = useSelector(
