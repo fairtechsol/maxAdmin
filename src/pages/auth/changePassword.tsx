@@ -123,7 +123,6 @@ const ChangePassword = () => {
       {showModal && (
         <>
           <NavigateModal
-            show={showModal}
             setShowModal={setShowModal}
             modalTitle="Your password has been changed sucessfully"
             functionDispatch={() => {
