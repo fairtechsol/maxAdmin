@@ -25,8 +25,7 @@ import {
 import { AppDispatch, RootState } from "../../../store/store";
 import {
   ApiConstants,
-  card2ConstantsAccountStatement,
-  gameConstantsAccountStatement,
+  gameConstantsAccountStatement
 } from "../../../utils/Constants";
 import LiveCasinoModal from "./liveCasinoModal";
 
@@ -124,10 +123,6 @@ const AccountStatement = () => {
       label: "Sport Report",
     },
     {
-      value: "2",
-      label: "Casino Reports",
-    },
-    {
       value: "3",
       label: "Third-Party Casino Reports",
     },
@@ -146,8 +141,6 @@ const AccountStatement = () => {
       ]);
     } else if (selectedOption && selectedOption === "1") {
       setGameNameOptions(gameConstantsAccountStatement);
-    } else if (selectedOption && selectedOption === "2") {
-      setGameNameOptions(card2ConstantsAccountStatement);
     } else if (selectedOption && selectedOption === "all") {
       setGameNameOptions([]);
     } else {
